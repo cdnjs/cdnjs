@@ -1,5 +1,5 @@
 /***
-* 
+ * 
  * Paper.js
  * 
  * A JavaScript Vector Graphics Library, based on Scriptographer.org and
