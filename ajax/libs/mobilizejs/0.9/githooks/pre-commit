@@ -1,0 +1,14 @@
+#!/usr/bin/python
+
+import sys
+from subprocess import call
+
+# Returns 0 if ok, amount of errored files if not
+result = call('python jslint.py "js/*.js-jquery.*,*.mobile.*"', shell = True)
+
+if result:
+    print "Pre-commit check failed, commit aborted"
+   
+# Non-zero aborts commit
+sys.exit(result) 
+
