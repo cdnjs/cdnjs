@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<!-- Load Wordpress blog page with comments simulating cloud load mechanism -->	
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>Reducing MySQL memory usage on Ubuntu / Debian Linux | mFabrik - mobile sites, apps, HTML5 and CMS software development</title>
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="stylesheet" type="text/css" media="all" href="mfabrik-comments_files/style.css">
+<link rel="pingback" href="http://blog.mfabrik.com/xmlrpc.php">
+<link rel="alternate" type="application/rss+xml" title="mFabrik - mobile sites, apps, HTML5 and CMS software development » Feed" href="http://blog.mfabrik.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="mFabrik - mobile sites, apps, HTML5 and CMS software development » Comments Feed" href="http://blog.mfabrik.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="mFabrik - mobile sites, apps, HTML5 and CMS software development » Reducing MySQL memory usage on Ubuntu / Debian Linux Comments Feed" href="http://blog.mfabrik.com/2011/03/31/reducing-mysql-memory-usage-on-ubuntu-debian-linux/feed/">
+<link rel="stylesheet" id="admin-bar-css" href="mfabrik-comments_files/admin-bar.css" type="text/css" media="all">
+<link rel="stylesheet" id="shashin_css-css" href="mfabrik-comments_files/shashin.css" type="text/css" media="all">
+<link rel="stylesheet" id="highslide_css-css" href="mfabrik-comments_files/highslide.css" type="text/css" media="all">
+<script type="text/javascript" src="mfabrik-comments_files/l10n.js"></script>
+<script type="text/javascript" src="mfabrik-comments_files/highslide.js"></script>
+<script type="text/javascript" src="mfabrik-comments_files/swfobject.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var highslide_settings = {
+	graphics_dir: "http://blog.mfabrik.com/wp-content/plugins/shashin/display/highslide/graphics/",
+	outline_type: "rounded-white",
+	dimming_opacity: "0.75",
+	interval: "5000",
+	repeat: "1",
+	position: "top center",
+	hide_controller: "0"
+};
+/* ]]> */
+</script>
+<script type="text/javascript" src="mfabrik-comments_files/highslide_settings.js"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://blog.mfabrik.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://blog.mfabrik.com/wp-includes/wlwmanifest.xml"> 
+<link rel="index" title="mFabrik – mobile sites, apps, HTML5 and CMS software development" href="http://blog.mfabrik.com/">
+<link rel="start" title="Hello Internet" href="http://blog.mfabrik.com/2007/07/20/hello-internet/">
+<link rel="prev" title="Copy/move phpBB3 forum from a server to another computer (Ubuntu/Linux)" href="http://blog.mfabrik.com/2011/03/30/copymove-phpbb3-forum-from-a-server-to-another-computer-ubuntulinux/">
+<meta name="generator" content="WordPress 3.1">
+<link rel="shortlink" href="http://blog.mfabrik.com/?p=1149">
+
+<!-- All in One SEO Pack 1.6.13.1 by Michael Torbert of Semper Fi Web Design[78,210] -->
+<meta name="keywords" content="debian,django,linux,memory,mtop,mysql,php,plone,python,ram,res,top,ubuntu,virt,virtual memory,wordpress">
+<link rel="canonical" href="http://blog.mfabrik.com/2011/03/31/reducing-mysql-memory-usage-on-ubuntu-debian-linux/">
+<!-- /all in one seo pack -->
+
+	<link type="text/css" rel="stylesheet" href="mfabrik-comments_files/SyntaxHighlighter.css">
+<style type="text/css" media="print">#wpadminbar { display:none; }</style>
+<style type="text/css">
+	html { margin-top: 28px !important; }
+	* html body { margin-top: 28px !important; }
+</style>
+<style type="text/css">.highslide img {cursor: url(http://blog.mfabrik.com/wp-content/plugins/shashin/display/highslide/graphics/zoomin.cur), pointer !important;}</style></head>
+
+<body class="single single-post postid-1149 single-format-standard logged-in admin-bar">
+
+        <script type="text/javascript">        
+
+             // Setup mobilize.js to load our additional mobilize.mfabrik-blog.js layer
+             function mobilizeCustomInit(){
+                 
+                 mobilize.cdnOptions.javascriptBundles.push('js/mobilize.mfabrik-blog.js');
+                                  
+                 // Since we are not in auto-run mode,
+                 // we start doing the stuff after we have set-up
+                 // our options for development correctly                 
+             }        
+        </script>	
+		
+        <script type="text/javascript" 
+                src="/js/mobilize.wordpress.debug.js"
+                >
+        </script>
+
+	
+<div id="wrapper" class="hfeed">
+	<div id="header">
+		<div id="masthead">
+			<div id="branding" role="banner">
+								<div id="site-title">
+					<span>
+						<a href="http://blog.mfabrik.com/" title="mFabrik – mobile sites, apps, HTML5 and CMS software development" rel="home">mFabrik – mobile sites, apps, HTML5 and CMS software development</a>
+					</span>
+				</div>
+				<div id="site-description">Freedom delivered.</div>
+
+										<img src="mfabrik-comments_files/path.jpg" alt="" height="198" width="940">
+								</div><!-- #branding -->
+
+			<div id="access" role="navigation">
+			  				<div class="skip-link screen-reader-text"><a href="#content" title="Skip to content">Skip to content</a></div>
+								<div class="menu"><ul><li><a href="http://blog.mfabrik.com/" title="Home">Home</a></li><li class="page_item page-item-2"><a href="http://blog.mfabrik.com/about/" title="About this blog">About this blog</a></li><li class="page_item page-item-336"><a href="http://blog.mfabrik.com/phonegap-on-maemo/" title="PhoneGap on Maemo">PhoneGap on Maemo</a></li></ul></div>
+			</div><!-- #access -->
+		</div><!-- #masthead -->
+	</div><!-- #header -->
+
+	<div id="main">
+
+		<div id="container">
+			<div id="content" role="main">
+
+			
+
+				<div id="nav-above" class="navigation">
+					<div class="nav-previous"><a href="http://blog.mfabrik.com/2011/03/30/copymove-phpbb3-forum-from-a-server-to-another-computer-ubuntulinux/" rel="prev"><span class="meta-nav">←</span> Copy/move phpBB3 forum from a server to another computer (Ubuntu/Linux)</a></div>
+					<div class="nav-next"></div>
+				</div><!-- #nav-above -->
+
+				<div id="post-1149" class="post-1149 post type-post status-publish format-standard hentry category-mysql category-php category-plone category-python category-technology tag-debian tag-django tag-linux tag-memory tag-mtop tag-mysql tag-php tag-plone tag-python tag-ram tag-res tag-top tag-ubuntu tag-virt tag-virtual-memory tag-wordpress">
+					<h1 class="entry-title">Reducing MySQL memory usage on Ubuntu / Debian Linux</h1>
+
+					<div class="entry-meta">
+						<span class="meta-prep meta-prep-author">Posted on</span> <a href="http://blog.mfabrik.com/2011/03/31/reducing-mysql-memory-usage-on-ubuntu-debian-linux/" title="1:56 pm" rel="bookmark"><span class="entry-date">March 31, 2011</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="http://blog.mfabrik.com/author/moo/" title="View all posts by Mikko Ohtamaa">Mikko Ohtamaa</a></span>					</div><!-- .entry-meta -->
+
+					<div class="entry-content">
+						<p>If you are running your services on a low end virtual hosting 
+every byte of memory you can save is important. The memory is often the 
+limiting factor of how many applications you can run on VPS: CPUs are 
+shared, memory not, on the same physical host.</p>
+<ul>
+<li>Low-end VPS come with 512 MB memory or less</li>
+<li>Front front-end server Apache / Nginx / Varnish takes &gt; 100 MB +&nbsp; min. 20 MB for each child process</li>
+<li>Memecached takes its toll</li>
+<li>MySQL takes 200 – 400 MB</li>
+<li>Each Python / PHP process takes at least 15 MB and you need parallel
+ processes for paraller HTTP requests (FCGI, pre-fork, others… )</li>
+<li>Operating system processes need some memory (SSH, cron, sendmail)</li>
+</ul>
+<p>As you can see it gets very crowded in 512 MB.</p>
+<p>It’s especially troublesome since the memory is allocated lazily and 
+the memory usage builds up slowly. In some point caches are no longer 
+caches, but swapped to a disk – virtual memory usage grows beyond 
+available RAM. To keep the server response, everything time critical 
+should fit to RAM once and if the processes themselves don’t know how to
+ release memory in this situation you need to tune a memory cap for 
+them.</p>
+<h2>MySQL memory consumption</h2>
+<p>MySQL can be a greedy bastard what comes to memory consumption. Here 
+on this server MySQL seems to take 417M virtual memory which seems to be
+ little excessive for just running two WordPress instances and one 
+Django / Python application:</p>
+<pre>1310 mysql&nbsp;&nbsp;&nbsp;&nbsp; 20&nbsp;&nbsp; 0&nbsp; 417M 21100&nbsp; 2776 S&nbsp; 0.0&nbsp; 1.2&nbsp; 0:00.00 /usr/sbin/mysqld --basedir=/usr --datadir=/var/lib/mysql --user=mysql --pid-file=/v</pre>
+<p>After some tuning I was able to bring it down a bit</p>
+<pre>3354 mysql&nbsp;&nbsp;&nbsp;&nbsp; 20&nbsp;&nbsp; 0&nbsp; 276m&nbsp; 19m 2848 S&nbsp;&nbsp;&nbsp; 0&nbsp; 1.2&nbsp;&nbsp; 3:41.19 mysqld</pre>
+<p>A reduction of 130 MB, or 1/4 of the server total memory. Not bad.</p>
+<p><a href="http://ubuntu-snippets.blogspot.com/2009/02/mtop-mysql-monitor.html">Use mtop to monitor running MySQL</a>,
+ its querieries, etc. so you know what’s going on. As you can see this 
+MySQL has very good cache rate meaning that basically it is keeping 
+everything in memory. If the content of the sites is less than 10 MBytes
+ total, 400 MB contains plenty of space to cache the content:</p>
+<pre>load average: 0.05, 0.08, 0.16 mysqld 5.0.51a-3ubuntu5.8-log up 1 day(s), 19:47 hrs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+2 threads: 1 running, 6 cached. Queries/slow: 187.1K/0 Cache Hit: 99.39%</pre>
+<h2>What eats memory</h2>
+<p>I am not an expert on MySQL, so I hope someone with more insight 
+could post comments regarding how to tune MySQL for low memory 
+situations and how it is expected to behave.</p>
+<p>Some ideas I run through my head</p>
+<ul>
+<li>MySQL default cache settings are not too tight on Ubuntu/Debian, 
+making it suitable for moderate loads, not low loads. If you don’t have 
+much content, everything is just kept in memory (even if not needed)</li>
+<li>MySQL uses round robin for connections and if there is 100 max 
+connections it will allocate a thread stack for each connection (someone
+ please confirm this – I found contracting infos).</li>
+</ul>
+<h2>Configuring MySQL</h2>
+<p>Here are listed some methods how to reduce the memory usage. This is what I done on this little box</p>
+<p>MySQL is mostly configured in <em>/etc/mysql/my.cnf</em> on Ubuntu / Debian.</p>
+<ul>
+<li>Let’s halve key_buffer from 16M to 8M. <a href="http://dev.mysql.com/doc/refman/5.0/en/myisam-key-cache.html">It is used by MyISAM table cache</a>.</li>
+<li>Halve <a href="http://techgurulive.com/2010/10/20/query_cache_size-tuning-optimizing-my-cnf-file-for-mysql/">query_cache_size</a>. query_cache_size&nbsp; = 8M. Also, decrease query_cache_limit to 512 K.</li>
+<li><a href="http://www.mysqlperformanceblog.com/2006/05/17/mysql-server-memory-usage/">Each connection, even if idle, will have 256 KB buffer</a>.
+ Decrease the number of max. connections. (XXX: not sure about this). 
+Drop max connections from 100 -&gt; 30, as we do not have that many 
+concurrent visitors on the site. Also, set less aggressive thread_stack 
+size.</li>
+</ul>
+<p>The final adjustments</p>
+<pre>key_buffer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = 8M
+max_connections         = 30
+query_cache_size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = 8M
+query_cache_limit       = 512K
+thread_stack            = 128K</pre>
+
+&#x25C0; &#x25B6;
+
+<h2>More info</h2>
+<ul>
+<li><a href="http://www.zimbio.com/Linux/articles/692/Fine+Tuning+MYSQL+Reducing+Memory+Usage">Fine-tuning MySQL</a></li>
+<li><a href="http://www.electrictoolbox.com/mysql-table-storage-engine/">Showing what database engine MySQL tables are using</a></li>
+<li><a href="http://www.mysqlperformanceblog.com/2006/05/17/mysql-server-memory-usage/">MySQL server memory usage</a></li>
+<li><a href="http://www.lowendbox.com/blog/reducing-mysql-memory-usage-for-low-end-boxes/">Reducing MySQL memory usage for low end boxes</a></li>
+</ul>
+<p>Send in more tips please! Is 32-bit better than 64-bit for low end VPS, how much this affects MySQL?
+</p><p class="signature">
+<a href="http://mfabrik.com/@@zoho-contact-form"><img valign="middle" src="mfabrik-comments_files/mfabrik-24.png"></a> <a href="http://mfabrik.com/@@zoho-contact-form" "="">Get developers</a> <a href="http://twitter.com/mfabrik"> </a><a href="http://feeds.feedburner.com/mFabrikWebAndMobileDevelopment" rel="alternate" type="application/rss+xml"><img valign="middle" src="mfabrik-comments_files/feed-icon16x16.png" alt="" style="vertical-align: middle; border: 0pt none;"></a>&nbsp;<a href="http://feeds.feedburner.com/mFabrikWebAndMobileDevelopment" rel="alternate" type="application/rss+xml">Subscribe mFabrik blog in a reader</a> <img valign="middle" src="mfabrik-comments_files/twitter-24.png"> <a href="http://twitter.com/moo9000">Follow me on Twitter</a></p>
+											</div><!-- .entry-content -->
+
+					<div id="entry-author-info">
+						<div id="author-avatar">
+							<img alt="" src="mfabrik-comments_files/349bc8bcbc12df11011b395bc016454f.png" class="avatar avatar-60 photo" height="60" width="60">						</div><!-- #author-avatar -->
+						<div id="author-description">
+							<h2>About Mikko Ohtamaa</h2>
+							Web and mobile consultant with background in Plone, Python and Django							<div id="author-link">
+								<a href="http://blog.mfabrik.com/author/moo/">
+									View all posts by Mikko Ohtamaa <span class="meta-nav">→</span>								</a>
+							</div><!-- #author-link	-->
+						</div><!-- #author-description -->
+					</div><!-- #entry-author-info -->
+
+					<div class="entry-utility">
+						This entry was posted in <a href="http://blog.mfabrik.com/category/mysql/" title="View all posts in mysql" rel="category tag">mysql</a>, <a href="http://blog.mfabrik.com/category/php/" title="View all posts in php" rel="category tag">php</a>, <a href="http://blog.mfabrik.com/category/plone/" title="View all posts in plone" rel="category tag">plone</a>, <a href="http://blog.mfabrik.com/category/python/" title="View all posts in python" rel="category tag">python</a>, <a href="http://blog.mfabrik.com/category/technology/" title="View all posts in technology" rel="category tag">technology</a> and tagged <a href="http://blog.mfabrik.com/tag/debian/" rel="tag">debian</a>, <a href="http://blog.mfabrik.com/tag/django/" rel="tag">django</a>, <a href="http://blog.mfabrik.com/tag/linux/" rel="tag">linux</a>, <a href="http://blog.mfabrik.com/tag/memory/" rel="tag">memory</a>, <a href="http://blog.mfabrik.com/tag/mtop/" rel="tag">mtop</a>, <a href="http://blog.mfabrik.com/tag/mysql/" rel="tag">mysql</a>, <a href="http://blog.mfabrik.com/tag/php/" rel="tag">php</a>, <a href="http://blog.mfabrik.com/tag/plone/" rel="tag">plone</a>, <a href="http://blog.mfabrik.com/tag/python/" rel="tag">python</a>, <a href="http://blog.mfabrik.com/tag/ram/" rel="tag">ram</a>, <a href="http://blog.mfabrik.com/tag/res/" rel="tag">res</a>, <a href="http://blog.mfabrik.com/tag/top/" rel="tag">top</a>, <a href="http://blog.mfabrik.com/tag/ubuntu/" rel="tag">ubuntu</a>, <a href="http://blog.mfabrik.com/tag/virt/" rel="tag">virt</a>, <a href="http://blog.mfabrik.com/tag/virtual-memory/" rel="tag">virtual memory</a>, <a href="http://blog.mfabrik.com/tag/wordpress/" rel="tag">Wordpress</a>. Bookmark the <a href="http://blog.mfabrik.com/2011/03/31/reducing-mysql-memory-usage-on-ubuntu-debian-linux/" title="Permalink to Reducing MySQL memory usage on Ubuntu / Debian Linux" rel="bookmark">permalink</a>.						<span class="edit-link"><a class="post-edit-link" href="http://blog.mfabrik.com/wp-admin/post.php?post=1149&amp;action=edit" title="Edit Post">Edit</a></span>					</div><!-- .entry-utility -->
+				</div><!-- #post-## -->
+
+				<div id="nav-below" class="navigation">
+					<div class="nav-previous"><a href="http://blog.mfabrik.com/2011/03/30/copymove-phpbb3-forum-from-a-server-to-another-computer-ubuntulinux/" rel="prev"><span class="meta-nav">←</span> Copy/move phpBB3 forum from a server to another computer (Ubuntu/Linux)</a></div>
+					<div class="nav-next"></div>
+				</div><!-- #nav-below -->
+
+				
+			<div id="comments">
+
+
+			<h3 id="comments-title">9 Responses to <em>Reducing MySQL memory usage on Ubuntu / Debian Linux</em></h3>
+
+
+			<ol class="commentlist">
+					<li class="comment even thread-even depth-1" id="li-comment-4502">
+		<div id="comment-4502">
+		<div class="comment-author vcard">
+			<img alt="" src="mfabrik-comments_files/3e9dc491607f52141897a765eaab25e4.jpg" class="avatar avatar-40 photo" height="40" width="40">			<cite class="fn"><a href="https://bitbucket.org/kmike" rel="external nofollow" class="url">Mikhai Korobov</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://blog.mfabrik.com/2011/03/31/reducing-mysql-memory-usage-on-ubuntu-debian-linux/comment-page-1/#comment-4502">
+			March 31, 2011 at 3:54 pm</a> <a class="comment-edit-link" href="http://blog.mfabrik.com/wp-admin/comment.php?action=editcomment&amp;c=4502" title="Edit comment">(Edit)</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi Mikko,</p>
+<p>The problem you are facing is not ‘mysql memory usage’ problem, that’s OpenVZ memory management issue. </p>
+<p>In your example:<br>
+1310 mysql     20   0  417M 21100  2776 S  0.0  1.2  0:00.00 /usr/sbin/mysqld </p>
+<p>mysql uses 21M RSS, not 417M. 417M is VIRT memory, it given for free 
+on almost all systems (on real servers, on xen or kvm vps’es) so 
+software usually can allocate as much VIRT memory as it wants. Moreover,
+ OS itself consider VIRT free to allocate and allocates about 10M per 
+thread for thread stack in VIRT memory. But this doesn’t work in OpenVZ 
+because VIRT is limited here, not RSS.</p>
+<p>That’s why many-many people consider apache or mysql InnoDB memory 
+hog. These programs are using threads and on cheap OpenVZ VPS’es they 
+are eating huge amount of memory indeed. </p>
+<p>There are several possible ways to decrease memory usage on OpenVZ.</p>
+<p>1. Use single-thereaded software (e.g. replace apache with nginx, use myisam instead of innodb)<br>
+2. Decrease thread stack using software config options (e.g. ThreadStackSize option for apache)<br>
+3. Decrease thread stack size globally. This can be done with ‘ulimit -s
+ ‘ command. Try e.g. typing ‘ulimit -s 2048′, then restart mysql and 
+check memory usage. If all is working fine, this command can be added to
+ booting sequence (e.g. to /etc/init.d/rc so it run before starting 
+mysql and apache).</p>
+<p>But the best way is to avoid OpenVZ and use XEN/KVM. “512M OpenVZ” is
+ a pure marketing, it is worse than 256M XEN because that’s just 
+different memory. Look, your mysql will use 400M+ on OpenVZ and less 
+than 25M on XEN. Get something like linode and your memory problems will
+ disappear.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-4505">
+		<div id="comment-4505">
+		<div class="comment-author vcard">
+			<img alt="" src="mfabrik-comments_files/13e2a7561bf80c6a0fb882a1394d7d5f.png" class="avatar avatar-40 photo" height="40" width="40">			<cite class="fn">Mark Biggers</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://blog.mfabrik.com/2011/03/31/reducing-mysql-memory-usage-on-ubuntu-debian-linux/comment-page-1/#comment-4505">
+			March 31, 2011 at 4:36 pm</a> <a class="comment-edit-link" href="http://blog.mfabrik.com/wp-admin/comment.php?action=editcomment&amp;c=4505" title="Edit comment">(Edit)</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>There must be some sort of DB-connection 
+pooling (app?), for Django’s ORM?  Then you can have a tunable, fixed # 
+of DB connections, released to the pool when a request is completed…</p>
+<p>I would think there’s a PHP DB-connection pooling “app”, too.</p>
+<p>Do you really want to run a Varnish caching proxy, and “memcached”, 
+in that relatively small VPS?  Perhaps there’s a way to use a Nginx 
+plugin, and Django caching, to take over from these? (not sure).</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment byuser comment-author-moo bypostauthor even thread-even depth-1" id="li-comment-4506">
+		<div id="comment-4506">
+		<div class="comment-author vcard">
+			<img alt="" src="mfabrik-comments_files/349bc8bcbc12df11011b395bc016454f_003.png" class="avatar avatar-40 photo" height="40" width="40">			<cite class="fn"><a href="http://mfabrik.com/" rel="external nofollow" class="url">Mikko Ohtamaa</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://blog.mfabrik.com/2011/03/31/reducing-mysql-memory-usage-on-ubuntu-debian-linux/comment-page-1/#comment-4506">
+			March 31, 2011 at 4:42 pm</a> <a class="comment-edit-link" href="http://blog.mfabrik.com/wp-admin/comment.php?action=editcomment&amp;c=4506" title="Edit comment">(Edit)</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Thank you for your insightful reply Mikhai. However, I am not using OpenVZ and I am using XEN.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-4508">
+		<div id="comment-4508">
+		<div class="comment-author vcard">
+			<img alt="" src="mfabrik-comments_files/3e9dc491607f52141897a765eaab25e4.jpg" class="avatar avatar-40 photo" height="40" width="40">			<cite class="fn"><a href="https://bitbucket.org/kmike" rel="external nofollow" class="url">Mikhai Korobov</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://blog.mfabrik.com/2011/03/31/reducing-mysql-memory-usage-on-ubuntu-debian-linux/comment-page-1/#comment-4508">
+			March 31, 2011 at 4:53 pm</a> <a class="comment-edit-link" href="http://blog.mfabrik.com/wp-admin/comment.php?action=editcomment&amp;c=4508" title="Edit comment">(Edit)</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>If you are using XEN then memory consumption shouldn’t be measured with VIRT column <img src="mfabrik-comments_files/icon_wink.gif" alt=";)" class="wp-smiley">  In your case Mysql consumes 21M before changes and 19M after, not 417M and 276M.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment byuser comment-author-moo bypostauthor even thread-even depth-1" id="li-comment-4509">
+		<div id="comment-4509">
+		<div class="comment-author vcard">
+			<img alt="" src="mfabrik-comments_files/349bc8bcbc12df11011b395bc016454f_003.png" class="avatar avatar-40 photo" height="40" width="40">			<cite class="fn"><a href="http://mfabrik.com/" rel="external nofollow" class="url">Mikko Ohtamaa</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://blog.mfabrik.com/2011/03/31/reducing-mysql-memory-usage-on-ubuntu-debian-linux/comment-page-1/#comment-4509">
+			March 31, 2011 at 4:55 pm</a> <a class="comment-edit-link" href="http://blog.mfabrik.com/wp-admin/comment.php?action=editcomment&amp;c=4509" title="Edit comment">(Edit)</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>VIRT still goes to swap and means that it is put on the disk in some point, right?</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-4510">
+		<div id="comment-4510">
+		<div class="comment-author vcard">
+			<img alt="" src="mfabrik-comments_files/3e9dc491607f52141897a765eaab25e4.jpg" class="avatar avatar-40 photo" height="40" width="40">			<cite class="fn"><a href="https://bitbucket.org/kmike" rel="external nofollow" class="url">Mikhai Korobov</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://blog.mfabrik.com/2011/03/31/reducing-mysql-memory-usage-on-ubuntu-debian-linux/comment-page-1/#comment-4510">
+			March 31, 2011 at 5:01 pm</a> <a class="comment-edit-link" href="http://blog.mfabrik.com/wp-admin/comment.php?action=editcomment&amp;c=4510" title="Edit comment">(Edit)</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>No, VIRT does not goes to swap and in 
+most cases it is never put on disk. Swapped memory accounts in VIRT as 
+well as stacks, mmaped files, etc. Take a look at <a href="http://linux-mm.org/ActualMemoryFootprint" rel="nofollow">http://linux-mm.org/ActualMemoryFootprint</a> for more info. Gigabytes of VIRT can be allocated without negative impact on system.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment byuser comment-author-moo bypostauthor even thread-even depth-1" id="li-comment-4511">
+		<div id="comment-4511">
+		<div class="comment-author vcard">
+			<img alt="" src="mfabrik-comments_files/349bc8bcbc12df11011b395bc016454f_003.png" class="avatar avatar-40 photo" height="40" width="40">			<cite class="fn"><a href="http://mfabrik.com/" rel="external nofollow" class="url">Mikko Ohtamaa</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://blog.mfabrik.com/2011/03/31/reducing-mysql-memory-usage-on-ubuntu-debian-linux/comment-page-1/#comment-4511">
+			March 31, 2011 at 5:07 pm</a> <a class="comment-edit-link" href="http://blog.mfabrik.com/wp-admin/comment.php?action=editcomment&amp;c=4511" title="Edit comment">(Edit)</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>However, tn this particular case we can observe swap space growth, so something is going there and memory usage must be reduced <img src="mfabrik-comments_files/icon_smile.gif" alt=":)" class="wp-smiley"> </p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-4515">
+		<div id="comment-4515">
+		<div class="comment-author vcard">
+			<img alt="" src="mfabrik-comments_files/3e9dc491607f52141897a765eaab25e4.jpg" class="avatar avatar-40 photo" height="40" width="40">			<cite class="fn"><a href="https://bitbucket.org/kmike" rel="external nofollow" class="url">Mikhai Korobov</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://blog.mfabrik.com/2011/03/31/reducing-mysql-memory-usage-on-ubuntu-debian-linux/comment-page-1/#comment-4515">
+			March 31, 2011 at 8:32 pm</a> <a class="comment-edit-link" href="http://blog.mfabrik.com/wp-admin/comment.php?action=editcomment&amp;c=4515" title="Edit comment">(Edit)</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Yep, but in order to reduce memory it’s 
+good to know what is exactly consuming memory. And in order to know this
+ take a look at RSS column, not at VIRT column (on XEN).</p>
+<p>Increasing VIRT can be a side effect of swapping, but it is definitely not a cause of swapping.</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment byuser comment-author-moo bypostauthor even thread-even depth-1" id="li-comment-4517">
+		<div id="comment-4517">
+		<div class="comment-author vcard">
+			<img alt="" src="mfabrik-comments_files/349bc8bcbc12df11011b395bc016454f_003.png" class="avatar avatar-40 photo" height="40" width="40">			<cite class="fn"><a href="http://mfabrik.com/" rel="external nofollow" class="url">Mikko Ohtamaa</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://blog.mfabrik.com/2011/03/31/reducing-mysql-memory-usage-on-ubuntu-debian-linux/comment-page-1/#comment-4517">
+			March 31, 2011 at 10:25 pm</a> <a class="comment-edit-link" href="http://blog.mfabrik.com/wp-admin/comment.php?action=editcomment&amp;c=4517" title="Edit comment">(Edit)</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Any tools for getting better data, with 
+historic profile, how much Linux processes hold memory in RES and how 
+much is swapped out?</p>
+</div>
+
+		<div class="reply">
+					</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+			</ol>
+
+
+
+								<div id="respond">
+				<h3 id="reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="http://blog.mfabrik.com/2011/03/31/reducing-mysql-memory-usage-on-ubuntu-debian-linux/?mobilize-test-wordpress=true#respond" style="display: none;">Cancel reply</a></small></h3>
+									<form action="http://blog.mfabrik.com/wp-comments-post.php" method="post" id="commentform">
+																			<p class="logged-in-as">Logged in as <a href="http://blog.mfabrik.com/wp-admin/profile.php">Mikko Ohtamaa</a>. <a href="http://blog.mfabrik.com/wp-login.php?action=logout&amp;redirect_to=http%3A%2F%2Fblog.mfabrik.com%2F2011%2F03%2F31%2Freducing-mysql-memory-usage-on-ubuntu-debian-linux%2F&amp;_wpnonce=18d0c6320e" title="Log out of this account">Log out?</a></p>																			<p class="comment-form-comment"><label for="comment">Comment</label><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>						<p class="form-allowed-tags">You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes:  <code>&lt;a
+ href="" title=""&gt; &lt;abbr title=""&gt; &lt;acronym title=""&gt; 
+&lt;b&gt; &lt;blockquote cite=""&gt; &lt;cite&gt; &lt;code&gt; &lt;del 
+datetime=""&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=""&gt; &lt;strike&gt; 
+&lt;strong&gt; </code></p>						<p class="form-submit">
+							<input name="submit" id="submit" value="Post Comment" type="submit">
+							<input name="comment_post_ID" value="1149" id="comment_post_ID" type="hidden">
+<input name="comment_parent" id="comment_parent" value="0" type="hidden">
+						</p>
+						<input id="_wp_unfiltered_html_comment" name="_wp_unfiltered_html_comment" value="c95d1c71dd" type="hidden"><p style="display: none;"><input id="akismet_comment_nonce" name="akismet_comment_nonce" value="a3e2db4645" type="hidden"></p><p><input name="adfbd8874a1bc8421f1949b762a7ae03" style="display: none;" type="text"><input name="d7cd6414ce8bf948533fc331dac6bae9" value="c5b3c574fc6c43d1e4b2e6d584e19269" style="display: none;" type="text"></p>
+
+	<p style="clear: both;" class="subscribe-to-comments">
+	You are the author of this entry.  <a href="http://blog.mfabrik.com/?wp-subscription-manager=1&amp;ref=http%3A%2F%2Fblog.mfabrik.com%2F2011%2F03%2F31%2Freducing-mysql-memory-usage-on-ubuntu-debian-linux%2F%3Fmobilize-test-wordpress%3Dtrue">Manage subscriptions</a>.	</p>
+
+					</form>
+							</div><!-- #respond -->
+						
+</div><!-- #comments -->
+
+
+			</div><!-- #content -->
+		</div><!-- #container -->
+
+
+		<div id="primary" class="widget-area" role="complementary">
+			<ul class="xoxo">
+
+
+			<li id="search" class="widget-container widget_search">
+				<form role="search" method="get" id="searchform" action="http://blog.mfabrik.com/">
+	<div><label class="screen-reader-text" for="s">Search for:</label>
+	<input name="s" id="s" type="text">
+	<input id="searchsubmit" value="Search" type="submit">
+	</div>
+	</form>			</li>
+
+			<li id="archives" class="widget-container">
+				<h3 class="widget-title">Archives</h3>
+				<ul>
+						<li><a href="http://blog.mfabrik.com/2011/03/" title="March 2011">March 2011</a></li>
+	<li><a href="http://blog.mfabrik.com/2011/02/" title="February 2011">February 2011</a></li>
+	<li><a href="http://blog.mfabrik.com/2011/01/" title="January 2011">January 2011</a></li>
+	<li><a href="http://blog.mfabrik.com/2010/12/" title="December 2010">December 2010</a></li>
+	<li><a href="http://blog.mfabrik.com/2010/11/" title="November 2010">November 2010</a></li>
+	<li><a href="http://blog.mfabrik.com/2010/10/" title="October 2010">October 2010</a></li>
+	<li><a href="http://blog.mfabrik.com/2010/09/" title="September 2010">September 2010</a></li>
+	<li><a href="http://blog.mfabrik.com/2010/08/" title="August 2010">August 2010</a></li>
+	<li><a href="http://blog.mfabrik.com/2010/07/" title="July 2010">July 2010</a></li>
+	<li><a href="http://blog.mfabrik.com/2010/06/" title="June 2010">June 2010</a></li>
+	<li><a href="http://blog.mfabrik.com/2010/05/" title="May 2010">May 2010</a></li>
+	<li><a href="http://blog.mfabrik.com/2010/04/" title="April 2010">April 2010</a></li>
+	<li><a href="http://blog.mfabrik.com/2010/03/" title="March 2010">March 2010</a></li>
+	<li><a href="http://blog.mfabrik.com/2010/01/" title="January 2010">January 2010</a></li>
+	<li><a href="http://blog.mfabrik.com/2009/12/" title="December 2009">December 2009</a></li>
+	<li><a href="http://blog.mfabrik.com/2009/11/" title="November 2009">November 2009</a></li>
+	<li><a href="http://blog.mfabrik.com/2009/10/" title="October 2009">October 2009</a></li>
+	<li><a href="http://blog.mfabrik.com/2009/09/" title="September 2009">September 2009</a></li>
+	<li><a href="http://blog.mfabrik.com/2009/08/" title="August 2009">August 2009</a></li>
+	<li><a href="http://blog.mfabrik.com/2009/07/" title="July 2009">July 2009</a></li>
+	<li><a href="http://blog.mfabrik.com/2009/02/" title="February 2009">February 2009</a></li>
+	<li><a href="http://blog.mfabrik.com/2008/12/" title="December 2008">December 2008</a></li>
+	<li><a href="http://blog.mfabrik.com/2008/11/" title="November 2008">November 2008</a></li>
+	<li><a href="http://blog.mfabrik.com/2008/10/" title="October 2008">October 2008</a></li>
+	<li><a href="http://blog.mfabrik.com/2008/09/" title="September 2008">September 2008</a></li>
+	<li><a href="http://blog.mfabrik.com/2008/08/" title="August 2008">August 2008</a></li>
+	<li><a href="http://blog.mfabrik.com/2008/07/" title="July 2008">July 2008</a></li>
+	<li><a href="http://blog.mfabrik.com/2008/06/" title="June 2008">June 2008</a></li>
+	<li><a href="http://blog.mfabrik.com/2008/05/" title="May 2008">May 2008</a></li>
+	<li><a href="http://blog.mfabrik.com/2008/04/" title="April 2008">April 2008</a></li>
+	<li><a href="http://blog.mfabrik.com/2008/03/" title="March 2008">March 2008</a></li>
+	<li><a href="http://blog.mfabrik.com/2008/02/" title="February 2008">February 2008</a></li>
+	<li><a href="http://blog.mfabrik.com/2007/11/" title="November 2007">November 2007</a></li>
+	<li><a href="http://blog.mfabrik.com/2007/10/" title="October 2007">October 2007</a></li>
+	<li><a href="http://blog.mfabrik.com/2007/09/" title="September 2007">September 2007</a></li>
+	<li><a href="http://blog.mfabrik.com/2007/08/" title="August 2007">August 2007</a></li>
+	<li><a href="http://blog.mfabrik.com/2007/07/" title="July 2007">July 2007</a></li>
+				</ul>
+			</li>
+
+			<li id="meta" class="widget-container">
+				<h3 class="widget-title">Meta</h3>
+				<ul>
+					<li><a href="http://blog.mfabrik.com/wp-admin/">Site Admin</a></li>					<li><a href="http://blog.mfabrik.com/wp-login.php?action=logout&amp;_wpnonce=18d0c6320e">Log out</a></li>
+									</ul>
+			</li>
+
+					</ul>
+		</div><!-- #primary .widget-area -->
+
+	</div><!-- #main -->
+
+	<div id="footer" role="contentinfo">
+		<div id="colophon">
+
+
+
+			<div id="site-info">
+				<a href="http://blog.mfabrik.com/" title="mFabrik – mobile sites, apps, HTML5 and CMS software development" rel="home">
+					mFabrik – mobile sites, apps, HTML5 and CMS software development				</a>
+			</div><!-- #site-info -->
+
+			<div id="site-generator">
+								<a href="http://wordpress.org/" title="Semantic Personal Publishing Platform" rel="generator">Proudly powered by WordPress.</a>
+			</div><!-- #site-generator -->
+
+		</div><!-- #colophon -->
+	</div><!-- #footer -->
+
+</div><!-- #wrapper -->
+
+<script type="text/javascript" src="mfabrik-comments_files/admin-bar.js"></script>
+
+<!-- tracker not added by Ultimate Google Analytics plugin v1.5.3: http://www.oratransplant.nl/uga -->
+<!-- tracker is not added for a logged on user of this level -->
+
+
+<!-- SyntaxHighlighter Start -->
+	<script type="text/javascript" src="mfabrik-comments_files/shCore.js"></script>
+	<script type="text/javascript" src="mfabrik-comments_files/shBrushPython.js"></script>
+	<script type="text/javascript">dp.SyntaxHighlighter.HighlightAll('code');</script>
+<!-- SyntaxHighlighter End -->
+<!--  phpinfo() Plugin for WordPress by Christopher Ross  - http://thisismyurl.com  -->		
+
+		
+
+<div style="padding: 0pt; border: medium none; margin: 0pt; position: absolute; left: 0pt; top: 0pt; width: 100%; z-index: 1001; direction: ltr;" class="highslide-container"><a style="position: absolute; top: -9999px; opacity: 0.75; z-index: 1;" href="javascript:;" title="Click to cancel" class="highslide-loading">Loading...</a><div style="display: none;"></div><div style="padding: 0pt; border: medium none; margin: 0pt;" class="highslide-viewport"></div><table style="padding: 0pt; border: medium none; margin: 0pt; visibility: hidden; position: absolute; border-collapse: collapse; width: 0pt;" cellspacing="0"><tbody style="padding: 0pt; border: medium none; margin: 0pt;"><tr style="padding: 0pt; border: medium none; margin: 0pt; height: auto;"><td style="padding: 0pt; border: medium none; margin: 0pt; line-height: 0; font-size: 0pt; background: url(&quot;http://blog.mfabrik.com/wp-content/plugins/shashin/display/highslide/graphics/outlines/rounded-white.png&quot;) repeat scroll 0px 0px transparent; height: 20px; width: 20px;"></td><td style="padding: 0pt; border: medium none; margin: 0pt; line-height: 0; font-size: 0pt; background: url(&quot;http://blog.mfabrik.com/wp-content/plugins/shashin/display/highslide/graphics/outlines/rounded-white.png&quot;) repeat scroll 0px -40px transparent; height: 20px; width: 20px;"></td><td style="padding: 0pt; border: medium none; margin: 0pt; line-height: 0; font-size: 0pt; background: url(&quot;http://blog.mfabrik.com/wp-content/plugins/shashin/display/highslide/graphics/outlines/rounded-white.png&quot;) repeat scroll -20px 0px transparent; height: 20px; width: 20px;"></td></tr><tr style="padding: 0pt; border: medium none; margin: 0pt; height: auto;"><td style="padding: 0pt; border: medium none; margin: 0pt; line-height: 0; font-size: 0pt; background: url(&quot;http://blog.mfabrik.com/wp-content/plugins/shashin/display/highslide/graphics/outlines/rounded-white.png&quot;) repeat scroll 0px -80px transparent; height: 20px; width: 20px;"></td><td class="rounded-white highslide-outline" style="padding: 0pt; border: medium none; margin: 0pt; position: relative;"></td><td style="padding: 0pt; border: medium none; margin: 0pt; line-height: 0; font-size: 0pt; background: url(&quot;http://blog.mfabrik.com/wp-content/plugins/shashin/display/highslide/graphics/outlines/rounded-white.png&quot;) repeat scroll -20px -80px transparent; height: 20px; width: 20px;"></td></tr><tr style="padding: 0pt; border: medium none; margin: 0pt; height: auto;"><td style="padding: 0pt; border: medium none; margin: 0pt; line-height: 0; font-size: 0pt; background: url(&quot;http://blog.mfabrik.com/wp-content/plugins/shashin/display/highslide/graphics/outlines/rounded-white.png&quot;) repeat scroll 0px -20px transparent; height: 20px; width: 20px;"></td><td style="padding: 0pt; border: medium none; margin: 0pt; line-height: 0; font-size: 0pt; background: url(&quot;http://blog.mfabrik.com/wp-content/plugins/shashin/display/highslide/graphics/outlines/rounded-white.png&quot;) repeat scroll 0px -60px transparent; height: 20px; width: 20px;"></td><td style="padding: 0pt; border: medium none; margin: 0pt; line-height: 0; font-size: 0pt; background: url(&quot;http://blog.mfabrik.com/wp-content/plugins/shashin/display/highslide/graphics/outlines/rounded-white.png&quot;) repeat scroll -20px -20px transparent; height: 20px; width: 20px;"></td></tr></tbody></table></div><div id="wpadminbar">
+			<div class="quicklinks">
+				<ul>
+													
+		<li id="wp-admin-bar-my-account-with-avatar" class="menupop">
+			<a href="http://blog.mfabrik.com/wp-admin/profile.php"><span><img alt="" src="mfabrik-comments_files/349bc8bcbc12df11011b395bc016454f_002.png" class="avatar avatar-16 photo" height="16" width="16">Mikko Ohtamaa</span></a>
+
+						<ul>
+											
+		<li id="wp-admin-bar-edit-my-profile" class="">
+			<a href="http://blog.mfabrik.com/wp-admin/profile.php">Edit My Profile</a>
+
+			
+					</li>											
+		<li id="wp-admin-bar-dashboard" class="">
+			<a href="http://blog.mfabrik.com/wp-admin/">Dashboard</a>
+
+			
+					</li>											
+		<li id="wp-admin-bar-log-out" class="">
+			<a href="http://blog.mfabrik.com/wp-login.php?action=logout&amp;_wpnonce=18d0c6320e">Log Out</a>
+
+			
+					</li>							</ul>
+			
+					</li>													
+		<li id="wp-admin-bar-edit" class="">
+			<a href="http://blog.mfabrik.com/wp-admin/post.php?post=1149&amp;action=edit">Edit Post</a>
+
+			
+					</li>													
+		<li id="wp-admin-bar-new-content" class="menupop">
+			<a href="http://blog.mfabrik.com/wp-admin/post-new.php?post_type=post"><span>Add New</span></a>
+
+						<ul>
+											
+		<li id="wp-admin-bar-new-post" class="">
+			<a href="http://blog.mfabrik.com/wp-admin/post-new.php?post_type=post">Post</a>
+
+			
+					</li>											
+		<li id="wp-admin-bar-new-page" class="">
+			<a href="http://blog.mfabrik.com/wp-admin/post-new.php?post_type=page">Page</a>
+
+			
+					</li>							</ul>
+			
+					</li>													
+		<li id="wp-admin-bar-comments" class="">
+			<a href="http://blog.mfabrik.com/wp-admin/edit-comments.php">Comments </a>
+
+			
+					</li>													
+		<li id="wp-admin-bar-appearance" class="menupop">
+			<a href="http://blog.mfabrik.com/wp-admin/themes.php"><span>Appearance</span></a>
+
+						<ul>
+											
+		<li id="wp-admin-bar-widgets" class="">
+			<a href="http://blog.mfabrik.com/wp-admin/widgets.php">Widgets</a>
+
+			
+					</li>											
+		<li id="wp-admin-bar-menus" class="">
+			<a href="http://blog.mfabrik.com/wp-admin/nav-menus.php">Menus</a>
+
+			
+					</li>							</ul>
+			
+					</li>													
+		<li id="wp-admin-bar-updates" class="">
+			<a href="http://blog.mfabrik.com/wp-admin/update-core.php"><span title="7 Plugin Updates">Updates <span id="ab-updates" class="update-count">7</span></span></a>
+
+			
+					</li>													
+		<li id="wp-admin-bar-get-shortlink" class="">
+			<a href="http://blog.mfabrik.com/?p=1149">Shortlink</a>
+
+			
+							<input class="shortlink-input" readonly="readonly" value="http://blog.mfabrik.com/?p=1149" type="text">					</li>									</ul>
+			</div>
+
+			<div id="adminbarsearch-wrap">
+				<form action="http://blog.mfabrik.com" method="get" id="adminbarsearch">
+					<input class="adminbar-input" name="s" id="adminbar-search" maxlength="150" type="text">
+					<input class="adminbar-button" value="Search" type="submit">
+				</form>
+			</div>
+		</div></body></html>

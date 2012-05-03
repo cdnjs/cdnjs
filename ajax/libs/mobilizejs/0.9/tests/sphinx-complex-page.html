@@ -1,0 +1,668 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+ 
+  <!-- Test loading, parsing and speed issues with a particular complex page.
+  
+       Use localhost bundle for loading the scripts.
+   --> 
+  
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Tutorial &mdash; mobilize.js v0.1 documentation</title>
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <script type="text/javascript" src="http://localhost:8080/js/mobilize.sphinx.debug.js"></script>
+    <link rel="top" title="mobilize.js v0.1 documentation" href="index.html" />
+    <link rel="next" title="Integrations for mobilize.js" href="integrations/index.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+  </head>
+  <body>
+      <div class="header">
+		
+		<a style="float: left; display: block; margin-right: 20px;" href="http://mobilizejs.com">
+            <img src="_static/logo_60.png" alt="Logo"/>
+		</a>
+    
+	    <h1 class="heading"><a href="index.html">
+          <span>mobilize.js v0.1 documentation</span></a></h1>
+        <h2 class="heading"><span>Tutorial</span></h2>
+
+        <div style="clear: both"><!-- --></div>
+		
+		
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="installation.html">Installation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="integrations/index.html">Integrations for mobilize.js</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="tutorial">
+<h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>In this tutorial we&#8217;ll explain how you can use mobilize.js to create a mobile version
+out of your existing web site or HTML theme.</p>
+<p>The target audience of this tutorial are</p>
+<ul class="simple">
+<li>Website authors who want to mobilize their web site</li>
+<li>Theme authors who want to support mobile version for their theme</li>
+<li>Mobile extension authors who want to use mobilize.js as a mobilization backend</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you just want to use existing Mobilize.js plug-in on your blog
+and CMS system, please see Integratations chapter for installation
+instructions.</p>
+</div>
+<ul class="simple">
+<li><a class="reference internal" href="integrations/index.html"><em>Ready integration plug-ins for different systems</em></a></li>
+</ul>
+</div>
+<div class="section" id="prerequirements">
+<h2>Prerequirements<a class="headerlink" href="#prerequirements" title="Permalink to this headline">¶</a></h2>
+<p>In order to understand this tutorial you should know the bare minimum of</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.w3cschool.org">Javascript</a></li>
+<li><a class="reference external" href="http://docs.jquery.org">jQuery DOM manipulation</a></li>
+<li><a class="reference external" href="http://jquerymobile.com/test/">jQuery Mobile widget basics</a></li>
+</ul>
+<p>If you manage to read through <a class="reference internal" href="development.html"><em>walkthrough how mobilize.js works</em></a>
+and you are not <em>totally</em> lost you should be ok.</p>
+<p>Remember that the <a class="reference external" href="http://groups.google.com/group/mobilizejs-users">community discussion forums are open for questions</a>.</p>
+</div>
+<div class="section" id="architecture">
+<h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
+<p><cite>mobilize</cite> Javascript object is a Javascript module.
+It will detect a mobile browser, perform mobile site transformation
+using jQuery and output the site using jQuery Mobile UI elements.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">There is no hard dependency to jQuery Mobile. You
+could as well use Sencha Touch, custom templates,
+etc.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In the future there will be sub-namespaces.</p>
+</div>
+<p><cite>mobilize.js</cite> itself does nothing. It needs to be tailored
+for each site or content management system HTML output.
+That&#8217;s saying which elements on the web pages go to mobile pages
+also.</p>
+</div>
+<div class="section" id="extenders-and-customizations">
+<h2>Extenders and customizations<a class="headerlink" href="#extenders-and-customizations" title="Permalink to this headline">¶</a></h2>
+<p>mobilize.js can be adopted for your system</p>
+<ul class="simple">
+<li>Using a single customization hook <tt class="docutils literal"><span class="pre">mobilizeCustomInit()</span></tt>: site-specific customization</li>
+<li>Extenders: generic solution for creating plug-ins for different systems (Wordpress, Sphinx, etc.)</li>
+</ul>
+<div class="section" id="customizations">
+<h3>Customizations<a class="headerlink" href="#customizations" title="Permalink to this headline">¶</a></h3>
+<p>mobilize.js calls <tt class="docutils literal"><span class="pre">mobilizeCustomInit()</span></tt> global
+function after loading which allows you to set up
+your site specific mobile Javascripts and CSS.</p>
+</div>
+<div class="section" id="extenders">
+<h3>Extenders<a class="headerlink" href="#extenders" title="Permalink to this headline">¶</a></h3>
+<p>An extender overrides
+mobilize.js abstract functions with its own system specific
+versions which tell what elements go to where and such.</p>
+<p>The name <tt class="docutils literal"><span class="pre">extender</span></tt> comes from Javascript <em>extends</em> pattern
+where target object functions are overridden from one or several
+source objects (as there is no real Javascript class inheritance).</p>
+</div>
+</div>
+<div class="section" id="server-side-optimizations">
+<h2>Server-side optimizations<a class="headerlink" href="#server-side-optimizations" title="Permalink to this headline">¶</a></h2>
+<p>mobilize.js can run with and without servers-support.</p>
+<p>Optimally you could procude
+HTML so that it finely satisfies both web and mobile browsers.
+However, in real-life compromises may need to be made.</p>
+<p>Server-side optimizations are changes to HTML templates run on the server.
+You may remove unnecessary CSS files or HTML mark-up to make your
+pages have less cruft. This makes pages load faster,
+but needs expertise in cache configuration and other potential
+hardcode pitfalls.</p>
+<p>In this tutorial we do not yet focus on any server-side
+changes.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Mobile.js mobile resources do not tax desktop browsers. mobilize.js
+loads mobile specific JS, CSS and image files only after
+the mobile browser has been detected.</p>
+</div>
+<p>Below is listed what you should consider
+when you pondering whether you&#8217;d like to use
+server-side optimizations or not.</p>
+<div class="section" id="clean-javascript-install">
+<h3>Clean Javascript install<a class="headerlink" href="#clean-javascript-install" title="Permalink to this headline">¶</a></h3>
+<p>Pros</p>
+<ul class="simple">
+<li>No server-side code needs to be maintained</li>
+<li>Cache friendly: one URL, one HTML payload</li>
+<li>Easy to integrate with <strong>any</strong> web system</li>
+<li>Works on static HTML files</li>
+<li>You can also integrate to sites for which you do not otherwise have access (third party systems, no source code)</li>
+</ul>
+<p>Cons</p>
+<ul class="simple">
+<li>May load unncessary CSS, JS and images, slowing loads</li>
+<li>May load unnecessary HTML payload just to later remove it with Javascript</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">With node.js you can execute mobilize.js transformations on
+the server side, supporting mobile browsers without Javascript
+capabilities.</p>
+</div>
+</div>
+<div class="section" id="id1">
+<h3>Server-side optimizations<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Pros</p>
+<ul class="simple">
+<li>HTML content can be made load faster</li>
+</ul>
+<p>Cons</p>
+<ul class="simple">
+<li>Need to write server specific and system specific plug-in</li>
+<li>Need to tune caching</li>
+</ul>
+<p>See <a class="reference internal" href="serverside.html"><em>server-side tips and tricks</em></a>
+for more info.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Add core plug-ins, like Mobilize.js for Wordpress, come
+with some server-side optimizations.</p>
+</div>
+</div>
+</div>
+<div class="section" id="simple-mobilize-js-integration">
+<h2>Simple mobilize.js integration<a class="headerlink" href="#simple-mobilize-js-integration" title="Permalink to this headline">¶</a></h2>
+<p>mobilize.js usually contains the following parts</p>
+<ul class="simple">
+<li>&lt;script&gt; tag to load mobilize.js or mobilize.js bundle to some specific system (e.g. mobilize.wordpress.css)</li>
+<li>&lt;script&gt; tag which tells what site specific resources (your own custom CSS to load)</li>
+</ul>
+<p>Here is an example how to perform a simpe custom mobilize.js initialization,
+in production mode.</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;body&gt;</span>
+
+    <span class="c">&lt;!-- Your custom extender goes here --&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
+        <span class="kd">function</span> <span class="nx">mobilizeCustomInit</span><span class="p">()</span> <span class="p">{</span>
+            <span class="c1">// Add your own Javascript layer to load list</span>
+            <span class="c1">// in mobile mode.</span>
+            <span class="c1">// push() is array append function in JS.</span>
+            <span class="c1">// NOTE: Relative paths may have not luck here.</span>
+            <span class="nx">mobilize</span><span class="p">.</span><span class="nx">cdnOptions</span><span class="p">.</span><span class="nx">javascriptBundles</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">&quot;http://yourserver/mobilize.mysite.js&quot;</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="nt">&lt;/script&gt;</span>
+
+    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;http://cdn.mobilizejs.com/releases/0.1/js/mobilize.core.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Version number goes ot mobilize.js Javascript URL. In the example above, it is 0.1.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">mobilize.js is designed to be executed early in &lt;head&gt; or right after &lt;body&gt; tag.</p>
+</div>
+<p>Then <tt class="docutils literal"><span class="pre">mobilize.mysite.js</span></tt> would contain</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">mobilize</span><span class="p">.</span><span class="kr">extends</span><span class="p">(</span><span class="nx">mobilize</span><span class="p">,</span> <span class="p">{</span>
+
+    <span class="nx">constructBody</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// Map contennt elements to jQuery Mobile</span>
+        <span class="c1">// div[data-role=content] here</span>
+    <span class="p">},</span>
+
+    <span class="nx">constructHeader</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// Map title and header buttons jQuery Mobile</span>
+        <span class="c1">// div[data-role=header] here</span>
+    <span class="p">},</span>
+
+    <span class="nx">constructFooter</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// Construct site footer</span>
+    <span class="p">}</span>
+
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="section" id="templates">
+<h3>Templates<a class="headerlink" href="#templates" title="Permalink to this headline">¶</a></h3>
+<p>Your mobilize.js customization script
+should map elements to jQuery Mobile template which is automatically
+loaded from CDN delivery for mobile browsers only.  You usually
+don&#8217;t care about the template, as jQuery Mobile page skeleton
+is very simple and you are executing transformations with Javascript in any case.</p>
+<p>The template does not include &lt;html&gt;, &lt;head&gt; or &lt;body&gt; elements
+because it is loaded directly to DOM of the current web page -
+otherwise browsers would go little crazy.</p>
+<ul class="simple">
+<li>&lt;div id=&#8221;mobile-body&#8221;&gt; contains mobile web site &lt;body&gt;</li>
+<li>&lt;div id=&#8221;mobile-head&#8221;&gt; can include additional elements
+for &lt;head&gt;</li>
+</ul>
+<p>The default template looks very simple:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;mobile-body&quot;</span><span class="nt">&gt;</span>
+
+    <span class="c">&lt;!-- http://jquerymobile.com/demos/1.0a3/#docs/pages/docs-pages.html --&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">&quot;page&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">&quot;header&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">&quot;content&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">&quot;footer&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>You can find it <a class="reference external" href="http://cdn.mobilizejs.com/releases/trunk/templates/core.html">here</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can use our own templates also. See mobilize.cdnOptions.template option.</p>
+</div>
+</div>
+<div class="section" id="transform-code">
+<h3>Transform code<a class="headerlink" href="#transform-code" title="Permalink to this headline">¶</a></h3>
+<p>What actually goes to <tt class="docutils literal"><span class="pre">constructBody()</span></tt> and others
+is jQuery transformation code which extracts a bit from the web page
+and places it to jQuery Mobile elements.</p>
+<p>You could, for example, move everything in your website #content div to mobile site
+content area</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="c1">// Move box on the left hand to body first</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">content</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.content&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="mobilize-js-and-loading-of-various-files">
+<h2>mobilize.js and loading of various files<a class="headerlink" href="#mobilize-js-and-loading-of-various-files" title="Permalink to this headline">¶</a></h2>
+<p>The common file loading pattern with mobilize.js is</p>
+<ul class="simple">
+<li>mobilize.js is loaded. If you use CDN version this is bundled with .js files like mobilize.wordpress.js and
+the bundle is called mobilize.wordpress.min.js</li>
+<li>mobilize.js extender, e.g. mobilize.wordpress.js, is loaded and it overrides mobilize.js abstract functions
+with CMS specific versions</li>
+<li><tt class="docutils literal"><span class="pre">mobilize.init()</span></tt> (setting options) and <tt class="docutils literal"><span class="pre">mobilize.bootstrap()</span></tt> (starting processing)
+are automatically called from <tt class="docutils literal"><span class="pre">mobilize.autoloa()</span></tt> which is at the end of your bundle
+(e.g. mobilize.wordpress.js)</li>
+<li><tt class="docutils literal"><span class="pre">mobilize.init()</span></tt> calls Javascript global <tt class="docutils literal"><span class="pre">mobilizeCustomInit</span></tt> where
+the site can adds its own mobile customization layer. Usually this is done
+by fiddling with Javascript and CSS files going to be loaded from
+<tt class="docutils literal"><span class="pre">mobilize.cdnOptions</span></tt></li>
+</ul>
+<p>More info</p>
+<ul class="simple">
+<li><a class="reference external" href="http://cdn.mobilizejs.com/docs/apidocs/symbols/mobilize.options.html">mobilize.options</a></li>
+</ul>
+</div>
+<div class="section" id="writing-your-first-mobilization">
+<h2>Writing your first mobilization<a class="headerlink" href="#writing-your-first-mobilization" title="Permalink to this headline">¶</a></h2>
+<p>Now we have covered basics how mobilize.js is installed and how it works.</p>
+<p>It is time to start mobilizing your web site.</p>
+<p>We start with a sample site which consists only of</p>
+<ul class="simple">
+<li>One HTML file</li>
+<li>One CSS file</li>
+</ul>
+<p><a class="reference external" href="https://github.com/mobilizejs/mobilize.js/tree/master/integrations/example">The sample files can be best seen on Github</a>.</p>
+<img alt="http://cdn.mobilizejs.com/docs/trunk/manual/_images/website.png" src="http://cdn.mobilizejs.com/docs/trunk/manual/_images/website.png" />
+<p>Here is our site sample.html</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="cp">&lt;!doctype html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;en&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;title&gt;</span>Example site<span class="nt">&lt;/title&gt;</span>
+        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;styles.css&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="na">media=</span><span class="s">&quot;screen&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;wrapper&quot;</span><span class="nt">&gt;</span>
+            <span class="c">&lt;!-- #wrapper --&gt;</span>
+            <span class="nt">&lt;header&gt;</span>
+                <span class="c">&lt;!-- header --&gt;</span><span class="nt">&lt;h1&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>Your Cool Site<span class="nt">&lt;/a&gt;&lt;/h1&gt;</span>
+            <span class="nt">&lt;/header&gt;</span><span class="c">&lt;!-- end of header --&gt;</span>
+
+            <span class="nt">&lt;nav&gt;</span>
+                <span class="c">&lt;!-- top nav --&gt;</span>
+                <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;menu&quot;</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;ul&gt;</span>
+                        <span class="nt">&lt;li&gt;</span>
+                            <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;/&quot;</span><span class="nt">&gt;</span>Home<span class="nt">&lt;/a&gt;</span>
+                        <span class="nt">&lt;/li&gt;</span>
+
+                        <span class="nt">&lt;li&gt;</span>
+                            <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;/about&quot;</span><span class="nt">&gt;</span>About<span class="nt">&lt;/a&gt;</span>
+                        <span class="nt">&lt;/li&gt;</span>
+
+
+                        <span class="nt">&lt;li&gt;</span>
+                            <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;/contact&quot;</span><span class="nt">&gt;</span>Contact<span class="nt">&lt;/a&gt;</span>
+                        <span class="nt">&lt;/li&gt;</span>
+
+
+                    <span class="nt">&lt;/ul&gt;</span>
+                <span class="nt">&lt;/div&gt;</span>
+            <span class="nt">&lt;/nav&gt;</span>
+
+            <span class="c">&lt;!-- end of top nav --&gt;</span>
+            <span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">&quot;main&quot;</span><span class="nt">&gt;</span>
+                <span class="c">&lt;!-- #main content and sidebar area --&gt;</span>
+                <span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">&quot;container&quot;</span><span class="nt">&gt;</span>
+                    <span class="c">&lt;!-- #container --&gt;</span>
+                    <span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">&quot;content&quot;</span><span class="nt">&gt;</span>
+                            <span class="nt">&lt;h2&gt;</span>This is our story<span class="nt">&lt;/h2&gt;</span>
+                            <span class="nt">&lt;p&gt;</span>Long long time ago,<span class="nt">&lt;/p&gt;</span>
+                            <span class="nt">&lt;h2&gt;</span>... anb this is how it ends<span class="nt">&lt;/h2&gt;</span>
+                            <span class="nt">&lt;p&gt;</span>Galaxy far far away<span class="nt">&lt;/p&gt;</span>
+                    <span class="nt">&lt;/section&gt;</span>
+                    <span class="c">&lt;!-- end of #content --&gt;</span>
+                <span class="nt">&lt;/section&gt;</span>
+                <span class="c">&lt;!-- end of #container --&gt;</span>
+                <span class="nt">&lt;aside</span> <span class="na">id=</span><span class="s">&quot;sidebar&quot;</span><span class="nt">&gt;</span>
+
+                        <span class="nt">&lt;h3&gt;</span>Sidebar<span class="nt">&lt;/h3&gt;</span>
+                        <span class="nt">&lt;ul&gt;</span>
+                            <span class="nt">&lt;li&gt;</span>
+                                Sidebar item 1
+                            <span class="nt">&lt;/li&gt;</span>
+
+
+                            <span class="nt">&lt;li&gt;</span>
+                                Sidebar item 2
+                            <span class="nt">&lt;/li&gt;</span>
+                        <span class="nt">&lt;/ul&gt;</span>
+
+                <span class="nt">&lt;/aside&gt;</span>
+                <span class="c">&lt;!-- end of sidebar --&gt;</span>
+            <span class="nt">&lt;/section&gt;</span>
+            <span class="c">&lt;!-- end of #main content and sidebar--&gt;</span>
+            <span class="nt">&lt;footer&gt;</span>
+                <span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">&quot;footer-area&quot;</span><span class="nt">&gt;</span>
+                    Some footer text. <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://freehtml5templates.com/&quot;</span><span class="nt">&gt;</span>Web theme authors.<span class="nt">&lt;/a&gt;</span>
+                <span class="nt">&lt;/section&gt;</span>
+                <span class="c">&lt;!-- end of #footer-area --&gt;</span>
+            <span class="nt">&lt;/footer&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+        <span class="c">&lt;!-- #wrapper --&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-mobilize-js-skeleton-javascript-for-your-site">
+<h2>Creating mobilize.js skeleton Javascript for your site<a class="headerlink" href="#creating-mobilize-js-skeleton-javascript-for-your-site" title="Permalink to this headline">¶</a></h2>
+<p>First let&#8217;s create dummy <tt class="docutils literal"><span class="pre">mobilize.yoursite.js</span></tt> file</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="cm">/**</span>
+<span class="cm"> * This file is executed when the site is loaded in mobile mode.</span>
+<span class="cm"> */</span>
+
+<span class="nx">mobilize</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">mobilize</span><span class="p">,</span> <span class="p">{</span>
+
+    <span class="nx">constructBody</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// Map different elements to jQuery Mobile theme</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">constructHeader</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">constructContent</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">constructFooter</span><span class="p">();</span>
+
+        <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;xxx&quot;</span><span class="p">);</span>
+    <span class="p">},</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * Create mobile site header name and buttons</span>
+<span class="cm">     */</span>
+    <span class="nx">constructHeader</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="p">},</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * Move content area from web site to mobile site</span>
+<span class="cm">     */</span>
+    <span class="nx">constructContent</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="p">},</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * Create mobile footer</span>
+<span class="cm">     */</span>
+    <span class="nx">constructFooter</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="p">}</span>
+
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>For now, this is file is supposed to throw an alert box on your page
+when you open the page in &#8220;mobile&#8221; browser.</p>
+</div>
+<div class="section" id="integrating-skeleton-script">
+<h2>Integrating skeleton script<a class="headerlink" href="#integrating-skeleton-script" title="Permalink to this headline">¶</a></h2>
+<p>We&#8217;ll now integrate this file to the web site.</p>
+<p>First we create a &lt;script&gt; tag which informs what additional CSS and JS files
+must be loaded for mobile devices, besides standard jQuery and jQuery Mobile.
+<tt class="docutils literal"><span class="pre">mobilizeCustomInit()</span></tt> is a Javascript global which is called by
+<tt class="docutils literal"><span class="pre">mobilize.init()</span></tt> when it is ready for setting some options.</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;body&gt;</span>
+
+    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
+
+        <span class="c1">// Called when mobilize.js is autoloading and init() is called</span>
+        <span class="kd">function</span> <span class="nx">mobilizeCustomInit</span><span class="p">()</span> <span class="p">{</span>
+
+             <span class="c1">// Add new Javascript and CSS files to mobile</span>
+             <span class="c1">// file loading list</span>
+
+             <span class="c1">// Note: Slashdot at the beginning of the filename</span>
+             <span class="c1">// indicates that the file path is relative to the HTML file location.</span>
+             <span class="c1">// This is an internal trick of mobilize.js.</span>
+             <span class="nx">mobilize</span><span class="p">.</span><span class="nx">cdnOptions</span><span class="p">.</span><span class="nx">javascriptBundles</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">&quot;./mobilize.yoursite.js&quot;</span><span class="p">);</span>
+             <span class="nx">mobilize</span><span class="p">.</span><span class="nx">cdnOptions</span><span class="p">.</span><span class="nx">cssBundles</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">&quot;./mobile-style.css&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="nt">&lt;/script&gt;</span>
+</pre></div>
+</div>
+<p>Now we can test the page.  Open it in <a class="reference internal" href="testing.html"><em>a mobile simulator</em></a> or
+in Firefox + Firebug + <a class="reference external" href="http://www.chrispederick.com/work/user-agent-switcher/">User Agent Switcher</a>
+combo (recommended). You can simply open the page as a file from your hard disk.</p>
+<ul class="simple">
+<li>Install User Agent Switcher</li>
+<li>From Firefox menu Tools -&gt; Default user agent -&gt; Choose iPhone 3.0. Now your
+Firefox presents itself as &#8220;iPhone 3.0&#8221; to the servers and Javascript files.</li>
+</ul>
+<p>Reload the page.</p>
+<p>You should see the alert pop-up coming up. Otherwise the page show
+look like empty, broken page. jQuery Mobile does not render
+anything until you start adding in content.</p>
+<p>Now we can start transforming bits and pieces
+from the web page to the mobile site.</p>
+</div>
+<div class="section" id="creating-transformations">
+<h2>Creating transformations<a class="headerlink" href="#creating-transformations" title="Permalink to this headline">¶</a></h2>
+<p>First we move the title from the web site to the mobile site
+by adding <tt class="docutils literal"><span class="pre">constructHeader()</span></tt> function body</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">constructHeader</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Map title and header buttons jQuery Mobile</span>
+
+    <span class="c1">// This is the mobile target element</span>
+    <span class="c1">// which will contain the title.</span>
+    <span class="kd">var</span> <span class="nx">mobileHeader</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#mobile-body div[data-role=header]&quot;</span><span class="p">);</span>
+
+    <span class="c1">// Pick the current page title from &lt;header&gt; section</span>
+    <span class="kd">var</span> <span class="nx">title</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;header h1&quot;</span><span class="p">).</span><span class="nx">text</span><span class="p">();</span>
+
+    <span class="c1">// Set mobile header title to the same text</span>
+    <span class="kd">var</span> <span class="nx">h1</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;h1&quot;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">title</span><span class="p">);</span>
+    <span class="nx">mobileHeader</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">h1</span><span class="p">);</span>
+
+<span class="p">},</span>
+</pre></div>
+</div>
+<p>Now you can reload in Firefox and see that title, indeed,
+appears in the mobile version.</p>
+<p>Then let&#8217;s add content area and footer as well.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="cm">/**</span>
+<span class="cm"> * Move content area from web site to mobile site</span>
+<span class="cm"> */</span>
+<span class="nx">constructContent</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">content</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#content&quot;</span><span class="p">);</span>
+
+    <span class="c1">// Place content HTML to mobile content area container</span>
+    <span class="kd">var</span> <span class="nx">mobileContent</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#mobile-body div[data-role=content]&quot;</span><span class="p">);</span>
+    <span class="nx">mobileContent</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">content</span><span class="p">);</span>
+<span class="p">},</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Create mobile footer</span>
+<span class="cm"> */</span>
+<span class="nx">constructFooter</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">footer</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;footer&quot;</span><span class="p">).</span><span class="nx">children</span><span class="p">();</span>
+
+    <span class="c1">// Place content HTML to mobile content area container</span>
+    <span class="kd">var</span> <span class="nx">mobileFooter</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#mobile-body div[data-role=footer]&quot;</span><span class="p">);</span>
+    <span class="nx">mobileFooter</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">footer</span><span class="p">);</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>And here is the result:</p>
+<img alt="http://cdn.mobilizejs.com/docs/trunk/manual/_images/mobile1.png" src="http://cdn.mobilizejs.com/docs/trunk/manual/_images/mobile1.png" />
+<p>You can see that footer looks still little unfinished. jQuery
+Mobile does not apply any default styles there.</p>
+<p>Let&#8217;s fix it by adding to our <tt class="docutils literal"><span class="pre">mobilize-style.css</span></tt></p>
+<div class="highlight-css"><div class="highlight"><pre><span class="nc">.ui-footer</span> <span class="p">{</span>
+    <span class="k">padding</span><span class="o">:</span> <span class="m">10px</span> <span class="m">0</span><span class="p">;</span>
+    <span class="k">text-align</span><span class="o">:</span> <span class="k">center</span><span class="p">;</span>
+    <span class="k">font-weight</span><span class="o">:</span> <span class="k">lighter</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>(You can pick class names for your CSS file using Firebug&#8217;s inspector).</p>
+<img alt="http://cdn.mobilizejs.com/docs/trunk/manual/_images/mobile2.png" src="http://cdn.mobilizejs.com/docs/trunk/manual/_images/mobile2.png" />
+<p>Much better!</p>
+</div>
+<div class="section" id="creating-mobile-navigation">
+<h2>Creating mobile navigation<a class="headerlink" href="#creating-mobile-navigation" title="Permalink to this headline">¶</a></h2>
+<p>We still haven&#8217;t mobilized more than one page.
+Let&#8217;s add navigation to our mobile site.</p>
+<p>jQuery Mobile uses <tt class="docutils literal"><span class="pre">data-role</span></tt> attributes
+to define its widgets. When jQuery Mobile
+is initialized, which done by mobilize.js,
+this mark-up is converted to actual HTML code with
+wrapper elements and such needed for the visuals.</p>
+<p>Let&#8217;s put all this to new method which we call
+from <tt class="docutils literal"><span class="pre">constructBody()</span></tt>, the entry point of transformation.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">constructBody</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Map different elements to jQuery Mobile theme</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">constructHeader</span><span class="p">();</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">constructContent</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">constructNavigation</span><span class="p">();</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">constructFooter</span><span class="p">();</span>
+<span class="p">},</span>
+
+
+<span class="cm">/**</span>
+<span class="cm"> * Use jQuery Mobile nested list to create a navigation.</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span>
+<span class="nx">constructNavigation</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="c1">// Get list of items which contain links for the navigation building</span>
+    <span class="kd">var</span> <span class="nx">items</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;nav li&quot;</span><span class="p">);</span>
+
+    <span class="c1">// Create navigation list</span>
+    <span class="kd">var</span> <span class="nx">list</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;&lt;ul class=&#39;page-list&#39; data-role=&#39;listview&#39; data-inset=true&gt;&quot;</span><span class="p">);</span>
+
+    <span class="c1">// Add list header</span>
+    <span class="nx">list</span><span class="p">.</span><span class="nx">prepend</span><span class="p">(</span><span class="s2">&quot;&lt;li data-role=&#39;list-divider&#39;&gt;Pages&lt;/li&gt;&quot;</span><span class="p">);</span>
+
+    <span class="c1">// Add list items</span>
+    <span class="nx">items</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">output</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;&lt;li role=&#39;option&#39;&gt;&quot;</span><span class="p">);</span>
+        <span class="nx">output</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">));</span>
+        <span class="nx">output</span><span class="p">.</span><span class="nx">appendTo</span><span class="p">(</span><span class="nx">list</span><span class="p">);</span>
+    <span class="p">});</span>
+
+    <span class="c1">// Put list below content</span>
+    <span class="kd">var</span> <span class="nx">mobileContent</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#mobile-body div[data-role=content]&quot;</span><span class="p">);</span>
+    <span class="nx">mobileContent</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">list</span><span class="p">);</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now we are done!</p>
+<img alt="http://cdn.mobilizejs.com/docs/trunk/manual/_images/mobile3.png" src="http://cdn.mobilizejs.com/docs/trunk/manual/_images/mobile3.png" />
+</div>
+<div class="section" id="more-learning-material">
+<h2>More learning material<a class="headerlink" href="#more-learning-material" title="Permalink to this headline">¶</a></h2>
+<p>To learn more</p>
+<ul class="simple">
+<li><a class="reference external" href="http://groups.google.com/group/mobilizejs-users">Join to the discussion group and don&#8217;t hesitate to ask any questions</a></li>
+<li>Read <a class="reference internal" href="development.html"><em>walkthrough</em></a></li>
+<li>Browse <a class="reference external" href="mobilizejs.com/docs">API docs</a></li>
+<li><a class="reference external" href="https://github.com/mobilizejs/mobilize.js">See more source code examples on Github</a>. Especially
+<tt class="docutils literal"><span class="pre">mobilize.mfabrik-blog.js</span></tt> and <tt class="docutils literal"><span class="pre">mobilize.mobilizejs-blog.js</span></tt> recommended.</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="installation.html">Installation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="integrations/index.html">Integrations for mobilize.js</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-21748037-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+    <div class="footer">
+        &copy; Copyright 2011, Mikko Ohtamaa, Jussi Toivola.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.5.
+    </div>
+  </body>
+</html>

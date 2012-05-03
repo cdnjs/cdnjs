@@ -1,0 +1,71 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="COMM">/**
+<span class='line'>  2</span>  * @namespace plone.org site  mobilization
+<span class='line'>  3</span>  *
+<span class='line'>  4</span>  * @requires mobilizePlone
+<span class='line'>  5</span>  */</span><span class="WHIT">
+<span class='line'>  6</span> </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">mobilizePloneOrg</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>  7</span> </span><span class="WHIT">	
+<span class='line'>  8</span> 	</span><span class="NAME">constructBody</span><span class="WHIT"> </span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>  9</span> </span><span class="WHIT">		
+<span class='line'> 10</span> 		</span><span class="COMM">// Move body to jQuery template</span><span class="WHIT">
+<span class='line'> 11</span> </span><span class="WHIT">		</span><span class="COMM">//if(window.location.pathname == "/") {</span><span class="WHIT">
+<span class='line'> 12</span> </span><span class="WHIT">		</span><span class="COMM">//}</span><span class="WHIT">
+<span class='line'> 13</span> </span><span class="WHIT">		
+<span class='line'> 14</span> 		</span><span class="NAME">this.constructFrontPage</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 15</span> </span><span class="WHIT">		
+<span class='line'> 16</span> 		</span><span class="NAME">this.constructHeader</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 17</span> </span><span class="WHIT">		</span><span class="NAME">this.constructFooter</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 18</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 19</span> </span><span class="WHIT">	
+<span class='line'> 20</span> 	</span><span class="COMM">/**
+<span class='line'> 21</span> 	 * Use h1 class="documentFirstHeading" as mobile page title if available,
+<span class='line'> 22</span> 	 * otherwise use head title.
+<span class='line'> 23</span> 	 */</span><span class="WHIT">
+<span class='line'> 24</span> </span><span class="WHIT">	</span><span class="NAME">constructHeader</span><span class="WHIT"> </span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 25</span> </span><span class="WHIT">        </span><span class="COMM">// Set page heading from &lt;title> tag</span><span class="WHIT">
+<span class='line'> 26</span> </span><span class="WHIT">        </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">title</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">jq</span><span class="PUNC">(</span><span class="STRN">"head title"</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">text</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 27</span> </span><span class="WHIT">        </span><span class="NAME">jq</span><span class="PUNC">(</span><span class="STRN">"#mobile-body div[data-role=header]"</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">append</span><span class="PUNC">(</span><span class="STRN">"&lt;h1>"</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">title</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">"&lt;/h1>"</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">		
+<span class='line'> 28</span> 	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 29</span> </span><span class="WHIT">	
+<span class='line'> 30</span> 	</span><span class="COMM">/**
+<span class='line'> 31</span> 	 * Use plone.org footer as is in mobile site footer
+<span class='line'> 32</span> 	 */</span><span class="WHIT">
+<span class='line'> 33</span> </span><span class="WHIT">	</span><span class="NAME">constructFooter</span><span class="WHIT"> </span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 34</span> </span><span class="WHIT">	    </span><span class="NAME">jq</span><span class="PUNC">(</span><span class="STRN">"#mobile-body div[data-role=footer]"</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">append</span><span class="PUNC">(</span><span class="NAME">jq</span><span class="PUNC">(</span><span class="STRN">"#footer p"</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">     	
+<span class='line'> 35</span> 	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 36</span> </span><span class="WHIT">	
+<span class='line'> 37</span> 	
+<span class='line'> 38</span> 	</span><span class="COMM">/**
+<span class='line'> 39</span> 	 * Construct mobile front page based on plone.org front page web input
+<span class='line'> 40</span> 	 */</span><span class="WHIT">
+<span class='line'> 41</span> </span><span class="WHIT">	</span><span class="NAME">constructFrontPage</span><span class="WHIT"> </span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 42</span> </span><span class="WHIT">	
+<span class='line'> 43</span> 		
+<span class='line'> 44</span> 		</span><span class="COMM">// Move box on the left hand to body first</span><span class="WHIT">
+<span class='line'> 45</span> </span><span class="WHIT">		</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">content</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">jq</span><span class="PUNC">(</span><span class="STRN">"#mobile-body div[data-role=content]"</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 46</span> </span><span class="WHIT">		</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">content.size</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">==</span><span class="WHIT"> </span><span class="NUMB">0</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 47</span> </span><span class="WHIT">			</span><span class="KEYW">throw</span><span class="WHIT"> </span><span class="STRN">"No template content section to fill in"</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 48</span> </span><span class="WHIT">		</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 49</span> </span><span class="WHIT">		
+<span class='line'> 50</span> 		</span><span class="NAME">content.append</span><span class="PUNC">(</span><span class="NAME">jq</span><span class="PUNC">(</span><span class="STRN">"#current"</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 51</span> </span><span class="WHIT">		
+<span class='line'> 52</span> 		</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">mainNavigation</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">mobilize.createNavigationBox</span><span class="PUNC">(</span><span class="NAME">jq</span><span class="PUNC">(</span><span class="STRN">"#main-nav a"</span><span class="PUNC">)</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">"Site sections"</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 53</span> </span><span class="WHIT">		</span><span class="NAME">content.append</span><span class="PUNC">(</span><span class="NAME">mainNavigation</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 54</span> </span><span class="WHIT">		
+<span class='line'> 55</span> 		</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">news</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">mobilize.createNavigationBox</span><span class="PUNC">(</span><span class="NAME">jq</span><span class="PUNC">(</span><span class="STRN">"#news li"</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">not</span><span class="PUNC">(</span><span class="STRN">":contains('Add news')"</span><span class="PUNC">)</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">"News"</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">mobilize.outputCollectionLink</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 56</span> </span><span class="WHIT">		</span><span class="NAME">content.append</span><span class="PUNC">(</span><span class="NAME">news</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 57</span> </span><span class="WHIT">		
+<span class='line'> 58</span> 		</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">events</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">mobilize.createNavigationBox</span><span class="PUNC">(</span><span class="NAME">jq</span><span class="PUNC">(</span><span class="STRN">"#events li"</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">not</span><span class="PUNC">(</span><span class="STRN">":contains('Add event')"</span><span class="PUNC">)</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">"Events"</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">mobilize.outputCollectionLink</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 59</span> </span><span class="WHIT">        </span><span class="NAME">content.append</span><span class="PUNC">(</span><span class="NAME">events</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 60</span> </span><span class="WHIT">		       	
+<span class='line'> 61</span> 	</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 62</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 63</span> 
+<span class='line'> 64</span> </span></pre></body></html>

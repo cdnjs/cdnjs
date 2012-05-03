@@ -1,0 +1,3016 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Jo HTML5 Mobile App Framework Documentaion</title>
+	<meta name="generator" content="joDoc">
+	<link rel="stylesheet" type="text/css" href="docbody.css">
+	<link rel="stylesheet" type="text/css" href="doc.css">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
+	<meta name="format-detection" content="false">
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-18941819-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+</head>
+<body>
+
+<p><cite>Jo<cite>JavaScript Framework for HTML5</cite></cite></p>
+
+<p><img src="jodog.png" align="right"></p>
+
+<h1><a name="About">About</a></h1>
+
+<p>Jo is a lightweight JavaScript framework designed for HTML5 apps.</p>
+
+<h2><a href="#jo">jo</a> does</h2>
+
+<ul>
+<li>Embrace JavaScript's object model and loosely typed nature</li>
+<li>Leverage CSS3 to handle as much of the pretty presentation and animation as possible</li>
+<li>Provide a consistent and modular event model between objects</li>
+<li>Wrap DOM and device-specific events into a cohesive gesture system</li>
+<li>Insulate developers from different persistent storage solutions</li>
+<li>Play nicely with other libraries like <a href="#PhoneGap">PhoneGap</a></li>
+</ul>
+
+<h2><a href="#jo">jo</a> doesn't</h2>
+
+<ul>
+<li>Use a lot of resources</li>
+<li>Depend on other frameworks</li>
+<li>Have a lot of browser dependent code</li>
+<li>Require detailed knowledge of the DOM</li>
+<li>Force you to deeper into its framework than you want to go</li>
+<li>Use <code>$</code> and other arcane looking symbols in place of proper identifiers</li>
+</ul>
+
+<h2>Author</h2>
+
+<p>Dave Balmer:
+<a class="external" href="http://davebalmer.wordpress.com">davebalmer.wordpress.com</a>,
+<a class="external" href="http://twitter.com/balmer">follow @balmer on Twitter</a>,
+or email <a class="external" href="mailto:dbalmerjr@gmail.com">dbalmerjr@gmail.com</a></p>
+
+<h2>Downloads</h2>
+
+<p>Version 0.4.1 is the latest stable release, check the <a href="#Release Notes">Release Notes</a> for
+details.</p>
+
+<p>Available from GitHub as a 
+<a class="external" href="http://github.com/davebalmer/Jo">git repo</a> or a
+<a class="external" href="http://github.com/davebalmer/Jo/downloads">zip file</a>.</p>
+
+<h1><a name="Philosophy">Philosophy</a></h1>
+
+<p>If you want to jam an existing web page into an application framework, <a href="#jo">jo</a> probably isn't
+for you. <a href="#jo">jo</a> is designed to create applications. While it will play nicely with a mixture
+of new and old web development techniques, it uses HTML5 as a development stack and does
+not require direct DOM manipulation.</p>
+
+<h2>Application Stack</h2>
+
+<table style="font-size: 75%">
+    <tr><td colspan="7">JavaScript Application</td></tr>
+    <tr><th colspan="6"><a href="#jo">jo</a></th><td rowspan="2"><a href="#PhoneGap">PhoneGap</a> (optional)</td></tr>
+    <tr><th colspan="3"><a href="#joView">joView</a></th><th><a href="#joEvent">joEvent</a></th><th colspan="2"><a href="#joDataSource">joDataSource</a></th><tr>
+    <tr><td>CSS3</td><td>Canvas</td><td>DOM</td><td>Events</td><td>XHR</td><td>SQLite</td><td>Device OS</td></tr>
+</table>
+
+<h1><a name="Documentation">Documentation</a></h1>
+
+<p>All documentation for the framework is based on
+<a class="external" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>
+and provides a simple, natural and flexible way to document the code. This simple set
+of <code>perl</code> scripts has become its own tool called <a href="#joDoc">joDoc</a>.</p>
+
+<hr />
+<h1><a name="Summary">Summary</a></h1>
+
+<p>Jo is a JavaScript framework for HTML5 capable browsers and devices. It was
+originally designed to work on mobile platforms as a GUI and light data layer
+on top of <a href="#PhoneGap">PhoneGap</a>. Since its creation, Jo has also been tested successfully
+as a lightweight framework for mobile browsers, newer desktop browsers, and
+even Dashboard widgets.</p>
+
+<h1><a name="Building">Building</a></h1>
+
+<p>It's pretty easy to build on your own, but to get the most out of it you'll
+want to get a minifier like <code>jsmin</code> or the YUI Compressor. Minified and
+gzipped, Jo weighs in around 9K with no other JavaScript library dependancies.</p>
+
+<h2>Mac OSX, Linux &amp; BSD</h2>
+
+<pre><code>cd <a href="#jo">jo</a>
+./build
+</code></pre>
+
+<h2>Windows</h2>
+
+<pre><code>cd <a href="#jo">jo</a>
+build.bat
+</code></pre>
+
+<p>If you're not up for building the library yourself, there's nothing wrong with
+downloading the latest stable release, all built and ready to plug in from:
+<a class="external" href="http://github.com/davebalmer/<a href="#jo">jo</a>/downloads">GitHub Downloads</a></p>
+
+<h1><a name="Directory Map">Directory Map</a></h1>
+
+<p>Important files in the directory tree are:</p>
+
+<ul>
+<li><p><code>js/jo_min.js</code></p>
+
+<p>This is the <a href="#jo">jo</a> library bundled and minified, ready to drop into your project. You
+will need to build the library to make this file (as well as the un-minified
+version <code><a href="#jo">jo</a>.js</code> which is useful for debugging).</p></li>
+<li><p><code>css/aluminum</code></p>
+
+<p>This is a CSS3 bundle ready to ship your app with. Also serves as a good example
+of modern HTML5 styling capabilities. Looks pretty bad in IE up through version 8.</p></li>
+<li><p><code>css/<a href="#jo">jo</a>.css</code></p>
+
+<p>This is a newer base CSS theme for Jo, preferred over Aluminum for now. Built with
+Less CSS compiler.</p></li>
+<li><p><code>docs/*.mdown</code></p>
+
+<p>These are supplimental doc files which are used by <a href="#joDoc">joDoc</a> to build out the
+developer guide portions of the documentation.</p></li>
+</ul>
+<h1><a name="Quick Start">Quick Start</a></h1>
+
+<h2>index.html</h2>
+
+<p>The complete <a href="#jo">jo</a> library is small, so in most cases you'll just want to pull it all in,
+like this:</p>
+
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+    &lt;link rel="stylesheet" type="text/css" href="css/aluminum.css"&gt;
+    &lt;link rel="stylesheet" type="text/css" href="css/webkit.css"&gt;
+    &lt;!-- &lt;link rel="stylesheet" type="text/css" href="css/webos.css"&gt; --&gt;
+    &lt;!-- &lt;link rel="stylesheet" type="text/css" href="css/chrome.css"&gt; --&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;!-- any static page content goes here --&gt;
+
+&lt;!-- load <a href="#jo">jo</a> library --&gt;
+&lt;script src="jo_min.js"&gt;&lt;/script&gt;
+
+&lt;!-- any application JavaScript files go here --&gt;
+&lt;script src="hello.js"&gt;&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>If you're using <a href="#jo">jo</a> to create all the UI for your application, you won't need <em>any</em> content
+or tags in your <code>index.html</code> file.</p>
+
+<p>Since the framework is highly dependent on CSS, your mileage may vary across platforms. In
+particular, Internet Explorer before 9 will have limited eye candy and no animated
+transitions.</p>
+
+<p>You can also completely skin your app with your own CSS, or augment the basic <a href="#jo">jo</a> CSS to suit
+your purposes.</p>
+
+<p>Since <a href="#jo">jo</a> is geared for HTML5 applications, I recommend you develop and test
+your apps with Safari or Chrome before moving to mobile devices. In fact, this
+makes the code/test/debug cycle go very quickly.</p>
+
+<h2>hello.js</h2>
+
+<p><a href="#jo">jo</a> has some initialization which should only be done when your browser is ready to have its
+DOM fiddled with, so you may want to wrap your code in a function that's called when your
+page loads, or your device signals that your app is ready to go.</p>
+
+<p>The simplest UI would be something like:</p>
+
+<pre><code>// initialize <a href="#jo">jo</a>
+<a href="#jo">jo</a>.load();
+
+// define a wrapper for document.body
+var scn = new <a href="#joScreen">joScreen</a>();
+
+// setup your UI
+scn.alert("Hello, Jo!", "This is a simple alert.");
+</code></pre>
+
+<p>Something more interesting would look like:</p>
+
+<pre><code>// initialize <a href="#jo">jo</a>
+<a href="#jo">jo</a>.load();
+
+// setup a stack and screen
+var stack = new <a href="#joStackScroller">joStackScroller</a>();
+var scn = new <a href="#joScreen">joScreen</a>(stack);
+
+// create our view card
+var card = new <a href="#joCard">joCard</a>([
+    new <a href="#joTitle">joTitle</a>("Hello"),
+    new <a href="#joCaption">joCaption</a>("Hello World!"),
+    new <a href="#joDivider">joDivider</a>(),
+    new <a href="#joButton">joButton</a>("OK").selectEvent.subscribe(function() {
+        stack.hide();
+    })
+]);
+
+// put the card on our view stack
+stack.push(card);
+</code></pre>
+
+<p>Notice above that <a href="#jo">jo</a> supports "chaining", meaning you can make successive calls
+inline to a given object (see the <a href="#joButton">joButton</a> line above for an example).</p>
+
+<p>Of course, it is recommended you use more robust OOP coding patterns to make a proper
+application. While there's nothing illegal about putting everything in global space
+in a single JavaScript file, but if you're looking to build something big or more easy
+to maintain, I recommend you check out "JavaScript: the Good Parts" by Doug Crockford
+(O'Reilly Press).</p>
+<h1><a name="Class Hierarchy">Class Hierarchy</a></h1>
+
+<p>The following is a class hierarchy for the framework, organized
+by general function.</p>
+
+<h2>User Interface</h2>
+
+<ul>
+<li><a href="#joView">joView</a>
+<ul>
+<li><a href="#joContainer">joContainer</a>
+<ul>
+<li><a href="#joCaption">joCaption</a></li>
+<li><a href="#joCard">joCard</a></li>
+<li><a href="#joDialog">joDialog</a></li>
+<li><a href="#joFlexcol">joFlexcol</a></li>
+<li><a href="#joFlexrow">joFlexrow</a></li>
+<li><a href="#joFooter">joFooter</a></li>
+<li>joForm</li>
+<li><a href="#joGroup">joGroup</a></li>
+<li><a href="#joNavbar">joNavbar</a></li>
+<li><a href="#joPopup">joPopup</a></li>
+<li><a href="#joScreen">joScreen</a></li>
+<li><a href="#joScroller">joScroller</a></li>
+<li><a href="#joShim">joShim</a></li>
+<li><a href="#joStack">joStack</a>
+<ul>
+<li><a href="#joStackScroller">joStackScroller</a></li>
+</ul></li>
+<li><a href="#joTitle">joTitle</a></li>
+<li><a href="#joToolbar">joToolbar</a></li>
+</ul></li>
+<li><a href="#joControl">joControl</a>
+<ul>
+<li><a href="#joButton">joButton</a>
+<ul>
+<li><a href="#joBackButton">joBackButton</a></li>
+</ul></li>
+<li><a href="#joCaption">joCaption</a></li>
+<li><a href="#joExpando">joExpando</a>
+<ul>
+<li><a href="#joSelect">joSelect</a></li>
+</ul></li>
+<li><a href="#joHTML">joHTML</a></li>
+<li><a href="#joInput">joInput</a>
+<ul>
+<li>joDateTime</li>
+<li><a href="#joPasswordInput">joPasswordInput</a></li>
+<li><a href="#joTextarea">joTextarea</a></li>
+</ul></li>
+<li><a href="#joLabel">joLabel</a></li>
+<li><a href="#joList">joList</a>
+<ul>
+<li><a href="#joMenu">joMenu</a></li>
+<li><a href="#joSelectList">joSelectList</a></li>
+<li><a href="#joTabBar">joTabBar</a></li>
+<li><a href="#joTable">joTable</a></li>
+</ul></li>
+<li>joKnob</li>
+<li><a href="#joSlider">joSlider</a></li>
+<li><a href="#joToggle">joToggle</a></li>
+<li><a href="#joOption">joOption</a></li>
+</ul></li>
+<li><a href="#joDivider">joDivider</a></li>
+</ul></li>
+</ul>
+
+<h2>Data</h2>
+
+<ul>
+<li><a href="#joDatabase">joDatabase</a></li>
+<li><a href="#joDataSource">joDataSource</a>
+<ul>
+<li><a href="#joFileSource">joFileSource</a></li>
+<li><a href="#joProperty">joProperty</a></li>
+<li><a href="#joRecord">joRecord</a></li>
+<li><a href="#joSQLDataSource">joSQLDataSource</a></li>
+<li><a href="#joYQL">joYQL</a></li>
+</ul></li>
+<li><a href="#joFile">joFile</a></li>
+<li><a href="#joScript">joScript</a></li>
+</ul>
+
+<h2>Events</h2>
+
+<ul>
+<li><a href="#joEvent">joEvent</a></li>
+<li><a href="#joSubject">joSubject</a></li>
+<li><a href="#joGesture">joGesture</a></li>
+</ul>
+
+<h2>Processing</h2>
+
+<ul>
+<li><a href="#joChain">joChain</a></li>
+<li><a href="#joDefer">joDefer</a></li>
+<li>joWait</li>
+</ul>
+
+<h2>Utility</h2>
+
+<ul>
+<li><a href="#joDOM">joDOM</a></li>
+<li><a href="#joInterface">joInterface</a></li>
+<li>joJSON</li>
+<li>joLocal</li>
+<li>joString</li>
+<li><a href="#joTime">joTime</a></li>
+</ul>
+
+<h2>Debugging</h2>
+
+<ul>
+<li><a href="#joLog">joLog</a></li>
+</ul>
+
+<h2>Application</h2>
+
+<ul>
+<li><a href="#jo">jo</a></li>
+<li><a href="#joClipboard">joClipboard</a></li>
+<li>joDevice</li>
+<li><a href="#joFocus">joFocus</a></li>
+<li><a href="#joPreference">joPreference</a></li>
+<li>joUser</li>
+</ul>
+<h1><a name="Class Patterns">Class Patterns</a></h1>
+
+<p>Instead of a complex set of pseudo-class methods, <a href="#jo">jo</a> uses a few simple
+coding patterns: singleton, base class, subclass, and module. All of these
+are found in modern JavaScript implementations. A good reference to have
+while developing your app is
+<a class="external" href="http://javascript.crockford.com/">JavaScript: The Good Parts</a>
+by Douglas Crockford (O'Reilly Press)</p>
+
+<h2>Singleton</h2>
+
+<p>The pattern for creating a singleton is really just an object literal. For
+example:</p>
+
+<pre><code>MyApp = {
+    init: function() {
+        // some sort of initialization code goes here
+    },
+
+    mymethod: function() {
+        // some custom method
+    },
+
+    // properties can also be declared inline
+    myproperty: true
+};
+</code></pre>
+
+<h2>Base Class</h2>
+
+<p>Prototypal inheritance does well with "fat" base classes which do most
+everything you anticipate a subclass would want. This type of inheritance
+benefits greatly from shallow/wide prototypes for a number of reasons.
+A base class looks something like:</p>
+
+<pre><code>MyClass = function(x) {
+    // constructor
+    this.x = x;
+};
+MyClass.prototype = {
+    mymethod: function() {
+        // some method
+    },
+
+    myothermethod: function() {
+        // another method
+    }
+};
+</code></pre>
+
+<h2>Subclass</h2>
+
+<p>Strictly speaking, JavaScript doesn't have classes and subclasses. But it does
+know how to make copies of an object, and keeps track of "inheritance" through
+its prototype chain. A subclass in <a href="#jo">jo</a> looks something like this:</p>
+
+<pre><code>MySubclass = function(x, y) {
+    //constructor
+    this.y = y;
+
+    // call to our "superclass" constructor
+    MyClass.call(this, x);
+};
+MySubclass.extend(MyClass, {
+    mynewmethod: function() {
+        // this subclass has its own new method
+    }
+});
+</code></pre>
+
+<p>A couple things to note. <a href="#jo">jo</a> augments the <a href="#Function">Function</a> object in JavaScript to
+have an <code>extend()</code> method. This is just some syntactic sugar which makes it
+easier to extend an object, giving us a pseudo-subclass with syntax that's
+not too awkward. The advantage here is we're using JavaScript's natural
+object model behind the scenes. We're not creating any extra fluff, just
+automating the process somewhat.</p>
+
+<p>Note that objects created using prototypal inheritance also get the benefit of
+using JavaScript's built-in <code>instanceof</code> operator which works up the
+prototype chain. For example:</p>
+
+<pre><code>// given this new subclass
+var someobject = new MySubclass(1, 2);
+
+// both of these tests are "true"
+<a href="#joLog">joLog</a>(someobject instanceof MySubclass);
+<a href="#joLog">joLog</a>(someobject instanceof MyClass);
+</code></pre>
+
+<p>You may also notice a "call to super" comment in our <code>MySubclass</code> constructor.
+This is a convenient coding pattern which makes it easier to create subclasses,
+with methods that augment the superclass' functionality. Like this:</p>
+
+<pre><code>MySubclass.extend(MyClass, {
+    mynewmethod: function() {
+        // this subclass has its own new method
+    },
+
+    mymethod: function() {
+        this.x += 5;
+
+        // call super's mymethod() with this object's context
+        MyClass.prototype.mymethod.apply(this, arguments);
+    }
+});
+</code></pre>
+
+<p>It may look slightly odd at first, but this approach gives us more of the
+benefits of subclassing you'd find in other languages without having to step
+outside of JavaScript's natural object model.</p>
+<h1><a name="Data Driven Controls">Data Driven Controls</a></h1>
+
+<p>Jo isn't just a pretty face with some DOM fiddling and standard DOM events.
+It also has a versatile application-level event model (see <a href="#Observer Pattern">Observer Pattern</a>).
+In addition, Jo has a simple event-driven layer for asynchronous data
+storage and retrieval using extensions of <a href="#joDataSource">joDataSource</a>.</p>
+
+<p>As a matter of convenience, all children of <a href="#joControl">joControl</a> (which includes most
+list or widget-driven UI elements) can be easily tied to data.</p>
+
+<p>The most convenient for most purposes is <a href="#joRecord">joRecord</a>. This class wraps a property
+list, which can be used to save or load using whatever your application
+requires. In addition, this class allows you to link a UI control to the data
+in one quick action.</p>
+
+<p>For more on this, check out the <a href="#joRecord">joRecord</a> docs which include an example or two.</p>
+<h1><a name="joDoc">joDoc</a></h1>
+
+<p><a href="#joDoc">joDoc</a> is a plain text code documentation scheme for JavaScript. It was created out of
+frustration felt working with various documentation systems available.</p>
+
+<h2>Source code formatting</h2>
+
+<pre><code>/**
+    myClass
+    =======
+
+    This is my class. It rocks, and this is its _description_, which also
+    rocks.
+
+    Extends
+    -------
+    - someOtherClass
+
+    Methods
+    -------
+    - setName(name)
+      Where `name` is a `String`.
+
+    Use
+    ---
+        // here is some sample code which shows how to use this class
+        var x = new myClass(name);
+
+    &gt; Note: use of the `name` reserved word is probaly a bad idea.
+*/
+</code></pre>
+
+<h2>Comment placement</h2>
+
+<p>You can put your comments for your code either:</p>
+
+<ol>
+<li><p>in your source code (anywhere and in as many pieces as you want) denoted with
+<code>/**  ... */</code> multiline-comment blocks</p></li>
+<li><p>separate markdown (<code>*.mdown</code>) files, probably (tho not necessarily) named to
+match your JavaScript files</p></li>
+</ol>
+
+<p>Can't get much more flexible than that.</p>
+
+<h2>Comparison</h2>
+
+<p>JavaScript is an extremely expressive language which is often difficult to describe in
+terms of meta data and fields. Often, important information that needs to be documented
+just doesn't fit into a neat, tidy spot.</p>
+
+<h3>jsdoc</h3>
+
+<p>jsdoc in its various incarnations and some of its spawn like yuidoc take the approach
+that "what is good for Java is good for JavaScript". All these flavors are based on
+javadoc formatting, and have been in use for some time.</p>
+
+<p>Aside from the regimented markup being a bit odd to read (admit it, even Java developers
+don't <em>love</em> it), it suffers from an inflexibility with regard to all the coding
+patterns available with JavaScript. Basically, it fails due for the same reason that all
+JavaScript libraries which attempt to subvert JavaScript's natural object model fail.
+These solutions, while influential in the idea that <em>some</em> form consistent coding
+approach could help us make better code, are not in the spirit of embracing JavaScript.</p>
+
+<p>Why then do so many developers continue to use a <em>documentation</em> tool which was born
+of the same well-meaning yet misguided logic of "let's pretend JavaScript is Java"?</p>
+
+<h3>Natural Docs</h3>
+
+<p>Excellent effort, but complex to set up and also tries to make a regimented system for
+documenting source code. It is extendable, but again, we have a documentation solution
+which is trying to force JavaScript into a more limited set of features.</p>
+
+<hr />
+<h1><a name="Observer Pattern">Observer Pattern</a></h1>
+
+<p><a href="#jo">jo</a> uses a variant on this OOP pattern quite extensively for notifications
+between objects.</p>
+
+<p>When you think about JavaScript, most of the interesting things that
+happen are asynchronous: XHR calls, loading scripts, accessing at database, making
+device-specific system calls; even user interactions are all asynchronous in nature.</p>
+
+<p>Instead of trying to hide from this often complex-looking stuff, <a href="#jo">jo</a> embraces it and
+provides a scheme to wrap all these different use cases in a consistent interface
+using <a href="#joSubject">joSubject</a>.</p>
+<h1><a name="PhoneGap">PhoneGap</a></h1>
+
+<p>This excellent, lightweight mobile application library by <a class="external" href="http://phonegap.com">Nitobi</a>
+neutralizes device differences and provides a stable webkit application shell. Jo is
+designed to work with <a href="#PhoneGap">PhoneGap</a> out of the box, and it's highly recommended.</p>
+
+<h1><a name="LawnChair">LawnChair</a></h1>
+
+<p>Another tool by <a class="external" href="http://phonegap.com">Nitobi</a>, <a href="#LawnChair">LawnChair</a> is a client-side storage
+solution which stores JSON objects (in SQLite or whatever the device supports). It looks
+promising, and the <a href="#jo">jo</a> core has a special subclass of <a href="#joDataSource">joDataSource</a> called joLawn
+which folds Nitobi's library into the Jo event model.</p>
+<h1><a name="Release Notes">Release Notes</a></h1>
+
+<h2>Jo 0.4.1</h2>
+
+<ul>
+<li>Emergency fix for <a href="#joScroller">joScroller</a> on iOS, was affecting performance and tapability on controls.</li>
+</ul>
+
+<h2>Jo 0.4.0</h2>
+
+<ul>
+<li>Added new <a href="#joSlider">joSlider</a> control and corresponding josliderthumb to CSS</li>
+<li>Added css/browser.css for cases where you want to allow the browser to handle scrolling purely with overflow:scroll</li>
+<li>Tweaked <a href="#joScroller">joScroller</a>, including removed the 50px fixed "bump" size (you can add it back if you want)</li>
+<li>Tweaked default CSS, made some controls less "roundy", thinned border on <a href="#joToggle">joToggle</a></li>
+<li>Changed readOnly and editable methods to setReadOnly()</li>
+<li>Fixed some broken method chaining in <a href="#joSound">joSound</a>, <a href="#joNavbar">joNavbar</a> and a few other places</li>
+<li>Important fixes in <a href="#joDataSource">joDataSource</a>, <a href="#joRecord">joRecord</a>, <a href="#joProperty">joProperty</a> and <a href="#joList">joList</a> relating to the data property</li>
+<li>Fixed background image bug in <a href="#joMenu">joMenu</a></li>
+<li>Fixed enable/disable methods for <a href="#joButton">joButton</a> and <a href="#joControl">joControl</a></li>
+<li>Fixed <a href="#joEvent">joEvent</a> capture method to properly return event handler reference</li>
+<li>Added resizeEvent to <a href="#joGesture">joGesture</a></li>
+<li>Added clientX/clientY to <a href="#joEvent">joEvent</a></li>
+<li>Added optional parameter passing for <a href="#joCache">joCache</a> get() method</li>
+<li>Added pageOffsetTop and pageOffsetLeft methods to <a href="#joDOM">joDOM</a></li>
+<li>Updated docs for <a href="#joDOM">joDOM</a>, <a href="#joEvent">joEvent</a>, <a href="#joFileSource">joFileSource</a>, <a href="#jo">jo</a>, <a href="#joControl">joControl</a>, <a href="#joSlider">joSlider</a>, <a href="#joSound">joSound</a>, <a href="#joStack">joStack</a>, <a href="#joTable">joTable</a> and <a href="#joView">joView</a></li>
+</ul>
+
+<h2>Jo 0.3.0</h2>
+
+<ul>
+<li>New data methods: <a href="#joFile">joFile</a>, <a href="#joFileSource">joFileSource</a>, <a href="#joRecord">joRecord</a>, <a href="#joYQL">joYQL</a></li>
+<li>New widgets: <a href="#joToggle">joToggle</a>, <a href="#joExpando">joExpando</a>, <a href="#joSelect">joSelect</a>, <a href="#joOption">joOption</a>, <a href="#joNavbar">joNavbar</a></li>
+<li>Even more improved <a href="#joScroller">joScroller</a> performance, and the beginnings of horizontal and free scroll support</li>
+<li>Better "downgraded" scroller experience for less fancy browsers</li>
+<li>Changed default tags for input fields to input, etc.</li>
+<li>New samples for file loading, YQL and a "kitchen sink" sample (which is more of a bathroom sink; look for -  more in the samples/test.html for now)</li>
+<li>New CSS default theme (built with Less CSS for those who are using our git repo)</li>
+<li>Added <a href="#joInterface">joInterface</a>, a method which will slurp HTML into Jo objects (experimental, read the docs please)</li>
+<li>Definitely check out the docs for <a href="#joRecord">joRecord</a> as it's even easier to bind UI controls to a data object</li>
+<li><a href="#joPreference">joPreference</a> has been deprecated for now; see <a href="#joRecord">joRecord</a></li>
+<li><a href="#joYield">joYield</a> has been renamed to <a href="#joDefer">joDefer</a></li>
+</ul>
+<h1><a name="CSS Skinning">CSS Skinning</a></h1>
+
+<p><a href="#jo">jo</a> makes extensive use of CSS for its widgets. As a result, it's extremely easy to
+skin and adapt your user interface for different devices. The project will have a
+community-driven theme collection to help reduce development time by choosing a
+stylesheet that most closely matches your application (or device native controls).</p>
+
+<h1><a name="HTML Tags">HTML Tags</a></h1>
+
+<p>One feature <a href="#jo">jo</a> exploits is the fact that modern browser engines treat unknown
+tags as -- <em>tags</em>. So instead of mucking up your application's DOM and CSS space with
+a horde of <code>div</code> tags with different CSS classes, it uses namespaced tags which
+are outside of your document's typical CSS name space (except <code>body</code>).</p>
+
+<h2>Special Tag Examples</h2>
+
+<pre><code>&lt;jocard&gt;
+    &lt;jotitle&gt;My title&lt;/jotitle&gt;
+    &lt;jogroup&gt;
+        &lt;jolabel&gt;Username&lt;/jolabel&gt;
+        &lt;input type="text"&gt;
+        &lt;jodivider&gt;&lt;/jodivider&gt;
+        &lt;jobutton&gt;Save&lt;/jobutton&gt;
+    &lt;/jogroup&gt;
+&lt;/jocard&gt;
+</code></pre>
+
+<p>One side benefit of this is that it is possible to load styled HTML content from
+another source and not have that content's CSS corrupt your application's user
+interface.</p>
+
+<p>Bottom line here is the special UI controls you add with Jo can coexist with
+your standard HTML content-driven tags without undue CSS headaches.</p>
+
+<p>See <a href="#joInterface">joInterface</a> and <a href="#joView">joView</a> for more uses of direct HTML and DOM nodes which are
+common for all UI elements.</p>
+<hr />
+
+<h1><a name="jo">jo</a></h1>
+
+<p>Singleton which the framework uses to store global infomation. It also is
+responsible for initializing the rest of the framework, detecting your environment,
+and notifying your application when <a href="#jo">jo</a> is ready to use.</p>
+
+<h2>Methods</h2>
+
+<ul>
+<li><p><code>load()</code></p>
+
+<p>This method should be called after your DOM is loaded and before your app uses
+<a href="#jo">jo</a>. Typically, you can call this function from your document's <code>onLoad</code> method,
+but it is recommended you use more device-specific "ready" notification if
+they are available.</p></li>
+<li><p><code>getPlatform()</code></p>
+
+<p>Returns the platform you're running in as a string. Usually this is not needed,
+but can be useful.</p></li>
+<li><p><code>getVersion()</code></p>
+
+<p>Returns the version of <a href="#jo">jo</a> you loaded in the form of a string (e.g. <code>0.1.1</code>).</p></li>
+<li><p><code>matchPlatform(string)</code></p>
+
+<p>Feed in a string list of desired platforms (e.g. <code>"mozilla chrome ipad"</code>),
+and returns true if the identified platform is in the test list.</p></li>
+</ul>
+
+<h2>Events</h2>
+
+<ul>
+<li><code>loadEvent</code></li>
+<li><p><code>unloadEvent</code></p>
+
+<p>These events are fired after <a href="#jo">jo</a> loads or unloads, and can be used in your
+application to perform initialization or cleanup tasks.</p></li>
+</ul>
+
+<h1><a name="Function">Function</a></h1>
+
+<p><a href="#jo">jo</a> extends the <a href="#Function">Function</a> object to add a few goodies which augment JavaScript
+in a farily non-intrusive way.</p>
+
+<h2>Methods</h2>
+
+<ul>
+<li><p><code>extend(superclass, prototype)</code></p>
+
+<p>Gives you an easy way to extend a class using JavaScript's natural prototypal
+inheritance. See <a href="#Class Patterns">Class Patterns</a> for more information.</p></li>
+<li><p><code>bind(context)</code></p>
+
+<p>Returns a private function wrapper which automagically resolves context
+for <code>this</code> when your method is called.</p></li>
+</ul>
+
+<h1><a name="HTMLElement">HTMLElement</a></h1>
+
+<p>This is a standard DOM element for JavaScript. Most of the <a href="#jo">jo</a> views, continers
+and controls deal with these so your application doesn't need to.</p>
+
+<h2>Methods</h2>
+
+<p>Not a complete list by any means, but the useful ones for our
+purposes are:</p>
+
+<ul>
+<li><code>appendChild(node)</code></li>
+<li><code>insertChild(before, node)</code></li>
+<li><code>removeChild(node)</code></li>
+</ul>
+
+<h2>Properties</h2>
+
+<p><a href="#jo">jo</a> uses these properties quite a bit:</p>
+
+<ul>
+<li><code>innerHTML</code></li>
+<li><code>className</code></li>
+<li><code>style</code></li>
+</ul>
+<h1><a name="joCache">joCache</a></h1>
+
+<p>A singleton which makes it easy to setup deferred object creation and cached
+results. This is a performance menchanism initially designed for UI views, but
+could be extended to handle data requests and other object types.</p>
+
+<h2>Methods</h2>
+
+<ul>
+<li><p><code>set(key, call, context)</code></p>
+
+<p>Defines a factory (<code>call</code>) for building an object keyed from the <code>key</code> string.
+The <code>context</code> argument is optional, but provides a reference for <code>this</code>.</p></li>
+<li><p><code>get(key)</code></p>
+
+<p>Returns an object based on the <code>key</code> string. If an object has not been created
+which corresponds to the <code>key</code>, <a href="#joCache">joCache</a> will call the constructor defined to
+create it and store the reference for future calls to <code>get()</code>.</p></li>
+</ul>
+
+<h2>Use</h2>
+
+<p>Defining a view for on-demand use:</p>
+
+<pre><code><a href="#joCache">joCache</a>.set("home", function() {
+    return new <a href="#joCard">joCard</a>([
+        new <a href="#joTitle">joTitle</a>("Home"),
+        new <a href="#joMenu">joMenu</a>([
+            "Top Stories",
+            "Latest News",
+            "Old News",
+            "No News"
+        ])
+    ]);
+});
+</code></pre>
+
+<p>Displaying a view later:</p>
+
+<pre><code>mystack.push(<a href="#joCache">joCache</a>.get("home"));
+
+// the first call to get() will instantiate
+// the view, subsequent calls will return the
+// view that was created the first time
+
+// you can pass parameters into your view factory
+var x = <a href="#joCache">joCache</a>.get("home", "My Title");
+
+// note that if you want to use <a href="#joCache">joCache</a> to cache
+// views which differ based on parameters passed in,
+// you probably want your own caching mechanism instead.
+</code></pre>
+<h1><a name="joChain">joChain</a></h1>
+
+<p>Class which strings asyncronous calls together.</p>
+
+<blockquote>
+  <p>In serious need of rework; doesn't meet original goal of sequencing
+these calls. This class might also become deprecated.</p>
+</blockquote>
+
+<h2>Methods</h2>
+
+<ul>
+<li><code>add(<a href="#Function">Function</a>, context, data)</code></li>
+<li><code>start()</code></li>
+<li><code>stop()</code></li>
+<li><code>next()</code></li>
+</ul>
+<h1><a name="joClipboard">joClipboard</a></h1>
+
+<p>Singleton which abstracts the system clipboard. Note that this is a platform
+dependant interface. By default, the class will simply store the contents in
+a special <a href="#joPreference">joPreference</a> named "joClipboardData" to provide clipboard capabilities
+within your app.</p>
+
+<blockquote>
+  <p>Even if you think you're just going to use the default behavior, it is
+recommended that you never manipulate the "joClipboardData" preference directly.</p>
+</blockquote>
+
+<h2>Methods</h2>
+
+<ul>
+<li><code>get()</code></li>
+<li><p><code>set(String)</code></p>
+
+<p>Low level methods which use just strings. At this time, you will need to
+stringify your own data when setting, and extract your data when getting.</p></li>
+<li><p><code>cut(<a href="#joControl">joControl</a>)</code></p></li>
+<li><code>copy(<a href="#joControl">joControl</a>)</code></li>
+<li><p><code>paste(<a href="#joControl">joControl</a>)</code></p>
+
+<p>High level methods which work with any <a href="#joControl">joControl</a> or subclass. If a control
+supports selections, <code>cut()</code> will automatically remove the selection after
+copying its contents. Otherwise, <code>cut()</code> will work the same as <code>copy()</code>.</p></li>
+</ul>
+
+<blockquote>
+  <p>Note: this is not working yet, steer clear (or contribute some working code!)</p>
+</blockquote>
+<h1><a name="joDOM">joDOM</a></h1>
+
+<p>Singleton with utility methods for manipulating DOM elements.</p>
+
+<h2>Methods</h2>
+
+<ul>
+<li><p><code>get(id)</code></p>
+
+<p>Returns an <a href="#HTMLElement">HTMLElement</a> which has the given id or if the
+id is not a string returns the value of id.</p></li>
+<li><p><code>create(type, style)</code></p>
+
+<p>Type is a valid HTML tag type. Style is the same as <code>setStyle()</code>
+method. Returns an <a href="#HTMLElement">HTMLElement</a>.</p>
+
+<pre><code>// simple
+var x = <a href="#joDOM">joDOM</a>.create("div", "mycssclass");
+
+
+// more interesting
+var x = <a href="#joDOM">joDOM</a>.create("div", {
+    id: "name",
+    className: "selected",
+    background: "#fff",
+    color: "#000"
+});
+</code></pre></li>
+<li><p><code>setStyle(tag, style)</code></p>
+
+<p>Style can be an object literal with
+style information (including "id" or "className") or a string. If
+it's a string, it will simply use the style string as the className
+for the new element.</p>
+
+<p>Note that the preferred and most cross-platform method for working
+with the DOM is to use <code>className</code> and possibly <code>id</code> and put your
+actual style information in your CSS file. That said, sometimes it's
+easier to just set the background color in the code. Up to you.</p></li>
+<li><p><code>getParentWithin(node, ancestor)</code></p>
+
+<p>Returns an <a href="#HTMLElement">HTMLElement</a> which is
+the first child of the ancestor which is a parent of a given node.</p></li>
+<li><p><code>addCSSClass(<a href="#HTMLElement">HTMLElement</a>, classname)</code></p>
+
+<p>Adds a CSS class to an element unless it is already there.</p></li>
+<li><p><code>removeCSSClass(<a href="#HTMLElement">HTMLElement</a>, classname)</code></p>
+
+<p>Removes a CSS class from an element if it exists.</p></li>
+<li><p><code>toggleCSSClass(<a href="#HTMLElement">HTMLElement</a>, classname)</code></p>
+
+<p>Auto add or remove a class from an element.</p></li>
+<li><p><code>pageOffsetLeft(<a href="#HTMLElement">HTMLElement</a>)</code> and <code>pageOffsetHeight(<a href="#HTMLElement">HTMLElement</a>)</code></p>
+
+<p>Returns the "true" left and top, in pixels, of a given element relative
+to the page.</p></li>
+<li><p><code>applyCSS(css, stylenode)</code></p>
+
+<p>Applies a <code>css</code> string to the app. Useful for quick changes, like backgrounds
+and other goodies. Basically creates an inline <code>&lt;style&gt;</code> tag. This method
+returns a reference to the new <code>&lt;style&gt;</code> tag, which you can use with <code>removeCSS()</code>
+and subsequent calls to <code>applyCSS()</code> as the <code>stylenode</code> argument.</p></li>
+<li><p><code>loadCSS(filename)</code></p>
+
+<p>Works the same as <code>applyCSS()</code> but loads the CSS from a file instead of a string.</p></li>
+<li><p><code>removeCSS(stylenode)</code></p>
+
+<p>Removes a <code>&lt;style&gt;</code> tag created with <code>applyCSS()</code> or <code>loadCSS()</code>.</p></li>
+</ul>
+<h1><a name="joEvent">joEvent</a></h1>
+
+<p>Singleton with DOM event model utility methods. Ideally, application-level
+code shouldn't have to use this, but library code does.</p>
+
+<h2>Methods</h2>
+
+<ul>
+<li><p><code>on(<a href="#HTMLElement">HTMLElement</a>, event, <a href="#Function">Function</a>, context, data)</code></p>
+
+<p>Set a DOM event listener for an <a href="#HTMLElement">HTMLElement</a> which calls a given <a href="#Function">Function</a>
+with an optional context for <code>this</code> and optional static data. Returns a
+reference to the handler function, which is required if you need to <code>remove()</code>
+later.</p></li>
+<li><p><code>capture(<a href="#HTMLElement">HTMLElement</a>, event, function, context, data)</code></p>
+
+<p>This is the same os <code>on()</code>, but captures the event at the node before its
+children. If in doubt, use <code>on()</code> instead.</p></li>
+<li><p><code>remove(<a href="#HTMLElement">HTMLElement</a>, event, handler)</code></p>
+
+<p>Removes a previously declared DOM event. Note that <code>handler</code> is the return
+value of the <code>on()</code> and <code>capture()</code> methods.</p></li>
+<li><p><code>stop(event)</code></p>
+
+<p>Stop event propogation.</p></li>
+<li><p><code>preventDefault(event)</code></p>
+
+<p>Prevent default action for this event.</p></li>
+<li><p><code>block(event)</code></p>
+
+<p>Useful for preventing dragging the window around in some browsers, also highlighting
+text in a desktop browser.</p></li>
+<li><p><code>getTarget(event)</code></p>
+
+<p>Returns the <a href="#HTMLElement">HTMLElement</a> which a DOM event relates to.</p></li>
+</ul>
+
+<h1><a name="joLog">joLog</a></h1>
+
+<p>Wrapper for <code>console.log()</code> (or whatever device-specific logging you have). Also could
+be extended to send log information to a RESTful service as well, handy for devices
+which don't have decent logging abilities.</p>
+
+<h2>Use</h2>
+
+<p>It's an all-in-one utility that's smart enough to ferret out whatever you throw at it
+and display it in the console.</p>
+
+<pre><code><a href="#joLog">joLog</a>("x=", x, "listdata=", listdata);
+</code></pre>
+
+<p>Basically, fill it up with strings, variables, objects, arrays and the function will
+produce a string version of each argument (where appropriate; browser debuggers tend to
+display objects nicely) in the same console line. Simple, effective, easy to use.</p>
+<h1><a name="joSubject">joSubject</a></h1>
+
+<p>Class for custom events using the <a href="#Observer Pattern">Observer Pattern</a>. This is designed to be used
+inside a subject to create events which observers can subscribe to. Unlike
+the classic observer pattern, a subject can fire more than one event when called,
+and each observer gets data from the subject. This is very similar to YUI 2.x
+event model.</p>
+
+<p>You can also "lock" the notification chain by using the <code>capture()</code> method, which
+tells the event to only notify the most recent subscriber (observer) which requested
+to capture the event exclusively.</p>
+
+<h2>Methods</h2>
+
+<ul>
+<li><p><code>subscribe(<a href="#Function">Function</a>, context, data)</code></p>
+
+<p>Both <code>context</code> and <code>data</code> are optional. Also, you may use the <code><a href="#Function">Function</a>.bind(this)</code>
+approach instead of passing in the <code>context</code> as a separate argument.
+All subscribers will be notified when the event is fired.</p></li>
+<li><p><code>unsubscribe(<a href="#Function">Function</a>, context)</code></p>
+
+<p>Does what you'd think. The <code>context</code> is only required if you used one when
+you set up a subscriber.</p></li>
+<li><p><code>capture(<a href="#Function">Function</a>, context, data)</code></p>
+
+<p>Only the last subscriber to capture this event will be notified until it is
+released. Note that you can stack <code>capture()</code> calls to produce a modal event
+heiarchy. Used in conjunction with the <code>resume()</code> method, you can build an
+event chain where each observer can fire the next based on some decision making.</p></li>
+<li><p><code>release(<a href="#Function">Function</a>, context)</code></p>
+
+<p>Removes the most recent subscription called with <code>capture()</code>, freeing up the next
+subscribers in the list to be notified the next time the event is fired.</p></li>
+<li><p><code>fire(data)</code></p>
+
+<p>Calls subscriber methods for all observers, and passes in: <code>data</code> from the subject,
+a reference to the <code>subject</code> and any static <code>data</code> which was passed in the
+<code>subscribe()</code> call.</p></li>
+<li><p><code>resume(data)</code></p>
+
+<p>If you used <code>capture()</code> to subscribe to this event, you can continue notifying
+other subscribers in the chain with this method. The <code>data</code> parameter, as in
+<code>fire()</code>, is optional.</p></li>
+</ul>
+
+<h2>Use</h2>
+
+<h3>In the subject (or "publisher") object</h3>
+
+<pre><code>// inside the Subject, we setup an event observers can subscribe to
+this.changeEvent = new <a href="#joSubject">joSubject</a>(this);
+
+// to fire the event inside the Subject
+this.changeEvent.fire(somedata);
+</code></pre>
+
+<h3>In the observer (or "subscriber") object</h3>
+
+<pre><code>// simple case, using <a href="#Function">Function</a>.bind()
+somesubject.changeEvent.subscribe(this.mymethod.bind());
+
+// explicit context (this)
+somesubject.changeEvent.subscribe(this.mymethod, this);
+
+// optional data which gets passed with the event fires
+somesubject.changeEvent.subscribe(this.mymethod, this, "hello");
+</code></pre>
+
+<p>This is a very flexible way to handle messages between objects. Each subject
+may have multiple events which any number of observer objects can subscribe
+to.</p>
+<h1><a name="joTime">joTime</a></h1>
+
+<p>Time utility functions. More will be added, but only as needed by the
+framework. There are entire libraries dedicated to extensive datetime
+manipulation, and Jo doesn't pretend to be one of them.</p>
+
+<h2>Methods</h2>
+
+<ul>
+<li><p><code>timestamp()</code></p>
+
+<p>Returns a current timestamp in milliseconds from 01/01/1970 from
+the system clock.</p></li>
+</ul>
+
+<h2>Constants</h2>
+
+<ul>
+<li><p><code>SEC</code>, <code>MIN</code>, <code>HOUR</code>, <code>DAY</code></p>
+
+<p>Convenience global constants which make it easier to manipulate
+timestamps.</p></li>
+</ul>
+
+<h2>Use</h2>
+
+<pre><code>var twoHoursLater = <a href="#joTime">joTime</a>.timestamp() + (HOUR * 2);
+</code></pre>
+<h1><a name="joDefer">joDefer</a></h1>
+
+<p>Utility function which calls a given method within a given context after <code>n</code>
+milliseconds with optional static data.</p>
+
+<h2>Use</h2>
+
+<pre><code><a href="#joDefer">joDefer</a>(<a href="#Function">Function</a>, context, delay, data);
+</code></pre>
+
+<p>Note that delay defaults to 100ms if not specified, and <code>data</code> is optional.</p>
+
+<h1><a name="joYield">joYield</a></h1>
+
+<p>Deprecated, use <a href="#joDefer">joDefer</a> instead.</p>
+<hr />
+
+<h1><a name="joDatabase">joDatabase</a></h1>
+
+<p>Wrapper class for WebKit SQLite database.</p>
+
+<h2>Methods</h2>
+
+<ul>
+<li><p><code>open(datafile, size)</code></p>
+
+<p><code>datafile</code> is a filename, <code>size</code> is an optional parameter for initial
+allocation size for the database.</p></li>
+<li><p><code>close()</code></p></li>
+<li><p><code>now()</code></p>
+
+<p><em>Deprecated</em> convenience method which returns a SQLite-formatted date
+string for use in queries. Should be replaced with a utility function
+in <a href="#joTime">joTime</a>.</p></li>
+</ul>
+<h1><a name="joDataSource">joDataSource</a></h1>
+
+<p>Wraps data acquisition in an event-driven class. Objects can
+subscribe to the <code>changeEvent</code> to update their own data.</p>
+
+<p>This base class can be used as-is as a data dispatcher, but is
+designed to be extended to handle asynchronous file or SQL queries.</p>
+
+<h2>Methods</h2>
+
+<ul>
+<li><code>set()</code></li>
+<li><code>get()</code></li>
+<li><code>clear()</code></li>
+<li><code>setQuery(...)</code></li>
+<li><code>getQuery()</code></li>
+<li><code>load()</code></li>
+<li><code>refresh()</code></li>
+</ul>
+
+<h2>Events</h2>
+
+<ul>
+<li><code>changeEvent</code></li>
+<li><code>errorEvent</code></li>
+</ul>
+
+<blockquote>
+  <p>Under construction, use with care.</p>
+</blockquote>
+<h1><a name="joFileSource">joFileSource</a></h1>
+
+<p>A special <a href="#joDataSource">joDataSource</a> which loads and handles a file. This class
+wraps <a href="#joFile">joFile</a>.</p>
+
+<h2>Extends</h2>
+
+<ul>
+<li><code><a href="#joDataSource">joDataSource</a></code></li>
+</ul>
+
+<h1><a name="joFile">joFile</a></h1>
+
+<p>A utility method which uses XMLHttpRequest to load a text-like file
+from either a remote server or a local file.</p>
+
+<blockquote>
+  <p>Note that some browsers and mobile devices will <em>not</em> allow you to
+load from just any URL, and some will restrict use with local files
+especially (I'm looking at you, FireFox).</p>
+
+<p>If your aim is to load JavaScript-like data (also, JSON), you may want
+to look at <a href="#joScript">joScript</a> instead, which uses script tags to accomplish the job.</p>
+</blockquote>
+
+<h2>Calling</h2>
+
+<pre><code><a href="#joFile">joFile</a>(url, call, context, timeout)
+</code></pre>
+
+<h2>Where</h2>
+
+<ul>
+<li><p><code>url</code> is a well-formed URL, or, in most cases, a relative url to a local
+file</p></li>
+<li><p><code>call</code> is a function to call when the operation completes</p></li>
+<li><p><code>context</code> is an optional scope for the function to call (i.e. value of <code>this</code>).
+You can also ignore this parameter (or pass in <code>null</code> and use <code><a href="#Function">Function</a>.bind(this)</code>
+instead.</p></li>
+<li><p><code>timeout</code> is an optional parameter which tells <a href="#joFile">joFile</a> to wait, in seconds,
+for a response before throwing an error.</p></li>
+</ul>
+
+<h2>Use</h2>
+
+<pre><code>// simple call with a global callback
+var x = <a href="#joFile">joFile</a>("about.html", App.loadAbout);
+
+// an inline function
+var y = <a href="#joFile">joFile</a>("http://joapp.com/index.html", function(data, error) {
+    if (error) {
+        console.log("error loading file");
+        return;
+    }
+
+    console.log(data);
+});
+</code></pre>
+<h1><a name="joPreference">joPreference</a></h1>
+
+<p>A class used for storing and retrieving preferences in your application.</p>
+
+<p><em>The interface for this is changing.</em> <a href="#joPreference">joPreference</a> will become a specialized
+application-level extension of <a href="#joRecord">joRecord</a> in the near future. Until then, you
+should use <a href="#joRecord">joRecord</a> to achieve this use-case.</p>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joRecord">joRecord</a></li>
+</ul>
+<h1><a name="joRecord">joRecord</a></h1>
+
+<p>An event-driven wrapper for an object and its properties. Useful as a
+data interface for forms and other collections of UI controls.</p>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joDataSource">joDataSource</a></li>
+</ul>
+
+<h2>Methods</h2>
+
+<ul>
+<li><p><code>link(property)</code></p>
+
+<p>Returns a reference to a <a href="#joProperty">joProperty</a> object which can be used with UI
+controls (children of <a href="#joControl">joControl</a>) to automatically save or load data
+based on user interaction.</p></li>
+<li><p><code>save()</code></p>
+
+<p>Saves the object's data. The base class does not itself save the data;
+you will need to make your own action for the save method, or have
+something which subscribes to the <code>saveEvent</code>.</p></li>
+<li><p><code>load()</code></p>
+
+<p>Loads the object's data, and fires off notifications to any UI controls
+which are linked to this <a href="#joRecord">joRecord</a> object. Same as the <code>save()</code> method,
+you will have to make this function do some actual file loading if that's
+what you want it to do.</p></li>
+<li><p><code>getProperty(property)</code></p></li>
+<li><p><code>setProperty(property, value)</code></p>
+
+<p>Get or set a given property. Used in conjunction with <code>setAutoSave()</code>,
+<code>setProprty()</code> will also trigger a call to the <code>save()</code> method.</p></li>
+<li><p><code>getDelegate(property)</code></p>
+
+<p>Returns a reference to the <a href="#joProperty">joProperty</a> object which fires off events
+for data changes for that property. If none exists, one is created.
+This method is used by the <code>link()</code> method, and can be overriden if
+you extend this class to provide some other flavor of a <a href="#joDataSource">joDataSource</a>
+to manage events for your properties.</p></li>
+</ul>
+
+<h2>Use</h2>
+
+<pre><code>// setup a <a href="#joRecord">joRecord</a>
+var r = new <a href="#joRecord">joRecord</a>({
+    user: "Jo",
+    password: "1234",
+    active: true
+});
+
+// bind it to some fields
+var x = new <a href="#joGroup">joGroup</a>([
+    new <a href="#joLabel">joLabel</a>("User"),
+    new <a href="#joInput">joInput</a>(r.link("user")),
+    new <a href="#joLabel">joLabel</a>("Password"),
+    new <a href="#joPasswordInput">joPasswordInput</a>(r.link("password")),
+    new joFlexBox([
+        new <a href="#joLabel">joLabel</a>("Active"),
+        new <a href="#joToggle">joToggle</a>(r.link("active"))
+    ])
+]);
+</code></pre>
+
+<p>And if you want the data to be persistent, or interact with some
+cloud service, you'll need to do something like this:</p>
+
+<pre><code>// make something happen to load the data
+r.load = function() {
+    // some AJAX or SQL call here
+};
+
+// make something happen to save the data
+r.save = function() {
+    // some AJAX or SQL call here
+};
+</code></pre>
+
+<p>You could also make your own subclass of <a href="#joRecord">joRecord</a> with your own save
+and load methods using <code>extend()</code> like this:</p>
+
+<pre><code>var preferences = function() {
+    // call to the superclass constructor
+    <a href="#joRecord">joRecord</a>.apply(this, arguments);
+};
+preferences.extend(<a href="#joRecord">joRecord</a>, {
+    save: function() {
+        // do an AJAX or SQL call here
+    },
+
+    load: function() {
+        // do an AJAX or SQL call here
+    }
+}
+</code></pre>
+
+<p>See <a href="#Class Patterns">Class Patterns</a> for more details on this method of "subclassing"
+in JavaScript.</p>
+
+<h1><a name="joProperty">joProperty</a></h1>
+
+<p>Used by <a href="#joRecord">joRecord</a> to provide an event-driven binding to properties.
+This class is instantiated by <a href="#joRecord">joRecord</a> and not of much use on its own.</p>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joDataSource">joDataSource</a></li>
+</ul>
+
+<h2>Use</h2>
+
+<p>See <a href="#joRecord">joRecord</a> for examples.</p>
+<h1><a name="joScript">joScript</a></h1>
+
+<p>Script tag loader function which can be used to dynamically load script
+files or make RESTful calls to many JSON services (provided they have some
+sort of callback ability). This is a low-level utility function.</p>
+
+<blockquote>
+  <p>Need a URL with some examples of this.</p>
+</blockquote>
+
+<h2>Calling</h2>
+
+<p><code><a href="#joScript">joScript</a>(url, callback, context, errorcallback, errorcontext)</code></p>
+
+<ul>
+<li>url</li>
+<li>callback is a function (supports bind, in which case context is optional)</li>
+<li>context (usually <code>this</code>, and is optional)</li>
+</ul>
+
+<h2>Returns</h2>
+
+<p>Calls your handler method and passes a truthy value if there was an error.</p>
+
+<h2>Use</h2>
+
+<pre><code><a href="#joScript">joScript</a>("myscript.js", function(error, url) {
+    if (error)
+        console.log("script " + url + " didn't load.");
+}, this);
+</code></pre>
+<h1><a name="joSQLDataSource">joSQLDataSource</a></h1>
+
+<p>SQL flavor of <a href="#joDataSource">joDataSource</a> which uses "HTML5" SQL found in webkit.</p>
+
+<h2>Methods</h2>
+
+<ul>
+<li><code>setDatabase(<a href="#joDatabase">joDatabase</a>)</code></li>
+<li><code>setQuery(query)</code></li>
+<li><code>setParameters(arguments)</code></li>
+<li><code>execute(query, arguments)</code></li>
+</ul>
+
+<h2>Events</h2>
+
+<ul>
+<li><p><code>changeEvent</code></p>
+
+<p>Fired when data is loaded after an <code>execute()</code> or when data is cleared.</p></li>
+<li><p><code>errorEvent</code></p>
+
+<p>Fired when some sort of SQL error happens.</p></li>
+</ul>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joDataSource">joDataSource</a></li>
+</ul>
+<h1><a name="joYQL">joYQL</a></h1>
+
+<p>A <a href="#joDataSource">joDataSource</a> geared for YQL RESTful JSON calls. YQL is like SQL, but for cloud
+services. Pretty amazing stuff:</p>
+
+<blockquote>
+  <p>The Yahoo! Query Language is an expressive SQL-like language that lets you query,
+filter, and join data across Web services. With YQL, apps run faster with fewer lines of
+code and a smaller network footprint.</p>
+
+<p>Yahoo! and other websites across the Internet make much of their structured data
+available to developers, primarily through Web services. To access and query these
+services, developers traditionally endure the pain of locating the right URLs and
+documentation to access and query each Web service.</p>
+
+<p>With YQL, developers can access and shape data across the Internet through one
+simple language, eliminating the need to learn how to call different APIs.</p>
+</blockquote>
+
+<p><a class="external" href="http://developer.yahoo.com/yql/">Yahoo! Query Language Home</a></p>
+
+<h2>Use</h2>
+
+<p>A simple one-shot use would look like:</p>
+
+<pre><code>// setup our data source
+var yql = new <a href="#joYQL">joYQL</a>("select * from rss where url='http://davebalmer.wordpress.com'");
+
+// subscribe to load events
+yql.loadEvent.subscribe(function(data) {
+    <a href="#joLog">joLog</a>("received data!");
+});
+
+// kick off our call
+yql.exec();
+</code></pre>
+
+<p>A more robust example with parameters in the query could look something
+like this:</p>
+
+<pre><code>// quick/dirty augmentation of the setQuery method
+var yql = new <a href="#joYQL">joYQL</a>();
+yql.setQuery = function(feed, limit) {
+    this.query = "select * from rss where url='"
+        + feed + "' limit " + limit
+        + " | sort(field=pubDate)";
+};
+
+// we can hook up a list to display the results
+var list = new <a href="#joList">joList</a>(yql).attach(document.body);
+list.formatItem = function(data, index) {
+    var html = new joListItem(data.title + " (" + data.pubDate + ")", index);
+};
+
+// later, we make our call with our parameters
+yql.exec("http://davebalmer.wordpress.com", 10);
+</code></pre>
+
+<h2>Methods</h2>
+
+<ul>
+<li><p><code>setQuery()</code></p>
+
+<p>Designed to be augmented, see the example above.</p></li>
+<li><p><code>exec()</code></p></li>
+</ul>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joDataSource">joDataSource</a></li>
+</ul>
+<hr />
+
+<h1><a name="joBusy">joBusy</a></h1>
+
+<p>The idea here is to make a generic "spinner" control which you
+can overlay on other controls. It's still in flux, don't use it
+just yet.</p>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joView">joView</a></li>
+</ul>
+
+<h2>Methods</h2>
+
+<ul>
+<li><p><code>setMessage(status)</code></p>
+
+<p>You can update the status message in this busy box so users
+have a better idea why the busy box is showing.</p></li>
+</ul>
+<h1><a name="joButton">joButton</a></h1>
+
+<p>Button control.</p>
+
+<pre><code>// simple invocation
+var x = new <a href="#joButton">joButton</a>("Done");
+
+// optionally pass in a CSS classname to style the button
+var y = new <a href="#joButton">joButton</a>("Cancel", "cancelbutton");
+
+// like other controls, you can pass in a <a href="#joDataSource">joDataSource</a>
+// which could be useful, so why not
+var z = new <a href="#joButton">joButton</a>(<a href="#joPreference">joPreference</a>.bind("processname"));
+</code></pre>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joControl">joControl</a></li>
+</ul>
+
+<h2>Methods</h2>
+
+<ul>
+<li>enable()</li>
+<li>disable()</li>
+</ul>
+<h1><a name="joCaption">joCaption</a></h1>
+
+<p>Basically, a paragraph of text.</p>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joControl">joControl</a></li>
+</ul>
+<h1><a name="joCard">joCard</a></h1>
+
+<p>Special container for card views, more of an application-level view.</p>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joContainer">joContainer</a></li>
+</ul>
+
+<h2>Methods</h2>
+
+<ul>
+<li><code>activate()</code></li>
+<li><p><code>deactivate()</code></p>
+
+<p>These methods are called automatically by various <a href="#joView">joView</a> objects, for
+now <a href="#joStack">joStack</a> is the only one which does. Basically, allows you to add
+application-level handlers to initialize or cleanup a <a href="#joCard">joCard</a>.</p></li>
+</ul>
+<h1><a name="joCollect">joCollect</a></h1>
+
+<p><em>DEPRECATED</em> use <a href="#joInterface">joInterface</a> instead. This function is planned
+to die when <a href="#jo">jo</a> goes beta.</p>
+<h1><a name="joContainer">joContainer</a></h1>
+
+<p>A view which is designed to contain other views and controls. Subclass to provide
+different layout types. A container can be used to intantiate an entire tree of
+controls at once, and is a very powerful UI component in <a href="#jo">jo</a>.</p>
+
+<h2>Use</h2>
+
+<pre><code>// plain container
+var x = new <a href="#joContainer">joContainer</a>();
+
+// HTML or plain text
+var y = new <a href="#joContainer">joContainer</a>("Some HTML");
+
+// <a href="#HTMLElement">HTMLElement</a>
+var w = new <a href="#joContainer">joContainer</a>(<a href="#joDOM">joDOM</a>.get("mydiv"));
+
+// nested inline structure with text, HTML, joViews or HTMLElements
+var z = new <a href="#joContainer">joContainer</a>([
+    new <a href="#joTitle">joTitle</a>("Hello"),
+    new <a href="#joList">joList</a>([
+        "Red",
+        "Green",
+        "Blue"
+    ]),
+    new joFieldset([
+        "Name", new <a href="#joInput">joInput</a>(<a href="#joPreference">joPreference</a>.bind("name")),
+        "Phone", new <a href="#joInput">joInput</a>(<a href="#joPreference">joPreference</a>.bind("phone"))
+    ]),
+    new <a href="#joButton">joButton</a>("Done")
+]);
+
+// set an optional title string, used with <a href="#joNavbar">joNavbar</a>
+z.setTitle("<a href="#About">About</a>");
+</code></pre>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joView">joView</a></li>
+</ul>
+
+<h2>Events</h2>
+
+<ul>
+<li><code>changeEvent</code></li>
+</ul>
+
+<h2>Methods</h2>
+
+<ul>
+<li><p><code>setData(data)</code></p>
+
+<p>The constructor calls this method if you provide <code>data</code> when you instantiate
+(see example above)</p></li>
+<li><p><code>push(data)</code></p>
+
+<p>Same support as <code>setData()</code>, but places the new content at the end of the
+existing content.</p></li>
+<li><p><code>setTitle(string)</code></p></li>
+<li><p><code>getTitle(string)</code></p>
+
+<p>Titles are optional, but used with <a href="#joStack">joStack</a> &amp; <a href="#joStackScroller">joStackScroller</a> to update a
+<a href="#joNavbar">joNavbar</a> control automagically.</p></li>
+</ul>
+<h1><a name="joControl">joControl</a></h1>
+
+<p>Interactive, data-driven control class which may be bound to a <a href="#joDataSource">joDataSource</a>,
+can receive focus events, and can fire off important events which other objects
+can listen for and react to.</p>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joView">joView</a></li>
+</ul>
+
+<h2>Events</h2>
+
+<ul>
+<li><code>changeEvent</code></li>
+<li><code>selectEvent</code></li>
+</ul>
+
+<h2>Methods</h2>
+
+<ul>
+<li><p><code>setValue(value)</code></p>
+
+<p>Many controls have a <em>value</em> in addition to their <em>data</em>. This is
+particularly useful for <code><a href="#joList">joList</a></code>, <code><a href="#joMenu">joMenu</a></code>, <code><a href="#joOption">joOption</a></code> and other controls
+which has a list of possibilities (the data) and a current seletion from those
+(the value).</p></li>
+<li><p><code>enable()</code></p></li>
+<li><p><code>disable()</code></p>
+
+<p>Enable or disable the control, pretty much does what you'd expect.</p></li>
+<li><p><code>focus()</code></p></li>
+<li><p><code>blur()</code></p>
+
+<p>Manually control focus for this control.</p></li>
+<li><p><code>setDataSource(<a href="#joDataSource">joDataSource</a>)</code></p>
+
+<p>Tells this control to bind its data to any <code><a href="#joDataSource">joDataSource</a></code> or subclass.</p></li>
+<li><p><code>setValueSource(<a href="#joDataSource">joDataSource</a>)</code></p>
+
+<p>Tells this control to bind its <em>value</em> to any <code><a href="#joDataSource">joDataSource</a></code> type.</p></li>
+<li><p><code>setReadOnly(state)</code></p>
+
+<p>Certain controls can have their interaction turned off. State is either <code>true</code>
+or <code>false</code>.</p></li>
+</ul>
+
+<h2>See Also</h2>
+
+<ul>
+<li><a href="#joRecord">joRecord</a> and <a href="#joProperty">joProperty</a> are specialized <a href="#joDataSource">joDataSource</a> classes which
+make it simple to bind control values to a data structure.</li>
+</ul>
+<h1><a name="joDialog">joDialog</a></h1>
+
+<p>This is a higher level container that wraps a <a href="#joPopup">joPopup</a> with a <a href="#joShim">joShim</a>.</p>
+<h1><a name="joDivider">joDivider</a></h1>
+
+<p>Simple visual divider.</p>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joView">joView</a></li>
+</ul>
+<h1><a name="joExpando">joExpando</a></h1>
+
+<p>A compound UI element which allows the user to hide/show its contents.
+The first object passed in becomes the trigger control for the container,
+and the second becomes the container which expands and contracts. This
+action is controlled in the CSS by the presence of the "open" class.</p>
+
+<h2>Use</h2>
+
+<p>This is a typical pattern:</p>
+
+<pre><code>// normal look &amp; feel
+var x = new <a href="#joExpando">joExpando</a>([
+    new <a href="#joExpandoTitle">joExpandoTitle</a>("Options"),
+    new <a href="#joExpandoContent">joExpandoContent</a>([
+        new <a href="#joLabel">joLabel</a>("Label"),
+        new <a href="#joInput">joInput</a>("sample field")
+    ])
+]);
+</code></pre>
+
+<p>Note that <a href="#joExpando">joExpando</a> doesn't care what sort of controls you tell it
+to use. In this example, we have a <a href="#joButton">joButton</a> that hides and shows a
+DOM element:</p>
+
+<pre><code>// you can use other things though
+var y = new <a href="#joExpando">joExpando</a>([
+    new <a href="#joButton">joButton</a>("More..."),
+    <a href="#joDOM">joDOM</a>.get("someelementid")
+]);
+</code></pre>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joContainer">joContainer</a></li>
+</ul>
+
+<h2>Methods</h2>
+
+<ul>
+<li><code>open()</code></li>
+<li><code>close()</code></li>
+<li><code>toggle()</code></li>
+</ul>
+
+<h2>Events</h2>
+
+<ul>
+<li><code>openEvent</code></li>
+<li><code>closeEvent</code></li>
+</ul>
+
+<h1><a name="joExpandoContent">joExpandoContent</a></h1>
+
+<p>New widget to contain expando contents. This is normally used with
+<a href="#joExpando">joExpando</a>, but not required.</p>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joContainer">joContainer</a></li>
+</ul>
+<h1><a name="joExpandoTitle">joExpandoTitle</a></h1>
+
+<p>Common UI element to trigger a <a href="#joExpando">joExpando</a>. Contains a stylable
+arrow image which indicates open/closed state.</p>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joControl">joControl</a></li>
+</ul>
+
+<h2>Use</h2>
+
+<p>See <a href="#joExpando">joExpando</a> use.</p>
+<h1><a name="joFlexrow">joFlexrow</a></h1>
+
+<p>Uses the flexible box model in CSS to stretch elements evenly across a row.</p>
+
+<h2>Use</h2>
+
+<pre><code>// a simple row of things
+var x = new <a href="#joFlexrow">joFlexrow</a>([
+    new <a href="#joButton">joButton</a>("OK"),
+    new <a href="#joButton">joButton</a>("Cancel")
+]);
+
+// making a control stretch
+var y = new <a href="#joFlexrow">joFlexrow</a>(new <a href="#joInput">joInput</a>("Bob"));
+</code></pre>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joContainer">joContainer</a></li>
+</ul>
+
+<h1><a name="joFlexcol">joFlexcol</a></h1>
+
+<p>Uses the flexible box model in CSS to stretch elements evenly across a column.</p>
+
+<h2>Use</h2>
+
+<pre><code>// fill up a vertical space with things
+var x = new <a href="#joFlexcol">joFlexcol</a>([
+    new <a href="#joNavbar">joNavbar</a>(),
+    new <a href="#joStackScroller">joStackScroller</a>()
+]);
+</code></pre>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joContainer">joContainer</a></li>
+</ul>
+<h1><a name="joFocus">joFocus</a></h1>
+
+<p>Singleton which manages global input and event focus among <a href="#joControl">joControl</a> objects.</p>
+
+<h2>Methods</h2>
+
+<ul>
+<li><p><code>set(<a href="#joControl">joControl</a>)</code></p>
+
+<p>Unsets focus on the last control, and sets focus on the control passed in.</p></li>
+<li><p><code>clear()</code></p>
+
+<p>Unsets focus on the last control.</p></li>
+<li><p><code>refresh()</code></p>
+
+<p>Sets focus back to the last control that was focused.</p></li>
+</ul>
+<h1><a name="joFooter">joFooter</a></h1>
+
+<p>Attempt to make a filler object which pushed subsequent <a href="#joView">joView</a> objects
+further down in the container if possible (to attach its contents to
+the bottom of a card, for eaxmple).</p>
+
+<blockquote>
+  <p>This behavior requires a working box model to attach properly to the bottom
+of your container view.</p>
+</blockquote>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joContainer">joContainer</a></li>
+</ul>
+
+<h1><a name="joGesture">joGesture</a></h1>
+
+<p>Experimental global gesture handler (keyboard, dpad, back, home, flick?).
+This needs a lot more fleshing out, so it's not (quite) ready for general
+consumption.</p>
+
+<h2>Events</h2>
+
+<ul>
+<li><code>upEvent</code></li>
+<li><code>downEvent</code></li>
+<li><code>leftEvent</code></li>
+<li><code>rightEvent</code></li>
+<li><code>backEvent</code></li>
+<li><code>forwardEvent</code></li>
+<li><code>homeEvent</code></li>
+<li><code>closeEvent</code></li>
+<li><code>activateEvent</code></li>
+<li><code>deactivateEvent</code></li>
+</ul>
+
+<blockquote>
+  <p>Note that the events setup here are for the browser
+or webOS. The <code>setEvents</code> method most likely needs to change
+based on which OS you're running, although looking more deeply
+into <a href="#PhoneGap">PhoneGap</a> event layer.</p>
+</blockquote>
+<h1><a name="joGroup">joGroup</a></h1>
+
+<p>Group of controls, purely visual.</p>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joContainer">joContainer</a></li>
+</ul>
+<h1><a name="joHTML">joHTML</a></h1>
+
+<p>A simple HTML content control. One interesting feature is it intercepts all
+<code>&lt;a&gt;</code> tag interactions and fires off a <code>selectEvent</code> with the contents of
+the tag's <code>href</code> property.</p>
+
+<p>This is a relatively lightweight approach to displaying arbitrary HTML
+data inside your app, but it is <em>not</em> recommended you allow external
+JavaScript inside the HTML chunk in question.</p>
+
+<p>Also keep in mind that your app document already <em>has</em> <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code> and
+<code>&lt;body&gt;</code> tags. When you use the <code>setData()</code> method on this view, <em>make sure
+you don't use any of these tags</em> to avoid weird issues.</p>
+
+<blockquote>
+  <p>In a future version, it is feasible to load in stylesheets references in
+the HTML document's <code>&lt;head&gt;</code> section. For now, that entire can of worms
+will be avoided, and it's left up to you, the developer, to load in any
+required CSS files using <code><a href="#joDOM">joDOM</a>.loadCSS()</code>.</p>
+</blockquote>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joControl">joControl</a></li>
+</ul>
+
+<h2>Use</h2>
+
+<pre><code>// simple html string
+var x = new <a href="#joHTML">joHTML</a>("&lt;h1&gt;Hello World!&lt;/h1&gt;&lt;p&gt;Sup?&lt;/p&gt;");
+
+// use a <a href="#joDataSource">joDataSource</a> like a file loader
+var y = new <a href="#joHTML">joHTML</a>(new <a href="#joFileSource">joFileSource</a>("sample.html"));
+</code></pre>
+<h1><a name="joInput">joInput</a></h1>
+
+<p>Single-line text input control. When you instantiate or use <code>setData()</code>, you can
+either pass in an initial value or a reference to a <a href="#joDataSource">joDataSource</a> object which it,
+like other <a href="#joControl">joControl</a> instances, will bind to.</p>
+
+<h2>Use</h2>
+
+<pre><code>// simple value, simple field
+var x = new <a href="#joInput">joInput</a>(a);
+
+// set up a simple <a href="#joRecord">joRecord</a> instance with some default data
+var pref = new <a href="#joRecord">joRecord</a>({
+    username: "Bob",
+    password: "password"
+});
+
+// attach the value to a data structure property
+var y = new <a href="#joInput">joInput</a>(pref.link("username"));
+</code></pre>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joControl">joControl</a></li>
+</ul>
+
+<h2>Methods</h2>
+
+<ul>
+<li><code>focus()</code></li>
+<li><p><code>blur()</code></p>
+
+<p>You can manually set focus or call the <code>blur()</code> method (which also
+triggers a data save).</p></li>
+<li><p><code>setData()</code></p>
+
+<p>Pass in either some arbitrary value for the control, or a reference to
+a <a href="#joDataSource">joDataSource</a> if you want to automatically bind to a storage system
+(e.g. <a href="#joPreference">joPreference</a>).</p></li>
+</ul>
+<h1><a name="joInterface">joInterface</a></h1>
+
+<p><em>EXPERIMENTAL</em></p>
+
+<blockquote>
+  <p>This utility method is experimental! Be very careful with it. <em>NOTE</em> that
+for now, this class requires you to remove whitespace in your HTML. If you
+don't know a good approach offhand to do that, then this thing probably isn't
+ready for you yet.</p>
+</blockquote>
+
+<p>This class parses the DOM tree for a given element and attempts to
+attach appropriate <a href="#joView">joView</a> subclasses to all the relevant HTML nodes.
+Returns an object with references to all elements with the <code>id</code>
+attribute set. This method helps turn HTML into HTML + JavaScript.</p>
+
+<h2>Use</h2>
+
+<pre><code>// an HTML element by its ID
+var x = new <a href="#joInterface">joInterface</a>("someid");
+
+// a known HTML element
+var y = new <a href="#joInterface">joInterface</a>(someHTMLElement);
+
+// the entire document body (careful, see below)
+var z = new <a href="#joInterface">joInterface</a>();
+</code></pre>
+
+<h2>Returns</h2>
+
+<p>A new object with a property for each element ID found. For example:</p>
+
+<pre><code>&lt;!-- this DOM structure --&gt;
+&lt;jocard id="login"&gt;
+    &lt;jotitle&gt;Login&lt;/jotitle&gt;
+    &lt;jogroup&gt;
+        &lt;jolabel&gt;Username&lt;/jolabel&gt;
+        &lt;input id="username" type="text"&gt;
+        &lt;jolabel&gt;Password&lt;/jolabel&gt;
+        &lt;input id="password" type="password"&gt;
+    &lt;/jogroup&gt;
+    &lt;jobutton id="loginbutton"&gt;Login&lt;/jobutton&gt;
+&lt;/jocard&gt;
+</code></pre>
+
+<p>Parsed with this JavaScript:</p>
+
+<pre><code>// walk the DOM, find nodes, create controls for each
+var x = new <a href="#joInterface">joInterface</a>("login");
+</code></pre>
+
+<p>Produces these properties:</p>
+
+<ul>
+<li><code>x.login</code> is a reference to a <code>new <a href="#joCard">joCard</a></code></li>
+<li><code>x.username</code> is a reference to a <code>new <a href="#joInput">joInput</a></code></li>
+<li><code>x.password</code> is a reference to a <code>new joPassword</code></li>
+<li><code>x.loginbutton</code> is a reference to a <code>new <a href="#joButton">joButton</a></code></li>
+</ul>
+
+<p>This in essence flattens your UI to a single set of properties you can
+use to access the controls that were created from your DOM structure.</p>
+
+<p>In addition, any unrecognized tags which have an <code>id</code> attribute set will
+also be loaded into the properties.</p>
+
+<h2>Parsing complex trees</h2>
+
+<p>Yes, you can make a <a href="#joInterface">joInterface</a> that encapsulates your entire UI with HTML.
+This is not recommended for larger or more complex applications, some
+reasons being:</p>
+
+<ul>
+<li><p>Rendering speed: if you're defining multiple views within a <code>&lt;jostack&gt;</code>
+(or another subclass of <a href="#joContainer">joContainer</a>), your users will see a flicker and
+longer load time while the window renders your static tags and the extra
+views for the stack are removed from view.</p></li>
+<li><p>Double rendering: again with <code>&lt;jostack&gt;</code> tags, you're going to see a separate
+render when the first view is redrawn (has to).</p></li>
+<li><p>Load time: especially if you're doing a mobile app, this could be a biggie.
+You are almost always going to be better off building the app controls with
+JavaScript (especially in conjunction with <a href="#joCache">joCache</a>, which only creates DOM
+nodes for a given view structure on demand).</p></li>
+</ul>
+
+<p>If you really want to use HTML as your primary means of defining your UI, you're
+better off putting your major UI components inside of a <code>&lt;div&gt;</code> (or other tag)
+with <code>display: none</code> set in its CSS property. Like this:</p>
+
+<pre><code>&lt;!-- in your CSS: .hideui { display: none } --&gt;
+&lt;div class="hideui" id="cards"&gt;
+    &lt;jocard id="about"&gt;
+        &lt;jotitle&gt;<a href="#About">About</a> this app&lt;/jotitle&gt;
+        &lt;johtml&gt;
+            This is my app, it is cool.
+        &lt;/johtml&gt;
+        &lt;jobutton&gt;Done&lt;/jobutton&gt;
+    &lt;/jocard&gt;
+    &lt;jocard id="login"&gt;
+        ... etc ...
+    &lt;/jocard&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>Then in your JavaScript:</p>
+
+<pre><code>// pull in all our card views from HTML
+var cards = new <a href="#joInterface">joInterface</a>("cards");
+</code></pre>
+
+<p>Definitely use this class judiciously or you'll end up doing a lot of recatoring
+as your application grows.</p>
+
+<h2>Flattening UI widget references</h2>
+
+<p>This is both good and bad, depending on your coding style and complexity of
+your app. Because all the tags with an ID attribute (regardless of where they
+are in your tag tree) get a single corresponding property reference, things
+could get very messy in larger apps. Again, be smart.</p>
+<h1><a name="joLabel">joLabel</a></h1>
+
+<p>Label view, purely a visual presentation. Usually placed in front
+of input fields and other controls.</p>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joView">joView</a></li>
+</ul>
+<h1><a name="joList">joList</a></h1>
+
+<p>A widget class which expects an array of any data type and renders the
+array as a list. The list control handles DOM interactions with only a
+single touch event to determine which item was selected.</p>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joControl">joControl</a></li>
+</ul>
+
+<h2>Events</h2>
+
+<ul>
+<li><p><code>selectEvent</code></p>
+
+<p>Fired when an item is selected from the list. The data in the call is the
+index of the item selected.</p></li>
+<li><p><code>changeEvent</code></p>
+
+<p>Fired when the data is changed for the list.</p></li>
+</ul>
+
+<h2>Methods</h2>
+
+<ul>
+<li><p><code>formatItem(data, index)</code></p>
+
+<p>When subclassing or augmenting, this is the method responsible for
+rendering a list item's data.</p></li>
+<li><p><code>compareItems(a, b)</code></p>
+
+<p>For sorting purposes, this method is called and should be overriden
+to support custom data types.</p>
+
+<pre><code>// general logic and approriate return values
+if (a &gt; b)
+    return 1;
+else if (a == b)
+    return 0;
+else
+    return -1
+</code></pre></li>
+<li><p><code>setIndex(index)</code></p></li>
+<li><p><code>getIndex()</code></p>
+
+<p><em>DEPRECATED</em> USe <code>setValue()</code> and <code>getValue()</code> instead, see <a href="#joControl">joControl</a>.</p></li>
+<li><p><code>refresh()</code></p></li>
+<li><p><code>setDefault(message)</code></p>
+
+<p>Will present this message (HTML string) when the list is empty.
+Normally the list is empty; this is a convenience for "zero state"
+UI requirements.</p></li>
+<li><p><code>getNodeData(index)</code></p></li>
+<li><p><code>getLength()</code></p></li>
+<li><p><code>next()</code></p></li>
+<li><p><code>prev()</code></p></li>
+<li><p><code>setAutoSort(boolean)</code></p></li>
+</ul>
+<h1><a name="joMenu">joMenu</a></h1>
+
+<p>Simple menu class with optional icons.</p>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joList">joList</a></li>
+</ul>
+
+<h2>Methods</h2>
+
+<ul>
+<li><p><code>setData(menudata)</code></p>
+
+<p>See the example below for the format of the menu data.</p></li>
+</ul>
+
+<h2>Use</h2>
+
+<pre><code>// simple inline menu; you can always setup the menu items (or change
+// them) but using the `setData()` method, same as any <a href="#joView">joView</a>
+var menu = new <a href="#joMenu">joMenu</a>([
+    { title: "<a href="#About">About</a>" },
+    { title: "Frequently Asked Questions", id: "faq" },
+    { title: "Visit our website", id: "visit", icon: "images/web" }
+]);
+
+// simple inline function event handler
+menu.selectEvent.subscribe(function(id) {
+    switch (id) {
+    case "0":
+        // the "<a href="#About">About</a>" line; if no id, the index of the menu item is used
+        stack.push(aboutCard);
+        break;
+    case "faq":
+        stack.push(faqCard);
+        break;
+    case "visit":
+        stack.push(visitCard);
+        break;
+    }
+});
+</code></pre>
+
+<h2>Advanced Use</h2>
+
+<p>This could actually be called "more consistent and simple" use. If your menus
+are static, you could always setup an id-based dispatch delegate which pushes
+the appropriate card based on the menu <code>id</code> selected.</p>
+
+<p>You could use the <code>id</code> in conjunction with view keys you create with <a href="#joCache">joCache</a>.
+The handler would then be something like:</p>
+
+<pre><code>menu.selectEvent.subscribe(function(id) {
+    mystack.push(<a href="#joCache">joCache</a>.get(id));
+});
+</code></pre>
+<h1><a name="joNavbar">joNavbar</a></h1>
+
+<p>Floating navigation control. Usually tied to a <a href="#joStack">joStack</a> or <a href="#joStackScroller">joStackScroller</a>.
+Will handle display of a "back" button (controllable in CSS) and show the
+title string of the current view in a stack (if it exists).</p>
+
+<h2>Use</h2>
+
+<pre><code>// make a stack
+var stack = new <a href="#joStackScroller">joStackScroller</a>();
+
+// new navbar
+var x = new <a href="#joNavbar">joNavbar</a>();
+
+// link to a stack
+x.setStack(stack);
+</code></pre>
+
+<h2>Methods</h2>
+
+<ul>
+<li><p><code>back()</code></p>
+
+<p>Signals the associated stack to move back in its stack (i.e. calls
+the stack's <code>pop()</code> method).</p></li>
+<li><p><code>setStack(<a href="#joStack">joStack</a> or <a href="#joStackScroller">joStackScroller</a>)</code></p>
+
+<p>Links this control to a stack.</p></li>
+</ul>
+
+<h1><a name="joBackButton">joBackButton</a></h1>
+
+<p>A "back" button, which can be made to be shown only in appropriate
+platforms (e.g. iOS, Safari, Chrome) through CSS styling.</p>
+
+<p>See <a href="#joNavbar">joNavbar</a> for more information.</p>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joButton">joButton</a></li>
+</ul>
+<h1><a name="joOption">joOption</a></h1>
+
+<p>This controls lets the user select one of a few options. Basically, this
+is a menu with a horizontal layout (depending on your CSS).</p>
+
+<h2>Use</h2>
+
+<pre><code>// simple set of options
+var x = new <a href="#joOption">joOption</a>([
+    "Red",
+    "Blue",
+    "Green"
+]);
+
+// set the current value
+x.setValue(2);
+
+// or, associate the value with a <a href="#joRecord">joRecord</a> property
+var pref = new <a href="#joRecord">joRecord</a>();
+
+var y = new <a href="#joOption">joOption</a>([
+    "Orange",
+    "Banana",
+    "Grape",
+    "Lime"
+], pref.link("fruit"));
+
+// you can even associate the list with a datasource
+var fruits = new <a href="#joDataSource">joDataSource</a>( ... some query stuff ...);
+var z = new <a href="#joOption">joOption</a>(fruits, pref.link("fruit"));
+</code></pre>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joMenu">joMenu</a></li>
+</ul>
+<h1><a name="joPasswordInput">joPasswordInput</a></h1>
+
+<p>Secret data input field (e.g. displays <code>******</code> instead of <code>secret</code>).</p>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joInput">joInput</a></li>
+</ul>
+
+<blockquote>
+  <p>Note that this requires CSS3 which is known not to be currently supported
+in Opera or Internet Explorer.</p>
+</blockquote>
+<h1><a name="joPopup">joPopup</a></h1>
+
+<p>A simple popup control. Pass in the UI contents as you would
+any other subclass of <a href="#joContainer">joContainer</a> (e.g. <a href="#joCard">joCard</a>).</p>
+
+<h2>Methods</h2>
+
+<ul>
+<li><code>show()</code></li>
+<li><p><code>hide()</code></p>
+
+<p>These do what you'd expect.</p></li>
+</ul>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joContainer">joContainer</a></li>
+</ul>
+
+<h2>Events</h2>
+
+<ul>
+<li><code>showEvent</code></li>
+<li><code>hideEvent</code></li>
+</ul>
+<h1><a name="joScreen">joScreen</a></h1>
+
+<p>Abstraction layer for the device screen. Uses document.body as its
+DOM element and allows other controls to be nested within (usually
+a <a href="#joStack">joStack</a> or other high-level containers or controls).</p>
+
+<h2>Methods</h2>
+
+<ul>
+<li><p><code>alert(title, message, buttons)</code></p>
+
+<p>Simple alert box. The <code>buttons</code> parameter is optional; a simple
+"OK" button is added if nothing is specified.</p></li>
+<li><p><code>showPopup(<a href="#joView">joView</a>)</code></p></li>
+<li><p><code>hidePopup(<a href="#joView">joView</a>)</code></p>
+
+<p>These methods allow you to do a completely custom modal <a href="#joPopup">joPopup</a>.
+Pass in either a <a href="#joView">joView</a>, an array of them, or and <a href="#HTMLElement">HTMLElement</a>
+or a string, the same as you would when you create a <a href="#joCard">joCard</a> or
+other child of <a href="#joContainer">joContainer</a>.</p></li>
+</ul>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joContainer">joContainer</a></li>
+</ul>
+
+<h2>Use</h2>
+
+<pre><code>var x = new <a href="#joScreen">joScreen</a>([
+    new joNav(),
+    new <a href="#joStack">joStack</a>(),
+    new <a href="#joToolbar">joToolbar</a>()
+]);
+
+// show a simple alert dialog
+x.alert("Hello", "This is an alert");
+
+// a more complex alert
+x.alert("Hola", "Do you like this alert?", [
+    { label: "Yes", action: yesFunction, context: this },
+    { label: "No", action: noFunction, context: this }
+]);
+
+// a completely custom popup
+x.showPopup(myView);
+</code></pre>
+
+<h2>Events</h2>
+
+<ul>
+<li><code>resizeEvent</code></li>
+<li><code>menuEvent</code></li>
+<li><code>activateEvent</code></li>
+<li><code>deactivateEvent</code></li>
+<li><code>backEvent</code></li>
+<li><code>forwardEvent</code></li>
+</ul>
+<h1><a name="joScroller">joScroller</a></h1>
+
+<p>A scroller container. Ultimately, mobile webkit implementations
+should properly support scrolling elements that have the CSS
+<code>overflow</code> property set to <code>scroll</code> or <code>auto</code>. Why don't they,
+anyway? Until some sanity is adopted, we need to handle this scrolling
+issue ourselves. <a href="#joScroller">joScroller</a> expects a single child to manage
+scrolling for.</p>
+
+<h2>Use</h2>
+
+<pre><code>// make a scroller and set its child later
+var x = new <a href="#joScroller">joScroller</a>();
+x.setData(myCard);
+
+// or define things inline, not always a good idea
+var y = new <a href="#joScroller">joScroller</a>(new <a href="#joList">joList</a>(mydata));
+
+// you can dump a big hunk of HTML in there, too
+// since <a href="#jo">jo</a> wraps strings in a container element, this works
+var z = new <a href="#joScroller">joScroller</a>('Some giant HTML as a string');
+</code></pre>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joContainer">joContainer</a></li>
+</ul>
+
+<h2>Methods</h2>
+
+<ul>
+<li><code>scrollBy(position)</code></li>
+<li><p><code>scrollTo(position or <a href="#joView">joView</a> or <a href="#HTMLElement">HTMLElement</a>)</code></p>
+
+<p>Scrolls to the position or the view or element. If you
+specify an element or view, make sure that element is a
+child node, or you'll get interesting results.</p></li>
+<li><p><code>setScroll(horizontal, vertical)</code></p>
+
+<p>Tells this scroller to allow scrolling the vertical, horizontal, both or none.</p>
+
+<p>// free scroller
+z.setScroll(true, true);</p>
+
+<p>// horizontal
+z.setScroll(true, false);</p>
+
+<p>// no scrolling
+z.setScroll(false, false);</p></li>
+</ul>
+<h1><a name="joSelect">joSelect</a></h1>
+
+<p>Multi-select control which presents a set of options for the user
+to choose from.</p>
+
+<h2>Methods</h2>
+
+<ul>
+<li><p><code>setValue(value)</code></p>
+
+<p>Set the current value, based on the index for the option list.</p></li>
+<li><p><code>getValue()</code></p>
+
+<p>Returns the index of the current selected item.</p></li>
+</ul>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joExpando">joExpando</a></li>
+</ul>
+
+<h2>Consumes</h2>
+
+<ul>
+<li><a href="#joSelectTitle">joSelectTitle</a></li>
+<li><a href="#joSelectList">joSelectList</a></li>
+</ul>
+
+<h2>Properties</h2>
+
+<ul>
+<li><p><code>field</code></p>
+
+<p>Reference to the value field for this control.</p></li>
+<li><p><code>list</code></p>
+
+<p>Reference to the <a href="#joSelectList">joSelectList</a> for this control.</p></li>
+</ul>
+
+<h2>Use</h2>
+
+<pre><code>// pass in an array of options
+var x = new <a href="#joSelect">joSelect</a>([ "Apples", "Oranges", "Grapes" ]);
+
+// pass in a current value
+var y = new <a href="#joSelect">joSelect</a>([ "Apples", "Oranges", "Grapes" ], 2);
+
+// respond to the change event
+y.changeEvent = function(value, list) {
+    console.log("Fruit: " + list.getNodeValue(value));
+});
+</code></pre>
+
+<h1><a name="joSelectTitle">joSelectTitle</a></h1>
+
+<p><a href="#joSelect">joSelect</a> flavor of <a href="#joExpandoTitle">joExpandoTitle</a>.</p>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joExpandoTitle">joExpandoTitle</a></li>
+</ul>
+<h1><a name="joSelectList">joSelectList</a></h1>
+
+<p>A selection list of options used by <a href="#joSelect">joSelect</a>.</p>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joList">joList</a></li>
+</ul>
+<h1><a name="joShim">joShim</a></h1>
+
+<p>A simple screen dimmer. Used mostly for popups and other
+modal use cases.</p>
+
+<h2>Methods</h2>
+
+<ul>
+<li><code>show()</code></li>
+<li><p><code>hide()</code></p>
+
+<p>These do what you'd expect.</p></li>
+</ul>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joView">joView</a></li>
+</ul>
+
+<h2>Events</h2>
+
+<ul>
+<li><code>showEvent</code></li>
+<li><code>hideEvent</code></li>
+</ul>
+<h1><a name="joSlider">joSlider</a></h1>
+
+<p>Slider control, horizontal presentation (may be extended later to allow for
+vertical and x/y).</p>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joControl">joControl</a></li>
+</ul>
+
+<h2>Methods</h2>
+
+<ul>
+<li><code>setRange(min, max, snap)</code></li>
+</ul>
+
+<p>Where <code>min</code>/<code>max</code> is a number, either integer or decimal, doesn't matter. If <code>max</code>
+and <code>min</code> are integers, then <code>snap</code> defaults to <code>1</code>, otherwise it is set to <code>0</code> (no
+snap, which allows free movement).</p>
+
+<p>The optional <code>snap</code> value adjusts the granularuty of choices. Set to <code>0</code> for
+free-floating, or any other positive number. Any <code>snap</code> that is less than <code>0</code>
+or greater than the total range of possible values will be ignored.</p>
+
+<h2>Use</h2>
+
+<pre><code>// basic slider, will allow any decimal value
+// between 0 and 1, defaults to 0
+var x = new <a href="#joSlider">joSlider</a>();
+
+// custom range and default value set
+var y = new <a href="#joSlider">joSlider</a>(0).setRange(-10, 10);
+
+// percent slider, with 5% snap
+var z = new <a href="#joSlider">joSlider</a>(0).setRange(0, 100, 5);
+
+// responding to change events
+var r = new <a href="#joSlider">joSlider</a>().changEvent.subscribe(function(value) {
+    console.log(value);
+}, this);
+</code></pre>
+<h1><a name="joSound">joSound</a></h1>
+
+<p>Play preloaded sound effects using the HTML5 <code>Audio</code> object. This module could
+be wildly different for various platforms. Be warned.</p>
+
+<h2>Methods</h2>
+
+<ul>
+<li><code>play()</code></li>
+<li><code>pause()</code></li>
+<li><code>rewind()</code></li>
+<li><p><code>stop()</code></p>
+
+<p>Basic sound controls.</p></li>
+<li><p><code>setLoop(n)</code></p>
+
+<p>Tell the <a href="#joSound">joSound</a> to automatically loop <code>n</code> times. Set to <code>-1</code> to loop
+continuously until <code>pause()</code>.</p></li>
+<li><p><code>setVolume(level)</code></p>
+
+<p>Level is a decimal value from <code>0</code> to <code>1</code>. So, half volume would be <code>0.5</code>.</p></li>
+</ul>
+
+<h2>Events</h2>
+
+<ul>
+<li><code>endedEvent</code></li>
+<li><code>errorEvent</code></li>
+</ul>
+<h1><a name="joStack">joStack</a></h1>
+
+<pre><code>A UI container which keeps an array of views which can be pushed and popped.
+</code></pre>
+
+<p>The DOM elements for a given view are removed from the DOM tree when popped
+so we keep the render tree clean.</p>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joView">joView</a></li>
+</ul>
+
+<h2>Methods</h2>
+
+<ul>
+<li><p><code>push(<a href="#joView">joView</a> | <a href="#HTMLElement">HTMLElement</a>)</code>  </p>
+
+<p>Pushes a new <a href="#joView">joView</a> (or HTMLELement) onto the stack.</p></li>
+<li><p><code>pop()</code></p>
+
+<p>Pulls the current view off the stack and goes back to the previous view.</p></li>
+<li><p><code>home()</code></p>
+
+<p>Return to the first view, pop everything else off the stack.</p></li>
+<li><p><code>show()</code></p></li>
+<li><p><code>hide()</code></p>
+
+<p>Controls the visibility of the entire stack.</p></li>
+<li><p><code>forward()</code></p></li>
+<li><p><code>back()</code></p>
+
+<p>Much like your browser forward and back buttons, only for the stack.</p></li>
+<li><p><code>setLocked(boolean)</code></p>
+
+<p>The <code>setLocked()</code> method tells the stack to keep the first view pushed onto the
+stack set; that is, <code>pop()</code> won't remove it. Most apps will probably use this,
+so setting it as a default for now.</p></li>
+</ul>
+
+<h2>Events</h2>
+
+<ul>
+<li><code>showEvent</code></li>
+<li><code>hideEvent</code></li>
+<li><code>homeEvent</code></li>
+<li><code>pushEvent</code></li>
+<li><code>popEvent</code></li>
+</ul>
+
+<h2>Notes</h2>
+
+<p>Should set classNames to new/old views to allow for CSS transitions to be set
+(swiping in/out, cross fading, etc). Currently, it does none of this.</p>
+
+<p>Also, some weirdness with the new <code>forward()</code> and <code>back()</code> methods in conjuction
+with <code>push()</code> -- need to work on that, or just have your app rigged to <code>pop()</code>
+on back to keep the nesting simple.</p>
+<h1><a name="joStackScroller">joStackScroller</a></h1>
+
+<p>What happens when you mix <a href="#joStack">joStack</a> and <a href="#joScroller">joScroller</a>? You get this
+class. Use exactly as you would <a href="#joStack">joStack</a>, only it automatically
+puts a scroller in the stack as needed. At some point, this
+might get folded into <a href="#joStack">joStack</a>, but for now it's a special class.</p>
+
+<p>It also handles the <code>scrollTo()</code> and <code>scrollBy()</code> methods from
+<a href="#joScroller">joScroller</a>.</p>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joStack">joStack</a></li>
+<li><a href="#joScroller">joScroller</a></li>
+</ul>
+<h1><a name="joTabBar">joTabBar</a></h1>
+
+<p>Tab bar widget.</p>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joList">joList</a></li>
+</ul>
+
+<h2>Model</h2>
+
+<p>Data is expected to be an array of <code>{ type: "", label: ""}</code> objects,
+in the display order for the bar.</p>
+<h1><a name="joTable">joTable</a></h1>
+
+<p>Table control, purely visual representation of tabular data (usually
+an array of arrays).</p>
+
+<h2>Use</h2>
+
+<pre><code>// simple table with inline data
+var x = new <a href="#joTable">joTable</a>([
+    ["Nickname", "Phone", "Email"],
+    ["Bob", "555-1234", "bob@bobco.not"],
+    ["Jo", "555-3456", "<a href="#jo">jo</a>@joco.not"],
+    ["Jane", "555-6789", "jane@janeco.not"]
+]);
+
+// we can respond to touch events in the table
+x.selectEvent.subscribe(function(index, table) {
+    // get the current row and column
+    <a href="#joLog">joLog</a>("Table cell clicked:", table.getRow(), table.getCol());
+
+    // you can also get at the cell HTML element as well
+    <a href="#joDOM">joDOM</a>.setStyle(table.getNode(), { fontWeight: "bold" });
+});
+</code></pre>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joList">joList</a></li>
+</ul>
+
+<h2>Methods</h2>
+
+<ul>
+<li><p><code>setCell(row, column)</code></p>
+
+<p>Sets the active cell for the table, also makes it editiable and sets focus.</p></li>
+<li><p><code>getRow()</code>, <code>getCol()</code></p>
+
+<p>Return the current row or column</p></li>
+</ul>
+<h1><a name="joTextarea">joTextarea</a></h1>
+
+<p>Multi-line text input control. When you instantiate or use <code>setData()</code>, you can
+either pass in an initial value or a reference to a <a href="#joDataSource">joDataSource</a> object which it,
+like other <a href="#joControl">joControl</a> instances, will bind to.</p>
+
+<p>Basically, this is just a multi-line version of <a href="#joInput">joInput</a>.</p>
+
+<h2>Use</h2>
+
+<pre><code>// simple multi-line field
+var sample = "This is some sample text to edit.";
+var x = new <a href="#joTextarea">joTextarea</a>(sample);
+
+// setting the style inline using chaining
+var f = new <a href="#joTextarea">joTextarea</a>(sample).setStyle({
+    minHeight: "100px",
+    maxHeight: "300px"
+});
+
+// adding a simple change event handler using chaining
+var h = new <a href="#joTextarea">joTextarea</a>(sample).changeEvent.subscribe(function(data) {
+    <a href="#joLog">joLog</a>("text area changed:", data);
+});
+
+// attach the value to a preference
+var y = new <a href="#joTextarea">joTextarea</a>(<a href="#joPreference">joPreference</a>.bind("username"));
+
+// attach input control to a custom <a href="#joDataSource">joDataSource</a>
+var username = new <a href="#joDataSource">joDataSource</a>("bob");
+var z = new <a href="#joTextarea">joTextarea</a>(username);
+</code></pre>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joInput">joInput</a></li>
+</ul>
+<h1><a name="joTitle">joTitle</a></h1>
+
+<p>Title view, purely a visual presentation.</p>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joContainer">joContainer</a></li>
+</ul>
+<h1><a name="joToggle">joToggle</a></h1>
+
+<p>Boolean widget (on or off).</p>
+
+<h2>Methods</h2>
+
+<ul>
+<li><code>setLabels(Array)</code></li>
+</ul>
+
+<p>You can change the labels for this control, which default to "Off" and "On".</p>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joControl">joControl</a></li>
+</ul>
+
+<h2>Use</h2>
+
+<pre><code>// simple
+var x = new <a href="#joToggle">joToggle</a>();
+
+// with value
+var y = new <a href="#joToggle">joToggle</a>(true);
+
+// with custom labels
+var z = new <a href="#joToggle">joToggle</a>().setLabels(["No", "Yes"]);
+</code></pre>
+
+<p>See <a href="#Data Driven Controls">Data Driven Controls</a> for more examples.</p>
+<h1><a name="joToolbar">joToolbar</a></h1>
+
+<p>Locks UI controls to the bottom of whatever you put this container into.</p>
+
+<h2>Extends</h2>
+
+<ul>
+<li><a href="#joContainer">joContainer</a></li>
+</ul>
+<h1><a name="joView">joView</a></h1>
+
+<p>Base class for all other views, containers, controls and other visual doo-dads.</p>
+
+<h2>Use</h2>
+
+<pre><code>var x = new <a href="#joView">joView</a>(data);
+</code></pre>
+
+<p>Where <code>data</code> is either a text or HTML string, an <a href="#HTMLElement">HTMLElement</a>, or any <a href="#joView">joView</a> object
+or subclass.</p>
+
+<h2>Methods</h2>
+
+<ul>
+<li><code>setData(data)</code></li>
+<li><code>getData()</code></li>
+<li><code>createContainer(type, classname)</code></li>
+<li><code>setContainer(<a href="#HTMLElement">HTMLElement</a>)</code></li>
+<li><code>getContainer()</code></li>
+<li><code>clear()</code></li>
+<li><p><code>refresh()</code></p></li>
+<li><p><code>attach(<a href="#HTMLElement">HTMLElement</a> or <a href="#joView">joView</a>)</code></p></li>
+<li><p><code>detach(<a href="#HTMLElement">HTMLElement</a> or <a href="#joView">joView</a>)</code></p>
+
+<p>Convenience methods which allow you to append a view or DOM node to the
+current view (or detach it).</p></li>
+</ul>
+<h1><a name="License">License</a></h1>
+
+<p>Copyright 2010 Dave Balmer, Jr. All rights reserved.</p>
+
+<p>Redistribution and use in source and binary forms, with or without modification, are
+permitted provided that the following conditions are met:</p>
+
+<ol>
+<li><p>Redistributions of source code must retain the above copyright notice, this list of
+  conditions and the following disclaimer.</p></li>
+<li><p>Redistributions in binary form must reproduce the above copyright notice, this list
+  of conditions and the following disclaimer in the documentation and/or other
+  materials provided with the distribution.</p></li>
+</ol>
+
+<p>THIS SOFTWARE IS PROVIDED BY DAVE BALMER, JR. "AS IS" AND ANY EXPRESS OR IMPLIED
+WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL DAVE BALMER, JR. OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+
+<p>The views and conclusions contained in the software and documentation are those of the
+authors and should not be interpreted as representing official policies, either expressed
+or implied, of Dave Balmer, Jr.</p>
+
+
+</body>
+</html>
+
+
+<hr>
+
+<h1>Index</h1>
+<div id="index">
+
+<h2>A</h2>
+
+<ul>
+<li><a href="#About">About</a></li>
+</ul>
+
+<h2>B</h2>
+
+<ul>
+<li><a href="#Building">Building</a></li>
+</ul>
+
+<h2>C</h2>
+
+<ul>
+<li><a href="#Class Hierarchy">Class Hierarchy</a></li>
+<li><a href="#Class Patterns">Class Patterns</a></li>
+<li><a href="#CSS Skinning">CSS Skinning</a></li>
+</ul>
+
+<h2>D</h2>
+
+<ul>
+<li><a href="#Data Driven Controls">Data Driven Controls</a></li>
+<li><a href="#Directory Map">Directory Map</a></li>
+<li><a href="#Documentation">Documentation</a></li>
+</ul>
+
+<h2>F</h2>
+
+<ul>
+<li><a href="#Function">Function</a></li>
+</ul>
+
+<h2>H</h2>
+
+<ul>
+<li><a href="#HTML Tags">HTML Tags</a></li>
+<li><a href="#HTMLElement">HTMLElement</a></li>
+</ul>
+
+<h2>J</h2>
+
+<ul>
+<li><a href="#jo">jo</a></li>
+<li><a href="#joBackButton">joBackButton</a></li>
+<li><a href="#joBusy">joBusy</a></li>
+<li><a href="#joButton">joButton</a></li>
+<li><a href="#joCache">joCache</a></li>
+<li><a href="#joCaption">joCaption</a></li>
+<li><a href="#joCard">joCard</a></li>
+<li><a href="#joChain">joChain</a></li>
+<li><a href="#joClipboard">joClipboard</a></li>
+<li><a href="#joCollect">joCollect</a></li>
+<li><a href="#joContainer">joContainer</a></li>
+<li><a href="#joControl">joControl</a></li>
+<li><a href="#joDatabase">joDatabase</a></li>
+<li><a href="#joDataSource">joDataSource</a></li>
+<li><a href="#joDefer">joDefer</a></li>
+<li><a href="#joDialog">joDialog</a></li>
+<li><a href="#joDivider">joDivider</a></li>
+<li><a href="#joDoc">joDoc</a></li>
+<li><a href="#joDOM">joDOM</a></li>
+<li><a href="#joEvent">joEvent</a></li>
+<li><a href="#joExpando">joExpando</a></li>
+<li><a href="#joExpandoContent">joExpandoContent</a></li>
+<li><a href="#joExpandoTitle">joExpandoTitle</a></li>
+<li><a href="#joFile">joFile</a></li>
+<li><a href="#joFileSource">joFileSource</a></li>
+<li><a href="#joFlexcol">joFlexcol</a></li>
+<li><a href="#joFlexrow">joFlexrow</a></li>
+<li><a href="#joFocus">joFocus</a></li>
+<li><a href="#joFooter">joFooter</a></li>
+<li><a href="#joGesture">joGesture</a></li>
+<li><a href="#joGroup">joGroup</a></li>
+<li><a href="#joHTML">joHTML</a></li>
+<li><a href="#joInput">joInput</a></li>
+<li><a href="#joInterface">joInterface</a></li>
+<li><a href="#joLabel">joLabel</a></li>
+<li><a href="#joList">joList</a></li>
+<li><a href="#joLog">joLog</a></li>
+<li><a href="#joMenu">joMenu</a></li>
+<li><a href="#joNavbar">joNavbar</a></li>
+<li><a href="#joOption">joOption</a></li>
+<li><a href="#joPasswordInput">joPasswordInput</a></li>
+<li><a href="#joPopup">joPopup</a></li>
+<li><a href="#joPreference">joPreference</a></li>
+<li><a href="#joProperty">joProperty</a></li>
+<li><a href="#joRecord">joRecord</a></li>
+<li><a href="#joScreen">joScreen</a></li>
+<li><a href="#joScript">joScript</a></li>
+<li><a href="#joScroller">joScroller</a></li>
+<li><a href="#joSelect">joSelect</a></li>
+<li><a href="#joSelectList">joSelectList</a></li>
+<li><a href="#joSelectTitle">joSelectTitle</a></li>
+<li><a href="#joShim">joShim</a></li>
+<li><a href="#joSlider">joSlider</a></li>
+<li><a href="#joSound">joSound</a></li>
+<li><a href="#joSQLDataSource">joSQLDataSource</a></li>
+<li><a href="#joStack">joStack</a></li>
+<li><a href="#joStackScroller">joStackScroller</a></li>
+<li><a href="#joSubject">joSubject</a></li>
+<li><a href="#joTabBar">joTabBar</a></li>
+<li><a href="#joTable">joTable</a></li>
+<li><a href="#joTextarea">joTextarea</a></li>
+<li><a href="#joTime">joTime</a></li>
+<li><a href="#joTitle">joTitle</a></li>
+<li><a href="#joToggle">joToggle</a></li>
+<li><a href="#joToolbar">joToolbar</a></li>
+<li><a href="#joView">joView</a></li>
+<li><a href="#joYield">joYield</a></li>
+<li><a href="#joYQL">joYQL</a></li>
+</ul>
+
+<h2>L</h2>
+
+<ul>
+<li><a href="#LawnChair">LawnChair</a></li>
+<li><a href="#License">License</a></li>
+</ul>
+
+<h2>O</h2>
+
+<ul>
+<li><a href="#Observer Pattern">Observer Pattern</a></li>
+</ul>
+
+<h2>P</h2>
+
+<ul>
+<li><a href="#Philosophy">Philosophy</a></li>
+<li><a href="#PhoneGap">PhoneGap</a></li>
+</ul>
+
+<h2>Q</h2>
+
+<ul>
+<li><a href="#Quick Start">Quick Start</a></li>
+</ul>
+
+<h2>R</h2>
+
+<ul>
+<li><a href="#Release Notes">Release Notes</a></li>
+</ul>
+
+<h2>S</h2>
+
+<ul>
+<li><a href="#Summary">Summary</a></li>
+</ul></div>
+

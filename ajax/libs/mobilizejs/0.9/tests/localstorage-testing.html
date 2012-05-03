@@ -1,0 +1,73 @@
+<html>
+<head>
+<!--
+<script type="text/javascript" src="http://localhost:8080/js/mobilize-1.0.0.js"></script>
+
+<script id="mobilizejs" type="text/javascript" src="http://localhost:8080/releases/trunk/js/mobilize.wordpress.min.js"></script>
+<script type="text/javascript" src="http://cdn.mobilizejs.com/releases/trunk/js/mobilize.wordpress.min.js"></script>
+
+-->
+
+
+
+<script>
+
+// http://dev.w3.org/html5/webstorage/#disk-space
+// TODO: Expiration to localstorage. Clear mobilizejs from localstorage and get the data again.
+// TODO: Must be able to force the update conveniently for dev purposes.
+// TODO: Site-wide expiration set by server. If some bug is fixed, all clients will update regardless of their local expiration.
+var debug_area = document.createElement("div")
+
+var source = localStorage.getItem('mobilizejs');
+if(!source)
+{
+    document.write("Loading mobilize to localstorage<br>");
+
+    var xmlhttp;
+    xmlhttp=new XMLHttpRequest();
+    xmlhttp.open("GET","http://cdn.mobilizejs.com/releases/trunk/js/mobilize.wordpress.debug.js",false);
+    xmlhttp.send();
+    source = xmlhttp.responseText;
+    localStorage.setItem('mobilizejs', source);
+}
+else{
+    document.write("Using localstorage<br>");
+}
+eval(source);
+
+document.write("Testing localstorage limit<br>");
+var bytes = "";
+var size = 1024 * 10;
+for(var i = 0; i < size; i++){
+   bytes += "d";
+}
+
+var j = 0;
+
+window.onload = function(){    
+     
+    document.getElementsByTagName("body")[0].appendChild(debug_area)
+    
+	var interval = setInterval(function(){
+	    try{
+	        debug_area.innerText = "" + j * size + " bytes written";
+	        localStorage.setItem("test"+j, bytes);
+	        j++;
+	    }
+	    catch(e)
+	    {
+	       clearInterval(interval)
+	       debug_area.innerText += "\n" + e
+	    }
+	});
+	
+}
+
+</script>
+
+</head>
+
+<body>
+<div id="t"></div>
+</body>
+</html>
