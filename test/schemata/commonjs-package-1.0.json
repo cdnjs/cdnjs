@@ -1,0 +1,104 @@
+{
+    "type": "object",
+    "name": "CommonJS Package Descriptor File 1.0",
+    "description": "Note that this is incomplete. See http://wiki.commonjs.org/wiki/Packages/1.0 for the complete spec.",
+    "summaryProperties": ["name", "version"],
+    "properties": {
+        "name": {
+            "type": "string",
+            "required": true, 
+            "description": "The name of the package. This must be a unique, lowercase alpha-numeric name without spaces. It may include \".\" or \"_\" or \"-\" characters. It is otherwise opaque."
+            },
+        "description": {
+            "type": "string",
+            "required": true,
+            "format": "multiline", 
+            "description": "A brief description of the package. By convention, the first sentence (up to the first \". \") should be usable as a package title in listings."
+            },
+        "version": {
+            "type": "string",
+            "required": true,
+            "format": "semver", 
+            "description": "Version string conforming to the Semantic Versioning requirements (http://semver.org/)."
+            },
+        "keywords": {
+            "type": "array",
+            "required": true,
+            "items": { "type": "string" }, 
+            "description": "An Array of string keywords to assist users searching for the package in catalogs."
+            },
+        "maintainers": {
+            "type": "array",
+            "required": true,
+            "items": {
+                "type": "object",
+                "name": "person",
+                "properties": {
+                    "name": { "type": "string", "required": true },
+                    "email": { "type": "string" },
+                    "web": { "type": "string" }
+                    } 
+                },
+            "description": "Array of maintainers of the package. Each maintainer is a hash which must have a \"name\" property and may optionally provide \"email\" and \"web\" properties."
+            },
+        "contributors": {
+            "type": "array",
+            "required": true,
+            "items": [{ "type": "string", "name": "person-name" }, {
+                "type": "object",
+                "name": "person",
+                "properties": {
+                    "name": { "type": "string", "required": true },
+                    "email": { "type": "string" },
+                    "web": { "type": "string" }
+                    }
+                }],
+            "description": "An Array of hashes each containing the details of a contributor. Format is the same as for author. By convention, the first contributor is the original author of the package."
+            },
+        "bugs": {
+            "type": "object",
+            "additionalProperties": "string",
+            "required": true, 
+            "description": "URL for submitting bugs. Can be mailto or http."
+            },
+        "licenses": {
+            "type": "array",
+            "required": true,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "type": { "type": "string", "required": true },
+                    "url": { "type": "string" }
+                    }
+                }, 
+            "description": "Array of licenses under which the package is provided."
+            },
+        "repositories": {
+            "required": true,
+            "description": "Array of repositories where the package can be located.",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "summaryProperties": ["type", "url"],
+                "properties": {
+                    "type": { "type": "string", "required": true },
+                    "url": { "type": "string", "required": true },
+                    "path": { "type": "string", "description": "Specified to locate the package in the repository if it does not reside at the root." }
+                    }
+                }
+            },
+        "dependencies": {
+            "required": true,
+            "description": "Prerequisite packages on which this package depends in order to install and run.",
+            "type": "object",
+            "additionalProperties": [
+                "string",
+                {
+                    "type": "object",
+                    "name": "depgroups",
+                    "additionalProperties": ["string", { "type": "array", "name": "verlist", "items": "string" }]
+                    }
+                ]
+            }
+    }
+}

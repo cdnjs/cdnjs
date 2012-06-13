@@ -1,0 +1,81 @@
+{
+    "type": "object",
+    "name": "jQuery Plugins Site package.json",
+    "description": "Package manifest file for jQuery plugins. https://github.com/jquery/plugins.jquery.com/blob/master/docs/package.md",
+    "primaryProperty": "name",
+    "properties": {
+        "name": {
+            "type": "string",
+            "required": true,
+            "description": "The most important things in your package.json are the name and version fields. The name and version together form an identifier that is assumed to be completely unique."
+            },
+        "version": {
+            "type": "string",
+            "required": true,
+            "description": "Version number must be a valid semantic version number per semver.org."
+            },
+        "title": {
+            "type": "string",
+            "required": true,
+            "description": "A nice complete and pretty title of your plugin. This will be used for the page title and top-level heading on your plugin's page. Include jQuery (if you want) and spaces and mixed case, unlike name."
+            },
+        "author": {
+            "required": true,
+            "type": "object",
+            "name": "person",
+            "properties": {
+                "name": { "type": "string", "required": true },
+                "email": { "type": "string" },
+                "url": { "type": "string" }
+                } 
+            },
+        "licenses": {
+            "type": "array",
+            "required": true,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "type": { "type": "string", "required": true },
+                    "url": { "type": "string" }
+                    }
+                }
+            },
+        "dependencies": {
+            "type": "object",
+            "required": true,
+            "description": "Use package name as the property name and its version as the value. You must list at least one dependency, jquery (note that it's lower-case).",
+            "additionalProperties": "string"
+            },
+        "description": {
+            "type": "string",
+            "format": "multiline"
+            },
+        "keywords": {
+            "type": "array",
+            "items": "string",
+            "description": "This helps people discover your plugin as it's listed on the jQuery Plugins Site."
+            },
+        "homepage": {
+            "type": "string",
+            "format": "url",
+            "description": "The URL to the plugin homepage."
+            },
+        "contributors": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "name": "person",
+                "properties": {
+                    "name": { "type": "string", "required": true },
+                    "email": { "type": "string" },
+                    "url": { "type": "string" }
+                    } 
+                }
+            },
+        "files": {
+            "description": "List of files that make up your plugin. This should be a file path relative to the root of your plugin folder.",
+            "type": "array",
+            "items": { "type": "string", "format": "url.path" }
+            }
+        }
+    }
