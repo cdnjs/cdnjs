@@ -20,4 +20,9 @@ Want your script included? Easy.
   * e.g. https://github.com/cdnjs/cdnjs/pull/229
   * If you set up Travis CI, include your badge for super-readability!
 
+## Running the validator
+1. Install all the needed dependencies locally (you will need `npm` and `node`): `npm install`
+2. Run the test suite: `npm test`
+
 <img alt="Clicky" width="1" height="1" src="//in.getclicky.com/66606907ns.gif" />
+

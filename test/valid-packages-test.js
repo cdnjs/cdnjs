@@ -93,6 +93,14 @@ packages.map(function (pkg) {
                 .join("\n"));
         }
     };
+    package_vows[pname + ": filename from package.json exists"] = function (pkg) {
+        var json = parse(pkg, true, true);
+        var filePath = "./ajax/libs/" + json.name + "/"+ json.version
+            + "/" + json.filename;
+        assert.ok(path.existsSync(filePath),
+                  filePath +" does not exist but is referenced in package.json!");
+    };
+
     context[pname] = package_vows;
     suite.addBatch(context);
 });
