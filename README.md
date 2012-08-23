@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/cdnjs/cdnjs.png)](http://travis-ci.org/cdnjs/cdnjs)
 <a href="http://travis-ci.org/cdnjs/cdnjs"><img src="https://secure.travis-ci.org/cdnjs/cdnjs.png" alt="Build Status" style="max-width:100%;"></a>
 
 
