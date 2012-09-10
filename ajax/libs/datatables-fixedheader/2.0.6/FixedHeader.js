@@ -1,6 +1,6 @@
 /*
  * File:        FixedHeader.js
- * Version:     2.0.7.dev
+ * Version:     2.0.6
  * Description: "Fix" a header at the top of the table, so it scrolls with the table
  * Author:      Allan Jardine (www.sprymedia.co.uk)
  * Created:     Wed 16 Sep 2009 19:46:30 BST
@@ -70,7 +70,6 @@ var FixedHeader = function ( mTable, oInit ) {
 		},
 		"nTable": null,
 		"bUseAbsPos": false,
-		"bCloneOnDraw": true,
 		"bFooter": false
 	};
 	
@@ -160,7 +159,7 @@ FixedHeader.prototype = {
 			}
 			
 			s.nTable = oDtSettings.nTable;
-			oDtSettings.aoDrawCallback.unshift( {
+			oDtSettings.aoDrawCallback.push( {
 				"fn": function () {
 					FixedHeader.fnMeasure();
 					that._fnUpdateClones.call(that);
@@ -258,9 +257,6 @@ FixedHeader.prototype = {
 
 			if ( typeof oInit.offsetTop != 'undefined' ) {
 				s.oOffset.top = oInit.offsetTop;
-			}
-			if ( typeof oInit.cloneOnDraw != 'undefined' ) {
-				s.bCloneOnDraw = oInit.cloneOnDraw;
 			}
 		}
 		
@@ -920,7 +916,7 @@ FixedHeader.fnMeasure = function ()
 };
 
 
-FixedHeader.VERSION = "2.0.7.dev";
+FixedHeader.VERSION = "2.0.6";
 FixedHeader.prototype.VERSION = FixedHeader.VERSION;
 
 	
