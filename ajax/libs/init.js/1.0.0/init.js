@@ -1,4 +1,4 @@
-/* Init.js by @jzn99 */
+/* init.js by @jzn99 */
 var Init = function(urls, styles) {
 	if (!urls === null||!urls === false) {
 		for (var i = 0; i < urls.length; i++) {
@@ -28,7 +28,7 @@ Init.prototype = {
 		var script, orig = document.getElementsByTagName('script'), use;
 		for (var i = 0; i < orig.length; i++) {
 			var src = orig[i].getAttribute('src');
-			var reg = new RegExp("(Init\.js)$");
+			var reg = new RegExp("(init\.js)$");
 			if (reg.test(src)) {
 				use = orig[i];
 				orig[i].setAttribute('class', 'injctd pre');
