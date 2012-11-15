@@ -1,4 +1,4 @@
-// Copyright (c) 2005-2009 Thomas Fuchs (http://script.aculo.us, http://mir.aculo.us)
+// Copyright (c) 2005-2010 Thomas Fuchs (http://script.aculo.us, http://mir.aculo.us)
 //
 // script.aculo.us is freely distributable under the terms of an MIT-style license.
 // For details, see the script.aculo.us web site: http://script.aculo.us/
@@ -372,7 +372,7 @@ var Draggable = Class.create({
       if (this.options.scroll == window) {
         with(this._getWindowScroll(this.options.scroll)) { p = [ left, top, left+width, top+height ]; }
       } else {
-        p = Position.page(this.options.scroll);
+        p = Position.page(this.options.scroll).toArray();
         p[0] += this.options.scroll.scrollLeft + Position.deltaX;
         p[1] += this.options.scroll.scrollTop + Position.deltaY;
         p.push(p[0]+this.options.scroll.offsetWidth);

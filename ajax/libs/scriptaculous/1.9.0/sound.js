@@ -1,4 +1,4 @@
-// Copyright (c) 2005-2009 Thomas Fuchs (http://script.aculo.us, http://mir.aculo.us)
+// Copyright (c) 2005-2010 Thomas Fuchs (http://script.aculo.us, http://mir.aculo.us)
 //
 // Based on code created by Jules Gravinese (http://www.webveteran.com/)
 //
@@ -54,4 +54,4 @@ if(Prototype.Browser.Gecko && navigator.userAgent.indexOf("Win") > 0){
     Sound.template = new Template('<embed type="audio/x-pn-realaudio-plugin" style="height:0" id="sound_#{track}_#{id}" src="#{url}" loop="false" autostart="true" hidden="true"/>');
   else
     Sound.play = function(){};
-}
+} 

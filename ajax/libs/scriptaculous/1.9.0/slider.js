@@ -1,4 +1,4 @@
-// Copyright (c) 2005-2009 Marty Haught, Thomas Fuchs
+// Copyright (c) 2005-2010 Marty Haught, Thomas Fuchs
 //
 // script.aculo.us is freely distributable under the terms of an MIT-style license.
 // For details, see the script.aculo.us web site: http://script.aculo.us/

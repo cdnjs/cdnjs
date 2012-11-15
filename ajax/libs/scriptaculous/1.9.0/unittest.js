@@ -1,6 +1,6 @@
-// Copyright (c) 2005-2009 Thomas Fuchs (http://script.aculo.us, http://mir.aculo.us)
-//           (c) 2005-2009 Jon Tirsen (http://www.tirsen.com)
-//           (c) 2005-2009 Michael Schuerig (http://www.schuerig.de/michael/)
+// Copyright (c) 2005-2010 Thomas Fuchs (http://script.aculo.us, http://mir.aculo.us)
+//           (c) 2005-2010 Jon Tirsen (http://www.tirsen.com)
+//           (c) 2005-2010 Michael Schuerig (http://www.schuerig.de/michael/)
 //
 // script.aculo.us is freely distributable under the terms of an MIT-style license.
 // For details, see the script.aculo.us web site: http://script.aculo.us/
@@ -427,14 +427,6 @@ Test.Unit.Assertions.prototype = {
   },
   assertElementMatches: function(element, expression) {
     this.assertElementsMatch([element], expression);
-  },
-  benchmark: function(operation, iterations) {
-    var startAt = new Date();
-    (iterations || 1).times(operation);
-    var timeTaken = ((new Date())-startAt);
-    this.info((arguments[2] || 'Operation') + ' finished ' + 
-       iterations + ' iterations in ' + (timeTaken/1000)+'s' );
-    return timeTaken;
   },
   _isVisible: function(element) {
     element = $(element);
