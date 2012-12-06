@@ -6,10 +6,10 @@
 */
 
 if ( typeof tb_pathToImage != 'string' ) {
-	var tb_pathToImage = "../img/loadingAnimation.gif";
+	var tb_pathToImage = "img/loadingAnimation.gif";
 }
 if ( typeof tb_closeImage != 'string' ) {
-	var tb_pathToImage = "../img/tb-close.png";
+	var tb_pathToImage = "img/tb-close.png";
 }
 
 /*!!!!!!!!!!!!!!!!! edit below this line at your own risk !!!!!!!!!!!!!!!!!!!!!!!*/
