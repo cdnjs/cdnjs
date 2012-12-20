@@ -1,5 +1,4 @@
 /*
- * VERSION 2.1.2
  * Original version: 1.0 © 2010 Andrew Valums ( andrew(at)valums.com )
  * Current Maintainer (2.0+): 2012, Ray Nicholus ( fineuploader(at)garstasio.com )
  *
@@ -11,7 +10,6 @@
 }
 .qq-upload-button {
     display: block;
-    /*or inline-block*/
     width: 105px;
     padding: 7px 0;
     text-align: center;
@@ -67,7 +65,7 @@
     font-size: 16px;
     background-color: #FFF0BD;
 }
-.qq-upload-file, .qq-upload-spinner, .qq-upload-size, .qq-upload-cancel, .qq-upload-failed-text, .qq-upload-finished {
+.qq-upload-file, .qq-upload-spinner, .qq-upload-size, .qq-upload-cancel, .qq-upload-retry, .qq-upload-failed-text, .qq-upload-finished {
     margin-right: 12px;
 }
 .qq-upload-file {
@@ -79,13 +77,33 @@
     height: 15px;
     vertical-align: text-bottom;
 }
+.qq-drop-processing {
+    display: none;
+}
+.qq-drop-processing-spinner {
+    display: inline-block;
+    background: url("processing.gif");
+    width: 24px;
+    height: 24px;
+    vertical-align: text-bottom;
+}
 .qq-upload-finished {
     display:none;
     width:15px;
     height:15px;
     vertical-align:text-bottom;
 }
-.qq-upload-size, .qq-upload-cancel {
+.qq-upload-retry {
+    display: none;
+    color: #000000;
+}
+.qq-upload-cancel {
+	color: #000000;
+}
+.qq-upload-retryable .qq-upload-retry {
+    display: inline;
+}
+.qq-upload-size, .qq-upload-cancel, .qq-upload-retry {
     font-size: 12px;
     font-weight: normal;
 }
@@ -102,6 +120,10 @@
 }
 .qq-upload-fail .qq-upload-failed-text {
     display: inline;
+}
+.qq-upload-retrying .qq-upload-failed-text {
+    display: inline;
+    color: #D60000;
 }
 .qq-upload-list li.qq-upload-success {
     background-color: #5DA30C;
