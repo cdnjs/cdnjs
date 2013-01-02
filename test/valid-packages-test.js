@@ -100,6 +100,13 @@ packages.map(function (pkg) {
         assert.ok(fs.existsSync(filePath),
                   filePath +" does not exist but is referenced in package.json!");
     };
+    package_vows[pname + ": name in package.json should be parent folder name"] = function (pkg) {
+        var json = parse(pkg, true, true);
+        var dirs = pkg.split("/");
+        var trueName = dirs[dirs.length - 2];
+        assert.ok(trueName == json.name,
+            pkg_name(pkg) + ": Name property should be '" + trueName + "', not '" + json.name +"'");
+    };
 
     context[pname] = package_vows;
     suite.addBatch(context);
