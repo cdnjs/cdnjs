@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>log4javascript</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- Make IE8 behave like IE7, having gone to all the trouble of making IE work -->
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<script type="text/javascript">
+//<![CDATA[
+var loggingEnabled=true;var messagesBeforeDocLoaded=[];function toggleLoggingEnabled(){setLoggingEnabled($("enableLogging").checked);}
+function setLoggingEnabled(enable){loggingEnabled=enable;}
+function scrollToLatestEntry(){var l=getLogContainer();if(typeof l.scrollTop!="undefined"){var latestLogEntry=l.lastChild;if(latestLogEntry){l.scrollTop=l.scrollHeight;}}}
+function log(logLevel,formattedMessage){if(loggingEnabled){if(loaded){doLog(logLevel,formattedMessage);}else{messagesBeforeDocLoaded.push([logLevel,formattedMessage]);}}}
+function doLog(logLevel,formattedMessage){var logEntry=document.createElement("div");logEntry.appendChild(document.createTextNode(formattedMessage));logEntry.className="logentry "+logLevel.name;getLogContainer().appendChild(logEntry);scrollToLatestEntry();}
+function mainPageReloaded(){var separator=document.createElement("div");separator.className="separator";separator.innerHTML="&nbsp;";getLogContainer().appendChild(separator);}
+var loaded=false;var logLevels=["DEBUG","INFO","WARN","ERROR","FATAL"];window.onload=function(){setLogContainerHeight();toggleLoggingEnabled();for(var i=0;i<messagesBeforeDocLoaded.length;i++){doLog(messagesBeforeDocLoaded[i][0],messagesBeforeDocLoaded[i][1]);}
+messagesBeforeDocLoaded=[];loaded=true;setTimeout(setLogContainerHeight,20);};function getLogContainer(){return $("log");}
+function clearLog(){getLogContainer().innerHTML="";}
+function $(id){return document.getElementById(id);}
+function getWindowHeight(){if(window.innerHeight){return window.innerHeight;}else if(document.documentElement&&document.documentElement.clientHeight){return document.documentElement.clientHeight;}else if(document.body){return document.body.clientHeight;}
+return 0;}
+function getChromeHeight(){return $("toolbar").offsetHeight;}
+function setLogContainerHeight(){var windowHeight=getWindowHeight();$("body").style.height=getWindowHeight()+"px";getLogContainer().style.height=""+
+Math.max(0,windowHeight-getChromeHeight())+"px";}
+window.onresize=function(){setLogContainerHeight();};
+//]]>
+</script>
+<style type="text/css">
+body{background-color:white;color:black;padding:0;margin:0;font-family:tahoma,verdana,arial,helvetica,sans-serif;overflow:hidden}div#toolbar{border-top:solid #ffffff 1px;border-bottom:solid #aca899 1px;background-color:#f1efe7;padding:3px 5px;font-size:68.75%}div#toolbar input.button{padding:0 5px;font-size:100%}div#log{font-family:Courier New,Courier;font-size:75%;width:100%;overflow:auto;clear:both}*.logentry{overflow:visible;white-space:pre}*.TRACE{color:#666666}*.DEBUG{color:green}*.INFO{color:#000099}*.WARN{color:#999900}*.ERROR{color:red}*.FATAL{color:#660066}div#log div.separator{background-color:#cccccc;margin:5px 0;line-height:1px}
+</style>
+</head>
+<body id="body">
+<div id="toolbar">
+Options:
+<input type="checkbox" id="enableLogging" onclick="toggleLoggingEnabled()" class="stateful" checked="checked" title="Enable/disable logging" /><label for="enableLogging" id="enableLoggingLabel">Enable logging</label>
+<input type="button" id="clearButton" value="Clear" onclick="clearLog()" class="stateful button" title="Clear all log messages"  />
+<input type="button" id="closeButton" value="Close" onclick="window.close()" class="stateful button" title="Close the window" />
+</div>
+<div id="log" class="TRACE DEBUG INFO WARN ERROR FATAL"></div>
+</body>
+</html>
