@@ -12,6 +12,7 @@ __Libraries must have notable popularity. 100 watchers on GitHub is a good examp
 ## Pull requests steps
 
 1. Fork this repository
+  * Install all the needed dependencies locally (you will need `node`): `npm install`
 2. Add your library (following the conventions of this repository)
   * 1 library per pull request
   * The pull request must be tagged in the original repository (some exceptions apply)
@@ -25,7 +26,7 @@ __Libraries must have notable popularity. 100 watchers on GitHub is a good examp
 4. If the library doesn't already provide a minified version, our preferred minifier is [UglifyJS](http://marijnhaverbeke.nl/uglifyjs "UglifyJS")
 
 ## Running the validator
-1. Install all the needed dependencies locally (you will need `npm` and `node`): `npm install`
+1. Install all the needed dependencies locally (you will need `node`): `npm install`
 2. Run the test suite: `npm test`
 
 <img alt="Clicky" width="1" height="1" src="//in.getclicky.com/66606907ns.gif" />
