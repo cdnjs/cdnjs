@@ -48,7 +48,6 @@
                         break;
                     }
                 }
-
             }
 
             return memory[ prop ];
