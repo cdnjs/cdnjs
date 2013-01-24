@@ -1,4 +1,4 @@
-/*! Embedly jQuery - v3.0.0 - 2013-01-17
+/*! Embedly jQuery - v3.0.0 - 2013-01-22
 * https://github.com/embedly/embedly-jquery
 * Copyright (c) 2013 Sean Creeley; Licensed BSD */
 
@@ -294,9 +294,6 @@
         html += this.description ? '<div class="description">' + this.description + '</div>' : '';
       }
 
-      if (this.options.wrapElement && this.options.wrapElement === 'div' && $.browser.msie && $.browser.version < 9){
-        this.options.wrapElement = 'span';
-      }
       if (this.options.wrapElement) {
         html = '<' + this.options.wrapElement+ ' class="' + this.options.className + '">' + html + '</' + this.options.wrapElement + '>';
       }
