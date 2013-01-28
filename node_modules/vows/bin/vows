@@ -1,0 +1,627 @@
+#!/usr/bin/env node
+
+
+var path   = require('path'),
+    fs     = require('fs'),
+    util   = require('util'),
+    wildcard   = require('../lib/utils/wildcard').wildcard,
+    events = require('events');
+
+//
+// Attempt to load Coffee-Script. If it's not available, continue on our
+// merry way, if it is available, start searching for `*.coffee` scripts too.
+//
+var fileExt, specFileExt;
+
+try {
+    var coffee = require('coffee-script');
+    fileExt     = /\.(js|coffee)$/;
+    specFileExt = /[.(-|_)]((t|T)est|(s|S)pec)\.(js|coffee)$/;
+} catch (_) {
+    fileExt     = /\.js$/;
+    specFileExt = /[.(-|_)]((t|T)est|(s|S)pec)\.js$/;
+}
+
+var inspect = require('eyes').inspector({
+    stream: null,
+    styles: { string: 'grey', regexp: 'grey' }
+});
+
+var vows = require('../lib/vows');
+var cutils = require('../lib/vows/console');
+var stylize = require('../lib/vows/console').stylize;
+var _reporter = require('../lib/vows/reporters/dot-matrix'), reporter = {
+    name: _reporter.name
+};
+var _coverage;
+
+var nodeMinorVersion = parseInt(process.version.split('.')[1], 10);
+
+var help = [
+    "usage: vows [FILE, ...] [options]",
+    "",
+    "options:",
+    "  -v, --verbose     Enable verbose output",
+    "  -w, --watch       Watch mode",
+    "  -s, --silent      Don't report",
+    "  -i, --isolate     Run each test in it's own vows process",
+    "  -m  PATTERN       Only run tests matching the PATTERN string",
+    "  -r  PATTERN       Only run tests matching the PATTERN regexp",
+    "  --json            Use JSON reporter",
+    "  --spec            Use Spec reporter",
+    "  --tap             Use TAP reporter",
+    "  --dot-matrix      Use Dot-Matrix reporter",
+    "  --xunit           Use xUnit reporter",
+    "  --cover-plain     Print plain coverage map if detected",
+    "  --cover-html      Write coverage map to \"coverage.html\"",
+    "  --cover-json      Write unified coverage map to \"coverage.json\"",
+    "  --cover-xml       Write coverage map to \"coverage.xml\" in Emma xml",
+    "  --no-color        Don't use terminal colors",
+    "  --version         Show version",
+    "  -h, --help        You're staring at it"
+].join('\n');
+
+var options = {
+    reporter: reporter,
+    matcher: /.*/,
+    watch: false,
+    coverage: false,
+    isolate: false,
+    shuffle: false,
+    nocolor: !process.stdout.isTTY
+};
+
+var files = [];
+var wildcardFiles = [];
+
+// Get rid of process runner
+// ('node' in most cases)
+var arg, args = [], argv = process.argv.slice(2);
+
+
+// Current directory index,
+// and path of test folder.
+var root, testFolder;
+
+//
+// Parse command-line parameters
+//
+while (arg = argv.shift()) {
+    if (arg === __filename) { continue }
+
+    if (arg[0] !== '-') {
+        args.push(arg);
+    } else {
+        arg = arg.match(/^--?(.+)/)[1];
+
+        if (arg[0] === 'r') {
+            options.matcher = new(RegExp)(argv.shift());
+        } else if (arg[0] === 'm') {
+            options.matcher = (function (str) { // Create an escaped RegExp
+                var specials = '. * + ? | ( ) [ ] { } \\ ^ ? ! = : $'.split(' ').join('|\\'),
+                    regex    = new(RegExp)('(\\' + specials + ')', 'g');
+                return new(RegExp)(str.replace(regex, '\\$1'));
+            })(argv.shift());
+        } else if (arg in options) {
+            options[arg] = true;
+        } else {
+            switch (arg) {
+                case 'json':
+                    _reporter = require('../lib/vows/reporters/json');
+                    break;
+                case 'spec':
+                    _reporter = require('../lib/vows/reporters/spec');
+                    break;
+                case 'tap':
+                    _reporter = require('../lib/vows/reporters/tap');
+                    break;
+                case 'dot-matrix':
+                    _reporter = require('../lib/vows/reporters/dot-matrix');
+                    break;
+                case 'silent':
+                case 's':
+                    _reporter = require('../lib/vows/reporters/silent');
+                    break;
+                case 'xunit':
+                    _reporter = require('../lib/vows/reporters/xunit');
+                    break;
+                case 'cover-plain':
+                    options.coverage = true;
+                    _coverage = require('../lib/vows/coverage/report-plain');
+                    break;
+                case 'cover-html':
+                    options.coverage = true;
+                    _coverage = require('../lib/vows/coverage/report-html');
+                    break;
+                case 'cover-json':
+                    options.coverage = true;
+                    _coverage = require('../lib/vows/coverage/report-json');
+                    break;
+                case 'cover-xml':
+                    options.coverage = true;
+                    _coverage = require('../lib/vows/coverage/report-xml');
+                    break;
+                case 'verbose':
+                case 'v':
+                    options.verbose = true;
+                    break;
+                case 'watch':
+                case 'w':
+                    options.watch = true;
+                    break;
+                case 'supress-stdout':
+                    options.supressStdout = true;
+                    break;
+                case 'shuffle':
+                    options.shuffle = true;
+                    break;
+                case 'isolate':
+                case 'i':
+                    options.isolate = true;
+                    break;
+                case 'no-color':
+                    options.nocolor = true;
+                    break;
+                case 'color':
+                    options.nocolor = false;
+                    break;
+                case 'no-error':
+                    options.error = false;
+                    break;
+                case 'version':
+                    console.log('vows ' + vows.version);
+                    process.exit(0);
+                case 'help':
+                case 'h':
+                    console.log(help);
+                    process.exit(0);
+                    break;
+            }
+        }
+    }
+}
+
+if (options.nocolor) {
+    cutils.nocolor = true;
+    inspect = require('eyes').inspector({ stream: null, styles: false });
+}
+
+if (options.supressStdout) {
+    _reporter.setStream && _reporter.setStream(process.stdout);
+    var devNullStream = null;
+
+    if(process.platform === 'win32'){
+        devNullStream = fs.createWriteStream('nul');
+    } else {
+        devNullStream = fs.createWriteStream('/dev/null');
+    }
+
+    process.__defineGetter__('stdout', function () {
+        return devNullStream;
+    });
+}
+
+if (options.watch) {
+    options.reporter = reporter = require('../lib/vows/reporters/watch');
+}
+
+msg('bin', 'argv', args);
+msg('bin', 'options', { reporter: options.reporter.name, matcher: options.matcher });
+
+if (args.length === 0 || options.watch) {
+    msg('bin', 'discovering', 'folder structure');
+    root = fs.readdirSync('.');
+
+    if (root.indexOf('test') !== -1) {
+        testFolder = 'test';
+    } else if (root.indexOf('spec') !== -1) {
+        testFolder = 'spec';
+    } else {
+        abort("runner", "couldn't find test folder");
+    }
+    msg('bin', 'discovered', "./" + testFolder);
+    if (args.length === 0) {
+        args = paths(testFolder).filter(function (f) {
+            return specFileExt.test(f);
+        });
+
+        if (options.watch) {
+            args = args.concat(paths('lib'), paths('src'));
+        }
+    }
+}
+
+if (! options.watch) {
+    reporter.report = function (data, filename) {
+        switch (data[0]) {
+            case 'subject':
+            case 'vow':
+            case 'context':
+            case 'error':
+                _reporter.report(data, filename);
+                break;
+            case 'end':
+                (options.verbose || _reporter.name === 'json') &&
+                _reporter.report(data);
+                break;
+            case 'finish':
+                options.verbose ?
+                    _reporter.print('\n')
+                    :
+                    _reporter.print(' ');
+                break;
+        }
+    };
+    reporter.reset = function () { _reporter.reset && _reporter.reset() };
+    reporter.print = _reporter.print;
+
+    // add full path if necessary
+    files = args.map(function (a) {
+        return (!a.match(/^[\/|c|C]/))
+            ? path.join(process.cwd(), a)
+            : a;
+    });
+
+    // preprocess the list of files for any wildcards. win32 does not handle wildcards before calling vows
+    // any paths not containing wildcards are simple returned by wildcard()
+    files.forEach(function(a) {
+        if(a.indexOf('*') !== -1) {
+          wildcardFiles = wildcardFiles.concat(wildcard(a));
+        } else {
+          wildcardFiles.push(a);
+        }
+     });
+
+    // now set up the file list for vows including all the wildcard files
+    files = wildcardFiles.map(function (a) {
+        return a.replace(fileExt, '');
+    });
+
+
+    if (options.shuffle) {
+        var source = files.slice(0);
+        files.length = 0;
+        while (source.length) {
+            files.push(source.splice(Math.floor(Math.random() * source.length), 1)[0]);
+        }
+    }
+
+
+    runSuites(importSuites(files), function (results) {
+        var status = results.errored ? 2 : (results.broken ? 1 : 0);
+
+        !options.verbose && _reporter.print('\n');
+        msg('runner', 'finish');
+        _reporter.report(['finish', results], {
+            write: function (str) {
+                util.print(str.replace(/^\n\n/, '\n'));
+            }
+        });
+        try {
+            if (options.coverage === true && _$jscoverage !== undefined) {
+                _coverage.report(_$jscoverage);
+            }
+        } catch (err) {
+            // ignore the undefined jscoverage
+        }
+        if (process.stdout.write('')) { // Check if stdout is drained
+            process.exit(status);
+        } else {
+            process.stdout.on('drain', function () {
+                process.exit(status);
+            });
+        }
+    });
+} else {
+    //
+    // Watch mode
+    //
+    (function () {
+        var pendulum = [
+            '.   ', '..  ', '... ', ' ...',
+            '  ..', '   .', '   .', '  ..',
+            '... ', '..  ', '.   '
+        ];
+        var strobe = ['.', ' '];
+        var status,
+            cue,
+            current = 0,
+            running = 0,
+            lastRun,
+            colors = ['32m', '33m', '31m'],
+            timer = setInterval(tick, 100);
+        process.on('uncaughtException', exception);
+        process.on('exit', cleanup);
+        process.on('SIGINT', function () {
+            process.exit(0);
+        });
+        process.on('SIGQUIT', function () {
+            changed();
+        });
+
+        cursorHide();
+
+        // Run every 100ms
+        function tick() {
+            if (running && (cue !== strobe)) {
+                cue = strobe, current = 0;
+            } else if (!running && (cue !== pendulum)) {
+                cue = pendulum, current = 0;
+            }
+
+            eraseLine();
+            lastRun && !running && esc(colors[status.errored ? 2 : (status.broken ? 1 : 0)]);
+            print(cue[current]);
+
+            if (current == cue.length - 1) { current = -1 }
+
+            current ++;
+            esc('39m');
+            cursorRestore();
+        }
+
+        //
+        // Utility functions
+        //
+        function print(str)      { util.print(str) }
+        function esc(str)        { print("\x1b[" + str) }
+        function eraseLine()     { esc("0K") }
+        function cursorRestore() { esc("0G") }
+        function cursorHide()    { esc("?25l") }
+        function cursorShow()    { esc("?25h") }
+        function cleanup()       { eraseLine(), cursorShow(), clearInterval(timer), print('\n') }
+        function exception(err)    { print(err.stack || err.message || JSON.stringify(err)), running = 0}
+
+        //
+        // Get a matching test for a given file
+        //
+        function getMatchingTest(file, join) {
+            join || (join = '-');
+            var testFile;
+            if (specFileExt.test(file)) {
+                testFile = path.join(testFolder, file);
+            }
+            else {
+                var root, extension;
+                _s = file.split('.'), root = _s[0], extension = _s[1];
+                testFile = path.join(testFolder, root + join + testFolder + "." + extension);
+            }
+
+            try {
+                fs.statSync(testFile);
+            } catch (e) {
+                if (join == '-') {
+                    return getMatchingTest(file, '_');
+                }
+                else {
+                    msg('watcher', 'no equivalence found, running all tests.');
+                    testFile = null;
+                }
+            }
+            return testFile;
+        }
+
+        //
+        // Called when a file has been modified.
+        // Run the matching tests and change the status.
+        //
+        function changed(file) {
+            status = { honored: 0, broken: 0, errored: 0, pending: 0 };
+
+            msg('watcher', 'detected change in', file);
+
+            file = getMatchingTest(file);
+
+            var files = (specFileExt.test(file) ? [file] : paths(testFolder)).map(function (p) {
+                return path.join(process.cwd(), p);
+            }).filter(function (p) {
+                    return specFileExt.test(p);
+                }).map(function (p) {
+                    var cache = require.main.moduleCache || require.cache;
+                    if (cache[p]) { delete(cache[p]) }
+                    return p;
+                }).map(function (p) {
+                    return p.replace(fileExt, '');
+                });
+
+            running ++;
+
+            runSuites(importSuites(files), function (results) {
+                delete(results.time);
+                print(cutils.result(results).join('') + '\n\n');
+                lastRun = new(Date);
+                status = results;
+                running --;
+            });
+        }
+
+        msg('watcher', 'watching', args);
+
+        //
+        // Watch all relevant files,
+        // and call `changed()` on change.
+        //
+        args.forEach(function (p) {
+            fs.watchFile(p, function (current, previous) {
+                if (new(Date)(current.mtime).valueOf() ===
+                    new(Date)(previous.mtime).valueOf()) { return }
+                else {
+                    changed(p);
+                }
+            });
+        });
+    })();
+}
+
+function runSuites(suites, callback) {
+    var results = {
+        honored: 0,
+        broken:  0,
+        errored: 0,
+        pending: 0,
+        total:   0,
+        time:    0
+    };
+    reporter.reset();
+
+    (function run(suites, callback) {
+        var suite = suites.shift();
+        if (suite) {
+            msg('runner', "running", suite.subject + ' ', options.watch ? false : true);
+            suite.run(options, function (result) {
+                Object.keys(result).forEach(function (k) {
+                    results[k] += result[k];
+                });
+                run(suites, callback);
+            });
+        } else {
+            callback(results);
+        }
+    })(suites, callback);
+}
+
+function importSuites(files) {
+    msg(options.watcher ? 'watcher' : 'runner', 'loading', files);
+
+    var spawn = require('child_process').spawn;
+
+    function cwdname(f) {
+        return f.replace(process.cwd() + '/', '') + '.js';
+    }
+
+    function wrapSpawn(f) {
+        f = cwdname(f);
+
+        return function (options, callback) {
+            var args = [process.argv[1], '--json', f],
+                result;
+
+            // --supress-stdout stops the stream too early on win32
+            if(process.platform !== 'win32') {
+                args.push( '--supress-stdout');
+            }
+
+            var p = spawn(process.execPath, args);
+
+            //
+            // AvianFlu, you broke the API! OH NOEZ.
+            // Anyway.
+            // Since node 0.7.something, semantics of child process events
+            // changed - `exit` event is emitted when child process exits
+            // and `close` event is emitted when child's streams stdio streams
+            // are closed. `exit` event is emitted before `close` event, and
+            // since we use child's stdio streams, we shouldn't rely on `exit`
+            // event.
+            //
+
+            p.on(nodeMinorVersion >= 7 ? 'close' : 'exit', function (code) {
+                callback(
+                    !result ?
+                    {errored: 1, total: 1}
+                        :
+                        result
+                );
+            });
+
+
+            var buffer = [];
+            p.stdout.on('data', function (data) {
+                data = data.toString().split(/\n/g);
+                if (data.length == 1) {
+                    buffer.push(data[0]);
+                } else {
+                    data[0] = buffer.concat(data[0]).join('');
+                    buffer = [data.pop()];
+
+                    data.forEach(function (data) {
+                        if (data && data !== 'undefined') {
+                          try {
+
+                            data = JSON.parse(data);
+
+                            // on win32 we may get back console.log strings which break JSON.parse
+                            if (data && data[0] === 'finish') {
+                                result = data[1];
+                            } else {
+                                reporter.report(data);
+                            }
+                          } catch(e) {
+
+                          }
+                        }
+                    });
+                }
+            });
+
+            p.stderr.pipe(process.stderr);
+        }
+    }
+
+    return files.reduce(options.isolate ? function (suites, f) {
+
+      return suites.concat({
+          run: wrapSpawn(f)
+        });
+    } : function (suites, f) {
+        //f = path.join(process.cwd(), path.relative(process.cwd(),f));
+        var obj = require(f);
+        return suites.concat(Object.keys(obj).map(function (s) {
+            obj[s]._filename = cwdname(f);
+            return obj[s];
+        }));
+    }, [])
+}
+
+//
+// Recursively traverse a hierarchy, returning
+// a list of all relevant .js files.
+//
+function paths(dir) {
+    var paths = [];
+
+    try { fs.statSync(dir) }
+    catch (e) { return [] }
+
+    (function traverse(dir, stack) {
+        stack.push(dir);
+        var dirPath = stack.join('/');
+        fs.readdirSync(stack.join('/')).forEach(function (file) {
+            //
+            // Skip dotfiles and `vendor` directory before `fs.stat()`ing them.
+            // Not doing so causes race conditions with Emacs buffer files
+            // (`.#filename.js`).
+            //
+            if (file[0] == '.' || file === 'vendor') {
+                return;
+            }
+
+            var path = stack.concat([file]).join('/'),
+                stat = fs.statSync(path);
+
+            if (stat.isFile() && fileExt.test(file)) {
+                paths.push(path);
+            } else if (stat.isDirectory()) {
+                traverse(file, stack);
+            }
+        });
+        stack.pop();
+    })(dir || '.', []);
+
+    return paths;
+}
+
+function msg(cmd, subject, str, p) {
+    if (options.verbose) {
+        util[p ? 'print' : 'puts']( stylize('vows ', 'green')
+            + stylize(cmd, 'bold')
+            + ' ' + subject + ' '
+            + (str ? (typeof(str) === 'string' ? str : inspect(str)) : '')
+        );
+    }
+}
+
+function abort(cmd, str) {
+    console.log(stylize('vows ', 'red') + stylize(cmd, 'bold') + ' ' + str);
+    console.log(stylize('vows ', 'red') + stylize(cmd, 'bold') + ' exiting');
+    process.exit(-1);
+}
