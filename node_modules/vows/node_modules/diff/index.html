@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Diff</title>
+	<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div id="settings">
+	<h1>Diff</h1>
+	<label><input type="radio" name="diff_type" value="diffChars" checked> Chars</label>
+	<label><input type="radio" name="diff_type" value="diffWords"> Words</label>
+	<label><input type="radio" name="diff_type" value="diffLines"> Lines</label>
+	<label><input type="radio" name="diff_type" value="createPatch"> Patch</label>
+	<label><input type="radio" name="diff_type" value="applyPatch"> Merge</label>
+</div>
+
+<a href="https://github.com/kpdecker/jsdiff" class="source">github.com/kpdecker/jsdiff</a>
+
+<table>
+	<tr>
+		<td contenteditable="true" id="a">restaurant</td>
+		<td contenteditable="true" id="b">aura</td>
+		<td id="result"></td>
+	</tr>
+</table>
+
+<script src="diff.js"></script>
+<script defer>
+var a = document.getElementById('a');
+var b = document.getElementById('b');
+var result = document.getElementById('result');
+
+function changed() {
+	if(window.diffType == 'applyPatch') {
+		b.textContent = JsDiff.applyPatch(a.textContent, result.textContent);
+	} else if(window.diffType == 'createPatch') {
+		result.textContent = JsDiff.createPatch('filename',a.textContent, b.textContent,'left','right');
+	} else {
+		var diff = JsDiff[window.diffType](a.textContent, b.textContent);
+		var fragment = document.createDocumentFragment();
+		for (var i=0; i < diff.length; i++) {
+
+			if (diff[i].added && diff[i + 1] && diff[i + 1].removed) {
+				var swap = diff[i];
+				diff[i] = diff[i + 1];
+				diff[i + 1] = swap;
+			}
+
+			var node;
+			if (diff[i].removed) {
+				node = document.createElement('del');
+				node.appendChild(document.createTextNode(diff[i].value));
+			} else if (diff[i].added) {
+				node = document.createElement('ins');
+				node.appendChild(document.createTextNode(diff[i].value));
+			} else {
+				node = document.createTextNode(diff[i].value);
+			}
+			fragment.appendChild(node);
+		}
+
+		result.textContent = '';
+		result.appendChild(fragment);
+	}
+}
+
+window.onload = function() {
+	onDiffTypeChange(document.querySelector('#settings [name="diff_type"]:checked'));
+	changed();
+};
+
+a.onpaste = a.onchange =
+b.onpaste = b.onchange =
+result.onpaste = result.onchange =
+ changed;
+
+if ('oninput' in a) {
+	a.oninput = b.oninput = result.oninput = changed;
+} else {
+	a.onkeyup = b.onkeyup = result.onkeyup = changed;
+}
+
+function onDiffTypeChange(radio) {
+	window.diffType = radio.value;
+	document.title = "Diff " + radio.parentNode.innerText;
+	if(window.diffType == "applyPatch") {
+		b.removeAttribute('contenteditable');
+		result.setAttribute('contenteditable','true');
+	} else {
+		result.removeAttribute('contenteditable');
+		b.setAttribute('contenteditable','true');
+	}
+}
+
+var radio = document.getElementsByName('diff_type');
+for (var i = 0; i < radio.length; i++) {
+	radio[i].onchange = function(e) {
+		onDiffTypeChange(e.target);
+		changed();
+	}
+}
+</script>
+</body>
+</html>
