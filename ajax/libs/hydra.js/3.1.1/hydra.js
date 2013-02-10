@@ -1,7 +1,7 @@
 /*global exports, module, require, define, setTimeout*/
 (function () {
     'use strict';
-    var root, sNotDefined, oModules, oVars, _null_, _false_, sVersion, Hydra, bDebug, ErrorHandler, Module, Bus, oChannels, isNodeEnvironment, oObjProto;
+    var root, sNotDefined, oModules, oVars, _null_, bUnblockUI, _false_, sVersion, Hydra, bDebug, ErrorHandler, Module, Bus, oChannels, isNodeEnvironment, oObjProto;
 
     /**
      * Used to generate an unique key for instance ids that are not supplied by the user.
@@ -91,7 +91,7 @@
      * @private
      * @type {String}
      */
-    sVersion = '3.1.0';
+    sVersion = '3.1.1';
 
     /**
      * Used to activate the debug mode
@@ -99,6 +99,13 @@
      * @type {Boolean}
      */
     bDebug = _false_;
+
+    /**
+     * Use to activate the unblock UI when notifies are executed.
+     * WARNING!!! This will not block your UI but could give problems with the order of execution.
+     * @type {Boolean}
+     */
+    bUnblockUI = _false_;
 
     /**
      * Wrapper of Object.prototype.toString to detect type of object in cross browsing mode.
@@ -137,6 +144,15 @@
      */
     function setDebug(_bDebug) {
         bDebug = _bDebug;
+    }
+
+    /**
+     * setUnblockUI is a method to set the bUnblockUI flag.
+     * @private
+     * @param {Boolean} _bUnblockUI
+     */
+    function setUnblockUI(_bUnblockUI) {
+        bUnblockUI = _bUnblockUI;
     }
 
     /**
@@ -470,11 +486,25 @@
          */
         publish:function (sChannelId, sEvent, oData) {
             var aSubscribers = this.subscribers(sChannelId, sEvent),
-                nLenSubscribers = aSubscribers.length;
+                nLenSubscribers = aSubscribers.length,
+                nIndex,
+                oHandlerObject;
             if (nLenSubscribers === 0) {
                 return false;
             }
-            this._avoidBlockUI(aSubscribers, oData, sChannelId, sEvent);
+            if(bUnblockUI)
+            {
+                this._avoidBlockUI(aSubscribers, oData, sChannelId, sEvent);
+            }else
+            {
+                for ( nIndex = 0 ; nIndex < nLenSubscribers; nIndex++ ) {
+                    oHandlerObject = aSubscribers[nIndex];
+                    oHandlerObject.handler.call( oHandlerObject.subscriber, oData );
+                    if (bDebug) {
+                        ErrorHandler.log(sChannelId, sEvent, oHandlerObject);
+                    }
+                }
+            }
             return true;
         },
         /**
@@ -1002,6 +1032,13 @@
      * @member Hydra
      */
     Hydra.module = new Module();
+
+    /**
+     * Change the unblock UI mode to on/off
+     * @static
+     * @Member Hydra
+     */
+    Hydra.setUnblockUI = setUnblockUI;
 
     /**
      * Change the debug mode to on/off
