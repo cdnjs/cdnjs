@@ -1,7 +1,7 @@
 /*global exports, module, require, define, setTimeout*/
 (function () {
     'use strict';
-    var root, sNotDefined, oModules, oVars, _null_, bUnblockUI, _false_, sVersion, Hydra, bDebug, ErrorHandler, Module, Bus, oChannels, isNodeEnvironment, oObjProto;
+    var root, sNotDefined, oModules, oVars, _null_, bUnblockUI, _false_, sVersion, FakeModule, Hydra, bDebug, ErrorHandler, Module, Bus, oChannels, isNodeEnvironment, oObjProto;
 
     /**
      * Used to generate an unique key for instance ids that are not supplied by the user.
@@ -91,7 +91,7 @@
      * @private
      * @type {String}
      */
-    sVersion = '3.1.1';
+    sVersion = '3.1.2';
 
     /**
      * Used to activate the debug mode
@@ -278,6 +278,7 @@
         }
         return aSubscribers;
     }
+
 
     /**
      * Bus is the object that must be used to manage the notifications by channels
@@ -609,10 +610,8 @@
          * @return {Module}
          */
         register:function (sModuleId, fpCreator) {
-            oModules[sModuleId] = {
-                creator:fpCreator,
-                instances:{}
-            };
+            var self = this;
+            oModules[sModuleId] = new FakeModule(sModuleId, fpCreator);
             return oModules[sModuleId];
         },
         /**
@@ -722,17 +721,15 @@
             oExtendedModule = fpCreator(Bus);
             oBaseModule = oModule.creator(Bus);
 
-            oModules[sFinalModuleId] = {
-                creator:function (Bus) {
-                    // If we extend the module with the different name, we
-                    // create proxy class for the original methods.
-                    oFinalModule = self._merge(oBaseModule, oExtendedModule);
-                    // This gives access to the Action instance used to listen and notify.
-                    oFinalModule.__action__ = Bus;
-                    return oFinalModule;
-                },
-                instances:{}
-            };
+            oModules[sFinalModuleId] = new FakeModule(sFinalModuleId, function (Bus) {
+                // If we extend the module with the different name, we
+                // create proxy class for the original methods.
+                oFinalModule = self._merge(oBaseModule, oExtendedModule);
+                // This gives access to the Action instance used to listen and notify.
+                oFinalModule.__action__ = Bus;
+                return oFinalModule;
+            });
+            return oModules[sFinalModuleId];
         },
         /**
          * Method to set an instance of a module
@@ -967,6 +964,39 @@
                 }
             }
             return null;
+        }
+    };
+
+    /**
+     * Module to be stored, adds two methods to start and extend modules.
+     * @private
+     * @param {String} sModuleId
+     * @param {Function} fpCreator
+     * @constructor
+     */
+    FakeModule = function(sModuleId, fpCreator)
+    {
+        if(typeof fpCreator === sNotDefined)
+        {
+            console.log('test');
+        }
+        this.creator = fpCreator;
+        this.instances = {};
+        this.sModuleId = sModuleId;
+    };
+
+    FakeModule.prototype = {
+        start: function(oData)
+        {
+            return Module.prototype.start(this.sModuleId, undefined, oData);
+        },
+        extend: function(oSecondParameter, oThirdParameter)
+        {
+            return Module.prototype.extend(this.sModuleId, oSecondParameter, oThirdParameter);
+        },
+        stop: function()
+        {
+            Module.prototype.stop(this.sModuleId);
         }
     };
 
