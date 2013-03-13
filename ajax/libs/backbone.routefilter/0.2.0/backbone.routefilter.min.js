@@ -1,0 +1,4 @@
+/*! backbone.routefilter - v0.2.0 - 2013-02-16
+* https://github.com/boazsender/backbone.routefilter
+* Copyright (c) 2013 Boaz Sender; Licensed MIT */
+(function(a,b){var c=a.Router.prototype.route,d=function(){};b.extend(a.Router.prototype,{before:d,after:d,route:function(a,e,f){f||(f=this[e]);var g=b.bind(function(){var c=[a,b.toArray(arguments)],e;b.isFunction(this.before)?e=this.before:typeof this.before[a]!="undefined"?e=this.before[a]:e=d;if(e.apply(this,c)===!1)return;f&&f.apply(this,arguments);var g;b.isFunction(this.after)?g=this.after:typeof this.after[a]!="undefined"?g=this.after[a]:g=d,g.apply(this,c)},this);return c.call(this,a,e,g)}})})(Backbone,_);
