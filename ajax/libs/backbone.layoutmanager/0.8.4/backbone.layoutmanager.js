@@ -14,7 +14,7 @@ var keys;
 // Localize global dependency references.
 var Backbone = window.Backbone;
 var _ = window._;
-var $ = window.$;
+var $ = Backbone.$;
 
 // Maintain references to the two `Backbone.View` functions that are
 // overwritten so that they can be proxied.
@@ -407,7 +407,11 @@ var LayoutManager = Backbone.View.extend({
         // If no container is specified, we must replace the content.
         if (manager.noel) {
           // Hold a reference to created element as replaceWith doesn't return new el.
-          renderedEl = root.$el.html(rendered).children();
+          renderedEl = $(rendered);
+
+          // Remove extra root elements
+          root.$el.slice(1).remove();
+
           root.$el.replaceWith(renderedEl);
           // Don't delegate events here - we'll do that in resolve()
           root.setElement(renderedEl, false);
