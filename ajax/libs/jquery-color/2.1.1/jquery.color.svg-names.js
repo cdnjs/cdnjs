@@ -1,15 +1,15 @@
 /*!
- * jQuery Color Animations v2.1.2 - SVG Color Names
+ * jQuery Color Animations v2.1.1 - SVG Color Names
  * https://github.com/jquery/jquery-color
  *
  * Remaining HTML/CSS color names per W3C's CSS Color Module Level 3.
  * http://www.w3.org/TR/css3-color/#svg-color
  *
- * Copyright 2013 jQuery Foundation and other contributors
+ * Copyright 2012 jQuery Foundation and other contributors
  * Released under the MIT license.
  * http://jquery.org/license
  *
- * Date: Wed Jan 16 08:47:09 2013 -0600
+ * Date: Sun Oct 28 15:08:06 2012 -0400
  */
 jQuery.extend( jQuery.Color.names, {
 	// 4.3. Extended color keywords (minus the basic ones in core color plugin)

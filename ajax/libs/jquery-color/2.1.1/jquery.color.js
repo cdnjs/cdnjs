@@ -1,12 +1,12 @@
 /*!
- * jQuery Color Animations v2.1.2
+ * jQuery Color Animations v2.1.1
  * https://github.com/jquery/jquery-color
  *
- * Copyright 2013 jQuery Foundation and other contributors
+ * Copyright 2012 jQuery Foundation and other contributors
  * Released under the MIT license.
  * http://jquery.org/license
  *
- * Date: Wed Jan 16 08:47:09 2013 -0600
+ * Date: Sun Oct 28 15:08:06 2012 -0400
  */
 (function( jQuery, undefined ) {
 
@@ -578,7 +578,7 @@ color.hook = function( hook ) {
 				var parsed, curElem,
 					backgroundColor = "";
 
-				if ( value !== "transparent" && ( jQuery.type( value ) !== "string" || ( parsed = stringParse( value ) ) ) ) {
+				if ( jQuery.type( value ) !== "string" || ( parsed = stringParse( value ) ) ) {
 					value = color( parsed || value );
 					if ( !support.rgba && value._rgba[ 3 ] !== 1 ) {
 						curElem = hook === "backgroundColor" ? elem.parentNode : elem;
@@ -654,7 +654,7 @@ colors = jQuery.Color.names = {
 	white: "#ffffff",
 	yellow: "#ffff00",
 
-	// 4.2.3. "transparent" color keyword
+	// 4.2.3. ‘transparent’ color keyword
 	transparent: [ null, null, null, 0 ],
 
 	_default: "#ffffff"
