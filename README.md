@@ -3,7 +3,7 @@
 
 # cdnJS Script Repository
 
-The repository mirroring all scripts on cdnjs.cloudflare.com
+The repository mirroring all scripts on cdnjs.cloudflare.com, created and maintained by [Thomas Davis](https://twitter.com/neutralthoughts) and [Ryan Kirkman](https://twitter.com/ryan_kirkman).
 
 We will host any version of any library. Feel free to add a pull request for an older version of a library if your site still uses it.
 
