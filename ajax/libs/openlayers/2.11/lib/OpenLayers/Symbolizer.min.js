@@ -1,0 +1,1 @@
+OpenLayers.Symbolizer=OpenLayers.Class({zIndex:0,initialize:function(e){OpenLayers.Util.extend(this,e)},clone:function(){var Type=eval(this.CLASS_NAME);return new Type(OpenLayers.Util.extend({},this))},CLASS_NAME:"OpenLayers.Symbolizer"});

@@ -1,0 +1,54 @@
+/* Social Likes by Artem Sapegin. http://sapegin.github.com/social-likes */
+
+// Simple CSS3 properties with vendor prefixes
+
+box-sizing()
+	-moz-box-sizing arguments
+	box-sizing arguments
+
+box-shadow()
+	-webkit-box-shadow arguments
+	box-shadow arguments
+
+transition()
+	-webkit-transition arguments
+	-moz-transition arguments
+	-ms-transition arguments
+	-o-transition arguments
+	transition arguments
+
+transform()
+	-webkit-transform arguments
+	-moz-transform arguments
+	-ms-transform arguments
+	-o-transform arguments
+	transform arguments
+
+overflow-scrolling()
+	-webkit-overflow-scrolling arguments
+	overflow-scrolling arguments
+
+
+// Gradients
+// https://github.com/LearnBoost/stylus/issues/245
+
+replace(str, a, b)
+	str = clone(str)
+	for e, i in str
+		if length(e) > 1
+			str[i] = replace(e, a, b)
+		else
+			if a == e
+				str[i] = b
+	str
+
+linear-gradient()
+	prop = current-property[0]
+	val = current-property[1]
+	args = unquote(join(', ', arguments))
+	add-property(prop, replace(val, '__CALL__', '-webkit-linear-gradient(%s)' % args))
+	add-property(prop, replace(val, '__CALL__', '-moz-linear-gradient(%s)' % args))
+	add-property(prop, replace(val, '__CALL__', '-ms-linear-gradient(%s)' % args))
+	add-property(prop, replace(val, '__CALL__', '-o-linear-gradient(%s)' % args))
+	g = 'linear-gradient(%s)' % args
+	g

@@ -1,0 +1,220 @@
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title>Galleriffic | A jQuery plugin for rendering fast-performing photo galleries</title>
+		<link rel="stylesheet" href="css/basic.css" type="text/css" />
+	</head>
+	<body>
+		<div id="page">
+			<div id="container">
+				<h1>Galleriffic</h1>
+				<h2>A jQuery plugin for rendering rich, fast-performing photo galleries</h2>
+				<p>
+					Galleriffic is a jQuery plugin that provides a rich, post-back free experience optimized to handle high volumes of 
+photos while conserving bandwidth.  I am not so great at spelling, and it was much later that I realized that the more appropriate spellings would be Galle<em>rif</em>ic or Galle<em>rrif</em>ic, but is too late now for a name change, so Galleriffic remains.
+				</p>
+
+				<div style="float: right;">
+					<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+						<input type="hidden" name="cmd" value="_s-xclick">
+						<input type="hidden" name="hosted_button_id" value="3012662">
+						<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="">
+						<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+					</form>
+				</div>
+
+				<h3>Features</h3>
+				<ul>
+					<li>Smart image preloading <strong>after</strong> the page is loaded</li>
+					<li>Thumbnail navigation (with pagination)</li>
+					<li>jQuery.history plugin integration to support bookmark-friendly URLs per-image</li>
+					<li>Slideshow (with optional auto-updating url bookmarks)</li>
+					<li>Keyboard navigation</li>
+					<li>Events that allow for adding your own custom transition effects</li>
+					<li>API for controlling the gallery with custom controls</li>
+					<li>Support for image captions</li>
+					<li>Flexible configuration</li>
+					<li>Graceful degradation when javascript is not available</li>
+					<li>Support for multiple galleries per page</li>
+				</ul>
+
+				<h3>Examples</h3>
+				<ul>
+					<li><a href="example-1.html">Minimal implementation</a></li>
+					<li><a href="example-2.html">Thumbnail rollover effects and slideshow crossfades</a></li>
+					<li><a href="example-3.html">Integration with history plugin</a></li>
+					<li><a href="example-4.html">Insert and remove images after initialization</a></li>
+					<li><a href="example-5.html">Alternate layout using custom previous/next page controls</a></li>
+				</ul>
+
+				<h3>Usage</h3>
+				<ol>
+					<li>Download the latest version of Galleriffic below and jQuery 1.3.2 or later (use other versions of jQuery at your own risk)</li>
+					<li>Setup the script references in the header:
+						<pre class="jush">
+&lt;head&gt;
+	...
+	&lt;script type="text/javascript" src="js/jquery-1.3.2.js"&gt;&lt;/script&gt;
+	&lt;script type="text/javascript" src="js/jquery.galleriffic.js"&gt;&lt;/script&gt;
+
+	&lt;!-- Optionally include jquery.history.js for history support --&gt;
+	&lt;script type="text/javascript" src="js/jquery.history.js"&gt;&lt;/script&gt;
+	&lt;script type="text/javascript" src="js/jquery.opacityrollover.js"&gt;&lt;/script&gt;
+	...
+&lt;/head&gt;
+						</pre>
+					</li>
+					<li>Add container elements to your page.  All container elements are optional, so you may choose to not include an area (such as the loading or caption container elements).  Here is an example of all the elements needed for a full-featured setup:
+						<pre class="jush">
+&lt;div id="controls"&gt;&lt;/div&gt;
+&lt;div id="loading"&gt;&lt;/div&gt;
+&lt;div id="slideshow"&gt;&lt;/div&gt;
+&lt;div id="caption"&gt;&lt;/div&gt;
+&lt;div id="thumbs"&gt;
+	... graceful degrading list of thumbnails (specific format specified below) ...
+&lt;/div&gt;
+						</pre>
+					</li>
+					<li>Within the thumbnails container element, build your graceful degrading unordered list of thumbnails linking to the image slides as such:
+						<pre class="jush">
+&lt;div id="thumbs"&gt;
+	&lt;ul class="thumbs noscript"&gt;
+		&lt;li&gt;
+			&lt;a class="thumb" name="optionalCustomIdentifier" href="path/to/slide" title="your image title"&gt;
+				&lt;img src="path/to/thumbnail" alt="your image title again for graceful degradation" /&gt;
+			&lt;/a&gt;
+			&lt;div class="caption"&gt;
+				(Any html can go here)
+			&lt;/div&gt;
+		&lt;/li&gt;
+		... (repeat for every image in the gallery)
+	&lt;/ul&gt;
+&lt;/div&gt;
+						</pre>
+						It is important to specify the 'thumb' class for the link that should serve as the thumbnail and the 'caption' class for
+						the element that should serve as the caption.  When an image is selected for display in the slideshow, any elements with the 'caption' class will be rendered within the specified caption container element above.
+					</li>
+					<li>Initialize the gallery by calling the <em>galleriffic</em> initialization function on the thumbnails container, passing in optional settings.  The following example shows the default options:
+						<pre class="jush-js">
+jQuery(document).ready(function($) {
+	var gallery = $('#thumbs').galleriffic({
+		delay:                     3000, // in milliseconds
+		numThumbs:                 20, // The number of thumbnails to show page
+		preloadAhead:              40, // Set to -1 to preload all images
+		enableTopPager:            false,
+		enableBottomPager:         true,
+		maxPagesToShow:            7,  // The maximum number of pages to display in either the top or bottom pager
+		imageContainerSel:         '', // The CSS selector for the element within which the main slideshow image should be rendered
+		controlsContainerSel:      '', // The CSS selector for the element within which the slideshow controls should be rendered
+		captionContainerSel:       '', // The CSS selector for the element within which the captions should be rendered
+		loadingContainerSel:       '', // The CSS selector for the element within which should be shown when an image is loading
+		renderSSControls:          true, // Specifies whether the slideshow's Play and Pause links should be rendered
+		renderNavControls:         true, // Specifies whether the slideshow's Next and Previous links should be rendered
+		playLinkText:              'Play',
+		pauseLinkText:             'Pause',
+		prevLinkText:              'Previous',
+		nextLinkText:              'Next',
+		nextPageLinkText:          'Next &amp;rsaquo;',
+		prevPageLinkText:          '&amp;lsaquo; Prev',
+		enableHistory:             false, // Specifies whether the url's hash and the browser's history cache should update when the current slideshow image changes
+		enableKeyboardNavigation:  true, // Specifies whether keyboard navigation is enabled
+		autoStart:                 false, // Specifies whether the slideshow should be playing or paused when the page first loads
+		syncTransitions:           false, // Specifies whether the out and in transitions occur simultaneously or distinctly
+		defaultTransitionDuration: 1000, // If using the default transitions, specifies the duration of the transitions
+		onSlideChange:             undefined, // accepts a delegate like such: function(prevIndex, nextIndex) { ... }
+		onTransitionOut:           undefined, // accepts a delegate like such: function(slide, caption, isSync, callback) { ... }
+		onTransitionIn:            undefined, // accepts a delegate like such: function(slide, caption, isSync) { ... }
+		onPageTransitionOut:       undefined, // accepts a delegate like such: function(callback) { ... }
+		onPageTransitionIn:        undefined, // accepts a delegate like such: function() { ... }
+		onImageAdded:              undefined, // accepts a delegate like such: function(imageData, $li) { ... }
+		onImageRemoved:            undefined  // accepts a delegate like such: function(imageData, $li) { ... }
+	});
+});
+						</pre>
+					</li>
+				</ol>
+
+				<h3>FAQ</h3>
+				<h4>Will Galleriffic generate the slide and thumbnail images automatically?</h4>
+				<p>I have been asked a lot if Galleriffic automatically generates the thumbnails and slides.  Galleriffic by itself does <strong>not</strong> do any image processiong or generation; however, there is a great tool that does: <a title="jAlbum" href="http://jalbum.net">jAlbum</a>.  I have created a <a title="Galleriffic jAlbum Skin" href="http://jalbum.net/skins/skin/Galleriffic">jAlbum skin</a> that I use myself for creating my personal galleries.  After installing jAlbum and the Galleriffic jAlbum skin, simply choose your source image directory and an output directory, click "Make Album", and wallah, you now have a complete html gallery with 3 different size versions of each image.</p>
+				<h4>How can I change the number of thumbnail columns?</h4>
+				<p>With the stylesheet used in these examples, each thumbnail is floated left, and thus as many thumbnails that will fit in the width of the column will be displayed.  If you want fewer or more columns, make the width of the navigation panel smaller or larger.  In all but the last example, I am setting the width using javascript with the following lines in the html page:
+<pre class="jush-js">
+	$('div.navigation').css({'width' : '300px', 'float' : 'left'});
+	$('div.content').css('display', 'block');
+</pre>
+
+				<h3>Download</h3>
+
+				Download latest (release 2.0):
+				<ul>
+					<li>Examples: <a href="galleriffic-2.0.zip">galleriffic-2.0.zip</a> ( ~135 kb )</li>
+					<li>Script only: <a href="js/jquery.galleriffic.js">jquery.galleriffic.js</a> ( ~32 kb )</li>
+				</ul>
+
+				<h3>Extras</h3>
+
+				<p>I put together a <a href="http://jalbum.net/skins/skin/Galleriffic">jAlbum skin</a> to make building static albums a breeze.  Check it out <a href="http://jalbum.net/skins/skin/Galleriffic">here</a>.</p>
+
+				<h3>Source Code</h3>
+				
+				<p>The SVN repo is located at <a href="http://code.google.com/p/galleriffic/source/browse/#svn/trunk/example">Google Code</a></p>
+				
+				<h3>Feedback</h3>
+
+				<p>
+					For general feedback, please leave a comment <a href="http://trentacular.com/2009/10/galleriffic-2-0/">here</a>.
+				</p>
+				
+				<p>
+					If you feel you have encountered a legitimate issue or have a valuable enhancement request, you are welcome to add it to the <a href="http://code.google.com/p/galleriffic/issues/list">issues list</a> which I am working off of for future releases.
+				</p>
+				
+				<p>I'd also like to keep a list of sites making use of Galleriffic, so if this is you, please email me (trent [at] twospy.com) your Web site's URL and indicate whether or not I may list it publicly.</p>
+
+				<h3>Donate</h3>
+				
+				<p>If you find Galleriffic useful and would sleep better knowing you gave something back, feel free to make a donation!
+					<form action="https://www.paypal.com/cgi-bin/webscr" method="post" style="text-align: center;">
+						<input type="hidden" name="cmd" value="_s-xclick">
+						<input type="hidden" name="hosted_button_id" value="3012662">
+						<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="">
+						<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+					</form>
+				</p>
+
+				<div id="ads">
+				<!-- Google Ads -->
+				<script type="text/javascript"><!--
+				google_ad_client = "pub-4720581481756902";
+				/* 728x90, created 9/19/08 */
+				google_ad_slot = "7729547492";
+				google_ad_width = 728;
+				google_ad_height = 90;
+				//-->
+				</script>
+				<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+				<!-- End Google Ads -->
+				</div>
+			</div>
+		</div>
+		<div id="footer">&copy; 2009 Trent Foley</div>		
+		<!-- Syntax Highlighting -->
+		
+		<script type="text/javascript">
+			jush.style('css/jush.css');
+			jush.highlight_tag('pre');
+		</script>
+
+		<!-- Start of Google Analytics -->
+		<script type="text/javascript">
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+		<script type="text/javascript">
+		var pageTracker = _gat._getTracker("UA-1812771-1");
+		pageTracker._trackPageview();
+		</script>
+		<!-- End of Google Analytics -->
+	</body>
+</html>

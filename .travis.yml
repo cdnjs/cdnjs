@@ -1,3 +1,19 @@
+---
 language: node_js
 node_js:
-  - 0.8
+- 0.8
+
+env:
+  global:
+    - "ARTIFACTS_AWS_REGION=us-east-1"
+    - "ARTIFACTS_S3_BUCKET=cdnjs-artifacts"
+    - secure: "TxudD0/5dovbpXh0ILUY+KRAGFgrJLdE7PE7y/wVI1cCtvg1kU28oKF29gXO\nhcEgEfOFX+mzKDHaHr0hpHd8vB24G7O6jhfJj8rb+QBGZ5NUvxN9H9t5SAL6\ngguGRavYOzjh/6sctcrRGdRsP4hJNCQ+uK/r2UtHBI3cFFKZx8U="
+    - secure: "VoYj/ZRKi72hpL3sB3sj2AhBorrTTeXUrtPajWRR4v5lgxrxia1K8vwEhCkg\nfESygxOUuao7LdWkQcDVrcmlyoXLdGU2vBNKmr6Aayxo7KwGaWjUtE1OICFk\nrhMkykHusQiMmLnmz/7663h4dJe53Cup8c1cHF0HApVJDVIwjGw="
+
+before_script:
+- "gem install travis-artifacts"
+after_success:
+- "node ./build/packages.json.js"
+- "travis-artifacts upload --path packages.json --target-path /"
+- "travis-artifacts upload --path rss --target-path /"
+

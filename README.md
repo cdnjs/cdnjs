@@ -3,11 +3,14 @@
 
 # cdnJS Script Repository
 
-The repository mirroring all scripts on cdnjs.cloudflare.com
+The repository mirroring all scripts on cdnjs.cloudflare.com, created and maintained by [Thomas Davis](https://twitter.com/neutralthoughts) and [Ryan Kirkman](https://twitter.com/ryan_kirkman).
 
 We will host any version of any library. Feel free to add a pull request for an older version of a library if your site still uses it.
 
 __Libraries must have notable popularity. 100 watchers on GitHub is a good example, but as long as reasonably popularity can be demonstrated the library will be added.__
+## Extensions, Plugins, Resources
+
+[Extensions, Plugins, Resources](https://github.com/cdnjs/cdnjs/wiki/Extensions%2C-Plugins%2C-Resources)
 
 ## Pull requests steps
 
@@ -30,5 +33,4 @@ __Libraries must have notable popularity. 100 watchers on GitHub is a good examp
 1. Install all the needed dependencies locally (you will need `node`): `npm install`
 2. Run the test suite: `npm test`
 
-<img alt="Clicky" width="1" height="1" src="//in.getclicky.com/66606907ns.gif" />
 
