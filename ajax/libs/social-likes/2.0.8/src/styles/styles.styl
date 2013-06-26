@@ -1,0 +1,430 @@
+/* Social Likes by Artem Sapegin. http://sapegin.github.com/social-likes */
+
+.social-likes,
+.social-likes__widget {
+	display:inline-block;
+	vertical-align:middle;
+	line-height:20px;
+	text-indent:0;
+	padding:0;
+	border:0;
+	word-spacing:0;
+	font-size:14px;
+	*zoom:1;
+	*display:inline;
+}
+
+.social-likes {
+	margin:-3px;
+	line-height:26px;
+	list-style:none;
+
+	li {
+		display:inline-block;
+		*zoom:1;
+		*display:inline;
+	}
+	&_vertical li {
+		display:block;
+	}
+	&__widget {
+		display:inline-block;
+		position:relative;
+		margin:3px;
+		white-space:nowrap;
+	}
+	&__widget:before {
+		display:none;  // Remove nice bullets
+	}
+
+	&__button,
+	&__counter,
+	&__balloon,
+	&__balloon__code {
+		font-family:"Trebuchet MS", "Helvetica Neue", Tahoma, sans-serif;
+		font-size:14px;
+		text-rendering:optimizeLegibility;
+	}
+
+	&__button,
+	&__counter {
+		display:inline-block;
+		*display:inline;
+		*float:left;
+		margin:0;
+		line-height:18px;
+		border-width:1px;
+		border-style:solid;
+		border-radius:3px;
+		outline:0;
+	}
+
+	&__button {
+		position:relative;
+		padding:1px 4px 1px 20px;
+		font-weight:bold;
+		text-shadow:0 1px 0 hsla(0,0%,100%,.6);
+		box-shadow:0 1px 1px hsla(0,0%,0%,.05);
+		transition:border .1s ease-in-out, color .2s ease-in-out;
+		cursor:pointer;
+		user-select:none;
+	}
+
+	&__icon {
+		position:absolute;
+		top:0;
+		left:0;
+		width:20px;
+		height:20px;
+		background-repeat:no-repeat;
+	}
+
+	&__counter {
+		position:relative;
+		margin-left:7px;
+		padding:1px 4px;
+		font-weight:normal;
+		color:#666;
+		color:hsla(0,0%,0%,.5);
+		cursor:default;
+	}
+
+	&__counter:before,
+	&__counter:after {
+		content:"";
+		position:absolute;
+		width:0;
+		height:0;
+	}
+	&__counter:before {
+		top:4px;
+		left:-6px;
+		border:6px inset transparent;  // inset fixes strange artefacts in Firefox
+		border-left:0;
+		border-right:6px solid;
+		border-right-color:inherit;
+		opacity:.7;
+		}
+	&__counter:after {
+		top:5px;
+		left:-4px;
+		border:5px inset transparent;  // inset fixes strange artefacts in Firefox
+		border-left:0;
+		border-right:5px solid;
+		}
+
+	&__close {
+		position:absolute;
+		right:0;
+		top:0;
+		padding:2px 4px;
+		font:16px Verdana, Geneva, Tahoma, sans-serif;
+		color:#999;
+		cursor:pointer;
+	}
+	&__close:hover {
+		color:#111;
+	}
+	&__close:before {
+		display:none;  // Remove nice bullets
+	}
+
+	// Vertical mode
+	&_vertical {
+		margin:-6px -4px;
+
+		.social-likes__widget {
+			display:block;
+			margin:6px 4px;
+		}
+	}
+
+	// Single button mode
+	&_single-w {
+		position:relative;
+		display:inline-block;
+	}
+	&_single {
+		position:absolute;
+		display:none;
+		top:-6px;
+		left:-6px;
+		padding:6px 6px 4px;
+		background:#fff;
+		text-align:left;
+		box-shadow:0 0 15px hsla(0,0%,0%,.3);
+		z-index:99999;
+	}
+	&_single &__widget:first-of-type {
+		margin-right:14px;  // Prevent collapse of widget and close button
+	}
+}
+
+
+// Single button
+.social-likes__button_single {
+	position:relative;
+	padding-left:19px;
+	background:#e2e2e2;
+	background:linear-gradient(top, #f7f7f7, #e2e2e2);
+	color:#444;
+	border-color:#ccc;
+	border-color:hsla(0,0%,70%,.8);
+	border-bottom-color:hsla(0,0%,60%,.8);
+}
+.social-likes__button_single:hover {
+	background:#f4f4f4;
+	background:linear-gradient(top, #f0f0f0, #cfcfcf);
+	color:#222;
+	border-color:#bbb;
+	border-bottom-color:#9f9f9f;
+}
+.social-likes__icon_single {
+	background-image:embedurl('../icons/single.png');
+	background-position:2px 3px;
+}
+.social-likes__counter_single {
+	background:#f6f6f6;
+	border-color:#ddd;
+}
+.social-likes__counter_single:after {
+	border-right-color:#f6f6f6;
+}
+
+
+// Facebook
+.social-likes__button_facebook {
+	padding-left:19px;
+	background:#eceef5;
+	background:linear-gradient(top, #fff, #d8def4);
+	color:#3b5998;
+	border-color:#cad4e7;
+	border-color:hsla(219,38%,85%,.8);
+	border-bottom-color:hsla(219,12%,77%,.8);
+}
+.social-likes__button_facebook:hover {
+	background:#c0cdf3;
+	background:linear-gradient(top, #f2f3f7, #c0cdf3);
+	color:#253860;
+	border-color:#b4bfd4;
+	border-bottom-color:#b3b7bf;
+}
+.social-likes__icon_facebook {
+	background-image:embedurl('../icons/facebook.png');
+	background-position:3px 3px;
+}
+.social-likes__counter_facebook {
+	background:#f2f3f7;
+	border-color:#cad4e7;
+}
+.social-likes__counter_facebook:after {
+	border-right-color:#f2f3f7;
+}
+
+
+// Twitter
+.social-likes__button_twitter {
+	padding-left:19px;
+	background:#d5e6ef;
+	background:linear-gradient(top, #fff, #d5e6ef);
+	color:#186487;
+	border-color:#a4cce5;
+	border-color:hsla(203,56%,77%,.8);
+	border-bottom-color:hsla(203,31%,71%,.8);
+}
+.social-likes__button_twitter:hover {
+	background:#bfdfed;
+	background:linear-gradient(top, #f2f8fc, #bfdfed);
+	color:#0b3752;
+	border-color:#9cbbcf;
+	border-bottom-color:#68a0c4;
+}
+.social-likes__icon_twitter {
+	background-image:embedurl('../icons/twitter.png');
+	background-position:3px 5px;
+}
+.social-likes__counter_twitter {
+	background:#f2f8fc;
+	border-color:#a4cce5;
+}
+.social-likes__counter_twitter:after {
+	border-right-color:#f2f8fc;
+}
+
+
+// Google+
+.social-likes__button_plusone {
+	padding-left:12px;
+	background:#e4e4e4;
+	background:linear-gradient(top, #f5f5f5, #e4e4e4);
+	color:#da573b;
+	border-color:#bbb;
+	border-color:hsla(0,0%,80%,.8);
+	border-bottom-color:hsla(0,0%,70%,.8);
+}
+.social-likes__button_plusone:hover {
+	background:#f4f4f4;
+	background:linear-gradient(top, #f9f9f9, #f0f0f0);
+	color:#cd4427;
+	border-color:#ddd;
+	border-bottom-color:#ccc;
+}
+.social-likes__icon_plusone {
+	background-image:embedurl('../icons/plusone.png');
+	background-position:0 6px;
+}
+.social-likes__counter_plusone {
+	background:#f9f9f9;
+	border-color:#d2d2d2;
+}
+.social-likes__counter_plusone:after {
+	border-right-color:#f9f9f9;
+}
+
+
+// Mail.ru
+.social-likes__button_mailru {
+	padding-left:18px;
+	background:#004584;
+	background:linear-gradient(top, #5d90ba, #004584);
+	color:#fff;
+	color:hsla(0,0%,100%,.95);
+	border-color:#1e65a5;
+	border-color:hsla(209,87%,32%,.8);
+	border-bottom-color:hsla(208,88%,10%,.8);
+	text-shadow: 0 -1px 0 hsla(0,0%,0%,.3);
+}
+.social-likes__button_mailru:hover {
+	background:#001e5d;
+	background:linear-gradient(top, #618cae, #001e5d);
+	color:#fff;
+	color:hsla(0,0%,100%,.99);
+	border-color:#094984;
+	border-bottom-color:#031b30;
+}
+.social-likes__icon_mailru {
+	background-image:embedurl('../icons/mailru.png');
+	background-position:1px 2px;
+}
+.social-likes__counter_mailru {
+	background:#fff1c2;
+	border-color:#ffc70d;
+}
+.social-likes__counter_mailru:after {
+	border-right-color:#fff1c2;
+}
+
+// Vkontakte
+.social-likes__button_vkontakte {
+	background:#436f96;
+	background:linear-gradient(top, #8faecf, #436f96);
+	color:#fff;
+	color:hsla(0,0%,100%,.95);
+	border-color:#4d84c1;
+	border-color:hsla(212,48%,53%,.8);
+	border-bottom-color:hsla(211,42%,35%,.8);
+	text-shadow: 0 -1px 0 hsla(0,0%,0%,.3);
+}
+.social-likes__button_vkontakte:hover {
+	background:#4e80ab;
+	background:linear-gradient(top, #a2c0df, #4e80ab);
+	color:#fff;
+	color:hsla(0,0%,100%,.99);
+	border-color:#5788be;
+	border-bottom-color:#3b6798;
+}
+.social-likes__icon_vkontakte {
+	background-image:embedurl('../icons/vkontakte.png');
+	background-position:1px 2px;
+}
+.social-likes__counter_vkontakte {
+	background:#eaeef3;
+	border-color:#afc1d4;
+}
+.social-likes__counter_vkontakte:after {
+	border-right-color:#eaeef3;
+}
+
+
+// Odnoklassniki
+.social-likes__button_odnoklassniki {
+	padding-left:17px;
+	background:#f6900b;
+	background:linear-gradient(top, #f6bb6d, #f6900b);
+	color:#fff;
+	color:hsla(0,0%,100%,.95);
+	border-color:#d99c27;
+	border-color:hsla(39,70%,50%,.8);
+	border-bottom-color:hsla(41,93%,40%,.8);
+	text-shadow: 0 -1px 0 hsla(0,0%,0%,.12);
+}
+.social-likes__button_odnoklassniki:hover {
+	background:#f69a21;
+	background:linear-gradient(top, #fbcc5a, #f69a21);
+	color:#fff;
+	color:hsla(0,0%,100%,.99);
+	border-color:#f0b22c;
+	border-bottom-color:#c59121;
+}
+.social-likes__icon_odnoklassniki {
+	background-image:embedurl('../icons/odnoklassniki.png');
+	background-position:4px 3px;
+}
+.social-likes__counter_odnoklassniki {
+	background:#ffe9be;
+	border-color:#d9ab53;
+}
+.social-likes__counter_odnoklassniki:after {
+	border-right-color:#ffe9be;
+}
+
+
+// Livejournal
+.social-likes__button_livejournal {
+	background:#cadcf3;
+	background:linear-gradient(top, #fff, #cadcf3);
+	color:#5183b4;
+	border-color:hsla(208,78%,84%,.8);
+	border-bottom-color:hsla(209,22%,60%,.8);
+}
+.social-likes__button_livejournal:hover {
+	background:#dce2f5;
+	background:linear-gradient(top, #ecf1f7, #bad2f0);
+	color:#253759;
+	border-color:#b7cfe4;
+	border-bottom-color:#9caebe;
+}
+.social-likes__icon_livejournal {
+	background-image:embedurl('../icons/livejournal.png');
+	background-position:2px 2px;
+}
+
+
+// Pinterest
+.social-likes__button_pinterest {
+	padding-left:20px;
+	background:#eee;
+	background:linear-gradient(top, #fefefe, #d3d3d3);
+	color:hsl(355,77%,44%);
+	border-color:#bbb;
+	border-color:hsla(0,0%,73%,.8);
+	border-bottom-color:hsla(0,0%,60%,.8);
+}
+.social-likes__button_pinterest:hover {
+	background:#efefef;
+	background:linear-gradient(top, #fff, #d9d9d9);
+	color:hsl(355,80%,42%);
+	border-color:hsla(0,0%,73%,.6);
+	border-bottom-color:hsla(0,0%,60%,.6);
+}
+.social-likes__icon_pinterest {
+	background-image:embedurl('../icons/pinterest.png');
+	background-position:2px 1px;
+}
+.social-likes__counter_pinterest {
+	background:hsl(355,100%,98%);
+	border-color:hsl(355,70%,80%);
+}
+.social-likes__counter_pinterest:after {
+	border-right-color:hsl(355,100%,98%);
+}
