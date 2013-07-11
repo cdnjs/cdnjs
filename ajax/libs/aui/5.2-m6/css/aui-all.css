@@ -1,0 +1,4903 @@
+/*! AUI Flat Pack - version 5.2-m6 - generated 2013-05-29 03:12:37 -0400 */
+
+
+/**
+ * RESET
+ */
+html, body, p, div, h1, h2, h3, h4, h5, h6, img, pre, form, fieldset {
+    margin: 0;
+    padding: 0;
+}
+ul, ol, dl {
+    margin: 0;
+}
+img, fieldset { 
+	border: 0; 
+}
+
+/**
+ * TYPOGRAPHY - 14px base font size, agnostic font stack
+ */
+body {
+    color: #333;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.42857142857143; /* 20px equiv line-height */
+}
+
+/* International Font Stacks*/
+[lang=en] {
+    font-family: Arial, sans-serif;
+}
+
+[lang=ja] {
+    font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", Verdana, Arial, sans-serif;
+}
+
+/* Default margins */
+p,
+ul,
+ol,
+dl,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+blockquote,
+pre,
+form.aui,
+table.aui,
+.aui-tabs,
+.aui-panel,
+.aui-group {
+    margin: 10px 0 0 0;
+}
+
+/* No top margin to interfere with box padding */
+p:first-child,
+ul:first-child,
+ol:first-child,
+dl:first-child,
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child,
+h6:first-child,
+blockquote:first-child,
+pre:first-child,
+form.aui:first-child,
+table.aui:first-child,
+.aui-tabs:first-child,
+.aui-panel:first-child,
+.aui-group:first-child {
+    margin-top: 0;
+}
+
+/* Headings: desired line height in px / font size = unitless line height */
+h1 {
+    font-size: 24px;
+    font-weight: normal;
+    line-height: 1.25; /* 30px equiv line-height */
+    margin: 30px 0 0 0;
+}
+h2 {
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 1.5; /* 30px equiv line-height */
+    margin: 30px 0 0 0;
+}
+h3 {
+    font-size: 16px;
+    line-height: 1.5; /* 24px equiv line-height */
+    margin: 30px 0 0 0;
+}
+h4 {
+    font-size: 14px;
+    line-height: 1.42857142857143; /* 20px equiv line-height */
+    margin: 20px 0 0 0;
+}
+h5 {
+    color: #707070;
+    font-size: 12px;
+    line-height: 1.66666666666667;
+    margin: 20px 0 0 0;
+    text-transform: uppercase;
+}
+h6 {
+    color: #707070;
+    font-size: 12px;
+    line-height: 1.66666666666667;
+    margin: 20px 0 0 0;
+}
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child,
+h6:first-child {
+    margin-top: 0;
+}
+/* Nice styles for using subheadings */
+h1 + h2,
+h2 + h3,
+h3 + h4,
+h4 + h5,
+h5 + h6 {
+    margin-top: 10px;
+}
+/* Increase the margins on all headings when used in the group/item pattern ... */
+.aui-group > .aui-item > h1:first-child,
+.aui-group > .aui-item > h2:first-child,
+.aui-group > .aui-item > h3:first-child,
+.aui-group > .aui-item > h4:first-child,
+.aui-group > .aui-item > h5:first-child,
+.aui-group > .aui-item > h6:first-child {
+    margin-top: 20px;
+}
+/* ... unless they're the first-child */
+.aui-group:first-child > .aui-item > h1:first-child,
+.aui-group:first-child > .aui-item > h2:first-child,
+.aui-group:first-child > .aui-item > h3:first-child,
+.aui-group:first-child > .aui-item > h4:first-child,
+.aui-group:first-child > .aui-item > h5:first-child,
+.aui-group:first-child > .aui-item > h6:first-child {
+    margin-top: 0;
+}
+
+/* Other typographical elements */
+small {
+    color: #707070;
+    font-size: 12px;
+    line-height: 1.33333333333333; /* 16px equiv line-height */
+}
+code,
+kbd {
+    font-family: monospace;
+}
+var,
+address,
+dfn,
+cite {
+    font-style: italic;
+}
+cite:before {
+    content: "\2014 \2009";
+}
+blockquote {
+    border-left: 1px solid #ccc;
+    color: #707070;
+    margin-left: 19px;
+    padding: 10px 20px;
+}
+blockquote > cite {
+    display: block;
+    margin-top: 10px;
+}
+q {
+    color: #707070;
+}
+q:before {
+    content: open-quote;
+}
+q:after {
+    content: close-quote;
+}
+abbr {
+    border-bottom: 1px #707070 dotted;
+    cursor: help;
+}
+/* Solution from https://github.com/necolas/normalize.css/blob/master/normalize.css */
+/* Corrects block display not defined in IE6/7/8/9 & FF3 */
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
+    display: block;
+}
+
+/* Corrects inline-block display not defined in IE6/7/8/9 & FF3 */
+audio, canvas, video {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+/* AUI avatar component */
+.aui-avatar {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: text-bottom;
+}
+.aui-avatar-inner {
+    display: table-cell;
+    vertical-align: middle;
+}
+.aui-avatar img {
+    border-radius: 3px;
+    display: block;
+    margin: 0 auto;
+    height: 100%;
+    width: 100%;
+}
+
+.aui-avatar-xsmall,
+.aui-avatar-xsmall .aui-avatar-inner {
+    height: 16px;
+    width: 16px;
+}
+.aui-avatar-small,
+.aui-avatar-small .aui-avatar-inner {
+    height: 24px;
+    width: 24px;
+}
+.aui-avatar-medium,
+.aui-avatar-medium .aui-avatar-inner {
+    height: 32px;
+    width: 32px;
+}
+.aui-avatar-large,
+.aui-avatar-large .aui-avatar-inner {
+    height: 48px;
+    width: 48px;
+}
+.aui-avatar-xlarge,
+.aui-avatar-xlarge .aui-avatar-inner {
+    height: 64px;
+    width: 64px;
+}
+
+.aui-avatar-xxlarge,
+.aui-avatar-xxlarge .aui-avatar-inner {
+    height: 96px;
+    width: 96px;
+}
+
+.aui-avatar-xxxlarge,
+.aui-avatar-xxxlarge .aui-avatar-inner {
+    height: 128px;
+    width: 128px;
+}
+
+
+.aui-avatar-xxlarge img,
+.aui-avatar-xxxlarge img {
+    border-radius: 5px;
+}
+
+/* Project avatars - circular and different sizes */
+.aui-avatar-project {
+    background-color: #fff;
+    box-shadow: 0 0 0 1px #ccc;
+    position: relative;
+}
+.aui-avatar-project,
+.aui-avatar-project img {
+    border-radius: 100%;
+}
+.aui-avatar-project img {
+    height: auto;
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+}
+/* The below style aims to minimise any "halo" caused by the antialiasing of the image */
+.aui-avatar-project:before {
+    border-radius: 100%;
+    border: 1px solid #ccc;
+    bottom: -1px;
+    content: "";
+    left: -1px;
+    position: absolute;
+    right: -1px;
+    top: -1px;
+}
+/*! AUI Badge */
+.aui-badge {
+    background: #ccc; /* for IE8 - IE9 and other browsers gets the next line */
+    background: rgba(0, 0, 0, 0.2); /* #ccc - derived with black on white - rgba so it tints off the background colour */
+    border-radius: 2em; /* needs to be at least 1em + border-top + border-bottom + padding-top + padding-bottom to get perfectly rounded */
+    color: #333; /* for IE8 - IE9 and other browsers gets the next line */
+    color: rgba(0, 0, 0, .8); /* #333 on white - rgba so it tints off the background colour */
+    display: inline-block;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 1;
+    margin: 0;
+    min-width: 1em; /* want a capsule style even when single digit */
+    padding: 3px 5px 2px 5px; /* override in aui-badge-ie.css */
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: none;
+    text-transform: uppercase;
+}
+/* Light version for contexts we know about */
+.aui-header a:active > .aui-badge,
+.aui-button-primary > .aui-badge,
+.aui-dropdown2.aui-style-default .active > .aui-badge {
+    background: #6B95C2; /* for IE8 - IE9 and other browsers gets the next line */
+    background: rgba(255, 255, 255, .25);
+    color: #fff;
+}
+.aui-button[disabled] > .aui-badge {
+    background: #ccc; /* for IE8 - IE9 and other browsers gets the next line */
+    background: rgba(0, 0, 0, 0.2); /* #ccc - derived with black on white - rgba so it tints off the background colour */
+    color: inherit;
+}
+.aui-button-primary[disabled] > .aui-badge {
+    background: #ccc; /* for IE8 - IE9 and other browsers gets the next line */
+    background: rgba(255, 255, 255, .25);
+}
+.aui-button > .aui-badge,
+.aui-tabs .menu-item .aui-badge {
+    top: -1px; /* slight tweak to position them in specific contexts */
+}
+/* AUI BUTTONS
+ * Note hover/disabled styles set directly as they are not precisely the same as
+ * if we used straight opacity.
+ */
+
+/* Basic Button Style */
+.aui-button,
+a.aui-button,
+.aui-button:visited {
+    background: #f2f2f2;
+    background: -webkit-linear-gradient(top, #fff 0%, #f2f2f2 100%);
+    background:    -moz-linear-gradient(top, #fff 0%, #f2f2f2 100%);
+    background:     -ms-linear-gradient(top, #fff 0%, #f2f2f2 100%);
+    background:      -o-linear-gradient(top, #fff 0%, #f2f2f2 100%);
+    background:         linear-gradient(to bottom, #fff 0%, #f2f2f2 100%);
+    border: 1px solid #ccc;
+    border-radius: 3.01px;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #333;
+    cursor: pointer;
+    display: inline-block;
+    font-family: inherit;
+    font-size: 14px;
+    font-variant: normal;
+    font-weight: normal;
+    height: 2.1428571428571em; /* 30px - using ems so the fields increase in line with user specified font-sizes */
+    line-height: 1.42857142857143;   /* 20px */
+    margin: 0;
+    padding: 4px 10px;
+    text-decoration: none;
+    text-shadow: 0 1px 0 white;
+    vertical-align: baseline;
+    white-space: nowrap;
+}
+.aui-button ~ .aui-button {
+    margin-left: 10px;
+}
+/* Ensure underlines not added by link styles */
+a.aui-button:hover,
+a.aui-button:active,
+a.aui-button:focus {
+    text-decoration: none;
+}
+
+/* Control button height in Firefox. See http://www.experimentgarden.com/2010/11/firefox-buttontext-height-and-padding.html */
+.aui-button::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+.aui-button:focus,
+.aui-button:hover,
+.aui-button-subtle.aui-button:focus,
+.aui-button-subtle.aui-button:hover {
+    background: #f7f7f7;
+    background: -webkit-linear-gradient(top, #fff 0%, #f7f7f7 100%);
+    background:    -moz-linear-gradient(top, #fff 0%, #f7f7f7 100%);
+    background:     -ms-linear-gradient(top, #fff 0%, #f7f7f7 100%);
+    background:      -o-linear-gradient(top, #fff 0%, #f7f7f7 100%);
+    background:         linear-gradient(to bottom, #fff 0%, #f7f7f7 100%);
+    border-color: #999;
+    color: #000;
+    text-decoration:none;
+}
+
+.aui-button:active,
+.aui-button.active,
+.aui-header .aui-button-split-more.active,
+.aui-button-subtle.aui-button:active,
+.aui-button-subtle.aui-button.active {
+    background-image: none;
+    background-color: #f2f2f2;
+    box-shadow: inset 0 3px 6px rgba(0,0,0,.1);
+    text-shadow: none;
+    text-decoration:none;
+}
+
+/* Primary Buttons */
+.aui-button.aui-button-primary,
+.aui-button.aui-button-primary:visited {
+    background: #3068a2;
+    background: -webkit-linear-gradient(top, #4687ce 0%, #3068a2 100%);
+    background:    -moz-linear-gradient(top, #4687ce 0%, #3068a2 100%);
+    background:     -ms-linear-gradient(top, #4687ce 0%, #3068a2 100%);
+    background:      -o-linear-gradient(top, #4687ce 0%, #3068a2 100%);
+    background:         linear-gradient(to bottom, #4687ce 0%, #3068a2 100%); 
+    border-color: #486582;
+    color: #fff;
+    font-weight: bold;
+    -webkit-font-smoothing: antialiased; /* for chrome on mac */
+    text-shadow: 0 1px 0 #205081;
+}
+
+.aui-button.aui-button-primary:hover,
+.aui-button.aui-button-primary:focus {
+    background: #3673B5;
+    background: -webkit-linear-gradient(top, #5A94D3 0%, #3673B5 100%);
+    background:    -moz-linear-gradient(top, #5A94D3 0%, #3673B5 100%); 
+    background:     -ms-linear-gradient(top, #5A94D3 0%, #3673B5 100%);
+    background:      -o-linear-gradient(top, #5A94D3 0%, #3673B5 100%);
+    background:         linear-gradient(to bottom, #5A94D3 0%,#3673B5 100%);
+    border-color: #205081;
+    color: #fff;
+    text-shadow: 0 1px 0 #205081;
+}
+
+.aui-button.aui-button-primary:active {
+    background: #3673B5;
+    background-image: none;
+    background-color: #3673B5;
+    box-shadow: inset 0 3px 6px rgba(0,0,0,.1);
+    text-shadow: none;
+    text-decoration:none;
+}
+
+/* Link style buttons - used for destructive/cancel actions ONLY */
+.aui-button.aui-button-link,
+.aui-button.aui-button-link:visited  {
+    background: transparent;
+    border-color: transparent;
+    color: #3b73af;
+    padding: 5px 0;
+    text-decoration: none;
+    text-shadow: none;
+    box-shadow: none;
+}
+
+.aui-button.aui-button-link:focus,
+.aui-button.aui-button-link:hover,
+.aui-button.aui-button-link:active,
+.aui-buttons .aui-button.aui-button-link:focus,
+.aui-buttons .aui-button.aui-button-link:hover,
+.aui-buttons .aui-button.aui-button-link:active,
+.aui-buttons .aui-button.aui-button-link[aria-pressed="true"] {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+/* Subtle/hybrid/entity action/mugger buttons */
+.aui-button.aui-button-subtle {
+    background: transparent;
+    border-color: transparent;
+    color: #707070;
+}
+.aui-buttons .aui-button.aui-button-subtle {
+    border-radius: 3.01px;
+}
+.aui-button.aui-button-subtle .aui-icon {
+    margin-right: 1px;
+}
+
+/* Compact Buttons */
+.aui-button.aui-button-compact {
+    font-size: 12px;
+    height: 2.16666666666667em; /* 26px with 12px font-size */
+    padding:  2px 8px 2px 8px;
+    line-height: 1.66666666666667;
+}
+
+/* End Compact Buttons */
+
+/* aui-buttons groups buttons together into one button lozenge. */
+.aui-buttons {
+    display: inline-block;
+    font-size: 0;
+}
+.aui-buttons:after {
+    clear: both;
+    content: "";
+    display: table;
+}
+.aui-buttons .aui-button {
+    border-radius: 0;
+    margin: 0;
+}
+.aui-buttons .aui-button:first-child {
+    border-top-left-radius: 3.01px;
+    border-bottom-left-radius: 3.01px;
+}
+.aui-buttons .aui-button:last-child {
+    border-top-right-radius: 3.01px;
+    border-bottom-right-radius: 3.01px;
+}
+.aui-buttons + .aui-buttons {
+    margin-left: 10px;
+}
+
+/* Grouped buttons go into toolbar style */
+.aui-buttons .aui-button:focus,
+.aui-buttons .aui-button:hover,
+.aui-buttons .aui-button:active {
+    border-color: #999;
+}
+.aui-buttons .aui-button[disabled],
+.aui-buttons .aui-button[disabled]:hover,
+.aui-buttons .aui-button[disabled]:focus,
+.aui-buttons .aui-button[disabled]:active,
+.aui-buttons .aui-button[aria-disabled="true"],
+.aui-buttons .aui-button[aria-disabled="true"]:hover,
+.aui-buttons .aui-button[aria-disabled="true"]:focus,
+.aui-buttons .aui-button[aria-disabled="true"]:active {
+    border-color: #ccc;
+}
+
+
+/* Grouped Primary Buttons */
+
+/* Primary Buttons */
+.aui-buttons .aui-button.aui-button-primary {
+    background: #f2f2f2;
+    background: -webkit-linear-gradient(top, #fff 0%, #f2f2f2 100%);
+    background:    -moz-linear-gradient(top, #fff 0%, #f2f2f2 100%); 
+    background:     -ms-linear-gradient(top, #fff 0%, #f2f2f2 100%);
+    background:      -o-linear-gradient(top, #fff 0%, #f2f2f2 100%); 
+    background:         linear-gradient(to bottom, #fff 0%, #f2f2f2 100%);
+    border-color: #ccc;
+    color: #3b73af;
+    text-shadow: none;
+}
+
+.aui-buttons .aui-button ~ .aui-button {
+    border-left-width: 0;
+    padding-left: 11px;
+}
+
+.aui-buttons .aui-button.aui-button-primary:hover,
+.aui-buttons .aui-button.aui-button-primary:focus,
+.aui-buttons .aui-button.aui-button-primary:active {
+    border-color: #999;
+    color: #205081;
+}
+
+.aui-buttons .aui-button ~ .aui-button:hover,
+.aui-buttons .aui-button ~ .aui-button:focus,
+.aui-buttons .aui-button ~ .aui-button:active {
+    border-width: 1px;
+    margin-left: -1px;
+    position: relative;
+}
+
+/* Selected buttons - NOT supported for free-standing primary buttons
+ARIA usage from http://www.paciellogroup.com/blog/misc/ARIA/togglebutton.html */
+.aui-button[aria-pressed="true"],
+.aui-buttons .aui-button[aria-pressed="true"],
+.aui-buttons .aui-button[aria-pressed="true"].aui-button-primary,
+.aui-buttons .aui-button[aria-pressed="true"].aui-button-subtle {
+    background: #ccc;
+    background: -webkit-linear-gradient(top, #ccc 0%, #ddd 13%); 
+    background:    -moz-linear-gradient(top, #ccc 0%, #ddd 13%);
+    background:     -ms-linear-gradient(top, #ccc 0%, #ddd 13%); 
+    background:      -o-linear-gradient(top, #ccc 0%, #ddd 13%); 
+    background:         linear-gradient(to bottom, #ccc 0%, #ddd 13%);
+}
+
+.aui-button[aria-pressed="true"].aui-button-subtle,
+.aui-buttons .aui-button[aria-pressed="true"].aui-button-subtle {
+    color: #333;
+    border-color: #ccc;
+}
+
+.aui-buttons .aui-button[aria-pressed="true"]:active {
+    background: #ccc;
+    box-shadow: inset 0px 3px 6px rgba(0,0,0,.2);
+}
+
+
+/* Disabled states (keep last to avoid excessive selector weight)
+---------------------------------------------------------------------- */
+.aui-button[disabled],
+.aui-button[disabled]:hover,
+.aui-button[disabled]:focus,
+.aui-button[disabled]:active,
+.aui-button[aria-disabled="true"],
+.aui-button[aria-disabled="true"]:hover,
+.aui-button[aria-disabled="true"]:focus,
+.aui-button[aria-disabled="true"]:active,
+.aui-button[aria-disabled="true"][aria-pressed] {
+    background: #f2f2f2;
+    background: -webkit-linear-gradient(top, #fff 0%, #f2f2f2 100%);
+    background:    -moz-linear-gradient(top, #fff 0%, #f2f2f2 100%);
+    background:     -ms-linear-gradient(top, #fff 0%, #f2f2f2 100%);
+    background:      -o-linear-gradient(top, #fff 0%, #f2f2f2 100%);
+    background:         linear-gradient(to bottom, #fff 0%, #f2f2f2 100%);
+    border-color: #ccc;
+    box-shadow: none;
+    color: #999;
+    cursor: default;
+    text-shadow: none;
+}
+
+/* Subtle buttons have their own disabled stated*/
+.aui-button.aui-button-subtle[disabled],
+.aui-button.aui-button-subtle[aria-disabled="true"] {
+    border: 0;
+    background: none;
+}
+
+.aui-button.aui-button-primary[disabled],
+.aui-button.aui-button-primary[disabled]:hover,
+.aui-button.aui-button-primary[disabled]:focus,
+.aui-button.aui-button-primary[disabled]:active,
+.aui-button.aui-button-primary[aria-disabled="true"],
+.aui-button.aui-button-primary[aria-disabled="true"]:hover,
+.aui-button.aui-button-primary[aria-disabled="true"]:focus,
+.aui-button.aui-button-primary[aria-disabled="true"]:active {
+    background: #97b3d0;
+    background: -webkit-linear-gradient(top, #a2c3e6 0%, #97b3d0 100%);
+    background:    -moz-linear-gradient(top, #a2c3e6 0%, #97b3d0 100%);
+    background:     -ms-linear-gradient(top, #a2c3e6 0%, #97b3d0 100%);
+    background:      -o-linear-gradient(top, #a2c3e6 0%, #97b3d0 100%);
+    background:         linear-gradient(to bottom, #a2c3e6 0%, #97b3d0 100%);
+    border-color: #7f9cb9;
+    box-shadow:none;
+    color: #fff;
+    text-shadow: none;
+}
+
+.aui-button.aui-button-link[disabled],
+.aui-button.aui-button-link[disabled]:hover,
+.aui-button.aui-button-link[disabled]:focus,
+.aui-button.aui-button-link[disabled]:active,
+.aui-button.aui-button-link[aria-disabled="true"],
+.aui-button.aui-button-link[aria-disabled="true"]:hover,
+.aui-button.aui-button-link[aria-disabled="true"]:focus,
+.aui-button.aui-button-link[aria-disabled="true"]:active {
+    background: transparent;
+    border-color: transparent;
+    color: #999;
+    text-shadow: none;
+    text-decoration: none;
+}
+
+.aui-buttons .aui-button.aui-button-primary[disabled],
+.aui-buttons .aui-button.aui-button-primary[disabled]:hover,
+.aui-buttons .aui-button.aui-button-primary[disabled]:focus,
+.aui-buttons .aui-button.aui-button-primary[disabled]:active,
+.aui-buttons .aui-button.aui-button-primary[aria-disabled="true"],
+.aui-buttons .aui-button.aui-button-primary[aria-disabled="true"]:hover,
+.aui-buttons .aui-button.aui-button-primary[aria-disabled="true"]:focus,
+.aui-buttons .aui-button.aui-button-primary[aria-disabled="true"]:active {
+    background: #f2f2f2;
+    background: -webkit-linear-gradient(top, #fff 0%, #f2f2f2 100%);
+    background:    -moz-linear-gradient(top, #fff 0%, #f2f2f2 100%);
+    background:     -ms-linear-gradient(top, #fff 0%, #f2f2f2 100%);
+    background:      -o-linear-gradient(top, #fff 0%, #f2f2f2 100%);
+    background:         linear-gradient(to bottom, #fff 0%, #f2f2f2 100%);
+    border-color: #ccc;
+    color: #9dbbd9;
+    text-shadow: none;
+}
+
+
+/* Cross-component integration
+---------------------------------------------------------------------- */
+/* Icons Integration
+----------- */
+
+.aui-button.aui-button-compact .aui-icon {
+    margin-top: -1px; /* icon is 1px off, adjust it so it is centered */
+}
+
+/* Dropdown2 integration
+---------- */
+.aui-button.aui-dropdown2-trigger:first-child.active,
+.aui-button.aui-dropdown2-trigger.active {
+    /* square off bottom corners */
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-width: 0; /* avoid double border when the dropdown is active - increase padding to cater for this reduction */
+    padding-bottom: 5px; /* increase the padding to cater for the lack of border so the button doesn't change size */
+}
+.aui-button-link.aui-dropdown2-trigger:first-child.active,
+.aui-button-link.aui-dropdown2-trigger.active {
+    border-bottom-width: 1px;
+    box-shadow: none;
+    padding-bottom: 5px;
+}
+
+.aui-buttons .aui-button.aui-button-subtle.aui-dropdown2-trigger.active,
+.aui-button.aui-button-subtle.aui-dropdown2-trigger.active {
+    border-color: #ccc;
+}
+.aui-button.aui-button-subtle.aui-dropdown2-trigger:hover {
+    border-color: #999;
+}
+
+.aui-button.aui-dropdown2-trigger {
+    padding-right: 23px !important; /* 8px (arrow width) + 10px (right padding) + 5px (margin between arrow and logo) */
+    position: relative;
+}
+
+/* Compact Dropdown2 Trigger */
+.aui-button.aui-button-compact.aui-dropdown2-trigger {
+    padding-right: 21px !important; /* 8px (arrow width) + 8px (right padding) + 5 (margin between arrow and logo) */
+}
+
+.aui-button.aui-button-compact.aui-dropdown2-trigger:after {
+    margin-left: -16px; /*  Override the margin-left from below for to compensate for the smaller padding-right */
+}
+
+.aui-button.aui-button-compact.aui-dropdown2-trigger:after {
+    top: 11px; /* position the top of the arrow in the middle - 26px (height) / 2 (halfway) - 2 (arrow height) */
+}
+/* adjust padding for smaller height */
+.aui-button.aui-dropdown2-trigger.aui-button-compact:first-child.active,
+.aui-button.aui-dropdown2-trigger.aui-button-compact.active {
+    padding-bottom: 3px; /* increase the padding to cater for the lack of border so the button doesn't change size */
+}
+
+/* End Compact Dropdown2 Trigger */
+
+.aui-button.aui-dropdown2-trigger:after {
+    border: 4px solid transparent;
+    content: "";
+    height: 0;
+    left: 100%; /* "left" + "margin-left" required because of webkit not working properly with "right" */
+    margin-left: -18px; /* push the arrow back inside the button */
+    margin-top: -2px;
+    opacity: 0.8;
+    position: absolute;
+    top: 50%;
+    width: 0;
+}
+.aui-button.aui-dropdown2-trigger:after,
+.aui-buttons .aui-button.aui-button-primary.aui-dropdown2-trigger:after {
+    border-top-color: #333;
+}
+.aui-button.aui-button-primary.aui-dropdown2-trigger:after {
+    border-top-color: #fff;
+}
+.aui-button.aui-dropdown2-trigger:hover:after,
+.aui-button.aui-dropdown2-trigger.active:after {
+    opacity: 1;
+}
+
+.aui-button.aui-dropdown2-trigger:after {
+    margin-top: 0;  /* make sure no margins intefere with the positioning*/
+    top: 13px;  /* position the top of the arrow in the middle - 30px (height) / 2 (halfway) - 2 (arrow height)*/
+}
+
+/* suppress old icon pattern for dropdown widget so we don't get double arrows */
+.aui-button.aui-dropdown2-trigger > .icon-dropdown,
+.aui-button.aui-dropdown2-trigger > .aui-icon-dropdown {
+    display: none;
+}
+
+/* INPUT does not play with :after - dropdown2 does not support arrow styles for INPUT buttons */
+input.aui-button.aui-dropdown2-trigger {
+    padding-right: 10px !important; /* someone used important now we're all doomed */
+}
+input.aui-button.aui-dropdown2-trigger:after {
+    display: none;
+}
+
+/* Dropdown2-only / Split Button
+---------- */
+.aui-button.aui-dropdown2-trigger.aui-button-split-more,
+.aui-button.aui-dropdown2-trigger.aui-button-split-more.active {
+    /* don't touch vertical padding or things jump around, jump around, jump up jump up and get down */
+    padding-left: 5px;
+    padding-right: 10px;
+    text-align: left;
+    text-indent: -9999em;
+}
+
+/* remove the element border... */
+.aui-button-split-main {
+    border-right: 0;
+}
+
+.aui-button.aui-dropdown2-trigger.aui-button-split-more:hover {
+    border-left: 0;
+    margin-left: 0;
+}
+ 
+/* ...then replace it with a border on a pseudo element so we can control the height. */
+.aui-button.aui-dropdown2-trigger.aui-button-split-more:before {
+    border-left: 1px solid #ccc;
+    bottom: 4px;
+    content: "";
+    display: block;
+    left: 0;
+    position: absolute;
+    top: 4px;
+}
+
+/* ...then extend it to full height border on hover */
+.aui-button.aui-button-split-main:hover + .aui-button.aui-dropdown2-trigger.aui-button-split-more:before,
+.aui-button.aui-dropdown2-trigger.aui-button-split-more.active:hover:before,
+.aui-button.aui-dropdown2-trigger.aui-button-split-more.active:before,
+.aui-button.aui-dropdown2-trigger.aui-button-split-more:hover:before {
+    border-left-color: #999; /* dark border for hover. */
+    bottom: -1px; /* -1 to pull it out over the border */
+    top: -1px; /* -1 to pull it out over the border */
+}
+/* ...and change the colour on dropdown .active */
+.aui-button.aui-dropdown2-trigger.aui-button-split-more.active:before {
+    border-left-color: #ccc; /* lighter border for dropdown-active */
+}
+
+
+/* App Header Buttons and Split Button
+---------- */
+.aui-header .aui-nav .aui-button,
+.aui-header .aui-nav .aui-button-primary {
+    margin: 5px 0 0 10px;
+}
+
+.aui-header .aui-nav .aui-button-split-main {
+    margin-right: 0;
+}
+
+/* long selector set required to avoid a jump in non-hover focus */
+.aui-header .aui-nav .aui-buttons .aui-button ~ .aui-button:hover, 
+.aui-header .aui-nav .aui-buttons .aui-button ~ .aui-button:focus, 
+.aui-header .aui-nav .aui-buttons .aui-button ~ .aui-button:active,
+.aui-header .aui-nav .aui-button-split-more {
+    margin-left: 0;
+}
+
+.aui-header .aui-nav .aui-button-primary,
+.aui-header .aui-nav .aui-button-primary:link,
+.aui-header .aui-nav .aui-button-primary:visited {
+    background: #336ea9;
+    background-image: -moz-linear-gradient(top, #3b7fc4, #336ea9);
+    background-image: -ms-linear-gradient(top,  #3b7fc4, #336ea9);
+    background-image: -webkit-linear-gradient(top,  #3b7fc4, #336ea9);
+    background-image: -o-linear-gradient(top,  #3b7fc4, #336ea9);
+    background-image: linear-gradient(top,  #3b7fc4, #336ea9);
+    border: 0;
+    box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0 0 inset, rgba(0, 0, 0, 0.2) 0 1px 1px 0;
+    color: #fff;    
+    text-shadow: 0 1px 0 #295989;
+}
+
+.aui-header .aui-nav .aui-button.aui-button-primary:focus,
+.aui-header .aui-nav .aui-button.aui-button-primary:hover {
+    background: #2D5F9C;
+    background-image: -moz-linear-gradient(top, #4796e6, #3773af);
+    background-image: -ms-linear-gradient(top, #4796e6, #3773af);
+    background-image: -webkit-linear-gradient(top, #4796e6, #3773af);
+    background-image: -o-linear-gradient(top, #4796e6, #3773af);
+    background-image: linear-gradient(top, #4796e6, #3773af);
+    color: #fff;    
+}
+
+.aui-header .aui-nav .aui-button.aui-button-primary:active,
+.aui-header .aui-nav .aui-button.aui-button-primary.active {
+    background-color: #3572b0;
+    background-image: none;
+}
+
+.aui-header .aui-nav .aui-buttons .aui-button-primary.aui-dropdown2-trigger:after {
+    border-top-color: #fff;
+}
+
+.aui-header .aui-button-primary.aui-dropdown2-trigger.aui-button-split-more.active {
+    top: -1px;
+}
+
+.aui-header .aui-button-primary.aui-button-split-main:hover + .aui-button.aui-dropdown2-trigger.aui-button-split-more:before,
+.aui-header .aui-button-primary.aui-dropdown2-trigger.aui-button-split-more.active:hover:before,
+.aui-header .aui-button-primary.aui-dropdown2-trigger.aui-button-split-more.active:before,
+.aui-header .aui-button-primary.aui-dropdown2-trigger.aui-button-split-more:hover:before,
+.aui-header .aui-button-primary.aui-dropdown2-trigger.aui-button-split-more:before {
+    border-color: #1f4e7e;
+    bottom: 0;
+    top: 0;
+}
+
+/*! AUI Date Picker, using jQuery UI Date Picker */
+/* 
+ * CSS is a bit curious because it has to work both with and without jQuery UI's theme CSS present.
+ * jQuery UI themes are not meant to be loaded, but we can't prevent the scenario.
+ */
+
+.aui-inline-dialog .ui-datepicker {
+    background: inherit;
+    color: inherit;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    padding: 0;
+    width: 100%;
+}
+
+.aui-inline-dialog .ui-datepicker .ui-datepicker-header {
+    height: 20px;
+    margin: 0 0 8px 0;
+    padding: 0;
+    position:relative; 
+}
+
+.aui-inline-dialog .ui-datepicker .ui-datepicker-prev, 
+.aui-inline-dialog .ui-datepicker .ui-datepicker-prev-hover, 
+.aui-inline-dialog .ui-datepicker .ui-datepicker-next,
+.aui-inline-dialog .ui-datepicker .ui-datepicker-next-hover { 
+    cursor: default;
+    height: 20px; 
+    line-height: 20px;
+    padding: 0;
+    position: absolute; 
+    text-align: center;
+    top: 0;
+    width: 38px; /* 40px - border width */
+}
+.aui-inline-dialog .ui-datepicker .ui-datepicker-prev,
+.aui-inline-dialog .ui-datepicker .ui-datepicker-prev-hover { left: 0; }
+.aui-inline-dialog .ui-datepicker .ui-datepicker-next,
+.aui-inline-dialog .ui-datepicker .ui-datepicker-next-hover { right: 0; }
+
+.aui-inline-dialog .ui-datepicker .ui-datepicker-prev span, 
+.aui-inline-dialog .ui-datepicker .ui-datepicker-next span { 
+    display: block; 
+    position: absolute; 
+    left: 15px; 
+    top: 0; 
+    margin: 0;
+}
+
+.aui-inline-dialog .ui-datepicker .ui-datepicker-title {
+    color: #333;
+    font-size: 20px;
+    font-weight: normal;
+    height: 20px;
+    line-height: 20px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* jQuery UI Date Picker - Calendar */
+
+.aui-inline-dialog .ui-datepicker .ui-datepicker-calendar {
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 0;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.aui-inline-dialog .ui-datepicker .ui-datepicker-calendar th,
+.aui-inline-dialog .ui-datepicker .ui-datepicker-calendar td,
+.aui-inline-dialog .ui-datepicker .ui-datepicker-calendar td a,
+.aui-inline-dialog .ui-datepicker .ui-datepicker-calendar td span {
+    line-height: 20px;
+}
+
+.aui-inline-dialog .ui-datepicker .ui-datepicker-calendar th {
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    padding: 1px 0;
+    text-align: center;
+}
+
+.aui-inline-dialog .ui-datepicker .ui-datepicker-calendar td {
+    text-align: right;
+}
+
+.aui-inline-dialog .ui-datepicker .ui-datepicker-calendar td a {
+    background: #fff;
+    color: #3b73af;
+    text-decoration: none;
+}
+
+.aui-inline-dialog .ui-datepicker .ui-datepicker-calendar td a,
+.aui-inline-dialog .ui-datepicker .ui-datepicker-calendar td span {
+    cursor: default;
+    display: block;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    padding: 0 8px;
+}
+
+.aui-inline-dialog .ui-datepicker .ui-datepicker-calendar .ui-datepicker-current-day a {
+    background: #3b73af;
+    color: #fff;
+}
+
+.aui-inline-dialog .ui-datepicker .ui-datepicker-today {
+    font-weight: bold;
+}
+
+.aui-inline-dialog .ui-datepicker .ui-datepicker-unselectable {
+    color: #707070;
+}
+
+/* jQuery UI Date Picker - Common; note that we need the extra specificity for .ui-datepicker-prev and .ui-datepicker-next to override the demo style sheets */
+.aui-inline-dialog .ui-datepicker .ui-datepicker-header .ui-datepicker-prev:hover, 
+.aui-inline-dialog .ui-datepicker .ui-datepicker-header .ui-datepicker-prev:active, 
+.aui-inline-dialog .ui-datepicker .ui-datepicker-header .ui-datepicker-prev:focus,
+.aui-inline-dialog .ui-datepicker .ui-datepicker-header .ui-datepicker-next:hover, 
+.aui-inline-dialog .ui-datepicker .ui-datepicker-header .ui-datepicker-next:active, 
+.aui-inline-dialog .ui-datepicker .ui-datepicker-header .ui-datepicker-next:focus,
+.aui-inline-dialog .ui-datepicker .ui-datepicker-calendar td a:hover, 
+.aui-inline-dialog .ui-datepicker .ui-datepicker-calendar td a:active, 
+.aui-inline-dialog .ui-datepicker .ui-datepicker-calendar td a:focus {
+    outline: 1px solid #707070;
+    text-decoration: none;
+}
+
+.aui-inline-dialog .ui-datepicker .ui-datepicker-prev.ui-state-disabled, 
+.aui-inline-dialog .ui-datepicker .ui-datepicker-header .ui-datepicker-prev.ui-state-disabled:hover, 
+.aui-inline-dialog .ui-datepicker .ui-datepicker-header .ui-datepicker-prev.ui-state-disabled:active, 
+.aui-inline-dialog .ui-datepicker .ui-datepicker-header .ui-datepicker-prev.ui-state-disabled:focus,
+.aui-inline-dialog .ui-datepicker .ui-datepicker-next.ui-state-disabled, 
+.aui-inline-dialog .ui-datepicker .ui-datepicker-header .ui-datepicker-next.ui-state-disabled:hover, 
+.aui-inline-dialog .ui-datepicker .ui-datepicker-header .ui-datepicker-next.ui-state-disabled:active, 
+.aui-inline-dialog .ui-datepicker .ui-datepicker-header .ui-datepicker-next.ui-state-disabled:focus {
+    color: #707070;
+    outline: none;
+}
+.aui-header {
+    background: #205081;
+    border-bottom: 1px solid #2e3d54;
+    color: #fff;
+    padding: 0 10px;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.aui-header:after,
+.aui-header .aui-header-logo a:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.aui-header .aui-header-logo,
+.aui-header .aui-nav {
+    margin: 0;
+    padding: 0;
+    float: left;
+}
+
+.aui-header .aui-header-secondary .aui-nav {
+    float: right;
+}
+
+.aui-header .aui-nav > li {
+    float: left;
+    padding: 0;
+}
+
+.aui-header a {
+    color: #fff;
+    display: block;
+    line-height: 1;
+    padding: 13px 10px;
+}
+
+.aui-header a:visited,
+.aui-header a:focus,
+.aui-header a:hover,
+.aui-header a:active {
+    text-decoration: none;
+}
+
+.aui-header .aui-header-logo a {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    float: left;
+    height: 40px;
+    padding: 0 10px;
+}
+
+.aui-header .aui-header-logo.aui-header-logo-textonly a {
+    padding: 5px 10px;
+}
+.aui-header .aui-header-logo-textonly .aui-header-logo-device {
+    float: left;
+    padding-top: 4px;
+}
+.aui-header .aui-header-logo-textonly .aui-header-logo-device + .aui-header-logo-text {
+    padding: 5px 0 5px 10px;
+}
+
+/* for extra visible text, eg. instance names. */
+.aui-header .aui-header-logo .aui-header-logo-text {
+    display: block;
+    float: left;
+    font-size: 14px;
+    line-height: 1.4286;
+    margin: 0;
+    padding: 10px 0 10px 10px;
+}
+
+.aui-header .aui-header-logo-aui .aui-header-logo-device,
+.aui-header .aui-header-logo-bamboo .aui-header-logo-device,
+.aui-header .aui-header-logo-bitbucket .aui-header-logo-device,
+.aui-header .aui-header-logo-confluence .aui-header-logo-device,
+.aui-header .aui-header-logo-crowd .aui-header-logo-device,
+.aui-header .aui-header-logo-fecru  .aui-header-logo-device,
+.aui-header .aui-header-logo-fisheye  .aui-header-logo-device,
+.aui-header .aui-header-logo-crucible  .aui-header-logo-device,
+.aui-header .aui-header-logo-hipchat .aui-header-logo-device,
+.aui-header .aui-header-logo-jira .aui-header-logo-device,
+.aui-header .aui-header-logo-stash .aui-header-logo-device {
+    background-repeat: no-repeat;
+    background-position: 0 50%;
+    background-size: 100%;
+    display: block;
+    float: left;
+    height: 24px;
+    padding: 8px 0;
+    text-indent: -9999px;
+    text-align: left;
+}
+
+.aui-header .aui-header-logo-aui .aui-header-logo-device {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAARCAYAAAC4qX7BAAAA50lEQVR42s2RYQ2DMBCFJwEJlTAHWJgEJNTBcDAkTEIdrA6KA3DAHNzC0h9vd30ZWSjZl/QHd+X4uHf6a0TEi8WRuxHu+EK/h34k9cBERrH4DSL9jyKxNNhJmfFoES8cd5gIxpKlEj7XFeGxOLWhsZ4IjyUxuSNEAg6F+oTxVBGBRiOfnKE3EPsqIh00Jqj1eVNIU0fExjLk2lPKdHuLsFguazTCCeoHTJ2I3rmIjWUBuRbOVccD7yLzutF8ZrJJKhK0NQJibGiS7zxgHBVZ1Ac0TBglbzAHWfI2GyOCke6NirPdcP99XrEI2FFFhYV6AAAAAElFTkSuQmCC);
+    width: 34px;
+}
+.aui-header .aui-header-logo-bamboo .aui-header-logo-device {
+    background-image: url(data:image/png;base64,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);
+    width: 95px;
+}
+.aui-header .aui-header-logo-bitbucket .aui-header-logo-device {
+    background-image: url(data:image/png;base64,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);
+    width: 100px;
+}
+.aui-header .aui-header-logo-confluence .aui-header-logo-device {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOwAAAAwBAMAAADgAYtzAAAAMFBMVEX///////////////////////////////////////////////////////////////9Or7hAAAAAD3RSTlMAiES7Ee4zd5nMZiLdqlXSNCnjAAAEX0lEQVR4Xu2WXWgcVRSAj5txrLtt3Y1VxB+6bIMVBRMdFLHgDgHRClKCpfg2ayH4g2CJPxE0bPrQB0Wa0uZB6sNGfBFUuorikyaiiG+LFAuK0NV3MbPLZrObTY/nnDv3znST2QTX7oPkPAznzjn3fPfce8+Zgf+77MiOfJHL9jI/kcdn9sGHmeH/FHpPCRFbP5fj7EmP7M0EPf5tVm50lBoR5UVUMhaHHWVrrQ/s3Pon4eD5ki+54FbYEltX+sDuRzyr9U8pA1YmNXY2hmqLdbkP7N+IHYCbHecxsAi0xoa8xqZjsLwdU/dm+8DeRIAqzCG24TpSz/ABM/HcRcfDhRgsedZJ6QO7hxA/wCLiEj/wRJDLB2w7DtcKK1N9jpPlvW24KiiGpWPlcoUI8cstsMc3rXcrCDGeuy8w5GWX84JGPwjaMZjPS4iN3xjlPAL2qx5OuFdjE47zIOkHHId4iV8Q8VEZXoKn3kG8JDGI0ToNkLqTrN+pjF4h9RgcnoULpBw1uZjtFPlRLsHBCsrxX0aRJcayh68qIg1WXnnz0P+L1Qal+TSKBlAUpa0Di5FjYLUbO4dKCoxV0tQ3fXkD9jAqQpmHSs4ERY51nYK6qBa/nVfFug5d2Bs062iIbcVizSJnQ+yKpvkwamLp5tBybY+vdDf2es3yQyzGYlOatRZimzqGDyXzyrTC+UnZa4MNmwmezFQQOxFsNu5seW/O58jaDrE+X57O1P1vHuJFTeReN8GLSAZOtgbd2P0cAoa4ohj7bNVmrPboxg5JBdLTF+z5sqjFYFv3yrEmTdHtQnPW3dg85aQmZAnruwBbYFfVdB4+LKqsYEzCCtDSWHNd27ARK1PsAFuD3tjdrBpselMsaKxJdyEOC9vE6uOPw2qBaLpNGDR2SAp74FhpGSsDx0pX67gDxu5ZkHTTcVhr+9jVHMtIHFasd+um0JYOWQux6EaxiW1ipTuIxGEhIpaHBY7QivT/WTN7TU0o9MCugvURKmxrU+ySxpZD6nPvIR5jI77/hvkvrA/n/rjLKRQpUDXFNuiBbWTyyFiu/9fo9cxCFDtK63IhMcLehyj6x5zS3lMoid6ILD8VmFvBQNKLWlvvgTXeSVbO8cFEsUf0d4ef3z+k9k8hGhRCpMOt6oLBmnZdi8UmQqzlBdpyFBvE8M3X+ArYFf1Of0TrLoCBjZlA6VgseAZr1rsSxaaUQx2+Qg2bxMa7WeS8eUp9fMbDea4GjYWXlbIKcVjt/CtxzIbXoliCqHO0PV3VpXoWbNUYj/BWQ7JCBLBPKc8TYN0ijlWA3ZyE5Fbguy5uPEVY9beS8o99QM8r8pD9mhDEWAd4UridWwGX1JrTqi8TcVF1ipemp6f/FO3gbQ/cXoZe8vX0lNG/zTgZHhnR0aZcUsYzF08OU7B8jdcsK9ulfs6LPlx7eRz3XW34BucHgLUuN+6Ijl9AHwYhiTk8G47exokyDESszybCwe+n+wLsyI78AwbieZyioUdvAAAAAElFTkSuQmCC);
+    width: 118px;
+}
+.aui-header .aui-header-logo-crowd .aui-header-logo-device {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEwAAAARCAMAAABAWbowAAAAMFBMVEX///////////////////////////////////////////////////////////////9Or7hAAAAAD3RSTlMACR4uQVBjdIygrMDR5Paigc8rAAABpklEQVR42pWUCXLDMAhFQRto9f1v2y9QM07STlNmIuwveCAcmzhpbX2uNUevWgKZRdGmkgN9bKH3RvO61uVmVxEb3M59/xwWEQ7Y4IxlrEuCXlfCRv2G13/Cxs5PK9JQ4mmdMfSppWjN/4R1q69DB1OGEIgS3DcmpASBUSEVn2GEYnp83GSRXDasYlIQ2gzEA9dMxuQDQ60ygM7Tz81b2fEeuhAZkOZGm4hDMlj9jDxDoQdsW4nrMUXMVYiXdR8wDwgPWNwr2rJiiPsJNmPFInlHhLKJycGIbDSx5KIbRtb/YGK7iO+wJUxjl7F+ckQ0KWRvSsmzosEEa5Pu4+/0DhO46Y8EzMIIQ+FZwWiQ+Q5jC6xqielvmC04I6IEcniCobXJ1PETb8yf5u8wtASfeW236BnGs6e0Lknijfn/7Bk2bkyxF4/9gfUXGIHkpg64vwEHhsSRo1pecgiVkzKxRp0HRtlZzVn3d/PAHHAgYXs5vlihY54tFudzev5qHBiJdz+CH/bafvgBg21NqOSW2ijOevmeJZFgShCt6pOEVu4+YKdwkvIFuowinKQ49LoAAAAASUVORK5CYII=);
+    width: 76px;
+}
+.aui-header .aui-header-logo-fecru .aui-header-logo-device {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADoAAAAYCAMAAACcAR4nAAAAM1BMVEUAAAD///////////////////////////////////////////////////////////////+3leKCAAAAEHRSTlMAECAwQFBgcICPn6+/z9/vIxqCigAAARRJREFUeNrlk8GWwyAIRcFGxYjh/f/XjiemYpt2MatZzF2pcBGjoX8HZwWgmb9nbFEkbrcEMQxMPoup4aIlWtnh7OSsCValU21mTPMoUto3d4Olub9h80AXxywoAI+IzIzK88x1URWN1wbUS/rIZH4VVwMOpkkFEN7VMA+yY8QHEYkcBhDP8jgZmx3oZKKMzuEXc3QdaJmfLcuLOicWo82lk9iHdYSokwHxhr1jJ9AKBmkI8aaSuqn0Ampo170kLytLa65GWnmgkl7HKGh0IxRXy8eGra+al/XShgV70MIx1wSVbqhFasNrFE1v718DUfKXtYZtI94NsJ1ps50WQtVyttGKmw4XKF9DRU/5Dex/DtPf8gNRKhRt+v7XRAAAAABJRU5ErkJggg==);
+    width: 58px;
+}
+.aui-header .aui-header-logo-fisheye .aui-header-logo-device {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAYCAYAAAAYl8YPAAAA5klEQVR42uWVYQ2EMAxGkYAEJCABCZOABCTMwSQgYRImYRKQgITeSLp8rGHdLeHHJfeShgDjUUoLAxG9Fn8ie4SIxhRbikAlgY+PgwpENsVJCnzetkQ79bF/KzpSuBSWt1EXQrQIyVK54YQ6gmL9bUFEcbvKEXA3ZARRW+iFcLoOGt5ZmwbZPiUmt8KBRUkOIvqq+bg2X2yr6aOvzINsK2QS0lmVLjA1mecXE7U2uOQEJimaswwtUyJK4nJthyfaM4kMbjNsarJDEc3ig3Dhe4c9iIzW9sRgIjwLHLIBLHEQvc8P/wM+bC4cX5Ta0O0AAAAASUVORK5CYII=);
+    width: 18px;
+}
+.aui-header .aui-header-logo-crucible .aui-header-logo-device {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAYCAMAAADAi10DAAAAM1BMVEUAAAD///////////////////////////////////////////////////////////////+3leKCAAAAEHRSTlMAECAwQFBgcICPn6+/z9/vIxqCigAAAI1JREFUGBmtwUGWwjAMRMEvIxvHcVDf/7QoJuSxnMVUwX8zr71XN77aocvRWIYUe097SIPkisalhRxw7cbFdjngUnSWHpIDRWmQhlIhvZSe8FR6cepKUWsodU5FPwrL1G3yUXWrLGXTbSukR+hHPIAZlUPLQY0JjHBshBTD8BiAbZrGYlObcbLGpRl/9QbfvwnZQu/QSwAAAABJRU5ErkJggg==);
+    width: 18px;
+}
+.aui-header .aui-header-logo-hipchat .aui-header-logo-device {
+    background-image: url(data:image/png;base64,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);
+    width: 91px;
+}
+.aui-header .aui-header-logo-jira .aui-header-logo-device {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHIAAAAwCAYAAADNTS4aAAAFk0lEQVR42u2bf2hVZRjH793c5sbMNtTKTKEwFgVJpFGx0VYr24yNLAWjHP2wH+qmJWmSpOFKxEyqCeoKo0QzNCUH9kM0K5xR5HS02mytcErq5syU5n48ff8Y3MPL8z73fc8Zuzs75wOfv+5zztne7zn3vOd574kQUegQMPADEAYZ8wl4Ap6Hq2Fy0AfVj0FOgd3QyYKgD+pgDDIJlsH3YBlztS2BKnuY/dwH18FyeEXQBz0RQa6HTjYqnz8MVd5WambDXorxExwW9IEfyCAzma/NHniloyYKqylGLcxS9lMHVQqDPvADGeRw2MUEmc3U5sDJmonOUahyT9AHfqC/Wquhky0uDvI8dFIHU4M+8ImY7DzXF+gzHh4tiuD7cAXMDvqghw2BUOMgS2ABTBqgP+BWWBY2Efo/yIsEQCusgtNgZj8eMBXmwpWwgWLcLmyTD5vg74qvM7UlmtoKpjYPNjK1kvWwFu6Gb8BCl49SM+Bx4TjfweFegvwZqnTBHf3w7LccXiCekcaTJbnx8CbxbNHu1zt/wccsx+IAxechL0FuJj0zlNpCeAb+oZxNZ+FSpXY87CKeJhjxRZAyawwHfTTspvhUewlyJuk5plyVk2Av8cxV9ruR9Kz1VZAy0w0G/Uky42+Y7DbIDHiO9Lyk1H8KVf6EaY6au+KcgZOHUJD1BoO+m8zJ8/L4sYL0dCoTk2thO8XohQ84Ps+CLaTnAIwMsiDPwO0aa2AryUyM0/a8ROas9RLkKHie9DQqk5PivoAJrFT6sDtIpmAQBvmtQZPkZdIzS9h2OtnR7LUhsJBk9sFUJcwKzaDq2AojPghS53HiWSRs8xHZM8lLkMmwlmQ+hlHt4Mu0wat8HmQN8SzR1Kdo5h89MA9uI57lXlt0E2AbybzLhDkrzuSmF06DEZ8HuccyyELiqe37/H7iOWIapGSRwTPPW476R6R65T4atCCriGdZ3+dpQsPkepsg5fulzDo4B3aSzC4YDWCQUWG2e5vBPl80D1L2HfLO9zADRoZIkPuJZzFTewfxtMKowd90sL+CjMIPyD0/qv1UnweZBf8lnqeZ+lXEs4lpZXL0wDG2QUoz2W1kzzE4GkZ8EuQhmKVxAiyOM6PPZY71K/GUMrX10gmi03oZyrLF1ASvsQ3Pxy26dpiiHOcm4vlPs0S4hnhq7IOUTYNfUXzOwutgJEBBVjLHWUo8X+jWX4XgR8hB2psBDxoEOSZAQdbBdOY4PxBPudA46JCWEuUg7R0JD5PMXhgNQJBfwlHMMcYJS303OMZxAVzssFlua3oPMgfOVGZvR0lm0ZAOUl6hmEc8DbEahGhOB0zzGmSK43c2C5Wz7gTpuQDH+yjIBvioYmWcvvFYzd/+tcGvCfaSHVO9Blmu9EsfVxaPO0nPThjx+XPk55a3kGx4mXjy+2rS4SWyY4OXIDNhO7PInO+oqSCZO30e5NXwNOmZy7w3ytHheESZSvacgklug5xPPKcdz4lRuE/qs7oM8pVB1NkpJT0X4Y2O2p3Es11Zx22D7YznpIvCbZC/GXYyJgpfsd3ae4nsLuL5LCEtOrlVeRgOg+l9wXLMNvy/k+BJ4lntJsgc0vMLc5lvIj3zLEMsEJbFKhMU5AjYTHpegyXGPVPZDcTT6CbICstgphAQryLZdHgvXA+7SM/dCWya5wonWBc8JC0iW/gg6bnZNsjNpGecZpsW8UySrTJcTYkmeBlrFdmzzEU79B/iedU2yG+Ip9XFbzc7DV4QepZkOpWrMVFBpsIjpEFaRLb0E93JrAnSOpStLjoapwxech0Le4UJ0xxh26csfs5fqjnOhxaDfAvsIDPqXLYrizS3mBY/vB9Zq/kGKA7663N+e9H1BXgZnoT74XyYHvSwwjeWwyBDwyBDwyBD7f0fOqGjwl4fmCwAAAAASUVORK5CYII=);
+    width: 57px;
+}
+.aui-header .aui-header-logo-stash .aui-header-logo-device {
+    background-image: url(data:image/png;base64,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);
+    width: 70px;
+}
+
+/* Custom IMG elements can be set in most products */
+.aui-header .aui-header-logo img {
+    border: 0;
+    float: left;
+    max-height: 30px;
+    padding: 5px 0;
+}
+
+/* Positioning icons in the header */
+.aui-header .aui-icon {
+    margin: -1px 0;
+    vertical-align: top;
+}
+
+/* In case showIcon is not set to false for header dropdown triggers */
+.aui-header .aui-dropdown2-trigger .aui-icon-dropdown {
+    display: none;
+}
+/* Styling the dropdown2 triggers differently in the header to avoid inline-block spacing issues with other icons */
+.aui-header .aui-dropdown2-trigger {
+    padding-right: 23px !important; /* 8px (arrow width) + 10px (right padding) + 5px (margin between arrow and logo) */
+    position: relative;
+}
+.aui-header .aui-dropdown2-trigger:after {
+    border: 4px solid transparent;
+    border-top-color: #fff;
+    content: "";
+    height: 0;
+    margin-left: -18px;
+    margin-top: -2px;
+    opacity: 0.8;
+    left: 100%; /* "left" + "margin-left" required because of webkit not working properly with "right" */
+    position: absolute;
+    text-indent: -99999px;
+    top: 50%;
+    width: 0;
+}
+.aui-header .aui-dropdown2-trigger:hover:after,
+.aui-header .aui-dropdown2-trigger.active:after {
+    opacity: 1;
+}
+.aui-header .aui-button.aui-dropdown2-trigger:after {
+    margin-top: 0;
+}
+.aui-header a > .aui-avatar {
+    vertical-align: top;
+}
+.aui-header a > .aui-avatar-tiny {
+    margin: -1px 0; /* (16px Tiny Avatar height - 14px font size (line-height 1 in the header)) / 2 */
+}
+.aui-header a > .aui-avatar-small {
+    margin: -5px 0; /* (24px Small Avatar height - 14px font size (line-height 1 in the header)) / 2 */
+}
+
+/**
+ * Buttons in header
+ */
+.aui-header .aui-button.aui-button-primary {
+    background: #366EA7;
+    background-image: -webkit-linear-gradient(top, #3b7fc4, #2c66a2);
+    background-image:    -moz-linear-gradient(top, #3b7fc4, #2c66a2);
+    background-image:     -ms-linear-gradient(top, #3b7fc4, #2c66a2);
+    background-image:      -o-linear-gradient(top, #3b7fc4, #2c66a2);
+    background-image:         linear-gradient(to bottom, #3b7fc4, #2c66a2);
+    border: 0;
+    box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0 0 inset, rgba(0, 0, 0, 0.2) 0 1px 1px 0;
+    margin: 6px 10px 0 10px;
+    padding: 4px 10px; /* Make sure the correct padding applies (overrides the above padding: 13px 10px; for .aui-header a if ordering is missed up*/
+}
+
+.aui-header .aui-button.aui-button-primary.active{
+    padding-bottom: 4px; /* header doesn't need the button/dropdown integration padding change because it has no border */
+}
+
+.aui-header .aui-button.aui-button-primary:focus,
+.aui-header .aui-button.aui-button-primary:hover,
+.aui-header .aui-button.aui-button-primary:active {
+    background: #2D5F9C;
+    background-image: -webkit-linear-gradient(top, #6299D0, #2C5E9B);
+    background-image:    -moz-linear-gradient(top, #6299D0, #2C5E9B);
+    background-image:     -ms-linear-gradient(top, #6299D0, #2C5E9B);
+    background-image:      -o-linear-gradient(top, #6299D0, #2C5E9B);
+    background-image:         linear-gradient(to bottom, #6299D0, #2C5E9B);
+}
+
+/**
+ * Dropdown2 triggers in header
+ */
+.aui-header .aui-dropdown2-trigger.active,
+.aui-header a:focus,
+.aui-header a:hover,
+.aui-header a:active {
+    background-color: #3b73af;
+}
+
+/* Icons in Dropdown2 triggers and links in header */
+.aui-header .aui-dropdown2-trigger.active .aui-icon,
+.aui-header a:focus .aui-icon,
+.aui-header a:hover .aui-icon,
+.aui-header a:active .aui-icon {
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+
+/**
+ * Quick search for header
+ */
+.aui-header .aui-quicksearch {
+    padding: 0 10px;
+}
+.aui-header .aui-quicksearch input {
+    -moz-appearance: textfield;
+    -webkit-appearance: textfield;
+    background: #f5f5f5 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAYAAABy6+R8AAAAb0lEQVR42p2RMQ7AIAhFWXsG1h7Gtffo6urqyJGpwyetomnwJ38BH/wgfZSaS7PABbVOqkqm3Fzx6IQTatlDb5PJi21YBy1iuNgjJIgzFXqyCcXj1Z1DXNGTiw01aP252DCCgH7Fk41h8KaAGMDxADnaOPucd/m3AAAAAElFTkSuQmCC) no-repeat 7px 6px;
+    border: none;
+    border-radius: 5em;
+    box-shadow: inset 1px 2px 3px rgba(0, 0, 0, 0.3);
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #333;
+    font-family: inherit;
+    font-size: inherit;
+    height: 1.71428571428571em; /* 24px effective - need height in ems so that user-specified font-sizes apply */
+    line-height: 1.71428571428571;
+    margin: 8px 0;
+    padding: 2px 10px 2px 25px;
+    vertical-align: baseline;
+    width: 170px;
+}
+.aui-header .aui-quicksearch input:focus {
+    background-color: #fff;
+    outline: none;
+}
+/* Placeholder styling
+ * - You have to use two rules, because user agents are required to ignore a rule with an unknown selector.
+ *   Since WebKit doesn’t know the proprietary Mozilla selector and vice versa, you have to include them separately.
+ *   See http://stackoverflow.com/questions/2610497/change-an-inputs-html5-placeholder-color-with-css#answer-2610741
+ */
+.aui-header .aui-quicksearch input::-webkit-input-placeholder {
+    color: #707070;
+}
+.aui-header .aui-quicksearch input:-moz-placeholder {
+    color: #707070;
+}
+
+/*! AUI Lozenge */
+.aui-lozenge {
+    background: #ccc;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    color: #333;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 1;
+    margin: 0;
+    padding: 2px 5px 1px 5px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.aui-lozenge.aui-lozenge-subtle {
+    background-color: #fff;
+    border-color: #ccc;
+    color: #333;
+}
+.aui-lozenge-success {
+    background-color: #14892c;
+    border-color: #14892c;
+    color: #fff;
+}
+.aui-lozenge-success.aui-lozenge-subtle {
+    background-color: #fff;
+    border-color: #b2d8b9;
+    color: #14892c;
+}
+.aui-lozenge-error {
+    background-color: #d04437;
+    border-color: #d04437;
+    color: #fff;
+}
+.aui-lozenge-error.aui-lozenge-subtle {
+    background-color: #fff;
+    border-color: #f8d3d1;
+    color: #d04437;
+}
+.aui-lozenge-current {
+    background-color: #ffd351;
+    border-color: #ffd351;
+    color: #594300;
+}
+.aui-lozenge-current.aui-lozenge-subtle {
+    background-color: #fff;
+    border-color: #ffe28c;
+    color: #594300;
+}
+.aui-lozenge-complete {
+    background-color: #4a6785;
+    border-color: #4a6785;
+    color: #fff;
+}
+.aui-lozenge-complete.aui-lozenge-subtle {
+    background-color: #fff;
+    border-color: #e4e8ed;
+    color: #4a6785;
+}
+.aui-lozenge-moved {
+    background-color: #815b3a;
+    border-color: #815b3a;
+    color: #fff;
+}
+.aui-lozenge-moved.aui-lozenge-subtle {
+    background-color: #fff;
+    border-color: #ece7e2;
+    color: #815b3a;
+}
+/*! AUI Navigation */
+
+/* Nav defaults - put very little here!
+-------------------- */
+.aui-nav,
+.aui-nav > li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Horizontal, breadcrumbs and pagination are all horizontal */
+.aui-nav-breadcrumbs:after,
+.aui-nav-pagination:after,
+.aui-nav-horizontal:after,
+.aui-navgroup-horizontal .aui-nav:after,
+.aui-navgroup-horizontal .aui-navgroup-inner:after {
+    clear: both;
+    content: " ";
+    display: table;
+}
+.aui-nav-breadcrumbs > li,
+.aui-nav-pagination > li,
+.aui-nav-horizontal > li,
+.aui-navgroup-horizontal .aui-nav > li {
+    float: left;
+}
+
+/* Navigation headings
+-------------------- */
+.aui-nav-heading {
+    color: #707070;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1.66666666666667; /* 20px */
+    text-transform: uppercase;
+}
+
+/* Breadcrumb navigation
+-------------------- */
+.aui-nav-breadcrumbs > li {
+    padding: 0 10px 0 0;
+}
+
+.aui-nav-breadcrumbs > li + li:before {
+    content: "/";
+    padding-right: 10px
+}
+
+/* Horizontal Navigation
+-------------------- */
+.aui-navgroup-horizontal .aui-nav > li a,
+.aui-nav-horizontal > li a {
+    padding-right: 10px;
+}
+
+/* Pagination
+-------------------- */
+.aui-nav-pagination {
+    margin: 10px 0 0 0;
+}
+.aui-nav-pagination > li {
+    padding: 0;
+}
+/* Need padding on the A elements for big click areas. 
+   Set equal left/right to help align the inline dialog on truncation. */
+.aui-nav-pagination > li > a {
+    padding: 10px 10px 0 10px;
+}
+/* Don't set top/bottom as that throws non-linked items out of whack. */
+.aui-nav-pagination > li.aui-nav-selected,
+.aui-nav-pagination > li.aui-nav-truncation {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.aui-nav-pagination .aui-nav-truncation > a {
+    padding-left: 0;
+    padding-right: 0;
+}
+/* Remove whitespace from first and last children (IE8 just gets space on 
+   last child, will wrap sooner in some cases but generally should work ok). */
+.aui-nav-pagination > li:first-child > a,
+.aui-nav-pagination > li.aui-nav-truncation:first-child,
+.aui-nav-pagination > li.aui-nav-selected:first-child {
+    padding-left: 0;
+}
+.aui-nav-pagination > li:last-child > a,
+.aui-nav-pagination > li.aui-nav-truncation:last-child,
+.aui-nav-pagination > li.aui-nav-selected:last-child {
+    padding-right: 0;
+}
+
+.aui-nav-pagination a[aria-disabled="true"]:link,
+.aui-nav-pagination a[aria-disabled="true"]:visited,
+.aui-nav-pagination a[aria-disabled="true"]:focus,
+.aui-nav-pagination a[aria-disabled="true"]:hover,
+.aui-nav-pagination a[aria-disabled="true"]:active {
+    color: #999;
+    text-decoration: none;
+}
+
+/* "current" is deprecated in 5.1 */
+.aui-nav-pagination > li.aui-nav-current,
+.aui-nav-pagination > li.aui-nav-selected {
+    color: #333;
+    font-weight: bold;
+}
+
+/* Vertical Navigation
+-------------------- */
+.aui-navgroup-vertical .aui-nav > li > a,
+.aui-nav-vertical > li > a {
+    color: #3b73af;
+    display: block;
+    padding: 7px 10px;
+	line-height: 1.14285714285714; /* 16px equiv */
+    word-wrap: break-word;
+}
+
+.aui-navgroup-vertical .aui-nav > li > a:focus,
+.aui-navgroup-vertical .aui-nav > li > a:hover,
+.aui-nav-vertical > li > a:focus,
+.aui-nav-vertical > li > a:hover {
+    background: #e6e6e6;
+    text-decoration: none;
+}
+
+.aui-navgroup-vertical .aui-nav .aui-nav-selected a,
+.aui-nav-vertical .aui-nav .aui-nav-selected a {
+    color: #333;
+    font-weight: bold;
+}
+
+.aui-navgroup-vertical .aui-nav,
+.aui-navgroup-vertical .aui-nav-heading {
+    border-top: 1px solid #ccc;
+    margin-top: 5px;
+    padding-top: 5px;
+}
+
+.aui-navgroup-vertical .aui-nav-heading {
+    padding: 10px 10px 4px 10px;
+}
+
+.aui-navgroup-vertical .aui-nav:first-child,
+.aui-navgroup-vertical .aui-navgroup-inner > .aui-nav-heading:first-child,
+.aui-navgroup-vertical .aui-navgroup-primary > .aui-nav-heading:first-child,
+.aui-navgroup-vertical .aui-nav-heading + .aui-nav {
+    border-top: 0;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+
+
+
+
+
+/* Horizontal Navgroup
+-------------------- */
+.aui-navgroup-horizontal {
+    background: #f5f5f5;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 0 10px;
+    margin: 0;
+}
+
+.aui-page-panel-content > .aui-navgroup-horizontal {
+    margin-left: -20px;
+    margin-right: -20px;
+}
+.aui-navgroup-horizontal + .aui-page-panel {
+    border-top: 0;
+    margin-top: 0;
+}
+.aui-page-panel-content > .aui-navgroup-horizontal:first-child {
+    margin-top: -20px;
+}
+
+/* Nav in a Navbar */
+.aui-navgroup-horizontal .aui-nav > li a {
+    color: #3b73af;
+    display: block;
+    margin: 0;
+    padding: 9px 10px;
+    text-decoration: none;
+}
+.aui-navgroup-horizontal .aui-nav > li a.active,
+.aui-navgroup-horizontal .aui-nav > li a:focus,
+.aui-navgroup-horizontal .aui-nav > li a:hover {
+    background: #e6e6e6;
+    text-decoration: none;
+}
+
+.aui-navgroup-horizontal .aui-nav > .aui-nav-selected a {
+    font-weight: bold;
+    color: #333;
+    position: relative;    
+}
+
+.aui-navgroup-horizontal .aui-nav > .aui-nav-selected a:before,
+.aui-navgroup-horizontal .aui-nav > .aui-nav-selected a:after {
+    border: 8px solid transparent;
+    border-style: outset outset solid outset; /* fixes FF bug */
+    border-bottom-color: #ccc;
+    bottom: 0;
+    content: "";
+    height: 0;
+    left: 50%;
+    margin-left: -8px;
+    overflow: hidden;
+    position: absolute;
+    width: 0;
+}
+.aui-navgroup-horizontal .aui-nav > .aui-nav-selected a:after {
+    background: transparent; 
+    border-bottom-color: #fff;
+    bottom: -1px;
+}
+
+/* Split horizontal navgroups */
+.aui-navgroup-horizontal .aui-nav,
+.aui-navgroup-horizontal .aui-nav-heading,
+.aui-navgroup-horizontal .aui-navgroup-primary {
+    float: left;
+}
+
+.aui-navgroup-horizontal .aui-navgroup-secondary {
+    float: right;
+}
+
+/* Horizontal navgroup + Dropdown2 integration. Note: ADG prohibits dropdowns in vertical nav. */
+.aui-navgroup-horizontal .aui-dropdown2-trigger .aui-icon-dropdown {
+    display: none;
+}
+.aui-navgroup-horizontal .aui-dropdown2-trigger {
+    padding-right: 23px !important; /* 8px (arrow width) + 10px (right padding) + 5px (margin between arrow and logo) */
+    position: relative;
+}
+.aui-navgroup-horizontal .aui-nav > li a.aui-dropdown2-trigger:after {
+    border: 4px solid transparent;
+    content: "";
+    height: 0;
+    left: 100%; /* "left" + "margin-left" required because of webkit not working properly with "right" */
+    margin-left: -18px;
+    margin-top: -3px; /* Align top of arrow with top of x height */
+    opacity: 0.8;
+    position: absolute;
+    top: 50%;
+    width: 0;
+}
+.aui-navgroup-horizontal .aui-nav > li a.aui-dropdown2-trigger:after {
+    border-top-color: #8e8e8e;
+}
+.aui-navgroup-horizontal .aui-nav > li a.aui-dropdown2-trigger:hover:after,
+.aui-navgroup-horizontal .aui-nav > li a.aui-dropdown2-trigger.active:after {
+    opacity: 1;
+}
+
+/* Breadcrumbs in navbar */
+.aui-navgroup-horizontal .aui-nav-breadcrumbs > li, 
+.aui-navgroup-horizontal .aui-nav-breadcrumbs > li:before {
+    padding: 0;
+}
+
+.aui-navgroup-horizontal .aui-nav-breadcrumbs > li a {
+    display: inline-block;
+}
+
+/* Bulletproofing - headings shouldn't be here but will at least not look heinously broken. */
+.aui-navgroup-horizontal .aui-nav-heading {
+    padding: 10px 10px 0 10px; /* 0 bottom required to unfuck IE9 */ 
+}
+
+/**
+ * PAGE LAYOUT
+ */
+.aui-header,
+#footer {
+    clear: both;
+    float: left;
+    width: 100%;
+}
+
+#content {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    clear: both;
+    position: relative;
+}
+
+#content:before {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+#footer .footer-body a {
+    color: #707070;
+}
+
+#footer .footer-body > ul,
+#footer .footer-body > p {
+    margin: 10px 0 0 0;
+}
+
+#footer .footer-body > ul:first-child,
+#footer .footer-body > p:first-child {
+    margin: 0;
+}
+
+#footer .footer-body > ul {
+    display: block;
+    font-size: 0;
+    list-style: none;
+    padding: 0;
+}
+
+#footer .footer-body > ul > li {
+    display: inline-block;
+    font-size: 12px;
+    line-height: 1.66666666666667;
+    padding: 0;
+    white-space: nowrap;
+}
+
+#footer .footer-body > ul > li + li {
+    margin-left: 10px;
+}
+
+#footer .footer-body > ul > li:after {
+    content: "\b7"; /* mid dot */
+    margin-left: 10px;
+    speak: none;
+}
+#footer .footer-body > ul > li:last-child:after {
+    display: none;
+}
+
+
+/**
+ * GROUP/ITEM
+ */
+
+.aui-group {
+    display: table;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-spacing: 0;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.aui-group > .aui-item {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: table-cell;
+    margin: 0;
+    vertical-align: top;
+}
+
+.aui-group > .aui-item + .aui-item {
+    padding-left: 20px;
+}
+
+/* defensive header allowance */
+.aui-layout .aui-group > header {
+    display: table-caption;
+}
+
+/* .aui-group-split: two items; alignment is left, then right (splits the layout). */
+.aui-group.aui-group-split > .aui-item {
+	text-align: right;
+}
+.aui-group.aui-group-split > .aui-item:first-child {
+	text-align: left;
+}
+
+/* .aui-group-trio: three items; alignment is left, center, right */
+.aui-group.aui-group-trio > .aui-item {
+	text-align: left;
+}
+.aui-group.aui-group-trio > .aui-item + .aui-item {
+	text-align: center;
+}
+.aui-group.aui-group-trio > .aui-item + .aui-item + .aui-item {
+	text-align: right;
+}
+
+/**
+ * DEFAULT THEME SPACING
+ */
+
+#content {
+    margin: 0;
+    padding: 0;
+}
+
+/**
+ * PAGE DESIGN
+ */
+body {
+    background: #f5f5f5;
+    color: #333;
+}
+
+a {
+    color: #3b73af;
+    text-decoration: none;
+}
+a:focus,
+a:hover,
+a:active {
+    text-decoration: underline;
+}
+
+#footer .footer-body {
+    color: #707070;
+    font-size: 12px;
+    margin: 20px 0;
+    padding: 0 10px 21px 10px;
+    line-height: 1.66666666666667;
+    min-height: 44px; /* margin + height of image, means footer is just as high if no footer link present */
+    text-align: center;
+} 
+
+#footer .footer-body,
+#footer-logo a {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHIAAAAYCAYAAAAmsqlBAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowMzc2N0JGOUI1REUxMUUyOEZFQ0ZDMEVGMzc4MTU2MyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDowMzc2N0JGQUI1REUxMUUyOEZFQ0ZDMEVGMzc4MTU2MyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjAzNzY3QkY3QjVERTExRTI4RkVDRkMwRUYzNzgxNTYzIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjAzNzY3QkY4QjVERTExRTI4RkVDRkMwRUYzNzgxNTYzIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+i9QGbgAABxlJREFUeNrsWgtM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) center bottom no-repeat;
+    background-size: 114px 24px
+}
+
+#footer-logo {
+    background: #f5f5f5; /* screen out the background image on the footer when the logo is present, so it doesn't mess up transparent areas */
+    position: relative;
+    bottom: -21px; /* margin plus 1 px to tweak for image */
+}
+
+#footer-logo a {
+    display: block;
+    height: 24px; /* match image height */
+    margin: 0 auto;
+    text-align: left;
+    text-indent: -9999em;
+    width: 114px; /* match image width */
+}
+#footer-logo a:focus,
+#footer-logo a:hover,
+#footer-logo a:active {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHIAAAAYCAYAAAAmsqlBAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpDNTgwNjJGOUI2ODQxMUUyOUVGQ0Q4Qzg0RUU4NDAzMyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpDNTgwNjJGQUI2ODQxMUUyOUVGQ0Q4Qzg0RUU4NDAzMyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkM1ODA2MkY3QjY4NDExRTI5RUZDRDhDODRFRTg0MDMzIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkM1ODA2MkY4QjY4NDExRTI5RUZDRDhDODRFRTg0MDMzIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+xRRg6wAAB+xJREFUeNrsWgls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);
+    background-size: 114px 24px
+}
+
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+    #footer .footer-body,
+    #footer-logo a {
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOQAAAAwCAYAAAAB+Na0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowMzc2N0JGREI1REUxMUUyOEZFQ0ZDMEVGMzc4MTU2MyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDowMzc2N0JGRUI1REUxMUUyOEZFQ0ZDMEVGMzc4MTU2MyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjAzNzY3QkZCQjVERTExRTI4RkVDRkMwRUYzNzgxNTYzIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjAzNzY3QkZDQjVERTExRTI4RkVDRkMwRUYzNzgxNTYzIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+f1cUVgAAD1JJREFUeNrsXQmU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);
+    }
+  
+    #footer-logo a:focus,
+    #footer-logo a:hover,
+    #footer-logo a:active {
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOQAAAAwCAYAAAAB+Na0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpDNTgwNjJGREI2ODQxMUUyOUVGQ0Q4Qzg0RUU4NDAzMyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpDNTgwNjJGRUI2ODQxMUUyOUVGQ0Q4Qzg0RUU4NDAzMyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkM1ODA2MkZCQjY4NDExRTI5RUZDRDhDODRFRTg0MDMzIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkM1ODA2MkZDQjY4NDExRTI5RUZDRDhDODRFRTg0MDMzIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+MZdy0wAAEK1JREFUeNrsXQu4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);
+    }
+}
+
+
+/**
+ * CONTENT PANEL
+ */
+#content > .aui-panel {
+    background: #fff;
+    margin: 20px 0 0 0;
+    padding: 20px;
+    border-color: #ccc;
+    border-style: solid;
+    border-width: 1px 0;
+}
+
+#content > .aui-page-header {
+    padding: 20px;
+}
+#content > .aui-page-header + .aui-panel {
+    margin-top: 0;
+}
+
+#content > .aui-page-header:first-child {
+    margin-top: 0;
+}
+.aui-panel + .aui-panel {
+    margin-top: 20px;
+}
+
+/*! AUI Page Panel */
+.aui-page-panel {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-left-width: 0;
+    border-right-width: 0;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    clear: both;
+    display: block;
+    margin: 20px 0 0 0;
+    padding: 0;
+    position: relative;
+    width: 100%;
+}
+.aui-page-panel-inner {
+    border-spacing: 0;
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+.aui-page-panel-nav,
+.aui-page-panel-content,
+.aui-page-panel-item,
+.aui-page-panel-sidebar {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: table-cell;
+    padding: 20px;
+    vertical-align: top;
+}
+.aui-page-panel-nav {
+    border-right: 1px solid #ccc;
+    width: 240px;
+}
+.aui-page-panel-sidebar {
+    width: 35%;
+}
+.aui-page-panel-item {
+    padding: 0;
+}
+.aui-page-panel-nav ~ .aui-page-panel-sidebar {
+    width: 30%;
+}
+/* Page Panel Interops */
+.aui-page-header + .aui-page-panel,
+.aui-navbar + .aui-page-panel {
+    margin-top: 0;
+}
+.aui-navbar + .aui-page-panel {
+    border-top: none;
+}
+.aui-page-panel-nav > .aui-nav-vertical {
+    margin-left: -10px;
+    margin-right: -10px;
+}
+
+/**
+ * Page variations
+ */
+.aui-page-focused .aui-page-header,
+.aui-page-focused .aui-page-panel,
+.aui-page-focused #footer .footer-body,
+.aui-page-fixed .aui-header-inner,
+.aui-page-fixed .aui-page-header-inner,
+.aui-page-fixed .aui-navgroup-horizontal .aui-navgroup-inner,
+.aui-page-fixed .aui-page-panel-inner,
+.aui-page-fixed #footer .footer-body,
+.aui-page-hybrid .aui-page-header,
+.aui-page-hybrid .aui-navgroup-horizontal .aui-navgroup-inner,
+.aui-page-hybrid .aui-page-panel-inner,
+.aui-page-hybrid #footer .footer-body {
+    margin-left: auto;
+    margin-right: auto;
+    width: 980px;
+}
+
+/* extra width so left edge of hoverable content aligns with left edge of content while inactive. On hover, the hover affordance does extend outside the alignment but this looks better than the other way around. */
+.aui-page-fixed .aui-header-inner,
+.aui-page-hybrid .aui-navgroup-horizontal .aui-navgroup-inner,
+.aui-page-fixed .aui-navgroup-horizontal .aui-navgroup-inner {
+    width: 1000px; 
+}
+
+.aui-page-focused-small .aui-page-header,
+.aui-page-focused-small .aui-page-panel,
+.aui-page-focused-small #footer .footer-body {
+    width: 400px;
+}
+.aui-page-focused-medium .aui-page-header,
+.aui-page-focused-medium .aui-page-panel,
+.aui-page-focused-medium #footer .footer-body {
+    width: 600px;
+}
+.aui-page-focused-large .aui-page-header,
+.aui-page-focused-large .aui-page-panel,
+.aui-page-focused-large #footer .footer-body {
+    width: 800px;
+}
+.aui-page-focused-xlarge .aui-page-header,
+.aui-page-focused-xlarge .aui-page-panel,
+.aui-page-focused-xlarge #footer .footer-body {
+    width: 980px;
+}
+
+
+.aui-page-focused .aui-page-panel {
+    border-width: 1px;
+    border-radius: 5px;
+}
+
+.aui-page-fixed .aui-page-panel-inner,
+.aui-page-fixed #content > .aui-page-header {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.aui-page-fixed .aui-page-panel-nav:first-child, 
+.aui-page-fixed .aui-page-panel-content:first-child, 
+.aui-page-fixed .aui-page-panel-item:first-child, 
+.aui-page-fixed .aui-page-panel-sidebar:first-child,
+.aui-page-hybrid .aui-page-panel-nav:first-child, 
+.aui-page-hybrid .aui-page-panel-content:first-child, 
+.aui-page-hybrid .aui-page-panel-item:first-child, 
+.aui-page-hybrid .aui-page-panel-sidebar:first-child {
+    padding-left: 0;
+}
+.aui-page-fixed .aui-page-panel-nav:last-child, 
+.aui-page-fixed .aui-page-panel-content:last-child, 
+.aui-page-fixed .aui-page-panel-item:last-child, 
+.aui-page-fixed .aui-page-panel-sidebar:last-child,
+.aui-page-hybrid .aui-page-panel-nav:last-child, 
+.aui-page-hybrid .aui-page-panel-content:last-child, 
+.aui-page-hybrid .aui-page-panel-item:last-child, 
+.aui-page-hybrid .aui-page-panel-sidebar:last-child {
+    padding-right: 0;
+}
+
+/* reset to 100% inside page panel */
+.aui-page-panel .aui-page-header {
+    width: auto;
+}
+.aui-page-panel .aui-page-header-inner {
+    width: 100%;
+}
+
+
+/**
+ * TABS AS FIRST CHILD IN CONTENT
+ * Explicitly sets bg to white, changes horizontal hovers to work on grey.
+ * Remember these extend the standard component styles.
+ */
+
+#content > .aui-tabs {
+    margin: 20px;
+    background: transparent;
+}
+
+#content > .aui-tabs > .tabs-pane {
+    padding: 20px;
+}
+
+#content > .aui-tabs.horizontal-tabs > .tabs-pane {
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 3px 3px;
+    background: #fff;
+}
+
+#content > .aui-tabs.horizontal-tabs > .tabs-menu {
+    display: table; /* stops a gap appearing */
+}
+/**
+ * AUI Page Header
+ */
+
+.aui-page-header-inner {
+    border-spacing: 0;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: table;
+    table-layout: auto;
+    width: 100%;
+}
+
+.aui-page-header-image,
+.aui-page-header-main,
+.aui-page-header-actions {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: table-cell;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    vertical-align: top;
+}
+/* collapse the cell to fit its content */
+.aui-page-header-image {
+    white-space: nowrap;
+    width: 1px;
+}
+.aui-page-header-main {
+    vertical-align: middle;
+}
+.aui-page-header-image + .aui-page-header-main {
+    padding-left: 10px;
+}
+.aui-page-header-actions {
+    padding-left: 20px;
+    text-align: right;
+    vertical-align: middle;
+}
+.aui-page-header-main > h1,
+.aui-page-header-main > h2,
+.aui-page-header-main > h3,
+.aui-page-header-main > h4,
+.aui-page-header-main > h5,
+.aui-page-header-main > h6 {
+    margin: 0;
+}
+.aui-page-header-actions > .aui-buttons {
+    margin: 5px 0; /* spaces out button groups when they wrap to 2 lines */
+    vertical-align: top;
+    white-space: nowrap;
+}
+/* Avatar overrides */
+.aui-page-header-image .aui-avatar {
+    vertical-align: top;
+}
+
+
+/* Hero header */
+.aui-page-header-hero .aui-page-header-main h1,
+.aui-page-header-hero .aui-page-header-main h2 {
+    font-size: 48px;
+    line-height: 1.25; /* 60px equivalent */
+    margin-top: 40px;
+}
+.aui-page-header-hero .aui-page-header-main p {
+    font-size: 24px;
+    line-height: 1.458333333333333; /* 35px equivalent */
+    margin-top: 10px;
+    padding-bottom: 50px;
+}
+
+/* Marketing header */
+.aui-page-header-marketing .aui-page-header-main h1,
+.aui-page-header-marketing .aui-page-header-main h2 {
+    color: #205081; 
+    font-size: 36px; 
+    line-height: 1.388888888888889; /* 50px equivalent */
+    margin-top: 60px;
+}
+.aui-page-header-marketing .aui-page-header-main p {
+    font-size: 20px;
+    color: #707070;
+    line-height: 1.5; /* 30px equivalent */
+}
+
+/* Hero & Marketing shared */
+.aui-page-header-hero .aui-page-header-main h1 .aui-lozenge,
+.aui-page-header-hero .aui-page-header-main h2 .aui-lozenge,
+.aui-page-header-marketing .aui-page-header-main h1 .aui-lozenge,
+.aui-page-header-marketing .aui-page-header-main h2 .aui-lozenge {
+    margin: 0 0 0 10px;
+    position: relative;
+    top: -3px; 
+}
+
+
+/*! AUI Toolbar2 */
+/* Spacing: 10px on toolbar + 10px on buttons so we get 20px above toolbars but just 10px between toolbar rows/wrapped toolbars. */
+.aui-toolbar2 {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 10px 0 0 0; 
+    padding: 0;
+}
+
+.aui-toolbar2 .aui-button {
+    margin-top: 10px;
+}
+
+.aui-toolbar2:after,
+.aui-toolbar2-group:after {
+    clear: both;
+    content: "";
+    display: table;
+}
+
+.aui-toolbar2-group {
+    margin: 0;
+    padding: 0;
+}
+.aui-toolbar2-primary { 
+    float: left; 
+}
+.aui-toolbar2-secondary { 
+    float: right; 
+}
+.aui-toolbar2 .aui-buttons {
+    float: left;
+    padding: 0;
+    white-space: nowrap;
+}
+
+.aui-toolbar2 .aui-button-link {
+    padding: 4px 0; /* TODO: determine if this should be in buttons. 5px creates extra space at the bottom of the toolbar. */
+}
+
+.aui-toolbar2-primary > .aui-buttons,
+.aui-toolbar2-secondary > .aui-buttons {
+    margin: 0 20px 0 0;
+}
+.aui-toolbar2-secondary > .aui-buttons:last-child {
+    margin-right: 0;
+}
+
+
+/*! Atlassian UI and the Atlassian Design Guidelines are created by Atlassian. See https://developer.atlassian.com/display/AUI/ and https://developer.atlassian.com/design/ for license details. */
+
+.clear {
+    clear: both;
+}
+.hidden,
+form.aui .hidden,
+form.aui .field-group.hidden,
+form.aui fieldset.hidden {
+    display: none;
+}
+
+.assistive,
+legend.assistive span {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+/* light shadow for use on dropdowns, inline dialogs */
+.aui-box-shadow {
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.13);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.13); 
+}
+
+/* dialog no longer gets shadow - "blanket is the shadow" */
+.aui-dialog.aui-box-shadow {
+    -webkit-box-shadow: none;
+    box-shadow: none; 
+}
+
+.aui-blanket {
+    background: #000;
+    height: 100%;
+    left: 0px;
+    opacity: 0.5;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 2500;
+}
+.aui-dialog-shadow-parent {
+    position: fixed;
+    overflow: hidden;
+    left:50%;
+    top:50%;
+}
+.aui-popup {
+    background-color: #fff;
+    left: 50%;
+    position: fixed;
+    top: 50%;
+    z-index: 3000;
+}
+.aui-dialog {
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.aui-dialog .dialog-blanket {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.2;
+    background: #000;
+}
+
+/* dialog header styles */
+.aui-dialog .dialog-title {
+    border-bottom: 1px solid #ccc;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 56px; /* NOTE: This value is hard-coded in dialog.js as HEADER_HEIGHT */
+    margin: 0;
+    overflow: hidden;
+    padding: 15px 20px;
+    position: relative;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.aui-dialog h2.dialog-title {
+    color: #333;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+/* dialog navigation styles */
+.aui-dialog .dialog-page-menu {
+    background: #fff;
+    border-right: 1px solid #ccc;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    float: left;
+    height: 100%;
+    list-style: none;
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 10px 10px 20px 10px;
+    width: 25%;
+}
+.aui-dialog .dialog-page-menu li.page-menu-item {
+    margin: 0;
+    padding: 0;
+}
+.aui-dialog .dialog-page-menu li.page-menu-item button.item-button {
+    background: none;
+    border: 0;
+    color: #3b73af;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit; /* = 14px */
+    line-height: 1.1428; /* 16px equiv */
+    padding: 7px 10px;
+    margin: 0;
+    text-align: left;
+    text-decoration: none;
+    width: 100%;
+}
+.aui-dialog .dialog-page-menu li.page-menu-item button.item-button:hover,
+.aui-dialog .dialog-page-menu li.page-menu-item button.item-button:focus {
+    background-color: #e6e6e6;
+}
+.aui-dialog .dialog-page-menu li.page-menu-item.selected button.item-button {
+    color: #333;
+    font-weight: bold;
+}
+.aui-dialog .dialog-page-menu li.page-menu-item button.item-button:active,
+.aui-dialog .dialog-page-menu li.page-menu-item.selected button.item-button:active {
+    background-color: #3b73af;
+    color: #fff;
+}
+
+/* dialog body content styles */
+.aui-dialog .dialog-page-body {
+    background: #fff;
+}
+
+.aui-dialog .dialog-panel-body {
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow: auto;
+    padding: 20px;
+}
+.aui-dialog .dialog-panel-body > *:first-child {
+    margin-top: 0;
+}
+
+/* dialog button panel styles */
+.aui-dialog .dialog-button-panel {
+    border-top: 1px solid #ccc;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    clear: both;
+    height: 51px; /* NOTE: This value is hard-coded in dialog.js as BUTTONS_HEIGHT */
+    overflow: hidden;
+    padding: 10px;
+    text-align: right;
+    width: 100%;
+}
+.aui-dialog .dialog-button-panel button.button-panel-button {
+    background: #f2f2f2;
+    background: -webkit-linear-gradient(top, #ffffff 0%, #f2f2f2 100%);
+    background:    -moz-linear-gradient(top, #ffffff 0%, #f2f2f2 100%);
+    background:     -ms-linear-gradient(top, #ffffff 0%, #f2f2f2 100%);
+    background:      -o-linear-gradient(top, #ffffff 0%, #f2f2f2 100%);
+    background:         linear-gradient(to bottom, #ffffff 0%,#f2f2f2 100%);
+    border-color: #ccc;
+    -moz-border-radius: 3.01px;
+    -webkit-border-radius: 3.01px;
+    border-radius: 3.01px;
+    border-style: solid; /* border width and style don't change after this */
+    border-width: 1px; /* border width and style don't change after this */
+    color: #333;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    font-variant: normal;
+    line-height: 20px;
+    padding: 4px 10px;
+    text-decoration: none;
+    text-shadow: 0 1px 0 white;
+    vertical-align: baseline;
+}
+.aui-dialog .dialog-button-panel button.button-panel-button::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+.aui-dialog .dialog-button-panel button.button-panel-button:focus,
+.aui-dialog .dialog-button-panel button.button-panel-button:hover {
+    background: #f7f7f7;
+    background: -webkit-linear-gradient(top, #ffffff 0%, #f7f7f7 100%);
+    background:    -moz-linear-gradient(top, #ffffff 0%, #f7f7f7 100%);
+    background:     -ms-linear-gradient(top, #ffffff 0%, #f7f7f7 100%);
+    background:      -o-linear-gradient(top, #ffffff 0%, #f7f7f7 100%);
+    background:         linear-gradient(to bottom, #ffffff 0%, #f7f7f7 100%);
+    border-color: #999;
+    color: #000;
+    text-decoration:none;
+}
+
+.aui-dialog .dialog-button-panel button.button-panel-button:active {
+    background: #f2f2f2;
+    background-image: none;
+    background-color: #f2f2f2;
+    box-shadow: inset 0px 3px 6px rgba(0,0,0,.1);
+    text-shadow: none;
+    text-decoration:none;
+}
+
+.aui-dialog .dialog-button-panel a.button-panel-link {
+    background: transparent;
+    border-color: transparent;
+    color: #3b73af;
+    display: inline-block;
+    padding: 5px 0;
+    text-decoration: none;
+    text-shadow: none;
+}
+
+.aui-dialog .dialog-button-panel a.button-panel-link:focus,
+.aui-dialog .dialog-button-panel a.button-panel-link:hover,
+.aui-dialog .dialog-button-panel a.button-panel-link:active {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.aui-dialog .dialog-button-panel button.button-panel-button,
+.aui-dialog .dialog-button-panel a.button-panel-link {
+    margin: 0 10px 0 0;
+}
+.aui-dialog .dialog-button-panel button.button-panel-button.left,
+.aui-dialog .dialog-button-panel a.button-panel-link.left {
+    float: left;
+    margin: 0 0 0 10px;
+}
+
+/* Styles for AJS.dropDown */
+.aui-dd-parent {
+    position: relative;
+}
+
+
+/*Default Styled Trigger*/
+.aui-dd-parent span a.aui-dd-trigger,
+.aui-dd-parent a.aui-dd-trigger {
+    background: transparent url(aui-icon-tools.gif) no-repeat -13px 0;
+    border: none;
+    color: #000;
+    display: block;
+    height: 13px;
+    padding: 0;
+    text-indent: -9999px;
+    width: 13px;
+}
+.aui-dd-parent a.aui-dd-trigger:link,
+.aui-dd-parent a.aui-dd-trigger:visited {}
+.aui-dd-parent a.aui-dd-trigger.active,
+.aui-dd-parent a.aui-dd-trigger:hover,
+.aui-dd-parent a.aui-dd-trigger:active,
+.aui-dd-parent a.aui-dd-trigger:focus {
+    background: transparent url(aui-icon-tools.gif) no-repeat -26px 0;
+    border: none;
+    color: #000;
+}
+
+
+.aui-dd-parent span a.aui-dd-trigger {
+    position: absolute;
+    right: 5px;
+    top: 8px;
+}
+
+/*UNSTYLED TRIGGER*/
+.aui-dd-parent span a.aui-dd-trigger.unstyled,
+.aui-dd-parent a.aui-dd-trigger.unstyled {
+    background: none;
+    border: none;
+    color: inherit;
+    display: block;
+    height: auto;
+    text-indent: 0;
+    width: auto;
+}
+.aui-dd-parent a.aui-dd-trigger-unstyled:link,
+.aui-dd-parent a.aui-dd-trigger-unstyled:visited {}
+.aui-dd-parent a.aui-dd-trigger-unstyled.active,
+.aui-dd-parent a.aui-dd-trigger-unstyled:hover,
+.aui-dd-parent a.aui-dd-trigger-unstyled:active,
+.aui-dd-parent a.aui-dd-trigger-unstyled:focus {
+    background: none;
+    border: none;
+    color: inherit;
+}
+
+.aui-dd-parent span a.aui-dd-trigger-unstyled {
+    position: absolute;
+    right: auto;
+    top: auto;
+}
+
+.aui-dropdown {list-style-type:none;}
+
+.aui-dd-parent .aui-dropdown,
+.aui-dropdown,
+.aui-dd-parent .aui-shadow-parent {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    color: #000;
+    margin-top: -1px;
+    padding: 4px 0 4px 0;
+    position: absolute;
+    z-index: 2003;
+}
+
+.aui-dd-parent  .aui-dropdown-left{
+    left:0px;
+}
+
+.aui-dd-parent .aui-dropdown-right{
+    right:0px;
+}
+
+.aui-dd-parent .aui-shadow {
+    right: 5px;
+}
+.aui-dd-parent .aui-dropdown li.dropdown-item,
+.aui-dropdown li.dropdown-item  {
+    background: #fff;
+    color: #000;
+    display: block;
+    float: none;
+    margin: 0;
+    position: static;
+}
+
+.aui-dd-parent .aui-dropdown a.item-link,
+.aui-dropdown a.item-link {
+    background: #fff;
+    color: #333;
+    display: inline-block;
+    float: none;
+    height: auto;
+    padding: 4px 14px 3px 12px;
+    position: static;
+    text-decoration: none;
+    text-indent: 0;
+    white-space: nowrap;
+    width: auto;
+}
+.aui-dd-parent .aui-dropdown a.item-link:link,
+.aui-dd-parent .aui-dropdown a.item-link:visited,
+.aui-dropdown a.item-link:link,
+.aui-dropdown a.item-link:visited {
+    background: #fff;
+    color: #333;
+}
+.aui-dd-parent .aui-dropdown li.dropdown-item.active a.item-link,
+.aui-dd-parent .aui-dropdown a.item-link:hover,
+.aui-dd-parent .aui-dropdown a.item-link:active,
+.aui-dd-parent .aui-dropdown a.item-link:focus,
+.aui-dropdown a.item-link:hover,
+.aui-dropdown a.item-link:active,
+.aui-dropdown a.item-link:focus  {
+    background: #3B73AF;
+    color: #FFF;
+}
+
+.aui-dd-parent .aui-dropdown li.dropdown-item a.item-link span.icon {
+    display: inline-block;
+}
+
+div.shim {
+    position: absolute;
+}
+/**
+ * Dropdown 2
+ */
+
+/* Functional styles - these are always applied
+---------------------------------------------------------------------- */
+.aui-dropdown2 {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: none;
+    max-width: 300px;
+    min-width: 160px;
+    position: absolute;
+}
+.aui-dropdown2 a {
+    display: block;
+}
+.aui-dropdown2 .aui-list-truncate a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Default style for Dropdown2, invoked with aui-style-default
+---------------------------------------------------------------------- */
+.aui-dropdown2.aui-style-default {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+.aui-dropdown2.aui-style-default ul {
+    list-style: none;
+    margin: 2px 0;
+    padding-left: 0;
+}
+.aui-style-default .aui-dropdown2-section + .aui-dropdown2-section {
+    border-top: 1px solid #ccc;
+}
+.aui-dropdown2.aui-style-default strong {
+    display: block;
+    font-weight: bold;
+    padding: 5px 10px;
+}
+.aui-dropdown2.aui-style-default strong + ul {
+    margin-top: 0;
+}
+.aui-dropdown2.aui-style-default a {
+    color: #333;
+    padding: 3px 10px;
+    text-decoration: none;
+}
+.aui-dropdown2.aui-style-default a:focus,
+.aui-dropdown2.aui-style-default a:hover {
+    text-decoration: none;
+}
+.aui-dropdown2.aui-style-default .active {
+    background-color: #3b73af;
+    color: #fff;
+}
+.aui-dropdown2.aui-style-default .disabled {
+    color: #ccc; /* equivalent of opacity: 0.5 without need for IE8 filter */
+    cursor: default;
+}
+.aui-dropdown2.aui-style-default .aui-icon-container,
+.aui-dropdown2.aui-style-default .aui-dropdown2-radio,
+.aui-dropdown2.aui-style-default .aui-dropdown2-checkbox {
+    padding-left: 31px;
+}
+
+.aui-dropdown2.aui-style-default .aui-icon-container,
+.aui-dropdown2.aui-style-default .aui-dropdown2-radio,
+.aui-dropdown2.aui-style-default .aui-dropdown2-checkbox {
+    /* position of the background or icon (both 16x16) is:
+     * - 10px from the left to match the item padding
+     * - 7px from the top which is calculated:
+     *   - 5px for the top padding of the item
+     *   - 2px is half the difference between the line-height (20) and the icon height (16) so it's vertically spaced
+     */
+    background-position: 10px 5px;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.aui-dropdown2.aui-style-default .aui-icon-container > img,
+.aui-dropdown2.aui-style-default .aui-icon-container > .aui-icon {
+    border-width: 0;
+    left: 10px;
+    position: absolute;
+    top: 5px;
+}
+.aui-dropdown2.aui-style-default .aui-icon-container > .aui-icon {
+    display: block;
+    overflow: hidden;
+    text-indent: -99999px;
+}
+
+
+/* Checkbox items */
+.aui-dropdown2.aui-style-default .aui-dropdown2-checkbox.checked {
+    /* black tick */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAZElEQVQ4y2P4//8/AyWYYdQA0gwAAisgjifLAKjmT0D8A4hlcBoABMxArIVD8y8gDsTrAiBYCMSfgdiakGZcBgRAFYMMScenGWcYQA35BsRf8WnGG4hAEAs1IJDsaAQCsRGQlAFzIahrvTZlPQAAAABJRU5ErkJggg==);
+}
+.aui-dropdown2.aui-style-default .aui-dropdown2-checkbox.checked.active {
+    /* white tick */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAXUlEQVQ4y2P4//8/AyWYYdQAkg2wAuJ4cg0Aaf4ExD+AWAafAcxArIVD8y8gDiTkgoVA/BmIrQlpxmVAAFQxyJB0fJrxhQHIkG9A/BWfZkKBGAs1IJCSaBQbAUkZADrWERF5/1uYAAAAAElFTkSuQmCC);
+}
+.aui-dropdown2.aui-style-default .aui-dropdown2-checkbox.checked.disabled,
+.aui-dropdown2.aui-style-default .aui-dropdown2-checkbox.checked.disabled.active {
+    /* grey tick */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAeElEQVQ4y2P4//8/AyWYYdQA0gw4deqU1ZkzZ+LJMgCk+fTp05+A+MeJEydkcBqwatUqZqACLRyaf508eTIQrwuAihYC8WcgtiakGasBQD8GgBRDDUnHpxlnGEAN+QbEX/FpxhuIQI2xIAPwaSYYCxcvXhQbAUkZACU4+yryyeQvAAAAAElFTkSuQmCC);
+}
+
+/* Radio items */
+.aui-dropdown2.aui-style-default .aui-dropdown2-radio.checked {
+    /* checked */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAPklEQVQ4y2P4//8/AyWYYdQA7AYAAZuamlo7ED+H4naQGNEGQDX/R8PtpBjwHIsBz+lqAGVeoDgQR1MiaRgAnxW7Q0QEK0cAAAAASUVORK5CYII=);
+}
+.aui-dropdown2.aui-style-default .aui-dropdown2-radio.checked.active {
+    /* checked hover/focus */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAOklEQVQ4y2P4//8/AyWYYdQAnAawAXE7ED+H4naoGNEGgDSgg3ZSDHiOxYDndDWAYi9QHIijKZEEDABrgRimRc6sKAAAAABJRU5ErkJggg==);
+}
+.aui-dropdown2.aui-style-default .aui-dropdown2-radio.checked.disabled,
+.aui-dropdown2.aui-style-default .aui-dropdown2-radio.checked.disabled.active {
+    /* checked disabled and checked disabled hover/focus */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAARklEQVQ4y2P4//8/AyWYYdQA7AasWrWK7eDBg+0HDhx4DsIgNkiMaANAGoD4PxpuJ9oAqK0oBoDE6GcAxV6gOBBHUyJpGADX7/1D0vUTdAAAAABJRU5ErkJggg==);
+}
+
+.aui-dropdown2.aui-dropdown2-tailed {
+    border: 1px solid #ccc;
+    margin-top: 10px;
+}
+
+.aui-dropdown2.aui-dropdown2-tailed:before,
+.aui-dropdown2.aui-dropdown2-tailed:after {
+    border-color: transparent;
+    border-style: outset outset solid outset;
+    border-width: 8px;
+    bottom: 100%;
+    content: "";
+    display: block;
+    height: 0;
+    position: absolute;
+    width: 0;
+}
+.aui-dropdown2.aui-dropdown2-tailed:before {
+    border-bottom-color: #ccc;
+    margin-bottom: 1px;
+}
+.aui-dropdown2.aui-dropdown2-tailed:after {
+    border-bottom-color: #fff;
+}
+.aui-dropdown2-tailed[data-dropdown2-alignment="left"]:before,
+.aui-dropdown2-tailed[data-dropdown2-alignment="left"]:after {
+    left: 20px;
+}
+.aui-dropdown2-tailed[data-dropdown2-alignment="right"]:before,
+.aui-dropdown2-tailed[data-dropdown2-alignment="right"]:after {
+    right: 20px;
+}
+
+/* basic in-page dropdown trigger style DEPRECATED as of 4.2 */
+.aui-dropdown2-trigger.aui-style-dropdown2triggerlegacy1 {
+    padding: 5px 8px;
+    text-decoration: none;
+}
+.aui-dropdown2-trigger.aui-style-dropdown2triggerlegacy1:hover,
+.aui-dropdown2-trigger.aui-style-dropdown2triggerlegacy1:focus,
+.aui-dropdown2-trigger.aui-style-dropdown2triggerlegacy1.active {
+    background-color: #326ca6;
+    border-radius: 4px;
+    color: #fff;
+    text-decoration: none;
+}
+.aui-dropdown2-trigger.aui-style-dropdown2triggerlegacy1.active {
+    border-radius: 4px 4px 0 0;
+}
+
+.aui-dropdown2-trigger.aui-style-dropdown2triggerlegacy1[aria-disabled="true"],
+.aui-dropdown2-trigger.aui-style-dropdown2triggerlegacy1[aria-disabled="true"]:hover,
+.aui-dropdown2-trigger.aui-style-dropdown2triggerlegacy1[aria-disabled="true"]:focus,
+.aui-dropdown2-trigger.aui-style-dropdown2triggerlegacy1[aria-disabled="true"]:active {
+    background: inherit;
+    color: #99b6d3; /* equivalent of opacity: 0.5 without need for IE8 filter. */
+    cursor: default;
+}
+
+/* Toolbar/Toolbar2-via-buttons integration. Avoid double border: */
+.aui-dropdown2.aui-style-default.aui-dropdown2-in-toolbar,
+.aui-dropdown2.aui-style-default.aui-dropdown2-in-buttons {
+    margin-top: -1px;
+    border-top-color: #ccc;
+}
+
+/* Header integration. */
+.aui-dropdown2.aui-style-default.aui-dropdown2-in-header {
+    margin-top: 1px;
+}
+.aui-dropdown2.aui-style-default.aui-dropdown2-in-header.aui-dropdown2-in-buttons {
+    margin-top: 0;
+}
+.aui-dropdown2.aui-style-default.aui-dropdown2-in-header.aui-dropdown2-tailed {
+    margin-top: 4px;
+}
+
+/* Arrow for sub menus */
+.aui-dropdown2-sub-trigger {
+    position: relative;
+}
+
+.aui-dropdown2-sub-trigger:after {
+    border: 5px solid transparent;
+    border-left-color: #333;
+    content: "";
+    height: 0;
+    margin-left: -16px;
+    margin-top: -5px;
+    left: 100%; /* "left" + "margin-left" required because of webkit not working properly with "right" */
+    position: absolute;
+    top: 50%;
+    width: 0;
+}
+
+.aui-dropdown2-sub-trigger.active:after {
+    border-left-color: #FFFFFF;
+}
+
+.aui-dropdown2-sub-trigger.disabled:after {
+    border-left-color: #d3d3d3;
+}
+
+.aui-dropdown2.aui-dropdown2-sub-menu,
+.aui-dropdown2.aui-dropdown2-in-header.aui-dropdown2-sub-menu {
+    margin-top: -3px;
+}
+
+form.aui {
+    margin: 20px 0 0 0;
+    position: relative;
+}
+form.aui:first-child {
+    margin-top: 0;
+}
+
+/* Field styles */
+form.aui .text,
+form.aui .password,
+form.aui .upfile,
+form.aui .textarea,
+form.aui .select,
+form.aui .multi-select {
+    color: #333;
+    font-family: inherit;
+    font-size: 14px;
+}
+form.aui .text,
+form.aui .password,
+form.aui .textarea,
+form.aui .select,
+form.aui .multi-select {
+    border: 1px solid #ccc;
+    border-radius: 3.01px;
+    box-shadow: inset 0 1px 3px #ccc;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #333;
+    font-size: inherit;
+    margin: 0;
+    max-width: 250px;
+    vertical-align: baseline;
+    width: 100%;
+}
+form.aui .text,
+form.aui .password,
+form.aui .select {
+    height: 2.1428571428571em; /* 30px - using ems so the fields increase in line with user specified font-sizes */
+    line-height: 1.4285714285714; /* Required for IE8. Causes misaligned placeholder text in Safari 5 - fixed in Safari 6 though */
+    padding: 4px 5px;
+}
+form.aui .select {
+    padding: 6px 5px 5px 5px; /* Firefox doesn't allow line-height to be adjusted and selects break horribly when the font-family is changed. Using padding instead */
+}
+form.aui .textarea,
+form.aui .select[size],
+form.aui .multi-select {
+    height: auto;
+    line-height: 1.4285714285714;
+    margin: 0;
+    padding: 4px 5px;
+}
+form.aui .textarea {
+    overflow-y: auto;
+}
+/* Do not give file inputs a height or width because they break horribly in certain browsers. */
+form.aui .upfile {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: inherit;
+    margin: 0;
+    padding: 5px 0;
+}
+form.aui optgroup {
+    background-color: #f5f5f5;
+    color: #707070;
+    font-style: normal;
+    font-weight: normal;
+}
+form.aui option,
+form.aui optgroup option {
+    background-color: #fff;
+    color: #333;
+}
+
+/* Disabled form element styles */
+form.aui .text[disabled],
+form.aui .password[disabled],
+form.aui .textarea[disabled],
+form.aui .select[disabled],
+form.aui .multi-select[disabled],
+form.aui .select[disabled] option,
+form.aui .select[disabled] optgroup,
+form.aui .multi-select[disabled] option,
+form.aui .multi-select[disabled] optgroup {
+    background-color: #f5f5f5;
+    color: #999;
+}
+form.aui .text[disabled],
+form.aui .password[disabled],
+form.aui .textarea[disabled],
+form.aui .select[disabled],
+form.aui .multi-select[disabled] {
+    box-shadow: none;
+    color: #999;
+}
+form.aui .text[disabled],
+form.aui .password[disabled],
+form.aui .textarea[disabled],
+form.aui .select[disabled],
+form.aui .multi-select[disabled],
+form.aui .radio[disabled],
+form.aui .checkbox[disabled] {
+    cursor: not-allowed;
+}
+
+/* Placeholder styling
+ * - You have to use two rules, because user agents are required to ignore a rule with an unknown selector.
+ *   Since WebKit doesn’t know the proprietary Mozilla selector and vice versa, you have to include them separately.
+ *   See http://stackoverflow.com/questions/2610497/change-an-inputs-html5-placeholder-color-with-css#answer-2610741
+ */
+form.aui .text::-webkit-input-placeholder,
+form.aui .password::-webkit-input-placeholder,
+form.aui .textarea::-webkit-input-placeholder {
+    color: #707070;
+}
+form.aui .text:-moz-placeholder,
+form.aui .password:-moz-placeholder,
+form.aui .textarea:-moz-placeholder {
+    color: #707070;
+}
+
+/* Field widths
+ * - don't add widths to file inputs - they break horribly
+ */
+form.aui .short-field {
+    max-width: 75px;
+}
+form.aui .medium-field {
+    max-width: 165px;
+}
+form.aui .long-field {
+    max-width: 500px;
+}
+form.aui .full-width-field {
+    max-width: none;
+}
+
+/* Structural elements */
+form.aui fieldset {
+    border: 0;
+    clear: both;
+    display: block;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+form.aui label {
+    color: #707070;
+}
+form.aui .icon-required {
+    left: 100%;
+    position: absolute;
+    top: 5px;
+}
+form.aui div.description {
+    color: #707070;
+    font-size: 12px;
+    line-height: 1.66666666666667;
+    margin: 5px 0 0 0;
+}
+form.aui div.description:first-child {
+    margin-top: 0;
+}
+form.aui .field-value {
+    display: inline-block;
+    font-weight: bold;
+    padding-top: 5px;
+}
+/* TODO: don't support this in AUI Forms 2 */
+form.aui legend {
+    display: none;
+}
+form.aui legend > span {
+    color: #707070;
+    left: 0;
+    padding: 5px 0 0 0;
+    position: absolute;
+    text-align: right;
+    top: 4px; /* the same as the padding-top on the fieldset.group */
+    width: 130px;
+    word-wrap: break-word;
+}
+form.aui .field-group,
+form.aui .group,
+form.aui .date-select {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    clear: both;
+    padding: 4px 0 4px 145px;
+    position: relative;
+    margin: 1px 0;
+    width: 100%;
+}
+form.aui .field-group:before,
+form.aui .field-group:after,
+form.aui .group:before,
+form.aui .group:after,
+form.aui .date-select:before,
+form.aui .date-select:after {
+    content: " ";
+    display: table;
+}
+form.aui .field-group:after,
+form.aui .group:after,
+form.aui .date-select:after {
+    clear: both;
+}
+form.aui .field-group > label {
+    float: left;
+    margin-left: -145px;
+    padding: 5px 0 0 0;
+    position: relative;
+    text-align: right;
+    width: 130px;
+    word-wrap: break-word;
+}
+
+form.aui .checkbox > label,
+form.aui .radio > label {
+    color: #333;
+}
+form.aui div.checkbox > .checkbox[disabled] + label,
+form.aui div.radio > .radio[disabled] + label {
+    color: #999;
+    cursor: not-allowed;
+}
+form.aui .field-group .error,
+form.aui .group .error,
+form.aui .checkbox .error,
+form.aui .radio .error {
+    clear: both;
+    color: #D04437;
+    display: block;
+    margin: 5px 0 0 0;
+}
+form.aui .field-group .error:first-child,
+form.aui .checkbox .error:first-child,
+form.aui .radio .error:first-child {
+    margin-top: 0;
+}
+form.aui .group legend,
+form.aui .date-select legend {
+    display: block;
+}
+form.aui .group legend,
+form.aui .date-select legend {
+    display: block;
+}
+form.aui .group .field-group,
+form.aui .date-select .field-group {
+    padding-left: 0;
+}
+form.aui .date-select .field-group label {
+    display: none;
+}
+form.aui div.checkbox,
+form.aui div.radio {
+    margin: 5px 0 0 0;
+    padding: 0 0 0 20px;
+    position: relative;
+}
+form.aui div.checkbox:first-child,
+form.aui div.radio:first-child {
+    margin-top: 0;
+}
+form.aui .matrix {
+    padding-top: 5px;
+}
+form.aui div.radio input.radio,
+form.aui div.checkbox input.checkbox {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 14px;
+    height: 1.4285714285714em;
+    left: 0;
+    margin: 0;
+    padding: 2px;
+    position: absolute;
+    vertical-align: baseline;
+}
+/* Buttons */
+form.aui .buttons-container {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    clear: both;
+    margin: 1px 0 0 0;
+    padding: 4px 0 4px 145px;
+    position: relative;
+    width: 100%;
+}
+
+/* Long Labels
+ * add long-label class to form eg: <form class="aui long-label">
+ */
+form.aui.long-label .field-group,
+form.aui.long-label .group,
+form.aui.long-label .date-select,
+form.aui.long-label .buttons-container {
+    padding-left: 250px;
+}
+form.aui.long-label .field-group > label {
+    margin-left: -250px;
+    width: 235px;
+}
+form.aui.long-label legend > span {
+    width: 235px;
+}
+form.aui.long-label .group .field-group,
+form.aui.long-label .date-select .field-group {
+    padding-left: 0;
+}
+/* End Long Labels */
+
+
+/* Top Labels
+ * add top-label class to form eg: <form class="aui top-label">
+ */
+form.aui.top-label .field-group {
+    padding-left: 0;
+}
+form.aui.top-label .field-group > label {
+    display: block;
+    float: none;
+    margin: 0 0 5px 0;
+    padding: 0;
+    text-align: left;
+    width: auto;
+}
+form.aui.top-label .icon-required {
+    left: 0;
+    position: static;
+    top: 0;
+}
+form.aui.top-label .group,
+form.aui.top-label .date-select {
+    padding-left: 0;
+}
+form.aui.top-label .group legend span,
+form.aui.top-label .date-select legend span {
+    left: 0;
+    position: relative;
+    top: 0;
+    text-align: left;
+    width: auto;
+}
+form.aui.top-label .date-select label {
+    display: none;
+}
+form.aui.top-label .buttons-container {
+    padding-left: 0;
+}
+/* End Top Labels */
+
+/* Deprecated button styling - use the new aui-button component */
+
+/* Basic Button Style */
+form.aui .button {
+    background: #f2f2f2;
+    background: -webkit-linear-gradient(top, #fff 0%, #f2f2f2 100%);
+    background:    -moz-linear-gradient(top, #fff 0%, #f2f2f2 100%);
+    background:     -ms-linear-gradient(top, #fff 0%, #f2f2f2 100%);
+    background:      -o-linear-gradient(top, #fff 0%, #f2f2f2 100%);
+    background:         linear-gradient(to bottom, #fff 0%, #f2f2f2 100%);
+    border: 1px solid #ccc;
+    border-radius: 3.01px;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #333;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-variant: normal;
+    font-weight: normal;
+    height: 2.1428571428571em; /* 30px - using ems so the fields increase in line with user specified font-sizes */
+    line-height: 1.4285714285714;
+    margin: 0;
+    padding: 4px 10px;
+    text-decoration: none;
+    text-shadow: 0 1px 0 white;
+    vertical-align: baseline;
+    white-space: nowrap;
+}
+form.aui .cancel  {
+    cursor: pointer;
+    font-size: 14px;
+    display: inline-block;
+    padding: 5px 10px;
+    vertical-align: baseline;
+}
+
+/* Create 10px effective gap; backwards compat for old and new buttons */
+/* zero font size hack to stop 4px magic number problems. */
+form.aui .buttons-container > .buttons {
+  font-size: 0;
+}
+/* ensure zero font size hack doesn't kill other elements. */
+form.aui .buttons-container > .buttons > * {
+    font-size: 14px;
+}
+form.aui .button + .button,
+form.aui .button + .aui-button,
+form.aui .aui-button + .button,
+form.aui .aui-button + .aui-button {
+    margin-left: 10px;
+}
+form.aui .aui-button + .aui-button-link {
+    margin-left: 9px; /* 1px diff due to border */
+}
+
+
+/* Control button height in Firefox. See http://www.experimentgarden.com/2010/11/firefox-buttontext-height-and-padding.html */
+form.aui .button::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+form.aui .button:focus,
+form.aui .button:hover {
+    background: #f7f7f7;
+    background: -webkit-linear-gradient(top, #fff 0%, #f7f7f7 100%);
+    background:    -moz-linear-gradient(top, #fff 0%, #f7f7f7 100%);
+    background:     -ms-linear-gradient(top, #fff 0%, #f7f7f7 100%);
+    background:      -o-linear-gradient(top, #fff 0%, #f7f7f7 100%);
+    background:         linear-gradient(to bottom, #fff 0%, #f7f7f7 100%);
+    border-color: #999;
+    color: #000;
+    text-decoration:none;
+}
+
+form.aui .button:active,
+form.aui .button.active {
+    background-image: none;
+    background-color: #f2f2f2;
+    box-shadow: inset 0 3px 6px rgba(0,0,0,.1);
+    text-shadow: none;
+    text-decoration:none;
+}
+
+form.aui .button[disabled],
+form.aui .button[disabled]:hover,
+form.aui .button[disabled]:focus,
+form.aui .button[disabled]:active {
+    background: #f2f2f2;
+    background: -webkit-linear-gradient(top, #fff 0%, #f2f2f2 100%);
+    background:    -moz-linear-gradient(top, #fff 0%, #f2f2f2 100%);
+    background:     -ms-linear-gradient(top, #fff 0%, #f2f2f2 100%); 
+    background:      -o-linear-gradient(top, #fff 0%, #f2f2f2 100%); 
+    background:         linear-gradient(to bottom, #fff 0%, #f2f2f2 100%);
+    border-color: #ccc;
+    box-shadow: none;
+    color: #999;
+    text-shadow: none;
+}
+
+
+/* Message Interops */
+form.aui .aui-message + .field-group,
+form.aui .aui-message + .group,
+form.aui .aui-message + .date-select {
+    margin-top: 10px;
+}
+
+
+/* Deprecated */
+form.aui span.content {
+    left: -9999px;
+    position: absolute;
+    top: -9999px;
+}
+form.aui pre.aui-form {
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    font-family: monospace;
+    font-size: 12px;
+    line-height: 1.66666666666667; /* 20px */
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 15px;
+}
+/**
+* Basic icon styles. Allows you to easily render sprite icons.
+*
+* .aui-icon must be present on all iconified elements
+* All iconified elements must include class names prefixed with 'aui-icon-'
+* Icons assume light backgrounds. Icon classnames for dark backgrounds must be suffixed with '-d'
+* For elements whose background changes in app, we advise maintaining light/dark state in the app.
+*
+*/
+
+.aui-icon {
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    border: none;
+    display: inline-block;
+    height: 16px;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    text-indent: -999em;
+    vertical-align: text-bottom;
+    width: 16px;
+}
+
+.icon-move,
+.icon-move-d,
+.icon-dropdown,
+.icon-dropdown-d,
+.icon-dropdown-active,
+.icon-dropdown-active-d,
+.icon-minimize,
+.icon-minimize-d,
+.icon-maximize,
+.icon-maximize-d {
+    background-repeat: no-repeat;
+}
+
+.aui-icon.icon-move,
+.aui-icon.icon-move-d,
+.aui-icon.icon-dropdown,
+.aui-icon.icon-dropdown-d,
+.aui-icon.icon-dropdown-active,
+.aui-icon.icon-dropdown-active-d,
+.aui-icon.icon-minimize,
+.aui-icon.icon-minimize-d,
+.aui-icon.icon-maximize,
+.aui-icon.icon-maximize-d {
+    background-position: 0 0 !important; /* This is for legacy support */
+    height: 13px;
+    vertical-align: baseline;
+    width: 13px;
+}
+
+
+/* Core icons - deprecated */
+.icon-move {
+    /* icon-move.png */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAYAAABy6+R8AAAAPUlEQVR42rWRMQoAMAjE+v9P29syBeFKs50YVDzGBKmbACKZACIV69G0ZqQJqwQJBcWk8iYD6eufTHha7wLFyOcZBIC2HgAAAABJRU5ErkJggg==);
+    cursor: move;
+}
+.icon-move-d {
+    /* icon-move-d.png */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANAQMAAABIJXY/AAAABlBMVEUAAABtbW0GOOmzAAAAAXRSTlMAQObYZgAAACZJREFUCFtjYGJgYGdg4G9gADKUFBiSDBj+/wCRQDYTWBwoy8QAAF4LBNTKhGdbAAAAAElFTkSuQmCC);
+    cursor: move;
+}
+.icon-dropdown {
+    /* icon-dropdown.png */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAYAAABy6+R8AAAANUlEQVQoz2NgIBH8//8fziAKwDX9h2slypb/A6gJn1/w2oRLA0HnYdMwCAKCaE1kpQhy0h4AvZXuEh7/K88AAAAASUVORK5CYII=);
+}
+.icon-dropdown-d {
+    /* icon-dropdown-d.png */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAYAAABy6+R8AAAAOElEQVQoz2NgIBH8//8fwsjNzf1PDIZrgnGIASC1A6gJn1/w2oRLA0HnYdMwCAKCaE1kpQhy0h4AVz6Yhl8Qyr8AAAAASUVORK5CYII=);
+}
+.icon-dropdown-active {
+    /* icon-dropdown-active.png */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAYAAABy6+R8AAAAMElEQVQoz2NgIBH8//8fziAKwDX9Jx0MlCY8nsdvEwENuJ2HR8P/oRB6ZKUIctIeACdj9RnXT1HMAAAAAElFTkSuQmCC);
+}
+.icon-dropdown-active-d {
+    /* icon-dropdown-active-d.png */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAYAAABy6+R8AAAANklEQVQokWNgIBH8//8fwsjNzf1PDIZrIlYDDA+gJlyeJ2gTPg14nYdLwwAHBNGayEoR5KQ9AH2/LqGCzCmZAAAAAElFTkSuQmCC);
+}
+.icon-minimize {
+    /* icon-minimize.png */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAYAAABy6+R8AAAAJ0lEQVQoz2NgIBH8//8fziAKwDX9Jx3QWxMJgTCqCUUTWSmCnLQHAMrBNdnApUZIAAAAAElFTkSuQmCC);
+}
+.icon-minimize-d {
+    /* icon-minimize-d.png */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAYAAABy6+R8AAAALElEQVQoz2NgIBH8//8fwsjNzf1PDIZrIlYDDA+AJmIDYVQTuiayUgQ5aQ8AKzrBcoqP7AUAAAAASUVORK5CYII=);
+}
+.icon-maximize {
+    /* icon-maximize.png */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAYAAABy6+R8AAAAMklEQVR42r3LMQoAAAhCUe9/aVulIZSivyk8pJFsh9EdwtAO0egOYUhxhHR/I6OO7BQVFiAd8RJdftsAAAAASUVORK5CYII=);
+}
+.icon-maximize-d {
+    /* icon-maximize-d.png */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAYAAABy6+R8AAAAOElEQVQokWNgIBH8//8fVSA3N/c/IUw9TficRpkmYpxEPU2EnIQREMRoQuYPgCZiAwKuiVQA0gQAtaqzzogsN8sAAAAASUVORK5CYII=);
+}
+
+
+/* Form icons - deprecated */
+form.aui .icon-date,
+.aui-icon-date {
+    /* icon-date.png */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAElBMVEVwcHA7c6/e297////d3d3QRDeta2PvAAAANElEQVR42o3NMQoAMAgDwFrj/7+sNB2EOHhkCgaPMrqkxcAdLVOBLwrQLuJFCp3sv9BqIhIVkgJPMGXvIwAAAABJRU5ErkJggg==);
+}
+form.aui .icon-range,
+.aui-icon-range {
+    /* icon-range.png */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAD1BMVEVwcHA7c6/d3d3////QRDegIdLtAAAANUlEQVR42oWOsQkAMBAC8/r7zxyIjaCQw+pQ8CQjIFIUSFiaANZ4jbU0saJOQIbwiZ7+jwUX+3ECESZGRrwAAAAASUVORK5CYII=);
+}
+form.aui .icon-required,
+.aui-icon-required {
+    /* icon-required.png */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAXklEQVR42u3MsQ2AIBSEYZnHAVjACZzkNUxA6yCOY2HhNnoXn6EggVxjRfHnQh75pmOJX/e7JTPrxo8JRQK+SQUyugj4ZhUIaCPgG1RgRida0c63ClQpQOs4gAH8Bzy5KFqGk8PBaQAAAABJRU5ErkJggg==);
+}
+form.aui .icon-users,
+.aui-icon-users {
+    /* icon-users.png */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAtUlEQVR42t2RMQrCQBBF9xparK138ATJaRYEPVWwj0o6m1zAJl1IOgvXJtX4ix9YZsKK2Fk8kn18HmHjQgg/sSh3+5MHNYh8+m8DZyAJTS5QgIEUDEQVmOAXt44HIUP+C+xWy5EBz8iLzw283TJQ8tDz3YmIAd5sc5e4BlcwgQtYffoLWzIHKnUHFbzdMnAAQo4MPFUgwtstA2MiHwyIBt5uGRBFLiCKfwncE9Ex0KrAjQGzfQN6A+Z5DlYHhgAAAABJRU5ErkJggg==);
+}
+form.aui .icon-help,
+.aui-icon-help,
+form.aui .icon-inline-help,
+.aui-icon-inline-help {
+    /* icon-help.png */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABOklEQVR42mXTv0rDUBTH8atDqYPi4mDRya3pAziIz+ETCDpoVt9BbKFRlFqfQGfBCukkODgIpREcddeiiCbR+A38ApfT4RNy/tzDzU3iwjC0mjjCGN8yVq5p+/1gDifIkWGIrgyVyxXX7IAaBihwgQac0UBfPTeo+QO6Kux7zZeYIMU11lTbVW9UDQiQa7qTe7xjG1t4wTNmVe9pTVAGbWRYVnEJBQ7g5FC5FTj1pmg7nXAM51lHXfcbeMNDtQOJkTi9pjMlrU184dEerNb8uPLiDbAGeMWiYjvgo7xJvEew7nBl8xJjNHWIxqrdujnEThm0kKNnmuYxkYUqb15jq0pEKLAHJ3UkUoeTHfzh2H7KtxrSN9uegVPuXD0DrZn6mU7xiwwxuhIjUy2yP5MVoIMnpPjESLnA9v8DHHysLnlPp3QAAAAASUVORK5CYII=);
+}
+
+
+/* Message icons */
+.aui-message .icon-generic,
+.aui-icon-generic {
+    /* icon-generic.png */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA00lEQVR42qWTUQqCQBCGe9KCuoiKPqj38iTpg4KeJbqFZHSNesgw6l/4F4ZBlrSFD5z/3xlmd8eNXkVRBOAIBvAkF2qB3KsTPVCDN/jMQa8Fu7nkk9jYgRxsSU7N+mfgyQINjRtIrG4TRByCK/VaihPF2Gi6gNIS6hMIjVDatjc/LnGc0gQDg4y+swPqGb3BBCMDf0EBn964tsCB3n3tEVJ6veMSnQU6epUJooXPGItnjFyDpJcepMY1yi1Iqe/53epR/vNncrdZsdUXeICeWqT3fwEp0i7HcWSJEgAAAABJRU5ErkJggg==);
+}
+.aui-message .icon-error {
+    /* icon-error-white.png */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAzUlEQVR42q2T3QqCQBBGvcqCehETvVBfM71QsGeJ3kIyeo260DC2b+CThoVdsFo44JzdGfZnDIwxNhE4gB4M5EIX2et1sAI1eBnH4FwLNnOeTj6phUdQgDUp6OZxlhxdoOHEDaSAnuMT78GVrhY3y4kyEekqQFK6SXJFlGrbgbcAUccpJegZ5AsK5PS9BCODcEGBkH78tsCO/u4+gp+MOd2vl1hJEC98xkQ9Y+xvJOJopMbXyi3I6Lf8bu1W/uvPZG+z4laf4AE6uthe/wbkrGRlM25n9wAAAABJRU5ErkJggg==);
+}
+.aui-icon-error {
+    /* icon-error.png */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA00lEQVR42qWTXQqCUBCFe+oHaiMm+qDSBlpf+qBga4n20INktI16yDDqDJwLwyAXzIEPnDM/zL13nFm77HcBOIAWvMiVWqBzbeEclOADvkMwVoPVUPFJJR5BBpYko+biZ6nRDSoG7iB2uitQ/hbcqJda7ClGotkGRoup91IrQu7GlgRvA5o6Ti5OSycd0SBlrBWno7MY0WDBWPdvgw1jD98RfDuTsKaZeomFOOHIZ4zUM4a+RbJmF6nyrXINEuprftd2lSf+TP4xC476Bk/QUAtt/g8cmyvPgMzXPwAAAABJRU5ErkJggg==);
+}
+.aui-message .icon-hint,
+.aui-icon-hint,
+.aui-message .icon-info,
+.aui-icon-info {
+    /* icon-info.png */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA1klEQVR42qWTUQqCQBCGfdKCuogu+qBeoot0kl7TBwU9S3QLyega9ZBh1L/wLyyDLGkLHzj/vzPM7o6eXLv9IQRH0IMnuVAL7b0y0QcVeIPPFPQasJ5KPlkbW5CDFcmpGf8MfLtATeMGEqObBCuOwJV6ZYsjxVhrsoDQEuojiLRQmLa9H5d1nEIHPYOMvrMD6hm9XgcDg2BGgYDesLTAlt596RFSep3jEp0FWnqlDtTMZ4ytZ1SuQZJLDlLtGuUGpNQ3/G7kKP/5M7nbLNnqCzxAR03J/V+HSh9XtOsatQAAAABJRU5ErkJggg==);
+}
+.aui-message .icon-success,
+.aui-icon-success {
+    /* icon-success.png */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA9klEQVR42qWTPQrCQBSErfwBhRQewDoGFYyHtDEWCSSVR8gBRDxCGjFi4xEstFBR4jyYYnmuK5LAB/vmzexuNpuGfvrzwAcLUIIb2VPzTa8ONkEMXqCywV4KOrbw2jBmYAbaZEatIhvJmBMkbBzB2LHLITjQG5vik+Ko8eORBeh9SlaEiELmCHmgACvWGTORFCWL8Et4IGF6TtRC1qUUdxYtNiOB4wk4s18Aj3qL2v1jAiOQ28L09Khf1CuoVS1heqbs7ayHyEm2INdhdYhLKYI/P+PI+IxBnYuUuK5yCqbUuxyn+irX/Jnc21xyqw9wBTtqgfa/Af067eG0xhemAAAAAElFTkSuQmCC);
+}
+.aui-message .icon-warning,
+.aui-icon-warning {
+    /* icon-warning.png */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABA0lEQVR42p2QP0tCURiH7zdQRA3u4OJUiyDY4CDtTuEXuXs0JEQ4uDk5C0EuKoEu+SWcg5baLCS7tNTx98IzyMWjXoeHe95/z3vODdzi2kdTvIo30fL1+YbLIhYOfsV5GsFAOL59zsNjBRfij60lEXKbf1E5RvDExl4URYGwXJfc6JCgwqZYhBp2hs5n4odadZ9gzKYu2x1YrUPt2SeosWEtijsEBfGN5HKXYErxweKkAMk9PbOkoE5hJXI+AbUVvfVtwZzkHTECAGptel8cgisSnyJDk+8GRlZ8MdOwxITghoa9ArhlZmzB+/abDjwh+c8+LBgRnMLEBHnxKJYpBpfMFDbGjWcGPFD11gAAAABJRU5ErkJggg==);
+}
+.aui-message .icon-close,
+.aui-icon-close {
+    /* icon-close.png */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAUElEQVR42sWTQQoAIAgEe2ef6smW1wb0MEHBXtp1QLMREUpvAefMFIKFf5srBUjhI4AQPAJKCO/YQgdhMQGE9MUe4FvwQ/TP6BfJr/L/37gBAXQVT6UvFQUAAAAASUVORK5CYII=);
+}
+.aui-message .icon-close-inverted,
+.aui-message.error .icon-close,
+.aui-icon-close-inverted {
+    /* icon-close-inverted.png */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAUklEQVR42sWTQQoAIAgE/f8r+qkl0WlwLyu0IB1WR0qLzLRiDnBU56oICj4A13wCBL4AEEKPgDaxAwMguqFYAQhhsQ8Yu4L/iP4Y/UXyV/n/b9xWqa6H7L0OrwAAAABJRU5ErkJggg==);
+}
+
+
+/* Dropdown icon (downwards arrow)
+* - achieved via pseudo element
+*/
+.aui-icon-dropdown {
+    border: 4px solid transparent;
+    border-top-color: #333;
+    content: "";
+    display: inline-block;
+    height: 0;
+    overflow: hidden;
+    text-align: left;
+    text-indent: -999em;
+    position: relative;
+    vertical-align: baseline;
+    width: 0;
+}
+
+
+/* Simple spinner icon for wait/loading time */
+.aui-icon-wait {
+    background-image: url(data:image/gif;base64,R0lGODlhEAAQAPMPALu7u5mZmTMzM93d3REREQAAAHd3d1VVVWZmZqqqqoiIiO7u7kRERCIiIgARAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQFBwAPACwAAAAAEAAQAEAEcPDJtyg6dUrFetDTIopMoSyFcxxD1krD8AwCkASDIlPaUDQLR6G1Cy0SgqIkE1IQGMrFAKCcGWSBzwPAnAwarcKQ15MpTMJYd1ZyUDXSDGelBY0qIoBh/ZoYGgELCjoxCRRvIQcGD1kzgSAgAACQDxEAIfkEBQcADwAsAAAAAA8AEAAABF3wyfkMkotOJpscRKJJwtI4Q1MAoxQ0RFBw0xEvhGAVRZZJh4JgMAEQW7TWI4EwGFjKR+CAQECjn8DoN0kwDtvBT8FILAKJgfoo1iAGAPNVY9DGJXNMIHN/HJVqIxEAIfkEBQcADwAsAAAAABAADwAABFrwyfmColgiydpaQiY5x9Ith7hURdIl0wBIhpCAjKIIxaAUPQ0hFQsAC7MJALFSFi4SgC4wyHyuCYNWxH3AuhSEotkNGAALAPqqkigG8MWAjAnM4A8594vPUyIAIfkEBQcADwAsAAAAABAAEAAABF3wySkDvdKsddg+APYIWrcg2DIRQAcU6DJICjIsjBEETLEEBYLqYSDdJoCGiHgZwG4LQCCRECEIBAdoF5hdEIWwgBJqDs7DgcKyRHZl3uUwuhm2AbNNW+LV7yd+FxEAIfkEBQcACAAsAAAAABAADgAABEYQyYmMoVgeWQrP3NYhBCgZBdAFRUkdBIAUguVVo1ZsWFcEGB5GMBkEjiCBL2a5ZAi+m2SAURExwKqPiuCafBkvBSCcmiYRACH5BAUHAA4ALAAAAAAQABAAAARs0MnpAKDYrbSWMp0xZIvBKYrXjNmADOhAKBiQDF5gGcICNAyJTwFYTBaDQ0HAkgwSmAUj0OkMrkZM4HBgKK7YTKDRICAo2clAEIheKc9CISjEVTuEQrJASGcSBQcSUFEUDQUXJBgDBW0Zj34RACH5BAUHAA8ALAAAAAAQABAAAARf8Mn5xqBYgrVC4EEmBcOSfAEjSopJMglmcQlgBYjE5NJgZwjCAbO4YBAJjpIjSiAQh5ayyRAIDKvJIbnIagoFRFdkQDQKC0RBsCIUFAWsT7RwG410R8HiiK0WBwJjFBEAIfkEBQcADgAsAQABAA8ADwAABFrQybEWADXJLUHHAMJxIDAgnrOo2+AOibEMh1LN62gIxphzitRoCDAYNcNN6FBLShao4WzwHDQKvVGhoFAwGgtFgQHENhoB7nCwHRAIC0EyUcC8Zw1ha3NIRgAAIfkEBQcADwAsAAAAABAAEAAABGDwyfnWoljaNYYFV+Zx3hCEGEcuypBtMJBISpClAWLfWODymIFiCJwMDMiZBNAAYFqUAaNQ2E0YBIXGURAMCo1AAsFYBBoIScBJEwgSVcmP0li4FwcHz+FpCCQMPCFINxEAIfkEBQcADgAsAAABABAADwAABFzQyemWXYNqaSXY2vVtw3UNmROM4JQowKKlFOsgRI6ASQ8IhSADFAjAMIMAgSYJtByxyQIhcEoaBcSiwegpDgvAwSBJ0AIHBoCQqIAEi/TCIAABGhLG8MbcKBQgEQAh+QQFBwAPACwAAAEAEAAPAAAEXfDJSd+qeK5RB8fDRRWFspyotAAfQBbfNLCVUSSdKDV89gDAwcFBIBgywMRnkWBgcJUDKSZRIKAPQcGwYByAAYTEEJAAJIGbATEQ+B4ExmK9CDhBd8ThdHw/AmUYEQAh+QQFBwAPACwAAAEADwAPAAAEXvBJQIa8+ILSspdHkXxS9wxF4Q3L2aTBeC0sFjhAtuyLIjAMhYc2GBgaSKGuyNoBDp7czFAgeBIKwC6kWCAMxUSAFjtNCAAFGGF5tCQLAaJnWCTqHoREvQuQJAkyGBEAOw==);    
+}
+
+.aui-dropdown2 .active .aui-icon-wait,
+.aui-button-primary .aui-icon-wait {
+    background-image: url(data:image/gif;base64,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);    
+}
+
+.aui-button-primary[aria-disabled="true"] .aui-icon-wait {
+    background-image: url(data:image/gif;base64,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);
+}
+
+
+
+/*! AUI Inline Dialog */
+.aui-inline-dialog {
+    display: none;
+    position: absolute;
+    z-index: 100;
+    -webkit-box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.13);
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.13); 
+    border-radius: 3px;
+}
+
+.aui-inline-dialog .contents {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    overflow: hidden;
+    padding: 20px;
+    width: 320px;
+}
+.aui-inline-dialog .arrow {
+    position: absolute;
+    height: 16px;
+    top: -7px; /* matches #inline-dialog-shim */
+    width: 16px;
+}
+
+#inline-dialog-shim {
+    display: none;
+}
+
+/* Inline Dialog + Forms Integration - top labels and full width fields supported */
+/* funny numbers to add up to 20px spacing in various places (border to cap height/baseline) */
+.aui-inline-dialog .contents form.aui h2:first-child {
+    border-bottom: 1px solid #ccc;
+    margin: -7px 0 11px 0;
+    padding: 0 0 12px 0;
+}
+.aui-inline-dialog .contents form.aui .buttons-container {
+    margin-top: 16px;
+    padding: 0;
+}
+.aui-inline-dialog .contents .submit + .cancel {
+    margin-left: 0;
+}
+
+/*Inline Dialog Arrow */
+
+.aui-inline-dialog .arrow.aui-css-arrow::after,
+.aui-inline-dialog .arrow.aui-css-arrow::before {
+    border-color: #ccc transparent;
+    border-style: solid;
+    border-width: 0 8px 8px;
+    content: "";
+    position: absolute;
+    top: 0;
+}
+
+.aui-inline-dialog .arrow.aui-css-arrow::after {
+    border-bottom-color: #fff;
+    top: 1px;
+}
+
+.aui-inline-dialog .arrow.aui-css-arrow.aui-bottom-arrow::after,
+.aui-inline-dialog .arrow.aui-css-arrow.aui-bottom-arrow::before {
+    border-width: 8px 8px 0;
+}
+
+.aui-inline-dialog .arrow.aui-css-arrow.aui-bottom-arrow::after {
+    border-top-color: #fff;
+    top: -1px;
+}
+.aui-message {
+    background: #fcfcfc;
+    border: 1px solid #ccc;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    color: #333;
+    margin: 10px 0 0 0;
+    padding: 10px 10px 10px 36px; /* Be sure to adjust icon positions below if these values are changed */
+    position: relative;
+}
+.aui-message:first-child {
+    margin-top: 0;
+}
+/* Lighter shadow for messages */
+.aui-message.shadowed {
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.aui-popup .aui-message.closeable,
+.aui-dialog .aui-message.closeable {
+    z-index: 4000;
+}
+
+.aui-message.error {
+    background: #d04437; 
+    border-color: #d04437;
+    color: #fff;
+}
+.aui-message.warning {
+    background: #fffdf6;	/* 5% of palette yellow #ffd351 */
+    border-color: #ffeaae;	/* 50% of palette yellow #ffd351 */
+}
+.aui-message.info {
+    background: #f6f7f9;    /* 5% of palette blue lozenge #4a6785 */
+    border-color: #8c9fb2;	/* 50% of palette blue lozenge #4a6785 */
+}
+.aui-message.success {
+    background: #f3f9f4;	/* 5% of palette green #14892c */
+    border-color: #91c89c;	/* 50% of palette green #14892c */
+}
+.aui-message.hint {
+    background: #fcfcfc; 
+    border-color: #aab8c6;	/* 50% of palette blue lozenge #4a6785 */
+}
+
+/* Errors get a different link style */
+.aui-message.error a {
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid #fff;
+}
+
+.aui-message p.title {
+    font-weight: bold;
+}
+/* IE double bolds otherwise... */
+.aui-message p.title strong {
+    font-weight: inherit;
+}
+
+/* Positioning aui-icon for messages */
+.aui-message .aui-icon {
+    left: 10px; /* desired spacing between the icon and text = 10px so need to subtract the icon width (16px) from the left padding of the message (36px) then remove 10px */
+    position: absolute;
+    top: 12px; /* 12px = top padding of the message (10px) + align to the center of the text ((20px line-height - 16px icon height) / 2) */
+}
+
+.aui-message.closeable {
+    padding-right: 36px;
+}
+
+.aui-message.closeable .icon-close {
+    cursor: pointer;
+    left: auto;
+    right: 10px;
+}
+/* End aui-icon position */
+
+/* Header interop */
+#header .aui-message {
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    border-width: 2px;
+    margin: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+
+/* Footer interop (provisional, just enough to stop them looking broken) */
+#footer .aui-message {
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: left;
+}
+/*! AUI Tables */
+/* Note child combinators are used to ensure nested non-AUI tables don't receive any AUI styles. */
+table.aui {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table.aui table.aui {
+    margin: 0;
+}
+table.aui > caption {
+    color: #707070;
+    background: #f5f5f5;
+    border-bottom: 1px solid #ccc;
+    caption-side: top;
+    padding: 7px 10px;
+    text-align: left;
+}
+table.aui > tbody > tr,
+table.aui > tfoot > tr {
+    background: #fff;
+    border-bottom: 1px solid #ccc;
+    color: #333;
+}
+
+table.aui > tbody > tr > th {
+    background: #fff;
+    color: #333;
+}
+table.aui > thead > tr > th,
+table.aui > tbody > tr > th,
+table.aui > thead > tr > td,
+table.aui > tbody > tr > td,
+table.aui > tfoot > tr > td {
+    padding: 7px 10px;
+    text-align: left;
+    vertical-align: top;
+}
+table.aui > thead {
+    border-bottom: 1px solid #ccc;
+}
+/* Borders on TBODY and TFOOT don't work in IE - whereas these at least work in IE7 & IE8 */
+table.aui > tbody > tr:first-child > td,
+table.aui > tbody > tr:first-child > th,
+table.aui > tfoot > tr:first-child > td {
+    border-top: 1px solid #ccc;
+}
+table.aui > thead > tr > th > ul.menu,
+table.aui > tbody > tr > th > ul.menu,
+table.aui > tbody > tr > td > ul.menu,
+table.aui > tfoot > tr > td > ul.menu {
+    list-style-type: none;
+    margin: 0; 
+    padding: 0;
+}
+table.aui > thead > tr > th > ul.menu > li,
+table.aui > tbody > tr > th > ul.menu > li,
+table.aui > tbody > tr > td > ul.menu > li,
+table.aui > tfoot > tr > td > ul.menu > li {
+    float: left;
+    margin: 0 10px 0 0;
+    width: auto;
+}
+
+/* Interactive Tables */
+
+table.aui.aui-table-interactive > tbody > tr:hover {
+    background: #f5f5f5;
+}
+
+/* End Interactive Tables */
+
+/* stripes - deprecated */
+table.aui.aui-zebra tr {
+    border-bottom: 0;
+}
+table.aui.aui-zebra > thead > tr:nth-child(even),
+table.aui.aui-zebra > tbody > tr:nth-child(even),
+table.aui.aui-zebra > tfoot > tr:nth-child(even),
+table.aui-zebra > tbody > tr:nth-child(even) > th {
+    background: #f5f5f5;
+    color: #333;
+}
+/* must be a separate rule for IE */
+table.aui-zebra tr.aui-zebra {
+    background: #e6e6e6;
+    color: #333;
+}
+table.aui-zebra tr.aui-zebra th {
+    background: #f5f5f5;
+    color: #333;
+}
+/* end stripes - deprecated */
+/*! AUI Tabs */
+
+/* temp override */
+.aui-tabs {
+    font-size: 14px;
+    line-height: 1.46; /* 20px equiv line-height */
+}
+
+/* Functional style */
+.aui-tabs > .tabs-pane {
+    display: none;
+}
+.aui-tabs > .tabs-pane.active-pane {
+    display: block;
+}
+
+/* Common styles - Vertical and Horizontal */
+
+.aui-tabs > .tabs-menu > .menu-item > a strong {
+    background: transparent;
+    font-weight: normal;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer; /* set explicitly to avoid ie bug */
+}
+
+.aui-tabs > .tabs-menu > .menu-item.active-tab > a,
+.aui-tabs > .tabs-menu > .menu-item.active-tab > a strong {
+    font-weight: bold;
+}
+
+.aui-tabs > .tabs-menu .menu-item a,
+.aui-tabs > .tabs-menu .menu-item a:link,
+.aui-tabs > .tabs-menu .menu-item a:visited {
+    background: #eee;
+    color: #333;
+}
+
+.aui-tabs > .tabs-menu .menu-item a:focus,
+.aui-tabs > .tabs-menu .menu-item a:hover {
+    background: #e6e6e6;
+    color: #333;
+}
+
+.aui-tabs > .tabs-menu .menu-item.active-tab a,
+.aui-tabs > .tabs-menu .menu-item.active-tab a:link,
+.aui-tabs > .tabs-menu .menu-item.active-tab a:visited,
+.aui-tabs > .tabs-menu .menu-item.active-tab a:focus,
+.aui-tabs > .tabs-menu .menu-item.active-tab a:hover,
+.aui-tabs > .tabs-menu .menu-item.active-tab a:active {
+    background: #fff;
+    color: #333;
+}
+
+
+/* Vertical Tabs - PDL colours but spacing still to be tweaked */
+.aui-tabs.vertical-tabs > .tabs-menu {
+    position: relative;
+    float: left;
+    width: 11em;
+    z-index: 5;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.aui-tabs.vertical-tabs > .tabs-menu > .menu-item {
+    border: 1px solid #ccc;
+    border-right: none;
+    margin: -1px 0 0 0;
+}
+.aui-tabs.vertical-tabs > .tabs-menu > .menu-item:first-child {
+    margin-top: 1em;
+}
+.aui-tabs.vertical-tabs > .tabs-menu > .menu-item.active-tab {
+    margin-left: -0.5em;
+    margin-right: -1px;
+}
+.aui-tabs.vertical-tabs > .tabs-menu > .menu-item.active-tab > a > strong {
+    padding: 4px 10px;
+
+}
+.aui-tabs.vertical-tabs > .tabs-menu > .menu-item > a {
+    display: block;
+    text-decoration: none;
+}
+.aui-tabs.vertical-tabs > .tabs-menu > .menu-item > a > strong {
+    display: block;
+    overflow: hidden;
+    padding: 3px 10px 4px 10px;
+}
+.aui-tabs.vertical-tabs > .tabs-menu > .menu-item strong {
+    padding-right: 0;
+}
+
+.aui-tabs.vertical-tabs > .tabs-pane {
+    background: #fff;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin: 0 0 0 11em;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Horizontal Tabs - PDL */
+.aui-tabs.horizontal-tabs > .tabs-menu {
+    border-bottom: 1px solid #ccc;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.aui-tabs.horizontal-tabs > .tabs-menu > .menu-item {
+    display: block;
+    float: left;
+    margin: 0;
+    background: #eee;
+}
+.aui-tabs.horizontal-tabs > .tabs-menu > .menu-item:first-child {
+    margin-left: 20px;
+}
+.aui-tabs.horizontal-tabs > .tabs-menu > .menu-item:first-child a {
+    border-radius: 3px 0 0 0;
+    border-left: 1px solid #ccc;
+}
+/* last-child ok because IE8 doesn't do border radius anyway */
+.aui-tabs.horizontal-tabs > .tabs-menu > .menu-item:last-child a {
+    border-radius: 0 3px 0 0;
+}
+
+.aui-tabs.horizontal-tabs > .tabs-menu > .menu-item > a,
+.aui-tabs.aui-tabs-disabled.horizontal-tabs > .tabs-menu > .menu-item > a:focus,
+.aui-tabs.aui-tabs-disabled.horizontal-tabs > .tabs-menu > .menu-item > a:hover,
+.aui-tabs.aui-tabs-disabled.horizontal-tabs > .tabs-menu > .menu-item > a:active {
+    display: block;
+    border-right: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    padding: 4px 10px 3px 10px;
+    text-decoration: none;
+}
+
+.aui-tabs.horizontal-tabs > .tabs-menu > .menu-item.active-tab a,
+.aui-tabs.aui-tabs-disabled.horizontal-tabs > .tabs-menu > .active-tab > a:focus,
+.aui-tabs.aui-tabs-disabled.horizontal-tabs > .tabs-menu > .active-tab > a:hover,
+.aui-tabs.aui-tabs-disabled.horizontal-tabs > .tabs-menu > .active-tab > a:active {
+    background: #fff;
+    border-bottom: 1px solid #fff;
+    margin-bottom: -1px;
+    position: relative;
+}
+.aui-tabs.horizontal-tabs > .tabs-menu > .active-tab > a,
+.aui-tabs.horizontal-tabs > .tabs-menu > .active-tab > a strong {
+    font-weight: normal;
+}
+
+/* Disabled/Page Tabs */
+.aui-tabs.aui-tabs-disabled > .tabs-menu > .menu-item > a {
+    cursor: default;
+}
+
+/* reloadable tabs (active tab has different cursor affordance) */
+.active-tab.reloadable-tab a,
+.active-tab.reloadable-tab a strong { cursor: pointer !important; }
+
+/* legacy tabs override - deprecated, to be remove in aui 5.0 */
+.aui-tabs.vertical-tabs.aui-legacystyle2011 > .tabs-menu .menu-item strong {
+    text-overflow: clip;
+}
+.aui-tabs.vertical-tabs.aui-legacystyle2011 > .tabs-menu .menu-item.active-tab {
+    margin-right: 0;
+}
+.aui-tabs.vertical-tabs.aui-legacystyle2011 > .tabs-pane {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+.aui-toolbar {
+    clear: both;
+    display: inline-block; /* new rendering context */
+    padding-top: 10px;
+    position: relative;
+    width: 100%; /* emulate normal block */
+}
+
+.aui-toolbar .toolbar-group {
+    display: inline-block;
+    float: left;
+    padding: 0;
+    margin: 0 10px 10px 0;
+    white-space: nowrap;
+}
+
+.aui-toolbar .toolbar-item {
+    display: inline-block;
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+
+.aui-toolbar .aui-dd-parent {
+    position: relative;
+    width: auto;
+}
+
+/* splits set toolbars into multiple sections, eg. left/right split */
+.aui-toolbar .toolbar-split {
+    display: inline-block;
+    float: left;
+    margin-left: 10px;
+}
+
+.aui-toolbar .toolbar-split.toolbar-split-right {
+    float: right;
+}
+
+.aui-toolbar .toolbar-split.toolbar-split-row {
+    clear: both;
+    float: none;
+    width: 100%;
+}
+
+/* Cursor/affordance: looks like a button = pointer, looks like a link = hand */
+.aui-toolbar .toolbar-trigger {
+    cursor: default;
+}
+.aui-toolbar .toolbar-item-link .toolbar-trigger {
+    cursor: pointer;
+}
+
+/* primary buttons */
+.aui-toolbar .primary .toolbar-trigger {
+    font-weight: bold;
+}
+
+/* available/inactive controls */
+.aui-toolbar .toolbar-group .toolbar-trigger,
+.aui-toolbar .aui-dd-parent a.aui-dd-trigger {
+    background: #f2f2f2;
+    background: -webkit-linear-gradient(top, #ffffff 0%, #f2f2f2 100%); 
+    background:    -moz-linear-gradient(top, #ffffff 0%, #f2f2f2 100%); 
+    background:     -ms-linear-gradient(top, #ffffff 0%, #f2f2f2 100%); 
+    background:      -o-linear-gradient(top, #ffffff 0%, #f2f2f2 100%); 
+    background:         linear-gradient(to bottom, #ffffff 0%, #f2f2f2 100%);
+    border-color: #ccc;
+    border-style: solid; /* border width and style don't change after this */
+    border-width: 1px; /* border width and style don't change after this */
+    color: #333;
+    display: inline-block;
+    margin: 0;
+    padding: 4px 10px;
+    text-decoration: none;
+    text-shadow: 0 1px 0 white;
+    vertical-align: baseline;
+    /* and now the styles to overcome aui-dropdown1 */
+    height: auto;
+    text-indent: 0;
+    width: auto;
+    /* to make split buttons work */
+    float: left;
+}
+
+.toolbar-item + .toolbar-item .toolbar-trigger,
+.toolbar-item + .toolbar-item a.aui-dd-trigger {
+    border-left-width: 0;
+    padding-left: 11px;
+}
+
+.aui-toolbar .toolbar-group button.toolbar-trigger,
+.aui-toolbar .toolbar-group input.toolbar-trigger {
+    font-size: inherit;
+    font-family: inherit;
+    line-height: inherit;
+}
+
+.aui-toolbar .toolbar-group .toolbar-item.toolbar-item-link .toolbar-trigger {
+    border-color: transparent;
+    background: transparent;
+    text-decoration: none;
+    color: #3C78B5;
+}
+
+.aui-toolbar .toolbar-group .toolbar-item-link:hover .toolbar-trigger,
+.aui-toolbar .toolbar-group .toolbar-item-link .toolbar-trigger:focus {
+    text-decoration: underline;
+}
+
+.toolbar-group .toolbar-item:first-of-type a,
+.toolbar-group .toolbar-item:first-of-type button,
+.toolbar-group .toolbar-item:first-of-type input[type="button"],
+.toolbar-group .toolbar-item:first-of-type input[type="reset"],
+.toolbar-group .toolbar-item:first-of-type input[type="submit"],
+.toolbar-group .toolbar-item:first-of-type .toolbar-trigger {
+    -webkit-border-top-left-radius: 3px;
+    -webkit-border-bottom-left-radius: 3px;
+    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-bottomleft: 3px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.toolbar-group .toolbar-item.toolbar-splitbutton .aui-dd-trigger {
+    -webkit-border-top-left-radius: 0;
+    -webkit-border-bottom-left-radius: 0;
+    -moz-border-radius-topleft: 0;
+    -moz-border-radius-bottomleft: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.toolbar-group .toolbar-item.toolbar-splitbutton:last-of-type .aui-dd-trigger,
+.toolbar-group .toolbar-item:last-of-type a,
+.toolbar-group .toolbar-item:last-of-type button,
+.toolbar-group .toolbar-item:last-of-type input[type="button"],
+.toolbar-group .toolbar-item:last-of-type input[type="reset"],
+.toolbar-group .toolbar-item:last-of-type input[type="submit"],
+.toolbar-group .toolbar-item:last-of-type .toolbar-trigger {
+    -webkit-border-top-right-radius: 3px;
+    -webkit-border-bottom-right-radius: 3px;
+    -moz-border-radius-topright: 3px;
+    -moz-border-radius-bottomright: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.toolbar-group .toolbar-splitbutton:last-of-type .toolbar-trigger {
+    -webkit-border-top-right-radius: 0;
+    -webkit-border-bottom-right-radius: 0;
+    -moz-border-radius-topright: 0;
+    -moz-border-radius-bottomright: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.toolbar-group .toolbar-item:first-of-type .toolbar-trigger,
+.toolbar-group .toolbar-item:first-of-type button {
+    border-left-width: 1px;
+}
+
+.aui-toolbar .toolbar-group .aui-dropdown {
+    border: 1px solid #999;
+}
+
+.aui-toolbar .toolbar-group .aui-dropdown a {
+    border: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
+/* hover/focus controls */
+.aui-toolbar .aui-dropdown2-trigger.toolbar-trigger.active,
+.aui-toolbar .toolbar-splitbutton:hover .toolbar-trigger,
+.aui-toolbar .toolbar-group .toolbar-trigger:focus,
+.aui-toolbar .toolbar-group .toolbar-trigger:hover,
+.aui-toolbar .toolbar-group button:focus,
+.aui-toolbar .toolbar-group button:hover,
+.aui-toolbar .aui-dd-parent .aui-dd-trigger:focus,
+.aui-toolbar .aui-dd-parent .aui-dd-trigger:hover,
+.aui-toolbar .toolbar-group .active .toolbar-trigger:hover {
+    background: #f7f7f7;
+    background: -webkit-linear-gradient(top, #ffffff 0%, #f7f7f7 100%);
+    background:    -moz-linear-gradient(top, #ffffff 0%, #f7f7f7 100%);
+    background:     -ms-linear-gradient(top, #ffffff 0%, #f7f7f7 100%);
+    background:      -o-linear-gradient(top, #ffffff 0%, #f7f7f7 100%);
+    background:         linear-gradient(to bottom, #ffffff 0%, #f7f7f7 100%);
+    border-width: 1px;
+    border-color: #999;
+    margin-left: -1px;
+    color: #000;
+    position: relative;
+    text-decoration:none;
+}
+.aui-toolbar .toolbar-item:first-child .toolbar-trigger:hover,
+.aui-toolbar .toolbar-item:first-child .aui-dropdown2-trigger.toolbar-trigger.active,
+.aui-toolbar .toolbar-item.active:first-child .toolbar-trigger,
+.aui-toolbar .toolbar-splitbutton:first-child:hover .toolbar-trigger,
+.aui-toolbar .toolbar-item:first-child .toolbar-trigger:focus,
+.aui-toolbar .toolbar-item:first-child .toolbar-trigger:hover,
+.aui-toolbar .toolbar-item:first-child button:focus,
+.aui-toolbar .toolbar-item:first-child button:hover,
+.aui-toolbar .toolbar-item:first-child .aui-dd-parent .aui-dd-trigger:focus,
+.aui-toolbar .toolbar-item:first-child .aui-dd-parent .aui-dd-trigger:hover,
+.aui-toolbar .toolbar-item:first-child.active .toolbar-trigger:hover {
+    margin-left: 0;
+}
+
+.aui-toolbar .aui-dropdown2-trigger.active,
+.aui-toolbar .aui-dd-parent a.aui-dd-trigger.active,
+.aui-toolbar .toolbar-group .active .toolbar-trigger,
+.aui-toolbar .toolbar-group .toolbar-trigger:active {
+    background: #f2f2f2;
+    background-image: none;
+    background-color: #f2f2f2;
+    box-shadow: inset 0px 3px 6px rgba(0,0,0,.1);
+    text-shadow: none;
+    text-decoration:none;
+}
+
+.aui-toolbar .toolbar-group .toolbar-item-link .toolbar-trigger:active {
+    background: none;
+    box-shadow: none;
+}
+
+/* Note .dropdown-text and .dropdown-icon used by both Dropdown and Dropdown2 */
+.aui-toolbar .icon-dropdown {
+    background: transparent url("aui-toolbar-24px.png") 0 0 no-repeat;
+    display: inline-block;
+    margin-top: 0;
+    margin-left: 5px;
+    margin-right: -5px;
+    padding-right: 5px;
+    text-indent: -9999px;
+    width: 7px;
+}
+
+.aui-toolbar .toolbar-dropdown .icon-dropdown {
+    background-position: -24px 0;
+    height: 7px;
+}
+
+.aui-toolbar .toolbar-splitbutton .icon-dropdown {
+    background-position: -46px 7px;
+    margin-left: 0;
+    height: auto;
+}
+
+.aui-toolbar .toolbar-splitbutton > .toolbar-trigger,
+.aui-toolbar .toolbar-splitbutton > .toolbar-trigger:hover,
+.aui-toolbar .toolbar-splitbutton > .toolbar-trigger:focus {
+    border-right-style: dotted;
+    float: left;
+}
+.aui-toolbar .toolbar-splitbutton > .aui-dd-parent > .toolbar-trigger:hover,
+.aui-toolbar .toolbar-splitbutton > .aui-dd-parent > .toolbar-trigger:focus {
+    border-left-width: 0;
+    margin-left: 0;
+}
+.aui-toolbar .toolbar-splitbutton > .aui-dd-parent {
+    float: left;
+}
+.aui-toolbar .toolbar-splitbutton > .aui-dd-parent > .toolbar-trigger {
+    border-left-width: 0;
+}
+.aui-toolbar .toolbar-splitbutton > .aui-dd-parent.active > .toolbar-trigger {
+    border-left-color: #999;
+}
+.aui-toolbar .toolbar-splitbutton > .aui-dd-parent > .aui-dd-trigger {
+    min-width: 0;
+    margin: 0;
+    padding-left: 2px;
+    padding-right: 2px;
+    width: 9px;
+}
+
+/* disabled controls */
+.aui-toolbar .aui-dropdown2-trigger[aria-disabled="true"],
+.aui-toolbar .toolbar-group.disabled .toolbar-trigger,
+.aui-toolbar .toolbar-item.disabled .toolbar-trigger,
+.aui-toolbar .toolbar-trigger.disabled {
+    color: #999;
+}
+
+/* Prevent border highlighting and use normal cursor when disabled.
+   .active classes are to counter a clash with dropdown states. */
+.aui-toolbar .aui-dropdown2-trigger[aria-disabled="true"]:focus,
+.aui-toolbar .aui-dropdown2-trigger[aria-disabled="true"]:hover,
+.aui-toolbar .aui-dropdown2-trigger[aria-disabled="true"]:active,
+.aui-toolbar .disabled .active .toolbar-trigger:hover,
+.aui-toolbar .toolbar-group.disabled .toolbar-trigger,
+.aui-toolbar .toolbar-group.disabled .toolbar-trigger:focus,
+.aui-toolbar .toolbar-group.disabled .toolbar-trigger:hover,
+.aui-toolbar .toolbar-group.disabled .toolbar-trigger:active,
+.aui-toolbar .toolbar-group .disabled .toolbar-trigger,
+.aui-toolbar .toolbar-group .disabled .toolbar-trigger:focus,
+.aui-toolbar .toolbar-group .disabled .toolbar-trigger:hover,
+.aui-toolbar .toolbar-group .disabled .toolbar-trigger:active,
+.aui-toolbar .toolbar-group .toolbar-trigger.disabled,
+.aui-toolbar .toolbar-group .toolbar-trigger.disabled:focus,
+.aui-toolbar .toolbar-group .toolbar-trigger.disabled:hover,
+.aui-toolbar .toolbar-group .toolbar-trigger.disabled:active {
+    background: #f2f2f2;
+    background: -webkit-linear-gradient(top, #ffffff 0%, #f2f2f2 100%);
+    background:    -moz-linear-gradient(top, #ffffff 0%, #f2f2f2 100%);
+    background:     -ms-linear-gradient(top, #ffffff 0%, #f2f2f2 100%);
+    background:      -o-linear-gradient(top, #ffffff 0%, #f2f2f2 100%); 
+    background:         linear-gradient(to bottom, #ffffff 0%, #f2f2f2 100%);
+    border-color: #ccc;
+    box-shadow: none;
+    cursor: default;
+    color: #999;
+}
+
+.aui-toolbar .aui-dropdown2-trigger[aria-disabled="true"]:focus,
+.aui-toolbar .aui-dropdown2-trigger[aria-disabled="true"]:hover,
+.aui-toolbar .aui-dropdown2-trigger[aria-disabled="true"]:active {
+    border-color: #ccc;
+    color: #999;
+}
+
+
+.aui-toolbar .toolbar-group.disabled .toolbar-item:first-child .toolbar-trigger,
+.aui-toolbar .toolbar-group .disabled.toolbar-item:first-child .toolbar-trigger,
+.aui-toolbar .toolbar-group .toolbar-item:first-child .disabled.toolbar-trigger {
+    border-left-width: 1px;
+    border-left-color: #ccc;
+}
+
+/* prevent disabled split buttons jumping if dropdown clicked */
+.aui-toolbar .toolbar-group.disabled .toolbar-item .aui-dd-trigger,
+.aui-toolbar .toolbar-group .disabled.toolbar-item .aui-dd-trigger,
+.aui-toolbar .toolbar-group .toolbar-item .disabled.aui-dd-trigger {
+    border-left-width: 0;
+}
+
+
+/*! AUI Flat Pack - version 5.2-m6 - generated 2013-05-29 03:12:37 -0400 */
+
+
+/**
+ * AUI Module
+ */
+.aui-module {
+    margin-top: 20px;
+}
+.aui-module:first-child {
+    margin-top: 0;
+}
+.aui-module-header,
+.aui-module-content,
+.aui-module-footer {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+/*! AUI Label */
+.aui-label {
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 3.01px; /* 3.01 for IE10 */
+    color: #3B73AF;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1;
+    padding: 1px 5px;   
+    margin: 0 5px 0 0;
+    text-align: left;
+    text-decoration: none;
+}
+
+span.aui-label {
+    color: #333;
+}
+
+/* Need the split hover to trigger border on parent while split label/X are hovered */
+.aui-label.aui-label-closeable.aui-label-split:hover,
+a.aui-label:focus,
+a.aui-label:hover,
+a.aui-label:active {
+    border-color: #707070;
+    text-decoration: none;
+}
+
+.aui-label-split .aui-label-split-main:hover,
+.aui-label-split .aui-label-split-main:active,
+.aui-label-split .aui-label-split-main:focus{ 
+    text-decoration: none;
+}
+
+.aui-label.aui-label-closeable {
+    padding-right: 18px;
+    position: relative;
+}
+
+.aui-label-closeable .aui-icon-close {
+    /* Small X icon */
+    background: url("data:image/png;base64,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") 0 0 no-repeat;
+    cursor: pointer;
+    display: block;
+    float: right;
+    height: 8px;
+    position: absolute;
+    right: 5px;
+    top: 4px;
+    width: 8px;
+}
+
+/*! AUI Sortable Tables */
+.aui-table-sortable .header {
+    cursor: pointer;
+}
+
+/**
+ * Color of header when selected or hovered.
+ */
+.aui-table-sortable .header:hover,
+.aui-table-sortable .headerSortUp,
+.aui-table-sortable .headerSortDown {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/**
+ * Used to generate the arrow on the right.
+ */
+.aui-table-sortable .aui-table-header-content:after {
+    border: 4px solid transparent;
+    content: "";
+    margin-left: 5px;
+    margin-top: -2px;
+    position: relative;
+    width: 0;
+}
+
+/**
+ * If the table header is hovered add the border color.
+ */
+.aui-table-sortable .header:hover .aui-table-header-content:after {
+    border-top-color: #333;
+    border-bottom-color: transparent;
+
+    top: 10px;
+
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
+/**
+ * If descending add border color
+ */
+.aui-table-sortable .headerSortUp .aui-table-header-content:after,
+.aui-table-sortable .headerSortUp:hover .aui-table-header-content:after {
+    border-top-color: #333;
+    border-bottom-color: transparent;
+
+    top: 10px;
+
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+
+/**
+ * If ascending add border color
+ */
+.aui-table-sortable .headerSortDown .aui-table-header-content:after,
+.aui-table-sortable .headerSortDown:hover .aui-table-header-content:after {
+    border-top-color: transparent;
+    border-bottom-color: #333;
+
+    top: -10px;
+
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+
+/*
+* Icon Font
+* - use when you need to change the colour of the icon via CSS - eg on hover or to match Look and Feel customisations
+* 
+* Ranges
+*
+* UTF+E001 - UTF+E3FF - Global
+* UTF+E400 - UTF+E7FF - Conf
+* UTF+E800 - UTF+EBFF - JIRA
+* UTF+EC00 - UTF+EFFF - Dev Tools
+*/
+
+@font-face {
+    font-family: "Atlassian Icons";
+    src: url(atlassian-icons.eot);
+    src: url(atlassian-icons.eot?#iefix) format("embedded-opentype"),
+    url(atlassian-icons.woff) format("woff"),
+    url(atlassian-icons.ttf) format("truetype"),
+    url(atlassian-icons.svg#atlassian-icons) format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.aui-icon-small,
+.aui-icon-large {
+    line-height: 0;
+    position: relative;
+    vertical-align: text-top;
+}
+.aui-icon-small {
+    height: 16px;
+    width: 16px;
+}
+.aui-icon-large {
+    height: 32px;
+    width: 32px;
+}
+.aui-icon-small:before,
+.aui-icon-large:before {
+    color: inherit;
+    font-family: "Atlassian Icons";
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased; /* Improves the rendering of icons */
+    font-style: normal;
+    left: 0;
+    line-height: 1;
+    position: absolute;
+    text-indent: 0;
+    speak: none; /* This prevents screen readers from pronouncing the pseudo element text content used to trigger the icon font */
+    top: 50%;
+}
+.aui-icon-small:before {
+    font-size: 16px;
+    margin-top: -8px; /* (font-size/2) */
+}
+.aui-icon-large:before {
+    font-size: 32px;
+    margin-top: -16px; /* (font-size/2) */
+}
+
+/* Global Icons - UTF+E001 to UTF+E3FF
+----------------------------------------------------------------------- */
+
+.aui-iconfont-configure:before {
+    content: "\e001";
+}
+.aui-iconfont-add:before {
+    content: "\e002";
+}
+.aui-iconfont-help:before {
+    content: "\e003";
+}
+.aui-iconfont-search:before {
+    content: "\e004";
+}
+.aui-iconfont-success:before {
+    content: "\e005";
+}
+.aui-iconfont-workbox:before {
+    content: "\e006";
+}
+.aui-iconfont-workbox-empty:before {
+    content: "\e007";
+}
+.aui-iconfont-email:before {
+    content: "\e008";
+}
+.aui-iconfont-appswitcher:before {
+    content: "\e009";
+}
+.aui-iconfont-comment:before {
+    content: "\e00a";
+}
+.aui-iconfont-add-comment:before {
+    content: "\e00b";
+}
+.aui-iconfont-search-small:before {
+    content: "\e00c";
+}
+.aui-iconfont-remove:before {
+    content: "\e00d";
+}
+.aui-iconfont-close-dialog:before {
+    content: "\e00e";
+}
+.aui-iconfont-remove-label:before {
+    content: "\e00f";
+}
+.aui-iconfont-time:before {
+    content: "\e010";
+}
+.aui-iconfont-error:before {
+    content: "\e011";
+}
+.aui-iconfont-info:before {
+    content: "\e012";
+}
+.aui-iconfont-approve:before {
+    content: "\e013";
+}
+.aui-iconfont-edit:before {
+    content: "\e014";
+}
+.aui-iconfont-share:before {
+    content: "\e015";
+}
+.aui-iconfont-build:before {
+    content: "\e016";
+}
+.aui-iconfont-user:before {
+    content: "\e017";
+}
+.aui-iconfont-jira:before {
+    content: "\e018";
+}
+.aui-iconfont-doc:before {
+    content: "\e019";
+}
+.aui-iconfont-star:before {
+    content: "\e01a";
+}
+.aui-iconfont-unstar:before {
+    content: "\e01b";
+}
+.aui-iconfont-view:before {
+    content: "\e01c";
+}
+
+/* Dev Tools Icons - UTF+EC00 to UTF+EFFF
+----------------------------------------------------------------------- */
+
+.aui-iconfont-devtools-folder-closed:before {
+    content: "\ec00";
+}
+.aui-iconfont-devtools-folder-open:before {
+    content: "\ec01";
+}
+.aui-iconfont-devtools-file:before {
+    content: "\ec02";
+}
+.aui-iconfont-devtools-file-binary:before {
+    content: "\ec03";
+}
+.aui-iconfont-devtools-branch:before {
+    content: "\ec04";
+}
+.aui-iconfont-devtools-repository:before {
+    content: "\ec05";
+}
+.aui-iconfont-devtools-repository-forked:before {
+    content: "\ec06";
+}
+.aui-iconfont-devtools-repository-locked:before {
+    content: "\ec07";
+}
+.aui-iconfont-devtools-commit:before {
+    content: "\ec08";
+}
+.aui-iconfont-devtools-pull-request:before {
+    content: "\ec09";
+}
+.aui-iconfont-devtools-tag:before {
+    content: "\ec0a";
+}
+.aui-iconfont-devtools-browse-up:before {
+    content: "\ec0b";
+}
+.aui-iconfont-devtools-clone:before {
+    content: "\ec0c";
+}
+.aui-iconfont-devtools-fork:before {
+    content: "\ec0d";
+}
+.aui-iconfont-devtools-submodule:before {
+    content: "\ec0e";
+}
+.aui-iconfont-devtools-arrow-right:before {
+    content: "\ec0f";
+}
+.aui-iconfont-devtools-arrow-left:before {
+    content: "\ec10";
+}
+.aui-iconfont-devtools-task-in-progress:before {
+    content: "\ec11";
+}
+.aui-iconfont-devtools-task-cancelled:before {
+    content: "\ec12";
+}
+.aui-iconfont-devtools-task-disabled:before {
+    content: "\ec13";
+}
+.aui-iconfont-devtools-branch-small:before {
+    content: "\ec14";
+}
+.aui-iconfont-devtools-file-commented:before {
+    content: "\ec15";
+}
+
+/* Layout */
+.aui-progress-tracker {
+    display: table;
+    font-size: 12px;
+    margin: 10px 0 0;
+    padding: 0;
+    table-layout: fixed;
+    word-wrap: break-word; /* doesn't work in IE */
+}
+.aui-progress-tracker:first-child {
+    margin-top: 0;
+}
+.aui-progress-tracker-step {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: table-cell;
+    padding: 0 10px;
+    max-width: 140px;
+    min-width: 80px;
+    text-align: center;
+}
+
+/* Progress Bar */
+.aui-progress-tracker-step > span,
+.aui-progress-tracker-step > a {
+    display: block;
+    font-weight: bold;
+    outline: none;
+    padding-top: 25px;
+    position: relative;
+}
+.aui-progress-tracker-step > span:before,
+.aui-progress-tracker-step > a:before {
+    background: #3b73af;
+    border-radius: 100%;
+    box-shadow: 0 0 0 3px #f5f5f5; /* can't just use a 3px border as an IE9 bug causes it to draw a strange additional darker border on the outside in addition to the 3px border */
+    content: "";
+    height: 10px;
+    left: 50%;
+    margin-left: -5px;
+    position: absolute;
+    top: 3px;
+    width: 10px;
+}
+.aui-progress-tracker-step + .aui-progress-tracker-step > span:after,
+.aui-progress-tracker-step + .aui-progress-tracker-step > a:after {
+    background: #3b73af;
+    border: solid #f5f5f5;
+    border-width: 2px 0;
+    box-shadow: -5px 0 0 -2px #3b73af, 5px 0 0 -2px #3b73af;
+    content: "";
+    height: 4px;
+    left: -50%;
+    margin-left: -14px; /* almost touches right edge of previous dot (leaves 1px room for rounding widths like 33.3% in webkit) */
+    margin-right: 6px; /* almost touches left edge of this dot (leaves 1px room for rounding widths like 33.3% in webkit) */
+    position: absolute;
+    right: 50%;
+    top: 4px;
+}
+.aui-progress-tracker-step-current ~ .aui-progress-tracker-step {
+    color: #707070;
+}
+.aui-progress-tracker-step-current ~ .aui-progress-tracker-step > span:before,
+.aui-progress-tracker-step-current ~ .aui-progress-tracker-step > a:before {
+    background-color: #ccc;
+}
+.aui-progress-tracker-step-current ~ .aui-progress-tracker-step > span:after,
+.aui-progress-tracker-step-current ~ .aui-progress-tracker-step > a:after {
+    background-color: #f5f5f5;
+    box-shadow: none;
+}
+
+/* Inverted Colours */
+.aui-progress-tracker-inverted .aui-progress-tracker-step > span:before,
+.aui-progress-tracker-inverted .aui-progress-tracker-step > a:before {
+    box-shadow: 0 0 0 3px #fff;
+}
+.aui-progress-tracker-inverted .aui-progress-tracker-step + .aui-progress-tracker-step > span:after,
+.aui-progress-tracker-inverted .aui-progress-tracker-step + .aui-progress-tracker-step > a:after {
+    border-color: #fff;
+}
+.aui-progress-tracker-inverted .aui-progress-tracker-step-current ~ .aui-progress-tracker-step > span:after,
+.aui-progress-tracker-inverted .aui-progress-tracker-step-current ~ .aui-progress-tracker-step > a:after {
+    background-color: #fff;
+}
+
+/* Interaction wih page layout */
+.aui-page-header-actions .aui-progress-tracker {
+    float: right;
+}
+.tipsy { font-size: 10px; position: absolute; padding: 5px; word-wrap: break-word; z-index: 100000; }
+  .tipsy-inner { background-color: #000; color: #FFF; max-width: 200px; padding: 5px 8px 4px 8px; text-align: center; }
+
+  /* Rounded corners */
+  .tipsy-inner { border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; }
+
+  /* Uncomment for shadow */
+  /*.tipsy-inner { box-shadow: 0 0 5px #000000; -webkit-box-shadow: 0 0 5px #000000; -moz-box-shadow: 0 0 5px #000000; }*/
+
+  .tipsy-arrow { position: absolute; width: 0; height: 0; line-height: 0; border: 5px dashed #000; }
+
+  /* Rules to colour arrows */
+  .tipsy-arrow-n { border-bottom-color: #000; }
+  .tipsy-arrow-s { border-top-color: #000; }
+  .tipsy-arrow-e { border-left-color: #000; }
+  .tipsy-arrow-w { border-right-color: #000; }
+
+	.tipsy-n .tipsy-arrow { top: 0px; left: 50%; margin-left: -5px; border-bottom-style: solid; border-top: none; border-left-color: transparent; border-right-color: transparent; }
+    .tipsy-nw .tipsy-arrow { top: 0; left: 10px; border-bottom-style: solid; border-top: none; border-left-color: transparent; border-right-color: transparent;}
+    .tipsy-ne .tipsy-arrow { top: 0; right: 10px; border-bottom-style: solid; border-top: none;  border-left-color: transparent; border-right-color: transparent;}
+  .tipsy-s .tipsy-arrow { bottom: 0; left: 50%; margin-left: -5px; border-top-style: solid; border-bottom: none;  border-left-color: transparent; border-right-color: transparent; }
+    .tipsy-sw .tipsy-arrow { bottom: 0; left: 10px; border-top-style: solid; border-bottom: none;  border-left-color: transparent; border-right-color: transparent; }
+    .tipsy-se .tipsy-arrow { bottom: 0; right: 10px; border-top-style: solid; border-bottom: none; border-left-color: transparent; border-right-color: transparent; }
+  .tipsy-e .tipsy-arrow { right: 0; top: 50%; margin-top: -5px; border-left-style: solid; border-right: none; border-top-color: transparent; border-bottom-color: transparent; }
+  .tipsy-w .tipsy-arrow { left: 0; top: 50%; margin-top: -5px; border-right-style: solid; border-left: none; border-top-color: transparent; border-bottom-color: transparent; }
+
+.tipsy {
+    font-size: 12px;
+    line-height: 20px;
+    font-family: Arial, sans-serif;
+    padding: 4px;
+}
+
+.tipsy-inner {
+    background: rgba(51, 51, 51, 0.9);
+    padding: 5px 10px;
+}
+
+.tipsy-arrow {
+    border-color: rgba(51, 51, 51, 0.9);
+    border-width: 4px;
+}
+
+.tipsy-arrow-n {
+    border-bottom-color: #333;
+    border-bottom-color: rgba(51, 51, 51, 0.9);
+    margin-left: -4px;
+}
+
+.tipsy-arrow-s {
+    border-top-color: #333;
+    border-top-color: rgba(51, 51, 51, 0.9);
+    margin-left: -4px;
+}
+
+.tipsy-arrow-e {
+    border-left-color: #333;
+    border-left-color: rgba(51, 51, 51, 0.9);
+    margin-top: -4px;
+}
+
+.tipsy-arrow-w {
+    border-right-color: #333;
+    border-right-color: rgba(51, 51, 51, 0.9);
+    margin-top: -4px;
+}
+
+.tipsy a,
+.tipsy a:visited {
+    color: white;
+    text-decoration: underline;
+}
+
+.aui-expander-short-content[aria-hidden="true"],
+.aui-expander-content[aria-hidden="true"],
+.aui-expander-content[aria-expanded="true"] .aui-expander-ellipsis /* reveal-text pattern */ {
+    display: none;
+}
+
+.aui-expander-content {
+    height: 0;  /* Collapsed by default */
+    overflow: hidden;
+    position: relative;
+}
+
+.aui-expander-content[aria-expanded="true"] {
+    height: auto;   /* Expanded by default */
+}
+
+.aui-expander-trigger {
+    cursor: pointer;
+}
+
+/*ADG REVEAL TEXT PATTERN*/
+a.aui-expander-trigger.aui-expander-reveal-text {
+    background: #fff;
+    bottom: 0;
+/*    box-shadow: -10px 0 5px #fff;*/
+    position: absolute;
+    right: 0;
+    text-decoration: none;
+    padding-left: 10px;
+}
+
+.aui-expander-trigger.aui-expander-reveal-text:hover > span {
+    text-decoration: underline;
+}
+
+.aui-expander-trigger.aui-expander-reveal-text:before {
+    color: #333;
+    content: "\2026\00a0";
+}
+
+.aui-expander-content[aria-expanded="true"] .aui-expander-trigger.aui-expander-reveal-text:before {
+    display: none;  /* Hide the ellipsis when expanded */
+}
+
+.aui-expander-content[aria-expanded="true"] .aui-expander-trigger.aui-expander-reveal-text {
+    position: relative;    
+}
+
+
