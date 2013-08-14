@@ -15,7 +15,7 @@ __Libraries must have notable popularity. 100 watchers on GitHub is a good examp
 
 * Filenames should **not** include version number and be **lowercase**
 * Javascript & Css files should be minified, If the library doesn't already provide a minified version, our preferred minifier is [UglifyJS](http://marijnhaverbeke.nl/uglifyjs "UglifyJS")
-* If updating an existing library, try to keep consistant with the existing structure
+* If updating an existing library, try to keep consistent with the existing structure
 
 ## Pull requests steps
 
