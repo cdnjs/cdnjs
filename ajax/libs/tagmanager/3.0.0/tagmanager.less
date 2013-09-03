@@ -1,0 +1,178 @@
+//
+// Bootstrap TagManager
+// --------------------------------------------------
+
+// Tag Variables
+// --------------------------------------------------
+
+// Colors
+// -------------------------
+
+@tagText:               @gray;
+@tagBackground:         #f5f5f5;
+@tagBorder:             #bbb;
+
+@tagWarningText:        #945203;
+@tagWarningBackground:  #f2c889;
+@tagWarningBorder:      #f0a12f;
+
+@tagErrorText:          #84212e;
+@tagErrorBackground:    #e69ca6;
+@tagErrorBorder:        #d24a5d;
+
+@tagSuccessText:        #638421;
+@tagSuccessBackground:  #cde69c;
+@tagSuccessBorder:      #a5d24a;
+
+@tagInfoText:           #4594b5;
+@tagInfoBackground:     #c5eefa;
+@tagInfoBorder:         #5dc8f7;
+
+@tagInverseText:        #ccc;
+@tagInverseBackground:  @gray;
+@tagInverseBorder:      @grayDark;
+
+@tagDisabledText:       #aaa;
+@tagDisabledBackground: #e6e6e6;
+@tagDisabledBorder:     #ccc;
+
+// Sizing
+// -------------------------
+
+@tagFontSize:           13px;
+@tagFontSizeLarge:      @tagFontSize * 1.25; // ~16px
+@tagFontSizeSmall:      @tagFontSize * 0.85; // ~11px
+@tagFontSizeMini:       @tagFontSize * 0.75; // ~10px
+
+@tagPadding:            4px;
+@tagMargin:             5px;
+
+// Tag Classes
+// --------------------------------------------------
+
+// Base tag class
+// -------------------------
+
+.tm-tag {
+  color: @tagText;
+  background-color: @tagBackground;
+  border: @tagBorder 1px solid;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+  display: inline-block;
+  border-radius: @borderRadiusSmall;
+  font-family: @sansFontFamily;
+  font-size: @tagFontSize;
+  margin: 0 @tagMargin @tagMargin 0;
+  padding: @tagPadding;
+  text-decoration: none;
+  transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+  -moz-transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+  -webkit-transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+  vertical-align: middle;
+
+  // Remove button
+  // -------------------------
+
+  .tm-tag-remove {
+    color: @black;
+    font-weight: bold;
+    margin-left: @tagPadding;
+    opacity: 0.2;
+    &:hover	{
+      color: @black;
+      text-decoration: none;
+      opacity: 0.4;
+    }
+  }
+
+  // Semantic Colors
+  // -------------------------
+
+  &.tm-tag-warning {
+    color: @tagWarningText;
+    background-color: @tagWarningBackground;
+    border-color: @tagWarningBorder;
+  }
+  &.tm-tag-error {
+    color: @tagErrorText;
+    background-color: @tagErrorBackground;
+    border-color: @tagErrorBorder;
+  }
+  &.tm-tag-success {
+    color: @tagSuccessText;
+    background-color: @tagSuccessBackground;
+    border-color: @tagSuccessBorder;
+  }
+  &.tm-tag-info {
+    color: @tagInfoText;
+    background-color: @tagInfoBackground;
+    border-color: @tagInfoBorder;
+  }
+  &.tm-tag-inverse {
+    color: @tagInverseText;
+    background-color: @tagInverseBackground;
+    border-color: @tagInverseBorder;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2) inset;
+    .tm-tag-remove {
+      color: @white;
+    }
+  }
+
+  // Sizes
+  // -------------------------
+
+  &.tm-tag-large {
+    font-size: @tagFontSizeLarge;
+    border-radius: @baseBorderRadius;
+    padding: 11px 7px;
+  }
+  &.tm-tag-small {
+    font-size: @tagFontSizeSmall;
+    border-radius: @borderRadiusSmall;
+    padding: 2px 4px;
+  }
+  &.tm-tag-mini {
+    font-size: @tagFontSizeMini;
+    border-radius: 2px;
+    padding: 0px 2px;
+  }
+
+  // Miscellaneous Styles
+  // -------------------------
+
+  &.tm-tag-plain {
+    color: @textColor;
+    box-shadow: none;
+    background: none;
+    border: none;
+  }
+  &.tm-tag-disabled {
+    color: @tagDisabledText;
+    background-color: @tagDisabledBackground;
+    border-color: @tagDisabledBorder;
+    box-shadow: none;
+    .tm-tag-remove {
+      display: none;
+    }
+  }
+}
+
+// Forms
+// --------------------------------------------------
+
+// Input style (Recommended)
+// -------------------------
+
+input[type="text"].tm-input {
+  margin-bottom: @tagMargin;
+}
+
+// Form wrappers (Optional)
+// -------------------------
+
+.control-group.tm-group {
+  margin-bottom: (@baseLineHeight / 2) - @tagMargin;
+}
+.form-horizontal .control-group.tm-group {
+  margin-bottom: @baseLineHeight - @tagMargin;
+}
