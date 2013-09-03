@@ -1,0 +1,1 @@
+CodeMirror.registerHelper("lint","json",function(r){var o=[];jsonlint.parseError=function(r,n){var i=n.loc;o.push({from:CodeMirror.Pos(i.first_line-1,i.first_column),to:CodeMirror.Pos(i.last_line-1,i.last_column),message:r})};try{jsonlint.parse(r)}catch(n){}return o}),CodeMirror.jsonValidator=CodeMirror.lint.json;
