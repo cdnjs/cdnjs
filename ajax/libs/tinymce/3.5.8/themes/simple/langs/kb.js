@@ -1,0 +1,1 @@
+tinyMCE.addI18n('kb.simple',{"numlist_desc":"Ger/Kes tabdart n wutunen","bullist_desc":"Ger/Kes tabdart n tlilac","underline_desc":"Aderrer","cleanup_desc":"Cleanup Messy Code","redo_desc":"Redo (Ctrl+Y)","undo_desc":"Undo (Ctrl+Z)","striketrough_desc":"Strikethrough","italic_desc":"Italic (Ctrl+I)","bold_desc":"Bold (Ctrl+B)"});

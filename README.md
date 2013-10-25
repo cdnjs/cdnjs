@@ -1,9 +1,8 @@
 <a href="http://travis-ci.org/cdnjs/cdnjs"><img src="https://secure.travis-ci.org/cdnjs/cdnjs.png" alt="Build Status" style="max-width:100%;"></a>
 
-
 # cdnJS Script Repository
 
-The repository mirroring all scripts on cdnjs.cloudflare.com, created and maintained by [Thomas Davis](https://twitter.com/neutralthoughts) and [Ryan Kirkman](https://twitter.com/ryan_kirkman).
+The repository mirroring all scripts on cdnjs.cloudflare.com, created and maintained by [Thomas Davis](https://twitter.com/neutralthoughts), [Ryan Kirkman](https://twitter.com/ryan_kirkman) and [Lachlan Collins](http://plus.google.com/116251728973496544370?prsrc=3)
 
 We will host any version of any library. Feel free to add a pull request for an older version of a library if your site still uses it.
 
@@ -11,6 +10,12 @@ __Libraries must have notable popularity. 100 watchers on GitHub is a good examp
 ## Extensions, Plugins, Resources
 
 [Extensions, Plugins, Resources](https://github.com/cdnjs/cdnjs/wiki/Extensions%2C-Plugins%2C-Resources)
+
+## Conventions
+
+* Filenames should **not** include version number and be **lowercase**
+* Javascript & Css files should be minified, If the library doesn't already provide a minified version, our preferred minifier is [UglifyJS](http://marijnhaverbeke.nl/uglifyjs "UglifyJS")
+* If updating an existing library, try to keep consistent with the existing structure
 
 ## Pull requests steps
 
@@ -32,5 +37,3 @@ __Libraries must have notable popularity. 100 watchers on GitHub is a good examp
 ## Running the validator
 1. Install all the needed dependencies locally (you will need `node`): `npm install`
 2. Run the test suite: `npm test`
-
-

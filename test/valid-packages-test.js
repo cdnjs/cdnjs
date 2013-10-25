@@ -4,7 +4,7 @@ var assert = require("assert"),
     path = require("path"),
     fs = require("fs"),
     glob = require("glob"),
-    vows = require("vows"),
+    vows = require("vows-si"),
     jsv = require("JSV").JSV.createEnvironment();
 
 function parse(json_file, ignore_missing, ignore_parse_fail) {
