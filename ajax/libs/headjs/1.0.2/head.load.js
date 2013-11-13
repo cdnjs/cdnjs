@@ -1,12 +1,11 @@
-﻿///#source 1 1 /src/0.99/load.js
-/*!
+﻿///#source 1 1 /src/1.0.0/load.js
+/*! head.load - v1.0.1 */
+/*
  * HeadJS     The only script in your <HEAD>
  * Author     Tero Piirainen  (tipiirai)
  * Maintainer Robert Hoffmann (itechnology)
  * License    MIT / http://bit.ly/mit-license
- *
- * Version 0.99
- * http://headjs.com
+ * WebSite    http://headjs.com
  */
 (function (win, undefined) {
     "use strict";
@@ -127,7 +126,7 @@
             obj.success.push(obj.callback);
             api.load.apply(null, obj.success);
         }
-        // Do we have a fail case
+            // Do we have a fail case
         else if (!passed && !!obj.failure) {
             obj.failure.push(obj.callback);
             api.load.apply(null, obj.failure);
@@ -437,6 +436,16 @@
             ele.type = "text/" + (asset.type || "css");
             ele.rel  = "stylesheet";
             ele.href = asset.url;
+            
+            // https://github.com/headjs/headjs/pull/240
+            //if (ele.onload !== null) {   // to support browsers which dont have an onload event on link tags
+            //    var img = document.createElement('img');
+            //    img.onerror = function() {
+            //        process({ "type": "load" });
+            //    };
+            //    img.src = asset.url;
+            //}
+            
         }
         else {
             ele      = doc.createElement("script");
