@@ -1,0 +1,162 @@
+/*
+
+Uniform Theme: Crayon
+Version: 2.0
+By: Tyler Akins
+License: MIT License
+---
+For use with the Uniform plugin:
+http://uniformjs.com/
+
+*/
+
+$button-height: 30px;
+$button-margin-left: 12px;
+$button-padding: 8px 15px 0 2px;
+$button-span-height: 22px;
+$checkbox-height: 19px;
+$checkbox-width: 19px;
+$input-background-focus: "../images/bg-input-focus-jeans.png";
+$input-background-focus-retina: "../images/bg-input-focus-retina-jeans.png";
+$input-background: "../images/bg-input-jeans.png";
+$input-background-retina: "../images/bg-input-retina-jeans.png";
+$input-padding: 3px;
+$radio-height: 18px;
+$radio-width: 18px;
+$select-fixed-width: 190px;
+$select-height: 26px;
+$select-margin-left: 10px;
+$select-margin-right: 25px;
+$select-select-height: 22px;
+$select-select-top: 2px;
+$sprite: "../images/sprite-jeans.png";
+$sprite-retina: "../images/sprite-retina-jeans.png";
+$upload-action-width: 82px;
+$upload-filename-margin-top: 2px;
+$upload-filename-margin-left: 2px;
+$upload-filename-width: 85px;
+$upload-filename-padding: 0 10px;
+$upload-height: 28px;
+$upload-span-height: 24px;
+$upload-width: 190px;
+$input-background-size: 60px;
+
+@import "../../_base/css/uniform._base.scss";
+
+/* INPUT & TEXTAREA */
+
+#{$class-wrapper-element}#{$class-wrapper} input#{$class-input},
+#{$class-wrapper-element}#{$class-wrapper} select#{$class-multiselect},
+#{$class-wrapper-element}#{$class-wrapper} textarea#{$class-textarea} {
+	font-size: 12px;
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	color: #FFE000;
+	border-top: solid 1px #aaa;
+	border-left: solid 1px #aaa;
+	border-bottom: solid 1px #ccc;
+	border-right: solid 1px #ccc;
+	@include border-radius($input-padding);
+
+	&:focus {
+		@include box-shadow(0px 0px 4px rgba(0,0,0,0.3));
+		border-color: #999;
+	}
+}
+
+/* PRESENTATION */
+
+/* Buttons */
+
+div#{$class-wrapper}#{$class-button} {
+	span {
+		font-weight: bold;
+		font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+		font-size: 12px;
+		letter-spacing: 1px;
+		text-transform: uppercase;
+		color: #FFE000;
+	}
+
+	@include whenHover {
+		span {
+			color: #FFE000;
+		}
+	}
+
+	@include whenDisabled {
+		span {
+			color: #FFE000;
+		}
+	}
+}
+
+/* Select */
+
+div#{$class-wrapper}#{$class-select} {
+	font-size: 12px;
+
+	select {
+		font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+		font-size: 12px;
+	}
+
+	span {
+		color: #FFE000;
+		text-shadow: 0 1px 0 #000;
+	}
+
+	@include whenDisabled {
+		span {
+			color: #FFE000;
+		}
+	}
+}
+
+/* Checker */
+div#{$class-wrapper}#{$class-checkbox} {
+	margin-right: 5px;
+}
+
+/* Radio */
+div#{$class-wrapper}#{$class-radio} {
+	margin-right: 3px;
+}
+
+/* Uploader */
+div#{$class-wrapper}#{$class-upload} {
+	span#{$class-action} {
+		text-shadow: #000 0px 1px 0px;
+		background-color: #fff;
+		font-size: 11px;
+		font-weight: bold;
+		color: #FFE000;
+	}
+
+	span#{$class-filename} {
+		color: #FFE000;
+		font-size: 11px;
+		border-right: 1px solid rgb(47, 67, 104);
+	}
+
+	@include whenDisabled {
+		span#{$class-action} {
+			color: #FFE000;
+		}
+
+		span#{$class-filename} {
+			border-color: #ddd;
+			color: #FFE000;
+		}
+	}
+}
+
+#{$class-wrapper-element}#{$class-wrapper} input#{$class-input},
+#{$class-wrapper-element}#{$class-wrapper} select#{$class-multiselect},
+#{$class-wrapper-element}#{$class-wrapper} textarea#{$class-textarea} {
+	&, &:focus {
+		background-repeat: repeat
+	}
+}
+
+@include retina()
