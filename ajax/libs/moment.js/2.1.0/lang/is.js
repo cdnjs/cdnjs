@@ -1,4 +1,114 @@
 // moment.js language configuration
 // language : icelandic (is)
 // author : Hinrik Örn Sigurðsson : https://github.com/hinrik
-!function(){function e(e){function t(e){return 11===e%100?!0:1===e%10?!1:!0}function n(e,n,a,_){var s=e+" ";switch(a){case"s":return n||_?"nokkrar sek\xfandur":"nokkrum sek\xfandum";case"m":return n?"m\xedn\xfata":"m\xedn\xfatu";case"mm":return t(e)?s+(n||_?"m\xedn\xfatur":"m\xedn\xfatum"):n?s+"m\xedn\xfata":s+"m\xedn\xfatu";case"hh":return t(e)?s+(n||_?"klukkustundir":"klukkustundum"):s+"klukkustund";case"d":return n?"dagur":_?"dag":"degi";case"dd":return t(e)?n?s+"dagar":s+(_?"daga":"d\xf6gum"):n?s+"dagur":s+(_?"dag":"degi");case"M":return n?"m\xe1nu\xf0ur":_?"m\xe1nu\xf0":"m\xe1nu\xf0i";case"MM":return t(e)?n?s+"m\xe1nu\xf0ir":s+(_?"m\xe1nu\xf0i":"m\xe1nu\xf0um"):n?s+"m\xe1nu\xf0ur":s+(_?"m\xe1nu\xf0":"m\xe1nu\xf0i");case"y":return n||_?"\xe1r":"\xe1ri";case"yy":return t(e)?s+(n||_?"\xe1r":"\xe1rum"):s+(n||_?"\xe1r":"\xe1ri")}}e.lang("is",{months:"jan\xfaar_febr\xfaar_mars_apr\xedl_ma\xed_j\xfan\xed_j\xfal\xed_\xe1g\xfast_september_okt\xf3ber_n\xf3vember_desember".split("_"),monthsShort:"jan_feb_mar_apr_ma\xed_j\xfan_j\xfal_\xe1g\xfa_sep_okt_n\xf3v_des".split("_"),weekdays:"sunnudagur_m\xe1nudagur_\xferi\xf0judagur_mi\xf0vikudagur_fimmtudagur_f\xf6studagur_laugardagur".split("_"),weekdaysShort:"sun_m\xe1n_\xferi_mi\xf0_fim_f\xf6s_lau".split("_"),weekdaysMin:"Su_M\xe1_\xder_Mi_Fi_F\xf6_La".split("_"),longDateFormat:{LT:"H:mm",L:"DD/MM/YYYY",LL:"D. MMMM YYYY",LLL:"D. MMMM YYYY [kl.] LT",LLLL:"dddd, D. MMMM YYYY [kl.] LT"},calendar:{sameDay:"[\xed dag kl.] LT",nextDay:"[\xe1 morgun kl.] LT",nextWeek:"dddd [kl.] LT",lastDay:"[\xed g\xe6r kl.] LT",lastWeek:"[s\xed\xf0asta] dddd [kl.] LT",sameElse:"L"},relativeTime:{future:"eftir %s",past:"fyrir %s s\xed\xf0an",s:n,m:n,mm:n,h:"klukkustund",hh:n,d:n,dd:n,M:n,MM:n,y:n,yy:n},ordinal:"%d.",week:{dow:1,doy:4}})}"function"==typeof define&&define.amd&&define(["moment"],e),"undefined"!=typeof window&&window.moment&&e(window.moment)}();
+
+function plural(n) {
+    if (n % 100 === 11) {
+        return true;
+    } else if (n % 10 === 1) {
+        return false;
+    }
+    return true;
+}
+
+function translate(number, withoutSuffix, key, isFuture) {
+    var result = number + " ";
+    switch (key) {
+    case 's':
+        return withoutSuffix || isFuture ? 'nokkrar sekúndur' : 'nokkrum sekúndum';
+    case 'm':
+        return withoutSuffix ? 'mínúta' : 'mínútu';
+    case 'mm':
+        if (plural(number)) {
+            return result + (withoutSuffix || isFuture ? 'mínútur' : 'mínútum');
+        } else if (withoutSuffix) {
+            return result + 'mínúta';
+        }
+        return result + 'mínútu';
+    case 'hh':
+        if (plural(number)) {
+            return result + (withoutSuffix || isFuture ? 'klukkustundir' : 'klukkustundum');
+        }
+        return result + 'klukkustund';
+    case 'd':
+        if (withoutSuffix) {
+            return 'dagur';
+        }
+        return isFuture ? 'dag' : 'degi';
+    case 'dd':
+        if (plural(number)) {
+            if (withoutSuffix) {
+                return result + 'dagar';
+            }
+            return result + (isFuture ? 'daga' : 'dögum');
+        } else if (withoutSuffix) {
+            return result + 'dagur';
+        }
+        return result + (isFuture ? 'dag' : 'degi');
+    case 'M':
+        if (withoutSuffix) {
+            return 'mánuður';
+        }
+        return isFuture ? 'mánuð' : 'mánuði';
+    case 'MM':
+        if (plural(number)) {
+            if (withoutSuffix) {
+                return result + 'mánuðir';
+            }
+            return result + (isFuture ? 'mánuði' : 'mánuðum');
+        } else if (withoutSuffix) {
+            return result + 'mánuður';
+        }
+        return result + (isFuture ? 'mánuð' : 'mánuði');
+    case 'y':
+        return withoutSuffix || isFuture ? 'ár' : 'ári';
+    case 'yy':
+        if (plural(number)) {
+            return result + (withoutSuffix || isFuture ? 'ár' : 'árum');
+        }
+        return result + (withoutSuffix || isFuture ? 'ár' : 'ári');
+    }
+}
+
+require('../moment').lang('is', {
+    months : "janúar_febrúar_mars_apríl_maí_júní_júlí_ágúst_september_október_nóvember_desember".split("_"),
+    monthsShort : "jan_feb_mar_apr_maí_jún_júl_ágú_sep_okt_nóv_des".split("_"),
+    weekdays : "sunnudagur_mánudagur_þriðjudagur_miðvikudagur_fimmtudagur_föstudagur_laugardagur".split("_"),
+    weekdaysShort : "sun_mán_þri_mið_fim_fös_lau".split("_"),
+    weekdaysMin : "Su_Má_Þr_Mi_Fi_Fö_La".split("_"),
+    longDateFormat : {
+        LT : "H:mm",
+        L : "DD/MM/YYYY",
+        LL : "D. MMMM YYYY",
+        LLL : "D. MMMM YYYY [kl.] LT",
+        LLLL : "dddd, D. MMMM YYYY [kl.] LT"
+    },
+    calendar : {
+        sameDay : '[í dag kl.] LT',
+        nextDay : '[á morgun kl.] LT',
+        nextWeek : 'dddd [kl.] LT',
+        lastDay : '[í gær kl.] LT',
+        lastWeek : '[síðasta] dddd [kl.] LT',
+        sameElse : 'L'
+    },
+    relativeTime : {
+        future : "eftir %s",
+        past : "fyrir %s síðan",
+        s : translate,
+        m : translate,
+        mm : translate,
+        h : "klukkustund",
+        hh : translate,
+        d : translate,
+        dd : translate,
+        M : translate,
+        MM : translate,
+        y : translate,
+        yy : translate
+    },
+    ordinal : '%d.',
+    week : {
+        dow : 1, // Monday is the first day of the week.
+        doy : 4  // The week that contains Jan 4th is the first week of the year.
+    }
+});

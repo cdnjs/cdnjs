@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Form Test</title>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css" />
+    <style>
+
+        /* Form and inputs */
+        form {
+            width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            display: block;
+        }
+
+        input.form-control {
+            width: 375px;
+        }
+
+        /* While server is being requested */
+        form.validating-server-side {
+            background: #F2F2F2;
+        }
+
+        input.validating-server-side {
+            opacity: 0.5;
+            background: lightgoldenrodyellow;
+        }
+
+        /* modify inputs for password strength */
+        .password-strength input.form-control {
+            width: 375px;
+            margin-right: 4px;
+            display: inline;
+        }
+
+        .password-strength label {
+            display: block;
+        }
+
+        /* Checkboxes */
+        .form-group.check-boxes input {
+            margin-left: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<div>
+    <form action="" id="test-form" role="form">
+        <div class="form-group">
+            <label class="control-label" for="inline-suggestions">Inline suggestions</label>
+            <input name="inline suggestions" type="text" id="inline-suggestions" class="form-control" data-suggestions="Monkey, Horse, Fox, Tiger, Elephant" />
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="country-suggestions">Country suggestions</label>
+            <input name="country suggestions" type="text" id="country-suggestions" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="country-suggestions">Swedish county suggestions</label>
+            <input name="Swedish county suggestion" type="text" id="swedish-county-suggestions" class="form-control" />
+        </div>
+
+        <div class="form-group password-strength">
+            <label class="control-label" for="password">Display password strength (only strong)</label>
+            <input name="password" type="password" id="password" class="form-control" data-validation="strength" data-validation-strength="3" />
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Alphanumeric and -_ and spaces</label>
+            <input name="alphanumeric with spaces" class="form-control" name="test" data-validation="alphanumeric" data-validation-allowing="-_ " />
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Alphanumeric only</label>
+            <input name="aplhanumeric only" class="form-control" name="test2" data-validation="alphanumeric" />
+        </div>
+
+        <div class="checkbox">
+            <label>
+                <input name="checkbox" type="checkbox" data-validation="required" /> Must be checked
+            </label>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Even numbers only</label>
+            <input name="even numbers" class="form-control" name="test4" data-validation="even_number" />
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Server validation</label>
+            <input class="form-control" name="code"
+                   data-validation-help="The word is &quot;secret&quot;"
+                   data-validation="alphanumeric server"
+                   data-validation-url="http://formvalidator.net/validate-email.php" />
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">File validation</label>
+            <input type="file" name="some-file1" class="form-control"
+                   data-validation="size mime required"
+                   data-validation-error-msg="You must upload an image file"
+                   data-validation-allowing="jpg, png, ico"
+                   data-validation-max-size="100kb" />
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">File validation (multiple)</label>
+            <input type="file" multiple="multiple" name="some-file2" class="form-control"
+                   data-validation="size mime required length"
+                   data-validation-length="min2"
+                   data-validation-error-msg="You must upload at least two image files"
+                   data-validation-allowing="jpg, png, ico"
+                   data-validation-max-size="100kb" />
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">
+                Callback validation, set this value to &quot;1&quot; and
+                validation will fail
+            </label>
+            <input id="callback" class="form-control" />
+        </div>
+
+        <div class="form-group check-boxes">
+            <label>Checkbox group</label><br />
+            <label>
+                <input type="checkbox" name="box" value="1"
+                       data-validation="checkbox_group"
+                       data-validation-qty="1-2" /> 1
+            </label>
+            <label>
+                <input type="checkbox" name="box" value="2" /> 2
+            </label>
+            <label>
+                <input type="checkbox" name="box" value="3" /> 3
+            </label>
+            <label>
+                <input type="checkbox" name="box" value="4" /> 4
+            </label>
+            <label>
+                <input type="checkbox" name="box" value="5" /> 5
+            </label>
+        </div>
+        <p>
+            <input type="submit" class="button">
+        </p>
+    </form>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="jquery.form-validator.js"></script>
+<script>
+(function($, window) {
+
+    var dev = window.location.hash.indexOf('dev') > -1 ? '.dev' : '';
+
+
+    // Add a new validator
+    $.formUtils.addValidator({
+        name : 'even_number',
+        validatorFunction : function(value, $el, config, language, $form) {
+            return parseInt(value, 10) % 2 === 0;
+        },
+        borderColorOnError : '',
+        errorMessage : 'You have to give an even number',
+        errorMessageKey: 'badEvenNumber'
+    });
+
+    window.applyValidation = function() {
+        $.validate({
+            language : {
+                requiredFields: 'Du måste bocka för denna'
+            },
+            errorMessagePosition : 'top',
+            scrollToTopOnError : true,
+            modules : 'security'+dev+', location'+dev+', sweden'+dev+', file'+dev+', uk'+dev,
+            onModulesLoaded: function( $form ) {
+                $('#country-suggestions').suggestCountry();
+                $('#swedish-county-suggestions').suggestSwedishCounty();
+                $('#password').displayPasswordStrength();
+            },
+            onValidate : function() {
+                console.log('wii');
+                var $callbackInput = $('#callback');
+                if( $callbackInput.val() == 1 ) {
+                    return {
+                        element : $callbackInput,
+                        message : 'This validation was made in a callback'
+                    };
+                }
+            },
+            onError : function() {
+                if( !$.formUtils.haltValidation ) {
+                    alert('Invalid');
+                }
+            },
+            onSuccess : function() {
+                alert('Valid');
+                return false;
+            }
+        });
+    };
+
+    window.applyValidation();
+
+    // Load one module outside $.validate() even though you do not have to
+    $.formUtils.loadModules('date'+dev+'.js', false, false);
+
+    $('input')
+        .on('beforeValidation', function() {
+            console.log('About to validate input "'+this.name+'"');
+        })
+        .on('validation', function(evt, isValid) {
+            console.log('Input '+this.name+' is '+( isValid ? 'VALID':'NOT VALID'));
+        });
+
+})(jQuery, window);
+</script>
+<body>
+</html>

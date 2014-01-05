@@ -1,4 +1,88 @@
 // moment.js language configuration
 // language : polish (pl)
 // author : Rafal Hirsz : https://github.com/evoL
-!function(){function e(e){function t(e){return 5>e%10&&e%10>1&&1!==~~(e/10)}function n(e,n,a){var _=e+" ";switch(a){case"m":return n?"minuta":"minut\u0119";case"mm":return _+(t(e)?"minuty":"minut");case"h":return n?"godzina":"godzin\u0119";case"hh":return _+(t(e)?"godziny":"godzin");case"MM":return _+(t(e)?"miesi\u0105ce":"miesi\u0119cy");case"yy":return _+(t(e)?"lata":"lat")}}var a="stycze\u0144_luty_marzec_kwiecie\u0144_maj_czerwiec_lipiec_sierpie\u0144_wrzesie\u0144_pa\u017adziernik_listopad_grudzie\u0144".split("_"),_="stycznia_lutego_marca_kwietnia_maja_czerwca_lipca_sierpnia_wrze\u015bnia_pa\u017adziernika_listopada_grudnia".split("_");e.lang("pl",{months:function(e,t){return/D MMMM/.test(t)?_[e.month()]:a[e.month()]},monthsShort:"sty_lut_mar_kwi_maj_cze_lip_sie_wrz_pa\u017a_lis_gru".split("_"),weekdays:"niedziela_poniedzia\u0142ek_wtorek_\u015broda_czwartek_pi\u0105tek_sobota".split("_"),weekdaysShort:"nie_pon_wt_\u015br_czw_pt_sb".split("_"),weekdaysMin:"N_Pn_Wt_\u015ar_Cz_Pt_So".split("_"),longDateFormat:{LT:"HH:mm",L:"DD.MM.YYYY",LL:"D MMMM YYYY",LLL:"D MMMM YYYY LT",LLLL:"dddd, D MMMM YYYY LT"},calendar:{sameDay:"[Dzi\u015b o] LT",nextDay:"[Jutro o] LT",nextWeek:"[W] dddd [o] LT",lastDay:"[Wczoraj o] LT",lastWeek:function(){switch(this.day()){case 0:return"[W zesz\u0142\u0105 niedziel\u0119 o] LT";case 3:return"[W zesz\u0142\u0105 \u015brod\u0119 o] LT";case 6:return"[W zesz\u0142\u0105 sobot\u0119 o] LT";default:return"[W zesz\u0142y] dddd [o] LT"}},sameElse:"L"},relativeTime:{future:"za %s",past:"%s temu",s:"kilka sekund",m:n,mm:n,h:n,hh:n,d:"1 dzie\u0144",dd:"%d dni",M:"miesi\u0105c",MM:n,y:"rok",yy:n},ordinal:"%d.",week:{dow:1,doy:4}})}"function"==typeof define&&define.amd&&define(["moment"],e),"undefined"!=typeof window&&window.moment&&e(window.moment)}();
+
+var monthsNominative = "styczeń_luty_marzec_kwiecień_maj_czerwiec_lipiec_sierpień_wrzesień_październik_listopad_grudzień".split("_"),
+    monthsSubjective = "stycznia_lutego_marca_kwietnia_maja_czerwca_lipca_sierpnia_września_października_listopada_grudnia".split("_");
+
+function plural(n) {
+    return (n % 10 < 5) && (n % 10 > 1) && (~~(n / 10) !== 1);
+}
+
+function translate(number, withoutSuffix, key) {
+    var result = number + " ";
+    switch (key) {
+    case 'm':
+        return withoutSuffix ? 'minuta' : 'minutę';
+    case 'mm':
+        return result + (plural(number) ? 'minuty' : 'minut');
+    case 'h':
+        return withoutSuffix  ? 'godzina'  : 'godzinę';
+    case 'hh':
+        return result + (plural(number) ? 'godziny' : 'godzin');
+    case 'MM':
+        return result + (plural(number) ? 'miesiące' : 'miesięcy');
+    case 'yy':
+        return result + (plural(number) ? 'lata' : 'lat');
+    }
+}
+
+require('../moment').lang('pl', {
+    months : function (momentToFormat, format) {
+        if (/D MMMM/.test(format)) {
+            return monthsSubjective[momentToFormat.month()];
+        } else {
+            return monthsNominative[momentToFormat.month()];
+        }
+    },
+    monthsShort : "sty_lut_mar_kwi_maj_cze_lip_sie_wrz_paź_lis_gru".split("_"),
+    weekdays : "niedziela_poniedziałek_wtorek_środa_czwartek_piątek_sobota".split("_"),
+    weekdaysShort : "nie_pon_wt_śr_czw_pt_sb".split("_"),
+    weekdaysMin : "N_Pn_Wt_Śr_Cz_Pt_So".split("_"),
+    longDateFormat : {
+        LT : "HH:mm",
+        L : "DD.MM.YYYY",
+        LL : "D MMMM YYYY",
+        LLL : "D MMMM YYYY LT",
+        LLLL : "dddd, D MMMM YYYY LT"
+    },
+    calendar : {
+        sameDay: '[Dziś o] LT',
+        nextDay: '[Jutro o] LT',
+        nextWeek: '[W] dddd [o] LT',
+        lastDay: '[Wczoraj o] LT',
+        lastWeek: function () {
+            switch (this.day()) {
+            case 0:
+                return '[W zeszłą niedzielę o] LT';
+            case 3:
+                return '[W zeszłą środę o] LT';
+            case 6:
+                return '[W zeszłą sobotę o] LT';
+            default:
+                return '[W zeszły] dddd [o] LT';
+            }
+        },
+        sameElse: 'L'
+    },
+    relativeTime : {
+        future : "za %s",
+        past : "%s temu",
+        s : "kilka sekund",
+        m : translate,
+        mm : translate,
+        h : translate,
+        hh : translate,
+        d : "1 dzień",
+        dd : '%d dni',
+        M : "miesiąc",
+        MM : translate,
+        y : "rok",
+        yy : translate
+    },
+    ordinal : '%d.',
+    week : {
+        dow : 1, // Monday is the first day of the week.
+        doy : 4  // The week that contains Jan 4th is the first week of the year.
+    }
+});
