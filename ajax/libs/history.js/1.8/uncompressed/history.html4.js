@@ -319,7 +319,7 @@
 						// Fetch
 						var
 							documentHash = History.getHash(),
-							iframeHash = History.getHash(iframe.contentWindow.document.location);
+							iframeHash = History.getHash(iframe.contentWindow.document);
 
 						// The Document Hash has changed (application caused)
 						if ( documentHash !== lastDocumentHash ) {

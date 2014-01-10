@@ -744,7 +744,7 @@
 			newState = {};
 			newState.normalized = true;
 			newState.title = oldState.title||'';
-			newState.url = History.getFullUrl(oldState.url?decodeURIComponent(oldState.url):(History.getLocationHref()));
+			newState.url = History.getFullUrl(oldState.url?oldState.url:(History.getLocationHref()));
 			newState.hash = History.getShortUrl(newState.url);
 			newState.data = History.cloneObject(oldState.data);
 
@@ -1972,11 +1972,15 @@
 					sessionStorage.setItem('History.store', currentStoreString);
 				}
 				catch (e) {
-					// Workaround for a bug seen on iPads. Sometimes the quota exceeded error comes up and simply
-					// removing/resetting the storage can work.
-					if (/QUOTA_EXCEEDED_ERR/.test(e.message)) {
-						sessionStorage.removeItem('History.store');
-						sessionStorage.setItem('History.store', currentStoreString);
+					if (e.code === DOMException.QUOTA_EXCEEDED_ERR) {
+						if (sessionStorage.length) {
+							// Workaround for a bug seen on iPads. Sometimes the quota exceeded error comes up and simply
+							// removing/resetting the storage can work.
+							sessionStorage.removeItem('History.store');
+							sessionStorage.setItem('History.store', currentStoreString);
+						} else {
+							// Otherwise, we're probably private browsing in Safari, so we'll ignore the exception.
+						}
 					} else {
 						throw e;
 					}
