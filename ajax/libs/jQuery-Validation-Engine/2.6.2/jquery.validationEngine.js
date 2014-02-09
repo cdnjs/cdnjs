@@ -87,7 +87,7 @@
 			form.off("submit", methods.onAjaxFormComplete);
 
 			// unbind form.submit
-			form.die("submit", methods.onAjaxFormComplete);
+			form.off("submit", methods.onAjaxFormComplete);
 			form.removeData('jqv');
             
 			form.off("click", "a[data-validation-engine-skip], a[class*='validate-skip'], button[data-validation-engine-skip], button[class*='validate-skip'], input[data-validation-engine-skip], input[class*='validate-skip']", methods._submitButtonClick);
