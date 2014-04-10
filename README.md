@@ -112,12 +112,16 @@ The above example looks in the tarball whose structure might look like this:
 The auto-update process will look for `dist` inside the named tarball and copy all the JavaScript file to cdnJS, minus the `dist` path. The resulting files in cdnJS will be: 
 
 ```
-ajax/libs/lodash.js/x.y.z/lodash.compat.js
-ajax/libs/lodash.js/x.y.z/lodash.compat.min.js
-ajax/libs/lodash.js/x.y.z/lodash.js
-ajax/libs/lodash.js/x.y.z/lodash.min.js
-ajax/libs/lodash.js/x.y.z/lodash.underscore.js
-ajax/libs/lodash.js/x.y.z/lodash.underscore.min.js
+|__ajax
+  |__libs
+    |__lodash.js
+      |__x.y.z
+        |__lodash.compat.js
+        |__lodash.compat.min.js
+        |__lodash.js
+        |__lodash.min.js
+        |__lodash.underscore.js
+        |__lodash.underscore.min.js
 ```
 
 ...where `x.y.z` is the version number, extracted from the `package.json` on npm.
