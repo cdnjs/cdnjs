@@ -79,8 +79,6 @@ cdnJS automatically updates libraries that are known to be hosted on `npm` e.g.,
 To add an `npm` hook to a library, update the `package.json` with configuration details and submit your pull request. An example configuration:
 
 ```
- // Lodash package.json
- // ...
   "npmName": "lodash",
   "npmFileMap": [{
     "basePath": "/dist/",
@@ -88,7 +86,6 @@ To add an `npm` hook to a library, update the `package.json` with configuration 
       "*.js"
     ]
   }],
-  // ...
 ```
 
 * `npmName` should map to the name of the library on `npm`
