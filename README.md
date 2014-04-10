@@ -96,16 +96,31 @@ To add an `npm` hook to a library, update the `package.json` with configuration 
 The above example looks in the tarball whose structure might look like this:
 
 ```
-- dist/lodash.js
-- dist/lodash.min.js
+|__dist
+| |__lodash.compat.js
+| |__lodash.compat.min.js
+| |__lodash.js
+| |__lodash.min.js
+| |__lodash.underscore.js
+| |__lodash.underscore.min.js
+|__LICENSE.txt
+|__lodash.js
+|__package.json
+|__README.md
 ```
 
-The auto-update process will look for `dist` inside the named tarball and copy all the JavaScript file(s) to cdnJS, minus the `dist` path. The resulting files in cdnJS will be: 
+The auto-update process will look for `dist` inside the named tarball and copy all the JavaScript file to cdnJS, minus the `dist` path. The resulting files in cdnJS will be: 
 
 ```
-ajax/libs/lodash.js/1.0.0/lodash.js
-ajax/libs/lodash.js/1.0.0/lodash.min.js
+ajax/libs/lodash.js/x.y.z/lodash.compat.js
+ajax/libs/lodash.js/x.y.z/lodash.compat.min.js
+ajax/libs/lodash.js/x.y.z/lodash.js
+ajax/libs/lodash.js/x.y.z/lodash.min.js
+ajax/libs/lodash.js/x.y.z/lodash.underscore.js
+ajax/libs/lodash.js/x.y.z/lodash.underscore.min.js
 ```
+
+...where `x.y.z` is the version number, extracted from the `package.json` on npm.
 
 ## API
 
