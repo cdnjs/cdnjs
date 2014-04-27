@@ -2,7 +2,7 @@
 * ng-grid JavaScript Library
 * Authors: https://github.com/angular-ui/ng-grid/blob/master/README.md 
 * License: MIT (http://www.opensource.org/licenses/mit-license.php)
-* Compiled At: 02/24/2014 12:38
+* Compiled At: 04/07/2014 16:55
 ***********************************************/
 (function(window, $) {
 'use strict';
@@ -715,21 +715,21 @@ var ngColumn = function (config, $scope, grid, domUtilityService, $templateCache
         self.editableCellTemplate = colDef.editableCellTemplate || $templateCache.get('editableCellTemplate.html');
     }
     if (colDef.cellTemplate && !TEMPLATE_REGEXP.test(colDef.cellTemplate)) {
-        self.cellTemplate = $.ajax({
+        self.cellTemplate = $templateCache.get(colDef.cellTemplate) || $.ajax({
             type: "GET",
             url: colDef.cellTemplate,
             async: false
         }).responseText;
     }
     if (self.enableCellEdit && colDef.editableCellTemplate && !TEMPLATE_REGEXP.test(colDef.editableCellTemplate)) {
-        self.editableCellTemplate = $.ajax({
+        self.editableCellTemplate = $templateCache.get(colDef.editableCellTemplate) || $.ajax({
             type: "GET",
             url: colDef.editableCellTemplate,
             async: false
         }).responseText;
     }
     if (colDef.headerCellTemplate && !TEMPLATE_REGEXP.test(colDef.headerCellTemplate)) {
-        self.headerCellTemplate = $.ajax({
+        self.headerCellTemplate = $templateCache.get(colDef.headerCellTemplate) || $.ajax({
             type: "GET",
             url: colDef.headerCellTemplate,
             async: false
@@ -975,7 +975,7 @@ var ngEventProvider = function (grid, $scope, domUtilityService, $timeout) {
 
                         angular.element(col).on('$destroy', function() {
                             angular.element(col).off('dragstart', self.dragStart);
-                            col.removeEventListener(self.dragStart);
+                            col.removeEventListener('dragstart', self.dragStart);
                         });
                     }
                 }
@@ -2761,14 +2761,13 @@ ngGridDirectives.directive('ngCell', ['$compile', '$domUtilityService', function
                         html = cellTemplate;
                     }
 
-                    var cellElement = $compile(html)($scope);
-
+                    var cellElement = $(html);
+                    iElement.append(cellElement);
+                    $compile(cellElement)($scope);
                     if ($scope.enableCellSelection && cellElement[0].className.indexOf('ngSelectionCell') === -1) {
                         cellElement[0].setAttribute('tabindex', 0);
                         cellElement.addClass('ngCellElement');
                     }
-
-                    iElement.append(cellElement);
                 },
                 post: function($scope, iElement) {
                     if ($scope.enableCellSelection) {
@@ -3003,7 +3002,7 @@ ngGridDirectives.directive('ngGrid', ['$compile', '$filter', '$templateCache', '
                             options.plugins[$utils.getInstanceType(p)] = p;
 
                             $scope.$on('$destroy', function() {
-                                newScope.destroy();
+                                newScope.$destroy();
                             });
                         });
                         if (typeof options.init === "function") {
@@ -3486,7 +3485,7 @@ angular.module('ngGrid').run(['$templateCache', function($templateCache) {
     "\n"
   );
   $templateCache.put('headerCellTemplate.html',
-    "<div class=\"ngHeaderSortColumn {{col.headerClass}}\" ng-style=\"{'cursor': col.cursor}\" ng-class=\"{ 'ngSorted': !noSortVisible }\">\r" +
+    "<div class=\"ngHeaderSortColumn {{col.headerClass}}\" ng-style=\"{'cursor': col.cursor}\" ng-class=\"{ 'ngSorted': !col.noSortVisible() }\">\r" +
     "\n" +
     "    <div ng-click=\"col.sort($event)\" ng-class=\"'colt' + col.index\" class=\"ngHeaderText\">{{col.displayName}}</div>\r" +
     "\n" +
