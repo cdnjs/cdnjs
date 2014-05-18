@@ -1,0 +1,115 @@
+@mixin placeholder {
+	&::-moz-placeholder {
+		@content;
+	}
+	&::-webkit-input-placeholder {
+		@content;
+	}
+	&:-ms-input-placeholder {
+		@content;
+	}
+	&.placeholder-visible,
+	& + .placeholder-text {
+		@content;
+	}
+}
+
+@mixin checked {
+  &:checked {
+    @content;
+  }
+
+  &.prop-checked {
+    @content;
+  }
+}
+
+@mixin progress {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	border: 0;
+	
+	@content;
+	
+	&::-webkit-progress-bar { 
+		@content;
+		border: 0 none;
+	}
+	
+	&::-moz-progress-bar { 
+		@content;
+	}
+	
+	&::-ms-fill {
+		animation-name: none;
+		@content;
+	}
+}
+@mixin progressbar {
+	&::-webkit-progress-value { 
+		@content;
+	}
+	&::-moz-progress-bar { 
+		@content;
+	}
+	&::-ms-fill {
+		animation-name: none;
+		@content;
+	}
+	> span.progress-value {
+		display: block !important;
+		@content;
+	}
+}
+@mixin indeterminate-progressbar {
+	&:indeterminate::-webkit-progress-bar { 
+		@content;
+	}
+	&:indeterminate::-moz-progress-bar {
+		@content;
+	}
+	&:indeterminate {
+		animation-name: none;
+		@content;
+	}
+	&.ws-indeterminate > span.progress-value {
+		display: block !important;
+		width: 100%;
+		right: 0;
+		@content;
+	}
+}
+
+
+@mixin summary-marker {
+	&::-webkit-details-marker {
+		display: none;
+	}
+	> .details-open-indicator {
+		display: none;
+	}
+	&:before {
+		display: inline-block;
+		content: ">";
+		@content;
+	}
+}
+
+@mixin cue($c: false) {
+	@if $c == false { 
+		&::cue {
+			@content;
+		}
+		& + .cue-display span.cue {
+			@content;
+		}
+	} @else {
+		&::cue(#{$c}) {
+			@content;
+		}
+		& + .cue-display span.cue #{$c} {
+			@content;
+		}
+	}
+}
