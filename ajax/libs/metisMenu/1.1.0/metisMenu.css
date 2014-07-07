@@ -1,5 +1,5 @@
 /*
- * metismenu - v1.1.0
+ * metisMenu - v1.1.0
  * Easy menu jQuery plugin for Twitter Bootstrap 3
  * https://github.com/onokumus/metisMenu
  *
