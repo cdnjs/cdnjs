@@ -239,7 +239,7 @@ var updateLibrary = function (pkg, cb) {
         console.log('Library finished', err);
             var npmVersion = result.body['dist-tags'] && result.body['dist-tags'].latest || 0;
             pkg.version = npmVersion;
-            fs.writeFileSync('ajax/libs/' + pkg.name + '/package.json', JSON.stringify(pkg, null, 2), 'utf8');
+            fs.writeFileSync('ajax/libs/' + pkg.name + '/package.json', JSON.stringify(pkg, null, 2) + '\n', 'utf8');
             cb(null);
         });
     });
