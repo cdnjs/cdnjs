@@ -1,0 +1,185 @@
+<project name="package.sub.builds">
+
+    <macrodef name="x-process-sub-packages">
+        <attribute name="all" default="false"/>
+        <element name="tasks" implicit="true"/>
+        <sequential>
+            <if>
+                <and>
+                    <isset property="package.subpkgs.dir"/>
+                    <available file="${package.subpkgs.dir}" type="dir"/>
+                </and>
+                <then>
+                    <local name="sub.packages.list"/>
+                    <condition property="sub.packages.list" value="${package.subpkgs}">
+                        <and>
+                            <isset property="package.subpkgs"/>
+                            <equals arg1="@{all}" arg2="false"/>
+                        </and>
+                    </condition>
+                    <property name="sub.packages.list" value="*"/>
+                    <for param="pkg-dir">
+                        <dirset dir="${package.subpkgs.dir}" includes="${sub.packages.list}"/>
+                        <sequential>
+                            <if>
+                                <available file="@{pkg-dir}/.sencha/package/sencha.cfg"/>
+                                <then>
+                                    <tasks/>
+                                </then>
+                            </if>
+                        </sequential>
+                    </for>
+                </then>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="x-process-examples">
+        <attribute name="all" default="false"/>
+        <element name="tasks" implicit="true"/>
+        <sequential>
+            <if>
+                <and>
+                    <isset property="package.examples.dir"/>
+                    <available file="${package.examples.dir}" type="dir"/>
+                </and>
+                <then>
+                    <local name="example.list"/>
+                    <condition property="example.list" value="${package.examples}">
+                        <and>
+                            <isset property="package.examples"/>
+                            <equals arg1="@{all}" arg2="false"/>
+                        </and>
+                    </condition>
+                    <property name="example.list" value="*"/>
+                    <for param="example-dir">
+                        <dirset dir="${package.examples.dir}" includes="${example.list}"/>
+                        <sequential>
+                            <if>
+                                <available file="@{example-dir}/.sencha/app/sencha.cfg"/>
+                                <then>
+                                    <tasks/>
+                                </then>
+                            </if>
+                        </sequential>
+                    </for>
+                </then>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="x-run-sub-build">
+        <attribute name="dir"/>
+        <attribute name="target"/>
+        <element name="properties" implicit="true"/>
+        <sequential>
+            <if>
+                <available file="@{dir}/build.xml"/>
+                <then>
+                    <local name="sub.name"/>
+                    <basename file="@{dir}" 
+                             property="sub.name"/>
+                    <ant dir="@{dir}" 
+                         inheritall="false" 
+                         inheritrefs="true"
+                         target="@{target}">
+                        <property name="compiler.ref.id" 
+                                  value="compiler-${sub.name}"/>
+                        <properties/>
+                    </ant>
+                </then>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="x-sub-build">
+        <attribute name="dir"/>
+        <attribute name="target" default="build"/>
+        <attribute name="inherit-version" default="0"/>
+        <sequential>
+            <if>
+                <x-is-true value="@{inherit-version}"/>
+                <then>
+                    <x-run-sub-build dir="@{dir}" target="@{target}">
+                        <property name="cmd.dir" value="${cmd.dir}"/>
+                        <property name="build.version" value="${build.version}"/>
+                    </x-run-sub-build>
+                </then>
+                <else>
+                    <x-run-sub-build dir="@{dir}" target="@{target}">
+                        <property name="cmd.dir" value="${cmd.dir}"/>
+                    </x-run-sub-build>
+                </else>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <target name="-before-subpkgs"/>
+    <target name="-after-subpkgs"/>
+    <target name="-subpkgs">
+        <x-process-sub-packages>
+            <x-sub-build dir="@{pkg-dir}"
+                         inherit-version="${build.subpkgs.inherit.version}"/>
+        </x-process-sub-packages>
+    </target>
+
+    <target name="-before-clean-subpkgs"/>
+    <target name="-after-clean-subpkgs"/>
+    <target name="-clean-subpkgs">
+        <x-process-sub-packages>
+            <x-sub-build dir="@{pkg-dir}"
+                         target="clean"
+                         inherit-version="${build.subpkgs.inherit.version}"/>
+        </x-process-sub-packages>
+    </target>
+
+    <target name="-before-upgrade-subpkgs"/>
+    <target name="-after-upgrade-subpkgs"/>
+    <target name="-upgrade-subpkgs">
+        <x-process-sub-packages all="true">
+            <x-sencha-command dir="@{pkg-dir}" inheritall="false">
+                <property name="args.force" value="true"/>
+                package
+                upgrade
+            </x-sencha-command>
+            <delete dir="@{example-dir}/.sencha_backup"/>
+        </x-process-sub-packages>
+    </target>
+
+    <target name="-before-examples"/>
+    <target name="-after-examples"/>
+    <target name="-examples">
+        <x-process-examples>
+            <echo>Building example in @{example-dir}</echo>
+            <x-sencha-command dir="@{example-dir}" inheritall="false">
+                app
+                build
+            </x-sencha-command>
+        </x-process-examples>
+    </target>
+    
+    <target name="-before-upgrade-examples"/>
+    <target name="-after-upgrade-examples"/>
+    <target name="-upgrade-examples">
+        <x-process-examples all="true">
+            <echo>Upgrading example in @{example-dir}</echo>
+            <x-sencha-command dir="@{example-dir}" inheritall="false">
+                <property name="args.force" value="true"/>
+                app
+                upgrade
+            </x-sencha-command>
+            <delete dir="@{example-dir}/.sencha_backup"/>
+        </x-process-examples>
+    </target>
+        
+    <target name="-before-clean-examples"/>
+    <target name="-after-clean-examples"/>
+    <target name="-clean-examples">
+        <x-process-examples all="true">
+            <echo>Cleaning example in @{example-dir}</echo>
+            <x-sub-build dir="@{example-dir}"
+                         target="clean"/>
+        </x-process-examples>
+    </target>
+    
+</project>

@@ -1,0 +1,142 @@
+/**
+ * Creates a visual theme for an Ext.ProgressBar
+ *
+ * @param {string} $ui
+ * The name of the UI being created. Can not included spaces or special punctuation
+ * (used in CSS class names).
+ *
+ * @param {color} [$ui-border-color=$progress-border-color]
+ * The border-color of the ProgressBar
+ *
+ * @param {color} [$ui-background-color=$progress-background-color]
+ * The background-color of the ProgressBar
+ *
+ * @param {color} [$ui-bar-background-color=$progress-bar-background-color]
+ * The background-color of the ProgressBar's moving element
+ *
+ * @param {string/list} [$ui-bar-background-gradient=$progress-bar-background-gradient]
+ * The background-gradient of the ProgressBar's moving element. Can be either the name of
+ * a predefined gradient or a list of color stops. Used as the `$type` parameter for
+ * {@link Global_CSS#background-gradient}.
+ *
+ * @param {color} [$ui-color-front=$progress-text-color-front]
+ * The color of the ProgressBar's text when in front of the ProgressBar's moving element
+ *
+ * @param {color} [$ui-color-back=$progress-text-color-back]
+ * The color of the ProgressBar's text when the ProgressBar's 'moving element is not under it
+ *
+ * @param {number} [$ui-height=$progress-height]
+ * The height of the ProgressBar
+ *
+ * @param {number} [$ui-border-width=$progress-border-width]
+ * The border-width of the ProgressBar
+ *
+ * @param {number} [$ui-border-radius=$progress-border-radius]
+ * The border-radius of the ProgressBar
+ *
+ * @param {string} [$ui-text-text-align=$progress-text-text-align]
+ * The text-align of the ProgressBar's text
+ *
+ * @param {number} [$ui-text-font-size=$progress-text-font-size]
+ * The font-size of the ProgressBar's text
+ *
+ * @param {string} [$ui-text-font-weight=$progress-text-font-weight]
+ * The font-weight of the ProgressBar's text
+ *
+ * @member Ext.ProgressBar
+ */
+@mixin extjs-progress-ui(
+    $ui: null,
+
+    $ui-border-color: $progress-border-color,
+    $ui-background-color: $progress-background-color,
+
+    $ui-bar-background-color: $progress-bar-background-color,
+    $ui-bar-background-gradient: $progress-bar-background-gradient,
+
+    $ui-color-front: $progress-text-color-front,
+    $ui-color-back: $progress-text-color-back,
+    $ui-height: $progress-height,
+    $ui-border-width: $progress-border-width,
+    $ui-border-radius: $progress-border-radius,
+    $ui-text-text-align: $progress-text-text-align,
+    $ui-text-font-size: $progress-text-font-size,
+    $ui-text-font-weight: $progress-text-font-weight,
+    $ui-text-font-family: $progress-text-font-family,
+
+    // deprecated - use $ui instead
+    $ui-label: null
+){
+    @if $ui == null {
+        @if $ui-label != null {
+            @warn '$ui-label is deprecated.  Use $ui instead';
+            $ui: $ui-label;
+        } @else {
+            @warn "#{error('$ui is required')}";
+        }
+    }
+
+    $progress-content-height: $ui-height - vertical($ui-border-width);
+    .#{$prefix}progress-#{$ui} {
+        background-color: $ui-background-color;
+        border-width: $ui-border-width;
+        height: $ui-height;
+
+        @if $ui-border-radius != 0 {
+            @include border-radius($ui-border-radius);
+        }
+        @if not is-null($ui-border-color) {
+            border-color: $ui-border-color;
+        }
+
+        .#{$prefix}progress-bar-#{$ui} {
+            @if $ui-border-radius != 0 {
+                @include border-radius($ui-border-radius);
+            }
+            @if not is-null($ui-bar-background-color) {
+                @include background-gradient($ui-bar-background-color, $ui-bar-background-gradient);
+            }
+            @if $include-slicer-gradient and not is-null($ui-bar-background-gradient) {
+                .#{$prefix}nlg & {
+                    background: repeat-x;
+                    background-image: slicer-background-image(progress-bar-#{$ui}, 'progress/progress-#{$ui}-bg');
+                }
+            }
+        }
+
+        .#{$prefix}progress-text {
+            color: $ui-color-front;
+            font-weight: $ui-text-font-weight;
+            font-size: $ui-text-font-size;
+            font-family: $ui-text-font-family;
+            text-align: $ui-text-text-align;
+            line-height: $progress-content-height;
+        }
+
+        .#{$prefix}progress-text-back {
+            color: $ui-color-back;
+            line-height: $progress-content-height;
+        }
+    }
+
+    $stretch: slicer-background-stretch(progress-bar-#{$ui}, bottom);
+    @include x-slicer(progress-bar-#{$ui});
+
+    @if $include-ext-view-table {
+        .#{$prefix}progressbar-#{$ui}-cell > .#{$prefix}grid-cell-inner,
+        .#{$prefix}progressbarwidget-#{$ui}-cell > .#{$prefix}grid-cell-inner {
+            padding-top:    max(ceil(($grid-row-height - $ui-height) / 2), 0);
+            padding-bottom: max(floor(($grid-row-height - $ui-height) / 2), 0);
+            .#{$prefix}progress-#{$ui} {
+                height: min($progress-height, $grid-row-height - 2);
+            }
+        }
+    }
+}
+
+
+@if $include-progress-default-ui {
+    @include extjs-progress-ui(
+        $ui: 'default'
+    );
+}

@@ -1,0 +1,27 @@
+// This file makes use of rules defined in grid-field.scss
+@import '../../grid-field.scss';
+
+@if $include-display-field-grid-ui and $include-ext-form-field-display {
+    @include extjs-display-field-ui(
+        $ui: 'grid-cell',
+        $ui-color: $grid-cell-display-field-color,
+        $ui-font-size: $grid-cell-display-field-font-size,
+        $ui-font-family: $grid-cell-display-field-font-family,
+        $ui-font-weight: $grid-cell-display-field-font-weight,
+        $ui-line-height: $grid-cell-display-field-line-height
+    );
+}
+
+.#{$prefix}grid-editor {
+    @if $include-ext-form-field-display {
+        .#{$prefix}form-display-field {
+            text-overflow: $grid-cell-inner-text-overflow;
+        }
+    }
+
+    @if $include-ext-grid-column-action {
+        .#{$prefix}form-action-col-field {
+            padding: $grid-actioncolumn-cell-padding;
+        }
+    }
+}

@@ -1,0 +1,86 @@
+//
+// Copyright (c) 2013. Sencha Inc.
+//
+
+$slicer-gen: map_create() !default;
+
+$slicer-map: map_create() !default;
+$slicer-map-size: 0 !default;
+
+@function sliceit($cls, $kind, $path, $extension) {
+    $url: theme-background-image($path, $extension, true);
+
+    @if $url != none {
+        $op: $kind + ':' + $url;
+        $slice: add-slice($cls, $op);
+    }
+
+    @return $url;
+}
+
+@function add-slice($cls, $op) {
+    $cls: quote($cls);
+    $slices: map_get($slicer-map, $cls);
+
+    @if $slices == '' {
+        $slices: unquote($op);
+        $slicer-map-size: $slicer-map-size + 1;
+    } @else {
+        $slices: append($slices, unquote($op), comma);
+    }
+
+    @return map_put($slicer-map, $cls, $slices);
+}
+
+@function slicer-background-image($cls, $path, $extension: $slicer-image-extension) {
+    @return sliceit($cls, 'bg', $path, $extension);
+}
+
+@function slicer-background-image-rtl($cls, $path, $extension: $slicer-image-extension) {
+    @return sliceit($cls, 'bg-rtl', $path, $extension);
+}
+
+@function slicer-frame-background-image($cls, $path, $extension: $slicer-image-extension) {
+    @return sliceit($cls, 'frame-bg', $path, $extension);
+}
+
+@function slicer-frame-background-image-rtl($cls, $path, $extension: $slicer-image-extension) {
+    @return sliceit($cls, 'frame-bg-rtl', $path, $extension);
+}
+
+@function slicer-corner-sprite($cls, $path, $extension: $slicer-image-extension) {
+    @return sliceit($cls, 'corners', $path, $extension);
+}
+
+@function slicer-corner-sprite-rtl($cls, $path, $extension: $slicer-image-extension) {
+    @return sliceit($cls, 'corners-rtl', $path, $extension);
+}
+
+@function slicer-sides-sprite($cls, $path, $extension: $slicer-image-extension) {
+    @return sliceit($cls, 'sides', $path, $extension);
+}
+
+@function slicer-sides-sprite-rtl($cls, $path, $extension: $slicer-image-extension) {
+    @return sliceit($cls, 'sides-rtl', $path, $extension);
+}
+
+@function slicer-background-stretch($cls, $stretch) {
+    @return add-slice($cls, 'stretch:' + $stretch);
+}
+
+@mixin x-slicer($cls) {
+    $cls: quote($cls);
+    $slices: map_get($slicer-map, $cls);
+
+    @if $slices != '' {
+
+        /*<if slicer>*/
+        .#{$prefix}#{$cls}:after {
+            display: none;
+            content: "x-slicer:#{$slices}";
+        }
+        /*</if slicer>*/
+// add a comment line to ensure the end directive gets its own lines
+        /* */
+    }
+}

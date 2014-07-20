@@ -1,0 +1,63 @@
+/**
+ * Creates a visual theme for display fields.  Note this mixin only provides styling
+ * for the form field body, The label and error are styled by {@link #extjs-label-ui}.
+ *
+ * @param {string} $ui
+ * The name of the UI being created. Can not included spaces or special punctuation
+ * (used in CSS class names).
+ *
+ * @param {number} [$ui-field-height=$form-field-height]
+ * The height of the field body that the display text must fit within.  This does not set
+ * the height of the field, only allows the text to be centered inside the field body.
+ * (The height of the field body is determined by {@link #extjs-label}).
+ *
+ * @param {color} [$ui-color=$form-display-field-color]
+ * The text color of display fields
+ *
+ * @param {number} [$ui-font-size=$form-display-field-font-size]
+ * The font-size of the display field
+ *
+ * @param {string} [$ui-font-family=$form-display-field-font-family]
+ * The font-family of the display field
+ *
+ * @param {string} [$ui-font-weight=$form-display-field-font-weight]
+ * The font-weight of the display field
+ *
+ * @param {number} [$ui-line-height=$form-display-field-line-height]
+ * The line-height of the display field
+ *
+ * @member Ext.form.field.Display
+ */
+@mixin extjs-display-field-ui(
+    $ui: null,
+    $ui-field-height: $form-field-height,
+    $ui-color: $form-display-field-color,
+    $ui-font-size: $form-display-field-font-size,
+    $ui-font-family: $form-display-field-font-family,
+    $ui-font-weight: $form-display-field-font-weight,
+    $ui-line-height: $form-display-field-line-height
+) {
+    .#{$prefix}form-display-field-#{$ui} {
+        height: $ui-field-height;
+        font: $ui-font-weight #{$ui-font-size}/#{$ui-line-height} $ui-font-family;
+        color: $ui-color;
+        margin-top: round(($ui-field-height - $ui-line-height) / 2);
+    }
+}
+
+@if $include-display-field-default-ui {
+    @include extjs-display-field-ui(
+        $ui: 'default'
+    );
+}
+
+@if $include-display-field-toolbar-ui {
+    @include extjs-display-field-ui(
+        $ui: 'toolbar',
+        $ui-color: $form-toolbar-display-field-color,
+        $ui-font-size: $form-toolbar-display-field-font-size,
+        $ui-font-family: $form-toolbar-display-field-font-family,
+        $ui-font-weight: $form-toolbar-display-field-font-weight,
+        $ui-line-height: $form-toolbar-display-field-line-height
+    );
+}

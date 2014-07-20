@@ -1,0 +1,135 @@
+.#{$prefix}title-icon {
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.#{$prefix}title {
+    display: table;
+    table-layout: fixed;
+}
+
+@if $include-rtl {
+    .#{$prefix}rtl.#{$prefix}title {
+        -o-text-overflow: clip;
+        text-overflow: clip;
+    }
+}
+
+.#{$prefix}title-text {
+    display: table-cell;
+    overflow: hidden;
+    white-space: nowrap;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+}
+
+.#{$prefix}title-align-left {
+    text-align: left;
+    @if $include-rtl {
+        &.#{$prefix}rtl {
+            text-align: right;
+        }
+    }
+}
+
+.#{$prefix}title-align-center {
+    text-align: center;
+}
+
+.#{$prefix}title-align-right {
+    text-align: right;
+    @if $include-rtl {
+        &.#{$prefix}rtl {
+            text-align: left;
+        }
+    }
+}
+
+.#{$prefix}title-rotate-right {
+    @include rotate-element($angle: 90);
+
+    @if $include-rtl {
+        &.#{$prefix}rtl {
+            @include rotate-element($angle: 270);
+        }
+    }
+}
+
+.#{$prefix}title-rotate-left {
+    @include rotate-element($angle: 270);
+
+    @if $include-rtl {
+        &.#{$prefix}rtl {
+            @include rotate-element($angle: 90);
+        }
+    }
+}
+
+@if $include-ext-panel-panel {
+    .#{$prefix}horizontal.#{$prefix}header {
+        .#{$prefix}title-rotate-right {
+            &.#{$prefix}title-align-left > .#{$prefix}title-item {
+                vertical-align: bottom;
+            }
+
+            &.#{$prefix}title-align-center > .#{$prefix}title-item {
+                vertical-align: middle;
+            }
+
+            &.#{$prefix}title-align-right > .#{$prefix}title-item {
+                vertical-align: top;
+            }
+        }
+
+        .#{$prefix}title-rotate-left {
+            &.#{$prefix}title-align-left > .#{$prefix}title-item {
+                vertical-align: top;
+            }
+
+            &.#{$prefix}title-align-center > .#{$prefix}title-item {
+                vertical-align: middle;
+            }
+
+            &.#{$prefix}title-align-right > .#{$prefix}title-item {
+                vertical-align: bottom;
+            }
+        }
+    }
+
+    .#{$prefix}vertical.#{$prefix}header {
+        .#{$prefix}title-rotate-none {
+            &.#{$prefix}title-align-left > .#{$prefix}title-item {
+                vertical-align: top;
+            }
+
+            &.#{$prefix}title-align-center > .#{$prefix}title-item {
+                vertical-align: middle;
+            }
+
+            &.#{$prefix}title-align-right > .#{$prefix}title-item {
+                vertical-align: bottom;
+            }
+        }
+    }
+}
+
+.#{$prefix}title-icon-wrap {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 0;
+    &.#{$prefix}title-icon-top,
+    &.#{$prefix}title-icon-bottom {
+        display: table-row;
+    }
+}
+
+.#{$prefix}title-icon {
+    display: inline-block;
+    vertical-align: middle;
+    background-position: center;
+    background-repeat: no-repeat;
+}

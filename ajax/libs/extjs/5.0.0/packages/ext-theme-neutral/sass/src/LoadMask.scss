@@ -1,0 +1,65 @@
+.#{$prefix}mask {
+    @include opacity($loadmask-opacity);
+    background: $loadmask-background-color;
+    @if not is-null($loadmask-cursor) {
+        cursor: $loadmask-cursor;
+    }
+}
+
+.#{$prefix}mask-msg {
+    padding: $loadmask-msg-padding;
+    @if $loadmask-msg-border-width != 0 {
+        border-style: $loadmask-msg-border-style;
+        border-width: $loadmask-msg-border-width;
+        border-color: $loadmask-msg-border-color;
+    }
+    @if $loadmask-msg-border-radius != 0 {
+        @include border-radius($loadmask-msg-border-radius);
+    }
+
+    @if not is-null($loadmask-msg-background-gradient) {
+        @include background-gradient($loadmask-msg-background-color, $loadmask-msg-background-gradient);
+    } @else {
+        background: $loadmask-msg-background-color;
+    }
+}
+
+.#{$prefix}mask-msg-inner {
+    padding: $loadmask-msg-inner-padding;
+    @if $loadmask-msg-inner-border-width != 0 {
+        border-style: $loadmask-msg-inner-border-style;
+        border-width: $loadmask-msg-inner-border-width;
+        border-color: $loadmask-msg-inner-border-color;
+    }
+    background-color: $loadmask-msg-inner-background-color;
+    color: $loadmask-msg-inner-color;
+    font: $loadmask-msg-inner-font;
+}
+
+.#{$prefix}mask-msg-text {
+    padding: $loadmask-msg-text-padding;
+    //if an icon is defined show it
+    @if not is-null($loadmask-msg-inner-icon) {
+        background-image: theme-background-image($loadmask-msg-inner-icon, 'gif');
+        background-repeat: no-repeat;
+        background-position: $loadmask-msg-inner-icon-position;
+    }
+}
+
+@if $include-rtl {
+    .#{$prefix}rtl.#{$prefix}mask-msg-text {
+        padding: rtl($loadmask-msg-text-padding);
+
+        @if not is-null($loadmask-msg-inner-icon) {
+            $loadmask-msg-icon-position-x: x($loadmask-msg-inner-icon-position);
+            @if $loadmask-msg-icon-position-x != center {
+                @if $loadmask-msg-icon-position-x == right {
+                    $loadmask-msg-icon-position-x: 0;
+                } @else {
+                    $loadmask-msg-icon-position-x: right;
+                }
+                background-position: $loadmask-msg-icon-position-x y($loadmask-msg-inner-icon-position);
+            }
+        }
+    }
+}

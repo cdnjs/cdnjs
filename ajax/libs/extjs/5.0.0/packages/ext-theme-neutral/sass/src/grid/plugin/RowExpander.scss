@@ -1,0 +1,23 @@
+.#{$prefix}grid-cell-inner-row-expander {
+    padding: $row-expander-cell-padding;
+
+    @if $grid-no-row-lines-show-focus-border {
+        .#{$prefix}grid-no-row-lines .#{$prefix}grid-row-focused & {
+            // when the grid has no row lines we need to subtract the border width from the 
+            // top and bottom padding when the row is focused so that the focus border does
+            // not increase the row height.
+            padding-top: top($row-expander-cell-padding) - $grid-row-cell-border-width;
+            padding-bottom: bottom($row-expander-cell-padding) - $grid-row-cell-border-width;
+        }
+    }
+}
+.#{$prefix}grid-row-expander {
+    width: $row-expander-width;
+    height: $row-expander-height;
+    cursor: $row-expander-cursor;
+    background-image: theme-background-image('grid/group-collapse');
+
+    .#{$prefix}grid-row-collapsed & {
+        background-image: theme-background-image('grid/group-expand');
+    }
+}

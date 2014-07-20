@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Jasmine Spec Runner</title>
+
+    <link rel="stylesheet" type="text/css" href="lib/jasmine-1.3.0/jasmine.css">
+
+    <!-- include source files here... -->
+    <script type="text/javascript" src="../../bootstrap.js"></script>
+    <script type="text/javascript">
+        function go () {
+            var jasmineEnv = jasmine.getEnv();
+            jasmineEnv.updateInterval = 1000;
+
+            var htmlReporter = new jasmine.HtmlReporter();
+
+            jasmineEnv.addReporter(htmlReporter);
+
+            jasmineEnv.specFilter = function(spec) {
+                return htmlReporter.specFilter(spec);
+            };
+
+            function execJasmine() {
+                jasmineEnv.execute();
+            }
+
+            if (document.body) {
+                execJasmine();
+            } else {
+                var currentWindowOnload = window.onload;
+                window.onload = function() {
+                    if (currentWindowOnload) {
+                        currentWindowOnload();
+                    }
+                    execJasmine();
+                };
+            }
+        }
+
+        function loadSpecs () {
+            var toLoad = [
+                //'../../.sencha/test/jasmine.js',
+                '../jasmine/lib/jasmine-1.3.0/jasmine.js', '../jasmine/MockAjax.js',
+
+                '../jasmine/lib/jasmine-1.3.0/jasmine-html.js',
+                
+                'util/Collection.js',
+                'util/Format.js',
+                'data/Batch.js',
+                'data/ErrorCollection.js',
+                'data/Model.js',
+                'data/Store.js',
+
+                'data/api/Api.js',
+
+                'data/field/Boolean.js',
+                'data/field/Date.js',
+                'data/field/Field.js',
+                'data/field/Integer.js',
+                'data/field/Number.js',
+                'data/field/String.js',
+
+                'data/identifier/Generator.js',
+                'data/identifier/Sequential.js',
+                'data/identifier/Uuid.js',
+
+                'data/operation/Create.js',
+                'data/operation/Destroy.js',
+                'data/operation/Operation.js',
+                'data/operation/Read.js',
+                'data/operation/Update.js',
+
+                'data/proxy/Memory.js',
+                'data/proxy/Ajax.js',
+                'data/proxy/Server.js',
+
+                'data/reader/Array.js',
+                'data/reader/Json.js',
+                'data/reader/Reader.js',
+                'data/reader/Xml.js',
+
+                'data/schema/ManyToMany.js',
+                'data/schema/ManyToOne.js',
+                'data/schema/Namer.js',
+                'data/schema/OneToOne.js',
+                'data/schema/Schema.js',
+                'data/schema/legacy-association/BelongsTo.js',
+                'data/schema/legacy-association/HasMany.js',
+                'data/schema/legacy-association/HasOne.js',
+
+                'data/validator/Email.js',
+                'data/validator/Exclusion.js',
+                'data/validator/Format.js',
+                'data/validator/Inclusion.js',
+                'data/validator/Length.js',
+                'data/validator/Presence.js',
+                'data/validator/Range.js',
+                'data/validator/Validator.js'
+                /**/
+              ],
+              loadIndex = -1,
+              path = '../specs/';
+
+            function loadNext () {
+                if (++loadIndex == toLoad.length) {
+                    go();
+                } else {
+                    Ext.Boot.load({
+                        url: path + toLoad[loadIndex],
+                        success: loadNext,
+                        failure: loadNext
+                    });
+                }
+            }
+
+            loadNext();
+        }
+
+        Ext.Loader.setConfig({enabled: true});
+        Ext.require([
+            '*'
+        ], function() {
+            loadSpecs();
+        });
+    </script>
+
+</head>
+
+<body></body>
+</html>

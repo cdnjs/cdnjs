@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="KitchenSink" default=".help">
+    <!--
+    The build-impl.xml file imported here contains the guts of the build process. It is
+    a great idea to read that file to understand how the process works, but it is best to
+    limit your changes to this file.
+    -->
+    <import file="${basedir}/.sencha/app/build-impl.xml"/>
+    <import file="${basedir}/.sencha/test/test-impl.xml"/>
+
+    <!--
+    The following targets can be provided to inject logic before and/or after key steps
+    of the build process:
+
+        The "init-local" target is used to initialize properties that may be personalized
+        for the local machine.
+
+            <target name="-before-init-local"/>
+            <target name="-after-init-local"/>
+
+        The "clean" target is used to clean build output from the build.dir.
+
+            <target name="-before-clean"/>
+            <target name="-after-clean"/>
+
+        The general "init" target is used to initialize all other properties, including
+        those provided by Sencha Cmd.
+
+            <target name="-before-init"/>
+            <target name="-after-init"/>
+        
+        The "page" target performs the call to Sencha Cmd to build the 'all-classes.js' file.
+
+            <target name="-before-page"/>
+            <target name="-after-page"/>
+
+        The "build" target performs the call to Sencha Cmd to build the application.
+
+            <target name="-before-build"/>
+            <target name="-after-build"/>
+    -->
+
+    <!-- Generate the KitchenSink.data.BigData class -->
+    <target name="generate-data" depends="init">
+        <x-script-def name="generate-dummy-data" src="generate-dummy-data.js">
+            <script src="${cmd.dir}/ant/JSON.js"/>
+            <script src="${cmd.dir}/ant/ant-util.js"/>
+        </x-script-def>
+        <generate-dummy-data/>
+    </target>
+
+    <target name="-after-build" depends="init">
+        <copy todir="${build.dir}/lib/" overwrite="true">
+            <fileset dir="${app.dir}/lib/" includes="**/*"/>
+        </copy>
+        <copy todir="${build.page.dir}" overwrite="true">
+            <fileset dir="${app.dir}" includes="app/**/*"/>
+        </copy>
+        <copy todir="${build.page.dir}" overwrite="true">
+            <fileset dir="${app.dir}" includes="sass/**/*"/>
+        </copy>
+    </target>
+
+    <target name="-after-resources">
+        <copy todir="${build.page.dir}/resources">
+            <fileset dir="${app.dir}/resources" includes="**/*"/>
+        </copy>
+    </target>
+    
+    <!--regenerate the example page to pick up changes to relative path to packages-->
+    <target name="-before-capture">
+        <local name="pkg.rel.path"/>
+        <local name="fwk.rel.path"/>
+        <local name="fwk.rel.path.actual"/>
+        <x-get-relative-path
+            from="${app.dir}"
+            to="${workspace.packages.dir}"
+            property="pkg.rel.path"
+            />
+        <x-get-relative-path
+            from="${app.dir}"
+            to="${framework.dir}"
+            property="fwk.rel.path"
+            />
+            <if>
+                <isset property="sencha.is.sdk.repo"/>
+                <then>
+                    <property name="fwk.rel.path.actual" value="${fwk.rel.path}/extjs"/>
+                </then>
+                <else>
+                    <property name="fwk.rel.path.actual" value="${fwk.rel.path}"/>
+                </else>
+            </if>
+        
+        <x-generate file="${framework.config.dir}/templates/App/sass/example/theme.html.tpl.merge"
+                    tofile="${app.example.dir}/theme.html" 
+                    store="${app.config.dir}/codegen"
+                    basedir="${app.dir}">
+            <param name="appName" value="${app.name}"/>
+            <param name="frameworkPath" value="${fwk.rel.path.actual}"/>
+            <param name="packagesRelPath" value="${pkg.rel.path}"/>
+        </x-generate>
+    </target>
+
+    <!--
+    ***************************************************************************
+    Custom tagets
+    ***************************************************************************
+    -->
+
+    <macrodef name="x-run-build">
+        <attribute name="target"/>
+        <attribute name="theme"/>
+        <attribute name="locale" default="en"/>
+        <attribute name="buildName" default="@{theme}"/>
+        <attribute name="buildId" default="@{theme}-@{locale}"/>
+        <sequential>
+            <if>
+                <equals arg1="@{locale}" arg2=""/>
+                <then>
+                    <ant dir="${basedir}" inheritall="false" inheritrefs="true" target="@{target}">
+                        <property name="compiler.ref.id" value="${compiler.ref.id}-@{theme}"/>
+                        <property name="app.theme" value="ext-theme-@{theme}"/>
+                        <property name="app.build.dir.suffix" value="ext-theme-@{theme}"/>
+                        <property name="cmd.dir" value="${cmd.dir}"/>
+                        <property name="build.environment" value="${build.environment}"/>
+                        <property name="build.compression.yui" value="${build.compression.yui}"/>
+                        <property name="build.id" value="@{buildId}"/>
+                        <property name="build.name" value="@{buildName}"/>
+                    </ant>
+                </then>
+                <else>
+                    <ant dir="${basedir}" inheritall="false" inheritrefs="true" target="@{target}">
+                        <property name="compiler.ref.id" value="${compiler.ref.id}-@{theme}-@{locale}"/>
+                        <property name="app.theme" value="ext-theme-@{theme}"/>
+                        <property name="app.locale" value="@{locale}"/>
+                        <property name="app.build.dir.suffix" value="ext-theme-@{theme}-@{locale}"/>
+                        <property name="cmd.dir" value="${cmd.dir}"/>
+                        <property name="build.environment" value="${build.environment}"/>
+                        <property name="build.compression.yui" value="${build.compression.yui}"/>
+                        <property name="build.id" value="@{buildId}"/>
+                        <property name="build.name" value="@{buildName}"/>
+                    </ant>
+                </else>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <!-- Neptune is last to restore the proper content of bootstrap.css -->
+    <target name="build-all"
+            depends="build-classic,build-neptune-hebrew,build-gray,build-neptune-touch,build-neptune,build-crisp,build-crisp-touch"/>
+
+    <!--<target name="clean" depends="init,clean-all"/>-->
+    <!--<target name="build" depends="init,build-all"/>-->
+
+    <!--
+    Build
+    -->
+
+    <target name="build-classic" depends="init">
+        <echo>Build Kitchen Sink - Classic Theme</echo>
+        <x-run-build theme="classic" target="app-build-impl.build"/>
+    </target>
+
+    <target name="build-gray" depends="init">
+        <echo>Build Kitchen Sink - Gray Theme</echo>
+        <x-run-build theme="gray" target="app-build-impl.build"/>
+    </target>
+
+    <target name="build-neptune-touch" depends="init">
+        <echo>Build Kitchen Sink - Neptune Touch Theme</echo>
+        <x-run-build theme="neptune-touch" target="app-build-impl.build"/>
+    </target>
+
+    <target name="build-neptune-hebrew" depends="init">
+        <echo>Build Kitchen Sink - Neptune Hebrew</echo>
+        <x-run-build theme="neptune" locale="he" target="app-build-impl.build"/>
+    </target>
+
+    <target name="build-crisp" depends="init">
+        <echo>Build Kitchen Sink - Crisp Theme</echo>
+        <x-run-build theme="crisp" target="app-build-impl.build"/>
+    </target>
+
+    <target name="build-crisp-touch" depends="init">
+        <echo>Build Kitchen Sink - Crisp Touch Theme</echo>
+        <x-run-build theme="crisp-touch" target="app-build-impl.build"/>
+    </target>
+
+    <target name="build-neptune" depends="init">
+        <echo>Build Kitchen Sink - Neptune Theme</echo>
+        <x-run-build theme="neptune" target="app-build-impl.build"/>
+    </target>
+    
+    <!--
+    Watch
+    -->
+    <target name="watch-classic" depends="init">
+        <echo>Watch Kitchen Sink - Classic Theme</echo>
+        <x-run-build theme="classic" target="watch"/>
+    </target>
+
+    <target name="watch-gray" depends="init">
+        <echo>Watch Kitchen Sink - Gray Theme</echo>
+        <x-run-build theme="gray" target="watch"/>
+    </target>
+
+    <target name="watch-neptune-touch" depends="init">
+        <echo>Watch Kitchen Sink - Neptune Touch Theme</echo>
+        <x-run-build theme="neptune-touch" target="watch"/>
+    </target>
+
+    <target name="watch-neptune-hebrew" depends="init">
+        <echo>Watch Kitchen Sink - Neptune Hebrew</echo>
+        <x-run-build theme="neptune" locale="he" target="watch"/>
+    </target>
+
+    <target name="watch-crisp" depends="init">
+        <echo>Watch Kitchen Sink - Crisp Theme</echo>
+        <x-run-build theme="crisp" target="watch"/>
+    </target>
+
+    <target name="watch-crisp-touch" depends="init">
+        <echo>Watch Kitchen Sink - Crisp Touch Theme</echo>
+        <x-run-build theme="crisp-touch" target="watch"/>
+    </target>
+
+    <target name="watch-neptune" depends="init">
+        <echo>Watch Kitchen Sink - Neptune Theme</echo>
+        <x-run-build theme="neptune" target="watch"/>
+    </target>
+    
+    <!--
+    Refresh
+    -->
+    <target name="refresh-classic" depends="init">
+        <echo>Refresh Kitchen Sink - Classic Theme</echo>
+        <x-run-build theme="classic" target="app-build-impl.refresh"/>
+    </target>
+
+    <target name="refresh-gray" depends="init">
+        <echo>Refresh Kitchen Sink - Gray Theme</echo>
+        <x-run-build theme="gray" target="app-build-impl.refresh"/>
+    </target>
+
+    <target name="refresh-neptune-touch" depends="init">
+        <echo>Refresh Kitchen Sink - Neptune Touch Theme</echo>
+        <x-run-build theme="neptune-touch" target="app-build-impl.refresh"/>
+    </target>
+
+    <target name="refresh-neptune-hebrew" depends="init">
+        <echo>Refresh Kitchen Sink - Neptune Hebrew</echo>
+        <x-run-build theme="neptune" locale="he" target="app-build-impl.refresh"/>
+    </target>
+
+    <target name="refresh-crisp" depends="init">
+        <echo>Refresh Kitchen Sink - Crisp Theme</echo>
+        <x-run-build theme="crisp" target="app-build-impl.refresh"/>
+    </target>
+
+    <target name="refresh-crisp-touch" depends="init">
+        <echo>Refresh Kitchen Sink - Crisp Theme</echo>
+        <x-run-build theme="crisp-touch" target="app-build-impl.refresh"/>
+    </target>
+
+    <target name="refresh-neptune" depends="init">
+        <echo>Refresh Kitchen Sink - Neptune Theme</echo>
+        <x-run-build theme="neptune" target="app-build-impl.refresh"/>
+    </target>
+
+    <!--
+    Clean
+    -->
+    <target name="clean-all"
+            depends="clean-classic,clean-gray,clean-neptune-touch,clean-crisp,clean-crisp-touch,clean-neptune-hebrew,clean-neptune"/>
+
+    <target name="clean-classic" depends="init">
+        <echo>Clean Kitchen Sink - Classic Theme</echo>
+        <x-run-build theme="classic" target="app-build-impl.clean"/>
+    </target>
+
+    <target name="clean-gray" depends="init">
+        <echo>Clean Kitchen Sink - Gray Theme</echo>
+        <x-run-build theme="gray" target="app-build-impl.clean"/>
+    </target>
+
+    <target name="clean-neptune-touch" depends="init">
+        <echo>Clean Kitchen Sink - Neptune Touch Theme</echo>
+        <x-run-build theme="neptune-touch" target="app-build-impl.clean"/>
+    </target>
+
+    <target name="clean-crisp" depends="init">
+        <echo>Clean Kitchen Sink - Crisp Theme</echo>
+        <x-run-build theme="crisp" target="app-build-impl.clean"/>
+    </target>
+
+    <target name="clean-crisp-touch" depends="init">
+        <echo>Clean Kitchen Sink - Crisp Theme</echo>
+        <x-run-build theme="crisp-touch" target="app-build-impl.clean"/>
+    </target>
+
+    <target name="clean-neptune" depends="init">
+        <echo>Clean Kitchen Sink - Neptune Theme</echo>
+        <x-run-build theme="neptune" target="app-build-impl.clean"/>
+    </target>
+
+    <target name="clean-neptune-hebrew" depends="init">
+        <echo>Clean Kitchen Sink - Neptune/Hebrew</echo>
+        <x-run-build theme="neptune" locale="he" target="app-build-impl.clean"/>
+    </target>
+
+    <target name="sass-full" depends="resources,sass"/>
+    
+    <target name="sass-all" depends="init">
+        <for param="theme" list="neptune,classic,crisp,gray,neptune-touch,crisp-touch">
+            <sequential>
+                <x-run-build target="sass-full" theme="@{theme}"/>
+            </sequential>
+        </for>
+    </target>
+    
+</project>

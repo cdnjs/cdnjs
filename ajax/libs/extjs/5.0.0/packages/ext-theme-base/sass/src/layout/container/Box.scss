@@ -1,0 +1,69 @@
+.#{$prefix}box-layout-ct {
+    overflow: hidden;
+    position: relative;
+}
+
+.#{$prefix}box-target {
+    position: absolute;
+    // This width for the "CSS container box" of the box child items gives them the room
+    // they need to avoid being "crushed" (aka, "wrapped"). On Opera, elements cannot be
+    // wider than 32767px or else they break the scrollWidth (it becomes == offsetWidth)
+    // and you cannot scroll the content.
+    width: 20000px;
+    // On IE quirks and IE6/7 strict, a text-align:center style trickles down to this el
+    // at times and will cause it to move off the left edge. The easy fix is to just always
+    // set left:0 here (right:0 in rtl mode). The top:0 part is just being paranoid.
+    // The requirement for targetEl is that its origin align with innerCt... this ensures
+    // that it does!
+    top: 0;
+    left: 0;
+    // If we don't give the element a height, it does not always participate in the scrollWidth.
+    height: 1px;
+}
+
+@if $include-rtl {
+    .#{$prefix}rtl.#{$prefix}box-target {
+        left: auto;
+        right: 0;
+    }
+}
+
+.#{$prefix}box-inner {
+    overflow:hidden;
+    position:relative;
+    left:0;
+    top:0;
+}
+
+.#{$prefix}box-scroller {
+    position: absolute;
+    background-repeat: no-repeat;
+    background-position: center;
+    line-height: 0;
+    font-size: 0;
+}
+
+.#{$prefix}box-scroller-top {
+    top: 0;
+}
+
+.#{$prefix}box-scroller-right {
+    right: 0;
+}
+
+.#{$prefix}box-scroller-bottom {
+    bottom: 0;
+}
+
+.#{$prefix}box-scroller-left {
+    left: 0;
+}
+
+.#{$prefix}box-menu-body-horizontal {
+    float: left;
+}
+
+.#{$prefix}box-menu-after {
+    position: relative;
+    float: left;
+}

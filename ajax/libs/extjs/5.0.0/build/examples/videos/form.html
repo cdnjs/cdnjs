@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Grids</title>
+    <link rel="stylesheet" type="text/css" href="../../resources/css/ext-all.css"/>
+
+    <!-- GC -->
+
+    <script type="text/javascript" src="../../ext-all.js"></script>
+</head>
+<body>
+    <script type="text/javascript" charset="utf-8">
+        Ext.require('Ext.data.proxy.LocalStorage');
+
+        Ext.onReady(function() {
+            Ext.define('User', {
+                extend: 'Ext.data.Model',
+                fields: ['id', 'first', 'last', 'start', 'bio'],
+                proxy: {
+                    type: 'localstorage',
+                    id: 'form'
+                }
+            });
+
+            var record;
+
+            var form = Ext.create('Ext.form.Panel', {
+                height: 400,
+                width: 600,
+                bodyPadding: 10,
+                renderTo: Ext.getBody(),
+                title: 'Edit User',
+                defaults: {
+                    anchor: "-20"
+                },
+                items: [
+                    {
+                        xtype: 'textfield',
+                        name: 'first',
+                        fieldLabel: 'First Name'
+                    },
+                    {
+                        xtype: 'textfield',
+                        name: 'last',
+                        fieldLabel: 'Last Name'
+                    },
+                    {
+                        xtype: 'datefield',
+                        name: 'startDate',
+                        fieldLabel: 'Start Date'
+                    },
+                    {
+                        xtype: 'htmleditor',
+                        name: 'bio',
+                        fieldLabel: 'Bio',
+                        labelAlign: 'top',
+                        anchor: '-20 -80' //THIS IS UTTERLY UTTERLY WRONG. IT SHOULD BE -20, NOT -80
+                    }
+                ],
+
+                buttons: [
+                    {
+                        text: 'Submit',
+                        handler: function() {
+                            if (!record) {
+                                record = new User({id: 1});
+                            }
+
+                            record.set(form.getValues());
+                            record.save();
+                        }
+                    }
+                ]
+            });
+
+            var store = Ext.create('Ext.data.Store', {
+                autoLoad: true,
+                model: 'User',
+                listeners: {
+                    load: function() {
+
+
+                        //FIXME: THIS APPEARS TO BE BEING CALLED TWICE BUT SHOULD ONLY HAVE BEEN CALLED ONCE
+
+
+                        record = this.first();
+
+                        if (record) {
+                            form.loadRecord(record);
+                        }
+                    }
+                }
+            });
+
+            store.load();
+        });
+    </script>
+</body>
+</html>

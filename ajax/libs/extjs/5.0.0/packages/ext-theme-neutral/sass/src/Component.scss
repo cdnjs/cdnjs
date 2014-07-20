@@ -1,0 +1,21 @@
+.#{$prefix}body {
+    color: $color;
+    font-size: $font-size;
+    @if $line-height != normal {
+        line-height: $line-height;
+    }
+    @if $font-weight != normal {
+        font-weight: $font-weight;
+    }
+    font-family: $font-family;
+    @if not is-null($body-background-color) and $body-background-color != transparent {
+        background: $body-background-color;
+    }
+}
+
+// When a component is having its size animated, or is collapsed, content must be clipped
+// This state must override others, so is !important
+.#{$prefix}animating-size,
+.#{$prefix}collapsed {
+    overflow: hidden!important;
+}

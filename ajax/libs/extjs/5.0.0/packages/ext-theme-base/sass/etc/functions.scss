@@ -1,0 +1,89 @@
+@function min($value1, $value2) {
+    @if $value1 > $value2 {
+        @return $value2;
+    }
+    @else if $value2 > $value1 {
+        @return $value1;
+    }
+    @return $value1;
+}
+
+@function max($value1, $value2) {
+    @if $value1 > $value2 {
+        @return $value1;
+    }
+    @else if $value2 > $value1 {
+        @return $value2;
+    }
+    @return $value1;
+}
+
+@function x($position) {
+    @return parsebox($position, 1);
+}
+@function y($position) {
+    @return parsebox($position, 2);
+}
+
+@function before($position) {
+    @return parsebox($position, 1);
+}
+@function after($position) {
+    @return parsebox($position, 2);
+}
+
+@function top($box) {
+    @return parsebox($box, 1);
+}
+@function right($box) {
+    @return parsebox($box, 2);
+}
+@function bottom($box) {
+    @return parsebox($box, 3);
+}
+@function left($box) {
+    @return parsebox($box, 4);
+}
+@function vertical($box) {
+    @return top($box) + bottom($box);
+}
+@function horizontal($box) {
+    @return left($box) + right($box);
+}
+@function boxmax($box) {
+    @return max(max(top($box), right($box)), max(bottom($box), left($box)));
+}
+@function boxmin($box) {
+    @return min(min(top($box), right($box)), min(bottom($box), left($box)));
+}
+@function rotate90($box) {
+    @return left($box) top($box) right($box) bottom($box);
+}
+@function rotate180($box) {
+    @return bottom($box) left($box) top($box) right($box);
+}
+@function rotate270($box) {
+    @return right($box) bottom($box) left($box) top($box);
+}
+@function flip-vertical($box) {
+    @return bottom($box) right($box) top($box) left($box);
+}
+@function flip-horizontal($box) {
+    @return top($box) left($box) bottom($box) right($box);
+}
+@function rtl($box) {
+    @return top($box) left($box) bottom($box) right($box);
+}
+
+@function rtl-background-position($pos) {
+    $x: parsebox($pos, 1);
+    $new-x: null;
+    @if $x == right or $x == 100% {
+        $new-x: 0;
+    } @else if $x == 0 or $x == left {
+        $new-x: right;
+    } @else {
+        $new-x: $x;
+    }
+    @return $new-x parsebox($pos, 2);
+}

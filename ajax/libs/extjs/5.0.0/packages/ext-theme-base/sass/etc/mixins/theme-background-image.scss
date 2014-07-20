@@ -1,0 +1,32 @@
+/*
+ * Method which inserts a full background-image property for a theme image.
+ * It checks if the file exists and if it doesn't, it'll throw an error.
+ * By default it will not include the background-image property if it is not found,
+ * but this can be changed by changing the default value of $include-missing-images to
+ * be true.
+ */
+@function theme-background-image($path, $extension: $image-extension, $nocheck: false) {
+    $path: file_join($relative-image-path-for-uis, $path + '.' + $extension);
+    $background-image: none;
+
+    @if $path {
+        @if $nocheck {
+            $background-image: $path;
+        } @else if theme_image_exists($image-search-path, $path) {
+            $background-image: $path;
+        } @else {
+            @warn "@theme-background-image: Theme image not found: #{$path}";
+            @if $include-missing-images {
+                $background-image: $path;
+            }
+        }
+
+        @if $background-image != none {
+            $background-image: url(file_join($theme-resource-path, $path));
+        }
+    } @else {
+        @warn "@theme-background-image: No arguments passed";
+    }
+
+    @return $background-image;
+}

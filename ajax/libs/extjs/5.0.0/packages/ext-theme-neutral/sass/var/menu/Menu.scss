@@ -1,0 +1,312 @@
+/**
+ * @class Ext.menu.Menu
+ */
+
+/**
+ * @var {color}
+ * The background-color of the Menu
+ */
+$menu-background-color: #fff !default;
+
+/**
+ * @var {color}
+ * The border-color of the Menu
+ */
+$menu-border-color: $neutral-color !default;
+
+/**
+ * @var {string}
+ * The border-style of the Menu
+ */
+$menu-border-style: solid !default;
+
+/**
+ * @var {number}
+ * The border-width of the Menu
+ */
+$menu-border-width: 1px !default;
+
+/**
+ * @var {number/list}
+ * The padding to apply to the Menu body element
+ */
+$menu-padding: 2px !default;
+
+/**
+ * @var {color}
+ * The color of Menu Item text
+ */
+$menu-text-color: #000 !default;
+
+/**
+ * @var {string}
+ * The font-family of {@link Ext.menu.Item Menu Items}
+ */
+$menu-item-font-family: $font-family !default;
+
+/**
+ * @var {number}
+ * The font-size of {@link Ext.menu.Item Menu Items}
+ */
+$menu-item-font-size: $font-size !default;
+
+/**
+ * @var {string}
+ * The font-weight of {@link Ext.menu.Item Menu Items}
+ */
+$menu-item-font-weight: normal !default;
+
+/**
+ * @var {number}
+ * The height of {@link Ext.menu.Item Menu Items}
+ */
+$menu-item-height: 24px !default;
+
+/**
+ * @var {number}
+ * The border-width of {@link Ext.menu.Item Menu Items}
+ */
+$menu-item-border-width: 1px !default;
+
+/**
+ * @var {string}
+ * The style of cursor to display when the cursor is over a {@link Ext.menu.Item Menu Item}
+ */
+$menu-item-cursor: pointer !default;
+
+/**
+ * @var {color}
+ * The background-color of the active {@link Ext.menu.Item Menu Item}
+ */
+$menu-item-active-background-color: $base-color !default;
+
+/**
+ * @var {color}
+ * The border-color of the active {@link Ext.menu.Item Menu Item}
+ */
+$menu-item-active-border-color: adjust-color($base-color, $saturation: 23%, $lightness: -3%) !default;
+ 
+/**
+ * @var {string/list}
+ * The background-gradient for {@link Ext.menu.Item Menu Items}. Can be either the name
+ * of a predefined gradient or a list of color stops. Used as the `$type` parameter for
+ * {@link Global_CSS#background-gradient}.
+ */
+$menu-item-background-gradient: 'none' !default;
+
+/**
+ * @var {number}
+ * The border-radius of {@link Ext.menu.Item Menu Items}
+ */
+$menu-item-active-border-radius: 0 !default;
+
+/**
+ * @var {number}
+ * The size of {@link Ext.menu.Item Menu Item} icons
+ */
+$menu-item-icon-size: 16px !default;
+
+/**
+ * @var {color} $menu-glyph-color
+ * The color to use for menu icons configured using {@link Ext.menu.Item#glyph glyph}
+ */
+$menu-glyph-color: $menu-text-color !default;
+
+/**
+ * @var {number} $menu-glyph-opacity
+ * The opacity to use for menu icons configured using {@link Ext.menu.Item#glyph glyph}
+ */
+$menu-glyph-opacity: .5 !default;
+
+/**
+ * @var {number}
+ * The size of {@link Ext.menu.Item Menu Item} checkboxes
+ */
+$menu-item-checkbox-size: $menu-item-icon-size !default;
+
+/**
+ * @var {list}
+ * The background-position of {@link Ext.menu.Item Menu Item} icons
+ */
+$menu-item-icon-background-position: center center !default;
+
+/**
+ * @var {number}
+ * vertical offset for menu item icons/checkboxes.  By default the icons are roughly
+ * vertically centered, but it may be necessary in some cases to make minor adjustments
+ * to the vertical position.
+ */
+$menu-item-icon-vertical-offset: 0 !default;
+
+/**
+ * @var {number}
+ * vertical offset for menu item text.  By default the text is given a line-height
+ * equal to the menu item's content-height, however, depending on the font this may not
+ * result in perfect vertical centering.  Offset can be used to make small adjustments
+ * to the text's vertical position.
+ */
+$menu-item-text-vertical-offset: 0 !default;
+
+/**
+ * @var {number/list}
+ * The space to the left and right of {@link Ext.menu.Item Menu Item} text. Can be specified
+ * as a number (e.g. 5px) or as a list with 2 items for different left/right values. e.g.
+ *
+ *     $menu-item-text-horizontal-spacing: 4px 8px !default; // 4px of space to the left, and 8px to the right
+ */
+$menu-item-text-horizontal-spacing: 4px !default;
+
+/**
+ * @var {number}
+ * The space to the left and right of {@link Ext.menu.Item Menu Item} icons. Can be specified
+ * as a number (e.g. 5px) or as a list with 2 items for different left/right values. e.g.
+ *
+ *     $menu-item-icon-horizontal-spacing: 4px 8px !default; // 4px of space to the left, and 8px to the right
+ */
+$menu-item-icon-horizontal-spacing: 3px 5px !default;
+
+/**
+ * @var {number}
+ * The space to the left and right of {@link Ext.menu.Item Menu Item} arrows. Can be specified
+ * as a number (e.g. 5px) or as a list with 2 items for different left/right values. e.g.
+ *
+ *     $menu-item-arrow-horizontal-spacing: 4px 8px !default; // 4px of space to the left, and 8px to the right
+ */
+$menu-item-arrow-horizontal-spacing: 5px 0 !default;
+
+/**
+ * @var {number/list}
+ * The margin of {@link Ext.menu.Separator Menu Separators}
+ */
+$menu-item-separator-margin: 2px 0 !default;
+
+/**
+ * @var {number}
+ * The height of {@link Ext.menu.Item Menu Item} arrows
+ */
+$menu-item-arrow-height: 9px !default;
+
+/**
+ * @var {number}
+ * The width of {@link Ext.menu.Item Menu Item} arrows
+ */
+$menu-item-arrow-width: 12px !default;
+
+/**
+ * @var {number}
+ * The opacity of disabled {@link Ext.menu.Item Menu Items}
+ */
+$menu-item-disabled-opacity: .5 !default;
+
+/**
+ * @var {number/list}
+ * The margin non-MenuItems placed in a Menu
+ */
+$menu-component-margin: 0 !default;
+
+/**
+ * @var {color}
+ * The border-color of {@link Ext.menu.Separator Menu Separators}
+ */
+$menu-separator-border-color: $neutral-color !default;
+
+/**
+ * @var {color}
+ * The background-color of {@link Ext.menu.Separator Menu Separators}
+ */
+$menu-separator-background-color: #FFF !default;
+
+/**
+ * @var {number}
+ * The size of {@link Ext.menu.Separator Menu Separators}
+ */
+$menu-separator-size: 2px !default;
+
+/**
+ * @var {number}
+ * The width of Menu scrollers
+ */
+$menu-scroller-width: 16px !default;
+
+/**
+ * @var {number}
+ * The height of Menu scrollers
+ */
+$menu-scroller-height: 16px !default;
+
+/**
+ * @var {color}
+ * The border-color of Menu scroller buttons
+ */
+$menu-scroller-border-color: $neutral-color !default;
+
+/**
+ * @var {number}
+ * The border-width of Menu scroller buttons
+ */
+$menu-scroller-border-width: 0 !default;
+
+/**
+ * @var {number/list}
+ * The margin of "top" Menu scroller buttons
+ */
+$menu-scroller-top-margin: 4px 0 !default;
+
+/**
+ * @var {number/list}
+ * The margin of "bottom" Menu scroller buttons
+ */
+$menu-scroller-bottom-margin: 4px 0 !default;
+
+/**
+ * @var {string}
+ * The cursor of Menu scroller buttons
+ */
+$menu-scroller-cursor: pointer !default;
+
+/**
+ * @var {string}
+ * The cursor of disabled Menu scroller buttons
+ */
+$menu-scroller-cursor-disabled: default !default;
+
+/**
+ * @var {number}
+ * The opacity of Menu scroller buttons. Only applicable when
+ * {@link $menu-classic-scrollers} is `false`.
+ */
+$menu-scroller-opacity: 0.5 !default;
+
+/**
+ * @var {number}
+ * The opacity of hovered Menu scroller buttons. Only applicable when
+ * {@link $menu-classic-scrollers} is `false`.
+ */
+$menu-scroller-opacity-over: 0.6 !default;
+
+/**
+ * @var {number}
+ * The opacity of pressed Menu scroller buttons. Only applicable when
+ * {@link $menu-classic-scrollers} is `false`.
+ */
+$menu-scroller-opacity-pressed: 0.7 !default;
+
+/**
+ * @var {number}
+ * The opacity of disabled Menu scroller buttons.
+ */
+$menu-scroller-opacity-disabled: 0.25 !default;
+
+/**
+ * @var {boolean}
+ * `true` to use classic-style scroller buttons.  When `true` scroller buttons are given their
+ * hover state by changing their background-position,  When `false` scroller buttons are
+ * given their hover state by applying opacity.
+ */
+$menu-classic-scrollers: false !default;
+
+/**
+ * @var {boolean}
+ * True to include the "default" menu UI
+ */
+$include-menu-default-ui: $include-default-uis !default;

@@ -1,0 +1,55 @@
+.#{$prefix}form-cb-wrap {
+    vertical-align: top;
+}
+
+.#{$prefix}form-cb-wrap-inner {
+    position: relative;
+}
+
+.#{$prefix}form-cb {
+    position: absolute;
+    left: 0;
+    right: auto;
+    vertical-align: top;
+    overflow: hidden;
+    padding: 0;
+    border: 0;
+    &::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+    }
+}
+
+@if $include-rtl {
+    .#{$prefix}rtl.#{$prefix}form-cb {
+        right: 0;
+        left: auto;
+    }
+}
+
+/* allow for the component to be positioned after the label */
+.#{$prefix}form-cb-after {
+    left: auto;
+    right: 0;
+}
+
+@if $include-rtl {
+    .#{$prefix}rtl.#{$prefix}form-cb-after {
+        left: 0;
+        right: auto;
+    }
+}
+
+/* some browsers like IE 10 need a block element to be able to measure
+the height of a multi-line element */
+.#{$prefix}form-cb-label {
+    display: inline-block;
+}
+
+// This is to work around lack of min-width support in older IE browsers. If it's determined
+// that there is no box label, the following class is applied to the wrapper around the inputEl.
+// See EXTJSIV-10302 and EXTJSIV-10977.
+// TODO: can we remove this in v5?
+.#{$prefix}form-cb-wrap-inner-no-box-label > .#{$prefix}form-cb {
+    position: static;
+}

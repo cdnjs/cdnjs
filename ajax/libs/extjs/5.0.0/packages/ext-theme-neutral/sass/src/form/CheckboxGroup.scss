@@ -1,0 +1,66 @@
+/**
+ * Creates a visual theme for a CheckboxGroup buttons.  Note this mixin only provides
+ * styling for the CheckboxGroup body and its {@link Ext.form.field.Checkbox#boxLabel}, The {@link #fieldLabel}
+ * and error icon/message are styled by {@link #extjs-label-ui}.
+ *
+ * @param {string} $ui
+ * The name of the UI being created. Can not included spaces or special punctuation
+ * (used in CSS class names).
+ *
+ * @param {number/list} [$ui-body-padding=$form-checkboxgroup-body-padding]
+ * The padding of the CheckboxGroup body element
+ *
+ * @param {color} [$ui-body-invalid-border-color=$form-checkboxgroup-body-invalid-border-color]
+ * The border color of the CheckboxGroup body element when in an invalid state.
+ *
+ * @param {string} [$ui-body-invalid-border-style=$form-checkboxgroup-body-invalid-border-style]
+ * The border style of the CheckboxGroup body element when in an invalid state.
+ *
+ * @param {number} [$ui-body-invalid-border-width=$form-checkboxgroup-body-invalid-border-width]
+ * The border width of the CheckboxGroup body element when in an invalid state.
+ *
+ * @param {string} [$ui-body-invalid-background-image=$form-checkboxgroup-body-invalid-background-image]
+ * The background image of the CheckboxGroup body element when in an invalid state.
+ *
+ * @param {string} [$form-checkboxgroup-body-invalid-background-repeat=$form-field-invalid-background-repeat]
+ * The background-repeat of the CheckboxGroup body element when in an invalid state.
+ *
+ * @param {string} [$ui-body-invalid-background-position=$form-checkboxgroup-body-invalid-background-position]
+ * The background-position of the CheckboxGroup body element when in an invalid state.
+ *
+ * @member Ext.form.CheckboxGroup
+ */
+@mixin extjs-checkboxgroup-ui(
+    $ui: null,
+    $ui-body-padding: $form-checkboxgroup-body-padding,
+    $ui-body-invalid-border-color: $form-checkboxgroup-body-invalid-border-color,
+    $ui-body-invalid-border-style: $form-checkboxgroup-body-invalid-border-style,
+    $ui-body-invalid-border-width: $form-checkboxgroup-body-invalid-border-width,
+    $ui-body-invalid-background-image: $form-checkboxgroup-body-invalid-background-image,
+    $ui-body-invalid-background-repeat: $form-checkboxgroup-body-invalid-background-repeat,
+    $ui-body-invalid-background-position: $form-checkboxgroup-body-invalid-background-position
+) {
+
+    .#{$prefix}form-item-body-#{$ui}.#{$prefix}form-checkboxgroup-body {
+        padding: $ui-body-padding;
+
+        .#{$prefix}form-invalid & {
+            @if $ui-body-invalid-border-width != 0 {
+                border-width: $ui-body-invalid-border-width;
+                border-width: $ui-body-invalid-border-style;
+                border-width: $ui-body-invalid-border-color;
+            }
+            @if not is-null($ui-body-invalid-background-image) {
+                background-image: theme-background-image($ui-body-invalid-background-image);
+                background-repeat: $ui-body-invalid-background-repeat;
+                background-position: $ui-body-invalid-background-position;
+            }
+        }
+    }
+}
+
+@if $include-checkboxgroup-default-ui {
+    @include extjs-checkboxgroup-ui(
+        $ui: 'default'
+    );
+}

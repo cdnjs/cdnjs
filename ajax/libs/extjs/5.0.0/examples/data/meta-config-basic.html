@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <title>Test meta config and metachange event support</title>
+    <link rel="stylesheet" type="text/css" href="../shared/example.css" />
+
+    <!-- GC -->
+
+    <script type="text/javascript" src="../../examples/shared/include-ext.js"></script>
+    <script type="text/javascript" src="../../examples/shared/options-toolbar.js"></script>
+
+    <script type="text/javascript" charset="utf-8">
+
+    Ext.Loader.setConfig({enabled: true});
+    Ext.require([
+        'Ext.grid.*',
+        'Ext.data.*',
+        'Ext.util.*',
+        'Ext.form.field.*'
+    ]);
+
+    Ext.define('MetaModel', {
+        extend: 'Ext.data.Model'
+    });
+
+    Ext.onReady(function(){
+
+        var metaStore = Ext.create('Ext.data.Store', {
+            model: 'MetaModel',
+            autoLoad: true,
+            proxy: {
+                type: 'ajax',
+                url: 'meta-config-basic.php',
+                reader: {
+                    type: 'json',
+                    root: 'data'
+                }
+            },
+            listeners: {
+                'metachange': function(store, meta) {
+                    grid.reconfigure(store, meta.columns);
+                }
+            }
+        });
+
+        var rowEditing = Ext.create('Ext.grid.plugin.RowEditing', {
+            clicksToMoveEditor: 1,
+            autoCancel: false
+        });
+
+        var grid = Ext.create('Ext.grid.Panel', {
+            width: 800,
+            height: 300,
+            title: 'Meta Grid',
+            store: metaStore,
+            columns: [],
+            renderTo: 'grid-ct',
+            tbar: [{
+                text: 'Reload Metadata',
+                handler: function() {
+                    metaStore.load();
+                }
+            }],
+            plugins: rowEditing
+        });
+    });
+    </script>
+</head>
+<body>
+    <h1>Basic Meta Configuration</h1>
+    <p>This example demonstrates reconfiguring a grid dynamically based on the metadata returned by the server<br>
+    (requires PHP). Click the "Reload Metadata" button to see a new randomized column set and data in the grid.</p>
+    <p>Note also that the grid is editable on double-click, and that the editors automatically update as well. See below for additional details.</p>
+
+    <div id="grid-ct" style="width:800px;height:300px;"></div>
+
+    <p style="margin-top:30px;">The server response is in this format:</p>
+    <pre><code>{
+  data: [{ ... }],
+  msg: "...",
+  total: 99,
+  metaData: {
+    fields: [{ ... }],
+    columns: [{ ... }],
+    idProperty: "id",
+    messageProperty: "msg",
+    root: "data"
+  }
+}
+    </code></pre>
+    <p>The store/model automatically read the <code>fields</code> config to reconfigure the data model, but you can add any
+    additional custom data into the <code>metaData</code> that you need. In this example we've added a <code>columns</code>
+    config that contains a grid-specific column configuration that can be passed to the <code>grid.reconfigure()</code> method
+    in the store's load event handler. You could easily add other widget-specific configurations into the response as well.</p>
+</body>
+</html>

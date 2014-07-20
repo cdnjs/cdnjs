@@ -1,0 +1,127 @@
+<project name="packager-impl">
+    <macrodef name="x-run-mobile-packager">
+        <attribute name="configfile"/>
+        <attribute name="action"/>
+        <sequential>
+            <echo>Running mobile packager action @{action} on file @{configFile}</echo>
+            <x-sencha-command dir="${app.dir}" inheritall="true">
+                <![CDATA[
+                app
+                    package
+                        @{action}
+                            -path=@{configfile}
+                ]]>
+            </x-sencha-command>
+        </sequential>
+    </macrodef>
+    
+    
+    <macrodef name="x-run-mobile-packager-config">
+        <attribute name="config"/>
+        <attribute name="run" default="${args.autorun}"/>
+        <sequential>
+            <if>
+                <not>
+                    <available file="@{config}"/>
+                </not>
+                <then>
+                    <!--
+                    if the input packager config file for stbuild is
+                    not available, then create it
+                    -->
+                    <echo><![CDATA[
+    Creating default mobile packager config file at : 
+    @{config}
+                    ]]></echo>
+                    <x-run-mobile-packager
+                        configfile="@{config}"
+                        action="generate"/>
+                </then>
+            </if>
+
+            <local name="local.build.mobile.out.dir"/>
+            <local name="local.build.mobile.config.name"/>
+            
+            <!--
+            append the current config file name to the output directory
+            for mobile packages.  this allows multiple config outputs to
+            be sandboxed by the name of the config file in the mobile
+            package output directory.
+            -->
+            <basename file="@{config}" property="local.build.mobile.config.name"/>
+            <property name="local.build.mobile.out.dir" 
+                      value="${build.mobile.packager.out.dir}/${local.build.mobile.config.name}"/>
+
+            <!--
+            duplicate the config file, so that we can set the 
+            input and output properties w/o losing comment blocks
+            -->
+            <x-set-json-property file="@{config}"
+                                 tofile="${build.mobile.packager.temp.file}">
+                <property name="inputPath" 
+                          value="${build.mobile.packager.in.dir}"/>
+                <property name="outputPath" 
+                          value="${local.build.mobile.out.dir}"/>
+            </x-set-json-property>
+
+<echo><![CDATA[
+    Processing Mobile Packager config file
+        config: @{config}
+        inputPath: ${build.mobile.packager.in.dir}
+        outputPath: ${local.build.mobile.out.dir}
+]]></echo>
+
+            <local name="mobile.packager.platform"/>
+            
+            <x-load-properties file="${build.mobile.packager.temp.file}" 
+                               prefix="mobile.packager" 
+                               required="true"/>
+
+            <if>
+                <contains string="${mobile.packager.platform}" substring="iOS"/>
+                <then>
+                    <copy todir="${build.dir}">
+                        <fileset dir="${app.dir}/resources/icons" includes="**/*"/>
+                        <fileset dir="${app.dir}/resources/loading" includes="**/*"/>
+                    </copy>
+                </then>
+            </if>
+
+            <local name="build.mobile.action"/>
+            <condition property="build.mobile.action" value="run">
+                <x-is-true value="@{run}"/>
+            </condition>
+            <property name="build.mobile.action" value="build"/>
+
+            <x-run-mobile-packager
+                configFile="${build.mobile.packager.temp.file}"
+                action="${build.mobile.action}"/>
+            </sequential>
+    </macrodef>
+    
+    <target name="-native-package-mobile">
+        <if>
+            <x-is-true value="${args.autorun}"/>
+            <then>
+                <echo>Running default mobile packager config.</echo>
+                <x-run-mobile-packager-config config="${build.mobile.packager.default.file}" 
+                                              run="true"/>
+            </then>
+            <else>
+                <echo>Building all specified mobile packager configs.</echo>
+                <for param="configfile" list="${build.mobile.packager.file}">
+                    <sequential>
+                        <x-run-mobile-packager-config config="@{configfile}" run="false"/>
+                    </sequential>
+                </for>
+            </else>
+        </if>
+    </target>
+    
+    <target name="-before-native-package"/>
+    <target name="-native-package" 
+            depends="-native-package-mobile">
+    </target>
+    <target name="-after-native-package"/>
+    
+</project>

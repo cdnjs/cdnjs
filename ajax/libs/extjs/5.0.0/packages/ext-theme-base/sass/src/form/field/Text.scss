@@ -1,0 +1,62 @@
+.#{$prefix}form-trigger-wrap {
+    display: table;
+    // fill body width
+    width: 100%;
+}
+
+.#{$prefix}form-text-wrap {
+    display: table-cell;
+    overflow: hidden;
+}
+
+.#{$prefix}form-item-body {
+    // allow the trigger wrap and text wrap elements to stretch to fill the field body
+    // when the component's main element has a height
+    > .#{$prefix}form-trigger-wrap {
+        height: 100%;
+        > .#{$prefix}form-text-wrap {
+            height: 100%;
+        }
+    }
+
+    // The extjs-text-field mixin sets min/max-width to give the body its default width.
+    // Fields with grow configured need no min/max-width since their body width is set by autoSize()
+    &.#{$prefix}form-text-grow {
+        min-width: inherit;
+        max-width: inherit;
+    }
+}
+
+.#{$prefix}form-text {
+    border: 0;
+    margin: 0;
+    display: block;
+    background: repeat-x 0 0;
+    width: 100%;
+    height: 100%;
+    @if $include-webkit {
+        .#{$prefix}webkit & {
+            // webkit adds a mysterious extra 3px of space under the textarea when it
+            // is height:100% of its parent
+            height: calc(100% + 3px);
+        }
+    }
+}
+
+.#{$prefix}form-trigger {
+    display: table-cell;
+    vertical-align: top;
+    cursor: pointer;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    line-height: 0;
+    .#{$prefix}item-disabled & {
+        cursor: default;
+    }
+    &.#{$prefix}form-trigger-cmp {
+        // neutral theme may set background and/or border on normal triggers.
+        // remove them for component triggers.
+        background: none;
+        border: 0;
+    }
+}

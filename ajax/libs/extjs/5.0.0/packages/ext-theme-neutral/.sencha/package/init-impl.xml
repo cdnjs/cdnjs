@@ -1,0 +1,266 @@
+<project name="init-impl">
+    <!--
+    Init-Local
+    -->
+    <target name="-before-init-local"/>
+    <target name="-init-local">
+        <!--
+        ${basedir} is actually the basedir of build.xml, in the app root
+        so this imports ${app.dir}/local.properties, if present
+        -->
+        <property file="${basedir}/local.properties"/>
+        
+        <!--
+        This will traverse upwards in the file system, starting at the
+        app root directory, looking for the workspace.  Once found, 
+        ${workspace.dir}/local.properties will be imported into this
+        project
+        -->
+        <script language="javascript">
+            <![CDATA[
+            var f = new java.io.File(project.getProperty("basedir"));
+            var sub = ".sencha/workspace/sencha.cfg";
+
+            for (var p = f; p; p = p.getParentFile()) {
+                var t = new java.io.File(p, sub);
+                if (t.exists()) {
+                    // we found the workspace folder!
+
+                    t = new java.io.File(p, "local.properties");
+                    if (t.exists()) {
+                        var loader = project.createTask("property");
+                        loader.setFile(new java.io.File(t.getCanonicalPath()));
+                        loader.execute();
+                    }
+
+                    break;
+                }
+            }
+            ]]>
+        </script>
+
+    </target>
+    <target name="-after-init-local"/>
+    <target name="init-local"
+            depends="-before-init-local,-init-local,-after-init-local"/>
+
+    <!--
+    Apply Version
+    -->
+    <target name="-before-apply-version"/>
+    <target name="-after-apply-version"/>
+    <target name="apply-version" if="build.version">
+        <echo>Switch package version to ${build.version}</echo>
+        <antcall target="-before-apply-version"/>
+
+        <x-set-json-version file="${basedir}/package.json"
+                            version="${build.version}"/>
+
+        <antcall target="-after-apply-version"/>
+    </target>
+
+    <target name="-before-init"/>
+    <target name="-init" unless="internal.x-sencha-initialized">
+        <antcall target="apply-version"/>
+
+        <!--
+        Now, apply various project updates, such as ant class loader path
+        updates, as well as loading Sencha Cmd config system properties
+        into ant property space
+        -->
+        <x-sencha-init prefix=""/>
+        
+        <!-- 
+        default the build environment to production if it is unset by this point 
+        -->
+        <property name="build.environment" value="production"/>
+        <property name="CR" value="&#10;"/>
+        <property name="build.version" value="${package.version}"/>
+
+        <x-load-properties>
+            <file path="${package.config.dir}/${build.environment}.properties" required="false"/>
+            <file path="${package.config.dir}/build.properties" required="false"/>
+            <file path="${package.config.dir}/defaults.properties" required="true"/>
+        </x-load-properties>
+        
+        <!--
+        See if there is a ./resources subfolder
+        -->
+        <if>
+            <not>
+                <available file="${package.resources.dir}" type="dir"/>
+            </not>
+            <then>
+                <property name="skip.resources" value="1"/>
+                <property name="skip.slice" value="1"/>
+            </then>
+        </if>
+
+        
+        <!--
+        See if there is a ./sass subfolder
+        -->
+        <if>
+            <not>
+                <available file="${package.sass.dir}" type="dir"/>
+            </not>
+            <then>
+                <property name="skip.sass" value="1"/>
+            </then>
+        </if>
+
+        <!-- 
+            Slicing operations are not needed when using the touch framework
+            or for non-theme packages
+        -->
+        <if>
+            <or>
+                <not>
+                    <equals arg1="theme" arg2="${package.type}"/>
+                </not>
+                <equals arg1="touch" arg2="${framework.name}"/>
+            </or>
+            <then>
+                <property name="skip.slice" value="1"/>
+            </then>
+        </if>
+
+        <!--
+        See if there is an ./examples subfolder full of example applications.
+        -->
+        <if>
+            <not>
+                <available file="${package.examples.dir}" type="dir"/>
+            </not>
+            <then>
+                <property name="skip.examples" value="1"/>
+            </then>
+        </if>
+
+        <!--
+        See if there is a ./packages subfolder full of packages. This is only allowed
+        for framework packages.
+        -->
+        <if>
+            <not>
+                <and>
+                    <equals arg1="${package.type}" arg2="framework"/>
+                    <available file="${package.subpkgs.dir}" type="dir"/>
+                </and>
+            </not>
+            <then>
+                <property name="skip.subpkgs" value="1"/>
+            </then>
+        </if>
+
+        <if>
+            <not>
+                <isset property="package.framework"/>
+            </not>
+            <then>
+                <property name="skip.style" value="1"/>
+            </then>
+        </if>
+        
+        <if>
+            <isset property="skip.style"/>
+            <then>
+                <property name="skip.sass" value="1"/>
+                <property name="skip.capture" value="1"/>
+                <property name="skip.slice" value="1"/>
+            </then>
+        </if>
+
+        <if>
+            <not>
+                <isset property="package.base.names"/>
+            </not>
+            <then>
+                <property name="skip.inherit" value="1"/>
+            </then>
+        </if>
+        
+        <!--
+        this id string is used to share a common compiler instance
+        for all x-compile calls in this project
+        -->
+        <property name="compiler.ref.id" value="package-compiler"/>
+
+        <fileset id="pkg.files" 
+                 dir="${package.dir}" 
+                 includes="${pkg.includes}"
+                 excludes="${pkg.excludes}">
+            <exclude name="**/.sass-cache/**/*"/>
+            <exclude name="**/.sass-cache"/>
+            <exclude name="**/theme-capture.*"/>
+        </fileset>
+                
+        <!--
+        this property is set indicating we've reached the end of the
+        core init phase.  it's presence will indicate that we've already
+        executed this target, and will bypass firing the init code
+        repeatedly in sub projects (antcall, x-ant-call)
+        See the above 'unless' attribute on the -init target
+        -->
+        <property name="internal.x-sencha-initialized" value="true"/>
+    </target>
+    <target name="-after-init"/>
+
+    <target name="-before-init-defaults"/>
+    <target name="-init-defaults">
+        <!--
+             This property can be modified to change general build options
+             such as excluding files from the set.  The format expects newlines
+             for each argument, for example:
+             
+             <property name="build.operations"/>
+                   exclude
+                       -namespace=Ext
+             </property>
+        -->
+        <property name="build.operations" value=""/>
+        
+        <!--
+             This property can be modified to change concatenation
+             specific options
+             
+             -strip-comments: comment suppression
+             -remove-text-references: transform string literal class references to objects
+             -beautify: unpack the source
+             
+             <property name="build.concat.options"/>
+                    -strip-comments
+                    -remove-text-references
+                    -beautify
+             </property>
+        -->
+        <property name="build.concat.options" value=""/>
+        <property name="build.concat.debug.options" value=""/>
+        
+        <property name="build.pkg.manifest" value="pkg.files"/>
+    </target>
+    <target name="-after-init-defaults"/>
+    
+    <!--
+    Initializes the compiler instances, reading in the app.json and package.json
+    definitions, as well as scanning and parsing all js files found on the
+    various classpath entries for the framework, workspace, packages, and app
+    -->
+    <target name="-init-compiler" depends="-init">
+        <x-compile refid="${compiler.ref.id}" 
+                   dir="${package.dir}" 
+                   initOnly="true" 
+                   inheritAll="true">
+            <![CDATA[
+                # base build command
+                -tempDir=${build.compile.temp.dir}
+                -keepTempDir=${build.compile.temp.dir.keep}
+                include
+                    -all
+                and
+                save
+                    package-${package.name}-all
+            ]]>
+        </x-compile>
+    </target>
+</project>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Toolbars</title>
+    <link rel="stylesheet" type="text/css" href="../../resources/css/ext-all.css"/>
+
+    <!-- GC -->
+
+    <script type="text/javascript" src="../../ext-all.js"></script>
+
+    <style type="text/css" media="screen">
+        .add {
+            background-image: url(../shared/icons/fam/add.gif) !important;
+        }
+    </style>
+</head>
+<body>
+    <script type="text/javascript" charset="utf-8">
+        Ext.onReady(function() {
+            var panel = Ext.create('Ext.window.Window', {
+                renderTo: Ext.getBody(),
+                autoShow: true,
+                height: 300,
+                width: 500,
+                title: 'Users',
+
+                tbar: [
+                    {
+                        xtype: 'splitbutton',
+                        text: 'Add',
+                        iconCls: 'add',
+                        handler: function() {
+                            alert('add button clicked');
+                        },
+                        menu: [
+                            {
+                                text: 'Customer'
+                            },
+                            {
+                                text: 'Salesperson',
+                                menu: [
+                                    {
+                                        text: 'Senior'
+                                    },
+                                    {
+                                        text: 'Junior'
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    '-',
+                    {
+                        iconCls: 'add'
+                    },
+                    '-',
+                    {
+                        text: 'Edit'
+                    },
+                    ' ',
+                    {
+                        text: 'Delete'
+                    },
+                    'Your Name',
+                    {
+                        xtype: 'textfield',
+                        itemId: 'nameField'
+                    },
+                    {
+                        text: 'Go',
+                        handler: function() {
+                            alert(panel.down('#nameField').getValue());
+                        }
+                    },
+                    {text: 'Button 1'},
+                    {text: 'Button 1'},
+                    {text: 'Button 1'},
+                    {text: 'Button 1'},
+                    {text: 'Button 1'},
+                    {text: 'Button 1'}
+                ]
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+/**
+ * Creates a visual theme for a Breadcrumb.
+ *
+ * @param {string} $ui
+ * The name of the UI being created. Can not included spaces or special punctuation
+ * (used in CSS class names).
+ *
+ * @param {string} [$ui-button-ui=$breadcrumb-button-ui]
+ * The name of the button UI that will be used with this breadcrumb UI. Used for overriding
+ * the button arrows for the given button UI when it is used inside a breadcrumb with this UI.
+ *
+ * @param {number} [$ui-button-spacing=$breadcrumb-button-spacing]
+ * The space between the breadcrumb buttons
+ *
+ * @param {number} [$ui-arrow-width=$breadcrumb-arrow-width]
+ * The width of the breadcrumb arrows when {@link #split} is `false`
+ *
+ * @param {number} [$ui-split-width=$breadcrumb-split-width]
+ * The width of breadcrumb arrows when {@link #split} is `true`
+ *
+ * @param {boolean} [$ui-include-menu-active-arrow=$breadcrumb-include-menu-active-arrow]
+ * `true` to include a separate background-image for menu arrows when a breadcrumb button's
+ * menu is open
+ *
+ * @param {boolean} [$ui-include-split-over-arrow=$breadcrumb-include-split-over-arrow
+ * `true` to include a separate background-image for split arrows when a breadcrumb button's
+ * arrow is hovered
+ *
+ * @param {string} [$ui-folder-icon=$breadcrumb-folder-icon]
+ * The background-image for the default "folder" icon
+ *
+ * @param {string} [$ui-leaf-icon=$breadcrumb-leaf-icon]
+ * The background-image for the default "leaf" icon
+ *
+ * @param {number} [$ui-scroller-width=$breadcrumb-scroller-width]
+ * The width of Breadcrumb scrollers
+ *
+ * @param {number} [$ui-scroller-height=$breadcrumb-scroller-height]
+ * The height of Breadcrumb scrollers
+ *
+ * @param {color} [$ui-scroller-border-color=$breadcrumb-scroller-border-color]
+ * The border-color of Breadcrumb scrollers
+ *
+ * @param {number} [$ui-scroller-border-width=$breadcrumb-scroller-border-width]
+ * The border-width of Breadcrumb scrollers
+ *
+ * @param {number/list} [$ui-scroller-top-margin=$breadcrumb-scroller-top-margin]
+ * The margin of "top" scroller buttons
+ *
+ * @param {number/list} [$ui-scroller-right-margin=$breadcrumb-scroller-right-margin]
+ * The margin of "right" scroller buttons
+ *
+ * @param {number/list} [$ui-scroller-bottom-margin=$breadcrumb-scroller-bottom-margin]
+ * The margin of "bottom" scroller buttons
+ *
+ * @param {number/list} [$ui-scroller-left-margin=$breadcrumb-scroller-left-margin]
+ * The margin of "left" scroller buttons
+ *
+ * @param {string} [$ui-scroller-cursor=$breadcrumb-scroller-cursor]
+ * The cursor of Breadcrumb scrollers
+ *
+ * @param {string} [$ui-scroller-cursor-disabled=$breadcrumb-scroller-cursor-disabled]
+ * The cursor of disabled Breadcrumb scrollers
+ *
+ * @param {number} [$ui-scroller-opacity=$breadcrumb-scroller-opacity]
+ * The opacity of Breadcrumb scroller buttons. Only applicable when
+ * `$ui-classic-scrollers` is `false`.
+ *
+ * @param {number} [$ui-scroller-opacity-over=$breadcrumb-scroller-opacity-over]
+ * The opacity of hovered Breadcrumb scroller buttons. Only applicable when
+ * `$ui-classic-scrollers` is `false`.
+ *
+ * @param {number} [$ui-scroller-opacity-pressed=$breadcrumb-scroller-opacity-pressed]
+ * The opacity of pressed Breadcrumb scroller buttons. Only applicable when
+ * `$ui-classic-scrollers` is `false`.
+ *
+ * @param {number} [$ui-scroller-opacity-disabled=$breadcrumb-scroller-opacity-disabled]
+ * The opacity of disabled Breadcrumb scroller buttons.
+ *
+ * @param {boolean} [$ui-classic-scrollers=$breadcrumb-classic-scrollers]
+ * `true` to use classic-style scroller buttons.  When `true` scroller buttons are given
+ * their hover state by changing their background-position,  When `false` scroller buttons
+ * are given their hover state by applying opacity.
+ */
+@mixin extjs-breadcrumb-ui(
+    $ui: null,
+    $ui-button-ui: $breadcrumb-button-ui,
+    $ui-button-spacing: $breadcrumb-button-spacing,
+    $ui-arrow-width: $breadcrumb-arrow-width,
+    $ui-split-width: $breadcrumb-split-width,
+    $ui-include-menu-active-arrow: $breadcrumb-include-menu-active-arrow,
+    $ui-include-split-over-arrow: $breadcrumb-include-split-over-arrow,
+    $ui-folder-icon: $breadcrumb-folder-icon,
+    $ui-leaf-icon: $breadcrumb-leaf-icon,
+    $ui-scroller-width: $breadcrumb-scroller-width,
+    $ui-scroller-height: $breadcrumb-scroller-height,
+    $ui-scroller-border-color: $breadcrumb-scroller-border-color,
+    $ui-scroller-border-width: $breadcrumb-scroller-border-width,
+    $ui-scroller-cursor: $breadcrumb-scroller-cursor,
+    $ui-scroller-cursor-disabled: $breadcrumb-scroller-cursor-disabled,
+    $ui-scroller-top-margin: $breadcrumb-scroller-top-margin,
+    $ui-scroller-right-margin: $breadcrumb-scroller-right-margin,
+    $ui-scroller-bottom-margin: $breadcrumb-scroller-bottom-margin,
+    $ui-scroller-left-margin: $breadcrumb-scroller-left-margin,
+    $ui-scroller-opacity: $breadcrumb-scroller-opacity,
+    $ui-scroller-opacity-over: $breadcrumb-scroller-opacity-over,
+    $ui-scroller-opacity-pressed: $breadcrumb-scroller-opacity-pressed,
+    $ui-scroller-opacity-disabled: $breadcrumb-scroller-opacity-disabled,
+    $ui-classic-scrollers: $breadcrumb-classic-scrollers
+) {
+    .#{$prefix}breadcrumb-btn-#{$ui} {
+        margin: 0 0 0 $ui-button-spacing;
+    }
+
+    .#{$prefix}breadcrumb-icon-folder-#{$ui} {
+        background-image: theme-background-image($ui-folder-icon);
+    }
+
+    .#{$prefix}breadcrumb-icon-leaf-#{$ui} {
+        background-image: theme-background-image($ui-leaf-icon);
+    }
+
+    .#{$prefix}btn-wrap-#{$ui-button-ui}-small.#{$prefix}btn-arrow:after {
+        .#{$prefix}breadcrumb-btn > & {
+            width: $ui-arrow-width;
+            background-image: theme-background-image('breadcrumb/#{$ui}-arrow');
+        }
+
+        @if $include-rtl {
+            .#{$prefix}rtl.#{$prefix}breadcrumb-btn > & {
+                background-image: theme-background-image('breadcrumb/#{$ui}-arrow-rtl');
+            }
+        }
+
+        @if $ui-include-menu-active-arrow {
+            .#{$prefix}btn-menu-active.#{$prefix}breadcrumb-btn > & {
+                background-image: theme-background-image('breadcrumb/#{$ui}-arrow-open');
+            }
+
+            @if $include-rtl {
+                .#{$prefix}rtl.#{$prefix}btn-menu-active.#{$prefix}breadcrumb-btn > & {
+                    background-image: theme-background-image('breadcrumb/#{$ui}-arrow-open-rtl');
+                }
+            }
+        }
+    }
+
+    .#{$prefix}btn-wrap-#{$ui-button-ui}-small.#{$prefix}btn-split:after {
+        .#{$prefix}breadcrumb-btn > & {
+            width: $ui-split-width;
+            background-image: theme-background-image('breadcrumb/#{$ui}-split-arrow');
+        }
+
+        @if $include-rtl {
+            .#{$prefix}rtl.#{$prefix}breadcrumb-btn > & {
+                background-image: theme-background-image('breadcrumb/#{$ui}-split-arrow-rtl');
+            }
+        }
+
+        @if $ui-include-split-over-arrow {
+            .#{$prefix}btn-over.#{$prefix}breadcrumb-btn > & {
+                background-image: theme-background-image('breadcrumb/#{$ui}-split-arrow-over');
+            }
+
+            @if $include-rtl {
+                .#{$prefix}rtl.#{$prefix}btn-over.#{$prefix}breadcrumb-btn > & {
+                    background-image: theme-background-image('breadcrumb/#{$ui}-split-arrow-over-rtl');
+                }
+            }
+        }
+
+        @if $ui-include-menu-active-arrow {
+            .#{$prefix}btn-menu-active.#{$prefix}breadcrumb-btn > & {
+                background-image: theme-background-image('breadcrumb/#{$ui}-split-arrow-open');
+            }
+
+            @if $include-rtl {
+                .#{$prefix}rtl.#{$prefix}btn-menu-active.#{$prefix}breadcrumb-btn > & {
+                    background-image: theme-background-image('breadcrumb/#{$ui}-split-arrow-open-rtl');
+                }
+            }
+        }
+    }
+
+    @if $include-ext-layout-container-boxoverflow-scroller {
+        @include extjs-box-scroller-ui(
+            $ui: $ui,
+            $type: 'breadcrumb',
+            $horizontal-width: $ui-scroller-width,
+            $horizontal-height: $ui-scroller-height,
+            $top-margin: $ui-scroller-top-margin,
+            $right-margin: $ui-scroller-right-margin,
+            $bottom-margin: $ui-scroller-bottom-margin,
+            $left-margin: $ui-scroller-left-margin,
+            $horizontal-border-color: $ui-scroller-border-color,
+            $horizontal-border-width: $ui-scroller-border-width,
+            $cursor: $ui-scroller-cursor,
+            $cursor-disabled: $ui-scroller-cursor-disabled,
+            $align: middle,
+            $opacity: $ui-scroller-opacity,
+            $opacity-over: $ui-scroller-opacity-over,
+            $opacity-pressed: $ui-scroller-opacity-pressed,
+            $opacity-disabled: $ui-scroller-opacity-disabled,
+            $classic: $ui-classic-scrollers,
+            $include-vertical: false
+        );
+    }
+}
+
+@if $include-breadcrumb-default-ui {
+    @include extjs-breadcrumb-ui(
+        $ui: 'default'
+    );
+}

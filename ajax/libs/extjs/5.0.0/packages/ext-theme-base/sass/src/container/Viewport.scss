@@ -1,0 +1,20 @@
+.#{$prefix}viewport,
+.#{$prefix}viewport > .#{$prefix}body {
+    margin: 0;
+    padding: 0;
+    border: 0 none;
+    overflow: hidden;
+    height: 100%;
+    position: static;
+    // For devices that have pointer events, touch-action:none prevents the default
+    // touch action, such as pan/zoom from occurring.  This style is absolutely
+    // required in order for the Gesture publisher to work correctly on browsers that
+    // support pointer events.  Without it, a pointercancel event will fire as soon as the
+    // touch is moved, and so pointermove will never fire while dragging a finger across
+    // the screen.  This also prevents overflowing containers from scrolling using touch
+    // and so we must enable "partial" touch scrolling in IE10+ (see Ext.supports.touchScroll)
+    // See http://www.w3.org/TR/pointerevents/#the-touch-action-css-property
+    touch-action: none;
+    // IE10 needs the -ms prefix, IE11+ does not
+    -ms-touch-action: none;
+}

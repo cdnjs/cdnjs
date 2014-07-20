@@ -1,0 +1,196 @@
+{
+    /**
+     * The application's namespace.
+     */
+    "name": "Desktop",
+
+    /**
+     * Comma-separated string with the paths of directories or files to search. Any classes
+     * declared in these locations will be available in your class "requires" or in calls
+     * to "Ext.require". The "app.dir" variable below is expanded to the path where the
+     * application resides (the same folder in which this file is located).
+     */
+    "classpath": "${app.dir}/app,${app.dir}/../ux",
+
+    /**
+     * The Sencha Framework for this application: "ext" or "touch".
+     */
+    "framework": "ext",
+
+    /**
+     * The name of the theme for this application.
+     */
+    "theme": "ext-theme-crisp",
+
+    /**
+     * The list of required packages (with optional versions; default is "latest").
+     *
+     * For example,
+     *
+     *      "requires": [
+     *          "sencha-charts"
+     *      ]
+     */
+    "requires": [
+        "ext-charts"
+    ],
+
+    /**
+     * Sass configuration properties.
+     */
+    "sass": {
+        /**
+         * The root namespace to use when mapping *.scss files to classes in the
+         * sass/src and sass/var directories. For example, "Desktop.view.Foo" would
+         * map to "sass/src/view/Foo.scss". If we changed this to "Desktop.view" then
+         * it would map to "sass/src/Foo.scss". To style classes outside the app's
+         * root namespace, change this to "". Doing so would change the mapping of
+         * "Desktop.view.Foo" to "sass/src/Desktop/view/Foo.scss".
+         */
+        "namespace": "Desktop"
+    },
+
+    /**
+     * The file path to this application's front HTML document. This is relative
+     * to this app.json file.
+     */
+    "indexHtmlPath": "index.html",
+
+    /**
+     * The absolute URL to this application in development environment, i.e: the URL to run
+     * this application on your web browser, e.g: "http://localhost/Desktop/index.html".
+     *
+     * This value is needed when build to resolve your application's dependencies if it
+     * requires server-side resources. This setting is only used if you enable dynamic
+     * resolution by setting "skip.resolve=0" (in .sencha/app/sencha.cfg) or if you
+     * invoke "sencha app resolve".
+     */
+    "url": null,
+
+    /**
+     * List of all JavaScript assets in the right execution order.
+     *
+     * Each item is an object with the following format:
+     *
+     *      {
+     *          // Path to file. If the file is local this must be a relative path from
+     *          // this app.json file.
+     *          //
+     *          "path": "path/to/script.js",   // REQUIRED
+     *
+     *          // Set to true on one file to indicate that it should become the container
+     *          // for the concatenated classes.
+     *          //
+     *          "bundle": false,    // OPTIONAL
+     *
+     *          // Set to true to include this file in the concatenated classes.
+     *          //
+     *          "includeInBundle": false,  // OPTIONAL
+     *
+     *          // Specify as true if this file is remote and should not be copied into the
+     *          // build folder. Defaults to false for a local file which will be copied.
+     *          //
+     *          "remote": false,    // OPTIONAL
+     *
+     *          // If not specified, this file will only be loaded once, and cached inside
+     *          // localStorage until this value is changed. You can specify:
+     *          //
+     *          //   - "delta" to enable over-the-air delta update for this file
+     *          //   - "full" means full update will be made when this file changes
+     *          //
+     *          "update": "",        // OPTIONAL
+     *
+     *          // A value of true indicates that is a development mode only dependency.
+     *          // These files will not be copied into the build directory or referenced
+     *          // in the generate app.json manifest for the micro loader.
+     *          //
+     *          "bootstrap": false   // OPTIONAL
+     *      }
+     */
+    "js": [
+        {
+            "path": "app.js",
+            "bundle": true
+        }
+    ],
+
+    /**
+     * List of all CSS assets in the right inclusion order.
+     *
+     * Each item is an object with the following format:
+     *
+     *      {
+     *          // Path to file. If the file is local this must be a relative path from
+     *          // this app.json file.
+     *          //
+     *          "path": "path/to/stylesheet.css",   // REQUIRED
+     *
+     *          // Specify as true if this file is remote and should not be copied into the
+     *          // build folder. Defaults to false for a local file which will be copied.
+     *          //
+     *          "remote": false,    // OPTIONAL
+     *
+     *          // If not specified, this file will only be loaded once, and cached inside
+     *          // localStorage until this value is changed. You can specify:
+     *          //
+     *          //   - "delta" to enable over-the-air delta update for this file
+     *          //   - "full" means full update will be made when this file changes
+     *          //
+     *          "update": ""      // OPTIONAL
+     *      }
+     */
+    "css": [
+        {
+            "path": "bootstrap.css",
+            "bootstrap": true
+        }
+    ],
+
+    /**
+     * Used to automatically generate cache.manifest (HTML 5 application cache manifest) file when you build
+     */
+    "appCache": {
+        /**
+         * List of items in the CACHE MANIFEST section
+         */
+        "cache": [
+            "index.html"
+        ],
+        /**
+         * List of items in the NETWORK section
+         */
+        "network": [
+            "*"
+        ],
+        /**
+         * List of items in the FALLBACK section
+         */
+        "fallback": []
+    },
+
+    /**
+     * Extra resources to be copied along when build
+     */
+    "resources": [
+    ],
+
+    /**
+     * File / directory name matchers to ignore when copying to the builds, must be valid regular expressions
+     */
+    "ignore": [
+        "^\\.svn$",
+        "^\\.git$"
+    ],
+
+    /**
+     * Directory path to store all previous production builds. Note that the content generated inside this directory
+     * must be kept intact for proper generation of deltas between updates
+     */
+    "archivePath": "archive",
+
+    /**
+     * Uniquely generated id for this application, used as prefix for localStorage keys.
+     * Normally you should never change this value.
+     */
+    "id": "b5be7f79-ed8c-4fa8-a73d-0bad96c4c7a2"
+}

@@ -1,0 +1,336 @@
+/**
+ * Creates a visual theme for a {@link Ext.layout.container.boxOverflow.Scroller Box Scroller}
+ *
+ * @param {string} $ui
+ * The name of the UI being created. Can not included spaces or special punctuation
+ * (used in CSS class names).
+ *
+ * @param {string} $type
+ * The type of component that this box scroller will be used with.  For example 'toolbar'
+ * or 'tab-bar'
+ *
+ * @param {number} [$horizontal-width=16px]
+ * The width of horizontal scroller buttons
+ *
+ * @param {Number} [$horizontal-height=16px]
+ * The height of horizontal scroller buttons
+ *
+ * @param {number} [$vertical-width=16px]
+ * The width of vertical scroller buttons
+ *
+ * @param {Number} [$vertical-height=16px]
+ * The height of vertical scroller buttons
+ *
+ * @param {number/list} [$top-margin=0]
+ * The margin of the "top" scroller button
+ *
+ * @param {number/list} [$right-margin=0]
+ * The margin of the "right" scroller button
+ *
+ * @param {number/list} [$bottom-margin=0]
+ * The margin of the "bottom" scroller button
+ *
+ * @param {number/list} [$left-margin=0]
+ * The margin of the "left" scroller button
+ *
+ * @param {number/list} $top-background-image
+ * The background-image of the "top" scroller button
+ *
+ * @param {number/list} $right-background-image
+ * The background-image of the "right" scroller button
+ *
+ * @param {number/list} $bottom-background-image
+ * The background-image of the "bottom" scroller button
+ *
+ * @param {number/list} $left-background-image
+ * The background-image of the "left" scroller button
+ *
+ * @param {color} [$border-color=$base-color]
+ * The border-color of the scroller buttons
+ *
+ * @param {number} [$horizontal-border-width=0]
+ * The border-width of the scroller buttons
+ *
+ * @param {number} [$vertical-border-width=0]
+ * The border-width of the scroller buttons
+ *
+ * @param {number/list} [$container-padding=0]
+ * The padding of the container that these scroller buttons will be used in.  Used for
+ * setting margin offsets of the inner layout element to reserve space for the scrollers.
+ *
+ * @param {string} [$cursor=pointer]
+ * The type of cursor to display when the mouse is over a scroller button
+ *
+ * @param {string} [$cursor-disabled=default]
+ * The type of cursor to display when the mouse is over a disabled scroller button
+ *
+ * @param {string} [$align=middle]
+ * Vertical alignment of the scroller buttons, or horizontal align of vertically oriented
+ * scroller buttons. Can be one of the following values:
+ *
+ * - `begin`
+ * - `middle`
+ * - `end`
+ * - `stretch`
+ *
+ * @param {number} [$opacity=0.6]
+ * The opacity of the scroller buttons. Only applicable when `$classic` is `false`.
+ *
+ * @param {number} [$opacity-over=0.8]
+ * The opacity of hovered scroller buttons. Only applicable when `$classic` is `false`.
+ *
+ * @param {number} [$opacity-pressed=1]
+ * The opacity of pressed scroller buttons. Only applicable when `$classic` is `false`.
+ *
+ * @param {number} [$opacity-disabled=0.25]
+ * The opacity of disabled scroller buttons. Only applicable when `$classic` is `false`.
+ *
+ * @param {boolean} [$classic=false]
+ * `true` to use classic-style scroller buttons.  When `true` scroller buttons are given
+ * their hover state by changing their background-position,  When `false` scroller buttons
+ * are given their hover state by applying opacity.
+ *
+ * @member Ext.layout.container.Box
+ * @private
+ */
+@mixin extjs-box-scroller-ui(
+    $ui: null,
+    $type: null,
+    $horizontal-width: 16px,
+    $horizontal-height: 16px,
+    $vertical-width: 16px,
+    $vertical-height: 16px,
+    $top-margin: 0,
+    $right-margin: 0,
+    $bottom-margin: 0,
+    $left-margin: 0,
+    $top-background-image: null,
+    $right-background-image: null,
+    $bottom-background-image: null,
+    $left-background-image: null,
+    $horizontal-border-color: $base-color,
+    $horizontal-border-width: 0,
+    $vertical-border-color: $base-color,
+    $vertical-border-width: 0,
+    $container-padding: 0,
+    $cursor: pointer,
+    $cursor-disabled: default,
+    $align: middle,
+    $opacity: 0.5,
+    $opacity-over: 0.8,
+    $opacity-pressed: 1,
+    $opacity-disabled: 0.25,
+    $classic: false,
+    $include-horizontal: true,
+    $include-vertical: true,
+    $include-background-images: true
+) {
+    @if is-null($top-background-image) {
+        $top-background-image: #{$type}/#{$ui}-scroll-top;
+    }
+
+    @if is-null($right-background-image) {
+        $right-background-image: #{$type}/#{$ui}-scroll-right;
+    }
+
+    @if is-null($bottom-background-image) {
+        $bottom-background-image: #{$type}/#{$ui}-scroll-bottom;
+    }
+
+    @if is-null($left-background-image) {
+        $left-background-image: #{$type}/#{$ui}-scroll-left;
+    }
+
+    .#{$prefix}#{$type}-#{$ui}-scroller {
+        .#{$prefix}box-scroller-body-horizontal {
+            margin-left: max($horizontal-width + horizontal($left-margin) - left($container-padding), 0);
+        }
+    }
+
+    .#{$prefix}#{$type}-#{$ui}-vertical-scroller {
+        .#{$prefix}box-scroller-body-vertical {
+            margin-top: max($vertical-height + vertical($top-margin) - top($container-padding), 0);
+        }
+    }
+
+    .#{$prefix}box-scroller-#{$type}-#{$ui} {
+        cursor: $cursor;
+
+        @if not $classic {
+            @if $opacity != 1 {
+                @include opacity($opacity);
+            }
+
+            @if $opacity != 1 or $opacity-over != 1 {
+                &.#{$prefix}box-scroller-hover {
+                    @include opacity($opacity-over);
+                }
+            }
+
+            @if $opacity != 1 or $opacity-pressed != 1 {
+                &.#{$prefix}box-scroller-pressed {
+                    @include opacity($opacity-pressed);
+                }
+            }
+        }
+
+        &.#{$prefix}box-scroller-disabled {
+            @if $opacity-disabled != 1 {
+                @include opacity($opacity-disabled);
+            }
+            @if not is-null($cursor-disabled) {
+                cursor: $cursor-disabled;
+            }
+        }
+
+        @if $include-horizontal {
+            &.#{$prefix}box-scroller-left,
+            &.#{$prefix}box-scroller-right {
+                width: $horizontal-width;
+
+                @if $align != stretch {
+                    height: $horizontal-height;
+                }
+
+                @if $horizontal-border-width != 0 {
+                    border-style: solid;
+                    border-color: $horizontal-border-color;
+                    border-width: $horizontal-border-width;
+                }
+
+                @if $align == begin {
+                    top: 0;
+                } @else if $align == middle {
+                    top: 50%;
+                    margin-top: -(floor($horizontal-height / 2));
+                } @else if $align == end {
+                    bottom: 0;
+                } @else if $align == stretch {
+                    top: 0;
+                    bottom: 0;
+                }
+            }
+
+            &.#{$prefix}box-scroller-left {
+                @if $align == middle {
+                    // set all but margin-top to avoid overriding centering margin above
+                    margin-left: left($left-margin);
+                    margin-right: right($left-margin);
+                    margin-bottom: bottom($left-margin);
+                } @else {
+                    margin: $left-margin;
+                }
+
+                @if $include-background-images {
+                    background-image: theme-background-image($left-background-image);
+                }
+
+                @if $classic {
+                    background-position: -$horizontal-width 0;
+
+                    &.#{$prefix}box-scroller-hover {
+                        background-position: 0 0;
+                    }
+                }
+            }
+
+            &.#{$prefix}box-scroller-right {
+                @if $align == middle {
+                    // set all but margin-top to avoid overriding centering margin above
+                    margin-left: left($right-margin);
+                    margin-right: right($right-margin);
+                    margin-bottom: bottom($right-margin);
+                } @else {
+                    margin: $right-margin;
+                }
+
+                @if $include-background-images {
+                    background-image: theme-background-image($right-background-image);
+                }
+
+                @if $classic {
+                    background-position: 0 0;
+
+                    &.#{$prefix}box-scroller-hover {
+                        background-position: -$horizontal-width 0;
+                    }
+                }
+            }
+        }
+
+        @if $include-vertical {
+            &.#{$prefix}box-scroller-top,
+            &.#{$prefix}box-scroller-bottom {
+                height: $vertical-height;
+
+                @if $align != stretch {
+                    width: $vertical-width;
+                }
+
+                @if $vertical-border-width != 0 {
+                    border-style: solid;
+                    border-color: $vertical-border-color;
+                    border-width: $vertical-border-width;
+                }
+
+                @if $align == begin {
+                    left: 0;
+                } @else if $align == middle {
+                    left: 50%;
+                    margin-left: -(floor($vertical-width / 2));
+                } @else if $align == end {
+                    right: 0;
+                } @else if $align == stretch {
+                    left: 0;
+                    right: 0;
+                }
+            }
+
+            &.#{$prefix}box-scroller-top {
+                @if $align == middle {
+                    // set all but margin-left to avoid overriding centering margin above
+                    margin-top: top($top-margin);
+                    margin-right: right($top-margin);
+                    margin-bottom: bottom($top-margin);
+                } @else {
+                    margin: $top-margin;
+                }
+
+                @if $include-background-images {
+                    background-image: theme-background-image($top-background-image);
+                }
+
+                @if $classic {
+                    background-position: 0 (-$vertical-height);
+
+                    &.#{$prefix}box-scroller-hover {
+                        background-position: 0 0;
+                    }
+                }
+            }
+
+            &.#{$prefix}box-scroller-bottom {
+                @if $align == middle {
+                    // set all but margin-left to avoid overriding centering margin above
+                    margin-top: top($bottom-margin);
+                    margin-right: right($bottom-margin);
+                    margin-bottom: bottom($bottom-margin);
+                } @else {
+                    margin: $bottom-margin;
+                }
+
+                @if $include-background-images {
+                    background-image: theme-background-image($bottom-background-image);
+                }
+
+                @if $classic {
+                    background-position: 0 0;
+
+                    &.#{$prefix}box-scroller-hover {
+                        background-position: 0 (-$vertical-height);
+                    }
+                }
+            }
+        }
+    }
+}

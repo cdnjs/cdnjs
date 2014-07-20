@@ -1,0 +1,36 @@
+.#{$prefix}docked-summary {
+    border-width: 1px;
+    border-color: $panel-body-border-color;
+    border-style: $panel-body-border-style;
+
+    .#{$prefix}grid-table {
+        border: 0 none;
+    }
+    // When in a border layout, the background-color shows through the summary content
+    background: $grid-body-background-color!important;
+}
+
+.#{$prefix}grid-row-summary {
+    .#{$prefix}grid-cell,
+    .#{$prefix}grid-rowwrap,
+    .#{$prefix}grid-cell-rowbody {
+        border-color: $grid-row-border-color;
+        background-color: $grid-body-background-color !important;
+        border-top: 1px solid $grid-row-border-color;
+        font: $grid-row-cell-font;
+    }
+}
+
+// Ensure no border between summary and body, or between summary and panel border.
+.#{$prefix}docked-summary {
+    .#{$prefix}grid-item,
+    .#{$prefix}grid-row-summary .#{$prefix}grid-cell {
+        border-bottom: 0 none;
+        border-top: 0 none;
+    }
+}
+
+// Hide expander cell in summary rows
+.#{$prefix}grid-row-summary .#{$prefix}grid-cell-inner-row-expander {
+    display: none;
+}

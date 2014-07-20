@@ -1,0 +1,65 @@
+.#{$prefix}menu {
+    outline: none;
+}
+
+.#{$prefix}menu-item {
+    white-space: nowrap;
+    overflow: hidden;
+    border-color: transparent;
+    border-style: solid;
+}
+
+// "Foreign" Components (such as form fields) put inside a Menu get this class.
+.#{$prefix}menu-item-cmp {
+
+    // Ensure labels are centered when in menus which enlarge the height of a Labelable Component
+    .#{$prefix}field-label-cell {
+        vertical-align: middle;
+    }
+    @if not is-null($menu-component-margin) and $menu-component-margin != 0 {
+        margin: $menu-component-margin;
+    }
+}
+
+.#{$prefix}menu-icon-separator {
+    position: absolute;
+    top: 0px;
+    z-index: 0;
+    height: 100%;
+    overflow: hidden;
+    .#{$prefix}menu-plain & {
+        display: none;
+    }
+}
+
+.#{$prefix}menu-item-link {
+    // prevent gray background on tap in mobile webkit
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    text-decoration: none;
+    outline: 0;
+    // display:block is required to make the menu item stretch to fill its container so that
+    // when using href, the entire menu item is clickable.
+    // If we ever consider going back to inline or inline-block, please remember inline
+    // will not work because it allows multi line menu items wrap into the padding area
+    // (icon space) in Webkit
+    display: block;
+
+}
+
+.#{$prefix}menu-item-link-href {
+    -webkit-touch-callout: default;
+}
+
+.#{$prefix}menu-item-text {
+    display: inline-block;
+}
+
+.#{$prefix}menu-item-icon,
+.#{$prefix}menu-item-icon-right,
+.#{$prefix}menu-item-arrow {
+    font-size: 0;
+    position: absolute;
+    text-align: center;
+    background-repeat: no-repeat;
+}

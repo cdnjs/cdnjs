@@ -1,0 +1,34 @@
+.#{$prefix}form-file-btn {
+    overflow: hidden;
+    position: relative;
+}
+
+.#{$prefix}form-file-input {
+    border: 0; // disables the focus border in old IE
+    position: absolute;
+    cursor: pointer;
+    // some browsers (I'm looking at you Firefox) add extra space around the file button
+    // that can't be removed using CSS. Others (webkit) add default margin.  Rather than
+    // try to handle each browser's unique case, we just negatively position the input to
+    // ensure that there is no extra space between it and the Button's edge
+    top: -2px;
+    right: -2px;
+    @include opacity(0);
+     /* Yes, there's actually a good reason for this...
+      * If the configured buttonText is set to something longer than the default,
+      * then it will quickly exceed the width of the hidden file input's "Browse..."
+      * button, so part of the custom button's clickable area will be covered by
+      * the hidden file input's text box instead. This results in a text-selection
+      * mouse cursor over that part of the button, at least in Firefox, which is
+      * confusing to a user. Giving the hidden file input a huge font-size makes
+      * the native button part very large so it will cover the whole clickable area.
+      */
+    font-size: 1000px;
+}
+
+@if $include-rtl {
+    .#{$prefix}rtl.#{$prefix}form-file-input {
+        right: auto;
+        left: -2px;
+    }
+}

@@ -1,0 +1,67 @@
+<project name="watch-impl">
+
+    <target name="-watch-impl">
+        <x-ant-call target="${build.trigger.targets}"/>
+    </target>
+
+    <target name="-watch-compiler">
+        <x-watch compilerRef="${compiler.ref.id}" targets="-watch-impl"/>
+    </target>
+
+    <target name="-watch-theme-package-css">
+        <x-compass-watch
+            refName="compass-watch"
+            rubyPath="${build.ruby.path}"
+            dir="${compass.working.dir}"
+            trace="${compass.compile.trace}"
+            boring="${compass.compile.boring}"
+            force="${compass.compile.force}"
+            sassdir="${compass.sass.dir}"
+            cssdir="${compass.css.dir}"
+            config="${compass.config.file}"
+            fork="true"/>
+    </target>
+
+    <macrodef name="x-run-compass-watch">
+        <attribute name="directory"/>
+        <sequential>
+            <x-compass-watch
+                refName="compass-watch"
+                rubyPath="${build.ruby.path}"
+                dir="@{directory}"
+                trace="${compass.compile.trace}"
+                boring="${compass.compile.boring}"
+                force="${compass.compile.force}"
+                fork="true"/>
+        </sequential>
+    </macrodef>
+
+    <target name="-watch-sass-dir">
+        <x-run-compass-watch directory="${app.sass.dir}" refName="compass-watch"/>
+    </target>
+    
+    <target name="-stop-compass-watch">
+        <x-compass-watch refName="compass-watch" stop="true"/>
+    </target>
+
+    <target name="-watch-theme-dir">
+        <local name="watch.sass.dir"/>
+        <property name="watch.sass.dir"
+                  value="${app.theme.dir}/${watch.theme.name}/sass"/>
+        <x-run-compass-watch directory="${watch.sass.dir}"/>
+    </target>
+
+    <target name="-before-watch"/>
+    <target name="-watch">
+        <x-ant-call target="${build.trigger.targets}"/>
+        <x-ant-call target="web-start" unless="skip.web.start">
+            <param name="enable.background.server" value="true"/>
+        </x-ant-call>
+        <x-ant-call target="${build.watcher.targets}"/>
+        <x-ant-call target="web-stop" unless="skip.web.start">
+            <param name="enable.background.server" value="true"/>
+        </x-ant-call>
+        <x-ant-call target="-stop-compass-watch"/>
+    </target>
+    <target name="-after-watch" depends="init"/>
+</project>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="ext-theme-aria" default=".help">
+    <!--
+    The build-impl.xml file imported here contains the guts of the build process. It is
+    a great idea to read that file to understand how the process works, but it is best to
+    limit your changes to this file.
+    -->
+    <import file="${basedir}/.sencha/package/build-impl.xml"/>
+
+    <!--
+    The following targets can be provided to inject logic before and/or after key steps
+    of the build process:
+
+        The "init-local" target is used to initialize properties that may be personalized
+        for the local machine.
+
+            <target name="-before-init-local"/>
+            <target name="-after-init-local"/>
+
+        The "clean" target is used to clean build output from the build.dir.
+
+            <target name="-before-clean"/>
+            <target name="-after-clean"/>
+
+        The general "init" target is used to initialize all other properties, including
+        those provided by Sencha Cmd.
+
+            <target name="-before-init"/>
+            <target name="-after-init"/>
+        
+        The "build" target performs the call to Sencha Cmd to build the application.
+
+            <target name="-before-build"/>
+            <target name="-after-build"/>
+    -->
+    <target name="-before-init-local">
+        <property name="slice.extension" value="gif"/>
+    </target>
+
+    <!--regenerate the example page to pick up changes to relative path to packages-->
+    <target name="-before-slice">
+        <local name="replace.pattern"/>
+        <local name="package.sass.example.dir"/>
+        <local name="theme.html.content"/>
+        <local name="ext.js.path"/>
+        <local name="ext.js.path.detected"/>
+        <local name="ext.js.path.exists"/>
+        <local name="fwk.rel.path"/>
+        <local name="fwk.rel.path.actual"/>
+
+        <property name="replace.pattern"
+                  value="src=&quot;(.*/ext(.*)?.js)&quot;"/>
+        
+        <property name="package.sass.example.dir" 
+                  value="${package.dir}/sass/example"/>
+        
+        <loadfile srcfile="${package.sass.example.dir}/theme.html"
+                  property="theme.html.content"/>
+        
+        <propertyregex property="ext.js.path"
+                       input="${theme.html.content}"
+                       regexp="${replace.pattern}"
+                       select="\1"
+                       casesensitive="false"/>
+        
+        <available file="${package.sass.example.dir}/${ext.js.path}"
+                   property="ext.js.path.exists"/>
+
+        <if>
+            <not>
+                <isset property="ext.js.path.exists"/>
+            </not>
+            <then>
+                <x-get-relative-path
+                    from="${package.sass.example.dir}"
+                    to="${framework.dir}"
+                    property="fwk.rel.path"
+                    />
+
+                <available file="${package.sass.example.dir}/${fwk.rel.path}/extjs/ext-all-debug.js"
+                           property="sencha.is.sdk.repo"/>
+
+                <if>
+                    <isset property="sencha.is.sdk.repo"/>
+                    <then>
+                        <property name="fwk.rel.path.actual" value="${fwk.rel.path}/extjs"/>
+                    </then>
+                    <else>
+                        <property name="fwk.rel.path.actual" value="${fwk.rel.path}"/>
+                    </else>
+                </if>
+
+                <property name="ext.js.path.detected" 
+                          value="${fwk.rel.path.actual}/ext-all-debug.js"/>
+
+                <echo>Updating theme.html reference '${ext.js.path}' to '${ext.js.path.detected}'</echo>
+                <replace token="${ext.js.path}" 
+                         value="${ext.js.path.detected}" 
+                         file="${package.sass.example.dir}/theme.html"/>
+            </then>
+        </if>
+        
+        
+    </target>
+
+    <target name="-before-build">
+        <if>
+            <isset property="build.number"/>
+            <then>
+                <echo>Setting package version to ${build.number}</echo>
+                <x-script-def name="x-update-version-number">
+                    <attribute name="jsonfile"/>
+                    <attribute name="version"/>
+                    <script src="${cmd.config.dir}/ant/JSON.js"/>
+                    <script src="${cmd.config.dir}/ant/ant-util.js"/>
+                    <![CDATA[
+                        var jsonFile = attributes.get("jsonfile"),
+                            ver = attributes.get("version") + '',
+                            config = readJson(jsonFile);
+                        config.version = ver;
+                        writeJson(jsonFile, config);
+                    ]]>
+                </x-script-def>
+
+                <x-update-version-number jsonfile="${package.dir}/package.json"
+                                         version="${build.number}"/>
+            </then>
+        </if>
+    </target>
+
+
+</project>

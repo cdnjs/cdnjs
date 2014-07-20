@@ -1,0 +1,652 @@
+/**
+ * Creates a visual theme for a Window
+ *
+ * @param {string} $ui
+ * The name of the UI being created. Can not included spaces or special punctuation
+ * (used in CSS class names).
+ *
+ * @param {number} [$ui-padding=$window-padding]
+ * The padding of the Window
+ *
+ * @param {number} [$ui-border-radius=$window-border-radius]
+ * The border-radius of the Window
+ *
+ * @param {color} [$ui-border-color=$window-border-color]
+ * The border-color of the Window
+ *
+ * @param {number} [$ui-border-width=$window-border-width]
+ * The border-width of the Window
+ *
+ * @param {color} [$ui-inner-border-color=$window-inner-border-color]
+ * The inner border-color of the Window
+ *
+ * @param {number} [$ui-inner-border-width=$window-inner-border-width]
+ * The inner border-width of the Window
+ *
+ * @param {color} [$ui-header-color=$window-header-color]
+ * The text color of the Header
+ *
+ * @param {color} [$ui-header-background-color=$window-header-background-color]
+ * The background-color of the Header
+ *
+ * @param {number/list} [$ui-header-padding=$window-header-padding]
+ * The padding of the Header
+ *
+ * @param {string} [$ui-header-font-family=$window-header-font-family]
+ * The font-family of the Header
+ *
+ * @param {number} [$ui-header-font-size=$window-header-font-size]
+ * The font-size of the Header
+ *
+ * @param {string} [$ui-header-font-weight=$window-header-font-weight]
+ * The font-weight of the Header
+ *
+ * @param {number} [$ui-header-line-height=$window-header-line-height]
+ * The line-height of the Header
+ *
+ * @param {number/list} [$ui-header-text-padding=$window-header-text-padding]
+ * The padding of the Header's text element
+ *
+ * @param {string} [$ui-header-text-transform=$window-header-text-transform]
+ * The text-transform of the Header
+ *
+ * @param {color} [$ui-header-border-color=$ui-border-color]
+ * The border-color of the Header
+ *
+ * @param {number} [$ui-header-border-width=$window-header-border-width]
+ * The border-width of the Header
+ *
+ * @param {color} [$ui-header-inner-border-color=$window-header-inner-border-color]
+ * The inner border-color of the Header
+ *
+ * @param {number} [$ui-header-inner-border-width=$window-header-inner-border-width]
+ * The inner border-width of the Header
+ *
+ * @param {number} [$ui-header-icon-width=$window-header-icon-width]
+ * The width of the Header icon
+ *
+ * @param {number} [$ui-header-icon-height=$window-header-icon-height]
+ * The height of the Header icon
+ *
+ * @param {number} [$ui-header-icon-spacing=$window-header-icon-spacing]
+ * The space between the Header icon and text
+ *
+ * @param {list} [$ui-header-icon-background-position=$window-header-icon-background-position]
+ * The background-position of the Header icon
+ *
+ * @param {color} [$ui-header-glyph-color=$window-header-glyph-color]
+ * The color of the Header glyph icon
+ *
+ * @param {number} [$ui-header-glyph-opacity=$window-header-glyph-opacity]
+ * The opacity of the Header glyph icon
+ *
+ * @param {number} [$ui-tool-spacing=$window-tool-spacing]
+ * The space between the {@link Ext.panel.Tool Tools}
+ *
+ * @param {string} [$ui-tool-background-image=$window-tool-background-image]
+ * The background sprite to use for {@link Ext.panel.Tool Tools}
+ *
+ * @param {color} [$ui-body-border-color=$window-body-border-color]
+ * The border-color of the Window body
+ *
+ * @param {color} [$ui-body-background-color=$window-body-background-color]
+ * The background-color of the Window body
+ *
+ * @param {number} [$ui-body-border-width=$window-body-border-width]
+ * The border-width of the Window body
+ *
+ * @param {string} [$ui-body-border-style=$window-body-border-style]
+ * The border-style of the Window body
+ *
+ * @param {color} [$ui-body-color=$window-body-color]
+ * The color of text inside the Window body
+ *
+ * @param {color} [$ui-background-color=$window-background-color]
+ * The background-color of the Window
+ *
+ * @param {boolean} [$ui-force-header-border=$window-force-header-border]
+ * True to force the window header to have a border on the side facing
+ * the window body.  Overrides dock layout's border management border
+ * removal rules.
+ *
+ * @param {boolean} [$ui-include-border-management-rules=$window-include-border-management-rules]
+ * True to include neptune style border management rules.
+ *
+ * @param {color} [$ui-wrap-border-color=$window-wrap-border-color]
+ * The color to apply to the border that wraps the body and docked items. The presence of
+ * the wrap border is controlled by the {@link #border} config. Only applicable when
+ * `$ui-include-border-management-rules` is `true`.
+ *
+ * @param {color} [$ui-wrap-border-width=$window-wrap-border-width]
+ * The width to apply to the border that wraps the body and docked items. The presence of
+ * the wrap border is controlled by the {@link #border} config. Only applicable when
+ * `$ui-include-border-management-rules` is `true`.
+ *
+ * @param {boolean} [$ui-ignore-frame-padding=$window-ignore-frame-padding]
+ * True to ignore the frame padding.  By default, the frame mixin adds extra padding when
+ * border radius is larger than border width.  This is intended to prevent the content
+ * from colliding with the rounded corners of the frame.  Set this to true to prevent
+ * the window frame from adding this extra padding.
+ *
+ * @member Ext.window.Window
+ */
+@mixin extjs-window-ui(
+    $ui: null,
+
+    $ui-padding: $window-padding,
+    $ui-border-radius: $window-border-radius,
+    $ui-border-color: $window-border-color,
+    $ui-border-width: $window-border-width,
+    $ui-inner-border-color: $window-inner-border-color,
+    $ui-inner-border-width: $window-inner-border-width,
+
+    $ui-header-color: $window-header-color,
+    $ui-header-background-color: $window-header-background-color,
+    $ui-header-padding: $window-header-padding,
+    $ui-header-font-family: $window-header-font-family,
+    $ui-header-font-size: $window-header-font-size,
+    $ui-header-font-weight: $window-header-font-weight,
+    $ui-header-line-height: $window-header-line-height,
+    $ui-header-text-padding: $window-header-text-padding,
+    $ui-header-text-transform: $window-header-text-transform,
+    $ui-header-border-color: $ui-border-color,
+    $ui-header-border-width: $window-header-border-width,
+    $ui-header-inner-border-color: $window-header-inner-border-color,
+    $ui-header-inner-border-width: $window-header-inner-border-width,
+    $ui-header-icon-width: $window-header-icon-width,
+    $ui-header-icon-height: $window-header-icon-height,
+    $ui-header-icon-spacing: $window-header-icon-spacing,
+    $ui-header-icon-background-position: $window-header-icon-background-position,
+    $ui-header-glyph-color: $window-header-glyph-color,
+    $ui-header-glyph-opacity: $window-header-glyph-opacity,
+
+    $ui-tool-spacing: $window-tool-spacing,
+    $ui-tool-background-image: $window-tool-background-image,
+
+    $ui-body-border-color: $window-body-border-color,
+    $ui-body-background-color: $window-body-background-color,
+    $ui-body-border-width: $window-body-border-width,
+    $ui-body-border-style: $window-body-border-style,
+    $ui-body-color: $window-body-color,
+    $ui-body-font-size: $window-body-font-size,
+    $ui-body-font-weight: $window-body-font-weight,
+    $ui-body-font-family: $window-body-font-family,
+
+    $ui-background-color: $window-background-color,
+
+    // See the docs above
+    $ui-force-header-border: $window-force-header-border,
+    $ui-include-border-management-rules: $window-include-border-management-rules,
+    $ui-wrap-border-color: null,
+    $ui-wrap-border-width: null,
+    $ui-ignore-frame-padding: $window-ignore-frame-padding,
+
+    // deprecated - use $ui instead
+    $ui-label: null
+){
+    @if $ui == null {
+        @if $ui-label != null {
+            @warn '$ui-label is deprecated.  Use $ui instead';
+            $ui: $ui-label;
+        } @else {
+            @warn "#{error('$ui is required')}";
+        }
+    }
+
+    @if is-null($ui-wrap-border-color) {
+        @if $ui == 'default' {
+            $ui-wrap-border-color: $window-wrap-border-color;
+        } @else {
+            $ui-wrap-border-color: $ui-border-color;
+        }
+    }
+
+    @if is-null($ui-wrap-border-width) {
+        @if $ui == 'default' {
+            $ui-wrap-border-width: $window-wrap-border-width;
+        } @else {
+            $ui-wrap-border-width: $ui-border-width;
+        }
+    }
+
+    .#{$prefix}window-#{$ui} {
+        @if not is-null($ui-border-color) { border-color: $ui-border-color; }
+        @if not is-null($ui-border-radius) { @include border-radius($ui-border-radius); }
+
+        @if $ui-inner-border-width != 0 {
+            @include inner-border($ui-inner-border-width, $ui-inner-border-color);
+        }
+    }
+
+    @if not is-null($ui-border-radius) and $ui-border-radius != 0{
+        @include x-frame(
+            'window',
+            $ui,
+
+            $border-radius: $ui-border-radius,
+            $border-width: $ui-border-width,
+            $padding: $ui-padding,
+            $background-color: $ui-background-color,
+            $ignore-frame-padding: $ui-ignore-frame-padding
+        );
+    }
+
+    .#{$prefix}window-body-#{$ui} {
+        @if not is-null($ui-body-border-color) {
+            border-color: $ui-body-border-color;
+            border-width: $ui-body-border-width;
+            border-style: $ui-body-border-style;
+        }
+
+        @if not is-null($ui-body-background-color) { background: $ui-body-background-color; }
+        @if not is-null($ui-body-color) { color: $ui-body-color; }
+        @if not is-null($ui-body-font-size) {        font-size: $ui-body-font-size; }
+        @if not is-null($ui-body-font-weight) {      font-weight: $ui-body-font-weight; }
+        @if not is-null($ui-body-font-family) {      font-family: $ui-body-font-family; }
+    }
+
+    .#{$prefix}window-header-#{$ui} {
+        @if not is-null($ui-header-font-size) { font-size: $ui-header-font-size; }
+        @if not is-null($ui-border-color) { border-color: $ui-border-color; }
+        background-color: $ui-header-background-color;
+
+        .#{$prefix}tool-img {
+            @if $ui-tool-background-image != $tool-background-image {
+                background-image: theme-background-image($ui-tool-background-image);
+            }
+            // EXTJSIV-8846: partially transparent png images do not display correctly
+            // in winXP/IE8m when the image element has a transparent background.
+            // to fix this, we give the element the same background-color as the header.
+            background-color: $ui-header-background-color;
+        }
+    }
+
+    @if $include-ext-tab-bar {
+        .#{$prefix}window-header-#{$ui}-horizontal {
+            .#{$prefix}window-header-#{$ui}-tab-bar {
+                margin-top: -(top($ui-header-padding));
+                margin-bottom: -(bottom($ui-header-padding));
+            }
+        }
+
+        .#{$prefix}window-header-#{$ui}-vertical {
+            .#{$prefix}window-header-#{$ui}-tab-bar {
+                margin-right: -(top($ui-header-padding));
+                margin-left: -(bottom($ui-header-padding));
+            }
+        }
+
+        @if $include-rtl {
+            .#{$prefix}rtl.#{$prefix}window-header-#{$ui}-vertical {
+                .#{$prefix}window-header-#{$ui}-tab-bar {
+                    margin-left: -(top($ui-header-padding));
+                    margin-right: -(bottom($ui-header-padding));
+                }
+            }
+        }
+    }
+
+    .#{$prefix}window-header-title-#{$ui} {
+        @if not is-null($ui-header-color) { color: $ui-header-color; }
+
+        @if not is-null($ui-header-font-size) {   font-size: $ui-header-font-size; }
+        @if not is-null($ui-header-font-weight) { font-weight: $ui-header-font-weight; }
+        @if not is-null($ui-header-font-family) { font-family: $ui-header-font-family; }
+        @if not is-null($ui-header-line-height) { line-height: $ui-header-line-height; }
+
+        > {
+            .#{$prefix}title-text-#{$ui} {
+                padding: $ui-header-text-padding;
+                text-transform: $ui-header-text-transform;
+
+                @if $ext-trial {
+                    &:after {
+                        content: 'Ext JS Trial';
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        // since IE8 does not support opacity on pseudo elements we simulate it by
+                        // mixing the text color with the background color
+                        color: mix($ui-header-color, $ui-header-background-color, 40%);
+                    }
+                }
+            }
+
+            .#{$prefix}title-icon-wrap-#{$ui} {
+                &.#{$prefix}title-icon-top {
+                    height: $ui-header-icon-height + $ui-header-icon-spacing;
+                    padding-bottom: $ui-header-icon-spacing;
+                }
+
+                &.#{$prefix}title-icon-right {
+                    width: $ui-header-icon-width + $ui-header-icon-spacing;
+                    padding-left: $ui-header-icon-spacing;
+
+                    @if $include-rtl {
+                        &.#{$prefix}rtl {
+                            padding-left: 0;
+                            padding-right: $ui-header-icon-spacing;
+                        }
+                    }
+                }
+
+                &.#{$prefix}title-icon-bottom {
+                    height: $ui-header-icon-height + $ui-header-icon-spacing;
+                    padding-top: $ui-header-icon-spacing;
+                }
+
+                &.#{$prefix}title-icon-left {
+                    width: $ui-header-icon-width + $ui-header-icon-spacing;
+                    padding-right: $ui-header-icon-spacing;
+
+                    @if $include-rtl {
+                        &.#{$prefix}rtl {
+                            padding-right: 0;
+                            padding-left: $ui-header-icon-spacing;
+                        }
+                    }
+                }
+
+                > .#{$prefix}title-icon-#{$ui} {
+                    width: $ui-header-icon-width;
+                    height: $ui-header-icon-height;
+                    background-position: $ui-header-icon-background-position;
+                }
+
+                > .#{$prefix}title-glyph {
+                    color: $ui-header-glyph-color;
+                    font-size: $ui-header-icon-height;
+                    line-height: $ui-header-icon-height;
+
+                    @if $ui-header-glyph-opacity != 1 {
+                        // do not use the opacity mixin because we do not want IE's filter version of
+                        // opacity to be included.  We emulate the opacity setting in IE8m by mixing
+                        // the icon color into the background color. (see below)
+                        opacity: $ui-header-glyph-opacity;
+                    }
+                    // In IE8 and below when a glyph contains partially transparent pixels, we
+                    // can't apply an opacity filter to the glyph element, because IE8m will render
+                    // the partially transparent pixels of the glyph as black. To work around this,
+                    // we emulate the approximate color that the glyph would have if it had opacity
+                    // applied by mixing the glyph color with the header's background-color.
+                    @if $include-ie {
+                        .#{$prefix}ie8 & {
+                            color: mix($ui-header-glyph-color, $ui-header-background-color, $ui-header-glyph-opacity * 100);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    $header-border-bottom-width: 0;
+    @if $ui-force-header-border {
+        $header-border-bottom-width: bottom($ui-header-border-width);
+    }
+
+    $frame-top: max(top($ui-border-width), max(top($ui-border-radius), right($ui-border-radius)));
+    $header-bottom-padding-adjust: $frame-top - top($ui-border-width);
+
+    $header-expanded-padding:
+        top($ui-header-padding),
+        right($ui-header-padding),
+        bottom($ui-header-padding) - $header-bottom-padding-adjust,
+        left($ui-header-padding);
+
+    @if not is-null($ui-border-radius) and $ui-border-radius != 0 {
+        @include x-frame(
+            $cls: 'window-header',
+            $ui: '#{$ui}-top',
+            $border-radius: top($ui-border-radius) right($ui-border-radius) 0 0,
+            $border-width: top($ui-header-border-width) right($ui-header-border-width) $header-border-bottom-width left($ui-header-border-width),
+            $padding: $header-expanded-padding,
+            $background-color: $ui-header-background-color
+        );
+
+        @include x-frame(
+            $cls: 'window-header',
+            $ui: '#{$ui}-right',
+            $border-radius: 0 top($ui-border-radius) right($ui-border-radius) 0,
+            $border-width: left($ui-header-border-width) top($ui-header-border-width) right($ui-header-border-width) $header-border-bottom-width,
+            $padding: rotate90($header-expanded-padding),
+            $background-color: $ui-header-background-color,
+            $include-frame-rtl: $include-rtl
+        );
+
+        @include x-frame(
+            $cls: 'window-header',
+            $ui: '#{$ui}-bottom',
+            $border-radius: 0 0 top($ui-border-radius) left($ui-border-radius),
+            $border-width: $header-border-bottom-width right($ui-header-border-width) top($ui-header-border-width) left($ui-header-border-width),
+            $padding: rotate180($header-expanded-padding),
+            $background-color: $ui-header-background-color
+        );
+
+        @include x-frame(
+            $cls: 'window-header',
+            $ui: '#{$ui}-left',
+            $border-radius: right($ui-border-radius) 0 0 top($ui-border-radius),
+            $border-width: right($ui-header-border-width) $header-border-bottom-width left($ui-header-border-width) top($ui-header-border-width),
+            $padding: rotate270($header-expanded-padding),
+            $background-color: $ui-header-background-color,
+            $include-frame-rtl: $include-rtl
+        );
+
+        @include x-frame(
+            $cls: 'window-header',
+            $ui: '#{$ui}-collapsed-top',
+            $border-radius: $ui-border-radius,
+            $border-width: $ui-header-border-width,
+            $padding: $ui-header-padding,
+            $background-color: $ui-header-background-color
+        );
+
+        @include x-frame(
+            $cls: 'window-header',
+            $ui: '#{$ui}-collapsed-right',
+            $border-radius: $ui-border-radius,
+            $border-width: $ui-header-border-width,
+            $padding: rotate90($ui-header-padding),
+            $background-color: $ui-header-background-color,
+            $include-frame-rtl: $include-rtl
+        );
+
+        @include x-frame(
+            $cls: 'window-header',
+            $ui: '#{$ui}-collapsed-bottom',
+            $border-radius: $ui-border-radius,
+            $border-width: $ui-header-border-width,
+            $padding: rotate180($ui-header-padding),
+            $background-color: $ui-header-background-color
+        );
+
+        @include x-frame(
+            $cls: 'window-header',
+            $ui: '#{$ui}-collapsed-left',
+            $border-radius: $ui-border-radius,
+            $border-width: $ui-header-border-width,
+            $padding: rotate270($ui-header-padding),
+            $background-color: $ui-header-background-color,
+            $include-frame-rtl: $include-rtl
+        );
+    }
+
+    @if $ui-header-inner-border-width != 0 {
+        .#{$prefix}window-header-#{$ui}-top {
+            @include inner-border($ui-header-inner-border-width, $ui-header-inner-border-color);
+        }
+
+        .#{$prefix}window-header-#{$ui}-right {
+            @include inner-border(rotate90($ui-header-inner-border-width), $ui-inner-border-color);
+        }
+
+        .#{$prefix}window-header-#{$ui}-bottom {
+            @include inner-border(rotate180($ui-header-inner-border-width), $ui-inner-border-color);
+        }
+
+        .#{$prefix}window-header-#{$ui}-left {
+            @include inner-border(rotate270($ui-header-inner-border-width), $ui-inner-border-color);
+        }
+    }
+
+    .#{$prefix}window-header-#{$ui} {
+        .#{$prefix}window-header-icon {
+            width: $ui-header-icon-width;
+            height: $ui-header-icon-height;
+            // color, font-size, and line-height are needed for glyph icons
+            color: $ui-header-glyph-color;
+            font-size: $ui-header-icon-height;
+            line-height: $ui-header-icon-height;
+            background-position: $window-header-icon-background-position;
+        }
+        .#{$prefix}window-header-glyph {
+            color: $ui-header-glyph-color;
+            font-size: $ui-header-icon-height;
+            line-height: $ui-header-icon-height;
+
+            @if $ui-header-glyph-opacity != 1 {
+                // do not use the opacity mixin because we do not want IE's filter version of
+                // opacity to be included.  We emulate the opacity setting in IE8m by mixing
+                // the icon color into the background color. (see below)
+                opacity: $ui-header-glyph-opacity;
+            }
+            // In IE8 and below when a glyph contains partially transparent pixels, we 
+            // can't apply an opacity filter to the glyph element, because IE8m will render
+            // the partially transparent pixels of the glyph as black. To work around this,
+            // we emulate the approximate color that the glyph would have if it had opacity
+            // applied by mixing the glyph color with the header's background-color.
+            @if $include-ie {
+                .#{$prefix}ie8 & {
+                    color: mix($ui-header-glyph-color, $ui-header-background-color, $ui-header-glyph-opacity * 100);
+                }
+            }
+        }
+    }
+
+    $ui-tool-margin: 0 0 0 $ui-tool-spacing;
+    .#{$prefix}window-header-#{$ui}-horizontal {
+        .#{$prefix}tool-after-title {
+            margin: $ui-tool-margin;
+        }
+
+        @if $include-rtl {
+            .#{$prefix}rtl.#{$prefix}tool-after-title {
+                margin: rtl($ui-tool-margin);
+            }
+        }
+
+        .#{$prefix}tool-before-title {
+            margin: rtl($ui-tool-margin);
+        }
+
+        @if $include-rtl {
+            .#{$prefix}rtl.#{$prefix}tool-before-title {
+                margin: $ui-tool-margin;
+            }
+        }
+    }
+
+    .#{$prefix}window-header-#{$ui}-vertical {
+        .#{$prefix}tool-after-title {
+            margin: rotate90($ui-tool-margin);
+        }
+
+        @if $include-rtl {
+            .#{$prefix}rtl.#{$prefix}tool-after-title {
+                margin: rotate270(rtl($ui-tool-margin));
+            }
+        }
+
+        .#{$prefix}tool-before-title {
+            margin: rotate90(rtl($ui-tool-margin));
+        }
+
+        @if $include-rtl {
+            .#{$prefix}rtl.#{$prefix}tool-before-title {
+                margin: rotate270($ui-tool-margin);
+            }
+        }
+    }
+
+    // !important is needed in the following rules to override dock layout's border
+    // management rules.
+    @if $ui-force-header-border {
+        .#{$prefix}window-header-#{$ui} {
+            border-width: $ui-header-border-width !important;
+        }
+    } @else {
+        .#{$prefix}window-#{$ui}-collapsed .#{$prefix}window-header {
+            border-width: $ui-header-border-width !important;
+        }
+    }
+
+    @if $include-slicer-border-radius {
+        .#{$prefix}nbr .#{$prefix}window-#{$ui}-collapsed .#{$prefix}window-header {
+            border-width: 0 !important;
+        }
+    }
+
+    // Window resizing.
+    // If there's a border that's wider than the specified threshold (Sencha default is 2) then
+    // embed the handles in the borders using -ve position and make resizable windows show overflow.
+    // The dock layout should ensure that all constituent elements fit within the element.
+    // The only exception is during animated resizing. Overflow inline style is set hidden during animation (AbstractComponent.animate)
+    @if $ui-border-width > $border-width-threshold {
+        .#{$prefix}window-#{$ui}-resizable {
+
+            // Resizable Window element overflow must be visible for embedded handles to accept mouseovers.
+            overflow: visible;
+
+            .#{$prefix}window-handle-north-br {
+                top: -($ui-border-width);
+            }
+            .#{$prefix}window-handle-south-br {
+                bottom: -($ui-border-width);
+            }
+            .#{$prefix}window-handle-east-br {
+                right: -($ui-border-width);
+            }
+            .#{$prefix}window-handle-west-br {
+                left: -($ui-border-width);
+            }
+            .#{$prefix}window-handle-northwest-br {
+                left: -($ui-border-width);
+                top: -($ui-border-width);
+            }
+            .#{$prefix}window-handle-northeast-br {
+                right: -($ui-border-width);
+                top: -($ui-border-width);
+            }
+            .#{$prefix}window-handle-southeast-br {
+                right: -($ui-border-width);
+                bottom: -($ui-border-width);
+            }
+            .#{$prefix}window-handle-southwest-br {
+                left: -($ui-border-width);
+                bottom: -($ui-border-width);
+            }
+        }
+    }
+
+    @if $ui-include-border-management-rules {
+        @include border-management(
+            $parent-cls: window-#{$ui},
+            $border-width: $ui-wrap-border-width,
+            $border-color: $ui-wrap-border-color
+        );
+    }
+}
+
+.#{$prefix}window-ghost {
+    @include opacity($window-ghost-opacity);
+}
+
+@if $include-window-default-ui {
+    @include extjs-window-ui(
+        $ui: 'default'
+    );
+}
+
+.#{$prefix}window-body-plain {
+    background-color: transparent;
+}

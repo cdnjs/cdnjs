@@ -1,0 +1,55 @@
+.#{$prefix}grid-view {
+    overflow: hidden;
+    position: relative;
+}
+
+/* A grid *item* is a dataview item. It is encapsulated by a <table class="x-grid-item">.
+ * One item always corresponds to one store record
+ * But an item may contain more than one <tr>.
+ * ONE child row, <tr class="x-grid-row"> will be the grid-row and will contain record data
+ */
+.#{$prefix}grid-row-table {
+    // When the touch scroller is used, we need to measure the table immediately after
+    // setting the widths of the column sizers (all cells in a column, or <COL> elements when the first row has a colspanning cell)
+    // so that the scroller's width can be refreshed.
+    // Unfortunately, if the table is auto width, browsers won't resize the cells until
+    // the current thread completes.  Setting the width of the table to 0 allows us to
+    // avoid refreshing the scroller on a delay
+    width: 0;
+    table-layout: fixed;
+    border: 0 none;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.#{$prefix}grid-item {
+    table-layout: fixed;
+    outline: none;
+}
+
+.#{$prefix}grid-row {
+    outline: none;
+}
+
+.#{$prefix}grid-td {
+    overflow: hidden;
+    border-width: 0;
+    vertical-align: top;
+}
+
+.#{$prefix}grid-cell-inner {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.#{$prefix}wrap-cell {
+    .#{$prefix}grid-cell-inner {
+        white-space: normal;
+    }
+}
+
+.#{$prefix}grid-resize-marker {
+    position: absolute;
+    z-index: 5;
+    top: 0;
+}

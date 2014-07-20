@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="ext-aria" default=".help">
+    <!--
+    The build-impl.xml file imported here contains the guts of the build process. It is
+    a great idea to read that file to understand how the process works, but it is best to
+    limit your changes to this file.
+    -->
+    <import file="${basedir}/.sencha/package/build-impl.xml"/>
+    <import file="${basedir}/.sencha/test/test-impl.xml"/>
+
+    <!--
+    The following targets can be provided to inject logic before and/or after key steps
+    of the build process:
+
+        The "init-local" target is used to initialize properties that may be personalized
+        for the local machine.
+
+            <target name="-before-init-local"/>
+            <target name="-after-init-local"/>
+
+        The "clean" target is used to clean build output from the build.dir.
+
+            <target name="-before-clean"/>
+            <target name="-after-clean"/>
+
+        The general "init" target is used to initialize all other properties, including
+        those provided by Sencha Cmd.
+
+            <target name="-before-init"/>
+            <target name="-after-init"/>
+        
+        The "build" target performs the call to Sencha Cmd to build the application.
+
+            <target name="-before-build"/>
+            <target name="-after-build"/>
+    -->
+
+    <target name="-before-init">
+        <property name="pkg.excludes" value="docs/*"/>
+
+        <tstamp>
+            <!-- sets DSTAMP=yyyyMMdd, TSTAMP=hhmm -->
+            <format property="THIS_YEAR" pattern="yyyy"/>
+            <format property="tstamp.datetime" pattern="yyyy-MM-dd HH:mm:ss"/>
+            <format property="tstamp.pretty" pattern="MMM dd, yyyy"/>
+        </tstamp>
+
+    </target>
+    <target name="-after-init">
+        <if>
+            <isset property="build.number"/>
+            <then>
+                <property name="build.version" value="${build.number}"/>
+            </then>
+        </if>
+
+        <property name="jira.host" value="sencha.jira.com"/>
+        <property name="jira.browse.url" value="https://${jira.host}/browse"/>
+        <property name="jira.search.base" value="/sr/jira.issueviews:searchrequest-xml/temp/SearchRequest.xml"/>
+        <property name="jira.max.results" value="1000"/>
+        <property name="jira.user.name" value="releasenotes"/>
+        <!--property name="jira.user.pswd" value=""/-->
+        <property name="build.version" value="${package.version}.54321"/>
+    </target>
+
+    <target name="-before-build">
+        <if>
+            <isset property="build.number"/>
+            <then>
+                <echo>Setting package version to ${build.number}</echo>
+                <x-script-def name="x-update-version-number">
+                    <attribute name="jsonfile"/>
+                    <attribute name="version"/>
+                    <script src="${cmd.config.dir}/ant/JSON.js"/>
+                    <script src="${cmd.config.dir}/ant/ant-util.js"/>
+                    <![CDATA[
+                        var jsonFile = attributes.get("jsonfile"),
+                            ver = attributes.get("version") + '',
+                            config = readJson(jsonFile);
+                        config.version = ver;
+                        writeJson(jsonFile, config);
+                    ]]>
+                </x-script-def>
+
+                <x-update-version-number jsonfile="${package.dir}/package.json"
+                                         version="${build.number}"/>
+            </then>
+        </if>
+    </target>
+
+    <target name="release-notes" depends="init">
+        <x-make-url property="jira.release-notes.query"
+                    scheme="https"
+                    host="${jira.host}"
+                    path="${jira.search.base}">
+            <query param="os_username" value="${jira.user.name}"/>
+            <query param="os_password" value="${jira.user.pswd}"/>
+            <query param="tempMax" value="${jira.max.results}"/>
+        </x-make-url>
+
+        <x-jira-query url="${jira.release-notes.query}&amp;jqlQuery="
+                      srcfile="${package.dir}/docs/release-notes.html"
+                      outfile="${build.dir}/release-notes.html"
+                      forumprefix="${build.dir}/release-notes-"
+                      failonerror="false"/>
+
+        <!-- Remove external dependencies: -->
+        <x-include srcfile="${build.dir}/release-notes.html"/>
+        <replace file="${build.dir}/release-notes.html"
+                 token="@@BUILD_VERSION@@"
+                 value="${build.version}"/>
+        <replace file="${build.dir}/release-notes.html"
+                 token="@@BUILD_DATE@@"
+                 value="${tstamp.pretty}"/>
+
+        <copy file="${package.dir}/docs/logo-sencha-sm.png" todir="${build.dir}"/>
+    </target>
+
+</project>

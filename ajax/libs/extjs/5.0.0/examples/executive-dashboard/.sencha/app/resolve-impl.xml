@@ -1,0 +1,109 @@
+<project name="resolve-impl">
+    
+    <target name="-before-web-start"/>
+    <target name="-web-start">
+        <property name="enable.background.server" value="false"/>
+        <x-sencha-command>
+            <![CDATA[
+            web
+                -port=${build.web.port}
+                -background=${enable.background.server}
+                start
+                    -map=${build.web.root}
+            ]]>
+        </x-sencha-command>
+        <if>
+            <x-is-true value="enable.browser.launch"/>
+            <then>
+                <x-launch-browser url="http://localhost:${build.web.port}"/>
+            </then>
+        </if>
+    </target>
+    <target name="-after-web-start"/>
+    <target name="web-start"
+        depends="init,-before-web-start,-web-start,-after-web-start"/>
+
+    <target name="-before-web-stop"/>
+    <target name="-web-stop">
+        <!--
+        This needs to be in it's own process due to threading issues when called from a
+        target.
+        -->
+        <java fork="true"
+              dir="${app.dir}"
+              jar="${cmd.dir}/sencha.jar"
+              failonerror="true">
+            <arg value="web"/>
+            <arg value="-port=${build.web.port}"/>
+            <arg value="stop"/>
+        </java>
+    </target>
+    <target name="-after-web-stop"/>
+    <target name="web-stop"
+            depends="-init,-before-web-stop,-web-stop,-after-web-stop"/>
+    
+    <target name="-resolve-impl" depends="-refresh">
+        <x-ant-call target="web-start" unless="skip.web.start">
+            <param name="enable.background.server" value="true"/>
+        </x-ant-call>
+        
+        <local name="app.relative.url"/>
+        <local name="build.resolve.relative.url"/>
+        
+        <!--calculate the relative path from the web root to the index page-->
+        <x-get-relative-path from="${build.web.root}" 
+                             to="${app.page.file}"
+                             property="app.relative.url"/>
+        
+        <property name="build.resolve.relative.url" 
+                  value="${build.resolve.url}/${app.relative.url}"/>
+        
+        <x-sencha-command dir="${app.dir}" inheritall="true">
+            <![CDATA[
+            app
+                resolve
+                    -mode=${build.resolve.mode}
+                    -uri=${build.resolve.relative.url}
+                    -tpl=${build.resolve.tpl}
+                    -out=${build.resolve.file}
+            ]]>
+        </x-sencha-command>
+        <x-ant-call target="web-stop" unless="skip.web.start"/>
+        <x-compile refid="${compiler.ref.id}">
+            <![CDATA[
+            restore
+                page
+            and
+            load-refs
+                -file=${build.resolve.file}
+                -defaultSrcName=@${build.tag.name}
+                -allowUnmatched=${build.resolve.allow.unmatched}
+            and
+            save
+                page
+            ]]>
+        </x-compile>
+    </target>
+    
+    <target name="-before-resolve"/>
+    <target name="-resolve">
+        <x-ant-call target="-resolve-impl"/>
+    </target>
+    <target name="-after-resolve"/>
+    
+    <target name="-before-explain"/>
+    <target name="-explain" depends="-init-compiler">
+        <x-compile refid="${compiler.ref.id}">
+            <![CDATA[
+            explain
+                -alias
+                    ${build.app.temp.dir}/${build.tag.name}-master-bundle.js=APPLICATION
+                ${build.app.temp.dir}/${build.tag.name}-master-bundle.js
+                ${args.targetName}
+            ]]>
+        </x-compile>
+    </target>
+    <target name="-after-explain"/>
+    <target name="explain" depends="init,-before-explain,-explain,-after-explain"/>
+    
+ </project>

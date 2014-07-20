@@ -1,0 +1,859 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="ext" default=".help">
+    <!--
+    The build-impl.xml file imported here contains the guts of the build process. It is
+    a great idea to read that file to understand how the process works, but it is best to
+    limit your changes to this file.
+    -->
+    <import file="${basedir}/.sencha/package/build-impl.xml"/>
+    <import file="${basedir}/.sencha/test/test-impl.xml"/>
+
+    <!--
+    The following targets can be provided to inject logic before and/or after key steps
+    of the build process:
+
+        The "init-local" target is used to initialize properties that may be personalized
+        for the local machine.
+
+            <target name="-before-init-local"/>
+            <target name="-after-init-local"/>
+
+        The "clean" target is used to clean build output from the build.dir.
+
+            <target name="-before-clean"/>
+            <target name="-after-clean"/>
+
+        The general "init" target is used to initialize all other properties, including
+        those provided by Sencha Cmd.
+
+            <target name="-before-init"/>
+            <target name="-after-init"/>
+        
+        The "build" target performs the call to Sencha Cmd to build the application.
+
+            <target name="-before-build"/>
+            <target name="-after-build"/>
+    -->
+
+    <target name="-before-init">
+        <property name="pkg.excludes"
+                  value="examples/build/**/*,
+                         test/**/*,
+                         attic/**/*,
+                         deployment_workspace/**/*,
+                         docs/**/*,
+                         release-notes-*,
+						 all-licenses/**/*"/>
+
+        <condition property="repo.dev.mode" value="true">
+            <available file="${basedir}/../packages/sencha-core" type="dir"/>
+        </condition>
+
+    </target>
+
+    <macrodef name="x-set-license">
+        <attribute name="license" default="${ext.license.name}"/>
+        <attribute name="version" default="${build.version}"/>
+        <sequential>
+            <replaceregexp replace="ext.license.name=@{license}"
+                           file="${basedir}/cmd/sencha.cfg" byline="true">
+                <regexp pattern="ext.license.name=(.*)"/>
+            </replaceregexp>
+
+            <replaceregexp replace="$ext-version: '@{version}'"
+                           file="${basedir}/packages/ext-theme-base/sass/etc/all.scss">
+                <regexp pattern="\$ext-version: '(.*)'"/>
+            </replaceregexp>
+
+            <local name="watermark.setting"/>
+
+            <condition property="watermark.setting" value="$ext-trial: true !default;">
+                <equals arg1="@{license}" arg2="trial"/>
+            </condition>
+
+            <property name="watermark.setting" value="$ext-trial: false !default;"/>
+
+            <replaceregexp replace="${watermark.setting}"
+                           file="${basedir}/packages/ext-theme-base/sass/etc/all.scss">
+                <regexp pattern="\$ext-trial: (.*) !default;"/>
+            </replaceregexp>
+
+            <if>
+                <available file="${basedir}/all-licenses/@{license}" type="dir"/>
+                <then>
+                    <copy todir="${basedir}/licenses" overwrite="true">
+                        <fileset dir="${basedir}/all-licenses/@{license}" includes="**/*"/>
+                    </copy>
+                </then>
+            </if>
+
+        </sequential>
+    </macrodef>
+
+    <target name="beta" depends="init">
+        <x-set-license license="beta"/>
+    </target>
+
+    <target name="commercial" depends="init">
+        <x-set-license license="commercial"/>
+    </target>
+
+    <target name="gpl" depends="init">
+        <x-set-license license="gpl"/>
+    </target>
+
+    <target name="trial" depends="init">
+        <x-set-license license="trial"/>
+    </target>
+
+    <target name="init-version-properties" if="repo.dev.mode">
+        <property name="ext.version.number" value="12345"/>
+        <property name="build.number" value="${ext.version.number}"/>
+        <property name="ext.license.name" value="beta"/>
+        <property name="version.major" value="5"/>
+        <property name="version.minor" value="0"/>
+        <property name="version.build" value="0"/>
+        <property name="version.revision" value="${build.number}"/>
+        <property name="version.release" value="${version.major}.${version.minor}.${version.build}"/>
+        <property name="version.full" value="${version.release}.${version.revision}"/>
+    </target>
+
+    <target name="detect-git-hash" if="repo.dev.mode">
+        <x-git-current-hash property="git.current.hash"/>
+    </target>
+
+    <target name="generate-version-properties"
+            depends="detect-git-hash,init-version-properties"
+            if="repo.dev.mode">
+        <propertyfile file="${package.dir}/version.properties">
+            <entry operation="="
+                   key="version.major"
+                   value="${version.major}"/>
+            <entry operation="="
+                   key="version.minor"
+                   value="${version.minor}"/>
+            <entry operation="="
+                   key="version.build"
+                   value="${version.build}"/>
+            <entry operation="="
+                   key="version.revision"
+                   value="${version.revision}"/>
+            <entry operation="="
+                   key="version.release"
+                   value="${version.release}"/>
+            <entry operation="="
+                   key="version.full"
+                   value="${version.full}"/>
+            <entry operation="="
+                   key="git.current.hash"
+                   value="${git.current.hash}"/>
+        </propertyfile>
+    </target>
+
+    <target name="load-version-properties" depends="generate-version-properties">
+        <property file="${package.dir}/version.properties"/>
+    </target>
+
+    <target name="-after-apply-version">
+        <property name="apply.version.stamp" value="1"/>
+    </target>
+    
+    <target name="-apply-version-stamp" if="apply.version.stamp">
+        <x-property-file file="${package.dir}/cmd/sencha.cfg">
+            <entry type="string" key="framework.version" operation="="
+                   value="${build.version}"/>
+            <entry type="string" key="framework.cmd.version" operation="="
+                   value="${cmd.version}"/>
+        </x-property-file>
+    </target>
+
+
+    <target name="copy-license" depends="init,load-version-properties">
+        <tstamp>
+            <!-- sets DSTAMP=yyyyMMdd, TSTAMP=hhmm -->
+            <format property="THIS_YEAR" pattern="yyyy"/>
+            <format property="tstamp.datetime" pattern="yyyy-MM-dd HH:mm:ss"/>
+            <format property="tstamp.pretty" pattern="MMMM d, yyyy"/>
+        </tstamp>
+        <property name="product.name" value="Ext JS ${package.version}"/>
+
+        <!--
+        Ext JS is distrubted under GPL and Commercial licenses as well as a Beta license.
+        This target allows the package build to be leveraged while swapping out the files
+        with license information.
+        -->
+
+        <condition property="ext.license"
+                   value="${package.dir}/all-licenses/${ext.license.name}">
+            <available file="${package.dir}/all-licenses/${ext.license.name}" type="dir"/>
+        </condition>
+
+        <property name="ext.license"  value="${package.licenses.dir}"/>
+
+        <echo> loading file-header.txt </echo>
+        <!-- Load the appropriate license file header -->
+        <local name="file-header"/>
+        <loadfile property="file-header" srcfile="${ext.license}/file-header.txt">
+            <filterchain>
+                <expandproperties/>
+            </filterchain>
+        </loadfile>
+
+        <echo> expanding file-header.txt </echo>
+        <copy file="${ext.license}/file-header.txt"
+              tofile="${package.licenses.dir}/file-header.txt.final"
+              overwrite="true">
+            <filterchain>
+                <expandproperties/>
+            </filterchain>
+        </copy>
+
+        <rename src="${package.licenses.dir}/file-header.txt.final"
+                dest="${package.licenses.dir}/file-header.txt"
+                replace="true"/>
+
+        <!--
+        Create a JS/CSS compatible file with header inside a "/* */" block.
+        -->
+        <echo file="${package.licenses.dir}/file-header.js"
+              message="/*&#10;${file-header}&#10;*/&#10;"/>
+
+        <fixcrlf file="${package.licenses.dir}/file-header.js"/>
+
+        <!--
+        Copy in the appropriate license.txt file
+        -->
+        <mkdir dir="${package.licenses.dir}"/>
+        <copy file="${ext.license}/license.txt"
+              tofile="${package.licenses.dir}/license.txt.final"
+              overwrite="true">
+            <filterchain>
+                <expandproperties/>
+            </filterchain>
+        </copy>
+
+        <rename src="${package.licenses.dir}/license.txt.final"
+                dest="${package.licenses.dir}/license.txt"
+                replace="true"/>
+
+        <copy file="${package.licenses.dir}/license.txt"
+              tofile="${package.dir}/LICENSE" overwrite="true"/>
+
+        <!--
+        Lay down the file header so we can append the rest from the compiler.
+        -->
+        <for list="ext,ext-all,ext-all-rtl,ext-all-sandbox,ext-all-rtl-sandbox"
+             param="file">
+            <sequential>
+                <for list=".js,-debug.js" param="sfx">
+                    <sequential>
+                        <copy file="${package.licenses.dir}/file-header.js"
+                              tofile="${build.dir}/@{file}@{sfx}" overwrite="true"/>
+                    </sequential>
+                </for>
+            </sequential>
+        </for>
+    </target>
+
+    <target name="-js" depends="copy-license">
+
+        <local name="manifest.wrapper"/>
+        <local name="concat.options"/>
+        
+        <property name="concat.options">
+                -remove-text-references=false
+                -optimize-string-references=false
+                -remove-requirement-nodes=false
+        </property>
+        
+        <property name="manifest.wrapper"><![CDATA[
+var Ext = Ext || {};
+(function(manifest){
+    if(!Ext.manifest) {
+        Ext.manifest = manifest;
+    } else {
+        for(var name in manifest) {
+            Ext.manifest[name] = manifest[name];
+        }
+    }
+})]]></property>
+            
+        <echo append="true" file="${build.dir}/ext-debug.js" message="${manifest.wrapper}"/>
+        <echo append="true" file="${build.dir}/ext.js" message="${manifest.wrapper}"/>
+
+        <property name="build.optimize"><![CDATA[
+            optimize
+                --call-parent=true
+                --define-rewrite=true
+                --include-metadata=false
+        ]]></property>
+
+        <property name="build.compress"><![CDATA[
+             +yui
+        ]]></property>
+
+        <!--
+        Ext JS produces a few additional flavors of compiled code, so we just reject the
+        provided build.compile.command property and substitute our own.
+        -->
+        <x-compile refid="${compiler.ref.id}">
+            <![CDATA[
+                -ignore=diag
+
+                # Remove the license header from the source files:
+                -prefix
+                    ${package.licenses.dir}/file-header.js
+
+                    include
+                        -all
+                    and
+                    save
+                        allfiles
+                    and
+                    exclude
+                        -all
+                    and
+                    include
+                        +recursive
+                        -class=Ext.Loader
+                    and
+                    include
+                        -tag=overrides
+                    and
+                    save
+                        corefiles
+                        
+                    and
+
+                # Build *-debug.js files - these have all "debug" conditional code active
+                # for use in development mode.
+
+                -options=debug:true
+                    restore
+                        allfiles
+                    and
+                    concatenate
+                        +append
+                        ${concat.options}
+                        -output-file=${build.dir}/ext-all-rtl-debug.js
+                    and
+                    concatenate
+                        +append
+                        ${concat.options}
+                        -sandbox=Ext4:x4-
+                        -output-file=${build.dir}/ext-all-rtl-sandbox-debug.js
+                    and
+
+
+                    exclude
+                        -namespace=Ext.rtl
+                    and
+
+                    concatenate
+                        +append
+                        ${concat.options}
+                        -output-file=${build.dir}/ext-all-debug.js
+                    and
+                    concatenate
+                        +append
+                        ${concat.options}
+                        -sandbox=Ext4:x4-
+                        -output-file=${build.dir}/ext-all-sandbox-debug.js
+                    and
+
+                    exclude
+                        -set=corefiles
+                    and
+                    metadata
+                        -tpl=({0});
+                        -info=AppManifest
+                        -basePath=${build.dir}
+                        +append
+                        +bootRelative
+                        -output-file=${build.dir}/ext-debug.js
+                    and
+                    restore
+                        corefiles
+                    and
+                    concatenate
+                        +append
+                        ${concat.options}
+                        -output-file=${build.dir}/ext-debug.js
+                    and
+            
+                # Optimize and compress the builds
+            
+                -options=debug:false
+                    restore
+                        allfiles
+                    and
+
+                    ${build.optimize}
+                    and
+
+                    concatenate
+                        +append
+                        ${concat.options}
+                        ${build.compress}
+                        -output-file=${build.dir}/ext-all-rtl.js
+                    and
+                    concatenate
+                        +append
+                        ${concat.options}
+                        ${build.compress}
+                        -sandbox=Ext4:x4-
+                        -output-file=${build.dir}/ext-all-rtl-sandbox.js
+                    and
+            
+                    exclude
+                        -namespace=Ext.rtl
+                    and
+                    concatenate
+                        +append
+                        ${concat.options}
+                        ${build.compress}
+                        -output-file=${build.dir}/ext-all.js
+                    and
+                    concatenate
+                        +append
+                        ${concat.options}
+                        ${build.compress}
+                        -sandbox=Ext4:x4-
+                        -output-file=${build.dir}/ext-all-sandbox.js
+                    and
+            
+            
+                    exclude
+                        -set=corefiles
+                    and
+                    metadata
+                        -tpl=({0});
+                        -info=AppManifest
+                        -basePath=${build.dir}
+                        +append
+                        +bootRelative
+                        -output-file=${build.dir}/ext.js
+                    and
+                    restore
+                        corefiles
+                    and
+                    concatenate
+                        +append
+                        ${concat.options}
+                        ${build.compress}
+                        -output-file=${build.dir}/ext.js
+            ]]>
+        </x-compile>
+    </target>
+
+    <target name="-before-js" depends="bootstrap"/>
+
+    <target name="-after-js">
+        <for list="ext-all,ext-all-rtl,ext-all-sandbox,ext-all-rtl-sandbox"
+             param="file">
+            <sequential>
+                <echo>version.full = ${version.full}</echo>
+                <local name="versions.value"/>
+                <property name="versions.value"
+                          value="Ext.setVersion('ext','${version.full}');Ext.setVersion('sencha-core','${version.full}');"/>
+
+                <replace file="${build.dir}/@{file}.js"
+                         token="Ext.setVersion(&quot;ext&quot;,&quot;5&quot;)"
+                         value="${versions.value}"/>
+
+                <replace file="${build.dir}/@{file}-debug.js"
+                         token="Ext.setVersion(&quot;ext&quot;,&quot;5&quot;)"
+                         value="${versions.value}"/>
+
+                <replace file="${build.dir}/@{file}.js"
+                         token="Ext.setVersion('ext', '5');"
+                         value="${versions.value}"/>
+
+                <replace file="${build.dir}/@{file}-debug.js"
+                         token="Ext.setVersion('ext', '5');"
+                         value="${versions.value}"/>
+            </sequential>
+        </for>
+
+        <for list="ext,ext-all,ext-all-rtl,ext-all-sandbox,ext-all-rtl-sandbox"
+             param="file">
+            <sequential>
+                <x-strip-js srcfile="${build.dir}/@{file}-debug.js"
+                            outfile="${build.dir}/@{file}-debug.js"/>
+            </sequential>
+        </for>
+
+        <copy file="${basedir}/ext-bootstrap.js"
+              tofile="${build.dir}/bootstrap.js">
+            <filterchain>
+                <concatfilter prepend="${package.licenses.dir}/file-header.js"/>
+            </filterchain>
+        </copy>
+    </target>
+
+    <target name="prep-build-folder" depends="init">
+        <for param="example">
+            <dirset dir="${package.dir}/examples" includes="*"/>
+            <sequential>
+                <if>
+                    <not>
+                        <available file="@{example}/app.json"/>
+                    </not>
+                    <then>
+                        <local name="example.name"/>
+                        <basename property="example.name" file="@{example}"/>
+                        <copy todir="${build.dir}/examples/${example.name}" overwrite="true">
+                            <fileset dir="@{example}" includes="**/*"/>
+                        </copy>
+                    </then>
+                </if>
+            </sequential>
+        </for>
+        <copy todir="${build.dir}" overwrite="true">
+            <fileset dir="${package.dir}" includes="examples/*"/>
+        </copy>
+
+        <x-process-sub-packages>
+            <local name="pkg.name"/>
+            <basename file="@{pkg-dir}" property="pkg.name"/>
+            <if>
+                <available file="@{pkg-dir}/build" type="dir"/>
+                <then>
+                    <copy todir="${build.dir}/packages/${pkg.name}/build">
+                        <fileset dir="@{pkg-dir}/build"
+                                 includes="**/*"/>
+                    </copy>
+                </then>
+            </if>
+        </x-process-sub-packages>
+
+        <move file="${build.dir}/examples/newindex.html"
+              tofile="${build.dir}/examples/index.html"
+              overwrite="true"/>
+
+        <copy todir="${build.dir}/welcome" overwrite="true">
+            <fileset dir="${basedir}/welcome"/>
+        </copy>
+
+        <copy file="${basedir}/index.html"
+              tofile="${build.dir}/index.html"
+              overwrite="true"/>
+        <replace file="${build.dir}/index.html"
+                 token="build/examples/index.html"
+                 value="examples/index.html"/>
+    </target>
+    
+    <target name="-before-pkg" depends="init,release-notes,prep-build-folder">
+        <if>
+            <available file="${basedir}/release-notes.html"/>
+            <then>
+                <copy file="${basedir}/release-notes.html"
+                      tofile="${build.dir}/release-notes.html"
+                      overwrite="true"/>
+            </then>
+        </if>
+    </target>
+
+    <!--
+    ******************************************************************
+    Targets for Maintenance
+    ******************************************************************
+    -->
+    <target name="upgrade-all"
+            description="Upgrade this package and all sub-packages and examples to current Cmd version"
+            depends="init">
+        <x-sencha-command dir="${package.dir}">
+            package
+            upgrade
+            then
+            ant
+            upgrade-subpkgs
+            upgrade-examples
+        </x-sencha-command>
+    </target>
+
+    <target name="core-bootstrap" depends="init">
+        <local name="base.path"/>
+        <property name="base.path" value="${basedir}"/>
+
+        <delete file="${package.dir}/bootstrap-manifest.js"/>
+        <x-compile refid="${compiler.ref.id}">
+        <![CDATA[
+            include
+                -all
+            and
+            exclude
+                +recursive
+                -class=Ext.Loader
+            and
+            metadata
+                -tpl=var Ext = Ext || '{' '}'; Ext.manifest = {0};
+                -info=AppManifest
+                -basePath=${package.dir}
+                +append
+                +bootRelative
+                -output-file=${package.dir}/bootstrap-manifest.js
+        ]]>
+        </x-compile>
+
+
+        <x-bootstrap file="${base.path}/bootstrap.js"
+                     basedir="${base.path}"
+                     coreFilesFile="${base.path}/bootstrap-files.js"
+                     classMetadataFile="${base.path}/bootstrap-data.js"
+                     overridesFile="${base.path}/bootstrap-data.js"
+                     includeBoot="true"
+                     includeCoreFiles="true"
+                     appendCoreFiles="false"
+                     appendClassMetadata="false"
+                     appendOverrides="true"
+                     coreFilesJsonpTpl="Ext.Boot.loadSyncBasePrefix"
+                     loaderConfigJsonpTpl="Ext.Loader.addBaseUrlClassPathMappings"
+                     overrideTpl="Ext.Loader.loadScriptsSyncBasePrefix"
+                     overrideTplType="jsonp"
+                     overrideExcludeTags="">
+<![CDATA[
+Ext.repoDevMode = true;
+Ext.Boot.loadSyncBasePrefix([
+    "bootstrap-manifest.js",
+    "bootstrap-files.js"
+]);
+]]>
+        </x-bootstrap>
+
+        <!--
+        Duplicate the "ext.js" dev-mode bootstrap file to the other deployed names
+        -->
+        <for list="ext,ext-all,ext-all-rtl" param="part1">
+            <sequential>
+                <for list=".,-debug." param="part2">
+                    <sequential>
+                        <local name="out"/>
+                        <property name="out" value="@{part1}@{part2}js"/>
+                            <echo>Generating ${out}</echo>
+                            <copy file="${basedir}/bootstrap.js" tofile="${basedir}/${out}"
+                                  overwrite="true"/>
+                            <replace file="${basedir}/${out}"
+                                     token="bootstrapper"
+                                     value="bootstrapper :: GENERATED COPY! Edit &quot;sencha-core/bootstrap.js&quot;"/>
+                    </sequential>
+                </for>
+            </sequential>
+        </for>
+        <delete file="${basedir}/bootstrap.js"/>
+    </target>
+
+    <target name="bootstrap"
+            description="*** Regenerate files needed by standalone examples and unit tests ***"
+            depends="core-bootstrap,test-bootstrap"/>
+
+    <!--
+    ******************************************************************
+    Targets to easily run builds for specific items
+    ******************************************************************
+    -->
+
+    <target name="build-classic"
+            description="Build the Classic Theme (needed by unit tests)"
+            depends="init">
+        <x-sencha-command dir="${package.dir}/packages/ext-theme-classic" inheritall="false">
+            package
+            build
+        </x-sencha-command>
+    </target>
+
+    <target name="build-crisp"
+            description="Build the Crisp Theme"
+            depends="init">
+        <x-sencha-command dir="${package.dir}/packages/ext-theme-crisp" inheritall="false">
+            package
+            build
+        </x-sencha-command>
+    </target>
+
+    <target name="build-gray"
+            description="Build the Gray Theme"
+            depends="init">
+        <x-sencha-command dir="${package.dir}/packages/ext-theme-gray" inheritall="false">
+            package
+            build
+        </x-sencha-command>
+    </target>
+
+    <target name="build-neptune"
+            description="Build the Neptune Theme"
+            depends="init">
+        <x-sencha-command dir="${package.dir}/packages/ext-theme-neptune" inheritall="false">
+            package
+            build
+        </x-sencha-command>
+    </target>
+
+    <target name="themes"
+            description="Build all theme packages"
+            depends="build-neptune,build-crisp,build-classic,build-gray"/>
+
+    <!--
+    ******************************************************************
+    Targets used to produce deployment builds
+    ******************************************************************
+    -->
+
+    <target name="release-notes" depends="init" if="jira.user.name" unless="opt.norelnotes"
+            description="Build release notes HTML file">
+        
+        <property name="jira.host" value="sencha.jira.com"/>
+        <property name="jira.browse.url" value="https://${jira.host}/browse"/>
+        <property name="jira.search.base" value="/sr/jira.issueviews:searchrequest-xml/temp/SearchRequest.xml"/>
+        <property name="jira.max.results" value="1000"/>
+
+        <tstamp>
+            <!-- sets DSTAMP=yyyyMMdd, TSTAMP=hhmm -->
+            <format property="THIS_YEAR" pattern="yyyy"/>
+            <format property="tstamp.datetime" pattern="yyyy-MM-dd HH:mm:ss"/>
+            <format property="tstamp.pretty" pattern="MMMM d, yyyy"/>
+        </tstamp>
+        
+        <!--
+        This is the CURL command that disables the XSRF check:
+            curl -H "X-Atlassian-Token: no-check" -g 'https://sencha.jira.com/sr/jira.issueviews:searchrequest-xml/temp/SearchRequest.xml?jqlQuery=project+%3D+EXTJSIV+AND+type+%3D+Bug+AND+fixVersion+in+%28%224.1.0%22%2C+%224.1.0+Beta+1%22%2C+%224.1.x%22%29+AND+status+in+%28%22Awaiting+Review%22%2C+Closed%29+ORDER+BY+priority+DESC%2C+created+ASC&tempMax=1000&os_username=TODO&os_password=TODO'
+        
+        We don't appear to need it.
+        -->
+        <echo>Generating release notes to release-notes.html</echo>
+        <x-make-url property="jira.release-notes.query"
+                    scheme="https"
+                    host="${jira.host}"
+                    path="${jira.search.base}">
+            <query param="os_username" value="${jira.user.name}"/>
+            <query param="os_password" value="${jira.user.pswd}"/>
+            <query param="tempMax" value="${jira.max.results}"/>
+        </x-make-url>
+
+        <x-jira-query url="${jira.release-notes.query}&amp;jqlQuery="
+                      srcfile="release-notes-src.html"
+                      outfile="release-notes.html"
+                      forumprefix="release-notes-"
+                      failonerror="true"/>
+
+        <!-- Remove external dependencies: -->
+        <x-include srcfile="release-notes.html"/>
+
+        <replace file="release-notes.html">
+            <replacefilter token="@@SDK_VERSION@@" value="${package.version}"/>
+            <replacefilter token="@@BUILD_DATE@@" value="${tstamp.pretty}"/>
+        </replace>
+    </target>
+
+    <target name="docs" depends="init" description="Builds docs for Ext JS and sub-packages">
+        <mkdir dir="${package.build.dir}/docs"/>
+        <exec executable="jsduck">
+            <arg value="--output=${package.build.dir}/docs"/>
+            <arg value="--config=${package.dir}/docs/config.json"/>
+        </exec>
+    </target>
+
+    <!-- FIXME sencha-core should be the only package here, but we still have dependencies in the examples -->
+    <property name="static.packages" value="sencha-core,sencha-amf,sencha-charts,sencha-soap"/>
+
+    <target name="normalize-workspace" depends="init" if="repo.dev.mode">
+        <echo message="Injecting static packages"/>
+        <property name="packages.dir" value="packages"/>
+        <for list="${static.packages}" delimiter="," param="static.package">
+            <sequential>
+                <echo message="Moving @{static.package} from ${workspace.dir}/${packages.dir} to ${package.dir}/${packages.dir}"/>
+                <move file="${workspace.dir}/${packages.dir}/@{static.package}" todir="${package.dir}/${packages.dir}" verbose="true"/>
+            </sequential>
+        </for>
+
+        <echo message="Setting up workspace folder"/>
+        <echo message="Moving ${package.dir}/deployment_workspace to ${package.dir}/.sencha/workspace"/>
+        <move file="${package.dir}/deployment_workspace" tofile="${package.dir}/.sencha/workspace" verbose="true"/>
+    </target>
+    
+    <target name="restore-workspace" depends="init" if="repo.dev.mode">
+        <echo message="Restoring static packages"/>
+        <property name="packages.dir" value="packages"/>
+        <for list="${static.packages}" delimiter="," param="static.package">
+            <sequential>
+                <echo message="Moving @{static.package} from ${package.dir}/${packages.dir} to ${workspace.dir}/${packages.dir}"/>
+                <move file="${package.dir}/${packages.dir}/@{static.package}" todir="${workspace.dir}/${packages.dir}" verbose="true"/>
+            </sequential>
+        </for>
+
+        <echo message="Restoring workspace folder"/>
+        <echo message="Moving ${package.dir}/.sencha/workspace to ${package.dir}/deployment_workspace"/>
+        <move file="${package.dir}/.sencha/workspace" tofile="${package.dir}/deployment_workspace" verbose="true"/>
+    </target>
+
+    <target name="zip-impl" depends="init">
+        <property name="staging.dir" value="${workspace.dir}/staging"/>
+        <property name="ext.staging.dir" value="${staging.dir}/${package.name}-${package.version}"/>
+        <property name="ext.zip" value="${pkg.build.dir}/${package.name}-${package.version}-${ext.license.name}.zip"/>
+
+        <delete dir="${staging.dir}"/>
+        <delete file="${ext.zip}"/>
+        <mkdir dir="${ext.staging.dir}"/>
+        <unzip src="${pkg.build.dir}/${pkg.file.name}" dest="${ext.staging.dir}"/>
+        <zip destfile="${ext.zip}" basedir="${staging.dir}"/>
+    </target>
+
+    <target name="zip" depends="normalize-workspace,build,restore-workspace,zip-impl"
+            description="Build package and create distribution ZIP file">
+    </target>
+
+    <target name="sass-rebuild" depends="init">
+        <x-process-sub-packages>
+            <x-sub-build dir="@{pkg-dir}"
+                         target="sass"
+                         inherit-version="${build.subpkgs.inherit.version}"/>
+        </x-process-sub-packages>
+        <x-process-examples>
+            <x-sencha-command dir="@{example-dir}" inheritall="false">
+                app
+                each
+                ant
+                sass
+            </x-sencha-command>
+        </x-process-examples>
+    </target>
+
+    <target name="quick-build" depends="init,js,prep-build-folder,pkg"/>
+
+    <target name="zip-only" depends="normalize-workspace,quick-build,restore-workspace,zip-impl">
+    </target>
+
+    <!--
+    ******************************************************************
+    Targets for Test
+    ******************************************************************
+    -->
+    <target name="test-ext" depends="bootstrap,build-classic,test-run"/>
+
+    <target name="test-all" depends="test-ext"/>
+    
+    <target name="coverage-run" depends="init">
+        <x-sencha-command dir="${package.dir}">
+            <![CDATA[
+                config 
+                    -prop
+                    cmd-test.specs.test-json=${package.dir}/test/specs/coverageTest.json
+                    -prop
+                    cmd-test.coverage.results.dir=${workspace.dir}/test/coverage-results
+                then
+                package
+                    test
+                        run
+            ]]>
+        </x-sencha-command>
+    </target>
+    
+    <target name="coverage-report" depends="init">
+        <x-shell dir="${workspace.dir}/test">
+            node istanbul_report.js ${workspace.dir}/test/coverage-results ${workspace.dir}
+        </x-shell>
+    </target>
+    
+    <target name="coverage" depends="coverage-run,coverage-report"/>
+
+</project>

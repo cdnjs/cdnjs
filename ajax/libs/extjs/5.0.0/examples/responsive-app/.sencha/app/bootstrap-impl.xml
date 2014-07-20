@@ -1,0 +1,301 @@
+<project name="bootstrap-impl">
+    <!--
+    This macrodef regenerates the bootstrap.js class system metadata, which includes
+    relative file paths, class names, alternate class names, and class alias data
+    -->
+    <macrodef name="x-bootstrap">
+        <attribute name="file"/>
+        <attribute name="basedir"/>
+        <attribute name="coreFilesFile" default="@{file}"/>
+        <attribute name="classMetadataFile" default="@{file}"/>
+        <attribute name="overridesFile" default="@{file}"/>
+        <attribute name="includeBoot" default="true"/>
+        <attribute name="includeManifest" default="false"/>
+        <attribute name="includeCoreFiles" default="false"/>
+        <attribute name="includeMetadata" default="true"/>
+        <attribute name="includeOverrides" default="true"/>
+        <attribute name="appendCoreFiles" default="true"/>
+        <attribute name="appendClassMetadata" default="true"/>
+        <attribute name="appendOverrides" default="true"/>
+        <attribute name="manifestTpl" default="var Ext = Ext || '{' '}'; Ext.manifest = {0};"/>
+        <attribute name="coreFilesJsonpTpl" default="Ext.Boot.loadSync"/>
+        <attribute name="loaderConfigJsonpTpl" default="Ext.Loader.addClassPathMappings"/>
+        <attribute name="overrideTpl" default='Ext.Loader.loadScriptsSync'/>
+        <attribute name="overrideTplType" default="jsonp"/>
+        <attribute name="overrideExcludeTags" default="package-sencha-core,package-${framework.name}"/>
+        <text name="launchcode" optional="true"/>
+        <sequential>
+
+            <local name="file.dir"/>
+            <local name="tag.filter"/>
+            <local name="ux.include"/>
+            <local name="load.script.tpl"/>
+            <local name="env.dir"/>
+
+            <local name="bootstrap.header"/>
+            <local name="bootstrap.file.content"/>
+            <local name="bootstrap.files.content"/>
+            <local name="bootstrap.data.content"/>
+            <local name="bootstrap.overrides.content"/>
+            <local name="bootstrap.launch.content"/>
+            <local name="bootstrap.manifest.content"/>
+
+            <local name="boot.file"/>
+            <local name="boot.content"/>
+            <local name="boot.content.included"/>
+
+            <local name="core.files.file"/>
+            <local name="core.files.content"/>
+            <local name="core.files.call"/>
+            <local name="core.relative.file"/>
+            <local name="manifest.file"/>
+            <local name="manifest.content"/>
+            <local name="manifest.content.included"/>
+
+            <local name="class.metadata.file"/>
+            <local name="class.metadata.content"/>
+            <local name="class.metadata.call"/>
+
+            <local name="override.files.file"/>
+            <local name="override.files.content"/>
+            <local name="override.files.call"/>
+            <local name="core.files.filter"/>
+            <local name="sencha.5.filters"/>
+
+            <property name="tag.filter" value="package-sencha-core,core"/>
+
+            <x-script-def name="x-detect-sencha-5">
+                <![CDATA[
+                    importPackage(com.sencha.util);
+                    importPackage(com.sencha.logging);
+                    
+                    var frameworkName = project.getProperty("framework.name"),
+                        frameworkVersion = project.getProperty("framework.version") || "0.0.0.0";
+                        
+                    try {
+                        var frameworkVer = new Version(frameworkVersion),
+                            limit = new Version('5.0.0.0');
+                        if(frameworkVer.compareTo(limit) >= 0) {
+                            project.setProperty('sencha.5.filters', 'true');
+                        } else {
+                            project.setProperty('sencha.5.filters', 'false');
+                        }
+                    } catch (err) {
+                        project.setProperty('sencha.5.filters', 'false');
+                    }
+                ]]>
+            </x-script-def>
+            <x-detect-sencha-5/>
+            
+            <if>
+                <equals arg1="true" arg2="${sencha.5.filters}"/>
+                <then>
+                    <property name="core.files.filter">
+                        <![CDATA[
+                        include
+                            -recursive
+                            -includeUses=true
+                            -class=Ext.Loader
+                        ]]>
+                    </property>
+                </then>
+                <else>
+                    <property name="core.files.filter">
+                        <![CDATA[
+                        include
+                            -tag=${tag.filter}
+                        ]]>
+                    </property>
+                </else>
+            </if>
+
+            <if>
+                <equals arg1="${framework.name}" arg2="ext"/>
+                <then>
+                    <property name="ux.include">
+                        include
+                        -namespace=Ext.ux
+                        and
+                    </property>
+                </then>
+                <else>
+                    <property name="ux.include" value=""/>
+                </else>
+            </if>
+
+            <condition property="env.dir" value="${build.temp.dir}">
+                <isset property="build.temp.dir"/>
+            </condition>
+            <condition property="env.dir" value="${app.dir}">
+                <isset property="app.dir"/>
+            </condition>
+            <property name="env.dir" value="${package.dir}"/>
+
+            <property name="load.script.tpl" value="{0}"/>
+            <property name="core.files.file" value="${env.dir}/__core.files"/>
+            <property name="manifest.file" value="${env.dir}/__manifest"/>
+            <property name="override.files.file" value="${env.dir}/__override.files"/>
+            <property name="class.metadata.file" value="${env.dir}/__class.metadata"/>
+
+            <!-- generate the various bootstrap components -->
+            <x-compile refid="${compiler.ref.id}">
+                <![CDATA[
+                    exclude
+                        -all
+                    and
+                    ${core.files.filter}
+                    and
+                    save
+                        corefiles
+                    and
+                    metadata
+                        -base-path=@{basedir}
+                        +filenames
+                        -jsonp=@{coreFilesJsonpTpl}
+                        -out=${core.files.file}
+                    and
+                    include
+                        -all
+                    and
+                    exclude
+                        -set=corefiles
+                    and
+                    ${ux.include}
+                    metadata
+                        -info=AppManifest
+                        -out=${manifest.file}
+                        -base-path=@{basedir}
+                        -bootRelative=false
+                        -tpl=@{manifestTpl}
+                    and
+                    metadata
+                        -base-path=@{basedir}
+                        +loader-paths
+                        -jsonp=@{loaderConfigJsonpTpl}
+                        -out=${class.metadata.file}
+                    and
+                    metadata
+                        +append
+                        -base-path=@{basedir}
+                        +alternates
+                        -out=${class.metadata.file}
+                    and
+                    metadata
+                        +append
+                        -base-path=@{basedir}
+                        +alias
+                        -out=${class.metadata.file}
+                    and
+                    meta
+                        +append
+                        +packages
+                        -out=${class.metadata.file}
+                    and
+                    union
+                        -recursive=false
+                        -tag=overrides
+                    and
+                    exclude
+                        -set=corefiles
+                    and
+                    exclude
+                        -tag=@{overrideExcludeTags}
+                    and
+                    metadata
+                        -base-path=@{basedir}
+                        +filenames
+                        -@{overrideTplType}=@{overrideTpl}
+                        -out=${override.files.file}
+                ]]>
+            </x-compile>
+
+            <condition property="boot.file" value="${app.config.dir}/Boot.js">
+                <isset property="app.config.dir"/>
+            </condition>
+            <property name="boot.file" value="${package.config.dir}/Boot.js"/>
+
+            <!-- now append into the target bootstrap file-->
+            <loadfile srcFile="${boot.file}" property="boot.content"/>
+            <loadfile srcFile="${core.files.file}" property="core.files.content"/>
+            <loadfile srcFile="${override.files.file}" property="override.files.content"/>
+            <loadfile srcFile="${class.metadata.file}" property="class.metadata.content"/>
+            <loadfile srcFile="${manifest.file}" property="manifest.content"/>
+
+            <property name="boot.content" value=""/>
+            <property name="core.files.content" value=""/>
+            <property name="override.files.content" value=""/>
+            <property name="class.metadata.content" value=""/>
+            <property name="manifest.content" value=""/>
+
+            <condition property="boot.content.included" value="${boot.content}">
+                <x-is-true value="@{includeBoot}"/>
+            </condition>
+            <property name="boot.content.included" value=""/>
+
+            <condition property="manifest.content.included" value="${manifest.content}">
+                <x-is-true value="@{includeManifest}"/>
+            </condition>
+            <property name="manifest.content.included" value=""/>
+
+            <condition property="core.files.call" value="${core.files.content}">
+                <x-is-true value="@{includeCoreFiles}"/>
+            </condition>
+            <property name="core.files.call" value=""/>
+
+            <condition property="class.metadata.call" value="${class.metadata.content}">
+                <x-is-true value="@{includeMetadata}"/>
+            </condition>
+            <property name="class.metadata.call" value=""/>
+
+            <condition property="override.files.call" value="${override.files.content}">
+                <x-is-true value="@{includeOverrides}"/>
+            </condition>
+            <property name="override.files.call" value=" "/>
+
+            <property name="bootstrap.header"><![CDATA[/**
+ * This file is generated by Sencha Cmd and should NOT be edited.  It is
+ * provided to support globbing requires, custom xtypes, and other
+ * metadata-driven class system features
+ */
+]]></property>
+
+            <property name="bootstrap.file.content"><![CDATA[
+${bootstrap.header}
+${manifest.content.included}
+${boot.content.included}
+]]></property>
+
+            <property name="bootstrap.files.content"><![CDATA[
+${bootstrap.header}
+${core.files.call}
+]]></property>
+
+            <property name="bootstrap.data.content"><![CDATA[
+${bootstrap.header}
+${class.metadata.call}
+]]></property>
+
+            <property name="bootstrap.overrides.content"><![CDATA[
+${bootstrap.header}
+${override.files.call}
+]]></property>
+
+            <property name="bootstrap.launch.content"><![CDATA[
+@{launchcode}
+]]></property>
+
+            <echo file="@{file}">${bootstrap.file.content}</echo>
+            <echo file="@{coreFilesFile}" append="@{appendCoreFiles}">${bootstrap.files.content}</echo>
+            <echo file="@{classMetadataFile}" append="@{appendClassMetadata}">${bootstrap.data.content}</echo>
+            <echo file="@{overridesFile}" append="@{appendOverrides}">${bootstrap.overrides.content}</echo>
+            <echo file="@{file}" append="true">${bootstrap.launch.content}</echo>
+
+            <!-- clean up temp artifacts -->
+            <delete file="${core.files.file}"/>
+            <delete file="${manifest.file}"/>
+            <delete file="${override.files.file}"/>
+            <delete file="${class.metadata.file}"/>
+        </sequential>
+    </macrodef>
+
+</project>
