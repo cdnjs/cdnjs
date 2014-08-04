@@ -1,16 +1,28 @@
-[![Build Status](https://travis-ci.org/cdnjs/cdnjs.png?branch=master)](https://travis-ci.org/cdnjs/cdnjs) [![Dependency Status](https://david-dm.org/cdnjs/cdnjs.png?theme=shields.io)](https://david-dm.org/cdnjs/cdnjs) [![devDependency Status](https://david-dm.org/cdnjs/cdnjs/dev-status.png?theme=shields.io)](https://david-dm.org/cdnjs/cdnjs#info=devDependencies)
+[![Build Status](https://travis-ci.org/cdnjs/cdnjs.svg?branch=master)](https://travis-ci.org/cdnjs/cdnjs) [![Dependency Status](https://david-dm.org/cdnjs/cdnjs.svg?theme=shields.io)](https://david-dm.org/cdnjs/cdnjs) [![devDependency Status](https://david-dm.org/cdnjs/cdnjs/dev-status.svg?theme=shields.io)](https://david-dm.org/cdnjs/cdnjs#info=devDependencies)
 
 # cdnjs Library Repository
 
 [cdnjs](http://github.com/cdnjs/cdnjs) is the repository mirroring all library assets on [cdnjs.cloudflare.com](http://cdnjs.cloudflare.com).
 
-[Thomas Davis](https://twitter.com/neutralthoughts) and [Ryan Kirkman](https://twitter.com/ryan_kirkman) created cdnjs, [Drew Freyling](http://decompile.it/blog/) and [Peter Dave Hello](http://peterdavehello.org/) are maintainers. [Juan Gallardo](http://www.jgallardo.me/) is our community moderator.
+[Thomas Davis](https://twitter.com/neutralthoughts) and [Ryan Kirkman](https://twitter.com/ryan_kirkman) created cdnjs, [Drew Freyling](http://decompile.it/blog/) and [Peter Dave Hello](https://github.com/PeterDaveHello) are maintainers. [Juan Gallardo](http://www.jgallardo.me/) is our community moderator.
 
 cdnjs will host any production version of any JavaScript/CSS library, subject to licence permissions.
 
   * Beta, release candidate and alpha releases are not usually considered ready for full production status. Requests for pre-release versions of libraries _may_ be declined after peer review.
 
 Please raise a new pull request for new library additions and existing library updates, following the instructions below.
+
+## IMPORTANT - No more manual submissions
+
+[Discussion](https://github.com/cdnjs/cdnjs/issues/3638)
+
+It's time for us to move away from manual submissions and focus solely on getting libraries updating from official sources. Everything is still flakey and we hope you can bear with us in this transition. 
+
+*All pull request should just add auto update configs to the package.json*
+
+
+
+
 
 ## Adding a new or updating an existing library
 
@@ -39,7 +51,7 @@ You should consider the following when adding to or updating the library, so tha
 * If you are updating a library, please try to maintain consistency with the existing file and directory structure.
   * There will be occasions, particularly with major version increments, where this is not practical.
 
-* You should sync your local repositry with our master branch as new as possible, try to make the commits' parent be new.
+* You should sync your local repository with our master branch as new as possible, try to make the commits' parent be new.
  * Please use `git pull --rebase` instead of `git pull`, use `git rebase upstream/master` instead of `git merge upstream/master`, so that we can avoid of meaningless merging.
 
 * Only do one thing in one commits, don't mix different things into the same commit.
@@ -201,3 +213,6 @@ The API is served over Cloudflare with a six-hour expiry for requests.
 ## Extensions, Plugins, Resources
 
 [Extensions, Plugins, Resources](https://github.com/cdnjs/cdnjs/wiki/Extensions%2C-Plugins%2C-Resources)
+
+### Bot
+The bot account is called `the-cdnjs-curator`
