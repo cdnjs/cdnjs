@@ -5,9 +5,10 @@ cd /root/cdnjs
 echo Getting latest libraries
 
 git add .
-git commit -am "new auto update"
+git diff --quiet --exit-code --cached || git commit -m 'bla'
 ls
-git pull --rebase
+git pull origin master
+git rebase master
 
 echo npm install for good measure
 /usr/local/bin/npm install
@@ -24,9 +25,10 @@ if [ "$?" != 0 ]; then
     exit 1
 fi
 
+git add .
+git diff --quiet --exit-code --cached || git commit -am "Updated packages via NPM auto-update.js"
 echo Pushing new versionis if there is a real changing
-git pull --rebase
-git push
+git push origin autoupdate
 #if [ "`git diff -w`" != "" ]; then
 #    git add .
 #    git commit -am "Updated packages via auto-update.js"
