@@ -1,0 +1,474 @@
+/*
+*
+* The YUI CSS Foundation uses the *property and _property CSS filter
+* techniques to shield a value from A-grade browsers [1] other than
+* IE6 & IE7 (*property) and IE6 (_property)
+*
+/
+Section: General Rules
+*/
+body {
+	/* center the page */
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+/*
+Section: Page Width Rules (#doc, #doc2, #doc3, #doc4)
+*/
+/*
+Subsection: General
+*/
+.yui-d0, /* 100% */
+.yui-d1, /* 750px */
+.yui-d1f, /* 750px fixed */
+.yui-d2, /* 950px */
+.yui-d2f, /* 950px fixed */
+.yui-d3, /* 974px */
+.yui-d3f { /* 974px fixed */
+	margin: auto;
+	text-align: left;
+	width: 57.69em;
+	*width: 56.25em; /* doc1*/
+}
+
+.yui-t1,
+.yui-t2,
+.yui-t3,
+.yui-t4,
+.yui-t5,
+.yui-t6 {
+	margin: auto;
+	text-align: left;
+	width: 100%;
+}
+
+/*
+Subsection: 100% (doc)
+*/
+.yui-d0 {
+	/* Left and Right margins are not a structural part of Grids. Without them Grids
+	works fine, but content bleeds to the very edge of the document, which often
+	impairs readability and usability. They are
+	provided because they prevent the content from "bleeding" into the browser's chrome.*/
+	margin: auto 10px;
+	width: auto;
+}
+.yui-d0f {
+	width: 100%;
+}
+
+/*
+Subsection: 950 Centered (doc2)
+*/
+.yui-d2 {
+	width: 73.076em;
+	*width: 71.25em;
+}
+.yui-d2f {
+	width: 950px;
+}
+/*
+Subsection: 974 Centered (doc3)
+*/
+.yui-d3 {
+	width: 74.923em;
+	*width: 73.05em;
+}
+.yui-d3f {
+	width: 974px;
+}
+/*
+Section: Preset Template Rules (.yui-t[1-6])
+*/
+/*
+Subsection: General
+*/
+
+/* to preserve source-order independence for Gecko without breaking IE */
+.yui-b {
+	position: relative;
+}
+.yui-b {
+	_position: static;
+}
+.yui-main .yui-b {
+	position: static;
+}
+.yui-main {
+	width: 100%;
+}
+.yui-t1 .yui-main,
+.yui-t2 .yui-main,
+.yui-t3 .yui-main {
+	float: right;
+	/* IE: preserve layout at narrow widths */
+	margin-left: -25em;
+}
+.yui-t4 .yui-main,
+.yui-t5 .yui-main,
+.yui-t6 .yui-main {
+	float: left;
+	/* IE: preserve layout at narrow widths */
+	margin-right: -25em;
+}
+
+/* Subsection: For Specific Template Presets */
+
+/**
+* Nudge down to get to 13px equivalent for these form elements
+*/
+
+/*
+TODO Create t1-6's that are based on fixed widths
+*/
+/* t1 narrow block = left, equivalent of 160px */
+.yui-t1 .yui-b {
+	float: left;
+	width: 12.30769em;
+	*width: 12.00em;
+}
+.yui-t1 .yui-main .yui-b {
+	margin-left: 13.30769em;
+	*margin-left:12.975em;
+}
+/* t2 narrow block = left, equivalent of 180px */
+.yui-t2 .yui-b {
+	float: left;
+	width: 13.84615em;
+	*width: 13.50em;
+}
+.yui-t2 .yui-main .yui-b {
+	margin-left: 14.84615em;
+	*margin-left: 14.475em;
+}
+/* t3 narrow block = left, equivalent of 300px */
+.yui-t3 .yui-b {
+	float: left;
+	width: 23.0769em;
+	*width: 22.50em;
+}
+.yui-t3 .yui-main .yui-b {
+	margin-left: 24.0769em;
+	*margin-left: 23.475em;
+}
+/* t4 narrow block = right, equivalent of 180px */
+.yui-t4 .yui-b {
+	float: right;
+	width: 13.8456em;
+	*width: 13.50em;
+}
+.yui-t4 .yui-main .yui-b {
+	margin-right: 14.8456em;
+	*margin-right: 14.475em;
+}
+/* t5 narrow block = right, equivalent of 240px */
+.yui-t5 .yui-b {
+	float: right;
+	width: 18.4615em;
+	*width: 18.00em;
+}
+.yui-t5 .yui-main .yui-b {
+	margin-right: 19.4615em;
+	*margin-right: 18.975em;
+}
+/* t6 narrow block = equivalent of 300px */
+.yui-t6 .yui-b {
+	float: right;
+	width: 23.0769em;
+	*width: 22.50em;
+}
+.yui-t6 .yui-main .yui-b {
+	margin-right: 24.0769em;
+	*margin-right: 23.475em;
+}
+
+.yui-main .yui-b {
+	float: none;
+	width: auto;
+}
+
+/*
+Section: Grids and Nesting Grids
+*/
+
+/*
+Subsection: Children generally take half the available space
+*/
+
+.yui-gb .yui-u,
+.yui-g .yui-gb .yui-u,
+.yui-gb .yui-g,
+.yui-gb .yui-gb,
+.yui-gb .yui-gc,
+.yui-gb .yui-gd,
+.yui-gb .yui-ge,
+.yui-gb .yui-gf,
+.yui-gc .yui-u,
+.yui-gc .yui-g,
+.yui-gd .yui-u {
+	float: left;
+}
+
+/*Float units (and sub grids) to the right */
+.yui-g .yui-u,
+.yui-g .yui-g,
+.yui-g .yui-gb,
+.yui-g .yui-gc,
+.yui-g .yui-gd,
+.yui-g .yui-ge,
+.yui-g .yui-gf,
+.yui-gc .yui-u,
+.yui-gd .yui-g,
+.yui-g .yui-gc .yui-u,
+.yui-ge .yui-u,
+.yui-ge .yui-g,
+.yui-gf .yui-g,
+.yui-gf .yui-u {
+	float: right;
+}
+
+/*Float units (and sub grids) to the left */
+.yui-g div.first,
+.yui-gb div.first,
+.yui-gc div.first,
+.yui-gd div.first,
+.yui-ge div.first,
+.yui-gf div.first,
+.yui-g .yui-gc div.first,
+.yui-g .yui-ge div.first,
+.yui-gc div.first div.first {
+	float: left;
+}
+
+.yui-g .yui-u,
+.yui-g .yui-g,
+.yui-g .yui-gb,
+.yui-g .yui-gc,
+.yui-g .yui-gd,
+.yui-g .yui-ge,
+.yui-g .yui-gf {
+	width: 49.1%;
+}
+
+.yui-gb .yui-u,
+.yui-g .yui-gb .yui-u,
+.yui-gb .yui-g,
+.yui-gb .yui-gb,
+.yui-gb .yui-gc,
+.yui-gb .yui-gd,
+.yui-gb .yui-ge,
+.yui-gb .yui-gf,
+.yui-gc .yui-u,
+.yui-gc .yui-g,
+.yui-gd .yui-u {
+	width: 32%;
+	margin-left: 2.0%;
+}
+
+/* Give IE some extra breathing room for 1/3-based rounding issues */
+.yui-gb .yui-u {
+	*width: 31.8%;
+	*margin-left: 1.9%;
+}
+
+.yui-gc div.first,
+.yui-gd .yui-u {
+	width: 66%;
+	_width: 65.7%;
+}
+.yui-gd div.first {
+	width: 32%;
+	_width: 31.5%;
+}
+
+.yui-ge div.first,
+.yui-gf .yui-u {
+	width: 74.2%;
+	_width: 74%;
+}
+
+.yui-ge .yui-u,
+.yui-gf div.first {
+	width: 24%;
+	_width: 23.8%;
+}
+
+.yui-g .yui-gb div.first,
+.yui-gb div.first,
+.yui-gc div.first,
+.yui-gd div.first {
+	margin-left: 0;
+}
+
+/*
+Section: Deep Nesting
+*/
+.yui-g .yui-g .yui-u,
+.yui-gb .yui-g .yui-u,
+.yui-gc .yui-g .yui-u,
+.yui-gd .yui-g .yui-u,
+.yui-ge .yui-g .yui-u,
+.yui-gf .yui-g .yui-u {
+	width: 49%;
+	*width: 48.1%;
+	*margin-left: 0;
+}
+
+.yui-g .yui-gb div.first,
+.yui-gb .yui-gb div.first {
+	*margin-right: 0;
+	*width: 32%;
+	_width: 31.7%;
+}
+
+.yui-g .yui-gc div.first,
+.yui-gd .yui-g {
+	width: 66%;
+}
+
+.yui-gb .yui-g div.first {
+	*margin-right: 4%;
+	_margin-right: 1.3%;
+}
+
+.yui-gb .yui-gc div.first,
+.yui-gb .yui-gd div.first {
+	*margin-right: 0;
+}
+
+.yui-gb .yui-gb .yui-u,
+.yui-gb .yui-gc .yui-u {
+	*margin-left: 1.8%;
+	_margin-left: 4%;
+}
+
+.yui-g .yui-gb .yui-u {
+	_margin-left: 1.0%;
+}
+
+.yui-gb .yui-gd .yui-u {
+	*width: 66%;
+	_width: 61.2%;
+}
+.yui-gb .yui-gd div.first {
+	*width: 31%;
+	_width: 29.5%;
+}
+
+.yui-g .yui-gc .yui-u,
+.yui-gb .yui-gc .yui-u {
+	width: 32%;
+	_float: right;
+	margin-right: 0;
+	_margin-left: 0;
+}
+.yui-gb .yui-gc div.first {
+	width: 66%;
+	*float: left;
+	*margin-left: 0;
+}
+
+.yui-gb .yui-ge .yui-u,
+.yui-gb .yui-gf .yui-u {
+	margin: 0;
+}
+
+.yui-gb .yui-gb .yui-u {
+	_margin-left: .7%;
+}
+
+.yui-gb .yui-g div.first,
+.yui-gb .yui-gb div.first {
+	*margin-left:0;
+}
+
+.yui-gc .yui-g .yui-u,
+.yui-gd .yui-g .yui-u {
+	*width: 48.1%;
+	*margin-left: 0;
+}
+
+.yui-gb .yui-gd div.first {
+	width: 32%;
+}
+.yui-g .yui-gd div.first {
+	_width: 29.9%;
+}
+
+.yui-ge .yui-g {
+	width: 24%;
+}
+.yui-gf .yui-g {
+	width: 74.2%;
+}
+
+.yui-gb .yui-ge div.yui-u,
+.yui-gb .yui-gf div.yui-u {
+	float: right;
+}
+.yui-gb .yui-ge div.first,
+.yui-gb .yui-gf div.first {
+	float: left;
+}
+
+/* Width Accommodation for Nested Contexts */
+.yui-gb .yui-ge .yui-u,
+.yui-gb .yui-gf div.first {
+	*width: 24%;
+	_width: 20%;
+}
+
+/* Width Accommodation for Nested Contexts */
+.yui-gb .yui-ge div.first,
+.yui-gb .yui-gf .yui-u {
+	*width: 73.5%;
+	_width: 65.5%;
+}
+
+/* Patch for GD within GE */
+.yui-ge div.first .yui-gd .yui-u {
+	width: 65%;
+}
+.yui-ge div.first .yui-gd div.first {
+	width: 32%;
+}
+
+/*
+Section: Clearing. zoom for IE, :after for others
+*/
+
+#bd:after,
+.yui-g:after,
+.yui-gb:after,
+.yui-gc:after,
+.yui-gd:after,
+.yui-ge:after,
+.yui-gf:after,
+.yui-t1:after,
+.yui-t2:after,
+.yui-t3:after,
+.yui-t4:after,
+.yui-t5:after,
+.yui-t6:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+#bd,
+.yui-g,
+.yui-gb,
+.yui-gc,
+.yui-gd,
+.yui-ge,
+.yui-gf,
+.yui-t1,
+.yui-t2,
+.yui-t3,
+.yui-t4,
+.yui-t5,
+.yui-t6 {
+	zoom: 1;
+}

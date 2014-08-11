@@ -1,0 +1,1 @@
+Ext.define("Ext.rtl.form.field.File",{override:"Ext.form.field.File",getButtonMarginProp:function(){return this.getHierarchyState().rtl?"margin-right:":"margin-left:"}});

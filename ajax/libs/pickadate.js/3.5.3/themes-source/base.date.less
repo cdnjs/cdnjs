@@ -1,0 +1,333 @@
+
+/* ==========================================================================
+   $BASE-DATE-PICKER
+   ========================================================================== */
+
+@import "_variables.less";
+
+
+/**
+ * The picker box.
+ */
+.picker__box {
+    padding: 0 1em;
+}
+
+
+/**
+ * The header containing the month and year stuff.
+ */
+.picker__header {
+    text-align: center;
+    position: relative;
+    margin-top: .75em;
+}
+
+
+/**
+ * The month and year labels.
+ */
+.picker__month,
+.picker__year {
+    font-weight: 500;
+    display: inline-block;
+    margin-left: .25em;
+    margin-right: .25em;
+}
+.picker__year {
+    color: @year-weekday-label;
+    font-size: .8em;
+    font-style: italic;
+}
+
+
+/**
+ * The month and year selectors.
+ */
+.picker__select--month,
+.picker__select--year {
+    border: 1px solid @border-select;
+    height: 2em;
+    padding: .5em; // For firefox
+    margin-left: .25em;
+    margin-right: .25em;
+
+    // For `tiny` width screens, move it up a bit.
+    @media ( min-width: @breakpoint-width-tiny ) {
+        margin-top: -.5em;
+    }
+}
+.picker__select--month {
+    width: 35%;
+}
+.picker__select--year {
+    width: 22.5%;
+}
+.picker__select--month:focus,
+.picker__select--year:focus {
+    border-color: @blue;
+}
+
+
+/**
+ * The month navigation buttons.
+ */
+.picker__nav--prev,
+.picker__nav--next {
+    position: absolute;
+    padding: .5em 1.25em;
+    width: 1em;
+    height: 1em;
+    box-sizing: content-box;
+    top: -.25em;
+
+    // For `tiny` width screens, move it up a bit.
+    @media ( min-width: @breakpoint-width-tiny ) {
+        top: -.33em;
+    }
+}
+.picker__nav--prev {
+    left: -1em;
+    padding-right: 1.25em;
+
+    // For `tiny` width screens, increase the padding a bit.
+    @media ( min-width: @breakpoint-width-tiny ) {
+        padding-right: 1.5em;
+    }
+}
+.picker__nav--next {
+    right: -1em;
+    padding-left: 1.25em;
+
+    // For `tiny` width screens, increase the padding a bit.
+    @media ( min-width: @breakpoint-width-tiny ) {
+        padding-left: 1.5em;
+    }
+}
+.picker__nav--prev:before,
+.picker__nav--next:before {
+    content: " ";
+    border-top: .5em solid transparent;
+    border-bottom: .5em solid transparent;
+    border-right: .75em solid @black;
+    width: 0;
+    height: 0;
+    display: block;
+    margin: 0 auto;
+}
+.picker__nav--next:before {
+    border-right: 0;
+    border-left: .75em solid @black;
+}
+
+// Hovered date picker items.
+.picker__nav--prev:hover,
+.picker__nav--next:hover {
+    .picker-item-hovered;
+}
+
+// Disabled month nav.
+.picker__nav--disabled,
+.picker__nav--disabled:hover,
+.picker__nav--disabled:before,
+.picker__nav--disabled:before:hover {
+    cursor: default;
+    background: none;
+    border-right-color: @disabled-things-bg;
+    border-left-color: @disabled-things-bg;
+}
+
+
+
+
+/**
+ * The calendar table of dates
+ */
+.picker__table {
+    text-align: center;
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: fixed;
+    font-size: inherit;
+    width: 100%;
+    margin-top: .75em;
+    margin-bottom: .5em;
+
+    // For `small` screens, increase the spacing a tad.
+    @media ( min-height: @breakpoint-small ) {
+        margin-bottom: .75em;
+    }
+}
+
+// Remove browser stylings on a table cell.
+.picker__table td {
+    margin: 0;
+    padding: 0;
+}
+
+
+/**
+ * The weekday labels
+ */
+.picker__weekday {
+    width: 14.285714286%; // 100/7
+    font-size: .75em;
+    padding-bottom: .25em;
+    color: @year-weekday-label;
+    font-weight: 500;
+
+    /* Increase the spacing a tad */
+    @media ( min-height: @breakpoint-small ) {
+        padding-bottom: .5em;
+    }
+}
+
+
+/**
+ * The days on the calendar
+ */
+.picker__day {
+    padding: .3125em 0;
+    font-weight: 200;
+    border: 1px solid transparent;
+}
+
+// Today.
+.picker__day--today {
+    position: relative;
+}
+.picker__day--today:before {
+    content: " ";
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 0;
+    height: 0;
+    border-top: .5em solid @blue-tag;
+    border-left: .5em solid transparent;
+}
+
+// Disabled day.
+.picker__day--disabled:before {
+    border-top-color: @disabled-tag;
+}
+
+// Out of focus days.
+.picker__day--outfocus {
+    color: @disabled-things-text;
+}
+
+// Hovered date picker items.
+.picker__day--infocus:hover,
+.picker__day--outfocus:hover {
+    .picker-item-hovered;
+}
+
+// Highlighted and hovered/focused dates.
+.picker__day--highlighted {
+    .picker-item-highlighted;
+}
+.picker__day--highlighted:hover,
+.picker--focused .picker__day--highlighted {
+    .picker-item-hovered;
+}
+
+// Selected and hovered/focused dates.
+.picker__day--selected,
+.picker__day--selected:hover,
+.picker--focused .picker__day--selected {
+    .picker-item-selected;
+}
+
+// Disabled dates.
+.picker__day--disabled,
+.picker__day--disabled:hover,
+.picker--focused .picker__day--disabled {
+    .picker-item-disabled;
+}
+
+// Disabled and highlighted dates.
+.picker__day--highlighted.picker__day--disabled,
+.picker__day--highlighted.picker__day--disabled:hover {
+    background: @disabled-highlighted-things-bg;
+}
+
+
+/**
+ * The footer containing the "today", "clear", and "close" buttons.
+ */
+.picker__footer {
+    text-align: center;
+}
+
+// Today, clear, and close buttons.
+.picker__button--today,
+.picker__button--clear,
+.picker__button--close {
+    border: 1px solid @white;
+    background: @white;
+    font-size: .8em;
+    padding: .66em 0;
+    font-weight: bold;
+    width: 33%;
+    display: inline-block;
+    vertical-align: bottom;
+}
+.picker__button--today:hover,
+.picker__button--clear:hover,
+.picker__button--close:hover {
+    .picker-item-hovered;
+    border-bottom-color: @blue-hover;
+}
+.picker__button--today:focus,
+.picker__button--clear:focus,
+.picker__button--close:focus {
+    background: @blue-hover;
+    border-color: @blue;
+    outline: none;
+}
+
+// Today, clear, and close “indicators”.
+.picker__button--today:before,
+.picker__button--clear:before,
+.picker__button--close:before {
+    position: relative;
+    display: inline-block;
+    height: 0;
+}
+.picker__button--today:before,
+.picker__button--clear:before {
+    content: " ";
+    margin-right: .45em;
+}
+.picker__button--today:before {
+    top: -.05em;
+    width: 0;
+    border-top: .66em solid @blue-tag;
+    border-left: .66em solid transparent;
+}
+.picker__button--clear:before {
+    top: -.25em;
+    width: .66em;
+    border-top: 3px solid @clear-red;
+}
+.picker__button--close:before {
+    content: "\D7"; // ×
+    top: -.1em;
+    vertical-align: top;
+    font-size: 1.1em;
+    margin-right: .35em;
+    color: @border-grey;
+}
+
+// Today when “disabled”.
+.picker__button--today[disabled],
+.picker__button--today[disabled]:hover {
+    .picker-item-disabled;
+}
+.picker__button--today[disabled]:before {
+    border-top-color: @disabled-tag;
+}
+
+
+

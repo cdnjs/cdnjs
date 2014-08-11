@@ -1,0 +1,1 @@
+Ext.define("Ext.app.domain.Component",{extend:"Ext.app.EventDomain",singleton:true,requires:["Ext.Component"],type:"component",constructor:function(){var a=this;a.callParent();a.monitor(Ext.Component)},match:function(b,a){return b.is(a)}});

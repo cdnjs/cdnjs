@@ -1,0 +1,1 @@
+YUI.add("lang/calendar-base_zh-HANT-TW",function(e){e.Intl.add("calendar-base","zh-HANT-TW",{weekdays:["星期日","星期一","星期二","星期三","星期四","星期五","星期六"],short_weekdays:["週日","週一","週二","週三","週四","週五","週六"],very_short_weekdays:["日","一","二","三","四","五","六"],first_weekday:0,weekends:[0,6]})},"@VERSION@");

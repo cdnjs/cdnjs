@@ -1,0 +1,1 @@
+Ext.define("Ext.app.domain.Direct",{extend:"Ext.app.EventDomain",singleton:true,requires:["Ext.direct.Provider"],type:"direct",idProperty:"id",constructor:function(){var a=this;a.callParent();a.monitor(Ext.direct.Provider)}});

@@ -1,16 +1,34 @@
-[![Build Status](https://travis-ci.org/cdnjs/cdnjs.png?branch=master)](https://travis-ci.org/cdnjs/cdnjs) [![Dependency Status](https://david-dm.org/cdnjs/cdnjs.png?theme=shields.io)](https://david-dm.org/cdnjs/cdnjs) [![devDependency Status](https://david-dm.org/cdnjs/cdnjs/dev-status.png?theme=shields.io)](https://david-dm.org/cdnjs/cdnjs#info=devDependencies)
+[![Build Status](https://travis-ci.org/cdnjs/cdnjs.svg?branch=master)](https://travis-ci.org/cdnjs/cdnjs) [![Dependency Status](https://david-dm.org/cdnjs/cdnjs.svg?theme=shields.io)](https://david-dm.org/cdnjs/cdnjs) [![devDependency Status](https://david-dm.org/cdnjs/cdnjs/dev-status.svg?theme=shields.io)](https://david-dm.org/cdnjs/cdnjs#info=devDependencies)
 
-# cdnjs Script Repository
+# cdnjs Library Repository
 
-[cdnjs](http://github.com/cdnjs/cdnjs) is the repository mirroring all scripts on `cdnjs.cloudflare.com`, created and maintained by [Thomas Davis](https://twitter.com/neutralthoughts), [Ryan Kirkman](https://twitter.com/ryan_kirkman), [Pete Cooper](http://twitter.com/petecooper) and [Drew Freyling](http://decompile.it/blog/)
+[cdnjs](http://github.com/cdnjs/cdnjs) is the repository mirroring all library assets on [cdnjs.cloudflare.com](http://cdnjs.cloudflare.com).
 
-We will host any version of any library, subject to popularity and licence permissions.
+[Thomas Davis](https://twitter.com/neutralthoughts) and [Ryan Kirkman](https://twitter.com/ryan_kirkman) created cdnjs, [Drew Freyling](http://decompile.it/blog/) and [Peter Dave Hello](https://github.com/PeterDaveHello) are maintainers. [Juan Gallardo](http://www.jgallardo.me/) is our community moderator.
 
-Please raise a pull request for an older version of a library if your site still uses it, and also for proposals for new libraries.
+cdnjs will host any production version of any JavaScript/CSS library, subject to licence permissions.
+
+  * Beta, release candidate and alpha releases are not usually considered ready for full production status. Requests for pre-release versions of libraries _may_ be declined after peer review.
+
+Please raise a new pull request for new library additions and existing library updates, following the instructions below.
+
+## IMPORTANT - No more manual submissions
+
+[Discussion](https://github.com/cdnjs/cdnjs/issues/3638)
+
+It's time for us to move away from manual submissions and focus solely on getting libraries updating from official sources. Everything is still flakey and we hope you can bear with us in this transition. 
+
+*All pull request should just add auto update configs to the package.json*
+
+
+
+
 
 ## Adding a new or updating an existing library
 
-cdnjs relies on user-submitted pull requests and automatic updating via `npm` to populate and update libraries. To add a new library, or update an existing library outside of `npm`, start by [forking the cdnjs repo](https://github.com/cdnjs/cdnjs/fork) to your own GitHub account.
+cdnjs relies on user-submitted pull requests and automatic updating via `npm` to populate and update libraries.
+
+To add a new library, or update an existing library outside of `npm`, start by [forking the cdnjs repo](https://github.com/cdnjs/cdnjs/fork) to your own GitHub account.
 
 If you're adding/modifying outside of the GitHub browser interface, for example on the command line or with the GitHub desktop application, you will need to additionally install `node` locally. For more information on installing `node`, please refer to [nodejs.org](http://nodejs.org).
 
@@ -22,18 +40,41 @@ When you have forked the cdnjs repo, add your library to it. Libraries are store
 
 ## Conventions
 
-You should consider the following when adding to or updating the library:
+You should consider the following when adding to or updating the library, so that we can keep our project neat, clean and clear:
 
-* Filenames should **not** include a version number and be **lowercase**. This is OK: `useful.min.js`, but this is not: `useful-2.0.1.min.js`.
+* Filenames should _not_ include a version number and be _lowercase_.
+  * This is OK: `useful.min.js`, but this is not: `useful-2.0.1.min.js`.
 
-* JavaScript & CSS files should be minified to reduce network and browser overhead. If the library doesn't already provide a minified version, cdnjs's preferred JavaScript minifier is [UglifyJS](http://marijnhaverbeke.nl/uglifyjs "UglifyJS")
+* JavaScript & CSS files should be minified to reduce network traffic and browser overhead.
+  * If the library doesn't already provide a minified version, cdnjs's preferred JavaScript minifier is [UglifyJS](http://marijnhaverbeke.nl/uglifyjs "UglifyJS")
 
-* If you are updating a library, please try to maintain consistency with the existing file and directory structure. There will be occasions, particularly with major version increments, where this is not practical. If there are significant changes in the file structure, please note this in your pull request.
+* If you are updating a library, please try to maintain consistency with the existing file and directory structure.
+  * There will be occasions, particularly with major version increments, where this is not practical.
 
+* You should sync your local repository with our master branch as new as possible, try to make the commits' parent be new.
+ * Please use `git pull --rebase` instead of `git pull`, use `git rebase upstream/master` instead of `git merge upstream/master`, so that we can avoid of meaningless merging.
+
+* Only do one thing in one commits, don't mix different things into the same commit.
+
+* Every commits should be meaningful, don't cut one thing into multiple commits.
+
+* Inspect your work by `git diff` & `git status` before commit your change.
+
+* Inspect your commit by `git log --stat` & `git log -p` before sending a pull request.
 
 ## Create or update `package.json`
 
-Each library has a corresponding `package.json`, written in `npm` format (see `test/schemata/npm-package.json` for details or use another `package.json` to crib from - it's very simple). When an existing library is updated, the details in `package.json` should be updated where required. For example, if a new version of the library is added, the version number may need changing.
+Each library has a corresponding `package.json`, written in `npm` format (see `test/schemata/npm-package.json` for details or use another `package.json` to crib from - it's pretty self-explanatory). When an existing library is updated, the details in `package.json` should be updated where required.
+
+For example, if a new version of the library is added, the version number may need changing. Likewise, if you're adding `npm` update information to a library, this is done in `package.json`.
+
+## Install `npm test` dependencies
+
+If you don't have `vows` installed do so by running:
+
+```
+npm install -g vows
+```
 
 ## Run `npm test` to check all is well
 
@@ -41,30 +82,38 @@ If you're updating the library outside of `npm` or the GitHub browser, you shoul
 
 If you run `npm test` and see no errors, all is well; resolve any errors before you raise your pull request and re-run `npm test` to ensure everything works.
 
-You may see a warning about a missing readme file - you can ignore this. Libraries on cdnjs do not require a readme file.
+If you see an error then run `npm install` before running `npm test:
+
+```
+vows: command not found
+npm ERR! Test failed.  See above for more details.
+npm ERR! not ok code 0
+```
 
 ## Pull request pre-flight checks
 
+* Have you comply with our conventions?
 * Have you followed the library directory structure?
 * Does a valid and accurate `package.json` exist for the library?
 * Have you minified JavaScript and CSS?
 * Did `npm test` check out OK?
 
-...if so, you're ready to raise a pull request.
+...if so, great! You're ready to raise a pull request.
 
 ## Raising a pull request
 
-Please restrict your pull request to one library. From a maintenance standpoint, it's much more straightforward to process pull requests where there is one commit for one library.
+Please restrict your pull request to one library. You can include >1 version/release of a library in a single pull request.
+
+From a maintenance standpoint, it's much more straightforward to process pull requests where there is one commit for one library.
 
 In your pull request title, tell us what you're doing. If you are the author of the library, please add `[author]` to the pull request title.
 
-Please include the following in your pull request:
+__Please include the following in your pull request:__
 
-* The origin of your library files (e.g., where you downloaded it)
-* How you found the version of the script (e.g., `Source: http://github.com/example/releases/1.2.3.zip`)
-* Evidence of popularity if the GitHub numbers don't indicate popularity.
+* The origin of your new files
+  * e.g., where you downloaded the version from
 
-Providing the origin of your files is very helpful as the cdnjs project is peer-reviewed.
+A URL is ideal. Providing the origin of your files is very helpful as the cdnjs project is peer-reviewed. Practically speaking, it also helps us process your pull request more efficiently, which means your files go live sooner. Help us and we'll help you back.
 
 ## Enabling `npm` auto update
 
@@ -164,3 +213,6 @@ The API is served over Cloudflare with a six-hour expiry for requests.
 ## Extensions, Plugins, Resources
 
 [Extensions, Plugins, Resources](https://github.com/cdnjs/cdnjs/wiki/Extensions%2C-Plugins%2C-Resources)
+
+### Bot
+The bot account is called `the-cdnjs-curator`

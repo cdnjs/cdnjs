@@ -1,7 +1,17 @@
 ---
 language: node_js
+
+cache:
+  bundler: true
+  apt: true
+  directories:
+    - node_modules
+
 node_js:
-- 0.8
+  - "0.10"
+
+git:
+  depth: 1
 
 env:
   global:
@@ -10,10 +20,21 @@ env:
     - secure: "TxudD0/5dovbpXh0ILUY+KRAGFgrJLdE7PE7y/wVI1cCtvg1kU28oKF29gXO\nhcEgEfOFX+mzKDHaHr0hpHd8vB24G7O6jhfJj8rb+QBGZ5NUvxN9H9t5SAL6\ngguGRavYOzjh/6sctcrRGdRsP4hJNCQ+uK/r2UtHBI3cFFKZx8U="
     - secure: "VoYj/ZRKi72hpL3sB3sj2AhBorrTTeXUrtPajWRR4v5lgxrxia1K8vwEhCkg\nfESygxOUuao7LdWkQcDVrcmlyoXLdGU2vBNKmr6Aayxo7KwGaWjUtE1OICFk\nrhMkykHusQiMmLnmz/7663h4dJe53Cup8c1cHF0HApVJDVIwjGw="
     - secure: "zxdgeOM+coI3Vy8EF62l1H605bhXQgBMpBBvmI8hDCaPmI2jjoUu+hZ2zJ5s\nZls3d8Bl49ancshFzTLGvBC4AExB6QZYtCNbYLM6COPq91Na7EbwOOKMNvfj\nuWIsnKTkekl0v8N/Aib794eR+YdOggc3XPK9T/C4/qh3QUC1G0g="
+
+install: true
+#  - npm install --production --loglevel warn
+
 before_script:
-- "gem install --version 0.8.0 faraday"
-- "gem install travis-artifacts"
+  - "travis_retry gem install --version 0.8.9 faraday --no-document > /dev/null"
+  - "travis_retry gem install fog-json --no-document > /dev/null"
+  - "travis_retry gem install travis-artifacts --no-document > /dev/null"
+
 after_success:
-- "node ./build/packages.json.js"
-- "travis-artifacts upload --path packages.json --target-path /"
-- "travis-artifacts upload --path rss --target-path /"
+  - "node ./build/packages.json.js"
+  - "travis-artifacts upload --path packages.json --target-path /"
+  - "travis-artifacts upload --path rss --target-path /"
+
+notifications:
+  hipchat: 3339f2786b483d04c81375df9d5193@cdnjs
+  email:
+    on_success: never

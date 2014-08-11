@@ -1,0 +1,240 @@
+/*
+  backgrid
+  http://github.com/wyuenho/backgrid
+
+  Copyright (c) 2013 Jimmy Yuen Ho Wong and contributors
+  Licensed under the MIT license.
+*/
+
+.backgrid-container {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 465px;
+  padding: 0;
+  overflow: auto;
+  border: 0;
+}
+
+.backgrid {
+  width: 100%;
+  max-width: 100%;
+  background-color: transparent;
+  border-collapse: collapse;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+}
+
+.backgrid th,
+.backgrid td {
+  display: none;
+  height: 20px;
+  max-width: 250px;
+  padding: 4px 5px;
+  overflow: hidden;
+  line-height: 20px;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
+  border-bottom: 1px solid #DDD;
+}
+
+.backgrid th.renderable,
+.backgrid td.renderable {
+  display: table-cell;
+}
+
+.backgrid th {
+  font-weight: bold;
+  text-align: center;
+}
+
+.backgrid th.sortable a {
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.backgrid thead th {
+  vertical-align: bottom;
+  background-color: #f9f9f9;
+}
+
+.backgrid thead th a {
+  display: block;
+}
+
+.backgrid.backgrid-striped tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.backgrid tbody tr.empty {
+  font-style: italic;
+  color: gray;
+}
+
+.backgrid tbody tr.empty td {
+  display: inherit;
+  text-align: center;
+}
+
+.backgrid td.editor {
+  padding: 0;
+}
+
+.backgrid td.editor,
+.backgrid tbody tr:nth-child(odd) td.editor {
+  background-color: rgba(82, 168, 236, 0.1);
+  outline: 1px solid rgba(82, 168, 236, 0.8);
+  outline-offset: -1px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-transition-duration: 200ms;
+     -moz-transition-duration: 200ms;
+       -o-transition-duration: 200ms;
+          transition-duration: 200ms;
+  -webkit-transition-property: width, outline, background-color;
+     -moz-transition-property: width, outline, background-color;
+       -o-transition-property: width, outline, background-color;
+          transition-property: width, outline, background-color;
+  -webkit-transition-timing-function: ease-in-out;
+     -moz-transition-timing-function: ease-in-out;
+       -o-transition-timing-function: ease-in-out;
+          transition-timing-function: ease-in-out;
+}
+
+.backgrid td.editor input[type=text] {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0 5px;
+  margin: 0;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  -webkit-box-shadow: none;
+     -moz-box-shadow: none;
+          box-shadow: none;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+}
+
+.backgrid td.editor input[type=text]::-ms-clear {
+  display: none;
+}
+
+.backgrid td.error,
+.backgrid tbody tr:nth-child(odd) td.error {
+  background-color: rgba(255, 210, 77, 0.1);
+  outline: 1px solid #ffd24d;
+}
+
+.backgrid td.editor :focus,
+.backgrid th.editor :focus {
+  outline: 0;
+}
+
+.backgrid .sort-caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 0.3em;
+  border: 0;
+  content: "";
+}
+
+.backgrid .ascending .sort-caret {
+  vertical-align: baseline;
+  border-top: none;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid #000000;
+  border-left: 4px solid transparent;
+}
+
+.backgrid .descending .sort-caret {
+  vertical-align: super;
+  border-top: 4px solid #000000;
+  border-right: 4px solid transparent;
+  border-bottom: none;
+  border-left: 4px solid transparent;
+}
+
+.backgrid .string-cell,
+.backgrid .uri-cell,
+.backgrid .email-cell,
+.backgrid .string-cell.editor input[type=text],
+.backgrid .uri-cell.editor input[type=text],
+.backgrid .email-cell.editor input[type=text] {
+  text-align: left;
+}
+
+.backgrid .date-cell,
+.backgrid .time-cell,
+.backgrid .datetime-cell,
+.backgrid .number-cell,
+.backgrid .integer-cell,
+.backgrid .percent-cell,
+.backgrid .date-cell.editor input[type=text],
+.backgrid .time-cell.editor input[type=text],
+.backgrid .datetime-cell.editor input[type=text],
+.backgrid .number-cell.editor input[type=text],
+.backgrid .integer-cell.editor input[type=text],
+.backgrid .percent-cell.editor input[type=text] {
+  text-align: right;
+}
+
+.backgrid .boolean-cell,
+.backgrid .boolean-cell.editor input[type=checkbox] {
+  text-align: center;
+}
+
+.backgrid .select-cell {
+  text-align: center;
+}
+
+.backgrid .select-cell.editor {
+  padding: 0;
+}
+
+.backgrid .select-cell.editor select {
+  display: block;
+  width: 100%;
+  height: 28px;
+  padding: 4px 5px;
+  margin: 0;
+  line-height: 28px;
+  vertical-align: middle;
+  background-color: white;
+  border: 0;
+  outline: 0;
+  -webkit-box-shadow: none;
+     -moz-box-shadow: none;
+          box-shadow: none;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.backgrid .select-cell.editor select[multiple] {
+  height: auto;
+}
+
+.backgrid .select-cell.editor :focus {
+  border: 0;
+  outline: 0;
+}
+
+.backgrid .select-cell.editor select::-moz-focus-inner,
+.backgrid .select-cell.editor optgroup::-moz-focus-inner,
+.backgrid .select-cell.editor option::-moz-focus-inner,
+.backgrid .select-cell.editor select::-o-focus-inner,
+.backgrid .select-cell.editor optgroup::-o-focus-inner,
+.backgrid .select-cell.editor option::-o-focus-inner {
+  border: 0;
+}

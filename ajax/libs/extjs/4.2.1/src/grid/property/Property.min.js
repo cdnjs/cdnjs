@@ -1,0 +1,1 @@
+Ext.define("Ext.grid.property.Property",{extend:"Ext.data.Model",alternateClassName:"Ext.PropGridProperty",fields:[{name:"name",type:"string"},{name:"value"}],idProperty:"name"});

@@ -1,0 +1,1 @@
+Ext.define("Ext.data.SequentialIdGenerator",{extend:"Ext.data.IdGenerator",alias:"idgen.sequential",constructor:function(){var a=this;a.callParent(arguments);a.parts=[a.prefix,""]},prefix:"",seed:1,generate:function(){var a=this,b=a.parts;b[1]=a.seed++;return b.join("")}});

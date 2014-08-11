@@ -1,0 +1,1 @@
+Ext.define("Ext.rtl.selection.CellModel",{override:"Ext.selection.CellModel",doMove:function(b,a){if(this.view.getHierarchyState().rtl){if(b=="left"){b="right"}else{if(b=="right"){b="left"}}}this.callParent([b,a])}});

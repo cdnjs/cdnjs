@@ -6,7 +6,16 @@ var Hipchat = require('node-hipchat'),
     _ = require('lodash'),
     request = require("superagent"),
     async = require("async"),
-    tarball = require('tarball-extract')
+    tarball = require('tarball-extract'),
+    colors = require('colors')
+
+colors.setTheme({
+  prompt: 'cyan',
+  info: 'grey',
+  success: 'green',
+  warn: 'yellow',
+  error: 'red'
+});
 
 var HC = new Hipchat(process.env.HIPCHAT);
 var hipchat = {
@@ -21,7 +30,7 @@ var hipchat = {
       };
       HC.postMessage(params, function(data) {});
     } else {
-      console.log('No Hipchat API Key');
+      console.log('No Hipchat API Key'.warn);
     }
   }
 };
@@ -81,7 +90,7 @@ var isValidFileMap = function(pkg){
 var error = function(msg, name){
     var err = new Error(msg);
     err.name = name;
-    console.log(msg);
+    console.log(msg.error);
     hipchat.message('red', msg);
     return err;
 }
@@ -121,7 +130,8 @@ var processNewVersion = function(pkg, version){
 
     if(!extractLibPath){
       //even more rarely, the tar doesnt seem to get extracted at all.. which is probably a bug in that lib.
-      console.log(pkg.npmName+"@"+version+" - never got extracted! This problem usually goes away on next run. Couldnt find extract dir here: ", getPackageTempPath(pkg, version));
+      var msg = pkg.npmName + "@" + version + " - never got extracted! This problem usually goes away on next run. Couldnt find extract dir here: " + getPackageTempPath(pkg, version);
+      console.log(msg.error);
       return;
     }
     var libPath = getPackagePath(pkg, version)
@@ -154,7 +164,8 @@ var processNewVersion = function(pkg, version){
 
             if(files.length == 0){
               //usually old versions have this problem
-              console.log(pkg.npmName+"@"+version+" - couldnt find file in npmFileMap. Doesnt exist: ", path.join(libContentsPath, file));
+              var msg = (pkg.npmName + "@" + version + " - couldnt find file in npmFileMap.") + (" Doesnt exist: " + path.join(libContentsPath, file)).info;
+              console.log(msg);
             }
 
             _.each(files, function(extractFilePath) {
@@ -166,12 +177,17 @@ var processNewVersion = function(pkg, version){
                 var copyPath = path.join(libPath, copyPart)
                 fs.mkdirsSync(path.dirname(copyPath))
                 fs.renameSync(extractFilePath, copyPath);
-                updated = true
+                updated = true;
             });
         });
     });
     if(updated){
       newVersionCount++;
+        var libPatha =path.normalize(path.join(__dirname, 'ajax', 'libs', pkg.name, 'package.json'));
+        console.log('------------'.red, libPatha.green);    
+        pkg.version = version;
+
+        fs.writeFileSync(libPatha, JSON.stringify(pkg, null, 2) + '\n', 'utf8');
     }
     return errors;
 }
@@ -206,9 +222,11 @@ var updateLibraryVersion = function(pkg, tarballUrl, version, cb) {
         tarball.extractTarballDownload(url , downloadFile, extractLibPath, {}, function(err, result) {
             if(fs.existsSync(downloadFile)){
                 processNewVersion(pkg, version);
-                console.log("Do not have version", version, "of ", pkg.npmName);
+                var msg = "Do not have version " + version + " of " + pkg.npmName;
+                console.log(msg.warn);
             } else {
-                console.log("error downloading "+ version+ " of "+pkg.npmName+" it didnt exist: ", result, err)
+                var msg = "error downloading " + version + " of " + pkg.npmName + " it didnt exist: " + result + err;
+                console.log(msg.error);
             }
             cb()
         });
@@ -225,20 +243,21 @@ var updateLibraryVersion = function(pkg, tarballUrl, version, cb) {
  */
 var updateLibrary = function (pkg, cb) {
     if(!isValidFileMap(pkg)){
-        console.log(pkg.npmName+" has a malicious npmFileMap");
+        var msg = pkg.npmName.error + " has a malicious npmFileMap";
+        console.log(msg.warn);
         hipchat.message('red', pkg.npmName+" has a malicious npmFileMap: "+ JSON.stringify(pkg.npmFileMap));
         return cb(null);
     }
-    console.log('Checking versions for ' + pkg.npmName);
+    var msg = 'Checking versions for ' + pkg.npmName;
+    console.log(msg);
     request.get('http://registry.npmjs.org/' + pkg.npmName, function(result) {
-        async.eachSeries(_.pairs(result.body.versions), function(p, cb){
+        async.eachLimit(_.pairs(result.body.versions), maxWorker, function(p, cb){
             var data = p[1];
             var version = p[0];
             updateLibraryVersion(pkg, data.dist.tarball, version, cb)
         }, function(err){
-            var npmVersion = result.body['dist-tags'] && result.body['dist-tags'].latest || 0;
-            pkg.version = npmVersion;
-            fs.writeFileSync('ajax/libs/' + pkg.name + '/package.json', JSON.stringify(pkg, null, 2), 'utf8');
+        var msg = 'Library finished' + (err ? ' ' + err.error : '');
+        console.log(msg);
             cb(null);
         });
     });
@@ -259,10 +278,12 @@ exports.run = function(){
         return (parsedPkg.npmName && parsedPkg.npmFileMap) ? parsedPkg : null;
     }).compact().value();
     hipchat.message('green', 'Found ' + packages.length + ' npm enabled libraries');
-    console.log('Found ' + packages.length + ' npm enabled libraries');
+    var msg = 'Found ' + packages.length + ' npm enabled libraries';
+    console.log(msg.prompt);
 
-    async.eachSeries(packages, updateLibrary, function(err) {
-        console.log('Auto Update Completed - ' + newVersionCount + ' versions were updated');
+    async.eachLimit(packages, maxWorker, updateLibrary, function(err) {
+        var msg = 'Auto Update Completed - ' + newVersionCount + ' versions were updated';
+        console.log(msg.prompt);
         hipchat.message('green', 'Auto Update Completed - ' + newVersionCount + ' versions were updated');
         fs.removeSync(path.join(__dirname, 'temp'))
     });
@@ -278,7 +299,8 @@ exports.invalidNpmName = invalidNpmName;
 
 var args = process.argv.slice(2);
 if(args.length > 0 && args[0] == 'run'){
+    maxWorker = (args[1] == 'serial') ? 1 : 8;
     exports.run()
 } else {
-    console.log('to start, pass the "run" arg')
+    console.log('to start, pass the "run" arg'.prompt)
 }

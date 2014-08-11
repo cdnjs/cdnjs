@@ -1,0 +1,1 @@
+Ext.define("Ext.toolbar.Separator",{extend:"Ext.toolbar.Item",alias:"widget.tbseparator",alternateClassName:"Ext.Toolbar.Separator",baseCls:Ext.baseCSSPrefix+"toolbar-separator",focusable:false});

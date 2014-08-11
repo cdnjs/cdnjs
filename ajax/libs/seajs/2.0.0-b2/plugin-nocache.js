@@ -1,0 +1,1 @@
+'use strict';(function(d){var f="seajs-nocache="+(new Date).getTime(),e={};d.on("fetch",function(b){var a=b.uri,c=a;-1===a.indexOf("seajs-nocache=")&&(c=a+(-1===a.indexOf("?")?"?":"&")+f,e[c]=a);b.requestUri=c});d.on("save",function(b){var a=b.uri;b.uri=e[a]||a})})(seajs);
