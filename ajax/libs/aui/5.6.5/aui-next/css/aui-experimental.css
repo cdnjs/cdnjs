@@ -1,0 +1,1426 @@
+/**
+ * AUI Module
+ */
+.aui-module {
+  margin-top: 20px;
+}
+.aui-module:first-child {
+  margin-top: 0;
+}
+.aui-module-header,
+.aui-module-content,
+.aui-module-footer {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/*! AUI Label */
+.aui-label {
+  background: #f5f5f5;
+  border: 1px solid #cccccc;
+  border-radius: 3.01px;
+  /* 3.01 for IE10 */
+  color: #3b73af;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1;
+  padding: 1px 5px;
+  margin: 0 5px 0 0;
+  text-align: left;
+  text-decoration: none;
+}
+span.aui-label {
+  color: #333333;
+}
+/* Need the split hover to trigger border on parent while split label/X are hovered */
+.aui-label.aui-label-closeable.aui-label-split:hover,
+a.aui-label:focus,
+a.aui-label:hover,
+a.aui-label:active {
+  border-color: #707070;
+  text-decoration: none;
+}
+.aui-label-split .aui-label-split-main:hover,
+.aui-label-split .aui-label-split-main:active,
+.aui-label-split .aui-label-split-main:focus {
+  text-decoration: none;
+}
+.aui-label.aui-label-closeable {
+  padding-right: 18px;
+  position: relative;
+}
+.aui-label-closeable .aui-icon-close {
+  /* Small X icon */
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAACXBIWXMAAAsTAAALEwEAmpwYAAAKT2lDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjanVNnVFPpFj333vRCS4iAlEtvUhUIIFJCi4AUkSYqIQkQSoghodkVUcERRUUEG8igiAOOjoCMFVEsDIoK2AfkIaKOg6OIisr74Xuja9a89+bN/rXXPues852zzwfACAyWSDNRNYAMqUIeEeCDx8TG4eQuQIEKJHAAEAizZCFz/SMBAPh+PDwrIsAHvgABeNMLCADATZvAMByH/w/qQplcAYCEAcB0kThLCIAUAEB6jkKmAEBGAYCdmCZTAKAEAGDLY2LjAFAtAGAnf+bTAICd+Jl7AQBblCEVAaCRACATZYhEAGg7AKzPVopFAFgwABRmS8Q5ANgtADBJV2ZIALC3AMDOEAuyAAgMADBRiIUpAAR7AGDIIyN4AISZABRG8lc88SuuEOcqAAB4mbI8uSQ5RYFbCC1xB1dXLh4ozkkXKxQ2YQJhmkAuwnmZGTKBNA/g88wAAKCRFRHgg/P9eM4Ors7ONo62Dl8t6r8G/yJiYuP+5c+rcEAAAOF0ftH+LC+zGoA7BoBt/qIl7gRoXgugdfeLZrIPQLUAoOnaV/Nw+H48PEWhkLnZ2eXk5NhKxEJbYcpXff5nwl/AV/1s+X48/Pf14L7iJIEyXYFHBPjgwsz0TKUcz5IJhGLc5o9H/LcL//wd0yLESWK5WCoU41EScY5EmozzMqUiiUKSKcUl0v9k4t8s+wM+3zUAsGo+AXuRLahdYwP2SycQWHTA4vcAAPK7b8HUKAgDgGiD4c93/+8//UegJQCAZkmScQAAXkQkLlTKsz/HCAAARKCBKrBBG/TBGCzABhzBBdzBC/xgNoRCJMTCQhBCCmSAHHJgKayCQiiGzbAdKmAv1EAdNMBRaIaTcA4uwlW4Dj1wD/phCJ7BKLyBCQRByAgTYSHaiAFiilgjjggXmYX4IcFIBBKLJCDJiBRRIkuRNUgxUopUIFVIHfI9cgI5h1xGupE7yAAygvyGvEcxlIGyUT3UDLVDuag3GoRGogvQZHQxmo8WoJvQcrQaPYw2oefQq2gP2o8+Q8cwwOgYBzPEbDAuxsNCsTgsCZNjy7EirAyrxhqwVqwDu4n1Y8+xdwQSgUXACTYEd0IgYR5BSFhMWE7YSKggHCQ0EdoJNwkDhFHCJyKTqEu0JroR+cQYYjIxh1hILCPWEo8TLxB7iEPENyQSiUMyJ7mQAkmxpFTSEtJG0m5SI+ksqZs0SBojk8naZGuyBzmULCAryIXkneTD5DPkG+Qh8lsKnWJAcaT4U+IoUspqShnlEOU05QZlmDJBVaOaUt2ooVQRNY9aQq2htlKvUYeoEzR1mjnNgxZJS6WtopXTGmgXaPdpr+h0uhHdlR5Ol9BX0svpR+iX6AP0dwwNhhWDx4hnKBmbGAcYZxl3GK+YTKYZ04sZx1QwNzHrmOeZD5lvVVgqtip8FZHKCpVKlSaVGyovVKmqpqreqgtV81XLVI+pXlN9rkZVM1PjqQnUlqtVqp1Q61MbU2epO6iHqmeob1Q/pH5Z/YkGWcNMw09DpFGgsV/jvMYgC2MZs3gsIWsNq4Z1gTXEJrHN2Xx2KruY/R27iz2qqaE5QzNKM1ezUvOUZj8H45hx+Jx0TgnnKKeX836K3hTvKeIpG6Y0TLkxZVxrqpaXllirSKtRq0frvTau7aedpr1Fu1n7gQ5Bx0onXCdHZ4/OBZ3nU9lT3acKpxZNPTr1ri6qa6UbobtEd79up+6Ynr5egJ5Mb6feeb3n+hx9L/1U/W36p/VHDFgGswwkBtsMzhg8xTVxbzwdL8fb8VFDXcNAQ6VhlWGX4YSRudE8o9VGjUYPjGnGXOMk423GbcajJgYmISZLTepN7ppSTbmmKaY7TDtMx83MzaLN1pk1mz0x1zLnm+eb15vft2BaeFostqi2uGVJsuRaplnutrxuhVo5WaVYVVpds0atna0l1rutu6cRp7lOk06rntZnw7Dxtsm2qbcZsOXYBtuutm22fWFnYhdnt8Wuw+6TvZN9un2N/T0HDYfZDqsdWh1+c7RyFDpWOt6azpzuP33F9JbpL2dYzxDP2DPjthPLKcRpnVOb00dnF2e5c4PziIuJS4LLLpc+Lpsbxt3IveRKdPVxXeF60vWdm7Obwu2o26/uNu5p7ofcn8w0nymeWTNz0MPIQ+BR5dE/C5+VMGvfrH5PQ0+BZ7XnIy9jL5FXrdewt6V3qvdh7xc+9j5yn+M+4zw33jLeWV/MN8C3yLfLT8Nvnl+F30N/I/9k/3r/0QCngCUBZwOJgUGBWwL7+Hp8Ib+OPzrbZfay2e1BjKC5QRVBj4KtguXBrSFoyOyQrSH355jOkc5pDoVQfujW0Adh5mGLw34MJ4WHhVeGP45wiFga0TGXNXfR3ENz30T6RJZE3ptnMU85ry1KNSo+qi5qPNo3ujS6P8YuZlnM1VidWElsSxw5LiquNm5svt/87fOH4p3iC+N7F5gvyF1weaHOwvSFpxapLhIsOpZATIhOOJTwQRAqqBaMJfITdyWOCnnCHcJnIi/RNtGI2ENcKh5O8kgqTXqS7JG8NXkkxTOlLOW5hCepkLxMDUzdmzqeFpp2IG0yPTq9MYOSkZBxQqohTZO2Z+pn5mZ2y6xlhbL+xW6Lty8elQfJa7OQrAVZLQq2QqboVFoo1yoHsmdlV2a/zYnKOZarnivN7cyzytuQN5zvn//tEsIS4ZK2pYZLVy0dWOa9rGo5sjxxedsK4xUFK4ZWBqw8uIq2Km3VT6vtV5eufr0mek1rgV7ByoLBtQFr6wtVCuWFfevc1+1dT1gvWd+1YfqGnRs+FYmKrhTbF5cVf9go3HjlG4dvyr+Z3JS0qavEuWTPZtJm6ebeLZ5bDpaql+aXDm4N2dq0Dd9WtO319kXbL5fNKNu7g7ZDuaO/PLi8ZafJzs07P1SkVPRU+lQ27tLdtWHX+G7R7ht7vPY07NXbW7z3/T7JvttVAVVN1WbVZftJ+7P3P66Jqun4lvttXa1ObXHtxwPSA/0HIw6217nU1R3SPVRSj9Yr60cOxx++/p3vdy0NNg1VjZzG4iNwRHnk6fcJ3/ceDTradox7rOEH0x92HWcdL2pCmvKaRptTmvtbYlu6T8w+0dbq3nr8R9sfD5w0PFl5SvNUyWna6YLTk2fyz4ydlZ19fi753GDborZ752PO32oPb++6EHTh0kX/i+c7vDvOXPK4dPKy2+UTV7hXmq86X23qdOo8/pPTT8e7nLuarrlca7nuer21e2b36RueN87d9L158Rb/1tWeOT3dvfN6b/fF9/XfFt1+cif9zsu72Xcn7q28T7xf9EDtQdlD3YfVP1v+3Njv3H9qwHeg89HcR/cGhYPP/pH1jw9DBY+Zj8uGDYbrnjg+OTniP3L96fynQ89kzyaeF/6i/suuFxYvfvjV69fO0ZjRoZfyl5O/bXyl/erA6xmv28bCxh6+yXgzMV70VvvtwXfcdx3vo98PT+R8IH8o/2j5sfVT0Kf7kxmTk/8EA5jz/GMzLdsAAAAgY0hSTQAAeiUAAICDAAD5/wAAgOkAAHUwAADqYAAAOpgAABdvkl/FRgAAAFZJREFUeNqEj8ENwDAIAy8VY7EKyyWrsJf7KRHpJ0h8zgjbSGLOKUn0LWZrLWUmgCJiAHRmH9wAIDNxdyJiGMDvaIsAD5ex7unulEVlsi7W2yPTreY7APE9YkMbUVxBAAAAAElFTkSuQmCC") 0 0 no-repeat;
+  cursor: pointer;
+  display: block;
+  float: right;
+  height: 8px;
+  position: absolute;
+  right: 5px;
+  top: 4px;
+  width: 8px;
+}
+/*! AUI Sortable Tables */
+.aui-table-sortable .tablesorter-header {
+  cursor: pointer;
+}
+/**
+ * Unsortable columns should not get the hover effects
+ */
+.aui-table-sortable .tablesorter-header.aui-table-column-unsortable {
+  cursor: default;
+}
+.aui-table-sortable .tablesorter-header.aui-table-column-unsortable:hover {
+  background-color: inherit;
+  color: inherit;
+}
+/**
+ * Color of header when selected or hovered.
+ */
+.aui-table-sortable .tablesorter-header:hover,
+.aui-table-sortable .tablesorter-headerAsc,
+.aui-table-sortable .tablesorter-headerDesc {
+  background-color: #f5f5f5;
+  color: #333333;
+}
+/**
+ * Used to generate the arrow on the right.
+ */
+.aui-table-sortable .aui-table-header-content:after {
+  border: 4px solid transparent;
+  content: "";
+  display: inline-block;
+  margin-left: 5px;
+  position: relative;
+  width: 0;
+}
+/**
+ * If the table header is hovered add the border color.
+ */
+.aui-table-sortable .tablesorter-header:hover .aui-table-header-content:after {
+  border-top-color: #333333;
+  border-bottom-color: transparent;
+  opacity: 0.5;
+  top: 2px;
+  /* push down by half the height of the arrow (border) */
+}
+/**
+ * If descending add border color
+ */
+.aui-table-sortable .tablesorter-headerAsc .aui-table-header-content:after,
+.aui-table-sortable .tablesorter-headerAsc:hover .aui-table-header-content:after {
+  border-top-color: #333333;
+  border-bottom-color: transparent;
+  opacity: 1;
+  top: 2px;
+  /* push down by half the height of the arrow (border) */
+}
+/**
+ * If ascending add border color
+ */
+.aui-table-sortable .tablesorter-headerDesc .aui-table-header-content:after,
+.aui-table-sortable .tablesorter-headerDesc:hover .aui-table-header-content:after {
+  border-top-color: transparent;
+  border-bottom-color: #333333;
+  opacity: 1;
+  top: -2px;
+  /* push up by half the height of the arrow (border) */
+}
+/* Layout */
+.aui-progress-tracker {
+  display: table;
+  font-size: 12px;
+  margin: 10px 0 0;
+  padding: 0;
+  table-layout: fixed;
+  word-wrap: break-word;
+  /* doesn't work in IE */
+}
+.aui-progress-tracker:first-child {
+  margin-top: 0;
+}
+.aui-progress-tracker-step {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  display: table-cell;
+  padding: 0 10px;
+  max-width: 140px;
+  min-width: 80px;
+  text-align: center;
+}
+/* Progress Bar */
+.aui-progress-tracker-step > span,
+.aui-progress-tracker-step > a {
+  display: block;
+  font-weight: bold;
+  outline: none;
+  padding-top: 25px;
+  position: relative;
+}
+.aui-progress-tracker-step > span:before,
+.aui-progress-tracker-step > a:before {
+  background: #3b73af;
+  border-radius: 100%;
+  box-shadow: 0 0 0 3px #f5f5f5;
+  /* can't just use a 3px border as an IE9 bug causes it to draw a strange additional darker border on the outside in addition to the 3px border */
+  content: "";
+  height: 10px;
+  left: 50%;
+  margin-left: -5px;
+  position: absolute;
+  top: 3px;
+  width: 10px;
+}
+.aui-progress-tracker-step + .aui-progress-tracker-step > span:after,
+.aui-progress-tracker-step + .aui-progress-tracker-step > a:after {
+  background: #3b73af;
+  border: solid #f5f5f5;
+  border-width: 2px 0;
+  box-shadow: -5px 0 0 -2px #3b73af, 5px 0 0 -2px #3b73af;
+  content: "";
+  height: 4px;
+  left: -50%;
+  margin-left: -14px;
+  /* almost touches right edge of previous dot (leaves 1px room for rounding widths like 33.3% in webkit) */
+  margin-right: 6px;
+  /* almost touches left edge of this dot (leaves 1px room for rounding widths like 33.3% in webkit) */
+  position: absolute;
+  right: 50%;
+  top: 4px;
+}
+.aui-progress-tracker-step-current ~ .aui-progress-tracker-step {
+  color: #707070;
+}
+.aui-progress-tracker-step-current ~ .aui-progress-tracker-step > span:before,
+.aui-progress-tracker-step-current ~ .aui-progress-tracker-step > a:before {
+  background-color: #cccccc;
+}
+.aui-progress-tracker-step-current ~ .aui-progress-tracker-step > span:after,
+.aui-progress-tracker-step-current ~ .aui-progress-tracker-step > a:after {
+  background-color: #f5f5f5;
+  box-shadow: none;
+}
+/* Inverted Colours */
+.aui-progress-tracker-inverted .aui-progress-tracker-step > span:before,
+.aui-progress-tracker-inverted .aui-progress-tracker-step > a:before {
+  box-shadow: 0 0 0 3px #ffffff;
+}
+.aui-progress-tracker-inverted .aui-progress-tracker-step + .aui-progress-tracker-step > span:after,
+.aui-progress-tracker-inverted .aui-progress-tracker-step + .aui-progress-tracker-step > a:after {
+  border-color: #ffffff;
+}
+.aui-progress-tracker-inverted .aui-progress-tracker-step-current ~ .aui-progress-tracker-step > span:after,
+.aui-progress-tracker-inverted .aui-progress-tracker-step-current ~ .aui-progress-tracker-step > a:after {
+  background-color: #ffffff;
+}
+/* Interaction wih page layout */
+.aui-page-header-actions .aui-progress-tracker {
+  float: right;
+}
+.tipsy {
+  font-size: 10px;
+  position: absolute;
+  padding: 5px;
+  word-wrap: break-word;
+  z-index: 100000;
+}
+.tipsy-inner {
+  background-color: #000;
+  color: #FFF;
+  max-width: 200px;
+  padding: 5px 8px 4px 8px;
+  text-align: center;
+}
+/* Rounded corners */
+.tipsy-inner {
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+/* Uncomment for shadow */
+/*.tipsy-inner { box-shadow: 0 0 5px #000000; -webkit-box-shadow: 0 0 5px #000000; -moz-box-shadow: 0 0 5px #000000; }*/
+.tipsy-arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  line-height: 0;
+  border: 5px dashed #000;
+}
+/* Rules to colour arrows */
+.tipsy-arrow-n {
+  border-bottom-color: #000;
+}
+.tipsy-arrow-s {
+  border-top-color: #000;
+}
+.tipsy-arrow-e {
+  border-left-color: #000;
+}
+.tipsy-arrow-w {
+  border-right-color: #000;
+}
+.tipsy-n .tipsy-arrow {
+  top: 0px;
+  left: 50%;
+  margin-left: -5px;
+  border-bottom-style: solid;
+  border-top: none;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+.tipsy-nw .tipsy-arrow {
+  top: 0;
+  left: 10px;
+  border-bottom-style: solid;
+  border-top: none;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+.tipsy-ne .tipsy-arrow {
+  top: 0;
+  right: 10px;
+  border-bottom-style: solid;
+  border-top: none;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+.tipsy-s .tipsy-arrow {
+  bottom: 0;
+  left: 50%;
+  margin-left: -5px;
+  border-top-style: solid;
+  border-bottom: none;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+.tipsy-sw .tipsy-arrow {
+  bottom: 0;
+  left: 10px;
+  border-top-style: solid;
+  border-bottom: none;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+.tipsy-se .tipsy-arrow {
+  bottom: 0;
+  right: 10px;
+  border-top-style: solid;
+  border-bottom: none;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+.tipsy-e .tipsy-arrow {
+  right: 0;
+  top: 50%;
+  margin-top: -5px;
+  border-left-style: solid;
+  border-right: none;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+}
+.tipsy-w .tipsy-arrow {
+  left: 0;
+  top: 50%;
+  margin-top: -5px;
+  border-right-style: solid;
+  border-left: none;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+}
+.tipsy {
+  font-size: 12px;
+  line-height: 20px;
+  font-family: Arial, sans-serif;
+  padding: 4px;
+}
+.tipsy-inner {
+  background: rgba(51, 51, 51, 0.9);
+  padding: 5px 10px;
+}
+.tipsy-arrow {
+  border-color: rgba(51, 51, 51, 0.9);
+  border-width: 4px;
+}
+.tipsy-arrow-n {
+  border-bottom-color: rgba(51, 51, 51, 0.9);
+  margin-left: -4px;
+}
+.tipsy-arrow-s {
+  border-top-color: rgba(51, 51, 51, 0.9);
+  margin-left: -4px;
+}
+.tipsy-arrow-e {
+  border-left-color: rgba(51, 51, 51, 0.9);
+  margin-top: -4px;
+}
+.tipsy-arrow-w {
+  border-right-color: rgba(51, 51, 51, 0.9);
+  margin-top: -4px;
+}
+.tipsy a,
+.tipsy a:visited {
+  color: white;
+  text-decoration: underline;
+}
+.aui-expander-short-content[aria-hidden="true"],
+.aui-expander-content[aria-hidden="true"],
+.aui-expander-content[aria-expanded="true"] .aui-expander-ellipsis {
+  display: none;
+}
+.aui-expander-content,
+.aui-expander-content[aria-expanded="false"] {
+  height: 0;
+  /* Collapsed by default */
+  overflow: hidden;
+  position: relative;
+}
+.aui-expander-content[aria-expanded="true"] {
+  height: auto;
+  /* Expanded by default */
+}
+.aui-expander-trigger {
+  cursor: pointer;
+}
+/* ADG REVEAL TEXT PATTERN */
+a.aui-expander-trigger.aui-expander-reveal-text {
+  background: #ffffff;
+  bottom: 0;
+  position: absolute;
+  right: 0;
+  text-decoration: none;
+  padding-left: 10px;
+}
+.aui-expander-trigger.aui-expander-reveal-text:hover > span {
+  text-decoration: underline;
+}
+.aui-expander-trigger.aui-expander-reveal-text:before {
+  color: #333333;
+  content: "\2026\00a0";
+}
+.aui-expander-content[aria-expanded="true"] .aui-expander-trigger.aui-expander-reveal-text:before {
+  display: none;
+  /* Hide the ellipsis when expanded */
+}
+.aui-expander-content[aria-expanded="true"] .aui-expander-trigger.aui-expander-reveal-text {
+  position: relative;
+}
+.aui-progress-indicator {
+  background: #e9e9e9;
+  border-radius: 3px;
+  height: 5px;
+  overflow: hidden;
+  position: relative;
+  /* so that animations work */
+  width: 100%;
+}
+.aui-progress-indicator-value {
+  -webkit-animation: progressSlide 1s infinite linear;
+  animation: progressSlide 1s infinite linear;
+  background: transparent;
+  background-size: 20px 5px;
+  background-image: linear-gradient(90deg, #cccccc 50%, transparent 50%, transparent 100%);
+  border-radius: 3px;
+  display: block;
+  height: 5px;
+  -webkit-transform: skewX(45deg);
+  transform: skewX(45deg);
+  position: absolute;
+  width: 100%;
+}
+@-webkit-keyframes progressSlide {
+  0% {
+    background-position: 20px;
+  }
+  100% {
+    background-position: 0;
+  }
+}
+@keyframes progressSlide {
+  0% {
+    background-position: 20px;
+  }
+  100% {
+    background-position: 0;
+  }
+}
+.aui-progress-indicator[data-value] .aui-progress-indicator-value {
+  background: #3b73af;
+  border-radius: 3px 0 0 3px;
+  transition: width 0.5s;
+  -webkit-transform: skewX(0);
+  transform: skewX(0);
+}
+.aui-progress-indicator-static[data-value] .aui-progress-indicator-value {
+  transition: none;
+}
+/* Special rule for progress bar at 100%, needs to be round at the end */
+.aui-progress-indicator[data-value="1"] .aui-progress-indicator-value {
+  border-radius: 3px;
+}
+/*
+Version: 3.4.4 Timestamp: Thu Oct 24 13:23:11 PDT 2013
+*/
+.select2-container {
+  margin: 0;
+  position: relative;
+  display: inline-block;
+  /* inline-block for ie7 */
+  zoom: 1;
+  *display: inline;
+  vertical-align: middle;
+}
+.select2-container,
+.select2-drop,
+.select2-search,
+.select2-search input {
+  /*
+    Force border-box so that % widths fit the parent
+    container without overlap because of margin/padding.
+
+    More Info : http://www.quirksmode.org/css/box.html
+  */
+  -webkit-box-sizing: border-box;
+  /* webkit */
+  -moz-box-sizing: border-box;
+  /* firefox */
+  box-sizing: border-box;
+  /* css3 */
+}
+.select2-container .select2-choice {
+  display: block;
+  height: 26px;
+  padding: 0 0 0 8px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #aaa;
+  white-space: nowrap;
+  line-height: 26px;
+  color: #444;
+  text-decoration: none;
+  border-radius: 4px;
+  background-clip: padding-box;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: #fff;
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eeeeee), color-stop(0.5, #ffffff));
+  background-image: -webkit-linear-gradient(center bottom, #eeeeee 0%, #ffffff 50%);
+  background-image: -moz-linear-gradient(center bottom, #eeeeee 0%, #ffffff 50%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eeeeee', GradientType=0);
+  background-image: linear-gradient(top, #ffffff 0%, #eeeeee 50%);
+}
+.select2-container.select2-drop-above .select2-choice {
+  border-bottom-color: #aaa;
+  border-radius: 0 0 4px 4px;
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eeeeee), color-stop(0.9, #ffffff));
+  background-image: -webkit-linear-gradient(center bottom, #eeeeee 0%, #ffffff 90%);
+  background-image: -moz-linear-gradient(center bottom, #eeeeee 0%, #ffffff 90%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eeeeee', GradientType=0);
+  background-image: linear-gradient(top, #eeeeee 0%, #ffffff 90%);
+}
+.select2-container.select2-allowclear .select2-choice .select2-chosen {
+  margin-right: 42px;
+}
+.select2-container .select2-choice > .select2-chosen {
+  margin-right: 26px;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.select2-container .select2-choice abbr {
+  display: none;
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  right: 24px;
+  top: 8px;
+  font-size: 1px;
+  text-decoration: none;
+  border: 0;
+  background: url('select2.png') right top no-repeat;
+  cursor: pointer;
+  outline: 0;
+}
+.select2-container.select2-allowclear .select2-choice abbr {
+  display: inline-block;
+}
+.select2-container .select2-choice abbr:hover {
+  background-position: right -11px;
+  cursor: pointer;
+}
+.select2-drop-mask {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  min-height: 100%;
+  min-width: 100%;
+  height: auto;
+  width: auto;
+  opacity: 0;
+  z-index: 9998;
+  /* styles required for IE to work */
+  background-color: #fff;
+  filter: alpha(opacity=0);
+}
+.select2-drop {
+  width: 100%;
+  margin-top: -1px;
+  position: absolute;
+  z-index: 9999;
+  top: 100%;
+  background: #fff;
+  color: #000;
+  border: 1px solid #aaa;
+  border-top: 0;
+  border-radius: 0 0 4px 4px;
+  -webkit-box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
+}
+.select2-drop-auto-width {
+  border-top: 1px solid #aaa;
+  width: auto;
+}
+.select2-drop-auto-width .select2-search {
+  padding-top: 4px;
+}
+.select2-drop.select2-drop-above {
+  margin-top: 1px;
+  border-top: 1px solid #aaa;
+  border-bottom: 0;
+  border-radius: 4px 4px 0 0;
+  -webkit-box-shadow: 0 -4px 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 -4px 5px rgba(0, 0, 0, 0.15);
+}
+.select2-drop-active {
+  border: 1px solid #5897fb;
+  border-top: none;
+}
+.select2-drop.select2-drop-above.select2-drop-active {
+  border-top: 1px solid #5897fb;
+}
+.select2-container .select2-choice .select2-arrow {
+  display: inline-block;
+  width: 18px;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  border-left: 1px solid #aaa;
+  border-radius: 0 4px 4px 0;
+  background-clip: padding-box;
+  background: #ccc;
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #cccccc), color-stop(0.6, #eeeeee));
+  background-image: -webkit-linear-gradient(center bottom, #cccccc 0%, #eeeeee 60%);
+  background-image: -moz-linear-gradient(center bottom, #cccccc 0%, #eeeeee 60%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#cccccc', GradientType=0);
+  background-image: linear-gradient(top, #cccccc 0%, #eeeeee 60%);
+}
+.select2-container .select2-choice .select2-arrow b {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: url('select2.png') no-repeat 0 1px;
+}
+.select2-search {
+  display: inline-block;
+  width: 100%;
+  min-height: 26px;
+  margin: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+  position: relative;
+  z-index: 10000;
+  white-space: nowrap;
+}
+.select2-search input {
+  width: 100%;
+  height: auto !important;
+  min-height: 26px;
+  padding: 4px 20px 4px 5px;
+  margin: 0;
+  outline: 0;
+  font-family: sans-serif;
+  font-size: 1em;
+  border: 1px solid #aaa;
+  border-radius: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background: #ffffff url('select2.png') no-repeat 100% -22px;
+  background: url('select2.png') no-repeat 100% -22px, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, #ffffff), color-stop(0.99, #eeeeee));
+  background: url('select2.png') no-repeat 100% -22px, -webkit-linear-gradient(center bottom, #ffffff 85%, #eeeeee 99%);
+  background: url('select2.png') no-repeat 100% -22px, -moz-linear-gradient(center bottom, #ffffff 85%, #eeeeee 99%);
+  background: url('select2.png') no-repeat 100% -22px, linear-gradient(top, #ffffff 85%, #eeeeee 99%);
+}
+.select2-drop.select2-drop-above .select2-search input {
+  margin-top: 4px;
+}
+.select2-search input.select2-active {
+  background: #ffffff url('select2-spinner.gif') no-repeat 100%;
+  background: url('select2-spinner.gif') no-repeat 100%, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, #ffffff), color-stop(0.99, #eeeeee));
+  background: url('select2-spinner.gif') no-repeat 100%, -webkit-linear-gradient(center bottom, #ffffff 85%, #eeeeee 99%);
+  background: url('select2-spinner.gif') no-repeat 100%, -moz-linear-gradient(center bottom, #ffffff 85%, #eeeeee 99%);
+  background: url('select2-spinner.gif') no-repeat 100%, linear-gradient(top, #ffffff 85%, #eeeeee 99%);
+}
+.select2-container-active .select2-choice,
+.select2-container-active .select2-choices {
+  border: 1px solid #5897fb;
+  outline: none;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+.select2-dropdown-open .select2-choice {
+  border-bottom-color: transparent;
+  -webkit-box-shadow: 0 1px 0 #fff inset;
+  box-shadow: 0 1px 0 #fff inset;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  background-color: #eee;
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #ffffff), color-stop(0.5, #eeeeee));
+  background-image: -webkit-linear-gradient(center bottom, #ffffff 0%, #eeeeee 50%);
+  background-image: -moz-linear-gradient(center bottom, #ffffff 0%, #eeeeee 50%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#ffffff', GradientType=0);
+  background-image: linear-gradient(top, #ffffff 0%, #eeeeee 50%);
+}
+.select2-dropdown-open.select2-drop-above .select2-choice,
+.select2-dropdown-open.select2-drop-above .select2-choices {
+  border: 1px solid #5897fb;
+  border-top-color: transparent;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffffff), color-stop(0.5, #eeeeee));
+  background-image: -webkit-linear-gradient(center top, #ffffff 0%, #eeeeee 50%);
+  background-image: -moz-linear-gradient(center top, #ffffff 0%, #eeeeee 50%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#ffffff', GradientType=0);
+  background-image: linear-gradient(bottom, #ffffff 0%, #eeeeee 50%);
+}
+.select2-dropdown-open .select2-choice .select2-arrow {
+  background: transparent;
+  border-left: none;
+  filter: none;
+}
+.select2-dropdown-open .select2-choice .select2-arrow b {
+  background-position: -18px 1px;
+}
+/* results */
+.select2-results {
+  max-height: 200px;
+  padding: 0 0 0 4px;
+  margin: 4px 4px 4px 0;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.select2-results ul.select2-result-sub {
+  margin: 0;
+  padding-left: 0;
+}
+.select2-results ul.select2-result-sub > li .select2-result-label {
+  padding-left: 20px;
+}
+.select2-results ul.select2-result-sub ul.select2-result-sub > li .select2-result-label {
+  padding-left: 40px;
+}
+.select2-results ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub > li .select2-result-label {
+  padding-left: 60px;
+}
+.select2-results ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub > li .select2-result-label {
+  padding-left: 80px;
+}
+.select2-results ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub > li .select2-result-label {
+  padding-left: 100px;
+}
+.select2-results ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub > li .select2-result-label {
+  padding-left: 110px;
+}
+.select2-results ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub > li .select2-result-label {
+  padding-left: 120px;
+}
+.select2-results li {
+  list-style: none;
+  display: list-item;
+  background-image: none;
+}
+.select2-results li.select2-result-with-children > .select2-result-label {
+  font-weight: bold;
+}
+.select2-results .select2-result-label {
+  padding: 3px 7px 4px;
+  margin: 0;
+  cursor: pointer;
+  min-height: 1em;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.select2-results .select2-highlighted {
+  background: #3875d7;
+  color: #fff;
+}
+.select2-results li em {
+  background: #feffde;
+  font-style: normal;
+}
+.select2-results .select2-highlighted em {
+  background: transparent;
+}
+.select2-results .select2-highlighted ul {
+  background: #fff;
+  color: #000;
+}
+.select2-results .select2-no-results,
+.select2-results .select2-searching,
+.select2-results .select2-selection-limit {
+  background: #f4f4f4;
+  display: list-item;
+}
+/*
+disabled look for disabled choices in the results dropdown
+*/
+.select2-results .select2-disabled.select2-highlighted {
+  color: #666;
+  background: #f4f4f4;
+  display: list-item;
+  cursor: default;
+}
+.select2-results .select2-disabled {
+  background: #f4f4f4;
+  display: list-item;
+  cursor: default;
+}
+.select2-results .select2-selected {
+  display: none;
+}
+.select2-more-results.select2-active {
+  background: #f4f4f4 url('select2-spinner.gif') no-repeat 100%;
+}
+.select2-more-results {
+  background: #f4f4f4;
+  display: list-item;
+}
+/* disabled styles */
+.select2-container.select2-container-disabled .select2-choice {
+  background-color: #f4f4f4;
+  background-image: none;
+  border: 1px solid #ddd;
+  cursor: default;
+}
+.select2-container.select2-container-disabled .select2-choice .select2-arrow {
+  background-color: #f4f4f4;
+  background-image: none;
+  border-left: 0;
+}
+.select2-container.select2-container-disabled .select2-choice abbr {
+  display: none;
+}
+/* multiselect */
+.select2-container-multi .select2-choices {
+  height: auto !important;
+  height: 1%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  border: 1px solid #aaa;
+  cursor: text;
+  overflow: hidden;
+  background-color: #fff;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(1%, #eeeeee), color-stop(15%, #ffffff));
+  background-image: -webkit-linear-gradient(top, #eeeeee 1%, #ffffff 15%);
+  background-image: -moz-linear-gradient(top, #eeeeee 1%, #ffffff 15%);
+  background-image: linear-gradient(top, #eeeeee 1%, #ffffff 15%);
+}
+.select2-locked {
+  padding: 3px 5px 3px 5px !important;
+}
+.select2-container-multi .select2-choices {
+  min-height: 26px;
+}
+.select2-container-multi.select2-container-active .select2-choices {
+  border: 1px solid #5897fb;
+  outline: none;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+.select2-container-multi .select2-choices li {
+  float: left;
+  list-style: none;
+}
+.select2-container-multi .select2-choices .select2-search-field {
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+}
+.select2-container-multi .select2-choices .select2-search-field input {
+  padding: 5px;
+  margin: 1px 0;
+  font-family: sans-serif;
+  font-size: 100%;
+  color: #666;
+  outline: 0;
+  border: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background: transparent !important;
+}
+.select2-container-multi .select2-choices .select2-search-field input.select2-active {
+  background: #ffffff url('select2-spinner.gif') no-repeat 100% !important;
+}
+.select2-default {
+  color: #999 !important;
+}
+.select2-container-multi .select2-choices .select2-search-choice {
+  padding: 3px 5px 3px 18px;
+  margin: 3px 0 3px 5px;
+  position: relative;
+  line-height: 13px;
+  color: #333;
+  cursor: default;
+  border: 1px solid #aaaaaa;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 0 2px #ffffff inset, 0 1px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 2px #ffffff inset, 0 1px 0 rgba(0, 0, 0, 0.05);
+  background-clip: padding-box;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: #e4e4e4;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#f4f4f4', GradientType=0);
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(20%, #f4f4f4), color-stop(50%, #f0f0f0), color-stop(52%, #e8e8e8), color-stop(100%, #eeeeee));
+  background-image: -webkit-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
+  background-image: -moz-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
+  background-image: linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
+}
+.select2-container-multi .select2-choices .select2-search-choice .select2-chosen {
+  cursor: default;
+}
+.select2-container-multi .select2-choices .select2-search-choice-focus {
+  background: #d4d4d4;
+}
+.select2-search-choice-close {
+  display: block;
+  width: 12px;
+  height: 13px;
+  position: absolute;
+  right: 3px;
+  top: 4px;
+  font-size: 1px;
+  outline: none;
+  background: url('select2.png') right top no-repeat;
+}
+.select2-container-multi .select2-search-choice-close {
+  left: 3px;
+}
+.select2-container-multi .select2-choices .select2-search-choice .select2-search-choice-close:hover {
+  background-position: right -11px;
+}
+.select2-container-multi .select2-choices .select2-search-choice-focus .select2-search-choice-close {
+  background-position: right -11px;
+}
+/* disabled styles */
+.select2-container-multi.select2-container-disabled .select2-choices {
+  background-color: #f4f4f4;
+  background-image: none;
+  border: 1px solid #ddd;
+  cursor: default;
+}
+.select2-container-multi.select2-container-disabled .select2-choices .select2-search-choice {
+  padding: 3px 5px 3px 5px;
+  border: 1px solid #ddd;
+  background-image: none;
+  background-color: #f4f4f4;
+}
+.select2-container-multi.select2-container-disabled .select2-choices .select2-search-choice .select2-search-choice-close {
+  display: none;
+  background: none;
+}
+/* end multiselect */
+.select2-result-selectable .select2-match,
+.select2-result-unselectable .select2-match {
+  text-decoration: underline;
+}
+.select2-offscreen,
+.select2-offscreen:focus {
+  clip: rect(0 0 0 0) !important;
+  width: 1px !important;
+  height: 1px !important;
+  border: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  outline: 0 !important;
+  left: 0px !important;
+  top: 0px !important;
+}
+.select2-display-none {
+  display: none;
+}
+.select2-measure-scrollbar {
+  position: absolute;
+  top: -10000px;
+  left: -10000px;
+  width: 100px;
+  height: 100px;
+  overflow: scroll;
+}
+/* Retina-ize icons */
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
+  .select2-search input,
+  .select2-search-choice-close,
+  .select2-container .select2-choice abbr,
+  .select2-container .select2-choice .select2-arrow b {
+    background-image: url('select2x2.png') !important;
+    background-repeat: no-repeat !important;
+    background-size: 60px 40px !important;
+  }
+  .select2-search input {
+    background-position: 100% -21px !important;
+  }
+}
+/*
+    ADG styles to be added to select2 items.
+
+    There are 5 main components that select2 uses.
+    # select2-container - the top-level container that wraps the original <input> element
+    ## select2-choice - the <a> the user clicks on to trigger the dropdown, shows the selected item
+    # select2-drop - the top-level container directly in the <body> that displays the dropdown
+    ## select2-search - the search box in the dropdown
+    ## select2-results - the list of results in the dropdown, including groups
+
+    Overrides in this CSS file should start with:
+    # .aui-select2-container - in auiSelect2 JS we add this class to the top container
+    # .aui-select2-drop - in auiSelect2 JS we add this class to the dropdown container
+
+    By sticking to these two selector elements we won't accidentally break other code that uses select2. If they want
+    sexy ADG styles they can call auiSelect2() instead of select2().
+    Please don't add application-specific styles/rules in here, as these styles will eventually be pulled into AUI.
+*/
+.aui-select2-drop .select2-search input {
+  min-height: 0;
+  font-family: inherit;
+}
+.aui-select2-drop .select2-result-selectable .select2-match,
+.aui-select2-drop .select2-result-unselectable .select2-match {
+  text-decoration: none;
+  font-weight: bold;
+}
+.aui-select2-drop .select2-results ul.select2-result-sub {
+  padding: 0;
+}
+.aui-select2-drop.aui-dropdown2 .select2-search {
+  padding: 5px;
+}
+.aui-select2-drop {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  /* re-instated style from core select2 style */
+}
+.aui-select2-drop.select2-drop-above.select2-drop-active {
+  border: 1px solid #cccccc;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  margin-top: 0;
+}
+.aui-select2-drop .select2-result-unselectable > .select2-result-label {
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #707070;
+  padding: 5px 10px 0;
+}
+.aui-select2-drop .select2-results ul.select2-result-sub > li .select2-result-label,
+.aui-select2-drop .select2-results .select2-result-label,
+.aui-select2-drop .select2-results .select2-searching,
+.aui-select2-drop .select2-results .select2-no-results,
+.aui-select2-drop .select2-results .select2-more-results {
+  padding: 3px 10px;
+}
+.aui-select2-drop .select2-result-label {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.aui-select2-drop .select2-results {
+  margin: 2px 0;
+  padding: 0;
+}
+.aui-select2-drop .select2-more-results,
+.aui-select2-drop .select2-searching,
+.aui-select2-drop .select2-no-results {
+  background-color: transparent;
+}
+.aui-select2-drop .select2-search input,
+.aui-select2-drop {
+  border: 1px solid #cccccc;
+  /* make border color consistent with AUI button border color */
+}
+.aui-select2-drop .select2-search input {
+  border-radius: 3px;
+}
+.aui-select2-container.select2-container .select2-choice,
+.aui-select2-drop {
+  color: inherit;
+  max-width: none;
+}
+.aui-select2-drop .select2-results ul.select2-result-sub {
+  margin: 2px 0;
+}
+.aui-select2-drop .select2-result-sub .select2-result-unselectable > .select2-result-label {
+  text-transform: none;
+  font-size: inherit;
+  margin-top: 5px;
+}
+.aui-select2-drop.aui-dropdown2.aui-style-default {
+  margin-left: 0;
+}
+.aui-select2-drop .select2-results .select2-highlighted {
+  background-color: #3b73af;
+}
+.aui-select2-container.select2-container .select2-choice > span {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.aui-select2-container.select2-container .select2-choice .select2-arrow {
+  background: none;
+  border: none;
+  filter: none;
+}
+.aui-select2-container.select2-container-active .select2-choice,
+.aui-select2-container.select2-container-active .select2-choices {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+.aui-select2-container.select2-container .select2-choice .select2-arrow b {
+  display: none;
+  background: none;
+}
+.aui-select2-container.select2-container .select2-choice {
+  padding-right: 23px;
+  /* 8px (arrow width) + 10px (right padding) + 5px (margin between arrow and logo) */
+  position: relative;
+  width: inherit;
+}
+.aui-select2-container.select2-container a.select2-choice,
+.aui-select2-container.select2-container a.select2-choice:focus,
+.aui-select2-container.select2-container a.select2-choice:hover,
+.aui-select2-container.select2-container a.select2-choice:active {
+  text-decoration: none;
+}
+.aui-select2-container.select2-container .select2-choice:after {
+  border: 4px solid transparent;
+  content: "";
+  height: 0;
+  left: 100%;
+  /* "left" + "margin-left" required because of webkit not working properly with "right" */
+  margin-left: -18px;
+  margin-top: -2px;
+  opacity: 0.8;
+  position: absolute;
+  top: 50%;
+  width: 0;
+}
+.aui-select2-container.select2-container .select2-choice:after {
+  border-top-color: #333333;
+}
+.aui-select2-container.select2-container .select2-choice:hover:after,
+.aui-select2-container.select2-container .select2-choice.active:after {
+  opacity: 1;
+}
+.aui-select2-container.select2-container .select2-choice:after {
+  margin-top: 0;
+  top: 12px;
+}
+/* Set the default text color to inherit.
+   NOTE: this class is only marked as !important because Select2 marks the same
+   selector as !important in it's styles. */
+.aui-select2-container .select2-input {
+  color: inherit !important;
+}
+/* Since select2 uses the placeholder text as the value of the input,
+  the following style is used to override text color to mach ADG placeholder.
+  Select2 gives the input a class of select2-default when the value represents the placeholder value.
+  NOTE: this class is only marked as !important because Select2 marks the same
+  selector as !important in its styles. */
+.aui-select2-container .select2-default {
+  color: #707070 !important;
+}
+.aui-select2-container .select2-choices .select2-search-field input {
+  font-family: inherit;
+  font-size: 14px;
+  height: 1.4285714285714em;
+  /* 20px - using ems so the fields increase in line with user specified font-sizes */
+  line-height: 1.4285714285714;
+  margin: 0;
+  padding: 0;
+}
+.aui-select2-container.select2-container-multi .select2-choices {
+  min-height: 0;
+  background: #ffffff;
+}
+.aui-select2-container.select2-container-multi.text {
+  height: auto;
+}
+.aui-select2-container .select2-choices .select2-search-choice {
+  background: #f5f5f5;
+  border: 1px solid #cccccc;
+  border-radius: 3.01px;
+  /* 3.01 for IE10 */
+  box-shadow: none;
+  color: #333333;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1;
+  padding: 1px 18px 1px 5px;
+  position: relative;
+  margin: 1px 5px 1px 0;
+  text-align: left;
+  text-decoration: none;
+}
+.aui-select2-container .select2-choices .select2-search-choice-focus {
+  border-color: #707070;
+}
+.aui-select2-container .select2-choice abbr {
+  padding-top: 10px;
+  position: absolute;
+  top: 10px;
+}
+.aui-select2-container.select2-allowclear .select2-choice abbr {
+  display: block;
+}
+.aui-select2-container .select2-search-choice-close {
+  cursor: pointer;
+  display: block;
+  height: 8px;
+  left: auto;
+  position: absolute;
+  right: 5px;
+  top: 4px;
+  width: 8px;
+}
+/* Clear select2's overrides for retina displays */
+@media all, (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5) {
+  .aui-select2-container.select2-container .select2-search-choice-close,
+  .aui-select2-container.select2-container .select2-choice abbr {
+    /* !important to ensure that the select2 hover state doesn't modify the background position */
+    background: url("data:image/png;base64,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") 0 0 no-repeat !important;
+    background-size: 8px !important;
+  }
+}
+/* In order to beat out select2's overrides, the aui-button style had to be copied in below.
+   Unfortunately, any changes to that style will have to be copied here as well to keep the select2
+   element consistent.*/
+.aui-select2-container.select2-container .select2-choice,
+.aui-select2-container.select2-container a.select2-choice,
+.aui-select2-container.select2-container .select2-choice:visited {
+  background: #f2f2f2;
+  background: linear-gradient(top, #ffffff 0%, #f2f2f2 100%);
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid #cccccc;
+  border-radius: 3.01px;
+  color: inherit;
+  cursor: pointer;
+  display: inline-block;
+  filter: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-variant: normal;
+  font-weight: normal;
+  height: 2.1428571428571em;
+  /* 30px - using ems so the fields increase in line with user specified font-sizes */
+  line-height: 1.4285714285714;
+  margin: 0;
+  padding: 4px 10px;
+  text-decoration: none;
+  text-shadow: 0 1px 0 white;
+  vertical-align: top;
+  white-space: nowrap;
+}
+.aui-select2-container.select2-container .select2-choice:focus,
+.aui-select2-container.select2-container .select2-choice:hover,
+.aui-select2-container.select2-container.select2-container-active .select2-choice {
+  background: #f7f7f7;
+  background: linear-gradient(top, #ffffff 0%, #f7f7f7 100%);
+  border-color: #999999;
+  color: #000000;
+  text-decoration: none;
+}
+.aui-select2-container.select2-container .select2-choice:active,
+.aui-select2-container.select2-container.select2-dropdown-open .select2-choice {
+  background-image: none;
+  background-color: #f5f5f5;
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
+  filter: none;
+  text-shadow: none;
+  text-decoration: none;
+}
+.aui-select2-container.select2-container.select2-dropdown-open .select2-choice,
+.aui-select2-container.select2-container.select2-dropdown-open .select2-choices {
+  /* square off bottom corners */
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-width: 0;
+  /* avoid double border when the dropdown is active - increase padding to cater for this reduction */
+  padding-bottom: 5px;
+  /* increase the padding to cater for the lack of border so the button doesn't change size */
+}
+.aui-select2-container.select2-container.select2-dropdown-open.select2-drop-above .select2-choice,
+.aui-select2-container.select2-container.select2-dropdown-open.select2-drop-above .select2-choices {
+  border-radius: 3.01px;
+  /* restore border-radius */
+  border-bottom-width: 1px;
+  /* restore bottom border */
+  /* square off top corners instead */
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border-top-width: 0;
+  /* avoid double border when the dropdown is active - increase padding to cater for this reduction */
+  padding-bottom: 4px;
+  /* restore bottom padding */
+  padding-top: 5px;
+  /* increase the padding to cater for the lack of border so the button doesn't change size */
+}
+.aui-select2-container.select2-container.select2-drop-above .select2-choice,
+.aui-select2-container.select2-dropdown-open.select2-drop-above .select2-choice,
+.aui-select2-container.select2-dropdown-open.select2-drop-above .select2-choices,
+.aui-select2-container.select2-container-multi .select2-choices .select2-search-choice {
+  filter: none;
+}
+.aui-select2-container.select2-container .select2-choice abbr {
+  display: none;
+}
+.aui-select2-container .aui-avatar {
+  margin-right: 5px;
+}
+.aui-select2-container.aui-has-avatar .select2-search-choice-close {
+  top: 5px;
+}
+.aui-select2-container.aui-has-avatar .select2-choices .select2-search-field input {
+  padding: 1px 0;
+}
+.aui-select2-drop.aui-has-avatar .select2-results .select2-result-label .aui-avatar {
+  margin-right: 5px;
+  vertical-align: middle;
+}
+.aui-select2-drop.aui-has-avatar .select2-more-results,
+.aui-select2-drop.aui-has-avatar .select2-searching,
+.aui-select2-drop.aui-has-avatar .select2-no-results {
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+.aui-form-notification-icon-error {
+  color: #d04437;
+}
+.tipsy.aui-form-notification-tooltip-error .tipsy-arrow-n {
+  border-bottom-color: #d04437;
+}
+.tipsy.aui-form-notification-tooltip-error .tipsy-arrow-s {
+  border-top-color: #d04437;
+}
+.tipsy.aui-form-notification-tooltip-error .tipsy-arrow-w {
+  border-right-color: #d04437;
+}
+.tipsy.aui-form-notification-tooltip-error .tipsy-inner {
+  background-color: #d04437;
+  color: #ffffff;
+}
+.tipsy.aui-form-notification-tooltip-info .tipsy-arrow-n {
+  border-bottom-color: #ffffff;
+}
+.tipsy.aui-form-notification-tooltip-info .tipsy-arrow-s {
+  border-top-color: #ffffff;
+}
+.tipsy.aui-form-notification-tooltip-info .tipsy-arrow-w {
+  border-right-color: #ffffff;
+}
+.tipsy.aui-form-notification-tooltip-info .tipsy-inner {
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  color: #333333;
+}
+.tipsy.aui-form-notification-tooltip-info:before {
+  content: '';
+  height: 0;
+  position: absolute;
+  width: 0;
+}
+.tipsy.aui-form-notification-tooltip-info.tipsy-ne:before {
+  border-bottom: 6px #cccccc solid;
+  border-left: 6px transparent dashed;
+  border-right: 6px transparent dashed;
+  border-top: none;
+  margin-top: -1px;
+  right: 9px;
+  top: 0;
+}
+.tipsy.aui-form-notification-tooltip-info.tipsy-se:before {
+  border-bottom: none;
+  border-left: 6px transparent dashed;
+  border-right: 6px transparent dashed;
+  border-top: 6px #cccccc solid;
+  margin-top: -5px;
+  right: 9px;
+  top: 100%;
+}
+.tipsy.aui-form-notification-tooltip-info.tipsy-w:before {
+  border-bottom: 6px transparent dashed;
+  border-left: none;
+  border-right: 6px #cccccc solid;
+  border-top: 6px transparent dashed;
+  left: -2px;
+  margin-top: -6px;
+  top: 50%;
+}
+.tipsy.aui-form-notification-tooltip {
+  padding: 4px;
+}
+.tipsy.aui-form-notification-tooltip .tipsy-arrow-n {
+  border-width: 5px;
+  margin-top: 0;
+  right: 10px;
+}
+.tipsy.aui-form-notification-tooltip .tipsy-arrow-s {
+  border-width: 5px;
+  margin-top: -5px;
+  right: 10px;
+}
+.tipsy.aui-form-notification-tooltip .tipsy-arrow-w {
+  border-width: 5px;
+  margin-top: -5px;
+}
+.tipsy.aui-form-notification-tooltip ul {
+  padding-left: 20px;
+}
+.tipsy.aui-form-notification-tooltip .tipsy-inner {
+  padding: 10px;
+  text-align: left;
+}
+.aui-form-notification-icon-info {
+  color: #707070;
+}
+.aui-form-notification-icon-outside-field {
+  margin-left: 2px;
+  margin-top: 4px;
+  vertical-align: top;
+}
+/* Primary Colors */
+/* Secondary Colors */
+/* Derivative Colors */
+form.aui .text[data-aui-validate-state="invalid"],
+form.aui .password[data-aui-validate-state="invalid"],
+form.aui .textarea[data-aui-validate-state="invalid"] {
+  border-color: #d04437;
+}

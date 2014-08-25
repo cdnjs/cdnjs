@@ -1,0 +1,3 @@
+/**
+ * Select2 Romanian translation.
+ */(function(e){"use strict";e.extend(e.fn.select2.defaults,{formatNoMatches:function(){return"Nu a fost găsit nimic"},formatInputTooShort:function(e,t){var n=t-e.length;return"Vă rugăm să introduceți incă "+n+" caracter"+(n==1?"":"e")},formatInputTooLong:function(e,t){var n=e.length-t;return"Vă rugăm să introduceți mai puțin de "+n+" caracter"+(n==1?"":"e")},formatSelectionTooBig:function(e){return"Aveți voie să selectați cel mult "+e+" element"+(e==1?"":"e")},formatLoadMore:function(e){return"Se încarcă..."},formatSearching:function(){return"Căutare..."}})})(jQuery);

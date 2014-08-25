@@ -1,0 +1,1 @@
+(function(){var b=CodeMirror.getMode({indentUnit:2},"ruby");function a(c){test.mode(c,b,Array.prototype.slice.call(arguments,1))}a("divide_equal_operator","[variable bar] [operator /=] [variable foo]");a("divide_equal_operator_no_spacing","[variable foo][operator /=][number 42]")})();

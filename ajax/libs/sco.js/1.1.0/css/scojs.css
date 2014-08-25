@@ -1,0 +1,292 @@
+/* sco.message.js */
+#page_message {
+  display: none;
+  font-size: 15px;
+  overflow: visible;
+  text-align: center;
+  left: 0;
+  top: 0;
+  /* place over all elements, also over modals */
+  z-index: 10001;
+  width: 100%;
+  border-bottom: 1px solid;
+  color: white;
+  padding: 15px;
+  position: fixed;
+}
+
+.page_mess_error {
+  background-color: #de4343;
+  border-color: #ca2424;
+}
+
+.page_mess_ok {
+  background-color: #48bb5e;
+  border-color: #38984b;
+}
+
+.page_mess_animate {
+  background-image: -webkit-linear-gradient(135deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.05) 75%, transparent 75%, transparent);
+  background-image: -moz-linear-gradient(135deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.05) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(135deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.05) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.05) 75%, transparent 75%, transparent);
+  -webkit-background-size: 10px 10px;
+  -moz-background-size: 10px 10px;
+  -o-background-size: 10px 10px;
+  background-size: 10px 10px;
+  -webkit-animation: animate-bg 3s linear infinite;
+  -moz-animation: animate-bg 3s linear infinite;
+  -ms-animation: animate-bg 3s linear infinite;
+  -o-animation: animate-bg 3s linear infinite;
+  animation: animate-bg 3s linear infinite;
+}
+
+@-moz-keyframes animate-bg {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -20px 0;
+  }
+}
+
+@-webkit-keyframes animate-bg {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -20px 0;
+  }
+}
+
+@-o-keyframes animate-bg {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -20px 0;
+  }
+}
+
+@-ms-keyframes animate-bg {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -20px 0;
+  }
+}
+
+@keyframes animate-bg {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -20px 0;
+  }
+}
+
+
+/* sco.tooltip.js */
+.tooltip {
+	padding: .6em;
+	width: 12em;
+	z-index: 10001;
+	position: absolute;
+	background: #444;
+	color: #f9f9f9;
+	font-size: 90%;
+	display: none;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+
+.tooltip .pointer {
+	position: absolute;
+	width: 0;
+	height: 0;
+	margin: 0;
+}
+
+.tooltip.pos_e .pointer {
+	border-right: 8px solid #444;
+	border-top: 8px dashed transparent;
+	border-bottom: 8px dashed transparent;
+	left: -8px;
+	top: 50%;
+	margin-top: -8px;
+}
+
+.tooltip.pos_w .pointer {
+	border-left: 8px solid #444;
+	border-top: 8px dashed transparent;
+	border-bottom: 8px dashed transparent;
+	right: -8px;
+	top: 50%;
+	margin-top: -8px;
+}
+
+.tooltip.pos_n .pointer {
+	border-top: 8px solid #444;
+	border-left: 8px dashed transparent;
+	border-right: 8px dashed transparent;
+	left: 50%;
+	margin-left: -8px;
+	bottom: -8px;
+}
+
+.tooltip.pos_s .pointer {
+	border-bottom: 8px solid #444;
+	border-left: 8px dashed transparent;
+	border-right: 8px dashed transparent;
+	left: 50%;
+	margin-left: -8px;
+	top: -8px;
+}
+
+.tooltip.pos_nw .pointer {
+	border-top: 14px solid #444;
+	border-left: 14px dashed transparent;
+	border-right: 0px dashed transparent;
+	left: 100%;
+	margin-left: -20px;
+	bottom: -13px;
+}
+
+.tooltip.pos_sw .pointer {
+	border-bottom: 14px solid #444;
+	border-left: 14px dashed transparent;
+	border-right: 0px dashed transparent;
+	left: 100%;
+	margin-left: -20px;
+	top: -13px;
+}
+
+.tooltip.pos_se .pointer {
+	border-bottom: 14px solid #444;
+	border-right: 14px dashed transparent;
+	border-left: 0px dashed transparent;
+	left: 8px;
+	top: -13px;
+}
+
+.tooltip.pos_ne .pointer {
+	border-top: 14px solid #444;
+	border-right: 14px dashed transparent;
+	border-left: 0px dashed transparent;
+	left: 8px;
+	bottom: -13px;
+}
+
+
+/* sco.panes.js */
+.pane-wrapper {
+	position: relative;
+	overflow: hidden;
+}
+
+.pane-wrapper > div {
+	width: 100%;
+	display: none;
+	top: 0;
+	left: 0;
+	position: relative;
+	transition: .6s ease-in-out all;
+	-webkit-transition: .6s ease-in-out all;
+	-o-transition: all .6s ease-in-out;
+	-moz-transition: all .6s ease-in-out;
+	-ms-transition: all .6s ease-in-out;
+}
+
+.pane-wrapper > .active,
+.pane-wrapper > .prev,
+.pane-wrapper > .next {
+	display: block;
+}
+
+.pane-wrapper.xfade > div,
+.pane-wrapper.xfade > .active.right,
+.pane-wrapper.xfade > .active.left {
+	opacity: 0;
+}
+.pane-wrapper.xfade > .next.left,
+.pane-wrapper.xfade > .prev.right,
+.pane-wrapper.xfade > .active {
+	opacity: 1;
+}
+.pane-wrapper.xfade > .next,
+.pane-wrapper.xfade > .prev {
+	position: absolute;
+}
+
+.pane-wrapper.slide > .active {
+	left: 0;
+}
+.pane-wrapper.slide > .next,
+.pane-wrapper.slide > .prev {
+	position: absolute;
+	width: 100%;
+}
+.pane-wrapper.slide > .next {
+	left: 100%;
+}
+.pane-wrapper.slide > .prev {
+	left: -100%;
+}
+.pane-wrapper.slide > .next.left,
+.pane-wrapper.slide > .prev.right {
+	left: 0;
+}
+.pane-wrapper.slide > .active.left {
+	left: -100%;
+}
+.pane-wrapper.slide > .active.right {
+	left: 100%;
+}
+
+.pane-wrapper.flip > div {
+	position: relative;
+	width: 100%;
+	top: 0;
+	left: 0;
+	-webkit-transform: rotateY(-180deg);
+	-moz-transform: rotateY(-180deg);
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+}
+
+.pane-wrapper.flip > .active {
+	-webkit-transform: rotateY(0deg);
+	-moz-transform: rotateY(0deg);
+}
+
+.pane-wrapper.flip > .next,
+.pane-wrapper.flip > .prev {
+	position: absolute;
+	display: block;
+}
+
+.pane-wrapper.flip > .active.left {
+	-webkit-transform: rotateY(-180deg);
+	-moz-transform: rotateY(-180deg);
+}
+
+.pane-wrapper.flip > .active.right {
+	-webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
+}
+.pane-wrapper.flip > .next.left,
+.pane-wrapper.flip > .prev.right {
+	-webkit-transform: rotateY(0deg);
+	-moz-transform: rotateY(0deg);
+}

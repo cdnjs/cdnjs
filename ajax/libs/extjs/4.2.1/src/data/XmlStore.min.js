@@ -1,0 +1,1 @@
+Ext.define("Ext.data.XmlStore",{extend:"Ext.data.Store",alias:"store.xml",requires:["Ext.data.proxy.Ajax","Ext.data.reader.Xml","Ext.data.writer.Xml"],constructor:function(a){a=Ext.apply({proxy:{type:"ajax",reader:"xml",writer:"xml"}},a);this.callParent([a])}});

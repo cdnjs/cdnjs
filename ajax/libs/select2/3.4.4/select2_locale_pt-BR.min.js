@@ -1,0 +1,3 @@
+/**
+ * Select2 Brazilian Portuguese translation
+ */(function(e){"use strict";e.extend(e.fn.select2.defaults,{formatNoMatches:function(){return"Nenhum resultado encontrado"},formatInputTooShort:function(e,t){var n=t-e.length;return"Informe "+n+" caractere"+(n==1?"":"s")},formatInputTooLong:function(e,t){var n=e.length-t;return"Apague "+n+" caractere"+(n==1?"":"s")},formatSelectionTooBig:function(e){return"Só é possível selecionar "+e+" elemento"+(e==1?"":"s")},formatLoadMore:function(e){return"Carregando mais resultados..."},formatSearching:function(){return"Buscando..."}})})(jQuery);

@@ -1,0 +1,207 @@
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='icomatic.css' />
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+<script src='icomatic.js'></script>
+<style>
+    body {
+        font-family: "Source Sans Pro", Arial, sans-serif;
+        font-weight: 300;
+        color: #454545;
+        margin: 60px;
+         -webkit-font-smoothing: antialiased;             
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        color: #000; 
+        font-weight: 300;
+    }
+
+    h2 {
+        margin: 1.2em 0 0.5em;
+    }
+
+    .instruction {
+        color: #666;
+        margin: 3px 0;
+    }
+
+    .demo {
+        box-shadow: inset 0 1px 2px rgba(0,0,0,0.15);
+        border: 1px solid #aaa;
+        border-radius: 3px;
+        font-size: 1.3em;
+        height: 1.6em;
+        line-height: 1.6em;
+        font-family: Icomatic;
+        padding: 0 5px;
+    }
+
+    .demo:focus {
+        outline: none;
+        border: 1px solid #0940fd;
+        box-shadow: 0 0 0 3px rgba(0,136,255,0.5);    
+    }
+
+    .icons {
+        list-style: none;
+        margin: 0 0 0 -10px; 
+        overflow: hidden;
+        padding: 0;
+    }
+            
+    .icons li {
+        background: #eee;
+        border-radius: 3px;
+        float: left;
+        margin: 0 0 10px 10px;
+        min-width: 6em;
+        padding: 30px;
+        text-align: center;
+    }
+            
+    .icons .icomatic {
+        color: #454545;
+        margin: 0 0 10px;
+        padding-right: 0;
+        text-align: center;
+    }
+
+    .label {
+        font-size: 1em;
+        width: 
+    }
+            
+    pre {
+        background: #f7f7f7;
+        border-radius: 3px;
+        box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+        padding: 20px 0 15px;
+    }
+
+    /* DatGUI */
+
+    .dg {
+        border-radius: 4px !important;
+        color: #454545 !important;
+        margin-right: 60px;
+        margin-top: 24px;
+        text-shadow: 0 1px 0 #fff !important;
+    }
+
+    .dg.main {
+        background: #fff;
+        border: 1px solid #d7d7d7;
+        padding: 10px !important;
+    }
+
+    .dg.a {
+        margin: 0 !important;
+    }
+
+    .dg .c .slider {
+        background: #eee !important;
+        border-radius: 3px;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        border-top: 1px solid rgba(0,0,0,0.1);
+        float: right !important;
+        margin-right: 6px; 
+    }
+
+    .dg .c .slider-fg {
+        background: #288edf !important;
+        border-radius: 2px;
+        position: relative;
+        left: 1px;
+    }
+
+    .dg .c input[type=text] {
+        border-radius: 3px !important;
+        border: 1px solid transparent !important;
+    } 
+
+    .dg .has-slider input[type=text] {
+        background: #fff !important;
+        border: 1px solid #9c9e9e !important;
+        box-shadow: inset 0 1px 0 rgba(0,0,0,0.1);
+        color: #454545 !important;
+    }            
+
+    .dg .selector {
+        margin: 26px 0 0 !important;
+    }                   
+
+    .dg li {
+        border: none !important;
+    }
+
+    .dg .property-name {
+        box-sizing: border-box;
+        padding-right: 10px;
+        text-align: right;
+    }
+
+    .close-button {
+        display: none !important;
+    }
+</style>
+</head>
+<body>
+<h1>Ligature Icon Font</h1>
+Try typing one of your icon ligatures in the area below.
+eg laptop
+<div contenteditable class='icomatic demo'></div>
+<h2>Available Icons</h2>
+<ul class='icons'>
+  
+    <li>
+        <div class='icomatic icon'>laptop</div>
+        <div class='icon-label'>laptop</div>
+    </li>
+  
+    <li>
+        <div class='icomatic icon'>phone</div>
+        <div class='icon-label'>phone</div>
+    </li>
+  
+</ul>
+<h2>Icon Font Usage</h2>
+Using an icon font is simple. Just include the stylesheet, and the icon class to any text you would like to be replaced with an icon.
+<code><pre>
+&lt;link rel='stylesheet' type='text/css' href='icomatic.css'&gt;
+&lt;!-- Include the script for fallback support --&gt;
+&lt;script type='text/javascript' src='icomatic.js'&gt;&lt;/script&gt;
+...
+&lt;span class='icomatic' style='color:blue'&gt;laptop&lt;/span&gt;
+</pre></code>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<!-- DatGUI -->
+<script src="js/dat.gui.js"></script>
+<script src="js/dat.color.js"></script>
+<script>
+$(document).ready( function() {
+
+    function rgb2hex(rgb){
+        rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
+        return (rgb && rgb.length === 4) ? "#" +
+          ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+          ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+          ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : '';
+    }
+
+    //intialize
+    var obj = { Color: rgb2hex($(".icomatic").css('color')),
+                Size: parseInt($(".icomatic").css("font-size")) };
+    var gui = new dat.GUI();
+    gui.add(obj, 'Size', 10, 100).onChange(function() {
+            $(".icomatic").css('font-size', obj.Size );
+    });                
+    gui.addColor(obj, 'Color').onChange(function() {
+            $('.icomatic').css('color', obj.Color);
+    });
+});            
+</script>
+</body>
+</html>

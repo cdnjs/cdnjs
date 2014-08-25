@@ -1,0 +1,1 @@
+Ext.define("Ext.data.Request",{action:undefined,params:undefined,method:"GET",url:undefined,constructor:function(a){Ext.apply(this,a)}});

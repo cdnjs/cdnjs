@@ -1,0 +1,264 @@
+doctype 5
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    title "ref" documentation v#{package.version}
+    meta(name="description", content=package.description)
+    meta(name="keywords", content=['node.js', package.name].concat(package.keywords).join(', '))
+    meta(name="author", content="Nathan Rajlich")
+    meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1")
+
+    link(rel="stylesheet", href="stylesheets/hightlight.css")
+    link(rel="stylesheet", href="stylesheets/base.css")
+    link(rel="stylesheet", href="stylesheets/skeleton.css")
+    link(rel="stylesheet", href="stylesheets/layout.css")
+
+    link(rel="shortcut icon", href="images/favicon.ico")
+    link(rel="apple-touch-icon", href="images/apple-touch-icon.png")
+    link(rel="apple-touch-icon", sizes="72x72", href="images/apple-touch-icon-72x72.png")
+    link(rel="apple-touch-icon", sizes="114x114", href="images/apple-touch-icon-114x114.png")
+
+  body
+    .container
+      .columns.three.logo
+        a(href="")
+          h1 #{package.name} 
+            span.pointer *
+            span.version v#{package.version}
+      .columns.thirteen.subtitle
+        h3= package.description
+      .columns.sixteen.intro
+        h4 What is <code>ref</code>?
+        p
+          code ref
+          |  is a native addon for 
+          a(href="http://nodejs.org") Node.js
+          |  that aids in doing C programming in JavaScript, by extending 
+          | the built-in 
+          a(href="http://nodejs.org/api/buffer.html")
+            code Buffer
+            |  class
+          |  with some fancy additions like:
+          ul
+            li Getting the memory address of a Buffer
+            li Checking the endianness of the processor
+            li Checking if a Buffer represents the NULL pointer
+            li Reading and writing "pointers" with Buffers
+            li Reading and writing C Strings (NULL-terminated)
+            li Reading and writing JavaScript Object references
+            li Reading and writing 
+              strong int64_t
+              |  and 
+              strong uint64_t
+              |  values
+            li A "type" convention to define the contents of a Buffer
+        p
+          | There is indeed a lot of 
+          em meat 
+          |  to 
+          code ref
+          | , but it all fits together in one way or another in the end.
+          br
+          | For simplicity, 
+          code ref
+          | 's API can be broken down into 3 sections:
+      a.nav.columns.five(href='#exports')
+        h4 ref <code>exports</code>
+        p
+          | All the static versions of 
+          code ref
+          | 's functions and default "types" available on the exports returned from 
+          code require('ref')
+          | .
+      a.nav.columns.five(href='#types')
+        h4 <em>"type"</em> system
+        p
+          | The 
+          em "type"
+          |  system allows you to define a "type" on any Buffer instance, and then
+          |  use generic 
+          code ref()
+          |  and 
+          code deref()
+          |  functions to reference and dereference values.
+      a.nav.columns.five(href='#extensions')
+        h4 <code>Buffer</code> extensions
+        p
+          code Buffer.prototype
+          |  gets extended with some convenience functions. These all just mirror
+          |  their static counterpart, using the Buffer's 
+          code this
+          |  variable as the 
+          code buffer
+          |  variable.
+
+
+      hr
+      .columns.eight.section.exports
+        a(name="exports")
+        a(href="#exports")
+          h2 ref exports
+      .columns.sixteen.intro
+        p
+          | This section documents all the functions exported from 
+          code require('ref')
+          | .
+      each doc in exports
+        if (!doc.ignore)
+          .columns.sixteen.section
+            a(name='exports-' + doc.name)
+            a(href='#exports-' + doc.name)
+              isFunc = doc.type == 'method' || doc.isPrivate
+              h3
+                | ref.#{doc.name}
+                if (isFunc)
+                  | (
+                  each param, i in doc.paramTypes
+                    span.param #{param.types.join('|')} #{param.name}
+                    if (i + 1 < doc.paramTypes.length)
+                      | , 
+                  | )
+                  if (doc.returnType)
+                    |  
+                    span.rtn &rarr; #{doc.returnType.types.join('|')}
+                if (!isFunc)
+                  |  
+                  span.rtn  &rArr; #{doc.type}
+            if (doc.paramTypes.length > 0 || doc.returnType)
+              ul
+                each param in doc.paramTypes
+                  li #{param.name} - !{param.description}
+                if (doc.returnType)
+                  li
+                    strong Return: 
+                    | !{doc.returnType.description}
+            != (doc && doc.description.full || '').replace(/\<br ?\/?\>/g, ' ')
+
+
+      hr
+      .columns.eight.section.types
+        a(name="types")
+        a(href="#types")
+          h2
+            em "type"
+            |  system
+      .columns.sixteen.intro.types
+        p
+          | A "type" in 
+          code ref
+          |  is simply an plain 'ol JavaScript Object, with a set 
+          | of expected properties attached that implement the logic for getting 
+          | &amp; setting values on a given 
+          code Buffer
+          |  instance.
+        p
+          | To attach a "type" to a Buffer instance, you simply attach the "type"
+          | object to the Buffer's <code>type</code> property. 
+          code ref
+          |  comes with a set of commonly used types which are described in this 
+          | section.
+        h4 Creating your own "type"
+        p
+          | It's trivial to create your own "type" that reads and writes your 
+          | own custom datatype/class to and from Buffer instances using 
+          code ref
+          | 's unified API.
+          br
+          | To create your own "type", simply create a JavaScript Object with 
+          | the following properties defined:
+          table
+            tr
+              th Name
+              th Data Type
+              th Description
+            tr
+              td: code size
+              td: code Number
+              td The size in bytes required to hold this datatype.
+            tr
+              td: code indirection
+              td: code Number
+              td
+                | The current level of indirection of the buffer. When defining 
+                | your own "types", just set this value to <code>1</code>.
+            tr
+              td: code get
+              td: code Function
+              td
+                | The function to invoke when 
+                a(href="#exports-get")
+                  code ref.get()
+                |  is invoked on a buffer of this type.
+            tr
+              td: code set
+              td: code Function
+              td
+                | The function to invoke when 
+                a(href="#exports-set")
+                  code ref.set()
+                |  is invoked on a buffer of this type.
+            tr
+              td: code name
+              td: code String
+              td
+                em (Optional)
+                |  The name to use during debugging for this datatype.
+            tr
+              td: code alignment
+              td: code Number
+              td
+                em (Optional)
+                |  The alignment of this datatype when placed inside a struct. 
+                | Defaults to the type's 
+                code size
+                | .
+        h4 The built-in "types"
+        p
+          | Here is the list of 
+          code ref
+          | 's built-in "type" Objects. All these built-in "types" can be found 
+          |  on the 
+          code ref.types
+          |  export Object. All the built-in types use "native endianness" when 
+          | multi-byte datatypes are involved.
+      each doc in types
+        if (!doc.ignore)
+          .columns.sixteen.section
+            a(name='types-' + doc.name)
+            a(href='#types-' + doc.name)
+              h3 types.#{doc.name}
+            != doc.description.full.replace(/\<br ?\/?\>/g, ' ')
+
+
+      hr
+      .columns.eight.section.exports
+        a(name="extensions")
+        a(href="#extensions")
+          h2 Buffer extensions
+      .columns.sixteen.intro
+        p
+          code Buffer.prototype
+          |  gets extended with some convenience functions that you can use in 
+          | your modules and/or applications.
+      each doc in extensions
+        if (!doc.ignore)
+          .columns.sixteen.section
+            a(name='extensions-' + doc.name)
+            a(href='#extensions-' + doc.name)
+              h3 Buffer##{doc.name}()
+            if (doc.name === 'inspect')
+              != doc.description.full.replace(/\<br ?\/?\>/g, ' ')
+            else
+              p
+                | Shorthand for 
+                a(href='#exports-' + doc.name)
+                  code ref.#{doc.name}(this, …)
+                | .
+              != (doc.ref && doc.ref.description.full || '').replace(/\<br ?\/?\>/g, ' ')
+
+
+    .ribbon
+      a(href="https://github.com/TooTallNate/ref", rel="me") Fork me on GitHub
+
+    script(src="scripts/jquery-1.7.2.min.js")
+    script(src="scripts/main.js")

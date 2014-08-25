@@ -1,0 +1,1 @@
+Ext.define("Ext.data.TreeModel",{extend:"Ext.data.Model",requires:["Ext.data.NodeInterface"]},function(){Ext.data.NodeInterface.decorate(this)});

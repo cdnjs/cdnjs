@@ -1,0 +1,3 @@
+/**
+ * Select2 Hungarian translation
+ */(function(e){"use strict";e.extend(e.fn.select2.defaults,{formatNoMatches:function(){return"Nincs találat."},formatInputTooShort:function(e,t){var n=t-e.length;return"Túl rövid. Még "+n+" karakter hiányzik."},formatInputTooLong:function(e,t){var n=e.length-t;return"Túl hosszú. "+n+" kerekterrel több mint kellene."},formatSelectionTooBig:function(e){return"Csak "+e+" elemet lehet kiválasztani."},formatLoadMore:function(e){return"Töltés..."},formatSearching:function(){return"Keresés..."}})})(jQuery);

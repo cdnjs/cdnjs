@@ -1,0 +1,1 @@
+Ext.define("Ext.fx.target.Target",{isAnimTarget:true,constructor:function(a){this.target=a;this.id=this.getId()},getId:function(){return this.target.id}});

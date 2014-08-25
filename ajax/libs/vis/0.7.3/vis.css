@@ -1,0 +1,469 @@
+.vis.timeline {
+}
+
+
+.vis.timeline.rootpanel {
+  position: relative;
+  overflow: hidden;
+
+  border: 1px solid #bfbfbf;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.vis.timeline .vpanel {
+  position: absolute;
+  overflow: hidden;
+}
+
+
+.vis.timeline .groupset {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+}
+
+.vis.timeline .labels {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  padding: 0;
+  margin: 0;
+
+  border-right: 1px solid #bfbfbf;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.vis.timeline .labels .label-set {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  border-top: none;
+  border-bottom: 1px solid #bfbfbf;
+}
+
+.vis.timeline .labels .label-set .vlabel {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  color: #4d4d4d;
+}
+
+.vis.timeline.top .labels .label-set .vlabel,
+.vis.timeline.top .groupset .itemset-axis {
+  border-top: 1px solid #bfbfbf;
+  border-bottom: none;
+}
+
+.vis.timeline.bottom .labels .label-set .vlabel,
+.vis.timeline.bottom .groupset .itemset-axis {
+  border-top: none;
+  border-bottom: 1px solid #bfbfbf;
+}
+
+.vis.timeline .labels .label-set .vlabel .inner {
+  display: inline-block;
+  padding: 5px;
+}
+
+
+.vis.timeline .itemset {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.vis.timeline .background {
+}
+
+.vis.timeline .foreground {
+}
+
+.vis.timeline .itemset-axis {
+  position: absolute;
+}
+
+
+.vis.timeline .item {
+  position: absolute;
+  color: #1A1A1A;
+  border-color: #97B0F8;
+  background-color: #D5DDF6;
+  display: inline-block;
+  padding: 5px;
+}
+
+.vis.timeline .item.selected {
+  border-color: #FFC200;
+  background-color: #FFF785;
+  z-index: 999;
+}
+
+.vis.timeline.editable .item.selected {
+  cursor: move;
+}
+
+.vis.timeline .item.point.selected {
+  background-color: #FFF785;
+  z-index: 999;
+}
+.vis.timeline .item.point.selected .dot {
+  border-color: #FFC200;
+}
+
+.vis.timeline .item.cluster {
+  /* TODO: use another color or pattern? */
+  background: #97B0F8 url('img/cluster_bg.png');
+  color: white;
+}
+.vis.timeline .item.cluster.point {
+  border-color: #D5DDF6;
+}
+
+.vis.timeline .item.box {
+  text-align: center;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  -moz-border-radius: 5px; /* For Firefox 3.6 and older */
+}
+
+.vis.timeline .item.point {
+  background: none;
+}
+
+.vis.timeline .dot,
+.vis.timeline .item.dot {
+  padding: 0;
+  border: 5px solid #97B0F8;
+  position: absolute;
+  border-radius: 5px;
+  -moz-border-radius: 5px;  /* For Firefox 3.6 and older */
+}
+
+.vis.timeline .item.range,
+.vis.timeline .item.rangeoverflow{
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 2px;
+  -moz-border-radius: 2px;  /* For Firefox 3.6 and older */
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.vis.timeline .item.range .content,
+.vis.timeline .item.rangeoverflow .content {
+  position: relative;
+  display: inline-block;
+}
+
+.vis.timeline .item.range .content {
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.vis.timeline .item.line {
+  padding: 0;
+  position: absolute;
+  width: 0;
+  border-left-width: 1px;
+  border-left-style: solid;
+}
+
+.vis.timeline .item .content {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.vis.timeline .item .delete {
+  background: url('img/timeline/delete.png') no-repeat top center;
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 0;
+  right: -24px;
+  cursor: pointer;
+}
+
+.vis.timeline .item.range .drag-left,
+.vis.timeline .item.rangeoverflow .drag-left {
+  position: absolute;
+  width: 24px;
+  height: 100%;
+  top: 0;
+  left: -4px;
+
+  cursor: w-resize;
+  z-index: 10000;
+}
+
+.vis.timeline .item.range .drag-right,
+.vis.timeline .item.rangeoverflow .drag-right {
+  position: absolute;
+  width: 24px;
+  height: 100%;
+  top: 0;
+  right: -4px;
+
+  cursor: e-resize;
+  z-index: 10001; /* a little higher z-index than .drag-left */
+}
+
+.vis.timeline .axis {
+  position: relative;
+}
+
+.vis.timeline .axis .text {
+  position: absolute;
+  color: #4d4d4d;
+  padding: 3px;
+  white-space: nowrap;
+}
+
+.vis.timeline .axis .text.measure {
+  position: absolute;
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 0;
+  margin-right: 0;
+  visibility: hidden;
+}
+
+.vis.timeline .axis .grid.vertical {
+  position: absolute;
+  width: 0;
+  border-right: 1px solid;
+}
+
+.vis.timeline .axis .grid.horizontal {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 0;
+  border-bottom: 1px solid;
+}
+
+.vis.timeline .axis .grid.minor {
+  border-color: #e5e5e5;
+}
+
+.vis.timeline .axis .grid.major {
+  border-color: #bfbfbf;
+}
+
+.vis.timeline .currenttime {
+  background-color: #FF7F6E;
+  width: 2px;
+  z-index: 9;
+}
+.vis.timeline .customtime {
+  background-color: #6E94FF;
+  width: 2px;
+  cursor: move;
+  z-index: 9;
+}
+div.graph-manipulationDiv {
+    border-width:0px;
+    border-bottom: 1px;
+    border-style:solid;
+    border-color: #d6d9d8;
+    background: #ffffff; /* Old browsers */
+    background: -moz-linear-gradient(top,  #ffffff 0%, #fcfcfc 48%, #fafafa 50%, #fcfcfc 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(48%,#fcfcfc), color-stop(50%,#fafafa), color-stop(100%,#fcfcfc)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #ffffff 0%,#fcfcfc 48%,#fafafa 50%,#fcfcfc 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #ffffff 0%,#fcfcfc 48%,#fafafa 50%,#fcfcfc 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #ffffff 0%,#fcfcfc 48%,#fafafa 50%,#fcfcfc 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #ffffff 0%,#fcfcfc 48%,#fafafa 50%,#fcfcfc 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#fcfcfc',GradientType=0 ); /* IE6-9 */
+
+    width: 600px;
+    height:30px;
+    z-index:10;
+    position:absolute;
+}
+
+div.graph-manipulation-editMode {
+    height:30px;
+    z-index:10;
+    position:absolute;
+    margin-top:20px;
+}
+
+div.graph-manipulation-closeDiv {
+    height:30px;
+    width:30px;
+    z-index:11;
+    position:absolute;
+    margin-top:3px;
+    margin-left:590px;
+    background-position: 0px 0px;
+    background-repeat:no-repeat;
+    background-image: url("img/graph/cross.png");
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+span.graph-manipulationUI {
+    font-family: verdana;
+    font-size: 12px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    display:inline-block;
+    background-position: 0px 0px;
+    background-repeat:no-repeat;
+    height:24px;
+    margin: -14px 0px 0px 10px;
+    vertical-align:middle;
+    cursor: pointer;
+    padding: 0px 8px 0px 8px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+span.graph-manipulationUI:hover {
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.20);
+}
+
+span.graph-manipulationUI:active {
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.50);
+}
+
+span.graph-manipulationUI.back {
+    background-image: url("img/graph/backIcon.png");
+}
+
+span.graph-manipulationUI.none:hover {
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.0);
+    cursor: default;
+}
+span.graph-manipulationUI.none:active {
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.0);
+}
+span.graph-manipulationUI.none {
+    padding: 0px 0px 0px 0px;
+}
+span.graph-manipulationUI.notification{
+    margin: 2px;
+    font-weight: bold;
+}
+
+span.graph-manipulationUI.add {
+    background-image: url("img/graph/addNodeIcon.png");
+}
+
+span.graph-manipulationUI.edit {
+    background-image: url("img/graph/editIcon.png");
+}
+
+span.graph-manipulationUI.edit.editmode {
+    background-color: #fcfcfc;
+    border-style:solid;
+    border-width:1px;
+    border-color: #cccccc;
+}
+
+span.graph-manipulationUI.connect {
+    background-image: url("img/graph/connectIcon.png");
+}
+
+span.graph-manipulationUI.delete {
+    background-image: url("img/graph/deleteIcon.png");
+}
+/* top right bottom left */
+span.graph-manipulationLabel {
+    margin: 0px 0px 0px 23px;
+    line-height: 25px;
+}
+div.graph-seperatorLine {
+    display:inline-block;
+    width:1px;
+    height:20px;
+    background-color: #bdbdbd;
+    margin: 5px 7px 0px 15px;
+}
+div.graph-navigation {
+    width:34px;
+    height:34px;
+    z-index:10;
+    -moz-border-radius: 17px;
+    border-radius: 17px;
+    position:absolute;
+    display:inline-block;
+    background-position: 2px 2px;
+    background-repeat:no-repeat;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+div.graph-navigation:hover {
+    box-shadow: 0px 0px 3px 3px rgba(56, 207, 21, 0.30);
+}
+
+div.graph-navigation:active {
+    box-shadow: 0px 0px 1px 3px rgba(56, 207, 21, 0.95);
+}
+
+div.graph-navigation.active {
+    box-shadow: 0px 0px 1px 3px rgba(56, 207, 21, 0.95);
+}
+
+div.graph-navigation.up {
+    background-image: url("img/graph/upArrow.png");
+    bottom:50px;
+    left:55px;
+}
+div.graph-navigation.down {
+    background-image: url("img/graph/downArrow.png");
+    bottom:10px;
+    left:55px;
+}
+div.graph-navigation.left {
+    background-image: url("img/graph/leftArrow.png");
+    bottom:10px;
+    left:15px;
+}
+div.graph-navigation.right {
+    background-image: url("img/graph/rightArrow.png");
+    bottom:10px;
+    left:95px;
+}
+div.graph-navigation.zoomIn {
+    background-image: url("img/graph/plus.png");
+    bottom:10px;
+    right:15px;
+}
+div.graph-navigation.zoomOut {
+    background-image: url("img/graph/minus.png");
+    bottom:10px;
+    right:55px;
+}
+div.graph-navigation.zoomExtends {
+    background-image: url("img/graph/zoomExtends.png");
+    bottom:50px;
+    right:15px;
+}

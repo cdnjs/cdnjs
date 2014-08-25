@@ -1,0 +1,195 @@
+@charset 'UTF-8';
+/*
+ * blueimp Gallery CSS 1.0
+ * https://github.com/blueimp/Gallery
+ *
+ * Copyright 2013, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/MIT
+ */
+
+.blueimp-gallery,
+.blueimp-gallery-wrap img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.blueimp-gallery {
+  position: fixed;
+  overflow: hidden;
+  visibility: hidden;
+  display: none;
+  background: #000;
+  background: rgba(0, 0, 0, 0.9);
+  opacity: 0;
+}
+.blueimp-gallery-carousel {
+  position: relative;
+  height: 300px;
+  max-width: 480px;
+  margin: 1em auto;
+  box-shadow: 0 0 10px #000;
+}
+.blueimp-gallery-display {
+  display: block;
+  opacity: 1;
+}
+.blueimp-gallery-wrap {
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+}
+.blueimp-gallery-wrap > div {
+  float: left;
+  height: 100%;
+  position: relative;
+  text-align: center;
+}
+.blueimp-gallery-wrap .loading {
+  background: url(../img/loading.gif) center no-repeat;
+  background-size: 64px 64px;
+}
+.blueimp-gallery-wrap .loading img {
+  opacity: 0;
+}
+.blueimp-gallery-wrap .error {
+  background: url(../img/error.png) center no-repeat;
+  background-size: 64px 64px;
+}
+.blueimp-gallery-wrap .error img {
+  display: none;
+}
+.blueimp-gallery,
+.blueimp-gallery-wrap img {
+  -webkit-transition: opacity 0.5s linear;
+  -moz-transition: opacity 0.5s linear;
+  -o-transition: opacity 0.5s linear;
+  transition: opacity 0.5s linear;
+}
+.blueimp-gallery-wrap img {
+  margin: auto;
+  max-width: 100%;
+  max-height: 100%;
+  opacity: 1;
+}
+.blueimp-gallery .prev,
+.blueimp-gallery .next {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  width: 40px;
+  height: 40px;
+  margin-top: -20px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 60px;
+  font-weight: 100;
+  line-height: 30px;
+  color: #fff;
+  text-shadow: 0 0 2px #000;
+  text-align: center;
+  background: #222;
+  background: rgba(0, 0, 0, 0.5);
+  border: 3px solid #fff;
+  -webkit-border-radius: 23px;
+  -moz-border-radius: 23px;
+  border-radius: 23px;
+  opacity: 0.5;
+  cursor: pointer;
+  display: none;
+}
+.blueimp-gallery .next {
+  left: auto;
+  right: 15px;
+}
+.blueimp-gallery .close,
+.blueimp-gallery .title {
+  margin: 0 60px 0 0;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-size: 20px;
+  line-height: 30px;
+  color: #fff;
+  text-shadow: 0 0 2px #000;
+  display: none;
+}
+.blueimp-gallery .close {
+  margin: -15px;
+  padding: 15px;
+  right: 15px;
+  left: auto;
+  font-size: 30px;
+  opacity: 0.8;
+  cursor: pointer;
+}
+.blueimp-gallery .indicator {
+  position: absolute;
+  top: auto;
+  right: 15px;
+  bottom: 15px;
+  left: 15px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+  line-height: 10px;
+  display: none;
+}
+.blueimp-gallery .indicator li {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 6px 3px 0 3px;
+  background: #ccc;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 5px;
+  box-shadow: 0 0 2px #000;
+  cursor: pointer;
+}
+.blueimp-gallery .indicator li img {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  opacity: 0.5;
+}
+.blueimp-gallery .indicator .active {
+  background: #fff;
+}
+.blueimp-gallery .indicator .active img {
+  margin: -1px;
+  border: 1px solid #fff;
+  opacity: 1;
+}
+.blueimp-gallery-controls .prev,
+.blueimp-gallery-controls .next,
+.blueimp-gallery-controls .close,
+.blueimp-gallery-controls .title,
+.blueimp-gallery-controls .indicator {
+  display: block;
+  /* Fix z-index issues (controls behind slide element) on Android: */
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+}
+.blueimp-gallery-single .prev,
+.blueimp-gallery-single .next,
+.blueimp-gallery-single .indicator {
+  display: none;
+}
+/* IE7 fixes */
+*+html .blueimp-gallery-wrap > div {
+  min-height: 300px;
+}
+*+html .blueimp-gallery-wrap img {
+  position: relative;
+}
+*+html .blueimp-gallery .indicator li {
+  display: inline;
+}

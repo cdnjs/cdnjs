@@ -1,0 +1,3 @@
+/**
+ * Select2 Italian translation
+ */(function(e){"use strict";e.extend(e.fn.select2.defaults,{formatNoMatches:function(){return"Nessuna corrispondenza trovata"},formatInputTooShort:function(e,t){var n=t-e.length;return"Inserisci ancora "+n+" caratter"+(n==1?"e":"i")},formatInputTooLong:function(e,t){var n=e.length-t;return"Inserisci "+n+" caratter"+(n==1?"e":"i")+" in meno"},formatSelectionTooBig:function(e){return"Puoi selezionare solo "+e+" element"+(e==1?"o":"i")},formatLoadMore:function(e){return"Caricamento in corso..."},formatSearching:function(){return"Ricerca..."}})})(jQuery);

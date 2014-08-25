@@ -1,0 +1,1 @@
+Ext.define("Ext.rtl.grid.RowEditor",{override:"Ext.grid.RowEditor",setButtonPosition:function(a,b){if(this.getHierarchyState().rtl){a.rtlSetLocalXY(b,this.el.dom.offsetHeight-1)}else{this.callParent(arguments)}}});

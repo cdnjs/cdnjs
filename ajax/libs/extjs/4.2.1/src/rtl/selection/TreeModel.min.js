@@ -1,0 +1,1 @@
+Ext.define("Ext.rtl.selection.TreeModel",{override:"Ext.selection.TreeModel",onKeyRight:function(b,a){if(this.view.getHierarchyState().rtl){this.navCollapse(b,a)}else{this.callParent(arguments)}},onKeyLeft:function(b,a){if(this.view.getHierarchyState().rtl){this.navExpand(b,a)}else{this.callParent(arguments)}}});

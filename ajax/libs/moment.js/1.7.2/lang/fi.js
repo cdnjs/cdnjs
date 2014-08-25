@@ -1,4 +1,98 @@
 // moment.js language configuration
 // language : finnish (fi)
 // author : Tarmo Aidantausta : https://github.com/bleadof
-(function(){function c(a,b,c,e){var f="";switch(c){case"s":return e?"muutaman sekunnin":"muutama sekunti";case"m":return e?"minuutin":"minuutti";case"mm":f=e?"minuutin":"minuuttia";break;case"h":return e?"tunnin":"tunti";case"hh":f=e?"tunnin":"tuntia";break;case"d":return e?"p\u00e4iv\u00e4n":"p\u00e4iv\u00e4";case"dd":f=e?"p\u00e4iv\u00e4n":"p\u00e4iv\u00e4\u00e4";break;case"M":return e?"kuukauden":"kuukausi";case"MM":f=e?"kuukauden":"kuukautta";break;case"y":return e?"vuoden":"vuosi";case"yy":f=e?"vuoden":"vuotta"}return f=d(a,e)+" "+f,f}function d(c,d){return c<10?d?b[c]:a[c]:c}var a=["nolla","yksi","kaksi","kolme","nelj\u00e4","viisi","kuusi","seitsem\u00e4n","kahdeksan","yhdeks\u00e4n"],b=["nolla","yhden","kahden","kolmen","nelj\u00e4n","viiden","kuuden",a[7],a[8],a[9]],e={months:"tammikuu_helmikuu_maaliskuu_huhtikuu_toukokuu_kes\u00e4kuu_hein\u00e4kuu_elokuu_syyskuu_lokakuu_marraskuu_joulukuu".split("_"),monthsShort:"tam_hel_maa_huh_tou_kes_hei_elo_syy_lok_mar_jou".split("_"),weekdays:"sunnuntai_maanantai_tiistai_keskiviikko_torstai_perjantai_lauantai".split("_"),weekdaysShort:"su_ma_ti_ke_to_pe_la".split("_"),weekdaysMin:"su_ma_ti_ke_to_pe_la".split("_"),longDateFormat:{LT:"HH.mm",L:"DD.MM.YYYY",LL:"Do MMMMt\\a YYYY",LLL:"Do MMMMt\\a YYYY, klo LT",LLLL:"dddd, Do MMMMt\\a YYYY, klo LT"},calendar:{sameDay:"[t\u00e4n\u00e4\u00e4n] [klo] LT",nextDay:"[huomenna] [klo] LT",nextWeek:"dddd [klo] LT",lastDay:"[eilen] [klo] LT",lastWeek:"[viime] dddd[na] [klo] LT",sameElse:"L"},relativeTime:{future:"%s p\u00e4\u00e4st\u00e4",past:"%s sitten",s:c,m:c,mm:c,h:c,hh:c,d:c,dd:c,M:c,MM:c,y:c,yy:c},ordinal:function(a){return"."}};typeof module!="undefined"&&module.exports&&(module.exports=e),typeof window!="undefined"&&this.moment&&this.moment.lang&&this.moment.lang("fi",e)})();
+(function () {
+    var numbers_past = ['nolla', 'yksi', 'kaksi', 'kolme', 'neljä', 'viisi',
+                        'kuusi', 'seitsemän', 'kahdeksan', 'yhdeksän'];
+    var numbers_future = ['nolla', 'yhden', 'kahden', 'kolmen', 'neljän', 'viiden',
+                          'kuuden', numbers_past[7], numbers_past[8], numbers_past[9]];
+
+    function translate(number, withoutSuffix, key, isFuture) {
+        var result = "";
+        switch (key) {
+        case 's':
+            return isFuture ? 'muutaman sekunnin' : 'muutama sekunti';
+        case 'm':
+            return isFuture ? 'minuutin' : 'minuutti';
+        case 'mm':
+            result = isFuture ? 'minuutin' : 'minuuttia';
+            break;
+        case 'h':
+            return isFuture ? 'tunnin' : 'tunti';
+        case 'hh':
+            result = isFuture ? 'tunnin' : 'tuntia';
+            break;
+        case 'd':
+            return isFuture ? 'päivän' : 'päivä';
+        case 'dd':
+            result = isFuture ? 'päivän' : 'päivää';
+            break;
+        case 'M':
+            return isFuture ? 'kuukauden' : 'kuukausi';
+        case 'MM':
+            result = isFuture ? 'kuukauden' : 'kuukautta';
+            break;
+        case 'y':
+            return isFuture ? 'vuoden' : 'vuosi';
+        case 'yy':
+            result = isFuture ? 'vuoden' : 'vuotta';
+            break;
+        }
+        result = verbal_number(number, isFuture) + " " + result;
+        return result;
+    }
+
+    function verbal_number(number, isFuture) {
+        return number < 10 ? (isFuture ? numbers_future[number] : numbers_past[number]) : number;
+    }
+
+    var lang = {
+            months : "tammikuu_helmikuu_maaliskuu_huhtikuu_toukokuu_kesäkuu_heinäkuu_elokuu_syyskuu_lokakuu_marraskuu_joulukuu".split("_"),
+            monthsShort : "tam_hel_maa_huh_tou_kes_hei_elo_syy_lok_mar_jou".split("_"),
+            weekdays : "sunnuntai_maanantai_tiistai_keskiviikko_torstai_perjantai_lauantai".split("_"),
+            weekdaysShort : "su_ma_ti_ke_to_pe_la".split("_"),
+            weekdaysMin : "su_ma_ti_ke_to_pe_la".split("_"),
+            longDateFormat : {
+                LT : "HH.mm",
+                L : "DD.MM.YYYY",
+                LL : "Do MMMMt\\a YYYY",
+                LLL : "Do MMMMt\\a YYYY, klo LT",
+                LLLL : "dddd, Do MMMMt\\a YYYY, klo LT"
+            },
+            calendar : {
+                sameDay : '[tänään] [klo] LT',
+                nextDay : '[huomenna] [klo] LT',
+                nextWeek : 'dddd [klo] LT',
+                lastDay : '[eilen] [klo] LT',
+                lastWeek : '[viime] dddd[na] [klo] LT',
+                sameElse : 'L'
+            },
+            relativeTime : {
+                future : "%s päästä",
+                past : "%s sitten",
+                s : translate,
+                m : translate,
+                mm : translate,
+                h : translate,
+                hh : translate,
+                d : translate,
+                dd : translate,
+                M : translate,
+                MM : translate,
+                y : translate,
+                yy : translate
+            },
+            ordinal : function (number) {
+                return ".";
+            }
+        };
+
+    // Node
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = lang;
+    }
+    // Browser
+    if (typeof window !== 'undefined' && this.moment && this.moment.lang) {
+        this.moment.lang('fi', lang);
+    }
+}());

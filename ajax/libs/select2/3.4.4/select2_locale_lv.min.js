@@ -1,0 +1,3 @@
+/**
+ * Select2 Latvian translation
+ */(function(e){"use strict";e.extend(e.fn.select2.defaults,{formatNoMatches:function(){return"Sakritību nav"},formatInputTooShort:function(e,t){var n=t-e.length;return"Lūdzu ievadiet vēl "+n+" simbol"+(n==11?"us":/^\d*[1]$/im.test(n)?"u":"us")},formatInputTooLong:function(e,t){var n=e.length-t;return"Lūdzu ievadiet par "+n+" simbol"+(n==11?"iem":/^\d*[1]$/im.test(n)?"u":"iem")+" mazāk"},formatSelectionTooBig:function(e){return"Jūs varat izvēlēties ne vairāk kā "+e+" element"+(e==11?"us":/^\d*[1]$/im.test(e)?"u":"us")},formatLoadMore:function(e){return"Datu ielāde..."},formatSearching:function(){return"Meklēšana..."}})})(jQuery);

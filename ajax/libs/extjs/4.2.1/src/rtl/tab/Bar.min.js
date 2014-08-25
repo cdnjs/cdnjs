@@ -1,0 +1,1 @@
+Ext.define("Ext.rtl.tab.Bar",{override:"Ext.tab.Bar",adjustTabPositions:function(){var a=this.items.items,b=a.length,c;if(!this.getHierarchyState().rtl){return this.callParent()}if(!Ext.isIE9m){if(this.dock==="left"){while(b--){c=a[b];c.el.setStyle("right",-c.lastBox.height+"px")}}else{if(this.dock==="right"){while(b--){c=a[b];c.el.setStyle("right",c.lastBox.width+"px")}}}}}});

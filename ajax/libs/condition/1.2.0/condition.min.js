@@ -1,0 +1,6 @@
+/*!
+ * condition v1.2.0
+ * Copyright (c) 2013 Nathaniel Higgins; Licensed MIT
+ * Built on 2013-09-03 
+ */
+!function(){var a="undefined"!=typeof setImmediate&&function(a){return setImmediate(a)}||function(a){return setTimeout(a,0)},b=function(a,b){if("undefined"!=typeof a.hasOwnProperty)return a.hasOwnProperty(b);if("undefined"!=typeof window&&window.hasOwnProperty)return window.hasOwnProperty.call(a,b);throw"Environment does not support hasOwnProperty"},c=function(a){var b=a.toString(),c=b.replace(/\s/g,"").split("function")[1].split(")")[0].split("(").slice(1)[0].split(",");return 1===c.length&&""===c[0]&&(c=[]),c},d=function(b,d,e){var f=arguments,g=this,h=arguments.callee,i=function(c){if(c){if("until"===b.type)return;if(e(c),"wait"===b.type)return}else c||"until"!==b.type||e(c);a(function(){return h.apply(g,f)})},j=d(b.async&&i);b.async&&0!==c(d).length||i(j)},e={},f=function(a){return function(){return Array.prototype.unshift.call(arguments,{type:a,async:!0}),d.apply(this,arguments)}},g=["wait","when","until"];for(var h in g)b(g,h)&&(e[g[h]]=f(g[h]));e.condition=d,e.tick=a,e.has=b,e.args=c,"undefined"!=typeof module&&"exports"in module?module.exports=e:"undefined"!=typeof define?define(function(a,b,c){c.exports=e}):"undefined"!=typeof window&&(window.condition=e)}();

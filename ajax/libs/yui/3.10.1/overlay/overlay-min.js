@@ -1,0 +1,1 @@
+YUI.add("overlay",function(e,t){e.Overlay=e.Base.create("overlay",e.Widget,[e.WidgetStdMod,e.WidgetPosition,e.WidgetStack,e.WidgetPositionAlign,e.WidgetPositionConstrain])},"@VERSION@",{requires:["widget","widget-stdmod","widget-position","widget-position-align","widget-stack","widget-position-constrain"],skinnable:!0});

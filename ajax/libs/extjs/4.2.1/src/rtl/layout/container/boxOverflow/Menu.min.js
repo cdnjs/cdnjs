@@ -1,0 +1,1 @@
+Ext.define("Ext.rtl.layout.container.boxOverflow.Menu",{override:"Ext.layout.container.boxOverflow.Menu",getSuffixConfig:function(a){if(a){return this.callParent()}else{return this.getPrefixConfig(true)}},getPrefixConfig:function(a){if(a){return this.callParent()}else{return this.getSuffixConfig(true)}}});

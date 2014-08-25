@@ -1,4 +1,58 @@
 // moment.js language configuration
 // language : chinese
 // author : suupic : https://github.com/suupic
-(function(){function e(e){e.lang("zh-cn",{months:"\u4e00\u6708_\u4e8c\u6708_\u4e09\u6708_\u56db\u6708_\u4e94\u6708_\u516d\u6708_\u4e03\u6708_\u516b\u6708_\u4e5d\u6708_\u5341\u6708_\u5341\u4e00\u6708_\u5341\u4e8c\u6708".split("_"),monthsShort:"1\u6708_2\u6708_3\u6708_4\u6708_5\u6708_6\u6708_7\u6708_8\u6708_9\u6708_10\u6708_11\u6708_12\u6708".split("_"),weekdays:"\u661f\u671f\u65e5_\u661f\u671f\u4e00_\u661f\u671f\u4e8c_\u661f\u671f\u4e09_\u661f\u671f\u56db_\u661f\u671f\u4e94_\u661f\u671f\u516d".split("_"),weekdaysShort:"\u5468\u65e5_\u5468\u4e00_\u5468\u4e8c_\u5468\u4e09_\u5468\u56db_\u5468\u4e94_\u5468\u516d".split("_"),weekdaysMin:"\u65e5_\u4e00_\u4e8c_\u4e09_\u56db_\u4e94_\u516d".split("_"),longDateFormat:{LT:"Ah\u70b9mm",L:"YYYY\u5e74MMMD\u65e5",LL:"YYYY\u5e74MMMD\u65e5",LLL:"YYYY\u5e74MMMD\u65e5LT",LLLL:"YYYY\u5e74MMMD\u65e5ddddLT",l:"YYYY\u5e74MMMD\u65e5",ll:"YYYY\u5e74MMMD\u65e5",lll:"YYYY\u5e74MMMD\u65e5LT",llll:"YYYY\u5e74MMMD\u65e5ddddLT"},meridiem:function(e,t,n){return e<9?"\u65e9\u4e0a":e<11&&t<30?"\u4e0a\u5348":e<13&&t<30?"\u4e2d\u5348":e<18?"\u4e0b\u5348":"\u665a\u4e0a"},calendar:{sameDay:"[\u4eca\u5929]LT",nextDay:"[\u660e\u5929]LT",nextWeek:"[\u4e0b]ddddLT",lastDay:"[\u6628\u5929]LT",lastWeek:"[\u4e0a]ddddLT",sameElse:"L"},relativeTime:{future:"%s\u5185",past:"%s\u524d",s:"\u51e0\u79d2",m:"1\u5206\u949f",mm:"%d\u5206\u949f",h:"1\u5c0f\u65f6",hh:"%d\u5c0f\u65f6",d:"1\u5929",dd:"%d\u5929",M:"1\u4e2a\u6708",MM:"%d\u4e2a\u6708",y:"1\u5e74",yy:"%d\u5e74"}})}typeof define=="function"&&define.amd&&define(["moment"],e),typeof window!="undefined"&&window.moment&&e(window.moment)})();
+
+require('../moment').lang('zh-cn', {
+    months : "一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月".split("_"),
+    monthsShort : "1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月".split("_"),
+    weekdays : "星期日_星期一_星期二_星期三_星期四_星期五_星期六".split("_"),
+    weekdaysShort : "周日_周一_周二_周三_周四_周五_周六".split("_"),
+    weekdaysMin : "日_一_二_三_四_五_六".split("_"),
+    longDateFormat : {
+        LT : "Ah点mm",
+        L : "YYYY年MMMD日",
+        LL : "YYYY年MMMD日",
+        LLL : "YYYY年MMMD日LT",
+        LLLL : "YYYY年MMMD日ddddLT",
+        l : "YYYY年MMMD日",
+        ll : "YYYY年MMMD日",
+        lll : "YYYY年MMMD日LT",
+        llll : "YYYY年MMMD日ddddLT"
+    },
+    meridiem : function (hour, minute, isLower) {
+        if (hour < 9) {
+            return "早上";
+        } else if (hour < 11 && minute < 30) {
+            return "上午";
+        } else if (hour < 13 && minute < 30) {
+            return "中午";
+        } else if (hour < 18) {
+            return "下午";
+        } else {
+            return "晚上";
+        }
+    },
+    calendar : {
+        sameDay : '[今天]LT',
+        nextDay : '[明天]LT',
+        nextWeek : '[下]ddddLT',
+        lastDay : '[昨天]LT',
+        lastWeek : '[上]ddddLT',
+        sameElse : 'L'
+    },
+    relativeTime : {
+        future : "%s内",
+        past : "%s前",
+        s : "几秒",
+        m : "1分钟",
+        mm : "%d分钟",
+        h : "1小时",
+        hh : "%d小时",
+        d : "1天",
+        dd : "%d天",
+        M : "1个月",
+        MM : "%d个月",
+        y : "1年",
+        yy : "%d年"
+    }
+});

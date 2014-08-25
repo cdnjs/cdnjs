@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>QUnit Tests</title>
+    <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.12.0.css">
+</head>
+<body>
+
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+<form id="dummy-form" style="visibility: hidden"></form>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="jquery.form-validator.js"></script>
+<script src="//code.jquery.com/qunit/qunit-1.12.0.js"></script>
+<script>
+(function($) {
+
+    var $form = $('#dummy-form'), $in=null;
+    window.$form = $form;
+    window.$in = $in;
+
+    function input(val, dataValidationAttr, elAttr) {
+        if(!elAttr)
+            elAttr = {};
+        if( typeof dataValidationAttr == 'string') {
+            elAttr['data-validation'] = dataValidationAttr;
+        } else if(dataValidationAttr) {
+            $.each(dataValidationAttr, function(x, val) {
+                if( x == '' ) {
+                    elAttr['data-validation'] = val;
+                } else {
+                    elAttr['data-validation-'+x] = val;
+                }
+            });
+        }
+
+        elAttr['value'] = val;
+        $in = $('<input />', elAttr);
+        $in.appendTo($form);
+        return $in;
+    }
+
+    function clearForm() {
+        $form.children().remove();
+    }
+
+    function runTest(obj, validation) {
+        var $el = typeof obj.val == 'string' ? input(obj.val, validation) : obj.val;
+        var result = $.formUtils.validateInput($el, $.formUtils.LANG, $.formUtils.defaultConfig(), $form);
+
+        var message;
+        if( typeof obj.val == 'string' ) {
+            message  = 'Check that '+obj.val+' is '+(obj.isValid ? 'valid':'invalid');
+        } else {
+            message = 'Check that input[value='+obj.val.attr('value')+'] is '+(obj.isValid ? 'valid':'invalid');
+        }
+
+        if( $el.attr('data-validation-optional') && !$el.val() ) {
+            equal(
+                result,
+                null,
+                message
+            );
+        } else {
+            equal(
+                typeof(result),
+                obj.isValid ? 'boolean':'string', // returns true if valid, error message otherwise
+                message
+            );
+        }
+    }
+
+    function runAllTests() {
+
+        /*
+         * E-MAIL VALIDATION
+         */
+        test("E-mail validation", function() {
+
+            clearForm();
+
+            var values = [
+                {val: 'sasas@sdssds.se', isValid : true},
+                {val: 'sasás@sdssds.se', isValid : false},
+                {val: 'sas+as@sdssds.se', isValid : true},
+                {val: '', isValid : false},
+                {val: 'asdsd@sdsds.se', isValid : true},
+                {val: 'valid-domain@website.COM', isValid : true},
+                {val: 'asdsdsd@sdsd.co.uk', isValid : true},
+                {val: 'sasas@sdsd.xxx', isValid : true},
+                {val: 'sasas@sdsd.xxz', isValid : false},
+                {val: '@sdsd.xxz', isValid : false},
+                {val: 'sasas@', isValid : false},
+                {val: 'sasas.se', isValid : false},
+                {val: 'sasas-sdsd.com', isValid : false}
+            ];
+
+            $.each(values, function(i, obj) {
+                runTest(obj, 'email');
+            });
+        });
+
+        /*
+         * URL VALIDATION
+         */
+        test("URL validation", function() {
+
+            clearForm();
+
+            var links = [
+                {val: 'klsdmfklsmdf', isValid: false},
+                {val: 'http://google.se', isValid: true},
+                {val: 'https://google.se/test/?arge=hej_&arg[]=123', isValid: true},
+                {val: 'http://google.xxx/test/test.jsp', isValid: true},
+                {val: 'http://google.xxy', isValid: false},
+                {val: 'http://google.xxy/test/test.jsp', isValid: false},
+                {val: 'http://google.test.de', isValid: true},
+                {val: 'http://google.test.co.uk/', isValid: true}
+            ];
+
+            $.each(links, function(i, obj) {
+                runTest(obj, 'url');
+            });
+        });
+
+
+        /*
+         * DOMAIN VALIDATION
+         */
+        test("Domain validation", function() {
+
+            clearForm();
+
+            var links = [
+                {val:'domain.xxx', isValid:true},
+                {val:'domain.com', isValid:true},
+                {val:'www.domain.com', isValid:true},
+                {val:'amazone.website.tippit.de', isValid:true},
+                {val:'amazone.website.co.uk', isValid:true},
+                {val:'http://domain.se', isValid:false},
+                {val:'http://www.domain.se', isValid:false},
+                {val:'http://www.domain.se/', isValid:false},
+                {val:'domain.com/', isValid:false},
+                {val:'', isValid:false}
+            ];
+
+            $.each(links, function(i, obj) {
+                runTest(obj, 'domain');
+            });
+        });
+
+        /*
+         * REQUIRED VALIDATION
+         */
+        test("Require validation", function() {
+
+            clearForm();
+
+            var links = [
+                {val:'a', isValid:true},
+                {val:'asdf askldfmlksamdf', isValid:true},
+                {val:'  ', isValid:false},
+                {val:"\n", isValid:false},
+                {val:'', isValid:false}
+            ];
+
+            $.each(links, function(i, obj) {
+                runTest(obj, 'required');
+            });
+        });
+
+        /*
+         * ALPHANUMERIC VALIDATION
+         */
+        test("Alphanumeric validation", function() {
+
+            clearForm();
+
+            var links = [
+                {val:'a', isValid:true},
+                {val:'asdXAvs1', isValid:true},
+                {val:'a  b', isValid:false},
+                {val:'a-_ bäöåA', isValid:false},
+                {val:input('a b', {'allowing':' ', '':'alphanumeric'}), isValid:true},
+                {val:input('a-_ bäöåÖA', {'allowing':' -_öäåÄÖÅ', '':'alphanumeric'}), isValid:true}
+            ];
+
+            $.each(links, function(i, obj) {
+                runTest(obj, 'alphanumeric');
+            });
+        });
+
+        /*
+         * NUMBER VALIDATION
+         */
+        test("Number validation", function() {
+
+            clearForm();
+
+            var links = [
+                {val:'123', isValid:true},
+                {val:'', isValid:false},
+                {val:'asdfsd', isValid:false},
+                {val:'-123', isValid:false},
+                {val:input('-123', {'allowing':'negative', '':'number'}), isValid:true},
+                {val:'1.032', isValid:false},
+                {val:input('1.023', {'allowing':'float', '':'number'}), isValid:true},
+                {val:'-1.032', isValid:false},
+                {val:input('-1.023', {'allowing':'float,negative', '':'number'}), isValid:true},
+                {val:input('1.0234', {'allowing':'float,negative', '':'number'}), isValid:true},
+                {val:input('1.0235', {'allowing':'float,negative,number', '':'number'}), isValid:true},
+                {val:input('1.0236', {'allowing':'float,negative,number', 'decimal-separator':',', '':'number'}), isValid:false},
+                //{val:input('1,023', {'allowing':'float,negative,number', 'decimal-separator':',', '':'number'}), isValid:true},
+                {val:'123', isValid:true},
+                {val:input('12', {'allowing':'range[1;10]', '':'number'}), isValid:false},
+                {val:input('-1', {'allowing':'range[1;10]', '':'number'}), isValid:false},
+                {val:input('1', {'allowing':'range[1;10]', '':'number'}), isValid:true},
+                {val:input('10', {'allowing':'range[1;10]', '':'number'}), isValid:true},
+                {val:input('5', {'allowing':'range[1;10]', '':'number'}), isValid:true},
+                {val:input('-1', {'allowing':'range[-10;10],negative', '':'number'}), isValid:true},
+                {val:input('0.0001', {'allowing':'range[0.05;0.9]', '':'number'}), isValid:false},
+                {val:input('0.06', {'allowing':'range[0.05;0.9],float', '':'number'}), isValid:true}
+            ];
+
+            $.each(links, function(i, obj) {
+                runTest(obj, 'number');
+            });
+        });
+
+        /*
+         * DATE VALIDATION
+         */
+        test("Date validation", function() {
+
+            clearForm();
+
+            var dates = [
+                {val:'2000-01-01', isValid:true},
+                {val:'2000-01-1', isValid:false},
+                {val:'2000-01-32', isValid:false},
+                {val:'2000-02-29', isValid:true}, // leap year
+                {val:'2013-02-29', isValid:false},
+                {val:'2000-04-31', isValid:false},
+                {val:'2000-13-1', isValid:false},
+                {val:'2000-1-1', isValid:false},
+                {val:'-01-01', isValid:false},
+                {val:input('01/01/2000', {'format':'dd/mm/yyyy', '':'date'}), isValid:true},
+                {val:input('29/02/2000', {'format':'dd/mm/yyyy', '':'date'}), isValid:true},
+                {val:input('29/02/2013', {'format':'dd/mm/yyyy', '':'date'}), isValid:false},
+                {val:input('29/13/2013', {'format':'dd/mm/yyyy', '':'date'}), isValid:false},
+                {val:input('29/00/2013', {'format':'dd/mm/yyyy', '':'date'}), isValid:false},
+                {val:'', isValid:false},
+                {val:input('', {'optional':'true', 'format':'dd/mm/yyyy', '':'date'}), isValid:true},
+                {val:'2014-01-01', isValid:true},
+                {val:'1880-01-01', isValid:true}
+            ];
+
+            $.each(dates, function(i, obj) {
+                runTest(obj, 'date');
+            });
+        });
+
+        /*
+         * BIRTH DATE VALIDATION
+         */
+        test("Birth date validation", function() {
+
+            clearForm();
+
+            var dates = [
+                {val:'2000-01-01', isValid:true},
+                {val:'2000-01-1', isValid:false},
+                {val:'2000-01-32', isValid:false},
+                {val:'2000-02-29', isValid:true}, // leap year
+                {val:'2013-02-29', isValid:false},
+                {val:'2000-04-31', isValid:false},
+                {val:'2000-13-1', isValid:false},
+                {val:'2000-1-1', isValid:false},
+                {val:'-01-01', isValid:false},
+                {val:input('01/01/2000', {'format':'dd/mm/yyyy', '':'date'}), isValid:true},
+                {val:input('29/02/2000', {'format':'dd/mm/yyyy', '':'date'}), isValid:true},
+                {val:input('29/02/2013', {'format':'dd/mm/yyyy', '':'date'}), isValid:false},
+                {val:input('29/13/2013', {'format':'dd/mm/yyyy', '':'date'}), isValid:false},
+                {val:input('29/00/2013', {'format':'dd/mm/yyyy', '':'date'}), isValid:false},
+                {val:'2014-01-01', isValid:false}, // no future date
+                {val:'1880-01-01', isValid:false} // no date that is to old
+            ];
+
+            $.each(dates, function(i, obj) {
+                runTest(obj, 'birthdate');
+            });
+        });
+
+        /*
+         * TIME VALIDATION
+         */
+        test("Time validation", function() {
+
+            clearForm();
+
+            var links = [
+                {val:'00:00', isValid:true},
+                {val:'00:01', isValid:true},
+                {val:'09:59', isValid:true},
+                {val:'19:59', isValid:true},
+                {val:'19:60', isValid:false},
+                {val:'19:61', isValid:false},
+                {val:'24:01', isValid:false},
+                {val:'24:00', isValid:false},
+                {val:'2200', isValid:false},
+                {val:'', isValid:false},
+                {val:'23', isValid:false},
+                {val:'23;00', isValid:false},
+                {val:'23-00', isValid:false}
+            ];
+
+            $.each(links, function(i, obj) {
+                runTest(obj, 'time');
+            });
+        });
+
+
+        /*
+         * SWEDISH MOBILE VALIDATION
+         */
+        test("Swe mobile validation", function() {
+
+            clearForm();
+
+            var links = [
+                {val:'0702777118', isValid:true},
+                {val:'0722777118', isValid:true},
+                {val:'46702777118', isValid:true},
+                {val:'45702777118', isValid:false},
+                {val:'+46702777118', isValid:true},
+                {val:'+45702777118', isValid:false},
+                {val:'0732777118', isValid:true},
+                {val:'0302777118', isValid:false},
+                {val:'07027771', isValid:false}
+            ];
+
+            $.each(links, function(i, obj) {
+                runTest(obj, 'swemobile');
+            });
+        });
+
+        /*
+         * LENGTH VALIDATION
+         */
+        test("Length validation", function() {
+
+            clearForm();
+
+            var links = [
+                {val:input('1234', {'length':'max3', '':'length'}), isValid:false},
+                {val:input('1234', {'length':'min3', '':'length'}), isValid:true},
+                {val:input('1234', {'length':'min5', '':'length'}), isValid:false},
+                {val:input('1234', {'length':'2-35', '':'length'}), isValid:true},
+                {val:input('123456', {'length':'2-5', '':'length'}), isValid:false},
+                {val:input('1234', {'length':'max4', '':'length'}), isValid:true},
+                {val:input('1234', {length : 'min5', '':'number length'}), isValid:false},
+                {val:input('12345', {length : 'min5', '':'number length'}), isValid:true},
+                {val:input('1234a', {length : 'min5', '':'number length'}), isValid:false},
+                {val:input('12345678', {length : 'min5', '':'number length'}), isValid:true}
+            ];
+
+            $.each(links, function(i, obj) {
+                runTest(obj, 'length');
+            });
+        });
+
+        /*
+         * SWEDISH SSN VALIDATION
+         */
+        test("Swedish SSN validation", function() {
+
+            clearForm();
+
+            var links = [
+                {val:'19:59', isValid:false},
+                {val:'', isValid:false},
+                {val:'198311084936', isValid:true},
+                {val:'198311084935', isValid:false},
+                {val:'198301128529', isValid:true},
+                {val:'198301128528', isValid:false},
+                {val:input('', {'use-hyphen' : 'true', '':'swesec'}), isValid:false},
+                {val:input('198301128529', {'use-hyphen' : 'true', '':'swesec'}), isValid:false},
+                {val:input('198311084936', {'use-hyphen' : 'true', '':'swesec'}), isValid:false},
+                {val:input('19830112-8529', {'use-hyphen' : 'true', '':'swesec'}), isValid:true},
+                {val:input('19831108-4936', {'use-hyphen' : 'true', '':'swesec'}), isValid:true}
+            ];
+
+            $.each(links, function(i, obj) {
+                runTest(obj, 'swesec');
+            });
+        });
+
+        /*
+         * FILE VALIDATION
+         */
+        test('File validation', function() {
+
+            clearForm();
+
+            equal(100, $.formUtils.convertSizeNameToBytes('100'));
+            equal(100, $.formUtils.convertSizeNameToBytes('100b'));
+            equal(100, $.formUtils.convertSizeNameToBytes('100B'));
+            equal(112640, $.formUtils.convertSizeNameToBytes('110kb'));
+            equal(112640, $.formUtils.convertSizeNameToBytes('110KB'));
+            equal(10485760, $.formUtils.convertSizeNameToBytes('10M'));
+            equal(10485760, $.formUtils.convertSizeNameToBytes('10MB'));
+            equal(10485760, $.formUtils.convertSizeNameToBytes('10mb'));
+            equal(10485760, $.formUtils.convertSizeNameToBytes('10m'));
+
+            /*
+             todo: test this somehow
+            var extensionTests = [
+                {val:input('file.jpg', {'allowing' : 'jpg', '':'extension'}), isValid:true},
+                {val:input('file.JPG', {'allowing' : 'jpg', '':'extension'}), isValid:true},
+                {val:input('file.jpgs', {'allowing' : 'jpg', '':'extension'}, {type:'file'}), isValid:false},
+                {val:input('file', {'allowing' : 'jpg', '':'extension'}), isValid:false},
+                {val:input('file.jpeg', {'allowing' : 'jpg', '':'extension'}), isValid:true},
+                {val:input('file.JPEG', {'allowing' : 'jpg, png, gif', '':'extension'}), isValid:true},
+                {val:input('file.JPEG', {'allowing' : 'jpg,', '':'extension'}), isValid:true},
+                {val:input('file.JPEG', {'allowing' : ' jpg ', '':'extension'}), isValid:true}
+            ];
+
+            $.each(extensionTests, function(i, obj) {
+                runTest(obj, 'extension');
+            });
+             */
+        });
+
+        test('Confirmation', function() {
+
+            clearForm();
+
+            var $inputA = input('hejsan', {'':'confirmation'}, {name:'test'}),
+                $inputB = input('hej', undefined, {name:'test_confirmation'}),
+                result = $.formUtils.validateInput($inputA, $.formUtils.LANG, $.formUtils.defaultConfig(), $form);
+
+            equal(
+                typeof(result) == 'string', // Should be an error message
+                true,
+                'Could not check that inputs did not confirmation each other'
+            );
+
+            $inputB.val('hejsan');
+            result = $.formUtils.validateInput($inputA, $.formUtils.LANG, $.formUtils.defaultConfig(), $form);
+            equal(
+                result,
+                true,
+                'Could not validate confirmation'
+            );
+        });
+
+        // TODO: Write more tests...
+
+    }
+
+    var dev = window.location.hash.indexOf('dev') > -1 ? '.dev' : '';
+
+    $.validate({
+        modules : 'security'+dev+', location'+dev+', sweden'+dev+', file'+dev+', date'+dev+', uk'+dev,
+        onModulesLoaded: function( $form ) {
+            console.log('About to run all tests');
+            runAllTests();
+        }
+    });
+
+})(jQuery);
+</script>
+
+</body>
+</html>
