@@ -49,6 +49,11 @@ You can also call ncp like `ncp(source, destination, options, callback)`.
   * `options.clobber` - boolean=true. if set to false, `ncp` will not overwrite 
   destination files that already exist.
 
+  * `options.dereference` - boolean=false. If set to true, `ncp` will follow symbolic
+  links. For example, a symlink in the source tree pointing to a regular file
+  will become a regular file in the destination tree. Broken symlinks will result in
+  errors.
+
   * `options.stopOnErr` - boolean=false.  If set to true, `ncp` will behave like `cp -r`,
   and stop on the first error it encounters. By default, `ncp` continues copying, logging all
   errors and returning an array.

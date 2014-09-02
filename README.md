@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/cdnjs/cdnjs.svg?branch=master)](https://travis-ci.org/cdnjs/cdnjs) [![Dependency Status](https://david-dm.org/cdnjs/cdnjs.svg?theme=shields.io)](https://david-dm.org/cdnjs/cdnjs) [![devDependency Status](https://david-dm.org/cdnjs/cdnjs/dev-status.svg?theme=shields.io)](https://david-dm.org/cdnjs/cdnjs#info=devDependencies)
+[![Build Status](https://travis-ci.org/cdnjs/cdnjs.svg?branch=master)](https://travis-ci.org/cdnjs/cdnjs) [![Dependency Status](https://david-dm.org/cdnjs/cdnjs.svg?theme=shields.io)](https://david-dm.org/cdnjs/cdnjs) [![devDependency Status](https://david-dm.org/cdnjs/cdnjs/dev-status.svg?theme=shields.io)](https://david-dm.org/cdnjs/cdnjs#info=devDependencies) [![license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/cdnjs/cdnjs/blob/master/MIT-LICENSE) [![Gitter chat](http://img.shields.io/badge/GITTER-cdnjs-brightgreen.svg)](https://gitter.im/cdnjs/cdnjs) [![tip for next commit](https://tip4commit.com/projects/919.svg)](https://tip4commit.com/github/cdnjs/cdnjs)
 
 # cdnjs Library Repository
 
@@ -106,7 +106,11 @@ Please restrict your pull request to one library. You can include >1 version/rel
 
 From a maintenance standpoint, it's much more straightforward to process pull requests where there is one commit for one library.
 
-In your pull request title, tell us what you're doing. If you are the author of the library, please add `[author]` to the pull request title.
+In your pull request title, tell us what you're doing.
+
+ - If you are the author of the library, please add `[author]` to the pull request title.
+
+ - If you are adding a new lib, please add `[new]` to the pull request title.
 
 __Please include the following in your pull request:__
 
@@ -116,8 +120,6 @@ __Please include the following in your pull request:__
 A URL is ideal. Providing the origin of your files is very helpful as the cdnjs project is peer-reviewed. Practically speaking, it also helps us process your pull request more efficiently, which means your files go live sooner. Help us and we'll help you back.
 
 ## Enabling `npm` auto update
-
-__We are currently in the process of converting as many libraries to NPM auto update as possible. For a bit of fun, cdnjs will send you **$5 USD in Bitcoin for each library you convert to NPM auto-update**. If you could tag your pull request with [BC] and throw your Bitcoin address in the commit, we will send your payment through as soon as possible. If you would like to keep your BC address private, send an email to thomasalwyndavis@gmail.com with the details.__
 
 cdnjs automatically updates libraries that are known to be hosted on `npm` e.g., Lodash. This auto-update script runs every 15 minutes.
 
@@ -133,10 +135,12 @@ To add an `npm` hook to a library, update the `package.json` with configuration 
   }],
 ```
 
+* Please __don't__ touch `version` number in this step, it'll be automatically updated
 * `npmName` should map to the name of the library on `npm`
 * `npmFileMap` is a list of files to take from the `npm` tarball and host on cdnjs
 * `basePath` will be ignored when copying over to the CDN
 * `files` is a pattern matcher allowing selection of multiple files
+
 
 The above example looks in the tarball whose structure might look like this:
 

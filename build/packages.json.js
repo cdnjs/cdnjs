@@ -73,7 +73,7 @@ exec('git ls-tree -r --name-only HEAD | grep **/package.json | while read filena
           date:           lib.date
       });
     })
-    fs.writeFileSync('rss', feed.xml(true), 'utf8');
+    fs.writeFileSync('scratch/rss', feed.xml(true), 'utf8');
 
 })
 
@@ -105,5 +105,5 @@ glob("ajax/libs/**/package.json", function (error, matches) {
     packages.push(package);
   });
   // Initialize the feed object
-  fs.writeFileSync('packages.json', JSON.stringify({"packages":packages}, null, 2), 'utf8');
+  fs.writeFileSync('scratch/packages.json', JSON.stringify({"packages":packages}), 'utf8');
 });

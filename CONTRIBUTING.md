@@ -36,26 +36,28 @@
 2. If you are **not** the author or maintainer of the lib, please tell us where are those files from, like the url of its download page, or the url of releases page of the library.
  * If you are the author or maintainer of the lib, please just add `[author]` in th pull request's title.
 
-3. If it doesn't have officially minified files, please minify all of the main css/js files, and give them a file name as `library.min.js`.
+3. If you are adding a **new** lib into cdnjs, please add `[new]` in the pull request's title.
+
+4. If it doesn't have officially minified files, please minify all of the main css/js files, and give them a file name as `library.min.js`.
  * cdnjs's preferred JavaScript minifier is [UglifyJS](http://marijnhaverbeke.nl/uglifyjs "UglifyJS")
  * You can also use [web-minify-helper](https://github.com/PeterDaveHello/web-minify-helper "web-minify-helper") to help you do this automatically, it supports both css and js.
 
-4. Filenames should **not** include a version number and be **lowercase**.
+5. Filenames should **not** include a version number and be **lowercase**.
  * This is OK: `useful.min.js`, but this is not: `useful-2.0.1.min.js`.
 
-5. Only do **one** thing or **strongly related** works in one commits, don't mix different things into the same commit.
+6. Only do **one** thing or **strongly related** works in one commits, don't mix different things into the same commit.
 
-6. Every commit should be meaningful, don't cut one thing into multiple commits, unless you are trying to fix an existing problem in the master branch.
+7. Every commit should be meaningful, don't cut one thing into multiple commits, unless you are trying to fix an existing problem in the master branch.
  * Like adding a lib, but it has some problem, so come with many commits to fix, that will not be allowed.
 
-7. Do **not** do things which are **not** related with your commit log.
+8. Do **not** do things which are **not** related with your commit log.
 
-8. We **only** host the css/js libs with **production** version, unless the project is very popular, like jQuery, this is for maintainer to decide.
+9. We **only** host the css/js libs with **production** version, unless the project is very popular, like jQuery, this is for maintainer to decide.
  * If you have a good reason to host a alpha/beta/RC or other non-production version, please feel free to explain in comments.
 
-9. If you are asked to modify the commits, please use `git commit --amend`/`git rebase` to update your commits, and use `--force` parameter with git push to update the pull request.
+10. If you are asked to modify the commits, please use `git commit --amend`/`git rebase` to update your commits, and use `--force` parameter with git push to update the pull request.
 
-10. You **should** go back to the PR page after you sent the PR for 15~25 mins, and check if you passed the CI build, if not, please take a look at the error message and try to fix, we **won't** merge a PR with a failed build.
+11. You **should** go back to the PR page after you sent the PR for 15~25 mins, and check if you passed the CI build, if not, please take a look at the error message and try to fix, we **won't** merge a PR with a failed build.
  * Feel free to ask for help if you have no idea.
 
 ### b. Updating an existing library
