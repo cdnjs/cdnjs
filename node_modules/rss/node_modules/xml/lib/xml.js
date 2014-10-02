@@ -140,7 +140,7 @@ function resolve(data, indent, indent_count) {
         name = keys[0];
         values = data[name];
 
-        if (values._elem) {
+        if (values && values._elem) {
             values._elem.name = name;
             values._elem.icount = indent_count;
             values._elem.indent = indent;

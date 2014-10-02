@@ -19,11 +19,13 @@ describe('xml module', function(done) {
 
     it('works with simple options', function(done) {
         expect(xml([ { a: {} }])).to.equal('<a/>');
+        expect(xml([ { a: null }])).to.equal('<a/>');
         expect(xml([ { a: [] }])).to.equal('<a></a>');
         expect(xml([ { a: -1 }])).to.equal('<a>-1</a>');
         expect(xml([ { a: false }])).to.equal('<a>false</a>');
         expect(xml([ { a: 'test' }])).to.equal('<a>test</a>');
         expect(xml( { a: {} })).to.equal('<a/>');
+        expect(xml( { a: null })).to.equal('<a/>');
         expect(xml( { a: [] })).to.equal('<a></a>');
         expect(xml( { a: -1 })).to.equal('<a>-1</a>');
         expect(xml( { a: false })).to.equal('<a>false</a>');

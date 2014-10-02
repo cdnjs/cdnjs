@@ -1,6 +1,4 @@
-/*
- Documentation coming soon.
-*/
+'use strict';
 
 var XML        = require('xml'),
     mime       = require('mime'),
