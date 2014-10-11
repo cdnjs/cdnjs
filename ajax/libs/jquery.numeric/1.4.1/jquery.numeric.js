@@ -3,8 +3,8 @@
  * Copyright (c) 2006-2014 Sam Collett (http://www.texotela.co.uk)
  * Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php)
  * and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
- * 
- * Version 1.4
+ *
+ * Version 1.4.1
  * Demo: http://www.texotela.co.uk/code/jquery/numeric/
  *
  */
@@ -162,7 +162,7 @@ $.fn.numeric.keyup = function(e)
 		var decimal = $.data(this, "numeric.decimal");
 		var negative = $.data(this, "numeric.negative");
         var decimalPlaces = $.data(this, "numeric.decimalPlaces");
-		
+
 		// prepend a 0 if necessary
 		if(decimal !== "" && decimal !== null)
 		{
@@ -184,7 +184,7 @@ $.fn.numeric.keyup = function(e)
 			}
 			val = this.value;
 		}
-		
+
 		// if pasted in, only allow the following characters
 		var validChars = [0,1,2,3,4,5,6,7,8,9,'-',decimal];
 		// get length of the value (to loop through)
