@@ -1,5 +1,5 @@
 /*!
-* jQuery Smoove v1.0.1 (http://contextify.donlabs.com)
+* jQuery Contextify v1.0.1 (http://contextify.donlabs.com)
 * Copyright (c) 2014 Adam Bouqdib
 * Licensed under GPL-2.0 (http://abemedia.co.uk/license) 
 */
