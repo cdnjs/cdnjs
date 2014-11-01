@@ -1,10 +1,10 @@
 /**
 * noti.js
-* https://github.com/j-l-n/noti.js/
+* https://github.com/j-l-n/noti.js
 *
 * @author: j-l-n (https://github.com/j-l-n)
-* @version: 1.0.1
-* @lastModified: 28/10/2014 (DD/MM/YYYY)
+* @version: 1.0.0
+* @lastModified: 01/11/2014 (DD/MM/YYYY)
 */
 
 
@@ -57,7 +57,7 @@
 		
 		checkSupport: function checkSupport(){
 			var notificationsSupported;
-			if(window.Notification){
+			if("Notification" in window){
 				notificationsSupported = true;
 			}
 			else {
@@ -66,8 +66,11 @@
 			return notificationsSupported;
 		},
 		
-		askForPermission: function askForPermission(){
-			if(noti.checkSupport() === true){
+		requestPermission: function requestPermission(){
+			var askForPermission;
+			askForPermission = function askForPermission(){
+				document.removeEventListener("mousemove", askForPermission, false);
+				document.removeEventListener("keypress", askForPermission, false);
 				if(window.Notification.permission === "default"){
 					console.log("Asking for notification permission...");
 					window.Notification.requestPermission(function(){
@@ -85,7 +88,9 @@
 				else {
 					console.warn("Permission for web notifications denied.");
 				}
-			}
+			};
+			document.addEventListener("mouseover", askForPermission, false);
+			document.addEventListener("keypress", askForPermission, false); //just to be sure: if user navigates via keyboard
 		},
 		
 		create: function create(notificationArguments){
@@ -176,10 +181,10 @@
 			return notificationId;
 		},
 		
-		callback: function callback(id, callback){ //this function is called when user closes notification
+		callback: function callback(id, callbackFunction){ //this function is called when user closes notification
 			console.log("Closed notification " + id);
-			if(callback !== false){ //if user defined callback, call that function
-				callback();
+			if(callbackFunction !== false){ //if user defined callback, call that function
+				callbackFunction();
 			}
 		},
 		
@@ -302,7 +307,7 @@
 		
 		playSound: function playSound(notificationArguments){
 			//play sound during notification?
-			var notificationSound, canPlayAudio, playSound;
+			var notificationSound, canPlayAudio, soundObject;
 			notificationSound = {
 				play: false,
 			};
@@ -329,21 +334,21 @@
 			}
 			if(notificationSound.play === true){
 				var audioSource;
-				playSound = document.createElement("audio");
-				playSound.preload = "auto";
+				soundObject = document.createElement("audio");
+				soundObject.preload = "auto";
 				audioSource = document.createElement("source"); //browser with support for ogg
 				audioSource.type = "audio/ogg";
 				audioSource.src = notificationSound.ogg;
-				playSound.appendChild(audioSource);
+				soundObject.appendChild(audioSource);
 				audioSource = document.createElement("source"); //browser with support for mp3
 				audioSource.type = "audio/mpeg";
 				audioSource.src = notificationSound.mp3;
-				playSound.appendChild(audioSource);
+				soundObject.appendChild(audioSource);
 			}
 			else{
-				playSound = false;
+				soundObject = false;
 			}
-			return playSound;
+			return soundObject;
 		}
 	};
 
@@ -351,7 +356,7 @@
 	var supportsCSSAnimation;
 	supportsCSSAnimation = true;
 	if(noti.checkSupport() === true){
-		noti.askForPermission();
+		noti.requestPermission();
 	}
 	else{
 		if(document.all && !document.addEventListener){ //IE 8: does only support the CSS :before single colon syntax and has no support for CSS transform()

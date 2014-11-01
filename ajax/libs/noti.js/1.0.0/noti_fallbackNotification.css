@@ -1,0 +1,240 @@
+/**
+* noti_fallbackNotification.css
+* https://github.com/j-l-n/noti.js/
+*
+* @author: j-l-n (https://github.com/j-l-n)
+* @lastModified: 01/11/2014 (DD/MM/YYYY)
+*/
+
+
+
+
+#notification-container{
+	z-index: 2147483647; /* highest possible z-index */
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	max-height: 290px;
+}
+
+
+.notification {
+	width: 370px;
+	height: 80px;
+	margin: 2px;
+	padding: 5px;
+	overflow: hidden;
+	border: 2px solid #C9C9C9;
+	border-radius: 2px;	
+	background-color: #E0E0E0;
+}
+
+.notification-icon{
+	float: left;
+	width: 80px;
+	height: 80px;
+	background-color: #C9C9C9;
+}
+.notification-icon img{
+	max-width: 80px;
+	max-height: 80px;
+	margin: auto;
+}
+
+.notification-content{
+	margin-left: 10px;
+	float: left;
+	width: 280px;
+	height: 80px;
+	font-family: Verdana, sans-serif;
+}
+.notification-content-title{
+	max-height: 20px;
+    white-space: nowrap;
+	overflow: hidden;
+    text-overflow: ellipsis;
+	font-size: 14px;
+	font-weight: bold;
+	display: inline;
+}
+.notification-content-message{
+	margin-top: 5px;
+	width: 100%;
+    max-height: 100%;
+    overflow: auto;
+	padding-right: 200px; /* hide scroll bar */
+	line-height: 20px;
+	font-size: 12px;
+}
+
+.notification-close{
+	margin-left: 350px;
+	width: 20px;
+}
+.notification-close{
+	display: none;
+}
+.notification:hover  .notification-close{
+	display: block;
+}
+
+
+
+/* pure CSS close button */
+.closeButton{
+	position: relative;
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+	background-color: #969696;
+	cursor: pointer;
+}
+.closeButton:hover{
+	background-color: #AD0000;
+}
+.closeButton::before,
+.closeButton::after{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -5px;
+	width: 0;
+	height: 10px;
+	outline: 2px solid #FFFFFF;
+	content: " ";
+}
+.closeButton::before{
+	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+}
+.closeButton::after{
+	transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+}
+
+
+
+/* workarounds for IE 8 which does not support ::before and transform() */
+.IE8 .closeButton:before{
+	content: "X";
+	color: #AD0000;
+	font: bold 20px Verdana, sans-serif;
+}
+.IE8 .closeButton{
+	padding: 2px;
+	bottom: 85px;
+	left: 6px;
+	position: relative;
+	display: inline;
+}
+.IE8 .closeButton:hover, .IE .closeButton:hover:before {
+	background-color: #AD0000;
+	color: white;
+}
+
+
+
+/* CSS3 animations */
+.notification{
+animation: slideIn 1s ease-in-out 0s 1 normal;
+-webkit-animation: slideIn 1s ease-in-out 0s 1 normal;
+}
+
+.notification.close {
+	animation: jumpOut 1s ease-in 0s 1 normal;
+	-webkit-animation: jumpOut 1s ease-in 0s 1 normal;
+}
+
+.notification:hover  .notification-close{
+	animation: pulse 1.5s ease-in-out 0s infinite normal;
+	-webkit-animation: pulse 1.5s ease-in-out 0s infinite normal;
+}
+.notification-close:hover{
+	animation-play-state: paused;
+}
+
+
+@keyframes slideIn{
+	0%{
+		transform: translateX(120%);
+		opacity: 0.0;
+	}
+	70%{
+		transform: translateX(-2%);
+		opacity: 0.5;
+	}	
+	100%{
+		transform: translateX(0%);
+		opacity: 1.0;
+	}
+}
+
+@-webkit-keyframes slideIn{
+	0%{
+		-webkit-transform: translateX(120%);
+		opacity: 0.0;
+	}
+	70%{
+		-webkit-transform: translateX(-2%);
+		opacity: 0.5;
+	}	
+	100%{
+		-webkit-transform: translateX(0%);
+		opacity: 1.0;
+	}
+}
+
+
+@keyframes jumpOut{
+	0%{
+		margin-bottom: 0px;
+	}
+	100%{
+		margin-bottom: -100px;
+	}
+}
+
+@-webkit-keyframes jumpOut{
+	0%{
+		margin-bottom: 0px;
+	}
+	100%{
+		margin-bottom: -100px;
+	}
+}
+
+
+@keyframes pulse{
+	0%{
+		transform: scale(1.0);
+		opacity: 1.0;
+	}
+	50%{
+		transform: scale(1.1);
+		opacity: 0.8;
+	}	
+	100%{
+		transform: scale(1.0);
+		opacity: 1.0;
+	}			
+}
+@-webkit-keyframes pulse{
+	0%{
+		-webkit-transform: scale(1.0);
+		opacity: 1.0;
+	}
+	50%{
+		-webkit-transform: scale(1.1);
+		opacity: 0.8;
+	}	
+	100%{
+		-webkit-transform: scale(1.0);
+		opacity: 1.0;
+	}			
+}
