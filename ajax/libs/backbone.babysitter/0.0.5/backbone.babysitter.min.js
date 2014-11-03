@@ -1,0 +1,11 @@
+// Backbone.BabySitter
+// -------------------
+// v0.0.5
+//
+// Copyright (c)2013 Derick Bailey, Muted Solutions, LLC.
+// Distributed under MIT license
+//
+// http://github.com/babysitterjs/backbone.babysitter
+
+Backbone.ChildViewContainer=function(i,t){var e=function(i){this._views={},this._indexByModel={},this._indexByCollection={},this._indexByCustom={},this._updateLength(),this._addInitialViews(i)};t.extend(e.prototype,{add:function(i,t){var e=i.cid;this._views[e]=i,i.model&&(this._indexByModel[i.model.cid]=e),i.collection&&(this._indexByCollection[i.collection.cid]=e),t&&(this._indexByCustom[t]=e),this._updateLength()},findByModel:function(i){var t=this._indexByModel[i.cid];return this.findByCid(t)},findByCollection:function(i){var t=this._indexByCollection[i.cid];return this.findByCid(t)},findByCustom:function(i){var t=this._indexByCustom[i];return this.findByCid(t)},findByIndex:function(i){return t.values(this._views)[i]},findByCid:function(i){return this._views[i]},remove:function(i){var t=i.cid;i.model&&delete this._indexByModel[i.model.cid],i.collection&&delete this._indexByCollection[i.collection.cid];var e;for(var n in this._indexByCustom)if(this._indexByCustom.hasOwnProperty(n)&&this._indexByCustom[n]===t){e=n;break}e&&delete this._indexByCustom[e],delete this._views[t],this._updateLength()},call:function(i,t){t=Array.prototype.slice.call(arguments,1),this.apply(i,t)},apply:function(i,e){e=e||[],t.each(this._views,function(n){t.isFunction(n[i])&&n[i].apply(n,e)})},_updateLength:function(){this.length=t.size(this._views)},_addInitialViews:function(i){if(i){var t,e,n=i.length;for(e=0;n>e;e++)t=i[e],this.add(t)}}});var n=["forEach","each","map","find","detect","filter","select","reject","every","all","some","any","include","contains","invoke","toArray","first","initial","rest","last","without","isEmpty","pluck"];return t.each(n,function(i){e.prototype[i]=function(){var e=t.values(this._views),n=[e].concat(t.toArray(arguments));return t[i].apply(t,n)}}),e}(Backbone,_);
+//@ sourceMappingURL=backbone.babysitter.map

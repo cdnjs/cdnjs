@@ -2326,7 +2326,7 @@
               $timepicker.$build();
             }
           };
-          $timepicker.select = function (date, index, keep) {
+          $timepicker.select = function (date, index) {
             if (!angular.isDate(date))
               date = new Date(date);
             if (index === 0)
@@ -2335,7 +2335,7 @@
               controller.$dateValue.setMinutes(date.getMinutes());
             controller.$setViewValue(controller.$dateValue);
             controller.$render();
-            if (options.autoclose && !keep) {
+            if (options.autoclose) {
               $timepicker.hide(true);
             }
           };
@@ -2456,7 +2456,7 @@
                 return createSelection(hoursLength + 1 + minutesLength + 1, hoursLength + 1 + minutesLength + 3);
               $timepicker.switchMeridian();
             }
-            $timepicker.select(newDate, selectedIndex, true);
+            $timepicker.select(newDate, selectedIndex);
             parentScope.$digest();
           };
           function createSelection(start, end) {

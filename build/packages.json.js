@@ -73,7 +73,7 @@ exec('git ls-tree -r --name-only HEAD | grep **/package.json | while read filena
           date:           lib.date
       });
     })
-    fs.writeFileSync('rss', feed.xml(true), 'utf8');
+    fs.writeFileSync('scratch/rss', feed.xml(true), 'utf8');
 
 })
 
@@ -90,7 +90,11 @@ glob("ajax/libs/**/package.json", function (error, matches) {
       temp.version = version.replace(/^.+\//, "");
       temp.files = glob.sync(version + "/**/*.*");
       for (var i = 0; i < temp.files.length; i++){
-        temp.files[i] = temp.files[i].replace(version + "/", "");
+        var filespec = temp.files[i];
+        temp.files[i] = {
+          name: filespec.replace(version + "/", ""),
+          size: Math.round(fs.statSync(filespec).size / 1024)
+        };
       }
       package.assets.push(temp);
     });
@@ -101,5 +105,5 @@ glob("ajax/libs/**/package.json", function (error, matches) {
     packages.push(package);
   });
   // Initialize the feed object
-  fs.writeFileSync('packages.json', JSON.stringify({"packages":packages}, null, 2), 'utf8');
+  fs.writeFileSync('scratch/packages.json', JSON.stringify({"packages":packages}), 'utf8');
 });
