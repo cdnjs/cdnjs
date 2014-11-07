@@ -1,0 +1,142 @@
+/*
+Copyright 2012 Adobe Systems Inc.;
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+// internal variables
+var-range-track-background-color = $border-color
+var-range-track-background-color-active = $highlight-color
+var-range-thumb-background-color = #fff
+var-range-thumb-border-color = $border-color
+
+var-range-border-radius := 3px
+var-range-thumb-border := 1px solid var-range-thumb-border-color
+var-range-border := none
+var-range-track-height := 2px
+var-range-thumb-width  := var-thumb-size
+
+/*! topdoc
+  name: Range
+  class: range
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <input type="range" class="range">
+    <input type="range" class="range" disabled>
+  showcase:
+    <div class="navigation-bar">
+        <div class="navigation-bar__item center full">
+            <h1 class="navigation-bar__title">Range</h1>
+        </div>
+    </div>
+
+    <div style="padding:8px">
+      <input type="range" class="range" style="width:100%" value="0">
+    </div>
+
+    <div style="padding:8px">
+      <input type="range" class="range" style="width:100%" value="30">
+    </div>
+
+    <div style="padding:8px">
+      <input type="range" class="range" style="width:100%" value="60">
+    </div>
+
+    <div style="padding:8px">
+      <input type="range" class="range" style="width:100%" value="90">
+    </div>
+*/
+range()
+  reset-input()
+  -webkit-appearance none
+
+range__thumb()
+  cursor pointer
+
+range__thumb--webkit()
+  cursor pointer
+  -webkit-appearance none
+
+range--disabled()
+  disabled()
+
+.range
+  range()
+  border-radius var-border-radius
+  border var-range-border
+  height var-range-track-height
+  border-radius var-border-radius--large
+  border-radius var-range-border-radius
+
+  background-image linear-gradient(var-range-track-background-color, var-range-track-background-color)
+  background-position left center
+  background-size 100% 2px
+  background-repeat no-repeat
+  overflow hidden
+  height 31px
+
+.range::-moz-range-track
+  position relative
+  border none
+  background-color var-range-track-background-color
+  height var-range-track-height
+  border-radius var-round-border
+  box-shadow none
+  top 0
+  margin 0
+  padding 0
+
+.range::-webkit-slider-thumb
+  range__thumb--webkit()
+  position relative
+  height var-range-thumb-width
+  width var-range-thumb-width
+  background-color var-range-thumb-background-color
+  border var-range-thumb-border
+  border-radius var-round-border
+  box-shadow none
+  top 0
+  margin 0
+  padding 0
+
+.range::-moz-range-thumb
+  range__thumb()
+  position relative
+  height var-range-thumb-width
+  width var-range-thumb-width
+  background-color var-range-thumb-background-color
+  border var-range-thumb-border
+  border-radius var-round-border
+  box-shadow none
+  margin 0
+  padding 0
+
+.range::-webkit-slider-thumb:before
+  position absolute
+  top 13px
+  right 0px
+  left -1024px
+  width 1024px
+  height 2px
+  background-color var-range-track-background-color-active
+  content ''
+  margin 0
+  padding 0
+
+.range:disabled
+  range--disabled()
+

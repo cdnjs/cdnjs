@@ -1,0 +1,141 @@
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+// internal variables
+var-radio-button-background-active := rgba(0, 0, 0, 0)
+var-radio-button-indicator-color := #1284ff
+
+var-radio-button-background = transparent
+var-radio-button-border = 3px solid var-radio-button-indicator-color
+var-size--radio-button = 24px
+
+/*! topdoc
+  name: Radio Button
+  class: radio-button
+  modifiers:
+  markup:
+    <label class="radio-button">
+      <input type="radio" name="r" checked="checked">
+      <div class="radio-button__checkmark"></div>
+      Label
+    </label>
+
+    <label class="radio-button">
+      <input type="radio" name="r">
+      <div class="radio-button__checkmark"></div>
+      Label
+    </label>
+
+    <label class="radio-button">
+      <input type="radio" name="r">
+      <div class="radio-button__checkmark"></div>
+      Label
+    </label>
+*/
+
+radio-button()
+  reset-box-model()
+  inline-block()
+  reset-cursor()
+  reset-font()
+  hide-input-parent()
+
+radio-button__label()
+  inline-block()
+  reset-cursor()
+
+radio-button--before()
+  content ''
+  position absolute
+  border-radius 100%
+  reset-box-model()
+
+radio-button--after()
+  content ''
+  position absolute
+  border-radius 100%
+  top 50%
+  left 50%
+  transform translate(-50%, -50%)
+
+radio-button--disabled()
+  disabled()
+
+.radio-button > input[type="radio"]
+  hide-input()
+  height 0px
+  width 0px
+
+.radio-button > input[type="radio"]:active,
+.radio-button > input[type="radio"]:focus
+  outline 0
+  -webkit-tap-highlight-color rgba(0, 0, 0, 0)
+
+.radio-button > input[type="radio"]:checked + .radio-button__checkmark:after
+  opacity 1
+
+.radio-button > input[type="radio"]:checked + .radio-button__checkmark:before
+  background transparent
+  border none
+
+.radio-button
+  radio-button__label()
+  hide-input-parent()
+  line-height var-size--radio-button
+  text-align left
+  margin 10px 0
+
+.radio-button__checkmark:before
+  radio-button--before()
+  width var-size--checkbox
+  height var-size--checkbox
+  background transparent
+  border none
+  border-radius var-border-radius--checkbox
+  left 0
+
+.radio-button__checkmark
+  radio-button()
+  position relative
+  width var-size--radio-button
+  height var-size--radio-button
+  background var-radio-button-background
+
+.radio-button > input[type="radio"]:checked + .radio-button__checkmark
+  background var-radio-button-background-active
+
+.radio-button__checkmark:after
+  radio-button--after()
+  top var-top--checkmark
+  left var-left--checkmark
+  opacity 0
+  width var-width--checkmark__tail
+  height var-height--checkmark__foot
+  background transparent
+  border var-radio-button-border
+  border-width var-border-width--checkmark
+  border-top none
+  border-right none
+  border-radius var-border-radius--checkmark
+  transform var-transform--checkmark
+
+.radio-button > input[type="radio"]:disabled + .radio-button__checkmark
+  radio-button--disabled()
+

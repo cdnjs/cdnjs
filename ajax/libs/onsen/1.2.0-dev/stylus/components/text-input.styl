@@ -1,0 +1,159 @@
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+// internal variables
+var-text-input-font-size = 15px
+var-text-input-height = 31px
+var-text-input-border-color = var-input-border-color
+
+/*! topdoc
+  name: Text Input
+  class: text-input
+  modifiers:
+    :disabled: Disabled state
+    :focus: Focused
+    :invalid: Hover state
+  markup:
+    <input type="text" class="text-input" placeholder="text" value="">
+    <br>
+    <input type="text" class="text-input" placeholder="text" value="" disabled>
+*/
+
+input()
+  reset-input()
+  reset-font()
+
+input--disabled()
+  disabled()
+
+text-input()
+  input()
+  letter-spacing var-letter-spacing
+  border var-input-border
+  border-radius var-border-radius
+  background-color var-input-bg-color
+  box-shadow var-box-shadow--text-input
+  color var-input-text-color
+  padding 4px 8px 0 8px
+  margin 0
+  font-size var-text-input-font-size
+  height var-text-input-height
+  font-weight var-font-weight
+  box-sizing border-box
+
+text-input--disabled()
+  input--disabled()
+
+webkit-input-placeholder()
+  color var-input-placeholder-color
+
+text-input--invalid()
+  border 1px solid var-input-invalid-border-color
+  color var-input-invalid-text-color
+
+.text-input
+  text-input()
+
+.text-input::-webkit-input-placeholder,
+.text-input::-moz-placeholder,
+.text-input::-ms-input-placeholder
+  color var-input-placeholder-color
+
+.text-input:disabled
+  text-input--disabled()
+
+.text-input:disabled::-webkit-input-placeholder,
+.text-input:disabled::-moz-placeholder,
+.text-input:disabled:-ms-input-placeholder
+  webkit-input-placeholder()
+
+.text-input:invalid
+  text-input--invalid()
+
+/*! topdoc
+  name: Transparent Text Input
+  class: text-input--transparent
+  markup:
+    <input type="text" class="text-input--transparent" placeholder="text" value="">
+    <br>
+    <input type="text" class="text-input--transparent" placeholder="text" value="" disabled>
+*/
+
+.text-input--transparent
+  text-input()
+  border none
+  background-color transparent
+  padding-left 0
+  padding-right 0
+
+.text-input--transparent:disabled
+  text-input--disabled()
+  border none
+  background-color transparent
+
+.text-input--transparent:disabled::-webkit-input-placeholder
+.text-input--transparent:disabled::-moz-placeholder,
+.text-input--transparent:disabled:-ms-input-placeholder
+  webkit-input-placeholder()
+  border none
+  background-color transparent
+
+
+.text-input--transparent:invalid
+  text-input--invalid()
+  border none
+  background-color transparent
+
+/*! topdoc
+  name: Underbar Text Input
+  class: text-input--underbar
+  markup:
+    <input type="text" class="text-input--underbar" placeholder="text" value="">
+    <br>
+    <input type="text" class="text-input--underbar" placeholder="text" value="" disabled>
+*/
+
+.text-input--underbar
+  text-input()
+  border none
+  background-color transparent
+  border-bottom 1px solid var-text-input-border-color
+  border-radius 0px
+
+.text-input--underbar:disabled
+  text-input--disabled()
+  border none
+  background-color transparent
+  border-bottom 1px solid var-text-input-border-color
+
+.text-input--underbar:disabled::-webkit-input-placeholder,
+.text-input--underbar:disabled::-moz-placeholder,
+.text-input--underbar:disabled:-ms-input-placeholder
+  webkit-input-placeholder()
+  border none
+  background-color transparent
+
+
+.text-input--underbar:invalid
+  text-input--invalid()
+  border none
+  background-color transparent
+  border-bottom 1px solid var-input-invalid-border-color
+

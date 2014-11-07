@@ -1,0 +1,99 @@
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+// internal variables
+var-textarea-color = var-input-text-color
+var-textarea-border = 1px solid var-input-border-color
+var-textarea-padding = 5px 5px 5px 5px
+var-textarea-box-shadow = none
+
+/*! topdoc
+  name: Textarea
+  class: textarea
+  modifiers:
+    :disabled: Disabled state
+  markup:
+    <textarea class="textarea" rows="3" placeholder="Textarea"></textarea>
+  showcase:
+*/
+
+.textarea
+  reset-box-model()
+  reset-base()
+  reset-font()
+  vertical-align top
+  resize none
+  outline none
+  padding var-textarea-padding
+  font-size var-font-size--text-input
+  font-weight var-font-weight
+  border-radius var-border-radius
+  border var-textarea-border
+  background-color var-input-bg-color
+  color var-textarea-color
+  letter-spacing var-letter-spacing
+  box-shadow var-textarea-box-shadow
+  -webkit-appearance none
+
+.textarea:disabled
+  disabled()
+
+.textarea::-webkit-input-placeholder,
+.textarea::-moz-placeholder,
+.textarea:-ms-input-placeholder
+  color var-input-placeholder-color
+
+/*! topdoc
+  name: Textarea Transparent
+  class: textarea--transparent
+  modifiers:
+    :disabled: Disabled state
+  markup:
+    <textarea class="textarea--transparent" rows="3" placeholder="Textarea"></textarea>
+  showcase:
+*/
+
+.textarea--transparent
+  reset-box-model()
+  reset-base()
+  reset-font()
+  vertical-align top
+  resize none
+  outline none
+  padding var-textarea-padding
+  padding-left 0
+  padding-right 0
+  font-size var-font-size--text-input
+  font-weight var-font-weight
+  border-radius var-border-radius
+  border none
+  background-color transparent
+  color var-textarea-color
+  letter-spacing var-letter-spacing
+  box-shadow var-textarea-box-shadow
+  -webkit-appearance none
+
+.textarea--transparent:disabled
+  disabled()
+
+.textarea--transpanret::-webkit-input-placeholder,
+.textarea--transparent::-moz-placeholder,
+.textarea--transparent:-ms-input-placeholder
+  color var-input-placeholder-color

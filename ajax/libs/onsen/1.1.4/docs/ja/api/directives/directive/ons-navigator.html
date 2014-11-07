@@ -1,0 +1,159 @@
+<div class="directive-container" id="module:directives.directive:ons-navigator">
+  <div>
+    <section class="description">
+      <p>ページスタックの管理とナビゲーション機能を提供するコンポーネント。画面上への出力はありません。</p>
+    </section>
+
+    <span class="anchor" id="ons-navigator-attributes"></span>
+
+    
+      <section>
+        <h4>例</h4>
+        <pre><code class="xml">&lt;ons-navigator animation=&quot;slide&quot; var=&quot;app.navi&quot;&gt;
+  &lt;ons-page&gt;
+    &lt;ons-toolbar&gt;
+      &lt;div class=&quot;center&quot;&gt;Title&lt;/div&gt;
+    &lt;/ons-toolbar&gt;
+
+    &lt;p style=&quot;text-align: center&quot;&gt;
+      &lt;ons-button modifier=&quot;light&quot; ng-click=&quot;app.navi.pushPage(&#39;page.html&#39;);&quot;&gt;Push&lt;/ons-button&gt;
+    &lt;/p&gt;
+  &lt;/ons-page&gt;
+&lt;/ons-navigator&gt;
+
+&lt;ons-template id=&quot;page.html&quot;&gt;
+  &lt;ons-page&gt;
+    &lt;ons-toolbar&gt;
+      &lt;div class=&quot;center&quot;&gt;Title&lt;/div&gt;
+    &lt;/ons-toolbar&gt;
+
+    &lt;p style=&quot;text-align: center&quot;&gt;
+      &lt;ons-button modifier=&quot;light&quot; ng-click=&quot;app.navi.popPage(&#39;page.html&#39;);&quot;&gt;Pop&lt;/ons-button&gt;
+    &lt;/p&gt;
+  &lt;/ons-page&gt;
+&lt;/ons-template&gt;</code></pre>
+      </section>
+    
+
+    
+      <section>
+        <h4>属性</h4>
+        <table>
+          <tbody>
+            
+            <span class="anchor" id="ons-navigator-page"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">page</td>
+              <td>ナビゲーターが初期化された時に表示するページを指定します。</td>
+            </tr>
+            
+            <span class="anchor" id="ons-navigator-var"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">var</td>
+              <td>ナビゲーターを参照するための変数を指定します。</td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </section>
+    
+
+    <span class="anchor" id="ons-navigator-methods"></span>
+    
+    <section>
+      <h4>メソッド</h4>
+      <table>
+        <tbody>
+          
+          <span class="anchor" id="pushPage(pageUrl,options)-pushPage(pageUrl,options)"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>pushPage(pageUrl,options)</code></td>
+            <td>指定したpageUrlを新しいページスタックに追加します。新しいページが表示されます。</td>
+          </tr>
+          
+          <span class="anchor" id="insertPage(index,pageUrl,options)-insertPage(index,pageUrl,options)"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>insertPage(index,pageUrl,options)</code></td>
+            <td>指定したpageUrlをページスタックのindexで指定した位置に追加します。</td>
+          </tr>
+          
+          <span class="anchor" id="popPage()-popPage()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>popPage()</code></td>
+            <td>現在表示中のページをページスタックから取り除きます。一つ前のページに戻ります。</td>
+          </tr>
+          
+          <span class="anchor" id="resetToPage(pageUrl,options)-resetToPage(pageUrl,options)"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>resetToPage(pageUrl,options)</code></td>
+            <td>ページスタックをリセットし、指定したページを表示します。</td>
+          </tr>
+          
+          <span class="anchor" id="getCurrentPage()-getCurrentPage()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>getCurrentPage()</code></td>
+            <td>現在のページを取得します。pushPage()やresetToPage()メソッドの引数を取得できます。</td>
+          </tr>
+          
+          <span class="anchor" id="getPages()-getPages()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>getPages()</code></td>
+            <td>ナビゲーターの持つページスタックの一覧を取得します。</td>
+          </tr>
+          
+          <span class="anchor" id="getDeviceBackButtonHandler()-getDeviceBackButtonHandler()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>getDeviceBackButtonHandler()</code></td>
+            <td>バックボタンハンドラを取得します。デフォルトの挙動を変更することができます。</td>
+          </tr>
+          
+          <span class="anchor" id="on(eventName,listener)-on(eventName,listener)"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>on(eventName,listener)</code></td>
+            <td>イベントリスナーを追加します。prepop, prepush, postpop, postpushを指定できます。</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
+    
+
+    
+
+    
+    <h4>サンプル</h4>
+
+    
+    <div style="height: 480px; width: 320px;" class="codepen-wrapper">
+    
+      <p data-height="480" data-theme-id="7186" data-slug-hash="yrhtv" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/yrhtv/'>ons-screen.presentPage, dismissPage</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+    </div>
+
+    <div class="codepen-open-link-wrapper"><a href="http://s.codepen.io/onsen/fullembedgrid/yrhtv" target="_blank"><i class="fa fa-external-link"></i>Open in New Window</a></div>
+    
+
+    
+      <h4>関連情報</h4>
+      <ul class="seealso">
+        
+          
+            <li class="guide"><a href="overview.html#PageNavigation">ページナビゲーションの概要</a></li>
+          
+            <li class="guide"><a href="overview.html#CallingComponentAPIsfromJavaScript">JavaScriptからコンポーネントを呼び出す</a></li>
+          
+            <li class="guide"><a href="overview.html#EventHandling">イベント処理の使い方</a></li>
+          
+            <li class="guide"><a href="overview.html#DefiningMultiplePagesinSingleHTML">複数のページを1つのHTMLに記述する</a></li>
+          
+        
+        
+          
+            <li class="seealso"><a href="#ons-toolbar">ons-toolbarコンポーネント</a></li>
+          
+        
+      </ul>
+    
+
+  </div>
+
+</div>

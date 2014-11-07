@@ -1,0 +1,95 @@
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+// internal variables
+var-search-icon = url("data:image/svg+xml;utf8,<svg width='41px' height='40px' viewBox='0 0 41 40' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:sketch='http://www.bohemiancoding.com/sketch/ns'><title>Slice 1</title><description>Created with Sketch (http://www.bohemiancoding.com/sketch)</description><defs></defs><g id='Page 1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'><g id='search' fill='#C6C8C8'><path d='M0.504,16.338 C0.504,25.085 7.635,32.165 16.444,32.165 C25.24,32.165 32.382,25.085 32.382,16.338 C32.382,7.591 25.24,0.5 16.444,0.5 C7.635,0.5 0.504,7.591 0.504,16.338 L0.504,16.338 Z M5.555,16.338 C5.555,10.359 10.423,5.521 16.445,5.521 C22.455,5.521 27.333,10.36 27.333,16.338 C27.333,22.317 22.455,27.156 16.445,27.156 C10.423,27.156 5.555,22.316 5.555,16.338 L5.555,16.338 Z M27.666,30.861 L34.521,38.67 C35.625,39.772 36.338,39.781 37.46,38.67 L39.661,36.489 C40.743,35.408 40.811,34.711 39.661,33.568 L31.765,26.793 L27.666,30.861 L27.666,30.861 Z M27.666,30.861' id='Shape'></path></g></g></svg>");
+var-background-image--search-input = var-search-icon
+var-background-color--search-input = var-input-bg-color
+var-background-color--search-input--focus = var-input-bg-color
+var-color--search-input = var-input-text-color
+var-color--search-input--focus = var-input-text-color
+var-placeholder-color--input = var-input-placeholder-color
+var-border--search-input = 1px solid var-input-border-color
+var-border--search-input--focus = 1px solid var-input-border-color
+var-margin-right--search-decoration = 0px
+var-search-input--border-radius = 4px
+var-background-position--search-input = 8px center
+var-padding--search-input = 8px 0 4px 28px
+var-height--search-input = 31px
+var-font-size--search-input = 15px
+
+/*! topdoc
+  name: Search Input
+  class: search-input
+  modifiers:
+    :disabled: Disabled state
+  markup:
+    <input type="search" value="" placeholder="Search" class="search-input">
+*/
+
+search-input()
+  reset-input()
+  reset-font()
+  -webkit-appearance none
+
+input[type="search"].search-input::-webkit-search-cancel-button
+  -webkit-appearance none
+  display none
+
+search-input--disabled()
+  disabled()
+
+.search-input
+  search-input()
+  box-sizing border-box
+  height var-height--search-input
+  font-size var-font-size--search-input
+  border var-border--search-input
+  background-color var-background-color--search-input
+  box-shadow var-box-shadow--text-input
+  color var-color--search-input
+  padding 4px 0 0 28px
+  border-radius var-search-input--border-radius
+  background-image var-background-image--search-input
+  background-position var-background-position--search-input
+  background-repeat no-repeat
+  background-size var-font-size
+  font-weight var-font-weight
+  display block
+  width 100%
+
+.search-input:focus
+  background-color var-background-color--search-input--focus
+  color var-color--search-input--focus
+  border var-border--search-input--focus
+  box-shadow var-box-shadow--text-input
+
+.search-input::-webkit-search-cancel-button,
+.search-input::-webkit-search-decoration
+  margin-right var-margin-right--search-decoration
+
+.search-input::-webkit-input-placeholder,
+.search-input::-moz-placeholder,
+.search-input::-ms-input-placeholder
+  color var-input-placeholder-color
+
+.search-input:disabled
+  search-input--disabled()
+

@@ -1,0 +1,194 @@
+<div class="directive-container" id="module:directives.directive:ons-sliding-menu">
+  <div>
+    <section class="description">
+      <p>Component for sliding UI where one page is overlayed over another page. The above page can be slided aside to reveal the page behind.</p>
+    </section>
+
+    <span class="anchor" id="ons-sliding-menu-attributes"></span>
+
+    
+      <section>
+        <h4>Example</h4>
+        <pre><code class="xml">&lt;ons-sliding-menu var=&quot;app.menu&quot; main-page=&quot;page.html&quot; menu-page=&quot;menu.html&quot; max-slide-distance=&quot;200px&quot; type=&quot;reveal&quot; side=&quot;left&quot;&gt;
+&lt;/ons-sliding-menu&gt;
+
+&lt;ons-template id=&quot;page.html&quot;&gt;
+  &lt;ons-page&gt;
+   &lt;p style=&quot;text-align: center&quot;&gt;
+     &lt;ons-button ng-click=&quot;app.menu.toggleMenu()&quot;&gt;Toggle&lt;/ons-button&gt;
+   &lt;/p&gt;
+  &lt;/ons-page&gt;
+&lt;/ons-template&gt;
+
+&lt;ons-template id=&quot;menu.html&quot;&gt;
+  &lt;ons-page&gt;
+    &lt;!-- menu page&#39;s contents --&gt;
+  &lt;/ons-page&gt;
+&lt;/ons-template&gt;</code></pre>
+      </section>
+    
+
+    
+      <section>
+        <h4>Attributes</h4>
+        <table>
+          <tbody>
+            
+            <span class="anchor" id="ons-sliding-menu-behind-page"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">behind-page</td>
+              <td>The url of the page to be set to the behind layer.</td>
+            </tr>
+            
+            <span class="anchor" id="ons-sliding-menu-above-page"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">above-page</td>
+              <td>The url of the page to be set to the above layer.</td>
+            </tr>
+            
+            <span class="anchor" id="ons-sliding-menu-swipable"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">swipable</td>
+              <td>Whether to enable swipe interaction.</td>
+            </tr>
+            
+            <span class="anchor" id="ons-sliding-menu-swipe-target-width"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">swipe-target-width</td>
+              <td>The width of swipable area calculated from the left (in pixel). Use this to enable swipe only when the finger touch on the screen edge.</td>
+            </tr>
+            
+            <span class="anchor" id="ons-sliding-menu-max-slide-distance"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">max-slide-distance</td>
+              <td>How far the behind page will slide open. Can specify both in px and %. eg. 90%, 200px</td>
+            </tr>
+            
+            <span class="anchor" id="ons-sliding-menu-var"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">var</td>
+              <td>Variable name to refer this sliding menu.</td>
+            </tr>
+            
+            <span class="anchor" id="ons-sliding-menu-side"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">side</td>
+              <td>Specify which side of the screen the behind page is located on. Possible values are left and right.</td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </section>
+    
+
+    <span class="anchor" id="ons-sliding-menu-methods"></span>
+    
+    <section>
+      <h4>Methods</h4>
+      <table>
+        <tbody>
+          
+          <span class="anchor" id="setMainPage(pageUrl,[options])-setMainPage(pageUrl,[options])"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>setMainPage(pageUrl,[options])</code></td>
+            <td>Show the page specified in pageUrl in the main contents pane.</td>
+          </tr>
+          
+          <span class="anchor" id="setMenuPage(pageUrl,[options])-setMenuPage(pageUrl,[options])"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>setMenuPage(pageUrl,[options])</code></td>
+            <td>Show the page specified in pageUrl in the side menu pane.</td>
+          </tr>
+          
+          <span class="anchor" id="setAbovePage(pageUrl)-setAbovePage(pageUrl)"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>setAbovePage(pageUrl)</code></td>
+            <td>[Deprecated]Show the page specified in pageUrl in the above layer.</td>
+          </tr>
+          
+          <span class="anchor" id="setBehindPage(pageUrl)-setBehindPage(pageUrl)"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>setBehindPage(pageUrl)</code></td>
+            <td>[Deprecated]Show the page specified in pageUrl in the behind layer.</td>
+          </tr>
+          
+          <span class="anchor" id="openMenu()-openMenu()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>openMenu()</code></td>
+            <td>Slide the above layer to reveal the layer behind.</td>
+          </tr>
+          
+          <span class="anchor" id="closeMenu()-closeMenu()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>closeMenu()</code></td>
+            <td>Slide the above layer to hide the layer behind.</td>
+          </tr>
+          
+          <span class="anchor" id="toggleMenu()-toggleMenu()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>toggleMenu()</code></td>
+            <td>Slide the above layer to reveal the layer behind if it is currently hidden, otherwies, hide the layer behind.</td>
+          </tr>
+          
+          <span class="anchor" id="on(eventName,listener)-on(eventName,listener)"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>on(eventName,listener)</code></td>
+            <td>Add an event listener. Preset events are preopen, preclose, postopen and postclose.</td>
+          </tr>
+          
+          <span class="anchor" id="isMenuOpened()-isMenuOpened()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>isMenuOpened()</code></td>
+            <td>Returns true if the menu page is open, otherwise false.</td>
+          </tr>
+          
+          <span class="anchor" id="getDeviceBackButtonHandler()-getDeviceBackButtonHandler()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>getDeviceBackButtonHandler()</code></td>
+            <td>Retrieve the back-button handler.</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
+    
+
+    
+
+    
+    <h4>Sample</h4>
+
+    
+    <div style="height: 480px; width: 320px;" class="codepen-wrapper">
+    
+      <p data-height="480" data-theme-id="7186" data-slug-hash="IDvFJ" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/IDvFJ/'>ons-screen.presentPage, dismissPage</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+    </div>
+
+    <div class="codepen-open-link-wrapper"><a href="http://s.codepen.io/onsen/fullembedgrid/IDvFJ" target="_blank"><i class="fa fa-external-link"></i>Open in New Window</a></div>
+    
+
+    
+      <h4>See also</h4>
+      <ul class="seealso">
+        
+          
+            <li class="guide"><a href="overview.html#UsingSlidingMenu">Using sliding menu</a></li>
+          
+            <li class="guide"><a href="overview.html#EventHandling">Using events</a></li>
+          
+            <li class="guide"><a href="overview.html#CallingComponentAPIsfromJavaScript">Using navigator from JavaScript</a></li>
+          
+            <li class="guide"><a href="overview.html#DefiningMultiplePagesinSingleHTML">Defining multiple pages in single html</a></li>
+          
+        
+        
+          
+            <li class="seealso"><a href="#ons-page">ons-page component</a></li>
+          
+        
+      </ul>
+    
+
+  </div>
+
+</div>

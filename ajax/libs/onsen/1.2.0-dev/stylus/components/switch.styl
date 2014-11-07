@@ -1,0 +1,122 @@
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+// internal variables
+var-switch-background-color = $border-color
+var-switch-checked-background-color = $switch-highlight-color // background color active
+var-switch-thumb-background-color = white
+var-swtich-thumb-border-color = $border-color
+var-swtich-thumb-border-color-active = $switch-highlight-color
+var-switch-height = 32px
+var-switch-width = 51px
+
+/*! topdoc
+  name: Switch
+  class: switch
+  modifiers:
+    :focus: Focus state
+    :disabled: Disabled state
+  markup:
+    <label class="switch">
+      <input type="checkbox" class="switch__input">
+      <div class="switch__toggle"></div>
+    </label>
+    <label class="switch">
+      <input type="checkbox" class="switch__input" checked>
+      <div class="switch__toggle"></div>
+    </label>
+    <label class="switch">
+      <input type="checkbox" class="switch__input" disabled>
+      <div class="switch__toggle"></div>
+    </label>
+*/
+
+switch()
+  inline-block()
+  reset-box-model()
+  hide-input-parent()
+
+switch__toggle()
+  inline-block()
+  reset-box-model()
+  reset-base()
+  reset-cursor()
+
+.switch
+  switch()
+  font-size var-font-size
+  padding 0 20px
+  border none
+  overflow visible
+  width var-switch-width
+  height var-switch-height
+  z-index 0
+  text-align left
+
+.switch__input
+  hide-input()
+  width var-switch-width
+  height 44px
+  margin-top -((44px-(var-switch-height))/2px)
+  top 0px
+  left 0px
+  transition all 0.2s linear
+
+// switch toggle background
+.switch__toggle
+  background-color var-switch-background-color
+  position absolute
+  top 0px
+  left 0px
+  right 0px
+  bottom 0px
+  border-radius 30px
+  transition-property all
+  transition-duration 0.35s
+  transition-timing-function ease-out
+
+// switch toggle circle
+.switch__toggle:before
+  reset-box-model()
+  position absolute
+  content ''
+  border-radius 28px
+  height 28px
+  width 28px
+  background-color var-switch-thumb-background-color
+  left 2px
+  top 2px
+  transition-property all
+  transition-duration 0.35s
+  transition-timing-function cubic-bezier(.5, 1.6, .5, 1)
+
+.switch__input:checked + .switch__toggle
+  background-color var-switch-checked-background-color
+
+.switch__input:checked + .switch__toggle:before
+  transform translateX(18px)
+
+.switch__input:not(:checked) + .switch__toggle:before
+  transform translateX(0px)
+
+.switch__input:disabled + .switch__toggle
+  disabled()
+

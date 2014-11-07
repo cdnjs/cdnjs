@@ -1,0 +1,470 @@
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+// internal variables
+var-background-color--list := #fff
+var-background-color--list-header := #f0eff4
+var-color--list-header := #1F1F21
+var-color--list-item := #1F1F21
+var-background-color--list-item := #fff
+var-background-color--list-item--active := #D9D9D9
+var-list-item-separator-color := #ddd
+
+var-padding--list = 0
+var-font-size--list-header = 15px
+var-list-border = 1px solid var-list-item-separator-color
+
+var-margin--list-item = 0 0 0 0
+var-padding--list-item = 0 10px 0 10px
+var-padding--list-header = 0 0 0 10px
+var-padding-left--list-item--first = 10px
+var-padding-left--list-item--last = 10px
+var-margin--list-item--first = 0
+var-margin--list-item--last = 0
+var-min-height--list-item = 44px
+var-min-height--list-header = 24px
+var-text-shadow--list-header = none
+var-font-weight--list-header = var-font-weight--large
+
+var-border-top--list = 1px solid var-list-item-separator-color
+var-border-bottom--list = 1px solid var-list-item-separator-color
+
+var-border-top--list-item--2 = 1px solid var-list-item-separator-color
+var-border-bottom--list-item = 1px solid var-list-item-separator-color
+
+var-border-top--list-item = none
+
+
+/*! topdoc
+  name: List
+  class: list
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        <span class="list__item__line-height">Item</span>
+      </li>
+      <li class="list__item">
+        <span class="list__item__line-height">Item</span>
+      </li>
+    </ul>
+*/
+
+retina-list-item-border(color = var-tab-bar-border-color)
+  +retina-query()
+    border-bottom none
+    background-size 100% 1px
+    background-repeat no-repeat
+    background-position bottom
+    background-image linear-gradient(0deg, color, color 50%, transparent 50%)
+
+retina-list-border(color = var-list-item-separator-color)
+  +retina-query()
+    border none
+    background-size 100% 1px, 100% 1px
+    background-repeat no-repeat
+    background-position bottom, top
+    background-image linear-gradient(0deg, color, color 50%, transparent 50%), linear-gradient(180deg, color, color 50%, transparent 50%)
+
+retina-list-header-border(color = var-tab-bar-border-color)
+  +retina-query()
+    border-top none
+    background-size 100% 1px
+    background-repeat no-repeat
+    background-position top
+    background-image linear-gradient(180deg, color, color 50%, transparent 50%)
+
+list()
+  reset-base()
+  reset-cursor()
+  reset-font()
+  reset-list()
+  overflow auto
+  display block
+  -webkit-overflow-scrolling touch
+
+list__header()
+  margin 0
+  padding 0
+  list-style none
+  text-align left
+  display block
+  box-sizing border-box
+
+list__item()
+  margin 0
+  padding 0
+  position relative
+  list-style none
+  box-sizing border-box
+  display block
+
+.list--noborder
+  border-top none
+  border-bottom none
+
+.list__header
+  list__header()
+  padding var-padding--list-header
+  font-size var-font-size--list-header
+  font-weight var-font-weight--list-header
+  background-color var-background-color--list-header
+  color var-color--list-header
+  text-shadow var-text-shadow--list-header
+  border-top none
+  border-bottom none
+  min-height var-min-height--list-header
+  line-height @min-height
+
+.list__header:first-child
+  retina-list-header-border()
+
+.list
+  list()
+  padding var-padding--list
+  background-color var-background-color--list
+  border-top var-border-top--list
+  border-bottom var-border-bottom--list
+  background-color var-background-color--list
+  retina-list-border()
+
+.list__item
+  list__item()
+  padding var-padding--list-item
+  margin var-margin--list-item
+  border-top none
+  border-bottom var-list-border
+  color var-color--list-item
+  background-color transparent
+  min-height var-min-height--list-item
+  line-height var-min-height--list-item
+
+.list__item--no-padding
+  padding 0
+
+.list__item__line-height,
+.list__item--line-height
+  line-height var-min-height--list-item
+
+.list__item_active:active
+  background-color var-background-color--list-item--active
+  transition none
+
+.list__item:first-child
+  border-top none
+  border-bottom var-list-border
+
+.list__item:last-child
+  border-bottom none
+
+.list__item:first-child:last-child
+  border-top none
+  border-bottom none
+
+.list__item:not(:last-child)
+  retina-list-item-border()
+
+/*! topdoc
+  name: Noborder List
+  class: list--noborder
+  use: List
+  markup:
+    <ul class="list list--noborder">
+      <li class="list__item">
+        <span class="list__item__line-height">Item</span>
+      </li>
+      <li class="list__item">
+        <span class="list__item__line-height">Item</span>
+      </li>
+    </ul>
+ */
+
+.list--noborder
+  background-color var-background-color--list
+  border-top none
+  border-bottom none
+  background-image none
+
+/*! topdoc
+  name: Category List Header
+  class: list__header
+  use: List
+  markup:
+    <ul class="list">
+      <li class="list__header">
+        Header
+      </li>
+      <li class="list__item">
+        Item
+      </li>
+      <li class="list__header">
+        Header
+      </li>
+      <li class="list__item">
+        Item
+      </li>
+    </ul>
+ */
+
+/*! topdoc
+  name: Tappable List
+  class: list__item--tappable
+  use: List
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--tappable">
+        Tappable Item
+      </li>
+    </ul>
+ */
+
+.list__item--tappable
+  transition background-color 0.2s linear
+
+.list__item--tappable:active
+  background-color var-background-color--list-item--active
+  transition none
+
+.list__item--tappable:hover
+  transition none
+
+/*! topdoc
+  name: Switch in List Item
+  class: switch--list-item
+  use: Switch, List
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        Label
+        <label class="switch switch--list-item">
+          <input type="checkbox" class="switch__input" checked>
+          <div class="switch__toggle"></div>
+        </label>
+      </li>
+      <li class="list__item">
+        Label
+        <label class="switch switch--list-item">
+          <input type="checkbox" class="switch__input">
+          <div class="switch__toggle"></div>
+        </label>
+      </li>
+    </ul>
+*/
+
+.switch--list-item
+  float right
+  margin-top 6px
+  margin-right 10px
+
+/*! topdoc
+  name: List Item with Chevron
+  class: list__item--chevron
+  use: List
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--chevron">
+        Tappable Item
+      </li>
+      <li class="list__item list__item--chevron">
+        Tappable Item
+      </li>
+    </ul>
+ */
+
+.list__item--chevron
+  transition background-color 0.2s linear
+  overflow hidden
+
+.list__item--chevron:active
+  background-color var-background-color--list-item--active
+  transition none
+
+.list__item--chevron:hover
+  transition none
+
+.list__item--chevron:before
+  position absolute
+  right 16px
+  top 50%
+  color var-list-item-separator-color
+  line-height 28px
+  height 28px
+  transform translateY(-50%)
+  font-size 28px
+  font-family FontAwesome
+  font-style normal
+  font-weight normal
+  content "\f105"
+
+/*! topdoc
+  name: Inset List
+  use: List, List Item with Chevron
+  markup:
+    <ul class="list list--inset">
+      <li class="list__item list--inset__item list__item--chevron">
+        List Item with Chevron
+      </li>
+      <li class="list__item list--inset__item list__item--chevron">
+        List Item with Chevron
+      </li>
+    </ul>
+ */
+
+.list--inset
+  margin-left 8px
+  margin-right 8px
+  border 1px solid var-list-item-separator-color
+  border-radius 4px
+  background-image none
+
+.list--inset__item:not(:last-child)
+  border-bottom 1px solid var-list-item-separator-color
+  background-image none
+
+/*! topdoc
+  name: Radio Button in List Item
+  modifiers:
+  use: Radio Button, List, Tappable List
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--tappable">
+        <label class="radio-button radio-button--list-item">
+          <input type="radio" name="b" checked="checked">
+          <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
+          Radio Button
+        </label>
+      </li>
+      <li class="list__item list__item--tappable">
+        <label class="radio-button radio-button--list-item">
+          <input type="radio" name="b">
+          <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
+          Radio Button
+        </label>
+      </li>
+    </ul>
+*/
+
+.radio-button--list-item
+  width 100%
+  height 100%
+  padding 0
+  margin 0
+  line-height var-min-height--list-item
+
+.radio-button--list-item__checkmark
+  margin-top 10px
+
+/*! topdoc
+  name: Checkbox in List Item
+  use: Checkbox, List, Tappable List
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--tappable">
+        <label class="checkbox checkbox--list-item">
+          <input type="checkbox">
+          <div class="checkbox__checkmark checkbox--list-item__checkmark"></div>
+          Checkbox
+        </label>
+      </li>
+      <li class="list__item list__item--tappable">
+        <label class="checkbox checkbox--list-item">
+          <input type="checkbox" checked>
+          <div class="checkbox__checkmark checkbox--list-item__checkmark"></div>
+          Checkbox
+        </label>
+      </li>
+    </ul>
+*/
+
+.checkbox--list-item
+  width 100%
+  height 100%
+  padding 0
+  margin 0
+  line-height var-min-height--list-item
+
+.checkbox--list-item__checkmark
+  margin-top 10px
+
+/*! topdoc
+  name: No border Checkbox in List Item
+  use: Checkbox in List Item, No border Checkbox
+  class: chckbox--list-item
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--tappable">
+        <label class="checkbox checkbox--noborder checkbox--list-item">
+          <input type="checkbox">
+          <div class="checkbox__checkmark checkbox--noborder checkbox--list-item__checkmark"></div>
+          Checkbox
+        </label>
+      </li>
+      <li class="list__item list__item--tappable">
+        <label class="checkbox checkbox--noborder checkbox--list-item">
+          <input type="checkbox" checked>
+          <div class="checkbox__checkmark checkbox--noborder checkbox--list-item__checkmark"></div>
+          Checkbox
+        </label>
+      </li>
+    </ul>
+*/
+
+/*! topdoc
+  name: Text Input in List Item
+  use: List, Transparent Text Input
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        <input type="text" class="text-input text-input--transparent" style="width:100%; margin-top:4px;" placeholder="name">
+      </li>
+      <li class="list__item">
+        <input type="text" class="text-input text-input--transparent" style="width:100%; margin-top:4px;" placeholder="email">
+      </li>
+    </ul>
+*/
+
+/*! topdoc
+  name: Textarea in List Item
+  use: List, Textarea Transparent
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        <textarea class="textarea textarea--transparent" style="width:100%;height:50px;margin-top:4px;" placeholder="text message"></textarea>
+      </li>
+    </ul>
+*/
+
+/*! topdoc
+  name: Right Label in List Item
+  use: List
+  class: list__right-label
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        <div class="list__right-label">Label</div>
+        Label
+      </li>
+    </ul>
+*/
+
+.list__right-label {
+  font-size: var-font-size--mini;
+  padding-right: 8px;
+  float: right;
+}

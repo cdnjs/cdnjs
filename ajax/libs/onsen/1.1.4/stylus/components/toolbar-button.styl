@@ -1,0 +1,108 @@
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+// internal variables
+var-color--toolbar-button := #1284ff
+var-background-color--toolbar-button := rgba(0, 0, 0, 0)
+var-toolbar-button-border-color := #1284ff
+
+var-toolbar-button-border-radius = 2px
+var-padding--toolbar-button = 4px 10px
+var-toolbar-top = 0
+var-toolbar-top--large = 0px
+var-background-color--toolbar-button--active = var-background-color--toolbar-button
+var-border--toolbar-button = 1px solid var-toolbar-button-border-color
+var-color--toolbar-button--quiet = var-color--toolbar-button
+
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+/*! topdoc
+  name: Toolbar Button
+  class: toolbar-button
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <button class="toolbar-button">
+      <i class="fa fa-bell" style="font-size:17px"></i> Label
+    </button>
+
+    <button class="toolbar-button toolbar-button--outline">
+      <i class="fa fa-bell" style="font-size:17px"></i> Label
+    </button>
+*/
+
+.toolbar-button
+  reset-font()
+  padding var-padding--toolbar-button
+  letter-spacing var-letter-spacing
+  color var-color--toolbar-button
+  text-shadow var-text-shadow
+  vertical-align baseline
+  background-color var-background-color--toolbar-button
+  border-radius var-toolbar-button-border-radius
+  border 1px solid transparent
+  font-weight var-font-weight
+  font-size var-font-size
+  transition none
+  vertical-align middle
+
+.toolbar-button:active
+  background-color var-background-color--toolbar-button--active
+  transition none
+  opacity 0.2
+
+.toolbar-button:disabled
+  disabled()
+
+.toolbar-button:focus
+  outline 0
+  transition none
+
+.toolbar-button:hover
+  transition none
+
+.toolbar-button--outline
+  @extend .toolbar-button
+  border var-border--toolbar-button
+  margin auto 8px
+  padding-left 6px
+  padding-right 6px
+
+.toolbar-button--outline:hover
+  @extend .toolbar-button:hover
+
+.toolbar-button--outline:active
+  @extend .toolbar-button:active
+
+.toolbar-button--outline:focus
+  @extend .toolbar-button:focus
+
+.toolbar-button--quiet
+  @extend .toolbar-button
+
+.toolbar-button--quiet:hover
+  @extend .toolbar-button:hover
+
+.toolbar-button--quiet:active
+  @extend .toolbar-button:active
+
+.toolbar-button--quiet:focus
+  @extend .toolbar-button:focus
+

@@ -1,0 +1,309 @@
+/**
+*
+* Copyright 2012 Adobe Systems Inc.
+*
+* Licensed under the Apache License, Version 2.0 (the "License")
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+// internal variables
+var-button-background-color = $highlight-color
+var-button-color = white
+var-button-cta-background-color = $second-highlight-color
+var-border--button-color = rgba(0, 0, 0, 0)
+var-button-quiet-color = $highlight-color
+
+var-button-cta-background-color = $second-highlight-color
+var-button-cta-color = white
+var-button-large-padding = 4px 12px
+var-button-padding = 4px 10px
+var-button-line-height = 32px
+var-button-large-line-height = 36px
+var-button-active-opacity = 0.2
+var-button-border-radius = 3px
+
+/*! topdoc
+  name: Button
+  class: button
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <button class="button">Button</button>
+    <button class="button" disabled>Button</button>
+*/
+
+button--quiet()
+  reset-quiet()
+
+button--disabled()
+  disabled()
+
+button--hover()
+  transition none
+
+button()
+  inline-block()
+  reset-box-model()
+  reset-base()
+  reset-font()
+  reset-cursor()
+  ellipsis()
+  height auto
+  text-decoration none
+  padding var-button-padding
+  font-size var-font-size
+  line-height var-button-line-height
+  letter-spacing var-letter-spacing
+  color var-button-color
+  vertical-align middle
+  background-color var-button-background-color
+  border 0px solid currentColor
+  border-radius var-button-border-radius
+  transition none
+
+button--focus()
+  outline 0
+
+button--active()
+  background-color var-button-background-color
+  transition none
+  opacity var-button-active-opacity
+
+.button
+  button()
+
+.button:hover
+  button--hover()
+
+.button:active
+  button--active()
+
+.button:focus
+  button--focus()
+
+.button:disabled,
+.button[disabled]
+  button--disabled()
+
+/*! topdoc
+  name: Outline Button
+  class: button--outline
+  use: Button
+  markup:
+    <button class="button button--outline">Button</button>
+    <button class="button button--outline" disabled>Button</button>
+*/
+.button--outline
+  background-color transparent
+  border 1px solid var-button-background-color
+  color var-button-background-color
+
+.button--outline:active
+  background-color mylighten(var-button-background-color)
+  border 1px solid var-button-background-color
+  color var-button-background-color
+  opacity 1
+
+.button--outline:hover
+  border 1px solid var-button-background-color
+  transition 0
+
+/*! topdoc
+  name: Light Button
+  class: button--light
+  use: Button
+  markup:
+    <button class="button button--light">Button</button>
+    <button class="button button--light" disabled>Button</button>
+*/
+.button--light
+  background-color transparent
+  color rgba(0, 0, 0, 0.4)
+  border 1px solid rgba(0, 0, 0, 0.2)
+
+.button--light:active
+  background-color rgba(0, 0, 0, 0.05)
+  color rgba(0, 0, 0, 0.4)
+  border 1px solid rgba(0, 0, 0, 0.2)
+  opacity 1
+
+/*! topdoc
+  name: Quiet Button
+  class: button--quiet
+  markup:
+    <button class="button--quiet">Button</button>
+    <button class="button--quiet" disabled>Button</button>
+*/
+
+.button--quiet
+  button()
+  button--quiet()
+  background transparent
+  color var-button-quiet-color
+  border none
+
+.button--quiet:disabled,
+.button--quiet[disabled]
+  button--disabled()
+  border none
+
+.button--quiet:hover
+  button--hover()
+
+.button--quiet:focus
+  button--focus()
+
+.button--quiet:active
+  background-color transparent
+  border none
+  transition none
+  opacity var-button-active-opacity
+  color var-button-quiet-color
+
+/*! topdoc
+  name: Call To Action Button
+  class: button--cta
+  markup:
+    <button class="button--cta">Button</button>
+    <button class="button--cta" disabled>Button</button>
+*/
+
+.button--cta
+  button()
+  border none
+  background-color var-button-cta-background-color
+  color var-button-cta-color
+
+.button--cta:hover
+  button--hover()
+
+.button--cta:focus
+  button--focus()
+
+.button--cta:active
+  color var-button-cat-color
+  background-color var-button-cta-background-color
+  transition none
+  opacity var-button-active-opacity
+
+.button--cta:disabled,
+.button--cta[disabled]
+  button--disabled()
+
+
+/*! topdoc
+  name: Large Button
+  class: button--large
+  use: Button
+  markup:
+    <button class="button button--large">Button</button>
+*/
+
+.button--large
+  font-size var-font-size--large
+  font-weight var-font-weight--large
+  line-height var-button-large-line-height
+  padding var-button-large-padding
+  display block
+  width 100%
+  text-align center
+
+.button--large:active
+  button--active()
+  transition none
+
+.button--large:disabled,
+.button--large[disabled]
+  button--disabled()
+
+.button--large:hover
+  button--hover()
+
+.button--large:focus
+  button--focus()
+
+/*! topdoc
+  name: Large Quiet Button
+  class: button--large--quiet
+  markup:
+    <button class="button--large--quiet">Button</button>
+*/
+
+.button--large--quiet
+  button()
+  font-size var-font-size--large
+  font-weight var-font-weight--large
+  line-height var-button-large-line-height
+  padding var-button-large-padding
+  display block
+  width 100%
+  button--quiet()
+  color var-button-quiet-color
+  text-align center
+
+.button--large--quiet:active
+  transition none
+  opacity var-button-active-opacity
+  color var-button-quiet-color
+  button--quiet()
+
+.button--large--quiet:disabled,
+.button--large--quiet[disabled]
+  button--disabled()
+
+.button--large--quiet:hover
+  button--hover()
+
+.button--large--quiet:focus
+  outline 0
+
+
+/*! topdoc
+  name: Large Call To Action Button
+  class: button--large--cta
+  markup:
+    <button class="button--large--cta" >Button</button>
+*/
+
+.button--large--cta
+  button()
+  border none
+  background-color var-button-cta-background-color
+  color var-button-cta-color
+  font-size var-font-size--large
+  font-weight var-font-weight--large
+  line-height var-button-large-line-height
+  padding var-button-large-padding
+  width 100%
+  text-align center
+  display block
+
+.button--large--cta:hover
+  button--hover()
+
+.button--large--cta:focus
+  button--focus()
+
+.button--large--cta:active
+  color var-button-cta-color
+  background-color var-button-cta-background-color
+  transition none
+  opacity var-button-active-opacity
+
+.button--large--cta:disabled,
+.button--large--cta[disabled]
+  button--disabled()

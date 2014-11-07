@@ -1,0 +1,194 @@
+<div class="directive-container" id="module:directives.directive:ons-sliding-menu">
+  <div>
+    <section class="description">
+      <p>スライディングメニューを表現するためのコンポーネントで、片方のページが別のページの上にオーバーレイで表示されます。above-pageで指定されたページは、横からスライドして表示します。</p>
+    </section>
+
+    <span class="anchor" id="ons-sliding-menu-attributes"></span>
+
+    
+      <section>
+        <h4>例</h4>
+        <pre><code class="xml">&lt;ons-sliding-menu var=&quot;app.menu&quot; main-page=&quot;page.html&quot; menu-page=&quot;menu.html&quot; max-slide-distance=&quot;200px&quot; type=&quot;reveal&quot; side=&quot;left&quot;&gt;
+&lt;/ons-sliding-menu&gt;
+
+&lt;ons-template id=&quot;page.html&quot;&gt;
+  &lt;ons-page&gt;
+   &lt;p style=&quot;text-align: center&quot;&gt;
+     &lt;ons-button ng-click=&quot;app.menu.toggleMenu()&quot;&gt;Toggle&lt;/ons-button&gt;
+   &lt;/p&gt;
+  &lt;/ons-page&gt;
+&lt;/ons-template&gt;
+
+&lt;ons-template id=&quot;menu.html&quot;&gt;
+  &lt;ons-page&gt;
+    &lt;!-- menu page&#39;s contents --&gt;
+  &lt;/ons-page&gt;
+&lt;/ons-template&gt;</code></pre>
+      </section>
+    
+
+    
+      <section>
+        <h4>属性</h4>
+        <table>
+          <tbody>
+            
+            <span class="anchor" id="ons-sliding-menu-behind-page"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">behind-page</td>
+              <td>後方のレイヤーにセットされたページのURLを指定します。</td>
+            </tr>
+            
+            <span class="anchor" id="ons-sliding-menu-above-page"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">above-page</td>
+              <td>前方のレイヤーにセットされたページのURLを指定します。</td>
+            </tr>
+            
+            <span class="anchor" id="ons-sliding-menu-swipable"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">swipable</td>
+              <td>スワイプ操作を有効にする場合に指定します。</td>
+            </tr>
+            
+            <span class="anchor" id="ons-sliding-menu-swipe-target-width"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">swipe-target-width</td>
+              <td>スワイプの判定領域をピクセル単位で指定します。画面の端から指定した距離に達するとページが表示されます。</td>
+            </tr>
+            
+            <span class="anchor" id="ons-sliding-menu-max-slide-distance"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">max-slide-distance</td>
+              <td>behind-pageで指定されたページの表示幅を指定します。ピクセルもしくは%の両方で指定できます（例: 90%, 200px）</td>
+            </tr>
+            
+            <span class="anchor" id="ons-sliding-menu-var"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">var</td>
+              <td>JavaScriptから操作するための変数名を指定します。</td>
+            </tr>
+            
+            <span class="anchor" id="ons-sliding-menu-side"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">side</td>
+              <td>behind-pageで指定されたページが画面のどちら側から表示されるかを指定します。leftもしくはrightのいずれかを指定できます。</td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </section>
+    
+
+    <span class="anchor" id="ons-sliding-menu-methods"></span>
+    
+    <section>
+      <h4>メソッド</h4>
+      <table>
+        <tbody>
+          
+          <span class="anchor" id="setMainPage(pageUrl,[options])-setMainPage(pageUrl,[options])"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>setMainPage(pageUrl,[options])</code></td>
+            <td>中央部分に表示されるページをpageUrlに指定します。</td>
+          </tr>
+          
+          <span class="anchor" id="setMenuPage(pageUrl,[options])-setMenuPage(pageUrl,[options])"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>setMenuPage(pageUrl,[options])</code></td>
+            <td>メニュー部分に表示されるページをpageUrlに指定します。</td>
+          </tr>
+          
+          <span class="anchor" id="setAbovePage(pageUrl)-setAbovePage(pageUrl)"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>setAbovePage(pageUrl)</code></td>
+            <td>[非推奨]上部に表示されるページをpageUrlに指定します。</td>
+          </tr>
+          
+          <span class="anchor" id="setBehindPage(pageUrl)-setBehindPage(pageUrl)"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>setBehindPage(pageUrl)</code></td>
+            <td>[非推奨]下部に表示されるページをpageUrlに指定します。</td>
+          </tr>
+          
+          <span class="anchor" id="openMenu()-openMenu()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>openMenu()</code></td>
+            <td>メニューページを表示します。</td>
+          </tr>
+          
+          <span class="anchor" id="closeMenu()-closeMenu()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>closeMenu()</code></td>
+            <td>メニューページを非表示にします。</td>
+          </tr>
+          
+          <span class="anchor" id="toggleMenu()-toggleMenu()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>toggleMenu()</code></td>
+            <td>現在の状況に合わせて、メニューページを表示もしくは非表示にします。</td>
+          </tr>
+          
+          <span class="anchor" id="on(eventName,listener)-on(eventName,listener)"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>on(eventName,listener)</code></td>
+            <td>イベントリスナーを追加します。preopen, preclose, postopen, postcloseのイベントに対応しています。</td>
+          </tr>
+          
+          <span class="anchor" id="isMenuOpened()-isMenuOpened()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>isMenuOpened()</code></td>
+            <td>メニューページが開いている場合はtrue、そうでない場合はfalseを返します。</td>
+          </tr>
+          
+          <span class="anchor" id="getDeviceBackButtonHandler()-getDeviceBackButtonHandler()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>getDeviceBackButtonHandler()</code></td>
+            <td>ons-sliding-menuに紐付いているバックボタンハンドラを取得します。</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
+    
+
+    
+
+    
+    <h4>サンプル</h4>
+
+    
+    <div style="height: 480px; width: 320px;" class="codepen-wrapper">
+    
+      <p data-height="480" data-theme-id="7186" data-slug-hash="IDvFJ" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/IDvFJ/'>ons-screen.presentPage, dismissPage</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+    </div>
+
+    <div class="codepen-open-link-wrapper"><a href="http://s.codepen.io/onsen/fullembedgrid/IDvFJ" target="_blank"><i class="fa fa-external-link"></i>Open in New Window</a></div>
+    
+
+    
+      <h4>関連情報</h4>
+      <ul class="seealso">
+        
+          
+            <li class="guide"><a href="overview.html#UsingSlidingMenu">スライディングメニューを使う</a></li>
+          
+            <li class="guide"><a href="overview.html#EventHandling">イベントの利用</a></li>
+          
+            <li class="guide"><a href="overview.html#CallingComponentAPIsfromJavaScript">JavaScriptからコンポーネントを呼び出す</a></li>
+          
+            <li class="guide"><a href="overview.html#DefiningMultiplePagesinSingleHTML">複数のページを1つのHTMLに記述する</a></li>
+          
+        
+        
+          
+            <li class="seealso"><a href="#ons-page">ons-pageコンポーネント</a></li>
+          
+        
+      </ul>
+    
+
+  </div>
+
+</div>

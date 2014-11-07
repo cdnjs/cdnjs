@@ -1,0 +1,250 @@
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+// internal variables
+var-navigation-bar-background-color := #F8F8F8
+var-color--navigation-bar := #1F1F21
+var-navigation-bar-separator-color := #ddd
+
+var-height--navigation-bar = 44px
+var-box-shadow--navigation-bar = none
+var-padding--navigation-bar = 0
+var-border-bottom--navigation-bar = 1px solid var-navigation-bar-separator-color
+
+/*! topdoc
+  name: Navigation Bar
+  class: navigation-bar
+  markup:
+    <div class="navigation-bar">
+      <div class="navigation-bar__center">Navigation Bar</div>
+    </div>
+*/
+
+retina-navigation-bar-border(position = bottom, color = #ddd)
+  +retina-query()
+    border-{position} none
+    background-size 100% 1px
+    background-repeat no-repeat
+    background-position position
+    background-image linear-gradient(0deg, color, color 50%, transparent 50%) if position == 'bottom'
+    background-image linear-gradient(180deg, color, color 50%, transparent 50%) if position == 'top'
+
+navigation-bar()
+  reset-font()
+  reset-container()
+  reset-base()
+  reset-cursor()
+  z-index 2
+
+navigation-bar__item()
+  reset-box-model()
+  reset-base()
+
+.navigation-bar
+  navigation-bar()
+  display block
+  height var-height--navigation-bar
+  padding-left var-padding--navigation-bar
+  padding-right var-padding--navigation-bar
+  background var-navigation-bar-background-color
+  color var-color--navigation-bar
+  box-shadow var-box-shadow--navigation-bar
+  border-bottom var-border-bottom--navigation-bar
+  font-weight var-font-weight
+  width 100%
+  white-space nowrap
+  overflow visible
+  retina-navigation-bar-border(bottom, var-navigation-bar-separator-color)
+
+.navigation-bar__line-height
+  line-height var-height--navigation-bar
+  padding-bottom 0
+  padding-top 0
+
+.navigation-bar__bg
+  background var-navigation-bar-background-color
+
+.navigation-bar__item
+  navigation-bar__item()
+  height var-height--navigation-bar
+  vertical-align top
+  overflow visible
+  display block
+  vertical-align middle
+  float left
+
+.navigation-bar__left
+  @extend .navigation-bar__item
+  max-width 50%
+  width 27%
+  text-align left
+
+.navigation-bar__right
+  @extend .navigation-bar__item
+  max-width 50%
+  width 27%
+  text-align right
+
+.navigation-bar__center
+  @extend .navigation-bar__item
+  width 46%
+  text-align center
+  line-height 44px
+  font-size var-font-size--large
+  font-weight var-font-weight--large
+
+.navigation-bar__title
+  line-height var-height--navigation-bar
+  font-size var-font-size--large
+  font-weight var-font-weight--large
+  color var-color--navigation-bar
+  margin 0
+  padding 0
+  overflow visible
+
+.navigation-bar__center:first-child:last-child
+  width 100%
+
+/*! topdoc
+  name: Navigation Bar Item
+  use: Toolbar Button, Navigation Bar
+  markup:
+    <div class="navigation-bar">
+      <div class="navigation-bar__left">
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
+        </span>
+      </div>
+
+      <div class="navigation-bar__center">
+        Navigation Bar
+      </div>
+
+      <div class="navigation-bar__right">
+        <span class="toolbar-button--quiet navigation-bar__line-height">Label</span>
+      </div>
+    </div>
+*/
+
+/*! topdoc
+  name: Navigation Bar with Outline Button
+  use: Toolbar Button, Navigation Bar
+  markup:
+    <div class="navigation-bar">
+      <div class="navigation-bar__left">
+        <span class="toolbar-button--outline navigation-bar__line-height">
+          <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
+        </span>
+      </div>
+
+      <div class="navigation-bar__center">
+        Title
+      </div>
+
+      <div class="navigation-bar__right">
+        <span class="toolbar-button--outline navigation-bar__line-height">Button</span>
+      </div>
+    </div>
+*/
+
+/*! topdoc
+  name: Transparent Navigation Bar
+  class: navigation-bar--transparent
+  use: Toolbar Button, Navigation Bar
+  markup:
+    <div class="navigation-bar navigation-bar--transparent">
+      <div class="navigation-bar__left">
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
+        </span>
+      </div>
+      <div class="navigation-bar__center">
+        Navigation Bar
+      </div>
+      <div class="navigation-bar__right">
+        <span class="toolbar-button--quiet navigation-bar__line-height">Label</span>
+      </div>
+    </div>
+*/
+
+.navigation-bar--transparent
+  background-color transparent
+  background-image none
+  border none
+
+/*! topdoc
+  name: Bottom Bar
+  class: bottom-bar
+  use: Navigation Bar
+  markup:
+    <div class="bottom-bar">
+      <div class="bottom-bar__line-height" style="text-align:center">Bottom Toolbar</div>
+    </div>
+*/
+.bottom-bar
+  navigation-bar()
+  display block
+  height var-height--navigation-bar
+  padding-left var-padding--navigation-bar
+  padding-right var-padding--navigation-bar
+  background var-navigation-bar-background-color
+  color var-color--navigation-bar
+  box-shadow var-box-shadow--navigation-bar
+  font-weight var-font-weight
+  border-bottom none
+  border-top var-border-bottom--navigation-bar
+  position absolute
+  bottom 0px
+  right 0px
+  left 0px
+  retina-navigation-bar-border(top, var-navigation-bar-separator-color)
+
+.bottom-bar__line-height
+  line-height var-height--navigation-bar
+  padding-bottom 0
+  padding-top 0
+
+.bottom-bar--transparent
+  background-color transparent
+  background-image none
+  border none
+
+/*! topdoc
+  name: Navigation Bar with Segment
+  class: navigation-bar
+  hint: .navigation-bar .button-bar
+  use: Segment, Navigation Bar
+  markup:
+    <div class="navigation-bar">
+      <div class="navigation-bar__center">
+        <div class="button-bar" style="width:200px;margin:7px 50px;">
+          <div class="button-bar__item">
+            <input type="radio" name="navi-segment-a" checked>
+            <div class="button-bar__button">One</div>
+          </div>
+
+          <div class="button-bar__item">
+            <input type="radio" name="navi-segment-a">
+            <div class="button-bar__button">Two</div>
+          </div>
+        </div>
+      </div>
+    </div>
+*/
