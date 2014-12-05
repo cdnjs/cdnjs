@@ -1,1 +1,0 @@
-OpenLayers.Control.ZoomOut=OpenLayers.Class(OpenLayers.Control,{type:OpenLayers.Control.TYPE_BUTTON,trigger:function(){this.map.zoomOut()},CLASS_NAME:"OpenLayers.Control.ZoomOut"});

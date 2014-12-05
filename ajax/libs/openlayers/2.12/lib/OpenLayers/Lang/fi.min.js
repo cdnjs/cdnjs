@@ -1,1 +1,0 @@
-OpenLayers.Lang.fi=OpenLayers.Util.applyDefaults({Permalink:"Ikilinkki",Overlays:"Kerrokset","Base Layer":"Peruskerros",W:"L",E:"I",N:"P",S:"E"});

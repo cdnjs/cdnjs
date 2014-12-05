@@ -1,1 +1,0 @@
-(function(a,d){function c(b){if(b){b=b.shim;for(var a in b)(function(b){b.deps&&define(b.src,b.deps);define(a,[b.src],function(){var a=b.exports;return"function"===typeof a?a():"string"===typeof a?d[a]:a})})(b[a])}}a.on("config",c);c(a.config.data)})(seajs,"undefined"===typeof global?this:global);

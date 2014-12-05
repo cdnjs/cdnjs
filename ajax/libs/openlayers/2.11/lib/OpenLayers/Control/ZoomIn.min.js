@@ -1,1 +1,0 @@
-OpenLayers.Control.ZoomIn=OpenLayers.Class(OpenLayers.Control,{type:OpenLayers.Control.TYPE_BUTTON,trigger:function(){this.map.zoomIn()},CLASS_NAME:"OpenLayers.Control.ZoomIn"});

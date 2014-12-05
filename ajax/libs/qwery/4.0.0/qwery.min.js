@@ -1,6 +1,0 @@
-/*!
-  * @preserve Qwery - A selector engine
-  * https://github.com/ded/qwery
-  * (c) Dustin Diaz 2014 | License MIT
-  */
-(function(e,t,n){typeof module!="undefined"&&module.exports?module.exports=n():typeof define=="function"&&define.amd?define(n):t[e]=n()})("qwery",this,function(){function o(e){return[].slice.call(e,0)}function u(e){var t;return e&&typeof e=="object"&&(t=e.nodeType)&&(t==1||t==9)}function a(e){return typeof e=="object"&&isFinite(e.length)}function f(e){for(var t=[],n=0,r=e.length;n<r;++n)a(e[n])?t=t.concat(e[n]):t[t.length]=e[n];return t}function l(e){var t=[],n,r;e:for(n=0;n<e.length;n++){for(r=0;r<t.length;r++)if(t[r]==e[n])continue e;t[t.length]=e[n]}return t}function c(e){return e?typeof e=="string"?h(e)[0]:!e[i]&&a(e)?e[0]:e:t}function h(r,i){var l,h=c(i);return!h||!r?[]:r===n||u(r)?!i||r!==n&&u(h)&&s(r,h)?[r]:[]:r&&a(r)?f(r):t.getElementsByClassName&&r=="string"&&(l=r.match(e))?o(h.getElementsByClassName(l[1])):r&&(r.document||r.nodeType&&r.nodeType==9)?i?[]:[r]:o(h.querySelectorAll(r))}var e=/^\.([\w\-]+)$/,t=document,n=window,r=t.documentElement,i="nodeType",s="compareDocumentPosition"in r?function(e,t){return(t.compareDocumentPosition(e)&16)==16}:function(e,n){return n=n==t||n==window?r:n,n!==e&&n.contains(e)};return h.uniq=l,h},this)

@@ -1,1 +1,0 @@
-YUI.add("overlay",function(A){A.Overlay=A.Base.build("overlay",A.Widget,[A.WidgetPosition,A.WidgetStack,A.WidgetPositionExt,A.WidgetStdMod]);},"@VERSION@",{requires:["widget","widget-position","widget-stack","widget-position-ext","widget-stdmod"]});

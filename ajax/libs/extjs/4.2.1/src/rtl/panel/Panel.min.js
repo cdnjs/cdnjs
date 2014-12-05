@@ -1,1 +1,0 @@
-Ext.define("Ext.rtl.panel.Panel",{override:"Ext.panel.Panel",rtlCollapseDirs:{top:"top",right:"left",bottom:"bottom",left:"right"},convertCollapseDir:function(a){if(!!Ext.rootHierarchyState.rtl!==this.isLocalRtl()){a=this.rtlCollapseDirs[a]}return this.callParent(arguments)}});

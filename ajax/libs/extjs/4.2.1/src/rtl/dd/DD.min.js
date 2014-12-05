@@ -1,1 +1,0 @@
-Ext.define("Ext.rtl.dd.DD",{override:"Ext.dd.DD",getLocalX:function(a){return Ext.rootHierarchyState.rtl?a.rtlGetLocalX():a.getLocalX()},setLocalXY:function(b,a,c){Ext.rootHierarchyState.rtl?b.rtlSetLocalXY(a,c):b.setLocalXY(a,c)}});

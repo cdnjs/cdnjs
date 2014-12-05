@@ -1,1 +1,0 @@
-OpenLayers.Control.ZoomToMaxExtent=OpenLayers.Class(OpenLayers.Control,{type:OpenLayers.Control.TYPE_BUTTON,trigger:function(){this.map&&this.map.zoomToMaxExtent()},CLASS_NAME:"OpenLayers.Control.ZoomToMaxExtent"});

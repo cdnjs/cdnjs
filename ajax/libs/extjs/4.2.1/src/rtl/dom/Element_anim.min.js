@@ -1,1 +1,0 @@
-Ext.define("Ext.rtl.dom.Element_anim",{override:"Ext.dom.Element",rtlXAnchors:{l:"r",r:"l"},anchorAnimX:function(a){if(Ext.rootHierarchyState.rtl){a=this.rtlXAnchors[a]}this.callParent(arguments)}});
