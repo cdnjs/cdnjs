@@ -1,32 +1,35 @@
 {
   "name": "leaflet-providers",
-  "filename": "leaflet-providers.js",
-  "version": "1.0.7",
+  "version": "1.0.17",
   "description": "An extension to Leaflet that contains configurations for various free tile providers.",
   "main": "leaflet-providers.js",
+  "filename": "leaflet-providers.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/leaflet-extras/leaflet-providers.git"
   },
   "scripts": {
-    "test": "jshint leaflet-providers.js preview/*.js",
-    "min": "uglifyjs leaflet-providers.js -m -o leaflet-providers.min.js"
+    "test": "eslint --config .eslintrc leaflet-providers.js preview/*.js",
+    "min": "uglifyjs leaflet-providers.js -mc -o leaflet-providers.min.js",
+    "release": "mversion patch -m"
   },
   "license": "BSD-2-Clause",
+  "keywords": ["leaflet", "providers", "maps"],
   "bugs": {
     "url": "https://github.com/leaflet-extras/leaflet-providers/issues"
   },
   "devDependencies": {
-    "jshint": "~2.1.11",
-    "uglifyjs": "^2.3.6"
+    "eslint": "^0.15.0",
+    "mversion": "^1.3.0",
+    "uglify-js": "^2.4.15"
   },
-  "npmName": "leaflet-providers",
-  "npmFileMap": [
-    {
-      "basePath": ".",
-      "files": [
-        "*.js"
-      ]
-    }
-  ]
+  "autoupdate": {
+    "source": "git",
+    "target": "git://github.com/leaflet-extras/leaflet-providers.git",
+    "basePath": "/",
+    "files": [
+      "leaflet-providers.js",
+      "leaflet-providers.min.js"
+    ]
+  }
 }
