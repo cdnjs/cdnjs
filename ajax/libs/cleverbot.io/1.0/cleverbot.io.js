@@ -5,7 +5,7 @@ if (!window.jQuery) {
     document.getElementsByTagName('head')[0].appendChild(script);
 }
 const cleverbotIO = function (user, key) {
-    this.base_url = "https://cleverbot.io/1,0/";
+    this.base_url = "https://cleverbot.io/1.0/";
     this.user = user;
     this.key = key;
 	this.setNick = function (nick) {
