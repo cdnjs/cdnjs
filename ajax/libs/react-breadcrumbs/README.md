@@ -2,7 +2,7 @@
 
 [React][1] Component for [React-Router][4]. 
 
-Demo at [opensourceprojects.robbestad.com][2]
+Demo at [learnreact.robbestad.com][2]
 
 Source on [github][5]
 
@@ -10,8 +10,11 @@ Source on [github][5]
 
     % npm install react-breadcrumbs --save
 
-## Usage
+## Versioning
 
+  The aim is to correlate with react-router. 
+
+## Usage
 
     var Breadcrumbs = require('react-breadcrumbs');
 
@@ -33,6 +36,18 @@ The breadcrumbs will automatically populate based on your
 route configuration. It requires that you have a name="" parameter
 in your routes for every route. It will use the displayName parameter
 for the Breadcrumb link. 
+
+Another optional is _breadcrumbName_:
+
+    <Breadcrumbs breadcrumbName="My breadcrumb name" />
+
+The point of this property is to provide a method to set a breaadcrumb name for the final breadcrumb. 
+
+You can also exclude specific routes if you want to:
+
+    <Breadcrumbs excludes={['App']} />
+
+This will print all breadcrumbs, except for the one where the route name is `App`.
 
 ## Styling
 
