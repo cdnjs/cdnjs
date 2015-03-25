@@ -5,11 +5,11 @@ var natcompare = require('./natcompare.js');
 var RSS = require('rss');
 var feed = new RSS({
     title:        'cdnjs.com - library updates',
-    description:  'Track when libraries are added and updated! Managed by <a href="http://twitter.com/ryan_kirkman">Ryan Kirkman</a> and <a href="http://twitter.com/neutralthoughts">Thomas Davis</a>. Sponsored and hosted by <a href="http://cloudflare.com">Cloudflare</a>',
+    description:  'Track when libraries are added and updated! Created by <a href="http://twitter.com/ryan_kirkman">Ryan Kirkman</a> and <a href="http://twitter.com/neutralthoughts">Thomas Davis</a>, managed by <a href="https://twitter.com/PeterDaveHello">Peter Dave Hello</a>. Sponsored and hosted by <a href="http://cloudflare.com">Cloudflare</a>',
     site_url:         'http://cdnjs.com/',
     feed_url:         'http://cdnjs.com/rss.xml',
     image_url:        'http://cdnjs.com/img/poweredbycloudflare.png',
-    copyright:    'Copyright © 2013 Cdnjs. All rights reserved',
+    copyright:    'Copyright © 2015 Cdnjs. All rights reserved',
     
     author: 'cdnjs team'
 });
@@ -73,7 +73,8 @@ exec('git ls-tree -r --name-only HEAD | grep **/package.json | while read filena
           date:           lib.date
       });
     })
-    fs.writeFileSync('scratch/rss', feed.xml(true), 'utf8');
+    fs.writeFileSync('../new-website/public/atom.xml', feed.xml(true), 'utf8');
+    fs.writeFileSync('../new-website/public/rss.xml', feed.xml(true), 'utf8');
 
 })
 
@@ -105,5 +106,6 @@ glob("ajax/libs/**/package.json", function (error, matches) {
     packages.push(package);
   });
   // Initialize the feed object
-  fs.writeFileSync('scratch/packages.json', JSON.stringify({"packages":packages}), 'utf8');
+  fs.writeFileSync('../new-website/public/packages.json', JSON.stringify({"packages":packages}, null, 2), 'utf8');
+  fs.writeFileSync('../new-website/public/packages.min.json', JSON.stringify({"packages":packages}), 'utf8');
 });

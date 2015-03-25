@@ -1,4 +1,4 @@
-# a temporary version of the contributing doc
+﻿# a temporary version of the contributing doc
 
 ## MENU
 
@@ -95,17 +95,17 @@
 
 ### e. P.S.
 
-1. Because of the characteristic of git, it'll be better to do the work on Unix-like environment, like linux or BSD distrobutions(not including Mac).
+1. Because of the characteristic of git, it'll be better to do the work on Unix-like environment, like Linux or BSD distributions (not including Mac).
 
 2. If you think this doc is too simple or casual, please refer to [README](https://github.com/cdnjs/cdnjs/blob/master/README.md) file or another detail version of [CONTRIBUTING-WIP](https://github.com/cdnjs/cdnjs/blob/master/CONTRIBUTING-WIP.md) doc.
  * If there are some conflicts between these files, the priority should be like this: README > CONTRIBUTING > CONTRIBUTING-WIP, and you can help us to open a issue and discuss, fix it.
 
 3. If the library has **official** npm package, please try to maintain it with [npm auto update](https://github.com/cdnjs/cdnjs#enabling-npm-auto-update).
 
-4. It'll always be better to compare the diff before commiting and sending pull request.
- * You can use `git diff` before commting, and use `git log -p` or `git show sha1hash` to compare the difference.
+4. It'll always be better to compare the diff before committing and sending pull request.
+ * You can use `git diff` before committing, and use `git log -p` or `git show sha1hash` to compare the difference.
 
-5. Maintainters may force take the task away if there is no response on the pull request for days.
+5. Maintainers may force take the task away if there is no response on the pull request for days.
 
 6. It'll be better to update/sync your branch again by rebase after your PR was asked to modify something.
  * You **must** do this if your PR was opened for more than 1 week, or maintainers may take the task away.

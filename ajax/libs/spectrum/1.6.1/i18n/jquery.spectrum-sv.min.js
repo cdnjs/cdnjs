@@ -1,0 +1,1 @@
+!function(e){var t=e.spectrum.localization.sv={cancelText:"Avbryt",chooseText:"Välj"};e.extend(e.fn.spectrum.defaults,t)}(jQuery);

@@ -1,0 +1,121 @@
+﻿Change Log
+______________
+1.1.6
+  Corrected bug preventing selections inside input values in some browsers - the onselectstart function no longer captures on input boxes.
+  Added support for up/down arrow adjustments of the currently focused input box making the picker more keyboard friendly.
+  Added ticks around the backgroundImage assignments to correct for paths with whitespace.
+
+1.1.5
+  Corrected Color object constructor to allow setting of the "alpha" value as per the documentation which previously didn't work.
+  Added support for translucency for quickList colors with checkered background - Only available if "alphaSupport" is enabled.
+  Restricted default color to "alpha" of 255 if "alphaSupport" is disabled - It will now assign an explicit alpha of 255 when disabled.
+  Added new setting variable "alphaPrecision" which indicates the number of decimal points to allow in the alpha percentage display - Now defaults to 0.
+
+1.1.4
+  Changed "alpha" range from 0-100 to 0-255 to correct truncating and rounding errors caused by attempting to get an integer percentage that matches a hex value.
+  "alpha" percentage display will now show up to 1 decimal point for more accurate representation of "alpha" value.
+  Color object now accepts "alpha" values in a range of 0-255 and also returns the same when getting the "alpha" value. You will need to run ((alpha * 100) / 255) to retrieve a percentage value.
+  Reworked the table layout and labels to remove the need for the label to reference the radio input box. This reduces injected code and removes the need to generate unique ids on the radio buttons.
+  Transparent/invisible caret on NULL color is now corrected - uses the same caret color as a white color.
+  Setting a binded input value of "" or no value attribute will now create a NULL color on initialization instead of the settings default color.
+  Added a dynamic, invisible "iframe" behind a dialog picker in all browsers that fail jQuery.support.boxModel (currently IE <= 7 Quirks Mode). This prevents "select" box from showing through the picker.
+
+1.1.3
+  Now adding popup color pickers to document.body instead of inline with the popup control. This corrects issues with the picker not showing beyond a relative container scope.
+  No longer need to hide popup icon in Internet Explorer for picker elements lower in the DOM than the currently active one since the picker itself is attached to document.body (it is always higher in the DOM now).
+  Popup pickers are now bring-to-front selectable. Clicking on the picker will bring it above all other pickers on the page instead of having to drag one out from underneath another.
+  Corrected jPicker.List/setTimeout bug which allowed an instance to bind to the List in an order other than the order the initialization function was called.
+  Added a updateInputColor option (default true) to allow for a binded input field that does not automatically update its background/text color.
+
+1.1.2
+  Reworked the find methods and contexts for element searches. Now using ":first" instead of ".eq(0)" to take advantage of early out searches. Much faster initialization of the picker, on the order of 6 times.
+  Now using setTimeout for calling visual updates. Dramatically improved marker dragging in all browsers. Reduces blocking as re-rendering is internal to the browser and independent of the other javascript still in progress.
+  Marker updates can now cancel a previous valueChanged event when a new mouseMove event comes in. IE8 marker dragging is still slower, much over 5 times faster than it was.
+  Reworked entire quickPick list creation. It now adds up source code and does a single "html" method instead of multiple "append" methods. This is a large part of the speed increase on initialization.
+  The vast majority of all running scripts on both initialization and dragging is now occupied altering the style rules and finding elements (init only) instead of jPicker code.
+  All methods previously called with global context now use the "call" method for using the context of the class running the method. "this" in a callback is now the DOM node (jQuery style) and jPicker instead of "window".
+  Added "effects" section of window settings to allow different show/hide effects and durations.
+  Removed change log and read me from the full source code to separate files (ChangeLog.txt and ReadMe.txt) and an HTML demonstration/documentation page (Example.txt).
+
+1.1.1
+  Correct IE exception caused by attempting to set "#transparent" to CSS background-color.
+
+1.1.0
+  Reworked nearly the entire plugin including the internal and external event model, bindings, DOM searches, classes, and overall presentation.
+  The Color object now supports a changed event that you can bind to (or just bind to the picker events still included).
+  Event order has been reversed, instead of a change event on the map/bar/text fields updating the display, they now update the Color object which then fires the events that update the display.
+  alphaSupport re-implemented by request - default behavior is off.
+  Hex code now only 6 characters again.
+  Color object can now have its value changed from code, using the "val" method, and it will fire all events necessary to update the display.
+  Removed all "get_*" methods from the color object, instead opting for a single "val" method for getting and setting, more in line with familiar jQuery methods.
+  Better rendering for all IE versions in Quirks mode.
+
+1.0.13
+  Updated transparency algorithm for red/green/blue color modes. The algorithm from John Dyers' color picker was close but incorrect. Bar colors are now pixel perfect with the new algorithm.
+  Changed from using "background-position" on the color maps to an element of full height using the "top" attribute for image-map location using "overflow: hidden" to hide overdraw.
+  IE7/8 ignores opacity on elements taller than 4096px. Image maps therefore no longer include a blank first map so the Bar is just under 4096. Blank is now accomplished by setting the "top" setting to below the map display.
+  New colorBar picker image that does not draw outside of the element since the elements now hide overdraw.
+  Added IE5.5/6 support for the picker. This is why it now uses maps of full height and the "top" attribute for map locations.
+  Moved the images in the maps to 4 pixels apart from each other. IE7/8 change the first pixel of the bottom-border of 2px to partially transparent showing a portion of a different color map without this.
+
+1.0.12
+  Added minified CSS file.
+  Added IE7/8 Quirks Mode support.
+  Added configurable string constants for all text and tooltips. You can now change the default values for different languages.
+  Privatized the RGBA values in the Color object for better NULL handling. YOU MUST USE THE NEW GET FUNCTIONS TO ACCESS THE COLOR PROPERTIES.
+  Better NULL color handling and an additional "No Color Selected" quick pick color.
+  More consistent behavior across multiple versions of browsers.
+  Added alpha response to the binded color picker icon.
+  Removed "alphaSupport" variable. It is now always supported.
+
+1.0.11b
+  Corrected NULL behavior in IE. jQuery was getting an exception when attempting to assign a backgroundColor style of '#'. Now assigns 'transparent' if color is NULL.
+  Can now create new Color object WITH OR WITHOUT the '#' prefix.
+
+1.0.11
+  Added ability for NULL colors (delete the hex value). Color will be returned as color.hex == ''. Can set the default color to an empty hex string as well.
+  cancelCallback now returns the original color for use in programming responses.
+
+1.0.10
+  Corrected table layout and tweaked display for more consisent presentation. Nice catch from Jonathan Pasquier.
+
+1.0.9
+  Added optional title variable for each jPicker window.
+
+1.0.8
+  Moved all images into a few sprites - now using backgroundPosition to change color maps and bars instead of changing the image - this should be faster to download and run.
+   
+1.0.7
+  RENAMED CSS FILE TO INCLUDE VERSION NUMBER!!! YOU MUST USE THIS VERSIONED CSS FILE!!! There will be no need to do your own CSS version number increments from now on.
+  Added opacity feedback to color preview boxes.
+  Removed reliance on "id" value of containing object. Subobjects are now found by class and container instead of id's. This drastically reduces injected code.
+  Removed (jQuery).jPicker.getListElementById(id) function since "id" is no longer incorporated or required.
+
+1.0.6
+  Corrected picker bugs introduced with 1.0.5.
+  Removed alpha slider bar until activated - default behavior for alpha is now OFF.
+  Corrected Color constructor bug not allowing values of 0 for initial value (it was evaluating false and missing the init code - Thanks Pavol).
+  Removed title tags (tooltips) from color maps and bars - They get in the way in some browsers (e.g. IE - dragging marker does NOT prevent or hide the tooltip).
+  THERE WERE CSS FILE CHANGES WITH THIS UPDATE!!! IF YOU USE NEVER-EXPIRE HEADERS, YOU WILL NEED TO INCREMENT YOUR CSS FILE VERSION NUMBER!!!
+
+1.0.5
+  Added opacity support to picker and color/callback methods. New property "a" (alpha - range from 0-100) in all color objects now - defaults to 100% opaque. (Thank you Pavol)
+  Added title attributes to input elements - gives short tooltip directions on what button or field does.
+  Commit callback used to fire on control initialization (twice actually) - This has been corrected, it does not fire on initialization.
+  THERE WERE CSS FILE CHANGES WITH THIS UPDATE!!! IF YOU USE NEVER-EXPIRE HEADERS, YOU WILL NEED TO INCREMENT YOUR CSS FILE VERSION NUMBER!!!
+
+1.0.4
+  Added ability for smaller picker icon with expandable window on any DOM element (not just input).
+  "draggable" property renamed to "expandable" and its scope increased to create small picker icon or large static picker.
+
+1.0.3
+  Added cancelCallback function for registering an external function when user clicks cancel button. (Thank you Jeff and Pavol)
+
+1.0.2
+  Random bug fixes - speed concerns.
+
+1.0.1
+  Corrected closure based memeory leak - there may be others?
+
+1.0.0
+  First Release.

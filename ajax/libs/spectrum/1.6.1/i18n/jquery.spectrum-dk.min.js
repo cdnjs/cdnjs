@@ -1,0 +1,1 @@
+!function(e){var n=e.spectrum.localization.dk={cancelText:"annuller",chooseText:"Vælg"};e.extend(e.fn.spectrum.defaults,n)}(jQuery);

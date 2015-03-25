@@ -1,0 +1,1 @@
+!function(e){var t=e.spectrum.localization.he={cancelText:"בטל בחירה",chooseText:"בחר צבע",clearText:"אפס בחירה",noColorSelectedText:"לא נבחר צבע",togglePaletteMoreText:"עוד צבעים",togglePaletteLessText:"פחות צבעים"};e.extend(e.fn.spectrum.defaults,t)}(jQuery);

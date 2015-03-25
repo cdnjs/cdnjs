@@ -1,0 +1,499 @@
+@import "_extends.scss";
+@import "_api-forms-ext.scss";
+
+//date popover
+$border-light: 1px solid #ddd;
+$button-bgcolor: #f5f5f5;
+%ws-button {
+	background: #ccc;
+	padding: em(5) em(8);
+	display: inline-block;
+	border: em(1) solid transparent;
+}
+
+.input-picker {
+	overflow: visible;
+	font-size: 13px;
+	outline: none;
+	text-align: center;
+	font-family: sans-serif;
+	width: em(380);
+	min-width: em(270);
+	max-width: 98vw;
+
+	.ws-po-outerbox {
+		-webkit-transform: translate(0, 30%);
+		transform: translate(0, 30%);
+	}
+
+	&[data-vertical="bottom"] .ws-po-outerbox {
+		-webkit-transform: translate(0, -30%);
+		transform: translate(0, -30%);
+	}
+
+	&.time-popover,
+	&.datetime-local-popover {
+		width: em(415);
+	}
+
+	&.time-popover	{
+		.ws-prev,
+		.ws-next,
+		.ws-super-prev,
+		.ws-super-next	{
+			display: none;
+		}
+	}
+
+	&.ws-size-2 {
+		width: em(675);
+		min-width: em(670);
+	}
+
+	&.ws-size-3 {
+		width: em(985);
+		min-width: em(982);
+	}
+
+	&.color-popover {
+		width: 590px;
+		min-width: 575px;
+	}
+
+	abbr[title] {
+		cursor: help;
+	}
+
+	li,
+	button {
+		font-size: em(13);
+		line-height: em(16);
+		color: #000;
+		transition: all 400ms;
+	}
+
+	.ws-focus,
+	:focus {
+		outline: 1px dotted #000;
+	}
+
+
+	.ws-po-box {
+		position: relative;
+		padding: em(15) em(20);
+		direction: ltr;
+	}
+
+	.ws-picker-controls {
+		position: absolute;
+		top: em(15);
+
+		> button {
+			box-sizing: content-box;
+			border: em(1) solid #ccc;
+			padding: 0;
+			width: em(24);
+			height: em(24);
+			background: #eee;
+			z-index: 1;
+			color: #333;
+
+			&.ws-year-btn:after,
+			&:before {
+				display: inline-block;
+				content: "";
+				width: 0px;
+				height: 0px;
+				border-style: solid;
+				margin-top: em(3.8);
+			}
+
+			&:hover	{
+				border-color: #666;
+				color: #000;
+			}
+
+			&[disabled]{
+				opacity: 0.4;
+				border-color: #eee;
+				color: #ddd;
+			}
+		}
+	}
+
+	.prev-controls,
+	.ws-po-box[dir="rtl"] .next-controls {
+		left: em(20);
+		right: auto;
+
+		> .ws-year-btn:after,
+		> button:before {
+			border-width: 0.35em 0.6em 0.35em 0;
+			border-color: transparent #333 transparent transparent;
+			margin-left: -0.1em;
+		}
+
+		> .ws-year-btn {
+			margin-right: em(3);
+			margin-left: 0;
+
+			&[disabled] {
+				display: none;
+			}
+		}
+
+	}
+
+	.next-controls,
+	.ws-po-box[dir="rtl"] .prev-controls {
+		right: em(20);
+		left: auto;
+
+		> button:before {
+			margin-left: em(1.5);
+		}
+
+
+		> .ws-year-btn:after,
+		> button:before {
+			border-width: 0.35em 0 0.35em 0.6em;
+			border-color: transparent transparent transparent #333;
+			margin-right: -0.1em;
+		}
+
+		> .ws-year-btn {
+			margin-left: em(3);
+			margin-right: 0;
+
+			&[disabled]	{
+				display: none;
+			}
+		}
+	}
+
+	&.ws-po-visible .ws-picker-controls > button {
+		&:after,
+		&:before {
+			content: " ";
+		}
+	}
+
+	.ws-po-box[dir="rtl"] {
+		direction: rtl;
+
+	}
+
+	&.time-popover .ws-picker-body {
+		padding-top: em(36);
+	}
+
+	.ws-picker-body {
+		@extend %clearfix;
+		position: relative;
+		padding: em(40) 0 0;
+		zoom: 1;
+		margin: 0 em(-10);
+	}
+
+
+	.ws-button-row {
+		@extend %clearfix;
+		position: relative;
+		margin: em(10) 0 0;
+		border-top: em(1) solid #eee;
+		padding: em(10) 0 0;
+		text-align: left;
+		z-index: 2;
+
+		> button {
+			@extend %ws-button;
+			border: em(1) solid #ccc;
+			background-color: #ddd;
+			background-image: linear-gradient(to bottom, #ececec 0%, #ddd 100%);
+			transition: border-color 200ms linear;
+			float: left;
+
+			&.ws-empty {
+				float: right;
+			}
+		}
+	}
+
+	.ws-po-box[dir="rtl"] .ws-button-row > button {
+		float: right;
+
+		&.ws-empty {
+			float: left;
+		}
+	}
+
+
+	&[data-currentview="setMonthList"] .ws-picker-header > select,
+	&[data-currentview="setYearList"] .ws-picker-header > select{
+		max-width: 90%;
+	}
+
+	&[data-currentview="setDayList"] .ws-picker-header > select {
+		max-width: 40%;
+	}
+
+	&[data-currentview="setDayList"] .ws-picker-header > .month-select {
+		max-width: 50%;
+	}
+
+	&.time-popover .ws-picker-header {
+		top: em(-30);
+
+		button {
+			font-size: em(15);
+		}
+	}
+
+
+	.ws-picker-header {
+		position: absolute;
+		top: em(-40);
+		right: 0;
+		left: 0;
+		margin: 0 em(35);
+
+		> button {
+			display: inline-block;
+			width: 100%;
+			margin: 0;
+			padding: em(4) 0;
+			font-weight: 700;
+			color: #000;
+
+			> .month-digit,
+			> .monthname-short {
+				display: none;
+			}
+
+			&:after {
+				content: " ";
+				margin: -0.1em 0.5em 0;
+				width: 0px;
+				height: 0px;
+				border-style: solid;
+				border-width: 0 0.3em 0.6em 0.3em;
+				border-color: transparent transparent #333 transparent;
+				vertical-align: middle;
+
+			}
+
+			&:hover {
+				text-decoration: underline;
+			}
+
+			&[disabled]:after {
+				display: none !important;
+			}
+
+			&[disabled]:hover {
+				text-decoration: none;
+			}
+		}
+	}
+
+	.picker-grid {
+		@extend %clearfix;
+		position: relative;
+		zoom: 1;
+		overflow: hidden;
+		/* negative padding of td */
+		margin: 0 em(-2);
+
+		.monthname,
+		.month-digit {
+			display: none;
+		}
+	}
+
+	&.ws-size-1 .picker-list  {
+		float: none;
+		width: auto;
+	}
+
+	.picker-list {
+		@extend %clearfix;
+		position: relative;
+		zoom: 1;
+		width: em(290);
+		float: left;
+		margin: 0 10px;
+		background: #fff;
+
+		tr {
+			border: 0;
+		}
+
+		th,
+		td {
+			padding: em(2);
+			text-align: center;
+		}
+
+		&.day-list td {
+			padding: em(0.5) em(2);
+
+			> button {
+				padding: em(5.5) 0;
+			}
+		}
+
+		&.time-list {
+			> .ws-picker-header > button > .monthname {
+				display: inline;
+			}
+
+			td {
+				padding: em(1) em(5);
+
+				> button {
+					padding: em(6.85) 0;
+				}
+			}
+		}
+
+
+		td > button {
+			display: block;
+			padding: em(20.669) 0;
+			width: 100%;
+			color: #000;
+			background-color: #fff;
+
+			&.othermonth {
+				color: #888;
+			}
+
+			&:hover,
+			&.checked-value {
+				color: #fff;
+				background: #000;
+			}
+
+			&[disabled],
+			&[disabled]:hover {
+				color: #888;
+				background-color: #fff;
+			}
+		}
+
+		table {
+			width: 100%;
+			margin: 0;
+			border: 0 none;
+			border-collapse: collapse;
+			table-layout: fixed;
+		}
+
+		th,
+		td.week-cell {
+			font-size: em(13);
+			line-height: em(16);
+			padding-bottom: em(3);
+			text-transform: uppercase;
+			font-weight: 700;
+		}
+	}
+
+	.ws-options {
+		margin: em(10) 0 0;
+		border-top: em(1) solid #eee;
+		padding: em(10) 0 0;
+		text-align: left;
+
+		h5 {
+			margin: 0 0 em(5);
+			padding: 0;
+			font-size: em(14);
+			font-weight: bold;
+		}
+
+		ul,
+		li {
+			padding: 0;
+			margin: 0;
+			list-style: none;
+		}
+
+		button {
+			@extend %clearfix;
+			display: block;
+			padding: em(4);
+			width: 100%;
+			text-align: left;
+
+			&.ws-focus,
+			&:focus,
+			&:hover {
+				color: #fff;
+				background: #000;
+			}
+
+			&[disabled],
+			&[disabled].ws-focus,
+			&[disabled]:focus,
+			&[disabled]:hover {
+				color: #888;
+				background: #fff;
+				text-decoration: none;
+			}
+			.ws-value {
+				float: left;
+			}
+
+			.ws-label {
+				float: right;
+				font-size: 96%;
+			}
+		}
+	}
+	/* Selector API: */
+	.ws-week,
+	.ws-year-btn {
+		display: none;
+	}
+}
+.ws-picker-controls > button {
+	display: inline-block;
+}
+.ws-picker-header > button:after {
+	display: none;
+}
+
+.ws-picker-header select {
+	display: none;
+}
+/* helper classes to hide show/hide specific picker features */
+@each $class in $pickerapis {
+	.input-picker[data-class~="#{$class}"],
+	.#{$class} .input-picker {
+		@extend %#{$class};
+	}
+}
+
+.capture-popover .ws-po-box {
+	padding-left: em(4);
+	padding-right: em(4);
+}
+
+.ws-videocapture-view {
+	position: relative;
+	height: 0;
+	width: 100%;
+	padding-bottom: 70%;
+
+	.ws-video-overlay,
+	video,
+	.polyfill-video {
+		position: absolute !important;
+		top: 0;
+		left: 0;
+		width: 100% !important;
+		height: 100% !important;
+	}
+}
+
