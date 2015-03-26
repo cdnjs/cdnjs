@@ -1,0 +1,30 @@
+$(function(){ 
+    var realWidth= $('.slide').size();
+    var realslideWidth = $('.slide').outerWidth();
+    var realslidewidth2 = $('.slide').width();
+    var real_w = realslideWidth - realslidewidth2;
+    var containerWidth= $('#slideshow').width();
+    
+$('.slide').css('width',containerWidth-real_w);
+   
+$('#slider').width((containerWidth)*realslideWidth);
+    var i=1;
+    var count=0;
+    function animation(){ 
+        if(count != realWidth-1){ 
+            $('#slider').fadeOut('slow');
+            $('#slider').animate({'right':(-containerWidth)*i},500);
+            $('#slider').fadeIn(1500);
+            i++;	
+            count++;
+        }
+        else{
+            $('#slider').fadeOut('slow');
+            $('#slider').animate({'right':0},500);
+            $('#slider').fadeIn(1500);
+            count=0;
+            i=1;
+        }
+    }
+    var e = setInterval(animation,7000); 
+});
