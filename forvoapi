@@ -1,0 +1,45 @@
+
+$(document).ready(function(){
+
+   $('#term').focus(function(){
+      var full = $("#poster").has("img").length ? true : false;
+      if(full == false){
+         $('#poster').empty();
+      }
+   });
+
+   var getPoster = function(){
+
+        var film = $('#term').val();
+
+         if(film == ''){
+
+            $('#poster').html("<h2 class='loading'>Ha! We haven't forgotten to validate the form! Please enter something.</h2>");
+
+         } else {
+
+            $('#poster').html("<h2 class='loading'>Your poster is on its way!</h2>");
+
+            $.getJSON("http://apifree.forvo.com/key/3ffef50eb08ba65a34864ce4dd718df1/format/json/action/word-pronunciations/word/" + film + "/language/en/limit/1/?callback=?", function(json) {
+               if (json != "Nothing found."){
+                     $('#poster').html('<h2 class="loading">Well, gee whiz! We found you a poster, skip!</h2><img id="thePoster" src=' + json[0].posters[0].image.url + ' />');
+                  } else {
+                     
+                        $('#poster').html('<h2 class="loading">We're afraid nothing was found for that search. Perhaps you could take the risk and try again?</h2><img id="thePoster" src=' + json[0].posters[0].image.url + ' />');
+                     });
+                  }
+             });
+
+          }
+
+        return false;
+   }
+
+   $('#search').click(getPoster);
+   $('#term').keyup(function(event){
+       if(event.keyCode == 13){
+           getPoster();
+       }
+   });
+
+});
