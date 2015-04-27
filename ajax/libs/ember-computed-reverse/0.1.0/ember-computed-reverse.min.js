@@ -1,0 +1,1 @@
+(function(e){var t=e.get,n="length";e.computed.reverse=function(r){return e.arrayComputed(r,{addedItem:function(e,r,u){e.insertAt(t(e,n)-u.index,r);return e},removedItem:function(e,r,u){e.removeAt(t(e,n)-u.index-1);return e}})}})(Ember);
