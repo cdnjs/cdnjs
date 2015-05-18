@@ -1,0 +1,2 @@
+//DataPage.js
+alert('Hello');
