@@ -23,6 +23,7 @@ Here is an example of `.git/info/sparse-checkout`:
 /tools
 /scratch
 /MIT-LICENSE
+/hooks
 /*.yml
 /*.md
 /*.json
