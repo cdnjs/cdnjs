@@ -118,7 +118,7 @@
 2. If you think this doc is too simple or casual, please refer to [README](https://github.com/cdnjs/cdnjs/blob/master/README.md) file or another detail version of [CONTRIBUTING-WIP](https://github.com/cdnjs/cdnjs/blob/master/CONTRIBUTING-WIP.md) doc.
  * If there are some conflicts between these files, the priority should be like this: README > CONTRIBUTING > CONTRIBUTING-WIP, and you can help us to open a issue and discuss, fix it.
 
-3. No matter you are upadting or adding a lib, if the library's **official** repo contains the dist files in each tag, please add [auto-update config](https://github.com/cdnjs/cdnjs#enabling-gitrecommended-or-npm-auto-update) for it, or, if the library has **official** npm package, please try to maintain it with [npm auto update](https://github.com/cdnjs/cdnjs#enabling-npm-auto-update). 
+3. No matter you are updating or adding a lib, if the library's **official** repo contains the dist files in each tag, please add [auto-update config](https://github.com/cdnjs/cdnjs#enabling-gitrecommended-or-npm-auto-update) for it, or, if the library has **official** npm package, please try to maintain it with [npm auto update](https://github.com/cdnjs/cdnjs#enabling-npm-auto-update). 
 
 4. It'll always be better to compare the diff before committing and sending pull request.
  * You can use `git diff` before committing, and use `git log -p` or `git show sha1hash` to compare the difference.

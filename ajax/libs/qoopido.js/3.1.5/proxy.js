@@ -1,0 +1,1 @@
+(function(t){window.qoopido.register("proxy",t,["./function/unique/uuid"])})(function(t){"use strict";return t.base.extend({_constructor:function(e,n){var r=Array.prototype.splice.call(arguments,2),o=function(){return n.apply(e,Array.prototype.slice.call(arguments,0).concat(r))};return o._quid=t["function/unique/uuid"](),o}})});

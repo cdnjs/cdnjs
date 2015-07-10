@@ -1,0 +1,277 @@
+/*
+	AnythingSlider v1.8+ cs-portfolio theme
+	By Curtis Scott (http://www.curtisscott.com/portfolio.html)
+***
+Note: the nav-cs-portfolio.png used for navigation and slideshow buttons uses a semi-transparent png,
+through which the background color is seen... so colors set will turn out darker than normal
+***/
+
+/*****************************
+  SET DEFAULT DIMENSIONS HERE
+ *****************************/
+/* change the ID & dimensions to match your slider */
+#slider {
+	width: 700px;
+	height: 390px;
+	list-style: none;
+	/* Prevent FOUC (see FAQ page) and keep things readable if javascript is disabled */
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+/******************
+  SET STYLING HERE
+ ******************
+ =================================
+ Default state (no keyboard focus)
+ ==================================*/
+/* Overall Wrapper */
+.anythingSlider-cs-portfolio {
+	margin: 0 auto 50px auto; /* added 50px to bottom to accomodate controls */
+	padding: 0;
+}
+
+/* slider window - top & bottom borders, default state */
+.anythingSlider-cs-portfolio .anythingWindow {
+	border: 0;
+}
+/* Navigation buttons + start/stop button, default state */
+.anythingSlider-cs-portfolio .anythingControls a {
+	background: #fff url(../images/cs-portfolio.png) right -20px no-repeat;
+	color: #000;
+}
+/* Navigation current button, default state */
+.anythingSlider-cs-portfolio .anythingControls a.cur,
+.anythingSlider-cs-portfolio .anythingControls a:hover {
+	background-color: #0d5c9f;
+	color: #000;
+}
+
+/* start-stop button, stopped, default state */
+.anythingSlider-cs-portfolio .anythingControls a.start-stop {
+	background-color: #080;
+	background-position: right top;
+	color: #ddd;
+}
+/* start-stop button, default hovered text color (when visible) */
+.anythingSlider-cs-portfolio .anythingControls a.start-stop:hover,
+.anythingSlider-cs-portfolio .anythingControls a.start-stop.hover {
+	background-color: #0f0;
+	color: #fff;
+}
+/* start-stop button, playing, default state */
+.anythingSlider-cs-portfolio .anythingControls a.start-stop.playing {
+	background-color: #800;
+}
+.anythingSlider-cs-portfolio .anythingControls a.start-stop.playing:hover {
+	background-color: #f00;
+}
+
+/************************
+  NAVIGATION POSITIONING
+ ************************/
+/* Navigation Arrows */
+.anythingSlider-cs-portfolio .arrow {
+	display: block;
+	position: absolute;
+	bottom: -38px;
+	z-index: 100;
+}
+.anythingSlider-cs-portfolio .arrow a {
+	display: block;
+	width: 26px;
+	height: 27px;
+	text-align: center;
+	outline: 0;
+	background: url(../images/cs-portfolio.png) no-repeat;
+}
+
+/* back arrow */
+.anythingSlider-cs-portfolio .back { left: 20px; }
+.anythingSlider-cs-portfolio .back a { background-position: left top; }
+.anythingSlider-cs-portfolio .back a:hover,
+.anythingSlider-cs-portfolio .back a.hover { background-position: left -27px; }
+
+/* forward arrow */
+.anythingSlider-cs-portfolio .forward { right: 20px; }
+.anythingSlider-cs-portfolio .forward a { background-position: -24px top; }
+.anythingSlider-cs-portfolio .forward a:hover,
+.anythingSlider-cs-portfolio .forward a.hover { background-position: -24px -27px; }
+
+/* Navigation Links */
+.anythingSlider-cs-portfolio .anythingControls {
+	position: relative;
+	background: url(../images/cs-portfolio.png) repeat-x bottom center;
+	height: 49px;
+	margin: 0 auto;
+	padding-left: 75px;
+	text-align: center;
+}
+.anythingSlider-cs-portfolio .anythingControls ul {
+	margin: 0;
+	padding: 0;
+	z-index: 100;
+}
+.anythingSlider-cs-portfolio .anythingControls ul.thumbNav {
+	padding-top: 18px;
+}
+.anythingSlider-cs-portfolio .anythingControls ul li {
+	margin: 0;
+	padding: 0;
+	display: inline;
+}
+.anythingSlider-cs-portfolio .anythingControls ul a {
+	font: 11px/18px Georgia, Serif;
+	width: 17px;
+	height: 17px;
+	margin: 0 5px 0 0;
+	padding: 0;
+	float: left;
+	text-decoration: none;
+	text-align: center;
+	outline: 0;
+	border: 0;
+}
+
+/* navigationSize window */
+.anythingSlider-cs-portfolio .anythingControls .anythingNavWindow {
+	margin: 0 5px 0 0;
+	overflow: hidden;
+	float: left;
+}
+.anythingSlider-cs-portfolio .anythingControls li.next a,
+.anythingSlider-cs-portfolio .anythingControls li.prev a {
+	margin: 19px 5px 0 5px;
+	width: 16px;
+	height: 15px;
+	background: url(../images/cs-portfolio.png) -25px -54px no-repeat;
+}
+.anythingSlider-cs-portfolio .anythingControls li.prev a {
+	background-position: -9px -54px;
+}
+.anythingSlider-cs-portfolio .anythingControls li.next a:hover {
+	background-position: -56px -54px;
+}
+.anythingSlider-cs-portfolio .anythingControls li.prev a:hover {
+	background-position: -41px -54px;
+}
+
+/* Autoplay Start/Stop button */
+.anythingSlider-cs-portfolio .anythingControls .start-stop {
+	right: 60px;
+	top: 15px;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	text-align: center;
+	width: 20px;
+	height: 20px;
+	z-index: 100;
+	border: 0;
+}
+
+/***********************
+IE8 AND OLDER STYLING
+***********************/
+
+/* Navigation Arrows */
+.as-oldie .anythingSlider-cs-portfolio .anythingControls a span {
+	line-height: 1px; /* needed for IE7 */
+}
+
+/* IE7 png fix*/
+.as-oldie .anythingSlider-cs-portfolio .arrow a,
+.as-oldie .anythingSlider-cs-portfolio .anythingControls,
+.as-oldie .anythingSlider-cs-portfolio .anythingControls a {
+	_background:none;
+	_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/cs-portfolio.png',sizingMethod='crop');
+}
+
+/***********************
+  COMMON SLIDER STYLING
+ ***********************/
+/* Overall Wrapper */
+.anythingSlider {
+	display: block;
+	overflow: visible !important;
+	position: relative;
+}
+/* anythingSlider viewport window */
+.anythingSlider .anythingWindow {
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+/* anythingSlider base (original element) */
+.anythingSlider .anythingBase {
+	background: transparent;
+	list-style: none;
+	position: absolute;
+	overflow: visible !important;
+	top: 0;
+	left: 0;
+	margin: 0;
+	padding: 0;
+}
+
+/* Navigation arrow text; indent moved to span inside "a", for IE7;
+  apparently, a negative text-indent on an "a" link moves the link as well as the text */
+.anythingSlider .arrow span,
+.anythingSlider .anythingControls span {
+	display: block;
+	visibility: hidden;
+}
+/* disabled arrows, hide or reduce opacity: opacity: .5; filter: alpha(opacity=50); */
+.anythingSlider .arrow.disabled {
+	display: none;
+}
+/* all panels inside the slider; horizontal mode */
+.anythingSlider .panel {
+	background: transparent;
+	display: block;
+	overflow: hidden;
+	float: left;
+	padding: 0;
+	margin: 0;
+}
+/* vertical mode */
+.anythingSlider .vertical .panel {
+	float: none;
+}
+/* fade mode */
+.anythingSlider .fade .panel {
+	float: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 0;
+}
+/* fade mode active page - visible & on top */
+.anythingSlider .fade .activePage {
+	z-index: 1;
+}
+
+/***********************
+  RTL STYLING
+ ***********************/
+/* slider autoplay right-to-left, reverse order of nav links to look better */
+.anythingSlider.rtl .anythingWindow {
+	direction: ltr;
+	unicode-bidi: bidi-override;
+}
+.anythingSlider.rtl .anythingControls ul { float: left; } /* move nav link group to left */
+.anythingSlider.rtl .anythingControls ul a { float: right; } /* reverse order of nav links */
+.anythingSlider.rtl .start-stop { /* float: right; */ } /* move start/stop button - in case you want to switch sides */
+
+/* probably not necessary, but added just in case */
+.anythingSlider,
+.anythingSlider .anythingWindow,
+.anythingSlider .anythingControls ul a,
+.anythingSlider .arrow a,
+.anythingSlider .start-stop {
+	transition-duration: 0s;
+	-o-transition-duration: 0s;
+	-moz-transition-duration: 0s;
+	-webkit-transition-duration: 0s;
+}

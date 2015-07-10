@@ -1,0 +1,1 @@
+(function(t){window.qoopido.register("polyfill/object/keys",t)})(function(){"use strict";return Object.keys||(Object.keys=function(t){if(t!==Object(t))throw new TypeError("Object.keys called on non-object");var e,n=[];for(e in t)Object.prototype.hasOwnProperty.call(t,e)&&n.push(e);return n}),!0});

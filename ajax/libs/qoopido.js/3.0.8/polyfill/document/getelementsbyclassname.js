@@ -1,0 +1,1 @@
+(function(t){"use strict";if("function"==typeof define&&define.amd){var e=[];Object.defineProperty||e.push("./queryselectorall"),define(e,t)}else t()})(function(){"use strict";if(!document.getElementsByClassName){var t=RegExp("^|\\s+","g");document.getElementsByClassName=function(e){return e=(e+"").replace(t,"."),document.querySelectorAll(e)}}});

@@ -231,7 +231,7 @@ var updateLibrary = function (pkg, cb) {
     var msg = 'Checking versions for ' + pkg.npmName;
     console.log(msg.prompt);
     request.get('http://registry.npmjs.org/' + pkg.npmName, function(result) {
-        async.eachLimit(_.pairs(result.body.versions), maxWorker, function(p, cb){
+        async.each(_.pairs(result.body.versions), function(p, cb){
             var data = p[1];
             var version = p[0];
             updateLibraryVersion(pkg, data.dist.tarball, version, cb)
@@ -260,7 +260,7 @@ exports.run = function(){
     var msg = 'Found ' + packages.length + ' npm enabled libraries';
     console.log(msg.prompt);
 
-    async.eachLimit(packages, maxWorker, updateLibrary, function(err) {
+    async.each(packages, updateLibrary, function(err) {
         var msg = 'Auto Update Completed - ' + newVersionCount + ' versions were updated';
         console.log(msg.prompt);
         fs.removeSync(path.join(__dirname, 'temp'))
@@ -277,7 +277,6 @@ exports.invalidNpmName = invalidNpmName;
 
 var args = process.argv.slice(2);
 if(args.length > 0 && args[0] == 'run'){
-    maxWorker = (args[1] == 'serial') ? 1 : 8;
     exports.run()
 } else {
     console.log('to start, pass the "run" arg'.prompt)

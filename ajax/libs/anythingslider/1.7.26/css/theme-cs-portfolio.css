@@ -1,0 +1,149 @@
+/*
+	AnythingSlider v1.5.10 cs-portfolio
+	By Curtis Scott (http://www.curtisscott.com/portfolio.html)
+	updated to work with the new themes
+*/
+
+/*** Note: the nav-cs-portfolio.png used for navigation and slideshow buttons uses a semi-transparent png,
+     through which the background color is seen... so colors set will turn out darker than normal ***/
+
+/****** SET COLORS HERE *******/
+/* Default/Acitve State */
+div.anythingSlider-cs-portfolio .anythingControls ul a, div.anythingSlider-cs-portfolio.activeSlider .anythingControls ul a {
+	background-color: #fff;
+}
+div.anythingSlider-cs-portfolio .anythingControls ul a:hover, div.anythingSlider-cs-portfolio .anythingControls ul a.cur,
+div.anythingSlider-cs-portfolio.activeSlider .anythingControls ul a:hover, div.anythingSlider-cs-portfolio.activeSlider .anythingControls ul a.cur {
+	background-color: #0d5c9f;
+}
+div.anythingSlider-cs-portfolio .start-stop, div.anythingSlider-cs-portfolio .start-stop.hover {
+	background-color: #080;
+}
+div.anythingSlider-cs-portfolio .start-stop:hover {
+	background-color: #0f0;
+}
+div.anythingSlider-cs-portfolio .start-stop.playing {
+	background-color: #a00;
+}
+div.anythingSlider-cs-portfolio .start-stop.playing:hover {
+	background-color: #f00;
+}
+
+/* Overall */
+div.anythingSlider-cs-portfolio {}
+div.anythingSlider-cs-portfolio .anythingWindow, div.anythingSlider-cs-portfolio.activeSlider .anythingWindow {
+	border: 0;
+}
+/* Navigation Arrows */
+div.anythingSlider-cs-portfolio .arrow {
+	display: block;
+	bottom: 7px; /* this is -18px for IE7 */
+	position: absolute;
+	z-index: 100;
+}
+div.anythingSlider-cs-portfolio .arrow a {
+	display: block;
+	bottom: 5px;
+	position: absolute;
+	height: 27px;
+	width: 26px;
+	outline: 0;
+	background: url(../images/cs-portfolio.png) no-repeat;
+}
+div.anythingSlider-cs-portfolio .forward { right: 70px; }
+div.anythingSlider-cs-portfolio .back { left: 20px; }
+div.anythingSlider-cs-portfolio .forward a { background-position: -24px top; }
+div.anythingSlider-cs-portfolio .back a { background-position: left top; }
+div.anythingSlider-cs-portfolio .forward a:hover, div.anythingSlider-cs-portfolio .forward a.hover { background-position: -24px -27px; }
+div.anythingSlider-cs-portfolio .back a:hover, div.anythingSlider-cs-portfolio .back a.hover { background-position: left -27px; }
+
+/* Navigation Links */
+div.anythingSlider-cs-portfolio .anythingControls {
+	background: url(../images/cs-portfolio.png) repeat-x bottom center;
+	height: 49px;
+	margin: 0 auto 49px auto;
+	padding-left: 150px;
+	text-align: center;
+	z-index: 100;
+}
+div.anythingSlider-cs-portfolio .anythingControls ul {
+	margin: 0;
+	z-index: 100;
+}
+div.anythingSlider-cs-portfolio .anythingControls ul li {
+	padding: 0;
+	display: inline;
+}
+
+div.anythingSlider-cs-portfolio .anythingControls ul a, div.anythingSlider-cs-portfolio.activeSlider .anythingControls ul a {
+	/*display: inline-block;*/
+	float: left;
+	width: 17px;
+	height: 17px;
+	margin: 18px 5px 0 0;
+	padding: 0;
+	outline: 0;
+	border: 0;
+}
+
+div.anythingSlider-cs-portfolio .anythingControls ul a, div.anythingSlider-cs-portfolio.activeSlider .anythingControls ul a,
+div.anythingSlider-cs-portfolio .anythingControls ul a:hover, div.anythingSlider-cs-portfolio .anythingControls ul a.cur,
+div.anythingSlider-cs-portfolio.activeSlider .anythingControls ul a:hover, div.anythingSlider-cs-portfolio.activeSlider .anythingControls ul a.cur {
+	background-image: url(../images/cs-portfolio.png);
+	background-position: right -20px;
+	background-repeat: no-repeat;
+}
+
+/* Navigation size window arrows */
+div.anythingSlider-cs-portfolio .anythingControls li.next a, div.anythingSlider-cs-portfolio .anythingControls li.prev a,
+div.anythingSlider-cs-portfolio .anythingControls li.next a:hover, div.anythingSlider-cs-portfolio .anythingControls li.prev a:hover {
+	width: 16px;
+	height: 15px;
+	background: url(../images/cs-portfolio.png) -25px -54px no-repeat;
+	margin: 19px 5px 0 5px;
+}
+div.anythingSlider-cs-portfolio .anythingControls li.prev a {
+	background-position: -9px -54px;
+}
+div.anythingSlider-cs-portfolio .anythingControls li.next a:hover {
+	background-position: -56px -54px;
+}
+div.anythingSlider-cs-portfolio .anythingControls li.prev a:hover {
+	background-position: -41px -54px;
+}
+
+/* slider autoplay right-to-left, reverse order of nav links to look better */
+div.anythingSlider-cs-portfolio.rtl .anythingControls ul a { float: right; } /* reverse order of nav links */
+div.anythingSlider-cs-portfolio.rtl .anythingControls ul { float: left; }    /* move nav link group to left */
+/* div.anythingSlider-cs-portfolio.rtl .start-stop { float: right; } */ /* move start/stop button - in case you want to switch sides */
+
+/* Autoplay Start/Stop button */
+div.anythingSlider-cs-portfolio .start-stop, div.anythingSlider-cs-portfolio .start-stop.hover {
+	margin: 15px 50px 0 0;
+	padding: 0;
+	display: inline;
+	text-align: center;
+	width: 20px;
+	height: 20px;
+	z-index: 100;
+	border: 0;
+}
+div.anythingSlider-cs-portfolio .start-stop, div.anythingSlider-cs-portfolio .start-stop.hover,
+div.anythingSlider-cs-portfolio .start-stop:hover, div.anythingSlider-cs-portfolio .start-stop.playing,
+div.anythingSlider-cs-portfolio .start-stop.playing:hover {
+	background-image: url(../images/cs-portfolio.png);
+	background-position: right top;
+	background-repeat: no-repeat;
+}
+
+/* Extra - replace defaults */
+div.anythingSlider-cs-portfolio {
+	padding: 0 23px 50px 0;
+}
+
+/* text indent moved to span inside "a", for IE7; apparently, a negative text-indent on an "a" link moves the link as well as the text */
+div.anythingSlider-cs-portfolio .arrow a span, div.anythingSlider-cs-portfolio .anythingControls ul a span, div.anythingSlider-cs-portfolio .start-stop span {
+	display: block;
+	line-height: 1px; /* needed for IE7 */
+	visibility: hidden; /* needed for IE8, instead of text-indent: -9999px */
+}

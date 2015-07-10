@@ -1,0 +1,1 @@
+(function(t){window.qoopido.register("support/css/transform",t,["../../support"])})(function(t){"use strict";return t.support.addTest("/css/transform",function(e){t.support.supportsCssProperty("transform")?e.resolve(t.support.getCssProperty("transform")):e.reject()})});

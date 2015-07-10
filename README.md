@@ -83,7 +83,7 @@ For more information regarding this importer, please check out the [repository d
 
 You should consider the following when adding to or updating the library, so that we can keep our project neat, clean and clear:
 
-* Filenames should _not_ include a version number and be _lowercase_.
+* Filenames should _not_ include a version number.
   * This is OK: `useful.min.js`, but this is not: `useful-2.0.1.min.js`.
 
 * JavaScript & CSS files should be minified to reduce network traffic and browser overhead.
@@ -162,7 +162,7 @@ A URL is ideal. Providing the origin of your files is very helpful as the cdnjs 
 
 ## Enabling `git`(recommended) or `npm` auto update
 
-cdnjs automatically updates libraries that are known to be hosted on `npm` or git repo, e.g., Lodash. This auto-update script runs every hour, but the update result **won't be committed until one of our maintainers audit the updates**, because many libs will change the naming or directory structure during different versions, and we may need to minify the lib without pre-minified dist files, so **it'll be reasonable to delay for at most 30 hours**, if you think there is a lib didn't been updated, please wait at least 30 hours for the process to audit it.
+cdnjs automatically updates libraries that are known to be hosted on `npm` or git repo, e.g., Lodash. npm auto-update relys on each release and git auto-update relys on the [tags](https://git-scm.com/book/en/v2/Git-Basics-Tagging) in git repo. This auto-update script runs every hour, but the update result **won't be committed until one of our maintainers audit the updates**, because many libs will change the naming or directory structure during different versions, and we may need to minify the lib without pre-minified dist files, so **it'll be reasonable to delay for at most 30 hours**, if you think there is a lib didn't been updated, please wait at least 30 hours for the process to audit it.
 
 To add `git` auto-update config to a library, update the `package.json` with configuration details and submit your pull request. An example configuration:
 
@@ -183,12 +183,14 @@ To add an `npm` hook to a library, update the `package.json` with configuration 
 
 ```js
   "npmName": "lodash",
-  "npmFileMap": [{
-    "basePath": "/dist/",
-    "files": [
-      "*.js"
-    ]
-  }],
+  "npmFileMap": [
+    {
+      "basePath": "dist",
+      "files": [
+        "*.js"
+      ]
+    }
+  ]
 ```
 
 * Please __don't__ touch `version` number in this step, it'll be automatically updated

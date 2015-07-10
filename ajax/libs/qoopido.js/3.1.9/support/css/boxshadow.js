@@ -1,0 +1,1 @@
+(function(t){window.qoopido.register("support/css/boxshadow",t,["../../support"])})(function(t){"use strict";return t.support.addTest("/css/boxshadow",function(e){t.support.supportsCssProperty("box-shadow")?e.resolve(t.support.getCssProperty("box-shadow")):e.reject()})});

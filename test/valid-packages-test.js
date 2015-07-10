@@ -23,7 +23,7 @@ function parse(json_file, ignore_missing, ignore_parse_fail) {
         return JSON.parse(content);
     } catch (err2) {
         if (!ignore_parse_fail) {
-            assert.ok(0, json_file + " failed to parse");
+            assert.ok(0, json_file + " failed to parse, you can validate your json here: http://jsonlint.com/");
         }
         return null;
     }
@@ -109,7 +109,7 @@ packages.map(function (pkg) {
             pkg_name(pkg) + ": Name property should be '" + trueName + "', not '" + json.name +"'");
     };
 
-    var targetPrefixes = new RegExp("^git://");
+    var targetPrefixes = new RegExp("^git://.+\.git$");
     package_vows[pname + ": autoupdate block is valid (if present)"] = function (pkg) {
         var json = parse(pkg, true, true);
         if (json.autoupdate) {

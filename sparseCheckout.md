@@ -18,15 +18,19 @@ Here are the steps:
 
 Here is an example of `.git/info/sparse-checkout`:
 ```
-/ajax/libs/jquery/*
 /build
+/test
+/tools
+/scratch
 /MIT-LICENSE
+/hooks
 /*.yml
 /*.md
 /*.json
 /*.sh
 /*.js
-.gitkeep
+/ajax/libs/jquery/*
+#/ajax/libs/*/package.json // for tools/createSparseCheckoutConfig.js
 ```
 
 You can update your `.git/info/sparse-checkout` and then do `git reset --hard` to update the working directory to be the same as you configured.

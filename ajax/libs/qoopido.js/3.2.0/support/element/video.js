@@ -1,0 +1,1 @@
+(function(t){window.qoopido.register("support/element/video",t,["../../support"])})(function(t,e,r,o,n,i){"use strict";var s=t.support;return s.addTest("/element/video",function(t){var e=s.pool?s.pool.obtain("video"):i.createElement("video");e.canPlayType?t.resolve():t.reject(),e.dispose&&e.dispose()})});

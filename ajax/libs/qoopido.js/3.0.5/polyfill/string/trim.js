@@ -1,0 +1,1 @@
+(function(t){"use strict";"function"==typeof define&&define.amd?define(t):t()})(function(){"use strict";if(!String.prototype.trim){var t=RegExp("^\\s+|\\s+$","g");String.prototype.trim=function(){return this.replace(t,"")}}});
