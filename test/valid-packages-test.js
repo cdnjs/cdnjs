@@ -120,6 +120,11 @@ packages.map(function (pkg) {
                 "', but is " + json.autoupdate.target);
         }
     }
+    package_vows[pname + ": should not have both multiple auto-update configs"] = function(pkg) {
+        var json = parse(pkg, true, true);
+        assert.ok(json.autoupdate === undefined || json.npmFileMap === undefined,
+            pkg_name(pkg) + ": has both git and npm auto-update config, should remove one of it");
+    }
     package_vows[pname + ": should point filename field to minified file"] = function (pkg) {
         var json = parse(pkg, true, true);
         if (json.filename) {
