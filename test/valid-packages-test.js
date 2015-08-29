@@ -80,7 +80,7 @@ packages.map(function (pkg) {
         });
         if (!valid) {
             assert.ok(valid,
-                [pkg_name(pkg) + " didn't parse as any known format:"].concat(
+                [pkg_name(pkg) + " is not a valid cdnjs package.json format:"].concat(
                     errors
                         .filter(function (schema) {
                             return schema !== null;
@@ -114,19 +114,34 @@ packages.map(function (pkg) {
         var json = parse(pkg, true, true);
         var dirs = pkg.split("/");
         var trueName = dirs[dirs.length - 2];
-        assert.ok(trueName == json.name,
-            pkg_name(pkg) + ": Name property should be '" + trueName + "', not '" + json.name +"'");
+        if (!fs.lstatSync("./ajax/libs/" + trueName).isSymbolicLink()) {
+            assert.ok(trueName == json.name,
+                pkg_name(pkg) + ": Name property should be '" + trueName + "', not '" + json.name +"'");
+        }
     };
 
     var targetPrefixes = new RegExp("^git://.+\.git$");
     package_vows[pname + ": autoupdate block is valid (if present)"] = function (pkg) {
-        var json = parse(pkg, true, true);
+        var json = parse(pkg, true, true),
+            fileMapPostfixes = new RegExp("\\*\\*$");
         if (json.autoupdate) {
             assert.ok(json.autoupdate.source == "git",
                 pkg_name(pkg) + ": Autoupdate source should be 'git', not " + json.autoupdate.source);
             assert.ok(targetPrefixes.test(json.autoupdate.target),
                 pkg_name(pkg) + ": Autoupdate target should match '" + targetPrefixes +
                 "', but is " + json.autoupdate.target);
+            for (var i in json.autoupdate.files) {
+                assert.ok(!fileMapPostfixes.test(json.autoupdate.files[i]),
+                    pkg_name(pkg) + ": fileMap should not end with ***");
+            }
+
+        } else if (json.npmFileMap) {
+            for (var i in json.npmFileMap) {
+                for (var j in json.npmFileMap[i].files) {
+                    assert.ok(!fileMapPostfixes.test(json.npmFileMap[i].files[j]),
+                        pkg_name(pkg) + ": fileMap should not end with ***");
+                }
+            }
         }
     }
     package_vows[pname + ": should not have both multiple auto-update configs"] = function(pkg) {
@@ -156,13 +171,26 @@ packages.map(function (pkg) {
         var orig = fs.readFileSync(pkg, 'utf8'),
             correct = JSON.stringify(JSON.parse(orig), null, 2) + '\n';
         assert.ok(orig === correct,
-            pkg_name(pkg) + ": package.json wrong format, correct one should be like this.\n(Remove the first 2 spaces of each line and include blank line at end if you copy and paste this example)\n" + correct +"\n");
+            pkg_name(pkg) + ": package.json wrong indent, please use our tool: tools/fixFormat.js to fix it for you, here is an example: (Please ignore the first 2 spaces and the wildcard symbol in autoupadte config due to a bug)\n" + correct +"\n");
     }
 
     package_vows[pname + ": useless fields check"] = function (pkg) {
         var json = parse(pkg, true, true);
-        assert.ok(json.scripts === undefined && json.devDependencies === undefined,
-            pkg_name(pkg) + ": we don't need scripts and devDependencies fields in package.json");
+        var json_fix = json;
+        delete json_fix.scripts;
+        delete json_fix.devDependencies;
+        delete json_fix.main;
+        delete json_fix.peerDependencies;
+        delete json_fix.contributors;
+        delete json_fix.bugs;
+        delete json_fix.issues;
+        delete json_fix.files;
+        delete json_fix.ignore;
+        delete json_fix.engines;
+        delete json_fix.engine;
+
+        assert.ok(json === json_fix,
+            pkg_name(pkg) + ": we don't need scripts, main, cnotributors, bugs, issues, files, ignore, engine(s) and (dev|peer)Dependencies fields in package.json");
     }
     context[pname] = package_vows;
     suite.addBatch(context);

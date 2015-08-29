@@ -1,0 +1,2 @@
+/*! Qoopido.js library 3.7.4, 2015-08-14 | https://github.com/dlueth/qoopido.js | (c) 2015 Dirk Lueth */
+!function(e,o){o.qoopido.register("support/element/video",e,["../../support"])}(function(e,o,t,i){"use strict";var n=e.support;return n.addTest("/element/video",function(e){var o=n.pool?n.pool.obtain("video"):document.createElement("video");o.canPlayType?e.resolve():e.reject(),o.dispose&&o.dispose()})},this);

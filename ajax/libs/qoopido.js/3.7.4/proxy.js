@@ -1,0 +1,2 @@
+/*! Qoopido.js library 3.7.4, 2015-08-14 | https://github.com/dlueth/qoopido.js | (c) 2015 Dirk Lueth */
+!function(t,n){n.qoopido.register("proxy",t,["./base","./function/unique/uuid"])}(function(t,n,u,r){"use strict";return t.base.extend({_constructor:function(n,u){var r=Array.prototype.splice.call(arguments,2),e=function(){return u.apply(n,Array.prototype.slice.call(arguments).concat(r))};return e._quid=t["function/unique/uuid"](),e}})},this);

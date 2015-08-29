@@ -1,0 +1,3980 @@
+html {
+  height: 100%;
+  width: 100%;
+}
+body {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
+  -webkit-text-size-adjust: 100%;
+}
+*:not(input):not(textarea):not(select) {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+input:active,
+input:focus,
+textarea:active,
+textarea:focus,
+select:active,
+select:focus {
+  outline: none;
+}
+h1 {
+  font-size: 36px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4,
+h5,
+h6 {
+  font-size: 18px;
+}
+.page {
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  background-color: #f9f9f9;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  overflow: visible;
+  font-size: 17px;
+  color: #1f1f21;
+}
+.page::-webkit-scrollbar {
+  display: none;
+}
+.page__content {
+  background-color: #f9f9f9;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-top: -1px;
+}
+.page__background {
+  background-color: #f9f9f9;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.content-padded {
+  padding: 8px;
+}
+/* topdoc
+  name: Switch
+  class: switch
+  modifiers:
+    :focus: Focus state
+    :disabled: Disabled state
+  markup:
+    <label class="switch">
+      <input type="checkbox" class="switch__input">
+      <div class="switch__toggle"></div>
+    </label>
+    <label class="switch">
+      <input type="checkbox" class="switch__input" checked>
+      <div class="switch__toggle"></div>
+    </label>
+    <label class="switch">
+      <input type="checkbox" class="switch__input" disabled>
+      <div class="switch__toggle"></div>
+    </label>
+*/
+.switch {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  position: relative;
+  overflow: hidden;
+  font-size: 17px;
+  padding: 0 20px;
+  border: none;
+  overflow: visible;
+  width: 51px;
+  height: 32px;
+  z-index: 0;
+  text-align: left;
+}
+.switch__input {
+  position: absolute;
+  overflow: hidden;
+  right: 0px;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  padding: 0;
+  border: 0;
+  opacity: 0.001;
+  z-index: 1;
+  vertical-align: top;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 51px;
+  height: 44px;
+  margin-top: -6px;
+  top: 0px;
+  left: 0px;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+.switch__toggle {
+  background-color: #ddd;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.35s;
+  -moz-transition-duration: 0.35s;
+  -o-transition-duration: 0.35s;
+  transition-duration: 0.35s;
+  -webkit-transition-timing-function: ease-out;
+  -moz-transition-timing-function: ease-out;
+  -o-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.switch__toggle:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  position: absolute;
+  content: '';
+  -webkit-border-radius: 28px;
+  border-radius: 28px;
+  height: 28px;
+  width: 28px;
+  background-color: #fff;
+  left: 2px;
+  top: 2px;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.35s;
+  -moz-transition-duration: 0.35s;
+  -o-transition-duration: 0.35s;
+  transition-duration: 0.35s;
+  -webkit-transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
+  -moz-transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
+  -o-transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
+  transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
+}
+.switch__input:checked + .switch__toggle {
+  background-color: #5198db;
+}
+.switch__input:checked + .switch__toggle:before {
+  -webkit-transform: translateX(18px);
+  -moz-transform: translateX(18px);
+  -ms-transform: translateX(18px);
+  -o-transform: translateX(18px);
+  transform: translateX(18px);
+}
+.switch__input:not(:checked) + .switch__toggle:before {
+  -webkit-transform: translateX(0px);
+  -moz-transform: translateX(0px);
+  -ms-transform: translateX(0px);
+  -o-transform: translateX(0px);
+  transform: translateX(0px);
+}
+.switch__input:disabled + .switch__toggle {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+/* topdoc
+  name: Range
+  class: range
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <input type="range" class="range">
+    <input type="range" class="range" disabled>
+  showcase:
+    <div class="navigation-bar">
+        <div class="navigation-bar__item center full">
+            <h1 class="navigation-bar__title">Range</h1>
+        </div>
+    </div>
+
+    <div style="padding:8px">
+      <input type="range" class="range" style="width:100%" value="0">
+    </div>
+
+    <div style="padding:8px">
+      <input type="range" class="range" style="width:100%" value="30">
+    </div>
+
+    <div style="padding:8px">
+      <input type="range" class="range" style="width:100%" value="60">
+    </div>
+
+    <div style="padding:8px">
+      <input type="range" class="range" style="width:100%" value="90">
+    </div>
+*/
+.range {
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  vertical-align: top;
+  outline: none;
+  line-height: 1;
+  -webkit-appearance: none;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  border: none;
+  height: 2px;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ddd), to(#ddd));
+  background-image: -webkit-linear-gradient(#ddd, #ddd);
+  background-image: -moz-linear-gradient(#ddd, #ddd);
+  background-image: -o-linear-gradient(#ddd, #ddd);
+  background-image: linear-gradient(#ddd, #ddd);
+  background-position: left center;
+  -webkit-background-size: 100% 2px;
+  background-size: 100% 2px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  height: 31px;
+}
+.range::-moz-range-track {
+  position: relative;
+  border: none;
+  background-color: #ddd;
+  height: 2px;
+  border-radius: 30px;
+  box-shadow: none;
+  top: 0;
+  margin: 0;
+  padding: 0;
+}
+.range::-webkit-slider-thumb {
+  cursor: pointer;
+  -webkit-appearance: none;
+  position: relative;
+  height: 29px;
+  width: 29px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  top: 0;
+  margin: 0;
+  padding: 0;
+}
+.range::-moz-range-thumb {
+  cursor: pointer;
+  position: relative;
+  height: 29px;
+  width: 29px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 30px;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+}
+.range::-webkit-slider-thumb:before {
+  position: absolute;
+  top: 13px;
+  right: 0px;
+  left: -1024px;
+  width: 1024px;
+  height: 2px;
+  background-color: rgba(24,103,194,0.81);
+  content: '';
+  margin: 0;
+  padding: 0;
+}
+.range:disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+/* topdoc
+  name: Navigation Bar
+  class: navigation-bar
+  markup:
+    <div class="navigation-bar">
+      <div class="navigation-bar__center">Navigation Bar</div>
+    </div>
+*/
+.navigation-bar {
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  white-space: nowrap;
+  overflow: hidden;
+  word-spacing: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  z-index: 2;
+  display: block;
+  height: 44px;
+  padding-left: 0;
+  padding-right: 0;
+  background: #fff;
+  color: #1f1f21;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-bottom: 1px solid #ddd;
+  font-weight: 400;
+  width: 100%;
+  white-space: nowrap;
+  overflow: visible;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .navigation-bar {
+    border-bottom: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-image: -webkit-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -moz-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -o-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
+  }
+}
+.navigation-bar__line-height {
+  line-height: 44px;
+  padding-bottom: 0;
+  padding-top: 0;
+}
+.navigation-bar__bg {
+  background: #fff;
+}
+.navigation-bar__item,
+.navigation-bar__left,
+.navigation-bar__right,
+.navigation-bar__center {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  height: 44px;
+  vertical-align: top;
+  overflow: visible;
+  display: block;
+  vertical-align: middle;
+  float: left;
+}
+.navigation-bar__left {
+  max-width: 50%;
+  width: 27%;
+  text-align: left;
+}
+.navigation-bar__right {
+  max-width: 50%;
+  width: 27%;
+  text-align: right;
+}
+.navigation-bar__center {
+  width: 46%;
+  text-align: center;
+  line-height: 44px;
+  font-size: 17px;
+  font-weight: 500;
+  color: #1f1f21;
+}
+.navigation-bar__title {
+  line-height: 44px;
+  font-size: 17px;
+  font-weight: 500;
+  color: #1f1f21;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+}
+.navigation-bar__center:first-child:last-child {
+  width: 100%;
+}
+/* topdoc
+  name: Navigation Bar Item
+  use: Toolbar Button, Navigation Bar
+  markup:
+    <div class="navigation-bar">
+      <div class="navigation-bar__left">
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
+        </span>
+      </div>
+
+      <div class="navigation-bar__center">
+        Navigation Bar
+      </div>
+
+      <div class="navigation-bar__right">
+        <span class="toolbar-button--quiet navigation-bar__line-height">Label</span>
+      </div>
+    </div>
+*/
+/* topdoc
+  name: Navigation Bar with Outline Button
+  use: Toolbar Button, Navigation Bar
+  markup:
+    <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
+    <div class="navigation-bar">
+      <div class="navigation-bar__left">
+        <span class="toolbar-button--outline navigation-bar__line-height">
+          <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
+        </span>
+      </div>
+
+      <div class="navigation-bar__center">
+        Title
+      </div>
+
+      <div class="navigation-bar__right">
+        <span class="toolbar-button--outline navigation-bar__line-height">Button</span>
+      </div>
+    </div>
+*/
+/* topdoc
+  name: Android-like Navigation Bar
+  class: navigation-bar--android
+  hint: .navigation-bar--android
+  use: Navigation Bar, Toolbar Button
+  markup:
+    <div class="navigation-bar navigation-bar--android">
+      <div class="navigation-bar__left navigation-bar--android__left">
+        <span class="toolbar-button navigation-bar__line-height" style="padding:0 5px 0 5px;"><i class="ion-android-arrow-back" style="font-size:20px;"></i></span>
+      </div>
+      <div class="navigation-bar__center navigation-bar--android__center">
+        <span class="toolbar-button navigation-bar__line-height" style="padding:0">
+          <i class="ion-cube" style="font-size:20px;"></i> App Bar
+        </span>
+      </div>
+      <div class="navigation-bar__right navigation-bar--android__right">
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <i class="ion-android-share" style="font-size:20px;"></i>
+        </span>
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <i class="ion-android-more" style="font-size:20px;"></i>
+        </span>
+      </div>
+    </div>
+*/
+.navigation-bar--android__left {
+  float: left;
+  text-align: left;
+  width: auto;
+  min-width: 10px;
+}
+.navigation-bar--android__center {
+  float: left;
+  text-align: left;
+  width: auto;
+  max-width: 50%;
+}
+.navigation-bar--android__right {
+  float: right;
+  text-align: right;
+  width: auto;
+}
+.navigation-bar--android__center:first-child:last-child {
+  padding-left: 10px;
+}
+/* topdoc
+  name: Android-like Navigation Bar(2)
+  use: Android-like Navigation Bar
+  markup:
+    <div class="navigation-bar navigation-bar--android">
+      <div class="navigation-bar__left navigation-bar--android__left">
+        <span class="toolbar-button navigation-bar__line-height" style="padding:0 5px 0 0;"><i class="ion-android-drawer" style="font-size:20px;"></i></span>
+      </div>
+      <div class="navigation-bar__center navigation-bar--android__center">
+        App Bar
+      </div>
+      <div class="navigation-bar__right navigation-bar--android__right">
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <i class="ion-android-star" style="font-size:20px;"></i>
+        </span>
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <i class="ion-android-search" style="font-size:20px;"></i>
+        </span>
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <i class="ion-android-more" style="font-size:20px;"></i>
+        </span>
+      </div>
+    </div>
+*/
+/* topdoc
+  name: Transparent Navigation Bar
+  class: navigation-bar--transparent
+  use: Toolbar Button, Navigation Bar
+  markup:
+    <div class="navigation-bar navigation-bar--transparent">
+      <div class="navigation-bar__left">
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
+        </span>
+      </div>
+      <div class="navigation-bar__center">
+        Navigation Bar
+      </div>
+      <div class="navigation-bar__right">
+        <span class="toolbar-button--quiet navigation-bar__line-height">Label</span>
+      </div>
+    </div>
+*/
+.navigation-bar--transparent {
+  background-color: transparent;
+  background-image: none;
+  border: none;
+}
+/* topdoc
+  name: Navigation Bar with Outline Button
+  use: Toolbar Button, Navigation Bar
+  markup:
+    <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
+    <div class="navigation-bar">
+      <div class="navigation-bar__left">
+        <span class="toolbar-button--outline navigation-bar__line-height">
+          <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
+        </span>
+      </div>
+
+      <div class="navigation-bar__center">
+        Title
+      </div>
+
+      <div class="navigation-bar__right">
+        <span class="toolbar-button--outline navigation-bar__line-height">Button</span>
+      </div>
+    </div>
+*/
+/* topdoc
+  name: Transparent Navigation Bar
+  class: navigation-bar--transparent
+  use: Toolbar Button, Navigation Bar
+  markup:
+    <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
+    <div class="navigation-bar navigation-bar--transparent">
+      <div class="navigation-bar__left">
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
+        </span>
+      </div>
+      <div class="navigation-bar__center">
+        Navigation Bar
+      </div>
+      <div class="navigation-bar__right">
+        <span class="toolbar-button--quiet navigation-bar__line-height">Label</span>
+      </div>
+    </div>
+*/
+.navigation-bar--transparent {
+  background-color: transparent;
+  background-image: none;
+  border: none;
+}
+/* topdoc
+  name: Bottom Bar
+  class: bottom-bar
+  use: Navigation Bar
+  markup:
+    <div class="bottom-bar">
+      <div class="bottom-bar__line-height" style="text-align:center">Bottom Toolbar</div>
+    </div>
+*/
+.bottom-bar {
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  white-space: nowrap;
+  overflow: hidden;
+  word-spacing: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  z-index: 2;
+  display: block;
+  height: 44px;
+  padding-left: 0;
+  padding-right: 0;
+  background: #fff;
+  color: #1f1f21;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  font-weight: 400;
+  border-bottom: none;
+  border-top: 1px solid #ddd;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .bottom-bar {
+    border-top: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-image: -webkit-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -moz-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -o-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%);
+  }
+}
+.bottom-bar__line-height {
+  line-height: 44px;
+  padding-bottom: 0;
+  padding-top: 0;
+}
+.bottom-bar--transparent {
+  background-color: transparent;
+  background-image: none;
+  border: none;
+}
+/* topdoc
+  name: Navigation Bar with Segment
+  class: navigation-bar
+  hint: .navigation-bar .button-bar
+  use: Segment, Navigation Bar
+  markup:
+    <div class="navigation-bar">
+      <div class="navigation-bar__center">
+        <div class="button-bar" style="width:200px;margin:7px 50px;">
+          <div class="button-bar__item">
+            <input type="radio" name="navi-segment-a" checked>
+            <div class="button-bar__button">One</div>
+          </div>
+
+          <div class="button-bar__item">
+            <input type="radio" name="navi-segment-a">
+            <div class="button-bar__button">Two</div>
+          </div>
+        </div>
+      </div>
+    </div>
+*/
+/* topdoc
+  name: Button
+  class: button
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <button class="button">Button</button>
+    <button class="button" disabled>Button</button>
+*/
+.button {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  height: auto;
+  text-decoration: none;
+  padding: 4px 10px;
+  font-size: 17px;
+  line-height: 32px;
+  letter-spacing: 0;
+  color: #fff;
+  vertical-align: middle;
+  background-color: rgba(24,103,194,0.81);
+  border: 0px solid currentColor;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.button:hover {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.button:active {
+  background-color: rgba(24,103,194,0.81);
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+  opacity: 0.2;
+}
+.button:focus {
+  outline: 0;
+}
+.button:disabled,
+.button[disabled] {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+/* topdoc
+  name: Outline Button
+  class: button--outline
+  use: Button
+  markup:
+    <button class="button button--outline">Button</button>
+    <button class="button button--outline" disabled>Button</button>
+*/
+.button--outline {
+  background-color: transparent;
+  border: 1px solid rgba(24,103,194,0.81);
+  color: rgba(24,103,194,0.81);
+}
+.button--outline:active {
+  background-color: rgba(24,103,194,0.2);
+  border: 1px solid rgba(24,103,194,0.81);
+  color: rgba(24,103,194,0.81);
+  opacity: 1;
+}
+.button--outline:hover {
+  border: 1px solid rgba(24,103,194,0.81);
+  -webkit-transition: 0;
+  -moz-transition: 0;
+  -o-transition: 0;
+  transition: 0;
+}
+/* topdoc
+  name: Light Button
+  class: button--light
+  use: Button
+  markup:
+    <button class="button button--light">Button</button>
+    <button class="button button--light" disabled>Button</button>
+*/
+.button--light {
+  background-color: transparent;
+  color: rgba(0,0,0,0.4);
+  border: 1px solid rgba(0,0,0,0.2);
+}
+.button--light:active {
+  background-color: rgba(0,0,0,0.05);
+  color: rgba(0,0,0,0.4);
+  border: 1px solid rgba(0,0,0,0.2);
+  opacity: 1;
+}
+/* topdoc
+  name: Quiet Button
+  class: button--quiet
+  markup:
+    <button class="button--quiet">Button</button>
+    <button class="button--quiet" disabled>Button</button>
+*/
+.button--quiet {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  height: auto;
+  text-decoration: none;
+  padding: 4px 10px;
+  font-size: 17px;
+  line-height: 32px;
+  letter-spacing: 0;
+  color: #fff;
+  vertical-align: middle;
+  background-color: rgba(24,103,194,0.81);
+  border: 0px solid currentColor;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+  background: transparent;
+  border: 1px solid transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background: transparent;
+  color: rgba(24,103,194,0.81);
+  border: none;
+}
+.button--quiet:disabled,
+.button--quiet[disabled] {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+  border: none;
+}
+.button--quiet:hover {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.button--quiet:focus {
+  outline: 0;
+}
+.button--quiet:active {
+  background-color: transparent;
+  border: none;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+  opacity: 0.2;
+  color: rgba(24,103,194,0.81);
+}
+/* topdoc
+  name: Call To Action Button
+  class: button--cta
+  markup:
+    <button class="button--cta">Button</button>
+    <button class="button--cta" disabled>Button</button>
+*/
+.button--cta {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  height: auto;
+  text-decoration: none;
+  padding: 4px 10px;
+  font-size: 17px;
+  line-height: 32px;
+  letter-spacing: 0;
+  color: #fff;
+  vertical-align: middle;
+  background-color: rgba(24,103,194,0.81);
+  border: 0px solid currentColor;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+  border: none;
+  background-color: #25a6d9;
+  color: #fff;
+}
+.button--cta:hover {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.button--cta:focus {
+  outline: 0;
+}
+.button--cta:active {
+  color: var-button-cat-color;
+  background-color: #25a6d9;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+  opacity: 0.2;
+}
+.button--cta:disabled,
+.button--cta[disabled] {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+/* topdoc
+  name: Large Button
+  class: button--large
+  use: Button
+  markup:
+    <button class="button button--large">Button</button>
+*/
+.button--large {
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 36px;
+  padding: 4px 12px;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+.button--large:active {
+  background-color: rgba(24,103,194,0.81);
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+  opacity: 0.2;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.button--large:disabled,
+.button--large[disabled] {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+.button--large:hover {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.button--large:focus {
+  outline: 0;
+}
+/* topdoc
+  name: Large Quiet Button
+  class: button--large--quiet
+  markup:
+    <button class="button--large--quiet">Button</button>
+*/
+.button--large--quiet {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  height: auto;
+  text-decoration: none;
+  padding: 4px 10px;
+  font-size: 17px;
+  line-height: 32px;
+  letter-spacing: 0;
+  color: #fff;
+  vertical-align: middle;
+  background-color: rgba(24,103,194,0.81);
+  border: 0px solid currentColor;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 36px;
+  padding: 4px 12px;
+  display: block;
+  width: 100%;
+  background: transparent;
+  border: 1px solid transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: rgba(24,103,194,0.81);
+  text-align: center;
+}
+.button--large--quiet:active {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+  opacity: 0.2;
+  color: rgba(24,103,194,0.81);
+  background: transparent;
+  border: 1px solid transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.button--large--quiet:disabled,
+.button--large--quiet[disabled] {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+.button--large--quiet:hover {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.button--large--quiet:focus {
+  outline: 0;
+}
+/* topdoc
+  name: Large Call To Action Button
+  class: button--large--cta
+  markup:
+    <button class="button--large--cta" >Button</button>
+*/
+.button--large--cta {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  height: auto;
+  text-decoration: none;
+  padding: 4px 10px;
+  font-size: 17px;
+  line-height: 32px;
+  letter-spacing: 0;
+  color: #fff;
+  vertical-align: middle;
+  background-color: rgba(24,103,194,0.81);
+  border: 0px solid currentColor;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+  border: none;
+  background-color: #25a6d9;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 36px;
+  padding: 4px 12px;
+  width: 100%;
+  text-align: center;
+  display: block;
+}
+.button--large--cta:hover {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.button--large--cta:focus {
+  outline: 0;
+}
+.button--large--cta:active {
+  color: #fff;
+  background-color: #25a6d9;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+  opacity: 0.2;
+}
+.button--large--cta:disabled,
+.button--large--cta[disabled] {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+/* topdoc
+  name: Button Bar
+  class: button-bar
+  modifiers:
+    :disabled: Disabled state
+  markup:
+    <div class="button-bar" style="width:280px;margin:0 auto;">
+      <div class="button-bar__item">
+        <button class="button-bar__button">One</button>
+      </div>
+      <div class="button-bar__item">
+        <button class="button-bar__button">Two</button>
+      </div>
+      <div class="button-bar__item">
+        <button class="button-bar__button">Three</button>
+      </div>
+    </div>
+*/
+.button-bar {
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  display: table;
+  table-layout: fixed;
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  margin: 0;
+  border: none;
+}
+.button-bar__item {
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  display: table-cell;
+  width: auto;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  position: relative;
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+.button-bar__item > input {
+  position: absolute;
+  overflow: hidden;
+  right: 0px;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  padding: 0;
+  border: 0;
+  opacity: 0.001;
+  z-index: 1;
+  vertical-align: top;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.button-bar__item:first-child > .button-bar__button {
+  border-left: 1px solid rgba(18,114,224,0.77);
+  border-right: 1px solid rgba(18,114,224,0.77);
+  -webkit-border-top-left-radius: 4px;
+  border-top-left-radius: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.button-bar__item:last-child > .button-bar__button {
+  border-right: 1px solid rgba(18,114,224,0.77);
+  -webkit-border-top-right-radius: 4px;
+  border-top-right-radius: 4px;
+  -webkit-border-bottom-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.button-bar__button {
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  -webkit-border-radius: inherit;
+  border-radius: inherit;
+  background-color: transparent;
+  color: rgba(18,114,224,0.77);
+  border: 0px solid rgba(18,114,224,0.77);
+  border-top: 1px solid rgba(18,114,224,0.77);
+  border-bottom: 1px solid rgba(18,114,224,0.77);
+  border-right: 1px solid rgba(18,114,224,0.77);
+  font-weight: 400;
+  padding: 0 8px;
+  height: 27px;
+  line-height: 27px;
+  font-size: 13px;
+  width: 100%;
+  -webkit-transition: background-color 0.2s linear, color 0.2s linear;
+  -moz-transition: background-color 0.2s linear, color 0.2s linear;
+  -o-transition: background-color 0.2s linear, color 0.2s linear;
+  transition: background-color 0.2s linear, color 0.2s linear;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.button-bar__button:active,
+:active + .button-bar__button {
+  background-color: rgba(18,114,224,0.2);
+  border: 0px solid rgba(18,114,224,0.77);
+  border-top: 1px solid rgba(18,114,224,0.77);
+  border-bottom: 1px solid rgba(18,114,224,0.77);
+  border-right: 1px solid rgba(18,114,224,0.77);
+  height: 27px;
+  line-height: 27px;
+  font-size: 13px;
+  width: 100%;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.button-bar__item.active > .button-bar__button,
+:checked + .button-bar__button {
+  background-color: rgba(18,114,224,0.77);
+  color: #fff;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.button-bar__button:disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+.button-bar__button:hover {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.button-bar__button:focus {
+  outline: 0;
+}
+/* topdoc
+  name: Segment
+  use: Button Bar
+  modifiers:
+    :disabled: Disabled state
+  markup:
+    <div class="button-bar" style="width:280px;margin:0 auto;">
+      <div class="button-bar__item">
+        <input type="radio" name="segment-a" checked>
+        <button class="button-bar__button">One</button>
+      </div>
+      <div class="button-bar__item">
+        <input type="radio" name="segment-a">
+        <button class="button-bar__button">Two</button>
+      </div>
+      <div class="button-bar__item">
+        <input type="radio" name="segment-a">
+        <button class="button-bar__button">Three</button>
+      </div>
+    </div>
+*/
+/* topdoc
+  name: Icon Tab Bar
+  class: tab-bar
+  use: Tab Bar
+  modifiers:
+    :disabled: Disabled state
+  markup:
+    <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
+    <div class="tab-bar">
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-a" checked="checked">
+        <button class="tab-bar__button">
+          <i class="tab-bar__icon ion-stop"></i>
+          <div class="tab-bar__label">One</div>
+        </button>
+      </label>
+
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-a">
+        <button class="tab-bar__button">
+          <i class="tab-bar__icon ion-record"></i>
+          <div class="tab-bar__label">Two</div>
+        </button>
+      </label>
+
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-a">
+        <button class="tab-bar__button">
+          <i class="tab-bar__icon ion-star"></i>
+          <div class="tab-bar__label">Three</div>
+        </button>
+      </label>
+    </div>
+*/
+/* topdoc
+  name: Tab Bar
+  class: tab-bar
+  modifiers:
+    :disabled: Disabled state
+  markup:
+    <div class="tab-bar">
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-c" checked="checked">
+        <button class="tab-bar__button">
+          <div class="tab-bar__label">One</div>
+        </button>
+      </label>
+
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-c">
+        <button class="tab-bar__button">
+          <div class="tab-bar__label">Two</div>
+        </button>
+      </label>
+
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-c">
+        <button class="tab-bar__button">
+          <div class="tab-bar__label">Three</div>
+        </button>
+      </label>
+    </div>
+*/
+.tab-bar {
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  display: table;
+  table-layout: fixed;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
+  height: 49px;
+  background-color: #222;
+  border-top: 1px solid rgba(0,0,0,0);
+  width: 100%;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .tab-bar {
+    border-top: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-image: -webkit-linear-gradient(270deg, rgba(0,0,0,0), rgba(0,0,0,0) 50%, transparent 50%);
+    background-image: -moz-linear-gradient(270deg, rgba(0,0,0,0), rgba(0,0,0,0) 50%, transparent 50%);
+    background-image: -o-linear-gradient(270deg, rgba(0,0,0,0), rgba(0,0,0,0) 50%, transparent 50%);
+    background-image: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0) 50%, transparent 50%);
+  }
+}
+.tab-bar__item {
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  position: relative;
+  overflow: hidden;
+  display: table-cell;
+  width: auto;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+.tab-bar__item > input {
+  position: absolute;
+  overflow: hidden;
+  right: 0px;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  padding: 0;
+  border: 0;
+  opacity: 0.001;
+  z-index: 1;
+  vertical-align: top;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.tab-bar__button {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-decoration: none;
+  padding: 0;
+  height: 49px;
+  letter-spacing: 0;
+  color: #999;
+  text-shadow: 0 1px none;
+  vertical-align: top;
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-top: none;
+  width: 100%;
+  font-weight: 400;
+  line-height: 49px;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .tab-bar__button {
+    border-top: none;
+  }
+}
+.tab-bar__icon {
+  font-size: 24px;
+  padding: 0;
+  margin: 0;
+  line-height: 32px;
+  display: block;
+  height: 32px;
+}
+.tab-bar__label {
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+}
+.tab-bar__icon + .tab-bar__label {
+  font-size: 10px;
+  line-height: 1;
+  margin: 0;
+  font-weight: 400;
+}
+.tab-bar__label:first-child {
+  font-size: 16px;
+  line-height: 49px;
+  margin: 0;
+  padding: 0;
+}
+.tab-bar__button {
+  color: #999;
+}
+:checked + .tab-bar__button {
+  color: #7abfff;
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-top: none;
+}
+:checked + .tab-bar__button > .tab-bar__icon {
+  color: #7abfff;
+}
+.tab-bar__button:disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+.tab-bar__button:focus {
+  z-index: 1;
+  border-top: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  outline: 0;
+}
+.tab-bar__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 49px;
+  z-index: 0;
+}
+/* topdoc
+  name: Icon Only Tab Bar
+  use: Tab Bar
+  class: tab-bar
+  hint: .tab-bar .fa
+  modifiers:
+    :disabled: Disabled state
+  markup:
+    <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
+    <div class="tab-bar">
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-b" checked="checked">
+        <button class="tab-bar__button">
+          <i class="tab-bar__icon ion-stop"></i>
+        </button>
+      </label>
+
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-b">
+        <button class="tab-bar__button">
+          <i class="tab-bar__icon ion-record"></i>
+        </button>
+      </label>
+
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-b">
+        <button class="tab-bar__button">
+          <i class="tab-bar__icon ion-star"></i>
+        </button>
+      </label>
+
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-b">
+        <button class="tab-bar__button">
+          <i class="tab-bar__icon ion-ios7-cloud-outline"></i>
+        </button>
+      </label>
+
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-b">
+        <button class="tab-bar__button">
+          <i class="tab-bar__icon ion-ios7-pie"></i>
+        </button>
+      </label>
+    </div>
+*/
+/* topdoc
+  name: Top Tab Bar
+  class: tab-bar--top
+  use: Tab Bar
+  markup:
+    <div class="tab-bar tab-bar--top">
+      <label class="tab-bar__item">
+        <input type="radio" name="top-tab-bar-a" checked="checked">
+        <button class="tab-bar__button">
+          <i class="tab-bar__icon ion-stop"></i>
+        </button>
+      </label>
+
+      <label class="tab-bar__item">
+        <input type="radio" name="top-tab-bar-a">
+        <button class="tab-bar__button">
+          <i class="tab-bar__icon ion-record"></i>
+        </button>
+      </label>
+
+      <label class="tab-bar__item">
+        <input type="radio" name="top-tab-bar-a">
+        <button class="tab-bar__button">
+          <i class="tab-bar__icon ion-star"></i>
+        </button>
+      </label>
+    </div>
+*/
+.tab-bar--top {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: auto;
+  border-top: none;
+  border-bottom: 1px solid rgba(0,0,0,0);
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .tab-bar--top {
+    border-bottom: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-image: -webkit-linear-gradient(90deg, rgba(0,0,0,0), rgba(0,0,0,0) 50%, transparent 50%);
+    background-image: -moz-linear-gradient(90deg, rgba(0,0,0,0), rgba(0,0,0,0) 50%, transparent 50%);
+    background-image: -o-linear-gradient(90deg, rgba(0,0,0,0), rgba(0,0,0,0) 50%, transparent 50%);
+    background-image: linear-gradient(0deg, rgba(0,0,0,0), rgba(0,0,0,0) 50%, transparent 50%);
+  }
+}
+.tab-bar--top__content {
+  top: 49px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+}
+/* topdoc
+  name: Bordered Top Tab Bar
+  class: tab-bar--top-border
+  use: Top Tab Bar
+  markup:
+    <div class="tab-bar tab-bar--top tab-bar--top-border">
+      <label class="tab-bar__item tab-bar--top-border__item">
+        <input type="radio" name="top-tab-bar-b" checked="checked">
+        <button class="tab-bar__button tab-bar--top-border__button">
+          Home
+        </button>
+      </label>
+
+      <label class="tab-bar__item tab-bar--top-border__item">
+        <input type="radio" name="top-tab-bar-b">
+        <button class="tab-bar__button tab-bar--top-border__button">
+          Comments
+        </button>
+      </label>
+
+      <label class="tab-bar__item tab-bar--top-border__item">
+        <input type="radio" name="top-tab-bar-b">
+        <button class="tab-bar__button tab-bar--top-border__button">
+          Activity
+        </button>
+      </label>
+    </div>
+*/
+.tab-bar--top-border__button {
+  background-color: transparent;
+  border-bottom: 4px solid transparent;
+}
+:checked + .tab-bar--top-border__button {
+  background-color: transparent;
+  border-bottom: 4px solid #7abfff;
+}
+/* topdoc
+  name: Notification
+  class: notification
+  markup:
+    <span class="notification">1</span>
+    <span class="notification">10</span>
+    <span class="notification">999</span>
+*/
+.notification {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-decoration: none;
+  padding: 0 4px;
+  width: auto;
+  height: 19px;
+  -webkit-border-radius: 19px;
+  border-radius: 19px;
+  background-color: #dc5236;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  min-width: 19px;
+  line-height: 19px;
+  font-weight: 400;
+}
+/* topdoc
+  name: Toolbar Button
+  class: toolbar-button
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <!-- Prerequisite=This example use font-awesome(http://fortawesome.github.io/Font-Awesome/) to display icons. -->
+    <button class="toolbar-button">
+      <i class="fa fa-bell" style="font-size:17px"></i> Label
+    </button>
+
+    <button class="toolbar-button toolbar-button--outline">
+      <i class="fa fa-bell" style="font-size:17px"></i> Label
+    </button>
+*/
+.toolbar-button,
+.toolbar-button--outline,
+.toolbar-button--quiet {
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  padding: 4px 10px;
+  letter-spacing: 0;
+  color: rgba(38,100,171,0.81);
+  text-shadow: 0 1px none;
+  vertical-align: baseline;
+  background-color: rgba(0,0,0,0);
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  font-weight: 400;
+  font-size: 17px;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+  vertical-align: middle;
+}
+.toolbar-button:active,
+.toolbar-button--outline:active,
+.toolbar-button--quiet:active {
+  background-color: rgba(0,0,0,0);
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+  opacity: 0.2;
+}
+.toolbar-button:disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+.toolbar-button:focus,
+.toolbar-button--outline:focus,
+.toolbar-button--quiet:focus {
+  outline: 0;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.toolbar-button:hover,
+.toolbar-button--outline:hover,
+.toolbar-button--quiet:hover {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.toolbar-button--outline {
+  border: 1px solid rgba(38,100,171,0.81);
+  margin: auto 8px;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+/* topdoc
+  name: Checkbox
+  class: checkbox
+  modifiers:
+    :focus: Focus state
+    :disabled: Disabled state
+  markup:
+    <label class="checkbox">
+      <input type="checkbox">
+      <div class="checkbox__checkmark"></div>
+      OFF
+    </label>
+
+    <label class="checkbox">
+      <input type="checkbox" checked="checked">
+      <div class="checkbox__checkmark"></div>
+      ON
+    </label>
+
+    <label class="checkbox">
+      <input type="checkbox" disabled>
+      <div class="checkbox__checkmark"></div>
+      Disabled
+    </label>
+*/
+.checkbox {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 24px;
+  margin: 10px 0;
+}
+.checkbox > .checkbox__checkmark {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  position: relative;
+  overflow: hidden;
+  height: 24px;
+  pointer-events: none;
+}
+.checkbox > input[type="checkbox"] {
+  position: absolute;
+  overflow: hidden;
+  right: 0px;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  padding: 0;
+  border: 0;
+  opacity: 0.001;
+  z-index: 1;
+  vertical-align: top;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 0;
+  width: 0;
+}
+.checkbox > input[type="checkbox"]:checked {
+  background: rgba(24,103,194,0.81);
+}
+.checkbox > input[type="checkbox"]:checked + .checkbox__checkmark:before {
+  background: rgba(24,103,194,0.81);
+  border: 1px solid rgba(24,103,194,0.81);
+}
+.checkbox > input[type="checkbox"]:checked + .checkbox__checkmark:after {
+  opacity: 1;
+}
+.checkbox > .checkbox__checkmark:before {
+  content: '';
+  position: absolute;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: 1px solid rgba(24,103,194,0.81);
+  -webkit-border-radius: 16px;
+  border-radius: 16px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  left: 0;
+}
+.checkbox > .checkbox__checkmark {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  position: relative;
+  overflow: hidden;
+  width: 24px;
+  height: 24px;
+}
+.checkbox > .checkbox__checkmark:after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 5px;
+  width: 12px;
+  height: 6px;
+  background: transparent;
+  border: 3px solid #fff;
+  border-width: 2px;
+  border-top: none;
+  border-right: none;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  opacity: 0;
+}
+.checkbox > input[type="checkbox"]:focus + .checkbox__checkmark:before {
+  -webkit-box-shadow: var-box-shadow--cta;
+  box-shadow: var-box-shadow--cta;
+}
+.checkbox > input[type="checkbox"]:disabled + .checkbox__checkmark {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+.checkbox > input[type="checkbox"]:disabled:active + .checkbox__checkmark:before {
+  background: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+/* topdoc
+  name: No border Checkbox
+  class: checkbox--noborder
+  markup:
+    <label class="checkbox--noborder">
+      <input type="checkbox">
+      <div class="checkbox__checkmark"></div>
+      OFF
+    </label>
+
+    <label class="checkbox--noborder">
+      <input type="checkbox" checked="checked">
+      <div class="checkbox__checkmark"></div>
+      ON
+    </label>
+
+    <label class="checkbox--noborder">
+      <input type="checkbox" disabled checked="checked">
+      <div class="checkbox__checkmark"></div>
+      Disabled
+    </label>
+ */
+.checkbox--noborder > input[type="checkbox"] {
+  position: absolute;
+  overflow: hidden;
+  right: 0px;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  padding: 0;
+  border: 0;
+  opacity: 0.001;
+  z-index: 1;
+  vertical-align: top;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.checkbox--noborder {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 24px;
+  margin: 10px 0;
+  position: relative;
+  overflow: hidden;
+}
+.checkbox--noborder > .checkbox__checkmark {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  height: 24px;
+  background: transparent;
+}
+.checkbox--noborder > input[type="checkbox"] {
+  position: absolute;
+  overflow: hidden;
+  right: 0px;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  padding: 0;
+  border: 0;
+  opacity: 0.001;
+  z-index: 1;
+  vertical-align: top;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 0;
+  width: 0;
+}
+.checkbox--noborder > input[type="checkbox"]:checked + .checkbox__checkmark:before {
+  background: transparent;
+  border: none;
+}
+.checkbox--noborder > input[type="checkbox"]:checked + .checkbox__checkmark:after {
+  opacity: 1;
+}
+.checkbox--noborder > .checkbox__checkmark:before {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  -webkit-border-radius: 16px;
+  border-radius: 16px;
+  left: 0;
+}
+.checkbox--noborder > .checkbox__checkmark {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  width: 24px;
+  height: 24px;
+  border: none;
+}
+.checkbox--noborder > .checkbox__checkmark:after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 5px;
+  opacity: 0;
+  width: 12px;
+  height: 6px;
+  background: transparent;
+  border: 3px solid rgba(24,103,194,0.81);
+  border-width: 2px;
+  border-top: none;
+  border-right: none;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+.checkbox--noborder > input[type="checkbox"]:focus + .checkbox__checkmark:before {
+  border: none;
+  -webkit-box-shadow: var-box-shadow--cta;
+  box-shadow: var-box-shadow--cta;
+}
+.checkbox--noborder > input[type="checkbox"]:disabled + .checkbox__checkmark {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+.checkbox--noborder > input[type="checkbox"]:disabled:active + .checkbox--noborder__checkmark:before {
+  background: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: none;
+}
+/* topdoc
+  name: Radio Button
+  class: radio-button
+  modifiers:
+  markup:
+    <label class="radio-button">
+      <input type="radio" name="r" checked="checked">
+      <div class="radio-button__checkmark"></div>
+      Label
+    </label>
+
+    <label class="radio-button">
+      <input type="radio" name="r">
+      <div class="radio-button__checkmark"></div>
+      Label
+    </label>
+
+    <label class="radio-button">
+      <input type="radio" name="r">
+      <div class="radio-button__checkmark"></div>
+      Label
+    </label>
+*/
+.radio-button > input[type="radio"] {
+  position: absolute;
+  overflow: hidden;
+  right: 0px;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  padding: 0;
+  border: 0;
+  opacity: 0.001;
+  z-index: 1;
+  vertical-align: top;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 0px;
+  width: 0px;
+}
+.radio-button > input[type="radio"]:active,
+.radio-button > input[type="radio"]:focus {
+  outline: 0;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+.radio-button > input[type="radio"]:checked + .radio-button__checkmark:after {
+  opacity: 1;
+}
+.radio-button > input[type="radio"]:checked + .radio-button__checkmark:before {
+  background: transparent;
+  border: none;
+}
+.radio-button {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+  line-height: 24px;
+  text-align: left;
+  margin: 10px 0;
+}
+.radio-button__checkmark:before {
+  content: '';
+  position: absolute;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  -webkit-border-radius: var-border-radius--checkbox;
+  border-radius: var-border-radius--checkbox;
+  left: 0;
+}
+.radio-button__checkmark {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  position: relative;
+  overflow: hidden;
+  position: relative;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  pointer-events: none;
+}
+.radio-button > input[type="radio"]:checked + .radio-button__checkmark {
+  background: rgba(0,0,0,0);
+}
+.radio-button__checkmark:after {
+  content: '';
+  position: absolute;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  top: 6px;
+  left: 5px;
+  opacity: 0;
+  width: 12px;
+  height: 6px;
+  background: transparent;
+  border: 3px solid rgba(24,103,194,0.81);
+  border-width: 2px;
+  border-top: none;
+  border-right: none;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+.radio-button > input[type="radio"]:disabled + .radio-button__checkmark {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+/* topdoc
+  name: List
+  class: list
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        <span class="list__item__line-height">Item</span>
+      </li>
+      <li class="list__item">
+        <span class="list__item__line-height">Item</span>
+      </li>
+    </ul>
+*/
+.list--noborder {
+  border-top: none;
+  border-bottom: none;
+}
+.list__header {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+  display: block;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0 0 0 10px;
+  font-size: 15px;
+  font-weight: 500;
+  background-color: #eee;
+  color: #1f1f21;
+  text-shadow: none;
+  border-top: none;
+  border-bottom: none;
+  min-height: 24px;
+  line-height: 24px;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .list__header:first-child {
+    border-top: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-image: -webkit-linear-gradient(270deg, rgba(0,0,0,0), rgba(0,0,0,0) 50%, transparent 50%);
+    background-image: -moz-linear-gradient(270deg, rgba(0,0,0,0), rgba(0,0,0,0) 50%, transparent 50%);
+    background-image: -o-linear-gradient(270deg, rgba(0,0,0,0), rgba(0,0,0,0) 50%, transparent 50%);
+    background-image: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0) 50%, transparent 50%);
+  }
+}
+.list {
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  text-align: left;
+  overflow: auto;
+  display: block;
+  -webkit-overflow-scrolling: touch;
+  padding: 0;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .list {
+    border: none;
+    -webkit-background-size: 100% 1px, 100% 1px;
+    background-size: 100% 1px, 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom, top;
+    background-image: -webkit-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%), -webkit-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -moz-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%), -moz-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -o-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%), -o-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%), linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%);
+  }
+}
+.list__item {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  list-style: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  display: block;
+  padding: 0 10px 0 10px;
+  margin: 0 0 0 0;
+  border-top: none;
+  border-bottom: 1px solid #ddd;
+  color: #1f1f21;
+  background-color: transparent;
+  min-height: 44px;
+  line-height: 44px;
+}
+.list__item--no-padding {
+  padding: 0;
+}
+.list__item__line-height,
+.list__item--line-height {
+  line-height: 44px;
+}
+.list__item_active:active {
+  background-color: #d9d9d9;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.list__item:first-child {
+  border-top: none;
+  border-bottom: 1px solid #ddd;
+}
+.list__item:last-child {
+  border-bottom: none;
+}
+.list__item:first-child:last-child {
+  border-top: none;
+  border-bottom: none;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .list__item:not(:last-child) {
+    border-bottom: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-image: -webkit-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -moz-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -o-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
+  }
+}
+/* topdoc
+  name: Noborder List
+  class: list--noborder
+  use: List
+  markup:
+    <ul class="list list--noborder">
+      <li class="list__item">
+        <span class="list__item__line-height">Item</span>
+      </li>
+      <li class="list__item">
+        <span class="list__item__line-height">Item</span>
+      </li>
+    </ul>
+ */
+.list--noborder {
+  background-color: #fff;
+  border-top: none;
+  border-bottom: none;
+  background-image: none;
+}
+/* topdoc
+  name: Category List Header
+  class: list__header
+  use: List
+  markup:
+    <ul class="list">
+      <li class="list__header">
+        Header
+      </li>
+      <li class="list__item">
+        Item
+      </li>
+      <li class="list__header">
+        Header
+      </li>
+      <li class="list__item">
+        Item
+      </li>
+    </ul>
+ */
+/* topdoc
+  name: Tappable List
+  class: list__item--tappable
+  use: List
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--tappable">
+        Tappable Item
+      </li>
+    </ul>
+ */
+.list__item--tappable {
+  -webkit-transition: background-color 0.2s linear;
+  -moz-transition: background-color 0.2s linear;
+  -o-transition: background-color 0.2s linear;
+  transition: background-color 0.2s linear;
+}
+.list__item--tappable:active {
+  background-color: #d9d9d9;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.list__item--tappable:hover {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+/* topdoc
+  name: Switch in List Item
+  class: switch--list-item
+  use: Switch, List
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        Label
+        <label class="switch switch--list-item">
+          <input type="checkbox" class="switch__input" checked>
+          <div class="switch__toggle"></div>
+        </label>
+      </li>
+      <li class="list__item">
+        Label
+        <label class="switch switch--list-item">
+          <input type="checkbox" class="switch__input">
+          <div class="switch__toggle"></div>
+        </label>
+      </li>
+    </ul>
+*/
+.switch--list-item {
+  float: right;
+  margin-top: 6px;
+  margin-right: 10px;
+}
+/* topdoc
+  name: List Item with Chevron
+  class: list__item--chevron
+  use: List
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--chevron">
+        Tappable Item
+      </li>
+      <li class="list__item list__item--chevron">
+        Tappable Item
+      </li>
+    </ul>
+ */
+.list__item--chevron {
+  -webkit-transition: background-color 0.2s linear;
+  -moz-transition: background-color 0.2s linear;
+  -o-transition: background-color 0.2s linear;
+  transition: background-color 0.2s linear;
+  overflow: hidden;
+}
+.list__item--chevron:active {
+  background-color: #d9d9d9;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.list__item--chevron:hover {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.list__item--chevron:before {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  color: #ddd;
+  line-height: 28px;
+  height: 28px;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  font-size: 28px;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  content: "\f105";
+}
+/* topdoc
+  name: Inset List
+  use: List, List Item with Chevron
+  markup:
+    <ul class="list list--inset">
+      <li class="list__item list--inset__item list__item--chevron">
+        List Item with Chevron
+      </li>
+      <li class="list__item list--inset__item list__item--chevron">
+        List Item with Chevron
+      </li>
+    </ul>
+ */
+.list--inset {
+  margin-left: 8px;
+  margin-right: 8px;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  background-image: none;
+}
+.list--inset__item:not(:last-child) {
+  border-bottom: 1px solid #ddd;
+  background-image: none;
+}
+/* topdoc
+  name: Radio Button in List Item
+  modifiers:
+  use: Radio Button, List, Tappable List
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--tappable">
+        <label class="radio-button radio-button--list-item">
+          <input type="radio" name="b" checked="checked">
+          <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
+          Radio Button
+        </label>
+      </li>
+      <li class="list__item list__item--tappable">
+        <label class="radio-button radio-button--list-item">
+          <input type="radio" name="b">
+          <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
+          Radio Button
+        </label>
+      </li>
+    </ul>
+*/
+.radio-button--list-item {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  line-height: 44px;
+}
+.radio-button--list-item__checkmark {
+  margin-top: 10px;
+}
+/* topdoc
+  name: Checkbox in List Item
+  use: Checkbox, List, Tappable List
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--tappable">
+        <label class="checkbox checkbox--list-item">
+          <input type="checkbox">
+          <div class="checkbox__checkmark checkbox--list-item__checkmark"></div>
+          Checkbox
+        </label>
+      </li>
+      <li class="list__item list__item--tappable">
+        <label class="checkbox checkbox--list-item">
+          <input type="checkbox" checked>
+          <div class="checkbox__checkmark checkbox--list-item__checkmark"></div>
+          Checkbox
+        </label>
+      </li>
+    </ul>
+*/
+.checkbox--list-item {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  line-height: 44px;
+}
+.checkbox--list-item__checkmark {
+  margin-top: 10px;
+}
+/* topdoc
+  name: No border Checkbox in List Item
+  use: Checkbox in List Item, No border Checkbox
+  class: chckbox--list-item
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--tappable">
+        <label class="checkbox checkbox--noborder checkbox--list-item">
+          <input type="checkbox">
+          <div class="checkbox__checkmark checkbox--noborder checkbox--list-item__checkmark"></div>
+          Checkbox
+        </label>
+      </li>
+      <li class="list__item list__item--tappable">
+        <label class="checkbox checkbox--noborder checkbox--list-item">
+          <input type="checkbox" checked>
+          <div class="checkbox__checkmark checkbox--noborder checkbox--list-item__checkmark"></div>
+          Checkbox
+        </label>
+      </li>
+    </ul>
+*/
+/* topdoc
+  name: Text Input in List Item
+  use: List, Transparent Text Input
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        <input type="text" class="text-input text-input--transparent" style="width:100%; margin-top:4px;" placeholder="name">
+      </li>
+      <li class="list__item">
+        <input type="text" class="text-input text-input--transparent" style="width:100%; margin-top:4px;" placeholder="email">
+      </li>
+    </ul>
+*/
+/* topdoc
+  name: Textarea in List Item
+  use: List, Textarea Transparent
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        <textarea class="textarea textarea--transparent" style="width:100%;height:50px;margin-top:4px;" placeholder="text message"></textarea>
+      </li>
+    </ul>
+*/
+/* topdoc
+  name: Right Label in List Item
+  use: List
+  class: list__right-label
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        <div class="list__right-label">Label</div>
+        Label
+      </li>
+    </ul>
+*/
+.list__right-label {
+  font-size: 14px;
+  padding-right: 8px;
+  float: right;
+}
+/* topdoc
+  name: Search Input
+  class: search-input
+  modifiers:
+    :disabled: Disabled state
+  markup:
+    <input type="search" value="" placeholder="Search" class="search-input">
+*/
+input[type="search"].search-input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  display: none;
+}
+.search-input {
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  vertical-align: top;
+  outline: none;
+  line-height: 1;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  -webkit-appearance: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 31px;
+  font-size: 15px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #1f1f21;
+  padding: 4px 0 0 28px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  background-image: url("data:image/svg+xml;utf8,<svg width='41px' height='40px' viewBox='0 0 41 40' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:sketch='http://www.bohemiancoding.com/sketch/ns'><title>Slice 1</title><description>Created with Sketch (http://www.bohemiancoding.com/sketch)</description><defs></defs><g id='Page 1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'><g id='search' fill='#C6C8C8'><path d='M0.504,16.338 C0.504,25.085 7.635,32.165 16.444,32.165 C25.24,32.165 32.382,25.085 32.382,16.338 C32.382,7.591 25.24,0.5 16.444,0.5 C7.635,0.5 0.504,7.591 0.504,16.338 L0.504,16.338 Z M5.555,16.338 C5.555,10.359 10.423,5.521 16.445,5.521 C22.455,5.521 27.333,10.36 27.333,16.338 C27.333,22.317 22.455,27.156 16.445,27.156 C10.423,27.156 5.555,22.316 5.555,16.338 L5.555,16.338 Z M27.666,30.861 L34.521,38.67 C35.625,39.772 36.338,39.781 37.46,38.67 L39.661,36.489 C40.743,35.408 40.811,34.711 39.661,33.568 L31.765,26.793 L27.666,30.861 L27.666,30.861 Z M27.666,30.861' id='Shape'></path></g></g></svg>");
+  background-position: 8px center;
+  background-repeat: no-repeat;
+  -webkit-background-size: 17px;
+  background-size: 17px;
+  font-weight: 400;
+  display: block;
+  width: 100%;
+}
+.search-input:focus {
+  background-color: #f9f9f9;
+  color: #1f1f21;
+  border: 1px solid #ddd;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.search-input::-webkit-search-cancel-button,
+.search-input::-webkit-search-decoration {
+  margin-right: 0px;
+}
+.search-input::-webkit-input-placeholder,
+.search-input::-moz-placeholder,
+.search-input::-ms-input-placeholder {
+  color: #999;
+}
+.search-input:disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+/* topdoc
+  name: Text Input
+  class: text-input
+  modifiers:
+    :disabled: Disabled state
+    :focus: Focused
+    :invalid: Hover state
+  markup:
+    <input type="text" class="text-input" placeholder="text" value="">
+    <br>
+    <input type="text" class="text-input" placeholder="text" value="" disabled>
+*/
+.text-input {
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  vertical-align: top;
+  outline: none;
+  line-height: 1;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  letter-spacing: 0;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #1f1f21;
+  padding: 4px 8px 0 8px;
+  margin: 0;
+  font-size: 15px;
+  height: 31px;
+  font-weight: 400;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.text-input::-webkit-input-placeholder,
+.text-input::-moz-placeholder,
+.text-input::-ms-input-placeholder {
+  color: #999;
+}
+.text-input:disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+.text-input:disabled::-webkit-input-placeholder,
+.text-input:disabled::-moz-placeholder,
+.text-input:disabled:-ms-input-placeholder {
+  color: #999;
+}
+.text-input:invalid {
+  border: 1px solid var-input-invalid-border-color;
+  color: #1f1f21;
+}
+/* topdoc
+  name: Transparent Text Input
+  class: text-input--transparent
+  markup:
+    <input type="text" class="text-input--transparent" placeholder="text" value="">
+    <br>
+    <input type="text" class="text-input--transparent" placeholder="text" value="" disabled>
+*/
+.text-input--transparent {
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  vertical-align: top;
+  outline: none;
+  line-height: 1;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  letter-spacing: 0;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #1f1f21;
+  padding: 4px 8px 0 8px;
+  margin: 0;
+  font-size: 15px;
+  height: 31px;
+  font-weight: 400;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: none;
+  background-color: transparent;
+  padding-left: 0;
+  padding-right: 0;
+}
+.text-input--transparent:disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+  border: none;
+  background-color: transparent;
+}
+.text-input--transparent:disabled::-webkit-input-placeholder,
+.text-input--transparent:disabled::-moz-placeholder,
+.text-input--transparent:disabled:-ms-input-placeholder {
+  color: #999;
+  border: none;
+  background-color: transparent;
+}
+.text-input--transparent:invalid {
+  border: 1px solid var-input-invalid-border-color;
+  color: #1f1f21;
+  border: none;
+  background-color: transparent;
+}
+/* topdoc
+  name: Underbar Text Input
+  class: text-input--underbar
+  markup:
+    <input type="text" class="text-input--underbar" placeholder="text" value="">
+    <br>
+    <input type="text" class="text-input--underbar" placeholder="text" value="" disabled>
+*/
+.text-input--underbar {
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  vertical-align: top;
+  outline: none;
+  line-height: 1;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  letter-spacing: 0;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #1f1f21;
+  padding: 4px 8px 0 8px;
+  margin: 0;
+  font-size: 15px;
+  height: 31px;
+  font-weight: 400;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid #ddd;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+}
+.text-input--underbar:disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid #ddd;
+}
+.text-input--underbar:disabled::-webkit-input-placeholder,
+.text-input--underbar:disabled::-moz-placeholder,
+.text-input--underbar:disabled:-ms-input-placeholder {
+  color: #999;
+  border: none;
+  background-color: transparent;
+}
+.text-input--underbar:invalid {
+  border: 1px solid var-input-invalid-border-color;
+  color: #1f1f21;
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid var-input-invalid-border-color;
+}
+/* topdoc
+  name: Textarea
+  class: textarea
+  modifiers:
+    :disabled: Disabled state
+  markup:
+    <textarea class="textarea" rows="3" placeholder="Textarea"></textarea>
+  showcase:
+*/
+.textarea {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  vertical-align: top;
+  resize: none;
+  outline: none;
+  padding: 5px 5px 5px 5px;
+  font-size: var-font-size--text-input;
+  font-weight: 400;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  color: #1f1f21;
+  letter-spacing: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-appearance: none;
+}
+.textarea:disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+.textarea::-webkit-input-placeholder,
+.textarea::-moz-placeholder,
+.textarea:-ms-input-placeholder {
+  color: #999;
+}
+/* topdoc
+  name: Textarea Transparent
+  class: textarea--transparent
+  modifiers:
+    :disabled: Disabled state
+  markup:
+    <textarea class="textarea--transparent" rows="3" placeholder="Textarea"></textarea>
+  showcase:
+*/
+.textarea--transparent {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  vertical-align: top;
+  resize: none;
+  outline: none;
+  padding: 5px 5px 5px 5px;
+  padding-left: 0;
+  padding-right: 0;
+  font-size: var-font-size--text-input;
+  font-weight: 400;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  border: none;
+  background-color: transparent;
+  color: #1f1f21;
+  letter-spacing: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-appearance: none;
+}
+.textarea--transparent:disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+.textarea--transpanret::-webkit-input-placeholder,
+.textarea--transparent::-moz-placeholder,
+.textarea--transparent:-ms-input-placeholder {
+  color: #999;
+}
+/* topdoc
+  name: Dialog
+  class: dialog
+  markup:
+    <div class="dialog-mask"></div>
+    <div class="dialog">
+      <div class="page">
+        <p style="text-align:center;margin-top:40px;opacity:0.4;">Content</p>
+      </div>
+    </div>
+*/
+.dialog {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  margin: auto auto;
+  background-color: rgba(255,255,255,0.92);
+  -webkit-box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  overflow: hidden;
+  min-width: 270px;
+  min-height: 100px;
+  text-align: left;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+.dialog-mask {
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.3);
+}
+/* topdoc
+  name: Alert Dialog
+  class: alert-dialog
+  height: 360px
+  markup:
+    <div class="alert-dialog-mask"></div>
+    <div class="alert-dialog">
+      <div class="alert-dialog-title">Alert</div>
+
+      <div class="alert-dialog-content">
+        Hello World!
+      </div>
+
+      <div class="alert-dialog-footer">
+        <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
+      </div>
+    </div>
+*/
+.alert-dialog {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 270px;
+  margin: auto auto;
+  background-color: rgba(255,255,255,0.92);
+  -webkit-box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 16px 0 0 0;
+  max-width: 95%;
+  color: #1f1f21;
+}
+.alert-dialog-title {
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  font-size: 17px;
+  font-weight: 500;
+  padding: 0px 8px 0px 8px;
+  text-align: center;
+  color: #1f1f21;
+}
+.alert-dialog-content {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 4px 12px 8px 12px;
+  font-size: 14px;
+  min-height: 36px;
+  text-align: center;
+  color: #1f1f21;
+}
+.alert-dialog-footer {
+  width: 100%;
+}
+.alert-dialog-button {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-decoration: none;
+  letter-spacing: 0;
+  vertical-align: middle;
+  border: none;
+  border-top: 1px solid #ddd;
+  font-size: 16px;
+  padding: 0 8px;
+  margin: 0;
+  display: block;
+  width: 100%;
+  background-color: transparent;
+  text-align: center;
+  height: 44px;
+  line-height: 44px;
+  outline: none;
+  color: rgba(24,103,194,0.81);
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .alert-dialog-button {
+    border-top: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-image: -webkit-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -moz-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -o-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%);
+  }
+}
+.alert-dialog-button:active {
+  background-color: rgba(0,0,0,0.05);
+}
+.alert-dialog-button--primal {
+  font-weight: 500;
+}
+.alert-dialog-footer--one {
+  white-space: nowrap;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.alert-dialog-button--one {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -moz-box-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  display: block;
+  width: 100%;
+  border-left: 1px solid #ddd;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .alert-dialog-button--one {
+    border-top: none;
+    border-left: none;
+    -webkit-background-size: 100% 1px, 1px 100%;
+    background-size: 100% 1px, 1px 100%;
+    background-repeat: no-repeat;
+    background-position: top, left;
+    background-image: -webkit-linear-gradient(90deg, transparent, transparent 50%, #ddd 50%), -webkit-linear-gradient(0deg, transparent, transparent 50%, #ddd 50%);
+    background-image: -moz-linear-gradient(90deg, transparent, transparent 50%, #ddd 50%), -moz-linear-gradient(0deg, transparent, transparent 50%, #ddd 50%);
+    background-image: -o-linear-gradient(90deg, transparent, transparent 50%, #ddd 50%), -o-linear-gradient(0deg, transparent, transparent 50%, #ddd 50%);
+    background-image: linear-gradient(0deg, transparent, transparent 50%, #ddd 50%), linear-gradient(90deg, transparent, transparent 50%, #ddd 50%);
+  }
+}
+.alert-dialog-button--one:first-child {
+  border-left: none;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .alert-dialog-button--one:first-child {
+    border-top: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top, left;
+    background-image: -webkit-linear-gradient(90deg, transparent, transparent 50%, #ddd 50%);
+    background-image: -moz-linear-gradient(90deg, transparent, transparent 50%, #ddd 50%);
+    background-image: -o-linear-gradient(90deg, transparent, transparent 50%, #ddd 50%);
+    background-image: linear-gradient(0deg, transparent, transparent 50%, #ddd 50%);
+  }
+}
+.alert-dialog-mask {
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.2);
+}
+/* topdoc
+  name: Alert Dialog without Title
+  use: Alert Dialog
+  height: 360px
+  markup:
+    <div class="alert-dialog-mask"></div>
+    <div class="alert-dialog">
+      <div class="alert-dialog-content">
+        Hello World!
+      </div>
+
+      <div class="alert-dialog-footer">
+        <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
+      </div>
+    </div>
+*/
+/* topdoc
+  name: Alert Dialog with Multiple Buttons
+  use: Alert Dialog
+  height: 360px
+  markup:
+    <div class="alert-dialog-mask"></div>
+    <div class="alert-dialog">
+      <div class="alert-dialog-content">
+        Hello World!
+      </div>
+
+      <div class="alert-dialog-footer">
+        <button class="alert-dialog-button">Cancel</button>
+        <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
+      </div>
+    </div>
+*/
+/* topdoc
+  name: Alert Dialog with Multiple Buttons 2
+  use: Alert Dialog
+  height: 360px
+  markup:
+    <div class="alert-dialog-mask"></div>
+    <div class="alert-dialog">
+      <div class="alert-dialog-title">Alert</div>
+
+      <div class="alert-dialog-content">
+        Hello World!
+      </div>
+
+      <div class="alert-dialog-footer alert-dialog-footer--one">
+        <button class="alert-dialog-button alert-dialog-button--one">Left</button>
+        <button class="alert-dialog-button alert-dialog-button--primal alert-dialog-button--one">Center</button>
+        <button class="alert-dialog-button alert-dialog-button--one">Right</button>
+      </div>
+    </div>
+*/
+/* topdoc
+  name: Android-like Alert Dialog
+  use: Alert Dialog
+  height: 360px
+  markup:
+    <div class="alert-dialog-mask"></div>
+
+    <div class="alert-dialog alert-dialog--android">
+      <div class="alert-dialog-title alert-dialog-title--android">
+        Alert
+      </div>
+
+      <div class="alert-dialog-content alert-dialog-content--android">
+        Hello World!
+      </div>
+
+      <div class="alert-dialog-footer alert-dialog-footer--one">
+        <button class="alert-dialog-button alert-dialog-button--one">Cancel</button>
+        <button class="alert-dialog-button alert-dialog-button--primal alert-dialog-button--one">Ok</button>
+      </div>
+    </div>
+*/
+.alert-dialog--android {
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  padding: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.alert-dialog-title--android {
+  border-bottom: 1px solid #ddd;
+  height: 52px;
+  line-height: 52px;
+  padding: 0 12px;
+  margin-bottom: 8px;
+  text-align: left;
+}
+.alert-dialog-content--android {
+  text-align: left;
+  padding: 8px 12px;
+}
+/* topdoc
+  name: Popover
+  class: popover
+  markup:
+    <div class="popover-mask"></div>
+    <div class="popover popover--up" style="bottom:20px;left:50px;">
+      <div class="popover__bottom-arrow"></div>
+      <div class="popover__content">
+        <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+      </div>
+    </div>
+*/
+.popover-mask {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.1);
+}
+.popover {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  position: absolute;
+  width: 220px;
+  min-height: 100px;
+}
+.popover__content {
+  background-color: #fff;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 2px 16px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.1);
+  color: #1f1f21;
+  overflow: hidden;
+  min-height: 100px;
+}
+.popover__content > * {
+  overflow: hidden;
+}
+.popover__bottom-arrow {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  -webkit-transform-origin: 50% 50% 0;
+  -moz-transform-origin: 50% 50% 0;
+  -ms-transform-origin: 50% 50% 0;
+  -o-transform-origin: 50% 50% 0;
+  transform-origin: 50% 50% 0;
+  background-color: transparent;
+  background-image: -webkit-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  background-image: -moz-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  background-image: -o-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  background-image: linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  -webkit-border-radius: 0 0 0 4px;
+  border-radius: 0 0 0 4px;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  bottom: 0;
+  left: 50%;
+  margin-left: -9px;
+  margin-bottom: -9px;
+}
+.popover__top-arrow {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  -webkit-transform-origin: 50% 50% 0;
+  -moz-transform-origin: 50% 50% 0;
+  -ms-transform-origin: 50% 50% 0;
+  -o-transform-origin: 50% 50% 0;
+  transform-origin: 50% 50% 0;
+  background-color: transparent;
+  background-image: -webkit-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  background-image: -moz-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  background-image: -o-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  background-image: linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  -webkit-border-radius: 0 0 0 4px;
+  border-radius: 0 0 0 4px;
+  -webkit-transform: rotate(135deg);
+  -moz-transform: rotate(135deg);
+  -ms-transform: rotate(135deg);
+  -o-transform: rotate(135deg);
+  transform: rotate(135deg);
+  top: 0;
+  left: 50%;
+  margin-left: -9px;
+  margin-top: -9px;
+}
+.popover__left-arrow {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  -webkit-transform-origin: 50% 50% 0;
+  -moz-transform-origin: 50% 50% 0;
+  -ms-transform-origin: 50% 50% 0;
+  -o-transform-origin: 50% 50% 0;
+  transform-origin: 50% 50% 0;
+  background-color: transparent;
+  background-image: -webkit-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  background-image: -moz-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  background-image: -o-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  background-image: linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  -webkit-border-radius: 0 0 0 4px;
+  border-radius: 0 0 0 4px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  top: 50%;
+  left: 0;
+  margin-left: -9px;
+  margin-top: -9px;
+}
+.popover__right-arrow {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  -webkit-transform-origin: 50% 50% 0;
+  -moz-transform-origin: 50% 50% 0;
+  -ms-transform-origin: 50% 50% 0;
+  -o-transform-origin: 50% 50% 0;
+  transform-origin: 50% 50% 0;
+  background-color: transparent;
+  background-image: -webkit-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  background-image: -moz-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  background-image: -o-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  background-image: linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  -webkit-border-radius: 0 0 0 4px;
+  border-radius: 0 0 0 4px;
+  -webkit-transform: rotate(225deg);
+  -moz-transform: rotate(225deg);
+  -ms-transform: rotate(225deg);
+  -o-transform: rotate(225deg);
+  transform: rotate(225deg);
+  top: 50%;
+  right: 0;
+  margin-right: -9px;
+  margin-top: -9px;
+}
+/* topdoc
+  name: Popover(down)
+  use: Popover
+  markup:
+    <div class="popover-mask"></div>
+    <div class="popover popover--down" style="top:20px;left:50px;">
+      <div class="popover__top-arrow"></div>
+      <div class="popover__content">
+        <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+      </div>
+    </div>
+*/
+/* topdoc
+  name: Popover(left)
+  use: Popover
+  markup:
+    <div class="popover-mask"></div>
+    <div class="popover popover--left" style="top:20px;right:20px;">
+      <div class="popover__right-arrow"></div>
+      <div class="popover__content">
+        <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+      </div>
+    </div>
+*/
+/* topdoc
+  name: Popover(right)
+  use: Popover
+  markup:
+    <div class="popover-mask"></div>
+    <div class="popover popover--right" style="top:20px;left:20px;">
+      <div class="popover__left-arrow"></div>
+      <div class="popover__content">
+        <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+      </div>
+    </div>
+*/
+/* topdoc
+  name: Android-like Popover
+  use: Popover
+  markup:
+    <div class="popover-mask"></div>
+    <div class="popover popover--up popover" style="top:10px;right:10px;">
+      <div class="popover__content popover__content--android">
+        <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+      </div>
+    </div>
+*/
+.popover__content--android {
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+}
+/* topdoc
+  name: Modal
+  class: modal
+  markup:
+    <div class="modal">
+      <div class="modal__content">
+        Message Text
+      </div>
+    </div>
+*/
+.modal {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  white-space: nowrap;
+  overflow: hidden;
+  word-spacing: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  overflow: hidden;
+  background-color: rgba(0,0,0,0.7);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: table;
+  z-index: 2147483647;
+}
+.modal__content {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  white-space: nowrap;
+  overflow: hidden;
+  word-spacing: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  color: #fff;
+  white-space: normal;
+}

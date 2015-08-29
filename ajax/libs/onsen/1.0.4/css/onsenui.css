@@ -1,0 +1,1456 @@
+/*! onsenui - v1.0.4 - 2014-04-04 */
+
+/*
+Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+@import url("font_awesome/css/font-awesome.min.css");
+
+[ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+[data-ng-cloak] {
+  display: none !important;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  margin: 0;
+  padding: 0;
+}
+
+.align-center {
+  align: center;
+}
+
+.middle {
+  vertical-align: middle;
+}
+
+.no-active:active {
+  background-color: transparent !important;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.max {
+  width: 100%;
+  height: 100%;
+}
+
+.block {
+  display: block;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+input {
+  -webkit-user-select: initial;
+  -moz-user-select: initial;
+  -ms-user-select: initial;
+  user-select: initial;
+}
+
+textarea {
+  -webkit-user-select: initial;
+  -moz-user-select: initial;
+  -ms-user-select: initial;
+  user-select: initial;
+}
+
+select {
+  -webkit-user-select: initial;
+  -moz-user-select: initial;
+  -ms-user-select: initial;
+  user-select: initial;
+}
+
+/*
+Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+/* MODAL */
+
+ons-screen {
+  display: block;
+  width: 100%;
+  height: 100%;
+  -webkit-perspective: 10px;
+  -moz-perspective: 10px;
+  -ms-perspective: 10px;
+  -o-perspective: 10px;
+  perspective: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.screen-page {
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transform-origin: 100% 100%;
+  -moz-transform-origin: 100% 100%;
+  -ms-transform-origin: 100% 100%;
+  -o-transform-origin: 100% 100%;
+  transform-origin: 100% 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.screen-page__container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.onsen_screen-black-mask {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: black;
+}
+
+.onsen_screen-black-mask.hide {
+  opacity: 0;
+}
+
+.screen-page.screen-center {
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-box-shadow: 0 -10px 5px -5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 -10px 5px -5px rgba(0, 0, 0, 0.1);
+}
+
+.screen-page.unmodal {
+  -webkit-transform: translate3d(0, 100%, 0) !important;
+  -moz-transform: translate3d(0, 100%, 0) !important;
+  -ms-transform: translate3d(0, 100%, 0) !important;
+  -o-transform: translate3d(0, 100%, 0) !important;
+  transform: translate3d(0, 100%, 0) !important;
+  -webkit-box-shadow: 0 -10px 5px -5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 -10px 5px -5px rgba(0, 0, 0, 0.2);
+}
+
+.screen-page.transition > .screen-page__container {
+  -webkit-transition-duration: 400ms;
+  -moz-transition-duration: 400ms;
+  -o-transition-duration: 400ms;
+  transition-duration: 400ms;
+  -webkit-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  -moz-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  -o-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+}
+
+.screen-page.unmodal > .screen-page__container {
+  opacity: 1;
+}
+
+.screen-page.transition {
+  -webkit-transition-duration: 400ms;
+  -moz-transition-duration: 400ms;
+  -o-transition-duration: 400ms;
+  transition-duration: 400ms;
+  -webkit-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  -moz-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  -o-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+}
+
+.screen-page.modal-behind {
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transform: translate3d(0, -10%, 0);
+  -moz-transform: translate3d(0, -10%, 0);
+  -ms-transform: translate3d(0, -10%, 0);
+  -o-transform: translate3d(0, -10%, 0);
+  transform: translate3d(0, -10%, 0);
+}
+
+.screen-page.modal-behind > .screen-page__container {
+  opacity: 0.9;
+}
+
+/*
+Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+.navigator-toolbar__content {
+  width: 100%;
+  height: 100%;
+}
+
+.onsen_navigator-pager {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.onsen_navigator-black-mask {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: black;
+}
+
+.onsen_navigator-pager.navigate_left {
+  -webkit-transform: translate3d(-25%, 0, 0);
+  -moz-transform: translate3d(-25%, 0, 0);
+  -ms-transform: translate3d(-25%, 0, 0);
+  -o-transform: translate3d(-25%, 0, 0);
+  transform: translate3d(-25%, 0, 0);
+  /*box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);*/
+}
+
+.onsen_navigator-pager.navigate_left .navigator-page {
+  opacity: 0.9;
+}
+
+.onsen_navigator-pager.navigator_center {
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  /*box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.02);*/
+}
+
+.onsen_navigator-pager.navigator_center .navigator-page {
+  opacity: 1;
+}
+
+.onsen_navigator-pager.navigate_right {
+  -webkit-transform: translate3d(100%, 0, 0);
+  -moz-transform: translate3d(100%, 0, 0);
+  -ms-transform: translate3d(100%, 0, 0);
+  -o-transform: translate3d(100%, 0, 0);
+  transform: translate3d(100%, 0, 0);
+  /*box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);*/
+}
+
+.onsen_navigator-pager.transition {
+  -webkit-transition-duration: 400ms;
+  -moz-transition-duration: 400ms;
+  -o-transition-duration: 400ms;
+  transition-duration: 400ms;
+  -webkit-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  -moz-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  -o-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+}
+
+.onsen_navigator-pager .navigator-page {
+  -webkit-transition-duration: 400ms;
+  -moz-transition-duration: 400ms;
+  -o-transition-duration: 400ms;
+  transition-duration: 400ms;
+  -webkit-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  -moz-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  -o-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+}
+
+.onsen_navigator-title {
+  width: 44%;
+  left: 28%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.onsen_navigator-title.animate-right {
+  -webkit-transform: translateX(100%);
+  -moz-transform: translateX(100%);
+  -ms-transform: translateX(100%);
+  -o-transform: translateX(100%);
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.onsen_navigator-title.animate-center {
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+  -ms-transform: translateX(0);
+  -o-transform: translateX(0);
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.onsen_navigator-title.animate-left {
+  -webkit-transform: translateX(-36%);
+  -moz-transform: translateX(-36%);
+  -ms-transform: translateX(-36%);
+  -o-transform: translateX(-36%);
+  transform: translateX(-36%);
+  opacity: 0;
+}
+
+.onsen_navigator-item {
+  position: absolute !important;
+  top: 0;
+  bottom: 1px;
+}
+
+/* TODO: */
+
+.onsen_navigator-title.transition {
+  -webkit-transition-duration: 400ms;
+  -moz-transition-duration: 400ms;
+  -o-transition-duration: 400ms;
+  transition-duration: 400ms;
+  -webkit-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  -moz-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  -o-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+}
+
+.onsen_navigator__left-button-container.transition {
+  -webkit-transition-duration: 400ms;
+  -moz-transition-duration: 400ms;
+  -o-transition-duration: 400ms;
+  transition-duration: 400ms;
+  -webkit-animation-timing-function: cubic-bezier(.99,.01,.99,.01);
+  -moz-animation-timing-function: cubic-bezier(.99,.01,.99,.01);
+  -o-animation-timing-function: cubic-bezier(.99,.01,.99,.01);
+  animation-timing-function: cubic-bezier(.99,.01,.99,.01);
+}
+
+.onsen_navigator__left-button-container.hide {
+  opacity: 0;
+}
+
+.onsen_navigator__left-button-container.show {
+  opacity: 1;
+}
+
+.onsen_navigator__left-button-container {
+  left: 0;
+  width: 20px;
+  text-align: right;
+}
+
+.onsen_fade {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.onsen_fade.transition {
+  -webkit-transition-duration: 400ms;
+  -moz-transition-duration: 400ms;
+  -o-transition-duration: 400ms;
+  transition-duration: 400ms;
+  -webkit-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  -moz-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  -o-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  -webkit-transition-property: opacity;
+  -moz-transition-property: opacity;
+  -o-transition-property: opacity;
+  transition-property: opacity;
+}
+
+.onsen_fade.show {
+  opacity: 1;
+}
+
+.onsen_fade.hide {
+  opacity: 0;
+}
+
+.onsen_navigator__right-button {
+  position: absolute;
+  padding-right: 10px;
+  right: 0;
+  width: 13%;
+  bottom: 0;
+}
+
+.right-section-icon {
+  position: relative;
+  width: 100%;
+}
+
+.onsen_navigator-back-label {
+  width: 25%;
+  left: 0;
+  text-align: left !important;
+  margin-left: 25px !important;
+  padding-left: 0 !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.onsen_navigator-back-label.transition {
+  -webkit-transition-duration: 400ms;
+  -moz-transition-duration: 400ms;
+  -o-transition-duration: 400ms;
+  transition-duration: 400ms;
+  -webkit-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  -moz-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  -o-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  -webkit-transition-property: -webkit-transform, opacity;
+  -moz-transition-property: -moz-transform, opacity;
+  -o-transition-property: -o-transform, opacity;
+  transition-property: -ms-transform, opacity;
+  transition-property: transform, opacity;
+}
+
+.onsen_navigator-back-label.navigate_right {
+  -webkit-transform: translateX(120%);
+  -moz-transform: translateX(120%);
+  -ms-transform: translateX(120%);
+  -o-transform: translateX(120%);
+  transform: translateX(120%);
+  opacity: 0;
+}
+
+.onsen_navigator-back-label.navigator_center {
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+  -ms-transform: translateX(0);
+  -o-transform: translateX(0);
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.onsen_navigator-back-label.navigate_left {
+  -webkit-transform: translateX(-60%);
+  -moz-transform: translateX(-60%);
+  -ms-transform: translateX(-60%);
+  -o-transform: translateX(-60%);
+  transform: translateX(-60%);
+  opacity: 0;
+}
+
+.effeckt-button {
+  position: relative;
+  font-family: inherit;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.effeckt-button[data-loading] {
+  cursor: default;
+}
+
+.effeckt-button > .spinner {
+  position: absolute;
+  width: 20px;
+  height: 10px;
+  top: 50%;
+  margin-top: -13px;
+  opacity: 0;
+  /*border: 3px solid #fff; specified in topcoat theme. .topcoat-button__spinner*/
+  border-bottom: 0;
+  -webkit-border-radius: 40px 40px 0 0;
+  border-radius: 40px 40px 0 0;
+  -webkit-transform-origin: bottom center;
+  background: transparent;
+}
+
+.effeckt-button[data-loading] > .spinner {
+  -webkit-animation: spinner .8s infinite linear;
+  -o-animation: spinner .8s infinite linear;
+  -moz-animation: spinner .8s infinite linear;
+  animation: spinner .8s infinite linear;
+}
+
+@-webkit-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  50% {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-o-keyframes spinner {
+  0% {
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  50% {
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+
+  100% {
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  50% {
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  50% {
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.effeckt-button,
+.effeckt-button > .spinner,
+.effeckt-button > .label {
+  -webkit-transition-property: padding, opacity, left, right, top, bottom, margin;
+  -moz-transition-property: padding, opacity, left, right, top, bottom, margin;
+  -o-transition-property: padding, opacity, left, right, top, bottom, margin;
+  transition-property: padding, opacity, left, right, top, bottom, margin;
+  -webkit-transition-duration: 500ms;
+  -moz-transition-duration: 500ms;
+  -o-transition-duration: 500ms;
+  transition-duration: 500ms;
+  -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -moz-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -o-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.effeckt-button.zoom-in,
+.effeckt-button.zoom-in > .spinner,
+.effeckt-button.zoom-in > .label,
+.effeckt-button.zoom-out,
+.effeckt-button.zoom-out > .spinner,
+.effeckt-button.zoom-out > .label {
+  -webkit-transition: 500ms ease all;
+  -o-transition: 500ms ease all;
+  -moz-transition: 500ms ease all;
+  transition: 500ms ease all;
+}
+
+.effeckt-button.expand-right > .spinner {
+  right: 16px;
+}
+
+.effeckt-button.expand-right[data-loading] {
+  padding-right: 64px;
+}
+
+.effeckt-button.expand-right[data-loading] > .spinner {
+  opacity: 1;
+}
+
+.effeckt-button.expand-left > .spinner {
+  left: 16px;
+}
+
+.effeckt-button.expand-left[data-loading] {
+  padding-left: 64px;
+}
+
+.effeckt-button.expand-left[data-loading] > .spinner {
+  opacity: 1;
+}
+
+.effeckt-button.expand-up {
+  overflow: hidden;
+}
+
+.effeckt-button.expand-up > .spinner {
+  top: 32px;
+  left: 50%;
+  margin-left: -16px;
+}
+
+.effeckt-button.expand-up[data-loading] {
+  padding-top: 64px;
+}
+
+.effeckt-button.expand-up[data-loading] > .spinner {
+  opacity: 1;
+  top: 16px;
+  margin-top: 0;
+}
+
+.effeckt-button.expand-down {
+  overflow: hidden;
+}
+
+.effeckt-button.expand-down > .spinner {
+  left: 50%;
+  top: 100%;
+  margin-left: -16px;
+  margin-top: -48px;
+}
+
+.effeckt-button.expand-down[data-loading] {
+  padding-bottom: 64px;
+}
+
+.effeckt-button.expand-down[data-loading] > .spinner {
+  opacity: 1;
+}
+
+.effeckt-button.slide-left {
+  overflow: hidden;
+}
+
+.effeckt-button.slide-left > .label {
+  position: relative;
+}
+
+.effeckt-button.slide-left > .spinner {
+  left: 100%;
+  margin-left: -16px;
+}
+
+.effeckt-button.slide-left[data-loading] > .label {
+  opacity: 0;
+  left: -100%;
+}
+
+.effeckt-button.slide-left[data-loading] > .spinner {
+  opacity: 1;
+  left: 50%;
+}
+
+.effeckt-button.slide-right {
+  overflow: hidden;
+}
+
+.effeckt-button.slide-right > .label {
+  position: relative;
+}
+
+.effeckt-button.slide-right > .spinner {
+  right: 100%;
+  margin-left: -16px;
+}
+
+.effeckt-button.slide-right[data-loading] > .label {
+  opacity: 0;
+  left: 100%;
+}
+
+.effeckt-button.slide-right[data-loading] > .spinner {
+  opacity: 1;
+  left: 50%;
+}
+
+.effeckt-button.slide-up {
+  overflow: hidden;
+}
+
+.effeckt-button.slide-up > .label {
+  position: relative;
+}
+
+.effeckt-button.slide-up > .spinner {
+  left: 50%;
+  margin-left: -16px;
+  margin-top: 1em;
+}
+
+.effeckt-button.slide-up[data-loading] > .label {
+  opacity: 0;
+  top: -1em;
+}
+
+.effeckt-button.slide-up[data-loading] > .spinner {
+  opacity: 1;
+  margin-top: -16px;
+}
+
+.effeckt-button.slide-down {
+  overflow: hidden;
+}
+
+.effeckt-button.slide-down > .label {
+  position: relative;
+}
+
+.effeckt-button.slide-down > .spinner {
+  left: 50%;
+  margin-left: -16px;
+  margin-top: -32px;
+}
+
+.effeckt-button.slide-down[data-loading] > .label {
+  opacity: 0;
+  top: 1em;
+}
+
+.effeckt-button.slide-down[data-loading] > .spinner {
+  opacity: 1;
+  margin-top: -16px;
+}
+
+.effeckt-button.zoom-out {
+  overflow: hidden;
+}
+
+.effeckt-button.zoom-out > .spinner {
+  left: 50%;
+  margin-left: -16px;
+  -webkit-transform: scale(2.5);
+  -ms-transform: scale(2.5);
+  -o-transform: scale(2.5);
+  -moz-transform: scale(2.5);
+  transform: scale(2.5);
+}
+
+.effeckt-button.zoom-out > .label {
+  position: relative;
+  display: inline-block;
+}
+
+.effeckt-button.zoom-out[data-loading] > .label {
+  opacity: 0;
+  -webkit-transform: scale(0.5);
+  -ms-transform: scale(0.5);
+  -o-transform: scale(0.5);
+  -moz-transform: scale(0.5);
+  transform: scale(0.5);
+}
+
+.effeckt-button.zoom-out[data-loading] > .spinner {
+  opacity: 1;
+  -webkit-transform: none;
+  -ms-transform: none;
+  -o-transform: none;
+  -moz-transform: none;
+  transform: none;
+}
+
+.effeckt-button.zoom-in {
+  overflow: hidden;
+}
+
+.effeckt-button.zoom-in > .spinner {
+  left: 50%;
+  margin-left: -16px;
+  -webkit-transform: scale(0.2);
+  -ms-transform: scale(0.2);
+  -o-transform: scale(0.2);
+  -moz-transform: scale(0.2);
+  transform: scale(0.2);
+}
+
+.effeckt-button.zoom-in > .label {
+  position: relative;
+  display: inline-block;
+}
+
+.effeckt-button.zoom-in[data-loading] > .label {
+  opacity: 0;
+  -webkit-transform: scale(2.2);
+  -ms-transform: scale(2.2);
+  -o-transform: scale(2.2);
+  -moz-transform: scale(2.2);
+  transform: scale(2.2);
+}
+
+.effeckt-button.zoom-in[data-loading] > .spinner {
+  opacity: 1;
+  -webkit-transform: none;
+  -ms-transform: none;
+  -o-transform: none;
+  -moz-transform: none;
+  transform: none;
+}
+
+/**
+ * Grid
+ * --------------------------------------------------
+ * Using flexbox for the grid, inspired by Philip Walton:
+ * http://philipwalton.github.io/solved-by-flexbox/demos/grids/
+ * By default each .col within a .row will evenly take up
+ * available width, and the height of each .col with take
+ * up the height of the tallest .col in the same .row.
+ */
+
+.row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.row + .row {
+  margin-top: -5px;
+  padding-top: 0;
+}
+
+.col {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -moz-box-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  display: block;
+  width: 100%;
+}
+
+/* Vertically Align Columns */
+
+/* .row-* vertically aligns every .col in the .row */
+
+.row-top {
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  -webkit-align-items: flex-start;
+  -moz-align-items: flex-start;
+  -moz-box-align: start;
+  align-items: flex-start;
+}
+
+.row-bottom {
+  -webkit-box-align: end;
+  -ms-flex-align: end;
+  -webkit-align-items: flex-end;
+  -moz-align-items: flex-end;
+  -moz-box-align: end;
+  align-items: flex-end;
+}
+
+.row-center {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -moz-box-align: center;
+  align-items: center;
+}
+
+/* .col-* vertically aligns an individual .col */
+
+.col-top {
+  -webkit-align-self: flex-start;
+  -moz-align-self: flex-start;
+  -ms-flex-item-align: start;
+  align-self: flex-start;
+}
+
+.col-bottom {
+  -webkit-align-self: flex-end;
+  -moz-align-self: flex-end;
+  -ms-flex-item-align: end;
+  align-self: flex-end;
+}
+
+.col-center {
+  -webkit-align-self: center;
+  -moz-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+
+/* Column Offsets */
+
+.col-offset-10 {
+  margin-left: 10%;
+}
+
+.col-offset-20 {
+  margin-left: 20%;
+}
+
+.col-offset-25 {
+  margin-left: 25%;
+}
+
+.col-offset-33,
+.col-offset-34 {
+  margin-left: 33.3333%;
+}
+
+.col-offset-50 {
+  margin-left: 50%;
+}
+
+.col-offset-66,
+.col-offset-67 {
+  margin-left: 66.6666%;
+}
+
+.col-offset-75 {
+  margin-left: 75%;
+}
+
+.col-offset-80 {
+  margin-left: 80%;
+}
+
+.col-offset-90 {
+  margin-left: 90%;
+}
+
+/* Explicit Column Percent Sizes */
+
+/* By default each grid column will evenly distribute */
+
+/* across the grid. However, you can specify individual */
+
+/* columns to take up a certain size of the available area */
+
+.col-10 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 10%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 10%;
+  -ms-flex: 0 0 10%;
+  flex: 0 0 10%;
+  max-width: 10%;
+}
+
+.col-20 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 20%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 20%;
+  -ms-flex: 0 0 20%;
+  flex: 0 0 20%;
+  max-width: 20%;
+}
+
+.col-25 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 25%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 25%;
+  -ms-flex: 0 0 25%;
+  flex: 0 0 25%;
+  max-width: 25%;
+}
+
+.col-33,
+.col-34 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 33.3333%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 33.3333%;
+  -ms-flex: 0 0 33.3333%;
+  flex: 0 0 33.3333%;
+  max-width: 33.3333%;
+}
+
+.col-50 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 50%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 50%;
+  -ms-flex: 0 0 50%;
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+.col-66,
+.col-67 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 66.6666%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 66.6666%;
+  -ms-flex: 0 0 66.6666%;
+  flex: 0 0 66.6666%;
+  max-width: 66.6666%;
+}
+
+.col-75 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 75%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 75%;
+  -ms-flex: 0 0 75%;
+  flex: 0 0 75%;
+  max-width: 75%;
+}
+
+.col-80 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 80%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 80%;
+  -ms-flex: 0 0 80%;
+  flex: 0 0 80%;
+  max-width: 80%;
+}
+
+.col-90 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 90%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 90%;
+  -ms-flex: 0 0 90%;
+  flex: 0 0 90%;
+  max-width: 90%;
+}
+
+.row--fit > .col {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -moz-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.row--100 > .col {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 100%;
+  -moz-box-flex: 0;
+  -ms-flex: 0 0 100%;
+  flex: 0 0 100%;
+}
+
+/*
+Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+ons-navigator-toolbar {
+  display: none;
+}
+
+ons-navigator {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.navigator-container {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: start;
+  -moz-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  -webkit-box-align: stretch;
+  -webkit-align-items: stretch;
+  -moz-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.navigator-toolbar {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 auto;
+  -moz-box-flex: 0;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+}
+
+.navigator-content {
+  -webkit-box-ordinal-group: 1;
+  -moz-box-ordinal-group: 1;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  -webkit-align-self: auto;
+  -ms-flex-item-align: auto;
+  align-self: auto;
+  overflow: hidden;
+}
+
+.topcoat-navigation-bar {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.right-section-icon {
+  height: 100%;
+  display: block !important;
+}
+
+.left-section {
+  height: 100%;
+}
+
+.page {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+.onsen_bottom-toolbar {
+  position: absolute;
+  bottom: 0;
+  height: 2.5rem;
+  width: 100%;
+}
+
+/*
+Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+.scroller-wrapper {
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.scroller {
+  min-height: 100%;
+}
+
+/*
+Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+.onsen_sliding-menu-black-mask {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  background-color: black;
+}
+
+.sliding-menu {
+  overflow: hidden;
+}
+
+.transition {
+  -webkit-transition-duration: 400ms;
+  -moz-transition-duration: 400ms;
+  -o-transition-duration: 400ms;
+  transition-duration: 400ms;
+  -webkit-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  -moz-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  -o-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+}
+
+.open {
+  -webkit-transform: translate3d(92%, 0, 0);
+  -moz-transform: translate3d(92%, 0, 0);
+  -ms-transform: translate3d(92%, 0, 0);
+  -o-transform: translate3d(92%, 0, 0);
+  transform: translate3d(92%, 0, 0);
+}
+
+.close {
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.menu {
+  z-index: -1;
+  background-color: gray;
+}
+
+.behind {
+  opacity: 0;
+  /* initially hidden */
+  -webkit-transform: translate3d(-10%, 0, 0);
+  -moz-transform: translate3d(-10%, 0, 0);
+  -ms-transform: translate3d(-10%, 0, 0);
+  -o-transform: translate3d(-10%, 0, 0);
+  transform: translate3d(-10%, 0, 0);
+  width: 100% !important;
+}
+
+.above {
+  -webkit-box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
+  box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.full-screen {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  /*height: 100%;*/
+}
+
+/*
+Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+.secondary {
+  opacity: 0;
+  width: 100%;
+  -webkit-transform: translate3d(-10%, 0, 0);
+  -moz-transform: translate3d(-10%, 0, 0);
+  -ms-transform: translate3d(-10%, 0, 0);
+  -o-transform: translate3d(-10%, 0, 0);
+  transform: translate3d(-10%, 0, 0);
+  overflow: hidden;
+}
+
+.main {
+  overflow: hidden;
+}
+
+.onsen_split-view__shadow {
+  -webkit-box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
+  box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+/*
+Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+.onsen_tab-bar__label {
+  line-height: 1rem;
+  margin-top: -16px;
+  font-size: small;
+}
+
+.onsen_tab-bar__label.big {
+  margin-top: 0;
+  font-size: large;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.tab-bar-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}

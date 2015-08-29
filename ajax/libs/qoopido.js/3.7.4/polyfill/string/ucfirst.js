@@ -1,0 +1,2 @@
+/*! Qoopido.js library 3.7.4, 2015-08-14 | https://github.com/dlueth/qoopido.js | (c) 2015 Dirk Lueth */
+!function(t,r){r.qoopido.register("polyfill/string/ucfirst",t)}(function(t,r,i,o){"use strict";return String.prototype.ucfirst||(String.prototype.ucfirst=function(){var t=this;return t.charAt(0).toUpperCase()+t.slice(1)}),String.prototype.ucfirst},this);

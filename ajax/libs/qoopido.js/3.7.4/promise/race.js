@@ -1,0 +1,2 @@
+/*! Qoopido.js library 3.7.4, 2015-08-14 | https://github.com/dlueth/qoopido.js | (c) 2015 Dirk Lueth */
+!function(r,o){var t=[];o.Promise||t.push("../polyfill/window/promise"),o.qoopido.register("promise/race",r,t)}(function(r,o,t,e){"use strict";return function(r){if("[object Array]"!==Object.prototype.toString.call(r))throw new TypeError("You must pass an array to all.");return new t.Promise(function(o,t){for(var n,i=0;(n=r[i])!==e;i++)n&&"function"==typeof n.then?n.then(o,t):o(n)})}},this);

@@ -1,0 +1,2 @@
+/*! Qoopido.js library 3.7.4, 2015-08-14 | https://github.com/dlueth/qoopido.js | (c) 2015 Dirk Lueth */
+!function(t,e){e.qoopido.register("support/element/canvas/todataurl",t,["../../../support","../canvas"])}(function(t,e,n,o){"use strict";var a=t.support;return a.addTest("/element/canvas/todataurl",function(e){t["support/element/canvas"]().then(function(){var t=a.pool?a.pool.obtain("canvas"):document.createElement("canvas");t.toDataURL!==o?e.resolve():e.reject(),t.dispose&&t.dispose()},function(){e.reject()})})},this);

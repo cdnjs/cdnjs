@@ -1,0 +1,7 @@
+/*!
+ DataTables Foundation integration
+ ©2011-2014 SpryMedia Ltd - datatables.net/license
+*/
+(function(){var d=function(g,e){g.extend(e.ext.classes,{sWrapper:"dataTables_wrapper dt-foundation"});g.extend(!0,e.defaults,{dom:"<'row'<'small-6 columns'l><'small-6 columns'f>r>t<'row'<'small-6 columns'i><'small-6 columns'p>>",renderer:"foundation"});e.ext.renderer.pageButton.foundation=function(f,d,p,k,h,l){var q=new e.Api(f),r=f.oClasses,i=f.oLanguage.oPaginate,b,c,o=function(d,e){var j,m,n,a,k=function(a){a.preventDefault();"ellipsis"!==a.data.action&&q.page(a.data.action).draw("page")};j=0;
+for(m=e.length;j<m;j++)if(a=e[j],g.isArray(a))o(d,a);else{c=b="";switch(a){case "ellipsis":b="&hellip;";c="unavailable";break;case "first":b=i.sFirst;c=a+(0<h?"":" unavailable");break;case "previous":b=i.sPrevious;c=a+(0<h?"":" unavailable");break;case "next":b=i.sNext;c=a+(h<l-1?"":" unavailable");break;case "last":b=i.sLast;c=a+(h<l-1?"":" unavailable");break;default:b=a+1,c=h===a?"current":""}b&&(n=g("<li>",{"class":r.sPageButton+" "+c,"aria-controls":f.sTableId,tabindex:f.iTabIndex,id:0===p&&
+"string"===typeof a?f.sTableId+"_"+a:null}).append(g("<a>",{href:"#"}).html(b)).appendTo(d),f.oApi._fnBindAction(n,{action:a},k))}};o(g(d).empty().html('<ul class="pagination"/>').children("ul"),k)}};"function"===typeof define&&define.amd?define(["jquery","datatables"],d):"object"===typeof exports?d(require("jquery"),require("datatables")):jQuery&&d(jQuery,jQuery.fn.dataTable)})(window,document);
