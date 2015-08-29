@@ -114,8 +114,10 @@ packages.map(function (pkg) {
         var json = parse(pkg, true, true);
         var dirs = pkg.split("/");
         var trueName = dirs[dirs.length - 2];
-        assert.ok(trueName == json.name,
-            pkg_name(pkg) + ": Name property should be '" + trueName + "', not '" + json.name +"'");
+        if (!fs.lstatSync("./ajax/libs/" + trueName).isSymbolicLink()) {
+            assert.ok(trueName == json.name,
+                pkg_name(pkg) + ": Name property should be '" + trueName + "', not '" + json.name +"'");
+        }
     };
 
     var targetPrefixes = new RegExp("^git://.+\.git$");
@@ -169,13 +171,26 @@ packages.map(function (pkg) {
         var orig = fs.readFileSync(pkg, 'utf8'),
             correct = JSON.stringify(JSON.parse(orig), null, 2) + '\n';
         assert.ok(orig === correct,
-            pkg_name(pkg) + ": package.json wrong format, correct one should be like this.\n(Remove the first 2 spaces of each line and include blank line at end if you copy and paste this example)\n" + correct +"\n");
+            pkg_name(pkg) + ": package.json wrong indent, please use our tool: tools/fixFormat.js to fix it for you, here is an example: (Please ignore the first 2 spaces and the wildcard symbol in autoupadte config due to a bug)\n" + correct +"\n");
     }
 
     package_vows[pname + ": useless fields check"] = function (pkg) {
         var json = parse(pkg, true, true);
-        assert.ok(json.scripts === undefined && json.devDependencies === undefined,
-            pkg_name(pkg) + ": we don't need scripts and devDependencies fields in package.json");
+        var json_fix = json;
+        delete json_fix.scripts;
+        delete json_fix.devDependencies;
+        delete json_fix.main;
+        delete json_fix.peerDependencies;
+        delete json_fix.contributors;
+        delete json_fix.bugs;
+        delete json_fix.issues;
+        delete json_fix.files;
+        delete json_fix.ignore;
+        delete json_fix.engines;
+        delete json_fix.engine;
+
+        assert.ok(json === json_fix,
+            pkg_name(pkg) + ": we don't need scripts, main, cnotributors, bugs, issues, files, ignore, engine(s) and (dev|peer)Dependencies fields in package.json");
     }
     context[pname] = package_vows;
     suite.addBatch(context);
