@@ -37,7 +37,9 @@ cdnjs will host any production version of any JavaScript/CSS library, subject to
 
 Please raise a new pull request for new library additions and existing library updates, following the instructions below.
 
-## IMPORTANT - No more manual submissions
+## IMPORTANT
+
+### No more manual submissions
 
 [Discussion](https://github.com/cdnjs/cdnjs/issues/3638)
 
@@ -45,6 +47,9 @@ It's time for us to move away from manual submissions and focus solely on gettin
 
 *All pull requests should just add auto update configs to the package.json*
 
+### Use sparse-checkout to save your disk space, preventsortable/Sortable issue(#3650), especially for Windows and Mac OS X users.
+
+https://github.com/cdnjs/cdnjs/blob/master/sparseCheckout.md
 
 ## Adding a new or updating an existing library
 
