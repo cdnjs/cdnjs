@@ -47,7 +47,7 @@ It's time for us to move away from manual submissions and focus solely on gettin
 
 *All pull requests should just add auto update configs to the package.json*
 
-### Use sparse-checkout to save your disk space, preventsortable/Sortable issue(#3650)
+### Use sparse-checkout to save your disk space, preventsortable/Sortable issue(#3650), especially for Windows and Mac OS X users.
 
 https://github.com/cdnjs/cdnjs/blob/master/sparseCheckout.md
 
