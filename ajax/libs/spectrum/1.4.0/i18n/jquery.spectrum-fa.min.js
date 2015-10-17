@@ -1,0 +1,1 @@
+!function(e){var t=e.spectrum.localization.fa={cancelText:"لغو",chooseText:"انتخاب"};e.extend(e.fn.spectrum.defaults,t)}(jQuery);

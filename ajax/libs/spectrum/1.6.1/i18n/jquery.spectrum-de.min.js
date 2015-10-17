@@ -1,0 +1,1 @@
+!function(e){var t=e.spectrum.localization.de={cancelText:"Abbrechen",chooseText:"Wählen",clearText:"Farbauswahl zurücksetzen",noColorSelectedText:"Keine Farbe ausgewählt",togglePaletteMoreText:"Mehr",togglePaletteLessText:"Weniger"};e.extend(e.fn.spectrum.defaults,t)}(jQuery);

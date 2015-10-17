@@ -1,0 +1,2 @@
+/*! Qoopido.js library 3.7.0, 2015-07-23 | https://github.com/dlueth/qoopido.js | (c) 2015 Dirk Lueth */
+!function(t){window.qoopido.register("polyfill/window/getcomputedstyle",t)}(function(t,e,r,n,o,u,l){"use strict";if(o.getComputedStyle)return o.getComputedStyle;var i=new RegExp("(\\-([a-z]){1})","g"),p=function(){return arguments[2].toUpperCase()};return function(t,e){var r=this;return r.getPropertyValue=function(e){return"float"===e&&(e="styleFloat"),i.test(e)&&(e=e.replace(i,p)),t.currentStyle[e]||null},r}});

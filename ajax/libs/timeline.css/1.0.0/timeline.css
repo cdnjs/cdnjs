@@ -1,0 +1,156 @@
+/* line 6, ../scss/timeline.scss */
+.timeline, .timeline.v1 {
+  margin: 0px auto;
+  max-width: 700px;
+  overflow: hidden;
+  height: auto;
+  position: relative;
+  padding: 0px;
+  list-style-type: none;
+  /*thanks to
+     https://twitter.com/JacoKoster
+  */
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEElEQVQIW2NMTEz8z8gABAAPKwIlXWq1kgAAAABJRU5ErkJggg==);
+  background-repeat: repeat-y;
+  background-position: 50% 0;
+  /*
+    border-box ftw, inside .timeline now to prevent
+    screwing up your CSS rule if you are not using
+    border-box
+    if that's the case, I have nothing to say to you.
+
+    thanks to https://github.com/jimmyandrade
+  */
+  /* 
+    elements 1,(2),3,(4), etc.
+    elements in brackets inherit these properties, some are overridden below (2n)
+    beginning at 0
+  */
+  /*v2*/
+}
+/* line 30, ../scss/timeline.scss */
+.timeline *, .timeline *:after, .timeline:after, .timeline *:before, .timeline:before, .timeline.v1 *, .timeline.v1 *:after, .timeline.v1:after, .timeline.v1 *:before, .timeline.v1:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* line 32, ../scss/timeline.scss */
+.timeline .year, .timeline.v1 .year {
+  background: #505050;
+  font-size: 3em;
+  max-width: 4em;
+  clear: both;
+  margin: 1em auto;
+  color: white;
+  border-radius: 30% / 100%;
+  text-align: center;
+  margin-top: 50px;
+  /*
+    thanks to Lukas Knuth ( https://github.com/christian-fei/Timeline.css/issues/1 )
+  */
+}
+/* line 43, ../scss/timeline.scss */
+.timeline .year:first-of-type, .timeline.v1 .year:first-of-type {
+  margin-top: 0 !important;
+}
+/* line 50, ../scss/timeline.scss */
+.timeline .year + .event, .timeline.v1 .year + .event {
+  margin-top: -1.5em;
+}
+/* line 60, ../scss/timeline.scss */
+.timeline .event, .timeline.v1 .event {
+  position: relative;
+  text-align: center;
+  float: right;
+  clear: right;
+  width: 45%;
+  margin: 10px 2.5%;
+  border-radius: 5px;
+  list-style-type: none;
+  display: block;
+  padding: .4em;
+  background: white;
+  z-index: 15;
+  color: #4d4d4d;
+  border: 1px solid #d0d0d0;
+  text-decoration: none;
+  -webkit-transition: background .15s linear;
+  -moz-transition: background .15s linear;
+  -ms-transition: background .15s linear;
+  -o-transition: background .15s linear;
+  transition: background .15s linear;
+}
+/* line 86, ../scss/timeline.scss */
+.timeline .event.featured, .timeline.v1 .event.featured {
+  width: 95% !important;
+}
+/* line 88, ../scss/timeline.scss */
+.timeline .event.featured:after, .timeline .event.featured:before, .timeline.v1 .event.featured:after, .timeline.v1 .event.featured:before {
+  display: none;
+}
+@media all and (max-width: 600px) {
+  /* line 60, ../scss/timeline.scss */
+  .timeline .event, .timeline.v1 .event {
+    width: 85%;
+  }
+}
+/* line 97, ../scss/timeline.scss */
+.timeline .event.offset-first, .timeline.v1 .event.offset-first {
+  margin-top: -1.5em;
+}
+/* line 101, ../scss/timeline.scss */
+.timeline .event img, .timeline.v1 .event img {
+  margin-top: 10px;
+  max-width: 100%;
+}
+/* line 106, ../scss/timeline.scss */
+.timeline .event:hover, .timeline.v1 .event:hover {
+  background: #f6f6f6;
+}
+/* line 109, ../scss/timeline.scss */
+.timeline .event:hover:after, .timeline.v1 .event:hover:after {
+  background: #505050;
+}
+/* line 114, ../scss/timeline.scss */
+.timeline .event:nth-of-type(2n), .timeline.v1 .event:nth-of-type(2n) {
+  float: left;
+  clear: left;
+}
+/* line 117, ../scss/timeline.scss */
+.timeline .event:nth-of-type(2n):after, .timeline.v1 .event:nth-of-type(2n):after {
+  right: -5%;
+  /* reset the standard declaration I defined before*/
+  left: auto;
+}
+@media all and (min-width: 650px) {
+  /* line 124, ../scss/timeline.scss */
+  .timeline .event:after, .timeline.v1 .event:after {
+    display: block;
+    content: ' ';
+    height: 9px;
+    width: 9px;
+    background: #9d9d9d;
+    border-radius: 50%;
+    position: absolute;
+    left: -5%;
+    top: 1.5em;
+    border: 2px solid white;
+  }
+}
+/* line 139, ../scss/timeline.scss */
+.timeline time, .timeline.v1 time {
+  display: block;
+  font-weight: bold;
+}
+/* line 148, ../scss/timeline.scss */
+.timeline.v2 .year, .timeline.v1.v2 .year {
+  background: white;
+  color: #505050;
+  border: 2px solid #505050;
+}
+/* line 154, ../scss/timeline.scss */
+.timeline.v2 .event, .timeline.v1.v2 .event {
+  border: none;
+  background: #FAFAFA;
+  border-bottom: 1px solid #cac4c4;
+}

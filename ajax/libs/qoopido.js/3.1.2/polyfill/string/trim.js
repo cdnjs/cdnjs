@@ -1,0 +1,1 @@
+(function(t){window.qoopido.register("polyfill/string/trim",t)})(function(){"use strict";if(!String.prototype.trim){var t=RegExp("^\\s+|\\s+$","g");String.prototype.trim=function(){return this.replace(t,"")}}return!0});

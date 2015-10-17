@@ -1,0 +1,4 @@
+/*! jQuery Once - v2.0.0-alpha.3 - 10/1/2014 - https://github.com/RobLoach/jquery-once
+ * (c) 2014 Rob Loach <robloach@gmail.com> (http://github.com/robloach)
+ * Licensed GPL-2.0, MIT */
+!function(a){"use strict";"object"==typeof exports?a(require("jquery")):"function"==typeof define&&define.amd?define(["jquery"],a):a(jQuery)}(function(a){"use strict";var b={},c=0;a.fn.once=function(d,e){"string"!=typeof d&&(d in b||(b[d]=++c),e||(e=d),d=b[d]);var f="jquery-once-"+d,g=this.filter(function(){return a(this).data(f)!==!0}).data(f,!0);return a.isFunction(e)?g.each(e):g},a.fn.removeOnce=function(b,c){var d="jquery-once-"+b,e=this.filter(function(){return a(this).data(d)===!0}).removeData(d);return a.isFunction(c)?e.each(c):e}});

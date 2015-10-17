@@ -1,0 +1,43 @@
+YUI.add('array-invoke', function(Y) {
+
+/**
+ * Collection utilities beyond what is provided in the YUI core
+ * @module collection
+ * @submodule array-invoke
+ */
+
+/**
+ * Adds the <code>Y.Array.invoke( items, methodName )</code> utility method.
+ * @class YUI~array~invoke
+ */
+
+/**
+ * <p>Execute a named method on an array of objects.  Items in the list that do
+ * not have a so named function will be skipped.</p>
+ *
+ * <p>The return values from each call are stored in an array and returned.</p>
+ *
+ * @method invoke
+ * @static
+ * @param items { Array } Array of objects supporting the named method
+ * @param name { String } the name of the method to execute on each item
+ * @param args* { mixed } Any number of additional args are passed as
+ *                        parameters to the execution of the named method.
+ * @return { Array } All return values, indexed according to item index.
+ */
+Y.Array.invoke = function ( items, name ) {
+    var args       = Y.Array( arguments, 2, true ),
+        isFunction = Y.Lang.isFunction,
+        ret        = [];
+
+    Y.Array.each( Y.Array( items ), function ( item, i ) {
+        if ( isFunction( item[ name ] ) ) {
+            ret[i] = item[ name ].apply( item, args );
+        }
+    });
+
+    return ret;
+};
+
+
+}, '@VERSION@' );

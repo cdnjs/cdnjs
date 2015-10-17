@@ -1,0 +1,1 @@
+(function(e,t){"use strict";function n(){return t.qoopido.initialize("support/css/transform",e,arguments)}"function"==typeof define&&define.amd?define(["../../support"],n):n()})(function(e){"use strict";return e.support.addTest("/css/transform",function(t){e.support.supportsProperty("transform")?t.resolve(e.support.getProperty("transform")):t.reject()})},window);

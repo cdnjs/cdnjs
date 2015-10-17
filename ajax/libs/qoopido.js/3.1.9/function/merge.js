@@ -1,0 +1,1 @@
+(function(t){window.qoopido.register("function/merge",t)})(function(t,e,n,r,i,o,a){"use strict";return function l(){var t,e,n,r,i,o=arguments[0];for(t=1;(e=arguments[t])!==a;t++)for(n in e)r=o[n],i=e[n],i!==a&&(null!==i&&"object"==typeof i?(r=i.length!==a?r&&"object"==typeof r&&r.length!==a?r:[]:r&&"object"==typeof r&&r.length===a?r:{},o[n]=l(r,i)):o[n]=i);return o}});

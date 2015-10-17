@@ -1,0 +1,13 @@
+/*!
+ * jQuery Lazy - min - v0.1.11
+ * http://jquery.eisbehr.de/lazy/
+ *
+ * Copyright 2013, Daniel 'Eisbehr' Kern
+ *
+ * Dual licensed under the MIT and GPL v2 licenses:
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.gnu.org/licenses/gpl-2.0.html
+ *
+ * jQuery("img.lazy").lazy();
+ */
+(function(e,t,n,r){e.fn.lazy=function(r){function o(n){if(typeof n!="boolean")n=false;s.each(function(){var r=e(this);var s=this.tagName.toLowerCase();if(a(r)||n){if(r.attr(i.attribute)&&(s=="img"&&r.attr(i.attribute)!=r.attr("src")||s!="img"&&r.attr(i.attribute)!=r.css("background-image"))&&!r.data("loaded")&&(r.is(":visible")||!i.visibleOnly)){var o=e(new Image);e.each(this.attributes,function(e,t){if(t.name!="src"){var n=r.attr(t.name);o.attr(t.name,n)}});if(i.onError)o.error(function(){i.onError(o)});var u=true;o.one("load",function(){var e=function(){if(u){t.setTimeout(e,100);return}r.hide();if(s=="img")r.attr("src",o.attr("src"));else r.css("background-image","url("+o.attr("src")+")");r[i.effect](i.effectTime);if(i.removeAttribute)r.removeAttr(i.attribute);if(i.afterLoad)i.afterLoad(r);o.unbind("load");o.remove()};e()});if(i.beforeLoad)i.beforeLoad(r);o.attr("src",r.attr(i.attribute));if(i.onLoad)i.onLoad(o);u=false;if(o.complete)o.load();r.data("loaded",true)}}});s=e(s).filter(function(){return!e(this).data("loaded")})}function u(){if(i.delay>=0)setTimeout(function(){o(true)},i.delay);if(i.delay<0||i.combined){o(false);e(t).bind("scroll",l(i.throttle,o));e(t).bind("resize",l(i.throttle,o))}}function a(e){var t=n.documentElement.scrollTop?n.documentElement.scrollTop:n.body.scrollTop;return t+f()+i.threshold>e.offset().top+e.height()}function f(){if(t.innerHeight)return t.innerHeight;if(n.documentElement&&n.documentElement.clientHeight)return n.documentElement.clientHeight;if(n.body&&n.body.clientHeight)return n.body.clientHeight;if(n.body&&n.body.offsetHeight)return n.body.offsetHeight;return i.fallbackHeight}function l(e,t){function s(){function o(){r=+(new Date);t.apply()}var s=+(new Date)-r;n&&clearTimeout(n);if(s>e||!i.enableThrottle)o();else n=setTimeout(o,e-s)}var n;var r=0;return s}var i={bind:"load",threshold:500,fallbackHeight:2e3,visibleOnly:true,delay:-1,combined:false,attribute:"data-src",removeAttribute:true,effect:"show",effectTime:0,enableThrottle:false,throttle:250,beforeLoad:null,onLoad:null,afterLoad:null,onError:null};if(r)e.extend(i,r);var s=this;if(i.bind=="load")e(t).load(u);else if(i.bind=="event")u();if(i.onError)s.bind("error",function(){i.onError(e(this))});return this};e.fn.Lazy=e.fn.lazy})(jQuery,window,document);

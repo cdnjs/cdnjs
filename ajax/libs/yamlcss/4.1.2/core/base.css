@@ -1,0 +1,705 @@
+/**
+ * "Yet Another Multicolumn Layout" - YAML CSS Framework
+ *
+ * (en) YAML core stylesheet
+ * (de) YAML Basis-Stylesheet
+ *
+ * Don't make any changes in this file!
+ * Your changes should be placed in any css-file in your own stylesheet folder.
+ *
+ * @copyright       © 2005-2013, Dirk Jesse
+ * @license         CC-BY 2.0 (http://creativecommons.org/licenses/by/2.0/),
+ *                  YAML-CDL (http://www.yaml.de/license.html)
+ * @link            http://www.yaml.de
+ * @package         yaml
+ * @version         4.1.2
+ */
+@media all {
+  /**
+   *  @section Normalisation Module
+   */
+  /* (en) Global reset of paddings and margins for all HTML elements */
+  /* (de) Globales Zurücksetzen der Innen- und Außenabstände für alle HTML-Elemente */
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* (en) Correction: margin/padding reset caused too small select boxes. */
+  /* (de) Korrektur: Das Zurücksetzen der Abstände verursacht zu kleine Selectboxen. */
+  option {
+    padding-left: 0.4em;
+  }
+
+  select {
+    padding: 1px;
+  }
+
+  /*
+  * (en) Global fix of the Italics bugs in IE 5.x and IE 6
+  * (de) Globale Korrektur des Italics Bugs des IE 5.x und IE 6
+  *
+  * @bugfix
+  * @affected   IE 5.x/Win, IE6
+  * @css-for    IE 5.x/Win, IE6
+  * @valid      yes
+  */
+  * html body * {
+    overflow: visible;
+  }
+
+  /*
+  * (en) Fix for rounding errors when scaling font sizes in older versions of Opera browser
+  *      Standard values for colors and text alignment
+  *
+  * (de) Beseitigung von Rundungsfehler beim Skalieren von Schriftgrößen in älteren Opera Versionen
+  *      Vorgabe der Standardfarben und Textausrichtung
+  */
+  body {
+    font-size: 100%;
+    background: #fff;
+    color: #000;
+    text-align: left;
+  }
+
+  /* (en) avoid visible outlines on DIV and h[x] elements in Webkit browsers */
+  /* (de) Vermeidung sichtbarer Outline-Rahmen in Webkit-Browsern */
+  div:target,
+  h1:target,
+  h2:target,
+  h3:target,
+  h4:target,
+  h5:target,
+  h6:target {
+    outline: 0 none;
+  }
+
+  /* (en) HTML5 - adjusting visual formatting model to block level */
+  /* (de) HTML5 - Elements werden als Blockelemente definiert */
+  article,
+  aside,
+  details,
+  figcaption,
+  figure,
+  footer,
+  header,
+  main,
+  nav,
+  section,
+  summary {
+    display: block;
+  }
+
+  /* (en) HTML5 - default media element styles */
+  /* (de) HTML5 - Standard Eigenschaften für Media-Elemente */
+  audio,
+  canvas,
+  video {
+    display: inline-block;
+  }
+
+  /* (en) HTML5 - don't show <audio> element if there aren't controls */
+  /* (de) HTML5 - <audio> ohne Kontrollelemente sollten nicht angezeigt werden */
+  audio:not([controls]) {
+    display: none;
+  }
+
+  /* (en) HTML5 - add missing styling in IE & old FF for hidden attribute */
+  /* (de) HTML5 - Eigenschaften für das hidden-Attribut in älteren IEs und FF nachrüsten */
+  [hidden] {
+    display: none;
+  }
+
+  /* (en) Prevent iOS text size adjust after orientation change, without disabling user zoom. */
+  /* (de) Verdindert die automatische Textanpassung bei Orientierungswechsel, ohne Zoom zu blockieren */
+  html {
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* (en) set correct box-modell in IE8/9 plus remove padding */
+  /* (de) Setze das richtige Box-Modell im IE8/9 und entferne unnötiges Padding */
+  input[type="checkbox"],
+  input[type="radio"] {
+    box-sizing: border-box;
+    padding: 0;
+  }
+
+  /* (en) force consistant appearance of input[type="search"] elements in all browser */
+  /* (de) Einheitliches Erscheinungsbild für input[type="search"] Elemente erzwingen */
+  input[type="search"] {
+    -webkit-appearance: textfield;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+  }
+
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+
+  /* (en) Correct overflow displayed oddly in IE 9 */
+  /* (de) Korrigiert fehlerhafte overflow Voreinstellung des IE 9 */
+  svg:not(:root) {
+    overflow: hidden;
+  }
+
+  /* (en) Address margin not present in IE 8/9 and Safari 5 */
+  /* (en) Ergänzt fehlenden Margin in IE 8/9 und Safari 5 */
+  figure {
+    margin: 0;
+  }
+
+  /* (en) Clear borders for <fieldset> and <img> elements */
+  /* (de) Rahmen für <fieldset> und <img> Elemente löschen */
+  fieldset,
+  img {
+    border: 0 solid;
+  }
+
+  /* (en) new standard values for lists, blockquote, cite and tables */
+  /* (de) Neue Standardwerte für Listen, Zitate und Tabellen */
+  ul,
+  ol,
+  dl {
+    margin: 0 0 1em 1em;
+  }
+
+  li {
+    line-height: 1.5em;
+    margin-left: 0.8em;
+  }
+
+  dt {
+    font-weight: bold;
+  }
+
+  dd {
+    margin: 0 0 1em 0.8em;
+  }
+
+  blockquote {
+    margin: 0 0 1em 0.8em;
+  }
+
+  q {
+    quotes: none;
+  }
+
+  blockquote:before,
+  blockquote:after,
+  q:before,
+  q:after {
+    content: '';
+    content: none;
+  }
+
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  /**
+  * @section Float Handling Module
+  */
+  /* (en) clearfix method for clearing floats */
+  /* (de) Clearfix-Methode zum Clearen der Float-Umgebungen */
+  .ym-clearfix:before {
+    content: "";
+    display: table;
+  }
+
+  .ym-clearfix:after {
+    clear: both;
+    content: ".";
+    display: block;
+    font-size: 0;
+    height: 0;
+    visibility: hidden;
+  }
+
+  /* (en) alternative solutions to contain floats */
+  /* (de) Alternative Methoden zum Einschließen von Float-Umgebungen */
+  .ym-contain-dt {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  .ym-contain-oh {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .ym-contain-fl {
+    float: left;
+    width: 100%;
+  }
+
+  /**
+  * @section Column Module
+  *
+  * default column config:
+  * |-------------------------------|
+  * | col1    | col3      | col2    |
+  * | 20%     | flexible  | 20%     |
+  * |-------------------------------|
+  */
+  .ym-column {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  .ym-col1 {
+    float: left;
+    width: 20%;
+  }
+
+  .ym-col2 {
+    float: right;
+    width: 20%;
+  }
+
+  .ym-col3 {
+    width: auto;
+    margin: 0 20%;
+  }
+
+  .ym-cbox {
+    padding: 0 10px;
+  }
+
+  .ym-cbox-left {
+    padding: 0 10px 0 0;
+  }
+
+  .ym-cbox-right {
+    padding: 0 0 0 10px;
+  }
+
+  /* (en) IE-Clearing: Only used in Internet Explorer, switched on in iehacks.css */
+  /* (de) IE-Clearing: Benötigt nur der Internet Explorer und über iehacks.css zugeschaltet */
+  .ym-ie-clearing {
+    display: none;
+  }
+
+  /**
+  * @section Grid Module
+  */
+  .ym-grid {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    list-style-type: none;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .ym-gl {
+    float: left;
+    margin: 0;
+  }
+
+  .ym-gr {
+    float: right;
+    margin: 0 0 0 -5px;
+  }
+
+  .ym-g20 {
+    width: 20%;
+  }
+
+  .ym-g40 {
+    width: 40%;
+  }
+
+  .ym-g60 {
+    width: 60%;
+  }
+
+  .ym-g80 {
+    width: 80%;
+  }
+
+  .ym-g25 {
+    width: 25%;
+  }
+
+  .ym-g33 {
+    width: 33.333%;
+  }
+
+  .ym-g50 {
+    width: 50%;
+  }
+
+  .ym-g66 {
+    width: 66.666%;
+  }
+
+  .ym-g75 {
+    width: 75%;
+  }
+
+  .ym-g38 {
+    width: 38.2%;
+  }
+
+  .ym-g62 {
+    width: 61.8%;
+  }
+
+  .ym-gbox {
+    padding: 0 10px;
+  }
+
+  .ym-gbox-left {
+    padding: 0 10px 0 0;
+  }
+
+  .ym-gbox-right {
+    padding: 0 0 0 10px;
+  }
+
+  .ym-equalize {
+    overflow: hidden;
+  }
+
+  .ym-equalize > [class*="ym-g"] {
+    display: table-cell;
+    float: none;
+    margin: 0;
+    vertical-align: top;
+  }
+
+  .ym-equalize > [class*="ym-g"] > [class*="ym-gbox"] {
+    padding-bottom: 10000px;
+    margin-bottom: -10000px;
+  }
+
+  /**
+  * @section Form Module
+  */
+  /** Vertical-Forms - technical base (standard)
+  *
+  * |-------------------------------|
+  * | form                          |
+  * |-------------------------------|
+  * |   label                       |
+  * |   input / select / textarea   |
+  * |-------------------------------|
+  * | /form                         |
+  * |-------------------------------|
+  *
+  * (en) Styling of forms where both label and input/select/textarea are styled with display:block;
+  * (de) Formulargestaltung, bei der sowohl label als auch input/select/textarea mit display:block; gestaltet werden
+  */
+  .ym-form,
+  .ym-form fieldset {
+    overflow: hidden;
+  }
+
+  .ym-form div {
+    position: relative;
+  }
+  .ym-form label,
+  .ym-form .ym-label,
+  .ym-form .ym-message {
+    position: relative;
+    line-height: 1.5;
+    display: block;
+  }
+  .ym-form .ym-message {
+    clear: both;
+  }
+  .ym-form .ym-fbox-check label {
+    display: inline;
+  }
+  .ym-form input,
+  .ym-form textarea {
+    cursor: text;
+  }
+  .ym-form .ym-fbox-check input,
+  .ym-form input[type="image"],
+  .ym-form input[type="radio"],
+  .ym-form input[type="checkbox"],
+  .ym-form select,
+  .ym-form label {
+    cursor: pointer;
+  }
+  .ym-form textarea {
+    overflow: auto;
+  }
+  .ym-form input.hidden,
+  .ym-form input[type=hidden] {
+    display: none !important;
+  }
+  .ym-form .ym-fbox:before,
+  .ym-form .ym-fbox-text:before,
+  .ym-form .ym-fbox-select:before,
+  .ym-form .ym-fbox-check:before,
+  .ym-form .ym-fbox-button:before {
+    content: "";
+    display: table;
+  }
+  .ym-form .ym-fbox:after,
+  .ym-form .ym-fbox-text:after,
+  .ym-form .ym-fbox-select:after,
+  .ym-form .ym-fbox-check:after,
+  .ym-form .ym-fbox-button:after {
+    clear: both;
+    content: ".";
+    display: block;
+    font-size: 0;
+    height: 0;
+    visibility: hidden;
+  }
+  .ym-form .ym-fbox-check input:focus,
+  .ym-form .ym-fbox-check input:hover,
+  .ym-form .ym-fbox-check input:active,
+  .ym-form input[type="radio"]:focus,
+  .ym-form input[type="radio"]:hover,
+  .ym-form input[type="radio"]:active,
+  .ym-form input[type="checkbox"]:focus,
+  .ym-form input[type="checkbox"]:hover,
+  .ym-form input[type="checkbox"]:active {
+    border: 0 none;
+  }
+  .ym-form input,
+  .ym-form textarea,
+  .ym-form select {
+    display: block;
+    position: relative;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 70%;
+  }
+  .ym-form .ym-fbox-check input,
+  .ym-form input[type="radio"],
+  .ym-form input[type="checkbox"] {
+    display: inline;
+    margin-left: 0;
+    margin-right: 0.5ex;
+    width: auto;
+    height: auto;
+  }
+  .ym-form input[type="image"] {
+    border: 0;
+    display: inline;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    width: auto;
+  }
+  .ym-form label,
+  .ym-form .ym-label {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  .ym-form .ym-fbox-button input {
+    display: inline;
+    overflow: visible;
+    width: auto;
+  }
+  .ym-form .ym-inline {
+    display: inline-block;
+    float: none;
+    margin-right: 0;
+    width: auto;
+    vertical-align: baseline;
+  }
+
+  /* default form wrapper width */
+  .ym-fbox-wrap {
+    display: table;
+    table-layout: fixed;
+    width: 70%;
+  }
+  .ym-fbox-wrap input,
+  .ym-fbox-wrap textarea,
+  .ym-fbox-wrap select {
+    width: 100%;
+  }
+  .ym-fbox-wrap input[type="image"] {
+    width: auto;
+  }
+  .ym-fbox-wrap input[type="radio"],
+  .ym-fbox-wrap input[type="checkbox"] {
+    display: inline;
+    width: auto;
+    margin-left: 0;
+    margin-right: 0.5ex;
+  }
+  .ym-fbox-wrap label,
+  .ym-fbox-wrap .ym-label {
+    display: inline;
+  }
+
+  .ym-full input,
+  .ym-full textarea,
+  .ym-full select {
+    width: 100%;
+  }
+  .ym-full .ym-fbox-wrap {
+    width: 100%;
+  }
+
+  /**
+  *  Columnar forms display - technical base (optional)
+  *
+  *  |-------------------------------------------|
+  *  | form                                      |
+  *  |-------------------------------------------|
+  *  |                                           |
+  *  |   label   |   input / select / textarea   |
+  *  |                                           |
+  *  |-------------------------------------------|
+  *  | /form                                     |
+  *  |-------------------------------------------|
+  *
+  *  (en) Styling of forms where label floats left of form-elements
+  *  (de) Formulargestaltung, bei der die label-Elemente nach links fließen
+  */
+  .ym-columnar input,
+  .ym-columnar textarea,
+  .ym-columnar select {
+    float: left;
+    margin-right: -3px;
+  }
+  .ym-columnar label,
+  .ym-columnar .ym-label {
+    display: inline;
+    float: left;
+    width: 30%;
+    z-index: 1;
+  }
+  .ym-columnar .ym-fbox-check input,
+  .ym-columnar .ym-message {
+    margin-left: 30%;
+  }
+  .ym-columnar .ym-fbox-wrap {
+    margin-left: 30%;
+    margin-right: -3px;
+  }
+  .ym-columnar .ym-fbox-wrap .ym-message {
+    margin-left: 0%;
+  }
+  .ym-columnar .ym-fbox-wrap label {
+    float: none;
+    width: auto;
+    z-index: 1;
+    margin-left: 0;
+  }
+  .ym-columnar .ym-fbox-wrap input {
+    margin-left: 0;
+    position: relative;
+  }
+  .ym-columnar .ym-fbox-check {
+    position: relative;
+  }
+  .ym-columnar .ym-fbox-check label,
+  .ym-columnar .ym-fbox-check .ym-label {
+    padding-top: 0;
+  }
+  .ym-columnar .ym-fbox-check input {
+    top: 3px;
+  }
+  .ym-columnar .ym-fbox-button input {
+    float: none;
+    margin-right: 1em;
+  }
+
+  .ym-fbox-wrap + .ym-fbox-wrap {
+    margin-top: 0.5em;
+  }
+
+  /* global and local columnar settings for button alignment */
+  .ym-columnar fieldset .ym-fbox-button,
+  fieldset.ym-columnar .ym-fbox-button {
+    padding-left: 30%;
+  }
+
+  /**
+  * @section Accessibility Module
+  *
+  * (en) skip links and hidden content
+  * (de) Skip-Links und versteckte Inhalte
+  */
+  /* (en) classes for invisible elements in the base layout */
+  /* (de) Klassen für unsichtbare Elemente im Basislayout */
+  .ym-skip,
+  .ym-hideme,
+  .ym-print {
+    position: absolute;
+    top: -32768px;
+    left: -32768px;
+  }
+
+  /* (en) make skip links visible when using tab navigation */
+  /* (de) Skip-Links für Tab-Navigation sichtbar schalten */
+  .ym-skip:focus,
+  .ym-skip:active {
+    position: static;
+    top: 0;
+    left: 0;
+  }
+
+  /* skiplinks:technical setup */
+  .ym-skiplinks {
+    position: absolute;
+    top: 0px;
+    left: -32768px;
+    z-index: 1000;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  .ym-skiplinks .ym-skip:focus,
+  .ym-skiplinks .ym-skip:active {
+    left: 32768px;
+    outline: 0 none;
+    position: absolute;
+    width: 100%;
+  }
+}
+@media print {
+  /**
+  * @section print adjustments for core modules
+  *
+  * (en) float containment for grids. Uses display:table to avoid bugs in FF & IE
+  * (de) Floats in Grids einschließen. Verwendet display:table, um Darstellungsprobleme im FF & IE zu vermeiden
+  *
+  * @bugfix
+  * @since     3.0
+  * @affected  FF2.0, FF3.0, IE7
+  * @css-for   all browsers
+  * @valid     yes
+  */
+  .ym-grid > .ym-gl,
+  .ym-grid > .ym-gr {
+    overflow: visible;
+    display: table;
+    table-layout: fixed;
+  }
+
+  /* (en) make .ym-print class visible */
+  /* (de) .ym-print-Klasse sichtbar schalten */
+  .ym-print {
+    position: static;
+    left: 0;
+  }
+
+  /* (en) generic class to hide elements for print */
+  /* (de) Allgemeine CSS Klasse, um beliebige Elemente in der Druckausgabe auszublenden */
+  .ym-noprint {
+    display: none !important;
+  }
+}

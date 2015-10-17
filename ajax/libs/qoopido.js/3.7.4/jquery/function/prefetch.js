@@ -1,0 +1,2 @@
+/*! Qoopido.js library 3.7.4, 2015-08-14 | https://github.com/dlueth/qoopido.js | (c) 2015 Dirk Lueth */
+!function(e,r){r.qoopido.register("jquery/function/prefetch",e,["jquery"])}(function(e,r,n,t){"use strict";var i=e.jquery||n.jQuery,u=i("head"),f=[];return i.prefetch=function(){var e=i.unique(i('a[rel="prefetch"]').removeAttr("rel").map(function(){return i(this).attr("href")}));e.each(function(e,r){-1===i.inArray(r,f)&&(i("<link />",{rel:"prefetch",href:r}).appendTo(u),i("<link />",{rel:"prerender",href:r}).appendTo(u))})},i},this);

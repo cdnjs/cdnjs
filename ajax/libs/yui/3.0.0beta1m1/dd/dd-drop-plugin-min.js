@@ -1,0 +1,1 @@
+YUI.add("dd-drop-plugin",function(A){var B=function(C){C.node=C.owner;B.superclass.constructor.apply(this,arguments);};B.NAME="dd-drop-plugin";B.NS="drop";A.extend(B,A.DD.Drop);A.namespace("plugin");A.plugin.Drop=B;},"@VERSION@",{skinnable:false,requires:["dd-drop"]});

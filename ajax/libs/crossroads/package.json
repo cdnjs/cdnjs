@@ -10,7 +10,7 @@
     "router"
   ],
   "homepage": "http://millermedeiros.github.com/crossroads.js/",
-  "version": "0.12.0",
+  "version": "0.12.2",
   "author": {
     "name": "Miller Medeiros",
     "url": "http://blog.millermedeiros.com/"
@@ -19,24 +19,8 @@
     "type": "git",
     "url": "https://github.com/millermedeiros/crossroads.js.git"
   },
-  "main": "dist/crossroads.js",
-  "bugs": "https://github.com/millermedeiros/crossroads.js/issues",
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "http://www.opensource.org/licenses/mit-license.php"
-    }
-  ],
   "dependencies": {
     "signals": "<2.0"
-  },
-  "devDependencies": {
-    "uglify-js": "~1.2.3",
-    "jasmine-node": "1.0.x"
-  },
-  "scripts": {
-    "pretest": "node build",
-    "test": "node node_modules/.bin/jasmine-node dev/tests/spec"
   },
   "readme": "[![Build Status](https://secure.travis-ci.org/millermedeiros/crossroads.js.png)](https://travis-ci.org/millermedeiros/crossroads.js)\n\n---\n\n![Crossroads - JavaScript Routes](https://github.com/millermedeiros/crossroads.js/raw/master/_assets/crossroads_logo.png)\n\n\n## Introduction ##\n\nCrossroads.js is a routing library inspired by URL Route/Dispatch utilities present on frameworks like Rails, Pyramid, Django, CakePHP, CodeIgniter, etc...\nIt parses a string input and decides which action should be executed by matching the string against multiple patterns.\n\nIf used properly it can reduce code complexity by decoupling objects and also by abstracting navigation paths.\n\nSee [project page](http://millermedeiros.github.com/crossroads.js/) for documentation and more details.\n\n\n\n\n## Links ##\n\n - [Project page and documentation](http://millermedeiros.github.com/crossroads.js/)\n - [Usage examples](https://github.com/millermedeiros/crossroads.js/wiki/Examples)\n - [Changelog](https://github.com/millermedeiros/crossroads.js/blob/master/CHANGELOG.md)\n\n\n\n## Dependencies ##\n\n**This library requires [JS-Signals](http://millermedeiros.github.com/js-signals/) to work.**\n\n\n\n## License ##\n\n[MIT License](http://www.opensource.org/licenses/mit-license.php)\n\n\n\n## Distribution Files ##\n\nFiles inside `dist` folder.\n\n * crossroads.js : Uncompressed source code with comments.\n * crossroads.min.js : Compressed code.\n\nYou can install Crossroads on Node.js using [NPM](http://npmjs.org/)\n\n    npm install crossroads\n\n\n\n## Repository Structure ##\n\n### Folder Structure ###\n\n    dev       ->  development files\n    |- lib          ->  3rd-party libraries\n    |- src          ->  source files\n    |- tests        ->  unit tests\n    dist      ->  distribution files\n\n### Branches ###\n\n    master      ->  always contain code from the latest stable version\n    release-**  ->  code canditate for the next stable version (alpha/beta)\n    dev         ->  main development branch (nightly)\n    gh-pages    ->  project page\n    **other**   ->  features/hotfixes/experimental, probably non-stable code\n\n\n\n## Building your own ##\n\nThis project uses [Node.js](http://nodejs.org/) for the build process. If for some reason you need to build a custom version install Node.js and run:\n\n    node build\n\nThis will delete all JS files inside the `dist` folder, merge/update/compress source files and copy the output to the `dist` folder.\n\n**IMPORTANT:** `dist` folder always contain the latest version, regular users should **not** need to run build task.\n\n\n\n## Running unit tests ##\n\n### On the browser ###\n\nOpen `dev/tests/spec_runner-dist.html` on your browser.\n\n`spec_runner-dist` tests `dist/crossroads.js` and `spec_runner-dev` tests files inside\n`dev/src` - they all run the same specs.\n\n\n### On Node.js ###\n\nInstall [npm](http://npmjs.org) and run:\n\n```\nnpm install --dev\nnpm test\n```\n\nEach time you run `npm test` the files inside the `dist` folder will be updated\n(it executes `node build` as a `pretest` script).\n",
   "_id": "crossroads@0.12.0",
@@ -44,11 +28,12 @@
   "npmName": "crossroads",
   "npmFileMap": [
     {
-      "basePath": "/",
+      "basePath": "dist",
       "files": [
-        "dist/crossroads.js",
-        "dist/crossroads.min.js"
+        "crossroads.js",
+        "crossroads.min.js"
       ]
     }
-  ]
+  ],
+  "license": "MIT"
 }

@@ -1,0 +1,190 @@
+/*---------------------------------------
+   Label.css
+
+   Developed By Hosein Emrani:
+
+    | Twitter: (@hoseiin)
+    | Facebook: (fb.com/hosein.emrani)
+    | Mail: hoseiin[at]outlook[dot]com
+    
+   Github: http://github.com/usablica/label.css
+       
+   With love in usablica, Tehran. 
+----------------------------------------*/
+
+/* Basic CSS for the label */
+.label[data-label] {
+    position: relative;
+    font-family: Arial;
+    margin: auto;
+    display: inline-block;
+    width: auto; 
+    overflow: hidden;
+}
+/* Bootstrap Hack! */
+
+/* Bootstrap also has ".label" class. these are for seprating styles!  */
+
+.label[data-label] {
+  padding:initial !important;
+  font-size:initial !important;
+  font-weight: initial !important;
+  line-height: initial !important;
+  color: initial !important;
+  text-shadow:initial !important;
+  white-space:initial !important;
+  vertical-align: initial !important;
+  background-color: initial !important;
+  border-radius: initial !important;
+}
+
+/* Label RTL Support */
+.label[data-label].rtl:after,
+.label[data-label].rtl:before {
+    text-align: right;
+    direction: rtl;
+}
+/* Label After Design */
+.label[data-label]:after,
+.label[data-label]:before { 
+    position: absolute;
+    
+    height: auto;
+    width: 98%;
+    display: block;
+    
+    padding:1%;
+    display: block;
+    background:rgba(242, 242, 242, 0.80);
+    
+    content:attr(data-label);
+    
+}
+.label[data-label] span[data-label] {
+    content: attr(data-label);
+}
+
+/* Now we just wanna choose the position of the label with class names. */
+
+/*  Positions Seprated to two category: "outer","inner". 
+    Each of them have subcategories in axises left or right, top, bottom,middle and center */
+
+/* Inside positions */
+
+/* we don't neeed these to show. */
+.label[data-label].top:after,
+.label[data-label].bottom:before,
+.label[data-label].inside.middle:before
+ { 
+    display: none;
+}
+/* top positions*/
+.label[data-label].inside.top:before {
+    top: 0px;
+}
+/* bottom positions*/
+.label[data-label].bottom:after { 
+    bottom:1%;
+}
+/* middle positions */
+.label[data-label].inside.middle:after {
+    top: 45%;
+}
+
+/* Left or Right Axis */
+.label[data-label].inside.left:after,.label[data-label].inside.left:before {
+    float: left;
+    width: auto;
+    left: 0px;
+}
+
+.label[data-label].inside.right:after,.label[data-label].inside.right:before { 
+    float: right;
+    width: auto;
+    right: 0px;
+}
+
+/* Outside Positions basics */
+.label[data-label].outside {
+    overflow: initial;
+}
+.label[data-label].outside:after,
+.label[data-label].outside:before { 
+    position: relative;
+    background: none;
+}
+.label[data-label].outside:after {
+    margin-bottom: -5%;
+}
+.label[data-label].outside:before {
+    margin-top: -5%;
+}
+
+/* let's play with CSS3 Transitions and make very cute effects for hovering! */
+
+/* fade effect */
+.label[data-label].fade:after,
+.label[data-label].fade:before,
+.label[data-label].float:after,
+.label[data-label].float:before {
+	transition:all 0.25s ease;
+    -webkit-transition:all 0.25s ease;
+    -moz-transition:all 0.25s ease;
+    -ms-transition:all 0.25s ease;
+    -o-transition:all 0.25s ease;
+}
+.label[data-label].fade:after,
+.label[data-label].fade:before {
+    opacity: 0;
+    visibility: hidden;
+}
+.label[data-label].fade:hover:after,
+.label[data-label].fade:hover:before {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* float effect */
+
+.label[data-label].inside.top.float:before {
+    top: -15px;
+}
+.label[data-label].inside.top.float:hover:before {
+    top: 0;
+}
+.label[data-label].inside.bottom.float:after {
+    bottom: -5px;
+}
+.label[data-label].inside.bottom.float:hover:after {
+    bottom: 1%;
+}
+.label[data-label].inside.middle.float:after {
+    margin-top: 20px;
+}
+.label[data-label].inside.middle.float:hover:after {
+    margin-top: 0px;
+}
+.label[data-label].outside.top.float:before { 
+    top: 10px;
+}
+.label[data-label].outside.top.float:hover:before {
+    top: 0px;
+}
+.label[data-label].outside.bottom.float:after { 
+    top: -10px;
+}
+.label[data-label].outside.bottom.float:hover:after {
+    top: 0px;
+}
+
+.label[data-label].float:after,
+.label[data-label].float:before {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.label[data-label].float:hover:after,
+.label[data-label].float:hover:before {
+    opacity: 1;
+    visibility: visible;
+}

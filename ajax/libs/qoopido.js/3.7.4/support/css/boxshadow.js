@@ -1,0 +1,2 @@
+/*! Qoopido.js library 3.7.4, 2015-08-14 | https://github.com/dlueth/qoopido.js | (c) 2015 Dirk Lueth */
+!function(s,o){o.qoopido.register("support/css/boxshadow",s,["../../support"])}(function(s,o,t,r){"use strict";return s.support.addTest("/css/boxshadow",function(o){s.support.supportsCssProperty("box-shadow")?o.resolve(s.support.getCssProperty("box-shadow")):o.reject()})},this);

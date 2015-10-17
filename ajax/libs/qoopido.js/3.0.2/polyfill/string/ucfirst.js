@@ -1,0 +1,1 @@
+(function(t){"use strict";"function"==typeof define&&define.amd?define(t):t()})(function(){"use strict";String.prototype.ucfirst||(String.prototype.ucfirst=function(){var t=this;return t.charAt(0).toUpperCase()+t.slice(1)})});

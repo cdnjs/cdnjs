@@ -1,0 +1,1 @@
+YUI.add("dom-base",function(a){},"@VERSION@",{requires:["dom-core","dom-attrs","dom-class","dom-create","dom-size"]});

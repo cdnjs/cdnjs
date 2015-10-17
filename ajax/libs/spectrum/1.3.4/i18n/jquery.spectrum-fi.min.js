@@ -1,0 +1,1 @@
+!function(e){var t=e.spectrum.localization.fi={cancelText:"Kumoa",chooseText:"Valitse"};e.extend(e.fn.spectrum.defaults,t)}(jQuery);

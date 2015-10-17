@@ -2,6 +2,7 @@
 var glob = require('glob');
 var fs = require('fs');
 var execSync = require('execSync');
+var isThere = require('is-there');
 
 
 glob("../ajax/libs/**/package.json", function (error, matches) {
@@ -27,7 +28,7 @@ glob("../ajax/libs/**/package.json", function (error, matches) {
                 }
 
                 if (typeof result[3] == "undefined") { //
-                    if (!fs.existsSync(temp.files[i] + ".gz")) {
+                    if (!isThere.sync(temp.files[i] + ".gz")) {
                         console.log('zopfli', temp.files[i])
                         execSync.exec('zopfli ' + temp.files[i]);
                         console.log('zopfli ended')

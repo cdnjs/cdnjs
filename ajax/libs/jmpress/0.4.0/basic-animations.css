@@ -1,0 +1,212 @@
+/*!
+ * jmpress.js v0.4.0
+ * http://shama.github.com/jmpress.js
+ *
+ * A jQuery plugin to build a website on the infinite canvas.
+ *
+ * Copyright 2012 Kyle Robinson Young @shama & Tobias Koppers @sokra
+ * Licensed MIT
+ * http://www.opensource.org/licenses/mit-license.php
+ *
+ * Based on the foundation laid by Bartek Szopka @bartaz
+ */
+
+.will-appear {
+	opacity: 0;
+}
+
+.do-appear {
+	opacity: 1;
+}
+
+
+.will-drive-right, .will-drive-left {
+	position: relative;
+
+	-webkit-transition: opacity 0.6s, left 1s;
+	-moz-transition:    opacity 0.6s, left 1s;
+	-ms-transition:     opacity 0.6s, left 1s;
+	-o-transition:      opacity 0.6s, left 1s;
+	transition:         opacity 0.6s, left 1s;
+
+	opacity: 0;
+}
+.will-drive-right {
+	left: -300px;
+}
+.will-drive-left {
+	left: 300px;
+}
+.will-drive-down, .will-drive-up {
+	position: relative;
+
+	-webkit-transition: opacity 0.6s, top 1s;
+	-moz-transition:    opacity 0.6s, top 1s;
+	-ms-transition:     opacity 0.6s, top 1s;
+	-o-transition:      opacity 0.6s, top 1s;
+	transition:         opacity 0.6s, top 1s;
+
+	opacity: 0;
+}
+.will-drive-down {
+	top: -300px;
+}
+.will-drive-up {
+	top: 300px;
+}
+
+.do-drive-up, .do-drive-down {
+	opacity: 1;
+	top: 0px;
+}
+.do-drive-right, .do-drive-left {
+	opacity: 1;
+	left: 0px;
+}
+
+.will-expand {
+	-webkit-transition: all 1s;
+	-moz-transition:    all 1s;
+	-ms-transition:     all 1s;
+	-o-transition:      all 1s;
+	transition:         all 1s;
+
+	opacity: 0;
+
+	-webkit-transform: translate3d(0,0,1px) scale(0.7,1);
+	-moz-transform:    translate3d(0,0,1px) scale(0.7,1);
+	-ms-transform:     translate3d(0,0,1px) scale(0.7,1);
+	-o-transform:      translate3d(0,0,1px) scale(0.7,1);
+	transform:         translate3d(0,0,1px) scale(0.7,1);
+}
+
+.do-expand {
+	opacity: 1;
+
+	-webkit-transform: translate3d(0,0,1px) scale(1,1);
+	-moz-transform:    translate3d(0,0,1px) scale(1,1);
+	-ms-transform:     translate3d(0,0,1px) scale(1,1);
+	-o-transform:      translate3d(0,0,1px) scale(1,1);
+	transform:         translate3d(0,0,1px) scale(1,1);
+}
+
+.has-expand {
+	-webkit-transform: none;
+	-moz-transform:    none;
+	-ms-transform:     none;
+	-o-transform:      none;
+	transform:         none;
+}
+
+
+.will-fade {
+	-webkit-transition: opacity 1s;
+	-moz-transition:    opacity 1s;
+	-ms-transition:     opacity 1s;
+	-o-transition:      opacity 1s;
+	transition:         opacity 1s;
+
+	opacity: 0;
+}
+.will-fade-slow {
+	-webkit-transition: opacity 2s;
+	-moz-transition:    opacity 2s;
+	-ms-transition:     opacity 2s;
+	-o-transition:      opacity 2s;
+	transition:         opacity 2s;
+
+	opacity: 0;
+}
+.will-fade-fast {
+	-webkit-transition: opacity 0.5s;
+	-moz-transition:    opacity 0.5s;
+	-ms-transition:     opacity 0.5s;
+	-o-transition:      opacity 0.5s;
+	transition:         opacity 0.5s;
+
+	opacity: 0;
+}
+
+.do-fade, .do-fade-slow, .do-fade-fast {
+	opacity: 1;
+}
+
+
+.will-warp-right, .will-warp-left {
+	position: relative;
+
+	-webkit-transition: opacity 0.2s, left 0.5s ease-in-out;
+	-moz-transition:    opacity 0.2s, left 0.5s ease-in-out;
+	-ms-transition:     opacity 0.2s, left 0.5s ease-in-out;
+	-o-transition:      opacity 0.2s, left 0.5s ease-in-out;
+	transition:         opacity 0.2s, left 0.5s ease-in-out;
+
+	opacity: 0;
+}
+.will-warp-right {
+	left: -600px;
+}
+.will-warp-left {
+	left: 600px;
+}
+.will-warp-down, .will-warp-up {
+	position: relative;
+
+	-webkit-transition: opacity 0.2s, top 0.5s ease-in-out;
+	-moz-transition:    opacity 0.2s, top 0.5s ease-in-out;
+	-ms-transition:     opacity 0.2s, top 0.5s ease-in-out;
+	-o-transition:      opacity 0.2s, top 0.5s ease-in-out;
+	transition:         opacity 0.2s, top 0.5s ease-in-out;
+
+	opacity: 0;
+}
+.will-warp-down {
+	top: -600px;
+}
+.will-warp-up {
+	top: 600px;
+}
+
+.do-warp-up, .do-warp-down {
+	opacity: 1;
+	top: 0px;
+}
+.do-warp-right, .do-warp-left {
+	opacity: 1;
+	left: 0px;
+}
+
+.will-zoom {
+	-webkit-transition: all 1s ease-in-out;
+	-moz-transition:    all 1s ease-in-out;
+	-ms-transition:     all 1s ease-in-out;
+	-o-transition:      all 1s ease-in-out;
+	transition:         all 1s ease-in-out;
+
+	opacity: 0;
+
+	-webkit-transform: translate3d(0,0,1px) scale(10,10);
+	-moz-transform:    translate3d(0,0,1px) scale(10,10);
+	-ms-transform:     translate3d(0,0,1px) scale(10,10);
+	-o-transform:      translate3d(0,0,1px) scale(10,10);
+	transform:         translate3d(0,0,1px) scale(10,10);
+}
+
+.do-zoom {
+	opacity: 1;
+
+	-webkit-transform: translate3d(0,0,1px) scale(1,1);
+	-moz-transform:    translate3d(0,0,1px) scale(1,1);
+	-ms-transform:     translate3d(0,0,1px) scale(1,1);
+	-o-transform:      translate3d(0,0,1px) scale(1,1);
+	transform:         translate3d(0,0,1px) scale(1,1);
+}
+
+.has-zoom {
+	-webkit-transform: none;
+	-moz-transform:    none;
+	-ms-transform:     none;
+	-o-transform:      none;
+	transform:         none;
+}
+

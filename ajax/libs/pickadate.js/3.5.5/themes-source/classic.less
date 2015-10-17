@@ -1,0 +1,103 @@
+/*!
+ * Classic picker styling for pickadate.js
+ * Demo: http://amsul.github.io/pickadate.js
+ */
+
+@import "_variables.less";
+
+
+/**
+ * Note: the root picker element should *NOT* be styled more than what’s here.
+ */
+.picker {
+
+    // Make it full-width so that it doesn’t collapse.
+    width: 100%;
+}
+
+
+
+/**
+ * The holder is the base of the picker.
+ */
+.picker__holder {
+
+    // The base stylings.
+    position: absolute;
+    background: @bg-white;
+
+    // Add a light border - except top & bottom to let it collapse.
+    border: 1px solid lighten( @border-grey, 20% );
+    border-top-width: 0;
+    border-bottom-width: 0;
+
+    // Round the bottom corners.
+    border-radius: 0 0 @picker-border-radius @picker-border-radius;
+
+    // Let’s not go 100% + 2px.
+    box-sizing: border-box;
+
+    // Specify the min & max widths.
+    min-width: @classic-min-width;
+    max-width: @classic-max-width;
+
+    // Hide everything to begin with.
+    max-height: 0;
+    .opacity( 0 );
+
+    // Tilt the picker.
+    transform: translateY( -1em ) perspective( 600px ) rotateX( 10deg );
+
+    // Everything should be smoothly animated – the height & border should wait till the rest is done.
+    transition: transform @speed-animate-in ease-out,
+                opacity @speed-animate-in ease-out,
+                max-height 0s @speed-animate-in,
+                border-width 0s @speed-animate-in;
+}
+
+
+
+/**
+ * The frame and wrap work together to ensure that
+ * clicks within the picker don’t reach the holder.
+ */
+.picker__frame {
+    padding: 1px;
+}
+.picker__wrap {
+    margin: -1px;
+}
+
+
+
+/**
+ * When the picker opens...
+ */
+.picker--opened {
+
+    .picker__holder {
+
+        // Reveal the content.
+        max-height: @classic-max-height;
+        .opacity( 1 );
+
+        // Expand the top & bottom borders.
+        border-top-width: 1px;
+        border-bottom-width: 1px;
+
+        // Straighten the picker.
+        transform: translateY( 0 ) perspective( 600px ) rotateX( 0 );
+
+        // Everything should be smoothly animated – except the height & border.
+        transition: transform @speed-animate-in ease-out,
+                    opacity @speed-animate-in ease-out,
+                    max-height 0s,
+                    border-width 0s;
+
+        // Add a light shadow.
+        box-shadow: @classic-box-shadow;
+    }
+}
+
+
+

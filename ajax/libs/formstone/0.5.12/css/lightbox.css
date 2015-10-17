@@ -1,0 +1,662 @@
+/*! formstone v0.5.12 [lightbox.css] 2015-05-12 | MIT License | formstone.it */
+
+/**
+	 * @class
+	 * @name .fs-lightbox-element
+	 * @type element
+	 * @description Target elmement
+	 */
+/**
+	 * @class
+	 * @name .fs-lightbox
+	 * @type element
+	 * @description Base widget class
+	 */
+/**
+	 * @class
+	 * @name .fs-lightbox.fs-lightbox-open
+	 * @type modifier
+	 * @description Indicates open state
+	 */
+/**
+	 * @class
+	 * @name .fs-lightbox.fs-lightbox-loading
+	 * @type modifier
+	 * @description Indicates loading state
+	 */
+/**
+	 * @class
+	 * @name .fs-lightbox.fs-lightbox-animating
+	 * @type modifier
+	 * @description Indicates animating state
+	 */
+/**
+	 * @class
+	 * @name .fs-lightbox.fs-lightbox-mobile
+	 * @type modifier
+	 * @description Indicates mobile display
+	 */
+/**
+	 * @class
+	 * @name .fs-lightbox.fs-lightbox-fixed
+	 * @type modifier
+	 * @description Indicates fixed positioning
+	 */
+/**
+	 * @class
+	 * @name .fs-lightbox.fs-lightbox-inline
+	 * @type modifier
+	 * @description Indicates inline content
+	 */
+/**
+	 * @class
+	 * @name .fs-lightbox.fs-lightbox-iframed
+	 * @type modifier
+	 * @description Indicates iFrame content
+	 */
+.fs-lightbox {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  right: 0;
+  left: 0;
+  z-index: 101;
+  background: #ffffff;
+  border-radius: 3px;
+  box-shadow: 0 0 25px #000000;
+  opacity: 0;
+  margin: 0 auto;
+  padding: 10px;
+  -webkit-transform: translateZ(0);
+  /**
+		 * @class
+		 * @name .fs-lightbox-overlay
+		 * @type element
+		 * @description Overlay element
+		 */
+  /**
+		 * @class
+		 * @name .fs-lightbox-close
+		 * @type element
+		 * @description Close element
+		 */
+  /**
+		 * @class
+		 * @name .fs-lightbox-loading_icon
+		 * @type element
+		 * @description Loading icon element
+		 */
+  /**
+		 * @class
+		 * @name .fs-lightbox-container
+		 * @type element
+		 * @description Container element
+		 */
+  /**
+		 * @class
+		 * @name .fs-lightbox-content
+		 * @type element
+		 * @description Content element
+		 */
+  /**
+		 * @class
+		 * @name .fs-lightbox-image
+		 * @type element
+		 * @description Image element
+		 */
+  /**
+		 * @class
+		 * @name .fs-lightbox-video
+		 * @type element
+		 * @description Video element
+		 */
+  /**
+		 * @class
+		 * @name .fs-lightbox-iframe
+		 * @type element
+		 * @description iFrame element
+		 */
+  /**
+		 * @class
+		 * @name .fs-lightbox-tools
+		 * @type element
+		 * @description Tools element
+		 */
+  /**
+		 * @class
+		 * @name .fs-lightbox-meta
+		 * @type element
+		 * @description Meta info element
+		 */
+  /**
+		 * @class
+		 * @name .fs-lightbox-controls
+		 * @type element
+		 * @description Controls container element
+		 */
+  /**
+		 * @class
+		 * @name .fs-lightbox-control
+		 * @type element
+		 * @description Control element
+		 */
+  /**
+		 * @class
+		 * @name .fs-lightbox-control.fs-lightbox-control_previous
+		 * @type modifier
+		 * @description Indicates previous control
+		 */
+  /**
+		 * @class
+		 * @name .fs-lightbox-control.fs-lightbox-control_next
+		 * @type modifier
+		 * @description Indicates next control
+		 */
+  /**
+		 * @class
+		 * @name .fs-lightbox-control.fs-lightbox-control_disabled
+		 * @type modifier
+		 * @description Indicates disbaled state
+		 */
+  /**
+		 * @class
+		 * @name .fs-lightbox-position
+		 * @type element
+		 * @description Position element
+		 */
+  /**
+		 * @class
+		 * @name .fs-lightbox-position_current
+		 * @type element
+		 * @description Current position element
+		 */
+  /**
+		 * @class
+		 * @name .fs-lightbox-position_total
+		 * @type element
+		 * @description Total position element
+		 */
+  /**
+		 * @class
+		 * @name .fs-lightbox-caption
+		 * @type element
+		 * @description Caption element
+		 */
+  /**
+		 * @class
+		 * @name .fs-lightbox-error
+		 * @type element
+		 * @description Error message element
+		 */
+  /**
+		 * @class
+		 * @name .fs-lightbox-lock
+		 * @type modifier
+		 * @description Indicates locked state; Applied to body element
+		 */
+}
+.fs-lightbox,
+.fs-lightbox * {
+  box-sizing: border-box;
+  -webkit-user-select: none !important;
+     -moz-user-select: none !important;
+      -ms-user-select: none !important;
+          user-select: none !important;
+}
+.fs-lightbox-fixed {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+.fs-lightbox-inline {
+  padding: 30px;
+}
+.fs-lightbox-animating {
+  -webkit-transition: height 0.25s ease, width 0.25s ease, opacity 0.25s linear, top 0.25s ease;
+          transition: height 0.25s ease, width 0.25s ease, opacity 0.25s linear, top 0.25s ease;
+}
+.fs-lightbox-animating .fs-lightbox-container {
+  -webkit-transition: opacity 0.25s linear 0.25s;
+          transition: opacity 0.25s linear 0.25s;
+}
+.fs-lightbox-overlay {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  background: #000000;
+  opacity: 0;
+  -webkit-transition: opacity 0.25s linear;
+          transition: opacity 0.25s linear;
+}
+.fs-lightbox-open {
+  opacity: 1;
+}
+.fs-lightbox-overlay.fs-lightbox-open {
+  opacity: 0.75;
+}
+.fs-lightbox-close {
+  border: none;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: -7.5px;
+  right: -7.5px;
+  z-index: 105;
+  background: #ffffff;
+  border-radius: 100%;
+  cursor: pointer;
+  display: block;
+  overflow: hidden;
+  padding: 0;
+  text-indent: 200%;
+  white-space: nowrap;
+}
+.fs-lightbox-close:focus {
+  outline: none;
+}
+.fs-lightbox-close:before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  color: #333333;
+  content: "\00d7";
+  display: block;
+  font-family: "Helvetica", Arial, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 30px;
+  margin: auto;
+  text-align: center;
+  text-indent: 0;
+  -webkit-transition: color 0.15s linear;
+          transition: color 0.15s linear;
+}
+.no-opacity .fs-lightbox-close {
+  text-indent: -999px;
+}
+.fs-lightbox-loading_icon {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 105;
+  display: block;
+  margin: auto;
+  opacity: 0;
+  -webkit-transition: opacity 0.25s linear;
+          transition: opacity 0.25s linear;
+}
+.fs-lightbox-loading_icon:before,
+.fs-lightbox-loading_icon:after {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 110%;
+  content: '';
+  display: block;
+}
+.fs-lightbox-loading_icon:before {
+  border: 5px solid rgba(51, 51, 51, 0.25);
+}
+.fs-lightbox-loading_icon:after {
+  -webkit-animation: fs-lightbox-loading-spin 0.75s linear infinite;
+          animation: fs-lightbox-loading-spin 0.75s linear infinite;
+  border: 5px solid transparent;
+  border-top-color: #333333;
+}
+@-webkit-keyframes fs-lightbox-loading-spin {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@keyframes fs-lightbox-loading-spin {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+.fs-lightbox-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 103;
+  background: #ffffff;
+  overflow: hidden;
+}
+.fs-lightbox-container:after {
+  clear: both;
+  content: '';
+  display: table;
+}
+.fs-lightbox-content {
+  width: 100%;
+  background: #ffffff;
+  opacity: 1;
+  overflow: hidden;
+  padding: 0;
+}
+.fs-lightbox-content:after {
+  clear: both;
+  content: '';
+  display: table;
+}
+.fs-lightbox-inline .fs-lightbox-content {
+  width: auto;
+}
+.fs-lightbox-iframed .fs-lightbox-content {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.fs-lightbox-image {
+  float: left;
+}
+.fs-lightbox-video {
+  width: 100%;
+  height: 100%;
+}
+.fs-lightbox-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  float: left;
+  overflow: auto;
+}
+.fs-lightbox-meta {
+  clear: both;
+  padding: 10px 10px 0;
+}
+.fs-lightbox-control {
+  border: none;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  z-index: 105;
+  background: #ffffff;
+  border-radius: 100%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  opacity: 1;
+  overflow: hidden;
+  text-indent: 200%;
+  -webkit-transition: opacity 0.15s linear;
+          transition: opacity 0.15s linear;
+  white-space: nowrap;
+}
+.fs-lightbox-control:focus {
+  outline: none;
+}
+.fs-lightbox-control:before {
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  content: '';
+  margin: auto;
+}
+.no-opacity .fs-lightbox-control {
+  text-indent: -999px;
+}
+.fs-lightbox-control_previous {
+  left: 20px;
+}
+.fs-lightbox-control_previous:before {
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 10.4px solid #333333;
+  margin-left: 14px;
+}
+.fs-lightbox-control_next {
+  right: 20px;
+}
+.fs-lightbox-control_next:before {
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 10.4px solid #333333;
+  margin-right: 14px;
+}
+.fs-lightbox-control_disabled {
+  opacity: 0;
+}
+.no-touch .fs-lightbox .fs-lightbox-control {
+  opacity: 0;
+}
+.no-touch .fs-lightbox:hover .fs-lightbox-control {
+  opacity: 1;
+}
+.no-touch .fs-lightbox .fs-lightbox-control_disabled,
+.no-touch .fs-lightbox:hover .fs-lightbox-control_disabled {
+  opacity: 0;
+  cursor: default;
+}
+.fs-lightbox-position {
+  color: #999999;
+  font-size: 12px;
+  margin: 5px 0;
+  padding: 0;
+}
+.fs-lightbox-caption:after {
+  clear: both;
+  content: '';
+  display: table;
+}
+.fs-lightbox-caption p {
+  color: #666666;
+  font-size: 14px;
+  margin: 5px 0;
+  padding: 0;
+}
+.fs-lightbox-caption_toggle {
+  display: none;
+}
+.fs-lightbox-error {
+  width: 250px;
+}
+.fs-lightbox-error p {
+  color: #990000;
+  font-size: 14px;
+  margin: 0;
+  padding: 25px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.fs-lightbox-loading .fs-lightbox-container {
+  opacity: 0;
+  -webkit-transition: opacity 0.25s linear;
+          transition: opacity 0.25s linear;
+}
+.fs-lightbox-loading .fs-lightbox-loading_icon {
+  opacity: 1;
+}
+.fs-lightbox-mobile {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: #111111;
+  border-radius: 0;
+  padding: 40px 0 0;
+}
+.fs-lightbox-mobile .fs-lightbox-close {
+  height: 40px;
+  width: 40px;
+  top: 0;
+  right: 0;
+  background: #111111;
+  border-radius: 0;
+}
+.fs-lightbox-mobile .fs-lightbox-close:before {
+  color: #cccccc;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 40px;
+}
+.fs-lightbox-mobile .fs-lightbox-loading_icon:before {
+  border-color: rgba(153, 153, 153, 0.25);
+}
+.fs-lightbox-mobile .fs-lightbox-loading_icon:after {
+  border-top-color: #999999;
+}
+.fs-lightbox-mobile .fs-lightbox-container {
+  background: #111111;
+}
+.fs-lightbox-mobile .fs-lightbox-content {
+  background-color: #111111;
+  padding: 0 15px;
+}
+.fs-lightbox-mobile .fs-lightbox-tools {
+  width: 100%;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #111111;
+}
+.fs-lightbox-mobile .fs-lightbox-control {
+  width: 50px;
+  height: 100%;
+  min-height: 50px;
+  background: #111111;
+  border-radius: 0;
+  box-shadow: none;
+  opacity: 1;
+}
+.fs-lightbox-mobile .fs-lightbox-control_previous {
+  left: 0;
+}
+.fs-lightbox-mobile .fs-lightbox-control_previous:before {
+  border-right-color: #eeeeee;
+  margin-left: 19px;
+}
+.fs-lightbox-mobile .fs-lightbox-control_next {
+  right: 0;
+}
+.fs-lightbox-mobile .fs-lightbox-control_next:before {
+  border-left-color: #eeeeee;
+  margin-right: 19px;
+}
+.no-touch .fs-lightbox-mobile .fs-lightbox-control,
+.no-touch .fs-lightbox-mobile:hover .fs-lightbox-control {
+  opacity: 1;
+}
+.fs-lightbox-mobile .fs-lightbox-control_disabled,
+.no-touch .fs-lightbox-mobile .fs-lightbox-control_disabled,
+.no-touch .fs-lightbox-mobile:hover .fs-lightbox-control_disabled {
+  opacity: 0;
+  cursor: default !important;
+}
+.fs-lightbox-mobile .fs-lightbox-meta {
+  padding: 15px 65px;
+}
+.fs-lightbox-mobile .fs-lightbox-position {
+  color: #999999;
+  font-size: 12px;
+  margin: 0;
+  padding: 0 15px 0 0;
+}
+.fs-lightbox-mobile .fs-lightbox-caption p {
+  color: #eeeeee;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+}
+.fs-lightbox-mobile .fs-lightbox-image {
+  -webkit-transition: none !important;
+          transition: none !important;
+  -webkit-transform: translate(0, 0);
+      -ms-transform: translate(0, 0);
+          transform: translate(0, 0);
+}
+.fs-lightbox-mobile.fs-lightbox-animated .fs-lightbox-image {
+  -webkit-transition: -webkit-transform 0.25s ease-out !important;
+          transition: transform 0.25s ease-out !important;
+}
+.fs-lightbox-mobile.fs-lightbox-inline .fs-lightbox-content,
+.fs-lightbox-mobile.fs-lightbox-iframe .fs-lightbox-content {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+.fs-lightbox-lock {
+  overflow: hidden !important;
+}
+.fs-lightbox-mobile.fs-lightbox-touch .fs-lightbox-tools {
+  width: auto;
+  position: static;
+  background: transparent;
+}
+.fs-lightbox-mobile.fs-lightbox-touch .fs-lightbox-controls {
+  width: 100%;
+  height: 50px;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 105;
+  background-color: #111111;
+  padding: 0 65px;
+}
+.fs-lightbox-mobile.fs-lightbox-touch .fs-lightbox-caption_toggle {
+  color: #999999;
+  display: block;
+  font-size: 12px;
+  line-height: 50px;
+}
+.fs-lightbox-mobile.fs-lightbox-touch .fs-lightbox-meta {
+  width: 100%;
+  height: 80%;
+  position: fixed;
+  top: 20%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 104;
+  background: #222222;
+  box-shadow: 0 0 25px #000000;
+  padding: 15px 15px 65px;
+  -webkit-transform: translate(0, 100%);
+      -ms-transform: translate(0, 100%);
+          transform: translate(0, 100%);
+  -webkit-transition: -webkit-transform 0.25s ease;
+          transition: transform 0.25s ease;
+}
+.fs-lightbox-touch.fs-lightbox-caption_open .fs-lightbox-meta {
+  -webkit-transform: translate(0, 0);
+      -ms-transform: translate(0, 0);
+          transform: translate(0, 0);
+}

@@ -1,0 +1,1 @@
+YUI.add("lang/datatable-base",function(A){A.Intl.add("datatable-base","",{summary:"",caption:""});},"@VERSION@");YUI.add("lang/datatable-sort",function(A){A.Intl.add("datatable-sort","",{sort_asc:"Asc",sort_desc:"Desc"});},"@VERSION@");YUI.add("lang/datatable",function(A){},"@VERSION@",{use:["lang/datatable-base","lang/datatable-sort"]});

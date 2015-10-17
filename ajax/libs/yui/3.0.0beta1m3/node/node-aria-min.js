@@ -1,0 +1,1 @@
+YUI.add("node-aria",function(B){var A=B.Node.prototype._addDOMAttr;B.Node.prototype._addDOMAttr=function(C){if(/^(?:role$|aria-)/.test(C)){this.addAttr(C,{getter:function(){return B.Node.getDOMNode(this).getAttribute(C,2);},setter:function(D){B.Node.getDOMNode(this).setAttribute(C,D);return D;}});}else{A.call(this,C);}};},"@VERSION@",{requires:["node-base"]});

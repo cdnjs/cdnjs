@@ -1,0 +1,1 @@
+YUI.add("anim-scroll",function(c,b){var a=Number;c.Anim.behaviors.scroll={set:function(g,h,j,k,l,f,i){var e=g._node,d=([i(l,a(j[0]),a(k[0])-a(j[0]),f),i(l,a(j[1]),a(k[1])-a(j[1]),f)]);if(d[0]){e.set("scrollLeft",d[0]);}if(d[1]){e.set("scrollTop",d[1]);}},get:function(e){var d=e._node;return[d.get("scrollLeft"),d.get("scrollTop")];}};},"@VERSION@",{"requires":["anim-base"]});

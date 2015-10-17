@@ -1,0 +1,1 @@
+YUI.add("controller",function(a){},"@VERSION@",{requires:["base-build"]});

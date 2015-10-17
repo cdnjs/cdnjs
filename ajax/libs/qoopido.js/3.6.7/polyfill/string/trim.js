@@ -1,0 +1,2 @@
+/*! Qoopido.js library 3.6.7, 2015-07-08 | https://github.com/dlueth/qoopido.js | (c) 2015 Dirk Lueth */
+!function(t){window.qoopido.register("polyfill/string/trim",t)}(function(t,r,i,n,o,e,p){"use strict";if(!String.prototype.trim){var g=new RegExp("^\\s+|\\s+$","g");String.prototype.trim=function(){return this.replace(g,"")}}return String.prototype.trim});

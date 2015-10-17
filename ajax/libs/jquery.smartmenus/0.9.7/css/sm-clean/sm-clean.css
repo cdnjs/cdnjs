@@ -1,0 +1,315 @@
+/*
+---------------------------------------------------------------
+  Note that styles you apply to the main menu items are inherited by the sub menus items too.
+  If you'd like to avoid this, you could use child selectors (not supported by IE6) - for example:
+  .sm-clean > li > a { ... } instead of .sm-clean a { ... }
+---------------------------------------------------------------*/
+
+
+/* Menu box
+===================*/
+
+	.sm-clean {
+		padding:0 10px;
+		background:#eee;
+		-moz-border-radius:50px;
+		-webkit-border-radius:50px;
+		border-radius:50px;
+	}
+	.sm-clean-vertical {
+		padding:10px 0;
+		-moz-border-radius:5px;
+		-webkit-border-radius:5px;
+		border-radius:5px;
+	}
+	.sm-clean ul {
+		border:1px solid #bbb;
+		padding:5px 0;
+		background:#fff;
+		-moz-border-radius:5px;
+		-webkit-border-radius:5px;
+		border-radius:5px;
+		-moz-box-shadow:0 5px 9px rgba(0,0,0,0.2);
+		-webkit-box-shadow:0 5px 9px rgba(0,0,0,0.2);
+		box-shadow:0 5px 9px rgba(0,0,0,0.2);
+	}
+	/* first sub level carets */
+	.sm-clean > li > ul:before {
+		content:'';
+		position:absolute;
+		top:-18px;
+		left:30px;
+		width:0;
+		height:0;
+		overflow:hidden;
+		border-width:9px; /* tweak size of the arrow */
+		border-style:dashed dashed solid dashed;
+		border-color:transparent transparent #bbb transparent;
+	}
+	.sm-clean > li > ul:after {
+		content:'';
+		position:absolute;
+		top:-16px;
+		left:31px;
+		width:0;
+		height:0;
+		overflow:hidden;
+		border-width:8px;
+		border-style:dashed dashed solid dashed;
+		border-color:transparent transparent #fff transparent;
+	}
+	/* no carets for vertical main */
+	.sm-clean-vertical > li > ul:before, .sm-clean-vertical > li > ul:after {
+		display:none;
+	}
+
+
+/* Menu items
+===================*/
+
+	.sm-clean a {
+		padding:12px;
+		color:#555;
+		font-size:18px;
+		line-height:17px;
+		font-family:'Lucida Sans Unicode','Lucida Sans','Lucida Grande',Arial,sans-serif;
+		text-decoration:none;
+	}
+	.sm-clean a:hover, .sm-clean a:focus, .sm-clean a:active,
+	.sm-clean a.highlighted {
+		color:#D23600;
+	}
+	.sm-clean-vertical a:hover, .sm-clean-vertical a:focus, .sm-clean-vertical a:active,
+	.sm-clean-vertical a.highlighted {
+		background:#fff;
+	}
+	.sm-clean a.has-submenu {
+		padding-right:25px;
+	}
+	.sm-clean-vertical a,
+ 	.sm-clean ul a {
+		padding:10px 20px;
+	}
+	.sm-clean-vertical a.has-submenu,
+ 	.sm-clean ul a.has-submenu {
+		padding-right:40px;
+	}
+	.sm-clean ul a {
+		font-size:16px;
+	}
+	.sm-clean ul a:hover, .sm-clean ul a:focus, .sm-clean ul a:active,
+	.sm-clean ul a.highlighted {
+		color:#D23600;
+		background:#eee;
+	}
+	/* current items - add the class manually to some item or check the "markCurrentItem" script option */
+	.sm-clean a.current, .sm-clean a.current:hover, .sm-clean a.current:focus, .sm-clean a.current:active {
+		color:#D23600;
+	}
+
+
+/* Sub menu indicators
+===================*/
+
+	.sm-clean a span.sub-arrow {
+		position:absolute;
+		right:12px;
+		top:50%;
+		margin-top:-3px;
+		/* we will use one-side border to create a triangle so that we don't use a real background image, of course, you can use a real image if you like too */
+		width:0;
+		height:0;
+		overflow:hidden;
+		border-width:4px; /* tweak size of the arrow */
+		border-style:solid dashed dashed dashed;
+		border-color:#555 transparent transparent transparent;
+	}
+	.sm-clean-vertical a span.sub-arrow,
+ 	.sm-clean ul a span.sub-arrow {
+		right:15px;
+		top:50%;
+		margin-top:-5px;
+		border-width:5px;
+		border-style:dashed dashed dashed solid;
+		border-color:transparent transparent transparent #555;
+	}
+
+
+/* Scrolling arrows containers for tall sub menus - test sub menu: "Sub test" -> "more..." -> "more..." in the default download package
+===================*/
+
+	.sm-clean span.scroll-up, .sm-clean span.scroll-down {
+		position:absolute;
+		display:none;
+		visibility:hidden;
+		overflow:hidden;
+		background:#fff;
+		height:20px;
+		/* width and position will be automatically set by the script */
+	}
+	.sm-clean span.scroll-up:hover, .sm-clean span.scroll-down:hover {
+		background:#eee;
+	}
+	.sm-clean span.scroll-up-arrow, .sm-clean span.scroll-down-arrow {
+		position:absolute;
+		top:0;
+		left:50%;
+		margin-left:-6px;
+		/* we will use one-side border to create a triangle so that we don't use a real background image, of course, you can use a real image if you like too */
+		width:0;
+		height:0;
+		overflow:hidden;
+		border-width:6px; /* tweak size of the arrow */
+		border-style:dashed dashed solid dashed;
+		border-color:transparent transparent #555 transparent;
+	}
+	.sm-clean span.scroll-up:hover span.scroll-up-arrow {
+		border-color:transparent transparent #D23600 transparent;
+	}
+	.sm-clean span.scroll-down-arrow {
+		top:8px;
+		border-style:solid dashed dashed dashed;
+		border-color:#555 transparent transparent transparent;
+	}
+	.sm-clean span.scroll-down:hover span.scroll-down-arrow {
+		border-color:#D23600 transparent transparent transparent;
+	}
+
+
+/*
+---------------------------------------------------------------
+  Responsiveness
+  These will make the sub menus collapsible when the screen width is too small.
+---------------------------------------------------------------*/
+
+
+/* decrease horizontal main menu items left/right padding to avoid wrapping */
+@media screen and (max-width: 850px) {
+	.sm-clean:not(.sm-clean-vertical) > li > a {
+		padding-left:8px;
+		padding-right:8px;
+	}
+	.sm-clean:not(.sm-clean-vertical) > li > a.has-submenu {
+		padding-right:25px;
+	}
+}
+@media screen and (max-width: 750px) {
+	.sm-clean:not(.sm-clean-vertical) > li > a {
+		padding-left:3px;
+		padding-right:3px;
+	}
+	.sm-clean:not(.sm-clean-vertical) > li > a.has-submenu {
+		padding-right:25px;
+	}
+}
+
+
+@media screen and (max-width: 700px) {
+
+	/* The following will make the sub menus collapsible for small screen devices (it's not recommended editing these) */
+	ul.sm-clean{width:auto !important;}
+	ul.sm-clean ul{display:none;position:static !important;top:auto !important;left:auto !important;margin-left:0 !important;margin-top:0 !important;width:auto !important;min-width:0 !important;max-width:none !important;}
+	ul.sm-clean>li{float:none;}
+	ul.sm-clean>li>a,ul.sm-clean ul.sm-nowrap>li>a{white-space:normal;}
+	ul.sm-clean iframe{display:none;}
+
+	/* Uncomment this rule to disable completely the sub menus for small screen devices */
+	/*.sm-clean ul, .sm-clean span.sub-arrow, .sm-clean iframe {
+		display:none !important;
+	}*/
+
+
+/* Menu box
+===================*/
+
+	.sm-clean {
+		padding:0;
+		-moz-border-radius:5px;
+		-webkit-border-radius:5px;
+		border-radius:5px;
+	}
+	.sm-clean ul {
+		border:0;
+		padding:0;
+		/* darken the background of the sub menus */
+		background:rgba(130,130,130,0.1);
+		-moz-border-radius:0;
+		-webkit-border-radius:0;
+		border-radius:0;
+		-moz-box-shadow:none;
+		-webkit-box-shadow:none;
+		box-shadow:none;
+	}
+	/* no carets */
+	.sm-clean > li > ul:before, .sm-clean > li > ul:after {
+		display:none;
+	}
+
+
+/* Menu items
+===================*/
+
+	.sm-clean a {
+		padding:13px 5px 13px 28px !important;
+		color:#555 !important;
+		background:transparent !important;
+	}
+	.sm-clean a.current {
+		color:#D23600 !important;
+	}
+	/* add some text indentation for the 2+ level sub menu items */
+	.sm-clean ul a {
+		border-left:8px solid transparent;
+	}
+	.sm-clean ul ul a {
+		border-left:16px solid transparent;
+	}
+	.sm-clean ul ul ul a {
+		border-left:24px solid transparent;
+	}
+	.sm-clean ul ul ul ul a {
+		border-left:32px solid transparent;
+	}
+	.sm-clean ul ul ul ul ul a {
+		border-left:40px solid transparent;
+	}
+
+
+/* Sub menu indicators
+===================*/
+
+	.sm-clean a span.sub-arrow,
+	.sm-clean ul a span.sub-arrow {
+		top:50%;
+		margin-top:-9px;
+		right:auto;
+		left:6px;
+		margin-left:0;
+		width:17px;
+		height:17px;
+		font:normal 16px/16px monospace !important;
+		text-align:center;
+		border:0;
+		text-shadow:none;
+		background:rgba(255,255,255,0.6);
+		-moz-border-radius:50px;
+		-webkit-border-radius:50px;
+		border-radius:50px;
+	}
+	/* Hide sub indicator when item is expanded - we enable the item link when it's expanded */
+	.sm-clean a.highlighted span.sub-arrow {
+		display:none !important;
+	}
+
+
+/* Items separators
+===================*/
+
+	.sm-clean li {
+		border-top:1px solid rgba(0,0,0,0.05);
+	}
+	.sm-clean > li:first-child {
+		border-top:0;
+	}
+
+}

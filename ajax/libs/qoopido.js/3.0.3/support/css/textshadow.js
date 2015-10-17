@@ -1,0 +1,1 @@
+(function(e,t){"use strict";function n(){return t.qoopido.initialize("support/css/textshadow",e,arguments)}"function"==typeof define&&define.amd?define(["../../support"],n):n()})(function(e){"use strict";return e.support.addTest("/css/textshadow",function(t){e.support.supportsCssProperty("text-shadow")?t.resolve(e.support.getCssProperty("text-shadow")):t.reject()})},window);

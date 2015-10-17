@@ -1,0 +1,2 @@
+/*! Qoopido.js library 3.7.4, 2015-08-14 | https://github.com/dlueth/qoopido.js | (c) 2015 Dirk Lueth */
+!function(t,o){o.qoopido.register("support/capability/touch",t,["../../support"])}(function(t,o,c,u){"use strict";var n=c.navigator;return t.support.addTest("/capability/touch",function(t){"ontouchstart"in c||c.DocumentTouch&&document instanceof DocumentTouch||n.maxTouchPoints>0||n.msMaxTouchPoints>0?t.resolve():t.reject()})},this);

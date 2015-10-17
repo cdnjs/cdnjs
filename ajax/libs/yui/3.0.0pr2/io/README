@@ -1,0 +1,27 @@
+*** version 3.0.0 PR2 ***
+
+* IO is now comprised of several modules, allowing users to specify and
+implement only the needed modules.  These modules are:
+
+- io-base.js: This is the IO base class, using XMLHttpRequest as the transport.
+- io-xdr.js: This sub-module extends IO to enable cross-domain transactions
+using Flash as the transport.
+- io-form.js: This sub-module extends IO to enable the serialization of an HTML
+form as transaction data.
+- io-upload-iframe.js: This sub-module extends IO, to allow file uploads with an
+HTML form, using an iframe transport.
+- io-queue.js: This sub-module extends IO to add transaction queuing
+capabilities.
+
+* [FIXED] SF2262707.  If defined in the configuration object, user-specified,
+HTTP "Content-Type" headers will correctly override POST default headers, for
+HTTP POST transactions.
+
+* XML is not supported as a response datatype when using sub-modules io-xdr.js
+and io-upload-iframe.js.
+
+*** version 3.0.0 PR1 ***
+
+* Initial Release
+
+

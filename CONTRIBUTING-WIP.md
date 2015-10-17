@@ -1,4 +1,4 @@
-# Contributing to cdnjs Library
+﻿# Contributing to cdnjs Library
 
 ## 0. Overview
 
@@ -35,7 +35,7 @@ Each cdnjs library has a `package.json` file. This file contains required and so
 
 ### 2.3 Auto-update example
 
-```
+```js
   "npmName": "lodash",
   "npmFileMap": [{
     "basePath": "/dist/",

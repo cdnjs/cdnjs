@@ -1,0 +1,6 @@
+/**
+ *  jQuery Prompt21
+ *  ===============
+ *  A minimalist jQuery prompt plugin for the 21st Century.
+ *  Created with JavaScript and <3 by the @jillix developers.
+ * */(function(e){var t={};t.unflattenObject=function(e){var t={},n=t,r=Object.keys(e);for(var i=0;i<r.length;++i){var s=r[i],o=s.split("."),u=o.pop();for(var a=0;a<o.length;++a){var f=o[a];n[f]=typeof n[f]=="undefined"?{}:n[f],n=n[f]}n[u]=e[s],n=t}return t};var n=e.fn.prompt21=function(r){function a(n){i[s.showFunc].call(i,function(){e(":input:first",u).focus()}),u.on("submit",function(){var r={};return e("[name]:input",u).each(function(){var t=e(this),n=t.attr("name"),i=t.val();if(t.attr("data-parse")==="json")try{i=JSON.parse(i)}catch(s){}r[n]=i}),r=t.unflattenObject(r),n(null,r),i[s.hideFunc](),!1})}var i=this,s=e.extend(r,n.defaults),o=e(s.cancel,i),u=e(s.form,i);return i.hide(),o.on("click",function(){return i[s.hideFunc](),u[0].reset(),!1}),{getData:a}};n.version="1.1.0",n.defaults={cancel:"button.cancel",showFunc:"fadeIn",hideFunc:"fadeOut",form:"form"}})($);

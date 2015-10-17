@@ -1,0 +1,1 @@
+YUI.add("node-event-delegate",function(b,a){b.Node.prototype.delegate=function(e){var d=b.Array(arguments,0,true),c=(b.Lang.isObject(e)&&!b.Lang.isArray(e))?1:2;d.splice(c,0,this._node);return b.delegate.apply(b,d);};},"@VERSION@",{"requires":["node-base","event-delegate"]});

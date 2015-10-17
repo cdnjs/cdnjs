@@ -1,0 +1,1 @@
+!function(e){var t=e.spectrum.localization["nl-nl"]={cancelText:"Annuleer",chooseText:"Kies",clearText:"Wis kleur selectie",togglePaletteMoreText:"Meer",togglePaletteLessText:"Minder"};e.extend(e.fn.spectrum.defaults,t)}(jQuery);

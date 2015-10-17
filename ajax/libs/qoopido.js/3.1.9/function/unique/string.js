@@ -1,0 +1,1 @@
+(function(t){window.qoopido.register("function/unique/string",t)})(function(){"use strict";function t(t){var e,r="";for(t=parseInt(t,10)||12,e=0;t>e;e++)r+=n[parseInt(Math.random()*(n.length-1),10)];return r}var e={},n="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");return function(n){var r;do r=t(n);while(e[r]!==undefined);return e[r]=!0,r}});

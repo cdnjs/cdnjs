@@ -1,0 +1,1 @@
+(function(t){window.qoopido.register("support/css/rem",t,["../../support"])})(function(t,e,r,n,o,i){"use strict";var s=t.support;return s.addTest("/css/rem",function(t){var e=s.pool?s.pool.obtain("div"):i.createElement("div");try{e.style.fontSize="3rem"}catch(r){}/rem/.test(e.style.fontSize)?t.resolve():t.reject(),e.dispose&&e.dispose()})});

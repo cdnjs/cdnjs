@@ -1,0 +1,1 @@
+YUI.add("dd-plugin",function(B){var A=function(C){C.node=C.owner;A.superclass.constructor.apply(this,arguments);};A.NAME="dd-plugin";A.NS="dd";B.extend(A,B.DD.Drag);B.namespace("plugin");B.plugin.Drag=A;},"@VERSION@",{requires:["dd-drag"],skinnable:false,optional:["dd-constrain","dd-proxy"]});

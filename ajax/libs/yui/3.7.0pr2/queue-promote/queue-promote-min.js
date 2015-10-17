@@ -1,0 +1,1 @@
+YUI.add("queue-promote",function(b,a){b.mix(b.Queue.prototype,{indexOf:function(c){return b.Array.indexOf(this._q,c);},promote:function(d){var c=this.indexOf(d);if(c>-1){this._q.unshift(this._q.splice(c,1)[0]);}},remove:function(d){var c=this.indexOf(d);if(c>-1){this._q.splice(c,1);}}});},"@VERSION@",{"requires":["yui-base"]});

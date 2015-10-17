@@ -1,0 +1,1 @@
+(function(t){window.qoopido.register("pool/array",t,["../pool"])})(function(t,e){"use strict";var n=t.pool.extend({_dispose:function(t){return t.length=0,t},_obtain:function(){return[]}});return e.pool=e.pool||{},e.pool.array=n.create(),n});

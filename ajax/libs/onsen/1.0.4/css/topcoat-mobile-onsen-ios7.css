@@ -1,0 +1,2655 @@
+/*
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+/*
+* This css is customized for Onsen UI Theming by Mitsunori KUBOTA<mitsunori@asial.co.jp>.
+*/
+
+* {
+  font-family: 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.quarter {
+  width: 25%;
+}
+
+.half {
+  width: 50%;
+}
+
+.three-quarters {
+  width: 75%;
+}
+
+.third {
+  width: 33.333%;
+}
+
+.two-thirds {
+  width: 66.666%;
+}
+
+.full {
+  width: 100%;
+}
+
+.left {
+  text-align: left;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+.reset-ui {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* topdoc
+  name: Button
+  description: A simple button
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup: 
+    <button class="topcoat-button">Button</button>
+    <button class="topcoat-button" disabled>Button</button>
+  showcase:
+    <div class="topcoat-navigation-bar">
+        <div class="topcoat-navigation-bar__item center full">
+            <h1 class="topcoat-navigation-bar__title">Button</h1>
+        </div>
+    </div>
+    <div style="padding:8px">
+        <button class="topcoat-button">Button</button>
+        <button class="topcoat-button--cta">Button</button>
+        <button class="topcoat-button--quiet">Button</button>
+
+        <br>
+        <br>
+
+        <div style="padding:4px 0px">
+            <button class="topcoat-button--large">Button</button>
+        </div>
+        <div style="padding:4px 0px">
+            <button class="topcoat-button--large--cta">Button</button>
+        </div>
+        <div style="padding:4px 0px">
+            <button class="topcoat-button--large--quiet">Button</button>
+        </div>
+    </div>
+*/
+
+/* topdoc
+  name: Button:Call To Action Button
+  markup:
+    <button class="topcoat-button--cta" >Button</button>
+    <button class="topcoat-button--cta" disabled>Button</button>
+*/
+
+/* topdoc
+  name: Button:Quiet Button
+  markup:
+    <button class="topcoat-button--quiet">Button</button>
+    <button class="topcoat-button--quiet" disabled>Button</button>
+*/
+
+/* topdoc
+  name: Button:Large Button
+  markup:
+    <button class="topcoat-button--large" >Button</button><br>
+    <button class="topcoat-button--large" disabled>Button</button>
+*/
+
+/* topdoc
+  name: Button:Large Quiet Button
+  markup:
+    <button class="topcoat-button--large--quiet">Button</button>
+    <button class="topcoat-button--large--quiet" disabled>Button</button>
+*/
+
+/* topdoc
+  name: Button:Large Call To Action Button
+  markup:
+    <button class="topcoat-button--large--cta" >Button</button><br>
+    <button class="topcoat-button--large--cta" disabled>Button</button>
+*/
+
+.button,
+.topcoat-button,
+.topcoat-button--quiet,
+.topcoat-button--large,
+.topcoat-button--large--quiet,
+.topcoat-button--cta,
+.topcoat-button--large--cta,
+.topcoat-button-bar__button,
+.topcoat-tab-bar__button {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.button--quiet {
+  background: transparent;
+  border: 1px solid transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.button--disabled,
+.topcoat-button:disabled,
+.topcoat-button--quiet:disabled,
+.topcoat-button--large:disabled,
+.topcoat-button--large--quiet:disabled,
+.topcoat-button--cta:disabled,
+.topcoat-button--large--cta:disabled,
+.topcoat-button-bar__button:disabled,
+.topcoat-tab-bar__button:disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+.topcoat-button,
+.topcoat-button--quiet,
+.topcoat-button--large,
+.topcoat-button--large--quiet,
+.topcoat-button--cta,
+.topcoat-button--large--cta,
+.topcoat-button-bar__button {
+  padding: 4px 20px;
+  font-size: 16px;
+  line-height: 36px;
+  letter-spacing: 0;
+  color: #c6c8c8;
+  color: #fff;
+  text-shadow: 0 1px none;
+  vertical-align: top;
+  background-color: transparent;
+  background-color: #1284ff;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: 1px solid #1284ff;
+  border: none;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-transition: background-color 0.2s linear, color 0.2s linear;
+  -moz-transition: background-color 0.2s linear, color 0.2s linear;
+  -o-transition: background-color 0.2s linear, color 0.2s linear;
+  transition: background-color 0.2s linear, color 0.2s linear;
+  font-weight: 400;
+}
+
+.topcoat-button:hover,
+.topcoat-button--quiet:hover,
+.topcoat-button--large:hover,
+.topcoat-button--large--quiet:hover,
+.topcoat-button--cta:hover,
+.topcoat-button--large--cta:hover {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+.topcoat-button:active,
+.topcoat-button--large:active,
+.topcoat-button-bar__button:active,
+:checked + .topcoat-button-bar__button {
+  background-color: #1284ff;
+  background-color: #78b9ff;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #fff;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+.topcoat-button:focus,
+.topcoat-button--quiet:focus,
+.topcoat-button--large:focus,
+.topcoat-button--cta:focus,
+.topcoat-button--large--cta:focus {
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  outline: 0;
+}
+
+.topcoat-button--quiet {
+  background: transparent;
+  border: 1px solid transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background: transparent;
+  color: #1284ff;
+  border: none;
+}
+
+.topcoat-button--quiet:disabled {
+  border: none;
+}
+
+.topcoat-button--quiet:active {
+  color: #c6c8c8;
+  color: #78b9ff;
+  text-shadow: 0 1px none;
+  background-color: #1284ff;
+  background-color: transparent;
+  border: 1px solid #1284ff;
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+.topcoat-button--large,
+.topcoat-button--large--quiet {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 36px;
+  padding: 4px 20px;
+  display: block;
+  width: 100%;
+}
+
+.topcoat-button--large:active {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+.topcoat-button--large--quiet {
+  background: transparent;
+  border: 1px solid transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #1284ff;
+}
+
+.topcoat-button--large--quiet:active {
+  color: #78b9ff;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+.topcoat-button--large--quiet:focus {
+  outline: 0;
+}
+
+.topcoat-button--cta,
+.topcoat-button--large--cta {
+  border: none;
+  background-color: #4cda64;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #fff;
+  font-weight: var-font-weight--cta;
+  text-shadow: none;
+}
+
+.topcoat-button--cta:active,
+color var-color--cta--down,
+.topcoat-button--large--cta:active {
+  background-color: #76e389;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+.topcoat-button--large--cta {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 36px;
+  padding: 4px 20px;
+  width: 100%;
+  display: block;
+}
+
+.topcoat-button--large--cta:active {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+.topcoat-button__spinner {
+  border: 3px solid #c6c8c8;
+  border: 3px solid #fff;
+}
+
+/* topdoc
+  name: Button Bar
+  description: Component of grouped buttons
+  modifiers:
+    :disabled: Disabled state
+  markup:
+    <div class="topcoat-button-bar" style="width:280px">
+      <div class="topcoat-button-bar__item">
+        <button class="topcoat-button-bar__button">One</button>
+      </div>
+      <div class="topcoat-button-bar__item">
+        <button class="topcoat-button-bar__button">Two</button>
+      </div>
+      <div class="topcoat-button-bar__item">
+        <button class="topcoat-button-bar__button">Three</button>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="topcoat-button-bar" style="width:280px">
+      <div class="topcoat-button-bar__item active">
+        <button class="topcoat-button-bar__button">One</button>
+      </div>
+      <div class="topcoat-button-bar__item">
+        <button class="topcoat-button-bar__button">Two</button>
+      </div>
+      <div class="topcoat-button-bar__item">
+        <button class="topcoat-button-bar__button">Three</button>
+      </div>
+    </div>
+
+  showcase:
+    <div class="topcoat-navigation-bar">
+        <div class="topcoat-navigation-bar__item center full">
+            <h1 class="topcoat-navigation-bar__title">Button Bar</h1>
+        </div>
+    </div>
+    <div style="padding:8px">
+      <div class="topcoat-button-bar" style="width:100%">
+        <div class="topcoat-button-bar__item active">
+          <button class="topcoat-button-bar__button">One</button>
+        </div>
+        <div class="topcoat-button-bar__item">
+          <button class="topcoat-button-bar__button">Two</button>
+        </div>
+        <div class="topcoat-button-bar__item">
+          <button class="topcoat-button-bar__button">Three</button>
+        </div>
+      </div>
+    </div>
+    <div style="padding:8px">
+      <div class="topcoat-button-bar" style="width:100%">
+        <div class="topcoat-button-bar__item">
+          <button class="topcoat-button-bar__button">One</button>
+        </div>
+        <div class="topcoat-button-bar__item active">
+          <button class="topcoat-button-bar__button">Two</button>
+        </div>
+        <div class="topcoat-button-bar__item">
+          <button class="topcoat-button-bar__button">Three</button>
+        </div>
+      </div>
+    </div>
+    <div style="padding:8px">
+      <div class="topcoat-button-bar" style="width:100%">
+        <div class="topcoat-button-bar__item">
+          <button class="topcoat-button-bar__button">One</button>
+        </div>
+        <div class="topcoat-button-bar__item">
+          <button class="topcoat-button-bar__button">Two</button>
+        </div>
+        <div class="topcoat-button-bar__item active">
+          <button class="topcoat-button-bar__button">Three</button>
+        </div>
+      </div>
+    </div>
+*/
+
+.button-bar,
+.topcoat-button-bar,
+.topcoat-tab-bar {
+  display: table;
+  table-layout: fixed;
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
+}
+
+.button-bar__item,
+.topcoat-button-bar__item,
+.topcoat-tab-bar__item {
+  display: table-cell;
+  width: auto;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+
+.button-bar__item > input,
+.topcoat-button-bar__item > input,
+.topcoat-tab-bar__item > input {
+  position: absolute;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  opacity: 0.001;
+  z-index: 1;
+  vertical-align: top;
+  outline: none;
+}
+
+.button-bar__button {
+  -webkit-border-radius: inherit;
+  border-radius: inherit;
+}
+
+.button-bar__itemdisabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+.topcoat-button-bar {
+  margin: 0;
+  border: 0px solid #1284ff;
+}
+
+.topcoat-button-bar__item {
+  border-top: 1px solid #1284ff;
+  border-bottom: 1px solid #1284ff;
+}
+
+.topcoat-button-bar > .topcoat-button-bar__item:first-child {
+  -webkit-border-top-left-radius: 4px;
+  border-top-left-radius: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.topcoat-button-bar > .topcoat-button-bar__item:last-child {
+  -webkit-border-top-right-radius: 4px;
+  border-top-right-radius: 4px;
+  -webkit-border-bottom-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.topcoat-button-bar__item:first-child > .topcoat-button-bar__button {
+  border-left: 1px solid #1284ff;
+  border-right: none;
+  border-right: 1px solid #1284ff;
+}
+
+.topcoat-button-bar__item:last-child > .topcoat-button-bar__button {
+  border-left: none;
+  border-right: 1px solid #1284ff;
+}
+
+.topcoat-button-bar__button {
+  -webkit-border-radius: inherit;
+  border-radius: inherit;
+  background-color: transparent;
+  color: #1284ff;
+  border: 0px solid #1284ff;
+  border-right: 1px solid #1284ff;
+  font-weight: 400;
+  padding: 0 8px;
+  height: 27px;
+  line-height: 27px;
+  font-size: 13px;
+  width: 100%;
+  -webkit-transition: background-color 0.2s linear, color 0.2s linear;
+  -moz-transition: background-color 0.2s linear, color 0.2s linear;
+  -o-transition: background-color 0.2s linear, color 0.2s linear;
+  transition: background-color 0.2s linear, color 0.2s linear;
+}
+
+.topcoat-button-bar__button:active,
+:checked + .topcoat-button-bar__button {
+  background-color: #b5d9ff;
+  color: #1284ff;
+  border: 0px solid #1284ff;
+  border-right: 1px solid #1284ff;
+  border-right: 1px solid #1284ff;
+  padding: 0 8px;
+  height: 27px;
+  line-height: 27px;
+  font-size: 13px;
+  width: 100%;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+.topcoat-button-bar__item.active > .topcoat-button-bar__button {
+  background-color: #1284ff;
+  color: #fff;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+.topcoat-button-bar__button:hover {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+.topcoat-button-bar__button:focus {
+  outline: 0;
+}
+
+/* topdoc
+  name: Icon Button
+  description: Like button, but it has an icon.
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <p>Icon Button</p>
+    <button class="topcoat-icon-button">
+      <i class="fa fa-bell" style="font-size:17px"></i> Label
+    </button>
+    <button class="topcoat-icon-button" disabled>
+      <i class="fa fa-bell" style="font-size:17px"></i> Label
+    </button>
+
+    <p>Quiet Icon Button</p>
+    <button class="topcoat-icon-button--quiet">
+      <i class="fa fa-bell" style="font-size:17px"></i> Label
+    </button>
+    <button class="topcoat-icon-button--quiet" disabled>
+      <i class="fa fa-bell" style="font-size:17px"></i> Label
+    </button>
+*/
+
+.topcoat-icon-button,
+.topcoat-icon-button--quiet {
+  padding: 4px 10px;
+  letter-spacing: 0;
+  color: #1284ff;
+  text-shadow: 0 1px none;
+  vertical-align: baseline;
+  background-color: transparent;
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: 1px solid #1284ff;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  border-radius: 3px;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.topcoat-icon-button:active {
+  background-color: #b5d9ff;
+}
+
+.topcoat-icon-button:disabled,
+.topcoat-icon-button--quiet:disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+.topcoat-icon-button:focus,
+.topcoat-icon-button--quiet:focus {
+  outline: 0;
+}
+
+.topcoat-icon-button--quiet {
+  background: transparent;
+  border: 1px solid transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background-color: transparent;
+  border: none;
+  color: #1284ff;
+}
+
+.topcoat-icon-button--quiet:active {
+  color: #c6c8c8;
+  color: #78b9ff;
+  text-shadow: 0 1px none;
+  background-color: #1284ff;
+  background-color: transparent;
+  border: 1px solid #1284ff;
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  box-shadow: none;
+}
+
+.topcoat-icon,
+.topcoat-icon--large {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  overflow: var-overflow;
+  width: 19.44px;
+  height: 19.44px;
+  vertical-align: middle;
+  top: 0;
+}
+
+.topcoat-icon--large {
+  width: 20.571428556px;
+  height: 20.571428556px;
+  top: 0px;
+}
+
+/* topdoc
+  name: Checkbox
+  description: Default skin for Topcoat checkbox
+  modifiers:
+    :focus: Focus state
+    :disabled: Disabled state
+  markup:
+    <label class="topcoat-checkbox">
+      <input type="checkbox">
+      <div class="topcoat-checkbox__checkmark"></div>
+      OFF
+    </label>
+    <br>
+    <label class="topcoat-checkbox">
+      <input type="checkbox" checked="checked">
+      <div class="topcoat-checkbox__checkmark"></div>
+      ON
+    </label>
+    <br>
+    <label class="topcoat-checkbox">
+      <input type="checkbox" disabled>
+      <div class="topcoat-checkbox__checkmark"></div>
+      Disabled
+    </label>
+  showcase:
+    <div class="topcoat-navigation-bar">
+        <div class="topcoat-navigation-bar__item center full">
+            <h1 class="topcoat-navigation-bar__title">Checkbox</h1>
+        </div>
+    </div>
+    <br>
+    <div class="topcoat-list">
+      <ul class="topcoat-list__container">
+        <li class="topcoat-list__item topcoat-list__item__line-height">
+          <label class="topcoat-checkbox">
+            <input type="checkbox" checked="checked">
+            <div class="topcoat-checkbox__checkmark"></div>
+            ON
+          </label>
+        </li>
+        <li class="topcoat-list__item topcoat-list__item__line-height">
+          <label class="topcoat-checkbox">
+            <input type="checkbox">
+            <div class="topcoat-checkbox__checkmark"></div>
+            OFF
+          </label>
+        </li>
+        <li class="topcoat-list__item topcoat-list__item__line-height">
+          <label class="topcoat-checkbox--noborder">
+            <input type="checkbox" checked="checked">
+            <div class="topcoat-checkbox__checkmark"></div>
+            ON
+          </label>
+        </li>
+        <li class="topcoat-list__item topcoat-list__item__line-height">
+          <label class="topcoat-checkbox--noborder">
+            <input type="checkbox">
+            <div class="topcoat-checkbox__checkmark"></div>
+            OFF
+          </label>
+        </li>
+      </ul>
+    </div>
+*/
+
+/* topdoc
+  name: Checkbox:Noborder Checkbox
+  markup:
+    <label class="topcoat-checkbox--noborder">
+      <input type="checkbox">
+      <div class="topcoat-checkbox__checkmark"></div>
+      OFF
+    </label>
+    <br>
+    <label class="topcoat-checkbox--noborder">
+      <input type="checkbox" checked="checked">
+      <div class="topcoat-checkbox__checkmark"></div>
+      ON
+    </label>
+    <br>
+    <label class="topcoat-checkbox--noborder">
+      <input type="checkbox" disabled checked="checked">
+      <div class="topcoat-checkbox__checkmark"></div>
+      Disabled
+    </label>
+ */
+
+input[type="checkbox"] {
+  position: absolute;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  opacity: 0.001;
+  z-index: 1;
+  vertical-align: top;
+  outline: none;
+}
+
+.checkbox,
+.topcoat-checkbox > .topcoat-checkbox__checkmark,
+.topcoat-checkbox--noborder > .topcoat-checkbox__checkmark {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.checkbox__label,
+.topcoat-checkbox,
+.topcoat-checkbox--noborder {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.checkbox--disabled,
+.topcoat-checkbox > input[type="checkbox"]:disabled + .topcoat-checkbox__checkmark,
+.topcoat-checkbox--noborder > input[type="checkbox"]:disabled + .topcoat-checkbox__checkmark {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+.checkbox:before,
+.checkbox:after,
+.topcoat-checkbox > .topcoat-checkbox__checkmark:before,
+.topcoat-checkbox > .topcoat-checkbox__checkmark:after,
+.topcoat-checkbox--noborder > .topcoat-checkbox__checkmark:before,
+.topcoat-checkbox--noborder > .topcoat-checkbox__checkmark:after {
+  content: '';
+  position: absolute;
+}
+
+.checkbox:before,
+.topcoat-checkbox > .topcoat-checkbox__checkmark:before,
+.topcoat-checkbox--noborder > .topcoat-checkbox__checkmark:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+
+.topcoat-checkbox > .topcoat-checkbox__checkmark {
+  height: 24px;
+}
+
+.topcoat-checkbox > input[type="checkbox"] {
+  height: 24px;
+  width: 24px;
+  margin-top: 0;
+  margin-right: -24px;
+  margin-bottom: -24px;
+  margin-left: 0;
+}
+
+.topcoat-checkbox > input[type="checkbox"]:checked {
+  background: #1284ff;
+}
+
+.topcoat-checkbox > input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:before {
+  background: #1284ff;
+}
+
+.topcoat-bheckbox > input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:after {
+  opacity: 1;
+}
+
+.topcoat-checkbox {
+  line-height: 24px;
+  margin: 10px 0;
+}
+
+.topcoat-checkbox > .topcoat-checkbox__checkmark:before {
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  background: #fff;
+  border: 1px solid #1284ff;
+  border: 1px solid #1284ff;
+  -webkit-border-radius: 16px;
+  border-radius: 16px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  left: 0;
+}
+
+.topcoat-checkbox > .topcoat-checkbox__checkmark {
+  width: 24px;
+  height: 24px;
+}
+
+.topcoat-checkbox > .topcoat-checkbox__checkmark:after {
+  top: 5px;
+  left: 4px;
+  width: 12px;
+  height: 6px;
+  background: transparent;
+  border: 3px solid #fff;
+  border-width: 3px;
+  border-top: none;
+  border-right: none;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.topcoat-checkbox > input[type="checkbox"]:focus + .topcoat-checkbox__checkmark:before {
+  border: none;
+  border: 1px solid #1284ff;
+  -webkit-box-shadow: none, none;
+  box-shadow: none, none;
+}
+
+.topcoat-checkbox > input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
+  border: 1px solid #1284ff;
+  background: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.topcoat-checkbox--noborder > .topcoat-checkbox__checkmark {
+  height: 24px;
+  background: transparent;
+}
+
+.topcoat-checkbox--noborder > input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:before {
+  background: transparent;
+}
+
+.topcoat-checkbox--noborder > input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:after {
+  opacity: 1;
+}
+
+.topcoat-checkbox--noborder {
+  line-height: 24px;
+  margin: 10px 0;
+}
+
+.topcoat-checkbox--noborder > .topcoat-checkbox__checkmark:before {
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  -webkit-border-radius: 16px;
+  border-radius: 16px;
+  left: 0;
+}
+
+.topcoat-checkbox--noborder > .topcoat-checkbox__checkmark {
+  width: 24px;
+  height: 24px;
+}
+
+.topcoat-checkbox--noborder > .topcoat-checkbox__checkmark:after {
+  top: 5px;
+  left: 4px;
+  opacity: 0;
+  width: 12px;
+  height: 6px;
+  background: transparent;
+  border: 3px solid #1284ff;
+  border-width: 3px;
+  border-top: none;
+  border-right: none;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.topcoat-checkbox--noborder > input[type="checkbox"]:focus + .topcoat-checkbox__checkmark:before {
+  -webkit-box-shadow: none, none;
+  box-shadow: none, none;
+}
+
+.topcoat-checkbox--noborder > input[type="checkbox"]:disabled:active + .topcoat-checkbox--noborder__checkmark:before {
+  background: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+/* topdoc
+  name: List
+  description: Topcoat default list skin
+  markup:
+    <div class="page">
+      <br>
+      <div class="topcoat-list">
+        <ul class="topcoat-list__container">
+          <li class="topcoat-list__item">
+            <span class="topcoat-list__item__line-height">Item</span>
+          </li>
+          <li class="topcoat-list__item">
+            <span class="topcoat-list__item__line-height">Item</span>
+          </li>
+        </ul>
+      </div>
+      <br>
+    </div>
+
+  showcase:
+    <div class="topcoat-navigation-bar">
+      <div class="topcoat-navigation-bar__item center full">
+          <h1 class="topcoat-navigation-bar__title">List</h1>
+      </div>
+    </div>
+    <br>
+    <div class="topcoat-list">
+      <h3 class="topcoat-list__header">Category</h3>
+      <ul class="topcoat-list__container">
+        <li class="topcoat-list__item">
+          <span class="topcoat-list__item__line-height">Item</span>
+        </li>
+        <li class="topcoat-list__item">
+          <span class="topcoat-list__item__line-height">Item</span>
+        </li>
+        <li class="topcoat-list__item">
+          <span class="topcoat-list__item__line-height">Item</span>
+        </li>
+      </ul>
+
+      <h3 class="topcoat-list__header">Category</h3>
+      <ul class="topcoat-list__container">
+        <li class="topcoat-list__item topcoat-list__item--tappable">
+          <span class="topcoat-list__item__line-height">Tappable Item</span>
+        </li>
+        <li class="topcoat-list__item topcoat-list__item--tappable">
+          <span class="topcoat-list__item__line-height">Tappable Item</span>
+        </li>
+      </ul>
+    </div>
+*/
+
+/* topdoc
+  name: List:Noborder List
+  markup:
+    <div class="page">
+      <br>
+      <div class="topcoat-list topcoat-list--noborder">
+        <ul class="topcoat-list__container">
+          <li class="topcoat-list__item">
+            <span class="topcoat-list__item__line-height">Item</span>
+          </li>
+          <li class="topcoat-list__item">
+            <span class="topcoat-list__item__line-height">Item</span>
+          </li>
+          <li class="topcoat-list__item">
+            <span class="topcoat-list__item__line-height">Item</span>
+          </li>
+        </ul>
+      </div>
+      <br>
+    </div>
+ */
+
+/* topdoc
+  name: List:Category Header
+  markup:
+    <div class="topcoat-list topcoat-list--noborder">
+      <h3 class="topcoat-list__header">Category</h3>
+      <ul class="topcoat-list__container">
+        <li class="topcoat-list__item topcoat-list__item__line-height">
+          Item
+        </li>
+        <li class="topcoat-list__item topcoat-list__item__line-height">
+          Item
+        </li>
+      </ul>
+      <h3 class="topcoat-list__header">Category</h3>
+      <ul class="topcoat-list__container">
+        <li class="topcoat-list__item topcoat-list__item__line-height">
+          Item
+        </li>
+        <li class="topcoat-list__item topcoat-list__item__line-height">
+          Item
+        </li>
+      </ul>
+    </div>
+ */
+
+/* topdoc
+  name: List:Tappable List Item
+  markup:
+    <div class="page">
+      <br>
+      <div class="topcoat-list topcoat-list">
+        <ul class="topcoat-list__container">
+          <li class="topcoat-list__item topcoat-list__item--tappable">
+            <span class="topcoat-list__item__line-height">Tappable Item</span>
+          </li>
+          <li class="topcoat-list__item topcoat-list__item--tappable">
+            <span class="topcoat-list__item__line-height">Tappable Item</span>
+          </li>
+        </ul>
+      </div>
+      <br>
+    </div>
+ */
+
+.list,
+.topcoat-list {
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.list__header,
+.topcoat-list__header {
+  margin: 0;
+}
+
+.list__container,
+.topcoat-list__container {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.list__item,
+.topcoat-list__item {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  list-style: none;
+}
+
+.topcoat-list {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  background-color: #f0eff4;
+}
+
+.topcoat-list--noborder {
+  border-top: none;
+  border-bottom: none;
+}
+
+.topcoat-list__header {
+  padding: 0 0 0 10px;
+  font-size: 15px;
+  font-weight: 500;
+  background-color: #f0eff4;
+  color: #1f1f21;
+  text-shadow: none;
+  border-top: none;
+  border-bottom: none;
+  min-height: 24px;
+  line-height: 24px;
+}
+
+.topcoat-list__container {
+  border-top: none;
+  color: #c6c8c8;
+  padding: 0;
+  background-color: #fff;
+}
+
+.topcoat-list__item {
+  padding: 0 0 0 10px;
+  margin: 0 0 0 0;
+  border-top: none;
+  border-bottom: 1px solid #ddd;
+  color: #1f1f21;
+  background-color: #fff;
+  min-height: 44px;
+  position: relative;
+}
+
+.topcoat-list__item__line-height {
+  line-height: 44px;
+}
+
+.topcoat-list__item_active:active {
+  background-color: #d9d9d9;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+.topcoat-list__item--tappable {
+  -webkit-transition: background-color 0.2s linear;
+  -moz-transition: background-color 0.2s linear;
+  -o-transition: background-color 0.2s linear;
+  transition: background-color 0.2s linear;
+}
+
+.topcoat-list__item--tappable:active {
+  background-color: #d9d9d9;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+.topcoat-list__item:first-child {
+  padding-left: 10px;
+  margin: 0;
+  border-top: none;
+  border-bottom: none;
+}
+
+.topcoat-list__item:last-child {
+  padding-left: 10px;
+  margin: 0;
+  border-top: none;
+  border-bottom: none;
+}
+
+.topcoat-list__item:nth-child(2) {
+  border-top: 1px solid #ddd;
+}
+
+/* topdoc
+  name: Navigation Bar
+  description: A place where navigation goes to drink
+  markup:
+    <div class="topcoat-navigation-bar">
+        <div class="topcoat-navigation-bar__item center full">
+            <h1 class="topcoat-navigation-bar__title">Navigation Bar</h1>
+        </div>
+    </div>
+
+    <br><br><br>
+
+    <div class="topcoat-navigation-bar topcoat-navigation-bar--bottom">
+        <div class="topcoat-navigation-bar__line-height" style="text-align:center">Bottom Toolbar</div>
+    </div>
+
+  showcase:
+    <div class="topcoat-navigation-bar">
+        <div class="topcoat-navigation-bar__item center full">
+            <h1 class="topcoat-navigation-bar__title">Navigation Bar</h1>
+        </div>
+    </div>
+
+    <div class="topcoat-navigation-bar topcoat-navigation-bar--bottom" style="position:absolute;left:0px;right:0px;bottom:0px">
+        <div class="topcoat-navigation-bar__line-height" style="text-align:center">Bottom Toolbar</div>
+    </div>
+*/
+
+/* topdoc
+  name: Navigation Bar:Bottom Bar
+  markup:
+    <div class="topcoat-navigation-bar topcoat-navigation-bar--bottom">
+        <div class="topcoat-navigation-bar__line-height" style="text-align:center">Bottom Toolbar</div>
+    </div>
+ */
+
+.navigation-bar,
+.topcoat-navigation-bar {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  white-space: nowrap;
+  overflow: hidden;
+  word-spacing: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.navigation-bar__item,
+.topcoat-navigation-bar__item {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+}
+
+.navigation-bar__title,
+.topcoat-navigation-bar__title {
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.topcoat-navigation-bar {
+  height: 44px;
+  padding-left: 0;
+  padding-right: 0;
+  background: transparent;
+  background: #f8f8f8;
+  color: #1f1f21;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-bottom: 1px solid #ddd;
+  font-weight: 400;
+}
+
+.topcoat-navigation-bar--bottom {
+  border-bottom: none;
+  border-top: 1px solid #ddd;
+}
+
+.topcoat-navigation-bar__line-height {
+  line-height: 36px !important;
+  line-height: 44px !important;
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+.topcoat-navigation-bar__bg {
+  background: transparent;
+  background: #f8f8f8;
+}
+
+.topcoat-navigation-bar__item {
+  margin: var-margin;
+  line-height: 36px;
+  line-height: 40px;
+  vertical-align: top;
+}
+
+.topcoat-navigation-bar__title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1f1f21;
+}
+
+/* topdoc
+  name: Notification
+  description: Notification badge
+  markup:
+    <span class="topcoat-notification">1</span>
+    <br><br>
+    <span class="topcoat-notification">10</span>
+    <br><br>
+    <span class="topcoat-notification">999</span>
+    <br><br>
+    <span class="topcoat-notification">9999</span>
+*/
+
+.notification,
+.topcoat-notification {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.topcoat-notification {
+  padding: 0 4px;
+  width: auto;
+  height: 19px;
+  -webkit-border-radius: 19px;
+  border-radius: 19px;
+  background-color: #dc5236;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  min-width: 19px;
+  line-height: 19px;
+  font-weight: 400;
+}
+
+/* topdoc
+  name: Page
+  description: Default skin for Onsen UI Page
+  modifiers:    
+  markup:
+    <div class="page" style="height:200px">
+    </div>
+*/
+
+.page {
+  background-color: #efeff4;
+  font-weight: 400;
+  color: #1f1f21;
+}
+
+.topcoat-page__bg {
+  background-color: #efeff4;
+}
+
+/* topdoc
+  name: Radio Button
+  description: A button that can play music, but usually just plays ads.
+  modifiers:
+  markup:
+    <label class="topcoat-radio-button">
+      <input type="radio" name="topcoat" checked="checked">
+      <div class="topcoat-radio-button__checkmark"></div>
+      Label
+    </label>
+    <br>
+    <label class="topcoat-radio-button">
+      <input type="radio" name="topcoat">
+      <div class="topcoat-radio-button__checkmark"></div>
+      Label
+    </label>
+    <br>
+    <label class="topcoat-radio-button">
+      <input type="radio" name="topcoat">
+      <div class="topcoat-radio-button__checkmark"></div>
+      Label
+    </label>
+
+  showcase:
+    <div class="topcoat-navigation-bar">
+        <div class="topcoat-navigation-bar__item center full">
+            <h1 class="topcoat-navigation-bar__title">Radio Button</h1>
+        </div>
+    </div>
+    <br>
+    <div class="topcoat-list">
+      <ul class="topcoat-list__container">
+        <li class="topcoat-list__item">
+          <label class="topcoat-radio-button" style="float:right; margin-right:8px;">
+            <input type="radio" name="example" checked="checked">
+            <div class="topcoat-radio-button__checkmark"></div>
+          </label>
+          <span class="topcoat-list__item__line-height">Label</span>
+        </li>
+
+        <li class="topcoat-list__item">
+          <label class="topcoat-radio-button" style="float:right; margin-right:8px;">
+            <input type="radio" name="example">
+            <div class="topcoat-radio-button__checkmark"></div>
+          </label>
+          <span class="topcoat-list__item__line-height">Label</span>
+        </li>
+      </ul>
+    </div>
+
+*/
+
+input[type="radio"] {
+  position: absolute;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  opacity: 0.001;
+  z-index: 1;
+  vertical-align: top;
+  outline: none;
+}
+
+.radio-button,
+.topcoat-radio-button__checkmark {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.radio-button__label,
+.topcoat-radio-button {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.radio-button:before,
+.radio-button:after,
+.topcoat-radio-button__checkmark:before,
+.topcoat-radio-button__checkmark:after {
+  content: '';
+  position: absolute;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+}
+
+.radio-button:after,
+.topcoat-radio-button__checkmark:after {
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.radio-button:before,
+.topcoat-radio-button__checkmark:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+
+.radio-button--disabled,
+input[type="radio"]:disabled + .topcoat-radio-button__checkmark {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+input[type="radio"] {
+  height: 24px;
+  width: 24px;
+  margin-top: 0;
+  margin-right: -24px;
+  margin-bottom: -24px;
+  margin-left: 0;
+}
+
+input[type="radio"]:active {
+  outline: 0;
+}
+
+input[type="radio"]:checked + .topcoat-radio-button__checkmark:after {
+  opacity: 1;
+}
+
+.topcoat-radio-button {
+  color: #c6c8c8;
+  color: #1f1f21;
+  line-height: 24px;
+  text-align: left;
+  margin: 10px 0;
+}
+
+.topcoat-radio-button__checkmark:before {
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  -webkit-border-radius: 16px;
+  border-radius: 16px;
+  left: 0;
+}
+
+.topcoat-radio-button__checkmark {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.topcoat-radio-button__checkmark:after {
+  top: 5px;
+  left: 4px;
+  opacity: 0;
+  width: 12px;
+  height: 6px;
+  background: transparent;
+  border: 3px solid #1284ff;
+  border-width: 3px;
+  border-top: none;
+  border-right: none;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+/* topdoc
+  name: Range
+  description: Range input
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <input type="range" class="topcoat-range">
+    <input type="range" class="topcoat-range" disabled>
+  showcase:
+    <div class="topcoat-navigation-bar">
+        <div class="topcoat-navigation-bar__item center full">
+            <h1 class="topcoat-navigation-bar__title">Range</h1>
+        </div>
+    </div>
+
+    <div style="padding:8px">
+      <input type="range" class="topcoat-range" style="width:100%" value="0">
+    </div>
+
+    <div style="padding:8px">
+      <input type="range" class="topcoat-range" style="width:100%" value="30">
+    </div>
+
+    <div style="padding:8px">
+      <input type="range" class="topcoat-range" style="width:100%" value="60">
+    </div>
+
+    <div style="padding:8px">
+      <input type="range" class="topcoat-range" style="width:100%" value="90">
+    </div>
+*/
+
+.range,
+.topcoat-range {
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  vertical-align: top;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.range__thumb,
+.topcoat-range::-moz-range-thumb {
+  cursor: pointer;
+}
+
+.range__thumb--webkit,
+.topcoat-range::-webkit-slider-thumb {
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+.range:disabled,
+.topcoat-range:disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+.topcoat-range {
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  border: none;
+  height: 2px;
+  border-radius: 0;
+  border-radius: 3px;
+  background-image: -webkit-linear-gradient(#ccc, #ccc);
+  background-image: -moz-linear-gradient(#ccc, #ccc);
+  background-image: -o-linear-gradient(#ccc, #ccc);
+  background-image: linear-gradient(#ccc, #ccc);
+  background-position: left center;
+  -webkit-background-size: 100% 2px;
+  background-size: 100% 2px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  height: 31px;
+}
+
+.topcoat-range::-moz-range-track {
+  position: relative;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  border: none;
+  background-color: transparent;
+  background-color: #ccc;
+  height: 2px;
+  border-radius: 0;
+  border-radius: none;
+  top: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.topcoat-range::-webkit-slider-thumb {
+  position: relative;
+  height: 29px;
+  width: 29px;
+  background-color: transparent;
+  background-color: #fff;
+  border: 1px solid #1284ff;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  border-radius: 30px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  top: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.topcoat-range::-moz-range-thumb {
+  position: relative;
+  height: 29px;
+  width: 29px;
+  background-color: transparent;
+  border: 1px solid #1284ff;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  border-radius: 30px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+}
+
+.topcoat-range::-webkit-slider-thumb:before {
+  position: absolute;
+  top: 13px;
+  right: 0px;
+  left: -1024px;
+  width: 1024px;
+  height: 2px;
+  background-color: #1284ff;
+  content: '';
+  margin: 0;
+  padding: 0;
+}
+
+/* topdoc
+  name: Search Input
+  description: A text input designed for searching.
+  modifiers:
+    :disabled: Disabled state
+  markup:
+    <input type="search" value="" placeholder="Search" class="topcoat-search-input">
+    <br>
+    <input type="search" value="" placeholder="Search" class="topcoat-search-input" disabled>
+  showcase:
+    <div class="topcoat-navigation-bar">
+      <div class="topcoat-navigation-bar__item center full">
+        <h1 class="topcoat-navigation-bar__title">Search Input</h1>
+      </div>
+    </div>
+    <div style="padding:4px">
+    <input type="search" value="" placeholder="Search" class="topcoat-search-input">
+    </div>
+    <div class="topcoat-list">
+      <ul class="topcoat-list__container">
+        <li class="topcoat-list__item topcoat-list__item__line-height">Label</li>
+        <li class="topcoat-list__item topcoat-list__item__line-height">Label</li>
+        <li class="topcoat-list__item topcoat-list__item__line-height">Label</li>
+        <li class="topcoat-list__item topcoat-list__item__line-height">Label</li>
+      </ul>
+    </div>
+*/
+
+.search-input,
+.topcoat-search-input {
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  vertical-align: top;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+.search-input:disabled,
+.topcoat-search-input:disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+.topcoat-search-input {
+  height: 31px;
+  font-size: 15px;
+  border: 1px solid #1284ff;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  background-color: #fff;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #c6c8c8;
+  color: #a3a3a6;
+  padding: 5px 0 5px 28px;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  border-radius: 4px;
+  background-image: url("../img/search.svg");
+  background-position: 16px center;
+  background-position: 8px center;
+  background-repeat: no-repeat;
+  -webkit-background-size: 16px;
+  background-size: 16px;
+  font-weight: 400;
+  display: block;
+  width: 100%;
+  vertical-align: middle;
+}
+
+.topcoat-search-input:focus {
+  background-color: #fff;
+  background-color: #fff;
+  color: #1f1f21;
+  color: #6f6f74;
+  border: none;
+  border: 1px solid #ddd;
+  -webkit-box-shadow: none, none;
+  box-shadow: none, none;
+}
+
+.topcoat-search-input::-webkit-search-cancel-button,
+.topcoat-search-input::-webkit-search-decoration {
+  margin-right: 0px;
+  margin-right: 0px;
+}
+
+.topcoat-search-input:focus::-webkit-input-placeholder {
+  color: var-placeholder-color--input;
+}
+
+.topcoat-search-input:disabled::-webkit-input-placeholder {
+  color: #1f1f21;
+}
+
+.topcoat-search-input:disabled::-moz-placeholder {
+  color: #1f1f21;
+}
+
+.topcoat-search-input:disabled:-ms-input-placeholder {
+  color: #1f1f21;
+}
+
+/* topdoc
+  name: Switch
+  description: Default skin for Topcoat switch
+  modifiers:
+    :focus: Focus state
+    :disabled: Disabled state
+  markup:
+    <label class="topcoat-switch">
+      <input type="checkbox" class="topcoat-switch__input">
+      <div class="topcoat-switch__toggle"></div>
+    </label>
+    <label class="topcoat-switch">
+      <input type="checkbox" class="topcoat-switch__input" checked>
+      <div class="topcoat-switch__toggle"></div>
+    </label>
+    <label class="topcoat-switch">
+      <input type="checkbox" class="topcoat-switch__input" disabled>
+      <div class="topcoat-switch__toggle"></div>
+    </label>
+
+  showcase:
+    <div class="topcoat-navigation-bar">
+        <div class="topcoat-navigation-bar__item center full">
+            <h1 class="topcoat-navigation-bar__title">Switch</h1>
+        </div>
+    </div>
+    <br>
+    <div class="topcoat-list">
+      <ul class="topcoat-list__container">
+        <li class="topcoat-list__item">
+          <label class="topcoat-switch" style="float:right;margin-right:8px">
+            <input type="checkbox" class="topcoat-switch__input">
+            <div class="topcoat-switch__toggle"></div>
+          </label>
+          <span class="topcoat-list__item__line-height">Label</span>
+        </li>
+
+        <li class="topcoat-list__item">
+          <label class="topcoat-switch" style="float:right;margin-right:8px">
+            <input type="checkbox" class="topcoat-switch__input" checked>
+            <div class="topcoat-switch__toggle"></div>
+          </label>
+          <span class="topcoat-list__item__line-height">Label</span>
+        </li>
+      </ul>
+    </div>
+*/
+
+.switch,
+.topcoat-switch {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+
+.switch__input,
+.topcoat-switch__input {
+  position: absolute;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  opacity: 0.001;
+  z-index: 1;
+  vertical-align: top;
+  outline: none;
+}
+
+.switch__toggle {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.switch__toggle:before,
+.switch__toggle:after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+
+.switch--disabled,
+.topcoat-switch__input:disabled + .topcoat-switch__toggle {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+.topcoat-switch {
+  font-size: 16px;
+  padding: 0 20px;
+  border: 1px solid #1284ff;
+  border: none;
+  overflow: visible;
+  width: 51px;
+  height: 32px;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
+  z-index: 1;
+  text-align: left;
+}
+
+.topcoat-switch__input {
+  width: 51px;
+  height: 44px;
+  margin-top: -6px;
+  top: 0px;
+  left: 0px;
+}
+
+.topcoat-switch__toggle:before {
+  position: absolute;
+  content: '';
+  -webkit-border-radius: 28px;
+  border-radius: 28px;
+  height: 28px;
+  width: 28px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  left: 0;
+  top: 1px;
+  -webkit-transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1);
+  -moz-transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1);
+  -o-transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1);
+  transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1);
+}
+
+.topcoat-switch__toggle {
+  background-color: #ddd;
+  width: 50px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
+  height: 32px;
+}
+
+.topcoat-switch__input + .topcoat-switch__toggle:before {
+  margin-left: 0px;
+}
+
+.topcoat-switch__input:checked + .topcoat-switch__toggle:before {
+  margin-left: 0px;
+}
+
+.topcoat-switch__input:active + .topcoat-switch__toggle {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: none;
+}
+
+.topcoat-switch__input:focus + .topcoat-switch__toggle {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: none;
+}
+
+.topcoat-switch__input:checked + .topcoat-switch__toggle {
+  background-color: #4cd964;
+  -webkit-box-shadow: inset 0 0 0 0px rgba(0,0,0,0.4);
+  box-shadow: inset 0 0 0 0px rgba(0,0,0,0.4);
+  -webkit-transition: background-color 0.5s cubic-bezier(0.5, 1.6, 0.5, 1);
+  -moz-transition: background-color 0.5s cubic-bezier(0.5, 1.6, 0.5, 1);
+  -o-transition: background-color 0.5s cubic-bezier(0.5, 1.6, 0.5, 1);
+  transition: background-color 0.5s cubic-bezier(0.5, 1.6, 0.5, 1);
+}
+
+.topcoat-switch__input:not(:checked) + .topcoat-switch__toggle {
+  -webkit-box-shadow: inset 0 0 0 0px rgba(0,0,0,0.1);
+  box-shadow: inset 0 0 0 0px rgba(0,0,0,0.1);
+  -webkit-transition: background-color 0.5s cubic-bezier(0.5, 1.3, 0.5, 1);
+  -moz-transition: background-color 0.5s cubic-bezier(0.5, 1.3, 0.5, 1);
+  -o-transition: background-color 0.5s cubic-bezier(0.5, 1.3, 0.5, 1);
+  transition: background-color 0.5s cubic-bezier(0.5, 1.3, 0.5, 1);
+}
+
+.topcoat-switch__input:checked + .topcoat-switch__toggle:before {
+  -webkit-transform: translate3d(19px, 0px, 0px);
+  -moz-transform: translate3d(19px, 0px, 0px);
+  -ms-transform: translate3d(19px, 0px, 0px);
+  -o-transform: translate3d(19px, 0px, 0px);
+  transform: translate3d(19px, 0px, 0px);
+  border-color: #4cd964;
+}
+
+.topcoat-switch__input:not(:checked) + .topcoat-switch__toggle:before {
+  -webkit-transform: translate3d(1px, 0px, 0px);
+  -moz-transform: translate3d(1px, 0px, 0px);
+  -ms-transform: translate3d(1px, 0px, 0px);
+  -o-transform: translate3d(1px, 0px, 0px);
+  transform: translate3d(1px, 0px, 0px);
+}
+
+/* topdoc
+  name: Tab Bar
+  description: Component of tab buttons
+  modifiers:
+    :disabled: Disabled state
+  markup:
+    <div class="topcoat-tab-bar">
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-a" checked="checked">
+        <button class="topcoat-tab-bar__button">
+          <div class="onsen_tab-bar__label">One</div>
+        </button>
+      </label>
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-a">
+        <button class="topcoat-tab-bar__button">
+          <div class="onsen_tab-bar__label">Two</div>
+        </button>
+      </label>
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-a">
+        <button class="topcoat-tab-bar__button">
+          <div class="onsen_tab-bar__label">Three</div>
+        </button>
+      </label>
+    </div>
+
+  showcase:
+    <div class="topcoat-navigation-bar">
+        <div class="topcoat-navigation-bar__item center full">
+            <h1 class="topcoat-navigation-bar__title">Tab Bar</h1>
+        </div>
+    </div>
+    <div class="topcoat-tab-bar" style="position:absolute;left:0px;right:0px;bottom:0px">
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-bb">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-folder"></i>
+          <div class="onsen_tab-bar__label">One</div>
+        </button>
+      </label> 
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-bb">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-heart"></i>
+          <div class="onsen_tab-bar__label">Two</div>
+        </button>
+      </label> 
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-bb" checked="checked">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-stop"></i>
+          <div class="onsen_tab-bar__label">Three</div>
+        </button>
+      </label> 
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-bb">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-circle"></i>
+          <div class="onsen_tab-bar__label">Four</div>
+        </button>
+      </label> 
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-bb">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-cloud"></i>
+          <div class="onsen_tab-bar__label">Five</div>
+        </button>
+      </label> 
+    </div>
+*/
+
+/* topdoc
+  name: Tab Bar:Icon + Label Tab Item
+  markup:
+    <div class="topcoat-tab-bar">
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-b" checked="checked">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-comment"></i>
+          <div class="onsen_tab-bar__label">Comments</div>
+        </button>
+      </label> 
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-b">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-video-camera"></i>
+          <div class="onsen_tab-bar__label">Videos</div>
+        </button>
+      </label> 
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-b">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-gear"></i>
+          <div class="onsen_tab-bar__label">Settings</div>
+        </button>
+      </label> 
+    </div>
+ */
+
+/* topdoc
+  name: Tab Bar:Icon Only Tab Item
+  markup:
+    <div class="topcoat-tab-bar">
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-c">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-star"></i>
+        </button>
+      </label> 
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-c">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-comment"></i>
+        </button>
+      </label> 
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-c">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-circle"></i>
+        </button>
+      </label> 
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-c">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-play fa-rotate-270"></i>
+        </button>
+      </label> 
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-c" checked="checked">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-gear"></i>
+        </button>
+      </label> 
+    </div>
+ */
+
+.topcoat-tab-bar {
+  height: 49px;
+  background-color: #f8f8f8;
+  border-top: 1px solid #ddd;
+  width: 100%;
+}
+
+.topcoat-tab-bar__button {
+  padding: 0;
+  height: 49px;
+  line-height: 49px;
+  letter-spacing: 0;
+  color: #888;
+  text-shadow: 0 1px none;
+  vertical-align: top;
+  background-color: transparent;
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-top: 1px solid #1284ff;
+  border-top: none;
+  width: 100%;
+  font-weight: 400;
+}
+
+.topcoat-tab-bar__button > i {
+  font-size: 24px;
+  padding: 0;
+  margin: 0;
+  line-height: 32px;
+  display: block;
+  -webkit-text-fill-color: transparent;
+  /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #888;
+}
+
+.topcoat-tab-bar__button > i + .onsen_tab-bar__label {
+  font-size: 10px;
+  line-height: 1;
+  margin: 0;
+  font-weight: 400;
+}
+
+.topcoat-tab-bar__button > .onsen_tab-bar__label:first-child {
+  font-size: 16px;
+  line-height: 49px;
+  margin: 0;
+  pading: 0;
+}
+
+.topcoat-tab-bar__button {
+  color: #888;
+}
+
+.topcoat-tab-bar__button:active,
+.topcoat-tab-bar__button--large:active,
+:checked + .topcoat-tab-bar__button {
+  color: #1284ff;
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-top: none;
+}
+
+.topcoat-tab-bar__button:active > i,
+.topcoat-tab-bar__button--large:active > i,
+:checked + .topcoat-tab-bar__button > i {
+  color: #1284ff;
+  -webkit-text-fill-color: #1284ff;
+  -webkit-text-stroke-width: 0px;
+  -webkit-text-stroke-color: #1284ff;
+}
+
+.topcoat-tab-bar__button:focus,
+.topcoat-tab-bar__button--large:focus {
+  z-index: 1;
+  border-top: none;
+  -webkit-box-shadow: none, none;
+  box-shadow: none, none;
+  box-shadow: none;
+  outline: 0;
+}
+
+/* topdoc
+  name: Text Input
+  modifiers:
+    :disabled: Disabled state
+    :focus: Focused
+    :invalid: Hover state
+  markup:
+    <input type="text" class="topcoat-text-input" placeholder="text" value="">
+    <br>
+    <input type="text" class="topcoat-text-input" placeholder="text" value="" disabled>
+  showcase:
+    <div class="topcoat-navigation-bar">
+      <div class="topcoat-navigation-bar__item center full">
+        <h1 class="topcoat-navigation-bar__title">Text Input</h1>
+      </div>
+    </div>
+    <br>
+    <div style="padding:8px">
+      <input type="text" class="topcoat-text-input" placeholder="text" style="width:100%">
+      <button class="topcoat-button--large" style="margin-top:8px">submit</button>
+    </div>
+    <br><br>
+    <div class="topcoat-list">
+      <ul class="topcoat-list__container">
+        <li class="topcoat-list__item">
+          <input type="text" class="topcoat-text-input--transparent" placeholder="text" style="width:100%;margin-top:4px">
+        </li>
+      </ul>
+    </div>
+    <div style="padding:8px">
+      <button class="topcoat-button--large">submit</button>
+    </div>
+*/
+
+/* topdoc
+  name: Text Input:Transparent Text Input
+  markup:
+    <input type="text" class="topcoat-text-input topcoat-text-input--transparent" placeholder="text" value="">
+    <br>
+    <input type="text" class="topcoat-text-input topcoat-text-input--transparent" placeholder="text" value="" disabled>
+*/
+
+/* topdoc
+  name: Text Input:Underbar Text Input
+  markup:
+    <input type="text" class="topcoat-text-input topcoat-text-input--underbar" placeholder="text" value="">
+    <br>
+    <input type="text" class="topcoat-text-input topcoat-text-input--underbar" placeholder="text" value="" disabled>
+*/
+
+.input,
+.topcoat-text-input,
+.topcoat-text-input--transparent,
+.topcoat-text-input--underbar {
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  vertical-align: top;
+  outline: none;
+}
+
+.input:disabled,
+.topcoat-text-input:disabled,
+.topcoat-text-input--transparent:disabled,
+.topcoat-text-input--underbar:disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+.topcoat-text-input,
+.topcoat-text-input--transparent,
+.topcoat-text-input--underbar {
+  letter-spacing: 0;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  background-color: #fff;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #c6c8c8;
+  color: #1f1f21;
+  padding: 4px 8px;
+  font-size: 15px;
+  height: 31px;
+  vertical-align: middle;
+  font-weight: 400;
+}
+
+.topcoat-text-input:disabled::-webkit-input-placeholder,
+.topcoat-text-input--transparent:disabled::-webkit-input-placeholder,
+.topcoat-text-input--underbar:disabled::-webkit-input-placeholder {
+  color: #1f1f21;
+}
+
+.topcoat-text-input:disabled::-moz-placeholder,
+.topcoat-text-input--transparent:disabled::-moz-placeholder,
+.topcoat-text-input--underbar:disabled::-moz-placeholder {
+  color: #1f1f21;
+}
+
+.topcoat-text-input:disabled:-ms-input-placeholder,
+.topcoat-text-input--transparent:disabled:-ms-input-placeholder,
+.topcoat-text-input--underbar:disabled:-ms-input-placeholder {
+  color: #1f1f21;
+}
+
+.topcoat-text-input:invalid,
+.topcoat-text-input--transparent:invalid,
+.topcoat-text-input--underbar:invalid {
+  border: 1px solid #f00;
+  color: #f00;
+}
+
+.topcoat-text-input--transparent {
+  border: none;
+  background-color: transparent;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.topcoat-text-input--transparent:disabled {
+  border: none;
+  background-color: transparent;
+}
+
+.topcoat-text-input--transparent:disabled::-webkit-input-placeholder {
+  border: none;
+  background-color: transparent;
+}
+
+.topcoat-text-input--transparent:disabled::-moz-placeholder {
+  border: none;
+  background-color: transparent;
+}
+
+.topcoat-text-input--transparent:disabled:-ms-input-placeholder {
+  border: none;
+  background-color: transparent;
+}
+
+.topcoat-text-input--transparent:invalid {
+  border: none;
+  background-color: transparent;
+}
+
+.topcoat-text-input--underbar {
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid #ddd;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+}
+
+.topcoat-text-input--underbar:disabled {
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid #ddd;
+}
+
+.topcoat-text-input--underbar:disabled::-webkit-input-placeholder {
+  border: none;
+  background-color: transparent;
+}
+
+.topcoat-text-input--underbar:disabled::-moz-placeholder {
+  border: none;
+  background-color: transparent;
+}
+
+.topcoat-text-input--underbar:disabled:-ms-input-placeholder {
+  border: none;
+  background-color: transparent;
+}
+
+.topcoat-text-input--underbar:invalid {
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid #f00;
+}
+
+/* topdoc
+  name: Textarea
+  description: A whole area, just for text.
+  modifiers:
+    :disabled: Disabled state
+  markup:
+    <textarea class="topcoat-textarea" rows="3" placeholder="Textarea"></textarea>
+    <br>
+    <textarea class="topcoat-textarea" rows="3" placeholder="Textarea" disabled></textarea>
+
+  showcase:
+    <div class="topcoat-navigation-bar">
+      <div class="topcoat-navigation-bar__item center full">
+        <h1 class="topcoat-navigation-bar__title">Textarea</h1>
+      </div>
+    </div>
+    <div style="padding:8px">
+      <textarea class="topcoat-textarea" style="width:100%; height:80px; margin-bottom:8px" placeholder="Textarea"></textarea><br>
+      <button class="topcoat-button--large">Submit</button>
+    </div>
+
+    <br><br><br><br>
+
+    <div class="topcoat-list">
+      <ul class="topcoat-list__container">
+        <li class="topcoat-list__item">
+          <textarea class="topcoat-textarea--transparent" style="width:100%; height:80px; margin-bottom:4px" placeholder="Textarea"></textarea>
+        </li>
+      </ul>
+    </div>
+    <div style="padding:8px">
+      <button class="topcoat-button--large">Submit</button>
+    </div>
+*/
+
+/* topdoc
+  name: Textarea:Transparent Textarea
+  markup:
+    <textarea class="topcoat-textarea--transparent" rows="3" placeholder="Textarea"></textarea>
+    <br>
+    <textarea class="topcoat-textarea--transparent" rows="3" placeholder="Textarea" disabled></textarea>
+*/
+
+.textarea,
+.topcoat-textarea,
+.topcoat-textarea--transparent {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  vertical-align: top;
+  resize: none;
+  outline: none;
+}
+
+.textarea:disabled,
+.topcoat-textarea:disabled,
+.topcoat-textarea--transparent:disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+.topcoat-textarea,
+.topcoat-textarea--transparent {
+  padding: 5px 5px 5px 5px;
+  font-size: 15px;
+  font-weight: 400;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  color: #1f1f21;
+  letter-spacing: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-appearance: none;
+}
+
+.topcoat-textarea:disabled::-webkit-input-placeholder,
+.topcoat-textarea--transparent:disabled::-webkit-input-placeholder {
+  color: #1f1f21;
+}
+
+.topcoat-textarea:disabled::-moz-placeholder,
+.topcoat-textarea--transparent:disabled::-moz-placeholder {
+  color: #1f1f21;
+}
+
+.topcoat-textarea:disabled:-ms-input-placeholder,
+.topcoat-textarea--transparent:disabled:-ms-input-placeholder {
+  color: #1f1f21;
+}
+
+.topcoat-textarea--transparent {
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  padding-left: 0;
+  padding-right: 0;
+}
