@@ -37,12 +37,14 @@ Each cdnjs library has a `package.json` file. This file contains required and so
 
 ```js
   "npmName": "lodash",
-  "npmFileMap": [{
-    "basePath": "/dist/",
-    "files": [
-      "*.js"
-    ]
-  }],
+  "npmFileMap": [
+    {
+      "basePath": "/dist/",
+      "files": [
+        "*.js"
+      ]
+    }
+  ],
 ```
 
 The example in 2.3. parses the `lodash` tarball, which has this structure:
