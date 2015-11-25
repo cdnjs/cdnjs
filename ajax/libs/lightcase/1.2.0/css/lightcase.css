@@ -1,0 +1,201 @@
+/*
+ * Lightcase - jQuery Plugin
+ * The smart and flexible Lightbox Plugin.
+ *
+ * @author		Cornel Boppart <cornel@bopp-art.com>
+ * @copyright	Author
+ *
+ * @version		1.2.0 (28/04/2013)
+ */
+
+#lightcase-overlay {
+	display: none;
+	position: fixed;
+	z-index: 1000;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #333;
+}
+
+	/* loading */
+#lightcase-loading {
+	display: none;
+	position: fixed;
+	z-index: 1001;
+	top: 50%;
+	left: 50%;
+	width: 30px;
+	height: 30px;
+	margin-top: -15px;
+	margin-left: -15px;
+	background: url(../images/loading_lite_neg.gif) transparent no-repeat 50% 50%;
+}
+#lightcase-case.loading .content,
+#lightcase-case.type-flash .content {
+	background: url(../images/loading_lite.gif) transparent no-repeat 50% 50%;
+}
+
+#lightcase-case {
+	display: none;
+	position: fixed;
+	z-index: 1002;
+	top: 50%;
+	left: 50%;
+	background-color: #fff;
+	/*
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	*/
+	-moz-box-shadow: 0 0 10px rgba(0,0,0,.85);
+	-webkit-box-shadow: 0 0 10px rgba(0,0,0,.85);
+	box-shadow: 0 0 10px rgba(0,0,0,.85);
+	border: 3px solid #fff;
+	
+	font-family: arial, sans-serif;
+	font-size: 13px;
+	line-height: 18px;
+	text-align: left;
+}
+
+#lightcase-case .sequenceInfo,
+#lightcase-case .title,
+#lightcase-case .caption {
+	margin: 10px;
+	padding: 0;
+	overflow: auto;
+	font-size: 11px;
+	line-height: 15px;
+	color: #333;
+}
+#lightcase-case .sequenceInfo {
+	float: left;
+	padding-right: 0;
+}
+
+#lightcase-case .content {
+	position: relative;
+	z-index: 1;
+}
+#lightcase-case.type-ajax .content .contentInner,
+#lightcase-case.type-inline .content .contentInner {
+	overflow-x: hidden;
+}
+#lightcase-case.type-image .content .contentInner,
+#lightcase-case.type-video .content .contentInner {
+	font-size: 0;
+	line-height: 0;
+}
+#lightcase-case .content .inlineWrap {
+	padding: 15px;
+}
+
+#lightcase-case .content object, 
+#lightcase-case .content embed {
+	display: block; /* this removes unwanted space at bottom of the movie object */
+}
+
+	/* nav */
+#lightcase-case .nav {
+}
+#lightcase-case .nav a {
+	position: absolute;
+	z-index: 3;
+	width: 25%;
+	top: 25%;
+	bottom: 25%;
+	outline: none;
+	cursor: pointer;
+	background: url(#) transparent; /* required to get the full height of link */
+	-ie67-outline: expression(this.hideFocus=true); /* hides ugly outline on focus, the property name is arbitrary */
+}
+#lightcase-case .nav a.prev {
+	left: 15px;
+}
+#lightcase-case .nav a.next {
+	right: 15px;
+}
+#lightcase-case .nav a.play,
+#lightcase-case .nav a.pause {
+	display: none;
+	z-index: 3;
+	width: 50%;
+	left: 25%;
+	right: 25%;
+}
+
+#lightcase-case .nav a span {
+	position: absolute;
+	z-index: 1;
+	top: 50%;
+	margin-top: -15px;
+	display: block;
+	width: 30px;
+	height: 30px;
+	text-indent: -9999px;
+	background: url(../images/sprite.png) transparent no-repeat 0 -30px;
+	
+    -webkit-backface-visibility: hidden;
+	
+	opacity: 0;
+	-khtml-opacity: 0;
+	-moz-opacity: 0;
+	-ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=0)';
+	filter: alpha(opacity=0);
+	
+	-webkit-transition: all .2s ease-out;
+	-moz-transition: all .2s ease-out;
+	-o-transition: all .2s ease-out;
+	transition: all .2s ease-out;
+}
+#lightcase-case .nav a:hover span {
+	opacity: 1;
+	-khtml-opacity: 1;
+	-moz-opacity: 1;
+	-ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=100)';
+	filter: alpha(opacity=100);
+}
+#lightcase-case .nav a.prev span {
+	left: 0;
+}
+#lightcase-case .nav a.next span {
+	right: 0;
+	background-position: 0 -60px;
+}
+#lightcase-case .nav a.pause span {
+	background-position: 0 -90px;
+}
+#lightcase-case .nav a.play span {
+	background-position: 0 -120px;
+}
+#lightcase-case .nav a.pause span,
+#lightcase-case .nav a.play span {
+	left: 50%;
+	margin-left: -15px;
+	transition-delay: 1s;
+}
+#lightcase-case .nav a.pause:hover span,
+#lightcase-case .nav a.play:hover span {
+	transition-delay: 0s;
+}
+	
+	/* close */
+#lightcase-case a.close {
+	position: absolute;
+	z-index: 1;
+	top: -16px;
+	right: -17px;
+	width: 30px;
+	height: 30px;
+	outline: none;
+	text-indent: -9999px;
+	background: url(../images/sprite.png) transparent no-repeat 0 0;
+}
+
+	/* error message */
+p.lightcase-error {
+	margin: 0;
+	padding: 0;
+}
