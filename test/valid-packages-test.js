@@ -212,7 +212,7 @@ packages.map(function (pkg) {
             correct = JSON.stringify(JSON.parse(orig), null, 2) + '\n',
             content = JSON.parse(correct);
         assert.ok(orig === correct,
-            pkg_name(pkg) + ": package.json wrong indent, please use our tool: tools/fixFormat.js to fix it for you, here is an example: (Please ignore the first 2 spaces and the wildcard symbol in autoupadte config due to a bug)\n" + correct +"\n");
+            pkg_name(pkg) + ": package.json wrong indent, please use 2-spaces as indent, remove trailing spaces, you can use our tool: tools/fixFormat.js to fix it for you, here is an example: (Please ignore the first 2 spaces and the wildcard symbol in autoupadte config due to a bug)\n" + correct +"\n");
         if (content.author != undefined) {
             assert.ok(!Array.isArray(content.author),
                 pkg_name(pkg) + ": author field in package.json should be a object or string to show its author info, if there is multiple authors info, you should use 'authors' instead, you can use our tool: tools/fixFormat.js to fix it for you.");
