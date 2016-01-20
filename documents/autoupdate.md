@@ -5,6 +5,7 @@ cdnjs automatically updates libraries that are known to be hosted on `npm` or gi
 To add `git` auto-update config to a library, update the `package.json` with configuration details and submit your pull request. An example configuration:
 
 ```js
+  "filename": "underscore-min.js",
   "autoupdate": {
     "source": "git",
     "target": "git://github.com/jashkenas/underscore.git",
