@@ -20,6 +20,7 @@ To add `git` auto-update config to a library, update the `package.json` with con
 To add an `npm` hook to a library, update the `package.json` with configuration details and submit your pull request. An example configuration:
 
 ```js
+  "filename": "function-plot.min.js",
   "npmName": "function-plot",
   "npmFileMap": [
     {
@@ -32,6 +33,7 @@ To add an `npm` hook to a library, update the `package.json` with configuration 
 ```
 
 * Please __don't__ touch `version` number in this step, it'll be automatically updated
+* `filename` must point to a minified file within the cdnjs target directory. If the file is in a subfolder, then include the folder (e.g. `"js/function-plot.min.js"`)
 * `npmName` should map to the name of the library on `npm`
 * `npmFileMap` is a list of files to take from the `npm` tarball and host on cdnjs
 * `basePath` will be ignored when copying over to the CDN
@@ -43,6 +45,7 @@ The above example looks in the tarball whose structure might look like this:
 ```
 |__dist
 | |__function-plot.js
+| |__function-plot.min.js
 |__bower.json
 |__index.js
 |__site.js
@@ -64,6 +67,7 @@ The auto-update process will look for `dist` inside the named tarball and copy a
     |__function-plot
       |__x.y.z
         |__function-plot.js
+        |__function-plot.min.js
 ```
 
 ...where `x.y.z` is the version number, extracted from the `package.json` on npm.
