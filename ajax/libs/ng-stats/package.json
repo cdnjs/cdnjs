@@ -1,0 +1,110 @@
+{
+   "name":"ng-stats",
+   "version":"2.3.1",
+   "description":"Little utility to show stats about your page's angular digest/watches.",
+   "main":"dist/ng-stats.js",
+   "scripts":{
+      "start":"npm run test",
+      "serve":"NODE_ENV=development webpack-dev-server --config node_modules/kcd-common-tools/shared/webpack.config.js --content-base demo/ --port 8080 --colors --progress",
+      "test":"COVERAGE=true NODE_ENV=test karma start",
+      "test:single":"COVERAGE=true NODE_ENV=test karma start --single-run",
+      "test:debug":"echo 'WARNING: This is currently not working quite right...' && NODE_ENV=test karma start --browsers Chrome",
+      "build:dist":"NODE_ENV=development webpack --config node_modules/kcd-common-tools/shared/webpack.config.js --progress --colors",
+      "build:prod":"NODE_ENV=production webpack --config node_modules/kcd-common-tools/shared/webpack.config.js --progress --colors",
+      "build":"npm run build:dist & npm run build:prod",
+      "ci":"npm run code-checks && npm run test:single && npm run check-coverage && npm run build",
+      "check-coverage":"./node_modules/istanbul/lib/cli.js check-coverage --statements 35 --functions 37 --lines 33 --branches 15",
+      "report-coverage":"echo 'Reporting coverage stats' && cat ./coverage/lcov.info | codecov",
+      "predeploy":"npm run deployClean && npm run deployCopy",
+      "deploy":"surge -p deploy.ignored -d ng-stats.surge.sh",
+      "deployCopy":"cp demo/index.html deploy.ignored/ && cp dist/ng-stats.js deploy.ignored/ && cp node_modules/angular/angular.js deploy.ignored/",
+      "deployClean":"rm -rf deploy.ignored/ && mkdir deploy.ignored/",
+      "only-check":"node node_modules/kcd-common-tools/shared/scripts/only-check.js",
+      "code-checks":"eslint src/ && npm run only-check",
+      "release":"npm run build && with-package git commit -am pkg.version && with-package git tag pkg.version && git push && npm publish && git push --tags",
+      "release:beta":"npm run release && npm run tag:beta",
+      "tag:beta":"with-package npm dist-tag add pkg.name@pkg.version beta"
+   },
+   "repository":{
+      "type":"git",
+      "url":"https://github.com/kentcdodds/ng-stats.git"
+   },
+   "keywords":[
+      "angular",
+      "ng-stats",
+      "angularjs",
+      "utilities"
+   ],
+   "author":"Kent C. Dodds <kent@doddsfamily.us> (http://kent.doddsfamily.us)",
+   "contributors":[
+      "Kent C. Dodds <kent@doddsfamily.us> (http://kent.doddsfamily.us)",
+      "Viper Bailey <jinxidoru@gmail.com> (http://jinxidoru.blogspot.com)"
+   ],
+   "license":"MIT",
+   "bugs":{
+      "url":"https://github.com/kentcdodds/ng-stats/issues"
+   },
+   "homepage":"https://github.com/kentcdodds/ng-stats",
+   "config":{
+      "ghooks":{
+         "pre-commit":"npm run code-checks && npm run test:single && npm run check-coverage"
+      }
+   },
+   "peerDependencies":{
+      "angular":"^1.2.x || >= 1.4.0-beta.0 || >= 1.5.0-beta.0"
+   },
+   "devDependencies":{
+      "angular":"1.4.1",
+      "angular-mocks":"1.4.1",
+      "babel":"5.5.8",
+      "babel-core":"5.5.8",
+      "babel-eslint":"3.1.17",
+      "babel-loader":"5.1.4",
+      "chai":"3.0.0",
+      "codecov.io":"0.1.4",
+      "eslint":"0.23.0",
+      "eslint-loader":"0.14.0",
+      "ghooks":"0.3.2",
+      "isparta":"3.0.3",
+      "isparta-loader":"0.2.0",
+      "istanbul":"0.3.15",
+      "karma":"0.12.36",
+      "karma-chai":"0.1.0",
+      "karma-chrome-launcher":"0.1.12",
+      "karma-coverage":"0.4.2",
+      "karma-firefox-launcher":"0.1.6",
+      "karma-mocha":"0.1.10",
+      "karma-webpack":"1.5.1",
+      "kcd-common-tools":"1.0.0-beta.9",
+      "lodash":"3.9.3",
+      "mocha":"2.2.5",
+      "node-libs-browser":"0.5.2",
+      "surge":"0.14.2",
+      "uglify-loader":"1.2.0",
+      "webpack":"1.9.11",
+      "webpack-dev-server":"1.9.0",
+      "with-package":"0.2.0"
+   },
+   "kcdCommon":{
+      "webpack":{
+         "output":{
+            "library":"showAngularStats",
+            "libraryTarget":"umd"
+         },
+         "externals":{
+            "angular":"angular"
+         }
+      },
+      "karma":"scripts/karma-overrides.js"
+   },
+   "npmName":"ng-stats",
+   "npmFileMap":[
+      {
+         "basePath":"/dist",
+         "files":[
+            "**/*"
+         ]
+      }
+   ],
+   "filename":"ng-stats.js"
+}
