@@ -85,7 +85,7 @@
  
 4. For those libs can use auto-update, you should add [auto-update config](https://github.com/cdnjs/cdnjs#enabling-gitrecommended-or-npm-auto-update) for it, but as the first pull request to add a lib, you should still add its real files, or you won't pass the test.
 
-### d. adding a new library
+### d. Adding a new library
 
 1. Libraries are stored in the ajax/libs directory. Each library has its own subdirectory of ajax/libs and each version of the library has its own subdirectory of the library directory name, for example:
  > /ajax/libs/jquery/2.0.0/
@@ -94,6 +94,7 @@
  * If there is an official `package.json`, please try to follow the official version, the best way is just copy from the official and do a little modification of it.
  * If there is **not** an official `package.json`, please **create** it by yourself, you should refer to [doc of package.json](https://www.npmjs.org/doc/package.json.html) orother lib's `package.json`, and the data should be as close as official data as possible.
   * If you will **create** its `package.json`, the indent of it **must** be `2 spaces`, others will be fine to follow official version or to use 2 spaces.
+  * Please include a `filename` property that points to the main minified file within the cdnjs target directory. If the file is in a subfolder, include it with the filename (e.g. `"filename" : "js/index.js"`).
   * Please use [JSONLint](http://jsonlint.com/) to validate your `package.json`.
 
 3. We use the directory/folder name and `name` property in `package.json` to identify a library, so this two string should be **totally** equal.
