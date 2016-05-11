@@ -1,0 +1,303 @@
+/*
+ * Lightcase - jQuery Plugin
+ * The smart and flexible Lightbox Plugin.
+ *
+ * @author		Cornel Boppart <cornel@bopp-art.com>
+ * @copyright	Author
+ *
+ * @version		1.3.1 (12/05/2013)
+ */
+
+@media screen {
+		/* overlay */
+	#lightcase-overlay {
+		display: none;
+		width: 100%;
+		height: 100%;
+		
+		position: fixed;
+		z-index: 1000;
+		top: 0;
+		left: 0;
+		
+		background-color: #333;
+	}
+
+		/* loading */
+	#lightcase-loading {
+		display: none;
+		width: 48px;
+		height: 48px;
+		margin-top: -24px;
+		margin-left: -24px;
+		
+		position: fixed;
+		z-index: 1001;
+		top: 50%;
+		left: 50%;
+		
+		background: url(../images/loading_neg.gif) transparent no-repeat 50% 50%;
+		background-size: 50%;
+	}
+	#lightcase-case.lightcase-loading .lightcase-content,
+	#lightcase-case.type-flash .lightcase-content {
+		background: url(../images/loading.gif) transparent no-repeat 50% 50%;
+		background-size: 24px;
+	}
+	
+		/* case */
+	#lightcase-case {
+		display: none;
+		
+		position: fixed;
+		z-index: 1002;
+		top: 50%;
+		left: 50%;
+		
+		color: #333;
+		background-color: #fff;
+		border: 3px solid #fff;
+		
+		/*
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		border-radius: 5px;
+		*/
+		-moz-box-shadow: 0 0 10px rgba(0,0,0,.85);
+		-webkit-box-shadow: 0 0 10px rgba(0,0,0,.85);
+		box-shadow: 0 0 10px rgba(0,0,0,.85);
+		
+		font-family: arial, sans-serif;
+		font-size: 13px;
+		line-height: 18px;
+		text-align: left;
+		-webkit-text-size-adjust: none;
+	}
+	
+		/* info */
+	#lightcase-case .lightcase-info {
+		overflow: auto;
+	}
+	#lightcase-case .lightcase-sequenceInfo,
+	#lightcase-case .lightcase-title,
+	#lightcase-case .lightcase-caption {
+		margin: 10px;
+		padding: 0;
+		overflow: auto;
+		font-size: 11px;
+		line-height: 15px;
+		text-overflow: ellipsis;
+	}
+	#lightcase-case .lightcase-sequenceInfo {
+		float: left;
+		padding-right: 0;
+	}
+	
+		/* content */
+	#lightcase-case .lightcase-content {
+		position: relative;
+		z-index: 1;
+	}
+	#lightcase-case.type-image .lightcase-contentInner,
+	#lightcase-case.type-video .lightcase-contentInner {
+		line-height: 0.75;
+	}
+	#lightcase-case  .lightcase-inlineWrap {
+		padding: 15px;
+		overflow: auto;
+		
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+	#lightcase-case .lightcase-content object, 
+	#lightcase-case .lightcase-content embed {
+		display: block; /* this removes unwanted space at bottom of the movie object */
+	}
+
+		/* error message */
+	p.lightcase-error {
+		margin: 0;
+		padding: 0;
+	}
+
+		/* navigation */
+	#lightcase-case .lightcase-nav {
+	}
+	#lightcase-case .lightcase-nav a {
+		width: 25%;
+		
+		position: absolute;
+		z-index: 3;
+		top: 25%;
+		bottom: 25%;
+		
+		outline: none;
+		cursor: pointer;
+		background: url(#) transparent; /* required to get the full height of link */
+		-ie67-outline: expression(this.hideFocus=true); /* hides ugly outline on focus, the property name is arbitrary */
+	}
+	#lightcase-case a.lightcase-prev {
+		left: 15px;
+	}
+	#lightcase-case a.lightcase-next {
+		right: 15px;
+	}
+	#lightcase-case a.lightcase-play,
+	#lightcase-case a.lightcase-pause {
+		display: none;
+		width: 50%;
+		
+		z-index: 3;
+		left: 25%;
+		right: 25%;
+	}
+	#lightcase-case .lightcase-nav a span {
+		display: block;
+		width: 30px;
+		height: 30px;
+		margin-top: -13px;
+		
+		position: absolute;
+		z-index: 1;
+		top: 50%;
+		
+		text-indent: -9999px;
+		background: url(../images/sprite.png) transparent no-repeat 0 -30px;
+		
+		opacity: 0;
+		-khtml-opacity: 0;
+		-moz-opacity: 0;
+		-ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=0)';
+		filter: alpha(opacity=0);
+		
+		-webkit-backface-visibility: hidden;
+		
+		-webkit-transition: all .2s ease-out;
+		-moz-transition: all .2s ease-out;
+		-o-transition: all .2s ease-out;
+		transition: all .2s ease-out;
+	}
+	#lightcase-case .lightcase-nav a:hover span {
+		opacity: 1;
+		-khtml-opacity: 1;
+		-moz-opacity: 1;
+		-ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=100)';
+		filter: alpha(opacity=100);
+	}
+	#lightcase-case a.lightcase-prev span {
+		left: 0;
+	}
+	#lightcase-case a.lightcase-next span {
+		right: 0;
+		background-position: 0 -60px;
+	}
+	#lightcase-case a.lightcase-pause span {
+		background-position: 0 -90px;
+	}
+	#lightcase-case a.lightcase-play span {
+		background-position: 0 -120px;
+	}
+	#lightcase-case a.lightcase-pause span,
+	#lightcase-case a.lightcase-play span {
+		left: 50%;
+		margin-left: -15px;
+	}
+		
+		/* close */
+	#lightcase-case a.lightcase-close {
+		width: 30px;
+		height: 30px;
+		
+		position: absolute;
+		z-index: 1;
+		top: -16px;
+		right: -17px;
+		
+		outline: none;
+		text-indent: -9999px;
+		background: url(../images/sprite.png) transparent no-repeat 0 0;
+	}
+	
+		/* isMobileDevice */
+	.lightcase-isMobileDevice #lightcase-case .lightcase-inlineWrap,
+	.lightcase-isMobileDevice #lightcase-case.type-iframe .lightcase-contentInner {
+		overflow: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+	
+	.lightcase-isMobileDevice.lightcase-open,
+	.lightcase-isMobileDevice.lightcase-open body {
+		max-width: 100%;
+		max-height: 100%;
+		overflow: hidden;
+	}
+		/* fullScreenModeForMobile */
+	.lightcase-fullScreenMode #lightcase-case {
+		color: #fff;
+		text-shadow: none;
+		
+		border: none;
+		background: none;
+		
+		/*
+		-moz-border-radius: 0px;
+		-webkit-border-radius: 0px;
+		border-radius: 0px;
+		*/
+		-moz-box-shadow: none;
+		-webkit-box-shadow: none;
+		box-shadow: none;
+	}
+	.lightcase-fullScreenMode #lightcase-case .lightcase-content {
+		background: none;
+	}
+	.lightcase-fullScreenMode #lightcase-case .lightcase-info {
+		position: fixed;
+		z-index: 1003;
+		left: 5px;
+		bottom: 5px;
+	}
+	.lightcase-fullScreenMode #lightcase-case a.lightcase-prev,
+	.lightcase-fullScreenMode #lightcase-case a.lightcase-next {
+		position: absolute; /* hide the prev/next buttons */
+		top: -99999px;
+	}
+	.lightcase-fullScreenMode #lightcase-case a.lightcase-play span {
+		margin-top: -15px;
+		background-image: url(../images/play.svg);
+	}
+	.lightcase-fullScreenMode #lightcase-case a.lightcase-pause span {
+		margin-top: -15px;
+		background-image: url(../images/pause.svg);
+	}
+	.lightcase-fullScreenMode #lightcase-case a.lightcase-pause span,
+	.lightcase-fullScreenMode #lightcase-case a.lightcase-play span,
+	.lightcase-fullScreenMode #lightcase-case a.lightcase-close {
+		border: 1px solid rbga(0,0,0, .25);
+		
+		background-color: rgba(150,150,150, .75);
+		background-repeat: no-repeat;
+		background-position: 50% 50%;
+		background-size: 55% 55%;
+		
+		-moz-box-shadow: inset 0px 0px 1px rgba(0,0,0, .25);
+		-webkit-box-shadow: inset 0px 0px 1px rgba(0,0,0, .25);
+		box-shadow: inset 0px 0px 1px rgba(0,0,0, .25);
+		
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		border-radius: 5px;
+	}
+	.lightcase-fullScreenMode #lightcase-case a.lightcase-close {
+		width: 30px;
+		height: 30px;
+		
+		position: fixed;
+		top: 5px;
+		right: 5px;
+		
+		background-image: url(../images/contract.svg);
+		background-size: 55% 55%;
+	}
+}

@@ -1,0 +1,80 @@
+'use strict';
+var React = require('react');
+var invariant = require('react/lib/invariant');
+var ls = global.localStorage;
+
+var Mixin = module.exports = {
+  /**
+   * Error checking. On update, ensure that the last state stored in localStorage is equal
+   * to the state on the component. We skip the check the first time around as state is left
+   * alone until mount to keep server rendering working.
+   *
+   * If it is not consistent, we know that someone else is modifying localStorage out from under us, so we throw
+   * an error.
+   *
+   * There are a lot of ways this can happen, so it is worth throwing the error.
+   */
+  componentDidUpdate: function(prevProps, prevState) {
+    if (!ls || process.env.NODE_ENV === "production" || !this.__stateLoadedFromLS) return;
+    var key = getLocalStorageKey(this);
+    var prevStoredState = ls.getItem(key);
+    if (prevStoredState) {
+      invariant(
+        prevStoredState === JSON.stringify(prevState),
+        'While component ' + getDisplayName(this) + ' was saving state to localStorage, ' +
+        'the localStorage entry was modified by another actor. This can happen when multiple ' +
+        'components are using the same localStorage key. Set the property `localStorageKey` ' +
+        'on ' + getDisplayName(this) + '.'
+      );
+    }
+    ls.setItem(key, JSON.stringify(this.state));
+  },
+
+  /**
+   * Load data.
+   * This seems odd to do this on componentDidMount, but it prevents server checksum errors.
+   * This is because the server has no way to know what is in your localStorage. So instead
+   * of breaking the checksum and causing a full rerender, we instead change the component after mount
+   * for an efficient diff.
+   */
+  componentDidMount: function () {
+    var me = this;
+    loadStateFromLocalStorage(this, function() {
+      // After setting state, mirror back to localstorage.
+      // This prevents invariants if the developer has changed the initial state of the component.
+      ls.setItem(getLocalStorageKey(me), JSON.stringify(me.state));
+    });
+  }
+};
+
+function loadStateFromLocalStorage(component, cb) {
+  if (!ls) return;
+  var key = getLocalStorageKey(component);
+  var waiting = false;
+  try {
+    var storedState = JSON.parse(ls.getItem(key));
+    if (storedState) {
+      waiting = true;
+      component.setState(storedState, cb);
+    }
+  } catch(e) {
+    if (console) console.warn("Unable to load state for", getDisplayName(component), "from localStorage.");
+  }
+  // Flag this component as loaded.
+  component.__stateLoadedFromLS = true;
+  // If we didn't set state, run the callback right away.
+  if (!waiting) cb();
+}
+
+function getDisplayName(component) {
+  // at least, we cannot get displayname 
+  // via this.displayname in react 0.12
+  return component.displayName || component.constructor.displayName;
+}
+
+function getLocalStorageKey(component) {
+  if (component.getLocalStorageKey) {
+    return component.getLocalStorageKey();
+  }
+  return component.props.localStorageKey || getDisplayName(component) || 'react-localstorage';
+}

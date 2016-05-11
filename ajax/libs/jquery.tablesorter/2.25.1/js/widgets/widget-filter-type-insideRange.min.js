@@ -1,0 +1,2 @@
+/*! Widget: filter, insideRange filter type - updated 12/10/2015 (v2.25.0) */
+!function(a){"use strict";var b=a.tablesorter,c=/\d+/,d=/\s+-\s+/,e=function(a){return isNaN(a)?a:parseFloat(a)};b.filter.types.insideRange=function(a,b){if(!b.anyMatch&&c.test(b.iFilter)&&d.test(b.iExact)){var f,g,h,i,j=b.index,k=b.$cells[j],l=b.iExact.split(d),m=a.parsers[b.index]&&a.parsers[b.index].format;return l&&l.length<2||"function"!=typeof m?null:(h=e(m(l[0],a.table,k,j)),i=e(m(l[1],a.table,k,j)),g=e(m(b.iFilter,a.table,k,j)),h>i&&(f=i,i=h,h=f),g>=h&&i>=g)}return null}}(jQuery);

@@ -1,0 +1,2 @@
+/* Lazy Load XT 1.1.0 | MIT License */
+!function(a,b){a.lazyLoadXT.forceEvent+=" beforeprint",b.matchMedia&&b.matchMedia("print").addListener(function(c){c.matches&&a(b).trigger("beforeprint")})}(window.jQuery||window.Zepto||window.$,window);

@@ -14,8 +14,7 @@ var path = require("path"),
     stable = require('semver-stable'),
     semver = require('semver');
 
-
-if(!fs.existsSync('/run/shm')) {
+if (!fs.existsSync('/run/shm')) {
   tempDirPath = path.join(__dirname, 'temp');
 } else {
   fs.mkdirsSync('/run/shm/cdnjs_NPM_temp');
@@ -52,7 +51,7 @@ var parse = function (json_file, ignore_missing, ignore_parse_fail) {
     }
 }
 
-var reEscape = function(s){
+var reEscape = function(s) {
     return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 }
 
@@ -61,18 +60,18 @@ var reEscape = function(s){
  * @param pkg
  * @returns {*}
  */
-var isValidFileMap = function(pkg){
-    var isValidPath = function(p){
-        if(p !== null){ //don't allow parent dir access, or tricky paths
+var isValidFileMap = function(pkg) {
+    var isValidPath = function(p) {
+        if (p !== null) { //don't allow parent dir access, or tricky paths
             p = p.replace(/\/+/g, '/'); //dont penalize for consequtive path seperators
             return p === path.normalize(p);
         }
         return false
     };
 
-    if(pkg && pkg.npmFileMap){
-        return _.every(pkg.npmFileMap, function(fileSpec){
-           if(isValidPath(fileSpec.basePath || "/")){
+    if (pkg && pkg.npmFileMap) {
+        return _.every(pkg.npmFileMap, function(fileSpec) {
+           if (isValidPath(fileSpec.basePath || "/")) {
                return _.every(fileSpec.files, isValidPath);
            }
            return false;
@@ -81,12 +80,13 @@ var isValidFileMap = function(pkg){
     return false
 };
 
-var error = function(msg, name){
+var error = function(msg, name) {
     var err = new Error(msg);
     err.name = name;
     console.log(msg.error);
     return err;
 }
+
 error.PKG_NAME = 'BadPackageName'
 error.FILE_PATH = 'BadFilePath'
 
@@ -94,9 +94,9 @@ error.FILE_PATH = 'BadFilePath'
  * returns a fucntion that takes N args, where each arg is a path that must not outside of libPath.
  * returns true if all paths are within libPath, else false
  */
-var isAllowedPathFn = function(libPath){ //is path within the lib dir? if not, they shouldnt be writing/reading there
+var isAllowedPathFn = function(libPath) { //is path within the lib dir? if not, they shouldnt be writing/reading there
     libPath = path.normalize(libPath || "/");
-    return function(){
+    return function() {
         var paths = 1 <= arguments.length ? [].slice.call(arguments, 0) : [];
         var re = new RegExp("^"+reEscape(libPath));
         return _.every(paths, function(p) {
@@ -106,7 +106,7 @@ var isAllowedPathFn = function(libPath){ //is path within the lib dir? if not, t
     }
 };
 
-var invalidNpmName = function(name){
+var invalidNpmName = function(name) {
     return !!~name.indexOf(".."); //doesnt contain
 }
 
@@ -117,45 +117,41 @@ var invalidNpmName = function(name){
  * @param libPath = root folder for extracted lib
  * @returns {Array} = array of security related errors triggered during operation.
  */
-var processNewVersion = function(pkg, version){
+var processNewVersion = function(pkg, version) {
     //sometimes the tar is extracted to a dir that isnt called 'package' - get that dir via glob
     var extractLibPath = glob.sync(getPackageTempPath(pkg, version)+"/*/")[0];
 
-    if(!extractLibPath){
+    if (!extractLibPath) {
       //even more rarely, the tar doesnt seem to get extracted at all.. which is probably a bug in that lib.
       var msg = pkg.npmName + "@" + version + " - never got extracted! This problem usually goes away on next run. Couldnt find extract dir here: " + getPackageTempPath(pkg, version);
       console.log(msg.error);
       return;
     }
-    var libPath = getPackagePath(pkg, version)
-
+    var libPath = getPackagePath(pkg, version);
     var isAllowedPath = isAllowedPathFn(extractLibPath);
-
-    var newPath = path.join(libPath, 'package.json')
-    if(false && fs.existsSync(newPath)){ //turn this off for now
+    var newPath = path.join(libPath, 'package.json');
+    if (false && fs.existsSync(newPath)) { //turn this off for now
         var newPkg = parse(newPath);
-        if(isValidFileMap(newPkg)){
+        if (isValidFileMap(newPkg)) {
             pkg.npmFileMap = newPkg.npmFileMap;
         }
     }
     var npmFileMap = pkg.npmFileMap;
     var errors = [];
-
     var updated = false;
-
     _.each(npmFileMap, function(fileSpec) {
         var basePath = fileSpec.basePath || "";
 
         _.each(fileSpec.files, function(file) {
             var libContentsPath = path.normalize(path.join(extractLibPath, basePath));
-            if(!isAllowedPath(libContentsPath)){
+            if (!isAllowedPath(libContentsPath)) {
                 errors.push(error(pkg.npmName+" contains a malicious file path: "+libContentsPath, error.FILE_PATH));
-                return
+                return;
             }
             var files = glob.sync(path.join(libContentsPath, file));
-            var copyPath = path.join(libPath, basePath)
+            var copyPath = path.join(libPath, basePath);
 
-            if(files.length == 0){
+            if (files.length == 0) {
               //usually old versions have this problem
               var msg = (pkg.npmName + "@" + version + " - couldnt find file in npmFileMap.") + (" Doesnt exist: " + path.join(libContentsPath, file)).info;
               fs.mkdirsSync(libPath);
@@ -163,25 +159,23 @@ var processNewVersion = function(pkg, version){
             }
 
             _.each(files, function(extractFilePath) {
-                if(extractFilePath.match(/(dependencies|\.zip\s*$)/i)){
+                if (extractFilePath.match(/(dependencies|\.zip\s*$)/i)) {
                   return;
                 }
-
                 var copyPart = path.relative(libContentsPath, extractFilePath);
-                var copyPath = path.join(libPath, copyPart)
-                fs.mkdirsSync(path.dirname(copyPath))
+                var copyPath = path.join(libPath, copyPart);
+                fs.mkdirsSync(path.dirname(copyPath));
                 fs.copySync(extractFilePath, copyPath);
                 updated = true;
             });
         });
     });
-    if(updated){
+    if (updated) {
       newVersionCount++;
         var libPatha =path.normalize(path.join(__dirname, 'ajax', 'libs', pkg.name, 'package.json'));
-        console.log('------------'.red, libPatha.green);    
-        if (stable.is(version) && semver.gt(version, pkg.version)) {
+        console.log('------------'.red, libPatha.green);
+        if (!pkg.version || stable.is(version) && semver.gt(version, pkg.version)) {
           pkg.version = version;
-
           fs.writeFileSync(libPatha, JSON.stringify(pkg, null, 2) + '\n', 'utf8');
         }
     }
@@ -189,10 +183,10 @@ var processNewVersion = function(pkg, version){
 }
 
 
-var getPackageTempPath = function(pkg, version){
-    return path.normalize(path.join(tempDirPath, pkg.name, version))
+var getPackageTempPath = function(pkg, version) {
+    return path.normalize(path.join(tempDirPath, pkg.name, version));
 }
-var getPackagePath = function(pkg, version){
+var getPackagePath = function(pkg, version) {
     return path.normalize(path.join(__dirname, 'ajax', 'libs', pkg.name, version));
 }
 /**
@@ -204,33 +198,36 @@ var getPackagePath = function(pkg, version){
  * @returns {*}
  */
 var updateLibraryVersion = function(pkg, tarballUrl, version, cb) {
-    if(invalidNpmName(pkg.name)){
+    if (invalidNpmName(pkg.name)) {
         return cb(error(pkg.npmName+" has a malicious package name:"+ pkg.name, error.PKG_NAME));
     }
     var extractLibPath = getPackageTempPath(pkg, version);
     var libPath = getPackagePath(pkg, version);
 
 
-    if(!fs.existsSync(libPath)) {
+    if (!fs.existsSync(libPath)) {
         fs.mkdirsSync(extractLibPath);
         var url = tarballUrl;
         var downloadFile = path.join(extractLibPath, 'dist.tar.gz');
         tarball.extractTarballDownload(url , downloadFile, extractLibPath, {}, function(err, result) {
-            if(fs.existsSync(downloadFile)){
-                processNewVersion(pkg, version);
-                var msg = "Do not have version " + version + " of " + pkg.npmName;
+            if (null == err && fs.existsSync(downloadFile)) {
+                var msg = "Found version " + version + " of " + pkg.npmName + ", now try to import it.";
                 console.log(msg.warn);
+                processNewVersion(pkg, version);
             } else {
                 if ('Server respond 404' == result.error) {
+                    var msg = "Got 404 on version " + version + " of " + pkg.npmName + ", create an empty folder for it.";
                     fs.mkdirsSync('./ajax/libs/' + pkg.name + '/' + version);
+                    console.log(msg.warn);
+                } else {
+                    var msg = "error downloading " + version + " of " + pkg.npmName + " it didnt exist: " + result.error;
+                    console.log(msg.error);
                 }
-                var msg = "error downloading " + version + " of " + pkg.npmName + " it didnt exist: " + result + err;
-                console.log(msg.error);
             }
-            cb()
+            cb();
         });
     } else {
-        cb()
+        cb();
     }
 };
 
@@ -241,7 +238,7 @@ var updateLibraryVersion = function(pkg, tarballUrl, version, cb) {
  * @param cb
  */
 var updateLibrary = function (pkg, cb) {
-    if(!isValidFileMap(pkg)){
+    if (!isValidFileMap(pkg)) {
         var msg = pkg.npmName.error + " has a malicious npmFileMap";
         console.log(msg.warn);
         return cb(null);
@@ -252,30 +249,30 @@ var updateLibrary = function (pkg, cb) {
     }
     console.log(msg.prompt);
     request.get('http://registry.npmjs.org/' + pkg.npmName).end(function(error, result) {
-        if (result.body != undefined) {
-            async.each(_.pairs(result.body.versions), function(p, cb){
+        if (result != undefined && result.body != undefined) {
+            async.each(_.toPairs(result.body.versions), function(p, cb) {
                 var data = p[1];
                 var version = p[0];
-                updateLibraryVersion(pkg, data.dist.tarball, version, cb)
-            }, function(err){
-            var msg = 'Library finished' + (err ? ' ' + err.error : '');
-            console.log(msg);
+                updateLibraryVersion(pkg, data.dist.tarball, version, cb);
+            }, function(err) {
+                var msg = 'Library "' + pkg.name + '" update finished' + (err ? ' ' + err.error : '');
+                console.log(msg);
                 cb(null);
             });
         } else {
-            error('Got error!', pkg.name);
+            console.log(('Got error on ' + pkg.name + ' ! Error: ' + error).error);
         }
     });
 }
 
-exports.run = function(){
-    fs.removeSync(path.join(tempDirPath, '/*'))
+exports.run = function() {
+    fs.removeSync(path.join(tempDirPath, '/*'));
 
     console.log('Looking for npm enabled libraries...');
 
     // load up those files
     if (args.length === 2 && isThere('./ajax/libs/' + args[1] + '/package.json')) {
-        var packages = glob.sync("./ajax/libs/" + args[1]+ "/package.json");
+        var packages = glob.sync("./ajax/libs/" + args[1] + "/package.json");
     } else {
         var packages = glob.sync("./ajax/libs/*/package.json");
     }
@@ -289,9 +286,10 @@ exports.run = function(){
     async.each(packages, updateLibrary, function(err) {
         var msg = 'Auto Update Completed - ' + newVersionCount + ' versions were updated';
         console.log(msg.prompt);
-        fs.removeSync(path.join(tempDirPath, '/*'))
+        fs.removeSync(path.join(tempDirPath, '/*'));
     });
 }
+
 exports.updateLibrary = updateLibrary;
 exports.updateLibraryVersion = updateLibraryVersion;
 exports.processNewVersion = processNewVersion;
@@ -300,11 +298,9 @@ exports.isAllowedPathFn = isAllowedPathFn;
 exports.isValidFileMap = isValidFileMap;
 exports.invalidNpmName = invalidNpmName;
 
-
 var args = process.argv.slice(2);
-if(args.length > 0 && args[0] == 'run'){
+if (args.length > 0 && args[0] == 'run') {
     exports.run();
-
 } else {
-    console.log('to start, pass the "run" arg'.prompt)
+    console.log('to start, pass the "run" arg'.prompt);
 }

@@ -1,0 +1,236 @@
+/*
+ * Lightcase - jQuery Plugin
+ * The smart and flexible Lightbox Plugin.
+ *
+ * @author		Cornel Boppart <cornel@bopp-art.com>
+ * @copyright	Author
+ *
+ * @version		2.1.1 (12/07/2015)
+ */
+
+/* Import icon font */
+@import url(font-lightcase.css);
+
+/* Import breakpoint related styles */
+@import url(lightcase-max-640.css);
+@import url(lightcase-min-641.css);
+
+@media screen {
+
+	/* Overlay */
+	#lightcase-overlay {
+		display: none;
+		width: 100%;
+		height: 100%;
+
+		position: fixed;
+		z-index: 1000;
+		top: 0;
+		left: 0;
+	}
+
+	/* Loading */
+	#lightcase-loading {
+		position: fixed;
+		z-index: 1001;
+		top: 50%;
+		left: 50%;
+
+		margin-top: -0.5em;
+		margin-left: -0.5em;
+
+		opacity: 1;
+
+		font-size: 32px;
+		
+		/* Fixes the icon wobble issue in firefox */
+		-moz-transform-origin: 50% 53%;
+
+		-webkit-animation: lightcase-loading-spin 0.5s infinite linear;
+		-moz-animation: lightcase-loading-spin 0.5s infinite linear;
+		-o-animation: lightcase-loading-spin 0.5s infinite linear;
+		animation: lightcase-loading-spin 0.5s infinite linear;
+	}
+
+	/* Case */
+	#lightcase-case {
+		display: none;
+
+		position: fixed;
+		z-index: 1002;
+		top: 50%;
+		left: 50%;
+	}
+
+	/* Additional info */
+	#lightcase-case .lightcase-info {
+		/* 
+		 * You can change to position "static" or "relative" instead, but consider
+		 * that this height will be integrated and calculated
+		 * to the maximum height additionally to the image height.
+		 */
+		position: absolute;
+
+		padding-top: 15px;
+	}
+
+	#lightcase-case .lightcase-caption {
+		clear: both;
+	}
+	#lightcase-case .lightcase-title,
+	#lightcase-case .lightcase-caption {
+		margin: 0;
+		padding: 0;
+
+		font-size: 17px;
+		line-height: 1.5;
+		font-weight: normal;
+		text-overflow: ellipsis;
+	}
+	#lightcase-case .lightcase-caption {
+		font-size: 13px;
+	}
+	#lightcase-case .lightcase-sequenceInfo {
+		font-size: 11px;
+	}
+
+	/* Icons */
+	[class*='lightcase-icon-'] {
+		width: 1.123em;
+		height: auto;
+
+		/*
+		 * For adjusting the icon size, just change the
+		 * value for "font-size" here!
+		 */
+		font-size: 38px;
+		line-height: 1;
+
+		text-align: center;
+		text-shadow: none;
+	}
+	a[class*='lightcase-icon-'],
+	a[class*='lightcase-icon-']:focus {
+		position: fixed;
+		z-index: 9999;
+
+		text-decoration: none;
+		color: rgba(255,255,255,0.6);
+
+		-webkit-tap-highlight-color: rgba(0,0,0,0);
+
+		-webkit-transition: color, opacity, ease-in-out 0.25s;
+		-moz-transition: color, opacity, ease-in-out 0.25s;
+		-o-transition: color, opacity, ease-in-out 0.25s;
+		transition: color, opacity, ease-in-out 0.25s;
+	}
+	a[class*='lightcase-icon-']:hover {
+		color: rgba(255,255,255,1);
+	}
+	a[class*='lightcase-icon-'] > span {
+		display: inline-block;
+		text-indent: -9999px;
+	}
+
+	/* For mobile (touch) devices */
+	.lightcase-isMobileDevice #lightcase-case .lightcase-inlineWrap,
+	.lightcase-isMobileDevice #lightcase-case[data-type=iframe] .lightcase-contentInner {
+		overflow: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.lightcase-isMobileDevice.lightcase-open,
+	.lightcase-isMobileDevice.lightcase-open body {
+		max-width: 100%;
+		max-height: 100%;
+		overflow: hidden;
+	}
+
+	.lightcase-isMobileDevice #lightcase-nav a:hover {
+		color: #aaa;
+		text-shadow: none;
+	}
+
+}
+
+/* Animation for loading spin icon */
+@-webkit-keyframes lightcase-loading-spin {
+
+	0% {
+		-webkit-transform: rotate(0deg);
+		-moz-transform: rotate(0deg);
+		-o-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(359deg);
+		-moz-transform: rotate(359deg);
+		-o-transform: rotate(359deg);
+		transform: rotate(359deg);
+	}
+
+}
+@-moz-keyframes lightcase-loading-spin {
+
+	0% {
+		-webkit-transform: rotate(0deg);
+		-moz-transform: rotate(0deg);
+		-o-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(359deg);
+		-moz-transform: rotate(359deg);
+		-o-transform: rotate(359deg);
+		transform: rotate(359deg);
+	}
+
+}
+@-o-keyframes lightcase-loading-spin {
+
+	0% {
+		-webkit-transform: rotate(0deg);
+		-moz-transform: rotate(0deg);
+		-o-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(359deg);
+		-moz-transform: rotate(359deg);
+		-o-transform: rotate(359deg);
+		transform: rotate(359deg);
+	}
+
+}
+@-ms-keyframes lightcase-loading-spin {
+
+	0% {
+		-webkit-transform: rotate(0deg);
+		-moz-transform: rotate(0deg);
+		-o-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(359deg);
+		-moz-transform: rotate(359deg);
+		-o-transform: rotate(359deg);
+		transform: rotate(359deg);
+	}
+
+}
+@keyframes lightcase-loading-spin {
+
+	0% {
+		-webkit-transform: rotate(0deg);
+		-moz-transform: rotate(0deg);
+		-o-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(359deg);
+		-moz-transform: rotate(359deg);
+		-o-transform: rotate(359deg);
+		transform: rotate(359deg);
+	}
+
+}

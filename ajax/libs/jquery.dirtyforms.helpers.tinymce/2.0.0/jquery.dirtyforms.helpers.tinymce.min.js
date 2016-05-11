@@ -1,0 +1,7 @@
+/*!
+TinyMCE helper module (for jQuery Dirty Forms) | v2.0.0 | github.com/snikch/jquery.dirtyforms
+(c) 2015 Mal Curtis
+License MIT
+*/
+!function(n,t,i,e){var r=":tinymce:not(.dirty-forms-temp)",c='.mceEditor a,.mceMenu a,[name^="mce_"]',a={ignoreSelector:c,isDirty:function(t){var i=!1;return f(t)&&t.filter(r).add(t.find(r)).each(function(){var t=n(this);if("undefined"==typeof t.data("df-tinymce-orig")){if(t.tinymce().isDirty())return i=!0,!1}else{var e=o(t),r=y(e),c=t.data("df-tinymce-orig");if(r!==c)return i=!0,!1}}),i},setClean:function(t){f(t)&&t.filter(r).add(t.find(r)).each(function(){var t=n(this);t.tinymce().isDirty()&&(t.tinymce().isNotDirty=1),d(t)})},rescan:function(t){f(t)&&t.filter(r).add(t.find(r)).each(function(){var t=n(this);"undefined"!=typeof t.data("df-tinymce-orig")&&d(t)})},ignoreAnchorSelector:c};n.DirtyForms.helpers.push(a);var f=function(n){try{return n.filter(r).length>0||n.find(r).length>0}catch(t){return!1}},o=function(n){return n.tinymce().getContent({format:"raw"}).replace(/<br><\/p>/gm,"</p>")},d=function(n){var t=o(n),i=y(t);n.data("df-tinymce-orig",i)},u=function(t){f(t)&&t.filter(r).add(t.find(r)).each(function(){d(n(this))})};n(i).bind("scan.dirtyforms",function(t){var i=n(t.target),e=n('<div style="display:none;" class="dirty-forms-temp"></div>');i.append(e),e.tinymce({oninit:function(){u(i)}})});var y=function(n){var t,i,e,r=0;if(0===n.length)return r;for(t=0,e=n.length;e>t;t++)i=n.charCodeAt(t),r=(r<<5)-r+i,r|=0;return r}}(jQuery,window,document);
+//# sourceMappingURL=jquery.dirtyforms.helpers.tinymce.min.js.map

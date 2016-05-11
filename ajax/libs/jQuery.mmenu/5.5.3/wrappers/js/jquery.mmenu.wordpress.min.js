@@ -1,0 +1,1 @@
+!function(e){var n="mmenu";e[n].configuration.classNames.selected="current-menu-item"}(jQuery);

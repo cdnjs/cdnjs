@@ -1,0 +1,6 @@
+/*!
+ * angular-datatables - v0.5.3
+ * https://github.com/l-lin/angular-datatables
+ * License: MIT
+ */
+"undefined"!=typeof module&&"undefined"!=typeof exports&&module.exports===exports&&(module.exports="datatables.buttons"),function(a,b,c,d){"use strict";function e(a,b){function c(a){function c(a,c){function e(a){var c="B";if(f.dom=f.dom?f.dom:b.dom,-1===f.dom.indexOf(c)&&(f.dom=c+f.dom),d.isUndefined(a))throw new Error("You must define the options for the button extension. See https://datatables.net/reference/option/buttons#Examples for some example");return f.buttons=a,f}var f=a(c);return f.withButtons=e,f}var e=a.newOptions,f=a.fromSource,g=a.fromFnPromise;return a.newOptions=function(){return c(e)},a.fromSource=function(a){return c(f,a)},a.fromFnPromise=function(a){return c(g,a)},a}a.decorator("DTOptionsBuilder",c),c.$inject=["$delegate"]}function f(a){function b(a){d.isArray(a.buttons)&&(a.buttonsTmp=a.buttons.slice())}function c(a){d.isDefined(a.buttonsTmp)&&(a.buttons=a.buttonsTmp,delete a.buttonsTmp)}var e={preRender:b,postRender:c};a.registerPlugin(e)}d.module("datatables.buttons",["datatables"]).config(e).run(f),e.$inject=["$provide","DT_DEFAULT_OPTIONS"],f.$inject=["DTRendererService"]}(window,document,jQuery,angular);

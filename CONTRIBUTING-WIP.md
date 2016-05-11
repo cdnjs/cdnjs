@@ -36,44 +36,43 @@ Each cdnjs library has a `package.json` file. This file contains required and so
 ### 2.3 Auto-update example
 
 ```js
-  "npmName": "lodash",
-  "npmFileMap": [{
-    "basePath": "/dist/",
-    "files": [
-      "*.js"
-    ]
-  }],
+  "npmName": "function-plot",
+  "npmFileMap": [
+    {
+      "basePath": "dist",
+      "files": [
+        "**/*"
+      ]
+    }
+  ],
 ```
 
-The example in 2.3. parses the `lodash` tarball, which has this structure:
+The example in 2.3. parses the `function-plot` tarball, which has this structure:
 
 ```
 |__dist
-| |__lodash.compat.js
-| |__lodash.compat.min.js
-| |__lodash.js
-| |__lodash.min.js
-| |__lodash.underscore.js
-| |__lodash.underscore.min.js
-|__LICENSE.txt
-|__lodash.js
+| |__function-plot.js
+|__bower.json
+|__index.js
+|__site.js
 |__package.json
 |__README.md
+|__lib
+| |__...
+|__node_modules
+| |__...
+|__sandbox
+| |__...
 ```
 
-The auto-update process will locate `dist` (specified in `basePath`) and copy *.js (specified in `files`) to cdnjs, removing the `dist` path. The resulting files in cdnjs will be: 
+The auto-update process will locate `dist` (specified in `basePath`) and copy **/* (specified in `files`) to cdnjs, removing the `dist` path. The resulting files in cdnjs will be: 
 
 ```
 |__ajax
   |__libs
-    |__lodash.js
+    |__function-plot
       |__x.y.z
-        |__lodash.compat.js
-        |__lodash.compat.min.js
-        |__lodash.js
-        |__lodash.min.js
-        |__lodash.underscore.js
-        |__lodash.underscore.min.js
+        |__function-plot.js
 ```
 
 &hellip;where `x.y.z` is the library version number, extracted from the `package.json` on npmjs.

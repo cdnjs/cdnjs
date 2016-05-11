@@ -1,0 +1,2 @@
+/*! Parser: hugeNumbers - updated 3/1/2016 (v2.25.5) */
+!function(a){"use strict";a.tablesorter.addParser({id:"hugeNumbers",is:function(){return!1},format:function(a){return a.replace(/\B(?=(\d{12})+(?!\d))/g,",")},type:"text"})}(jQuery);

@@ -1,0 +1,1 @@
+!function(){self.onmessage=function(a){var b=a.data||{},c=b.encoding,d=b.method||"readAsText",e=b.file,f=[e],g=new FileReaderSync;c&&"readAsText"===d&&f.push(c);try{var h=g[d].apply(g,f);self.postMessage({result:h})}catch(i){self.postMessage({error:i})}}}();

@@ -1,0 +1,2 @@
+/* Lazy Load XT 1.1.0 | MIT License */
+!function(a){var b=a.lazyLoadXT,c=b.widgetAttr||"data-lazy-widget",d=/<!--([\s\S]*)-->/;b.selector+=",["+c+"]",a(document).on("lazyshow","["+c+"]",function(){var b,e=a(this),f=e,g=e.attr(c);g&&(f=a("#"+g)),f.length&&(b=d.exec(f.html()),b&&f.replaceWith(a.trim(b[1]))),e.triggerHandler("load")})}(window.jQuery||window.Zepto||window.$);
