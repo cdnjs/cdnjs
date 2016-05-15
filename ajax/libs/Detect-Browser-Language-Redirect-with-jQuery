@@ -1,0 +1,10 @@
+/*!
+ * jQuery Language detection plugin v1.0
+ * jQuery plugin for browser language detection with automatic redirection 
+ *
+ * https://github.com/danieledesantis/jquery-language-detection
+ *
+ * Released under the MIT License
+ * Copyright 2014 Daniele De Santis
+ */
+(function(e){function n(e,t){if(!t){var n=""}else{var n=new Date;n.setDate(n.getDate()+t);n="; expires="+n.toUTCString()}document.cookie="languageDetection="+e+n+"; path=/"}function r(){var e=document.cookie;var t=e.indexOf(" languageDetection=");if(t==-1){t=e.indexOf("languageDetection=")}if(t==-1){var n=null}else{var r=e.indexOf("=",t)+1;var i=e.indexOf(";",t);if(i==-1){i=e.length}n=unescape(e.substring(r,i))}return n}var t={init:function(n){var n=e.extend({domain:window.location.protocol+"//"+window.location.hostname+"/",useFullPaths:false,languages:[{code:"en",path:"",defaultLanguage:true}],expires:null},n);e(document).on("click",".language",function(t){t.preventDefault();e(document).languageDetection("setLanguage",n.domain,n.useFullPaths,n.languages,n.expires,e(this).attr("data-language"))});var i=r();var s=!i?navigator.language||navigator.userLanguage:i;t.setLanguage(n.domain,n.useFullPaths,n.languages,n.expires,s)},setLanguage:function(t,r,i,s,o){var u,a;for(var f=0;f<i.length;f++){if(i[f]["code"]==o.substr(0,2)){u=i[f]["path"];a=i[f]["code"]}}if(!u&&u!=""){for(var f=0;f<i.length;f++){if(i[f]["defaultLanguage"]==true){u=i[f]["path"];a=i[f]["code"]}}}if(e("html").attr("lang")==a){return}n(a,s);var l=!r?t+u:u;window.location.replace(l)}};e.fn.languageDetection=function(){var n=arguments[0];if(t[n]){n=t[n];arguments=Array.prototype.slice.call(arguments,1)}else if(typeof n=="object"||!n){n=t.init}else{e.error("Method "+n+" does not exist.");return this}return n.apply(this,arguments)}})(jQuery)
