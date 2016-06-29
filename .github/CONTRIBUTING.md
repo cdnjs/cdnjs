@@ -92,7 +92,7 @@
 
 2. We use [`package.json`](https://www.npmjs.org/doc/package.json.html) to store the meta data of a library in [npm format](https://www.npmjs.org/doc/package.json.html), please don't forget to add this file at the root of the lib.
  * If there is an official `package.json`, please try to follow the official version, the best way is just copy from the official and do a little modification of it.
- * If there is **not** an official `package.json`, please **create** it by yourself, you should refer to [doc of package.json](https://www.npmjs.org/doc/package.json.html) orother lib's `package.json`, and the data should be as close as official data as possible.
+ * If there is **not** an official `package.json`, please **create** it by yourself, you should refer to [doc of package.json](https://www.npmjs.org/doc/package.json.html) or other lib's `package.json`, and the data should be as close as official data as possible.
   * If you will **create** its `package.json`, the indent of it **must** be `2 spaces`, others will be fine to follow official version or to use 2 spaces.
   * Please use [JSONLint](http://jsonlint.com/) to validate your `package.json`.
 
