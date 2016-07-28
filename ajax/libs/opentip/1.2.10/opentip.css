@@ -1,0 +1,403 @@
+/**
+ ** http://www.opentip.org
+ ** See opentip.js for the license.
+ **
+ ** One word about the different states when showing / hiding opentips.
+ **
+ ** An opentip starts with the .ot-completely-hidden class.
+ ** When shown, it changes to .ot-becoming-visible, then to .ot-visible (depending
+ ** on the length of the transition effect).
+ ** When hidden, it changes to .ot-hidden, and then to .ot-completely-hidden (again:
+ ** depending on the length of the transition effect).
+ **/
+.ot-container {
+	position: absolute;
+	max-width: 300px;
+	z-index: 100;
+}
+  /**
+   * Only using the position transition on fixed opentips, so the tip only moves
+   * smoothly when it changes position due to browser viewport changes.
+   */
+  .ot-container.ot-fixed {
+    -webkit-transition-property: left, top;
+    -webkit-transition-duration: 0.2s, 0.2s;
+    -moz-transition-property: left, top;
+    -moz-transition-duration: 0.2s, 0.2s;
+  }
+  .ot-container.ot-completely-hidden {
+/*    display: none;*/
+  }
+.opentip {
+	position: relative;
+	font-size: 13px;
+	line-height: 120%;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+.opentip .title   { font-weight: bold; }
+.opentip .content { width: auto !important;}
+
+
+.opentip .loadingIndication {
+	display: none;
+	padding: 10px 15px;
+	background: url("images/loading.gif") center center no-repeat;
+	width: 25px;
+	height: 15px;
+}
+.opentip .loadingIndication span { display: none; }
+.ot-loading .opentip .loadingIndication { display: block; }
+.ot-loading .opentip .content { display: none; }
+
+.ot-buttons {
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.ot-buttons .close {
+	display: block;
+	text-decoration:none;
+	width: 15px;
+	height: 15px;
+	background: url("images/button.close.small.ffffff.png") center center no-repeat;
+}
+.ot-buttons .close span {
+	display: none;
+}
+
+.ot-container .stem-container {
+	position: absolute;
+	width: 0;
+	height: 0;
+}
+.ot-container .stem {
+	position: absolute;
+	overflow: hidden;
+}
+.ot-container .stem div {
+	background: no-repeat url("images/stems.cccccc.png");
+	position: absolute;
+	width: 320px;
+	height: 160px;
+}
+
+
+.ot-container .left { left: 0; }
+.ot-container .center { left: 50%; }
+.ot-container .right { right: 0; }
+.ot-container .top { top: 0; }
+.ot-container .middle { top: 50%; }
+.ot-container .bottom { bottom: 0; }
+
+
+
+/**  Styles  **/
+
+.style-standard .opentip {
+	border: 1px solid #f2e37b;
+	background-color: #fff18f;
+	color: black;
+	padding: 6px 10px;
+	box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.1);
+}
+.style-standard .opentip .title {
+	margin-bottom: 1px;
+}
+.style-standard .stem div {
+	background-image: url("images/stems.e3ca1b.png");
+}
+.style-standard .ot-buttons {
+	top: -9px;
+	right: -10px;
+}
+.style-standard .ot-buttons .close {
+	background-color: rgba(0,0,0,0.2);
+	width: 21px;
+	height: 21px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+
+
+
+
+.style-rounded .opentip {
+	border: 7px solid #81b4da;
+	background-color: #f9fbfc;
+	color: #3f5d73;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+	-moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+	-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+}
+.style-rounded .opentip .title {
+	background: #81b4da;
+	color: #f7fafd;
+	padding: 0px 10px 4px 10px;
+}
+.style-rounded .opentip .content {
+	padding: 6px 10px;
+}
+.style-rounded .stem div {
+	background-image: url("images/stems.c3ddf0.png");
+}
+.style-rounded .ot-buttons {
+	top: -13px;
+	right: -12px;
+}
+.style-rounded .ot-buttons .close {
+	background-color: #81B4DA;
+	width: 21px;
+	height: 21px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+
+.style-slick .opentip {
+	border: 1px solid #eeeeee;
+	background: #f7f7f7;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+.style-slick .opentip .title {
+	color: #49677e;
+	padding: 5px 10px 3px 10px;
+	border-bottom: 1px solid #eeeeee;
+}
+.style-slick .opentip .content {
+	padding: 6px 10px;
+	border-top: 1px solid #fefefe;
+}
+.style-slick .stem div {
+	background-image: url("images/stems.cccccc.png");
+}
+.style-slick .ot-buttons {
+	right: -11px;
+	top: -11px;
+}
+.style-slick .ot-buttons .close {
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	background-color: rgba(0, 0, 0, 0.1);
+	border: 1px solid #cccccc;
+	height: 19px;
+	width: 19px;
+
+}
+
+.style-glass .opentip {
+	background: white;
+	background: rgba(255, 255, 255, 0.9);
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	box-shadow: 0 0 15px rgba(51, 113, 136, 0.5);
+	-moz-box-shadow: 0 0 15px rgba(51, 113, 136, 0.5);
+	-webkit-box-shadow: 0 0 15px rgba(51, 113, 136, 0.5);
+	padding: 20px 30px; 
+}
+.style-glass .opentip .title {
+	color: #316F89;
+	font-family: serif;
+	font-style: italic;
+	margin: 0 0 20px 0;
+	font-size: 16px;
+}
+.style-glass .opentip .content {
+	color: #333333;
+}
+.style-glass .stem {
+	background-image: url("images/stems.ffffff.png");
+}
+.style-glass .ot-buttons .close {
+	background-image: url("images/button.close.big.ffffff.png");
+	border-radius: 0 5px 0 5px;
+	-moz-border-radius: 0 5px 0 5px;
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	background-color: #F7BA00;
+	width: 25px;
+	height: 25px;
+}
+
+
+/** IE 6 HACKS **/
+/*\*/
+.ot-buttons {
+	z-index: 110;
+}
+.opentip {
+	z-index: 110;
+}
+.opentipIFrame {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border: none;
+	background: none;
+	margin: 0;
+	padding: 0;
+	display:none;
+ 	/*sorry for IE5*/ display/**/:block;/*sorry for IE5*/
+ 	z-index:-1;/*must have*/
+ 	filter:mask();/*must have*/
+}
+.ot-container .stem div {
+	behavior: expression((this.runtimeStyle.behavior="none")&&(this.pngSet?this.pngSet=true:(this.nodeName == "IMG" && this.src.toLowerCase().indexOf('.png')>-1?(this.runtimeStyle.backgroundImage = "none",
+		this.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + this.src + "', sizingMethod='image')",
+		this.src = "transparent.gif"):(this.origBg = this.origBg? this.origBg :this.currentStyle.backgroundImage.toString().replace('url("','').replace('")',''),
+		this.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + this.origBg + "', sizingMethod='crop')",
+		this.runtimeStyle.backgroundImage = "none")),this.pngSet=true)
+	);
+}
+.style-glass .opentip {
+	border: 1px solid #bbbbbb;
+}
+/**/
+
+
+
+
+/**
+
+CSS3 Transitions
+================
+
+The definitions that follow here, are only meant for browsers that support css3
+transitions.
+
+So the syntax I'm going to use, is really meant for more modern browsers than
+IE6.
+
+
+
+To define a show effect, you have to define the position you want to come from
+as the .ot-completely-hidden property (in combination with your
+.ot-show-effectName).
+
+To define a hide effect, you do the same, but for .ot-hidden (in combination
+with your .ot-show-effectName).
+
+**/
+
+
+.ot-container.ot-css3 {
+  -webkit-transition-duration: 1s; /* Well be reset by JS */
+  -webkit-transition-property: opacity, -webkit-transform;
+  -moz-transition-duration: 1s; /* Well be reset by JS */
+  -moz-transition-property: opacity, -moz-transform;
+  -o-transition-duration: 1s; /* Well be reset by JS */
+  -o-transition-property: opacity, -o-transform;
+
+  opacity: 1;
+}
+
+.ot-container.ot-css3.ot-completely-hidden {
+  display: none;
+}
+
+
+
+
+
+/** Appear / Fade**/
+.ot-container.ot-css3.ot-becoming-visible.ot-show-appear,
+.ot-container.ot-css3.ot-hidden.ot-hide-fade {
+  opacity: 0;
+}
+
+
+
+/** Grow / Shrink **/
+.ot-container.ot-css3.ot-becoming-visible.ot-show-grow,
+.ot-container.ot-css3.ot-hidden.ot-hide-shrink {
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -o-transform: scale(0);
+}
+
+
+
+/** Blind/Slide down / Blind up**/
+.ot-container.ot-css3.ot-becoming-visible.ot-show-blindDown,
+.ot-container.ot-css3.ot-becoming-visible.ot-show-slideDown,
+.ot-container.ot-css3.ot-hidden.ot-hide-blindUp {
+  -webkit-transform: scaleY(0);
+  -moz-transform: scaleY(0);
+  -o-transform: scaleY(0);
+  opacity: 0;
+}
+
+
+/** Condense / Puff **/
+.ot-container.ot-css3.ot-becoming-visible.ot-show-condense,
+.ot-container.ot-css3.ot-hidden.ot-hide-puff {
+  -webkit-transform: scale(5);
+  -moz-transform: scale(5);
+  -o-transform: scale(5);
+  opacity: 0;
+}
+
+/** Rotate **/
+.ot-container.ot-css3.ot-becoming-visible.ot-show-rotate {
+  -webkit-transform: scale(3) rotate(-500deg);
+  -moz-transform: scale(3) rotate(-500deg);
+  -o-transform: scale(3) rotate(-500deg);
+  opacity: 0;
+}
+.ot-container.ot-css3.ot-hidden.ot-hide-rotate {
+  -webkit-transform: scale(3) rotate(500deg);
+  -moz-transform: scale(3) rotate(500deg);
+  -o-transform: scale(3) rotate(500deg);
+  opacity: 0;
+}
+
+
+
+/*
+
+.ot-container.ot-css3.ot-hidden.ot-show-condense { -webkit-transform: scale(5); }
+*/
+
+
+
+/*
+.ot-container.ot-css3.ot-hidden.ot-hide-fade { }
+
+
+@-webkit-keyframes shrink {
+	0% { opacity: 1; -webkit-transform: scale(1); }
+    90% { opacity: 0; -webkit-transform: scale(0.1); }
+	100% { opacity: 0; -webkit-transform: scale(0); }
+}
+.ot-container.ot-css3.ot-hidden.ot-hide-shrink { -webkit-animation-name: shrink; }
+
+@-webkit-keyframes blindUp {
+	0% { opacity: 1; -webkit-transform: scaleY(1); }
+    90% { opacity: 0; -webkit-transform: scaleY(0.1); }
+	100% { opacity: 0; -webkit-transform: scaleY(0); }
+}
+.ot-container.ot-css3.ot-hidden.ot-hide-blindUp { -webkit-animation-name: blindUp; }
+.ot-container.ot-css3.ot-hidden.ot-hide-slideUp { -webkit-animation-name: blindUp; }
+
+
+@-webkit-keyframes puff {
+	0% { opacity: 1; -webkit-transform: scale(1); }
+	100% { opacity: 0; -webkit-transform: scale(5); }
+}
+.ot-container.ot-css3.ot-hidden.ot-hide-puff { -webkit-animation-name: puff; }
+
+
+*/
+
