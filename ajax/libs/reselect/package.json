@@ -1,0 +1,71 @@
+{
+  "name": "reselect",
+  "version": "2.5.1",
+  "description": "Selectors for Redux.",
+  "main": "lib/index.js",
+  "jsnext:main": "es/index.js",
+  "typings": "src/reselect.d.ts",
+  "files": [
+    "lib",
+    "src",
+    "dist",
+    "es"
+  ],
+  "bugs": {
+    "url": "https://github.com/reactjs/reselect/issues"
+  },
+  "betterScripts": {
+    "test": {
+      "command": "mocha --compilers js:babel-register --ui tdd --recursive",
+      "env": {
+        "NODE_ENV": "test"
+      }
+    },
+    "test:cov": {
+      "command": "nyc --reporter=lcov --reporter=text mocha --compilers js:babel-register --ui tdd",
+      "env": {
+        "NODE_ENV": "test"
+      }
+    },
+    "test:typescript": {
+      "command": "node ./typescript_test/test.js"
+    },
+    "compile:commonjs": {
+      "command": "babel -d lib/ src/ && ncp ./src/reselect.d.ts lib",
+      "env": {
+        "NODE_ENV": "commonjs"
+      }
+    },
+    "compile:umd": {
+      "command": "mkdirp dist/ && babel -o dist/reselect.js src/",
+      "env": {
+        "NODE_ENV": "umd"
+      }
+    }
+  },
+  "keywords": [
+    "react",
+    "redux"
+  ],
+  "authors": [
+    "Lee Bannard",
+    "Robert Binna",
+    "Martijn Faassen",
+    "Philip Spitzlinger"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reactjs/reselect.git"
+  },
+  "license": "MIT",
+  "npmName": "reselect",
+  "npmFileMap": [
+    {
+      "basePath": "/src",
+      "files": [
+        "**/*"
+      ]
+    }
+  ],
+  "filename": "/index.js"
+}
