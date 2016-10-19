@@ -63,7 +63,7 @@ packages.map(function(pkg) {
   };
   packageVows[pname + " package.json is valid"] = function(pkg) {
     var pkgObj = parse(pkg, true);
-    var valid = false;
+    var valid = true;
     var errors;
     if (pkgObj === null) {
             // we already know about the problem
@@ -77,9 +77,11 @@ packages.map(function(pkg) {
           errors: schemaErrors
         };
       }
-      valid = true;
       return null;
-    });
+    }).filter(Boolean);
+    if (errors.length) {
+      valid = false;
+    }
     if (!valid) {
       assert.ok(valid,
                 [pkgName(pkg) + " is not a valid cdnjs package.json format:"].concat(
@@ -277,8 +279,21 @@ packages.map(function(pkg) {
                   pkgName(pkg) + ": Need to add \"String\" type basePath in auto-update config");
       }
     } else if (json.autoupdate) {
-        assert.ok(json.autoupdate.basePath != undefined && ((typeof json.autoupdate.basePath) == "string"),
-                  pkgName(pkg) + ": Need to add \"String\" type basePath in auto-update config");
+        var autoupdate = json.autoupdate;
+        if (autoupdate.fileMap) {
+            assert.ok(autoupdate.basePath === undefined, "The autoupadte.basePath should appear inside of fileMap only.");
+            assert.ok(Array.isArray(autoupdate.fileMap) === true, "The fileMap should be an array.");
+            autoupdate.fileMap.forEach(function (c) {
+                assert.ok(c && typeof c.basePath === "string", "The basePath should be a string.");
+                assert.ok(Array.isArray(c.files), "The files field should be an array.");
+                c.files.forEach(function (cFile) {
+                    assert.ok(cFile && typeof cFile === "string", "The file items should be a non-empty strings.");
+                });
+            });
+        } else {
+            assert.ok(json.autoupdate.basePath != undefined && ((typeof json.autoupdate.basePath) == "string"),
+                      pkgName(pkg) + ": Need to add \"String\" type basePath in auto-update config or a fileMap \"Array\"");
+        }
     }
   }
   packageVows[pname + ": There must no \"/\" at the front or the last of basePath "] = function(pkg) {
