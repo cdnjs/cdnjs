@@ -319,7 +319,14 @@ packages.map(function(pkg) {
                   pkgName(pkg) + ": files in auto-update config file map need to be an array");
       }
   };
-
+  packageVows[pname + ": There is a format problem in the filename field"] = function(pkg) {
+    var json = parse(pkg, true);
+    var filenamePrefixes = new RegExp("^/");
+    if (json.filename) {
+          assert.ok(!filenamePrefixes.test(json.filename),
+                  pkgName(pkg) + ": filename should not begin with /");
+    }
+  };
   context[pname] = packageVows;
   suite.addBatch(context);
   return null;
