@@ -90,6 +90,14 @@ async.each(packages, function(item, callback) {
       pkg.keywords = mod;
     }
   }
+  if (pkg.filename !== undefined) {
+    var filename = pkg.filename;
+    var filenamePrefixes = new RegExp("^/");
+    if (filenamePrefixes.test(pkg.filename)) {
+      filename = (filename).replace("/", "");
+      pkg.filename = filename;
+    }
+  }
   fs.writeFileSync(item, JSON.stringify(pkg, null, 2) + '\n', 'utf8');
   callback();
 });
