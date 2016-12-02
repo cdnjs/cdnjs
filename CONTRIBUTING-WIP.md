@@ -36,6 +36,7 @@ Each cdnjs library has a `package.json` file. This file contains required and so
 ### 2.3 Auto-update example
 
 ```js
+  "filename": "function-plot.min.js",
   "npmName": "function-plot",
   "npmFileMap": [
     {
@@ -52,6 +53,7 @@ The example in 2.3. parses the `function-plot` tarball, which has this structure
 ```
 |__dist
 | |__function-plot.js
+| |__function-plot.min.js
 |__bower.json
 |__index.js
 |__site.js
@@ -65,7 +67,7 @@ The example in 2.3. parses the `function-plot` tarball, which has this structure
 | |__...
 ```
 
-The auto-update process will locate `dist` (specified in `basePath`) and copy **/* (specified in `files`) to cdnjs, removing the `dist` path. The resulting files in cdnjs will be: 
+The auto-update process will locate `dist` (specified in `basePath`) and copy **/* (specified in `files`) to cdnjs, removing the `dist` path. The resulting files in cdnjs will be:
 
 ```
 |__ajax
@@ -73,6 +75,7 @@ The auto-update process will locate `dist` (specified in `basePath`) and copy **
     |__function-plot
       |__x.y.z
         |__function-plot.js
+        |__function-plot.min.js
 ```
 
 &hellip;where `x.y.z` is the library version number, extracted from the `package.json` on npmjs.
