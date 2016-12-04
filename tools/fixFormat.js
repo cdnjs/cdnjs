@@ -232,3 +232,4 @@ if (process.argv[1].indexOf('jasmine') == -1) {
 }
 
 exports.fixFormat = fixFormat;
+
