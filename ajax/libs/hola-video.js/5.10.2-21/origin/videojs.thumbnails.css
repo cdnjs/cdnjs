@@ -1,0 +1,31 @@
+/* a wrapper element that tracks the mouse vertically */
+.vjs-thumbnail-holder {
+  position: absolute;
+  left: -1000px;
+}
+
+/* the thumbnail image itself */
+.vjs-thumbnail {
+  position: absolute;
+  left: 0;
+  bottom: 1.3em;
+  opacity: 0;
+  transition: opacity .2s ease;
+  -webkit-transition: opacity .2s ease;
+  -moz-transition: opacity .2s ease;
+  -mz-transition: opacity .2s ease;
+}
+
+/* fade in the thumbnail when hovering over the progress bar */
+/* .fake-active is needed for Android only. It's removed on touchend/touchecancel */
+.vjs-progress-control:hover .vjs-thumbnail,
+.vjs-progress-control.fake-active .vjs-thumbnail,
+.vjs-progress-control:active .vjs-thumbnail {
+  opacity: 1;
+}
+
+/* ... but hide the thumbnail when hovering directly over it */
+.vjs-progress-control:hover .vjs-thumbnail:hover,
+.vjs-progress-control:active .vjs-thumbnail:active {
+  opacity: 0;
+}
