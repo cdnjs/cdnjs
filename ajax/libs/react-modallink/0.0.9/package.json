@@ -1,0 +1,47 @@
+{
+  "name": "react-modallink",
+  "version": "0.0.9",
+  "description": "Creates a modal and a link to open the modal",
+  "main": "index.js",
+  "scripts": {
+    "test": "jsxhint src/**/* & jest",
+    "release": "rm -rf dist & jsx -x jsx src dist & npm-release patch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andersem/react-modallink"
+  },
+  "keywords": [
+    "react",
+    "modal",
+    "react-modallink",
+    "popup"
+  ],
+  "author": {
+    "name": "Anders Emil Salvesen"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andersem/react-modallink/issues"
+  },
+  "devDependencies": {
+    "react": "~0.12.2",
+    "jest": "~0.1.37",
+    "react-tools": "~0.12.2",
+    "classnames": "~1.1.4",
+    "jsxhint": "~0.12.1",
+    "npm-release": "0.0.4-3"
+  },
+  "jest": {
+    "rootDir": "./src",
+    "scriptPreprocessor": "../preprocessor.js",
+    "unmockedModulePathPatterns": [
+      "../node_modules/react"
+    ]
+  },
+  "readme": "# react-modallink\nCreates a modal and a link to open the modal\n\n## Installation\n\n```bash\nnpm install react-modallink --save\n```\n\n## Usage\n\n### Create a react-component that contains a Modal\n\n```javascript\n# MyModal.jsx\nvar Modal = require('react-modallink').Modal;\n\nvar MyModal = React.createClass({\n  render: function () {\n    return (\n      <Modal {...this.props}>\n        <header>Modal</header>\n        <p>{this.props.something}</p>\n      </Modal>\n    );\n  }\n});\n```\n\n### Include a link for it in another component\n\n```javascript\n\n\nvar MyModal = require('./MyModal.jsx');\nvar ModalLink = require('react-modallink').ModalLink;\n\nvar ComponentWithModalLink = React.createClass({\n  render: function () {\n    return (\n      <div>\n        <ModalLink modal={<MyModal something=\"anything\" />}>\n          <a>Open modal</a>\n        </ModalLink>\n      </div>\n    );\n  }\n});\n```\n\n### Add some css into the mix\n\n```css\n.overlay {\n  box-sizing: content-box;\n  position: fixed;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  background-color: rgba(0, 0, 0, 0.8);\n  overflow: auto;\n  color: #272b34;\n  font-size: 1rem;\n  z-index: 9999;\n}\n\n.overlay.hidden {\n  display: none;\n}\n\n.overlay-top {\n  box-sizing: content-box;\n  position: relative;\n  width: 699px;\n  margin: 4% auto;\n}\n\n.overlay-content {\n  box-sizing: content-box;\n  position: relative;\n  width: 699px;\n  margin: 0 auto;\n  margin-bottom: 4%;\n  padding: 22.5px 30px;\n  background-color: #F3F4F7;\n  border-radius: 4px;\n}\n\n.overlay-close {\n  box-sizing: content-box;\n  position: absolute;\n  top: 25.5px;\n  right: 26px;\n  cursor: pointer;\n  z-index: 2000;\n  padding: 0;\n  color: #CED3E1;\n  font-size: 4em;\n  font-weight: 300;\n  line-height: 1em;\n  border-top-right-radius: 4px;\n  border-bottom-left-radius: 4px;\n}\n```\n\n\n## Inspiration\n\nInspired by and modified from react-bootstrap and cupcake-react-modal.\n",
+  "readmeFilename": "README.md",
+  "homepage": "https://github.com/andersem/react-modallink",
+  "_id": "react-modallink@0.0.9",
+  "_from": "react-modallink@*"
+}
