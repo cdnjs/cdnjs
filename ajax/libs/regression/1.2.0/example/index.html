@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>regression-js example</title>
+		<script src="http://code.jquery.com/jquery.min.js"></script>
+		<script src="http://tomalexander.co.nz/regression-js/jquery.flot.js"></script>
+		<script src="../build/regression.min.js"></script>
+
+		<script>
+
+		$(function(){
+
+			// Data
+			var data = [
+
+				[-10, -738],
+				[-9, -520],
+				[-8, -350],
+				[-7, -222],
+				[-6, -130],
+				[-5, -68],
+				[-4, -30],
+				[-3, -10],
+				[-2, -2],
+				[-1, 0],
+				[0, 2],
+				[1, 10],
+				[2, 30],
+				[3, 68],
+				[4, 130],
+				[5, 222],
+				[6, 350],
+				[7, 520],
+				[8, 738],
+				[9, 1010],
+				[10, 1342]
+			];
+
+			// do the regression (polynomial to the third degree)
+			var myRegression = regression('polynomial', data, 3);
+
+			// Plot the result
+			$.plot($('.graph'), [
+				{data: myRegression.points, label: 'Polynomial'},
+				{data: data, lines: { show: false }, points: { show: true }},
+			]);
+
+			// print the equation out
+			$('h2').text(myRegression.string);
+
+		});
+
+		</script>
+
+		<style>
+			html, body{
+				margin: 0;
+				padding: 0;
+				font-family: "Helvetica", sans-serif;
+				text-align: center;
+
+			}
+			.container{
+				margin: 0 auto;
+				width: 1170px;
+			}
+			.graph{
+				width: 1170px;
+				height: 500px;
+			}
+		</style>
+
+	</head>
+	<body>
+		<div class="container">
+			<h1>regression-js</h1>
+			<div class="graph"></div>
+			<h2></h2>
+		</div>
+	</body>
+</html>
