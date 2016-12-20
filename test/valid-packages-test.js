@@ -268,7 +268,7 @@ packages.map(function(pkg) {
                     (json.homepage !== repoUrlHttps + '#readme') &&
                     (json.homepage !== repoUrlHttps + '.git')
                 ),
-                pkgName(pkg) + ": Need to add repository information in package.json");
+                pkgName(pkg) + ": Maybe you'll like to use its GitHub page or GitLab page as its homepage?");
     }
   };
   packageVows[pname + ": There must be \"String\" type basePath in auto-update config"] = function(pkg) {

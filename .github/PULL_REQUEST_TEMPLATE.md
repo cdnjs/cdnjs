@@ -10,6 +10,7 @@ Note that if you are using a distribution purpose repository/package, please als
  * Git repository (required):
  * Official website (optional, not the repository):
  * NPM package url (optional):
+ * License and its reference:
  * GitHub / Bitbucket popularity (required):
    - Count of stars:
    - Count of watchers:
