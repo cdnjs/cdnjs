@@ -7,6 +7,7 @@ var vows = require("vows-si");
 var jsv = require("JSV").JSV.createEnvironment();
 var gitUrlParse = require("git-url-parse");
 var isThere = require("is-there");
+var _ = require("lodash");
 
 function parse(jsonFile, ignoreMissing) {
   var content;
@@ -326,6 +327,24 @@ packages.map(function(pkg) {
                 pkgName(pkg) + ": Need to remove \"/\" at the front or the last of basePath in package.json");
         }
       }
+  }
+  packageVows[pname + ": There can't be duplicate keywords"] = function(pkg) {
+      var json = parse(pkg, true);
+      var keywords = json.keywords;
+      var dul_key = [];
+      if (keywords !== undefined) {
+        keywords.sort();
+        dul_key = keywords.filter (function (dul, i, temp) {
+          if (i >= 0 && dul === temp[i-1] && dul !== temp[i-2]) {
+            return dul;
+          }
+        });
+        dul_key = _.map (dul_key, function(item) {
+          return " " + item;
+        });
+      }
+      assert.ok(dul_key.length === 0,
+        pkgName(pkg) + ": Need to remove duplicate keywords:" + dul_key);
   };
   packageVows[pname + ": There must be array datatype files in auto-update config"] = function(pkg) {
     var json = parse(pkg, true);
