@@ -1,0 +1,355 @@
+// private vars
+$datepicker-width: ($datepicker-item-width * 7) + horizontal($datepicker-border-width);
+$datepicker-button-height: $button-small-icon-size + vertical($button-small-padding);
+$datepicker-monthpicker-months-width: floor(($datepicker-width - horizontal($datepicker-border-width)) / 2);
+$datepicker-monthpicker-years-width: ceil(($datepicker-width - horizontal($datepicker-border-width)) / 2);
+$datepicker-monthpicker-yearnav-height: $datepicker-monthpicker-item-height + vertical($datepicker-monthpicker-item-margin);
+$datepicker-monthpicker-small-yearnav-height: $datepicker-monthpicker-small-item-height + vertical($datepicker-monthpicker-small-item-margin);
+
+.#{$prefix}datepicker {
+    @if $datepicker-border-width != 0 {
+        border-width: $datepicker-border-width;
+    }
+    border-style: $datepicker-border-style;
+    border-color: $datepicker-border-color;
+    background-color: $datepicker-background-color;
+    width: $datepicker-width;
+}
+
+.#{$prefix}datepicker-header {
+    padding: $datepicker-header-padding;
+    text-align: $datepicker-header-text-align;
+    @if $datepicker-header-background-gradient {
+        @include background-gradient($datepicker-header-background-color, $datepicker-header-background-gradient);
+    } @else {
+        background-color: $datepicker-header-background-color;
+    }
+}
+
+@if not $datepicker-use-transparent-month-button {
+    $datepicker-button-height: $datepicker-button-height + vertical($button-small-border-width);
+}
+.#{$prefix}datepicker-arrow {
+    width: $datepicker-arrow-width;
+    height: $datepicker-arrow-height;
+    top: round(($datepicker-button-height + vertical($datepicker-header-padding) - $datepicker-arrow-height) / 2);
+    cursor: $datepicker-arrow-cursor;
+    -webkit-touch-callout: none;
+
+    // EXTJSIV-8846: partially transparent png images do not display correctly
+    // in winXP/IE8m when the image element has a transparent background.
+    // to fix this, we give the element the same background-color as the datepicker.
+    background-color: $datepicker-header-background-color;
+
+    @if $datepicker-arrow-opacity != 1 {
+        @include opacity($datepicker-arrow-opacity);
+    }
+}
+
+@if $datepicker-arrow-opacity-over != 1 or $datepicker-arrow-opacity != 1  {
+    // include the element name since :hover causes performance issues in IE7 and 8 otherwise
+    a.#{$prefix}datepicker-arrow:hover {
+        @include opacity($datepicker-arrow-opacity-over);
+    }
+}
+
+.#{$prefix}datepicker-next {
+    right: right($datepicker-header-padding);
+    background: theme-background-image($datepicker-next-image) no-repeat $datepicker-next-background-position;
+}
+
+.#{$prefix}datepicker-prev {
+    left: left($datepicker-header-padding);
+    background: theme-background-image($datepicker-prev-image) no-repeat $datepicker-prev-background-position;
+}
+
+.#{$prefix}datepicker-month {
+    @if $datepicker-use-transparent-month-button {
+        .#{$prefix}btn,
+        .#{$prefix}btn .#{$prefix}btn-tc,
+        .#{$prefix}btn .#{$prefix}btn-tl,
+        .#{$prefix}btn .#{$prefix}btn-tr,
+        .#{$prefix}btn .#{$prefix}btn-mc,
+        .#{$prefix}btn .#{$prefix}btn-ml,
+        .#{$prefix}btn .#{$prefix}btn-mr,
+        .#{$prefix}btn .#{$prefix}btn-bc,
+        .#{$prefix}btn .#{$prefix}btn-bl,
+        .#{$prefix}btn .#{$prefix}btn-br {
+            background: transparent;
+            border-width: 0 !important;
+        }
+    }
+
+    @if $datepicker-month-button-color {
+        .#{$prefix}btn-inner {
+            color: $datepicker-month-button-color;
+        }
+    }
+
+    .#{$prefix}btn-split-right:after {
+        background-image: theme-background-image($datepicker-month-button-arrow-image);
+        padding-right: $datepicker-month-button-arrow-width;
+    }
+}
+
+.#{$prefix}datepicker-column-header {
+    width: $datepicker-item-width;
+    color: $datepicker-column-header-color;
+    font: $datepicker-column-header-font-weight $datepicker-column-header-font-size $datepicker-column-header-font-family;
+    text-align: $datepicker-column-header-text-align;
+
+    @if $datepicker-column-header-border-width != 0 {
+        border-width: $datepicker-column-header-border-width;
+        border-style: $datepicker-column-header-border-style;
+        border-color: $datepicker-column-header-border-color;
+    }
+
+    @if $datepicker-column-header-background-gradient {
+        @include background-gradient($datepicker-column-header-background-color, $datepicker-column-header-background-gradient);
+    } @else {
+        background-color: $datepicker-column-header-background-color;
+    }
+}
+
+.#{$prefix}datepicker-column-header-inner {
+    line-height: $datepicker-column-header-height - vertical($datepicker-column-header-border-width);
+    padding: $datepicker-column-header-item-padding;
+}
+
+.#{$prefix}datepicker-cell {
+    text-align: $datepicker-item-text-align;
+
+    @if $datepicker-item-border-width != 0 {
+        border-width: $datepicker-item-border-width;
+        border-style: $datepicker-item-border-style;
+        border-color: $datepicker-item-border-color;
+    }
+}
+
+.#{$prefix}datepicker-date {
+    padding: $datepicker-item-padding;
+    font: $datepicker-item-font-weight $datepicker-item-font-size $datepicker-item-font-family;
+    color: $datepicker-item-color;
+    cursor: $datepicker-item-cursor;
+    line-height: $datepicker-item-height - vertical($datepicker-item-border-width);
+
+}
+
+// include the element name since :hover causes performance issues in IE7 and 8 otherwise
+a.#{$prefix}datepicker-date:hover {
+    color: $datepicker-item-color; // needed to override color for prevday/nextday
+    background-color: $datepicker-item-hover-background-color;
+}
+
+.#{$prefix}datepicker-selected {
+    border-style: $datepicker-item-selected-border-style;
+    border-color: $datepicker-item-selected-border-color;
+    .#{$prefix}datepicker-date {
+        background-color: $datepicker-item-selected-background-color;
+        font-weight: $datepicker-item-selected-font-weight;
+    }
+}
+
+.#{$prefix}datepicker-today {
+    border-color: $datepicker-item-today-border-color;
+    border-style: $datepicker-item-today-border-style;
+}
+
+.#{$prefix}datepicker-prevday,
+.#{$prefix}datepicker-nextday {
+    .#{$prefix}datepicker-date {
+        color: $datepicker-item-prev-next-color;
+    }
+}
+
+.#{$prefix}datepicker-disabled {
+    // include the element name to increase the specificity over the :hover rule
+    a.#{$prefix}datepicker-date {
+        background-color: $datepicker-item-disabled-background-color;
+        cursor: $datepicker-item-disabled-cursor;
+        color: $datepicker-item-disabled-color;
+    }
+}
+
+// include the element name since :hover causes performance issues in IE7 and 8 otherwise
+.#{$prefix}datepicker-disabled  a.#{$prefix}datepicker-date:hover {
+    background-color: $datepicker-item-disabled-background-color;
+}
+
+.#{$prefix}datepicker-footer,
+.#{$prefix}monthpicker-buttons {
+    padding: $datepicker-footer-padding;
+
+    @if $datepicker-footer-border-width != 0 {
+        border-width: $datepicker-footer-border-width;
+        border-style: $datepicker-footer-border-style;
+        border-color: $datepicker-footer-border-color;
+    }
+
+    @if $datepicker-footer-background-gradient {
+        @include background-gradient($datepicker-footer-background-color, $datepicker-footer-background-gradient);
+    } @else {
+        background-color: $datepicker-footer-background-color;
+    }
+
+    text-align: $datepicker-footer-text-align;
+    .#{$prefix}btn {
+        margin: 0 ceil($datepicker-footer-button-spacing / 2) 0 floor($datepicker-footer-button-spacing / 2);
+    }
+}
+
+// month picker
+.#{$prefix}monthpicker {
+    width: $datepicker-width;
+    @if $datepicker-border-width != 0 {
+        border-width: $datepicker-border-width;
+    }
+    border-style: $datepicker-border-style;
+    border-color: $datepicker-border-color;
+    background-color: $datepicker-background-color;
+}
+
+.#{$prefix}monthpicker-months {
+    //border-right: $datepicker-border;
+    @if $datepicker-monthpicker-separator-border-width != 0 {
+        border-width: 0 $datepicker-monthpicker-separator-border-width 0 0;
+        border-color: $datepicker-monthpicker-separator-border-color;
+        border-style: $datepicker-monthpicker-separator-border-style;
+    }
+    width: $datepicker-monthpicker-months-width;
+
+    .#{$prefix}monthpicker-item {
+        width: floor(($datepicker-monthpicker-months-width - $datepicker-monthpicker-separator-border-width) / 2);
+    }
+}
+
+.#{$prefix}monthpicker-years {
+    width: $datepicker-monthpicker-years-width;
+
+    .#{$prefix}monthpicker-item {
+        width: floor(($datepicker-monthpicker-years-width) / 2);
+    }
+}
+
+.#{$prefix}monthpicker-item {
+    margin: top($datepicker-monthpicker-item-margin) 0 bottom($datepicker-monthpicker-item-margin);
+    font: $datepicker-monthpicker-item-font-weight $datepicker-monthpicker-item-font-size $datepicker-monthpicker-item-font-family;
+    text-align: $datepicker-monthpicker-item-text-align;
+}
+
+.#{$prefix}monthpicker-item-inner {
+    margin: 0 right($datepicker-monthpicker-item-margin) 0 left($datepicker-monthpicker-item-margin);
+    color: $datepicker-monthpicker-item-color;
+
+    @if $datepicker-monthpicker-item-border-width != 0 {
+        border-width: $datepicker-monthpicker-item-border-width;
+        border-style: $datepicker-monthpicker-item-border-style;
+        border-color: $datepicker-monthpicker-item-border-color;
+    }
+
+    line-height: $datepicker-monthpicker-item-height - vertical($datepicker-monthpicker-item-border-width);
+    cursor: $datepicker-monthpicker-item-cursor;
+}
+
+// include the element name since :hover causes performance issues in IE7 and 8 otherwise
+a.#{$prefix}monthpicker-item-inner:hover {
+    background-color: $datepicker-monthpicker-item-hover-background-color;
+}
+
+.#{$prefix}monthpicker-selected {
+    background-color: $datepicker-monthpicker-item-selected-background-color;
+    border-style: $datepicker-monthpicker-item-selected-border-style;
+    border-color: $datepicker-monthpicker-item-selected-border-color;
+}
+
+.#{$prefix}monthpicker-yearnav {
+    height: $datepicker-monthpicker-yearnav-height;
+}
+
+.#{$prefix}monthpicker-yearnav-button-ct {
+    width: floor(($datepicker-monthpicker-years-width) / 2);
+}
+
+.#{$prefix}monthpicker-yearnav-button {
+    height: $datepicker-monthpicker-yearnav-button-height;
+    width: $datepicker-monthpicker-yearnav-button-width;
+    cursor: $datepicker-monthpicker-yearnav-button-cursor;
+    margin-top: floor(($datepicker-monthpicker-yearnav-height - $datepicker-monthpicker-yearnav-button-height) / 2);
+    @if $datepicker-monthpicker-yearnav-button-opacity != 1 {
+        @include opacity($datepicker-monthpicker-yearnav-button-opacity);
+    }
+    -webkit-touch-callout: none;
+
+    // EXTJSIV-8846: partially transparent png images do not display correctly
+    // in winXP/IE8m when the image element has a transparent background.
+    // to fix this, we give the element the same background-color as the datepicker.
+    background-color: $datepicker-background-color;
+}
+
+@if $datepicker-monthpicker-yearnav-button-opacity-over != 1 or $datepicker-monthpicker-yearnav-button-opacity != 1  {
+    // include the element name since :hover causes performance issues in IE7 and 8 otherwise
+    a.#{$prefix}monthpicker-yearnav-button:hover {
+        @include opacity($datepicker-monthpicker-yearnav-button-opacity-over);
+    }
+}
+
+.#{$prefix}monthpicker-yearnav-next {
+    background: theme-background-image($datepicker-monthpicker-next-image) no-repeat $datepicker-monthpicker-next-background-position;
+}
+
+.#{$prefix}monthpicker-yearnav-next-over {
+    background-position: $datepicker-monthpicker-next-background-position-over;
+}
+
+.#{$prefix}monthpicker-yearnav-prev {
+    background: theme-background-image($datepicker-monthpicker-prev-image) no-repeat $datepicker-monthpicker-prev-background-position;
+}
+
+.#{$prefix}monthpicker-yearnav-prev-over {
+    background-position: $datepicker-monthpicker-prev-background-position-over;
+}
+
+.#{$prefix}monthpicker-small {
+    .#{$prefix}monthpicker-item {
+        margin: top($datepicker-monthpicker-small-item-margin) 0 bottom($datepicker-monthpicker-small-item-margin);
+    }
+
+    .#{$prefix}monthpicker-item-inner {
+        margin: 0 right($datepicker-monthpicker-small-item-margin) 0 left($datepicker-monthpicker-small-item-margin);
+    }
+
+    .#{$prefix}monthpicker-yearnav {
+        height: $datepicker-monthpicker-small-yearnav-height;
+    }
+
+    .#{$prefix}monthpicker-yearnav-button {
+        margin-top: floor(($datepicker-monthpicker-small-yearnav-height - $datepicker-monthpicker-yearnav-button-height) / 2);
+    }
+}
+
+//nlg support
+@if $include-slicer-gradient {
+    .#{$prefix}nlg {
+        @if not is-null($datepicker-header-background-gradient) {
+            .#{$prefix}datepicker-header {
+                background-image: slicer-background-image(datepicker-header, 'datepicker/datepicker-header-bg');
+                background-repeat: repeat-x;
+                background-position: top left;
+            }
+        }
+
+        @if not is-null($datepicker-footer-background-gradient) {
+            .#{$prefix}datepicker-footer,
+            .#{$prefix}monthpicker-buttons {
+                background-image: slicer-background-image(datepicker-footer, 'datepicker/datepicker-footer-bg');
+                background-repeat: repeat-x;
+                background-position: top left;
+            }
+        }
+    }
+}
+
+$stretch: slicer-background-stretch(datepicker-header, bottom);
+$stretch: slicer-background-stretch(datepicker-footer, bottom);
+@include x-slicer(datepicker-header);
+@include x-slicer(datepicker-footer);

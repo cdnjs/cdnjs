@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>All</title>
+    <script type="text/javascript" src="ext.js"></script>
+    <script type="text/javascript">
+        var injectScriptElement = Ext.Loader.injectScriptElement,
+            queue = [],
+            timer = false;
+
+        Ext.Loader.injectScriptElement = function(url, onLoad, onError, scope) {
+            queue.push(Array.prototype.slice.call(arguments));
+            startProcessQueue();
+        };
+
+        function startProcessQueue() {
+            if (!timer) {
+                timer = setInterval(requireNext, 1);
+            }
+        }
+
+        function requireNext() {
+            var item = queue.shift();
+
+            if (item) {
+                injectScriptElement.apply(Ext.Loader, item);
+            }
+        }
+
+        Ext.require('*');
+
+        Ext.onReady(function() {
+            clearInterval(timer);
+            console.log("loaded");
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>

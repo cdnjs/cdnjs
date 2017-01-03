@@ -1,0 +1,41 @@
+.#{$prefix}boundlist {
+    border-width: $boundlist-border-width;
+    border-style: $boundlist-border-style;
+    border-color: $boundlist-border-color;
+    background: $boundlist-background-color;
+}
+
+.#{$prefix}boundlist-item {
+    padding: $boundlist-item-padding;
+    font: $boundlist-item-font-weight $boundlist-item-font-size $boundlist-item-font-family;
+    @if not is-null($boundlist-item-height) {
+        line-height: $boundlist-item-height - vertical($boundlist-item-border-width) - vertical($boundlist-item-padding);
+    }
+
+    cursor: pointer;
+    cursor: hand;
+    position: relative; /*allow hover in IE on empty items*/
+
+    border-width: $boundlist-item-border-width;
+    border-style: $boundlist-item-border-style;
+    border-color: $boundlist-item-border-color;
+}
+
+.#{$prefix}boundlist-selected {
+    background: $boundlist-item-selected-background-color;
+    border-color: $boundlist-item-selected-border-color;
+}
+
+.#{$prefix}boundlist-item-over {
+    background: $boundlist-item-over-background-color;
+    border-color: $boundlist-item-over-border-color;
+}
+
+.#{$prefix}boundlist-floating {
+    border-top-width: 0;
+}
+
+.#{$prefix}boundlist-above {
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+}

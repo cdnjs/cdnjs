@@ -1,0 +1,140 @@
+.#{$prefix}column-header {
+    border-right: $grid-column-header-border-width $grid-column-header-border-style $grid-header-border-color;
+
+    @if $grid-column-header-color {
+        color: $grid-column-header-color;
+    }
+    font: $grid-column-header-font;
+
+    @if not is-null($grid-header-background-gradient) {
+        @include background-gradient($grid-header-background-color, $grid-header-background-gradient);
+    }
+    @if is-null($grid-header-background-gradient) {
+        background-color: $grid-header-background-color;
+    }
+}
+
+@if $include-rtl {
+    .#{$prefix}rtl.#{$prefix}column-header {
+        border-right: 0 none;
+        border-left: $grid-column-header-border-width $grid-column-header-border-style $grid-header-border-color;
+    }
+}
+
+.#{$prefix}group-sub-header {
+    background: transparent;
+    border-top: $grid-column-header-border-width $grid-column-header-border-style $grid-header-border-color;
+
+    // Because the sub-header has a top border, the padding of the inner is reduced by the border width
+    .#{$prefix}column-header-inner {
+        padding: top($grid-header-padding) - $grid-column-header-border-width right($grid-header-padding) bottom($grid-header-padding) left($grid-header-padding);
+    }
+}
+
+.#{$prefix}column-header-inner {
+    padding: $grid-header-padding;
+    text-overflow: ellipsis;
+}
+
+.#{$prefix}column-header-inner-empty {
+    // The default text for an empty column header is a space.  It can trigger an ellipsis
+    // if the column width is too small.  Ensure this does not happen by clipping overflow
+    // of empty colum headers.
+    text-overflow: clip;
+}
+
+.#{$prefix}column-header-over,
+.#{$prefix}column-header-sort-ASC,
+.#{$prefix}column-header-sort-DESC {
+    @include background-gradient($grid-header-over-background-color, $grid-header-over-background-gradient);
+}
+
+@if $include-slicer-gradient {
+    @if not is-null($grid-header-background-gradient) {
+        .#{$prefix}nlg {
+            .#{$prefix}grid-header-ct,
+            .#{$prefix}column-header {
+                background-image: slicer-background-image(column-header, 'grid/column-header-bg');
+            }
+        }
+        $stretch: slicer-background-stretch(column-header, bottom);
+    }
+
+    @if not is-null($grid-header-over-background-gradient) {
+        .#{$prefix}nlg {
+            .#{$prefix}column-header-over,
+            .#{$prefix}column-header-sort-ASC,
+            .#{$prefix}column-header-sort-DESC {
+                background-image: slicer-background-image(column-header-over, 'grid/column-header-over-bg');
+            }
+        }
+        $stretch: slicer-background-stretch(column-header-over, bottom);
+    }
+}
+
+.#{$prefix}column-header-open {
+    background-color: $grid-header-open-background-color;
+
+    .#{$prefix}column-header-trigger {
+        background-color: $grid-header-trigger-background-color-open;
+    }
+}
+
+.#{$prefix}column-header-trigger {
+    width: $grid-header-trigger-width;
+    cursor: $grid-header-trigger-cursor;
+    background-color: $grid-header-trigger-background-color;
+    background-position: $grid-header-trigger-background-position;
+}
+
+@if $include-rtl {
+    .#{$prefix}rtl.#{$prefix}column-header-trigger {
+        background-position: rtl-background-position($grid-header-trigger-background-position);
+    }
+}
+
+$grid-column-align-right-margin:
+    $grid-header-trigger-width +
+    $grid-header-trigger-spacing -
+    right($grid-header-padding);
+
+.#{$prefix}column-header-align-right .#{$prefix}column-header-text {
+    margin-right: $grid-column-align-right-margin;
+}
+
+@if $include-rtl {
+    .#{$prefix}column-header-align-right .#{$prefix}rtl.#{$prefix}column-header-text {
+        margin-right: 0;
+        margin-left: $grid-column-align-right-margin;
+    }
+}
+
+// Sort direction indicator is a background of the text span.
+.#{$prefix}column-header-sort-ASC,
+.#{$prefix}column-header-sort-DESC {
+    .#{$prefix}column-header-text {
+        padding-right: $grid-header-sort-icon-width + $grid-header-sort-icon-spacing;
+        background-position: $grid-header-sort-icon-position;
+    }
+}
+
+@if $include-rtl {
+    .#{$prefix}column-header-sort-ASC,
+    .#{$prefix}column-header-sort-DESC {
+        .#{$prefix}rtl.#{$prefix}column-header-text {
+            padding-right: 0;
+            padding-left: $grid-header-sort-icon-width + $grid-header-sort-icon-spacing;
+            background-position: rtl-background-position($grid-header-sort-icon-position);
+        }
+    }
+}
+
+.#{$prefix}column-header-sort-ASC .#{$prefix}column-header-text {
+    background-image: theme-background-image('grid/sort_asc');
+}
+.#{$prefix}column-header-sort-DESC .#{$prefix}column-header-text {
+    background-image: theme-background-image('grid/sort_desc');
+}
+
+@include x-slicer(column-header);
+@include x-slicer(column-header-over);

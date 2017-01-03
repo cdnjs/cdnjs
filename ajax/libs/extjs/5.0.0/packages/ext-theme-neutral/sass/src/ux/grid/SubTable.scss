@@ -1,0 +1,32 @@
+.#{$prefix}grid-subtable {
+    border-collapse: collapse;
+}
+
+tr.#{$prefix}grid-subtable-row {
+    background-color: $grid-body-background-color;
+}
+
+.#{$prefix}grid-subtable-header {
+    border: $grid-column-header-border-width $grid-column-header-border-style $grid-header-border-color;
+
+    @if $grid-column-header-color {
+        color: $grid-column-header-color;
+    }
+    font: $grid-column-header-font;
+
+    @if $grid-header-background-gradient != null {
+        @include background-gradient($grid-header-background-color, $grid-header-background-gradient);
+    }
+    @if $grid-header-background-gradient == null {
+        background-color: $grid-header-background-color;
+    }
+    padding: top($grid-header-padding) - 1 right($grid-header-padding) bottom($grid-header-padding) - 1 left($grid-header-padding);
+    text-overflow: ellipsis;
+}
+
+.#{$prefix}grid-subtable-cell {
+    border-top:    $grid-row-cell-border-width $grid-row-cell-border-style $grid-row-border-color;
+    border-right:  $grid-row-cell-border-width $grid-row-cell-border-style $grid-col-border-color;
+    border-bottom: $grid-row-cell-border-width $grid-row-cell-border-style $grid-row-border-color;
+    border-left:   $grid-row-cell-border-width $grid-row-cell-border-style $grid-col-border-color;
+}

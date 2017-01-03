@@ -1,0 +1,249 @@
+$active: #12C897;
+$paused: #C8C8C8;
+$ended: #F1485B;
+
+@include extjs-button-small-ui(
+    $ui: 'kpi',
+    $background-color: transparent,
+    $border-color: transparent,
+    $color: $exec-font-color,
+
+    $background-color-focus: transparent,
+    $border-color-focus: transparent,
+    $color-focus: $exec-font-color,
+
+    $background-color-over: mix($exec-light-background, $button-default-background-color),
+    $border-color-over: mix($exec-light-background, $button-default-background-color),
+    $color-over: #fff,
+
+    $background-color-pressed: $button-default-background-color,
+    $border-color-pressed: $button-default-background-color,
+    $color-pressed: #fff
+);
+
+.kpi-main {
+    .kpi-meta {
+        width: 100%;
+        height: 100%;
+        background-color: $exec-tile-background;
+
+        -webkit-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.25);
+        -moz-box-shadow:    0px 1px 1px 0px rgba(0, 0, 0, 0.25);
+        box-shadow:         0px 1px 1px 0px rgba(0, 0, 0, 0.25);
+
+        span {
+            border-right: 1px solid $exec-light-background;
+            display: inline-block;
+            text-align: center;
+            padding: 30px 0;
+            height: 100%;
+            width: 20%;
+            white-space: nowrap;
+            overflow: hide;
+            text-transform: uppercase;
+            color: $exec-font-light-color;
+            font-weight: $exec-font-bold;
+            font-size: $exec-font-size-small-content;
+
+            div {
+                font-size: $exec-font-size-xlarge-title;
+                color: $exec-font-color;
+                font-weight: $exec-font-semibold;
+                padding-bottom: 7px;
+            }
+        }
+
+        span:last-child {
+            border-right: none;
+        }
+    }
+
+    .kpi-toolbar {
+        padding: 0 0 10px 0 !important;
+    }
+
+    .kpi-chart-title {
+        margin-top: 3px !important;
+        color: $exec-font-color;
+        font-size: $exec-font-size-small-title;
+        font-weight: $exec-font-bold;
+    }
+
+    .kpi-meta-charts-body {
+        overflow: visible;
+        padding-bottom: 20px;
+
+        .x-box-inner {
+            overflow: visible;
+        }
+
+        .x-panel {
+            overflow: visible;
+        }
+    }
+
+    .kpi-tiles {
+        margin-bottom: 20px;
+    }
+
+    .kpi-main-chart {
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-bottom: 10px;
+
+        overflow: visible;
+
+        .x-panel-body {
+            border-radius: 3px;
+
+            -webkit-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.25);
+            -moz-box-shadow:    0px 1px 1px 0px rgba(0, 0, 0, 0.25);
+            box-shadow:         0px 1px 1px 0px rgba(0, 0, 0, 0.25);
+
+            z-index: 1000;
+        }
+    }
+
+    .kpi-meta-charts {
+        margin-bottom: 20px;
+        overflow: visible;
+
+        .x-panel-body, .x-panel, .x-box-inner {
+            overflow: visible;
+
+        }
+        .kpi-in-store, .kpi-online {
+            padding-left: 30px;
+            font-size: $exec-font-size-content;
+            font-weight: $exec-font-bold;
+            color: $exec-font-light-color;
+
+            span {
+                margin-right: 15px;
+            }
+            span:first-child {
+                float: left;
+            }
+            span:nth-child(2) {
+                float: right;
+            }
+        }
+
+        .kpi-online {
+            padding-bottom: 10px;
+        }
+        .kpi-in-store:before, .kpi-online:before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            border-radius: 6px;
+            display: block;
+            position: absolute;
+            left: 10px;
+            margin-top: 2px;
+        }
+        .kpi-in-store:before {
+            background-color: #2ac8ef;
+        }
+        .kpi-online:before {
+            background-color: #11c897;
+        }
+        .x-panel-header {
+            background-color: $exec-light-background;
+            margin: 15px 0 10px 0;
+            padding: 0 !important;
+
+            .x-title {
+                line-height: $exec-font-size-small-title;
+            }
+
+            .x-title-text {
+                color: $exec-font-color;
+                font-size: $exec-font-size-small-title;
+                font-weight: $exec-font-bold;
+            }
+        }
+
+        .redemption-body, .statistics-body {
+            border-radius: 3px;
+
+            -webkit-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.25);
+            -moz-box-shadow:    0px 1px 1px 0px rgba(0, 0, 0, 0.25);
+            box-shadow:         0px 1px 1px 0px rgba(0, 0, 0, 0.25);
+
+            background-color: $exec-tile-background;
+        }
+
+        .redemption-body {
+            margin-right: 10px;
+        }
+
+        .statistics-body {
+            margin-right: 20px;
+            padding: 15px;
+        }
+
+        .statistic-header {
+            font-size: $exec-font-size-content;
+            font-weight: $exec-font-semibold;
+            text-transform: uppercase;
+            color: $exec-font-light-color;
+            margin-bottom: 10px;
+        }
+
+        .sparkline {
+            height: 7px;
+            margin-left: 85px;
+            background-color: #e6e7eb;
+            clear: both;
+            border-radius: 4px;
+            margin-bottom: 10px;
+
+            .sparkline-inner {
+                height: 100%;
+                border-radius: 4px;
+            }
+            .sparkline-inner-active {
+                background-color: $active;
+            }
+            .sparkline-inner-paused {
+                background-color: $paused;
+            }
+            .sparkline-inner-ended {
+                background-color: $ended;
+            }
+        }
+        .statistic-tag {
+            width: 70px;
+            padding: 5px 0 5px 0;
+            font-size: $exec-font-size-small-content;
+            font-weight: $exec-font-semibold;
+            color: white;
+            border-radius: 3px;
+            text-transform: uppercase;
+            text-align: center;
+            float: left;
+            &.active {
+                background-color: $active;
+            }
+            &.paused {
+                background-color: $paused;
+            }
+            &.ended {
+                background-color: $ended;
+            }
+        }
+        .statistic-description {
+            line-height: 27px;
+            font-size: $exec-font-size-small-content;
+            font-weight: $exec-font-bold;
+            float:left;
+            margin-left: 15px;
+            color: $exec-font-light-color;
+            text-transform: uppercase;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+}

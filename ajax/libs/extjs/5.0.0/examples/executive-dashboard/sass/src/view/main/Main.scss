@@ -1,0 +1,220 @@
+/**
+ * Generates a set of style rules for the "navigation" tab UI.
+ */
+@include extjs-tab-panel-ui(
+    $ui: 'navigation',
+    $ui-tab-background-color: transparent,
+    $ui-tab-background-color-over: transparent,
+    $ui-tab-background-color-active: transparent,
+    $ui-tab-color: #fff,
+    $ui-tab-color-over: #fff,
+    $ui-tab-color-active: #fff,
+    $ui-tab-glyph-color: #fff,
+    $ui-tab-glyph-color-over: #fff,
+    $ui-tab-glyph-color-active: #fff,
+    $ui-tab-glyph-opacity: 1,
+    $ui-tab-border-radius: 0,
+    $ui-tab-border-width: 0,
+    $ui-tab-padding: 24px 20px,
+    $ui-tab-margin: 0,
+    $ui-tab-font-size: 14px,
+    $ui-tab-font-size-over: 14px,
+    $ui-tab-font-size-active: 14px,
+    $ui-tab-line-height: 20px,
+    $ui-tab-font-weight: 600,
+    $ui-tab-font-weight-over: 600,
+    $ui-tab-font-weight-active: 600,
+    $ui-tab-icon-width: 20px,
+    $ui-tab-icon-height: 20px,
+    $ui-tab-icon-spacing: 15px,
+    $ui-bar-background-color: $exec-dark-background,
+    $ui-bar-background-gradient: 'none',
+    $ui-bar-padding: 0,
+    $ui-strip-height: 0
+);
+
+/**
+ * Generates a set of style rules for the "navigation" panel UI.
+ */
+@include extjs-panel-ui(
+    $ui: 'navigation',
+    $ui-header-color: #fff,
+    $ui-header-glyph-color: #fff,
+    $ui-header-glyph-opacity: 1,
+    $ui-header-font-size: 32px,
+    $ui-header-line-height: 48px,
+    $ui-header-font-weight: 600,
+    $ui-header-icon-height: 32px,
+    $ui-header-icon-width: 32px,
+    $ui-header-icon-spacing: 16px,
+    $ui-header-background-color: #f1495b,
+    $ui-header-padding: 0,
+    $ui-header-text-margin: 26px 36px,
+    $ui-header-noborder-adjust: false
+);
+
+.x-tab-navigation {
+    // TODO: add opacity support to extjs-tab-panel-ui mixin
+    @include opacity(0.5);
+
+    // Important added here to overcome background-color:transparent added by framing in IE8
+    // TODO: can we remove the !important rule from the framework?
+    &.x-tab-over {
+        background-color: mix(#000, $exec-dark-background, 10%) !important;
+        @include opacity(0.8);
+    }
+
+    &.x-tab-active {
+        background-color: mix(#000, $exec-dark-background, 20%) !important;
+        @include opacity(1);
+    }
+
+    &.x-tab-pressed {
+        background-color: mix(#000, $exec-dark-background, 20%) !important;
+        @include opacity(1);
+    }
+}
+
+.x-tab-inner-navigation {
+    white-space: normal;
+
+    .x-ie8 & {
+        font-size: 13px;
+    }
+}
+
+.x-panel-header-title-navigation {
+    text-align: left;
+}
+
+.exec-header-icon,
+.x-tab-icon-el-navigation {
+    background-size: contain;
+}
+
+.exec-header-icon {
+    background-image: url(icons/mybiz.png);
+
+    .x-ie8 & {
+        background-image: url(icons/mybiz-small.png);
+    }
+}
+
+.exec-kpi-icon {
+    background-image: url(icons/kpi.png);
+
+    .x-ie8 & {
+        background-image: url(icons/kpi-small.png);
+    }
+}
+
+.exec-quarterly-icon {
+    background-image: url(icons/quarterly.png);
+
+    .x-ie8 & {
+        background-image: url(icons/quarterly-small.png);
+    }
+}
+
+.exec-pl-icon {
+    background-image: url(icons/pl.png);
+
+    .x-ie8 & {
+        background-image: url(icons/pl-small.png);
+    }
+}
+
+.exec-news-icon {
+    background-image: url(icons/news.png);
+
+    .x-ie8 & {
+        background-image: url(icons/news-small.png);
+    }
+}
+
+.exec-menu-navigation {
+
+    // MENU DISCLOSURE
+
+    .x-menu {
+        border: none;
+    }
+
+    .x-css-shadow {
+        -webkit-box-shadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.35) !important;
+        -moz-box-shadow:    0px 0px 4px 3px rgba(0, 0, 0, 0.35) !important;
+        box-shadow:         0px 0px 4px 3px rgba(0, 0, 0, 0.35) !important;
+    }
+
+    .x-tool-img {
+        background-color: transparent !important;
+        left: 44px;
+        width: 32px;
+        height: 32px;
+        position: relative;
+        top: 30px;
+    }
+
+    .x-tool-gear {
+        background-image: url(icons/menu-disclosure.png) !important;
+        background-size: 70%;
+        background-repeat: no-repeat;
+        background-position: center center !important;
+        @include opacity(0.5);
+    }
+
+    &.x-ie8 .x-tool-gear {
+        background-image: url(icons/menu-disclosure-small.png) !important;
+    }
+
+    .x-tool {
+        background-color: $exec-dark-background;
+    }
+
+    .x-tool:hover {
+        .x-tool-gear {
+            @include opacity(1);
+        }
+        background-color: darken($exec-dark-background, 10%) !important;
+    }
+
+    // MENU
+
+    .x-menu-body {
+        background-color: $exec-dark-background;
+        span {
+            color: white;
+            font-weight: $exec-font-semibold;
+            @include opacity(0.5);
+        }
+        a {
+            line-height: 50px;
+        }
+    }
+
+    .x-menu-item-icon {
+        width: 40px;
+        height: 40px;
+        margin: 5px;
+        top: 0;
+        left: 10px;
+        @include opacity(0.5);
+        background-size: 70%;
+    }
+
+    .x-menu-item-text {
+        margin-left: 65px;
+        margin-right: 15px;
+    }
+
+    .x-menu-item-active {
+        background-color: darken($exec-dark-background, 10%) !important;
+        span {
+            @include opacity(1);
+        }
+        .x-menu-item-icon {
+            @include opacity(1);
+        }
+    }
+}
+

@@ -1,0 +1,225 @@
+.#{$prefix}tree-expander {
+    cursor: $tree-expander-cursor;
+}
+
+//arrows
+.#{$prefix}tree-arrows {
+    .#{$prefix}tree-expander {
+        background-image: theme-background-image('tree/arrows');
+    }
+
+    .#{$prefix}tree-expander-over .#{$prefix}tree-expander {
+        background-position: (-$tree-elbow-width * 2) center;
+    }
+
+    .#{$prefix}grid-tree-node-expanded .#{$prefix}tree-expander {
+        background-position: (-$tree-elbow-width) center;
+    }
+
+    .#{$prefix}grid-tree-node-expanded .#{$prefix}tree-expander-over .#{$prefix}tree-expander {
+        background-position: (-$tree-elbow-width * 3) center;
+    }
+
+    @if $include-rtl {
+        .#{$prefix}rtl.#{$prefix}tree-expander {
+            background: theme-background-image('tree/arrows-rtl') no-repeat (-$tree-elbow-width * 3) center;
+        }
+
+        .#{$prefix}tree-expander-over .#{$prefix}rtl.#{$prefix}tree-expander {
+            background-position: (-$tree-elbow-width) center;
+        }
+
+        .#{$prefix}grid-tree-node-expanded .#{$prefix}rtl.#{$prefix}tree-expander {
+            background-position: (-$tree-elbow-width * 2) center;
+        }
+
+        .#{$prefix}grid-tree-node-expanded .#{$prefix}tree-expander-over .#{$prefix}rtl.#{$prefix}tree-expander {
+            background-position: 0 center;
+        }
+    }
+}
+
+//elbows
+.#{$prefix}tree-lines {
+    .#{$prefix}tree-elbow {
+        background-image: theme-background-image('tree/elbow');
+    }
+
+    .#{$prefix}tree-elbow-end {
+        background-image: theme-background-image('tree/elbow-end');
+    }
+
+    .#{$prefix}tree-elbow-plus {
+        background-image: theme-background-image('tree/elbow-plus');
+    }
+
+    .#{$prefix}tree-elbow-end-plus {
+        background-image: theme-background-image('tree/elbow-end-plus');
+    }
+
+    .#{$prefix}grid-tree-node-expanded .#{$prefix}tree-elbow-plus {
+        background-image: theme-background-image('tree/elbow-minus');
+    }
+
+    .#{$prefix}grid-tree-node-expanded .#{$prefix}tree-elbow-end-plus {
+        background-image: theme-background-image('tree/elbow-end-minus');
+    }
+
+    .#{$prefix}tree-elbow-line {
+        background-image: theme-background-image('tree/elbow-line');
+    }
+
+    @if $include-rtl {
+        .#{$prefix}rtl.#{$prefix}tree-elbow {
+            background-image: theme-background-image('tree/elbow-rtl');
+        }
+
+        .#{$prefix}rtl.#{$prefix}tree-elbow-end {
+            background-image: theme-background-image('tree/elbow-end-rtl');
+        }
+
+        .#{$prefix}rtl.#{$prefix}tree-elbow-plus {
+            background-image: theme-background-image('tree/elbow-plus-rtl');
+        }
+
+        .#{$prefix}rtl.#{$prefix}tree-elbow-end-plus {
+            background-image: theme-background-image('tree/elbow-end-plus-rtl');
+        }
+
+        .#{$prefix}grid-tree-node-expanded .#{$prefix}rtl.#{$prefix}tree-elbow-plus {
+            background-image: theme-background-image('tree/elbow-minus-rtl');
+        }
+
+        .#{$prefix}grid-tree-node-expanded .#{$prefix}rtl.#{$prefix}tree-elbow-end-plus {
+            background-image: theme-background-image('tree/elbow-end-minus-rtl');
+        }
+
+        .#{$prefix}rtl.#{$prefix}tree-elbow-line {
+            background-image: theme-background-image('tree/elbow-line-rtl');
+        }
+    }
+}
+
+.#{$prefix}tree-no-lines {
+    .#{$prefix}tree-expander {
+        background-image: theme-background-image('tree/elbow-plus-nl');
+    }
+
+    .#{$prefix}grid-tree-node-expanded .#{$prefix}tree-expander {
+        background-image: theme-background-image('tree/elbow-minus-nl');
+    }
+
+    @if $include-rtl {
+        .#{$prefix}rtl.#{$prefix}tree-expander {
+            background-image: theme-background-image('tree/elbow-plus-nl-rtl');
+        }
+
+        .#{$prefix}grid-tree-node-expanded .#{$prefix}rtl.#{$prefix}tree-expander {
+            background-image: theme-background-image('tree/elbow-minus-nl-rtl');
+        }
+    }
+}
+
+.#{$prefix}tree-icon {
+    width: $tree-icon-width;
+    height: $grid-row-height;
+}
+
+.#{$prefix}tree-elbow-img {
+    width: $tree-elbow-width;
+    height: $grid-row-height;
+    margin-right: $tree-elbow-spacing;
+}
+
+@if $include-rtl {
+    .#{$prefix}rtl.#{$prefix}tree-elbow-img {
+        margin-right: 0;
+        margin-left: $tree-elbow-spacing;
+    }
+}
+
+.#{$prefix}tree-icon,
+.#{$prefix}tree-elbow-img,
+.#{$prefix}tree-checkbox {
+    // negative vertical margins are used to make the images ignore the inner cell's padding
+    // this means we don't have to change the padding which ensures that the text is
+    // vertically aligned exactly the same as regular grid cells
+    margin-top: -(top($grid-cell-inner-padding));
+    margin-bottom: -(bottom($grid-cell-inner-padding));
+}
+
+.#{$prefix}tree-icon-leaf {
+    background-image: theme-background-image('tree/leaf');
+}
+
+@if $include-rtl {
+    .#{$prefix}rtl.#{$prefix}tree-icon-leaf {
+        background-image: theme-background-image('tree/leaf-rtl');
+    }
+}
+
+.#{$prefix}tree-icon-parent {
+    background-image: theme-background-image('tree/folder');
+}
+
+@if $include-rtl {
+    .#{$prefix}rtl.#{$prefix}tree-icon-parent {
+        background-image: theme-background-image('tree/folder-rtl');
+    }
+}
+
+.#{$prefix}grid-tree-node-expanded .#{$prefix}tree-icon-parent {
+    background-image: theme-background-image('tree/folder-open');
+}
+
+@if $include-rtl {
+    .#{$prefix}grid-tree-node-expanded .#{$prefix}rtl.#{$prefix}tree-icon-parent {
+        background-image: theme-background-image('tree/folder-open-rtl');
+    }
+}
+
+.#{$prefix}tree-checkbox {
+    margin-right: $tree-checkbox-spacing;
+    top: round(($grid-row-height - $form-checkbox-size) / 2);
+    width: $form-checkbox-size;
+    height: $form-checkbox-size;
+    background-image: theme-background-image($form-checkbox-background-image);
+}
+
+@if $include-rtl {
+    .#{$prefix}rtl.#{$prefix}tree-checkbox {
+        margin-right: 0;
+        margin-left: $tree-checkbox-spacing;
+    }
+}
+
+.#{$prefix}tree-checkbox-checked {
+    background-position: 0 (0 - $form-checkbox-size);
+}
+
+.#{$prefix}grid-tree-loading .#{$prefix}tree-icon {
+    background-image: theme-background-image('tree/loading', 'gif');
+}
+
+@if $include-rtl {
+    .#{$prefix}grid-tree-loading .#{$prefix}rtl.#{$prefix}tree-icon {
+        background-image: theme-background-image('tree/loading', 'gif');
+    }
+}
+
+.#{$prefix}tree-node-text {
+    padding-left: $tree-icon-spacing;
+}
+
+@if $include-rtl {
+    .#{$prefix}rtl.#{$prefix}tree-node-text {
+        padding-left: 0;
+        padding-right: $tree-icon-spacing;
+    }
+}
+
+@if $tree-cell-inner-padding != $grid-cell-inner-padding {
+    .#{$prefix}grid-cell-inner-treecolumn {
+        padding: $tree-cell-inner-padding;
+    }
+}

@@ -1,0 +1,138 @@
+.#{$prefix}grid-row-editor {
+    .#{$prefix}field {
+        margin: 0 ceil($grid-row-editor-field-spacing / 2) 0 floor($grid-row-editor-field-spacing / 2);
+    }
+
+    @if $include-ext-form-field-display {
+        .#{$prefix}form-display-field {
+            padding: 
+                top($grid-row-editor-field-padding) + $form-field-border-width
+                right($grid-row-editor-field-padding) + $form-field-border-width
+                bottom($grid-row-editor-field-padding) + $form-field-border-width
+                left($grid-row-editor-field-padding) + $form-field-border-width;
+        }
+
+        @if $include-ext-grid-column-action {
+            .#{$prefix}form-action-col-field {
+                padding:
+                    max(ceil(($grid-cell-field-height - $grid-actioncolumn-icon-height) / 2), 0)
+                    max($grid-actioncolumn-horizontal-padding - ceil($grid-row-editor-field-spacing / 2), 0)
+                    max(floor(($grid-cell-field-height - $grid-actioncolumn-icon-height) / 2), 0)
+                    max($grid-actioncolumn-horizontal-padding - floor($grid-row-editor-field-spacing / 2), 0);
+            }
+        }
+    }
+
+    @if $include-ext-form-field-text {
+        .#{$prefix}form-text {
+            padding: $grid-row-editor-field-padding;
+
+            @if $include-ff {
+                .#{$prefix}gecko & {
+                    // firefox adds an additional px of horizontal space inside text inputs
+                    padding-left: max((left($grid-row-editor-field-padding) - 1), 0);
+                    padding-right: max((right($grid-row-editor-field-padding) - 1), 0);
+                }
+            }
+        }
+    }
+
+    .#{$prefix}panel-body {
+        // !important is needed to override dock layout border-management rules
+        border-top: $grid-row-editor-border !important;
+        border-bottom: $grid-row-editor-border !important;
+        padding: $grid-row-editor-padding;
+        background-color: $grid-row-editor-background-color;
+    }
+
+    @if $include-ext-form-field-checkbox {
+        .#{$prefix}grid-with-col-lines & {
+            .#{$prefix}form-cb {
+                margin-right: $grid-row-cell-border-width;
+            }
+
+            @if $include-rtl {
+                .#{$prefix}rtl.#{$prefix}form-cb {
+                    margin-right: 0;
+                    margin-left: $grid-row-cell-border-width;
+                }
+            }
+        }
+    }
+}
+
+@include x-frame(
+    $cls: grid-row-editor-buttons,
+    $ui: default-bottom, // change default to $ui when RowEditor adds ui support
+    $border-radius: 0 0
+        $grid-row-editor-button-container-border-radius
+        $grid-row-editor-button-container-border-radius,
+    $border-width: 0
+        $grid-row-editor-border-width
+        $grid-row-editor-border-width
+        $grid-row-editor-border-width,
+    $padding: $grid-row-editor-button-container-padding,
+    $background-color: $grid-row-editor-background-color,
+    $background-gradient: 'none',
+    $table: true
+);
+
+@include x-frame(
+    $cls: grid-row-editor-buttons,
+    $ui: default-top, // change default to $ui when RowEditor adds ui support
+    $border-radius:
+        $grid-row-editor-button-container-border-radius
+        $grid-row-editor-button-container-border-radius
+        0 0,
+    $border-width:
+        $grid-row-editor-border-width
+        $grid-row-editor-border-width
+        0
+        $grid-row-editor-border-width,
+    $padding: flip-vertical($grid-row-editor-button-container-padding),
+    $background-color: $grid-row-editor-background-color,
+    $background-gradient: 'none',
+    $table: true
+);
+
+.#{$prefix}grid-row-editor-buttons {
+    border-color: $grid-row-editor-border-color;
+}
+
+.#{$prefix}row-editor-update-button {
+    margin-right: ceil($grid-row-editor-button-spacing / 2);
+}
+.#{$prefix}row-editor-cancel-button {
+    margin-left: floor($grid-row-editor-button-spacing / 2);
+}
+
+@if $include-rtl {
+    .#{$prefix}rtl.#{$prefix}row-editor-update-button {
+        margin-left: ceil($grid-row-editor-button-spacing / 2);
+        margin-right: auto;
+    }
+    .#{$prefix}rtl.#{$prefix}row-editor-cancel-button {
+        margin-right: floor($grid-row-editor-button-spacing / 2);
+        margin-left: auto;
+    }
+}
+
+.#{$prefix}grid-row-editor-errors {
+    .#{$prefix}tip-body {
+        padding: $grid-row-editor-error-tip-body-padding;
+    }
+}
+
+.#{$prefix}grid-row-editor-errors-item {
+    list-style: $grid-row-editor-error-tip-list-style;
+    margin-left: $grid-row-editor-error-tip-list-spacing;
+}
+
+@if $include-rtl {
+    .#{$prefix}rtl.#{$prefix}grid-row-editor-errors {
+        .#{$prefix}grid-row-editor-errors-item {
+            margin-left: 0;
+            margin-right: $grid-row-editor-error-tip-list-spacing;
+        }
+    }
+}

@@ -1,0 +1,541 @@
+/*
+ * Creates a visual theme for a Menu.
+ *
+ * @param {string} $ui
+ * The name of the UI being created. Can not included spaces or special punctuation
+ * (used in CSS class names).
+ *
+ * @param {color} [$ui-background-color=$menu-background-color]
+ * The background-color of the Menu
+ *
+ * @param {color} [$ui-border-color=$menu-border-color]
+ * The border-color of the Menu
+ *
+ * @param {string} [$ui-border-style=$menu-border-style]
+ * The border-style of the Menu
+ *
+ * @param {number} [$ui-border-width=$menu-border-width]
+ * The border-width of the Menu
+ *
+ * @param {number/list} [$ui-padding=$menu-padding]
+ * The padding to apply to the Menu body element
+ *
+ * @param {color} [$ui-text-color=$menu-text-color]
+ * The color of Menu Item text
+ *
+ * @param {string} [$ui-item-font-family=$menu-item-font-family]
+ * The font-family of {@link Ext.menu.Item Menu Items}
+ *
+ * @param {number} [$ui-item-font-size=$menu-item-font-size]
+ * The font-size of {@link Ext.menu.Item Menu Items}
+ *
+ * @param {string} [$ui-item-font-weight=$menu-item-font-weight]
+ * The font-weight of {@link Ext.menu.Item Menu Items}
+ *
+ * @param {number} [$ui-item-height=$menu-item-height]
+ * The height of {@link Ext.menu.Item Menu Items}
+ *
+ * @param {number} [$ui-item-border-width=$menu-item-border-width]
+ * The border-width of {@link Ext.menu.Item Menu Items}
+ *
+ * @param {string} [$ui-item-cursor=$menu-item-cursor]
+ * The style of cursor to display when the cursor is over a {@link Ext.menu.Item Menu Item}
+ *
+ * @param {color} [$ui-item-active-background-color=$menu-item-active-background-color]
+ * The background-color of the active {@link Ext.menu.Item Menu Item}
+ *
+ * @param {color} [$ui-item-active-border-color=$menu-item-active-border-color]
+ * The border-color of the active {@link Ext.menu.Item Menu Item}
+ *
+ * @param {string/list} [$ui-item-background-gradient=$menu-item-background-gradient]
+ * The background-gradient for {@link Ext.menu.Item Menu Items}. Can be either the name
+ * of a predefined gradient or a list of color stops. Used as the `$type` parameter for
+ * {@link Global_CSS#background-gradient}.
+ *
+ * @param {number} [$ui-item-active-border-radius=$menu-item-active-border-radius]
+ * The border-radius of {@link Ext.menu.Item Menu Items}
+ *
+ * @param {number} [$ui-item-icon-size=$menu-item-icon-size]
+ * The size of {@link Ext.menu.Item Menu Item} icons
+ *
+ * @param {color} [$ui-glyph-color=$menu-glyph-color]
+ * The color to use for menu icons configured using {@link Ext.menu.Item#glyph glyph}
+ *
+ * @param {number} [$ui-glyph-opacity=$menu-glyph-opacity]
+ * The opacity to use for menu icons configured using {@link Ext.menu.Item#glyph glyph}
+ *
+ * @param {number} [$ui-item-checkbox-size=$menu-item-checkbox-size]
+ * The size of {@link Ext.menu.Item Menu Item} checkboxes
+ *
+ * @param {list} [$ui-item-icon-background-position=$menu-item-icon-background-position]
+ * The background-position of {@link Ext.menu.Item Menu Item} icons
+ *
+ * @param {number} [$ui-item-icon-vertical-offset=$menu-item-icon-vertical-offset]
+ * vertical offset for menu item icons/checkboxes.  By default the icons are roughly
+ * vertically centered, but it may be necessary in some cases to make minor adjustments
+ * to the vertical position.
+ *
+ * @param {number} [$ui-item-text-vertical-offset=$menu-item-text-vertical-offset]
+ * vertical offset for menu item text.  By default the text is given a line-height
+ * equal to the menu item's content-height, however, depending on the font this may not
+ * result in perfect vertical centering.  Offset can be used to make small adjustments
+ * to the text's vertical position.
+ *
+ * @param {number/list} [$ui-item-text-horizontal-spacing=$menu-item-text-horizontal-spacing]
+ * The space to the left and right of {@link Ext.menu.Item Menu Item} text. Can be specified
+ * as a number (e.g. 5px) or as a list with 2 items for different left/right values. e.g.
+ *
+ *     $menu-item-text-horizontal-spacing: 4px 8px !default; // 4px of space to the left, and 8px to the right
+ *
+ * @param {number} [$ui-item-icon-horizontal-spacing=$menu-item-icon-horizontal-spacing]
+ * The space to the left and right of {@link Ext.menu.Item Menu Item} icons. Can be specified
+ * as a number (e.g. 5px) or as a list with 2 items for different left/right values. e.g.
+ *
+ *     $menu-item-icon-horizontal-spacing: 4px 8px !default; // 4px of space to the left, and 8px to the right
+ *
+ * @param {number} [$ui-item-arrow-horizontal-spacing=$menu-item-arrow-horizontal-spacing]
+ * The space to the left and right of {@link Ext.menu.Item Menu Item} arrows. Can be specified
+ * as a number (e.g. 5px) or as a list with 2 items for different left/right values. e.g.
+ *
+ *     $menu-item-arrow-horizontal-spacing: 4px 8px !default; // 4px of space to the left, and 8px to the right
+ *
+ * @param {number/list} [$ui-item-separator-margin=$menu-item-separator-margin]
+ * The margin of {@link Ext.menu.Separator Menu Separators}
+ *
+ * @param {number} [$ui-item-arrow-height=$menu-item-arrow-height]
+ * The height of {@link Ext.menu.Item Menu Item} arrows
+ *
+ * @param {number} [$ui-item-arrow-width=$menu-item-arrow-width]
+ * The width of {@link Ext.menu.Item Menu Item} arrows
+ *
+ * @param {number} [$ui-item-disabled-opacity=$menu-item-disabled-opacity]
+ * The opacity of disabled {@link Ext.menu.Item Menu Items}
+ *
+ * @param {number/list} [$ui-component-margin=$menu-component-margin]
+ * The margin non-MenuItems placed in a Menu
+ *
+ * @param {color} [$ui-separator-border-color=$menu-separator-border-color]
+ * The border-color of {@link Ext.menu.Separator Menu Separators}
+ *
+ * @param {color} [$ui-separator-background-color=$menu-separator-background-color]
+ * The background-color of {@link Ext.menu.Separator Menu Separators}
+ *
+ * @param {number} [$ui-separator-size=$menu-separator-size]
+ * The size of {@link Ext.menu.Separator Menu Separators}
+ *
+ * @param {number} [$ui-scroller-width=$menu-scroller-width]
+ * The width of Menu scrollers
+ *
+ * @param {number} [$ui-scroller-height=$menu-scroller-height]
+ * The height of Menu scrollers
+ *
+ * @param {color} [$ui-scroller-border-color=$menu-scroller-border-color]
+ * The border-color of Menu scroller buttons
+ *
+ * @param {number} [$ui-scroller-border-width=$menu-scroller-border-width]
+ * The border-width of Menu scroller buttons
+ *
+ * @param {number/list} [$ui-scroller-top-margin=$menu-scroller-top-margin]
+ * The margin of "top" Menu scroller buttons
+ *
+ * @param {number/list} [$ui-scroller-bottom-margin=$menu-scroller-bottom-margin]
+ * The margin of "bottom" Menu scroller buttons
+ *
+ * @param {string} [$ui-scroller-cursor=$menu-scroller-cursor]
+ * The cursor of Menu scroller buttons
+ *
+ * @param {string} [$ui-scroller-cursor-disabled=$menu-scroller-cursor-disabled]
+ * The cursor of disabled Menu scroller buttons
+ *
+ * @param {number} [$ui-scroller-opacity=$menu-scroller-opacity]
+ * The opacity of Menu scroller buttons. Only applicable when
+ * {@link $menu-classic-scrollers} is `false`.
+ *
+ * @param {number} [$ui-scroller-opacity-over=$menu-scroller-opacity-over]
+ * The opacity of hovered Menu scroller buttons. Only applicable when
+ * {@link $menu-classic-scrollers} is `false`.
+ *
+ * @param {number} [$ui-scroller-opacity-pressed=$menu-scroller-opacity-pressed]
+ * The opacity of pressed Menu scroller buttons. Only applicable when
+ * {@link $menu-classic-scrollers} is `false`.
+ *
+ * @param {number} [$ui-scroller-opacity-disabled=$menu-scroller-opacity-disabled]
+ * The opacity of disabled Menu scroller buttons.
+ *
+ * @param {boolean} [$ui-classic-scrollers=$menu-classic-scrollers]
+ * `true` to use classic-style scroller buttons.  When `true` scroller buttons are given their
+ * hover state by changing their background-position,  When `false` scroller buttons are
+ * given their hover state by applying opacity.
+ *
+ * @member Ext.menu.Menu
+ */
+@mixin extjs-menu-ui(
+    $ui,
+    $ui-background-color: $menu-background-color,
+    $ui-border-color: $menu-border-color,
+    $ui-border-style: $menu-border-style,
+    $ui-border-width: $menu-border-width,
+    $ui-padding: $menu-padding,
+    $ui-text-color: $menu-text-color,
+    $ui-item-font-family: $menu-item-font-family,
+    $ui-item-font-size: $menu-item-font-size,
+    $ui-item-font-weight: $menu-item-font-weight,
+    $ui-item-height: $menu-item-height,
+    $ui-item-border-width: $menu-item-border-width,
+    $ui-item-cursor: $menu-item-cursor,
+    $ui-item-active-background-color: $menu-item-active-background-color,
+    $ui-item-active-border-color: $menu-item-active-border-color,
+    $ui-item-background-gradient: $menu-item-background-gradient,
+    $ui-item-active-border-radius: $menu-item-active-border-radius,
+    $ui-item-icon-size: $menu-item-icon-size,
+    $ui-glyph-color: $menu-glyph-color,
+    $ui-glyph-opacity: $menu-glyph-opacity,
+    $ui-item-checkbox-size: $menu-item-checkbox-size,
+    $ui-item-icon-background-position: $menu-item-icon-background-position,
+    $ui-item-icon-vertical-offset: $menu-item-icon-vertical-offset,
+    $ui-item-text-vertical-offset: $menu-item-text-vertical-offset,
+    $ui-item-text-horizontal-spacing: $menu-item-text-horizontal-spacing,
+    $ui-item-icon-horizontal-spacing: $menu-item-icon-horizontal-spacing,
+    $ui-item-arrow-horizontal-spacing: $menu-item-arrow-horizontal-spacing,
+    $ui-item-separator-margin: $menu-item-separator-margin,
+    $ui-item-arrow-height: $menu-item-arrow-height,
+    $ui-item-arrow-width: $menu-item-arrow-width,
+    $ui-item-disabled-opacity: $menu-item-disabled-opacity,
+    $ui-component-margin: $menu-component-margin,
+    $ui-separator-border-color: $menu-separator-border-color,
+    $ui-separator-background-color: $menu-separator-background-color,
+    $ui-separator-size: $menu-separator-size,
+    $ui-scroller-width: $menu-scroller-width,
+    $ui-scroller-height: $menu-scroller-height,
+    $ui-scroller-border-color: $menu-scroller-border-color,
+    $ui-scroller-border-width: $menu-scroller-border-width,
+    $ui-scroller-top-margin: $menu-scroller-top-margin,
+    $ui-scroller-bottom-margin: $menu-scroller-bottom-margin,
+    $ui-scroller-cursor: $menu-scroller-cursor,
+    $ui-scroller-cursor-disabled: $menu-scroller-cursor-disabled,
+    $ui-scroller-opacity: $menu-scroller-opacity,
+    $ui-scroller-opacity-over: $menu-scroller-opacity-over,
+    $ui-scroller-opacity-pressed: $menu-scroller-opacity-pressed,
+    $ui-scroller-opacity-disabled: $menu-scroller-opacity-disabled,
+    $ui-classic-scrollers: $menu-classic-scrollers
+) {
+
+    $ui-item-arrow-top: round(($ui-item-height - vertical($ui-item-border-width) - $ui-item-arrow-height) / 2) !default;
+    $ui-icon-separator-indent: before($ui-item-icon-horizontal-spacing) + $ui-item-icon-size + after($ui-item-icon-horizontal-spacing);
+    $ui-item-indent: $ui-icon-separator-indent + $ui-separator-size + before($ui-item-text-horizontal-spacing);
+    $ui-item-indent-no-separator: before($ui-item-icon-horizontal-spacing) + $ui-item-icon-size + max(after($ui-item-icon-horizontal-spacing), before($ui-item-text-horizontal-spacing));
+    $ui-item-indent-right-icon: $ui-icon-separator-indent + before($ui-item-text-horizontal-spacing);
+    $ui-item-indent-right-arrow: $ui-item-arrow-width + before($ui-item-arrow-horizontal-spacing) + after($ui-item-arrow-horizontal-spacing) + after($ui-item-text-horizontal-spacing);
+    $ui-item-icon-top: round(($ui-item-height - vertical($ui-item-border-width) - $ui-item-icon-size) / 2) + $ui-item-icon-vertical-offset !default;
+
+    @if not is-null($ui-border-width) and $ui-border-width != 0 {
+        .#{$prefix}menu-#{$ui} {
+            border-style: $ui-border-style;
+            border-width: $ui-border-width;
+            border-color: $ui-border-color;
+        }
+    }
+    .#{$prefix}menu-body-#{$ui} {
+        background: $ui-background-color;
+        padding: $ui-padding;
+    }
+
+    .#{$prefix}menu-icon-separator-#{$ui} {
+        left: $ui-icon-separator-indent;
+        border-left: solid 1px $ui-separator-border-color;
+        background-color: $ui-separator-background-color;
+        width: $ui-separator-size;
+
+        @if $include-rtl {
+            &.#{$prefix}rtl {
+                left: auto;
+                right: $ui-icon-separator-indent;
+            }
+        }
+    }
+
+    .#{$prefix}menu-item-#{$ui} {
+        border-width: $ui-item-border-width;
+        cursor: $ui-item-cursor;
+
+        &.#{$prefix}menu-item-active {
+            @include background-gradient($ui-item-active-background-color, $ui-item-background-gradient);
+            @if $ui-item-active-border-radius != 0 {
+                @include border-radius($ui-item-active-border-radius);
+            }
+
+            @if $ui-item-border-width != 0 {
+                border-color: $ui-item-active-border-color;
+            }
+
+            // Background linear gradient
+            @if $include-slicer-gradient {
+                .#{$prefix}nlg & {
+                    background: $ui-item-active-background-color repeat-x left top;
+                    background-image: slicer-background-image(menu-item-#{$ui}-active, 'menu/menu-item-#{$ui}-active-bg');
+                }
+            }
+        }
+
+        &.#{$prefix}menu-item-separator {
+            height: $ui-separator-size;
+            border-top: solid 1px $ui-separator-border-color;
+            background-color: $ui-separator-background-color;
+            margin: $ui-item-separator-margin;
+            padding: 0;
+        }
+
+        &.#{$prefix}menu-item-disabled {
+            @include opacity($ui-item-disabled-opacity);
+
+            @if $include-ie {
+                .#{$prefix}ie9m & {
+                    .#{$prefix}menu-item-icon-#{ui} {
+                        @include opacity($ui-item-disabled-opacity);
+                    }
+
+                    .#{$prefix}menu-item-text-#{$ui} {
+                        // IE opacity/cleartype bug workaround
+                        background-color: transparent;
+                    }
+                }
+            }
+        }
+
+        @if $include-ext-form-labelable {
+            // When Fields are added to Menus...
+            .#{$prefix}form-item-label {
+                font-size: $ui-item-font-size;
+                color: $ui-text-color;
+            }
+        }
+    }
+
+    .#{$prefix}menu-item-text-#{$ui},
+    .#{$prefix}menu-item-cmp-#{$ui} {
+        margin: 0 after($ui-item-text-horizontal-spacing) 0 before($ui-item-text-horizontal-spacing);
+    }
+
+    .#{$prefix}menu-item-text-#{$ui} {
+        font: $ui-item-font-weight $ui-item-font-size $ui-item-font-family;
+        line-height: $ui-item-height - vertical($ui-item-border-width) - abs($ui-item-text-vertical-offset);
+        @if $ui-item-text-vertical-offset > 0 {
+            padding-top: $ui-item-text-vertical-offset;
+        } @else if $ui-item-text-vertical-offset < 0 {
+            padding-bottom: $ui-item-text-vertical-offset;
+        }
+        color: $ui-text-color;
+        cursor: $ui-item-cursor; // needed to override cursor:default set by x-unselectable
+
+        &.#{$prefix}menu-item-indent {
+            margin-left: $ui-item-indent;
+        }
+
+        &.#{$prefix}menu-item-indent-no-separator {
+            margin-left: $ui-item-indent-no-separator;
+        }
+
+        &.#{$prefix}menu-item-indent-right-icon {
+            margin-right: $ui-item-indent-right-icon;
+        }
+
+        &.#{$prefix}menu-item-indent-right-arrow {
+            margin-right: $ui-item-indent-right-arrow;
+        }
+    }
+
+    @if $include-rtl {
+        .#{$prefix}rtl {
+            &.#{$prefix}menu-item-text-#{$ui},
+            &.#{$prefix}menu-item-cmp-#{$ui} {
+                margin: 0 before($ui-item-text-horizontal-spacing) 0 after($ui-item-text-horizontal-spacing);
+            }
+
+            &.#{$prefix}menu-item-text-#{$ui} {
+                &.#{$prefix}menu-item-indent {
+                    margin-right: $ui-item-indent;
+                }
+
+                &.#{$prefix}menu-item-indent-no-separator {
+                    margin-right: $ui-item-indent-no-separator;
+                }
+
+                &.#{$prefix}menu-item-indent-right-icon {
+                    margin-left: $ui-item-indent-right-icon;
+                }
+
+                &.#{$prefix}menu-item-indent-right-arrow {
+                    margin-left: $ui-item-indent-right-arrow;
+                }
+            }
+        }
+    }
+
+   .#{$prefix}menu-item-indent-#{$ui} {
+        margin-left: $ui-item-indent;
+        @if $include-rtl {
+            &.#{$prefix}rtl {
+                margin-left: 0;
+                margin-right: $ui-item-indent;
+            }
+        }
+    }
+
+    .#{$prefix}menu-item-icon-#{$ui} {
+        width: $ui-item-icon-size;
+        height: $ui-item-icon-size;
+        top: $ui-item-icon-top;
+        left: before($ui-item-icon-horizontal-spacing);
+        background-position: $ui-item-icon-background-position;
+
+        @if $include-rtl {
+            &.#{$prefix}rtl {
+                left: auto;
+                right: before($ui-item-icon-horizontal-spacing);
+
+                .#{$prefix}menu-item-active & {
+                    right: before($ui-item-icon-horizontal-spacing) - left($ui-item-border-width);
+                }
+            }
+        }
+
+        &.#{$prefix}menu-item-glyph {
+            font-size: $ui-item-icon-size;
+            line-height: $ui-item-icon-size;
+            color: $ui-glyph-color;
+
+            @if $ui-glyph-opacity != 1 {
+                // do not use the opacity mixin because we do not want IE's filter version of
+                // opacity to be included.  We emulate the opacity setting in IE8m by mixing
+                // the icon color into the background color. (see below)
+                opacity: $ui-glyph-opacity;
+            }
+            @if $include-ie {
+                // In IE8 and below when a glyph contains partially transparent pixels, we
+                // can't apply an opacity filter to the glyph element, because IE8m will render
+                // the partially transparent pixels of the glyph as black. To work around this,
+                // we emulate the approximate color that the glyph would have if it had opacity
+                // applied by mixing the glyph color with the menus's background-color.
+                .#{$prefix}ie8 & {
+                    color: mix($ui-glyph-color, $ui-background-color, $ui-glyph-opacity * 100);
+                }
+            }
+        }
+
+        // For when an icon needs to be used in the right position where a submenu arrow usually goes.
+        // eg: When a CheckItem needs an icon. The left icon position is a checkbox, so the icon is moved to the right.
+        &.#{$prefix}menu-item-icon-right {
+            width: $ui-item-icon-size;
+            height: $ui-item-icon-size;
+            top: $ui-item-icon-top;
+            right: after($ui-item-icon-horizontal-spacing);
+            left: auto;
+            background-position: $ui-item-icon-background-position;
+
+            @if $include-rtl {
+                &.#{$prefix}rtl {
+                    right: auto;
+                    left: after($ui-item-icon-horizontal-spacing);
+
+                    .#{$prefix}menu-item-active & {
+                        left: after($ui-item-icon-horizontal-spacing) - right($ui-item-border-width);
+                    }
+                }
+            }
+        }
+
+        &.#{$prefix}menu-item-checkbox {
+            @if $ui-item-checkbox-size != $ui-item-icon-size {
+                height: $ui-item-checkbox-size;
+                width: $ui-item-checkbox-sze;
+            }
+            .#{$prefix}menu-item-checked & {
+                background-image: theme-background-image('menu/#{$ui}-checked');
+            }
+
+            .#{$prefix}menu-item-unchecked & {
+                background-image: theme-background-image('menu/#{$ui}-unchecked');
+            }
+        }
+
+        &.#{$prefix}menu-group-icon {
+            .#{$prefix}menu-item-checked & {
+                background-image: theme-background-image('menu/#{$ui}-group-checked');
+            }
+
+            .#{$prefix}menu-item-unchecked & {
+                background-image: none;
+            }
+        }
+    }
+
+    .#{$prefix}menu-item-arrow-#{$ui} {
+        width: $ui-item-arrow-width;
+        height: $ui-item-arrow-height;
+        top: $ui-item-arrow-top;
+        right: after($ui-item-arrow-horizontal-spacing);
+        background-image: theme-background-image('menu/#{$ui}-menu-parent');
+
+        .#{$prefix}menu-item-active & {
+            top: $ui-item-arrow-top - top($ui-item-border-width);
+            right: after($ui-item-arrow-horizontal-spacing) - right($ui-item-border-width);
+        }
+
+        @if $include-rtl {
+            &.#{$prefix}rtl {
+                left: after($ui-item-arrow-horizontal-spacing);
+                right: auto;
+                background-image: theme-background-image('menu/#{$ui}-menu-parent-left');
+
+                .#{$prefix}menu-item-active & {
+                    left: after($ui-item-arrow-horizontal-spacing) - right($ui-item-border-width);
+                }
+            }
+        }
+    }
+
+    @if $include-ext-layout-container-boxoverflow-scroller {
+        @include extjs-box-scroller-ui(
+            $ui: $ui,
+            $type: 'menu',
+            $vertical-width: $ui-scroller-width,
+            $vertical-height: $ui-scroller-height,
+            $top-margin: $ui-scroller-top-margin,
+            $bottom-margin: $ui-scroller-bottom-margin,
+            $vertical-border-color: $ui-scroller-border-color,
+            $vertical-border-width: $ui-scroller-border-width,
+            $container-padding: $ui-padding,
+            $cursor: $ui-scroller-cursor,
+            $cursor-disabled: $ui-scroller-cursor-disabled,
+            $align: middle,
+            $opacity: $ui-scroller-opacity,
+            $opacity-over: $ui-scroller-opacity-over,
+            $opacity-pressed: $ui-scroller-opacity-pressed,
+            $opacity-disabled: $ui-scroller-opacity-disabled,
+            $classic: $ui-classic-scrollers,
+            $include-horizontal: false
+        );
+    }
+
+    // EXTJSIV-8846: partially transparent png images do not display correctly
+    // in winXP/IE8 when the image element has a transparent background.
+    // to fix this, we give the element the same background-color as the menu.
+    .#{$prefix}ie8 {
+        .#{$prefix}box-scroller-menu-#{$ui} {
+            background-color: $ui-background-color;
+        }
+    }
+
+    @if not is-null($ui-item-background-gradient) {
+        $stretch: slicer-background-stretch(menu-item-#{$ui}-active, bottom);
+        @include x-slicer(menu-item-#{$ui}-active);
+    }
+}
+
+@if $include-menu-default-ui {
+    @include extjs-menu-ui(
+        $ui: 'default'
+    );
+}
+
+

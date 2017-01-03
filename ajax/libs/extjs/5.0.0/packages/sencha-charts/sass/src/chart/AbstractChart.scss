@@ -1,0 +1,178 @@
+/*
+  Copied from touch/resources/themes/stylesheets/sencha-touch/base/src/chart/_AbstractChart.scss
+*/
+
+// import 'user-interface' to use the 'user-select' mixin
+@import "compass/css3/user-interface";
+
+.#{$prefix}android-3 .#{$prefix}surface-wrap, .#{$prefix}android-3 .#{$prefix}surface-wrap > * {
+  -webkit-perspective: 1;
+}
+
+.#{$prefix}draw-container {
+  position: relative;
+  @include user-select(none);
+  -ms-user-select: none;
+  cursor: default;
+  .#{$prefix}inner {
+    overflow: hidden;
+  }
+}
+
+.#{$prefix}surface-canvas {
+  position: absolute;
+}
+
+.#{$prefix}chart-watermark {
+  opacity: 0.5;
+  z-index: 9;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 4px 6px;
+  font-family: "Helvetica";
+  font-size: 12px;
+  position: absolute;
+  white-space:nowrap;
+  border-top-left-radius: 4px;
+  -webkit-border-top-left-radius: 4px;
+}
+
+.#{$prefix}chart-image {
+  width: 100%;
+  height: auto;
+}
+
+.#{$prefix}legend-container {
+  display: inline-block;
+  line-height: 0;
+  @include border-radius($chart-legend-border-radius);
+  border: $chart-legend-border;
+  background: $chart-legend-background-color;
+
+  @if (lightness($chart-legend-background-color) > 30) {
+    @include box-shadow(rgba(#fff, .6) 0 1px 1px);
+  } @else {
+    @include box-shadow(rgba(#fff, .2) 0 1px 0);
+  }
+}
+
+.#{$prefix}legend-item {
+  padding: .8em 1em .8em $chart-marker-size + 1em;
+  color: $chart-legend-item-color;
+  background: $chart-legend-item-background;
+  max-width: 16em;
+  min-width: 0;
+  font-size: $font-size;
+  font-family: $font-family;
+  line-height: $font-size;
+  font-weight: $font-weight;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+}
+
+.#{$prefix}legend-inactive {
+  @include opacity(.3);
+}
+
+.#{$prefix}legend-item-marker {
+  position: absolute;
+  width: $chart-marker-size;
+  height: $chart-marker-size;
+  @include border-radius($chart-marker-size/2);
+  @include box-shadow(rgba(#fff, .3) 0 1px 0, rgba(#000, .4) 0 1px 0 inset);
+  left: .7em;
+  top: .85em;
+}
+
+.#{$prefix}rtl > * > .#{$prefix}legend-item {
+  padding: .8em $chart-marker-size + 1em .8em 1em;
+}
+
+.#{$prefix}rtl > * > * > .#{$prefix}legend-item-marker {
+  right: .7em;
+}
+
+.#{$prefix}legend, .#{$prefix}legend-panel {
+  background: $chart-legend-background-color;
+  outline: none; // hide dotted focus outline in Firefox
+
+  &.#{$prefix}docked-top, &.#{$prefix}docked-bottom {
+    .#{$prefix}legend-item {
+      border-left: $chart-legend-item-border;
+      &:first-child {
+        border-left: none;
+      }
+    }
+    &.#{$prefix}rtl .#{$prefix}legend-item {
+      &:first-child {
+        border-left: $chart-legend-item-border;
+      }
+      &:last-child {
+        border-left: none;
+      }
+    }
+  }
+  
+  &.#{$prefix}docked-left, &.#{$prefix}docked-right {
+    .#{$prefix}legend-item {
+      border-top: $chart-legend-item-border;
+      &:first-child {
+        border-top: none;
+      }
+    }
+    .#{$prefix}legend-inner {
+      display: -webkit-box;
+      -webkit-box-align: center;
+      -webkit-box-pack: center;
+    }
+  }
+}
+
+.#{$prefix}legend.#{$prefix}horizontal {
+  white-space: nowrap;
+  .#{$prefix}legend-item {
+    display: inline-block;
+  }
+}
+
+.#{$prefix}chart-toolbar {
+  position: absolute;
+  z-index: 9;
+  @include display-box;
+  padding: .6em;
+
+  .#{$prefix}button {
+    margin: .2em;
+  }
+
+  &[data-side=left], &[data-side=right] {
+    top: 0;
+    @include box-orient(vertical);
+  }
+
+  &[data-side=left] {
+    left: 0;
+  }
+
+  &[data-side=right] {
+    right: 0;
+  }
+
+  &[data-side=top], &[data-side=bottom] {
+    @include box-orient(horizontal);
+    right: 0;
+  }
+
+  &[data-side=top] {
+    top: 0;
+  }
+
+  &[data-side=bottom] {
+    bottom: 0;
+    @include box-orient(horizontal);
+  }
+}

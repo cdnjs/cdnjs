@@ -1,0 +1,364 @@
+/**
+ * Creates a visual theme for a Toolbar.
+
+ * @param {String} $ui
+ * The name of the UI being created. Can not included spaces or special punctuation
+ * (used in CSS class names).
+ *
+ * @param {color} [$background-color=$toolbar-background-color]
+ * The background color of the toolbar
+ *
+ * @param {string/list} [$background-gradient=$toolbar-background-gradient]
+ * The background gradient of the toolbar
+ *
+ * @param {string/list} [$vertical-spacing=$toolbar-vertical-spacing]
+ * The vertical spacing of the toolbar's items
+ *
+ * @param {string/list} [$horizontal-spacing=$toolbar-horizontal-spacing]
+ * The horizontal spacing of the toolbar's items
+ *
+ * @param {color} [$border-color=$toolbar-border-color]
+ * The border color of the toolbar
+ *
+ * @param {number} [$border-width=$toolbar-border-width]
+ * The border-width of the toolbar
+ *
+ * @param {number} [$border-style=$toolbar-border-style]
+ * The border-style of the toolbar
+ *
+ * @param {number} [$spacer-width=$toolbar-spacer-width]
+ * The width of the toolbar's {@link Ext.toolbar.Spacer Spacers}
+ *
+ * @param {color} [$separator-color=$toolbar-separator-color]
+ * The main border-color of the toolbar's {@link Ext.toolbar.Separator Separators}
+ *
+ * @param {color} [$separator-highlight-color=$toolbar-separator-highlight-color]
+ * The highlight border-color of the toolbar's {@link Ext.toolbar.Separator Separators}
+ *
+ * @param {number/list} [$separator-horizontal-margin=$toolbar-separator-horizontal-margin]
+ * The margin of {@link Ext.toolbar.Separator Separators} when the toolbar is horizontally aligned
+ *
+ * @param {number} [$separator-horizontal-height=$toolbar-separator-horizontal-height]
+ * The height of {@link Ext.toolbar.Separator Separators} when the toolbar is vertically aligned
+ *
+ * @param {string} [$separator-horizontal-border-style=$toolbar-separator-horizontal-border-style]
+ * The border-style of {@link Ext.toolbar.Separator Separators} when the toolbar is horizontally aligned
+ *
+ * @param {number} [$separator-horizontal-border-width=$toolbar-separator-horizontal-border-width]
+ * The border-width of {@link Ext.toolbar.Separator Separators} when the toolbar is horizontally aligned
+ *
+ * @param {number/list} [$separator-vertical-margin=$toolbar-separator-vertical-margin]
+ * The margin of {@link Ext.toolbar.Separator Separators} when the toolbar is vertically aligned
+ *
+ * @param {string} [$separator-vertical-border-style=$toolbar-separator-vertical-border-style]
+ * The border-style of {@link Ext.toolbar.Separator Separators} when the toolbar is vertically aligned
+ *
+ * @param {number} [$separator-vertical-border-width=$toolbar-separator-vertical-border-width]
+ * The border-width of {@link Ext.toolbar.Separator Separators} when the toolbar is vertically aligned
+ *
+ * @param {string} [$text-font-family=$toolbar-text-font-family]
+ * The default font-family of the toolbar's text items
+ *
+ * @param {number} [$text-font-size=$toolbar-text-font-size]
+ * The default font-size of the toolbar's text items
+ *
+ * @param {number} [$text-font-weight=$toolbar-text-font-weight]
+ * The default font-weight of the toolbar's text items
+ *
+ * @param {color} [$text-color=$toolbar-text-color]
+ * The color of the toolbar's text items
+ *
+ * @param {number} [$text-line-height=$toolbar-text-line-height]
+ * The line-height of the toolbar's text items
+ *
+ * @param {number/list} [$text-padding=$toolbar-text-padding]
+ * The padding of the toolbar's text items
+ *
+ * @param {number} [$scroller-width=$toolbar-scroller-width]
+ * The width of the scroller buttons
+ *
+ * @param {number} [$scroller-height=$toolbar-scroller-height]
+ * The height of the scroller buttons
+ *
+ * @param {number} [$scroller-vertical-width=$toolbar-scroller-vertical-width]
+ * The width of scrollers on vertically aligned toolbars
+ *
+ * @param {number} [$scroller-vertical-height=$toolbar-scroller-vertical-height]
+ * The height of scrollers on vertically aligned toolbars
+ *
+ * @param {color} [$scroller-border-color=$toolbar-scroller-border-color]
+ * The border-color of the scroller buttons
+ *
+ * @param {color} [$scroller-border-width=$toolbar-scroller-border-width]
+ * The border-width of the scroller buttons
+ *
+ * @param {color} [$scroller-vertical-border-color=$toolbar-scroller-vertical-border-color]
+ * The border-color of scroller buttons on vertically aligned toolbars
+ *
+ * @param {color} [$scroller-vertical-border-width=$toolbar-scroller-vertical-border-width]
+ * The border-width of scroller buttons on vertically aligned toolbars
+ *
+ * @param {number/list} [$scroller-top-margin=$toolbar-scroller-top-margin]
+ * The margin of "top" scroller buttons
+ *
+ * @param {number/list} [$scroller-right-margin=$toolbar-scroller-right-margin]
+ * The margin of "right" scroller buttons
+ *
+ * @param {number/list} [$scroller-bottom-margin=$toolbar-scroller-bottom-margin]
+ * The margin of "bottom" scroller buttons
+ *
+ * @param {number/list} [$scroller-left-margin=$toolbar-scroller-left-margin]
+ * The margin of "left" scroller buttons
+ *
+ * @param {string} [$scroller-cursor=$toolbar-scroller-cursor]
+ * The cursor of Toolbar scrollers
+ *
+ * @param {string} [$scroller-cursor-disabled=$toolbar-scroller-cursor-disabled]
+ * The cursor of disabled Toolbar scrollers
+ *
+ * @param {number} [$scroller-opacity=$toolbar-scroller-opacity]
+ * The opacity of Toolbar scroller buttons. Only applicable when
+ * `$classic-scrollers` is `false`.
+ *
+ * @param {number} [$scroller-opacity-over=$toolbar-scroller-opacity-over]
+ * The opacity of hovered Toolbar scroller buttons. Only applicable when
+ * `$classic-scrollers` is `false`.
+ *
+ * @param {number} [$scroller-opacity-pressed=$toolbar-scroller-opacity-pressed]
+ * The opacity of pressed Toolbar scroller buttons. Only applicable when
+ * `$classic-scrollers` is `false`.
+ *
+ * @param {number} [$scroller-opacity-disabled=$toolbar-scroller-opacity-disabled]
+ * The opacity of disabled Toolbar scroller buttons.
+ *
+ * @param {string} [$tool-background-image=$toolbar-tool-background-image]
+ * The sprite to use for {@link Ext.panel.Tool Tools} on a Toolbar
+ *
+ * @param {boolean} [$classic-scrollers=$toolbar-classic-scrollers]
+ * `true` to use classic-style scroller buttons.  When `true` scroller buttons are given
+ * their hover state by changing their background-position,  When `false` scroller buttons
+ * are given their hover state by applying opacity.
+ *
+ * @member Ext.toolbar.Toolbar
+ */
+@mixin extjs-toolbar-ui(
+    $ui,
+
+    $background-color: $toolbar-background-color,
+    $background-gradient: $toolbar-background-gradient,
+
+    $vertical-spacing: $toolbar-vertical-spacing,
+    $horizontal-spacing: $toolbar-horizontal-spacing,
+
+    $border-color: $toolbar-border-color,
+    $border-width: $toolbar-border-width,
+    $border-style: $toolbar-border-style,
+
+    $spacer-width: $toolbar-spacer-width,
+    $separator-color: $toolbar-separator-color,
+    $separator-highlight-color: $toolbar-separator-highlight-color,
+    $separator-horizontal-margin: $toolbar-separator-horizontal-margin,
+    $separator-horizontal-height: $toolbar-separator-horizontal-height,
+    $separator-horizontal-border-style: $toolbar-separator-horizontal-border-style,
+    $separator-horizontal-border-width: $toolbar-separator-horizontal-border-width,
+    $separator-vertical-margin: $toolbar-separator-vertical-margin,
+    $separator-vertical-border-style: $toolbar-separator-vertical-border-style,
+    $separator-vertical-border-width: $toolbar-separator-vertical-border-width,
+
+    $text-font-family: $toolbar-text-font-family,
+    $text-font-size: $toolbar-text-font-size,
+    $text-font-weight: $toolbar-text-font-weight,
+    $text-color: $toolbar-text-color,
+    $text-line-height: $toolbar-text-line-height,
+    $text-padding: $toolbar-text-padding,
+
+    $scroller-width: $toolbar-scroller-width,
+    $scroller-height: $toolbar-scroller-height,
+    $scroller-vertical-width: $toolbar-scroller-vertical-width,
+    $scroller-vertical-height: $toolbar-scroller-vertical-height,
+    $scroller-border-color: $toolbar-scroller-border-color,
+    $scroller-border-width: $toolbar-scroller-border-width,
+    $scroller-vertical-border-color: $toolbar-scroller-vertical-border-color,
+    $scroller-vertical-border-width: $toolbar-scroller-vertical-border-width,
+    $scroller-top-margin: $toolbar-scroller-top-margin,
+    $scroller-right-margin: $toolbar-scroller-right-margin,
+    $scroller-bottom-margin: $toolbar-scroller-bottom-margin,
+    $scroller-left-margin: $toolbar-scroller-left-margin,
+    $scroller-cursor: $toolbar-scroller-cursor,
+    $scroller-cursor-disabled: $toolbar-scroller-cursor-disabled,
+    $scroller-opacity: $toolbar-scroller-opacity,
+    $scroller-opacity-over: $toolbar-scroller-opacity-over,
+    $scroller-opacity-pressed: $toolbar-scroller-opacity-pressed,
+    $scroller-opacity-disabled: $toolbar-scroller-opacity-disabled,
+
+    $tool-background-image: $toolbar-tool-background-image,
+    $classic-scrollers: $toolbar-classic-scrollers
+) {
+    $ui-padding: $vertical-spacing 0 $vertical-spacing $horizontal-spacing;
+    .#{$prefix}toolbar-#{$ui} {
+        padding: $ui-padding;
+
+        @if $include-rtl {
+            &.#{$prefix}rtl {
+                padding: $vertical-spacing $horizontal-spacing $vertical-spacing 0;
+            }
+        }
+
+        border-style: $border-style;
+        border-color: $border-color;
+        border-width: $border-width;
+
+        @include background-gradient($background-color, $background-gradient);
+
+        @if $include-ext-panel-tool {
+            .#{$prefix}tool-img {
+                @if not is-null($tool-background-image) {
+                    background-image: theme-background-image($tool-background-image);
+                }
+                @if is-null($background-gradient) {
+                    // EXTJSIV-8846: partially transparent png images do not display correctly
+                    // in winXP/IE8m when the image element has a transparent background.
+                    // to fix this, we give the element the same background-color as the toolbar.
+                    background-color: $background-color;
+                }
+            }
+        }
+
+        .#{$prefix}toolbar-item {
+            margin: 0 $horizontal-spacing 0 0;
+
+            @if $include-rtl {
+                &.#{$prefix}rtl {
+                    margin: 0 0 0 $horizontal-spacing;
+                }
+            }
+        }
+
+        .#{$prefix}toolbar-separator-horizontal {
+            margin: $separator-horizontal-margin;
+            height: $separator-horizontal-height;
+            border-style: $separator-horizontal-border-style;
+            border-width: $separator-horizontal-border-width;
+            border-left-color: $separator-color;
+            border-right-color: $separator-highlight-color;
+        }
+
+        .#{$prefix}box-menu-after {
+            margin: 0 $horizontal-spacing;
+        }
+    }
+
+    .#{$prefix}toolbar-#{$ui}-vertical {
+        padding: $vertical-spacing $horizontal-spacing 0;
+
+        @if $include-rtl {
+            &.#{$prefix}rtl {
+                padding: $vertical-spacing $horizontal-spacing 0;
+            }
+        }
+
+        .#{$prefix}toolbar-item {
+            margin: 0 0 $vertical-spacing 0;
+        }
+
+        .#{$prefix}toolbar-separator-vertical {
+            margin: $separator-vertical-margin;
+            border-style: $separator-vertical-border-style;
+            border-width: $separator-vertical-border-width;
+            border-top-color: $separator-color;
+            border-bottom-color: $separator-highlight-color;
+        }
+
+        .#{$prefix}box-menu-after {
+            margin: $vertical-spacing 0;
+        }
+    }
+
+    @if $include-slicer-gradient and not is-null($background-gradient) {
+        .#{$prefix}nlg {
+            .#{$prefix}toolbar-#{$ui} {
+                background-image: slicer-background-image(toolbar-#{$ui}, 'toolbar/toolbar-#{$ui}-bg') !important;
+                background-repeat: repeat-x;
+            }
+        }
+        $stretch: slicer-background-stretch(toolbar-#{$ui}, bottom);
+    }
+
+    .#{$prefix}toolbar-text-#{$ui} {
+        padding: $text-padding;
+        color: $text-color;
+        font: $text-font-weight #{$text-font-size}/#{$text-line-height} $text-font-family;
+    }
+
+    .#{$prefix}toolbar-spacer-#{$ui} {
+        width: $spacer-width;
+    }
+
+    @if $include-ext-layout-container-boxoverflow-scroller {
+        @include extjs-box-scroller-ui(
+            $ui: $ui,
+            $type: 'toolbar',
+            $horizontal-width: $scroller-width,
+            $horizontal-height: $scroller-height,
+            $vertical-width: $scroller-vertical-width,
+            $vertical-height: $scroller-vertical-height,
+            $top-margin: $scroller-top-margin,
+            $right-margin: $scroller-right-margin,
+            $bottom-margin: $scroller-bottom-margin,
+            $left-margin: $scroller-left-margin,
+            $horizontal-border-color: $scroller-border-color,
+            $horizontal-border-width: $scroller-border-width,
+            $vertical-border-color: $scroller-vertical-border-color,
+            $vertical-border-width: $scroller-vertical-border-width,
+            $container-padding: $ui-padding,
+            $cursor: $scroller-cursor,
+            $cursor-disabled: $scroller-cursor-disabled,
+            $align: middle,
+            $opacity: $scroller-opacity,
+            $opacity-over: $scroller-opacity-over,
+            $opacity-pressed: $scroller-opacity-pressed,
+            $opacity-disabled: $scroller-opacity-disabled,
+            $classic: $classic-scrollers,
+            $include-vertical: if($ui == 'footer', false, true)
+        );
+    }
+
+    // EXTJSIV-8846: partially transparent png images do not display correctly
+    // in winXP/IE8 when the image element has a transparent background.
+    // to fix this, we give the element the same background-color as the toolbar.
+    .#{$prefix}ie8 {
+        .#{$prefix}box-scroller-toolbar-#{$ui} {
+            background-color: $background-color;
+        }
+    }
+
+    @if $include-ext-layout-container-boxoverflow-menu {
+        .#{$prefix}toolbar-more-icon {
+            background-image: theme-background-image('toolbar/#{$ui}-more');
+
+            @if $include-rtl {
+                &.#{$prefix}rtl {
+                    background-image: theme-background-image('toolbar/#{$ui}-more-left');
+                }
+            }
+        }
+    }
+
+    @include x-slicer(toolbar-#{$ui});
+}
+
+@if $include-toolbar-default-ui {
+    @include extjs-toolbar-ui(
+        $ui: 'default'
+    );
+}
+
+@if $include-toolbar-footer-ui {
+    @include extjs-toolbar-ui(
+        $ui: 'footer',
+        $background-color: $toolbar-footer-background-color,
+        $border-width: $toolbar-footer-border-width,
+        $vertical-spacing: $toolbar-footer-vertical-spacing,
+        $horizontal-spacing: $toolbar-footer-horizontal-spacing
+    );
+}

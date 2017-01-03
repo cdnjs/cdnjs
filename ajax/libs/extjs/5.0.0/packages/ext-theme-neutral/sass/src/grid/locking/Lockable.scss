@@ -1,0 +1,63 @@
+.#{$prefix}grid-locked .#{$prefix}grid-inner-locked {
+    border-width: 0 $grid-lockable-separator-border-width 0 0;
+    border-style: $grid-lockable-separator-border-style;
+}
+@if $include-rtl {
+    .#{$prefix}grid-locked .#{$prefix}rtl.#{$prefix}grid-inner-locked {
+        border-width: 0 0 0 $grid-lockable-separator-border-width;
+    }
+}
+
+// When the locking grid is configured with a splitter, the locked grid needs a border on its trailing edge
+.#{$prefix}grid-locked-split .#{$prefix}grid-inner-normal {
+    border-width: 0 0 0 $grid-lockable-separator-border-width;
+    border-style: $grid-lockable-separator-border-style;
+}
+@if $include-rtl {
+    .#{$prefix}grid-locked-split .#{$prefix}rtl.#{$prefix}grid-inner-normal {
+        border-width: 0 $grid-lockable-separator-border-width 0 0;
+    }
+}
+
+.#{$prefix}grid-inner-locked {
+    // Inner locked grid has a 1px border. Last cell looks bad with an extra grey one.
+    // The rules must be last because they override default header and cell bordering.
+    // Must use the border-right property because we have to override the .x-column-header border-right setting.
+    // Override last border width
+    .#{$prefix}column-header-last,
+    .#{$prefix}grid-cell-last {
+        border-right-width: 0!important;
+    }
+    @if $include-rtl {
+        .#{$prefix}rtl.#{$prefix}column-header-last {
+            border-left-width: 0!important;
+        }
+    }
+
+    // Explicitly set separating border color so that themes can override if the panel border color does not contrast enough
+    border-right-color: $grid-lockable-separator-border-color;
+}
+@if $include-rtl {
+    .#{$prefix}rtl.#{$prefix}grid-inner-locked {
+        .#{$prefix}grid-row {
+            .#{$prefix}column-header-last {
+                border-left: 0 none;
+            }
+            .#{$prefix}grid-cell-last {
+                border-left: 0 none;
+            }
+        }
+
+        // Override separating border side for RTL
+        border-right-color: $panel-border-color;
+        border-left-color: $grid-lockable-separator-border-color;
+    }
+}
+
+.#{$prefix}hmenu-lock {
+    background-image: theme-background-image('grid/hmenu-lock');
+}
+
+.#{$prefix}hmenu-unlock {
+    background-image: theme-background-image('grid/hmenu-unlock');
+}

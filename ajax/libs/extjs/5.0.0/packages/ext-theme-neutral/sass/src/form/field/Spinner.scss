@@ -1,0 +1,183 @@
+/**
+ * Creates a visual theme for spinner field triggers.  Note this mixin only provides
+ * styling for the spinner trigger buttons. The text field portion of the styling must be
+ * created using {@link #extjs-text-field-ui}
+ *
+ * @param {string} $ui
+ * The name of the UI being created. Can not included spaces or special punctuation
+ * (used in CSS class names).
+ *
+ * @param {boolean} [$ui-trigger-vertical=$spinner-trigger-vertical]
+ * `true` to align the up/down triggers vertically.
+ *
+ * @param {number} [$ui-trigger-width=$form-trigger-width]
+ * The width of the triggers.
+ *
+ * @param {number} [$ui-field-height=$form-text-field-height]
+ * The height of the text field that the trigger must fit within.  This does not set the
+ * height of the field, only the height of the triggers.  When {@link #$ui-trigger-vertical}
+ * is true, the available height within the field borders is divided evenly between the
+ * two triggers.
+ *
+ * @param {number/list} [$ui-field-border-width=$form-text-field-border-width]
+ * The border width of the text field that the trigger must fit within.  This does not set
+ * the border of the field, it is only needed so that the border-width of the field can
+ * be subtracted from the trigger height.
+ *
+ * @param {string} [$ui-trigger-vertical-background-image=$spinner-trigger-vertical-background-image]
+ * The background image sprite for vertically aligned spinner triggers
+ *
+ * @param {string} [$ui-trigger-up-background-image='form/spinner-up']
+ * The background image for the "up" trigger when triggers are horizontally aligned
+ *
+ * @param {string} [$ui-trigger-down-background-image='form/spinner-down']
+ * The background image for the "down" trigger when triggers are horizontally aligned
+ *
+ * @param {color} [$ui-trigger-background-color=$form-text-field-background-color]
+ * The background color of the spinner triggers
+ *
+ * @param {boolean} [$ui-classic-border=$form-text-field-classic-border]
+ * `true` to use classic-theme styled border.
+ *
+ * @member Ext.form.field.Spinner
+ */
+@mixin extjs-spinner-trigger-ui(
+    $ui: null,
+    $ui-trigger-vertical: $spinner-trigger-vertical,
+    $ui-trigger-width: $form-trigger-width,
+    $ui-field-height: $form-text-field-height,
+    $ui-field-border-width: $form-text-field-border-width,
+    $ui-trigger-vertical-background-image: $spinner-trigger-vertical-background-image,
+    $ui-trigger-up-background-image: $spinner-trigger-up-background-image,
+    $ui-trigger-down-background-image: $spinner-trigger-down-background-image,
+    $ui-trigger-background-color: $form-text-field-background-color,
+    $ui-classic-border: $form-text-field-classic-border
+) {
+    $ui-inner-height: if($ui-classic-border, $ui-field-height, $ui-field-height - vertical($ui-field-border-width));
+    $ui-trigger-height: if($ui-trigger-vertical, $ui-inner-height / 2, $ui-inner-height);
+
+    .#{$prefix}form-trigger-spinner-#{$ui} {
+        width: if($ui-trigger-vertical, $ui-trigger-width, $ui-trigger-width * 2);
+        @if $ui-classic-border {
+            border: 0;
+        }
+    }
+
+    .#{$prefix}form-spinner-#{$ui} {
+        @if $ui-trigger-vertical {
+            background-image: theme-background-image($ui-trigger-vertical-background-image);
+            @if $include-rtl {
+                &.#{$prefix}rtl {
+                    background-image: theme-background-image($ui-trigger-vertical-background-image + '-rtl');
+                }
+            }
+        } @else {
+            display: inline-block;
+        }
+        background-color: $ui-trigger-background-color;
+        width: $ui-trigger-width;
+        height: $ui-trigger-height;
+    }
+
+    @if not $spinner-trigger-vertical {
+        .#{$prefix}form-spinner-up-#{$ui} {
+            background-image: theme-background-image($ui-trigger-up-background-image);
+            @if $include-rtl {
+                &.#{$prefix}rtl {
+                    background-image: theme-background-image($ui-trigger-up-background-image + '-rtl');
+                }
+            }
+        }
+        .#{$prefix}form-spinner-down-#{$ui} {
+            background-image: theme-background-image($ui-trigger-down-background-image);
+            @if $include-rtl {
+                &.#{$prefix}rtl {
+                    background-image: theme-background-image($ui-trigger-down-background-image + '-rtl');
+                }
+            }
+        }
+    }
+
+    @if $ui-trigger-vertical {
+        .#{$prefix}form-spinner-up-#{$ui} {
+            background-position: 0 0;
+
+            &.#{$prefix}form-spinner-over {
+                background-position: (-$ui-trigger-width) 0;
+                &.#{$prefix}form-spinner-focus {
+                    background-position: -($ui-trigger-width * 4) 0;
+                }
+            }
+
+            &.#{$prefix}form-spinner-focus {
+                background-position: -($ui-trigger-width * 3) 0;
+            }
+
+            // add x-form-spinner class to increase specificity of "click" above focus/over
+            &.#{$prefix}form-spinner.#{$prefix}form-spinner-click {
+                background-position: -($ui-trigger-width * 2) 0;
+            }
+        }
+
+        .#{$prefix}form-spinner-down-#{$ui} {
+            background-position: 0 (-$ui-trigger-height);
+
+            &.#{$prefix}form-spinner-over {
+                background-position: (-$ui-trigger-width) (-$ui-trigger-height);
+                &.#{$prefix}form-spinner-focus {
+                    background-position: -($ui-trigger-width * 4) (-$ui-trigger-height);
+                }
+            }
+
+            &.#{$prefix}form-spinner-focus {
+                background-position: -($ui-trigger-width * 3) (-$ui-trigger-height);
+            }
+
+            // add x-form-spinner class to increase specificity of "click" above focus/over
+            &.#{$prefix}form-spinner.#{$prefix}form-spinner-click {
+                background-position: -($ui-trigger-width * 2) (-$ui-trigger-height);
+            }
+        }
+    } @else {
+        .#{$prefix}form-spinner-#{$ui} {
+            background-position: 0 0;
+
+            &.#{$prefix}form-spinner-over {
+                background-position: (-$ui-trigger-width) 0;
+                &.#{$prefix}form-spinner-focus {
+                    background-position: -($ui-trigger-width * 4) 0;
+                }
+            }
+
+            &.#{$prefix}form-spinner-focus {
+                background-position: -($ui-trigger-width * 3) 0;
+            }
+
+            // add x-form-spinner class to increase specificity of "click" above focus/over
+            &.#{$prefix}form-spinner.#{$prefix}form-spinner-click {
+                background-position: -($ui-trigger-width * 2) 0;
+            }
+        }
+    }
+}
+
+@if $include-spinner-trigger-default-ui {
+    @include extjs-spinner-trigger-ui(
+        $ui: 'default'
+    );
+}
+
+@if $include-spinner-trigger-toolbar-ui {
+    @include extjs-spinner-trigger-ui(
+        $ui: 'toolbar',
+        $ui-trigger-vertical: $spinner-toolbar-trigger-vertical,
+        $ui-trigger-width: $form-toolbar-trigger-width,
+        $ui-field-height: $form-toolbar-text-field-height,
+        $ui-field-border-width: $form-toolbar-text-field-border-width,
+        $ui-trigger-vertical-background-image: $spinner-toolbar-trigger-vertical-background-image,
+        $ui-trigger-up-background-image: $spinner-toolbar-trigger-up-background-image,
+        $ui-trigger-down-background-image: $spinner-toolbar-trigger-down-background-image,
+        $ui-trigger-background-color: $form-toolbar-text-field-background-color,
+        $ui-classic-border: $form-toolbar-text-field-classic-border
+    );
+}

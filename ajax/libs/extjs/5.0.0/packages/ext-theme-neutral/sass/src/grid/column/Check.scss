@@ -1,0 +1,24 @@
+.#{$prefix}grid-cell-inner-checkcolumn {
+    padding: $grid-checkcolumn-cell-padding;
+
+    @if $grid-no-row-lines-show-focus-border {
+        .#{$prefix}grid-no-row-lines .#{$prefix}grid-row-focused & {
+            padding-top: top($grid-checkcolumn-cell-padding) - $grid-row-cell-border-width;
+            padding-bottom: bottom($grid-checkcolumn-cell-padding) - $grid-row-cell-border-width;
+        }
+    }
+}
+
+.#{$prefix}grid-checkcolumn {
+    width: $form-checkbox-size;
+    height: $form-checkbox-size;
+    background: theme-background-image($form-checkbox-background-image) 0 0 no-repeat;
+
+    .#{$prefix}item-disabled & {
+        @include opacity($grid-checkcolumn-disabled-opacity);
+    }
+}
+
+.#{$prefix}grid-checkcolumn-checked {
+    background-position: 0 (0 - $form-checkbox-size);
+}

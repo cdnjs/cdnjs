@@ -1,0 +1,87 @@
+<project name="js-impl">
+    <!--
+    this target extracts split mode information from the compiler's app
+    processor to determine various pieces of information
+    -->
+    <target name="-detect-app-build-properties" 
+            depends="-init-app-js-files">
+        <x-load-app-builder-properties
+            refid="${compiler.ref.id}"
+            splitModePropName="enable.split.mode"
+            pageModePropName="app.page.mode"/>
+    </target>
+
+    <!--    
+    this is the standard js compile target that builds the output js file(s)
+    -->
+    <target name="-compile-js" depends="-detect-app-build-properties">
+        <if>
+            <x-is-true value="${enable.split.mode}"/>
+            <then>
+                <x-compile refid="${compiler.ref.id}">
+                    <![CDATA[
+                        # build a separate sdk-only js file
+                        union
+                            -tag=package-sencha-core,framework
+                        and
+                        ${build.optimize}
+                        and
+                        concat
+                            -remove-text-references=${build.remove.references}
+                            -optimize-string-references=${build.optimize.string.references}
+                            -remove-requirement-nodes=${build.remove.requirement.nodes}
+                            ${build.compression}
+                            -out=${build.framework.file}
+                            ${build.concat.options}
+                        
+                        # now build the all-classes file, without
+                        # the framework code included
+                        and
+                        restore
+                            page
+                        and
+                        exclude
+                            -tag=framework,package-sencha-core
+                        and
+                        ${build.optimize}
+                        and
+                        concat
+                            -remove-text-references=${build.remove.references}
+                            -optimize-string-references=${build.optimize.string.references}
+                            -remove-requirement-nodes=${build.remove.requirement.nodes}
+                            ${build.compression}
+                            -out=${build.classes.file}
+                            ${build.concat.options}
+                    ]]>
+                </x-compile>
+            </then>
+            <else>
+                <x-compile refid="${compiler.ref.id}">
+                    <![CDATA[
+                        # build an all-classes.js file that contains
+                        # all code needed by the app
+                        restore
+                            page
+                        and
+                        ${build.optimize}
+                        and
+                        concat
+                            -remove-text-references=${build.remove.references}
+                            -optimize-string-references=${build.optimize.string.references}
+                            -remove-requirement-nodes=${build.remove.requirement.nodes}
+                            ${build.compression}
+                            -out=${build.classes.file}
+                            ${build.concat.options}
+                    ]]>
+                </x-compile>
+            </else>
+        </if>
+    </target>
+    
+    <!--    
+    Build javascript
+    -->
+    <target name="-before-js"/>
+    <target name="-js" depends="-compile-js"/>
+    <target name="-after-js"/>
+</project>

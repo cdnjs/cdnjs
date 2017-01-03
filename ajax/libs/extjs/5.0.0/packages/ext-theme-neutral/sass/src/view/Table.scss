@@ -1,0 +1,204 @@
+.#{$prefix}grid-body {
+    background: $grid-body-background-color;
+    border-width: $grid-body-border-width;
+    border-style: $grid-body-border-style;
+    border-color: $grid-body-border-color;
+}
+
+.#{$prefix}grid-empty {
+    padding: $grid-empty-padding;
+    color: $grid-empty-color;
+    background-color: $grid-empty-background-color;
+    font: $grid-empty-font-weight $grid-empty-font-size $grid-empty-font-family;
+}
+
+// Default background color applied at table level - each row is its own separate table
+.#{$prefix}grid-item {
+    color: $grid-row-cell-color;
+    font: $grid-row-cell-font;
+    background-color: $grid-row-cell-background-color;
+}
+
+.#{$prefix}grid-item-alt {
+    background-color: $grid-row-cell-alt-background-color;
+}
+
+.#{$prefix}grid-item-over {
+    color: $grid-row-cell-over-color;
+    background-color: $grid-row-cell-over-background-color;
+}
+
+.#{$prefix}grid-item-focused {
+    color: $grid-row-cell-focus-color;
+    background-color: $grid-row-cell-focus-background-color;
+}
+
+.#{$prefix}grid-item-selected {
+    color: $grid-row-cell-selected-color;
+    background-color: $grid-row-cell-selected-background-color;
+}
+
+.#{$prefix}grid-with-row-lines {
+    .#{$prefix}grid-item {
+        border-style: $grid-row-cell-border-style;
+        border-width: $grid-row-cell-border-width 0 0;
+        border-color: $grid-row-border-color;
+    }
+
+    .#{$prefix}grid-item:first-child {
+        border-top-color: $grid-row-cell-background-color;
+    }
+
+    // the following rules have .x-grid-item added to increase specificity over the
+    // :first-child rule above
+    .#{$prefix}grid-item.#{$prefix}grid-item-over {
+        border-style: $grid-row-cell-over-border-style;
+        border-color: $grid-row-cell-over-border-color;
+    }
+
+    .#{$prefix}grid-item-over + .#{$prefix}grid-item {
+        border-top-style: $grid-row-cell-over-border-style;
+        border-top-color: $grid-row-cell-over-border-color;
+    }
+
+    .#{$prefix}grid-item.#{$prefix}grid-item-selected {
+        border-style: $grid-row-cell-selected-border-style;
+        border-color: $grid-row-cell-selected-border-color;
+    }
+
+    .#{$prefix}grid-item-selected + .#{$prefix}grid-item {
+        border-top-style: $grid-row-cell-selected-border-style;
+        border-top-color: $grid-row-cell-selected-border-color;
+    }
+
+    .#{$prefix}grid-item.#{$prefix}grid-item-focused {
+        border-style: $grid-row-cell-focus-border-style;
+        border-color: $grid-row-cell-focus-border-color;
+    }
+
+    .#{$prefix}grid-item-focused + .#{$prefix}grid-item {
+        border-top-style: $grid-row-cell-focus-border-style;
+        border-top-color: $grid-row-cell-focus-border-color;
+    }
+
+    .#{$prefix}grid-item:last-child {
+        border-bottom-width: $grid-row-cell-border-width;
+    }
+
+    // IE8 doesn't have last-child, so we end up with no border on the bottom row.
+    // To work around this issue we give all the rows a bottom border and negative
+    // margin so that they overlap.  This approach doesn't work everywhere though...
+    // in newer IE, using the browser's zoom feature can result in rounding errors on 
+    // the negative margin, resulting in the appearance of some borders being double.
+    .#{$prefix}ie8 & {
+        .#{$prefix}grid-item {
+            border-width: $grid-row-cell-border-width 0;
+            margin-top: (-$grid-row-cell-border-width);
+        }
+
+        .#{$prefix}grid-item:first-child {
+            margin-top: 0;
+        }
+    }
+}
+
+.#{$prefix}grid-cell-inner {
+    text-overflow: $grid-cell-inner-text-overflow;
+    padding: $grid-cell-inner-padding;
+}
+
+@if $include-rtl and (left($grid-cell-inner-padding) != right($grid-cell-inner-padding)) {
+    .#{$prefix}rtl.#{$prefix}grid-cell-inner {
+        padding: rtl($grid-cell-inner-padding);
+    }
+}
+
+@if $include-ext-grid-column-rownumberer
+    or $include-ext-selection-checkboxmodel
+    or $include-ext-grid-plugin-rowexpander {
+    // .x-grid-cell-special is used by RowNumberer, CheckboxModel, and RowExpander
+    .#{$prefix}grid-cell-special {
+        @if $grid-cell-special-border-width != 0 {
+            border-color: $grid-cell-special-border-color;
+            border-style: $grid-cell-special-border-style;
+            border-right-width: $grid-cell-special-border-width;
+        }
+        @if not is-null($grid-cell-special-background-color) {
+            @if is-null($grid-cell-special-background-gradient) {
+                background-color: $grid-cell-special-background-color;
+            } @else {
+                @include background-gradient($grid-cell-special-background-color, $grid-cell-special-background-gradient);
+            }
+
+            .#{$prefix}grid-item-selected & {
+                @if not is-null($grid-cell-special-selected-border-color) {
+                    border-right-color: $grid-cell-special-selected-border-color;
+                }
+
+                @if not is-null($grid-row-cell-selected-background-color) {
+                    @if is-null($grid-cell-special-background-gradient) {
+                        background-color: $grid-row-cell-selected-background-color;
+                    } @else {
+                        @include background-gradient($grid-row-cell-selected-background-color, $grid-cell-special-background-gradient, left);
+                    }
+                }
+            }
+
+            @if $include-slicer-gradient {
+                .#{$prefix}nlg & {
+                    background-repeat: repeat-y;
+                    background-image: slicer-background-image(grid-cell-special, 'grid/cell-special-bg');
+                }
+
+                .#{$prefix}nlg .#{$prefix}grid-item-selected & {
+                    background-image: slicer-background-image(grid-cell-special-selected, 'grid/cell-special-selected-bg');
+                }
+                @include x-slicer(grid-cell-special);
+                @include x-slicer(grid-cell-special-selected);
+            }
+        }
+    }
+
+    @if $include-rtl and $grid-cell-special-border-width != 0 {
+        .#{$prefix}rtl.#{$prefix}grid-cell-special {
+            border-right-width: 0;
+            border-left-width: $grid-cell-special-border-width;
+        }
+    }
+}
+
+.#{$prefix}grid-dirty-cell {
+    background: theme-background-image('grid/dirty') no-repeat 0 0;
+}
+
+@if $include-rtl {
+    .#{$prefix}rtl.#{$prefix}grid-dirty-cell {
+        background-image: theme-background-image('grid/dirty-rtl');
+        background-position: right 0;
+    }
+}
+
+// add grid-row class to increase specificity over the state rules that set background-color
+// e.g. .x-grid-item-over .x-grid-td, .x-grid-row-focused .x-grid-td
+.#{$prefix}grid-row .#{$prefix}grid-cell-selected {
+    color: $grid-cell-selected-color;
+    background-color: $grid-cell-selected-background-color;
+}
+
+// Column lines on leading edge where there may be whitespace following
+.#{$prefix}grid-with-col-lines .#{$prefix}grid-cell {
+    border-right: $grid-row-cell-border-width $grid-row-cell-border-style $grid-col-border-color;
+}
+
+// Column lines in RTL mode - leading edge is left.
+@if $include-rtl {
+    .#{$prefix}rtl.#{$prefix}grid-with-col-lines .#{$prefix}grid-cell {
+        border-right: 0;
+        border-left: $grid-row-cell-border-width $grid-row-cell-border-style $grid-col-border-color;
+    }
+}
+
+.#{$prefix}grid-resize-marker {
+    width: $grid-row-cell-border-width;
+    background-color: $grid-resize-marker-background-color;
+}

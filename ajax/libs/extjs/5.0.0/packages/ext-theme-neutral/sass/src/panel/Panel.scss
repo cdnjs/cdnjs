@@ -1,0 +1,863 @@
+/**
+ * Creates a visual theme for a Panel
+ *
+ * @param {string} $ui
+ * The name of the UI being created. Can not included spaces or special punctuation
+ * (used in CSS class names).
+ * 
+ * @param {color} [$ui-border-color=$panel-border-color]
+ * The border-color of the Panel
+ *
+ * @param {number} [$ui-border-radius=$panel-border-radius]
+ * The border-radius of the Panel
+ *
+ * @param {number} [$ui-border-width=$panel-border-width]
+ * The border-width of the Panel
+ *
+ * @param {number} [$ui-padding=$panel-padding]
+ * The padding of the Panel
+ *
+ * @param {color} [$ui-header-color=$panel-header-color]
+ * The text color of the Header
+ *
+ * @param {string} [$ui-header-font-family=$panel-header-font-family]
+ * The font-family of the Header
+ *
+ * @param {number} [$ui-header-font-size=$panel-header-font-size]
+ * The font-size of the Header
+ *
+ * @param {string} [$ui-header-font-weight=$panel-header-font-weight]
+ * The font-weight of the Header
+ *
+ * @param {number} [$ui-header-line-height=$panel-header-line-height]
+ * The line-height of the Header
+ *
+ * @param {color} [$ui-header-border-color=$panel-header-border-color]
+ * The border-color of the Header
+ *
+ * @param {number} [$ui-header-border-width=$panel-header-border-width]
+ * The border-width of the Header
+ *
+ * @param {string} [$ui-header-border-style=$panel-header-border-style]
+ * The border-style of the Header
+ *
+ * @param {color} [$ui-header-background-color=$panel-header-background-color]
+ * The background-color of the Header
+ *
+ * @param {string/list} [$ui-header-background-gradient=$panel-header-background-gradient]
+ * The background-gradient of the Header. Can be either the name of a predefined gradient
+ * or a list of color stops. Used as the `$type` parameter for {@link Global_CSS#background-gradient}.
+ *
+ * @param {color} [$ui-header-inner-border-color=$panel-header-inner-border-color]
+ * The inner border-color of the Header
+ *
+ * @param {number} [$ui-header-inner-border-width=$panel-header-inner-border-width]
+ * The inner border-width of the Header
+ *
+ * @param {number/list} [$ui-header-text-padding=$panel-header-text-padding]
+ * The padding of the Header's text element
+ *
+ * @param {number/list} [$ui-header-text-margin=$panel-header-text-margin]
+ * The margin of the Header's text element
+ *
+ * @param {string} [$ui-header-text-transform=$panel-header-text-transform]
+ * The text-transform of the Header
+ *
+ * @param {number/list} [$ui-header-padding=$panel-header-padding]
+ * The padding of the Header
+ *
+ * @param {number} [$ui-header-icon-width=$panel-header-icon-width]
+ * The width of the Header icon
+ *
+ * @param {number} [$ui-header-icon-height=$panel-header-icon-height]
+ * The height of the Header icon
+ *
+ * @param {number} [$ui-header-icon-spacing=$panel-header-icon-spacing]
+ * The space between the Header icon and text
+ *
+ * @param {list} [$ui-header-icon-background-position=$panel-header-icon-background-position]
+ * The background-position of the Header icon
+ *
+ * @param {color} [$ui-header-glyph-color=$panel-header-glyph-color]
+ * The color of the Header glyph icon
+ *
+ * @param {number} [$ui-header-glyph-opacity=$panel-header-glyph-opacity]
+ * The opacity of the Header glyph icon
+ *
+ * @param {number} [$ui-header-noborder-adjust=$panel-header-noborder-adjust]
+ * True to adjust the padding of borderless panel headers so that their height is the same
+ * as the height of bordered panels.  This is helpful when borderless and bordered panels
+ * are used side-by-side, as it maintains a consistent vertical alignment.
+ *
+ * @param {number} [$ui-tool-spacing=$panel-tool-spacing]
+ * The space between the Panel {@link Ext.panel.Tool Tools}
+ *
+ * @param {string} [$ui-tool-background-image=$panel-tool-background-image]
+ * The background sprite to use for Panel {@link Ext.panel.Tool Tools}
+ *
+ * @param {color} [$ui-body-color=$panel-body-color]
+ * The color of text inside the Panel body
+ *
+ * @param {color} [$ui-body-border-color=$panel-body-border-color]
+ * The border-color of the Panel body
+ *
+ * @param {number} [$ui-body-border-width=$panel-body-border-width]
+ * The border-width of the Panel body
+ *
+ * @param {string} [$ui-body-border-style=$panel-body-border-style]
+ * The border-style of the Panel body
+ *
+ * @param {color} [$ui-body-background-color=$panel-body-background-color]
+ * The background-color of the Panel body
+ *
+ * @param {number} [$ui-body-font-size=$panel-body-font-size]
+ * The font-size of the Panel body
+ *
+ * @param {string} [$ui-body-font-weight=$panel-body-font-weight]
+ * The font-weight of the Panel body
+ *
+ * @param {string} [$ui-background-stretch-top=$panel-background-stretch-top]
+ * The direction to strech the background-gradient of top docked Headers when slicing images
+ * for IE using Sencha Cmd
+ *
+ * @param {string} [$ui-background-stretch-bottom=$panel-background-stretch-bottom]
+ * The direction to strech the background-gradient of bottom docked Headers when slicing images
+ * for IE using Sencha Cmd
+ *
+ * @param {string} [$ui-background-stretch-right=$panel-background-stretch-right]
+ * The direction to strech the background-gradient of right docked Headers when slicing images
+ * for IE using Sencha Cmd
+ *
+ * @param {string} [$ui-background-stretch-left=$panel-background-stretch-left]
+ * The direction to strech the background-gradient of left docked Headers when slicing images
+ * for IE using Sencha Cmd
+ *
+ * @param {boolean} [$ui-include-border-management-rules=$panel-include-border-management-rules]
+ * True to include neptune style border management rules.
+ *
+ * @param {color} [$ui-wrap-border-color=$panel-wrap-border-color]
+ * The color to apply to the border that wraps the body and docked items in a framed
+ * panel. The presence of the wrap border in a framed panel is controlled by the
+ * {@link #border} config. Only applicable when `$ui-include-border-management-rules` is
+ * `true`.
+ *
+ * @param {color} [$ui-wrap-border-width=$panel-wrap-border-width]
+ * The width to apply to the border that wraps the body and docked items in a framed
+ * panel. The presence of the wrap border in a framed panel is controlled by the
+ * {@link #border} config. Only applicable when `$ui-include-border-management-rules` is
+ * `true`.
+ *
+ * @param {boolean} [$ui-ignore-frame-padding=$panel-ignore-frame-padding]
+ * True to ignore the frame padding.  By default, the frame mixin adds extra padding when
+ * border radius is larger than border width.  This is intended to prevent the content
+ * from colliding with the rounded corners of the frame.  Set this to true to prevent
+ * the panel frame from adding this extra padding.
+ *
+ * @member Ext.panel.Panel
+ */
+@mixin extjs-panel-ui(
+    $ui: null,
+
+    $ui-border-color: $panel-border-color,
+    $ui-border-radius: $panel-border-radius,
+    $ui-border-width: $panel-border-width,
+    $ui-padding: 0,
+
+    $ui-header-color: $panel-header-color,
+    $ui-header-font-family: $panel-header-font-family,
+    $ui-header-font-size: $panel-header-font-size,
+    $ui-header-font-weight: $panel-header-font-weight,
+    $ui-header-line-height: $panel-header-line-height,
+    $ui-header-border-color: $panel-header-border-color,
+    $ui-header-border-width: $panel-header-border-width,
+    $ui-header-border-style: $panel-header-border-style,
+    $ui-header-background-color: $panel-header-background-color,
+    $ui-header-background-gradient: $panel-header-background-gradient,
+    $ui-header-inner-border-color: $panel-header-inner-border-color,
+    $ui-header-inner-border-width: $panel-header-inner-border-width,
+    $ui-header-text-padding: $panel-header-text-padding,
+    $ui-header-text-margin: $panel-header-text-margin,
+    $ui-header-text-transform: $panel-header-text-transform,
+    $ui-header-padding: $panel-header-padding,
+    $ui-header-icon-width: $panel-header-icon-width,
+    $ui-header-icon-height: $panel-header-icon-height,
+    $ui-header-icon-spacing: $panel-header-icon-spacing,
+    $ui-header-icon-background-position: $panel-header-icon-background-position,
+    $ui-header-glyph-color: $panel-header-glyph-color,
+    $ui-header-glyph-opacity: $panel-header-glyph-opacity,
+    $ui-header-noborder-adjust: $panel-header-noborder-adjust,
+
+    $ui-tool-spacing: $panel-tool-spacing,
+    $ui-tool-background-image: $panel-tool-background-image,
+
+    $ui-body-color: $panel-body-color,
+    $ui-body-border-color: $panel-body-border-color,
+    $ui-body-border-width: $panel-body-border-width,
+    $ui-body-border-style: $panel-body-border-style,
+    $ui-body-background-color: $panel-body-background-color,
+    $ui-body-font-size: $panel-body-font-size,
+    $ui-body-font-weight: $panel-body-font-weight,
+    $ui-body-font-family: $panel-body-font-family,
+
+    $ui-background-stretch-top: $panel-background-stretch-top,
+    $ui-background-stretch-bottom: $panel-background-stretch-bottom,
+    $ui-background-stretch-right: $panel-background-stretch-right,
+    $ui-background-stretch-left: $panel-background-stretch-left,
+
+    // See the docs above
+    $ui-include-border-management-rules: $panel-include-border-management-rules,
+    $ui-wrap-border-color: null,
+    $ui-wrap-border-width: null,
+    $ui-ignore-frame-padding: $panel-ignore-frame-padding,
+
+    // deprecated - use $ui instead
+    $ui-label: null
+){
+    @if $ui == null {
+        @if $ui-label != null {
+            @warn '$ui-label is deprecated.  Use $ui instead';
+            $ui: $ui-label;
+        } @else {
+            @warn "#{error('$ui is required')}";
+        }
+    }
+
+    @if is-null($ui-wrap-border-color) {
+        @if $ui == 'default-framed' {
+            $ui-wrap-border-color: $panel-wrap-border-color;
+        } @else {
+            $ui-wrap-border-color: $ui-border-color;
+        }
+    }
+
+    @if is-null($ui-wrap-border-width) {
+        @if $ui == 'default-framed' {
+            $ui-wrap-border-width: $panel-wrap-border-width;
+        } @else {
+            $ui-wrap-border-width: $ui-border-width;
+        }
+    }
+
+    @if is-null($ui-header-inner-border-color) and not is-null($ui-header-background-color) {
+        $ui-header-inner-border-color: lighten($ui-header-background-color, 10);
+    }
+
+    $ui-header-padding-noborder:
+        top($ui-header-padding) + top($ui-header-border-width)
+        right($ui-header-padding) + right($ui-header-border-width)
+        // don't add bottom border since bottom border always gets removed by dock layout
+        bottom($ui-header-padding)
+        left($ui-header-padding) + left($ui-header-border-width);
+
+    .#{$prefix}panel-#{$ui} {
+        @if not is-null($ui-border-color) { border-color: $ui-border-color; }
+        padding: $ui-padding;
+    }
+
+    // header
+    .#{$prefix}panel-header-#{$ui} {
+        @if not is-null($ui-header-font-size) { font-size: $ui-header-font-size; }
+
+        @if $ui-header-border-width != 0 {
+            border: $ui-header-border-width $ui-header-border-style $ui-header-border-color;
+        }
+
+        .#{$prefix}tool-img {
+            @if $ui-tool-background-image != $tool-background-image {
+                background-image: theme-background-image($ui-tool-background-image);
+            }
+            @if is-null($ui-header-background-gradient) {
+                // EXTJSIV-8846: partially transparent png images do not display correctly
+                // in winXP/IE8 when the image element has a transparent background.
+                // to fix this, we give the element the same background-color as the header.
+                background-color: $ui-header-background-color;
+            }
+        }
+    }
+
+    .#{$prefix}panel-header-#{$ui}-horizontal {
+        padding: $ui-header-padding;
+
+        @if $include-ext-tab-bar {
+            .#{$prefix}panel-header-#{$ui}-tab-bar {
+                margin-top: -(top($ui-header-padding));
+                margin-bottom: -(bottom($ui-header-padding));
+            }
+        }
+    }
+
+    @if $ui-header-noborder-adjust {
+        .#{$prefix}panel-header-#{$ui}-horizontal.#{$prefix}header-noborder {
+            padding: $ui-header-padding-noborder;
+
+            @if $include-ext-tab-bar {
+                .#{$prefix}panel-header-#{$ui}-tab-bar {
+                    margin-top: -(top($ui-header-padding-noborder));
+                    margin-bottom: -(bottom($ui-header-padding-noborder));
+                }
+            }
+        }
+    }
+
+    .#{$prefix}panel-header-#{$ui}-vertical {
+        padding: rotate90($ui-header-padding);
+
+        @if $include-ext-tab-bar {
+            .#{$prefix}panel-header-#{$ui}-tab-bar {
+                margin-right: -(top($ui-header-padding));
+                margin-left: -(bottom($ui-header-padding));
+            }
+        }
+    }
+
+    @if $ui-header-noborder-adjust {
+        .#{$prefix}panel-header-#{$ui}-vertical.#{$prefix}header-noborder {
+            padding: rotate90($ui-header-padding-noborder);
+
+            @if $include-ext-tab-bar {
+                .#{$prefix}panel-header-#{$ui}-tab-bar {
+                    margin-right: -(top($ui-header-padding-noborder));
+                    margin-left: -(bottom($ui-header-padding-noborder));
+                }
+            }
+        }
+    }
+
+    @if $include-rtl {
+        .#{$prefix}rtl.#{$prefix}panel-header-#{$ui}-vertical {
+            padding: rotate270($ui-header-padding);
+
+            @if $include-ext-tab-bar {
+                .#{$prefix}panel-header-#{$ui}-tab-bar {
+                    margin-left: -(top($ui-header-padding));
+                    margin-right: -(bottom($ui-header-padding));
+                }
+            }
+        }
+
+        @if $ui-header-noborder-adjust {
+            .#{$prefix}rtl.#{$prefix}panel-header-#{$ui}-vertical.#{$prefix}header-noborder {
+                padding: rotate270($ui-header-padding-noborder);
+
+                @if $include-ext-tab-bar {
+                    .#{$prefix}panel-header-#{$ui}-tab-bar {
+                        margin-left: -(top($ui-header-padding-noborder));
+                        margin-right: -(bottom($ui-header-padding-noborder));
+                    }
+                }
+            }
+        }
+    }
+
+    .#{$prefix}panel-header-title-#{$ui} {
+        @if not is-null($ui-header-color) { color: $ui-header-color; }
+
+        @if not is-null($ui-header-font-size) {   font-size: $ui-header-font-size; }
+        @if not is-null($ui-header-font-weight) { font-weight: $ui-header-font-weight; }
+        @if not is-null($ui-header-font-family) { font-family: $ui-header-font-family; }
+        @if not is-null($ui-header-line-height) { line-height: $ui-header-line-height; }
+
+        @if $ui-header-text-margin != 0 {
+            margin: $ui-header-text-margin;
+        }
+
+        > {
+            .#{$prefix}title-text-#{$ui} {
+                text-transform: $ui-header-text-transform;
+                padding: $ui-header-text-padding;
+
+                @if $ext-trial {
+                    &:after {
+                        content: 'Ext JS Trial';
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        // since IE8 does not support opacity on pseudo elements we simulate it by
+                        // mixing the text color with the background color
+                        color: mix($ui-header-color, $ui-header-background-color, 40%);
+                    }
+                }
+            }
+
+            .#{$prefix}title-icon-wrap-#{$ui} {
+                &.#{$prefix}title-icon-top {
+                    height: $ui-header-icon-height + $ui-header-icon-spacing;
+                    padding-bottom: $ui-header-icon-spacing;
+                }
+
+                &.#{$prefix}title-icon-right {
+                    width: $ui-header-icon-width + $ui-header-icon-spacing;
+                    padding-left: $ui-header-icon-spacing;
+
+                    @if $include-rtl {
+                        &.#{$prefix}rtl {
+                            padding-left: 0;
+                            padding-right: $ui-header-icon-spacing;
+                        }
+                    }
+                }
+
+                &.#{$prefix}title-icon-bottom {
+                    height: $ui-header-icon-height + $ui-header-icon-spacing;
+                    padding-top: $ui-header-icon-spacing;
+                }
+
+                &.#{$prefix}title-icon-left {
+                    width: $ui-header-icon-width + $ui-header-icon-spacing;
+                    padding-right: $ui-header-icon-spacing;
+
+                    @if $include-rtl {
+                        &.#{$prefix}rtl {
+                            padding-right: 0;
+                            padding-left: $ui-header-icon-spacing;
+                        }
+                    }
+                }
+
+                > .#{$prefix}title-icon-#{$ui} {
+                    width: $ui-header-icon-width;
+                    height: $ui-header-icon-height;
+                    background-position: $ui-header-icon-background-position;
+                }
+
+                > .#{$prefix}title-glyph {
+                    color: $ui-header-glyph-color;
+                    font-size: $ui-header-icon-height;
+                    line-height: $ui-header-icon-height;
+
+                    @if $ui-header-glyph-opacity != 1 {
+                        // do not use the opacity mixin because we do not want IE's filter version of
+                        // opacity to be included.  We emulate the opacity setting in IE8m by mixing
+                        // the icon color into the background color. (see below)
+                        opacity: $ui-header-glyph-opacity;
+                    }
+                    // In IE8 and below when a glyph contains partially transparent pixels, we
+                    // can't apply an opacity filter to the glyph element, because IE8m will render
+                    // the partially transparent pixels of the glyph as black. To work around this,
+                    // we emulate the approximate color that the glyph would have if it had opacity
+                    // applied by mixing the glyph color with the header's background-color.
+                    @if $include-ie {
+                        .#{$prefix}ie8 & {
+                            color: mix($ui-header-glyph-color, $ui-header-background-color, $ui-header-glyph-opacity * 100);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // body
+    .#{$prefix}panel-body-#{$ui} {
+        @if not is-null($ui-body-background-color) { background: $ui-body-background-color; }
+        @if not is-null($ui-body-border-color) {     border-color: $ui-body-border-color; }
+        @if not is-null($ui-body-color) {            color: $ui-body-color; }
+        @if not is-null($ui-body-font-size) {        font-size: $ui-body-font-size; }
+        @if not is-null($ui-body-font-weight) {      font-weight: $ui-body-font-weight; }
+        @if not is-null($ui-body-font-family) {      font-family: $ui-body-font-family; }
+
+        @if not is-null($ui-body-border-width) {
+            border-width: $ui-body-border-width;
+            @if not is-null($ui-body-border-style) { border-style: $ui-body-border-style; }
+        }
+    }
+
+    @if not is-null($ui-border-radius) and $ui-border-radius != 0 {
+        @include x-frame(
+            $cls: 'panel',
+            $ui: '#{$ui}',
+            $border-radius: $ui-border-radius,
+            $border-width: $ui-border-width,
+            $padding: $ui-padding,
+            $background-color: $ui-body-background-color,
+            $ignore-frame-padding: $ui-ignore-frame-padding
+        );
+
+        @include x-frame(
+            $cls: 'panel-header',
+            $ui: '#{$ui}-top',
+            $border-radius: top($ui-border-radius) right($ui-border-radius) 0 0,
+            $border-width: top($ui-header-border-width) right($ui-header-border-width) 0 left($ui-header-border-width),
+            $padding: $ui-header-padding,
+            $background-color: $ui-header-background-color,
+            $background-gradient: $ui-header-background-gradient,
+            $background-stretch: $ui-background-stretch-top
+        );
+
+        @include x-frame(
+            $cls: 'panel-header',
+            $ui: '#{$ui}-right',
+            $border-radius: 0 right($ui-border-radius) bottom($ui-border-radius) 0,
+            $border-width: top($ui-header-border-width) right($ui-header-border-width) bottom($ui-header-border-width) 0,
+            $padding: rotate90($ui-header-padding),
+            $background-color: $ui-header-background-color,
+            $background-gradient: $ui-header-background-gradient,
+            $background-direction: right,
+            $include-frame-rtl: $include-rtl,
+            $background-stretch: $ui-background-stretch-right
+        );
+
+        @include x-frame(
+            $cls: 'panel-header',
+            $ui: '#{$ui}-bottom',
+            $border-radius: 0 0 bottom($ui-border-radius) left($ui-border-radius),
+            $border-width: 0 right($ui-header-border-width) bottom($ui-header-border-width) left($ui-header-border-width),
+            $padding: $ui-header-padding,
+            $background-color: $ui-header-background-color,
+            $background-gradient: $ui-header-background-gradient,
+            $background-stretch: $ui-background-stretch-bottom
+        );
+
+        @include x-frame(
+            $cls: 'panel-header',
+            $ui: '#{$ui}-left',
+            $border-radius: top($ui-border-radius) 0 0 left($ui-border-radius),
+            $border-width: top($ui-header-border-width) 0 bottom($ui-header-border-width) left($ui-header-border-width),
+            $padding: rotate90($ui-header-padding),
+            $background-color: $ui-header-background-color,
+            $background-gradient: $ui-header-background-gradient,
+            $background-direction: right,
+            $include-frame-rtl: $include-rtl,
+            $background-stretch: $ui-background-stretch-left
+        );
+
+        @include x-frame(
+            $cls: 'panel-header',
+            $ui: '#{$ui}-collapsed-top',
+            $border-radius: top($ui-border-radius) right($ui-border-radius) bottom($ui-border-radius) left($ui-border-radius),
+            $border-width: $ui-header-border-width,
+            $padding: $ui-header-padding,
+            $background-color: $ui-header-background-color,
+            $background-gradient: $ui-header-background-gradient,
+            $background-stretch: $ui-background-stretch-top
+        );
+
+        @include x-frame(
+            $cls: 'panel-header',
+            $ui: '#{$ui}-collapsed-right',
+            $border-radius: top($ui-border-radius) right($ui-border-radius) bottom($ui-border-radius) left($ui-border-radius),
+            $border-width: $ui-header-border-width,
+            $padding: rotate90($ui-header-padding),
+            $background-color: $ui-header-background-color,
+            $background-gradient: $ui-header-background-gradient,
+            $background-direction: right,
+            $include-frame-rtl: $include-rtl,
+            $background-stretch: $ui-background-stretch-right
+        );
+
+        @include x-frame(
+            $cls: 'panel-header',
+            $ui: '#{$ui}-collapsed-bottom',
+            $border-radius: top($ui-border-radius) right($ui-border-radius) bottom($ui-border-radius) left($ui-border-radius),
+            $border-width: $ui-header-border-width,
+            $padding: $ui-header-padding,
+            $background-color: $ui-header-background-color,
+            $background-gradient: $ui-header-background-gradient,
+            $background-stretch: $ui-background-stretch-bottom
+        );
+
+        @include x-frame(
+            $cls: 'panel-header',
+            $ui: '#{$ui}-collapsed-left',
+            $border-radius: top($ui-border-radius) right($ui-border-radius) bottom($ui-border-radius) left($ui-border-radius),
+            $border-width: $ui-header-border-width,
+            $padding: rotate90($ui-header-padding),
+            $background-color: $ui-header-background-color,
+            $background-gradient: $ui-header-background-gradient,
+            $background-direction: right,
+            $include-frame-rtl: $include-rtl,
+            $background-stretch: $ui-background-stretch-left
+        );
+
+        // !important is needed in the following rules to override dock layout's border
+        // management rules. the x-panel ancestor selector is used to increase the
+        // specificity over the ".#{$prefix}nbr .#{$prefix}#{$cls-ui}" rule produced by
+        // x-frame
+        .#{$prefix}panel {
+            .#{$prefix}panel-header-#{$ui}-top {
+                border-bottom-width: bottom($ui-header-border-width) !important;
+            }
+
+            .#{$prefix}panel-header-#{$ui}-right {
+                border-left-width: bottom($ui-header-border-width) !important;
+            }
+
+            .#{$prefix}panel-header-#{$ui}-bottom {
+                border-top-width: bottom($ui-header-border-width) !important;
+            }
+
+            .#{$prefix}panel-header-#{$ui}-left {
+                border-right-width: bottom($ui-header-border-width) !important;
+            }
+        }
+        @if $include-slicer-border-radius {
+            .#{$prefix}nbr {
+                .#{$prefix}panel-header-#{$ui}-collapsed-top {
+                    border-bottom-width: 0 !important;
+                }
+
+                .#{$prefix}panel-header-#{$ui}-collapsed-right {
+                    border-left-width: 0 !important;
+                }
+
+                .#{$prefix}panel-header-#{$ui}-collapsed-bottom {
+                    border-top-width: 0 !important;
+                }
+
+                .#{$prefix}panel-header-#{$ui}-collapsed-left {
+                    border-right-width: 0 !important;
+                }
+            }
+        }
+
+    } @else {
+        @if not is-null($ui-header-background-color) {
+            .#{$prefix}panel-header-#{$ui} {
+                @include background-gradient($ui-header-background-color, $ui-header-background-gradient);
+            }
+
+            .#{$prefix}panel-header-#{$ui}-vertical {
+                @include background-gradient($ui-header-background-color, $ui-header-background-gradient, right);
+            }
+
+            @if $include-rtl {
+                .#{$prefix}rtl.#{$prefix}panel-header-#{$ui}-vertical {
+                    @include background-gradient($ui-header-background-color, $ui-header-background-gradient, left);
+                }
+            }
+        }
+
+        // header background images
+        $panel-header-ui: 'panel-header-#{$ui}';
+        $panel-header-path: 'panel-header/panel-header-#{$ui}';
+
+        @if not is-null($ui-header-background-color) and not is-null($ui-header-background-gradient) {
+            @if $include-slicer-gradient {
+                .#{$prefix}nlg {
+                    .#{$prefix}#{$panel-header-ui}-top {
+                        background: slicer-background-image($panel-header-ui + '-top',
+                                            '#{$panel-header-path}-top-bg');
+                    }
+
+                    .#{$prefix}#{$panel-header-ui}-bottom {
+                        background: slicer-background-image($panel-header-ui + '-bottom',
+                                            '#{$panel-header-path}-bottom-bg') bottom left;
+                    }
+
+                    .#{$prefix}#{$panel-header-ui}-left {
+                        background: slicer-background-image($panel-header-ui + '-left',
+                                            '#{$panel-header-path}-left-bg') top left;
+                    }
+
+                    .#{$prefix}#{$panel-header-ui}-right {
+                        background: slicer-background-image($panel-header-ui + '-right',
+                                            '#{$panel-header-path}-right-bg') top right;
+                    }
+
+                    @if $include-rtl {
+                        .#{$prefix}rtl {
+                            &.#{$prefix}#{$panel-header-ui}-left {
+                                background: slicer-background-image-rtl($panel-header-ui + '-left',
+                                            '#{$panel-header-path}-left-bg-rtl') top right;
+                            }
+                            &.#{$prefix}#{$panel-header-ui}-right {
+                                background: slicer-background-image-rtl($panel-header-ui + '-right',
+                                            '#{$panel-header-path}-right-bg-rtl') top left;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .#{$prefix}panel {
+            // !important is needed here to override dock layout's border management
+            // rules. the x-panel ancestor selector is used to increase the specificity
+            // over the ".#{$prefix}nbr .#{$prefix}#{$cls-ui}" rule produced by x-frame
+            .#{$prefix}panel-header-#{$ui}-collapsed-border-top {
+                border-bottom-width: $ui-header-border-width !important;
+            }
+
+            .#{$prefix}panel-header-#{$ui}-collapsed-border-right {
+                border-left-width: $ui-header-border-width !important;
+            }
+
+            .#{$prefix}panel-header-#{$ui}-collapsed-border-bottom {
+                border-top-width: $ui-header-border-width !important;
+            }
+
+            .#{$prefix}panel-header-#{$ui}-collapsed-border-left {
+                border-right-width: $ui-header-border-width !important;
+            }
+        }
+
+        $stretch: slicer-background-stretch($panel-header-ui + '-top', $ui-background-stretch-top);
+        $stretch: slicer-background-stretch($panel-header-ui + '-right', $ui-background-stretch-right);
+        $stretch: slicer-background-stretch($panel-header-ui + '-bottom', $ui-background-stretch-bottom);
+        $stretch: slicer-background-stretch($panel-header-ui + '-left', $ui-background-stretch-left);
+
+        @include x-slicer($panel-header-ui + '-top');
+        @include x-slicer($panel-header-ui + '-bottom');
+        @include x-slicer($panel-header-ui + '-left');
+        @include x-slicer($panel-header-ui + '-right');
+    }
+
+    @if $ui-header-inner-border-width != 0 {
+        .#{$prefix}panel-header-#{$ui}-top {
+            @include inner-border($ui-header-inner-border-width, $ui-header-inner-border-color);
+        }
+
+        .#{$prefix}panel-header-#{$ui}-right {
+            @include inner-border(rotate90($ui-header-inner-border-width), $ui-header-inner-border-color);
+        }
+
+        .#{$prefix}panel-header-#{$ui}-bottom {
+            @include inner-border(rotate180($ui-header-inner-border-width), $ui-header-inner-border-color);
+        }
+
+        .#{$prefix}panel-header-#{$ui}-left {
+            @include inner-border(rotate270($ui-header-inner-border-width), $ui-header-inner-border-color);
+        }
+    }
+
+    $ui-tool-margin: 0 0 0 $ui-tool-spacing;
+    .#{$prefix}panel-header-#{$ui}-horizontal {
+        .#{$prefix}tool-after-title {
+            margin: $ui-tool-margin;
+        }
+
+        @if $include-rtl {
+            .#{$prefix}rtl.#{$prefix}tool-after-title {
+                margin: rtl($ui-tool-margin);
+            }
+        }
+
+        .#{$prefix}tool-before-title {
+            margin: rtl($ui-tool-margin);
+        }
+
+        @if $include-rtl {
+            .#{$prefix}rtl.#{$prefix}tool-before-title {
+                margin: $ui-tool-margin;
+            }
+        }
+    }
+
+    .#{$prefix}panel-header-#{$ui}-vertical {
+        .#{$prefix}tool-after-title {
+            margin: rotate90($ui-tool-margin);
+        }
+
+        @if $include-rtl {
+            .#{$prefix}rtl.#{$prefix}tool-after-title {
+                margin: rotate270(rtl($ui-tool-margin));
+            }
+        }
+
+        .#{$prefix}tool-before-title {
+            margin: rotate90(rtl($ui-tool-margin));
+        }
+
+        @if $include-rtl {
+            .#{$prefix}rtl.#{$prefix}tool-before-title {
+                margin: rotate270($ui-tool-margin);
+            }
+        }
+    }
+
+    @if $include-rtl {
+        .#{$prefix}rtl {
+            &.#{$prefix}panel-header-#{$ui}-collapsed-border-right {
+                border-right-width: $ui-header-border-width !important;
+            }
+            &.#{$prefix}panel-header-#{$ui}-collapsed-border-left {
+                border-left-width: $ui-header-border-width !important;
+            }
+        }
+    }
+
+    // Panel resizing.
+    // If there's a border that's wider than the specified threshold (Sencha default is 2) then
+    // embed the handles in the borders using -ve position and make resizable windows show overflow.
+    // The dock layout should ensure that all constituent elements fit within the element.
+    // The only exception is during animated resizing. Overflow inline style is set hidden during animation (AbstractComponent.animate)
+    .#{$prefix}panel-#{$ui}-resizable {
+
+        // Panel resize handles are invisible
+        .#{$prefix}panel-handle {
+            @include opacity(0);
+        }
+
+        // If there's a border width, embed the handles in that border
+        @if $ui-border-width > $border-width-threshold {
+            // Resizable Panel element overflow must be visible for embedded handles to accept mouseovers.
+            overflow: visible;
+
+            .#{$prefix}panel-handle-north-br {
+                top: -($ui-border-width);
+            }
+            .#{$prefix}panel-handle-south-br {
+                bottom: -($ui-border-width);
+            }
+            .#{$prefix}panel-handle-east-br {
+                right: -($ui-border-width);
+            }
+            .#{$prefix}panel-handle-west-br {
+                left: -($ui-border-width);
+            }
+            .#{$prefix}panel-handle-northwest-br {
+                left: -($ui-border-width);
+                top: -($ui-border-width);
+            }
+            .#{$prefix}panel-handle-northeast-br {
+                right: -($ui-border-width);
+                top: -($ui-border-width);
+            }
+            .#{$prefix}panel-handle-southeast-br {
+                right: -($ui-border-width);
+                bottom: -($ui-border-width);
+            }
+            .#{$prefix}panel-handle-southwest-br {
+                left: -($ui-border-width);
+                bottom: -($ui-border-width);
+            }
+        }
+    }
+
+    @if $ui-include-border-management-rules {
+        @include border-management(
+            $parent-cls: panel-#{$ui},
+            $border-width: $ui-wrap-border-width,
+            $border-color: $ui-wrap-border-color
+        );
+    }
+}
+
+.#{$prefix}panel-ghost {
+    @include opacity($panel-ghost-opacity);
+}
+
+@if $include-panel-default-ui {
+    @include extjs-panel-ui(
+        $ui: 'default'
+    );
+}
+
+@if $include-panel-default-framed-ui {
+    @include extjs-panel-ui(
+        $ui: 'default-framed',
+
+        $ui-border-color: $panel-frame-border-color,
+        $ui-border-width: $panel-frame-border-width,
+        $ui-border-radius: $panel-frame-border-radius,
+        $ui-padding: $panel-frame-padding,
+
+        $ui-header-border-color: $panel-frame-border-color,
+        $ui-header-border-width: $panel-frame-header-border-width,
+        $ui-header-inner-border-color: $panel-frame-header-inner-border-color,
+        $ui-header-inner-border-width: $panel-frame-header-inner-border-width,
+        $ui-header-padding: $panel-frame-header-padding,
+
+        $ui-body-border-width: $panel-frame-body-border-width,
+        $ui-body-background-color: $panel-frame-background-color
+    );
+}

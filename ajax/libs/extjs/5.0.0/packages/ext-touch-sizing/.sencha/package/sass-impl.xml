@@ -1,0 +1,114 @@
+<project name="sass-impl">
+    
+    <target name="-init-sass-compiler">
+        <x-normalize-path path="${build.dir}/resources" 
+                          property="image.search.path"/>
+    </target>
+    
+    <target name="-compile-sass-rtl" depends="-init-sass-compiler">
+        <x-compile refid="${compiler.ref.id}">
+            <![CDATA[
+            include
+                -all
+            and
+            sass
+                -etc=true
+                -vars=true
+                -rules=true
+                -class-name-vars=true
+                -variable=$image-search-path:'${image.search.path}' !default
+                -variable=$theme-name: '${package.name}' !default
+                -output=${build.all.rtl.scss}
+            and
+            sass
+                -ruby=true
+                -output=${build.all.ruby}
+            ]]>
+        </x-compile>
+    </target>
+
+    <target name="-compile-sass-ltr" depends="-init-sass-compiler">
+        <x-compile refid="${compiler.ref.id}">
+            <![CDATA[
+            exclude
+                -all
+            and
+            include
+                -not
+                -namespace=Ext.rtl
+            and
+            sass
+                -etc=true
+                -vars=true
+                -rules=true
+                -class-name-vars=true
+                -variable=$image-search-path:'${image.search.path}' !default
+                -variable=$theme-name: '${package.name}' !default
+                -output=${build.all.scss}
+            and
+            sass
+                -ruby=true
+                -output=${build.all.ruby}
+            ]]>
+        </x-compile>
+    </target>
+
+    <target name="-compile-sass" 
+            depends="-compile-sass-rtl,-compile-sass-ltr"/>
+    
+    <macrodef name="x-compress-css-files">
+        <attribute name="dir"/>
+        <attribute name="prefix"/>
+        <attribute name="outprefix"/>
+        <sequential>
+            <x-split-css file="@{dir}/@{prefix}.css"
+                         outdir="${build.resources.dir}"
+                         limit="${build.css.selector.limit}"/>
+
+            <for param="cssfile">
+                <fileset dir="@{dir}" includes="@{prefix}*.css"/>
+                <sequential>
+                    <local name="css.output.name"/>
+                    <local name="pattern"/>
+                    <property name="pattern" value="(.*?)(@{prefix})(_\d{1,2})*\.css"/>
+                    <propertyregex property="css.output.name"
+                                   input="@{cssfile}"
+                                   regexp="${pattern}"
+                                   select="\1@{outprefix}\3.css"
+                                   override="true"/>
+                    <x-compress-css srcfile="@{cssfile}"
+                                    outfile="${css.output.name}"/>
+                </sequential>
+            </for>
+        </sequential>
+    </macrodef>
+
+    <target name="-compass-compile" depends="-compile-sass">
+        <x-compass-compile
+            rubyPath="${build.ruby.path}"
+            trace="${compass.compile.trace}"
+            boring="${compass.compile.boring}"
+            force="${compass.compile.force}"
+            dir="${compass.working.dir}"
+            sassdir="${build.dir}"
+            cssdir="${build.dir}/resources"
+            config="${build.all.ruby}"/>
+    </target>
+
+    <target name="-compile-css" depends="-compass-compile">
+        <x-compress-css-files
+            dir="${build.resources.dir}"
+            prefix="${build.all.css.debug.prefix}"
+            outprefix="${build.all.css.prefix}"/>
+        
+        <x-compress-css-files
+            dir="${build.resources.dir}"
+            prefix="${build.all.rtl.css.debug.prefix}"
+            outprefix="${build.all.rtl.css.prefix}"/>
+    </target>
+
+    <target name="-before-sass"/>
+    <target name="-sass" depends="-compile-css"/>
+    <target name="-after-sass"/>
+
+</project>

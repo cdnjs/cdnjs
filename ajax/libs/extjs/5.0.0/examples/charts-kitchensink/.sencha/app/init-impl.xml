@@ -1,0 +1,256 @@
+<project name="init-impl">
+    <!--
+    Init-Local
+    -->
+    <target name="-before-init-local"/>
+    <target name="-init-local">
+        <!--
+        ${basedir} is actually the basedir of build.xml, in the app root
+        so this imports ${app.dir}/local.properties, if present
+        -->
+        <property file="${basedir}/local.properties"/>
+
+        <!--
+        This will traverse upwards in the file system, starting at the
+        app root directory, looking for the workspace.  Once found, 
+        ${workspace.dir}/local.properties will be imported into this
+        project
+        -->
+        <script language="javascript">
+            <![CDATA[
+            var f = new java.io.File(project.getProperty("basedir"));
+            var sub = ".sencha/workspace/sencha.cfg";
+
+            for (var p = f; p; p = p.getParentFile()) {
+                var t = new java.io.File(p, sub);
+                if (t.exists()) {
+                    // we found the workspace folder!
+
+                    t = new java.io.File(p, "local.properties");
+                    if (t.exists()) {
+                        var loader = project.createTask("property");
+                        loader.setFile(new java.io.File(t.getCanonicalPath()));
+                        loader.execute();
+                    }
+
+                    break;
+                }
+            }
+            ]]>
+        </script>
+
+    </target>
+    <target name="-after-init-local"/>
+    <target name="init-local"
+            depends="-before-init-local,-init-local,-after-init-local"/>
+
+    <target name="-before-init"/>
+    <target name="-init" unless="internal.x-sencha-initialized">
+        <!--
+        Now, apply various project updates, such as ant class loader path
+        updates, as well as loading Sencha Cmd config system properties
+        into ant property space
+        -->
+        <x-sencha-init prefix=""/>
+
+        <!-- 
+        default the build environment to production if it is unset by this point 
+        -->
+        <property name="build.environment" value="production"/>
+        <property name="CR" value="&#10;"/>
+
+        <x-load-properties>
+            <!-- If available, load user-defined properties for this build identifier -->
+            <file path="${app.config.dir}/${build.id}.properties" required="false"/>
+            <file path="${app.config.dir}/${app.locale}.properties" required="false"/>
+            <file path="${app.config.dir}/${app.theme}.properties" required="false"/>
+            <file path="${app.config.dir}/${build.name}.properties" required="false"/>
+            <file path="${app.config.dir}/multi-build.properties" required="false"/>
+            <!-- Load user-defined properties for environment then general: -->
+            <file path="${app.config.dir}/${build.environment}.properties" required="false"/>
+            <file path="${app.config.dir}/build.properties" required="false"/>
+            <!-- Pick up the defaults by framework/environment followed by general: -->
+            <file path="${app.config.dir}/${framework.name}.properties" required="true"/>
+            <file path="${app.config.dir}/${build.environment}.defaults.properties" required="true"/>
+            <file path="${app.config.dir}/defaults.properties" required="true"/>
+        </x-load-properties>
+
+        <!--
+        calculate the appropriate build.compression value
+        -->
+        <condition property="build.compression" value="-yui">
+            <x-is-true value="${build.compression.yui}"/>
+        </condition>
+
+        <condition property="build.compression" value="-closure">
+            <x-is-true value="${build.compression.closure}"/>
+        </condition>
+
+        <condition property="build.compression" value="-uglify">
+            <x-is-true value="${build.compression.uglify}"/>
+        </condition>
+
+        <property name="build.compression" value=""/>
+
+        <x-verify-app-cmd-ver/>
+
+        <!--
+        this id string is used to share a common compiler instance
+        for all x-compile calls in this project
+        -->
+        <property name="compiler.ref.id" value="app-compiler"/>
+
+        <!--
+        this property is set indicating we've reached the end of the
+        core init phase.  it's presence will indicate that we've already
+        executed this target, and will bypass firing the init code
+        repeatedly in sub projects (antcall, x-ant-call)
+        See the above 'unless' attribute on the -init target
+        -->
+        <property name="internal.x-sencha-initialized" value="true"/>
+
+        <!-- 
+        this is a helper property that is the relative path prefix from the 
+        application's root directory to the root of the build directory
+        -->
+        <x-get-relative-path from="${app.dir}"
+                             to="${build.dir}"
+                             property="build.dir.relative"/>
+    </target>
+    <target name="-after-init"/>
+
+    <target name="-before-init-defaults"/>
+    <target name="-init-defaults">
+        <!--
+             This property can be modified to change general build options
+             such as excluding files from the set.  The format expects newlines
+             for each argument, for example:
+             
+             <property name="build.operations"/>
+                   exclude
+                       -namespace=Ext
+             </property>
+        -->
+        <property name="build.operations" value=""/>
+
+        <!--
+             This property can be modified to change concatenation
+             specific options
+             
+             -strip-comments: comment suppression
+             -remove-text-references: transform string literal class references to objects
+             -beautify: unpack the source
+             
+             <property name="build.concat.options"/>
+                    -strip-comments
+                    -remove-text-references
+                    -beautify
+             </property>
+        -->
+        <property name="build.concat.options" value=""/>
+
+        <!--
+             This property can be modified to change page compilation options
+             
+             -scripts: inject the given script path into the generated markup ahead of the all classes file
+             
+             <property name="build.page.options"/>
+                    -scripts=framework.js
+             </property>
+        -->
+        <property name="build.page.options" value=""/>
+    </target>
+    <target name="-after-init-defaults"/>
+
+    <!--
+    Initializes the compiler instances, reading in the app.json and package.json
+    definitions, as well as scanning and parsing all js files found on the
+    various classpath entries for the framework, workspace, packages, and app
+    -->
+    <target name="-init-compiler" depends="-init">
+        <local name="include.versions.file"/>
+        <local name="include.versions.file.command"/>
+
+        <condition property="internal.app.css.rel" value="${app.out.css.rel}">
+            <x-is-true value="${enable.ext42.themes}"/>
+        </condition>
+        <property name="internal.app.css.rel" value=""/>
+
+        <property name="include.versions.file.command">
+            <![CDATA[
+                meta
+                    +packages
+                    -out=${build.out.package.versions}
+                and
+                classpath
+                    -path=${build.out.package.versions}
+                    -name=framework
+                and
+                require
+                    -scopeName=framework
+                    -source=Ext.Base
+                    -requires=${build.out.package.versions}
+                    -allow-unmet=false
+                and
+            ]]>
+        </property>
+
+        <condition property="include.versions.file" value="${include.versions.file.command}">
+            <x-is-false value="${build.skip.versions.file}"/>
+        </condition>
+
+        <property name="include.versions.file" value="#skip"/>
+
+        <x-compile refid="${compiler.ref.id}"
+                   dir="${app.dir}"
+                   initOnly="true"
+                   inheritAll="true">
+            <![CDATA[
+                # base build command
+                -tempDir=${build.compile.temp.dir}
+                -keepTempDir=${build.compile.temp.dir.keep}
+                -options=${build.options}
+                load-app
+                    -frameworkFile=${build.framework.name}
+                    -jsBundleFile=${build.classes.name}
+                    -cssBundleFile=${internal.app.css.rel}
+                    -tempDir=${build.app.temp.dir}
+                    -tag=${build.tag.name}
+                and
+                restore
+                    ${build.tag.name}     
+                and
+                ${include.versions.file}
+                union
+                    -recursive
+                    -tag=${build.tag.name}
+                and
+                save
+                    ${build.tag.name}-overrides
+                and
+                ${build.operations}
+                and
+                save
+                    page
+            ]]>
+        </x-compile>
+    </target>
+
+    <target name="-init-app-js-files" depends="-init-compiler">
+        <x-compile refid="${compiler.ref.id}">
+            <![CDATA[
+                union
+                    -recursive
+                    -tag=${build.tag.name}
+                and
+                save
+                    ${build.tag.name}-overrides
+                and
+                ${build.operations}
+                and
+                save
+                    page
+            ]]>
+        </x-compile>
+    </target>
+</project>

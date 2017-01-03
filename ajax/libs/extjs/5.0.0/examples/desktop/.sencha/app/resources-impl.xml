@@ -1,0 +1,25 @@
+<project name="resources-impl">
+    <target name="-before-resources"/>
+    <target name="-after-resources"/>
+    
+    <!--'-init-compiler' defined in init-impl.xml-->
+    <target name="-resources" depends="-init-compiler">
+        <x-compile refid="${compiler.ref.id}">
+            <![CDATA[
+                resources
+                    -excludes=-all*.css
+                    -out=${build.resources.dir}
+                and
+                resources
+                    -model=true
+                    -out=${build.dir}
+            ]]>
+        </x-compile>
+    </target>
+
+    <!-- Legacy targets (implement -before-resources or -after-resources instead): -->
+    <target name="-after-copy-resources"/>
+    <target name="-after-inherit-resources"/>
+    <target name="-before-copy-resources"/>
+    <target name="-before-inherit-resources"/>
+</project>

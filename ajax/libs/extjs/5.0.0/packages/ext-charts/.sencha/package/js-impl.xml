@@ -1,0 +1,71 @@
+<project name="js-impl">
+    <target name="-init-compile-js" depends="-init-compiler">
+        <if>
+            <equals arg1="theme" arg2="${package.type}"/>
+            <then>
+                <property name="build.compile.js.filter">
+                    <![CDATA[
+                        union
+                            -tag=package-${package.name}
+                        and
+                        include
+                            -tag=package-${package.name}-base
+                        and
+                        ${build.operations}
+                    ]]>
+                </property>
+            </then>
+            <else>
+                <property name="build.compile.js.filter">
+                    <![CDATA[
+                    union
+                        -tag=package-${package.name}
+                    and
+                    ${build.operations}
+                    ]]>
+                </property>
+            </else>
+        </if>
+     </target>
+    
+    <target name="-compile-js-debug" depends="-init-compile-js">
+        <x-compile refid="${compiler.ref.id}">
+            <![CDATA[
+                restore
+                    package-${package.name}-all
+                and
+            -options=${build.compile.js.debug.options}
+                ${build.compile.js.filter}
+                and
+                concatenate
+                    -remove-text-references=${build.remove.references}
+                    -output-file=${build.all.debug.js}
+                    ${build.concat.debug.options}
+            ]]>
+        </x-compile>
+    </target>
+
+    <target name="-compile-js-non-debug" depends="-init-compile-js">
+        <x-compile refid="${compiler.ref.id}">
+            <![CDATA[
+                restore 
+                    package-${package.name}-all
+                and
+            -options=${build.compile.js.options}
+                ${build.compile.js.filter}
+                and
+                concatenate
+                    -remove-text-references=${build.remove.references}
+                    ${build.compile.js.compress}
+                    -output-file=${build.all.js}
+                    ${build.concat.options}
+            ]]>
+        </x-compile>
+    </target>
+
+    <target name="-before-js"/>
+    <target name="-after-js"/>
+    <target name="-js"
+            depends="-compile-js-debug,-compile-js-non-debug"/>
+
+</project>

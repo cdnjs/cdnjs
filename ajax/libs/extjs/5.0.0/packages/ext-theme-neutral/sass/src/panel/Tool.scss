@@ -1,0 +1,312 @@
+.#{$prefix}tool {
+    cursor: $tool-cursor;
+}
+
+.#{$prefix}tool-img {
+    overflow: hidden;
+    width: $tool-size;
+    height: $tool-size;
+    background-image: theme-background-image($tool-background-image);
+    margin: 0;
+    @if $tool-opacity != 1 {
+        @include opacity($tool-opacity);
+    }
+    @if $tool-opacity-over != 1 or $tool-opacity != 1 {
+        .#{$prefix}tool-over & {
+            @include opacity($tool-opacity-over);
+        }
+    }
+    @if $tool-opacity-pressed != 1 or $tool-opacity != 1 {
+        .#{$prefix}tool-pressed & {
+            @include opacity($tool-opacity-pressed);
+        }
+    }
+
+
+}
+
+.#{$prefix}tool-placeholder {
+    visibility: hidden;
+}
+
+.#{$prefix}tool-close {
+    background-position: 0 0;
+}
+
+.#{$prefix}tool-minimize {
+    background-position: 0 (-$tool-size);
+}
+
+.#{$prefix}tool-maximize {
+    background-position: 0 ($tool-size * -2);
+}
+
+.#{$prefix}tool-restore {
+    background-position: 0 ($tool-size * -3);
+}
+
+.#{$prefix}tool-toggle {
+    background-position: 0 ($tool-size * -4);
+
+    .#{$prefix}panel-collapsed & {
+        background-position: 0 ($tool-size * -5);
+    }
+}
+
+.#{$prefix}tool-gear {
+    background-position: 0 ($tool-size * -6);
+}
+
+.#{$prefix}tool-prev {
+    background-position: 0 ($tool-size * -7);
+}
+
+.#{$prefix}tool-next {
+    background-position: 0 ($tool-size * -8);
+}
+
+.#{$prefix}tool-pin {
+    background-position: 0 ($tool-size * -9);
+}
+
+.#{$prefix}tool-unpin {
+    background-position: 0 ($tool-size * -10);
+}
+
+.#{$prefix}tool-right {
+    background-position: 0 ($tool-size * -11);
+}
+
+.#{$prefix}tool-left {
+    background-position: 0 ($tool-size * -12);
+}
+
+.#{$prefix}tool-down {
+    background-position: 0 ($tool-size * -13);
+}
+
+.#{$prefix}tool-up {
+    background-position: 0 ($tool-size * -14);
+}
+
+.#{$prefix}tool-refresh {
+    background-position: 0 ($tool-size * -15);
+}
+
+.#{$prefix}tool-plus {
+    background-position: 0 ($tool-size * -16);
+}
+
+.#{$prefix}tool-minus {
+    background-position: 0 ($tool-size * -17);
+}
+
+.#{$prefix}tool-search {
+    background-position: 0 ($tool-size * -18);
+}
+
+.#{$prefix}tool-save {
+    background-position: 0 ($tool-size * -19);
+}
+
+.#{$prefix}tool-help {
+    background-position: 0 ($tool-size * -20);
+}
+
+.#{$prefix}tool-print {
+    background-position: 0 ($tool-size * -21);
+}
+
+.#{$prefix}tool-expand {
+    background-position: 0 ($tool-size * -22);
+}
+
+.#{$prefix}tool-collapse {
+    background-position: 0 ($tool-size * -23);
+}
+
+.#{$prefix}tool-resize {
+    background-position: 0 ($tool-size * -24);
+}
+
+.#{$prefix}tool-move {
+    background-position: 0 ($tool-size * -25);
+}
+
+.#{$prefix}tool-expand-bottom,
+.#{$prefix}tool-collapse-bottom {
+    background-position: 0 ($tool-size * -13);
+}
+
+.#{$prefix}tool-expand-top,
+.#{$prefix}tool-collapse-top {
+    background-position: 0 ($tool-size * -14);
+}
+
+.#{$prefix}tool-expand-left,
+.#{$prefix}tool-collapse-left {
+    background-position: 0 ($tool-size * -12);
+}
+
+.#{$prefix}tool-expand-right,
+.#{$prefix}tool-collapse-right {
+    background-position: 0 ($tool-size * -11);
+}
+
+@if $include-rtl {
+    .#{$prefix}rtl {
+        &.#{$prefix}tool-expand-left,
+        &.#{$prefix}tool-collapse-left {
+            background-position: 0 ($tool-size * -11);
+        }
+
+        &.#{$prefix}tool-expand-right,
+        &.#{$prefix}tool-collapse-right {
+            background-position: 0 ($tool-size * -12);
+        }
+    }
+}
+
+@if $tool-include-hover-icons {
+    .#{$prefix}tool-over {
+        .#{$prefix}tool-close {
+            background-position: -$tool-size 0;
+        }
+
+        .#{$prefix}tool-minimize {
+            background-position: (-$tool-size) (-$tool-size);
+        }
+
+        .#{$prefix}tool-maximize {
+            background-position: (-$tool-size) ($tool-size * -2);
+        }
+
+        .#{$prefix}tool-restore {
+            background-position: (-$tool-size) ($tool-size * -3);
+        }
+
+        .#{$prefix}tool-toggle {
+            background-position: (-$tool-size) ($tool-size * -4);
+        }
+
+        .#{$prefix}panel-collapsed & {
+            .#{$prefix}tool-toggle {
+                background-position: (-$tool-size) ($tool-size * -5);
+            }
+        }
+
+        .#{$prefix}tool-gear {
+            background-position: (-$tool-size) ($tool-size * -6);
+        }
+
+        .#{$prefix}tool-prev {
+            background-position: (-$tool-size) ($tool-size * -7);
+        }
+
+        .#{$prefix}tool-next {
+            background-position: (-$tool-size) ($tool-size * -8);
+        }
+
+        .#{$prefix}tool-pin {
+            background-position: (-$tool-size) ($tool-size * -9);
+        }
+
+        .#{$prefix}tool-unpin {
+            background-position: (-$tool-size) ($tool-size * -10);
+        }
+
+        .#{$prefix}tool-right {
+            background-position: (-$tool-size) ($tool-size * -11);
+        }
+
+        .#{$prefix}tool-left {
+            background-position: (-$tool-size) ($tool-size * -12);
+        }
+
+        .#{$prefix}tool-down {
+            background-position: (-$tool-size) ($tool-size * -13);
+        }
+
+        .#{$prefix}tool-up {
+            background-position: (-$tool-size) ($tool-size * -14);
+        }
+
+        .#{$prefix}tool-refresh {
+            background-position: (-$tool-size) ($tool-size * -15);
+        }
+
+        .#{$prefix}tool-plus {
+            background-position: (-$tool-size) ($tool-size * -16);
+        }
+
+        .#{$prefix}tool-minus {
+            background-position: (-$tool-size) ($tool-size * -17);
+        }
+
+        .#{$prefix}tool-search {
+            background-position: (-$tool-size) ($tool-size * -18);
+        }
+
+        .#{$prefix}tool-save {
+            background-position: (-$tool-size) ($tool-size * -19);
+        }
+
+        .#{$prefix}tool-help {
+            background-position: (-$tool-size) ($tool-size * -20);
+        }
+
+        .#{$prefix}tool-print {
+            background-position: (-$tool-size) ($tool-size * -21);
+        }
+
+        .#{$prefix}tool-expand {
+            background-position: (-$tool-size) ($tool-size * -22);
+        }
+
+        .#{$prefix}tool-collapse {
+            background-position: (-$tool-size) ($tool-size * -23);
+        }
+
+        .#{$prefix}tool-resize {
+            background-position: (-$tool-size) ($tool-size * -24);
+        }
+
+        .#{$prefix}tool-move {
+            background-position: (-$tool-size) ($tool-size * -25);
+        }
+        
+        .#{$prefix}tool-expand-bottom,
+        .#{$prefix}tool-collapse-bottom {
+            background-position: (-$tool-size) ($tool-size * -13);
+        }
+
+        .#{$prefix}tool-expand-top,
+        .#{$prefix}tool-collapse-top {
+            background-position: (-$tool-size) ($tool-size * -14);
+        }
+
+        .#{$prefix}tool-expand-left,
+        .#{$prefix}tool-collapse-left {
+            background-position: (-$tool-size) ($tool-size * -12);
+        }
+
+        .#{$prefix}tool-expand-right,
+        .#{$prefix}tool-collapse-right {
+            background-position: (-$tool-size) ($tool-size * -11);
+        }
+
+        @if $include-rtl {
+            .#{$prefix}rtl {
+                &.#{$prefix}tool-expand-left,
+                &.#{$prefix}tool-collapse-left {
+                    background-position: (-$tool-size) ($tool-size * -11);
+                }
+            
+                &.#{$prefix}tool-expand-right,
+                &.#{$prefix}tool-collapse-right {
+                    background-position: (-$tool-size) ($tool-size * -12);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,11 @@
+// Fixes a bug in IE 9 standards. When there is a row that is wider than the view, the horizontal scrollbar is triggered b/c overflow
+// is set to auto. The boundlist will then continue to grow vertically in size every time addCls is called when the rows are highlighted.
+// http://stackoverflow.com/questions/5788726/add-remove-css-will-cause-ie9-to-increase-the-tables-height
+// http://blog.brianrichards.net/post/6721471926/ie9-hover-bug-workaround
+//
+// Note that without escaping the '%' this was not working, IE 9 was changing 0% to 0px. The backslash forced it to remain '0%'.
+@if $include-ie {
+    .#{$prefix}ie9 .#{$prefix}boundlist-list-ct {
+        min-height: 0\%;
+    }
+}

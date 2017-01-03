@@ -1,0 +1,278 @@
+/**
+ * Creates a visual theme for a Ext.tip.Tip
+ *
+ * @param {string} $ui
+ * The name of the UI being created. Can not included spaces or special punctuation
+ * (used in CSS class names).
+ *
+ * @param {color} [$ui-border-color=$tip-border-color]
+ * The border-color of the Tip
+ *
+ * @param {number} [$ui-border-width=$tip-border-width]
+ * The border-width of the Tip
+ *
+ * @param {number} [$ui-border-radius=$tip-border-radius]
+ * The border-radius of the Tip
+ *
+ * @param {color} [$ui-background-color=$tip-background-color]
+ * The background-color of the Tip
+ *
+ * @param {string/list} [$ui-background-gradient=$tip-background-gradient]
+ * The background-gradient of the Tip. Can be either the name of a predefined gradient or a
+ * list of color stops. Used as the `$type` parameter for {@link Global_CSS#background-gradient}.
+ *
+ * @param {number} [$ui-tool-spacing=$tip-tool-spacing]
+ * The space between {@link Ext.panel.Tool Tools} in the header
+ *
+ * @param {string} [$ui-tool-background-image=$tip-tool-background-image]
+ * The sprite to use for the header {@link Ext.panel.Tool Tools}
+ *
+ * @param {number/list} [$ui-header-padding=$tip-header-padding]
+ * The padding of the Tip header's body element
+ *
+ * @param {color} [$ui-header-color=$tip-header-color]
+ * The text color of the Tip header
+ *
+ * @param {number} [$ui-header-font-size=$tip-header-font-size]
+ * The font-size of the Tip header
+ *
+ * @param {string} [$ui-header-font-weight=$tip-header-font-weight]
+ * The font-weight of the Tip header
+ *
+ * @param {number/list} [$ui-body-padding=$tip-body-padding]
+ * The padding of the Tip body
+ *
+ * @param {color} [$ui-body-color=$tip-body-color]
+ * The text color of the Tip body
+ *
+ * @param {number} [$ui-body-font-size=$tip-body-font-size]
+ * The font-size of the Tip body
+ *
+ * @param {string} [$ui-body-font-weight=$tip-body-font-weight]
+ * The font-weight of the Tip body
+ *
+ * @param {color} [$ui-body-link-color=$tip-body-link-color]
+ * The text color of any anchor tags inside the Tip body
+ *
+ * @param {number} [$ui-inner-border-width=0]
+ * The inner border-width of the Tip
+ *
+ * @param {color} [$ui-inner-border-color=#fff]
+ * The inner border-color of the Tip
+ *
+ * @member Ext.tip.Tip
+ */
+@mixin extjs-tip-ui(
+    $ui: null,
+    $ui-border-color: $tip-border-color,
+    $ui-border-width: $tip-border-width,
+    $ui-border-radius: $tip-border-radius,
+    $ui-background-color: $tip-background-color,
+    $ui-background-gradient: $tip-background-gradient,
+
+    $ui-tool-spacing: $tip-tool-spacing,
+    $ui-tool-background-image: $tip-tool-background-image,
+    $ui-header-padding: $tip-header-padding,
+    $ui-header-color: $tip-header-color,
+    $ui-header-font-size: $tip-header-font-size,
+    $ui-header-font-weight: $tip-header-font-weight,
+    $ui-body-padding: $tip-body-padding,
+    $ui-body-color: $tip-body-color,
+    $ui-body-font-size: $tip-body-font-size,
+    $ui-body-font-weight: $tip-body-font-weight,
+    $ui-body-link-color: $tip-body-link-color,
+
+    $ui-inner-border-width: 0,
+    $ui-inner-border-color: #fff,
+
+    // deprecated - use $ui instead
+    $ui-label: null
+) {
+    @if $ui == null {
+        @if $ui-label != null {
+            @warn '$ui-label is deprecated.  Use $ui instead';
+            $ui: $ui-label;
+        } @else {
+            @warn "#{error('$ui is required')}";
+        }
+    }
+
+    @if not is-null($ui-border-radius) and $ui-border-radius != 0 {
+        @include x-frame(
+            $cls: 'tip',
+            $ui: '#{$ui}',
+            $border-radius: $ui-border-radius,
+            $border-width: $ui-border-width,
+            $background-color: $ui-background-color,
+            $background-gradient: $ui-background-gradient,
+            $table: true
+        );
+    }
+
+    .#{$prefix}tip-#{$ui} {
+        border-color: $ui-border-color;
+        @if $ui-inner-border-width != 0 {
+            @include inner-border(
+                $width: $ui-inner-border-width,
+                $color: $ui-inner-border-color
+            );
+        }
+
+        .#{$prefix}tool-img {
+            @if $ui-tool-background-image != $tool-background-image {
+                background-image: theme-background-image($ui-tool-background-image);
+            }
+            @if is-null($ui-background-gradient) {
+                // EXTJSIV-8846: partially transparent png images do not display correctly
+                // in winXP/IE8m when the image element has a transparent background.
+                // to fix this, we give the element the same background-color as the tooltip.
+                background-color: $ui-background-color;
+            }
+        }
+    }
+
+    $ui-tool-margin: 0 0 0 $ui-tool-spacing;
+    .#{$prefix}tip-header-#{$ui} {
+        .#{$prefix}tool-after-title {
+            margin: $ui-tool-margin;
+        }
+
+        @if $include-rtl {
+            .#{$prefix}rtl.#{$prefix}tool-after-title {
+                margin: rtl($ui-tool-margin);
+            }
+        }
+
+        .#{$prefix}tool-before-title {
+            margin: rtl($ui-tool-margin);
+        }
+
+        @if $include-rtl {
+            .#{$prefix}rtl.#{$prefix}tool-before-title {
+                margin: $ui-tool-margin;
+            }
+        }
+    }
+
+    .#{$prefix}tip-header-#{$ui} {
+        padding: $ui-header-padding;
+    }
+
+    .#{$prefix}tip-header-title-#{$ui} {
+        color: $ui-header-color;
+        font-size: $ui-header-font-size;
+        font-weight: $ui-header-font-weight;
+    }
+
+    .#{$prefix}tip-body-#{$ui} {
+        padding: $ui-body-padding;
+        color: $ui-body-color;
+        font-size: $ui-body-font-size;
+        font-weight: $ui-body-font-weight;
+        a {
+            color: $ui-body-link-color;
+        }
+    }
+}
+
+// TODO: refactor anchor to use an image instead of the border triangle technique
+.#{$prefix}tip-anchor {
+    position: absolute;
+
+    overflow: hidden;
+
+    height: 10px;
+    width: 10px;
+
+    border-style: solid;
+    border-width: 5px;
+    border-color: $tip-border-color;
+}
+
+.#{$prefix}tip-anchor-top {
+    border-top-color: transparent;
+    border-left-color: transparent;
+    border-right-color: transparent;
+
+    @if $include_ie {
+        _border-top-color: pink;
+        _border-left-color: pink;
+        _border-right-color: pink;
+        _filter: chroma(color=pink);
+    }
+}
+
+.#{$prefix}tip-anchor-bottom {
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    border-right-color: transparent;
+
+    @if $include_ie {
+        _border-bottom-color: pink;
+        _border-left-color: pink;
+        _border-right-color: pink;
+        _filter: chroma(color=pink);
+    }
+}
+
+.#{$prefix}tip-anchor-left {
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+
+    @if $include-ie {
+        _border-top-color: pink;
+        _border-bottom-color: pink;
+        _border-left-color: pink;
+        _filter: chroma(color=pink);
+    }
+}
+
+.#{$prefix}tip-anchor-right {
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+
+    @if $include-ie {
+        _border-top-color: pink;
+        _border-bottom-color: pink;
+        _border-right-color: pink;
+        _filter: chroma(color=pink);
+    }
+}
+
+@if $include-tip-default-ui {
+    @include extjs-tip-ui(
+        $ui: 'default'
+    );
+}
+
+@if $include-ext-form-field-base {
+    @if $include-tip-form-invalid-ui {
+        @include extjs-tip-ui(
+            $ui: 'form-invalid',
+            $ui-border-color: $tip-error-border-color,
+            $ui-border-width: $tip-error-border-width,
+            $ui-border-radius: $tip-error-border-radius,
+            $ui-background-color: $tip-error-background-color,
+            $ui-body-padding: $tip-error-body-padding,
+            $ui-body-color: $tip-error-body-color,
+            $ui-body-font-size: $tip-error-body-font-size,
+            $ui-body-font-weight: $tip-error-body-font-weight,
+            $ui-body-link-color: $tip-error-body-link-color,
+            $ui-inner-border-color: $tip-error-inner-border-color,
+            $ui-inner-border-width: $tip-error-inner-border-width
+        );
+    }
+
+    .#{$prefix}tip-body-form-invalid {
+        background: 1px 1px no-repeat;
+        background-image: theme-background-image('form/exclamation');
+        li {
+            margin-bottom: 4px;
+            &.last {
+                margin-bottom: 0;
+            }
+        }
+    }
+}

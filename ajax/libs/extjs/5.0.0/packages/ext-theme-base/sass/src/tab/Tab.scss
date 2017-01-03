@@ -1,0 +1,51 @@
+@include extjs-button-base(
+    $base-cls: 'tab',
+    $btn-display: block,
+    $include-arrows: false
+);
+
+.#{$prefix}tab {
+    z-index: 1;
+}
+
+.#{$prefix}tab-active {
+    z-index: 3;
+}
+
+.#{$prefix}tab-close-btn {
+    display: block;
+    position: absolute;
+    font-size: 0;
+    line-height: 0;
+}
+
+.#{$prefix}tab-rotate-left {
+    @include rotate-element($angle: 270);
+
+    @if $include-rtl {
+        &.#{$prefix}rtl {
+            @include rotate-element($angle: 90);
+        }
+    }
+}
+
+.#{$prefix}tab-rotate-right {
+    @include rotate-element($angle: 90);
+
+    @if $include-rtl {
+        &.#{$prefix}rtl {
+            @include rotate-element($angle: 270);
+        }
+    }
+}
+
+// the corner elements of tabs can gain extra height when rotated.
+// setting width: 1px prevents this
+.#{$prefix}tab-tr,
+.#{$prefix}tab-br,
+.#{$prefix}tab-mr,
+.#{$prefix}tab-tl,
+.#{$prefix}tab-bl,
+.#{$prefix}tab-ml {
+    width: 1px;
+}

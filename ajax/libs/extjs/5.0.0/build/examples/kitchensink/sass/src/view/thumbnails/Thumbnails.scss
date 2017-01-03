@@ -1,0 +1,70 @@
+$kitchensink-thumbnail-background-color: #888;
+$kitchensink-thumbnail-color: #fff;
+
+@if $theme-name == 'ext-theme-crisp' or $theme-name == 'ext-theme-crisp-touch' {
+    $kitchensink-thumbnail-background-color: #2a3f5d;
+} @else if $theme-name == 'ext-theme-neptune' or $theme-name == 'ext-theme-neptune-touch' {
+    $kitchensink-thumbnail-background-color: #3892d3;
+    $kitchensink-thumbnail-color: #b8d8f0;
+} @else if $theme-name == 'ext-theme-classic' {
+    $kitchensink-thumbnail-background-color: #275287;
+} @else if $theme-name == 'ext-theme-classic' {
+    $kitchensink-thumbnail-background-color: #4d4d4d;
+}
+
+$kitchensink-thumbnail-size: 96px;
+
+.thumbnails {
+    display: table;
+}
+
+.thumbnail-item {
+    float: left;
+    width: $kitchensink-thumbnail-size + 20;
+    height: $kitchensink-thumbnail-size + 60;
+    margin-right: 20px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.thumbnail-text {
+    text-align: center;
+}
+
+.thumbnail-icon-wrap {
+    width: $kitchensink-thumbnail-size;
+    height: $kitchensink-thumbnail-size;
+    text-align: center;
+    font-size: $kitchensink-thumbnail-size;
+    line-height: $kitchensink-thumbnail-size;
+    font-family: Sencha-Examples;
+    margin: 0 auto 8px;
+    position: relative;
+    overflow: hidden;
+    color: $kitchensink-thumbnail-background-color;
+}
+
+.thumbnail-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    font-size: $kitchensink-thumbnail-size / 2;
+    line-height: $kitchensink-thumbnail-size;
+    color: $kitchensink-thumbnail-color;
+    overflow: hidden;
+}
+
+.x-rtl.thumbnails {
+    .thumbnail-item {
+        direction: ltr;
+        float: right;
+        margin-right: 0;
+        margin-left: 20px;
+    }
+    .thumbnail-text {
+        direction: rtl;
+    }
+}

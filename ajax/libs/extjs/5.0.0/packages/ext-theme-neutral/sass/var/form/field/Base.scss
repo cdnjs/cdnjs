@@ -1,0 +1,1117 @@
+// NOTE: this file contains the variables for all types of form fields.  This is done
+// (as opposed to having separate files for Text.scss, Checkbox.scss etc) so that grid
+// editor sass vars (in Editor.scss) can derive from any of the form field vars simply
+// because Ext.grid.plugin.Editing requires Ext.form.field.Base.  Grid editor sass
+// vars cannot live in the same files as normal form field vars because they also derive
+// some of their values from grid vars.
+
+// <editor-fold desc="Base Variables">
+/**
+ * @class Ext.form.field.Base
+ */
+
+/**
+ * @var {number} $form-field-height
+ * Height for form fields.
+ */
+$form-field-height: 24px !default;
+
+/**
+ * @var {number} $form-toolbar-field-height
+ * Height for form fields in toolbar.
+ */
+$form-toolbar-field-height: $form-field-height !default;
+
+/**
+ * @var {number} $form-field-padding
+ * Padding around form fields.
+ */
+$form-field-padding: 1px 3px 2px !default;
+
+/**
+ * @var {number} $form-field-font-size
+ * Font size for form fields.
+ */
+$form-field-font-size: $font-size !default;
+
+/**
+ * @var {string} $form-field-font-family
+ * Font family for form fields.
+ */
+$form-field-font-family: $font-family !default;
+
+/**
+ * @var {string} $form-field-font-weight
+ * Font weight for form fields.
+ */
+$form-field-font-weight: $font-weight !default;
+
+/**
+ * @var {number} $form-toolbar-field-font-size
+ * Font size for toolbar form fields.
+ */
+$form-toolbar-field-font-size: $form-field-font-size !default;
+
+/**
+ * @var {string} $form-toolbar-field-font-family
+ * Font family for toolbar form fields.
+ */
+$form-toolbar-field-font-family: $form-field-font-family !default;
+/**
+ * @var {string} $form-toolbar-field-font-weight
+ * Font weight for toolbar form fields.
+ */
+$form-toolbar-field-font-weight: $form-field-font-weight !default;
+
+/**
+ * @var {color} $form-field-color
+ * Text color for form fields.
+ */
+$form-field-color: $color !default;
+
+/**
+ * @var {color} $form-field-empty-color
+ * Text color for empty form fields.
+ */
+$form-field-empty-color: gray !default;
+
+/**
+ * @var {color} $form-field-border-color
+ * Border color for form fields.
+ */
+$form-field-border-color: $neutral-color !default;
+
+/**
+ * @var {number} $form-field-border-width
+ * Border width for form fields.
+ */
+$form-field-border-width: 1px !default;
+
+/**
+ * @var {string} $form-field-border-style
+ * Border style for form fields.
+ */
+$form-field-border-style: solid !default;
+
+/**
+ * @var {color} $form-field-focus-border-color
+ * Border color for focused form fields.
+ */
+$form-field-focus-border-color: $base-color !default;
+
+/**
+ * @var {color} $form-field-invalid-border-color
+ * Border color for invalid form fields.
+ */
+$form-field-invalid-border-color: #c30 !default;
+
+/**
+ * @var {color} $form-field-background-color
+ * Background color for form fields.
+ */
+$form-field-background-color: #fff !default;
+/**
+ * @var {string} $form-field-background-image
+ * Background image for form fields.
+ */
+$form-field-background-image: 'form/text-bg' !default;
+
+/**
+ * @var {color} $form-field-invalid-background-color
+ * Background color for invalid form fields.
+ */
+$form-field-invalid-background-color: #fff !default;
+/**
+ * @var {string} $form-field-invalid-background-image
+ * Background image for invalid form fields.
+ */
+$form-field-invalid-background-image: 'grid/invalid_line' !default;
+/**
+ * @var {string} $form-field-invalid-background-repeat
+ * Background repeat for invalid form fields.
+ */
+$form-field-invalid-background-repeat: repeat-x !default;
+/**
+ * @var {string/list} $form-field-invalid-background-position
+ * Background position for invalid form fields.
+ */
+$form-field-invalid-background-position: bottom !default;
+
+/**
+ * @var {boolean}
+ * True to include the "default" field UI
+ */
+$include-field-default-ui: $include-default-uis !default;
+
+/**
+ * @var {boolean}
+ * True to include the "toolbar" field UI
+ */
+$include-field-toolbar-ui: false !default;
+
+// </editor-fold>
+
+// <editor-fold desc="Labelable Variables">
+/**
+ * @class Ext.form.Labelable
+ */
+
+/**
+ * @var {color}
+ * The text color of form field labels
+ */
+$form-label-font-color: $color !default;
+
+/**
+ * @var {string}
+ * The font-weight of form field labels
+ */
+$form-label-font-weight: $font-weight !default;
+
+/**
+ * @var {number}
+ * The font-size of form field labels
+ */
+$form-label-font-size: $font-size !default;
+
+/**
+ * @var {string}
+ * The font-family of form field labels
+ */
+$form-label-font-family: $font-family !default;
+
+/**
+ * @var {number}
+ * The line-height of form field labels
+ */
+$form-label-line-height: round($form-label-font-size * 1.15) !default;
+
+/**
+ * @var {number}
+ * Horizontal space between the label and the field body when the label is left-aligned.
+ */
+$form-label-horizontal-spacing: 5px !default;
+
+/**
+ * @var {number}
+ * Vertical space between the label and the field body when the label is top-aligned.
+ */
+$form-label-vertical-spacing: 5px !default;
+
+/**
+ * @var {string}
+ * The background image for error icons
+ */
+$form-error-icon-background-image: 'form/exclamation' !default;
+
+/**
+ * @var {number}
+ * Width for form error icons.
+ */
+$form-error-icon-width: 16px !default;
+
+/**
+ * @var {number}
+ * Height for form error icons.
+ */
+$form-error-icon-height: 16px !default;
+
+/**
+ * @var {number/list}
+ * Margin for error icons that are aligned to the side of the field
+ */
+$form-error-icon-side-margin: 0 1px !default;
+
+/**
+ * @var {number}
+ * The space between the icon and the message for errors that display under the field
+ */
+$form-error-under-icon-spacing: 4px !default;
+
+/**
+ * @var {number/list}
+ * The padding on errors that display under the form field
+ */
+$form-error-under-padding: 2px 2px 2px 0 !default;
+
+/**
+ * @var {color}
+ * The text color of form error messages
+ */
+$form-error-msg-color: $form-field-invalid-border-color !default;
+
+/**
+ * @var {string}
+ * The font-weight of form error messages
+ */
+$form-error-msg-font-weight: $font-weight !default;
+
+/**
+ * @var {number}
+ * The font-size of form error messages
+ */
+$form-error-msg-font-size: $font-size !default;
+
+/**
+ * @var {string}
+ * The font-family of form error messages
+ */
+$form-error-msg-font-family: $font-family !default;
+
+/**
+ * @var {number}
+ * The line-height of form error messages
+ */
+$form-error-msg-line-height: $form-error-icon-height !default;
+
+/**
+ * @var {number}
+ * The bottom margin to apply to form items when in auto, anchor, vbox, or table layout.
+ * This value is also used as the default border-spacing in a form-layout.
+ */
+$form-item-margin-bottom: 5px !default;
+
+/**
+ * @var {number}
+ * Opacity of disabled form fields
+ */
+$form-field-disabled-opacity: .3 !default;
+
+/**
+ * @var {color}
+ * The text color of toolbar form field labels
+ */
+$form-toolbar-label-font-color: $color !default;
+
+/**
+ * @var {string}
+ * The font-weight of toolbar form field labels
+ */
+$form-toolbar-label-font-weight: $font-weight !default;
+
+/**
+ * @var {number}
+ * The font-size of toolbar form field labels
+ */
+$form-toolbar-label-font-size: $font-size !default;
+
+/**
+ * @var {string}
+ * The font-family of toolbar form field labels
+ */
+$form-toolbar-label-font-family: $font-family !default;
+
+/**
+ * @var {number}
+ * The line-height of toolbar form field labels
+ */
+$form-toolbar-label-line-height: round($form-toolbar-label-font-size * 1.15) !default;
+
+/**
+ * @var {number}
+ * Horizontal space between the toolbar field's label and the field body when the label is left-aligned.
+ */
+$form-toolbar-label-horizontal-spacing: 5px !default;
+
+/**
+ * @var {number}
+ * Vertical space between the toolbar field's label and the field body when the label is top-aligned.
+ */
+$form-toolbar-label-vertical-spacing: 5px !default;
+
+/**
+ * @var {string}
+ * The background image for toolbar field error icons
+ */
+$form-toolbar-error-icon-background-image: 'form/exclamation' !default;
+
+/**
+ * @var {number}
+ * Width for toolbar field error icons.
+ */
+$form-toolbar-error-icon-width: 16px !default;
+
+/**
+ * @var {number}
+ * Height for toolbar field error icons.
+ */
+$form-toolbar-error-icon-height: 16px !default;
+
+/**
+ * @var {number/list}
+ * Margin for toolbar field error icons that are aligned to the side of the field
+ */
+$form-toolbar-error-icon-side-margin: 0 1px !default;
+
+/**
+ * @var {number}
+ * The space between the icon and the message for errors that display under a toolbar field
+ */
+$form-toolbar-error-under-icon-spacing: 4px !default;
+
+/**
+ * @var {number/list}
+ * The padding on errors that display under the toolbar form field
+ */
+$form-toolbar-error-under-padding: 2px 2px 2px 0 !default;
+
+/**
+ * @var {color}
+ * The text color of toolbar form error messages
+ */
+$form-toolbar-error-msg-color: $form-field-invalid-border-color !default;
+
+/**
+ * @var {string}
+ * The font-weight of toolbar form field error messages
+ */
+$form-toolbar-error-msg-font-weight: $font-weight !default;
+
+/**
+ * @var {number}
+ * The font-size of toolbar form field error messages
+ */
+$form-toolbar-error-msg-font-size: $font-size !default;
+
+/**
+ * @var {string}
+ * The font-family of toolbar form field error messages
+ */
+$form-toolbar-error-msg-font-family: $font-family !default;
+
+/**
+ * @var {number}
+ * The line-height of toolbar form field error messages
+ */
+$form-toolbar-error-msg-line-height: $form-toolbar-error-icon-height !default;
+
+/**
+ * @var {number}
+ * Opacity of disabled toolbar form fields
+ */
+$form-toolbar-field-disabled-opacity: .3 !default;
+
+/**
+ * @var {boolean}
+ * True to include the "default" label UI
+ */
+$include-label-default-ui: $include-field-default-ui !default;
+
+/**
+ * @var {boolean}
+ * True to include the "default" label UI
+ */
+$include-label-toolbar-ui: $include-field-toolbar-ui !default;
+
+// </editor-fold>
+
+// <editor-fold desc="Text Field Variables">
+/**
+ * @class Ext.form.field.Text
+ */
+
+/**
+ * @var {number}
+ * The height of text fields
+ */
+$form-text-field-height: $form-field-height !default;
+
+/**
+ * @var {number}
+ * Font size for text fields.
+ */
+$form-text-field-font-size: $form-field-font-size !default;
+
+/**
+ * @var {string}
+ * Font family for text fields.
+ */
+$form-text-field-font-family: $form-field-font-family !default;
+
+/**
+ * @var {string}
+ * Font weight for text fields.
+ */
+$form-text-field-font-weight: $form-field-font-weight !default;
+
+/**
+ * @var {color}
+ * The color of the text field's input element
+ */
+$form-text-field-color: $form-field-color !default;
+
+/**
+ * @var {color}
+ * The background color of the text field's input element
+ */
+$form-text-field-background-color: $form-field-background-color !default;
+
+/**
+ * @var {number/list}
+ * The border width of text fields
+ */
+$form-text-field-border-width: $form-field-border-width !default;
+
+/**
+ * @var {string/list}
+ * The border style of text fields
+ */
+$form-text-field-border-style: $form-field-border-style !default;
+
+/**
+ * @var {color/list}
+ * The border color of text fields
+ */
+$form-text-field-border-color: $form-field-border-color !default;
+
+/**
+ * @var {color/list}
+ * The border color of the focused text field
+ */
+$form-text-field-focus-border-color: $form-field-focus-border-color !default;
+
+/**
+ * @var {color}
+ * Border color for invalid text fields.
+ */
+$form-text-field-invalid-border-color: $form-field-invalid-border-color !default;
+
+/**
+ * @var {number/list}
+ * Border radius for text fields
+ */
+$form-text-field-border-radius: 0 !default;
+
+/**
+ * @var {string}
+ * The background image of the text field's input element
+ */
+$form-text-field-background-image: $form-field-background-image !default;
+
+/**
+ * @var {number/list}
+ * The padding of the text field's input element
+ */
+$form-text-field-padding: $form-field-padding !default;
+
+/**
+ * @var {color}
+ * Text color for empty text fields.
+ */
+$form-text-field-empty-color: $form-field-empty-color !default;
+
+/**
+ * @var {number}
+ * The default width of the text field's body element (the element that contains the input
+ * element and triggers) when the field is not sized explicitly using the {@link #width}
+ * config, or sized by it's containing layout.
+ */
+$form-text-field-body-width: 150px !default;
+
+/**
+ * @var {color}
+ * Background color of the text field's input element when the field value is invalid.
+ */
+$form-text-field-invalid-background-color: $form-field-invalid-background-color !default;
+
+/**
+ * @var {string}
+ * Background image of the text field's input element when the field value is invalid.
+ */
+$form-text-field-invalid-background-image: $form-field-invalid-background-image !default;
+
+/**
+ * @var {string}
+ * Background repeat of the text field's input element when the field value is invalid.
+ */
+$form-text-field-invalid-background-repeat: $form-field-invalid-background-repeat !default;
+
+/**
+ * @var {string/list}
+ * Background position of the text field's input element when the field value is invalid.
+ */
+$form-text-field-invalid-background-position: $form-field-invalid-background-position !default;
+
+/**
+ * @var {boolean}
+ * `true` to use classic-theme styled border for text fields.
+ */
+$form-text-field-classic-border: false !default;
+
+/**
+ * @var {number} $form-textarea-line-height
+ * The line-height to use for the TextArea's text
+ */
+// 1.15 is a rough approximation of the ratio of a "normal" line-height to font-size.
+// we use this as opposed to using "normal" so it can be involved in the calculation of
+// $form-textarea-body-height
+$form-textarea-line-height: round($form-text-field-font-size * 1.15) !default;
+
+/**
+ * @var {number} $form-textarea-body-height
+ * The default width of the TextArea's body element (the element that contains the textarea
+ * html element when the field is not sized explicitly using the {@link #width}config, or
+ * sized by it's containing layout.
+ */
+// In 4.x the "rows" config defaulted to "4", so we attempt to preserves roughly the same
+// height using a multiple of line-height.
+$form-textarea-body-height: $form-textarea-line-height * 4 !default;
+
+/**
+ * @var {color}
+ * Text color for file fields
+ */
+$form-file-field-color: $form-field-empty-color !default;
+
+/**
+ * @var {number}
+ * The width of the text field's trigger element
+ */
+$form-trigger-width: 22px !default;
+
+/**
+ * @var {number/list}
+ * The width of the text field's trigger's border
+ */
+$form-trigger-border-width: 0 !default;
+
+/**
+ * @var {color/list}
+ * The color of the text field's trigger's border
+ */
+$form-trigger-border-color: $form-field-border-color !default;
+
+/**
+ * @var {string/list}
+ * The style of the text field's trigger's border
+ */
+$form-trigger-border-style: $form-field-border-style !default;
+
+/**
+ * @var {color}
+ * The color of the text field's trigger's border when hovered
+ */
+$form-trigger-border-color-over: $form-field-border-color !default;
+
+/**
+ * @var {color}
+ * The color of the text field's trigger's border when the field is focused
+ */
+$form-trigger-border-color-focus: $form-field-focus-border-color !default;
+
+/**
+ * @var {color}
+ * The color of the text field's trigger's border when the field is focused and the trigger is hovered
+ */
+$form-trigger-border-color-pressed: $form-trigger-border-color-over !default;
+
+/**
+ * @var {string}
+ * The default background image for text field triggers
+ */
+$form-trigger-background-image: 'form/trigger' !default;
+
+/**
+ * @var {color}
+ * The background color of the text field's trigger element
+ */
+$form-trigger-background-color: $form-field-background-color !default;
+
+/**
+ * @var {number}
+ * The height of toolbar text fields
+ */
+$form-toolbar-text-field-height: $form-toolbar-field-height !default;
+
+/**
+ * @var {number}
+ * Font size for toolbar text fields.
+ */
+$form-toolbar-text-field-font-size: $form-text-field-font-size !default;
+
+/**
+ * @var {string}
+ * Font family for toolbar text fields.
+ */
+$form-toolbar-text-field-font-family: $form-text-field-font-family !default;
+
+/**
+ * @var {string}
+ * Font weight for toolbar text fields.
+ */
+$form-toolbar-text-field-font-weight: $form-text-field-font-weight !default;
+
+/**
+ * @var {color}
+ * The color of the toolbar text field's input element
+ */
+$form-toolbar-text-field-color: $form-text-field-color !default;
+
+/**
+ * @var {color}
+ * The background color of the toolbar text field's input element
+ */
+$form-toolbar-text-field-background-color: $form-text-field-background-color !default;
+
+/**
+ * @var {number/list}
+ * The border width of toolbar text fields
+ */
+$form-toolbar-text-field-border-width: $form-text-field-border-width !default;
+
+/**
+ * @var {string/list}
+ * The border style of toolbar text fields
+ */
+$form-toolbar-text-field-border-style: $form-text-field-border-style !default;
+
+/**
+ * @var {color/list}
+ * The border color of toolbar text fields
+ */
+$form-toolbar-text-field-border-color: $form-text-field-border-color !default;
+
+/**
+ * @var {color/list}
+ * The border color of the focused toolbar text field
+ */
+$form-toolbar-text-field-focus-border-color: $form-text-field-focus-border-color !default;
+
+/**
+ * @var {color} $form-field-invalid-border-color
+ * Border color for invalid toolbar text fields.
+ */
+$form-toolbar-text-field-invalid-border-color: $form-text-field-invalid-border-color !default;
+
+/**
+ * @var {number/list}
+ * Border radius for toolbar text fields
+ */
+$form-toolbar-text-field-border-radius: $form-text-field-border-radius !default;
+
+/**
+ * @var {string}
+ * The background image of the toolbar text field's input element
+ */
+$form-toolbar-text-field-background-image: $form-text-field-background-image !default;
+
+/**
+ * @var {number/list}
+ * The padding of the toolbar text field's input element
+ */
+$form-toolbar-text-field-padding: $form-text-field-padding !default;
+
+/**
+ * @var {color}
+ * Text color for empty toolbar text fields.
+ */
+$form-toolbar-text-field-empty-color: $form-text-field-empty-color !default;
+
+/**
+ * @var {number}
+ * The default width of the toolbar text field's body element (the element that contains the input
+ * element and triggers) when the field is not sized explicitly using the {@link #width}
+ * config, or sized by it's containing layout.
+ */
+$form-toolbar-text-field-body-width: $form-text-field-body-width !default;
+
+/**
+ * @var {color}
+ * Background color of the toolbar text field's input element when the field value is invalid.
+ */
+$form-toolbar-text-field-invalid-background-color: $form-text-field-invalid-background-color !default;
+
+/**
+ * @var {string}
+ * Background image of the toolbar text field's input element when the field value is invalid.
+ */
+$form-toolbar-text-field-invalid-background-image: $form-text-field-invalid-background-image !default;
+
+/**
+ * @var {string}
+ * Background repeat of the toolbar text field's input element when the field value is invalid.
+ */
+$form-toolbar-text-field-invalid-background-repeat: $form-text-field-invalid-background-repeat !default;
+
+/**
+ * @var {string/list}
+ * Background position of the toolbar text field's input element when the field value is invalid.
+ */
+$form-toolbar-text-field-invalid-background-position: $form-text-field-invalid-background-position !default;
+
+/**
+ * @var {boolean}
+ * `true` to use classic-theme styled border for toolbar text fields.
+ */
+$form-toolbar-text-field-classic-border: $form-text-field-classic-border !default;
+
+/**
+ * @var {number/string}
+ * The line-height to use for the toolbar TextArea's text
+ */
+$form-toolbar-textarea-line-height: $form-textarea-line-height !default;
+
+/**
+ * @var {number}
+ * The default width of the toolbar TextArea's body element (the element that contains the
+ * textarea html element when the field is not sized explicitly using the {@link #width}
+ * config, or sized by it's containing layout.
+ */
+$form-toolbar-textarea-body-height: $form-textarea-body-height !default;
+
+/**
+ * @var {color}
+ * Text color for toolbar file fields
+ */
+$form-toolbar-file-field-color: $form-file-field-color !default;
+
+/**
+ * @var {number}
+ * The width of the toolbar text field's trigger element
+ */
+$form-toolbar-trigger-width: $form-trigger-width !default;
+
+/**
+ * @var {number/list}
+ * The width of the toolbar text field's trigger's border
+ */
+$form-toolbar-trigger-border-width: $form-trigger-border-width !default;
+
+/**
+ * @var {color/list}
+ * The color of the toolbar text field's trigger's border
+ */
+$form-toolbar-trigger-border-color: $form-trigger-border-color !default;
+
+/**
+ * @var {string/list}
+ * The style of the toolbar text field's trigger's border
+ */
+$form-toolbar-trigger-border-style: $form-trigger-border-style !default;
+
+/**
+ * @var {color}
+ * The color of the toolbar text field's trigger's border when hovered
+ */
+$form-toolbar-trigger-border-color-over: $form-trigger-border-color !default;
+
+/**
+ * @var {color}
+ * The color of the toolbar text field's trigger's border when the field is focused
+ */
+$form-toolbar-trigger-border-color-focus: $form-trigger-border-color-focus !default;
+
+/**
+ * @var {color}
+ * The color of the toolbar text field's trigger's border when the field is focused and the trigger is hovered
+ */
+$form-toolbar-trigger-border-color-pressed: $form-toolbar-trigger-border-color-over !default;
+
+/**
+ * @var {string}
+ * The default background image for toolbar text field triggers
+ */
+$form-toolbar-trigger-background-image: $form-trigger-background-image !default;
+
+/**
+ * @var {color}
+ * The background color of the toolbar text field's trigger element
+ */
+$form-toolbar-trigger-background-color: $form-text-field-background-color !default;
+
+/**
+ * @var {boolean}
+ * True to include the "default" text field UI
+ */
+$include-text-field-default-ui: $include-field-default-ui !default;
+
+/**
+ * @var {boolean}
+ * True to include the "toolbar" text field UI
+ */
+$include-text-field-toolbar-ui: $include-field-toolbar-ui !default;
+
+// </editor-fold>
+
+// <editor-fold desc="Spinner Variables"
+/**
+ * @class Ext.form.field.Spinner
+ */
+
+/**
+ * @var {boolean}
+ * True to use vertically oriented triggers. False to use horizontally oriented triggers.
+ * Themes that set this property to true must also override the {@link #triggerVertical}
+ * config to match. Defaults to true.  When 'vertical' orientation is used, the background image
+ * for both triggers is 'form/spinner'.  When 'horizontal' is used, the triggers use separate
+ * background images - 'form/spinner-up', and 'form/spinner-down'.
+ */
+$spinner-trigger-vertical: true !default;
+
+/**
+ * @var {string}
+ * Background image for vertically oriented spinner triggers
+ */
+$spinner-trigger-vertical-background-image: 'form/spinner' !default;
+
+/**
+ * @var {string}
+ * Background image for the "up" trigger when trigger buttons are horizontally aligned
+ */
+$spinner-trigger-up-background-image: 'form/spinner-up' !default;
+
+/**
+ * @var {string}
+ * Background image for the "down" trigger when trigger buttons are horizontally aligned
+ */
+$spinner-trigger-down-background-image: 'form/spinner-down' !default;
+
+/**
+ * @var {boolean}
+ * `true` to use vertically oriented triggers for fields with the 'toolbar' UI.
+ */
+$spinner-toolbar-trigger-vertical: true !default;
+
+/**
+ * @var {string}
+ * Background image for vertically oriented toolbar spinner triggers
+ */
+$spinner-toolbar-trigger-vertical-background-image: $spinner-trigger-vertical-background-image !default;
+
+/**
+ * @var {string}
+ * Background image for the "up" toolbar trigger when trigger buttons are horizontally aligned
+ */
+$spinner-toolbar-trigger-up-background-image: $spinner-trigger-up-background-image !default;
+
+/**
+ * @var {string}
+ * Background image for the "down" toolbar trigger when trigger buttons are horizontally aligned
+ */
+$spinner-toolbar-trigger-down-background-image: $spinner-trigger-down-background-image !default;
+
+/**
+ * @var {boolean}
+ * True to include the "default" spinner UI
+ */
+$include-spinner-trigger-default-ui: $include-default-uis !default;
+
+/**
+ * @var {boolean}
+ * True to include the "toolbar" spinner UI
+ */
+$include-spinner-trigger-toolbar-ui: $include-text-field-toolbar-ui !default;
+
+// </editor-fold>
+
+// <editor-fold desc="Checkbox Variables"
+/**
+ * @class Ext.form.field.Checkbox
+ */
+
+/**
+ * @var {number}
+ * The size of the checkbox
+ */
+$form-checkbox-size: 13px !default;
+
+/**
+ * @var {string}
+ * The background-image of the checkbox
+ */
+$form-checkbox-background-image: 'form/checkbox' !default;
+
+/**
+ * @var {string}
+ * The background-image of the radio button
+ */
+$form-radio-background-image: 'form/radio' !default;
+
+/**
+ * @var {color}
+ * The color of the checkbox's {@link #boxLabel}
+ */
+$form-checkbox-label-color: $form-label-font-color !default;
+
+/**
+ * @var {string}
+ * The font-weight of the checkbox's {@link #boxLabel}
+ */
+$form-checkbox-label-font-weight: $form-label-font-weight !default;
+
+/**
+ * @var {string}
+ * The font-size of the checkbox's {@link #boxLabel}
+ */
+$form-checkbox-label-font-size: $form-label-font-family !default;
+
+/**
+ * @var {string}
+ * The font-family of the checkbox's {@link #boxLabel}
+ */
+$form-checkbox-label-font-family: $form-label-font-family !default;
+
+/**
+ * @var {string}
+ * The line-height of the checkbox's {@link #boxLabel}
+ */
+$form-checkbox-label-line-height: $form-label-line-height !default;
+
+/**
+ * @var {number}
+ * The space between the {@link #boxLabel} and the checkbox.
+ */
+$form-checkbox-label-spacing: 4px !default;
+
+/**
+ * @var {number}
+ * The size of the toolbar checkbox
+ */
+$form-toolbar-checkbox-size: 13px !default;
+
+/**
+ * @var {string}
+ * The background-image of the toolbar checkbox
+ */
+$form-toolbar-checkbox-background-image: 'form/checkbox' !default;
+
+/**
+ * @var {string}
+ * The background-image of the toolbar radio button
+ */
+$form-toolbar-radio-background-image: 'form/radio' !default;
+
+/**
+ * @var {color}
+ * The color of the toolbar checkbox's {@link #boxLabel}
+ */
+$form-toolbar-checkbox-label-color: $form-toolbar-label-font-color !default;
+
+/**
+ * @var {string}
+ * The font-weight of the toolbar checkbox's {@link #boxLabel}
+ */
+$form-toolbar-checkbox-label-font-weight: $form-toolbar-label-font-weight !default;
+
+/**
+ * @var {string}
+ * The font-size of the toolbar checkbox's {@link #boxLabel}
+ */
+$form-toolbar-checkbox-label-font-size: $form-toolbar-label-font-family !default;
+
+/**
+ * @var {string}
+ * The font-family of the toolbar checkbox's {@link #boxLabel}
+ */
+$form-toolbar-checkbox-label-font-family: $form-toolbar-label-font-family !default;
+
+/**
+ * @var {string}
+ * The line-height of the toolbar checkbox's {@link #boxLabel}
+ */
+$form-toolbar-checkbox-label-line-height: $form-toolbar-label-line-height !default;
+
+/**
+ * @var {number}
+ * The space between the {@link #boxLabel} and the toolbar checkbox.
+ */
+$form-toolbar-checkbox-label-spacing: 4px !default;
+
+/**
+ * @var {boolean}
+ * True to include the "default" checkbox UI
+ */
+$include-checkbox-default-ui: $include-field-default-ui !default;
+
+/**
+ * @var {boolean}
+ * True to include the "toolbar" checkbox UI
+ */
+$include-checkbox-toolbar-ui: $include-field-toolbar-ui !default;
+
+// </editor-fold>
+
+// <editor-fold desc="Display Field Variables">
+/**
+ * @class Ext.form.field.Display
+ */
+
+/**
+ * @var {color}
+ * The text color of display fields
+ */
+$form-display-field-color: $form-field-color !default;
+
+/**
+ * @var {number}
+ * The font-size of display fields
+ */
+$form-display-field-font-size: $form-field-font-size !default;
+
+/**
+ * @var {string}
+ * The font-family of display fields
+ */
+$form-display-field-font-family: $form-field-font-family !default;
+
+/**
+ * @var {string}
+ * The font-weight of display fields
+ */
+$form-display-field-font-weight: $form-field-font-weight !default;
+
+/**
+ * @var {number}
+ * The line-height of display fields
+ */
+$form-display-field-line-height: round($form-display-field-font-size * 1.15) !default;
+
+/**
+ * @var {color}
+ * The text color of toolbar display fields
+ */
+$form-toolbar-display-field-color: $form-display-field-color !default;
+
+/**
+ * @var {number}
+ * The font-size of toolbar display fields
+ */
+$form-toolbar-display-field-font-size: $form-display-field-font-size !default;
+
+/**
+ * @var {string}
+ * The font-family of toolbar display fields
+ */
+$form-toolbar-display-field-font-family: $form-display-field-font-family !default;
+
+/**
+ * @var {string}
+ * The font-weight of toolbar display fields
+ */
+$form-toolbar-display-field-font-weight: $form-display-field-font-weight !default;
+
+/**
+ * @var {number}
+ * The line-height of toolbar display fields
+ */
+$form-toolbar-display-field-line-height: round($form-toolbar-display-field-font-size * 1.15) !default;
+
+/**
+ * @var {boolean}
+ * True to include the "default" display field UI
+ */
+$include-display-field-default-ui: $include-field-default-ui !default;
+
+/**
+ * @var {boolean}
+ * True to include the "toolbar" display field UI
+ */
+$include-display-field-toolbar-ui: $include-field-toolbar-ui !default;
+
+// </editor-fold>
+
+
+
+
+
+

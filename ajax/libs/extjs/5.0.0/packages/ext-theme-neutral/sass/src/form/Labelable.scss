@@ -1,0 +1,193 @@
+/**
+ * Creates a visual theme for "labelable" form items.  Provides visual styling for the
+ * Label and error message that can be shared between many types of form fields.
+ *
+ * @param {string} $ui
+ * The name of the UI being created. Can not included spaces or special punctuation
+ * (used in CSS class names).
+ *
+ * @param {color} [$ui-font-color=$form-label-font-color]
+ * The text color the label
+ *
+ * @param {string} [$ui-font-weight=$form-label-font-weight]
+ * The font-weight of the label
+ *
+ * @param {number} [$ui-font-size=$form-label-font-size]
+ * The font-size of the label
+ *
+ * @param {string} [$ui-font-family=$form-label-font-family]
+ * The font-family the label
+ *
+ * @param {number} [$ui-height=$form-field-height]
+ * The height of the label.  This should be the same height as the height of fields that
+ * this label ui will be used with.  This does not actually set the height of the label
+ * but is used to ensure that the label is centered within the given height.
+ *
+ * @param {number} [$ui-line-height=$form-label-line-height]
+ * The line-height of the label
+ *
+ * @param {number} [$ui-horizontal-spacing: $form-label-horizontal-spacing]
+ * Horizontal space between the label and the field body when the label is left-aligned.
+ *
+ * @param {number} [$ui-vertical-spacing: $form-label-vertical-spacing]
+ * Vertical space between the label and the field body when the label is top-aligned.
+ *
+ * @param {number} [$ui-error-icon-background-image=$form-error-icon-background-image]
+ * The background-image of the error icon
+ *
+ * @param {number} [$ui-error-icon-width=$form-error-icon-width]
+ * The width of the error icon
+ *
+ * @param {number} [$ui-error-icon-height=$form-error-icon-height]
+ * The height of the error icon
+ *
+ * @param {number/list} [$ui-error-icon-side-margin=$form-error-icon-side-margin]
+ * Margin for error icons when aligned to the side of the field
+ *
+ * @param {number} [$ui-error-under-icon-spacing=$form-error-under-icon-spacing]
+ * The space between the icon and the message for errors that display under the field
+ *
+ * @param {number/list} [$ui-error-under-padding=$form-error-under-padding]
+ * The padding on errors that display under the form field
+ *
+ * @param {color} [$ui-error-msg-color=$form-error-msg-color]
+ * The text color of form error messages
+ *
+ * @param {string} [$ui-error-msg-font-weight=$form-error-msg-font-weight]
+ * The font-weight of form error messages
+ *
+ * @param {number} [$ui-error-msg-font-size=$form-error-msg-font-size]
+ * The font-size of form error messages
+ *
+ * @param {string} [$ui-error-msg-font-family=$form-error-msg-font-family]
+ * The font-family of form error messages
+ *
+ * @param {number} [$ui-error-msg-line-height=$form-error-msg-line-height]
+ * The line-height of form error messages
+ *
+ * @param {number} [$ui-disabled-opacity=$form-field-disabled-opacity]
+ * Opacity of disabled form fields
+ *
+ * @member Ext.form.Labelable
+ */
+@mixin extjs-label-ui(
+    $ui: null,
+    $ui-font-color: $form-label-font-color,
+    $ui-font-weight: $form-label-font-weight,
+    $ui-font-size: $form-label-font-size,
+    $ui-font-family: $form-label-font-family,
+    $ui-height: $form-field-height,
+    $ui-line-height: $form-label-line-height,
+    $ui-horizontal-spacing: $form-label-horizontal-spacing,
+    $ui-vertical-spacing: $form-label-vertical-spacing,
+    $ui-error-icon-background-image: $form-error-icon-background-image,
+    $ui-error-icon-width: $form-error-icon-width,
+    $ui-error-icon-height: $form-error-icon-height,
+    $ui-error-icon-side-margin: $form-error-icon-side-margin,
+    $ui-error-under-icon-spacing: $form-error-under-icon-spacing,
+    $ui-error-under-padding: $form-error-under-padding,
+    $ui-error-msg-color: $form-error-msg-color,
+    $ui-error-msg-font-weight: $form-error-msg-font-weight,
+    $ui-error-msg-font-size: $form-error-msg-font-size,
+    $ui-error-msg-font-family: $form-error-msg-font-family,
+    $ui-error-msg-line-height: $form-error-msg-line-height,
+    $ui-disabled-opacity: $form-field-disabled-opacity
+) {
+    $ui-error-wrap-width: $ui-error-icon-width + horizontal($ui-error-icon-side-margin);
+    .#{$prefix}form-item-label-#{$ui} {
+        $padding-top: round(($ui-height - $ui-line-height) / 2);
+
+        color: $ui-font-color;
+        font: $ui-font-weight #{$ui-font-size}/#{$ui-line-height} $ui-font-family;
+        min-height: $ui-height;
+        padding-top: $padding-top;
+        padding-right: $ui-horizontal-spacing;
+
+        @if $include-ie {
+            .#{$prefix}ie8 & {
+                // min-height triggers content-box sizing on IE8, so subtract padding
+                min-height: $ui-height - $padding-top;
+            }
+        }
+
+        &.#{$prefix}form-item-label-top {
+            height: 1px;
+            > .#{$prefix}form-item-label-inner {
+                padding-top: round(($ui-height - $ui-line-height) / 2);
+                padding-bottom: $ui-vertical-spacing;
+            }
+        }
+
+        &.#{$prefix}form-item-label-top-side-error:after {
+            width: $ui-error-wrap-width;
+        }
+    }
+
+    .#{$prefix}form-item-body-#{$ui} {
+        min-height: $ui-height;
+    }
+
+    .#{$prefix}form-invalid-icon-#{$ui} {
+        width: $ui-error-icon-width;
+        height: $ui-error-icon-height;
+        margin: $ui-error-icon-side-margin;
+        background: theme-background-image($ui-error-icon-background-image) no-repeat;
+    }
+
+    .#{$prefix}form-invalid-under-#{$ui} {
+        padding: top($ui-error-under-padding) right($ui-error-under-padding) bottom($ui-error-under-padding) (left($ui-error-under-padding) + $ui-error-icon-width + $ui-error-under-icon-spacing);
+        color: $ui-error-msg-color;
+        font: $ui-error-msg-font-weight #{$ui-error-msg-font-size}/#{$ui-error-msg-line-height} $ui-error-msg-font-family;
+        background: no-repeat left($ui-error-under-padding) top($ui-error-under-padding);
+        background-image: theme-background-image($ui-error-icon-background-image);
+    }
+
+    .#{$prefix}form-error-wrap-#{$ui}.#{$prefix}form-error-wrap-side {
+        width: $ui-error-wrap-width;
+    }
+
+    @if $ui-disabled-opacity != 1 {
+        .#{$prefix}form-item-#{$ui}.#{$prefix}item-disabled {
+            @include opacity($ui-disabled-opacity);
+        }
+    }
+}
+
+@if $include-label-default-ui {
+    @include extjs-label-ui(
+        $ui: 'default'
+    );
+}
+
+@if $include-label-toolbar-ui {
+    @include extjs-label-ui(
+        $ui: 'toolbar',
+        $ui-font-color: $form-toolbar-label-font-color,
+        $ui-font-weight: $form-toolbar-label-font-weight,
+        $ui-font-size: $form-toolbar-label-font-size,
+        $ui-font-family: $form-toolbar-label-font-family,
+        $ui-height: $form-toolbar-field-height,
+        $ui-line-height: $form-toolbar-label-line-height,
+        $ui-horizontal-spacing: $form-toolbar-label-horizontal-spacing,
+        $ui-vertical-spacing: $form-toolbar-label-vertical-spacing,
+        $ui-error-icon-background-image: $form-toolbar-error-icon-background-image,
+        $ui-error-icon-width: $form-toolbar-error-icon-width,
+        $ui-error-icon-height: $form-toolbar-error-icon-height,
+        $ui-error-icon-side-margin: $form-toolbar-error-icon-side-margin,
+        $ui-error-under-icon-spacing: $form-toolbar-error-under-icon-spacing,
+        $ui-error-under-padding: $form-toolbar-error-under-padding,
+        $ui-error-msg-color: $form-toolbar-error-msg-color,
+        $ui-error-msg-font-weight: $form-toolbar-error-msg-font-weight,
+        $ui-error-msg-font-size: $form-toolbar-error-msg-font-size,
+        $ui-error-msg-font-family: $form-toolbar-error-msg-font-family,
+        $ui-error-msg-line-height: $form-toolbar-error-msg-line-height,
+        $ui-disabled-opacity: $form-toolbar-field-disabled-opacity
+    );
+}
+
+.#{$prefix}autocontainer-form-item,
+.#{$prefix}anchor-form-item,
+.#{$prefix}vbox-form-item,
+.#{$prefix}table-form-item {
+    margin-bottom: $form-item-margin-bottom;
+}

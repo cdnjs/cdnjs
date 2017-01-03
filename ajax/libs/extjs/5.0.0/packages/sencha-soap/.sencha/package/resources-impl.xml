@@ -1,0 +1,32 @@
+<project name="resources-impl">
+    <target name="-before-inherit-resources"/>
+    <target name="-after-inherit-resources"/>
+    <target name="-inherit-resources">
+        <for list="${package.base.packages}" param="base">
+            <sequential>
+                <local name="base.path"/>
+                <local name="base.resource.path"/>
+                <property name="base.path" location="@{base}"/>
+                <property name="base.resource.path" location="${base.path}/resources"/>
+                <echo>Merging resources from base package ${base.path}</echo>
+                <if>
+                    <available file="${base.resource.path}" type="dir"/>
+                    <then>
+                        <copy todir="${build.dir}/resources/" overwrite="true">
+                            <fileset dir="${base.resource.path}" includes="**/*"/>
+                        </copy>
+                    </then>
+                </if>
+            </sequential>
+        </for>
+    </target>
+    
+    <target name="-before-copy-resources"/>
+    <target name="-after-copy-resources"/>
+    <target name="-copy-resources">
+        <echo>Merging resources from current package ${package.resources.dir}</echo>
+        <copy todir="${build.dir}/resources" overwrite="true">
+            <fileset dir="${package.resources.dir}" includes="**/*"/>
+        </copy>
+    </target>
+</project>

@@ -1,0 +1,11 @@
+<project basedir=".">
+    <!--
+    If framework.config.dir is already set, this next task will do nothing and
+    the original value will remain... but if framework.config.dir is not yet
+    defined, we are running in a workspace sans framework and so we need to go
+    directly to the plugin base from cmd.config.dir instead.
+    -->
+    <property name="framework.config.dir" value="${cmd.config.dir}"/>
+
+    <import file="${framework.config.dir}/plugin.xml"/>
+</project>

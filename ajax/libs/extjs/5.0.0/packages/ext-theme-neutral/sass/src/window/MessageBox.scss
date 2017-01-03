@@ -1,0 +1,49 @@
+.#{$prefix}message-box .#{$prefix}window-body {
+    background-color: $messagebox-body-background-color;
+    border-width: $messagebox-body-border-width;
+    @if $messagebox-body-border-width != 0 {
+        border-color: $messagebox-body-border-color;
+        border-style: $messagebox-body-border-style;
+    }
+}
+
+.#{$prefix}message-box-info,
+.#{$prefix}message-box-warning,
+.#{$prefix}message-box-question,
+.#{$prefix}message-box-error {
+    background-position: $messagebox-icon-background-position;
+    background-repeat: no-repeat;
+}
+
+@if $include-rtl {
+    .#{$prefix}rtl {
+        &.#{$prefix}message-box-info,
+        &.#{$prefix}message-box-warning,
+        &.#{$prefix}message-box-question,
+        &.#{$prefix}message-box-error {
+            background-position: rtl-background-position($messagebox-icon-background-position)
+        }
+    }
+}
+
+.#{$prefix}message-box-icon {
+    height: $messagebox-icon-size;
+    width: $messagebox-icon-size;
+    margin-right: $messagebox-icon-spacing;
+}
+
+.#{$prefix}message-box-info {
+    background-image: theme-background-image('shared/icon-info');
+}
+
+.#{$prefix}message-box-warning {
+    background-image: theme-background-image('shared/icon-warning');
+}
+
+.#{$prefix}message-box-question {
+    background-image: theme-background-image('shared/icon-question');
+}
+
+.#{$prefix}message-box-error {
+    background-image: theme-background-image('shared/icon-error');
+}

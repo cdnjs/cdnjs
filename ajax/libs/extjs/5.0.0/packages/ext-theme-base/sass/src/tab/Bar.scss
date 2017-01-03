@@ -1,0 +1,70 @@
+.#{$prefix}tab-bar {
+    z-index: 0;
+    position: relative;
+}
+
+.#{$prefix}tab-bar-body {
+    position: relative;
+}
+
+.#{$prefix}tab-bar-strip {
+    position: absolute;
+    line-height: 0;
+    font-size: 0;
+    z-index: 2;
+
+    .#{$prefix}tab-bar-top > & {
+        bottom: 0;
+    }
+
+    .#{$prefix}tab-bar-bottom > &{
+        top: 0;
+    }
+
+    .#{$prefix}tab-bar-left > & {
+        right: 0;
+
+        @if $include-rtl {
+           &.#{$prefix}rtl {
+                right: auto;
+                left: 0;
+            }
+        }
+    }
+
+    .#{$prefix}tab-bar-right > & {
+        left: 0;
+
+        @if $include-rtl {
+            &.#{$prefix}rtl {
+                left: auto;
+                right: 0;
+            }
+        }
+    }
+}
+
+.#{$prefix}tab-bar-horizontal .#{$prefix}tab-bar-strip {
+    width: 100%;
+    left: 0;
+}
+
+.#{$prefix}tab-bar-vertical {
+    // vertical tabbars use display:table-cell so that they doen't expand to fill their
+    // container when rendered outside of a tabpanel. (display:table doesn't work in IE9
+    // because getComputedStyle doesn't return the correct border/padding info)
+    display: table-cell;
+
+    .#{$prefix}tab-bar-strip {
+        height: 100%;
+        top: 0;
+    }
+}
+
+.#{$prefix}tab-bar-plain {
+    background: transparent !important;
+}
+
+.#{$prefix}box-scroller-plain {
+    background-color: transparent !important;
+}

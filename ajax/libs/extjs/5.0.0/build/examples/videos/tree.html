@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Trees</title>
+    <link rel="stylesheet" type="text/css" href="../../resources/css/ext-all.css"/>
+
+    <!-- GC -->
+
+    <script type="text/javascript" src="../../ext-all.js"></script>
+</head>
+<body>
+    <script type="text/javascript" charset="utf-8">
+        Ext.require();
+
+        Ext.onReady(function() {
+            Ext.create('Ext.tree.Panel', {
+                renderTo: Ext.getBody(),
+                width: 400,
+                height: 600,
+                title: 'Categories',
+                rootVisible: false, //IT'S UGLY THAT I HAVE TO DO THIS
+
+                //ALSO, INCREDIBLY, IF I DELETE THE ROOTVISIBLE LINE THIS DOESN'T WORK AT ALL :/
+
+                store: {
+                    autoLoad: true,
+                    proxy: {
+                        type: 'ajax',
+                        url: 'tree.json'
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

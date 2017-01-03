@@ -1,0 +1,89 @@
+.#{$prefix}tbar-page-number {
+    width: 30px;
+}
+
+.#{$prefix}tbar-page-first {
+    background-image: theme-background-image('grid/page-first');
+}
+
+.#{$prefix}tbar-page-prev {
+    background-image: theme-background-image('grid/page-prev');
+}
+
+.#{$prefix}tbar-page-next {
+    background-image: theme-background-image('grid/page-next');
+}
+
+.#{$prefix}tbar-page-last {
+    background-image: theme-background-image('grid/page-last');
+}
+
+.#{$prefix}tbar-loading {
+    background-image: theme-background-image('grid/refresh');
+}
+
+@if $grid-paging-toolbar-include-disabled-icons {
+    .#{$prefix}item-disabled {
+        .#{$prefix}tbar-page-first {
+            background-image: theme-background-image('grid/page-first-disabled');
+        }
+        
+        .#{$prefix}tbar-page-prev {
+            background-image: theme-background-image('grid/page-prev-disabled');
+        }
+        
+        .#{$prefix}tbar-page-next {
+            background-image: theme-background-image('grid/page-next-disabled');
+        }
+
+        .#{$prefix}tbar-page-last {
+            background-image: theme-background-image('grid/page-last-disabled');
+        }
+
+        .#{$prefix}tbar-loading {
+            background-image: theme-background-image('grid/refresh-disabled');
+        }
+    }
+}
+
+@if $include-rtl {
+    .#{$prefix}rtl {
+        &.#{$prefix}tbar-page-first {
+            background-image: theme-background-image('grid/page-last');
+        }
+
+        &.#{$prefix}tbar-page-prev {
+            background-image: theme-background-image('grid/page-next');
+        }
+
+        &.#{$prefix}tbar-page-next {
+            background-image: theme-background-image('grid/page-prev');
+        }
+
+        &.#{$prefix}tbar-page-last {
+            background-image: theme-background-image('grid/page-first');
+        }
+    }
+        
+    @if $grid-paging-toolbar-include-disabled-icons {
+        .#{$prefix}item-disabled {
+            .#{$prefix}rtl {
+                &.#{$prefix}tbar-page-first {
+                    background-image: theme-background-image('grid/page-last-disabled');
+                }
+            
+                &.#{$prefix}tbar-page-prev {
+                    background-image: theme-background-image('grid/page-next-disabled');
+                }
+            
+                &.#{$prefix}tbar-page-next {
+                    background-image: theme-background-image('grid/page-prev-disabled');
+                }
+
+                &.#{$prefix}tbar-page-last {
+                    background-image: theme-background-image('grid/page-first-disabled');
+                }
+            }
+        }
+    }
+}

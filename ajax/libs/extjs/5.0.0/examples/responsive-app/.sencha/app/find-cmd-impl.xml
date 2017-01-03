@@ -1,0 +1,58 @@
+<project name="find-cmd-impl">
+    <!--
+    Run "sencha which" to find the Sencha Cmd basedir and get "cmd.dir" setup. We
+    need to execute the command with curdir set properly for Cmd to pick up that we
+    are running for an application.
+    -->
+    <target name="find-cmd-in-path" unless="cmd.dir">
+        <exec executable="sencha" 
+              dir="${basedir}" 
+              failifexecutionfails="false" 
+              outputproperty="exec.error">
+            <arg value="which"/>
+            <arg value="-p=cmd.dir"/>
+            <arg value="-o=$cmddir$"/>
+        </exec>
+
+        <!-- Now read the generated properties file and delete it -->
+        <property file="$cmddir$"/>
+        <delete file="$cmddir$"/>
+    </target>
+
+    <!--
+    Run "sencha which" again, similar to the above target, but explicitly check
+    for the 'SENCHA_CMD' environment variable to have been set, in case sencha 
+    cmd isn't on the current path settings for the user
+    -->
+    <target name="find-cmd-in-environment" unless="cmd.dir">
+        <exec executable="${env.SENCHA_CMD}/sencha" 
+              dir="${basedir}"
+              failifexecutionfails="false">
+            <arg value="which"/>
+            <arg value="-p=cmd.dir"/>
+            <arg value="-o=$cmddir$"/>
+        </exec>
+
+        <property file="$cmddir$"/>
+        <delete file="$cmddir$"/>
+    </target>
+
+    <!--
+    == Mac OSX launchd fix ==
+    create a child shell process that will source in ~/.bash_profile
+    and then attempt to call 'sencha which' with the current user's 
+    shell profile settings.  sencha which will create a properties file
+    that can then be loaded into this (the parent) process.
+    
+    This allows ant integrations in IDE's like netbeans or eclipse to properly
+    locate Sencha Cmd, even if the IDE was launched via launchd (Finder)
+    -->
+    <target name="find-cmd-in-shell" unless="cmd.dir">
+        <delete quiet="true" file="$cmddir$"/>
+        <echo file="tmp.sh"> source ~/.bash_profile; sencha which -p cmd.dir -o '$cmddir$'</echo>
+        <exec executable="/bin/sh"><arg value="tmp.sh"/></exec>
+        <property file="$cmddir$"/>
+        <delete file="tmp.sh"/>
+        <delete file="$cmddir$"/>
+    </target>
+</project>

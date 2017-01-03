@@ -1,0 +1,78 @@
+.#{$prefix}accordion-layout-ct {
+    background-color: $accordion-background-color;
+    padding: $accordion-padding;
+}
+
+.#{$prefix}accordion-hd .#{$prefix}panel-header-title {
+    color: $accordion-header-color;
+    font-weight: $accordion-header-font-weight;
+    font-family: $accordion-header-font-family;
+    text-transform: $accordion-header-text-transform;
+}
+
+.#{$prefix}accordion-item {
+    margin: $accordion-item-margin;
+
+    .#{$prefix}accordion-hd {
+        background: $accordion-header-background-color;
+        border-width: $accordion-header-border-width;
+        border-color: $accordion-header-border-color;
+        padding: $accordion-header-padding;
+    }
+
+    @if $accordion-header-over-background-color != $accordion-header-background-color {
+        .#{$prefix}accordion-hd-over {
+            background-color: $accordion-header-over-background-color;
+        }
+    }
+
+    .#{$prefix}accordion-hd-sibling-expanded {
+        border-top-color: bottom($accordion-header-border-color);
+        border-top-width: bottom($accordion-header-border-width);
+    }
+
+    .#{$prefix}accordion-hd-last-collapsed {
+        border-bottom-color: $accordion-header-background-color;
+    }
+
+    .#{$prefix}accordion-body {
+        border-width: $accordion-body-border-width;
+    }
+}
+
+.#{$prefix}accordion-hd {
+    .#{$prefix}tool-collapse-top,
+    .#{$prefix}tool-collapse-bottom {
+        background-position: 0 ($accordion-header-tool-size * -17);
+    }
+
+    .#{$prefix}tool-expand-top,
+    .#{$prefix}tool-expand-bottom {
+        background-position: 0 ($accordion-header-tool-size * -16);
+    }
+
+
+    @if $tool-include-hover-icons {
+        .#{$prefix}tool-over {
+            .#{$prefix}tool-collapse-top,
+            .#{$prefix}tool-collapse-bottom {
+                background-position: (-$accordion-header-tool-size) ($accordion-header-tool-size * -17);
+            }
+
+            .#{$prefix}tool-expand-top,
+            .#{$prefix}tool-expand-bottom {
+                background-position: (-$accordion-header-tool-size) ($accordion-header-tool-size * -16);
+            }
+        }
+    }
+
+    .#{$prefix}tool-img {
+        @if $accordion-tool-background-image != $tool-background-image {
+            background-image: theme-background-image($accordion-tool-background-image);
+        }
+        // EXTJSIV-8846: partially transparent png images do not display correctly
+        // in winXP/IE8m when the image element has a transparent background.
+        // to fix this, we give the element the same background-color as the header.
+        background-color: $accordion-header-background-color;
+    }
+}

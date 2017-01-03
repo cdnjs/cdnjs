@@ -1,0 +1,34 @@
+.#{$prefix}column-header-checkbox {
+    border-color: $grid-header-background-color;
+}
+
+.#{$prefix}grid-row-checker,
+.#{$prefix}column-header-checkbox .#{$prefix}column-header-text {
+    height: $form-checkbox-size;
+    width: $form-checkbox-size;
+    background-image: theme-background-image($form-checkbox-background-image);
+    // IE6, IE7, and all IE Quirks mode need line-height to be the same as checkbox height
+    // or the header/row height will be too tall
+    line-height: $form-checkbox-size;
+}
+
+.#{$prefix}column-header-checkbox .#{$prefix}column-header-inner {
+    padding: $checkbox-selection-model-column-header-padding;
+}
+
+.#{$prefix}grid-cell-row-checker .#{$prefix}grid-cell-inner {
+    padding: $checkbox-selection-model-cell-padding;
+
+    @if $grid-no-row-lines-show-focus-border {
+        .#{$prefix}grid-no-row-lines .#{$prefix}grid-row-focused & {
+            padding-top: top($checkbox-selection-model-cell-padding) - $grid-row-cell-border-width;
+            padding-bottom: bottom($checkbox-selection-model-cell-padding) - $grid-row-cell-border-width;
+        }
+    }
+}
+
+.#{$prefix}grid-hd-checker-on .#{$prefix}column-header-text,
+.#{$prefix}grid-item-selected .#{$prefix}grid-row-checker,
+.#{$prefix}grid-item-selected .#{$prefix}grid-row-checker {
+    background-position: 0 (-$form-checkbox-size);
+}

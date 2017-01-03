@@ -1,0 +1,72 @@
+.#{$prefix}column-header {
+    position: absolute;
+    overflow: hidden;
+    background-repeat: repeat-x;
+}
+
+.#{$prefix}column-header-inner {
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+}
+
+.#{$prefix}column-header-text {
+    white-space: nowrap;
+    background-repeat: no-repeat;
+}
+
+@if $include-ie and $include-rtl {
+    .#{$prefix}rtl.#{$prefix}column-header-text {
+        // in IE9, left and right padding are automatically reversed on inline elements when
+        // the direction property is "rtl". inline-block fixes it. We only apply this hack
+        // in rtl mode because inline-block breaks ellipsis.
+        display: inline-block;
+    }
+}
+
+.#{$prefix}column-header-trigger {
+    display: none;
+    height: 100%;
+    background-repeat: no-repeat;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 2;
+}
+
+@if $include-rtl {
+    .#{$prefix}rtl.#{$prefix}column-header-trigger {
+        left: 0;
+        right: auto;
+    }
+}
+
+.#{$prefix}column-header-over, .#{$prefix}column-header-open {
+    .#{$prefix}column-header-trigger {
+        display: block;
+    }
+}
+
+.#{$prefix}column-header-align-right {
+    text-align: right;
+}
+
+@if $include-rtl {
+    .#{$prefix}rtl.#{$prefix}column-header-align-right {
+        text-align: left;
+    }
+}
+
+.#{$prefix}column-header-align-left {
+    text-align: left;
+}
+
+@if $include-rtl {
+    .#{$prefix}rtl.#{$prefix}column-header-align-left {
+        text-align: right;
+    }
+}
+
+.#{$prefix}column-header-align-center {
+    text-align: center;
+}

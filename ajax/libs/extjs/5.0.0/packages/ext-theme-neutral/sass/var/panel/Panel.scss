@@ -1,0 +1,395 @@
+/**
+ * @class Ext.panel.Panel
+ */
+
+// TODO: setting this probably does not work well, since border-radius is typically
+// reserved for framed-panels - should we remove this?
+$panel-border-radius: 0 !default;
+
+/**
+ * @var {number}
+ * The default border-width of Panels
+ */
+$panel-border-width: 1px !default;
+
+/**
+ * @var {color}
+ * The base color of Panels
+ */
+$panel-base-color: $base-color !default;
+
+/**
+ * @var {color}
+ * The default border-color of Panels
+ */
+$panel-border-color: $panel-base-color !default;
+
+/**
+ * @var {number}
+ * The maximum width a Panel's border can be before resizer handles are embedded
+ * into the borders using negative absolute positions.
+ *
+ * This defaults to 2, so that in the classic theme which uses 1 pixel borders,
+ * resize handles are in the content area within the border as they always have
+ * been.
+ *
+ * In the Neptune theme, the handles are embedded into the 5 pixel wide borders
+ * of any framed panel.
+ */
+$border-width-threshold: 2 !default;
+
+// ===============================
+// ========= PANEL BODY ==========
+// ===============================
+/**
+ * @var {string}
+ * The default border-style of Panels
+ */
+$panel-body-border-style: solid !default;
+
+/**
+ * @var {color}
+ * The default body background-color of Panels
+ */
+$panel-body-background-color: #fff !default;
+
+/**
+ * @var {color}
+ * The default color of text inside a Panel's body
+ */
+$panel-body-color: #000 !default;
+
+/**
+ * @var {color}
+ * The default border-color of the Panel body
+ */
+$panel-body-border-color: $panel-border-color !default;
+
+/**
+ * @var {number}
+ * The default border-width of the Panel body
+ */
+$panel-body-border-width: 1px !default;
+
+/**
+ * @var {number}
+ * The default font-size of the Panel body
+ */
+$panel-body-font-size: $font-size !default;
+
+/**
+ * @var {string}
+ * The default font-weight of the Panel body
+ */
+$panel-body-font-weight: $font-weight !default;
+
+/**
+ * @var {string}
+ * The default font-family of the Panel body
+ */
+$panel-body-font-family: $font-family !default;
+
+/**
+ * @var {number}
+ * The space between the Panel {@link Ext.panel.Tool Tools}
+ */
+$panel-tool-spacing: 4px !default;
+
+/**
+ * @var {string}
+ * The background sprite to use for Panel {@link Ext.panel.Tool Tools}
+ */
+$panel-tool-background-image: 'tools/tool-sprites' !default;
+
+/**
+ * @var {number}
+ * The border-width of Panel Headers
+ */
+$panel-header-border-width: $panel-border-width !default;
+
+/**
+ * @var {string}
+ * The border-style of Panel Headers
+ */
+$panel-header-border-style: solid !default;
+
+/**
+ * @var {number/list}
+ * The padding of Panel Headers
+ */
+$panel-header-padding: 5px !default;
+
+/**
+ * @var {number}
+ * The font-size of Panel Headers
+ */
+$panel-header-font-size: $font-size !default;
+
+/**
+ * @var {number}
+ * The line-height of Panel Headers
+ */
+$panel-header-line-height: 16px !default;
+
+/**
+ * @var {string}
+ * The font-weight of Panel Headers
+ */
+$panel-header-font-weight: $font-weight-bold !default;
+
+/**
+ * @var {string}
+ * The font-family of Panel Headers
+ */
+$panel-header-font-family: $font-family !default;
+
+/**
+ * @var {string}
+ * The text-transform of Panel Headers
+ */
+$panel-header-text-transform: none !default;
+
+/**
+ * @var {number/list}
+ * The padding of the Panel Header's text element
+ */
+$panel-header-text-padding: 0 !default;
+
+/**
+ * @var {number/list}
+ * The margin of the Panel Header's text element
+ */
+$panel-header-text-margin: 0 !default;
+
+/**
+ * @var {string/list}
+ * The background-gradient of the Panel Header. Can be either the name of a predefined
+ * gradient or a list of color stops. Used as the `$type` parameter for
+ * {@link Global_CSS#background-gradient}.
+ */
+$panel-header-background-gradient: 'none' !default;
+
+/**
+ * @var {color}
+ * The border-color of the Panel Header
+ */
+$panel-header-border-color: $panel-border-color !default;
+
+/**
+ * @var {color}
+ * The inner border-color of the Panel Header
+ */
+$panel-header-inner-border-color: #fff !default;
+
+/**
+ * @var {number}
+ * The inner border-width of the Panel Header
+ */
+$panel-header-inner-border-width: 0 !default;
+
+/**
+ * @var {color}
+ * The text color of the Panel Header
+ */
+$panel-header-color: $color !default;
+
+/**
+ * @var {color}
+ * The background-color of the Panel Header
+ */
+$panel-header-background-color: $panel-base-color !default;
+
+/**
+ * @var {number}
+ * The width of the Panel Header icon
+ */
+$panel-header-icon-width: 16px !default;
+
+/**
+ * @var {number}
+ * The height of the Panel Header icon
+ */
+$panel-header-icon-height: 16px !default;
+
+/**
+ * @var {number}
+ * The space between the Panel Header icon and text
+ */
+$panel-header-icon-spacing: 4px !default;
+
+/**
+ * @var {list}
+ * The background-position of  the Panel Header icon
+ */
+$panel-header-icon-background-position: center center !default;
+
+/**
+ * @var {color}
+ * The color of the Panel Header glyph icon
+ */
+$panel-header-glyph-color: $panel-header-color !default;
+
+/**
+ * @var {number}
+ * The opacity of the Panel Header glyph icon
+ */
+$panel-header-glyph-opacity: .5 !default;
+
+/**
+ * @var {boolean}
+ * True to adjust the padding of borderless panel headers so that their height is the same
+ * as the height of bordered panels.  This is helpful when borderless and bordered panels
+ * are used side-by-side, as it maintains a consistent vertical alignment.
+ */
+$panel-header-noborder-adjust: true !default;
+
+/**
+ * @var {color}
+ * The base color of the framed Panels
+ */
+$panel-frame-base-color: $panel-base-color !default;
+
+/**
+ * @var {number}
+ * The border-radius of framed Panels
+ */
+$panel-frame-border-radius: 4px !default;
+
+/**
+ * @var {number}
+ * The border-width of framed Panels
+ */
+$panel-frame-border-width: 1px !default;
+
+/**
+ * @var {string}
+ * The border-style of framed Panels
+ */
+$panel-frame-border-style: solid !default;
+
+/**
+ * @var {number}
+ * The padding of framed Panels
+ */
+$panel-frame-padding: 4px !default;
+
+/**
+ * @var {color}
+ * The background-color of framed Panels
+ */
+$panel-frame-background-color: #fff !default;
+
+/**
+ * @var {color}
+ * The border-color of framed Panels
+ */
+$panel-frame-border-color: $panel-border-color !default;
+
+/**
+ * @var {number}
+ * The border-width of the body element of framed Panels
+ */
+$panel-frame-body-border-width: 1px !default;
+
+/**
+ * @var {number}
+ * The border-width of framed Panel Headers
+ */
+$panel-frame-header-border-width: $panel-header-border-width !default;
+
+/**
+ * @var {color}
+ * The inner border-color of framed Panel Headers
+ */
+$panel-frame-header-inner-border-color: #fff !default;
+
+/**
+ * @var {number}
+ * The inner border-width of framed Panel Headers
+ */
+$panel-frame-header-inner-border-width: 0 !default;
+
+/**
+ * @var {number/list}
+ * The padding of framed Panel Headers
+ */
+$panel-frame-header-padding: $panel-header-padding !default;
+
+/**
+ * @var {number}
+ * The opacity of ghost Panels while dragging
+ */
+$panel-ghost-opacity: 0.50 !default;
+
+/**
+ * @var {string}
+ * The direction to strech the background-gradient of top docked Headers when slicing images
+ * for IE using Sencha Cmd
+ */
+$panel-background-stretch-top: bottom !default;
+
+/**
+ * @var {string}
+ * The direction to strech the background-gradient of bottom docked Headers when slicing images
+ * for IE using Sencha Cmd
+ */
+$panel-background-stretch-bottom: top !default;
+
+/**
+ * @var {string}
+ * The direction to strech the background-gradient of right docked Headers when slicing images
+ * for IE using Sencha Cmd
+ */
+$panel-background-stretch-right: left !default;
+
+/**
+ * @var {string}
+ * The direction to strech the background-gradient of left docked Headers when slicing images
+ * for IE using Sencha Cmd
+ */
+$panel-background-stretch-left: right !default;
+
+/**
+ * @var {boolean}
+ * True to include neptune style border management rules.
+ */
+$panel-include-border-management-rules: false !default;
+
+/**
+ * @var {color}
+ * The color to apply to the border that wraps the body and docked items in a framed
+ * panel. The presence of the wrap border in a framed panel is controlled by the
+ * {@link #border} config. Only applicable when `$panel-include-border-management-rules` is
+ * `true`.
+ */
+$panel-wrap-border-color: $panel-border-color !default;
+
+/**
+ * @var {number}
+ * The width to apply to the border that wraps the body and docked items in a framed
+ * panel. The presence of the wrap border in a framed panel is controlled by the
+ * {@link #border} config. Only applicable when `$panel-include-border-management-rules` is
+ * `true`.
+ */
+$panel-wrap-border-width: 1px !default;
+
+/**
+ * @var {boolean}
+ * True to include the "default" panel UI
+ */
+$include-panel-default-ui: $include-default-uis !default;
+
+/**
+ * @var {boolean}
+ * True to include the "default-framed" panel UI
+ */
+$include-panel-default-framed-ui: $include-default-uis !default;
+
+/**
+ * @var {boolean}
+ * True to ignore the frame padding.  By default, the frame mixin adds extra padding when
+ * border radius is larger than border width.  This is intended to prevent the content
+ * from colliding with the rounded corners of the frame.  Set this to true to prevent
+ * the panel frame from adding this extra padding.
+ */
+$panel-ignore-frame-padding: false !default;

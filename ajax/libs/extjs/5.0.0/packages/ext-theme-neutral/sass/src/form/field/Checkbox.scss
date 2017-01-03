@@ -1,0 +1,154 @@
+/**
+ * Creates a visual theme for checkboxes and radio buttons.  Note this mixin only provides
+ * styling for the checkbox/radio button and its {@link #boxLabel}, The {@link #fieldLabel}
+ * and error icon/message are styled by {@link #extjs-label-ui}.
+ *
+ * @param {string} $ui
+ * The name of the UI being created. Can not included spaces or special punctuation
+ * (used in CSS class names).
+ *
+ * @param {number} [$ui-field-height=$form-field-height]
+ * The height of the field body that the checkbox must fit within.  This does not set the
+ * height of the field, only allows the checkbox to be centered inside the field body.
+ * (The height of the field body is determined by {@link #extjs-label-ui}).
+ *
+ * @param {number} [$ui-checkbox-size=$form-checkbox-size]
+ * The size of the checkbox
+ *
+ * @param {string} [$ui-checkbox-background-image=$form-checkbox-background-image]
+ * The background-image of the checkbox
+ *
+ * @param {string} [$ui-radio-background-image=$form-radio-background-image]
+ * The background-image of the radio button
+ *
+ * @param {color} [$ui-label-color=$form-checkbox-label-color]
+ * The color of the checkbox's {@link #boxLabel}
+ *
+ * @param {string} [$ui-label-font-weight=$form-checkbox-label-font-weight]
+ * The font-weight of the checkbox's {@link #boxLabel}
+ *
+ * @param {string} [$ui-label-font-size=$form-checkbox-label-font-size]
+ * The font-size of the checkbox's {@link #boxLabel}
+ *
+ * @param {string} [$ui-label-font-family=$form-checkbox-label-font-family]
+ * The font-family of the checkbox's {@link #boxLabel}
+ *
+ * @param {string} [$ui-label-line-height=$form-checkbox-label-line-height]
+ * The line-height of the checkbox's {@link #boxLabel}
+ *
+ * @param {number} [$ui-label-spacing=$form-checkbox-label-spacing]
+ * The space between the boxLabel and the checkbox.
+ *
+ * @member Ext.form.field.Checkbox
+ */
+@mixin extjs-checkbox-ui(
+    $ui: null,
+    $ui-field-height: $form-field-height,
+    $ui-checkbox-size: $form-checkbox-size,
+    $ui-checkbox-background-image: $form-checkbox-background-image,
+    $ui-radio-background-image: $form-radio-background-image,
+    $ui-label-color: $form-checkbox-label-color,
+    $ui-label-font-weight: $form-checkbox-label-font-weight,
+    $ui-label-font-size: $form-checkbox-label-font-size,
+    $ui-label-font-family: $form-checkbox-label-font-family,
+    $ui-label-line-height: $form-checkbox-label-line-height,
+    $ui-label-spacing: $form-checkbox-label-spacing
+) {
+    .#{$prefix}form-cb-wrap-#{$ui} {
+        height: $ui-field-height;
+    }
+
+    .#{$prefix}form-cb-#{$ui} {
+        // vertically center the checkbox
+        margin-top: round(($ui-field-height - $ui-checkbox-size) / 2);
+    }
+
+    .#{$prefix}form-checkbox-#{$ui},
+    .#{$prefix}form-radio-#{$ui} {
+        width: $ui-checkbox-size;
+        height: $ui-checkbox-size;
+    }
+
+    .#{$prefix}form-radio-#{$ui} {
+        background: theme-background-image($ui-radio-background-image) no-repeat;
+
+        .#{$prefix}form-cb-checked & {
+            background-position: 0 (0 - $ui-checkbox-size);
+        }
+    }
+
+    .#{$prefix}form-checkbox-#{$ui} {
+        background: theme-background-image($ui-checkbox-background-image) no-repeat;
+
+        .#{$prefix}form-cb-checked & {
+            background-position: 0 (0 - $ui-checkbox-size);
+        }
+    }
+
+    .#{$prefix}field-#{$ui}-form-checkbox-focus {
+        background-position: (0 - $ui-checkbox-size) 0;
+
+
+        .#{$prefix}form-cb-checked & {
+            background-position: (0 - $ui-checkbox-size) (0 - $ui-checkbox-size);
+        }
+    }
+
+    .#{$prefix}form-cb-label-#{$ui} {
+        margin-top: round(($ui-field-height - $ui-label-line-height) / 2);
+        font: $ui-label-font-weight #{$ui-label-font-size}/#{$ui-label-line-height} $ui-label-font-family;
+
+        &.#{$prefix}form-cb-label-before {
+            padding-right: $ui-label-spacing + $ui-checkbox-size;
+
+            @if $include-rtl {
+                &.#{$prefix}rtl {
+                    padding-right: 0;
+                    padding-left: $ui-label-spacing + $ui-checkbox-size;
+                }
+            }
+        }
+
+        &.#{$prefix}form-cb-label-after {
+            padding-left: $ui-label-spacing + $ui-checkbox-size;
+        }
+
+        @if $include-rtl {
+            &.#{$prefix}rtl {
+                padding-left: 0;
+                padding-right: $ui-label-spacing + $ui-checkbox-size;
+            }
+        }
+    }
+
+    // Checkbox field or subclass inside cell - calculate top/bottom padding to keep row height correct
+    @if $include-ext-grid-column-widget or $include-ext-grid-plugin-editing {
+        .#{$prefix}checkbox-#{$ui}-cell > .#{$prefix}grid-cell-inner {
+            padding-top:    max(ceil(($grid-row-height - $ui-field-height) / 2), 0);
+            padding-bottom: max(floor(($grid-row-height - $ui-field-height) / 2), 0);
+        }
+    }
+}
+
+@if $include-checkbox-default-ui {
+    @include extjs-checkbox-ui(
+        $ui: 'default'
+    );
+}
+
+@if $include-checkbox-toolbar-ui {
+    @include extjs-checkbox-ui(
+        $ui: 'toolbar',
+        $ui-field-height: $form-toolbar-field-height,
+        $ui-checkbox-size: $form-toolbar-checkbox-size,
+        $ui-checkbox-background-image: $form-toolbar-checkbox-background-image,
+        $ui-radio-background-image: $form-toolbar-radio-background-image,
+        $ui-label-color: $form-toolbar-checkbox-label-color,
+        $ui-label-font-weight: $form-toolbar-checkbox-label-font-weight,
+        $ui-label-font-size: $form-toolbar-checkbox-label-font-size,
+        $ui-label-font-family: $form-toolbar-checkbox-label-font-family,
+        $ui-label-line-height: $form-toolbar-checkbox-label-line-height,
+        $ui-label-spacing: $form-toolbar-checkbox-label-spacing
+    );
+}
+

@@ -1,0 +1,109 @@
+.#{$prefix}tagfield {
+    height: auto!important; /* The wrap has to accommodate the list, so override the .x-form-text height rule */
+    padding: 0!important;   /* Override .x-form-text padding rule */
+    cursor: text;
+    min-height: $form-text-field-height;
+    overflow-y: auto;
+}
+
+.#{$prefix}tagfield ul.#{$prefix}tagfield-list {
+    padding: 1px 3px;
+    margin: 0;
+}
+
+ul.#{$prefix}tagfield-list.#{$prefix}tagfield-singleselect {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.#{$prefix}tagfield-input, .#{$prefix}tagfield-item {
+    vertical-align: top;
+    display: inline-block;
+    position: relative;
+}
+
+.#{$prefix}tagfield-input input, .#{$prefix}tagfield-input div {
+    border: 0 none;
+    margin: 0;
+    background: none;
+    width: 100%;
+}
+
+.#{$prefix}tagfield-input-field {
+    line-height: $tag-field-input-field-height;
+}
+
+.#{$prefix}tagfield-emptyinput {
+    display: none;
+}
+
+.#{$prefix}tagfield-stacked .#{$prefix}tagfield-item {
+    display: block;
+}
+
+.#{$prefix}tagfield-item {
+    @include border-radius(3px);
+    background-color: $tag-field-item-background-color;
+    border: 1px solid $tag-field-item-border-color;
+    padding: 0px 1px 0px 5px !important;
+    margin: $tag-field-item-margin;
+    cursor: default;
+}
+
+.#{$prefix}field:not(.#{$prefix}item-disabled) .#{$prefix}tagfield-item:hover {
+    background: $tag-field-item-over-background-color;
+    border: 1px solid $tag-field-item-over-border-color;
+}
+
+.#{$prefix}field:not(.#{$prefix}item-disabled) .#{$prefix}tagfield-item.selected {
+    border: 1px solid $tag-field-item-selected-border-color !important;
+    background: $tag-field-item-selected-background-color!important;
+    color: $tag-field-item-selected-color!important;
+}
+
+.#{$prefix}tagfield-item-text {
+    line-height: $tag-field-item-line-height;
+    padding-right: $tag-field-item-after-padding;
+}
+
+.#{$prefix}tagfield-item-close {
+    cursor: pointer;
+    position: absolute;
+    background-image: theme-background-image('form/tag-field-item-close');
+    width: $tag-field-item-close-icon-width;
+    height: $tag-field-item-close-icon-height;
+    top: $tag-field-item-close-icon-top;
+    right: $tag-field-item-close-icon-right;
+}
+
+.#{$prefix}field:not(.#{$prefix}item-disabled) .#{$prefix}tagfield-item.selected .#{$prefix}tagfield-item-close {
+    background-position: $tag-field-item-selected-close-icon-position;
+}
+
+.#{$prefix}field:not(.#{$prefix}item-disabled) .#{$prefix}tagfield-item-close:hover {
+    background-position: $tag-field-item-close-icon-over-position;
+}
+
+.#{$prefix}field:not(.#{$prefix}item-disabled) .#{$prefix}tagfield-item.selected .#{$prefix}tagfield-item-close:hover {
+    background-position: $tag-field-item-selected-close-icon-over-position;
+}
+
+.#{$prefix}field:not(.#{$prefix}item-disabled) .#{$prefix}tagfield-item-close:active {
+    background-position: $tag-field-item-close-icon-active-position;
+}
+
+.#{$prefix}field:not(.#{$prefix}item-disabled) .#{$prefix}tagfield-item.selected .#{$prefix}tagfield-item-close:active {
+    background-position: $tag-field-item-selected-close-icon-active-position;
+}
+
+// Flip after padding and the close icon that sits in the padding to the left side in RTL mode.
+@if $include-rtl {
+    .#{$prefix}rtl.#{$prefix}tagfield-item-text {
+        padding-right: auto;
+        padding-left: $tag-field-item-after-padding;
+    }
+    .#{$prefix}rtl.#{$prefix}tagfield-item-close {
+        right: auto;
+        left: $tag-field-item-close-icon-right;
+    }
+}

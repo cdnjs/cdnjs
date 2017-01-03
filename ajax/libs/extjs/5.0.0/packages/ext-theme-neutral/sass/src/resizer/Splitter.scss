@@ -1,0 +1,89 @@
+.#{$prefix}collapse-el {
+    cursor: $collapse-tool-cursor;
+    @if $collapse-tool-opacity != 1 {
+        @include opacity($collapse-tool-opacity);
+    }
+}
+
+.#{$prefix}layout-split-left,
+.#{$prefix}layout-split-right {
+    top: 50%;
+    margin-top: round(-$collapse-tool-size / 2);
+    width: $splitter-size;
+    height: $collapse-tool-size;
+}
+
+.#{$prefix}layout-split-top,
+.#{$prefix}layout-split-bottom {
+    left: 50%;
+    width: $collapse-tool-size;
+    height: $splitter-size;
+    margin-left: round(-$collapse-tool-size / 2);
+}
+
+.#{$prefix}layout-split-left {
+    background-image: theme-background-image('util/splitter/mini-left');
+}
+
+.#{$prefix}layout-split-right {
+    background-image: theme-background-image('util/splitter/mini-right');
+}
+
+@if $include-rtl {
+    .#{$prefix}rtl {
+        &.#{$prefix}layout-split-left {
+            background-image: theme-background-image('util/splitter/mini-right');
+        }
+
+        &.#{$prefix}layout-split-right {
+            background-image: theme-background-image('util/splitter/mini-left');
+        }
+    }
+}
+
+.#{$prefix}layout-split-top {
+    background-image: theme-background-image('util/splitter/mini-top');
+}
+
+.#{$prefix}layout-split-bottom {
+    background-image: theme-background-image('util/splitter/mini-bottom');
+}
+
+.#{$prefix}splitter-collapsed {
+    .#{$prefix}layout-split-left {
+        background-image: theme-background-image('util/splitter/mini-right');
+    }
+
+    .#{$prefix}layout-split-right {
+        background-image: theme-background-image('util/splitter/mini-left');
+    }
+
+    @if $include-rtl {
+        .#{$prefix}rtl {
+            &.#{$prefix}layout-split-left {
+                background-image: theme-background-image('util/splitter/mini-left');
+            }
+
+            &.#{$prefix}layout-split-right {
+                background-image: theme-background-image('util/splitter/mini-right');
+            }
+        }
+    }
+
+    .#{$prefix}layout-split-top {
+        background-image: theme-background-image('util/splitter/mini-bottom');
+    }
+
+    .#{$prefix}layout-split-bottom {
+        background-image: theme-background-image('util/splitter/mini-top');
+    }
+}
+
+.#{$prefix}splitter-active {
+    background-color: $splitter-active-background-color;
+    @include opacity($splitter-active-opacity);
+
+    .#{$prefix}collapse-el {
+        @include opacity($splitter-active-collapse-tool-opacity);
+    }
+}

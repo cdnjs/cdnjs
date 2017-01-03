@@ -1,0 +1,150 @@
+/**
+ * generates base style rules for both tabs and buttons
+ *
+ * @param {string} [$base-cls='button']
+ *
+ * @param {boolean} [$include-arrows=true]
+ *
+ * @member Ext.button.Button
+ * @private
+ */
+@mixin extjs-button-base(
+    $base-cls: 'btn',
+    $btn-display: inline-block,
+    $include-arrows: true
+) {
+    .#{$prefix}#{$base-cls} {
+        display: $btn-display;
+        outline: 0;
+        cursor: pointer;
+        white-space: nowrap;
+        text-decoration: none;
+        > .#{$prefix}frame {
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+    .#{$prefix}#{$base-cls}-wrap {
+        display: table;
+        height: 100%;
+        width: 100%;
+    }
+
+    .#{$prefix}#{$base-cls}-button {
+        vertical-align: middle;
+        display: table-cell;
+        white-space: nowrap;
+        overflow: hidden;
+        line-height: 0;
+    }
+
+    .#{$prefix}#{$base-cls}-inner {
+        display: inline-block;
+        vertical-align: middle;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        .#{$prefix}#{$base-cls}-icon.#{$prefix}#{$base-cls}-no-text > & {
+            display: none;
+        }
+    }
+
+    .#{$prefix}#{$base-cls}-icon-el {
+        display: none;
+        vertical-align: middle;
+        background-position: center center;
+        background-repeat: no-repeat;
+
+        .#{$prefix}#{$base-cls}-icon > & {
+            display: inline-block;
+        }
+
+        .#{$prefix}#{$base-cls}-icon-top > &,
+        .#{$prefix}#{$base-cls}-icon-bottom > & {
+            display: block;
+        }
+    }
+
+    .#{$prefix}#{$base-cls}-button-center {
+        text-align: center;
+    }
+
+    .#{$prefix}#{$base-cls}-button-left {
+        text-align: left;
+    }
+
+    @if $include-rtl {
+        .#{$prefix}rtl.#{$prefix}#{$base-cls}-button-left {
+            text-align: right;
+        }
+    }
+
+    .#{$prefix}#{$base-cls}-button-right {
+        text-align: right;
+    }
+
+    @if $include-rtl {
+        .#{$prefix}rtl.#{$prefix}#{$base-cls}-button-right {
+            text-align: left;
+        }
+    }
+
+    @if $include-arrows {
+        @if $include-opera {
+            // Opera 12 inserts an implicit table-row for each cell.  This means that in order to
+            // make 2 cells display beside each other, they must be wrapped in a table-row element
+            .#{$prefix}opera12m-#{$base-cls}-arrow-right {
+                display: table;
+                > {
+                    .#{$prefix}#{$base-cls}-arrow-right,
+                    .#{$prefix}#{$base-cls}-split-right {
+                        display: table-row;
+                    }
+                }
+            }
+        }
+
+        .#{$prefix}#{$base-cls}-arrow:after,
+        .#{$prefix}#{$base-cls}-split:after {
+            background-repeat: no-repeat;
+            content: '';
+            // pseudo elements don't match wildcard selectors, so ".x-border-box *" will not apply
+            // to this element
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -ms-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+        }
+
+        .#{$prefix}#{$base-cls}-arrow-right:after,
+        .#{$prefix}#{$base-cls}-split-right:after {
+            display: table-cell;
+            background-position: right center;
+        }
+
+        @if $include-rtl {
+            .#{$prefix}rtl {
+                &.#{$prefix}#{$base-cls}-arrow-right:after,
+                &.#{$prefix}#{$base-cls}-split-right:after {
+                    background-position: left center;
+                }
+            }
+        }
+
+        .#{$prefix}#{$base-cls}-arrow-bottom:after,
+        .#{$prefix}#{$base-cls}-split-bottom:after {
+            display: table-row;
+            background-position: center bottom;
+            // when this pseudo el is display:table-row (with no table-cell inside) in needs
+            // content other than emtpy or space in order to render in some browsers (IE8-11
+            // and opera 12m currently), so use non-breaking space
+            content: '\00a0';
+            // line-height:0 is needed in opera 12 to prevent the pseudo el from inheriting
+            // line-height and being taller than specified by $icon-size.
+            line-height: 0;
+        }
+    }
+}
+
+@include extjs-button-base();

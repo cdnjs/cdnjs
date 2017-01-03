@@ -1,0 +1,121 @@
+.#{$prefix}segmented-button {
+    display: table;
+    table-layout: fixed;
+}
+
+.#{$prefix}segmented-button-item {
+    display: table-cell;
+    vertical-align: top;
+    @if $include-slicer-border-radius {
+        > .#{$prefix}frame {
+            width: 100%;
+            height: 100%;
+        }
+    }
+    
+    @if $include-slicer-border-radius {
+        .#{$prefix}btn-mc {
+            width: 100%;
+        }
+    }
+}
+
+.#{$prefix}segmented-button-item-horizontal {
+    display: table-cell;
+
+    // IE8 needs height:100% or else the "frame" element will not stretch to fit the
+    // height of the button
+    height: 100%;
+
+    &.#{$prefix}segmented-button-first {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+
+        @if $include-slicer-border-radius {
+            .#{$prefix}btn-tr,
+            .#{$prefix}btn-mr,
+            .#{$prefix}btn-br {
+                display: none;
+            }
+        }
+    }
+
+    &.#{$prefix}segmented-button-middle {
+        border-radius: 0;
+        border-left: 0;
+
+        @if $include-slicer-border-radius {
+            .#{$prefix}btn-tl,
+            .#{$prefix}btn-tr,
+            .#{$prefix}btn-ml,
+            .#{$prefix}btn-mr,
+            .#{$prefix}btn-bl,
+            .#{$prefix}btn-br {
+                display: none;
+            }
+        }
+    }
+
+    &.#{$prefix}segmented-button-last {
+        border-left: 0;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+
+        @if $include-slicer-border-radius {
+            .#{$prefix}btn-tl,
+            .#{$prefix}btn-ml,
+            .#{$prefix}btn-bl {
+                display: none;
+            }
+        }
+    }
+}
+
+.#{$prefix}segmented-button-row {
+    display: table-row;
+}
+
+.#{$prefix}segmented-button-item-vertical {
+    &.#{$prefix}segmented-button-first {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+
+        @if $include-slicer-border-radius {
+            .#{$prefix}btn-bl,
+            .#{$prefix}btn-bc,
+            .#{$prefix}btn-br {
+                display: none;
+            }
+        }
+    }
+
+    &.#{$prefix}segmented-button-middle {
+        border-radius: 0;
+        border-top: 0;
+
+        @if $include-slicer-border-radius {
+            .#{$prefix}btn-tl,
+            .#{$prefix}btn-tc,
+            .#{$prefix}btn-tr,
+            .#{$prefix}btn-bl,
+            .#{$prefix}btn-bc,
+            .#{$prefix}btn-br {
+                display: none;
+            }
+        }
+    }
+
+    &.#{$prefix}segmented-button-last {
+        border-top: 0;
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
+
+        @if $include-slicer-border-radius {
+            .#{$prefix}btn-tl,
+            .#{$prefix}btn-tc,
+            .#{$prefix}btn-tr {
+                display: none;
+            }
+        }
+    }
+}

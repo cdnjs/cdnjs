@@ -1,0 +1,77 @@
+.#{$prefix}dd-drag-repair {
+    .#{$prefix}dd-drag-ghost {
+        @include opacity(.6);
+    }
+
+    .#{$prefix}dd-drop-icon {
+        display: none;
+    }
+}
+
+.#{$prefix}dd-drag-ghost {
+    @include opacity(.85);
+    
+    padding: 5px;
+    padding-left: 20px;
+    
+    white-space: nowrap;
+    
+    color: #000;
+    font: normal ceil($font-size * .9) $font-family;
+    
+    border: 1px solid;
+    border-color: #ddd #bbb #bbb #ddd;
+    
+    background-color: #fff;
+}
+
+.#{$prefix}dd-drop-icon {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    
+    display: block;
+    
+    width: 16px;
+    height: 16px;
+    
+    background-color: transparent;
+    background-position:  center;
+    background-repeat:  no-repeat;
+    
+    z-index: 1;
+}
+
+@if $include-rtl {
+    .#{$prefix}rtl {
+        // These rules do not account for applications that contain nested rtl/ltr
+        // components, because it's a challenge to determine what the direction
+        // of the drag StatusProxy should be.  For now we just switch it to rtl styling
+        // if any ancestor has the x-rtl class.
+        .#{$prefix}dd-drag-ghost {
+            padding-left: 5px;
+            padding-right: 20px;
+        }
+        .#{$prefix}dd-drop-icon {
+            left: auto;
+            right: 3px;
+        }
+    }
+}
+
+$drop-ok-background-url: theme-background-image('dd/drop-yes') !default;
+$drop-ok-add-background-url: theme-background-image('dd/drop-add') !default;
+$drop-not-ok-background-url: theme-background-image('dd/drop-no') !default;
+
+.#{$prefix}dd-drop-ok .#{$prefix}dd-drop-icon {
+    background-image: $drop-ok-background-url
+}
+
+.#{$prefix}dd-drop-ok-add .#{$prefix}dd-drop-icon {
+    background-image: $drop-ok-add-background-url;
+}
+
+// nodrop rule must go at end to override drop OK icon rules
+.#{$prefix}dd-drop-nodrop div.#{$prefix}dd-drop-icon {
+    background-image: $drop-not-ok-background-url;
+}

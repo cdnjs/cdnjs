@@ -1,0 +1,43 @@
+.#{$prefix}grid-header-ct {
+    border: $grid-header-border-width $grid-header-border-style $panel-body-border-color;
+
+    // Body border provided by headerCt only when in accordion layout.
+    border-bottom-color: $grid-header-background-color;
+
+    background-color: $grid-header-background-color;
+    @if not is-null($grid-header-background-gradient) {
+        @include background-gradient($grid-header-background-color, $grid-header-background-gradient);
+    }
+}
+
+@if $include-ext-layout-container-accordion {
+    .#{$prefix}accordion-item .#{$prefix}grid-header-ct {
+        border-width: 0 0 $grid-header-border-width !important;
+    }
+}
+
+// When hideHeaders: true, we need !important to override above rule
+.#{$prefix}grid-header-ct-hidden {
+    border: 0 !important;
+}
+
+
+// create the bottom border of the header container by adding a top border to the
+// grid body.  This is necessary because the header container is a docked item, and 
+// Dock layout's border-collapsing mechanism removes the bottom border of top docked
+// items with a !important.
+.#{$prefix}grid-body {
+    border-top-color: $grid-header-border-color;
+}
+
+.#{$prefix}hmenu-sort-asc {
+    background-image: theme-background-image('grid/hmenu-asc');
+}
+
+.#{$prefix}hmenu-sort-desc {
+    background-image: theme-background-image('grid/hmenu-desc');
+}
+
+.#{$prefix}cols-icon {
+    background-image: theme-background-image('grid/columns');
+}

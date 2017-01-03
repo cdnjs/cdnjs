@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Windows</title>
+    <link rel="stylesheet" type="text/css" href="../../resources/css/ext-all.css"/>
+
+    <!-- GC -->
+
+    <script type="text/javascript" src="../../ext-all.js"></script>
+</head>
+<body>
+    <script type="text/javascript" charset="utf-8">
+        Ext.require([
+            'Ext.button.Button',
+            'Ext.layout.container.Border',
+            'Ext.window.MessageBox'
+        ]);
+        Ext.onReady(function() {
+            Ext.create('Ext.button.Button', {
+                renderTo: Ext.getBody(),
+                text: 'My Button'
+            });
+            
+            Ext.create('Ext.window.Window', {
+                height: 400,
+                width: 500,
+                title: 'My Window',
+                
+                minWidth: 300,
+                minHeight: 200,
+                modal: true,
+                
+                layout: 'border',
+                items: [
+                    {
+                        xtype: 'panel',
+                        region: 'west',
+                        width: 150,
+                        split: true,
+                        html: 'This is a panel'
+                    },
+                    {
+                        xtype: 'panel',
+                        region: 'center',
+                        html: 'In the center'
+                    }
+                ],
+                
+                buttons: [
+                    {
+                        text: 'My Button',
+                        handler: function() {
+                            Ext.Msg.alert('You clicked', 'Do NOT click the button');
+                        }
+                    }
+                ]
+            }).show();
+        });
+    </script>
+</body>
+</html>

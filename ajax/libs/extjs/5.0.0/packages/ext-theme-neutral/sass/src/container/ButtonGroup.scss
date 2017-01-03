@@ -1,0 +1,159 @@
+/**
+ * Creates a visual theme for a ButtonGroup.
+ *
+ * @param {string} $ui
+ * The name of the UI being created. Can not included spaces or special punctuation
+ * (used in CSS class names).
+ *
+ * @param {color} [$ui-background-color=$btn-group-background-color]
+ * The background-color of the button group
+ *
+ * @param {color} [$ui-border-color=$btn-group-border-color]
+ * The border-color of the button group
+ *
+ * @param {number} [$ui-border-width=$btn-group-border-width]
+ * The border-width of the button group
+ *
+ * @param {number} [$ui-border-radius=$btn-group-border-radius]
+ * The border-radius of the button group
+ *
+ * @param {color} [$ui-inner-border-color=$btn-group-inner-border-color]
+ * The inner border-color of the button group
+ *
+ * @param {color} [$ui-header-background-color=$btn-group-header-background-color]
+ * The background-color of the header
+ *
+ * @param {string} [$ui-header-font=$btn-group-header-font]
+ * The font of the header
+ *
+ * @param {color} [$ui-header-color=$btn-group-header-color]
+ * The text color of the header
+ *
+ * @param {number} [$ui-header-line-height=$btn-group-header-line-height]
+ * The line-height of the header
+ *
+ * @param {number} [$ui-header-padding=$btn-group-header-padding]
+ * The padding of the header
+ *
+ * @param {number} [$ui-body-padding=$btn-group-padding]
+ * The padding of the body element
+ *
+ * @param {string} [$ui-tool-background-image=$btn-group-tool-background-image]
+ * Sprite image to use for header {@link Ext.panel.Tool Tools}
+ *
+ * @member Ext.container.ButtonGroup
+ */
+@mixin extjs-btn-group-ui(
+    $ui: null,
+
+    // background
+    $ui-background-color: $btn-group-background-color,
+
+    // borders
+    $ui-border-color: $btn-group-border-color,
+    $ui-border-width: $btn-group-border-width,
+    $ui-border-radius: $btn-group-border-radius,
+    $ui-inner-border-color: $btn-group-inner-border-color,
+
+    //header
+    $ui-header-background-color: $btn-group-header-background-color,
+    $ui-header-font: $btn-group-header-font,
+    $ui-header-color: $btn-group-header-color,
+    $ui-header-line-height: $btn-group-header-line-height,
+    $ui-header-padding: $btn-group-header-padding,
+
+    $ui-body-padding: $btn-group-padding,
+    $ui-tool-background-image: $btn-group-tool-background-image,
+
+    // deprecated - use $ui instead
+    $ui-label: null
+){
+    @if $ui == null {
+        @if $ui-label != null {
+            @warn '$ui-label is deprecated.  Use $ui instead';
+            $ui: $ui-label;
+        } @else {
+            @warn "#{error('$ui is required')}";
+        }
+    }
+
+    @if $ui-border-radius != 0 {
+        @include x-frame(
+            'btn-group',
+            $ui: '#{$ui}',
+
+            $border-radius: $ui-border-radius,
+            $border-width: $ui-border-width,
+            $padding: $btn-group-padding,
+            $background-color: $ui-background-color
+        );
+        @include x-frame(
+            'btn-group',
+            $ui: '#{$ui}-notitle',
+
+            $border-radius: $ui-border-radius,
+            $border-width: $ui-border-width,
+            $padding: $btn-group-padding,
+            $background-color: $ui-background-color
+        );
+    }
+
+    .#{$prefix}btn-group-#{$ui} {
+        border-color: $ui-border-color;
+        @include inner-border(
+            $width: $btn-group-inner-border-width,
+            $color: $ui-inner-border-color
+        );
+
+    }
+
+    .#{$prefix}btn-group-header-#{$ui} {
+        @if $btn-group-header-margin != 0 {
+            margin: $btn-group-header-margin;
+        }
+        padding: $ui-header-padding;
+        line-height: $ui-header-line-height;
+        background: $ui-header-background-color;
+        @if not is-null($ui-border-radius) {
+            @include border-top-radius($ui-border-radius);
+        }
+
+        .#{$prefix}tool-img {
+            @if $ui-tool-background-image != $tool-background-image {
+                background-image: theme-background-image($ui-tool-background-image);
+            }
+            // EXTJSIV-8846: partially transparent png images do not display correctly
+            // in winXP/IE8m when the image element has a transparent background.
+            // to fix this, we give the element the same background-color as the ButtonGroup.
+            background-color: $ui-header-background-color;
+        }
+    }
+
+    .#{$prefix}btn-group-header-text-container-#{$ui} {
+        font: $ui-header-font;
+        line-height: $ui-header-line-height;
+        color: $ui-header-color;
+    }
+
+    .#{$prefix}btn-group-body-#{$ui} {
+        padding: $btn-group-padding;
+        .#{$prefix}table-layout {
+            border-spacing: $btn-group-border-spacing;
+        }
+    }
+}
+
+@if $include-btn-group-default-ui {
+    @include extjs-btn-group-ui(
+        $ui: 'default'
+    );
+}
+
+@if $include-btn-group-default-framed-ui {
+    @include extjs-btn-group-ui(
+        $ui: 'default-framed',
+        $ui-background-color: $btn-group-framed-background-color,
+        $ui-border-radius: $btn-group-framed-border-radius,
+        $ui-border-width: $btn-group-framed-border-width
+    );
+}

@@ -1,0 +1,153 @@
+@if $include-ext-toolbar-toolbar {
+    @if $include-button-default-toolbar-small-ui {
+        @include extjs-button-toolbar-small-ui(
+            $ui: 'plain',
+
+            $border-color: transparent,
+            $border-color-over: $button-toolbar-border-color-over,
+            $border-color-focus: $button-toolbar-border-color-focus,
+            $border-color-pressed: $button-toolbar-border-color-pressed,
+            $border-color-disabled: transparent,
+
+            $background-color: transparent,
+            $background-color-over: $button-toolbar-background-color-over,
+            $background-color-focus: $button-toolbar-background-color-focus,
+            $background-color-pressed: $button-toolbar-background-color-pressed,
+            $background-color-disabled: transparent,
+
+            $color: $button-toolbar-color,
+            $color-over: $button-toolbar-color-over,
+            $color-focus: $button-toolbar-color-focus,
+            $color-pressed: $button-toolbar-color-pressed,
+            $color-disabled: $button-toolbar-color-disabled,
+
+            $font-size: $button-small-font-size,
+            $font-size-over: $button-small-font-size-over,
+            $font-size-focus: $button-small-font-size-focus,
+            $font-size-pressed: $button-small-font-size-pressed,
+            $font-size-disabled: $button-small-font-size-disabled,
+
+            $font-weight: $button-small-font-weight,
+            $font-weight-over: $button-small-font-weight-over,
+            $font-weight-focus: $button-small-font-weight-focus,
+            $font-weight-pressed: $button-small-font-weight-pressed,
+            $font-weight-disabled: $button-small-font-weight-disabled,
+
+            $font-family: $button-small-font-family,
+            $font-family-over: $button-small-font-family-over,
+            $font-family-focus: $button-small-font-family-focus,
+            $font-family-pressed: $button-small-font-family-pressed,
+            $font-family-disabled: $button-small-font-family-disabled
+        );
+    }
+
+    @if $include-button-default-toolbar-medium-ui {
+        @include extjs-button-toolbar-medium-ui(
+            $ui: 'plain',
+
+            $border-color: transparent,
+            $border-color-over: $button-toolbar-border-color-over,
+            $border-color-focus: $button-toolbar-border-color-focus,
+            $border-color-pressed: $button-toolbar-border-color-pressed,
+            $border-color-disabled: transparent,
+
+            $background-color: transparent,
+            $background-color-over: $button-toolbar-background-color-over,
+            $background-color-focus: $button-toolbar-background-color-focus,
+            $background-color-pressed: $button-toolbar-background-color-pressed,
+            $background-color-disabled: transparent,
+
+            $color: $button-toolbar-color,
+            $color-over: $button-toolbar-color-over,
+            $color-focus: $button-toolbar-color-focus,
+            $color-pressed: $button-toolbar-color-pressed,
+            $color-disabled: $button-toolbar-color-disabled,
+
+            $font-size: $button-medium-font-size,
+            $font-size-over: $button-medium-font-size-over,
+            $font-size-focus: $button-medium-font-size-focus,
+            $font-size-pressed: $button-medium-font-size-pressed,
+            $font-size-disabled: $button-medium-font-size-disabled,
+
+            $font-weight: $button-medium-font-weight,
+            $font-weight-over: $button-medium-font-weight-over,
+            $font-weight-focus: $button-medium-font-weight-focus,
+            $font-weight-pressed: $button-medium-font-weight-pressed,
+            $font-weight-disabled: $button-medium-font-weight-disabled,
+
+            $font-family: $button-medium-font-family,
+            $font-family-over: $button-medium-font-family-over,
+            $font-family-focus: $button-medium-font-family-focus,
+            $font-family-pressed: $button-medium-font-family-pressed,
+            $font-family-disabled: $button-medium-font-family-disabled
+        );
+    }
+
+    @if $include-button-default-toolbar-large-ui {
+        @include extjs-button-toolbar-large-ui(
+            $ui: 'plain',
+
+            $border-color: transparent,
+            $border-color-over: $button-toolbar-border-color-over,
+            $border-color-focus: $button-toolbar-border-color-focus,
+            $border-color-pressed: $button-toolbar-border-color-pressed,
+            $border-color-disabled: transparent,
+
+            $background-color: transparent,
+            $background-color-over: $button-toolbar-background-color-over,
+            $background-color-focus: $button-toolbar-background-color-focus,
+            $background-color-pressed: $button-toolbar-background-color-pressed,
+            $background-color-disabled: transparent,
+
+            $color: $button-toolbar-color,
+            $color-over: $button-toolbar-color-over,
+            $color-focus: $button-toolbar-color-focus,
+            $color-pressed: $button-toolbar-color-pressed,
+            $color-disabled: $button-toolbar-color-disabled,
+
+            $font-size: $button-large-font-size,
+            $font-size-over: $button-large-font-size-over,
+            $font-size-focus: $button-large-font-size-focus,
+            $font-size-pressed: $button-large-font-size-pressed,
+            $font-size-disabled: $button-large-font-size-disabled,
+
+            $font-weight: $button-large-font-weight,
+            $font-weight-over: $button-large-font-weight-over,
+            $font-weight-focus: $button-large-font-weight-focus,
+            $font-weight-pressed: $button-large-font-weight-pressed,
+            $font-weight-disabled: $button-large-font-weight-disabled,
+
+            $font-family: $button-large-font-family,
+            $font-family-over: $button-large-font-family-over,
+            $font-family-focus: $button-large-font-family-focus,
+            $font-family-pressed: $button-large-font-family-pressed,
+            $font-family-disabled: $button-large-font-family-disabled
+        );
+    }
+
+    // neptune buttons are given their disabled appearance using opacity. IE8 and below
+    // in xp have problems rendering png icons with alpha transparency when opacity
+    // is applied to the element if the element has a transparent background.  To work
+    // around this we give the disabled button the same background-color as the toolbar.
+    // see EXTJSIV-8846
+    .#{$prefix}btn-plain-toolbar-small-disabled,
+    .#{$prefix}btn-plain-toolbar-medium-disabled,
+    .#{$prefix}btn-plain-toolbar-large-disabled {
+        .#{$prefix}btn-icon-el {
+            background-color: $toolbar-background-color;
+            @if $include-ie {
+                .#{$prefix}ie8 & {
+                    // in IE8 position: absolute breaks inheritance of opacity,
+                    // so we have to apply the opacity to the icon element.
+                    // We don't do this in the button mixin because the icon el has to 
+                    // have a background-color or else partially transparent pixels
+                    // in the icon will not display correctly.
+                    @if $button-toolbar-opacity-disabled != 1 {
+                        @include opacity($button-toolbar-opacity-disabled);
+                    }
+                }
+            }
+        }
+    }
+    
+}

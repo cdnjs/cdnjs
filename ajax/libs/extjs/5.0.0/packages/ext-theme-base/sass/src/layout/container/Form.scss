@@ -1,0 +1,58 @@
+.#{$prefix}form-layout-wrap {
+    display: table;
+    width: 100%;
+    border-collapse: separate;
+}
+
+.#{$prefix}form-layout-colgroup {
+    display: table-column-group;
+}
+
+.#{$prefix}form-layout-column {
+    display: table-column;
+}
+
+.#{$prefix}form-layout-auto-label > * > {
+    .#{$prefix}form-item-label {
+        // shrink wrap label (sized using width:1px on column element), needs !important
+        // to cancel the effects of inline width set by Ext.form.Labelable#labelWidth
+        width: auto !important;
+        > .#{$prefix}form-item-label-inner {
+            width: auto !important;
+            white-space: nowrap;
+        }
+    }
+
+    .#{$prefix}form-layout-label-column {
+        // forces the label column to be as small as possible, given the text inside
+        width: 1px;
+    }
+}
+
+.#{$prefix}form-layout-sized-label > * > {
+    .#{$prefix}form-item-label {
+        // label with specified size (layout sets width on column element), needs !important
+        // to cancel the effects of inline width set by the Ext.form.Labelable#labelWidth
+        width: auto !important;
+    }
+}
+
+.#{$prefix}form-form-item {
+    display: table-row;
+
+    > .#{$prefix}form-item-label {
+        // override any inline padding set by the labelPad config, since form layout uses
+        // border-spacing to provide space between the label and field body
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    > .#{$prefix}form-item-body {
+        // text fields control the default width of the body using min-width and
+        // max-width.  In a form layout, max-width prevents the body from expanding
+        // to fit the width of the field.  min-width, on the other hand is still
+        // desirable when the field is in a form layout
+        max-width: none;
+    }
+}

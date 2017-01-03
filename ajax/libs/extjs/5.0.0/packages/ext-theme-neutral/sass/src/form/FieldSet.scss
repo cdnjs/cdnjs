@@ -1,0 +1,217 @@
+/**
+ * Creates a visual theme for text fields.  Note this mixin only provides styling
+ * For the form field body, The label and error are styled by {@link #extjs-label}.
+ *
+ * @param {string} $ui
+ * The name of the UI being created. Can not included spaces or special punctuation
+ * (used in CSS class names).
+ *
+ * @param {number} [$ui-header-font-size=$fieldset-header-font-size]
+ * The font-size of the FieldSet header
+ *
+ * @param {string} [$ui-header-font-weight=$fieldset-header-font-weight]
+ * The font-weight of the FieldSet header
+ *
+ * @param {string} [$ui-header-font-family=$fieldset-header-font-family]
+ * The font-family of the FieldSet header
+ *
+ * @param {number/string} [$ui-header-line-height=$fieldset-header-line-height]
+ * The line-height of the FieldSet header
+ *
+ * @param {color} [$ui-header-color=$fieldset-header-color]
+ * The text color of the FieldSet header
+ *
+ * @param {number} [$ui-border-width=$fieldset-border-width]
+ * The border-width of the FieldSet
+ *
+ * @param {string} [$ui-border-style=$fieldset-border-style]
+ * The border-style of the FieldSet
+ *
+ * @param {color} [$ui-border-color=$fieldset=border-color]
+ * The border-color of the FieldSet
+ *
+ * @param {number} [$ui-border-radius=$fieldset=border-radius]
+ * The border radius of FieldSet elements.
+ *
+ * @param {number/list} [$ui-padding=$fieldset-padding]
+ * The FieldSet's padding
+ *
+ * @param {number/list} [$ui-margin=$fieldset-margin]
+ * The FieldSet's margin
+ *
+ * @param {number/list} [$ui-header-padding=$fieldset-header-padding]
+ * The padding to apply to the FieldSet's header
+ *
+ * @param {number} [$ui-collapse-tool-size=$fieldset-collapse-tool-size]
+ * The size of the FieldSet's collapse tool
+ *
+ * @param {number/list} [$ui-collapse-tool-margin=$fieldset-collapse-tool-margin]
+ * The margin to apply to the FieldSet's collapse tool
+ *
+ * @param {number/list} [$ui-collapse-tool-padding=$fieldset-collapse-tool-padding]
+ * The padding to apply to the FieldSet's collapse tool
+ *
+ * @param {string} [$ui-collapse-tool-background-image=$fieldset-collapse-tool-background-image]
+ * The background-image to use for the collapse tool. If 'none' the default tool
+ * sprite will be used.  Defaults to 'none'.
+ *
+ * @param {number} [$ui-collapse-tool-opacity=$fieldset-collapse-tool-opacity]
+ * The opacity of the FieldSet's collapse tool
+ *
+ * @param {number} [$ui-collapse-tool-opacity-over=$fieldset-collapse-tool-opacity-over]
+ * The opacity of the FieldSet's collapse tool when hovered
+ *
+ * @param {number} [$ui-collapse-tool-opacity-pressed=$fieldset-collapse-tool-opacity-pressed]
+ * The opacity of the FieldSet's collapse tool when pressed
+ *
+ * @param {number/list} [$ui-checkbox-margin=$fieldset-checkbox-margin]
+ * The margin to apply to the FieldSet's checkbox (for FieldSets that use
+ * {@link #checkboxToggle})
+ *
+ * @member Ext.form.FieldSet
+ */
+@mixin extjs-fieldset-ui(
+    $ui: null,
+    $ui-header-font-size: $fieldset-header-font-size,
+    $ui-header-font-weight: $fieldset-header-font-weight,
+    $ui-header-font-family: $fieldset-header-font-family,
+    $ui-header-line-height: $fieldset-header-line-height,
+    $ui-header-color: $fieldset-header-color,
+    $ui-border-width: $fieldset-border-width,
+    $ui-border-style: $fieldset-border-style,
+    $ui-border-color: $fieldset-border-color,
+    $ui-border-radius: $fieldset-border-radius,
+    $ui-padding: $fieldset-padding,
+    $ui-margin: $fieldset-margin,
+    $ui-header-padding: $fieldset-header-padding,
+    $ui-collapse-tool-size: $fieldset-collapse-tool-size,
+    $ui-collapse-tool-margin: $fieldset-collapse-tool-margin,
+    $ui-collapse-tool-padding: $fieldset-collapse-tool-padding,
+    $ui-collapse-tool-background-image: $fieldset-collapse-tool-background-image,
+    $ui-collapse-tool-opacity: $fieldset-collapse-tool-opacity,
+    $ui-collapse-tool-opacity-over: $fieldset-collapse-tool-opacity-over,
+    $ui-collapse-tool-opacity-pressed: $fieldset-collapse-tool-opacity-pressed,
+    $ui-checkbox-margin: $fieldset-checkbox-margin,
+    $ui-use-standard-tool-background-positions: $fieldset-use-standard-tool-background-positions
+) {
+    $ui-collapse-tool-background-position: 0 0;
+    $ui-collapse-tool-background-position-over: 0 (-$ui-collapse-tool-size);
+    $ui-collapse-tool-background-position-collapsed: (-$ui-collapse-tool-size) 0;
+    $ui-collapse-tool-background-position-collapsed-over: (-$ui-collapse-tool-size) (-$ui-collapse-tool-size);
+
+    @if ($ui-use-standard-tool-background-positions) {
+        $ui-collapse-tool-background-position: 0 ($ui-collapse-tool-size * -4);
+        $ui-collapse-tool-background-position-over: (-$ui-collapse-tool-size) ($ui-collapse-tool-size * -4);
+        $ui-collapse-tool-background-position-collapsed: 0 ($ui-collapse-tool-size * -5);
+        $ui-collapse-tool-background-position-collapsed-over: (-$ui-collapse-tool-size) ($ui-collapse-tool-size * -5);
+    }
+
+    .#{$prefix}fieldset-#{$ui} {
+        border: $ui-border-width $ui-border-style $ui-border-color;
+        padding: $ui-padding;
+        margin: $ui-margin;
+        @if $ui-border-radius != 0 {
+            @include border-radius($ui-border-radius);
+        }
+    }
+
+    @if $include-ie {
+        // Insane IE bug: Fieldset padding-top is rendered *outside* the border
+        // So we transfer the padding-top to the body element.
+        .#{$prefix}ie8 {
+            .#{$prefix}fieldset-#{$ui} {
+                padding-top: 0;
+            }
+            .#{$prefix}fieldset-body-#{$ui} {
+                padding-top: top($ui-padding);
+            }
+        }
+    }
+
+    .#{$prefix}fieldset-header-#{$ui} {
+        padding: $ui-header-padding;
+        line-height: $ui-header-line-height;
+
+        > .#{$prefix}fieldset-header-text {
+            font: $ui-header-font-weight #{$ui-header-font-size}/#{$ui-header-line-height} $ui-header-font-family;
+            color: $ui-header-color;
+            padding: 1px 0;
+        }
+    }
+
+    .#{$prefix}fieldset-header-checkbox-#{$ui} {
+        margin: $ui-checkbox-margin;
+        @if $include-rtl {
+            &.#{$prefix}rtl {
+                margin: rtl($ui-checkbox-margin);
+            }
+        }
+        line-height: $ui-header-line-height;
+    }
+
+    .#{$prefix}fieldset-header-tool-#{$ui} {
+        margin: $ui-collapse-tool-margin;
+        @if $include-rtl {
+            &.#{$prefix}rtl {
+                margin: rtl($ui-collapse-tool-margin);
+            }
+        }
+        padding: $ui-collapse-tool-padding;
+
+        > .#{$prefix}tool-img {
+            @include opacity($ui-collapse-tool-opacity);
+            height: $ui-collapse-tool-size;
+            width: $ui-collapse-tool-size;
+        }
+
+        @if $ui-collapse-tool-opacity-over != 1 or $ui-collapse-tool-opacity != 1 {
+            &.#{$prefix}tool-over > .#{$prefix}tool-img {
+                @include opacity($ui-collapse-tool-opacity-over);
+            }
+        }
+
+        @if $ui-collapse-tool-opacity-pressed != 1 or $ui-collapse-tool-opacity != 1 {
+            &.#{$prefix}tool-pressed > .#{$prefix}tool-img {
+                @include opacity($ui-collapse-tool-opacity-pressed);
+            }
+        }
+
+        > .#{$prefix}tool-toggle {
+            @if not is-null($ui-collapse-tool-background-image) {
+                background-image: theme-background-image($ui-collapse-tool-background-image);
+            }
+            background-position: $ui-collapse-tool-background-position;
+        }
+        @if not is-null($ui-collapse-tool-background-position-over) {
+            &.#{$prefix}tool-over > .#{$prefix}tool-toggle {
+                background-position: $ui-collapse-tool-background-position-over;
+            }
+        }
+    }
+
+    .#{$prefix}fieldset-#{$ui} {
+        &.#{$prefix}fieldset-collapsed {
+            @if $ui-border-radius != 0 {
+                @include border-radius(0);
+            }
+            border-width: 1px 1px 0 1px;
+            border-left-color: transparent;
+            border-right-color: transparent;
+
+            .#{$prefix}tool-toggle {
+                background-position: $ui-collapse-tool-background-position-collapsed;
+            }
+            @if not is-null($ui-collapse-tool-background-position-collapsed-over) {
+                .#{$prefix}tool-over > .#{$prefix}tool-toggle {
+                    background-position: $ui-collapse-tool-background-position-collapsed-over;
+                }
+            }
+        }
+    }
+}
+
+@if $include-fieldset-default-ui {
+    @include extjs-fieldset-ui(
+        $ui: 'default'
+    );
+}

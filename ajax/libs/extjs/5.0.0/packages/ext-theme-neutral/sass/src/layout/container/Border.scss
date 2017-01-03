@@ -1,0 +1,8 @@
+// This class has the potential of being included before others that it needs to override
+// adding the tagname to the selector ensures that this rule will win over others that
+// modify the background-color using single-class selectors, e.g. x-window
+// see EXTJSIV-12918
+body.#{$prefix}border-layout-ct,
+div.#{$prefix}border-layout-ct {
+    background-color: $border-layout-ct-background-color;
+}

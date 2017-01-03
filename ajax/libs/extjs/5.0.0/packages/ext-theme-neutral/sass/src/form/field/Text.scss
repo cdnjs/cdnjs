@@ -1,0 +1,422 @@
+/**
+ * Creates a visual theme for text fields.  Note this mixin only provides styling
+ * for the form field body, The label and error are styled by {@link #extjs-label-ui}.
+ *
+ * @param {string} $ui
+ * The name of the UI being created. Can not included spaces or special punctuation
+ * (used in CSS class names).
+ *
+ * @param {number} [$ui-height=$form-text-field-height]
+ * The height of the text field
+ *
+ * @param {number} [$ui-font-size=$form-text-field-font-size]
+ * The font-size of the text field
+ *
+ * @param {string} [$ui-font-family=$form-text-field-font-family]
+ * The font-family of the text field
+ *
+ * @param {string} [$ui-font-weight=$form-text-field-font-weight]
+ * The font-weight of the text field
+ *
+ * @param {color} [$ui-color=$form-text-field-color]
+ * The color of the text field's input element
+ *
+ * @param {color} [$ui-background-color=$form-text-field-background-color]
+ * The background color of the text field's input element
+ *
+ * @param {number/list} [$ui-border-width=$form-text-field-border-width]
+ * The border width of the text field
+ *
+ * @param {string/list} [$ui-border-style=$form-text-field-border-style]
+ * The border style of the text field
+ *
+ * @param {color/list} [$ui-border-color=$form-text-field-border-color]
+ * The border color of text fields
+ *
+ * @param {color/list} [$ui-focus-border-color=$form-text-field-focus-border-color]
+ * The border color of the text field when focused
+ *
+ * @param {color} [$ui-invalid-border-color=$form-text-field-invalid-border-color]
+ * The border color of the text field when the field value is invalid.
+ *
+ * @param {number/list} [$ui-border-radius=$form-text-field-border-radius]
+ * The border radius of the text field
+ *
+ * @param {string} [$ui-background-image=$form-text-field-background-image]
+ * The background image of the text field's input element
+ *
+ * @param {number/list} [$ui-padding=$form-text-field-padding]
+ * The padding of the text field's input element
+ *
+ * @param {color} [$ui-empty-color=$form-text-field-empty-color]
+ * Text color for of the text field when empty
+ *
+ * @param {number} [$ui-body-width=$form-text-field-body-width]
+ * The default width of the text field's body element (the element that contains the input
+ * element and triggers) when the field is not sized explicitly using the {@link #width}
+ * config, or sized by it's containing layout.
+ *
+ * @param {color} [$form-text-field-invalid-background-color=$form-field-invalid-background-color]
+ * Background color of the input element when the field value is invalid.
+ *
+ * @param {string} [$form-text-field-invalid-background-image=$form-field-invalid-background-image]
+ * Background image of the input element when the field value is invalid.
+ *
+ * @param {string} [$form-text-field-invalid-background-repeat=$form-field-invalid-background-repeat]
+ * Background repeat of the input element when the field value is invalid.
+ *
+ * @param {string/list} [$form-text-field-invalid-background-position=$form-field-invalid-background-position]
+ * Background position of the input element when the field value is invalid.
+ *
+ * @param {number} [$ui-trigger-width=$form-trigger-width]
+ * The width of the trigger element
+ *
+ * @param {number/list} [$ui-trigger-border-width=$form-trigger-border-width]
+ * The width of the trigger's border
+ *
+ * @param {color/list} [$ui-trigger-border-color=$form-trigger-border-color]
+ * The color of the trigger's border
+ *
+ * @param {string/list} [$ui-trigger-border-style=$form-trigger-border-style]
+ * The style of the trigger's border
+ *
+ * @param {color} [$ui-trigger-border-color-over=$form-trigger-border-color-over]
+ * The color of the trigger's border when hovered
+ *
+ * @param {color} [$ui-trigger-border-color-focus=$form-trigger-border-color-focus]
+ * The color of the trigger's border when the field is focused
+ *
+ * @param {color} [$ui-trigger-border-color-pressed=$form-trigger-border-color-pressed]
+ * The color of the trigger's border when the field is focused and the trigger is hovered
+ *
+ * @param {string} [$ui-trigger-background-image=$form-trigger-background-image]
+ * The default background image for the trigger
+ *
+ * @param {color} [$ui-trigger-background-color=$form-trigger-background-color]
+ * The background color of the trigger element
+ *
+ * @param {number} [$ui-textarea-line-height=$form-textarea-line-height]
+ * The line-height of the textarea element when this mixin is used to style a
+ * {@link Ext.form.field.TextArea TextArea}
+ *
+ * @param {number} [$ui-textarea-body-height=$form-textarea-body-height]
+ * The default width of the TextArea's body element (the element that contains the textarea
+ * html element when the field is not sized explicitly using the {@link #width}config, or
+ * sized by it's containing layout.
+ *
+ * @param {color} [$ui-file-field-color=$form-file-field-color] The text color of the
+ * input element when this mixin is used to style a {@link Ext.form.field.File File Field}
+ *
+ * @param {boolean} [$ui-classic-border=$form-text-field-classic-border]
+ * `true` to use classic-theme styled border.
+ *
+ * @member Ext.form.field.Text
+ */
+@mixin extjs-text-field-ui(
+    $ui: null,
+    $ui-height: $form-text-field-height,
+    $ui-font-size: $form-text-field-font-size,
+    $ui-font-family: $form-text-field-font-family,
+    $ui-font-weight: $form-text-field-font-weight,
+    $ui-color: $form-text-field-color,
+    $ui-background-color: $form-text-field-background-color,
+    $ui-border-width: $form-text-field-border-width,
+    $ui-border-style: $form-text-field-border-style,
+    $ui-border-color: $form-text-field-border-color,
+    $ui-focus-border-color: $form-text-field-focus-border-color,
+    $ui-invalid-border-color: $form-text-field-invalid-border-color,
+    $ui-border-radius: $form-text-field-border-radius,
+    $ui-background-image: $form-text-field-background-image,
+    $ui-padding: $form-text-field-padding,
+    $ui-empty-color: $form-text-field-empty-color,
+    $ui-body-width: $form-text-field-body-width,
+
+    $ui-invalid-background-color: $form-field-invalid-background-color,
+    $ui-invalid-background-image: $form-field-invalid-background-image,
+    $ui-invalid-background-repeat: $form-field-invalid-background-repeat,
+    $ui-invalid-background-position: $form-field-invalid-background-position,
+
+    $ui-trigger-width: $form-trigger-width,
+    $ui-trigger-border-width: $form-trigger-border-width,
+    $ui-trigger-border-color: $form-trigger-border-color,
+    $ui-trigger-border-style: $form-trigger-border-style,
+
+    $ui-trigger-border-color-over: null,
+    $ui-trigger-border-color-focus: null,
+    $ui-trigger-border-color-pressed: null,
+
+    $ui-trigger-background-image: $form-trigger-background-image,
+    $ui-trigger-background-color: $form-trigger-background-color,
+
+    $ui-textarea-line-height: $form-textarea-line-height,
+    $ui-textarea-body-height: $form-textarea-body-height,
+    $ui-file-field-color: $form-file-field-color,
+
+    $ui-classic-border: $form-text-field-classic-border
+) {
+    @if is-null($ui-trigger-border-color-over) {
+        @if $ui == 'default' {
+            $ui-trigger-border-color-over: $form-trigger-border-color-over;
+        } @else if $ui == 'toolbar' {
+            $ui-trigger-border-color-over: $form-toolbar-trigger-border-color-over;
+        } @else if $ui == 'grid-cell' {
+            $ui-trigger-border-color-over: $grid-cell-field-trigger-border-color-over;
+        } @else {
+            $ui-trigger-border-color-over: $ui-trigger-border-color;
+        }
+    }
+
+    @if is-null($ui-trigger-border-color-focus) {
+        @if $ui == 'default' {
+            $ui-trigger-border-color-focus: $form-trigger-border-color-focus;
+        } @else if $ui == 'toolbar' {
+            $ui-trigger-border-color-over: $form-toolbar-trigger-border-color-over;
+        } @else if $ui == 'grid-cell' {
+            $ui-trigger-border-color-over: $grid-cell-field-trigger-border-color-over;
+        } @else {
+            $ui-trigger-border-color-focus: $ui-trigger-border-color;
+        }
+    }
+
+    @if is-null($ui-trigger-border-color-pressed) {
+        @if $ui == 'default' {
+            $ui-trigger-border-color-pressed: $form-trigger-border-color-pressed;
+        } @else if $ui == 'toolbar' {
+            $ui-trigger-border-color-pressed: $form-toolbar-trigger-border-color-pressed;
+        } @else if $ui == 'grid-cell' {
+            $ui-trigger-border-color-pressed: $grid-cell-field-trigger-border-color-pressed;
+        } @else {
+            $ui-trigger-border-color-pressed: $ui-trigger-border-color;
+        }
+    }
+
+    .#{$prefix}form-text-field-body-#{$ui} {
+        // We use a combination of min-width and max-width to control the "default" width
+        // of the field body for the following reasons:
+        //
+        // 1. When the field is shrink wrap width, min-width prevents the width of the
+        // body from shrinking smaller than the default width
+        //
+        // 2. When the field is shrink wrap width, max-width prevents the width:100%
+        // triggerWrap element that is immediately inside the body element from causing
+        // the body to expand to infinity.
+        //
+        // 3. When the field's outermost element has a "width" assigned, whether that
+        // width is larger or smaller than what the default shrink-wrap width of the
+        // field would have been, that width will overcome either min-width or max-width
+        // and adjust the size of the body to fit within the defined width of the field
+        // minus the label width.
+        min-width: $ui-body-width;
+        max-width: $ui-body-width;
+    }
+
+    .#{$prefix}form-trigger-wrap-#{$ui} {
+        @if not $ui-classic-border {
+            border-width: $ui-border-width;
+            border-style: $ui-border-style;
+            border-color: $ui-border-color;
+            @if $ui-border-radius != 0 {
+                border-radius: $ui-border-radius;
+            }
+            &.#{$prefix}form-trigger-wrap-focus {
+                border-color: $ui-focus-border-color;
+            }
+
+            &.#{$prefix}form-trigger-wrap-invalid {
+                border-color: $ui-invalid-border-color;
+            }
+        }
+    }
+
+    @if $ui-classic-border {
+        .#{$prefix}form-text-wrap-#{$ui} {
+            border-width: $ui-border-width;
+            border-style: $ui-border-style;
+            border-color: $ui-border-color;
+            @if $ui-border-radius != 0 {
+                border-radius: $ui-border-radius;
+            }
+            &.#{$prefix}form-text-wrap-focus {
+                border-color: $ui-focus-border-color;
+            }
+
+            &.#{$prefix}form-text-wrap-invalid {
+                border-color: $ui-invalid-border-color;
+            }
+        }
+    }
+
+    $ui-line-height: $ui-height - vertical($ui-padding) - vertical($ui-border-width);
+    .#{$prefix}form-text-#{$ui} {
+        color: $ui-color;
+        padding: $ui-padding;
+        background-color: $ui-background-color;
+        @if $ui-border-radius != 0 {
+            border-radius: $ui-border-radius;
+        }
+        @if not is-null($ui-background-image) {
+            background-image: theme-background-image($ui-background-image);
+        }
+        font: $ui-font-weight #{$ui-font-size}/#{$ui-line-height} $ui-font-family;
+        min-height: $ui-height - vertical($ui-border-width);
+
+        @if $include-ie {
+            .#{$prefix}ie8 & {
+                // min-height triggers content-box sizing on IE8, so subtract padding
+                min-height: $ui-height - vertical($ui-border-width) - vertical($ui-padding);
+            }
+        }
+
+        &.#{$prefix}form-textarea {
+            line-height: $ui-textarea-line-height;
+            min-height: $ui-textarea-body-height;
+
+            @if $include-ie {
+                .#{$prefix}ie8 & {
+                    // min-height triggers content-box sizing on IE8, so subtract padding
+                    min-height: $ui-textarea-body-height - vertical($ui-padding);
+                }
+            }
+        }
+
+        &.#{$prefix}form-text-file {
+            color: $ui-file-field-color;
+        }
+    }
+
+    .#{$prefix}form-empty-field-#{$ui} {
+        color: $ui-empty-color;
+    }
+
+    .#{$prefix}form-invalid-field-#{$ui} {
+        background-color: $ui-invalid-background-color;
+        @if not is-null($ui-invalid-background-image) {
+            background-image: theme-background-image($ui-invalid-background-image);
+            background-repeat: $ui-invalid-background-repeat;
+            background-position: $ui-invalid-background-position;
+        }
+    }
+
+    $bg-position-y: if($ui-classic-border, 0, center);
+
+    .#{$prefix}form-trigger-#{$ui} {
+        background: $ui-trigger-background-color theme-background-image($ui-trigger-background-image) no-repeat;
+        background-position: 0 $bg-position-y;
+        width: $ui-trigger-width;
+
+        @if $ui-trigger-border-width != 0 {
+            border-width: $ui-trigger-border-width;
+            border-color: $ui-trigger-border-color;
+            border-style: $ui-trigger-border-style;
+        }
+
+        @if $include-rtl {
+            &.#{$prefix}rtl {
+                background-image: theme-background-image($ui-trigger-background-image + '-rtl');
+            }
+        }
+
+        &.#{$prefix}form-trigger-over {
+            background-position: -$ui-trigger-width $bg-position-y;
+            @if $ui-trigger-border-width != 0 and $ui-trigger-border-color-over != $ui-trigger-border-color {
+                border-color: $ui-trigger-border-color-over;
+            }
+
+            &.#{$prefix}form-trigger-focus {
+                background-position: -($ui-trigger-width * 4) $bg-position-y;
+            }
+        }
+
+        &.#{$prefix}form-trigger-focus {
+            background-position: -($ui-trigger-width * 3) $bg-position-y;
+            @if $ui-trigger-border-width != 0 and $ui-trigger-border-color-focus != $ui-trigger-border-color {
+                border-color: $ui-trigger-border-color-focus;
+            }
+        }
+    }
+
+    // add x-form-trigger class to increase specificity of "click" above focus/over
+    .#{$prefix}form-trigger.#{$prefix}form-trigger-#{$ui}.#{$prefix}form-trigger-click {
+        background-position: -($ui-trigger-width * 2) $bg-position-y;
+        @if $ui-trigger-border-width != 0 and $ui-trigger-border-color-pressed != $ui-trigger-border-color-over {
+            border-color: $ui-trigger-border-color-pressed;
+        }
+    }
+
+    // Text field or subclass inside cell - calculate top/bottom padding to keep row height correct
+    @if $include-ext-grid-column-widget or $include-ext-grid-plugin-editing {
+        .#{$prefix}textfield-#{$ui}-cell > .#{$prefix}grid-cell-inner {
+            padding-top:    max(ceil(($grid-row-height - $ui-height) / 2), 0);
+            padding-bottom: max(floor(($grid-row-height - $ui-height) / 2), 0);
+        }
+    }
+}
+
+@if $include-text-field-default-ui {
+    @include extjs-text-field-ui(
+        $ui: 'default'
+    );
+}
+
+@if $include-text-field-toolbar-ui {
+     @include extjs-text-field-ui(
+        $ui: 'toolbar',
+        $ui-height: $form-toolbar-text-field-height,
+        $ui-font-size: $form-toolbar-text-field-font-size,
+        $ui-font-family: $form-toolbar-text-field-font-family,
+        $ui-font-weight: $form-toolbar-text-field-font-weight,
+        $ui-color: $form-toolbar-text-field-color,
+        $ui-background-color: $form-toolbar-text-field-background-color,
+        $ui-border-width: $form-toolbar-text-field-border-width,
+        $ui-border-style: $form-toolbar-text-field-border-style,
+        $ui-border-color: $form-toolbar-text-field-border-color,
+        $ui-focus-border-color: $form-toolbar-text-field-focus-border-color,
+        $ui-invalid-border-color: $form-toolbar-text-field-invalid-border-color,
+        $ui-border-radius: $form-toolbar-text-field-border-radius,
+        $ui-background-image: $form-toolbar-text-field-background-image,
+        $ui-padding: $form-toolbar-text-field-padding,
+        $ui-empty-color: $form-toolbar-text-field-empty-color,
+        $ui-body-width: $form-toolbar-text-field-body-width,
+
+        $ui-invalid-background-color: $form-toolbar-text-field-invalid-background-color,
+        $ui-invalid-background-image: $form-toolbar-text-field-invalid-background-image,
+        $ui-invalid-background-repeat: $form-toolbar-text-field-invalid-background-repeat,
+        $ui-invalid-background-position: $form-toolbar-text-field-invalid-background-position,
+
+        $ui-trigger-width: $form-toolbar-trigger-width,
+        $ui-trigger-border-width: $form-toolbar-trigger-border-width,
+        $ui-trigger-border-color: $form-toolbar-trigger-border-color,
+        $ui-trigger-border-style: $form-toolbar-trigger-border-style,
+
+        $ui-trigger-border-color-over: null,
+        $ui-trigger-border-color-focus: null,
+        $ui-trigger-border-color-pressed: null,
+
+        $ui-trigger-background-image: $form-toolbar-trigger-background-image,
+        $ui-trigger-background-color: $form-toolbar-trigger-background-color,
+
+        $ui-textarea-line-height: $form-toolbar-textarea-line-height,
+        $ui-textarea-body-height: $form-toolbar-textarea-body-height,
+        $ui-file-field-color: $form-toolbar-file-field-color,
+
+        $ui-classic-border: $form-toolbar-text-field-classic-border
+    );
+}
+
+.#{$prefix}form-clear-trigger {
+    background-image: theme-background-image('form/clear-trigger');
+    @if $include-rtl {
+        &.#{$prefix}rtl {
+            background-image: theme-background-image('form/clear-trigger-rtl');
+        }
+    }
+}
+
+.#{$prefix}form-search-trigger {
+    background-image: theme-background-image('form/search-trigger');
+    @if $include-rtl {
+        &.#{$prefix}rtl {
+            background-image: theme-background-image('form/search-trigger-rtl');
+        }
+    }
+}

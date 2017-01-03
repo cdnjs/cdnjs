@@ -1,0 +1,209 @@
+.#{$prefix}body {
+    margin: 0;
+    @if $enable-font-smoothing {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+.#{$prefix}no-touch-scroll {
+    // prevents overflowing elements from being scrolled using touch input.  Needed
+    // in browsers that use native scrolling on touch-screen devices (e.g. IE10+ win8)
+    // Without this styling, gesture recognition inside overflowing containers is not
+    // possible.
+    touch-action: none;
+    -ms-touch-action: none; // IE10
+}
+
+@-ms-viewport {
+    // prevent scaling on windows8 tablets when using portrait orientation
+    width: device-width;
+}
+
+img {
+    border: 0;
+}
+
+.#{$prefix}border-box, 
+.#{$prefix}border-box * {
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -ms-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+}
+
+@if $include-rtl {
+    .#{$prefix}rtl {
+        direction: rtl;
+    }
+}
+
+.#{$prefix}ltr {
+    direction: ltr;
+}
+
+.#{$prefix}clear {
+    overflow: hidden;
+    clear: both;
+    font-size: 0;
+    line-height: 0;
+    display: table;
+}
+
+.#{$prefix}layer {
+    position: absolute !important;
+    overflow: hidden;
+}
+
+// Support for Floating config fixed: true which creates a fixed Layer.
+// Currently only available in browsers which support position: fixed
+.#{$prefix}fixed-layer {
+    position: fixed !important;
+    overflow: hidden;
+}
+
+.#{$prefix}shim {
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    @include opacity(0);
+}
+
+.#{$prefix}hidden-display {
+    display: none !important;
+}
+
+.#{$prefix}hidden-visibility {
+    visibility: hidden !important;
+}
+
+.#{$prefix}hidden,
+.#{$prefix}hidden-offsets {
+    // to deal with inline elements that can't be position:absolute
+    display: block !important;
+    // ensure the browser disallows tabbing into this element
+    visibility: hidden !important;
+    position: absolute !important;
+    // hide using top since left  can trigger a horizontal scrollbar in rtl mode.
+    top: -10000px !important;
+}
+
+// A hide method which is still accessible to screen readers
+.#{$prefix}hidden-clip {
+    position: absolute!important;
+    clip: rect(0,0,0,0);
+}
+
+.#{$prefix}masked-relative {
+    position: relative;
+}
+
+// Element shadows for IE 8 and below
+@if $include-ie {
+    .#{$prefix}ie-shadow {
+        background-color: #777;
+        display: none;
+        position: absolute;
+        overflow: hidden;
+    }
+}
+
+.#{$prefix}unselectable {
+    @include no-select;
+}
+
+.#{$prefix}selectable {
+    cursor: auto;
+
+    // Mozilla and WebKit support these properties
+    -moz-user-select: text;
+    -webkit-user-select: text;
+
+    // IE 10 is expected to support this
+    -ms-user-select: text;
+
+    // No browsers currently support these
+    user-select: text;
+    -o-user-select: text;
+}
+
+.#{$prefix}list-plain {
+    // removes default styling from ul elements
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.#{$prefix}table-plain {
+    border-collapse: collapse;
+    border-spacing: 0;
+    // inherit font size from parent node instead of using the browser's default font
+    // size for tables. (can't use font-size: inherit because of lack of IE6/7 support)
+    font-size: 1em;
+}
+
+.#{$prefix}frame-tl,
+.#{$prefix}frame-tr,
+.#{$prefix}frame-tc,
+.#{$prefix}frame-bl,
+.#{$prefix}frame-br,
+.#{$prefix}frame-bc {
+    overflow: hidden;
+    background-repeat: no-repeat;
+}
+
+.#{$prefix}frame-tc,
+.#{$prefix}frame-bc {
+    background-repeat: repeat-x;
+}
+
+// the corners of a table frame are given their width by applying padding.  Setting their
+// width property to 1px ensures that they can get no larger than the amount of padding
+// inside, even when the frame is stretched because the button has a width
+// (e.g. Button with width or minWidth configured has width:100% on the frame table)
+td.#{$prefix}frame-tl,
+td.#{$prefix}frame-tr,
+td.#{$prefix}frame-bl,
+td.#{$prefix}frame-br {
+    width: 1px;
+}
+
+.#{$prefix}frame-mc {
+    background-repeat: repeat-x;
+    overflow: hidden;
+}
+
+.#{$prefix}proxy-el {
+    position: absolute;
+    background: rgb(180, 180, 180);
+    @include opacity(0.8);
+}
+
+// Element shadows for browsers that support CSS3 box-shadow
+.#{$prefix}css-shadow {
+    position: absolute;
+    @include border-radius($css-shadow-border-radius);
+}
+
+.#{$prefix}item-disabled,
+.#{$prefix}item-disabled * {
+    cursor: default;
+}
+
+.#{$prefix}component,
+.#{$prefix}container {
+    // position relative so that things can be positioned inside of components/containers
+    // e.g. touch scroll indicators.
+    position: relative;
+}
+
+// TODO: remove outline from individual components that need it instead of resetting globally
+// *Really* TODO: use focus outline for its intended purpose: implementing ARIA. Instead of hacking focus outlines.
+.#{$prefix}webkit {
+    * {
+        &:focus {
+            outline:none;
+        }
+    }
+}
