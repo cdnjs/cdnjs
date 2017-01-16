@@ -23,7 +23,7 @@ var threads = require('os').cpus().length;
 var data;
 threads = threads > 2 ? threads - 1 : 1;
 
-exec('git ls-tree -r --name-only HEAD | grep **/package.json | xargs -n 1 -P ' + threads + ' git log -1 --since="2 weeks ago" --name-status --format="blahcrap %ad" --', function(err, stdout, stderr) {
+exec('git log --since="2 weeks ago" --name-status --format="blahcrap %ad" -- **/package.json', function(err, stdout, stderr) {
   console.dir(err);
   var recentLibraries = stdout.split('blahcrap');
   recentLibraries = _.filter(recentLibraries, function(lib) {
@@ -33,30 +33,52 @@ exec('git ls-tree -r --name-only HEAD | grep **/package.json | xargs -n 1 -P ' +
     return false;
   });
 
-  recentLibraries = _.map(recentLibraries, function(lib) {
-    lib = lib.replace('\n\n', '\n');
-    lib = lib.replace('\t', '\n');
-    lib = lib.substr(1);
-    lib = lib.split('\n');
+  recentLibraries = _.map(recentLibraries, function(entry) {
 
-    lib[0] = new Date(lib[0]);
-    if (lib[2]) {
-      lib = {
-        date: lib[0],
-        change: lib[1],
-        path: lib[2].replace(/(^\s+|\s+$)/g, '')
-      };
-    } else {
-      lib = null;
+    var entry = entry.split('\n\n');
+    if (entry.length < 2) {
+      return [];
     }
-    return lib;
+
+    var date = new Date(entry[0]);
+    var libs = entry[1].split('\n');
+    if (libs.length === 0) {
+      return [];
+    }
+
+    return _.map(libs, function (lib) {
+      lib = lib.replace('\t', '\n');
+      lib = lib.split('\n');
+
+      var change = lib[0];
+      var path = lib[1];
+      if (path) {
+        return {
+          date: date,
+          change: change,
+          path: path.replace(/(^\s+|\s+$)/g, '')
+        };
+      }
+
+      return null;
+    });
+
   });
+
+  recentLibraries = _.flatten(recentLibraries);
+
   recentLibraries = _.filter(recentLibraries, function(lib) {
     // console.log(lib, 'a', lib.length);
     if (lib === null) {
       return false;
     }
+    if (!isThere(lib.path)) {
+      return false;
+    }
     return true;
+  });
+  recentLibraries = _.uniqBy(recentLibraries, function(arrayElement) {
+    return arrayElement.path;
   });
   recentLibraries = _.sortBy(recentLibraries, function(arrayElement) {
     // element will be each array, so we just return a date from first element in it
@@ -64,9 +86,6 @@ exec('git ls-tree -r --name-only HEAD | grep **/package.json | xargs -n 1 -P ' +
   });
   recentLibraries = recentLibraries.reverse();
   _.each(recentLibraries, function(lib) {
-    if (!isThere(lib.path)) {
-      return;
-    }
     var library = JSON.parse(fs.readFileSync(lib.path, 'utf8'));
     var title = '';
     if (lib.change === 'M') {
