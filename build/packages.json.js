@@ -19,9 +19,7 @@ var feed = new RSS({
 });
 var exec = require('child_process').exec;
 var execSync = require('child_process').execSync;
-var threads = require('os').cpus().length;
 var data;
-threads = threads > 2 ? threads - 1 : 1;
 
 exec('git log --since="2 weeks ago" --name-status --format="blahcrap %ad" -- **/package.json', function(err, stdout, stderr) {
   console.dir(err);
