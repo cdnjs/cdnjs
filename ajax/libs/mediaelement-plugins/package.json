@@ -1,0 +1,62 @@
+{
+  "name": "mediaelement-plugins",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johndyer/mediaelement-plugins.git"
+  },
+  "bugs": {
+    "url": "https://github.com/johndyer/mediaelement-plugins/issues"
+  },
+  "private": false,
+  "devDependencies": {
+    "autoprefixer": "^6.5.1",
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.18.2",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-register": "^6.18.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.1",
+    "browserify-derequire": "^0.9.4",
+    "browserify-versionify": "^1.0.6",
+    "bundle-collapser": "^1.2.1",
+    "cssnano": "^3.8.0",
+    "cssnano-cli": "^1.0.5",
+    "jshint": "^2.9.4",
+    "uglify-js": "^2.4.21"
+  },
+  "scripts": {
+    "jshint": "jshint src/",
+    "build": "npm run ads && npm run vast && npm run context && npm run ga && npm run jump && npm run loop && npm run markers && npm run postroll && npm run skip && npm run chooser && npm run speed && npm run stop",
+    "ads": "postcss -u autoprefixer -r src/ads/ads.css && cp src/ads/ads.css dist/ads/ads.css && cssnano dist/ads/ads.css dist/ads/ads.min.css && browserify -t browserify-versionify -t [babelify] -p browserify-derequire -p bundle-collapser/plugin src/ads/ads.js > dist/ads/ads.js && uglifyjs dist/ads/ads.js -c sequences=true,dead_code=true,conditionals=true,booleans=true,unused=true,if_return=true,join_vars=true,drop_console=true -m --screw-ie8  > dist/ads/ads.min.js",
+    "vast": "browserify -t browserify-versionify -t [babelify] -p browserify-derequire -p bundle-collapser/plugin src/ads-vast/ads-vast.js > dist/ads-vast/ads-vast.js && uglifyjs dist/ads-vast/ads-vast.js -c sequences=true,dead_code=true,conditionals=true,booleans=true,unused=true,if_return=true,join_vars=true,drop_console=true -m --screw-ie8  > dist/ads-vast/ads-vast.min.js",
+    "context": "postcss -u autoprefixer -r src/context-menu/context-menu.css && cp src/context-menu/context-menu.css dist/context-menu/context-menu.css && cssnano dist/context-menu/context-menu.css dist/context-menu/context-menu.min.css && browserify -t browserify-versionify -t [babelify] -p browserify-derequire -p bundle-collapser/plugin src/context-menu/context-menu.js > dist/context-menu/context-menu.js && uglifyjs dist/context-menu/context-menu.js -c sequences=true,dead_code=true,conditionals=true,booleans=true,unused=true,if_return=true,join_vars=true,drop_console=true -m --screw-ie8  > dist/context-menu/context-menu.min.js",
+    "ga": "browserify -t browserify-versionify -t [babelify] -p browserify-derequire -p bundle-collapser/plugin src/google-analytics/google-analytics.js > dist/google-analytics/google-analytics.js && uglifyjs dist/google-analytics/google-analytics.js -c sequences=true,dead_code=true,conditionals=true,booleans=true,unused=true,if_return=true,join_vars=true,drop_console=true -m --screw-ie8  > dist/google-analytics/google-analytics.min.js",
+    "jump": "postcss -u autoprefixer -r src/context-menu/context-menu.css && cp src/context-menu/context-menu.css dist/context-menu/context-menu.css && cssnano dist/context-menu/context-menu.css dist/context-menu/context-menu.min.css && browserify -t browserify-versionify -t [babelify] -p browserify-derequire -p bundle-collapser/plugin src/jump-forward/jump-forward.js > dist/jump-forward/jump-forward.js && uglifyjs dist/jump-forward/jump-forward.js -c sequences=true,dead_code=true,conditionals=true,booleans=true,unused=true,if_return=true,join_vars=true,drop_console=true -m --screw-ie8  > dist/jump-forward/jump-forward.min.js",
+    "loop": "postcss -u autoprefixer -r src/context-menu/context-menu.css && cp src/context-menu/context-menu.css dist/context-menu/context-menu.css && cssnano dist/context-menu/context-menu.css dist/context-menu/context-menu.min.css && browserify -t browserify-versionify -t [babelify] -p browserify-derequire -p bundle-collapser/plugin src/loop/loop.js > dist/loop/loop.js && uglifyjs dist/loop/loop.js -c sequences=true,dead_code=true,conditionals=true,booleans=true,unused=true,if_return=true,join_vars=true,drop_console=true -m --screw-ie8  > dist/loop/loop.min.js",
+    "markers": "browserify -t browserify-versionify -t [babelify] -p browserify-derequire -p bundle-collapser/plugin src/markers/markers.js > dist/markers/markers.js && uglifyjs dist/markers/markers.js -c sequences=true,dead_code=true,conditionals=true,booleans=true,unused=true,if_return=true,join_vars=true,drop_console=true -m --screw-ie8  > dist/markers/markers.min.js",
+    "postroll": "postcss -u autoprefixer -r src/postroll/postroll.css && cp src/postroll/postroll.css dist/postroll/postroll.css && cssnano dist/postroll/postroll.css dist/postroll/postroll.min.css && browserify -t browserify-versionify -t [babelify] -p browserify-derequire -p bundle-collapser/plugin src/postroll/postroll.js > dist/postroll/postroll.js && uglifyjs dist/postroll/postroll.js -c sequences=true,dead_code=true,conditionals=true,booleans=true,unused=true,if_return=true,join_vars=true,drop_console=true -m --screw-ie8  > dist/postroll/postroll.min.js",
+    "skip": "postcss -u autoprefixer -r src/skip-back/skip-back.css && cp src/skip-back/skip-back.css dist/skip-back/skip-back.css && cssnano dist/skip-back/skip-back.css dist/skip-back/skip-back.min.css && browserify -t browserify-versionify -t [babelify] -p browserify-derequire -p bundle-collapser/plugin src/skip-back/skip-back.js > dist/skip-back/skip-back.js && uglifyjs dist/skip-back/skip-back.js -c sequences=true,dead_code=true,conditionals=true,booleans=true,unused=true,if_return=true,join_vars=true,drop_console=true -m --screw-ie8  > dist/skip-back/skip-back.min.js",
+    "chooser": "postcss -u autoprefixer -r src/source-chooser/source-chooser.css && cp src/source-chooser/source-chooser.css dist/source-chooser/source-chooser.css && cssnano dist/source-chooser/source-chooser.css dist/source-chooser/source-chooser.min.css && browserify -t browserify-versionify -t [babelify] -p browserify-derequire -p bundle-collapser/plugin src/source-chooser/source-chooser.js > dist/source-chooser/source-chooser.js && uglifyjs dist/source-chooser/source-chooser.js -c sequences=true,dead_code=true,conditionals=true,booleans=true,unused=true,if_return=true,join_vars=true,drop_console=true -m --screw-ie8  > dist/source-chooser/source-chooser.min.js",
+    "speed": "postcss -u autoprefixer -r src/speed/speed.css && cp src/speed/speed.css dist/speed/speed.css && cssnano dist/speed/speed.css dist/speed/speed.min.css && browserify -t browserify-versionify -t [babelify] -p browserify-derequire -p bundle-collapser/plugin src/speed/speed.js > dist/speed/speed.js && uglifyjs dist/speed/speed.js -c sequences=true,dead_code=true,conditionals=true,booleans=true,unused=true,if_return=true,join_vars=true,drop_console=true -m --screw-ie8  > dist/speed/speed.min.js",
+    "stop": "postcss -u autoprefixer -r src/stop/stop.css && cp src/stop/stop.css dist/stop/stop.css && cssnano dist/stop/stop.css dist/stop/stop.min.css && browserify -t browserify-versionify -t [babelify] -p browserify-derequire -p bundle-collapser/plugin src/stop/stop.js > dist/stop/stop.js && uglifyjs dist/stop/stop.js -c sequences=true,dead_code=true,conditionals=true,booleans=true,unused=true,if_return=true,join_vars=true,drop_console=true -m --screw-ie8  > dist/stop/stop.min.js",
+    "preview": "browserify -t browserify-versionify -t [babelify] -p browserify-derequire -p bundle-collapser/plugin src/preview/preview.js > dist/preview/preview.js && uglifyjs dist/preview/preview.js -c sequences=true,dead_code=true,conditionals=true,booleans=true,unused=true,if_return=true,join_vars=true,drop_console=true -m --screw-ie8  > dist/preview/preview.min.js"
+  },
+  "dependencies": {
+    "global": "^4.3.1"
+  },
+  "browserify": {
+    "extensions": [
+      ".js"
+    ],
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": "es2015",
+          "sourceMapsAbsolute": true
+        }
+      ]
+    ]
+  }
+}
