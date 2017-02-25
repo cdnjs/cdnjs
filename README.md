@@ -45,6 +45,59 @@ cdnjs relies on user-submitted pull requests and automatic updating via `npm` or
 
 To add a new library, or update an existing library outside of `npm`/`git`, start by [forking the cdnjs repo](https://github.com/cdnjs/cdnjs/fork) to your own GitHub account.
 
+There is a simple way to add a library via single package.json only.
+
+You can follow these steps:
+
+1. Fork cdnjs repository to your GitHub account.
+
+2. Create a new folder named **libname** under `/ajax/libs`, then create a package.json under `libname`.
+
+   Note: the libname must be the same as the "name" in package.json
+
+3. Edit package.json:
+
+    take the npm package lib `frzr` for an example:
+    ```js
+    {
+      "name": "frzr",
+      "filename": "frzr.min.js",
+      "description": "Turboboosted 2 KB view library",
+      "homepage": "https://frzr.js.org",
+      "repository": {
+        "type": "git",
+        "url": "git://github.com/pakastin/frzr"
+      },
+      "author": "Juha Lindstedt",
+      "license": "ISC",
+      "keywords": [
+        "frzr",
+        "tiny",
+        "view"
+      ],
+      "npmName": "frzr",
+      "npmFileMap": [
+        {
+          "basePath": "dist",
+          "files": [
+            "frzr*.js"
+          ]
+        }
+      ]
+    }
+    ```
+    you can change to use git auto-update, [autoupdate.md](https://github.com/cdnjs/cdnjs/blob/master/documents/autoupdate.md#enabling-npmrecommended-or-git-auto-update)
+
+    * Please don't add version in package.json if you don't want to commit with its assets.
+    * Please use [SPDX](https://spdx.org/licenses/) in license, [license-list.json](https://github.com/cdnjs/cdnjs/blob/master/tools/license-list.json).
+    * Please point to minified file in filename.
+
+4. Submit the package.json.
+
+5. Create a pull request.
+
+We will merge the PR when it achieves the requirements.
+
 If you're adding/modifying outside of the GitHub browser interface, for example on the command line or with the GitHub desktop application, you will need to additionally install `node`(`node.js`) locally, so that you can run the test  or utils under `tools` locally.
 
 When you have forked the cdnjs repo, add your library to it. Libraries are stored in the `ajax/libs` directory. Each library has its own subdirectory of `ajax/libs` and each version of the library has its own subdirectory of the library directory name, for example:
