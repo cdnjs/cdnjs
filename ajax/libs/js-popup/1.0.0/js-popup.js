@@ -45,7 +45,6 @@ var PopupClass = function () {
                 if (closeBTN) closeBTN.addEventListener("click", this._closeMessageButton.bind(this, id));
                 if (header) {
                     header.addEventListener("mousedown", this._swipe.bind(this, _this));
-                    //header.addEventListener("touchstart", this._swipe.bind(this, _this));
                 }
                 if (body) {
                     if (header) {
