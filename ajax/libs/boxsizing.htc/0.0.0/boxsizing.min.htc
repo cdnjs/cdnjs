@@ -1,0 +1,55 @@
+/**
+* box-sizing Polyfill
+*
+* A polyfill for box-sizing: border-box for IE6 & IE7.
+*
+* JScript
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Lesser General Public License as published
+* by the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU Lesser General Public License for more details.
+*
+* See <http://www.gnu.org/licenses/lgpl-3.0.txt>
+*
+* @category  JScript
+* @package   box-sizing-polyfill
+* @author    Christian Schepp Schaefer <schaepp@gmx.de> <http://twitter.com/derSchepp>
+* @copyright 2012 Christian Schepp Schaefer
+* @license   http://www.gnu.org/copyleft/lesser.html The GNU LESSER GENERAL PUBLIC LICENSE, Version 3.0
+* @link      http://github.com/Schepp/box-sizing-polyfill
+*
+* PREFACE:
+*
+* This box-sizing polyfill is based on previous work done by Erik Arvidsson,
+* which he published in 2002 on http://webfx.eae.net/dhtml/boxsizing/boxsizing.html.
+*
+* USAGE:
+*
+* Add the behavior/HTC after every `box-sizing: border-box;` that you assign:
+*
+* box-sizing: border-box;
+* *behavior: url(/scripts/boxsizing.htc);`
+*
+* Prefix the `behavior` property with a star, like seen above, so it will only be seen by
+* IE6 & IE7, not by IE8+ who already implement box-sizing.
+*
+* The URL to the HTC file must be relative to your HTML(!) document, not relative to your CSS.
+* That's why I'd advise you to use absolute paths like in the example.
+*
+*/
+<component lightWeight="true">
+<attach event="onpropertychange" onevent="checkPropertyChange()" />
+<attach event="ondetach" onevent="restore()" />
+<attach event="onresize" for="window" onevent="update()" />
+<script type="text/javascript">
+//<![CDATA[
+function update(){null!==resizetimeout&&window.clearTimeout(resizetimeout),resizetimeout=window.setTimeout(function(){restore(),init(),resizetimeout=null},100)}function restore(){if(apply)try{element.runtimeStyle.removeAttribute("width"),element.runtimeStyle.removeAttribute("height")}catch(a){}}function init(){apply&&(updateBorderBoxWidth(),updateBorderBoxHeight())}function checkPropertyChange(){if(apply){var a=event.propertyName;switch("style.boxSizing"===a&&""===element.style.boxSizing&&(element.style.removeAttribute("boxSizing"),element.runtimeStyle.removeAttribute("boxSizing"),element.runtimeStyle.removeAttribute("width"),element.runtimeStyle.removeAttribute("height")),a){case"style.width":case"style.minWidth":case"style.maxWidth":case"style.borderLeftWidth":case"style.borderLeftStyle":case"style.borderRightWidth":case"style.borderRightStyle":case"style.paddingLeft":case"style.paddingRight":updateBorderBoxWidth();break;case"style.height":case"style.minHeight":case"style.maxHeight":case"style.borderTopWidth":case"style.borderTopStyle":case"style.borderBottomWidth":case"style.borderBottomStyle":case"style.paddingTop":case"style.paddingBottom":updateBorderBoxHeight();break;case"className":case"style.boxSizing":updateBorderBoxWidth(),updateBorderBoxHeight()}}}function getPixelValue(a){var b=/^\d+(px)?$/i;if(b.test(a))return parseInt(a);var c=element.style.left,d=element.runtimeStyle.left;return element.runtimeStyle.left=element.currentStyle.left,element.style.left=a||0,a=parseInt(element.style.pixelLeft),element.style.left=c,element.runtimeStyle.left=d,a}function getPixelWidth(a,b){var c=/^\d+(px)?$/i;if(c.test(b))return parseInt(b);var d=/^[\d\.]+%$/i;if(d.test(b)){try{var e=getPixelWidth(a.parentElement,a.parentElement.currentStyle.paddingLeft),f=getPixelWidth(a.parentElement,a.parentElement.currentStyle.paddingRight),g=getPixelWidth(a.parentElement,a.parentElement.currentStyle.borderLeft),h=getPixelWidth(a.parentElement,a.parentElement.currentStyle.borderRight),i=a.parentElement.offsetWidth-e-f-g-h,b=parseFloat(b)/100*i}catch(j){var b=parseFloat(b)/100*element.document.documentElement.clientWidth}return parseInt(b)}var k=a.style.left,l=a.runtimeStyle.left;return a.runtimeStyle.left=a.currentStyle.left,a.style.left=b||0,b=parseInt(a.style.pixelLeft),a.style.left=k,a.runtimeStyle.left=l,b}function getPixelHeight(a,b){var c=/^\d+(px)?$/i;if(c.test(b))return parseInt(b);var d=/^[\d\.]+%$/i;if(d.test(b)){try{if("auto"!=a.parentElement.currentStyle.height){switch(a.parentElement.nodeName){default:if("auto"!==a.parentElement.currentStyle.height){var e=getPixelWidth(a.parentElement,a.parentElement.currentStyle.paddingTop),f=getPixelWidth(a.parentElement,a.parentElement.currentStyle.paddingBottom),g=getPixelWidth(a.parentElement,a.parentElement.currentStyle.borderTop),h=getPixelWidth(a.parentElement,a.parentElement.currentStyle.borderBottom),i=a.parentElement.offsetHeight-e-f-g-h;b=parseFloat(b)/100*i}else b="auto";break;case"HTML":i=element.document.documentElement.clientHeight,b="auto"!==i?parseFloat(b)/100*i:"auto"}"auto"!==b&&(b=parseInt(b))}else b="auto"}catch(j){b="auto"}return b}var k=a.style.left,l=a.runtimeStyle.left;return a.runtimeStyle.left=a.currentStyle.left,a.style.left=b||0,b=parseInt(a.style.pixelLeft),a.style.left=k,a.runtimeStyle.left=l,b}function getBorderWidth(a){if("none"==element.currentStyle["border"+a+"Style"])return 0;var b=getPixelValue(element.currentStyle["border"+a+"Width"]);return b||0}function getBorderLeftWidth(){return getBorderWidth("Left")}function getBorderRightWidth(){return getBorderWidth("Right")}function getBorderTopWidth(){return getBorderWidth("Top")}function getBorderBottomWidth(){return getBorderWidth("Bottom")}function getPadding(a){var b=getPixelValue(element.currentStyle["padding"+a]);return b||0}function getPaddingLeft(){return getPadding("Left")}function getPaddingRight(){return getPadding("Right")}function getPaddingTop(){return getPadding("Top")}function getPaddingBottom(){return getPadding("Bottom")}function getBoxSizing(){var a=element.style,b=element.currentStyle;return a.boxSizing!==void 0&&""!=a.boxSizing?a.boxSizing:a["box-sizing"]!==void 0&&""!=a["box-sizing"]?a["box-sizing"]:b.boxSizing!==void 0&&""!=b.boxSizing?b.boxSizing:b["box-sizing"]!==void 0&&""!=b["box-sizing"]?b["box-sizing"]:getDocumentBoxSizing()}function getDocumentBoxSizing(){return null===doc.compatMode||"BackCompat"===doc.compatMode?"border-box":"content-box"}function setBorderBoxWidth(a){element.runtimeStyle.width=Math.max(0,a-getBorderLeftWidth()-getPaddingLeft()-getPaddingRight()-getBorderRightWidth())+"px"}function setBorderBoxMinWidth(a){element.runtimeStyle.minWidth=Math.max(0,a-getBorderLeftWidth()-getPaddingLeft()-getPaddingRight()-getBorderRightWidth())+"px"}function setBorderBoxMaxWidth(a){element.runtimeStyle.maxWidth=Math.max(0,a-getBorderLeftWidth()-getPaddingLeft()-getPaddingRight()-getBorderRightWidth())+"px"}function setBorderBoxHeight(a){element.runtimeStyle.height=Math.max(0,a-getBorderTopWidth()-getPaddingTop()-getPaddingBottom()-getBorderBottomWidth())+"px"}function setBorderBoxMinHeight(a){element.runtimeStyle.minHeight=Math.max(0,a-getBorderTopWidth()-getPaddingTop()-getPaddingBottom()-getBorderBottomWidth())+"px"}function setBorderBoxMaxHeight(a){element.runtimeStyle.maxHeight=Math.max(0,a-getBorderTopWidth()-getPaddingTop()-getPaddingBottom()-getBorderBottomWidth())+"px"}function setContentBoxWidth(a){element.runtimeStyle.width=Math.max(0,a+getBorderLeftWidth()+getPaddingLeft()+getPaddingRight()+getBorderRightWidth())+"px"}function setContentBoxMinWidth(a){element.runtimeStyle.minWidth=Math.max(0,a+getBorderLeftWidth()+getPaddingLeft()+getPaddingRight()+getBorderRightWidth())+"px"}function setContentBoxMaxWidth(a){element.runtimeStyle.maxWidth=Math.max(0,a+getBorderLeftWidth()+getPaddingLeft()+getPaddingRight()+getBorderRightWidth())+"px"}function setContentBoxHeight(a){element.runtimeStyle.height=Math.max(0,a+getBorderTopWidth()+getPaddingTop()+getPaddingBottom()+getBorderBottomWidth())+"px"}function setContentBoxMinHeight(a){element.runtimeStyle.minHeight=Math.max(0,a+getBorderTopWidth()+getPaddingTop()+getPaddingBottom()+getBorderBottomWidth())+"px"}function setContentBoxMaxHeight(a){element.runtimeStyle.maxHeight=Math.max(0,a+getBorderTopWidth()+getPaddingTop()+getPaddingBottom()+getBorderBottomWidth())+"px"}function updateBorderBoxWidth(){if(getDocumentBoxSizing()!=getBoxSizing()){var a=element.currentStyle.width;"auto"!=a&&(a=getPixelWidth(element,a),"border-box"==getBoxSizing()?setBorderBoxWidth(parseInt(a)):setContentBoxWidth(parseInt(a))),a=element.currentStyle.minWidth,"none"!=a&&(a=getPixelWidth(element,a),"border-box"==getBoxSizing()?setBorderBoxMinWidth(parseInt(a)):setContentBoxMinWidth(parseInt(a))),a=element.currentStyle.maxWidth,"none"!=a&&(a=getPixelWidth(element,a),"border-box"==getBoxSizing()?setBorderBoxMaxWidth(parseInt(a)):setContentBoxMaxWidth(parseInt(a)))}}function updateBorderBoxHeight(){if(getDocumentBoxSizing()!=getBoxSizing()){var a=element.currentStyle.height;"auto"!=a&&(a=getPixelHeight(element,a),"auto"!==a&&("border-box"==getBoxSizing()?setBorderBoxHeight(parseInt(a)):setContentBoxHeight(parseInt(a)))),a=element.currentStyle.minHeight,"none"!=a&&(a=getPixelHeight(element,a),"none"!==a&&("border-box"==getBoxSizing()?setBorderBoxMinHeight(parseInt(a)):setContentBoxMinHeight(parseInt(a)))),a=element.currentStyle.maxHeight,"none"!=a&&(a=getPixelHeight(element,a),"none"!==a&&("border-box"==getBoxSizing()?setBorderBoxMaxHeight(parseInt(a)):setContentBoxMaxHeight(parseInt(a))))}}var viewportwidth=window.innerWidth!==void 0?window.innerWidth:element.document.documentElement.clientWidth,doc=element.document,resizetimeout=null,apply=!1;switch(element.nodeName){case"#comment":case"HTML":case"HEAD":case"TITLE":case"SCRIPT":case"STYLE":case"LINK":case"META":break;default:apply=!0}init();
+//]]>
+</script>
+</component>
