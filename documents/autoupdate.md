@@ -39,8 +39,14 @@ To add an `npm` hook to a library, update the `package.json` with configuration 
 * `npmName` should map to the name of the library on `npm`
 * `npmFileMap` is a list of files to take from the `npm` tarball and host on cdnjs
 * `basePath` will be ignored when copying over to the CDN
-* `files` is a pattern matcher allowing selection of multiple files
+* `files` is a pattern matcher allowing selection of multiple files, see [node-glob](https://github.com/isaacs/node-glob#glob-primer)
+  * you can use `!(...)` to exclude the files which are not needed. For example, if you want to exclude `*.flow` and `*.scss`, you can use:
 
+  ```js
+  "files": [
+    "**/!(*.+(flow|scss))"  //To fetch all files except *.flow and *.scss
+  ]
+  ```
 
 The above example looks in the tarball whose structure might look like this:
 
