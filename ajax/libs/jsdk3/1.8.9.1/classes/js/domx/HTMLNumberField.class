@@ -1,0 +1,51 @@
+/**
+ * @file HTMLNumberField.class.js
+ * @author Liu Denggao
+ * @created 2012.5.31
+ * @modified 2012.7.23
+ * @version 0.6.2
+ * @since JSDK3 V1.9.0
+ */
+$package("js.domx");$import("js.domx.HTMLFormField");js.domx.HTMLNumberField=function(){this._dataType="Number";this._minValue=undefined;this._minValueBy="";this._maxValue=undefined;this._maxValueBy="";this._decimalOptions=0;this._isFocusing=false;this._pageSize=undefined;};var _$class=js.domx.HTMLNumberField;_$class.$name="HTMLNumberField";_$class.$context=js.domx.HTML;_$class.$extends(js.domx.HTMLFormField);var _$proto=_$class.prototype;_$class.getContext=function(){return this.$context;}
+_$proto.setIsReadOnly=function(value){if(this._isReadOnly===value)return;this._isReadOnly=value;this.fireEvent("_onPropertyChanged","isReadOnly");}
+_$proto.getMinValue=function(){if(!this._minValueBy){return this._minValue;}else if(typeof(this._minValueBy)!="string"){return this._minValueBy.getDataValue();}else{var field=this._parentForm.getFieldByName(this._minValueBy);if(field){this._minValueBy=field;return field.getDataValue();}}}
+_$proto.setMinValue=function(value){if(value===this._minValue)return;this._minValue=value;this._minValueBy="";}
+_$proto.getMaxValue=function(){if(!this._maxValueBy){return this._maxValue;}else if(typeof(this._maxValueBy)!="string"){return this._maxValueBy.getDataValue();}else{var field=this._parentForm.getFieldByName(this._maxValueBy);if(field){this._maxValueBy=field;return field.getDataValue();}}}
+_$proto.setMaxValue=function(value){if(value===this._maxValue)return;this._maxValue=value;this._maxValueBy="";}
+_$proto.getPageSize=function(){return this._pageSize;}
+_$proto.setPageSize=function(value){this._pageSize=value;}
+_$proto.getDecimalOptions=function(){return this._decimalOptions;}
+_$proto.setDecimalOptions=function(value){this._decimalOptions=value;}
+_$proto.getDataText=function(){return this.__original.value;}
+_$proto.getDataValue=function(){var value=this.__original.value;return value&&parseFloat("0"+value)||undefined;}
+_$proto.setDataValue=function(vValue){if(!this.isValidValueFor(vValue))return;this.__original.value=""+vValue;this.fireEvent("_onValueChanged");}
+_$class.newInstanceFrom=function(parentForm,vField,vOptions){if(!vField)return null;var obj=new this();obj._parentForm=parentForm;if(typeof(vField)=="string"){obj.__original=parentForm.getElementsByName(vField).getFirst();}else{obj.__original=vField;}
+obj._name=obj.__original.name||obj.__original.id||"";if(vOptions){obj._label=vOptions.label||"";if(vOptions.allowEmpty!=undefined)obj._allowEmpty=vOptions.allowEmpty;if(vOptions.isReadOnly!=undefined)obj._isReadOnly=vOptions.isReadOnly;if(vOptions.unfilledPrompt!=undefined)obj._unfilledPrompt=vOptions.unfilledPrompt;if(vOptions.unmatchedPrompt!=undefined)obj._unmatchedPrompt=vOptions.unmatchedPrompt;if(vOptions.decimalOptions!=undefined)obj._decimalOptions=vOptions.decimalOptions;if(vOptions.pageSize!=undefined)obj._pageSize=vOptions.pageSize;if(vOptions.minValue!=undefined){if(typeof(vOptions.minValue)!="string"){obj._minValue=vOptions.minValue;}else if(vOptions.minValue.indexOf("->#")==0){obj._minValueBy=vOptions.minValue.right("->#");}else{obj._minValue=parseFloat(vOptions.minValue);}}
+if(vOptions.maxValue!=undefined){if(typeof(vOptions.maxValue)!="string"){obj._maxValue=vOptions.maxValue;}else if(vOptions.maxValue.indexOf("->#")==0){obj._maxValueBy=vOptions.maxValue.right("->#");}else{obj._maxValue=parseFloat(vOptions.maxValue);}}
+if(vOptions.onEvents){["onValidate","onReadStateChanged","onValueChanged"].forEach(function(sEvent){var func=vOptions.onEvents[sEvent];if(func)obj.addEventListener(sEvent,func);});}}
+obj.__original.attachEvent("onmouseover",function(){obj.fireEvent("_onTips");});obj.__original.attachEvent("onchange",function(event){var flag=![0,1,2].some(function(mode){return!obj.validate(mode);});if(!flag)obj._isFocusing=true;obj.fireEvent("_onValueChanged",event);});obj.__original.attachEvent("onblur",function(){return obj.fireEvent("_onBlur");});obj.fireEvent("_onPropertyChanged","minValue");obj.fireEvent("_onPropertyChanged","maxValue");obj.fireEvent("_onPropertyChanged","isReadOnly");return obj;}
+_$proto.isValidValueFor=function(value){if(typeof(value)!="number")return false;var minValue=this.getMinValue();var maxValue=this.getMaxValue();if(minValue!=undefined&&value<minValue){return false;}else if(maxValue!=undefined&&value>maxValue){return false;}else{return true;}}
+_$proto.validate=function(iOptions,isSubmiting){var field=this.__original;switch(iOptions){case 0:if(!field.value){if(!this._allowEmpty&&isSubmiting){if(this._unfilledPrompt)alert(this._unfilledPrompt);else alert("\u8bf7\u9009\u62e9\u6216\u8f93\u5165\""+this._label+"\"!");try{field.focus();}catch(e){}}
+return this._allowEmpty;}
+if(isNaN(field.value)){alert("\u60a8\u8f93\u5165\u7684\""+this._label+"\"\u4e0d\u662f\u6570\u5b57\uff01");field.value="";try{field.focus();}catch(e){}
+return false;}else if(field.value!="0"&&field.value.slice(0,1)=="0"){this.__original.value=parseFloat(field.value);}
+break;case 1:var minValue=this.getMinValue();var maxValue=this.getMaxValue();var iValue=parseFloat("0"+field.value);if(maxValue!=undefined){if(Global.isNumber(maxValue)&&iValue>maxValue){if(this._unmatchedPrompt)alert(this._unmatchedPrompt);else alert("\u60a8\u8f93\u5165\u7684\""+this._label+"\"\u4e0d\u80fd\u5927\u4e8e"+maxValue+"!");field.value="";try{field.focus();}catch(e){}
+return false;}}else if(minValue!=undefined){if(Global.isNumber(minValue)&&iValue<minValue){if(this._unmatchedPrompt)alert(this._unmatchedPrompt);else alert("\u60a8\u8f93\u5165\u7684\""+this._label+"\"\u4e0d\u80fd\u5c0f\u4e8e"+minValue+"!");field.value="";try{field.focus();}catch(e){}
+return false;}}
+if(field.value.slice(-1)=="."){field.value+=this._decimalOptions<=0?"00":Global.obj("0").repeat(this._decimalOptions).valueOf();}
+if(this._decimalOptions==0&&field.value.indexOf(".")>0){field.value=field.value.word(".",0);}else if(this._decimalOptions>0&&field.value.indexOf(".")>0){var bits=field.value.length-field.value.indexOf(".")-1;if(bits>this._decimalOptions){alert("\u8bf7\u6700\u591a\u8f93\u5165"+this._decimalOptions+"\u4f4d\u5c0f\u6570!");field.value=field.value.slice(0,field.value.indexOf(".")+this._decimalOptions+1);field.focus();return false;}}
+break;case 2:return this.fireEvent("_onValidate",isSubmiting);}
+return true;}
+_$proto._onPropertyChanged=function(sName){switch(sName){case"isReadOnly":this.__original.readOnly=this._isReadOnly;this.fireEvent("onReadStateChanged",this._isReadOnly);break;case"minValue":case"maxValue":var minValue=this.getMinValue();var maxValue=this.getMaxValue();if(minValue!=undefined&&maxValue!=undefined){this.__original.title="\u6709\u6548\u8303\u56f4: "+minValue+" - "+maxValue;}else if(minValue!=undefined){this.__original.title="\u6709\u6548\u8303\u56f4: "+minValue+" - ~";}else if(maxValue!=undefined){this.__original.title="\u6709\u6548\u8303\u56f4: ~ - "+maxValue;}
+break;}}
+_$proto._onValueChanged=function(event){var flag=this.fireEvent("onValueChanged",this.getDataValue());if(flag||flag==undefined)this._parentForm.fireEvent("_onFieldValueChanged",this);}
+_$proto._onKeyDown=function(event){var field=this.__original;var intValue=field.value==""?-1:parseFloat("0"+field.value);var at=field.value.indexOf(".");var precision=at<0?0:(field.value.length-at-1);field.style.imeMode="disabled";switch(event.keyCode){case Global.KEY_Up:var value=this.getDataValue().adjust(1);if(this._minValue!=undefined&&value<this._minValue){field.value=this._minValue;}else if(this._maxValue!=undefined&&value>this._maxValue){field.value=this._maxValue;}else{field.value=value;}
+break;case Global.KEY_Down:var value=this.getDataValue().adjust(-1);if(this._minValue!=undefined&&value<this._minValue){field.value=this._minValue;}else if(this._maxValue!=undefined&&value>this._maxValue){field.value=this._maxValue;}else{field.value=value<0?0:value;}
+break;case Global.KEY_Left:break;case Global.KEY_Right:break;case Global.KEY_Home:break;case Global.KEY_End:break;case Global.KEY_PageUp:if(this._pageSize){var value=this.getDataValue().adjust(this._pageSize);if(this._minValue!=undefined&&value<this._minValue){field.value=this._minValue;}else if(this._maxValue!=undefined&&value>this._maxValue){field.value=this._maxValue;}else{field.value=value;}}
+return event.returnValue=false;break;case Global.KEY_PageDown:if(this._pageSize){var value=this.getDataValue().adjust(-this._pageSize);if(this._minValue!=undefined&&value<this._minValue){field.value=this._minValue;}else if(this._maxValue!=undefined&&value>this._maxValue){field.value=this._maxValue;}else{field.value=value;}}
+return event.returnValue=false;break;case Global.KEY_Enter:field.blur();break;case Global.KEY_Backspace:break;case Global.KEY_Delete:break;default:if(event.keyCode>=Global.KEY_NUM_Min&&event.keyCode<=Global.KEY_NUM_Max){if(intValue==0&&at<0)return event.returnValue=false;if(this._maxValue!=undefined){}
+if(this._decimalOptions>0&&field.value.indexOf(".")>0){var bits=field.value.length-field.value.indexOf(".")-1;}}else if(event.keyCode>=Global.KEY_MIN_Min&&event.keyCode<=Global.KEY_MIN_Max){if(intValue==0&&at<0)return event.returnValue=false;if(this._maxValue!=undefined){}
+if(this._decimalOptions>0&&field.value.indexOf(".")>0){var bits=field.value.length-field.value.indexOf(".")-1;}}else if(event.keyCode==190||event.keyCode==110){if(this._decimalOptions==0)return event.returnValue=false;if(field.value=="")return event.returnValue=false;if(field.value.indexOf(".")>=0)return event.returnValue=false;}else{return event.returnValue=false;}}}
+_$proto._onTips=function(){if(!this._minValueBy&&!this._maxValueBy)return;var minValue=this.getMinValue();var maxValue=this.getMaxValue();if(minValue!=undefined&&maxValue!=undefined){this.__original.title="\u6709\u6548\u8303\u56f4: "+minValue+" - "+maxValue;}else if(minValue!=undefined){this.__original.title="\u6709\u6548\u8303\u56f4: "+minValue+" - ~";}else if(maxValue!=undefined){this.__original.title="\u6709\u6548\u8303\u56f4: ~ - "+maxValue;}}
+_$proto._onBlur=function(){var _this=this;if(this._isFocusing){this._isFocusing=false;try{window.setTimeout(function(){_this.__original.focus();},2);}catch(e){}
+return false;}}

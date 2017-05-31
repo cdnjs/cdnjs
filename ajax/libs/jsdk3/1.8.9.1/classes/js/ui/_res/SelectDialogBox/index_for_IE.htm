@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="description" content="for IE6">
+  <base target="_self">  
+  <link type="text/css" rel="stylesheet" href="common.css">
+  <link type="text/css" rel="stylesheet" href="std.IE.css">
+  <script>
+	if(this.opener&&this.opener.__$activeDialog==window){
+		var para=this.opener.__$activeDialogParameter.arguments;
+	}else{
+		var para=window.dialogArguments||{};
+		window.opener=para.opener;
+	}
+  </script>
+  <script>document.title=para.oDspTexts.title;</script> 
+  <script>
+	document.write("<script appName=\"jsdk\" debug=\"false\" src=\""
+		+(window.location.host?"":window.location.protocol+"//"+window.location.host)+para.engineDir+"/loader.js\">"
+		+"$import(\"js.dom.HTMLForm\");$import(\"js.dom.DOMTemplate\");</script"+">");
+  </script>
+  <script src="list.js"></script>
+  <script src="init1.js"></script>
+ </head>
+ <body scroll="no">
+	<div id="page">
+		<div class="box">
+			<div id="body">
+				<form style="width:100%;height:100%" onkeypress="if(event.keyCode==13) return false" onsubmit="return false;">
+				<div id="top">
+					<div class="searchbar"><input type="text" name="F_SearchKey"/><button hidefocus="true" id="btnClearSearchResult" name="btnClearSearchResult"></button><button hidefocus="true" id="btnSearch" name="btnSearch"></button></div>
+					<script>document.write(para.oDspTexts.tips);</script>
+				</div>
+				<div id="content">
+					<div class="box">
+						<script id="mainpanel" type="text/html">
+						<style>
+						  .datalist{
+							width: <%= oPara.dspResult?"27%":"40%" %>;
+						  }
+						  .resultlist{
+							width: <%= oPara.hasChildData&&oPara.dspData?"27%":"40%" %>;
+						  }
+						</style>
+						<TABLE class="mainpanel">
+							<TR class="labelbar" style="height: 1.3em">
+								<TD><span class="label">${oDspTexts.view}</span></TD>
+								<TD style="display: <%= oPara.hasChildData&&oPara.dspData?'':'none' %>"></TD>
+								<TD style="display: <%= oPara.hasChildData&&oPara.dspData?'':'none' %>"><span class="label">${oDspTexts.data}</span></TD>
+								<TD style="display: <%= oPara.dspResult?'':'none' %>"></TD>
+								<TD style="display: <%= oPara.dspResult?'':'none' %>"><span class="label">${oDspTexts.result}</span></TD>
+							</TR>
+							<TR class="dataarea" style="height: auto">
+								<TD class="nav">
+									<div style="position: relative;height:100%;padding-top: <%= oPara.hasCategory?"22px":"0" %>">
+										<div class="category" style="display: <%= oPara.hasCategory?'':'none' %>">
+											<select id="F_Category" NAME="F_Category" style="margin:0;"></select>
+										</div>
+										<div class="view">
+											<select id="F_View" NAME="F_View" class="list" style="height: <%= oPara.hasCategory?"230px":"" %>" 
+												size="2" <%= oPara.isMultiple&&!oPara.dspData?'multiple="true"':'' %> ></select>
+										</div>
+									</div>
+								</TD>
+								<TD style="width: 10px; display: <%= oPara.hasChildData&&oPara.dspData?'':'none' %>"></TD>
+								<TD class="datalist" style="display: <%= oPara.hasChildData&&oPara.dspData?'':'none' %>">
+									<select id="F_Data" NAME="F_Data" class="list" size="2" <%= oPara.isMultiple?'multiple="true"':'' %> ></select>
+								</TD>
+								<TD style="width: 25px; display: <%= oPara.dspResult?'':'none' %>">
+									<div class="ToolsBar">
+										<a class="button" id="btnDelete" href="javascript:void(0)"><img src="icons/del.gif" title="删除"/></a>
+										<a class="button" id="btnClear" href="javascript:void(0)"><img src="icons/clear.gif" title="清空"/></a>
+										<a class="button"></a>
+										<a class="button" id="btnTop" href="javascript:void(0)"><img src="icons/top.gif" title="置顶"/></a>
+										<a class="button" id="btnUp" href="javascript:void(0)"><img src="icons/up.gif" title="向上"/></a>
+										<a class="button" id="btnDown" href="javascript:void(0)"><img src="icons/down.gif" title="向下"/></a>
+										<a class="button" id="btnBottom" href="javascript:void(0)"><img src="icons/bottom.gif" title="置底"/></a>
+									</div>
+								</TD>
+								<TD class="resultlist" style="display: <%= oPara.dspResult?'':'none' %>">
+									<select id="F_Result" NAME="F_Result" class="list" size="2" <%= oPara.isMultiple?'multiple="true"':'' %> ></select>
+								</TD>
+							</TR>
+						</TABLE>
+						</script>
+						<script>
+						
+						var tplMainPanel=jsdk.DOMTemplate.newInstanceWithId("mainpanel");
+						tplMainPanel.setIsOnsiteOutput(true);
+						tplMainPanel.parse(para);
+						
+						</script>
+					</div>
+				</div>
+				<div id="bottom">
+					<div id="actionbar" class="ActionBar">
+						<script id="actions" type="text/html">
+						<INPUT id="btnOK" name="btnOK" class="ActionBarItem" TYPE="button" value="${oDspTexts.button.OK}" />
+						<INPUT id="btnCancel" name="btnCancel" class="ActionBarItem" TYPE="button" value="${oDspTexts.button.Cancel}" />
+						</script>
+						<script>
+						var tplActions=jsdk.DOMTemplate.newInstanceWithId("actions");
+						tplActions.setIsOnsiteOutput(true);
+						tplActions.parse(para);
+						</script>
+					</div>
+					<div id="memo"><script>document.write(para.oDspTexts.memo);</script></div>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+ </body>
+</html>

@@ -1,0 +1,16 @@
+/**
+ * @file DOMElement.class.js
+ * @author Liu Denggao
+ * @created 2012.5.23
+ * @modified 2012.5.29
+ * @version 1.0
+ * @since JSDK3 V1.9.0
+ */
+$package("js.domx");$import("js.domx.DOM");js.domx.DOMElement=function(){};var _$class=js.domx.DOMElement;_$class.$name="DOMElement";_$class.$abstract=true;_$class.$context=js.domx.DOM;_$class.$extends(js.domx.DOMNode);var _$proto=_$class.prototype;_$class.getContext=function(){return this.$context;}
+_$proto.getTagName=function(){return this.__original.tagName;}
+_$proto.getAttributes=function(){return this.__original.attributes;}
+_$class.newInstanceFrom=function(original){if(original==null)return null;var obj=new this();obj.__original=original;return obj;}
+_$proto.getAttribute=function(name){return this.__original.getAttribute(name);}
+_$proto.getElementsByTagName=function(tagName){return this.getClass().getContext().obj(this.__original.getElementsByTagName(tagName),"Element");}
+_$proto.hasAttribute=function(name){if(this.__original.hasAttribute)return this.__original.hasAttribute(name);else return typeof(this.__origibal.getAttribute(name))!="undefined";}
+_$proto.setAttribute=function(name,value){this.__original.setAttribute(name,value);}

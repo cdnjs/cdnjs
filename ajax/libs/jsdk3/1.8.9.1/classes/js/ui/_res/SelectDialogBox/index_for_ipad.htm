@@ -1,0 +1,467 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <!-- updated date: 2011.11.16 -->
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link type="text/css" rel="stylesheet" href="common.css" />
+  <link type="text/css" rel="stylesheet" href="std.ipad.css" />
+  <script>
+	if(this.opener&&this.opener.__$activeDialog==window){
+		var para=this.opener.__$activeDialogParameter.arguments;
+	}else{
+		var para=window.dialogArguments||{};
+	}
+  </script>
+  <script>document.title=para.oDspTexts.title;</script> 
+  <script>
+	document.write("<script appName=\"jsdk\" debug=\"false\" src=\""
+		+(window.location.host?"":window.location.protocol+"//"+window.location.host)+para.engineDir+"/loader.js\">"
+		+"$import(\"js.dom.HTMLForm\");$import(\"js.dom.DOMTemplate\");</script"+">");
+  </script>
+  <script>
+  if(para.oPara.hasChildData&&!para.oPara.dspData)
+	para.oPara.dspData=true;
+  if(!para.oPara.hasChildData)
+    para.oPara.dspData=false;
+  function fillList(list,values,label){
+	clearEmptyList(list,true);
+	expandList(list,[("---"+(label||"请选择")+"---")+"|"]);
+	expandList(list,values);
+	list.options[0].selected=true;
+  }
+  function expandList(list,values){
+	if(!jsdk.isArray(values)) values=[values];
+	for(var i=0;i<values.length;i++){
+		var item=values[i];
+		if(!item){
+			continue;
+		}else if(jsdk.isArray(item)){
+			//none---
+		}else if(typeof(item)=="object"){
+			item=[item.text,item.value==undefined?item.text:item.value];
+		}else if(typeof(item)=="string"){
+			item=[item.split("|")[0],item.split("|").pop()];
+		}
+		if(findList(list,item[1],1)<0){
+			list.options[list.options.length]=new Option(item[0],item[1]);
+		}
+	}
+  }
+  function getListValues(list,iOptions){
+	var thisform=document.forms[0];
+	var values=[];
+	for(var i=1;i<list.options.length;i++){
+		var item=list.options[i];
+		if(iOptions==0){
+			values.push({ text: item.text, value: item.value});
+		}else if(item.selected){
+			values.push({ text: item.text, value: item.value});
+		}
+	}
+	return values;
+  }
+  function getListSelectedCount(list){
+	var thisform=document.forms[0];
+	var count=0;
+	for(var i=1;i<list.options.length;i++){
+		var item=list.options[i];
+		if(item.selected) count++;
+	}
+	return count;
+  }
+  function setListValues(list,vValues){
+	if(!vValues) return;
+	if(typeof(vValues)=="object"){
+		vValues=[vValues];
+	}else if(typeof(vValues=="string")){
+		vValues=[vValues];
+	}
+	for(var i=0;i<vValues.length;i++){
+		var value=vValues[i];
+		if(!value){
+			continue;
+		}else if(typeof(value)=="object"){
+			value=[value.text,value.value==undefined?value.text:value.value];
+		}else if(typeof(value)=="string"){
+			value=[value.split("|")[0],value.split("|").pop()];
+		}
+		var index=findList(list,value[1],1);
+		if(index>=0) list.options[index].selected=true;
+	}
+  }
+  function selectListAll(list){
+	for(var i=1;i<list.options.length;i++){
+		var item=list.options[i];
+		item.selected=true;
+	}
+	list.options[0].selected=list.options.length==1;
+  }
+  function findList(list,value,iOptions){
+	for(var i=list.options.length-1;i>=1;i--){
+		var item=list.options[i];
+		if(iOptions==0&&item.text==value){
+			return i;
+		}else if(iOptions==1&&item.value==value){
+			return i;
+		}
+	}
+	return -1;
+  }
+  function clearEmptyList(list,isAll){
+	for(var i=list.options.length-1;i>=(isAll?0:1);i--){
+		list.removeChild(list.options[i]);
+	}
+	if(list.options.length) list.options[0].selected=true;
+  }
+  function initCategoryArea(){
+	var thisform=document.forms[0];
+	var values=[];
+	for(var i=0;i<para.oViewData.length;i++){
+		if(typeof(para.oViewData[i])=="object"
+			&&typeof(para.oViewData[i].value)=="function") {
+			values.push({ text: para.oViewData[i].text, value: "javascript: para.oViewData["+i+"].value();"});
+		}else{
+			values.push(para.oViewData[i]);
+		}
+	}
+	expandList(thisform.F_Category,values);
+	var index=findList(thisform.F_Category,para.oPara.defaultCategory,0);
+	if(index>=0) {
+		thisform.F_Category.options[index].selected=true;
+		thisform.F_Category.onchange();
+	}
+  }
+  var categoryKeys={};
+  var currentViewPathData=[];
+  var currentViewPath="";
+  function setCurrentViewPath(){
+	currentViewPath=currentViewPathData.toNewArray(function(item,index,array){
+		return item.text;
+	}).join(para.oPara.pathSeparator||"\\");
+  }    
+  window.onload=function(){
+	var thisform=document.forms[0];
+	jsdk.HTMLForm.applyInstance(thisform,"copy");
+	thisform.F_Category.onchange=function(){
+		currentViewPathData=[];
+		currentViewPath="";
+		clearEmptyList(thisform.F_View);
+		thisform.F_View.options[0].selected=true;
+		thisform.F_View.onchange();
+		if(this.selectedIndex<0) return;
+		var data=this.options[this.selectedIndex].value;
+		if(data==""){
+			return;
+		}else if(data.indexOf("url(json):")==0){
+			data=data.right("url(json):");
+			data=jsdk.getURIFullPath(para.opener.document.location.pathname.leftBack("/"),data,"/").replace(/^\/[a-z]\:/gi,"");
+			var dataFormat="JSON";
+		}else if(data.indexOf("url(xml):")==0){
+			data=data.right("url(xml):");
+			data=jsdk.getURIFullPath(para.opener.document.location.pathname.leftBack("/"),data,"/").replace(/^\/[a-z]\:/gi,"");
+			var dataFormat="XML";
+		}else if(data.indexOf("javascript:")==0){
+			data=data.right("javascript:");
+			data=(new Function("return "+data+"; "))();
+			expandList(thisform.F_View,data);
+			//cache---
+			var sKey=this.selectedIndex+"";
+			this.options[this.selectedIndex].value=sKey;
+			categoryKeys[sKey]=data;
+			onAfterCategoryChanged();
+			return;
+		}else{
+			expandList(thisform.F_View,categoryKeys[data]);
+			onAfterCategoryChanged();
+		}
+		if(dataFormat=="JSON"){
+			jsdk.get(data,"",false,function(json){
+				var items=json.items;
+				if(!jsdk.isArray(items)) return;
+				for(var i=0;i<items.length;i++){
+					expandList(thisform.F_View,items[i]);
+				}
+				//cache---
+				var sKey=thisform.F_Category.selectedIndex+"";
+				thisform.F_Category.options[thisform.F_Category.selectedIndex].value=sKey;
+				categoryKeys[sKey]=items;
+				onAfterCategoryChanged();
+			},dataFormat);
+		}else if(dataFormat=="XML"){
+			jsdk.get(data,"",false,function(xml){
+				if(!xml||!xml.documentElement) return;
+				var items=xml.documentElement.$childNodes||xml.documentElement.childNodes;
+				var values=[];
+				for(var i=0;i<items.length;i++){
+					values.push({ text: items[i].getAttribute("text"), value: items[i].getAttribute("value")});
+				}
+				expandList(thisform.F_View,values);
+				//cache---
+				var sKey=thisform.F_Category.selectedIndex+"";
+				thisform.F_Category.options[thisform.F_Category.selectedIndex].value=sKey;
+				categoryKeys[sKey]=values;
+				onAfterCategoryChanged();
+			},dataFormat);
+		}
+
+	}
+	function onAfterCategoryChanged(){
+		//main for iPad-----
+		if(thisform.F_View.options.length==2
+			&&!para.oPara.hasChildItem){
+			thisform.F_View.options[1].selected=true;
+			thisform.F_View.onchange();
+		}
+	}
+	thisform.F_View.onchange=function(){
+		clearEmptyList(thisform.F_Data);
+		if(this.selectedIndex<=0) return;
+		var curCategory=para.oPara.hasCategory?thisform.F_Category.options[thisform.F_Category.selectedIndex]:null;
+		var curItem=this.options[this.selectedIndex];
+		if((para.oPara.hasChildItem||para.oPara.hasChildData)
+			&&typeof(para.fnGetItemData)=="function"){
+			if(para.oPara.hasChildItem){
+				if(curItem.text=="<---"){
+					currentViewPathData.pop();
+					curItem=currentViewPathData.pop();
+					setCurrentViewPath();
+					clearEmptyList(thisform.F_View);
+					if(!currentViewPathData.length&&!curItem){
+						thisform.F_Category.onchange();
+						return;
+					}
+				}
+				var vValue=para.fnGetItemData(para.oPara.hasCategory?curCategory:"",currentViewPath,curItem,this.selectedIndex);
+				if(jsdk.isArray(vValue)&&vValue.length==2){
+					if(vValue[0]){	//is child data
+						if(jsdk.isArray(vValue[0])){
+							fillList(thisform.F_Data,vValue[0]);
+						}else{
+							expandList(thisform.F_Data,[vValue[0]]);
+						}
+					}
+					if(vValue[1]&&jsdk.isArray(vValue[1])&&vValue[1].length){	//is child items
+						currentViewPathData.push({text: curItem.text, value: curItem.value});
+						setCurrentViewPath();
+						fillList(thisform.F_View,["<---"]);
+						expandList(thisform.F_View,vValue[1]);
+					}
+				}
+			}else{
+				var vValue=para.fnGetItemData(para.oPara.hasCategory?curCategory:"","",curItem,this.selectedIndex);
+				if(jsdk.isArray(vValue)){
+					fillList(thisform.F_Data,vValue);
+				}else if(vValue){
+					expandList(thisform.F_Data,[vValue]);
+				}
+			}
+		}else {
+			expandList(thisform.F_Data,[{text:this.options[this.selectedIndex].text,value:this.options[this.selectedIndex].value}]);
+		}
+		if(getListSelectedCount(this)){
+			this.options[0].selected=false;
+		}else{
+			this.options[0].selected=true;
+		}
+		if(thisform.F_Data.options.length==2&&para.oPara.dspResult){
+			if(!para.oPara.hasChildData&&!para.oPara.dspData) {
+				thisform.F_Data.options[1].selected=true;
+				thisform.F_Data.onchange();
+			}
+		}
+	}
+	thisform.F_View.ondblclick=function(){
+		this.onchange();
+	}
+	thisform.F_Data.onchange=function(){
+		for(var i=1;i<this.options.length;i++){
+			var item=this.options[i];
+			if(item.selected&&para.oPara.dspResult){
+				if(!para.oPara.isMultiple) clearEmptyList(thisform.F_Result);
+				expandList(thisform.F_Result,[[item.text,item.value]]);
+			}
+		}
+		if(getListSelectedCount(this)){
+			this.options[0].selected=false;
+		}else{
+			this.options[0].selected=true;
+		}
+		selectListAll(thisform.F_Result);
+	}
+	thisform.F_Data.ondblclick=function(){
+		if(this.selectedIndex<=0) return;
+		var item=this.options[this.selectedIndex];
+		if(!para.oPara.isMultiple) clearEmptyList(thisform.F_Result);
+		expandList(thisform.F_Result,[[item.text,item.value]]);
+	}
+	thisform.F_Result.onchange=function(){
+		for(var i=this.options.length-1;i>=1;i--){
+			var item=this.options[i];
+			if(item.selected){
+				this.removeChild(item);
+			}else{
+				item.selected=true;	//for ipad
+			}
+		}
+		if(this.options.length==1)
+			this.options[0].selected=true;
+		else
+			this.options[0].selected=false;
+	}
+	thisform.F_Result.ondblclick=function(){
+		if(this.selectedIndex<=0) return;
+		this.removeChild(this.options[this.selectedIndex]);
+	}
+	thisform.btnOK.onclick=function(){
+		if(para.oPara.dspResult){
+			window.returnValue=getListValues(thisform.F_Result,0);
+		}else if(para.oPara.dspData){
+			window.returnValue=getListValues(thisform.F_Data,1);
+		}else{
+			window.returnValue=getListValues(thisform.F_View,1);
+		}
+		window.$close();
+	}
+	thisform.btnCancel.onclick=function(){
+		window.$close();
+	}
+	switch(typeof(para.oViewData)){
+		case "object":
+			break;
+		case "string":
+			if(para.oViewData.indexOf("url(json):")==0){
+				var sUrl=para.oViewData.right("url(json):");
+				sUrl=jsdk.getURIFullPath(para.opener.document.location.pathname.leftBack("/"),sUrl,"/").replace(/^\/[a-z]\:/gi,"");
+				para.oViewData=jsdk.get(sUrl,"",false,"","JSON").items;
+			}else if(para.oViewData.indexOf("url(xml):")==0){
+				var sUrl=para.oViewData.right("url(xml):");
+				sUrl=jsdk.getURIFullPath(para.opener.document.location.pathname.leftBack("/"),sUrl,"/").replace(/^\/[a-z]\:/gi,"");
+				var xml=jsdk.get(sUrl,"",false,"","XML");
+				para.oViewData=[];
+				var nodes=xml.documentElement.$childNodes||xml.documentElement.childNodes;
+				for(var i=0;i<nodes.length;i++){
+					para.oViewData.push({ text: nodes[i].getAttribute("text"), value: nodes[i].getAttribute("value")});
+				}
+			}
+			break;
+		case "function":
+			para.oViewData=para.oViewData();
+			break;
+	}
+	//初始化列表
+	fillList(thisform.F_Category,[],para.oDspTexts.category?para.oDspTexts.category:"");
+	fillList(thisform.F_View,[]);
+	fillList(thisform.F_Data,[]);
+	fillList(thisform.F_Result,[]);
+	if(!para.oPara.hasCategory){
+		expandList(thisform.F_View,para.oViewData);
+	}else{
+		initCategoryArea();
+	}
+	if(!para.vValues){
+		//none---
+	}else if(!jsdk.isArray(para.vValues)){
+		para.vValues=[para.vValues];
+	}else if(!para.oPara.isMultiple){
+		para.vValues=para.vValues.slice(0,1);
+	}
+	if(para.oPara.dspResult){
+		fillList(thisform.F_Result,para.vValues);
+	}else if(!para.oPara.dspData&&!para.oPara.hasCategory){
+		setListValues(thisform.F_View,para.vValues);
+	}
+  }
+  </script>
+ </head>
+
+ <body scroll="no">
+	<div id="page">
+		<div class="box">
+			<div id="body">
+				<form>
+				<div id="top"><script>document.write(para.oDspTexts.tips);</script></div>
+				<div id="content">
+					<div class="box">
+						<script id="mainpanel" type="text/html">
+						<style>
+						  .datalist{
+							width: <%= oPara.dspResult?"27%":"40%" %>;
+						  }
+						  .resultlist{
+							width: <%= oPara.hasChildData&&oPara.dspData?"27%":"40%" %>;
+						  }
+						</style>
+						<TABLE class="mainpanel">
+							<TR class="labelbar" style="height: 1.3em">
+								<TD><span class="label">${oDspTexts.view}</span></TD>
+								<TD style="display: <%= oPara.hasChildData&&oPara.dspData?'':'none' %>"></TD>
+								<TD style="display: <%= oPara.hasChildData&&oPara.dspData?'':'none' %>"><span class="label">${oDspTexts.data}</span></TD>
+								<TD style="display: <%= oPara.dspResult?'':'none' %>"></TD>
+								<TD style="display: <%= oPara.dspResult?'':'none' %>"><span class="label">${oDspTexts.result}</span></TD>
+							</TR>
+							<TR class="dataarea" style="height: auto">
+								<TD class="nav">
+									<div style="position: relative;height:100%;">
+										<div class="category" style="display: <%= oPara.hasCategory?'':'none' %>">
+											<select id="F_Category" NAME="F_Category" style="margin:0;">
+												<%
+												
+												
+												%>
+											</select>
+										</div>
+										<div class="view" style="<%= !oPara.hasCategory?'top:0px;height:100%':'' %>">
+											<select id="F_View" NAME="F_View" class="list" size="2" <%= oPara.isMultiple&&!oPara.dspData?'multiple="true"':'' %> >
+												<%
+													if(!oPara.hasCategory){
+												%>
+												
+												<%
+													}
+												%>
+											</select>
+										</div>
+									</div>
+								</TD>
+								<TD style="width: 10px; display: <%= oPara.hasChildData&&oPara.dspData?'':'none' %>"></TD>
+								<TD class="datalist" style="display: <%= oPara.hasChildData&&oPara.dspData?'':'none' %>">
+									<select id="F_Data" NAME="F_Data" class="list" size="2" <%= oPara.isMultiple?'multiple="true"':'' %> ></select>
+								</TD>
+								<TD style="width: 10px; display: <%= oPara.dspResult?'':'none' %>"></TD>
+								<TD class="resultlist" style="display: <%= oPara.dspResult?'':'none' %>">
+									<select id="F_Result" NAME="F_Result" class="list" size="2" <%= oPara.isMultiple?'multiple="true"':'' %> >
+										<%
+
+										%>
+									</select>
+								</TD>
+							</TR>
+						</TABLE>
+						</script>
+						<script>
+						var tplMainPanel=jsdk.DOMTemplate.newInstanceWithId("mainpanel");
+						tplMainPanel.setIsOnsiteOutput(true);
+						tplMainPanel.parse(para);
+						</script>
+					</div>
+				</div>
+				<div id="bottom">
+					<div id="actionbar" class="ActionBar">
+						<script id="actions" type="text/html">
+						<INPUT id="btnOK" name="btnOK" class="ActionBarItem" TYPE="button" value="${oDspTexts.button.OK}" />
+						<INPUT id="btnCancel" name="btnCancel" class="ActionBarItem" TYPE="button" value="${oDspTexts.button.Cancel}" />
+						</script>
+						<script>
+						var tplActions=jsdk.DOMTemplate.newInstanceWithId("actions");
+						tplActions.setIsOnsiteOutput(true);
+						tplActions.parse(para);
+						</script>
+					</div>
+					<div id="memo"><script>document.write(para.oDspTexts.memo);</script></div>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+ </body>
+</html>

@@ -1,0 +1,69 @@
+/**
+ * @file HTMLTextField.class.js
+ * @version 0.5.1
+ * @since JSDK3 V1.9.0
+ * @author Liu Denggao
+ * @created 2012.5.29
+ * @modified 2012.7.9
+ */
+$package("js.domx");$import("js.domx.HTMLFormField");js.domx.HTMLTextField=function(){this._dataType="Text";this._separator="";this._allowMultiple=false;this._allowKeywordSyno=false;this._allowNotInList=true;this._allowMultipleLine=false;this._optionalValues=null;this._minValue=undefined;this._maxValue=undefined;this._dataValue=undefined;this._dataField=undefined;this._isSelecting=false;this._isAutoHeight=false;this._minRows=0;this._maxRows=0;};var _$class=js.domx.HTMLTextField;_$class.$name="HTMLTextField";_$class.$context=js.domx.HTML;_$class.$extends(js.domx.HTMLFormField);var _$proto=_$class.prototype;_$class.getContext=function(){return this.$context;}
+_$proto.getMinValue=function(){return this._minValue;}
+_$proto.setMinValue=function(value){if(value===this._minValue)return;this._minValue=value;this.fireEvent("_onPropertyChanged","minValue");}
+_$proto.getMaxValue=function(){return this._maxValue;}
+_$proto.setMaxValue=function(value){if(value===this._maxValue)return;this._maxValue=value;this.fireEvent("_onPropertyChanged","maxValue");}
+_$proto.getSeparator=function(){return this._separator;}
+_$proto.setSeparator=function(value){this._separator=value;switch(value.toLowerCase()){case"_newline":this._separator=Global.STR_NewLine;break;case"_blankline":this._separator=Global.STR_NewLine+Global.STR_NewLine;break;default:this._separator=value;}}
+_$proto.getAllowMultiple=function(){return this._allowMultiple;}
+_$proto.setAllowMultiple=function(value){this._allowMultiple=value;}
+_$proto.getAllowKeywordSyno=function(){return this._allowKeywordSyno;}
+_$proto.getAllowNotInList=function(){return this._allowNotInList;}
+_$proto.getIsAutoHeight=function(){return this._isAutoHeight;}
+_$proto.getIsReadOnly=function(){return this._isReadOnly;}
+_$proto.setIsReadOnly=function(value){if(this._isReadOnly===value)return;this._isReadOnly=value;this.fireEvent("_onPropertyChanged","isReadOnly");}
+_$proto.getOptionalValues=function(){return this._optionalValues;}
+_$proto.setOptionalValues=function(value){this._optionalValues=value;}
+_$proto.getDataText=function(){return this._allowMultiple?this.__original.value.split(this._separator||";"):this.__original.value;}
+_$proto.getDataValue=function(){if(!this._allowKeywordSyno){var field=this.__original;if(!this._allowMultiple){return field.value;}else if(!field.value){return[];}else{return field.value.split(this._separator||";");}}else if(this._dataField){var field=this._dataField;if(!this._allowMultiple){return field.value;}else if(!field.value){return[];}else{return field.value.split(this._separator||";");}}else if(this._dataValue){return this._dataValue;}else{return this._allowMultiple?[]:"";}}
+_$proto.setDataValue=function(vValue){var element=this.__original;if(this._allowKeywordSyno)vValue=this._setDataValue(vValue);vValue=Global.isArray(vValue)?vValue:[vValue];if(!this._allowKeywordSyno){var sValue=vValue.join(this._separator||";");}else if(!this._optionalValues||!this._optionalValues.length){var sValue=vValue.join(this._separator||";");}else{var sValue=this._optionalValues.select(function(item){return vValue.contains(item.getLast());}).map(function(item){return item.getFirst();}).join(this._separator||";");}
+if(element.value!=sValue)element.value=sValue;this.fireEvent("_onValueChanged");}
+_$proto._setDataValue=function(vValue){if(Global.isArray(vValue)){if(this._dataField){this._dataField.value=vValue.join(this._separator||";");}else{this._dataValue=vValue.join(this._separator||";");}}else{if(this._dataField){this._dataField.value=vValue;}else{this._dataValue=vValue;}}
+return this.getDataValue();}
+_$class.newInstanceFrom=function(parentForm,vField,vOptions){if(!vField)return null;var obj=new this();obj._parentForm=parentForm;if(typeof(vField)=="string"){obj.__original=parentForm.getElementsByName(vField).getFirst();}else{obj.__original=vField;}
+obj._name=obj.__original.name||obj.__original.id||"";if(vOptions){obj._separator=vOptions.separator||"";obj._label=vOptions.label||"";if(vOptions.allowEmpty!=undefined)obj._allowEmpty=vOptions.allowEmpty;if(vOptions.unfilledPrompt!=undefined)obj._unfilledPrompt=vOptions.unfilledPrompt;if(vOptions.unmatchedPrompt!=undefined)obj._unmatchedPrompt=vOptions.unmatchedPrompt;if(vOptions.allowMultiple!=undefined)obj._allowMultiple=vOptions.allowMultiple;if(vOptions.allowKeywordSyno!=undefined)obj._allowKeywordSyno=vOptions.allowKeywordSyno;if(vOptions.allowNotInList!=undefined)obj._allowNotInList=vOptions.allowNotInList;if(vOptions.isReadOnly!=undefined)obj._isReadOnly=vOptions.isReadOnly;obj._allowMultipleLine=obj.__original.tagName=="TEXTAREA";if(obj._allowMultipleLine){obj._isAutoHeight=vOptions.isAutoHeight||false;obj._minRows=vOptions.minRows||obj.__original.rows||2;obj._maxRows=vOptions.maxRows||0;obj._maxRows=obj._maxRows>0?Math.max(obj._minRows,obj._maxRows):0;}
+if(vOptions.dataField!=undefined){if(typeof(vOptions.dataField)!="string"){obj._dataField=vOptions.dataField;}else{obj._dataField=parentForm.getElementsByName(vOptions.dataField).getFirst();}}
+if(vOptions.optionalValues!=undefined){if(typeof(vOptions.optionalValues)!="string"){obj._optionalValues=vOptions.optionalValues;}else if(vOptions.optionalValues.indexOf("->#")==0){obj._optionalValues=parentForm.getElementsByName(vOptions.optionalValues.right("->#")).getFirst().value.split(obj._separator||";");}else{obj._optionalValues=vOptions.optionalValues.split(obj._separator||";");}
+for(var i=0;i<obj._optionalValues.length;i++){var vValue=obj._optionalValues[i];if(Global.isArray(vValue)){}else if(typeof(vValue)=="string"){if(!obj._allowKeywordSyno){obj._optionalValues[i]=[vValue];}else{obj._optionalValues[i]=[vValue.split("|")[0],vValue.split("|").pop()];}}else{obj._optionalValues[i]=obj._allowKeywordSyno?[vValue.text,vValue.value]:[vValue.text];}}}
+if(vOptions.minValue!=undefined){if(typeof(vOptions.minValue)!="string"){obj._minValue=vOptions.minValue;}else{obj._minValue=parseFloat(vOptions.minValue);}}
+if(vOptions.maxValue!=undefined){if(typeof(vOptions.maxValue)!="string"){obj._maxValue=vOptions.maxValue;}else{obj._maxValue=parseFloat(vOptions.maxValue);}}
+if(vOptions.onEvents){["onValidate","onSelect","onReadStateChanged","onValueChanged"].forEach(function(sEvent){var func=vOptions.onEvents[sEvent];if(func)obj.addEventListener(sEvent,func);});}}
+if(obj.__original.type!="file"){obj.__original.attachEvent("onchange",function(event){obj.fireEvent("_onValueChanged",event);});obj.__original.attachEvent("onblur",function(event){obj.fireEvent("_onBlur",event);});}else{obj.__original.attachEvent("onchange",function(event){obj.fireEvent("_onValueChanged",event);obj.fireEvent("_onBlur",event);});}
+obj.fireEvent("_onPropertyChanged","allowKeywordSyno");obj.fireEvent("_onPropertyChanged","allowNotInList");obj.fireEvent("_onPropertyChanged","minValue");obj.fireEvent("_onPropertyChanged","maxValue");obj.fireEvent("_onPropertyChanged","isAutoHeight");obj.fireEvent("_onPropertyChanged","minRows");obj.adjustHeight();obj.fireEvent("_onPropertyChanged","isReadOnly");return obj;}
+_$proto.selectValues=function(event){this.fireEvent("_onSelect",event);}
+_$proto.clearEmpty=function(){this.__original.value="";if(this._dataValue)this._dataValue="";if(this._dataField)this._dataField.value="";}
+_$proto.validate=function(iOptions,isSubmiting){var field=this.__original;switch(iOptions){case 0:if(!field.value){if(!this._allowEmpty&&isSubmiting){if(this._unfilledPrompt)alert(this._unfilledPrompt);else alert("\u8bf7\u9009\u62e9\u6216\u8f93\u5165\""+this._label+"\"!");try{field.focus();}catch(e){}}
+return this._allowEmpty;}
+break;case 1:var minValue=this.getMinValue();var maxValue=this.getMaxValue();if(this._allowMultiple){var length=this.getDataValue().length;if(maxValue!=undefined){if(length>maxValue){if(this._unmatchedPrompt)alert(this._unmatchedPrompt);else alert("\u60a8\u9009\u62e9\u7684\""+this._label+"\"\u7684\u6761\u76ee\u6570\u4e0d\u80fd\u8d85\u8fc7"+maxValue+"\u6761!");try{field.focus();}catch(e){}
+return false;}}else if(minValue!=undefined){if(length<minValue){if(this._unmatchedPrompt)alert(this._unmatchedPrompt);else alert("\u60a8\u9009\u62e9\u7684\""+this._label+"\"\u7684\u6761\u76ee\u6570\u4e0d\u80fd\u5c11\u4e8e"+minValue+"\u6761!");try{field.focus();}catch(e){}
+return false;}}}else if(this._allowNotInList){var length=field.value.length;if(maxValue!=undefined){if(length>maxValue){if(this._unmatchedPrompt)alert(this._unmatchedPrompt);else alert("\u60a8\u8f93\u5165\u7684\""+this._label+"\"\u7684\u5b57\u6570\u4e0d\u80fd\u8d85\u8fc7"+maxValue+"\u5b57!");try{field.focus();}catch(e){}
+return false;}}else if(minValue!=undefined){if(length<minValue){if(this._unmatchedPrompt)alert(this._unmatchedPrompt);else alert("\u60a8\u8f93\u5165\u7684\""+this._label+"\"\u7684\u5b57\u6570\u4e0d\u80fd\u5c11\u4e8e"+minValue+"\u5b57!");try{field.focus();}catch(e){}
+return false;}}}
+break;case 2:return this.fireEvent("_onValidate",isSubmiting);}
+return true;}
+_$proto.adjustHeight=function(){var field=this.__original;if(this._isAutoHeight){if(Global.Browser.Engine.trident){if(document.compatMode!="CSS1Compat")return;while(field.scrollHeight<=field.clientHeight){if(field.rows>this._minRows)field.rows--;else
+break;if(this._maxRows==0||field.rows<this._maxRows)field.style.overflowY="hidden";if(field.scrollHeight>field.clientHeight){field.rows++;break;}}
+while(field.scrollHeight>field.clientHeight){if(this._maxRows==0||field.rows<this._maxRows){field.rows++;}else{field.style.overflowY="auto";break;}}}else{if(field.scrollTop==0)field.scrollTop=1;while(field.scrollTop==0){if(field.rows>this._minRows)field.rows--;else
+break;field.scrollTop=1;if(this._maxRows==0||field.rows<this._maxRows)field.style.overflowY="hidden";if(field.scrollTop>0){field.rows++;break;}}
+while(field.scrollTop>0){if(this._maxRows==0||field.rows<this._maxRows){field.rows++;if(field.scrollTop==0)field.scrollTop=1;}else{field.style.overflowY="auto";break;}}}}}
+_$proto._onPropertyChanged=function(sName){var _this=this;var field=this.__original;switch(sName){case"isAutoHeight":if(!this._allowMultipleLine){return;}else if(this._isAutoHeight){if(Global.Browser.Engine.trident){if(document.compatMode!="CSS1Compat"){field.style.overflowY="visible";}else{field.style.overflowY="hidden";field.attachEvent("onkeyup",function(event){event=event||window.event;if(!_this._isReadOnly)_this.adjustHeight();});}}else{field.style.overflowY="hidden";field.attachEvent("oninput",function(event){event=event||window.event;if(!_this._isReadOnly)_this.adjustHeight();});}}else{this.__original.style.overflowY="auto";}
+break;case"minRows":if(this._allowMultipleLine){if(field.rows<this._minRows)field.rows=this._minRows;}
+break;case"isReadOnly":if(this._isReadOnly){this.__original.readOnly=this._isReadOnly;}else{this.__original.readOnly=!this._allowNotInList;}
+this.fireEvent("onReadStateChanged",this._isReadOnly);break;case"allowKeywordSyno":case"allowNotInList":if(this._allowKeywordSyno){this._allowNotInList=false;}
+if(this._allowKeywordSyno){this.__original.readOnly=true;}else if(this._allowNotInList){this.__original.readOnly=false;}else{this.__original.readOnly=true;}
+break;case"minValue":case"maxValue":var minValue=this.getMinValue();var maxValue=this.getMaxValue();if(this._allowMultiple){if(minValue!=undefined&&maxValue!=undefined){this.__original.title="\u5143\u7d20\u4e2a\u6570\u9650\u5236: "+minValue+" - "+maxValue;}else if(minValue!=undefined){this.__original.title="\u81f3\u5c11"+minValue+"\u4e2a!";}else if(maxValue!=undefined){this.__original.title="\u6700\u591a"+maxValue+"\u4e2a!";}}else{if(minValue!=undefined&&maxValue!=undefined){this.__original.title="\u957f\u5ea6\u9650\u5236: "+minValue+" - "+maxValue;}else if(minValue!=undefined){this.__original.title="\u81f3\u5c11"+minValue+"\u5b57!";}else if(maxValue!=undefined){this.__original.title="\u6700\u591a"+maxValue+"\u5b57!";}}
+break;}}
+_$proto._onSelect=function(event){var _this=this;if(this.hasEvent("onSelect")){this._isSelecting=true;this.fireEvent("onSelect",event,this._optionalValues,function(action,value){switch(action){case 1:_this.fireEvent("_onSelectingOK",value);break;case 0:_this.fireEvent("_onSelectingCancel",value);break;}});}}
+_$proto._onSelectingOK=function(value){this.fireEvent("_onSelectingFinished");this.setDataValue(value);}
+_$proto._onSelectingCancel=function(){this.fireEvent("_onSelectingFinished");}
+_$proto._onSelectingFinished=function(){this._isSelecting=false;}
+_$proto._onValueChanged=function(event){this.adjustHeight();var flag=this.fireEvent("onValueChanged",this.getDataValue());if(flag||flag==undefined)this._parentForm.fireEvent("_onFieldValueChanged",this);}
+_$proto._onBlur=function(event){var value=this.__original.value;var flag=![0,1,2].some(function(mode){return!this.validate(mode);},this);return flag;}

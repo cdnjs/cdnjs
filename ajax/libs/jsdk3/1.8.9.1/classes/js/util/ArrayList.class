@@ -1,0 +1,34 @@
+/**
+ * @file ArrayList.js
+ * @author Liu Denggao
+ * @date 2008.11.16-2008.12.03-2010.03.13
+ * @modified 2011.11.03
+ * @version 0.5
+ * @since JSDK3 V0.1
+ * @for JSDK3 V1.7.5
+ */
+$package("js.util");js.util.ArrayList=function(){this.__array=[];}
+var _$class=js.util.ArrayList;var _$proto=js.util.ArrayList.prototype;_$proto.toArray=function(){return this.__array.concat([]);}
+_$proto.indexOf=function(o){var l=this.__array.length;for(var i=0;i<l;i++){if(this.__array[i]==o){return i;}}
+return-1;}
+_$proto.lastIndexOf=function(o){var l=this.__array.length-1;for(var i=l;i>=0;i--){if(this.__array[i]==o){return i;}}
+return-1;}
+_$proto.add=function(arg1,arg2){if(arguments.length==1){this.__array.push(arg1);}else{var l1=this.__array.length;var a1=this.__array.slice(0,arg1);var a2=this.__array.slice(arg1,l1);var l2=a1.length;a1[l2]=arg2;this.__array=a1.concat(a2);}}
+_$proto.addAll=function(a){if(a instanceof Array){this.__array=this.__array.concat(a);}else if(typeof(a.toArray)=="function"
+&&((a=a.toArray())instanceof Array)){this.__array=this.__array.concat(a);}else{throw new Error(0,this.getClass().getName()+".addAll(): arguments error.");}}
+_$proto.removeAt=function(i){var l=this.__array.length;if(i<0||i>=l){return null;}
+var o=this.__array[i];this.__array=this.__array.slice(0,i).concat(this.__array.slice(i+1,l));return o;}
+_$proto.remove=function(o){var i=this.indexOf(o);if(i==-1){return this;}
+return this.removeAt(i);}
+_$proto.contains=function(o){return this.indexOf(o)!=-1;}
+_$proto.clear=function(){this.__array.length=0;}
+_$proto.size=function(){return this.__array.length;}
+_$proto.get=function(i){var size=this.size();if(i>=0&&i<size){return this.__array[i];}else{return null;}}
+_$proto.clone=function(){var o=new ArrayList();o.addAll(this.__array);return o;}
+_$proto.sort=function(dataType,iSortOption,funGetValue){var aTemps=[];if(iSortOption==2)return Math.random()>0.5?-1:1;switch(dataType){case"String":aTemps=this.__array.sort(function(a,b){var a1=Global.js.lang.natives.String(typeof(funGetValue)=="function"?funGetValue(a):a);var b1=Global.js.lang.natives.String(typeof(funGetValue)=="function"?funGetValue(b):b);return iSortOption==0?a1.localeCompare(b1):b1.localeCompare(a1);});break;case"Date":aTemps=this.__array.sort(function(a,b){var a1=new Global.js.lang.natives.Date(typeof(funGetValue)=="function"?funGetValue(a):a);var b1=new Global.js.lang.natives.Date(typeof(funGetValue)=="function"?funGetValue(b):b);if(isNaN(a1)&&isNaN(b1)){return 0;}else if(isNaN(a1)){return iSortOption==0?1:-1;}else if(isNaN(b1)){return iSortOption==0?-1:1;}else{return[a1-b1,b1-a1][iSortOption];}});break;case"Number":aTemps=this.__array.sort(function(a,b){var a1=Global.js.lang.natives.Number(typeof(funGetValue)=="function"?funGetValue(a):a);var b1=Global.js.lang.natives.Number(typeof(funGetValue)=="function"?funGetValue(b):b);if(isNaN(a1)&&isNaN(b1)){return 0;}else if(isNaN(a1)){return iSortOption==0?1:-1;}else if(isNaN(b1)){return iSortOption==0?-1:1;}else{return[a1-b1,b1-a1][iSortOption];}});break;case"Boolean":aTemps=this.__array.sort(function(a,b){var a1=Global.js.lang.natives.Boolean(typeof(funGetValue)=="function"?funGetValue(a):a);var b1=Global.js.lang.natives.Boolean(typeof(funGetValue)=="function"?funGetValue(b):b);if(a1==b1){return 0;}else if(a1){return iSortOption==0?1:-1;}else{return iSortOption==0?-1:1;}});break;}
+for(var i=0;i<this.__array.length;i++){this.__array[i]=aTemps[i];}
+return this.__array;}
+_$class.sort=function(aArray,dataType,iSortOption,funGetValue){var aTemps=[];if(iSortOption==2)return Math.random()>0.5?-1:1;switch(dataType){case"String":aTemps=aArray.sort(function(a,b){var a1=Global.js.lang.natives.String(typeof(funGetValue)=="function"?funGetValue(a):a);var b1=Global.js.lang.natives.String(typeof(funGetValue)=="function"?funGetValue(b):b);return iSortOption==0?a1.localeCompare(b1):b1.localeCompare(a1);});break;case"Date":aTemps=aArray.sort(function(a,b){var a1=new Global.js.lang.natives.Date((typeof(funGetValue)=="function"?funGetValue(a):a).replace(/-/g,"/"));var b1=new Global.js.lang.natives.Date((typeof(funGetValue)=="function"?funGetValue(b):b).replace(/-/g,"/"));if(isNaN(a1)&&isNaN(b1)){return 0;}else if(isNaN(a1)){return iSortOption==0?1:-1;}else if(isNaN(b1)){return iSortOption==0?-1:1;}else{return[a1-b1,b1-a1][iSortOption];}});break;case"Number":aTemps=aArray.sort(function(a,b){var a1=Global.js.lang.natives.Number(typeof(funGetValue)=="function"?funGetValue(a):a);var b1=Global.js.lang.natives.Number(typeof(funGetValue)=="function"?funGetValue(b):b);if(isNaN(a1)&&isNaN(b1)){return 0;}else if(isNaN(a1)){return iSortOption==0?1:-1;}else if(isNaN(b1)){return iSortOption==0?-1:1;}else{return[a1-b1,b1-a1][iSortOption];}});break;case"Boolean":aTemps=aArray.sort(function(a,b){var a1=Global.js.lang.natives.Boolean(typeof(funGetValue)=="function"?funGetValue(a):a);var b1=Global.js.lang.natives.Boolean(typeof(funGetValue)=="function"?funGetValue(b):b);if(a1==b1){return 0;}else if(a1){return iSortOption==0?1:-1;}else{return iSortOption==0?-1:1;}});break;}
+for(var i=0;i<aTemps.length;i++){aArray[i]=aTemps[i];}
+return aArray;}
+_$proto.toString=function(){return this.__array.toString();}

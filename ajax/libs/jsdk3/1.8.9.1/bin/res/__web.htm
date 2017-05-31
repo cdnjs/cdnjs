@@ -1,0 +1,34 @@
+<html>
+<head>
+<script language="JavaScript">
+/**
+ * static resource for web or dialog
+ * @author: Liu Denggao
+ * @date: 2009.07.19
+ * @modified: 2011.6.13
+ */
+
+// --- modal dialog (only for ie)---
+(function(){
+if (typeof(dialogArguments) != "undefined" 
+	&& dialogArguments != null){
+	window.opener = dialogArguments.window;
+	window.arguments = dialogArguments.arguments;
+	document.write(dialogArguments.sourceCode);
+	if(typeof(dialogArguments.init)=="function"){
+		window.onload=function(){dialogArguments.init.call(caller,window);}
+	}
+}else if(window.opener&&window.opener.__$activeDialog==window){
+	var vArguments=window.opener.__$activeDialogParameter.arguments;
+	window.arguments = vArguments.arguments;
+	document.write(vArguments.sourceCode);
+	if(typeof(vArguments.init)=="function"){
+		window.onload=function(){vArguments.init.call(caller,window);}
+	}
+}else{
+	// about:blank
+}
+})();
+</script>
+</head>
+</html>

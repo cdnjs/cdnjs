@@ -1,0 +1,47 @@
+/**
+ * @file Packager.js
+ * @support: IE6+
+ * @author Liu Denggao
+ * @created 2011.7.15
+ * @modified 2012.7.11
+ * @version 1.3
+ * @since JSDK3 V1.3
+ */
+$package("js.build");$import("js.build.Compressor");js.build.Packager=function(mode){this._mode=0;this._names=[];this._files=[];this._isCompress=false;this._Packager(mode);}
+var _$class=js.build.Packager;_$class.$extends("Object");var _$proto=js.build.Packager.prototype;_$class.MODE={FILE:0,CLASS:1,PRODUCT:2}
+_$proto._Packager=function(mode){this._mode=mode;}
+_$proto.getMode=function(){return this._mode;}
+_$proto.setMode=function(value){if(value===this._mode)return;this._mode=value;this.fireEvent("_onModeChange");}
+_$proto.getIsCompress=function(){return this._isCompress;}
+_$proto.setIsCompress=function(value){this._isCompress=value;}
+_$proto.addFile=function(sFilePath){this._files[this._files.length]=sFilePath;}
+_$proto.addFolder=function(){var fso=new ActiveXObject("Scripting.FileSystemObject");}
+_$proto.addClasses=function(sClassFullName){var jsre=Engine.runtimeEnvironment;this._names[this._names.length]=sClassFullName;this._files[this._files.length]="classes/"+sClassFullName.replace(/\./g,"/")+Global.get(jsre.getRootHome()+"/config.json","",false,"","JSON").fileExtension["class"].compile;}
+_$proto.clearEmpty=function(){this._names=[];this._files=[];}
+_$proto.build=function(sComment,oInfo,sSepa,sOutput){switch(this._mode){case 0:return this._buildForFile(sComment,sSepa,sOutput);case 1:return this._buildForClass(sComment,oInfo,sOutput);case 2:return this._buildForProduct(sComment,sOutput);}
+return;}
+_$proto._buildForFile=function(sComment,sSepa,sOutput){if(!this._files.length)return;var jsre=Engine.runtimeEnvironment;var compressor=new Global.Compressor(1);var location=jsre.config.getParameter("location");sOutput=Global.getURIFullPath(jsre.getRootPath().slice(1).replace(/\//g,"\\"),sOutput,"\\");var sCode="";var oEvent=document.createEventObject();var fso=new ActiveXObject("Scripting.FileSystemObject");var file=fso.CreateTextFile(sOutput,true,false);if(!this._isCompress){file.WriteLine(sComment);for(var i=0,iLen=this._files.length;i<iLen;i++){var sFile=Global.getURIFullPath(jsre.getRootPath(),this._files[i].replace(/\\/g,"/"));if(!location.hostname){sFile=location.protocol+"//"+sFile;}
+var errors=[];try{oEvent.result={filePath:sFile};this.fireEvent("_onPackagingFile",oEvent);try{sCode=Global.get(sFile,"",false,"","Text");sCode=Global.obj(sCode).encodeNonAscii();}catch(e){errors[errors.length]=e;sCode="";}
+file.Write(sCode);if(errors.length==0&&(i<iLen-1)){file.WriteLine(sSepa||"");file.WriteLine("");}}catch(e){errors[errors.length]=e;}
+if(errors.length){oEvent.result={filePath:sFile,errors:errors};this.fireEvent("_onPackageFileFail",oEvent);}}}else{var text="";text+=sComment+Global.STR_NewLine;for(var i=0,iLen=this._files.length;i<iLen;i++){var sFile=Global.getURIFullPath(jsre.getRootPath(),this._files[i].replace(/\\/g,"/"));if(!location.hostname){sFile=location.protocol+"//"+sFile;}
+var errors=[];try{oEvent.result={filePath:sFile};this.fireEvent("_onPackagingFile",oEvent);try{sCode=Global.get(sFile,"",false,"","Text");sCode=Global.obj(sCode).encodeNonAscii();}catch(e){errors[errors.length]=e;sCode="";}
+text+=sCode+Global.STR_NewLine;if(errors.length==0&&(i<iLen-1)){text+=(sSepa||"")+Global.STR_NewLine+Global.STR_NewLine;}}catch(e){errors[errors.length]=e;}
+if(errors.length){oEvent.result={filePath:sFile,errors:errors};this.fireEvent("_onPackageFileFail",oEvent);}}
+file.Write(compressor.compress(text));}
+file.Close();oEvent.result={output:sOutput};this.fireEvent("_onCompleted",oEvent);return;}
+_$proto._buildForClass=function(sComment,oManifest,sOutput){if(!this._files.length)return;var jsre=Engine.runtimeEnvironment;var compressor=new Global.Compressor(0);var location=jsre.config.getParameter("location");sOutput=Global.getURIFullPath(jsre.getRootPath().slice(1).replace(/\//g,"\\"),sOutput,"\\");var sCode="";var oEvent=document.createEventObject();var fso=new ActiveXObject("Scripting.FileSystemObject");var file=fso.CreateTextFile(sOutput,true,false);file.WriteLine(sComment);file.WriteLine("{");file.WriteLine("manifest : {");var aTemps=[];for(var p in oManifest){if(oManifest.hasOwnProperty(p)){aTemps[aTemps.length]=("\""+p+"\" : \""+oManifest[p]+"\"");}}
+file.WriteLine(aTemps.join(","));file.WriteLine("},");file.WriteLine("entity : {");for(var i=0,iLen=this._files.length;i<iLen;i++){var sFile=Global.getURIFullPath(jsre.getRootPath(),this._files[i].replace(/\\/g,"/"));if(!location.hostname){sFile=location.protocol+"//"+sFile;}
+var errors=[];try{oEvent.result={filePath:sFile};this.fireEvent("_onPackagingClass",oEvent);try{sCode=Global.get(sFile,"",false,"","Text");}catch(e){errors[errors.length]=e;sCode="";}
+file.Write("\""+this._names[i]+"\" : "+Global.obj(compressor.compress(sCode)).serialize());if(errors.length==0){file.WriteLine((i<iLen-1)?",":"");}}catch(e){errors[errors.length]=e;}
+if(errors.length){oEvent.result={filePath:sFile,errors:errors};this.fireEvent("_onPackageClassFail",oEvent);}}
+file.WriteLine("}");file.WriteLine("}");file.Close();oEvent.result={output:sOutput};this.fireEvent("_onCompleted",oEvent);return;}
+_$proto._buildForProduct=function(sComment,sOutput){}
+_$proto.attachEvent=function(sEvent,fpNotify){switch(sEvent){case"onPackagingFile":case"onPackagingFileError":case"onPackageFileFail":case"onPackagingClass":case"onPackagingClassError":case"onPackageClassFail":case"onCompleted":this[sEvent]=fpNotify;break;default:}}
+_$proto._onModeChange=function(){this._files=[];}
+_$proto._onPackagingFile=function(oEvent){this.fireEvent("onPackagingFile",oEvent);}
+_$proto._onPackagingFileError=function(oEvent){this.fireEvent("onPackagingFileError",oEvent);}
+_$proto._onPackageFileFail=function(oEvent){this.fireEvent("onPackageFileFail",oEvent);}
+_$proto._onPackagingClass=function(oEvent){this.fireEvent("onPackagingClass",oEvent);}
+_$proto._onPackagingClassError=function(oEvent){this.fireEvent("onPackagingClassError",oEvent);}
+_$proto._onPackageClassFail=function(oEvent){this.fireEvent("onPackageClassFail",oEvent);}
+_$proto._onCompleted=function(oEvent){this.fireEvent("onCompleted",oEvent);}

@@ -1,0 +1,10 @@
+
+$package("js.ui");js.ui.SelectDialogBox=function(){}
+var _$class=js.ui.SelectDialogBox;with(_$class){$name="SelectDialogBox";$extends("Object");_$class._styleLib={"std":Engine.runtimeEnvironment.getResPath("js.ui")+"/SelectDialogBox/"+(Browser.Engine.trident&&document.compatMode!="CSS1Compat"?"std.IE.css":"std.css")}
+_$class._styleSkin="std";addMethod(true,true,"show",function(oDspTexts,oPara,oViewData,vValues,fnGetItemData,fnCallBack){var _minCellWidth=100;var _minHeight=50;var pageName=(Global.Browser.Platform.ios?"index_for_ipad.htm":"index.htm")+"?seq="+(new js.lang.natives.Date()).getMilliseconds();oPara.opener=window;if(!oPara.icon){oPara.icon={}}
+if(oPara.cateDspMode==undefined){oPara.cateDspMode=0;}
+if(oPara.viewDspMode==undefined){oPara.viewDspMode=0;}
+if(Global.Browser.Platform.ios){pageName="index_for_ipad.htm";}else if(oPara.viewDspMode==0){if(Global.Browser.Engine.trident&&Global.Browser.Engine.version<=3){pageName="index_for_IE.htm";}else{pageName="index.htm";}}else{if(Global.Browser.Engine.trident&&Global.Browser.Engine.version<=3){pageName="index_tree_for_IE.htm";}else{pageName="index_tree.htm";}}
+pageName+="?seq="+(new js.lang.natives.Date()).getMilliseconds();var ret=window.$showModalDialog(Engine.runtimeEnvironment.getResPath("js.ui")+"/SelectDialogBox/"+pageName
+,{engineDir:Engine.runtimeEnvironment.getRootPath(),opener:window,oDspTexts:function(){if(!oDspTexts.button){oDspTexts.button={OK:"OK",Cancel:"Cancel"}}
+return oDspTexts;}(),oPara:oPara,oViewData:oViewData,vValues:vValues,fnGetItemData:fnGetItemData},"dialogWidth=650px;dialogHeight=450px;status:no",fnCallBack);return ret;});addMethod(true,true,"addStyleSkin",function(sName,sPath){this._styleLib[sName]=sPath;});}

@@ -1,0 +1,202 @@
+﻿
+>>2013.05.05	JSDK3 V1.8.9.1 Final
+   修改了装载器"loader.js"，允许框架的根目录形如“jsdk3/[v](version)”的格式，例如 "jsdk3/1.8.9.1"、
+"jsdk3/v1.8.x"，以用于其他第三方代码库管理存放不同版本的本框架库。例如：CDNJS
+
+>>2013.04.23	JSDK3 V1.8.9 Final
+   增加了新的CSS选择器公共方法“query()”，等同于“dom()”方法，功能代码来源于网上开源的Q.js.
+   修改了根命名空间上function模式对应的选择器为新的选择器“query()”
+   升级了DOM模版，从v2.7.4到v2.9了，修复了不能禁止输出的问题。
+   修复了JSDK3装载器在第二次装载时脚本标签不包含“include”属性的问题。
+   修改了框架引擎“jsre.js”中的日志记录方法，可在调试模式下框架装载完成后即时在控制台输出日志信息
+   升级了弹出框组件“js.ui.PopupDialog”，从1.8到1.9了
+   升级了树形菜单组件“js.ui.menu.Outline”,从v1.3.2到v1.3.3
+   修复了firefox下查找event方法引起的死循环问题，限定了最大循环次数10次
+   升级了“js.dom.HTML”类，从0.8到0.9，增加了文本光标位置的获取、设置、插入文本等功能。
+   增强了Array类的getFirst、getLast方法，可根据传入的函数进行自定义查找
+   添加了Array类的isUniqueValues()方法，用来判断数组的每个元素是否彼此唯一
+   添加了配置文件，修改了框架引擎，可设置是否启用日志和是否启用日志发送，及修改日志发送地址，用于跟踪统计
+   添加了全局方法“getImage(url, ready, load, error)”，可用来获取图像的尺寸
+
+>>2012.12.20	JSDK3 V1.8.8 Beta
+   更新了框架引擎“jsre.js”，增强了根命名空间的使用方式，采用function模式，集成了
+“JSDK.dom()”和“JSDK.exec()”方法，使根命名空间函数可直接传参使用，就像jquery的万能函数“$()”一样。
+   更新了框架装载器“loader.js”，使之框架的装载方式多了两种，即可在另外单独的标签
+块中根据“contentType”参数类型值“import”和“script”去处理“批量导入类”和“框架内部脚本执
+行环境”等功能。
+   增加了数组类“Array”的一个实例方法“equalWith(otherArray,ignoreSeq,ignoreCase)”，实际
+上是增加了原来的一个等于方法“equal()”，增加了忽略元素顺序和字符大小写等两个功能参数。
+   增加了数组类“Array”的一个实例方法“belongTo(otherArray,ignoreSeq,ignoreCase)”
+   修复了CSS选择器公共方法“dom()”的较多选择问题。
+
+>>2012.10.16	JSDK3 V1.8.7 Beta 20121016
+   更新了表单类“js.dom.HTMLForm”，完善了表单的验证功能
+   增加了数组类“Array”的静态方法“from(item)”
+   统一了全局方法“dom()”返回的类型，为数组而非集合。
+   给日期类“Date”添加了实例方法“toSTDString(sPart,sDateSep)”
+   增加了DOM封装类包“js.domx”，封装了DOM、XML、HTML API，并增加了表单及表单域的验证控制功能。
+   修改了js.dom.HTMLDocument类，取消了对内部Object基本对象的继承，并重新打包了dom库。
+   给js.domx.HTMLFormField及其子类添加了“ValueChanged”值改变事件，并更新了domx2库。
+   修复了Array.from()方法的一个匹配问题(发现在Safari中)导致DOM节点集合对象不能转换为数组的问题。
+   更新了JSDK3精简版
+   更新了装载器“loader.js”，可根据引入时的参数“version”导入指定的历史版本，目前可支持
+v1.6.5版以上的所有版本。
+   修复了DOM模版“js.dom.DOMTemplate”的标签式解析功能对json类型的data属性执行没有返回值的问题。
+   增强了公共方法“xml2json”，使之可按辅助选项转换XML为更为合理的JSON结果。
+   优化了公共方法“globalEval”，增加了返回值功能。
+   修复了内部字符串对象"String"的扩展方法“truncate”的截取长度问题
+   修复了针对webkit引擎浏览器下的一个补丁程序，修改了原对“Element”进行的扩展改为针对“Node”的扩展。
+   增加了公共方法“同步队列执行”“exec(func([container],[callBack]),[container])”，可在HTML脚本标签
+下执行，亦可以分解由于数据量大而造成执行过于繁重冗长的任务。
+
+>>2012.05.14	JSDK3 V1.8.5 Beta 20120514
+   更新了数组原型类，删除了部分方法，又增加了许多新方法。	
+   添加了一些常用方法
+   更新升级了“js.dom.DOMTemplate”模版及类库“dom.json”
+   更新了装载器“loader.js”和引擎“jsre.js”
+   给通用根类Class添加了包装方法“$encapsulate”
+   修复了内部Date的封装方式
+   添加了常用方法“newId”、“newUnid”、“newGuid”
+
+>>2012.03.16	JSDK3 V1.8.0 Beta 20120316
+   增加了公共方法“ajax()”、“post()”等两个方法。
+   增加了“站点域”设置项，可在引入标签上设置域属性“domain”
+   修改了公共方法“ajax()”、“get()”
+
+>>2012.02.28	JSDK3 V1.7.7 Beta 20120229
+   增加了DOM类“HTMLForm”中对应表单项的值改变事件的处理，从而进一步加强了表单的校验功能。
+   对原生类“String”扩展了一个方法“word(sep,index)”
+
+>>2012.02.07	JSDK3 V1.7.6 Beta 20120207
+   修复了公共方法“getURIRelPath()”的路径获取问题。
+   增加了公共方法“isDate()”
+   更新了类“js.dom.HTMLForm”到版本V1.0.
+   修复了公共方法“dom()”在指定对象范围后的一个选择问题。
+   修复了DOM类“HTMLForm”对于不存在的表单项仍然进行校验的问题。
+
+>>2011.11.03	JSDK3 V1.7.5 Beta 20111103
+   修改了类库的路径从原来的“lib”到新的“lib\classes”
+   增加了公共方法“getURIPrmt(sPrmts,sName)”,可采用“JSDK.getURIPrmt(window.location,"name")”
+的调用方法进行调用。
+   完成精简版V1.0，见“lite”目录。
+   修复了ArrayList的一个问题
+
+>>2011.10.31	JSDK3 V1.7.3 Beta 20111031
+   增加了脚本压缩类“js.build.Compressor”，可按三种压缩方式压缩脚本代码
+   根据这个新的压缩类重新编译了所有类，并更新了基本类库，从而减少了整个
+框架的文件体积。
+   给数组类添加了实例方法“toNewArray(fn)”。
+   修复了“Class.forName()”在外部调用时，部分命名空间没有发布到实际应用根空间上。
+
+>>2011.09.29	JSDK3 V1.7.0 Beta 20110929
+   分离了宿主模式为浏览器模式时运行的代码。
+   ?增加了iPad_Safari浏览器的处理，并增加了滚动条功能
+
+>>2011.09.23	JSDK3 V1.6.0 Beta 20110923
+   分离了“base.js”文件, 但使用时需合在一起
+   调整了“kernel.js”与“base.js”的先后加载顺序为先“base.js”再“kernel.js”
+   增加了一个内部基类“Date”
+   给内部基类“String”增加了实例方法“encodeNonAscii()”
+   升级了原公共方法“dom(value)”为新的“dom(value,obj)”
+   升级了DOM模版类“js.dom.DOMTemplate”
+   增加了类“js.dom.HTMLForm”，并集成到类库“dom.json”中了。
+   修复了“Class.forName()”在外部调用时，在内部方法“loadClass()”中不能动态装载类的问题
+
+>>2011.09.21	JSDK3 V1.5.7 Beta 20110921
+   修复了公共方法“get()”在IE下获取本地XML时不能正常解析的问题。
+   升级了DOM模版类“DOMTemplate”，使之支持嵌套模版。
+   ??增加了HTML文档下激活元素“document.activeElement”的兼容处理，需统一先调用“$activeElement”，
+如果没有，再调用“activeElement”。在IE8+的标准CSS模式和非IE浏览器下可统一使用“$activeElement”。
+   修复了通用类的实例方法“applyInstance”的问题。
+   增加了原生类“Object,Function,String,Number,Boolean,Date,Math,Array,Error”到类包中，可在实际应用中
+用于比较或调用原生类的属性和方法。
+   完善了模拟模态对话框的处理方式，使不支持模态对话框的浏览器和支持的做更好的统一调用。
+
+>>2011.09.09	JSDK3 V1.5.5 Beta 20110909
+   修复了XML和通过“get()”方法获取XML格式文档的解析问题
+   给基础类“String”增加了方法“xsplit(vOptions,vSepStr)”,可用于简单的语法解析。
+   解决了公共方法“get()”多个异步操作的覆盖问题。
+   增加了一些字符集处理函数，如：utf8to16()、utf16to8()、bin2str()、bin2hex()。
+   解决了公共方法“get()”在处理返回编码为GB2312的文本时的乱码问题。具体为除
+了IE需要提供GB2312转换为Unicode(UTF-16)的函数外，其他浏览器都只需提供字符集名就
+行了。
+   解决了一个命名空间的拷贝问题。
+   增加了类文件扩展名的批量修改工具。
+   增加了类文件批量编译工具。
+   增加了公共方法“xml2json”用于转换XML对象为JSON对象。
+
+>>2011.08.23	JSDK3 V1.5.3 Beta 20110823
+   修复了多框架网页联合模式下的问题。
+   修复了类打包后的中文问题，直接把中文也序列化了。
+
+>>2011.08.21	JSDK3 V1.5.0 Beta 20110821
+   完善了类的打包方式，使类的导入优先从类库中查询。
+   优化了多框架网页模式下的运行效率，使代码最大可能的共享。
+
+>>2011.08.19	JSDK3 V1.4.3 Beta 20110819
+   修改了String、Number的扩展方法
+   升级了“js.build.Packager”类，实现了类的打包方式
+
+>>2011.08.13	JSDK3 V1.4.2 Beta 20110813
+   给Object类对象增加了addEventListener方法
+   修改了function.ajax.js的内容
+
+>>2011.08.04	JSDK3 V1.4.0 Beta 20110804
+   修复了一个跨域问题
+   实现了类的版本机制，可导入指定版本的类，但不允许同时导入一个类的多个版本。
+   完善了类文件扩展名“.class”，并修改了加载顺序，使如果在调式模式，则优先选择扩展名
+为“.class.js”的类文件进行加载，如果不在调式模式，则优先选择扩展名为“class”的类文件进行加载，
+其中“.class”文件可理解为压缩混淆后的发布代码，“.class.js”文件可理解为源文件，这样的目的是使
+开发调式更容易些。
+
+>>2011.07.29	JSDK3 V1.3.0 Beta 20110729
+   修改JObject名称为Object，此为扩展封装的基本对象，非原始对象。一共封装了“Object”、
+“String”、“Number”这些基本对象，并作了较多扩展。在内部可使用“Object(value)”
+进行封装类的调用，比如：“Object()”、“Object({})”、“Object("abc")”、“Object(123)”。
+在外部可使用“JSDK.obj(value)”、“JSDK.Object(value)”进行调用。
+
+>>2011.07.28	JSDK3 V1.2.7.1 Beta 20110728
+   改名“bin\globals.js”为“global.js”。之前是因为Firefox3的问题，现在在Firefox 3.6.19
+和其他浏览器下都测试通过。
+
+>>2011.07.27	JSDK3 V1.2.7 Beta 20110727
+   增加了appFilePath
+>>2011.07.25	JSDK3 V1.2.6 Beta 20110725
+   修复了Global.get()方法的异步获取问题。
+
+>>2011.07.05	JSDK3 V1.2.5 Beta 20110705
+   增加了公共方法“dom(selector)”,可以像这样“jsdk.dom("div.class1.class2#title")、
+jsdk.dom("input[name='file']")”使用。
+
+>>2011.06.23	JSDK3 V1.2.4 Beta 20110623
+   增加了公共方法“get(url,data,callback,type)”
+
+>>2011.06.21	JSDK3 V1.2.3 Beta 20110621
+   修复了一些bug
+
+>>2011.06.13	JSDK3 V1.2.0 Beta 20110613
+   增加了模态窗口的兼容处理。使不支持模态窗口的浏览器使用“window.open()”方法进行模拟。
+
+>>2011.06.07	JSDK3 V1.1.0 Beta 20110607
+   修复了一些bug
+
+>>2011.06.06	JSDK3 V1.0.0 Beta 20110606
+   为了适应不同的使用环境，而独立出装载器了，由“loader.js”装载“jsre.js”。
+   修复了一些bug和与jQuery的冲突问题
+
+>>2011.05.23-2011.06.01	JSDK3 V0.3.3 Beta 20110601
+   修复了一些bug。
+   完善了操作系统和浏览器的检测功能。
+   完善了对所有主流浏览器(IE6、IE7、IE8、Firefox 3.6+、Safari 5+、Chrome 13+、Opera 11.11+)的支持功能。
+
+>>2010.01.28	JSDK3 V0.1 Beta 20100128
+   修复了一些bug,较好的使Firefox 3.5.16+ 支持IE的HTC组件。
+
+>>2010.01.03	JSDK3 V0.1 Beta 20100103
+   JSDK第三版，基于多外壳模式的可分类管理类包的脚本框架	
+
+>>2007.11.12	JSDK2 V2.0
+   JSDK第二版，可动态装载类的脚本框架
+
+>>2007.01.01	JSDK V1.0
+   JSDK第一版，单一脚本文件

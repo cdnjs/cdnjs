@@ -1,0 +1,29 @@
+/**
+ * @file HTMLDocument.js
+ * @description: 
+ * @invoke: HTMLDocument.applyInstance(doc)
+ * @author Liu Denggao
+ * @created 2010.01.04
+ * @modified 2011.6.21
+ * @version 0.2
+ * @since JSDK3
+ */
+$package("js.dom");$import("js.dom.HTMLElement");js.dom.HTMLDocument=function(){};var _$class=js.dom.HTMLDocument;var _$proto=_$class.prototype;_$class.$name="HTMLDocument";_$class.getName=function(){return this.$name;}
+_$proto.$all=function(id){var document=this;var aValues=[];var retValues=[];if(typeof(id)=="string"){var el=document.getElementById(id);var els=document.getElementsByName(id);if(el)aValues=aValues.concat(el);if(els.length)aValues=aValues.addElementsFromOther(els);aValues=aValues.unique();}else{aValues[0]=id;}
+for(var i=0;i<aValues.length;i++){if(!aValues[i].constructor){retValues[i]=__JSDK_Namespace__.js.dom.HTMLElement.applyInstance(aValues[i],"instance",true);}else if(!aValues[i].$class){retValues[i]=__JSDK_Namespace__.js.dom.HTMLElement.applyInstance(aValues[i],"implement",true);}}
+if(retValues.length==0){return undefined;}else if(retValues.length==1){return retValues[0];}else{return retValues;}}
+_$proto.$get=function(id){var document=this;var els=[];if(typeof(id)=="string"){var el=document.getElementById(id);if(el)els[0]=el;else els=document.getElementsByName(id);}else{els[0]=id;}
+if(!els.length||!els[0]){return null;}else if(!els[0].constructor){return __JSDK_Namespace__.js.dom.HTMLElement.applyInstance(els[0],"instance",true);}else if(!els[0].$class){return __JSDK_Namespace__.js.dom.HTMLElement.applyInstance(els[0],"implement",true);}else{return els[0];}
+return null;}
+_$proto.$fireEvent=function(oEl,sEvtName,oEvent){var sEvtShortName=sEvtName.replace(/^on/,"");var sEvtFullName="on"+sEvtShortName;if(oEl[sEvtShortName]&&sEvtShortName==sEvtName)oEl[sEvtShortName]();else if(oEl.fireEvent)oEl.fireEvent(sEvtFullName,oEvent);else if(this.createEvent){if(!oEvent)oEvent=this.createEvent("Events");var evt=null;if(oEvent.constructor==Event){evt=this.createEvent("Events");evt.initEvent(sEvtShortName,oEvent.bubbles,oEvent.cancelable);}else if(oEvent.constructor==MouseEvent){evt=this.createEvent("MouseEvents");evt.initMouseEvent(sEvtShortName,oEvent.bubbles,oEvent.cancelable,oEvent.view,oEvent.detail,oEvent.screenX,oEvent.screenY,oEvent.clientX,oEvent.clientY,oEvent.ctrlKey,oEvent.altKey,oEvent.shiftKey,oEvent.metaKey,oEvent.button,oEvent.relatedTarget
+);}else if(oEvent.constructor==UIEvent){evt=this.createEvent("UIEvents");evt.initUIEvent(sEvtShortName,oEvent.bubbles,oEvent.view,oEvent.detail);}else{return;}
+oEl.dispatchEvent(evt);}}
+_$proto.$importBehavior=function(sSelector,srcBehaviors){var jsre=Engine.runtimeEnvironment;var rootHome=jsre.getRootHome();var localeLanuage=jsre.getLocaleLanguage();var behaviors=[];if(isArray(srcBehaviors)){behaviors=srcBehaviors;}else{behaviors=[srcBehaviors];}
+switch(Browser.Engine.name){case"trident":var styleSheet=this.createStyleSheet();for(var i=0;i<behaviors.length;i++){if(!behaviors[i].split("/")[0].equal(["",".",".."])){var baseFilePath=rootHome+"/shell/webbrowser/IE/widgets/"+behaviors[i];if(baseFilePath.rightback(".").toLowerCase()!="htc"){var filePath=baseFilePath+(localeLanuage?("_"+localeLanuage):"")+".htc";if(localeLanuage&&!jsre.isFileExists(filePath)){filePath=baseFilePath+".htc";}
+behaviors[i]=filePath;}else{behaviors[i]=baseFilePath;}}}
+styleSheet.addRule(sSelector,"behavior:url('"+behaviors.join("') url('")+"')");break;case"gecko":var basePath="",commonFileName="";fileName="";for(var i=0;i<behaviors.length;i++){switch(behaviors[i].split("/")[0]){case"":break;case".":behaviors[i]="../../../../"+jsre.getAppRelPath()+"/"+behaviors[i].right("/");break;case"..":behaviors[i]="../../../../"+jsre.getAppRelPath()+"/"+behaviors[i];break;default:basePath=rootHome+"/shell/webbrowser/Firefox/widgets";fileName=behaviors[i].split("/").pop();commonFileName=fileName.split(".")[0];if(fileName.rightback(".").toLowerCase()!="htc"){fileName=commonFileName+(localeLanuage?("_"+localeLanuage):"")+".htc";if(localeLanuage&&!jsre.isFileExists([basePath,fileName].join("/"))){fileName=commonFileName+".htc";}}
+behaviors[i]="../widgets/"+fileName;}}
+var style=this.getElementsByTagName("head")[0].appendChild(this.createElement("style"));style.type='text/css';style.appendChild(document.createTextNode(sSelector+"{-moz-binding:url("
++rootHome+"/shell/webbrowser/firefox/patch/moz-behaviors.xml?"
++behaviors.join(":")+"/#behavior)}"
+));break;}}
