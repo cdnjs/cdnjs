@@ -1,0 +1,55 @@
+{
+  "version": "0.6.7",
+  "name": "nipplejs",
+  "description": "A virtual joystick for touch capable interfaces",
+  "author": "Yoann Moinet <yoann.moinet@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yoannmoinet/nipplejs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yoannmoinet/nipplejs/issues"
+  },
+  "homepage": "https://github.com/yoannmoinet/nipplejs",
+  "main": "./dist/nipplejs.js",
+  "scripts": {
+    "postversion": "npm run bowerSync && npm run changelog",
+    "buildWatch": "npm run concat && npm run umd",
+    "postbuildWatch": "npm run clean && npm run copyToTest",
+    "build": "npm run buildWatch && npm run uglify",
+    "formatAndLint": "npm run format && npm run lint",
+    "prebuild": "npm run formatAndLint",
+    "pretest": "npm run build",
+    "test": "casperjs test ./test/nipplejs.casper.js",
+    "format": "jscs ./src/start.js ./src/utils.js ./src/super.js ./src/manager.js ./src/nipple.js ./test/nipplejs.casper.js",
+    "lint": "eslint ./src/start.js ./src/utils.js ./src/super.js ./src/manager.js ./src/nipple.js ./src/end.js ./test/nipplejs.casper.js",
+    "umd": "umd nipplejs ./nipplejs.temp.js ./dist/nipplejs.js",
+    "changelog": "node ./bin/changelog.js",
+    "bowerSync": "node ./bin/bowerSync.js",
+    "clean": "node ./bin/clean.js",
+    "copyToTest": "node ./bin/copyToTest.js",
+    "uglify": "uglifyjs ./dist/nipplejs.js -o ./dist/nipplejs.min.js -c -m",
+    "watch": "watch \"npm run buildWatch\" src",
+    "start": "static test",
+    "toc": "markdown-toc -i README.md",
+    "copyGh": "node ./bin/copyToGhPages.js",
+    "concat": "concat-cli -f ./src/start.js ./src/utils.js ./src/super.js ./src/nipple.js ./src/collection.js ./src/manager.js ./src/end.js -o ./nipplejs.temp.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "casperjs": "^1.1.3",
+    "concat-cli": "^4.0.0",
+    "conventional-changelog": "^1.1.0",
+    "eslint": "^3.1.0",
+    "expect.js": "^0.3.1",
+    "jscs": "^3.0.7",
+    "markdown-toc": "^0.12.16",
+    "mocha": "^3.0.2",
+    "node-static": "^0.7.8",
+    "phantomjs-prebuilt": "^2.1.12",
+    "uglify-js": "^2.7.3",
+    "umd": "^3.0.1",
+    "watch": "^0.19.2"
+  }
+}
