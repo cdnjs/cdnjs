@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://www.w3.org/2015/EXI/json" xmlns:j="http://www.w3.org/2015/EXI/json">
+
+    <!-- 
+     * This is a schema for the XML representation of JSON 
+     *
+     * The schema is made available under the terms of the W3C software notice and license
+     * at http://www.w3.org/Consortium/Legal/copyright-software-19980720
+     *
+    -->
+
+    <xs:element name="map" type="j:mapType">
+        <xs:unique name="unique-key">
+            <xs:selector xpath="*"/>
+            <xs:field xpath="@key"/>
+        </xs:unique>
+    </xs:element>
+
+    <xs:element name="array" type="j:arrayType"/>
+
+    <xs:element name="string" type="j:stringType"/>
+
+    <xs:element name="number" type="j:numberType"/>
+
+    <xs:element name="boolean" type="j:booleanType"/>
+
+    <xs:element name="null" type="j:nullType"/>
+
+    <xs:element name="other" type="j:otherType"/>
+
+    <xs:complexType name="mapType">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="map">
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="j:mapType">
+                            <xs:attributeGroup ref="j:key-group"/>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+                <xs:unique name="unique-key-2">
+                    <xs:selector xpath="*"/>
+                    <xs:field xpath="@key"/>
+                </xs:unique>
+            </xs:element>
+            <xs:element name="array">
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="j:arrayType">
+                            <xs:attributeGroup ref="j:key-group"/>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="string">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="j:stringType">
+                            <xs:attributeGroup ref="j:key-group"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="number">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="j:numberType">
+                            <xs:attributeGroup ref="j:key-group"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="boolean">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="j:booleanType">
+                            <xs:attributeGroup ref="j:key-group"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="null">
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="j:nullType">
+                            <xs:attributeGroup ref="j:key-group"/>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="other">
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="j:otherType">
+                            <xs:attributeGroup ref="j:key-group"/>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:complexType name="arrayType">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element ref="j:map"/>
+            <xs:element ref="j:array"/>
+            <xs:element ref="j:string"/>
+            <xs:element ref="j:number"/>
+            <xs:element ref="j:boolean"/>
+            <xs:element ref="j:null"/>
+            <xs:element ref="j:other"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:simpleType name="stringType">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="numberType">
+        <xs:restriction base="xs:double">
+            <!-- exclude positive and negative infinity, and NaN -->
+            <!-- Note: No real effect for EXI Float datatype -->
+            <xs:minExclusive value="-INF"/>
+            <xs:maxExclusive value="INF"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="booleanType">
+        <xs:restriction base="xs:boolean"/>
+    </xs:simpleType>
+
+    <xs:complexType name="nullType"/>
+
+    <xs:complexType name="otherType">
+        <xs:choice>
+            <!-- useful types beyond JSON such as binary, date-times, decimal and integer -->
+            <xs:element name="base64Binary">
+                <xs:simpleType>
+                    <xs:restriction base="xs:base64Binary"/>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="dateTime">
+                <xs:simpleType>
+                    <xs:restriction base="xs:dateTime"/>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="time">
+                <xs:simpleType>
+                    <xs:restriction base="xs:time"/>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="date">
+                <xs:simpleType>
+                    <xs:restriction base="xs:date"/>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="integer">
+                <xs:simpleType>
+                    <xs:restriction base="xs:integer"/>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="decimal">
+                <xs:simpleType>
+                    <xs:restriction base="xs:decimal"/>
+                </xs:simpleType>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:attributeGroup name="key-group">
+        <xs:attribute name="key" type="xs:string"/>
+    </xs:attributeGroup>
+
+</xs:schema>
