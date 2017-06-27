@@ -1,0 +1,669 @@
+(function() {
+
+	var version = '0.0.11';
+
+	/**
+	 * Adds some support to IE8
+	 */
+	if (!Event.prototype.preventDefault) {
+		Event.prototype.preventDefault = function() {
+			this.returnValue=false;
+		};
+	}
+
+	/**
+	 * Represents an Output through 6px.
+	 *
+	 * Outputs are basically images that are created through 6px.  It contains all of
+	 * the information needed to build the image.
+	 */
+	var Output = function(refs) {
+
+	    this.refs = (refs || {});
+
+	    this.type = 'image/png';
+	    this.urlLocation = false;
+	    this.actions = [];
+		this.tagName = '';
+	    this.hasFilters = false;
+	    this.filters = {};
+
+	};
+
+	Output.prototype.tag = function(name) {
+		this.tagName = name;
+
+		return this;
+	};
+
+	/**
+	 * Resize an image based off of the size object.
+	 *
+	 * If you just pass one value (width or height) the omitted value is assumed based on the aspect ratio.
+	 *
+	 * @method resize
+	 * @param  {Object} size [description]
+	 * @chainable
+	 */
+	Output.prototype.resize = function(size) {
+
+	    this.actions.push({
+	        method: 'resize',
+	        options: size
+	    });
+
+	    return this;
+
+	};
+
+	/**
+	 * Add some filters to an image
+	 *
+	 * @method filter
+	 * @param  {String} type  The filter name.  For instance: 'sepia'
+	 * @param  {Mixed} value  The value or strength that you are looking for.
+	 * @chainable
+	 */
+	Output.prototype.filter = function(type, value) {
+
+	    if (typeof type == 'object' && !(type instanceof Array)) {
+
+	        this.filters = type;
+
+	        this.hasFilters = true;
+
+	        return this;
+
+	    }
+
+	    this.filters[type] = value;
+
+	    this.hasFilters = true;
+
+	    return this;
+	};
+
+	/**
+	 * The location that we will attempt to save this to.
+	 *
+	 * The most convenient would be to save simply to 6px's CDN. To do that, just
+	 * pass in '6px'.
+	 *
+	 * @method url
+	 * @param  {String} location The location to save this to.
+	 * @chainable
+	 */
+	Output.prototype.url = function(location) {
+
+	    this.urlLocation = location;
+
+	    return this;
+
+	};
+
+	/**
+	 * Rotate an image
+	 *
+	 * @method rotate
+	 * @param  {Object} options Pass in degrees.  Pass in the optional background color as `color` (it assumes 'transparent')
+	 * @chainable
+	 */
+	Output.prototype.rotate = function(options) {
+
+	    this.actions.push({
+	        method: 'rotate',
+	        options: options
+	    });
+
+	    return this;
+
+	};
+
+	/**
+	 * Crop the image
+	 *
+	 * @method crop
+	 * @param  {Object} position Contains x, y, width, and height
+	 * @chainable
+	 */
+	Output.prototype.crop = function(position) {
+
+	    this.actions.push({
+	        method: 'crop',
+	        options: position
+	    });
+
+	    return this;
+	};
+
+	/**
+	 * Place one input on top of another.  Watermarking.
+	 *
+	 * @method layer
+	 * @param  {String} refName The name of the input you want to put on top.
+	 * @param  {Object} options The options object that contains (all optional): opacity, x, y, width, height
+	 * @chainable
+	 */
+	Output.prototype.layer = function(refName, options) {
+
+	    var action = {
+	        method: 'layer',
+	        options: {
+	            ref: refName
+	        }
+	    };
+
+	    if (options && typeof options == 'object' && !(options instanceof Array)) {
+
+	        Object.keys(options).forEach(function(index) {
+	            action.options[index] = options[index];
+	        });
+
+	    }
+
+	    this.actions.push(action);
+
+	    return this;
+
+	};
+
+	/**
+	 * The mime type to save this out as
+	 *
+	 * It assumes 'image/png'.
+	 *
+	 * @method type
+	 * @param  {String} mime The mime type to save as
+	 * @chainable
+	 */
+	Output.prototype.type = function(mime) {
+
+	    this.type = mime;
+
+	    return this;
+
+	};
+
+	/**
+	 * Called by the SDK to make sense of all of the data the user inputted.
+	 *
+	 * @method export
+	 * @return {Object}
+	 */
+	Output.prototype.export = function() {
+
+	    if (this.hasFilters) {
+
+	        this.actions.push({
+	            method: 'filter',
+	            options: this.filters
+	        });
+
+	    }
+
+	    var output = {
+	        ref: this.refs,
+	        type: this.type,
+			tag: this.tagName,
+	        methods: this.actions
+	    };
+
+	    if (this.urlLocation) {
+	        output.url = this.urlLocation;
+	    }
+
+	    return output;
+
+	};
+
+
+	/**
+	 * Constructor
+	 */
+	var _6px = function(images) {
+
+		// Setting some default values
+		this.reset();
+
+		if (images && typeof images == 'object') {
+	        Object.keys(images).forEach(function(index) {
+	            this.load(index, images[index]);
+	        }, this);
+	    }
+
+	};
+
+	/**
+	 * Load an input.
+	 *
+	 * Define a name and then where the file is.  Could be a local file or a file
+	 * somewhere online.
+	 *
+	 * @method load
+	 * @param {String} name The name we want to give our image.
+	 * @param {Mixed}  path The location or the file itself.  Can be a Buffer, relative path, or location on the web.
+	 * @chainable
+	 */
+	_6px.prototype.load = function(name, path) {
+
+	    this.images[name] = path;
+
+	    return this;
+	};
+
+	/**
+	 * Create a new output.
+	 *
+	 * Will create an Output object and add it to the list of outputs.
+	 *
+	 * @method  output
+	 * @param   {Object} refs A key/value pair.  Key refers to the ref (input name).  Value is the filename you wish to have.  If false, we will generate one for you.
+	 * @returns {Output} An output object
+	 */
+	_6px.prototype.output = function(refs) {
+
+	    var output = new Output(refs);
+
+	    this.outputs.push(output);
+
+	    return output;
+	};
+
+	/**
+	* Reset the request
+	*
+	* @method reset
+	*/
+	_6px.prototype.reset = function() {
+		// Setting some default values
+	    this.images = {};
+	    this.outputs = [];
+	    this.callback = false;
+	};
+
+	/**
+	 * Set a callback URL for the API to send a POST request to when finished.
+	 *
+	 * @method callback
+	 * @param {String} url The URL to post to
+	 * @chainable
+	 */
+	_6px.prototype.callback = function(url) {
+
+		this.url = url;
+
+		return this;
+
+	};
+
+	/**
+	 * Send the request up to the server for processing.
+	 *
+	 * Options:
+	 * - dryRun: Does not post the request to the server.
+	 *
+	 * @method save
+	 * @param {Object} [options] Some saving options.  Described above.
+	 * @param {Function} [fn] Callback function.  Ran whenever we hear back from the API that the request was sent.  Does not mean the job has finished.
+	 * @chainable
+	 */
+	_6px.prototype.save = function(options, fn) {
+
+		var _this = this;
+
+	    if (typeof options == 'function') {
+	        fn = options;
+	        options = {};
+	    }
+
+	    var inputs = {};
+
+	    var inputTotal = Object.keys(this.images),
+	        inputTotalLen = inputTotal.length;
+
+	    var done = function() {
+
+	        var json = {
+	            input: inputs,
+	            output: _this.outputs.map(function(output) {
+	                return output.export();
+	            })
+	        };
+
+	        if (_this.callback) {
+
+	            json.callback = {
+	                url: _this.callback
+	            };
+
+	        }
+
+	        px.sendToServer(
+				'post',
+				'/users/:userId/jobs',
+				json,
+				function(res) {
+
+					if (fn) {
+						fn.call(_this, null, res);
+					}
+				},
+				function() {
+
+					if (fn) {
+						fn.call(_this, 'Error sending to server');
+					}
+				});
+
+	    };
+
+	    // parse the inputs, then run done() when finished.
+	    inputTotal.forEach(function(index) {
+
+	        px.parseInput(this.images[index], function(data) {
+
+	            inputs[index] = data;
+
+	            if (!--inputTotalLen) {
+	                done();
+	            }
+
+	        });
+
+	    }, this);
+
+	};
+
+	/**
+	 * The main px object and convenience functions.
+	 *
+	 * Will throw an exception if px.init has not been called.
+	 */
+	var px = function(input) {
+
+		if (!px.userData) {
+			throw '6px: You must call init!';
+		}
+
+		return new _6px(input);
+
+	};
+
+	/**
+	 * Use this to set up your account with apiKey, etc
+	 *
+	 * Must be called before any other functions.
+	 */
+	px.init = function(data) {
+
+		if (px.userData) {
+			throw '6px: Init must only be called once!';
+		}
+
+		px.debug = (!!data.debug || false);
+        px.dryRun = (!!data.dryRun || false);
+
+		if (!data.apiKey) {
+			throw '6px: apiKey is required!';
+		}
+
+		if (!data.userId) {
+			throw '6px: userId is required!';
+		}
+
+		px.userData = data;
+
+		var success = function(res) {
+			px.openSocket();
+			px.log(res);
+		};
+
+		var failed = function(res) {
+			px.log('failed:', res);
+			px.trigger('error', '');
+		};
+
+		px.sendToServer('post', '/users/:userId/auth', null, success, failed);
+
+	};
+
+	px.openSocket = function() {
+
+		var host = 'ws://socks.6px.io';
+
+		var socket = new WebSocket(host);
+
+		socket.onopen = function() {
+			// Send up a simple auth command, which will register our session
+			px.sendSocketMsg(socket, { auth: { user_id: px.userData.userId } });
+		};
+
+		// ping server to keep socket connection open (closes after 55s)
+		setInterval(function() {
+			socket.send(JSON.stringify({ ping: true }));
+		}, 30000);
+
+		socket.onclose = function() {
+			setTimeout(function() {
+				px.openSocket();
+			}, 1000);
+		};
+
+		socket.onmessage = px.handleIncoming;
+
+	};
+
+	px.sendSocketMsg = function(socket, obj) {
+		socket.send(JSON.stringify(obj));
+	};
+
+	px.handleIncoming = function(msg) {
+		var data = JSON.parse(msg.data);
+
+		if (data.auth && data.auth === true) {
+			console.log('Auth successful');
+		}
+
+		if (data.job_id && data.status) {
+			px.trigger('job-update', data.job_id, data.status);
+		}
+	};
+
+	/**
+	 * Built in events
+	 */
+	px.on = function(name, fn) {
+		window.addEventListener(name, function(e) {
+			var args = [e];
+			if (e.detail) {
+				for (var i in e.detail) {
+					if (e.detail.hasOwnProperty(i)) {
+						args.push(e.detail[i]);
+					}
+				}
+			}
+			fn.apply(null, args);
+		}, false);
+	};
+
+	px.trigger = function(name) {
+		var options = Array.prototype.slice.call(arguments, 1);
+		if (name == 'error') {
+			px.log(options[0], true);
+		}
+		window.dispatchEvent(new CustomEvent(name, { detail: options }));
+	};
+
+	/**
+	 * Very simple dropzone creator to help with creating HTML5 file uploads.
+	 *
+	 * Allows an element on the page to be set up so you can drag a file from your computer
+	 * and have it read the file inline.
+	 *
+	 * @example
+	 * 	px.dropZone('#dropzone', { onDrop: function(e) {
+	 *		console.log(e.dataTransfer.files);
+     *     } });
+	 */
+	px.dropZone = function(input, options) {
+
+		var elm;
+
+		if (typeof input == 'string') {
+			elm = document.querySelector(input);
+		} else {
+			elm = input;
+		}
+
+		if (!elm) {
+			px.trigger('error', 'Element is not defined');
+			return false;
+		}
+
+		var wrapCallbacks = function(e, cb) {
+			e.preventDefault();
+
+			if (cb) cb(e);
+
+			return false;
+		};
+
+		var dragOver = function(e) {
+			return wrapCallbacks(e, options.onDragOver);
+		};
+		var dragEnd = function(e) {
+			return wrapCallbacks(e, options.onDragEnd);
+		};
+		var dropped = function(e) {
+			return wrapCallbacks(e, options.onDrop);
+		};
+
+		elm.ondragover = dragOver;
+		elm.ondragend = function() { return dragEnd; };
+		elm.ondrop = dropped;
+
+	};
+
+	/**
+	 * Reads in an input of multiple types for parsing as a DataURI
+	 *
+	 * If using with dropzone, you should utilize e.dataTransfer
+	 * @param {Mixed} input Can be a query string of the element, or the element itself.
+	 * @param {Function} fn Runs when the input has been parsed.
+	 * @example
+	 * 	px.dropZone('#dropzone', {
+	 *         onDrop: function(e) {
+	 *		      px.parseInput(e.dataTransfer, function(uri) {
+	 *			     console.log('data uri:', uri);
+	 *			  }
+	 *		   }
+	 *	   });
+	 */
+	px.parseInput = function(input, fn) {
+
+		if (typeof input == 'string') {
+
+			fn.call(null, input);
+			return;
+		}
+
+		if (input instanceof Image) {
+
+			fn.call(null, input.src);
+
+			return;
+		}
+
+		if (input.nodeType === 1) {
+
+			if (input.tagName.toLowerCase() == 'img') {
+				fn.call(null, input.src);
+				return;
+			}
+		}
+
+		// All else failed... must be a FileAPI upload
+
+		if (window.FormData === undefined) {
+			throw '6px: FileAPI not supported with your browser.';
+		}
+
+		var f = input.files[0];
+
+		var dataUrlReader = new FileReader();
+		dataUrlReader.onloadend = function() {
+
+			fn.call(null, this.result);
+
+		};
+
+		dataUrlReader.readAsDataURL(f);
+	};
+
+	/**
+	 * Sends our data up to the 6px server
+	 *
+	 * Basically a wrapper that sends an XHR request to the 6px API server
+	 */
+	px.sendToServer = function(method, path, json, success, failed) {
+
+		var user = px.userData;
+
+		path = path.replace(":userId", user.userId); // make life easier, eh?
+
+		var url = 'https://api.6px.io/v1'+ path + (/\?/.test(url) ? '&' : '?') + 'key='+ user.apiKey;
+		// var url = 'http://localhost:3000/v1'+ path + (/\?/.test(url) ? '&' : '?') + 'key='+ user.apiKey;
+
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState < 4)
+				return;
+
+			if (xhr.status !== 200)
+				return failed.call(window, JSON.parse(xhr.responseText));
+
+			if (xhr.readyState === 4)
+				success.call(null, JSON.parse(xhr.responseText));
+		};
+
+		xhr.open(method.toUpperCase(), url, true);
+		if (json) {
+			xhr.setRequestHeader('Content-Type', 'application/json');
+			xhr.send(JSON.stringify(json));
+		} else {
+			xhr.send();
+		}
+
+	};
+
+	/**
+	 * Wrapper for a console log.  Only shows if console.log is available and debug is enabled.
+	 */
+	px.log = function(msg, err) {
+		if (px.debug && console && console.log) {
+			if (err) {
+				console.error('6px:', msg);
+			} else {
+				console.log('6px:', msg);
+			}
+		}
+	};
+
+	px.get = function(jobId, cb, binding) {
+
+		px.sendToServer('get', '/users/:userId/jobs/'+ jobId, false,
+			function success(res) {
+				cb.call((binding || window), res);
+			},
+
+			function failedr(res) {
+				cb.call((binding || window), res);
+			}
+		);
+
+	};
+
+	px.version = version;
+	window.px = px;
+
+})();

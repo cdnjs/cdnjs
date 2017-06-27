@@ -1,0 +1,411 @@
+/*! Crocodoc Viewer - v0.10.10 | (c) 2015 Box */
+
+.crocodoc-viewer {
+    padding:0;
+    position: relative;
+}
+
+/* prevent sizing issues from bootstrap (and others) that change global defaults */
+.crocodoc-viewer * {
+    -webkit-box-sizing: content-box !important;
+    -moz-box-sizing: content-box !important;
+    box-sizing: content-box !important;
+}
+
+.crocodoc-viewer-fullscreen {
+    background: #000;
+    margin: 0;
+    padding: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.crocodoc-viewport {
+    margin:0; padding:0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: auto;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    outline: 0 !important;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+.crocodoc-draggable .crocodoc-viewport {
+    cursor: move;
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+    cursor: grab;
+}
+.crocodoc-dragging .crocodoc-viewport {
+    cursor: -webkit-grabbing;
+    cursor: -moz-grabbing;
+    cursor: grabbing;
+}
+
+/* outside wrapper for positioning the transformed inner wrapper properly */
+.crocodoc-doc {
+    overflow: hidden;
+    /* @NOTE: position:relative is necessary for overflow:hidden to work in IE7 */
+    position: relative;
+    text-align: center;
+    font-size: 100%;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+.crocodoc-window-as-viewport .crocodoc-viewport {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    overflow: visible;
+}
+
+.crocodoc-window-as-viewport .crocodoc-doc {
+    width: auto;
+    height: auto;
+    overflow: hidden;
+}
+
+/* individual pages */
+.crocodoc-page {
+    display: inline-block;
+    /* IE7 hack to force inline behavior on divs */
+    *display: inline;
+    *zoom: 1;
+    /* End hack */
+
+    /* IE7 inherits text-align: center, which causes the page-content to be shifted */
+    text-align: left;
+
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.crocodoc-page-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.crocodoc-page-content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.crocodoc-page-visible,
+.crocodoc-current-page {
+    visibility: visible !important;
+}
+
+.crocodoc-page-svg object,
+.crocodoc-page-svg iframe,
+.crocodoc-page-svg img {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+
+.crocodoc-page-autoscale {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+    -ms-transform-origin: 0 0;
+    transform-origin: 0 0;
+}
+
+.crocodoc-page-autoscale > div {
+    display: block;
+    position: absolute;
+}
+
+/* @NOTE: this is a fix for the white "border" issue */
+.crocodoc-page-svg {
+    position: absolute;
+    overflow: hidden;
+    top: -1px;
+    left: -1px;
+    bottom: -1px;
+    right: -1px;
+    width: auto;
+    height: auto;
+}
+
+.crocodoc-page-links {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.crocodoc-page-link {
+    position: absolute;
+    display: block;
+}
+/* Fix for IE ctrl+click behavior */
+.crocodoc-page-link span {
+    width: 100%;
+    height: 100%;
+    display: block;
+    /* IE <= 9 requires a background image for an empty element to actually receive click events */
+    background: url(data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==) 0 0 no-repeat;
+}
+.crocodoc-links-disabled .crocodoc-page-links {
+    display: none;
+}
+.crocodoc-links-disabled .crocodoc-page-link {
+    background: transparent;
+}
+
+.crocodoc-page-text {
+    width: 100%;
+    height: 100%;
+    display: none;
+    opacity: 0.5;
+    overflow: hidden;
+}
+
+/* don't hide text if it's selected or visible */
+.crocodoc-page-visible .crocodoc-page-text,
+.crocodoc-page-selected .crocodoc-page-text {
+    display: block !important;
+}
+
+/* NEVER display text if it's disabled; this should be highest priority */
+.crocodoc-draggable .crocodoc-page-text,
+.crocodoc-text-disabled .crocodoc-page-text {
+    display: none !important;
+}
+
+.crocodoc-page-error .crocodoc-page-text,
+.crocodoc-page-loading .crocodoc-page-text,
+.crocodoc-page-error .crocodoc-page-svg,
+.crocodoc-page-loading .crocodoc-page-svg,
+.crocodoc-page-error .crocodoc-page-links,
+.crocodoc-page-loading .crocodoc-page-links {
+    display: none !important;
+}
+
+.crocodoc-subpx-fix {
+    zoom: 10;
+    -webkit-transform: scale(0.1);
+    transform: scale(0.1);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    width: 1000%;
+    height: 1000%;
+}
+
+/* Layout-specific styles -------------------------------- */
+.crocodoc-layout-horizontal .crocodoc-doc {
+    text-align: left;
+    white-space: nowrap;
+}
+
+.crocodoc-layout-vertical-single-column .crocodoc-page {
+    display: block;
+    margin: 0 auto;
+}
+
+.crocodoc-layout-presentation-two-page .crocodoc-page,
+.crocodoc-layout-presentation .crocodoc-page {
+    position: absolute;
+    visibility: hidden;
+    display: block;
+}
+
+.crocodoc-layout-presentation-two-page .crocodoc-doc,
+.crocodoc-layout-presentation .crocodoc-doc {
+    overflow: visible;
+    /* @NOTE: this is for IE 7; text-align is incorrectly honored even when pages are position:absolute/display:block */
+    text-align: left;
+}
+
+.crocodoc-layout-presentation-two-page .crocodoc-page:nth-child(odd) {
+    padding-right: 0 !important;
+}
+
+.crocodoc-layout-presentation-two-page .crocodoc-page:nth-child(even) {
+    padding-left: 0 !important;
+}
+
+.crocodoc-layout-presentation-two-page .crocodoc-page-visible,
+.crocodoc-layout-presentation .crocodoc-page-visible {
+    z-index: 1;
+}
+
+/* only possibly show scrollbars when the presentation is intentionally scrollable (e.g., doesn't fit in viewport) */
+.crocodoc-layout-presentation .crocodoc-viewport,
+.crocodoc-layout-presentation-two-page .crocodoc-viewport {
+    overflow: hidden;
+}
+.crocodoc-layout-presentation.crocodoc-scrollable .crocodoc-viewport,
+.crocodoc-layout-presentation-two-page.crocodoc-scrollable .crocodoc-viewport {
+    overflow: auto;
+}
+
+
+/** Version-specific changes ----------------------------- */
+
+/* all conversions before v1.0.0 require text to be transparent */
+.crocodoc-viewer[data-svg-version^="0"] .crocodoc-page-text .tx {
+    color: transparent !important;
+}
+
+/* Background */
+.crocodoc-viewport {
+    background: transparent;
+}
+
+/* Page borders/backgrounds */
+.crocodoc-page-content {
+    border: 0;
+    background: #fff;
+}
+
+/* Page paddings */
+.crocodoc-page {
+    padding: 10px 15px;
+}
+
+/* Text selection color */
+/* NOTE: these two *-selection rules MUST be separate (cannot be comma-separated) */
+.crocodoc-page-text {
+    opacity: 0.4;
+}
+
+/* override these rules with !important to change the highlight color */
+/* @NOTE: !important is used here because stylesheet.css would otherwise take precedence in this case */
+.crocodoc-page-text ::-moz-selection {
+    background: rgba(50, 151, 253, 0.75) !important;
+}
+.crocodoc-page-text ::selection {
+    background: rgba(50, 151, 253, 0.75) !important;
+}
+
+.crocodoc-text-disabled .crocodoc-text {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.crocodoc-doc.crocodoc-text {
+    margin: 0;
+    padding: 0;
+    opacity: 1;
+    text-align: left;
+    counter-reset: line-numbering;
+    font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 10pt;
+    background: #fff;
+    min-height: 100%;
+    width: 100%;
+    tab-size: 8;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+.crocodoc-text tr:last-child {
+    height: 100%;
+}
+
+.crocodoc-text tr:first-child td {
+    padding-top: 0.3em;
+}
+.crocodoc-text tr:last-child td {
+    padding-bottom: 0.3em;
+}
+
+/* line numbers */
+
+.crocodoc-text td:first-child {
+    width: 1%;
+    padding-left: 0.5em;
+    padding-right: 0.3em;
+    vertical-align: top;
+    text-align: right;
+    color: #aaa;
+    background: #f8f8f8;
+    border-right: 1px solid #eee;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-box-sizing: border-box !important;
+    -moz-box-sizing: border-box !important;
+    box-sizing: border-box !important;
+}
+.crocodoc-text td:first-child:before {
+    content: counter(line-numbering);
+    counter-increment: line-numbering;
+}
+
+/* line contents */
+.crocodoc-text td:last-child {
+    vertical-align: top;
+    text-align: left;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    padding: 0 10px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-all;
+    color: #333;
+    vertical-align: top;
+}
+
+.crocodoc-viewer-logo {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    width: 29px;
+    height: 16px;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAQCAYAAADqDXTRAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA+hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NDkxMSwgMjAxMy8xMC8yOS0xMTo0NzoxNiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgKE1hY2ludG9zaCkiIHhtcDpDcmVhdGVEYXRlPSIyMDE0LTAzLTIwVDE1OjIzOjE2LTA3OjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAxNC0wMy0yNFQxODoyODoyOS0wNzowMCIgeG1wOk1ldGFkYXRhRGF0ZT0iMjAxNC0wMy0yNFQxODoyODoyOS0wNzowMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OTAwMThGMThBOTJCMTFFM0FEQUU4MzYwQjIzNDg2OUUiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OTAwMThGMTlBOTJCMTFFM0FEQUU4MzYwQjIzNDg2OUUiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5MDAxOEYxNkE5MkIxMUUzQURBRTgzNjBCMjM0ODY5RSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5MDAxOEYxN0E5MkIxMUUzQURBRTgzNjBCMjM0ODY5RSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Prmu5EQAAAHNSURBVHja5NVNSBtBGMbxGLSggiKtevEiVHsoQUQRESxexJOlFKGUGJQqqBc9VC+CoCKaQxU/DkoNhUIhtqEFtYpI6VEPfit6KB4LSjERIVqoaP0PPMK6bK7JwYUf77g7O7Mz7zsxye/3u+J9uRWXsRqvSZMVqxOxUte9m7QAU9jBGqZRbOvzDJ+whXWMIl/P6rGJSts72fiBgDWnt9eB7V4p3uCtBn+ntvUqQTNeoUgf+RUVOMQDfEEV9p1W6tbAHjzFAP5jWDtgJvyLLjzRhB+QroE/aofMyr4hExOa8AyvnVY6iB7L36YdhTnMLbrXhKClT5M+thFteKnj59H2P8YVfNhzWumUQ94nLe0IPjv0ea9Yht+ow4UmNFc35u2FFFH85zDgpaV9LbH63I4Xtr135FS9G4o+hwG9lvajGD8k9Yq7yuOC4onum6ott086ojiEDmQhA60Y17PvikFVahpy0Y925W0MIRRqm01e51TBs8izTrqEXqToaERUbSafqare58rnQ8zgHMcqtmt94AvthMlnrZ57VUA5qug7hdSHGizij/LyU5N16uiYkm/ACk6Vq5DOZECVHla/bY0b1Ri/9I4rKRH/2m4EGADdeWtsTUEE0QAAAABJRU5ErkJggg==) 0 0 no-repeat;
+    pointer-events: none;
+}
+
+.crocodoc-window-as-viewport .crocodoc-viewer-logo {
+    position: fixed;
+}
+
+/* hidpi logo */
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+    .crocodoc-viewer-logo {
+        background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADkAAAAgCAYAAACowdDWAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA+hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NDkxMSwgMjAxMy8xMC8yOS0xMTo0NzoxNiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgKE1hY2ludG9zaCkiIHhtcDpDcmVhdGVEYXRlPSIyMDE0LTAzLTIwVDE1OjIzOjE2LTA3OjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAxNC0wMy0yNFQxODoyODoxMS0wNzowMCIgeG1wOk1ldGFkYXRhRGF0ZT0iMjAxNC0wMy0yNFQxODoyODoxMS0wNzowMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RTJGNDU3OUJBOEE2MTFFM0FEQUU4MzYwQjIzNDg2OUUiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RTJGNDU3OUNBOEE2MTFFM0FEQUU4MzYwQjIzNDg2OUUiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpFMkY0NTc5OUE4QTYxMUUzQURBRTgzNjBCMjM0ODY5RSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpFMkY0NTc5QUE4QTYxMUUzQURBRTgzNjBCMjM0ODY5RSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PtuEGeAAAARPSURBVHja7JltaJZVGMc356zNyJK5dE4CE+vLwGJimenQp0a+tFArTMgpzoFoH3RfRBKtnBNnpCwSDC0VLLaGbonSmwsr1zZf0fkyrb1iqWjkUkzn/F/yv/Nwec790qd43AU/7mfnvu/nnOuc67rO/zxLLCkpSYh368XrWHAS/AqmxJuTvXndAJ7k541gYDyu5BCj7THQLx6dfOh+yMmEHid7nOxx8n+1hfiZVNtskM7nz4FDoCNCP4ncorLAo6ALNINfQKfjnQFgMmgD34HuEP2kgVfARbCL/fg6KR0sBuM4SG37wXrwhc8AUsBCMA88Ybl/HewA74JGNbFHeBX7BBQEODiYY/K2w89Avl+4SsfVIMfhoNhzYDuoUfusef8EWO1wUOwB8AYdKjbG86LhoNhc8LaPg31AhRrHm0E5mRMhFEUS/gSGGW0Twffg8QhpswRUcsD14B/1zBr2ZbOPwLOq7eeohec3rmwVOG25LzO4GzwMRoBy8KB65hZooCN7wCXL9+RxwKfAIsdqZar2Qq60aRfAW2GdPMxVHcqEzmMBGQl+VM/KSpaCLSBV3fuUqyrvTQMvMxxlIOfVszLg8XR2k6UYVRoTOJp1wbQupkBrGCdlZcaAHyz3Guh8hWovYAU1rQjMBu2q/SbYyjBrVveKeZ0P6tQ9maiPWWgquMK6v71h9kkpwTPB3z6TIDM2C5zxeeZLsDZEKsxUFXoUeIbVV1b+D/VOPvN2kGrfBj50iYFrql1C4HKIXL3KguCy5SFzXorEN6rtJV4lAl6zFCLt4EHmp1Px6C+ojlBdqxztcgA/FuF7vlJ/m2G/z1KIdKGZykkPLevaIgzud0skeE5GsVb1dz/LNlHueFfSpiVIu96wKJWwlmzZLv7LGTXFkvOmZYDnHe++Hkag61nMjjC4px2qKIuKJqzpPlsse2SG4918ykdfJ2ste1VYK3S09zWlVYClssJqbexZGWWin5W6FJHnpI71SaxoQTaB+eCyYotCsdkq9ePZVZ4ivL23wFJoikMqon+drGEFM01U/AyfgU2k+kgy2tpVpZaBf5tw95dAm2YtsYhv2cL+oqIpcyiapWBzgCK6Y0mxWMz7LOV+juF4MjfiF4wJSafkkplfoXKum5PSpsImjUetTOrXZErA6TxCvaoGeo6h25975yPqvhz/Pudn0cC5VD/mkUv62mk7NNdzL1pnCckJIULufUrBr6lYYiqUCn3y1wxTqZRXGK4ZAYrmOvfHA1wAsxDVUf7ds0+u50x1RSg8soLvgWVGOOX5iIQEHymZS+E/2VJoXIqmnVGhBc1KPzHwAfej2hADa2RuLrOsiIThAg4+aJK2U6t6J5vOKIqG9aRItV2z5aRpHTzm7OPDN7gXSidnGUrv8IubfByoZ8g0caa99PgTHGVOyv62gYXGVEvy7HD+uiBHsuMBk1XHnH+Kp5oC73STeD/9Vyuu7bYAAwDrRe6zG4porAAAAABJRU5ErkJggg==) 0 0 no-repeat;
+        background-size: 29px auto;
+    }
+}

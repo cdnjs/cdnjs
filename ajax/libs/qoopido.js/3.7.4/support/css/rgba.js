@@ -1,0 +1,2 @@
+/*! Qoopido.js library 3.7.4, 2015-08-14 | https://github.com/dlueth/qoopido.js | (c) 2015 Dirk Lueth */
+!function(o,t){t.qoopido.register("support/css/rgba",o,["../../support"])}(function(o,t,r,s){"use strict";var e=o.support;return e.addTest("/css/rgba",function(o){var t=e.pool?e.pool.obtain("div"):document.createElement("div");try{t.style.backgroundColor="rgba(0,0,0,.5)"}catch(r){}/rgba/.test(t.style.backgroundColor)?o.resolve():o.reject(),t.dispose&&t.dispose()})},this);

@@ -1,0 +1,6 @@
+/*!
+ * jquery.scrolldepth.js | v0.1.2
+ * Copyright (c) 2012 Rob Flaherty (@robflaherty)
+ * Licensed under the MIT and GPL licenses.
+ */
+;(function(d,c,a,g){var e={elements:[],minHeight:0,offset:0,percentage:true,testing:false},f=d(c),b=[];d.scrollDepth=function(i){var j=+new Date;i=d.extend({},e,i);if(d(a).height()<i.minHeight){return}m("Percentage","Baseline");function m(p,n,o){if(!i.testing){_gaq.push(["_trackEvent","Scroll Depth",p,n,1,true]);if(arguments.length>2){_gaq.push(["_trackTiming","Scroll Depth",p,o,n,100])}}else{d("#console").html(p+": "+n)}}function l(n){return{"25%":parseInt(n*0.25,10),"50%":parseInt(n*0.5,10),"75%":parseInt(n*0.75,10),"100%":n-1}}function h(o,n,p){d.each(o,function(q,r){if(d.inArray(q,b)===-1&&n>=r){m("Percentage",q,p);b.push(q)}})}function k(p,n,o){d.each(p,function(q,r){if(d.inArray(r,b)===-1&&d(r).length){if(n>=d(r).offset().top){m("Elements",r,o);b.push(r)}}})}f.on("scroll.scrollDepth",function(){var p=d(a).height(),o=c.innerHeight?c.innerHeight:f.height(),n=f.scrollTop()+o,s=parseInt(o*(i.offset/100),10),q=l(p),r=+new Date-j;if(b.length>=4+i.elements.length){f.off("scroll.scrollDepth");return}if(i.elements){k(i.elements,n,r)}if(i.percentage){h(q,n,r)}})}})(jQuery,window,document);

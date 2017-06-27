@@ -1,0 +1,1 @@
+Ext.define("Ext.rtl.layout.container.boxOverflow.Scroller",{override:"Ext.layout.container.boxOverflow.Scroller",getWheelDelta:function(b){var a=this.layout,c=b.getWheelDelta();if(a.direction==="horizontal"&&a.owner.getHierarchyState().rtl){c=-c}return c}});

@@ -1,0 +1,1 @@
+YUI.add("querystring-parse-simple",function(B){var A=B.namespace("QueryString");A.parse=function(E,G,D){G=G||"&";D=D||"=";for(var J={},H=0,I=E.split(G),F=I.length,C;H<F;H++){C=I[H].split(D);if(C.length>0){J[A.unescape(C.shift())]=A.unescape(C.join(D));}}return J;};A.unescape=function(C){return decodeURIComponent(C.replace(/\+/g," "));};},"@VERSION@");

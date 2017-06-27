@@ -1,0 +1,56 @@
+@keyframes fade {
+	0% { opacity: 0; }
+	100% { opacity: 1; }
+}
+
+@keyframes fadeZoom {
+	0% { transform: scale(0.5); opacity: 0; }
+	100% { transform: scale(1); opacity: 1; }
+}
+
+.lum-lightbox {
+	background: rgba(0, 0, 0, 0.5);
+}
+
+.lum-lightbox-inner {
+	top: 2.5%;
+	right: 2.5%;
+	bottom: 2.5%;
+	left: 2.5%;
+}
+
+.lum-lightbox.lum-opening {
+	animation: fade 180ms ease-out;
+}
+
+.lum-lightbox.lum-opening .lum-lightbox-inner {
+	animation: fadeZoom 180ms ease-out;
+}
+
+.lum-lightbox.lum-closing {
+	animation: fade 300ms ease-in;
+	animation-direction: reverse;
+}
+
+.lum-lightbox.lum-closing .lum-lightbox-inner {
+	animation: fadeZoom 300ms ease-in;
+	animation-direction: reverse;
+}
+
+/* This media query makes screens less than 460px wide display in a "fullscreen"-esque mode. Users can then scroll around inside the lightbox to see the entire image. */
+@media (max-width: 460px) {
+	.lum-lightbox-inner {
+		overflow: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.lum-lightbox-inner img {
+		max-width: none;
+		max-height: none;
+		position: relative;
+		top: 0;
+		left: 0;
+		transform: none;
+		display: block;
+	}
+}

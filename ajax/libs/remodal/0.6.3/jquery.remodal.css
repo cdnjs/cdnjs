@@ -1,0 +1,321 @@
+/*
+ *  Remodal - v0.6.3
+ *  Flat, responsive, lightweight, easy customizable modal window plugin with declarative state notation and hash tracking.
+ *  http://vodkabears.github.io/remodal/
+ *
+ *  Made by Ilya Makarov
+ *  Under MIT License
+ */
+@import url(http://fonts.googleapis.com/css?family=Exo+2:700,400&subset=latin,cyrillic);
+
+/* ==========================================================================
+   Remodal necessary styles
+   ========================================================================== */
+
+/* Hide scroll bar */
+
+html.remodal-is-locked {
+    overflow: hidden;
+}
+
+/* Anti FOUC */
+
+.remodal,
+[data-remodal-id] {
+    visibility: hidden;
+}
+
+/* Necessary styles of the overlay */
+
+.remodal-overlay {
+    position: fixed;
+    z-index: 9999;
+    top: -5000px;
+    right: -5000px;
+    bottom: -5000px;
+    left: -5000px;
+
+    display: none;
+}
+
+/* Necessary styles of the wrapper */
+
+.remodal-wrapper {
+    position: fixed;
+    z-index: 10000;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    display: none;
+    overflow: auto;
+
+    text-align: center;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+.remodal-wrapper:after {
+    display: inline-block;
+
+    height: 100%;
+    margin-left: -0.05em;
+
+    content: "";
+}
+
+/* Fix iPad, iPhone glitches */
+
+.remodal-overlay,
+.remodal-wrapper {
+    -webkit-transform: translateZ(0px);
+}
+
+/* Necessary styles of the modal dialog */
+
+.remodal {
+    position: relative;
+
+    display: inline-block;
+}
+
+/* Anti-zoom. Font-size should be >= 16px. */
+
+.remodal select,
+.remodal textarea,
+.remodal input,
+.remodal select:focus,
+.remodal textarea:focus,
+.remodal input:focus {
+    font-size: 16px;
+}
+
+/* ==========================================================================
+   Remodal default theme
+   ========================================================================== */
+
+/* Default theme font */
+
+.remodal,
+.remodal * {
+    font-family: "Exo 2", sans-serif;
+}
+
+/* Background for effects */
+
+.remodal-bg {
+    -webkit-transition: -webkit-filter 0.2s ease-out;
+    -moz-transition: -moz-filter 0.2s ease-out;
+    -o-transition: -o-filter 0.2s ease-out;
+    transition: filter 0.2s ease-out;
+}
+
+body.remodal-is-active .remodal-bg {
+    -webkit-filter: blur(3px);
+    -ms-filter: blur(3px);
+    filter: blur(3px);
+    -moz-filter: blur(3px);
+    -o-filter: blur(3px);
+}
+
+/* Default theme styles of the overlay */
+
+.remodal-overlay {
+    -webkit-transition: opacity 0.2s ease-out;
+    -moz-transition: opacity 0.2s ease-out;
+    -o-transition: opacity 0.2s ease-out;
+    transition: opacity 0.2s ease-out;
+
+    opacity: 0;
+    background: rgba(33, 36, 46, 0.95);
+}
+
+body.remodal-is-active .remodal-overlay {
+    opacity: 1;
+}
+
+/* Default theme styles of the modal dialog */
+
+.remodal {
+    font-size: 16px;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 100%;
+    padding: 35px;
+
+    -webkit-transition: -webkit-transform 0.2s ease-out, opacity 0.2s ease-out;
+    -moz-transition: -moz-transform 0.2s ease-out, opacity 0.2s ease-out;
+    -o-transition: -o-transform 0.2s ease-out, opacity 0.2s ease-out;
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+    -webkit-transform: scale(0.95);
+    -moz-transform: scale(0.95);
+    -ms-transform: scale(0.95);
+    -o-transform: scale(0.95);
+    transform: scale(0.95);
+
+    opacity: 0;
+    color: #182a3c;
+    background: #f4f4f4;
+    background-clip: padding-box;
+}
+
+body.remodal-is-active .remodal {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+
+    opacity: 1;
+}
+
+/* Vertical align of the modal dialog */
+
+.remodal,
+.remodal-wrapper:after {
+    vertical-align: middle;
+}
+
+/* Close button */
+
+.remodal-close {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+
+    width: 28px;
+    height: 28px;
+
+    -webkit-transition: background 0.2s ease-out;
+    -moz-transition: background 0.2s ease-out;
+    -o-transition: background 0.2s ease-out;
+    transition: background 0.2s ease-out;
+    text-decoration: none;
+
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.remodal-close:after {
+    font-family: Arial, "Helvetica CY", "Nimbus Sans L", sans-serif !important;
+    font-size: 28px;
+    line-height: 28px;
+
+    display: block;
+
+    content: "×";
+    cursor: pointer;
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+    text-decoration: none;
+
+    color: #3e5368;
+}
+
+.remodal-close:hover,
+.remodal-close:active {
+    background: #3e5368;
+}
+
+.remodal-close:hover.remodal-close:after,
+.remodal-close:active.remodal-close:after {
+    color: #f4f4f4;
+}
+
+/* Dialog buttons */
+
+.remodal-confirm,
+.remodal-cancel {
+    font-size: 10pt;
+
+    display: inline-block;
+
+    width: 120px;
+    margin: 0 0 5px 0;
+    padding: 9px 0;
+
+    cursor: pointer;
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+    text-align: center;
+    text-decoration: none;
+
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    background-clip: padding-box;
+}
+
+.remodal-confirm {
+    color: #16a085;
+    border: 2px solid #16a085;
+    background: #f4f4f4;
+}
+
+.remodal-confirm:hover,
+.remodal-confirm:active {
+    color: #f4f4f4;
+    background: #16a085;
+}
+
+.remodal-cancel {
+    color: #c0392b;
+    border: 2px solid #c0392b;
+    background: #f4f4f4;
+}
+
+.remodal-cancel:hover,
+.remodal-cancel:active {
+    color: #f4f4f4;
+    background: #c0392b;
+}
+
+/* Media queries
+   ========================================================================== */
+
+@media only screen and (min-width: 40.063em) /* min-width 641px */ {
+    .remodal {
+        max-width: 700px;
+        min-height: 0;
+        margin: 20px auto;
+
+        -webkit-border-radius: 6px;
+        border-radius: 6px;
+    }
+}
+
+/* IE8
+   ========================================================================== */
+
+.lt-ie9 .remodal-overlay {
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#F021242E, endColorstr=#F021242E);
+}
+
+.lt-ie9 .remodal {
+    width: 700px;
+    min-height: 0;
+    margin: 20px auto;
+}
+
+.lt-ie9 .remodal-close:after {
+    margin: auto;
+
+    text-align: center;
+}
+
+.lt-ie9 .remodal-close:hover,
+.lt-ie9 .remodal-close:active {
+    background: transparent;
+}
+
+.lt-ie9 .remodal-close:hover.remodal-close:after,
+.lt-ie9 .remodal-close:active.remodal-close:after {
+    color: #3e5368;
+}

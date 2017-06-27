@@ -1,0 +1,732 @@
+* {
+  border: 0;
+  font: inherit;
+  margin: 0;
+  padding: 0;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+  height: 100%; }
+  @media screen and (min-width: 960px) {
+    html {
+      font-size: 78.125%; } }
+
+body {
+  box-sizing: border-box;
+  color: #3c3c3d;
+  font-family: Avenir, "Avenir Next", "Helvetica Neue", "Segoe UI", Verdana, sans-serif;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  min-height: 100%;
+  position: relative; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+  line-height: 4.8rem;
+  padding: .8rem 0 1.6rem; }
+
+h1 {
+  font-size: 3.6rem; }
+
+h2 {
+  font-size: 3.2rem; }
+
+h3 {
+  font-size: 3rem; }
+
+h4 {
+  font-size: 2.8rem; }
+
+h5 {
+  font-size: 2.6rem; }
+
+h6 {
+  font-size: 2.4rem; }
+
+p {
+  padding-bottom: 2.4rem; }
+
+pre,
+code,
+samp,
+kbd {
+  background-color: #efeff0;
+  font-size: 1.2rem;
+  color: #e528b0;
+  font-family: "Consolas", "Monaco", "Courier New", monospace;
+  line-height: 1; }
+
+code,
+samp,
+kbd {
+  border-radius: 2px;
+  overflow-y: hidden;
+  overflow-x: auto;
+  padding: .4rem .4rem .2rem; }
+
+pre {
+  border-radius: 2px;
+  line-height: 2.4rem;
+  overflow-y: hidden;
+  overflow-x: auto;
+  padding: 1.2rem 1rem;
+  margin: 0 0 2.4rem; }
+  pre code,
+  pre samp,
+  pre kbd {
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0; }
+
+a:link {
+  color: #4076D4; }
+
+a:visited {
+  color: #9140D4; }
+
+a:hover,
+a:focus {
+  color: #2e68cc; }
+
+a:active {
+  color: #D44076; }
+
+img,
+video {
+  max-width: 100%;
+  display: table; }
+
+hr {
+  height: 4.8rem;
+  position: relative; }
+  hr:before {
+    background-color: #cdcdce;
+    content: '';
+    height: 1px;
+    position: absolute;
+    top: 50%;
+    width: 100%; }
+
+ol,
+ul {
+  margin-left: 2rem;
+  padding: 0 0 2.4rem; }
+
+ol {
+  list-style-type: decimal; }
+
+ol ol {
+  padding-bottom: 0; }
+
+ul {
+  list-style-type: disc; }
+
+ul ul {
+  padding-bottom: 0; }
+
+dt {
+  font-style: italic; }
+
+dd {
+  text-indent: 2rem; }
+
+blockquote {
+  margin: 0 0 2.4rem 1.2rem;
+  border-left: 0.3rem solid #cdcdce;
+  padding: 1.2rem; }
+  blockquote p:last-child {
+    padding-bottom: 0; }
+
+figure {
+  margin: 0 auto;
+  padding-bottom: 2.4rem; }
+  figure img {
+    display: table;
+    margin: 0 auto; }
+
+small,
+sub,
+sup {
+  font-size: 1.2rem;
+  line-height: 1; }
+
+caption,
+figcaption {
+  font-size: 1.2rem;
+  font-style: italic;
+  text-align: center; }
+
+em,
+cite,
+i {
+  font-style: italic; }
+
+strong,
+var,
+b {
+  font-weight: bold; }
+
+q:before {
+  content: "'"; }
+
+q:after {
+  content: "'"; }
+
+q > q {
+  font-style: italic; }
+
+dfn,
+abbr {
+  border-bottom: 0.1rem dotted #5a5a5b;
+  cursor: default; }
+
+table {
+  border-radius: 2px;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-bottom: 2.4rem;
+  width: 100%; }
+  table th {
+    background-color: #7d7d7e;
+    color: #ffffff;
+    font-weight: 500;
+    text-align: left; }
+  table th, table td {
+    padding: 1.2rem; }
+  table td {
+    font-size: 1.2rem; }
+  table tr:nth-child(even) td {
+    background-color: #dededf; }
+  table tr:nth-child(odd) td {
+    background-color: #efeff0; }
+
+input,
+label,
+select,
+button,
+textarea {
+  display: block;
+  resize: none;
+  -webkit-appearance: none;
+  -moz-appearance: none; }
+
+/* remove yellow from chrome auto-fill background */
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  color: #3c3c3d;
+  -webkit-text-fill-color: #3c3c3d;
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important; }
+
+/*
+
+Utilities
+
+These utility classes have one or two CSS properties that are meant to save you from creating several identical classes to do the same thing, like just centering some text.
+
+Markup:
+<div class="{{modifier_class}}" style="background-color: #ddd">
+  Example Text
+</div>
+
+.disabled								 - Disable an Element
+.clearfix                - Clear floats to keep the parent container in shape
+.f-none                  - float: none;
+.f-left                  - float: left;
+.f-right           			 - float: right;
+.ta-left                 - text-align: left;
+.ta-center           		 - text-align: center;
+.ta-right           		 - text-align: right;
+
+Styleguide 4.0
+
+*/
+.disabled {
+  opacity: 0.5;
+  pointer-events: none; }
+
+.f-none {
+  float: none; }
+
+.f-left {
+  float: left; }
+
+.f-right {
+  float: right; }
+
+.clearfix {
+  clear: both;
+  overflow: hidden; }
+
+.ta-left {
+  text-align: left; }
+
+.ta-center {
+  text-align: center; }
+
+.ta-right {
+  text-align: right; }
+
+/*
+
+Type Utilities
+
+These are specific typography related utilities
+
+Markup:
+<div class="type {{modifier_class}}">
+  The quick brown fox jumps over the lazy dog.
+</div>
+
+.fs-small            - Smaller than the default font size
+.fs-base           	 - Exactly the default font size
+.fs-large            - Larger than the default font size
+.fw-light            - Changes the type to be 300 weight
+.fw-normal           - Changes the type to be 400 weight
+.fw-semibold         - Changes the type to be 500 weight
+.fw-bold		         - Changes the type to be 600 weight
+
+Styleguide 4.1
+
+*/
+.fs-small {
+  font-size: 1.2rem; }
+
+.fs-base {
+  font-size: 1.6rem; }
+
+.fs-large {
+  font-size: 2rem; }
+
+.fw-light {
+  font-weight: 300; }
+
+.fw-normal {
+  font-weight: 400; }
+
+.fw-semibold {
+  font-weight: 500; }
+
+.fw-bold {
+  font-weight: 600; }
+
+/*
+
+Buttons
+
+Buttons and their variations
+
+Markup:
+<a href="#" class="btn {{modifier_class}}">Button</a>
+
+.btn--invisible       - Hardly even a button, but great for alignment
+.btn--block           - 100% width with minimal side padding
+
+Styleguide 2.0
+
+*/
+.btn, [type=button],
+[type=submit],
+button {
+  background-color: #E83FB8;
+  border: none;
+  border-radius: .2rem;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  height: 4.8rem;
+  line-height: 4.8rem;
+  max-width: 100%;
+  transition-property: background-color;
+  transition-duration: 200ms;
+  margin: 0 auto;
+  padding: 0 3rem;
+  text-align: center;
+  width: auto; }
+  .btn:link, [type=button]:link,
+  [type=submit]:link,
+  button:link, .btn:visited, [type=button]:visited,
+  [type=submit]:visited,
+  button:visited {
+    color: #ffffff;
+    text-decoration: none; }
+  .btn:focus, [type=button]:focus,
+  [type=submit]:focus,
+  button:focus, .btn:hover, [type=button]:hover,
+  [type=submit]:hover,
+  button:hover {
+    background-color: #e528b0;
+    color: #ffffff; }
+  .btn:focus, [type=button]:focus,
+  [type=submit]:focus,
+  button:focus {
+    outline: 0.1rem dotted #7d7d7e; }
+
+.btn--invisible {
+  background-color: transparent;
+  color: #E83FB8;
+  text-decoration: underline; }
+  .btn--invisible:link, .btn--invisible:focus, .btn--invisible:visited {
+    color: #E83FB8; }
+  .btn--invisible:hover {
+    color: #e528b0;
+    background-color: transparent; }
+
+.btn--block {
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem; }
+
+/*
+
+Forms
+
+Markup:
+<form>
+  <label class="textfield">
+    <input type="text" />
+    <span class="textfield__label">Name</span>
+  </label>
+  <label class="radio">
+    <input type="radio" name="example" />
+    <span class="radio__label">Desktop</span>
+  </label>
+  <label class="radio">
+    <input type="radio" name="example" />
+    <span class="radio__label">Mobile</span>
+  </label>
+  <label class="select">
+    <select name="select">
+      <option disabled="disabled" selected="selected">Flavors</option>
+      <option>Chocolate</option>
+    </select>
+    <span class="select__label" for="select">Favorite Ice Cream</span>
+  </label>
+  <label class="textfield">
+    <textarea></textarea>
+    <span class="textfield__label">Comments</span>
+  </label>
+  <label class="checkbox">
+    <input type="checkbox" />
+    <span class="checkbox__label">I Lied</span>
+  </label>
+  <br/>
+  <input type="submit" value="Cross My Heart" />
+</form>
+
+Styleguide 3.0
+
+*/
+label {
+  color: #7d7d7e; }
+
+.label--side, .radio, .checkbox {
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 2.4rem;
+  padding: 0 1rem 0 3rem;
+  position: relative; }
+
+.label--top, .textfield, .select {
+  background-color: #ffffff;
+  display: block;
+  margin-top: -2px;
+  margin-bottom: 2.4rem;
+  position: relative; }
+
+.label__label--top, .textfield__label, .select__label {
+  font-size: 1.2rem;
+  position: absolute;
+  left: 1px;
+  line-height: 1;
+  padding: .5rem;
+  right: 1px;
+  top: 1px; }
+
+/*
+
+Radio
+
+Markup:
+<label class="radio {{modifier_class}}">
+  <input type="radio" />
+  <span class="radio__label">Radio</span>
+</label>
+
+Styleguide 3.1
+
+*/
+.radio input[type=radio] {
+  opacity: 0;
+  position: absolute;
+  z-index: -1; }
+
+.radio:before {
+  background-color: #fff;
+  border: 0.2rem solid #7d7d7e;
+  border-radius: 2rem;
+  content: '';
+  height: 1.6rem;
+  left: 0;
+  margin-top: -1rem;
+  position: absolute;
+  top: 50%;
+  width: 1.6rem; }
+
+.radio__label {
+  color: #7d7d7e;
+  font-size: 1.2rem;
+  line-height: 1; }
+  .radio__label:before {
+    border: 0.1rem solid #E83FB8;
+    border-radius: .2rem;
+    content: '';
+    height: 1.8rem;
+    left: 0;
+    margin-top: -1rem;
+    position: absolute;
+    top: 50%;
+    visibility: hidden;
+    width: 1.8rem; }
+
+.radio input[type=radio]:focus + .radio__label:before {
+  visibility: visible; }
+
+.radio input[type=radio]:checked + .radio__label:after {
+  background-color: #E83FB8;
+  border-radius: 10px;
+  content: '';
+  height: 1rem;
+  left: .5rem;
+  margin-top: -.5rem;
+  position: absolute;
+  top: 50%;
+  width: 1rem; }
+
+/*
+
+Checkbox
+
+Markup:
+<label class="checkbox {{modifier_class}}">
+  <input type="checkbox" />
+  <span class="checkbox__label">Checkbox</span>
+</label>
+
+Styleguide 3.2
+
+*/
+.checkbox input[type=checkbox] {
+  opacity: 0;
+  position: absolute;
+  z-index: -1; }
+
+.checkbox .checkbox__label {
+  color: #7d7d7e;
+  font-size: 1.2rem;
+  line-height: 1; }
+  .checkbox .checkbox__label:before, .checkbox .checkbox__label:after {
+    border-radius: 2px;
+    content: '';
+    left: 0;
+    position: absolute;
+    top: 50%; }
+  .checkbox .checkbox__label:before {
+    background-color: #ffffff;
+    border: 0.2rem solid #7d7d7e;
+    height: 1.6rem;
+    margin-top: -1rem;
+    width: 1.6rem; }
+  .checkbox .checkbox__label:after {
+    border: .1rem solid transparent;
+    color: #e528b0;
+    font-size: 1.4rem;
+    height: 1.4rem;
+    line-height: 1;
+    margin-top: -1rem;
+    padding: .2rem;
+    text-align: center;
+    width: 1.4rem; }
+
+.checkbox input[type=checkbox]:checked + .checkbox__label:before {
+  border-color: #7d7d7e; }
+
+.checkbox input[type=checkbox]:checked + .checkbox__label:after {
+  content: '\2714'; }
+
+.checkbox input[type=checkbox]:focus + .checkbox__label:after {
+  border-color: #E83FB8; }
+
+/*
+
+Input and text areas
+
+Markup:
+<label class="textfield {{modifier_class}}">
+  <input type="text" />
+  <span class="textfield__label">Input</span>
+</label>
+<label class="textfield {{modifier_class}}">
+  <textarea></textarea>
+  <span class="textfield__label">Textarea</span>
+</label>
+
+Styleguide 3.3
+
+*/
+.textfield:before {
+  line-height: inherit;
+  position: absolute; }
+
+.textfield input,
+.textfield textarea {
+  border: 1px solid #7d7d7e;
+  border-radius: 2px;
+  box-sizing: border-box;
+  padding: 1.8rem .5rem .6rem;
+  width: 100%; }
+
+.textfield *:focus {
+  border-color: #E83FB8;
+  outline: none; }
+
+.textfield *[disabled] {
+  background-color: #efeff0;
+  color: #5a5a5b; }
+
+/*
+
+Select
+
+Markup:
+<label class="select {{modifier_class}}">
+  <select>
+    <option disabled="disabled" selected="selected">Select</option>
+    <option>Option 1</option>
+    <option>Option 2</option>
+    <option>Option 3</option>
+  </select>
+  <span class="select__label">Select Label</span>
+</label>
+
+Styleguide 3.4
+
+*/
+.select:after {
+  content: '';
+  border-left: .6rem solid transparent;
+  border-right: .6rem solid transparent;
+  border-top: 0.6rem solid #7d7d7e;
+  height: 0;
+  margin-top: -.5rem;
+  position: absolute;
+  right: 1rem;
+  bottom: 1.3rem;
+  width: 0; }
+
+.select select {
+  background-color: transparent;
+  border: 1px solid #7d7d7e;
+  border-radius: 2px;
+  box-sizing: border-box;
+  padding: 1.8rem .5rem .6rem;
+  position: relative;
+  width: 100%;
+  z-index: 100; }
+
+.select select:focus {
+  border-color: #E83FB8;
+  outline: none; }
+
+.select select:focus + .select__label {
+  border-color: #E83FB8; }
+
+/*
+
+Grid
+
+Basic grid made using flexbox. Direct children of `.grid` are rows and direct children of rows are columns.
+
+Markup:
+<main class="grid">
+  <article>
+    <section class="{{modifier_class}}">
+      Cell 1
+    </section>
+    <div class="grid">
+      <aside>
+        <p class="grid {{modifier_class}}">
+          Cell 2.1
+        </p>
+        <ul>
+          <li>Cell 2.2</li>
+        </ul>
+      </aside>
+    </div>
+  </article>
+</main>
+
+.column--light           - Less important column
+.column--heavy           - More important column
+
+Styleguide 1.0
+
+*/
+.grid > *:not(.grid) {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  margin: 0 -1rem; }
+
+.grid > *:not(.grid) > * {
+  -webkit-flex-grow: 4;
+  -moz-flex-grow: 4;
+  -ms-flex-grow: 4;
+  flex-grow: 4;
+  padding: 0 1rem; }
+  .grid > *:not(.grid) > *.column--light {
+    -webkit-flex-grow: 2;
+    -moz-flex-grow: 2;
+    -ms-flex-grow: 2;
+    flex-grow: 2; }
+  .grid > *:not(.grid) > *.column--heavy {
+    -webkit-flex-grow: 8;
+    -moz-flex-grow: 8;
+    -ms-flex-grow: 8;
+    flex-grow: 8; }
+
+/*
+
+Wrappers
+
+Use wrappers when you need a content area that is a standardized width and centered on the page.
+
+Markup:
+<div class="wrapper {{modifier_class}}">Wrapper</div>
+
+.wrapper--small      - Small Wrapper
+.wrapper--large      - Large Wrapper
+
+Styleguide 1.1
+
+*/
+.wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 4.8rem 2rem; }
+
+.wrapper--large {
+  max-width: 1200px;
+  padding: 7.2rem 3rem; }
+
+.wrapper--small {
+  max-width: 640px;
+  padding: 2.4rem 1rem; }
+
+/*# sourceMappingURL=styleguide.css.map */

@@ -1,0 +1,71 @@
+/**
+ * angular-motion
+ * @version v0.3.0 - 2014-01-24
+ * @link https://github.com/mgcrea/angular-motion
+ * @author Olivier Louvignes <olivier@mg-crea.com>
+ * @license MIT License, http://www.opensource.org/licenses/MIT
+ */
+.am-flip-x {
+  animation-duration: 0.4s;
+  animation-timing-function: ease;
+  animation-fill-mode: backwards;
+}
+.am-flip-x.ng-enter,
+.am-flip-x.am-flip-x-add {
+  animation-name: flipInX;
+}
+.am-flip-x.ng-leave,
+.am-flip-x.am-flip-x-remove,
+.am-flip-x.ng-hide {
+  animation-name: flipOutX;
+}
+.am-flip-x-bounce {
+  animation-duration: 0.4s;
+  animation-timing-function: ease;
+  animation-fill-mode: backwards;
+}
+.am-flip-x-bounce.ng-enter,
+.am-flip-x-bounce.am-flip-x-add {
+  animation-name: flipInXBounce;
+}
+.am-flip-x-bounce.ng-leave,
+.am-flip-x-bounce.am-flip-x-remove,
+.am-flip-x-bounce.ng-hide {
+  animation-name: flipOutX;
+}
+@keyframes flipInX {
+  from {
+    opacity: 0;
+    transform: perspective(400px) rotateX(90deg);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(400px) rotateX(0deg);
+  }
+}
+@keyframes flipInXBounce {
+  from {
+    opacity: 0;
+    transform: perspective(400px) rotateX(90deg);
+  }
+  40% {
+    transform: perspective(400px) rotateX(-10deg);
+  }
+  70% {
+    transform: perspective(400px) rotateX(10deg);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(400px) rotateX(0deg);
+  }
+}
+@keyframes flipOutX {
+  from {
+    opacity: 1;
+    transform: perspective(400px) rotateX(0deg);
+  }
+  to {
+    opacity: 0;
+    transform: perspective(400px) rotateX(90deg);
+  }
+}

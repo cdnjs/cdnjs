@@ -1,0 +1,1 @@
+(function(t){window.qoopido.register("support/css/rgba",t,["../../support","../../pool/dom"])})(function(t,e){"use strict";return t.support.addTest("/css/rgba",function(t){var r=e.pool.dom.obtain("div");try{r.style.backgroundColor="rgba(0,0,0,.5)"}catch(n){}/rgba/.test(r.style.backgroundColor)?t.resolve():t.reject(),r.dispose()})});

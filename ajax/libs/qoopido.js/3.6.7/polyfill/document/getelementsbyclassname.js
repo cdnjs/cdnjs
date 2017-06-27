@@ -1,0 +1,2 @@
+/*! Qoopido.js library 3.6.7, 2015-07-08 | https://github.com/dlueth/qoopido.js | (c) 2015 Dirk Lueth */
+!function(e){var t=[];Object.defineProperty||t.push("./queryselectorall"),window.qoopido.register("polyfill/document/getelementsbyclassname",e,t)}(function(e,t,l,n,s,r,a){"use strict";if(!r.getElementsByClassName){var o=new RegExp("^|\\s+","g");r.getElementsByClassName=function(e){return e=String(e).replace(o,"."),r.querySelectorAll(e)}}return r.getElementsByClassName});

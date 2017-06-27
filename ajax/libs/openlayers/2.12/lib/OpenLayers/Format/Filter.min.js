@@ -1,0 +1,1 @@
+OpenLayers.Format.Filter=OpenLayers.Class(OpenLayers.Format.XML.VersionedOGC,{defaultVersion:"1.0.0",CLASS_NAME:"OpenLayers.Format.Filter"});

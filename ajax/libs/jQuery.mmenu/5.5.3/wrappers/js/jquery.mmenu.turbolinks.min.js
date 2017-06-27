@@ -1,0 +1,1 @@
+!function(n){var t,a,o="mmenu";n(document).on("ready",function(){a=n("html"),t=a.attr("class")}),n(document).on("page:load",function(){a.attr("class",t),n[o].glbl=!1})}(jQuery);

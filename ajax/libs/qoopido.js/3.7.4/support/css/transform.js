@@ -1,0 +1,2 @@
+/*! Qoopido.js library 3.7.4, 2015-08-14 | https://github.com/dlueth/qoopido.js | (c) 2015 Dirk Lueth */
+!function(r,s){s.qoopido.register("support/css/transform",r,["../../support"])}(function(r,s,t,o){"use strict";return r.support.addTest("/css/transform",function(s){r.support.supportsCssProperty("transform")?s.resolve(r.support.getCssProperty("transform")):s.reject()})},this);

@@ -1,0 +1,7 @@
+/*	
+ * jQuery mmenu iconPanels add-on
+ * mmenu.frebsite.nl
+ *
+ * Copyright (c) Fred Heusschen
+ */
+!function(e){var n="mmenu",i="iconPanels";e[n].addons[i]={setup:function(){var a=this,t=this.opts[i];this.conf[i];if(l=e[n].glbl,"boolean"==typeof t&&(t={add:t}),"number"==typeof t&&(t={add:!0,visible:t}),"object"!=typeof t&&(t={}),t=this.opts[i]=e.extend(!0,{},e[n].defaults[i],t),t.visible++,t.add){for(var d=[],o=0;o<=t.visible;o++)d.push(s.iconpanel+"-"+o);d=d.join(" ");var c=function(n){n.hasClass(s.vertical)||a.$pnls.children("."+s.panel).removeClass(d).filter("."+s.subopened).removeClass(s.hidden).add(n).not("."+s.vertical).slice(-t.visible).each(function(n){e(this).addClass(s.iconpanel+"-"+n)})};this.bind("initMenu:after",function(){this.$menu.addClass(s.iconpanel)}),this.bind("openPanel:start",c),this.bind("initPanels:after",function(e){c.call(a,a.$pnls.children("."+s.opened))}),this.bind("initListview:after",function(e){e.hasClass(s.vertical)||e.children("."+s.subblocker).length||e.prepend('<a href="#'+e.closest("."+s.panel).attr("id")+'" class="'+s.subblocker+'" />')})}},add:function(){s=e[n]._c,a=e[n]._d,t=e[n]._e,s.add("iconpanel subblocker")},clickAnchor:function(e,n){}},e[n].defaults[i]={add:!1,visible:3};var s,a,t,l}(jQuery);

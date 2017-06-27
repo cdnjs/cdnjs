@@ -1,0 +1,281 @@
+/**
+ *
+ * slippry v1.4.0 - Responsive content slider for jQuery
+ * http://slippry.com
+ *
+ * Authors: Lukas Jakob Hafner - @saftsaak
+ *          Thomas Hurd - @SeenNotHurd
+ *
+ * Copyright 2016, booncon oy - http://booncon.com
+ *
+ *
+ * Released under the MIT license - http://opensource.org/licenses/MIT
+ */
+/* kenBurns animations, very basic */
+@-webkit-keyframes left-right {
+  0% {
+    -webkit-transform: translateY(-20%) translateX(-10%);
+            transform: translateY(-20%) translateX(-10%); }
+  100% {
+    -webkit-transform: translateY(0%) translateX(10%);
+            transform: translateY(0%) translateX(10%); } }
+@-o-keyframes left-right {
+  0% {
+    -o-transform: translateY(-20%) translateX(-10%);
+       transform: translateY(-20%) translateX(-10%); }
+  100% {
+    -o-transform: translateY(0%) translateX(10%);
+       transform: translateY(0%) translateX(10%); } }
+@keyframes left-right {
+  0% {
+    -webkit-transform: translateY(-20%) translateX(-10%);
+         -o-transform: translateY(-20%) translateX(-10%);
+            transform: translateY(-20%) translateX(-10%); }
+  100% {
+    -webkit-transform: translateY(0%) translateX(10%);
+         -o-transform: translateY(0%) translateX(10%);
+            transform: translateY(0%) translateX(10%); } }
+@-webkit-keyframes right-left {
+  0% {
+    -webkit-transform: translateY(0%) translateX(10%);
+            transform: translateY(0%) translateX(10%); }
+  100% {
+    -webkit-transform: translateY(-20%) translateX(-10%);
+            transform: translateY(-20%) translateX(-10%); } }
+@-o-keyframes right-left {
+  0% {
+    -o-transform: translateY(0%) translateX(10%);
+       transform: translateY(0%) translateX(10%); }
+  100% {
+    -o-transform: translateY(-20%) translateX(-10%);
+       transform: translateY(-20%) translateX(-10%); } }
+@keyframes right-left {
+  0% {
+    -webkit-transform: translateY(0%) translateX(10%);
+         -o-transform: translateY(0%) translateX(10%);
+            transform: translateY(0%) translateX(10%); }
+  100% {
+    -webkit-transform: translateY(-20%) translateX(-10%);
+         -o-transform: translateY(-20%) translateX(-10%);
+            transform: translateY(-20%) translateX(-10%); } }
+/* added to the original element calling slippry */
+.sy-box.sy-loading {
+  background: url("/images/sy-loader.gif") 50% 50% no-repeat;
+  -webkit-background-size: 32px 32px;
+          background-size: 32px;
+  min-height: 40px; }
+  .sy-box.sy-loading .sy-slides-wrap, .sy-box.sy-loading .sy-pager {
+    visibility: hidden; }
+
+/* element that wraps the slides */
+.sy-slides-wrap {
+  position: relative;
+  height: 100%;
+  width: 100%; }
+  .sy-slides-wrap:hover .sy-controls {
+    display: block; }
+
+/* element that crops the visible area to the slides */
+.sy-slides-crop {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  overflow: hidden; }
+
+/* list containing the slides */
+.sy-list {
+  width: 100%;
+  height: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute; }
+  .sy-list.horizontal {
+    -webkit-transition: left ease;
+         -o-transition: left ease;
+            transition: left ease; }
+  .sy-list.vertical {
+    -webkit-transition: top ease;
+         -o-transition: top ease;
+            transition: top ease; }
+
+/* single slide */
+.sy-slide {
+  position: absolute;
+  width: 100%;
+  z-index: 2; }
+  .sy-slide.kenburns {
+    width: 140%;
+    left: -20%; }
+    .sy-slide.kenburns.useCSS {
+      -webkit-transition-property: opacity;
+           -o-transition-property: opacity;
+              transition-property: opacity; }
+      .sy-slide.kenburns.useCSS.sy-ken:nth-child(1n) {
+        -webkit-animation-name: left-right;
+             -o-animation-name: left-right;
+                animation-name: left-right;
+        -webkit-animation-fill-mode: forwards;
+             -o-animation-fill-mode: forwards;
+                animation-fill-mode: forwards; }
+      .sy-slide.kenburns.useCSS.sy-ken:nth-child(2n) {
+        -webkit-animation-name: right-left;
+             -o-animation-name: right-left;
+                animation-name: right-left;
+        -webkit-animation-fill-mode: forwards;
+             -o-animation-fill-mode: forwards;
+                animation-fill-mode: forwards; }
+  .sy-slide.sy-active {
+    z-index: 3; }
+  .sy-slide > img {
+    margin: 0;
+    padding: 0;
+    display: block;
+    width: 100%;
+    border: 0; }
+  .sy-slide > a {
+    margin: 0;
+    padding: 0;
+    display: block;
+    width: 100%; }
+    .sy-slide > a > img {
+      margin: 0;
+      padding: 0;
+      display: block;
+      width: 100%;
+      border: 0; }
+
+/* next/ prev buttons, with arrows and clickable area a lot larger than the visible buttons */
+.sy-controls {
+  display: none;
+  list-style: none;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  padding: 0;
+  margin: 0; }
+  .sy-controls li {
+    position: absolute;
+    width: 10%;
+    min-width: 4.2em;
+    height: 100%;
+    z-index: 33; }
+    .sy-controls li.sy-prev {
+      left: 0;
+      top: 0; }
+      .sy-controls li.sy-prev a:after {
+        background-position: -5% 0; }
+    .sy-controls li.sy-next {
+      right: 0;
+      top: 0; }
+      .sy-controls li.sy-next a:after {
+        background-position: 105% 0; }
+    .sy-controls li a {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: block;
+      text-indent: -9999px; }
+      .sy-controls li a:link, .sy-controls li a:visited {
+        opacity: 0.4; }
+      .sy-controls li a:hover, .sy-controls li a:focus {
+        opacity: 0.8;
+        outline: none; }
+      .sy-controls li a:after {
+        content: "";
+        background-image: url("/images/arrows.svg");
+        background-repeat: no-repeat;
+        -webkit-background-size: cover;
+                background-size: cover;
+        text-align: center;
+        text-indent: 0;
+        line-height: 2.8em;
+        color: #111;
+        font-weight: 800;
+        position: absolute;
+        background-color: #fff;
+        width: 2.8em;
+        height: 2.8em;
+        left: 50%;
+        top: 50%;
+        margin-top: -1.4em;
+        margin-left: -1.4em;
+        border-radius: 50%; }
+  @media only screen and (max-device-width: 600px) {
+    .sy-controls {
+      display: block; }
+      .sy-controls li {
+        min-width: 2.1em; }
+        .sy-controls li a:after {
+          width: 1.4em;
+          height: 1.4em;
+          margin-top: -0.7em;
+          margin-left: -0.7em; } }
+
+/* captions, styled fo the overlay variant */
+.sy-caption-wrap {
+  position: absolute;
+  bottom: 2em;
+  z-index: 12;
+  left: 50%; }
+  .sy-caption-wrap .sy-caption {
+    position: relative;
+    left: -50%;
+    background-color: rgba(0, 0, 0, 0.54);
+    color: #fff;
+    padding: 0.4em 1em;
+    border-radius: 1.2em; }
+    .sy-caption-wrap .sy-caption a:link, .sy-caption-wrap .sy-caption a:visited {
+      color: #e24b70;
+      font-weight: 600;
+      text-decoration: none; }
+    .sy-caption-wrap .sy-caption a:hover, .sy-caption-wrap .sy-caption a:focus {
+      text-decoration: underline; }
+  @media only screen and (max-device-width: 600px), screen and (max-width: 600px) {
+    .sy-caption-wrap {
+      left: 0;
+      bottom: 0.4em; }
+      .sy-caption-wrap .sy-caption {
+        left: 0;
+        padding: 0.2em 0.4em;
+        font-size: 0.92em;
+        border-radius: 0; } }
+
+/* pager bubbles */
+.sy-pager {
+  clear: both;
+  display: block;
+  width: 100%;
+  margin: 1em 0 0;
+  padding: 0;
+  list-style: none;
+  text-align: center; }
+  .sy-pager li {
+    display: inline-block;
+    width: 1.2em;
+    height: 1.2em;
+    margin: 0 1em 0 0;
+    border-radius: 50%; }
+    .sy-pager li.sy-active a {
+      background-color: #e24b70; }
+    .sy-pager li a {
+      width: 100%;
+      height: 100%;
+      display: block;
+      background-color: #ccc;
+      text-indent: -9999px;
+      -webkit-background-size: 2em 2em;
+              background-size: 2em;
+      border-radius: 50%; }
+      .sy-pager li a:link, .sy-pager li a:visited {
+        opacity: 1.0; }
+      .sy-pager li a:hover, .sy-pager li a:focus {
+        opacity: 0.6; }
+
+/* element to "keep/ fill" the space of the content, gets intrinsic height via js */
+.sy-filler {
+  width: 100%; }
+  .sy-filler.ready {
+    -webkit-transition: padding 600ms ease;
+         -o-transition: padding 600ms ease;
+            transition: padding 600ms ease; }

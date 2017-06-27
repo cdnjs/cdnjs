@@ -1,0 +1,6 @@
+/*!
+ * Vue Material v0.6.0
+ * Made with love by Marcos Moura
+ * Released under the MIT License.
+ */
+!(function(e,o){"object"==typeof exports&&"object"==typeof module?module.exports=o():"function"==typeof define&&define.amd?define([],o):"object"==typeof exports?exports.VueMaterial=o():e.VueMaterial=o()})(this,(function(){return (function(e){function o(n){if(t[n])return t[n].exports;var r=t[n]={exports:{},id:n,loaded:!1};return e[n].call(r.exports,r,r.exports,o),r.loaded=!0,r.exports}var t={};return o.m=e,o.c=t,o.p="/",o(0)})({0:function(e,o,t){e.exports=t(20)},20:function(e,o,t){"use strict";function n(e){return e&&e.__esModule?e:{default:e}}function r(e){e.component("md-icon",e.extend(d.default)),e.material.styles.push(i.default)}Object.defineProperty(o,"__esModule",{value:!0}),o.default=r;var u=t(!(function(){var e=new Error('Cannot find module "./mdIcon.vue"');throw e.code="MODULE_NOT_FOUND",e})()),d=n(u),c=t(82),i=n(c);e.exports=o.default},82:function(e,o){e.exports=".THEME_NAME.md-icon.md-primary{color:PRIMARY-COLOR}.THEME_NAME.md-icon.md-accent{color:ACCENT-COLOR}.THEME_NAME.md-icon.md-warn{color:WARN-COLOR}\n"}})}));

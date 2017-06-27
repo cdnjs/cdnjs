@@ -1,0 +1,196 @@
+/**
+ * "Yet Another Multicolumn Layout" - YAML CSS Framework
+ *
+ * default screen stylesheet - PAGE-layout type layout
+ *
+ * @copyright       © 2005-2013, Dirk Jesse
+ * @license         CC-BY 2.0 (http://creativecommons.org/licenses/by/2.0/),
+ *                  YAML-CDL (http://www.yaml.de/license.html)
+ * @link            http://www.yaml.de
+ * @package         yaml
+ * @version         4.1.2
+ */
+@media screen {
+  /* force vertical scrollbar */
+  body {
+    overflow-y: scroll;
+  }
+
+  /* Layout Module Configuration & fallback for unsupported media queries */
+  .ym-wrapper {
+    min-width: 760px;
+    max-width: 80em;
+    margin: 0 auto;
+  }
+
+  .ym-wbox {
+    padding: 10px;
+  }
+
+  /* Basic Element Styling */
+  header {
+    background: #444;
+    color: #ccc;
+    padding: 1.5em;
+  }
+  header h1 {
+    background: transparent;
+    color: #fff;
+  }
+
+  nav {
+    background: #222222;
+  }
+
+  main {
+    padding: 1.5em 0 0 0;
+  }
+
+  footer {
+    margin: 0;
+    background: #eee;
+    color: #444;
+    padding: 1.5em;
+  }
+  footer p {
+    margin: 0;
+  }
+
+  /* Column-Set Configuration: 1-3 (sidebar right) */
+  .ym-column {
+    display: block;
+    overflow: hidden;
+    padding-right: 340px;
+    width: auto;
+  }
+
+  /* content - column */
+  .ym-col1 {
+    float: left;
+    width: 100%;
+  }
+
+  /* sidebar - column */
+  .ym-col3 {
+    position: relative;
+    float: left;
+    width: 340px;
+    margin-left: 0;
+    margin-right: -340px;
+  }
+
+  .ym-col1 .ym-cbox {
+    padding: 0 0.75em 0 1.5em;
+  }
+
+  .ym-col3 .ym-cbox {
+    padding: 0 20px 0 12px;
+  }
+
+  .ym-gbox {
+    padding: 0 1.5em 0 0;
+  }
+
+  /* skip links styling */
+  .ym-skiplinks a.ym-skip:focus,
+  .ym-skiplinks a.ym-skip:active {
+    color: #fff;
+    background: #333;
+    border-bottom: 1px #000 solid;
+    padding: 10px 0;
+    text-align: center;
+    text-decoration: none;
+  }
+}
+/* reset fallback values in modern browsers */
+@media screen and (min-width: 0px) {
+  .ym-wrapper {
+    min-width: 0px;
+  }
+}
+@media screen and (max-width: 760px) {
+  /* Linearisation for Grid- and Column-Module, based on CSS class .linearize-level-1 */
+  .linearize-level-1, .linearize-level-1 > [class*="ym-c"], .linearize-level-1 > [class*="ym-g"] {
+    /* linearization for grids and columns module */
+    display: block;
+    float: none;
+    padding: 0;
+    margin: 0;
+    width: auto !important;
+  }
+  .linearize-level-1 > [class*="ym-c"] > [class*="ym-cbox"], .linearize-level-1 > [class*="ym-g"] > [class*="ym-gbox"] {
+    /* reset defined gutter values */
+    margin: 0;
+    padding: 0;
+    /* optional for containing floats */
+    overflow: hidden;
+  }
+
+  nav .ym-hlist ul {
+    padding-right: 10px;
+  }
+
+  .ym-searchform {
+    display: block;
+    float: none;
+    width: auto;
+    padding-right: 10px;
+    text-align: right;
+  }
+
+  .ym-searchform input[type="search"] {
+    width: 14%;
+  }
+}
+@media screen and (max-width: 480px) {
+  .ym-wbox {
+    padding: 0;
+  }
+
+  header {
+    padding: 0.75em 10px;
+  }
+  header h1 {
+    font-size: 1.5em;
+    line-height: 1em;
+    margin: 0;
+  }
+
+  footer,
+  main,
+  .ym-searchform,
+  nav .ym-hlist ul {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  /* Linearisation for Grid- and Column-Module, based on CSS class .linearize-level-2 */
+  .linearize-level-2, .linearize-level-2 > [class*="ym-c"], .linearize-level-2 > [class*="ym-g"] {
+    /* linearization for grids and columns module */
+    display: block;
+    float: none;
+    padding: 0;
+    margin: 0;
+    width: auto !important;
+  }
+  .linearize-level-2 > [class*="ym-c"] > [class*="ym-cbox"], .linearize-level-2 > [class*="ym-g"] > [class*="ym-gbox"] {
+    /* reset defined gutter values */
+    margin: 0;
+    padding: 0;
+    /* optional for containing floats */
+    overflow: hidden;
+  }
+
+  .ym-searchform,
+  nav .ym-hlist ul,
+  nav .ym-hlist li {
+    display: block;
+    float: none;
+    width: auto;
+    text-align: left;
+  }
+
+  .ym-searchform input[type="search"] {
+    width: 75%;
+  }
+}

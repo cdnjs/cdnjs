@@ -1,0 +1,140 @@
+/**
+ * 1. Make the overlay full width and height.
+ * 2. Center direct children horizontally and vertically.
+ * 3. Hide the overlay by default and show it when it is targeted or active.
+ */
+.perfundo__overlay {
+  position: fixed;
+  /* [1] */
+  top: 0;
+  /* [1] */
+  right: 0;
+  /* [1] */
+  bottom: 0;
+  /* [1] */
+  left: 0;
+  /* [1] */
+  z-index: 999;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  /* [2] */
+  visibility: hidden;
+  /* [3] */
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  /* [2] */
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  /* [2] */
+  background-color: rgba(0, 0, 0, 0.9); }
+  .perfundo__overlay:target, .perfundo__overlay.is-active {
+    visibility: visible;
+    /* [3] */ }
+
+/**
+ * 1. Add a scrollbar if the content doesn't fit vertically.
+ * 2. Inherit the animation name (e.g. animate.css class) from the parent.
+ */
+.perfundo__content {
+  overflow: auto;
+  /* [1] */
+  max-height: 100%;
+  /* [1] */ }
+  :target > .perfundo__content,
+  .is-active > .perfundo__content {
+    -webkit-animation: 0.4s ease-out 0.2s both;
+            animation: 0.4s ease-out 0.2s both;
+    -webkit-animation-name: inherit;
+            animation-name: inherit;
+    /* [2] */ }
+
+.perfundo__html {
+  padding: 2em;
+  max-width: 42em;
+  background-color: #fff; }
+
+/**
+ * 1. Prevent the full sized image from loading initially.
+ * 2. Trigger loading of the full sized image when the lightbox is opened.
+ */
+.perfundo__figure {
+  display: none;
+  /* [1] */
+  margin: 1.5em; }
+  :target > .perfundo__figure,
+  .is-active > .perfundo__figure {
+    display: block;
+    /* [2] */ }
+  .perfundo__figure img {
+    display: block;
+    height: 0; }
+
+.perfundo__figcaption {
+  color: #fff; }
+
+/**
+ * 1. Make the image container responsive.
+ * 2. Scale the background image to match the size of the image container.
+ */
+.perfundo__image {
+  max-width: 100%;
+  /* [1] */
+  background-size: 100%;
+  /* [2] */ }
+
+/**
+ * 1. Make the icons as big as the control element.
+ * 2. Hide the control text visually, but have it available for screen readers.
+ * 3. Make the control links readable depending on the overlay color.
+ */
+.perfundo__control {
+  position: absolute; }
+  .perfundo__control, .perfundo__control:visited {
+    color: #fff;
+    /* [3] */ }
+
+.perfundo__close {
+  top: 1em;
+  right: 1em; }
+
+/**
+ * 1. Vertically center the prev / next controls.
+ */
+.perfundo__prev,
+.perfundo__next {
+  top: 50%;
+  /* [1] */
+  margin-top: -1.5em;
+  /* [1] */
+  opacity: 0.2;
+  -webkit-transition: opacity 0.2s;
+  transition: opacity 0.2s; }
+  .perfundo__prev:hover, .perfundo__prev:focus,
+  .perfundo__next:hover,
+  .perfundo__next:focus {
+    opacity: 1; }
+
+/**
+ * 1. Rotate the control element so it is possible to use the same icon for
+ *    prev and next.
+ */
+.perfundo__prev {
+  left: 2em; }
+
+.perfundo__next {
+  right: 2em; }
+
+/**
+ * 1. Move the untarget anchor to the top of the screen to prevent "jumping".
+ */
+.perfundo__untarget {
+  position: fixed;
+  /* [1] */
+  top: 0;
+  /* [1] */ }

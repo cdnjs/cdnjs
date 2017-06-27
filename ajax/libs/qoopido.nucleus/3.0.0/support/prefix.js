@@ -1,0 +1,2 @@
+!function(t){"use strict";function n(n,e){var i=t.createElement("div").style,r=/^(Moz|WebKit|Khtml|ms|O|Icab)(?=[A-Z])/,c=null;return function(){return null===c&&(c=!1,n(i,function(t){if(r.test(t))return c=t.match(r)[0],!1}),!c&&"WebkitOpacity"in i&&(c="WebKit"),!c&&"KhtmlOpacity"in i&&(c="Khtml"),c&&(c=[c.toLowerCase(),e(c.toLowerCase()),c])),c}}provide(["/demand/function/iterate","../function/string/ucfirst"],n)}(document);
+//# sourceMappingURL=prefix.js.map

@@ -1,0 +1,10 @@
+/*!
+  SerializeJSON jQuery plugin.
+  https://github.com/marioizquierdo/jquery.serializeJSON
+  version 1.2.3 (Apr, 2014)
+
+  Copyright (c) 2012 Mario Izquierdo
+  Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php)
+  and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
+*/
+(function(e){"use strict";e.fn.serializeJSON=function(){var t,n,r;t={};n=this.serializeArray();e.each(n,function(n,i){r=e.serializeJSON.splitInputNameIntoKeysArray(i.name);e.serializeJSON.deepSet(t,r,i.value)});return t};e.serializeJSON={isObject:function(e){return e===Object(e)},isUndefined:function(e){return e===void 0},isValidArrayIndex:function(e){return e===""||/^[0-9]+$/.test(String(e))},splitInputNameIntoKeysArray:function(t){var n,r;if(e.serializeJSON.isUndefined(t)){throw new Error("ArgumentError: param 'name' expected to be a string, found undefined")}n=e.map(t.split("["),function(e){r=e[e.length-1];return r==="]"?e.substring(0,e.length-1):e});if(n[0]===""){n.shift()}return n},deepSet:function(t,n,r){var i,s,o,u,a;if(e.serializeJSON.isUndefined(t)){throw new Error("ArgumentError: param 'o' expected to be an object or array, found undefined")}if(!n||n.length===0){throw new Error("ArgumentError: param 'keys' expected to be an array with least one element")}i=n[0];if(n.length===1){if(i===""){t.push(r)}else{t[i]=r}}else{s=n[1];if(i===""){u=t.length-1;a=t[t.length-1];if(e.serializeJSON.isObject(a)&&e.serializeJSON.isUndefined(a[s])){i=u}else{i=u+1}}if(e.serializeJSON.isUndefined(t[i])){if(e.serializeJSON.isValidArrayIndex(s)){t[i]=[]}else{t[i]={}}}o=n.slice(1);e.serializeJSON.deepSet(t[i],o,r)}}}})(window.jQuery||window.Zepto||window.$)

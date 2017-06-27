@@ -1,0 +1,1 @@
+(function(t){window.qoopido.register("support/element/canvas",t,["../../support","../../pool/dom"])})(function(t,e){"use strict";return t.support.addTest("/element/canvas",function(t){var r=e.pool.dom.obtain("canvas");r.getContext&&r.getContext("2d")?t.resolve():t.reject(),r.dispose()})});

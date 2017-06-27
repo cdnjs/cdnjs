@@ -1,0 +1,1 @@
+Ext.define("Ext.rtl.layout.container.Column",{override:"Ext.layout.container.Column",getRenderData:function(){var a=this.callParent();if(this.owner.getHierarchyState().rtl){a.innerCtCls=(a.innerCtCls||"")+" "+Ext.baseCSSPrefix+"rtl"}return a}});

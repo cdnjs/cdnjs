@@ -1,0 +1,7 @@
+/*!
+* Qoopido.js library v3.2.1, 2014-0-10
+* https://github.com/dlueth/qoopido.js
+* (c) 2014 Dirk Lueth
+* Dual licensed under MIT and GPL
+*/
+!function(t){window.qoopido.register("jquery/extension/selector",t,["../../base","jquery"])}(function(t,e,r,n,o,i,f){"use strict";var s=t.jquery||o.jQuery,u=s(o),h=s(i);return s.extend(s.expr[":"],{loaded:function(t){return s(t).data("loaded")},scrollable:function(t){return"auto"===s(t).css("overflow")},width:function(t,e,r){return r[3]&&/^(<|>)\d+$/.test(r[3])?">"===r[3].substr(0,1)?s(t).width()>r[3].substr(1):s(t).width()<r[3].substr(1):!1},height:function(t,e,r){return r[3]&&/^(<|>)\d+$/.test(r[3])?">"===r[3].substr(0,1)?s(t).height()>r[3].substr(1):s(t).height()<r[3].substr(1):!1},leftOf:function(t,e,r){return r[3]?(t=s(t),r=s(r[3]),t.offset().left+t.width()<r.offset().left):!1},rightOf:function(t,e,r){return r[3]?(t=s(t),r=s(r[3]),t.offset().left>r.offset().left+r.width()):!1},external:function(t){return t.href?t.hostname&&t.hostname!==o.location.hostname:!1},inView:function(t){t=s(t);var e=u,r=h,n=t.offset(),o={top:r.scrollTop(),height:r.scrollLeft()};return!(n.top>e.height()+o.top||n.top+t.height()<o.top||n.left>e.width()+o.left||n.left+t.width()<o.left)},largerThan:function(t,e,r){return r[3]?(t=s(t),r=s(r[3]),t.width()*t.height()>r.width()*r.height()):!1},isBold:function(t){return"700"===s(t).css("fontWeight")},color:function(t,e,r){return r[3]?s(t).css("color")===r[3]:!1},hasId:function(t){return t=s(t),t.attr("id")!==f&&""!==t.attr("id")}}),s});

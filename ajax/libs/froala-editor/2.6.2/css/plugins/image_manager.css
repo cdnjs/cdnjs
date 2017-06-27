@@ -1,0 +1,265 @@
+/*!
+ * froala_editor v2.6.2 (https://www.froala.com/wysiwyg-editor)
+ * License https://froala.com/wysiwyg-editor/terms/
+ * Copyright 2014-2017 Froala Labs
+ */
+
+.clearfix::after {
+  clear: both;
+  display: block;
+  content: "";
+  height: 0;
+}
+.hide-by-clipping {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+.fr-modal-head .fr-modal-head-line::after {
+  clear: both;
+  display: block;
+  content: "";
+  height: 0;
+}
+.fr-modal-head .fr-modal-head-line i.fr-modal-more {
+  float: left;
+  opacity: 1;
+  -webkit-transition: padding 0.2s ease 0s, width 0.2s ease 0s, opacity 0.2s ease 0s;
+  -moz-transition: padding 0.2s ease 0s, width 0.2s ease 0s, opacity 0.2s ease 0s;
+  -ms-transition: padding 0.2s ease 0s, width 0.2s ease 0s, opacity 0.2s ease 0s;
+  -o-transition: padding 0.2s ease 0s, width 0.2s ease 0s, opacity 0.2s ease 0s;
+}
+.fr-modal-head .fr-modal-head-line i.fr-modal-more.fr-not-available {
+  opacity: 0;
+  width: 0;
+  padding: 12px 0;
+}
+.fr-modal-head .fr-modal-tags {
+  display: none;
+  text-align: left;
+}
+.fr-modal-head .fr-modal-tags a {
+  display: inline-block;
+  opacity: 0;
+  padding: 6px 8px;
+  margin: 8px 0 8px 8px;
+  text-decoration: none;
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  color: #1e88e5;
+  -webkit-transition: opacity 0.2s ease 0s, background 0.2s ease 0s;
+  -moz-transition: opacity 0.2s ease 0s, background 0.2s ease 0s;
+  -ms-transition: opacity 0.2s ease 0s, background 0.2s ease 0s;
+  -o-transition: opacity 0.2s ease 0s, background 0.2s ease 0s;
+  cursor: pointer;
+}
+.fr-modal-head .fr-modal-tags a:focus {
+  outline: none;
+}
+.fr-modal-head .fr-modal-tags a.fr-selected-tag {
+  background: #d6d6d6;
+}
+div.fr-modal-body .fr-preloader {
+  display: block;
+  margin: 50px auto;
+}
+div.fr-modal-body div.fr-image-list {
+  text-align: center;
+  margin: 0 10px;
+  padding: 0;
+}
+div.fr-modal-body div.fr-image-list::after {
+  clear: both;
+  display: block;
+  content: "";
+  height: 0;
+}
+div.fr-modal-body div.fr-image-list .fr-list-column {
+  float: left;
+  width: calc((100% - 10px) / 2);
+}
+@media (min-width: 768px) and (max-width: 1199px) {
+  div.fr-modal-body div.fr-image-list .fr-list-column {
+    width: calc((100% - 20px) / 3);
+  }
+}
+@media (min-width: 1200px) {
+  div.fr-modal-body div.fr-image-list .fr-list-column {
+    width: calc((100% - 30px) / 4);
+  }
+}
+div.fr-modal-body div.fr-image-list .fr-list-column + .fr-list-column {
+  margin-left: 10px;
+}
+div.fr-modal-body div.fr-image-list div.fr-image-container {
+  position: relative;
+  width: 100%;
+  display: block;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 1px 1px rgba(0, 0, 0, 0.16);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 1px 1px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 1px 1px rgba(0, 0, 0, 0.16);
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  overflow: hidden;
+}
+div.fr-modal-body div.fr-image-list div.fr-image-container:first-child {
+  margin-top: 10px;
+}
+div.fr-modal-body div.fr-image-list div.fr-image-container + div {
+  margin-top: 10px;
+}
+div.fr-modal-body div.fr-image-list div.fr-image-container.fr-image-deleting::after {
+  position: absolute;
+  -webkit-opacity: 0.5;
+  -moz-opacity: 0.5;
+  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  -webkit-transition: opacity 0.2s ease 0s;
+  -moz-transition: opacity 0.2s ease 0s;
+  -ms-transition: opacity 0.2s ease 0s;
+  -o-transition: opacity 0.2s ease 0s;
+  background: #000000;
+  content: "";
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+}
+div.fr-modal-body div.fr-image-list div.fr-image-container.fr-image-deleting::before {
+  content: attr(data-deleting);
+  color: #ffffff;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  position: absolute;
+  z-index: 3;
+  font-size: 15px;
+  height: 20px;
+}
+div.fr-modal-body div.fr-image-list div.fr-image-container.fr-empty {
+  height: 95px;
+  background: #cccccc;
+  z-index: 1;
+}
+div.fr-modal-body div.fr-image-list div.fr-image-container.fr-empty::after {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  content: attr(data-loading);
+  display: inline-block;
+  height: 20px;
+}
+div.fr-modal-body div.fr-image-list div.fr-image-container img {
+  width: 100%;
+  vertical-align: middle;
+  position: relative;
+  z-index: 2;
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  opacity: 1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  -webkit-transition: opacity 0.2s ease 0s, filter 0.2s ease 0s;
+  -moz-transition: opacity 0.2s ease 0s, filter 0.2s ease 0s;
+  -ms-transition: opacity 0.2s ease 0s, filter 0.2s ease 0s;
+  -o-transition: opacity 0.2s ease 0s, filter 0.2s ease 0s;
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+}
+div.fr-modal-body div.fr-image-list div.fr-image-container.fr-mobile-selected img {
+  -webkit-opacity: 0.75;
+  -moz-opacity: 0.75;
+  opacity: 0.75;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+}
+div.fr-modal-body div.fr-image-list div.fr-image-container.fr-mobile-selected .fr-delete-img,
+div.fr-modal-body div.fr-image-list div.fr-image-container.fr-mobile-selected .fr-insert-img {
+  display: inline-block;
+}
+div.fr-modal-body div.fr-image-list div.fr-image-container .fr-delete-img,
+div.fr-modal-body div.fr-image-list div.fr-image-container .fr-insert-img {
+  display: none;
+  top: 50%;
+  border-radius: 100%;
+  -moz-border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  -webkit-transition: background 0.2s ease 0s, color 0.2s ease 0s;
+  -moz-transition: background 0.2s ease 0s, color 0.2s ease 0s;
+  -ms-transition: background 0.2s ease 0s, color 0.2s ease 0s;
+  -o-transition: background 0.2s ease 0s, color 0.2s ease 0s;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 1px 1px rgba(0, 0, 0, 0.16);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 1px 1px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 1px 1px rgba(0, 0, 0, 0.16);
+  position: absolute;
+  cursor: pointer;
+  margin: 0;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  text-decoration: none;
+  z-index: 3;
+}
+div.fr-modal-body div.fr-image-list div.fr-image-container .fr-delete-img {
+  background: #b8312f;
+  color: #ffffff;
+  left: 50%;
+  -webkit-transform: translateY(-50%) translateX(25%);
+  -moz-transform: translateY(-50%) translateX(25%);
+  -ms-transform: translateY(-50%) translateX(25%);
+  -o-transform: translateY(-50%) translateX(25%);
+}
+div.fr-modal-body div.fr-image-list div.fr-image-container .fr-insert-img {
+  background: #ffffff;
+  color: #1e88e5;
+  left: 50%;
+  -webkit-transform: translateY(-50%) translateX(-125%);
+  -moz-transform: translateY(-50%) translateX(-125%);
+  -ms-transform: translateY(-50%) translateX(-125%);
+  -o-transform: translateY(-50%) translateX(-125%);
+}
+.fr-desktop .fr-modal-wrapper .fr-modal-head .fr-modal-tags a:hover {
+  background: #ebebeb;
+}
+.fr-desktop .fr-modal-wrapper .fr-modal-head .fr-modal-tags a.fr-selected-tag {
+  background: #d6d6d6;
+}
+.fr-desktop .fr-modal-wrapper div.fr-modal-body div.fr-image-list div.fr-image-container:hover img {
+  -webkit-opacity: 0.75;
+  -moz-opacity: 0.75;
+  opacity: 0.75;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+}
+.fr-desktop .fr-modal-wrapper div.fr-modal-body div.fr-image-list div.fr-image-container:hover .fr-delete-img,
+.fr-desktop .fr-modal-wrapper div.fr-modal-body div.fr-image-list div.fr-image-container:hover .fr-insert-img {
+  display: inline-block;
+}
+.fr-desktop .fr-modal-wrapper div.fr-modal-body div.fr-image-list div.fr-image-container .fr-delete-img:hover {
+  background: #bf4644;
+  color: #ffffff;
+}
+.fr-desktop .fr-modal-wrapper div.fr-modal-body div.fr-image-list div.fr-image-container .fr-insert-img:hover {
+  background: #ebebeb;
+}

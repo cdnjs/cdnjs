@@ -1,0 +1,1 @@
+(function(t){var e=[];Object.defineProperty||e.push("./queryselectorall"),window.qoopido.register("polyfill/document/queryselector",t,e)})(function(t,e,n,r,i,o){"use strict";return o.querySelector||(o.querySelector=function(t){var e=o.querySelectorAll(t);return e.length?e[0]:null}),!0});

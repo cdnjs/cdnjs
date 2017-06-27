@@ -1,0 +1,87 @@
+.backdrop-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 26;
+  background: transparent;
+  background-color: rgba(0,0,0,0.35);
+}
+.backdrop-dialog.fadeout {
+  opacity: 0;
+  -webkit-transition: opacity 0.45s linear;
+  transition: opacity 0.45s linear;
+}
+.dialog {
+  width: 280px;
+  height: auto;
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  z-index: 28;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px #8a8a8a;
+  background-color: #fff;
+  -webkit-transform: translate3d(0, 0, 0) scale(1.185);
+          transform: translate3d(0, 0, 0) scale(1.185);
+  -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+  transition: opacity 0.3s, -webkit-transform 0.3s;
+  transition: transform 0.3s, opacity 0.3s;
+  transition: transform 0.3s, opacity 0.3s, -webkit-transform 0.3s;
+}
+.dialog.active {
+  opacity: 1;
+  -webkit-transform: translate3d(0, 0, 0) scale(1);
+          transform: translate3d(0, 0, 0) scale(1);
+}
+.dialog.close {
+  -webkit-animation: closeDialog 0.3s ease-out;
+          animation: closeDialog 0.3s ease-out;
+}
+.dialog .content {
+  position: relative;
+  max-height: 350px;
+}
+.dialog .content h1,
+.dialog .content h2,
+.dialog .content h3 {
+  margin-bottom: 22px;
+}
+.dialog .content .circle-progress {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+}
+.dialog .padded-full {
+  margin-bottom: 0;
+}
+@-webkit-keyframes closeDialog {
+  0% {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0) scale(1);
+            transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 0, 0) scale(0.815);
+            transform: translate3d(0, 0, 0) scale(0.815);
+  }
+}
+@keyframes closeDialog {
+  0% {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0) scale(1);
+            transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 0, 0) scale(0.815);
+            transform: translate3d(0, 0, 0) scale(0.815);
+  }
+}

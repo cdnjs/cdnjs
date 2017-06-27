@@ -1,0 +1,2 @@
+!function(n,r){"use strict";function t(t,e,i){var u=i(),o=n.createElement("div").style,f={};return function(n){n=t(n);var i=f[n]||null;if(null===i){i=!1;var c,l=0,a=e(n),s=(n+" "+a+" "+u.join(a+" ")+a).split(" "),p="";for(l;(c=s[l])!==r;l++)if(o[c]!==r){i=c,l>0&&(p="-");break}f[n]=i=!!i&&[p+i.replace(/([A-Z])/g,"-$1").toLowerCase(),i]}return i}}provide(["../../function/property/unify","../../function/string/ucfirst","../prefix"],t)}(document);
+//# sourceMappingURL=property.js.map

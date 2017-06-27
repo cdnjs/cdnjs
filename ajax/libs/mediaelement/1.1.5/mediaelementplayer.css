@@ -1,0 +1,381 @@
+/*
+<div class="mep-container">
+	<div class="mep-mediaelement">
+	</div>
+	<div class="mep-poster" />
+		<img />
+	</div>
+	<div class="mep-overlay"><div class="mep-overlay-message"></div>
+	</div>
+	<div class="mep-controls">
+		<div class="mep-playpause-button mep-play"><span></span></div>
+		<div class="mep-time-rail">
+			<span class="mep-time-total">
+				<span class="mep-time-loaded"></span>
+				<span class="mep-time-current"></span>
+				<span class="mep-time-handle"></span>
+			</span>
+		</div>
+		<div class="mep-time">
+			<span class="mep-currenttime"></span>
+			<span>|</span>
+			<span class="mep-duration"></span>
+		</div>
+		<div class="mep-volume-button mep-mute">
+			<span></span>
+			<div class="mep-volume-slider">
+				<div class="mep-volume-rail"><div class="mep-volume-handle"></div></div>
+			</div>
+		</div>
+		<div class="mep-fullscreen-button"><span></span></div>
+	</div>
+	<div class="mep-clear"></div>
+</div>
+*/
+
+.mep-container {
+	position: relative;
+	background: #000;
+	font-family: Helvetica, Arial;
+}
+
+.me-cannotplay {	
+}
+.me-cannotplay a {
+	color: #fff;
+	font-weight: bold;
+}
+.me-cannotplay span {
+	padding: 15px;
+	display: block;
+}
+.mep-container-fullscreen { 
+	position: fixed; 
+	left: 0; 
+	top: 0; 
+	right: 0; 
+	bottom: 0; 
+	overflow: hidden; 
+}
+.mep-container-fullscreen .mep-mediaelement,
+.mep-container-fullscreen video { 	
+	width: 100%; 
+	height: 100%; 
+}
+.mep-mediaelement {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.mep-poster {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.mep-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	cursor: pointer;
+}
+.mep-overlay-button {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 100px;
+	height: 100px;
+	margin: -50px 0 0 -50px;
+	background: url(bigplay.png) top left no-repeat;
+}
+.mep-overlay:hover .mep-overlay-button{
+	background-position: 0 -100px ;
+}
+.mep-captions-layer {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	padding: 0 0 38px 0;
+	text-align:center;
+	
+	/*font-weight: bold;*/
+	line-height: 22px;	
+	font-size: 12px;
+	color: #fff;
+}
+.mep-captions-layer  a {
+	color: #fff;
+	text-decoration: underline;
+}
+.mep-captions-layer[lang=ar] {
+	font-size: 20px;
+	font-weight: normal;
+} 
+
+.mep-captions-text {	
+	padding: 3px 5px;
+	
+	background: url(background.png);	
+	background: rgba(0, 0, 0, 0.8);
+
+}
+
+.mep-container .mep-controls {
+	position: absolute;
+	background: none;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	bottom: 0;
+	left: 0;
+	background: url(background.png);	
+	background: rgba(0, 0, 0, 0.7);
+	height: 30px;
+	width: 100%;	
+}
+
+.mep-container .mep-controls  div {
+	list-style-type: none;
+	background-image: none;
+	display: inline-block;
+	float: left;
+	margin: 5px 5px 5px 0;
+	padding: 0;
+	width: 20px;
+	height: 20px;	
+	font-size: 11px;
+	line-height: 11px;	
+	/*
+	background: #999;	
+	background: rgba(100, 100, 100, 0.8);
+	*/
+	
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;		
+	
+	font-family: Helvetica, Arial;
+}
+
+.mep-container .mep-controls div:first-child {
+	margin-left: 5px;	
+}
+
+.mep-container .mep-controls .mep-time {
+	color: #fff;
+	display: block;	
+	width: 80px;
+	height: 17px;
+	padding: 3px 0 0 0 ;
+	overflow: hidden;	
+	text-align: center;
+}
+.mep-container .mep-controls .mep-time span {
+	font-size: 11px;
+	color: #fff;	
+	line-height: 1em;
+	display: inline-block;	
+	
+}
+
+.mep-controls .mep-playpause-button, 
+/*.mep-controls .mep-volume-button, */
+.mep-controls .mep-fullscreen-button {
+	
+}
+.mep-controls .mep-playpause-button span, 
+.mep-controls .mep-volume-button span, 
+.mep-controls .mep-fullscreen-button span,
+.mep-controls .mep-captions-button span {
+	cursor: pointer;
+	display: block;
+	font-size: 0px;
+	line-height: 0;
+	text-decoration: none;
+	margin: 2px;
+	height: 16px;
+	width: 16px;
+	background: transparent url(controls.png) 0 0 no-repeat;	
+}
+
+.mep-controls .mep-play span {
+	background-position:0 0;
+
+}
+.mep-controls .mep-pause span {
+	background-position:0 -16px;
+}
+.mep-controls .mep-time-rail {
+	width: 200px;
+}
+.mep-controls .mep-time-rail span {
+	display: block;
+	position: absolute;
+	width: 180px;
+	height: 10px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;	
+	cursor: pointer;	
+}
+.mep-controls .mep-time-rail .mep-time-total {
+	margin: 5px;
+	background: #333;
+	background: rgba(50,50,50,50.8);	
+}
+.mep-controls .mep-time-rail .mep-time-loaded {
+	background: #3caac8;
+	background: rgba(60,170,200,0.8);
+}
+.mep-controls .mep-time-rail .mep-time-current {
+	background: #fff;
+	background: rgba(255,255,255,0.8);
+}
+
+.mep-controls .mep-time-rail .mep-time-handle {
+	display: block;
+	position: absolute;
+	margin: 0;
+	width: 10px;
+	background: #fff;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;	
+	cursor: pointer;	
+	display: none;
+}
+
+
+.mep-controls .mep-fullscreen-button span {
+	background-position:-32px 0;
+}
+
+.mep-controls .mep-unfullscreen span {
+	background-position:-32px -16px;
+}
+
+.mep-controls .mep-volume {
+
+}
+
+.mep-controls .mep-captions-button {
+	position: relative;
+}
+
+.mep-controls .mep-captions-button span {
+	background-position:-48px 0;
+}
+.mep-controls .mep-captions-button .mep-captions-selector {
+	visibility: hidden;
+	position: absolute;
+	bottom: 15px;
+	left: -80px;
+	width: 130px;
+	min-height: 50px;
+	background: url(background.png);
+	background: rgba(0,0,0,0.8);
+	border: solid 1px #fff;
+	padding: 10px;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;	
+	border-radius: 0;	
+}
+.mep-controls .mep-captions-button:hover  .mep-captions-selector {
+	visibility: visible;
+}
+
+.mep-controls .mep-captions-button .mep-captions-selector ul {
+	margin: 0;
+	padding: 0;
+	display: block;
+	list-style-type: none !important;
+	overflow: hidden;
+}
+.mep-controls .mep-captions-button .mep-captions-selector ul li{
+	margin: 0 0 6px 0;
+	padding: 0;
+	list-style-type: none !important;
+	display:block;
+	color: #fff;
+	overflow: hidden;
+}
+.mep-controls .mep-captions-button .mep-captions-selector ul li input{
+	clear: both;
+	float: left;
+
+}
+.mep-controls .mep-captions-button .mep-captions-selector ul li label{
+	width: 100px;
+	float: left;
+	padding: 4px 0 0 0;
+	line-height: 15px;	
+}
+
+.mep-controls .mep-captions-button .mep-captions-translations {
+	font-size: 10px;
+	margin: 0 0 5px 0;
+}
+
+.mep-controls .mep-mute span {
+	background-position:-16px -16px;
+}
+
+.mep-controls .mep-unmute span {
+	background-position:-16px 0;
+}
+
+.mep-controls .mep-volume-button {
+	position: relative;
+}
+
+.mep-controls .mep-volume-button .mep-volume-slider {
+	display: none;
+	height: 115px;
+	width: 20px;
+	background: url(background.png);	
+	background: rgba(0, 0, 0, 0.7);
+	-webkit-border-radius: 0;	
+	-moz-border-radius: 0;	
+	border-radius: 0;	
+	top: -115px;	
+	left: 0;
+	z-index: 1;
+	position: absolute;
+	margin: 0;
+}
+.mep-controls .mep-volume-button:hover {
+	-webkit-border-radius: 0 0 4px 4px ;	
+	-moz-border-radius: 0 0 4px 4px ;	
+	border-radius: 0 0 4px 4px ;	
+}
+.mep-controls .mep-volume-button:hover .mep-volume-slider {
+	display: block;
+}
+
+.mep-controls .mep-volume-button .mep-volume-slider .mep-volume-rail {
+	position: absolute;
+	left: 9px;
+	top: 8px;	
+	width: 2px;
+	height: 100px;
+	background: #ddd;	
+	background: rgba(255, 255, 255, 0.8);
+	margin: 0;
+}	
+
+.mep-controls .mep-volume-button .mep-volume-slider .mep-volume-rail .mep-volume-handle {
+	position: absolute;
+	left: -7px;
+	top: -3px;
+	width: 16px;
+	height: 6px;
+	background: #ddd;	
+	background: rgba(255, 255, 255, 0.9);
+	cursor: N-resize;
+	-webkit-border-radius: 1px;	
+	-moz-border-radius: 1px;	
+	border-radius: 1px;	
+	margin: 0;
+}
+.mep-clear {
+	clear: both;
+}

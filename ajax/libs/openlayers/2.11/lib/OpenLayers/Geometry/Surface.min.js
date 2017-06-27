@@ -1,0 +1,1 @@
+OpenLayers.Geometry.Surface=OpenLayers.Class(OpenLayers.Geometry,{initialize:function(){OpenLayers.Geometry.prototype.initialize.apply(this,arguments)},CLASS_NAME:"OpenLayers.Geometry.Surface"});

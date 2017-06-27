@@ -1,0 +1,1 @@
+Ext.define("Ext.chart.series.Column",{alternateClassName:["Ext.chart.ColumnSeries","Ext.chart.ColumnChart","Ext.chart.StackedColumnChart"],extend:"Ext.chart.series.Bar",type:"column",alias:"series.column",column:true,boundColumn:false,xPadding:10,yPadding:0});

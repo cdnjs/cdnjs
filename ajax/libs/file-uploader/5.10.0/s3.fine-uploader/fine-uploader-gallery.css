@@ -1,0 +1,487 @@
+/*!
+* Fine Uploader
+*
+* Copyright 2013-present, Widen Enterprises, Inc.
+*
+* Version: 5.10.0
+*
+* Homepage: http://fineuploader.com
+*
+* Repository: git://github.com/FineUploader/fine-uploader.git
+*
+* Licensed only under the MIT license (http://fineuploader.com/licensing).
+*/ 
+
+
+/* ---------------------------------------
+/* Fine Uploader Gallery View Styles
+/* ---------------------------------------
+
+
+/* Buttons
+------------------------------------------ */
+.qq-gallery .qq-btn
+{
+    float: right;
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* Upload Button
+------------------------------------------ */
+.qq-gallery .qq-upload-button {
+    display: inline;
+    width: 105px;
+    padding: 7px 10px;
+    float: left;
+    text-align: center;
+    background: #00ABC7;
+    color: #FFFFFF;
+    border-radius: 2px;
+    border: 1px solid #37B7CC;
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.37) inset,
+    1px 0 1px rgba(255, 255, 255, 0.07) inset,
+    0 1px 0 rgba(0, 0, 0, 0.36),
+    0 -2px 12px rgba(0, 0, 0, 0.08) inset
+}
+.qq-gallery .qq-upload-button-hover {
+    background: #33B6CC;
+}
+.qq-gallery .qq-upload-button-focus {
+    outline: 1px dotted #000000;
+}
+
+
+/* Drop Zone
+------------------------------------------ */
+.qq-gallery.qq-uploader {
+    position: relative;
+    min-height: 200px;
+    max-height: 490px;
+    overflow-y: hidden;
+    width: inherit;
+    border-radius: 6px;
+    border: 1px dashed #CCCCCC;
+    background-color: #FAFAFA;
+    padding: 20px;
+}
+.qq-gallery.qq-uploader:before {
+    content: attr(qq-drop-area-text) " ";
+    position: absolute;
+    font-size: 200%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    top: 45%;
+    opacity: 0.25;
+    filter: alpha(opacity=25);
+}
+.qq-gallery .qq-upload-drop-area, .qq-upload-extra-drop-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 30px;
+    z-index: 2;
+    background: #F9F9F9;
+    border-radius: 4px;
+    text-align: center;
+}
+.qq-gallery .qq-upload-drop-area span {
+    display: block;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    margin-top: -8px;
+    font-size: 16px;
+}
+.qq-gallery .qq-upload-extra-drop-area {
+    position: relative;
+    margin-top: 50px;
+    font-size: 16px;
+    padding-top: 30px;
+    height: 20px;
+    min-height: 40px;
+}
+.qq-gallery .qq-upload-drop-area-active {
+    background: #FDFDFD;
+    border-radius: 4px;
+}
+.qq-gallery .qq-upload-list {
+    margin: 0;
+    padding: 10px 0 0;
+    list-style: none;
+    max-height: 450px;
+    overflow-y: auto;
+    clear: both;
+    box-shadow: none;
+}
+
+
+/* Uploaded Elements
+------------------------------------------ */
+.qq-gallery .qq-upload-list li {
+    display: inline-block;
+    position: relative;
+    max-width: 120px;
+    margin: 0 25px 25px 0;
+    padding: 0;
+    line-height: 16px;
+    font-size: 13px;
+    color: #424242;
+    background-color: #FFFFFF;
+    border-radius: 2px;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.22);
+    vertical-align: top;
+
+    /* to ensure consistent size of tiles - may need to change if qq-max-size attr on preview img changes */
+    height: 186px;
+}
+
+.qq-gallery .qq-upload-spinner,
+.qq-gallery .qq-upload-size,
+.qq-gallery .qq-upload-retry,
+.qq-gallery .qq-upload-failed-text,
+.qq-gallery .qq-upload-delete,
+.qq-gallery .qq-upload-pause,
+.qq-gallery .qq-upload-continue {
+    display: inline;
+}
+.qq-gallery .qq-upload-retry:hover,
+.qq-gallery .qq-upload-delete:hover,
+.qq-gallery .qq-upload-pause:hover,
+.qq-gallery .qq-upload-continue:hover {
+    background-color: transparent;
+}
+.qq-gallery .qq-upload-delete,
+.qq-gallery .qq-upload-pause,
+.qq-gallery .qq-upload-continue,
+.qq-gallery .qq-upload-cancel {
+    cursor: pointer;
+}
+.qq-gallery .qq-upload-delete,
+.qq-gallery .qq-upload-pause,
+.qq-gallery .qq-upload-continue {
+    border:none;
+    background: none;
+    color: #00A0BA;
+    font-size: 12px;
+    padding: 0;
+}
+/* to ensure consistent size of tiles - only display status text before auto-retry or after failure */
+.qq-gallery .qq-upload-status-text {
+    color: #333333;
+    font-size: 12px;
+    padding-left: 3px;
+    padding-top: 2px;
+    width: inherit;
+    display: none;
+    width: 108px;
+}
+.qq-gallery .qq-upload-fail .qq-upload-status-text {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow-x: hidden;
+    display: block;
+}
+.qq-gallery .qq-upload-retrying .qq-upload-status-text {
+    display: inline-block;
+}
+.qq-gallery .qq-upload-retrying .qq-progress-bar-container {
+    display: none;
+}
+
+.qq-gallery .qq-upload-cancel {
+    background-color: #525252;
+    color: #F7F7F7;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 12px;
+    border: none;
+    height: 22px;
+    width: 22px;
+    padding: 4px;
+    position: absolute;
+    right: -5px;
+    top: -6px;
+    margin: 0;
+    line-height: 17px;
+}
+.qq-gallery .qq-upload-cancel:hover {
+    background-color: #525252;
+}
+.qq-gallery .qq-upload-retry {
+    cursor: pointer;
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    margin-left: -31px;
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.37) inset,
+                1px 0 1px rgba(255, 255, 255, 0.07) inset,
+                0 4px 4px rgba(0, 0, 0, 0.5),
+                0 -2px 12px rgba(0, 0, 0, 0.08) inset;
+    padding: 3px 4px;
+    border: 1px solid #d2ddc7;
+    border-radius: 2px;
+    color: inherit;
+    background-color: #EBF6E0;
+    z-index: 1;
+}
+.qq-gallery .qq-upload-retry:hover {
+    background-color: #f7ffec;
+}
+
+.qq-gallery .qq-file-info {
+    padding: 10px 6px 4px;
+    margin-top: -3px;
+    border-radius: 0 0 2px 2px;
+    text-align: left;
+    overflow: hidden;
+}
+
+.qq-gallery .qq-file-info .qq-file-name {
+    position: relative;
+}
+
+.qq-gallery .qq-upload-file {
+    display: block;
+    margin-right: 0;
+    margin-bottom: 3px;
+    width: auto;
+
+    /* to ensure consistent size of tiles - constrain text to single line */
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow-x: hidden;
+}
+.qq-gallery .qq-upload-spinner {
+    display: inline-block;
+    background: url("loading.gif");
+    position: absolute;
+    left: 50%;
+    margin-left: -7px;
+    top: 53px;
+    width: 15px;
+    height: 15px;
+    vertical-align: text-bottom;
+}
+.qq-gallery .qq-drop-processing {
+    display: block;
+}
+.qq-gallery .qq-drop-processing-spinner {
+    display: inline-block;
+    background: url("processing.gif");
+    width: 24px;
+    height: 24px;
+    vertical-align: text-bottom;
+}
+.qq-gallery .qq-upload-failed-text {
+    display: none;
+    font-style: italic;
+    font-weight: bold;
+}
+.qq-gallery .qq-upload-failed-icon {
+    display:none;
+    width:15px;
+    height:15px;
+    vertical-align:text-bottom;
+}
+.qq-gallery .qq-upload-fail .qq-upload-failed-text {
+    display: inline;
+}
+.qq-gallery .qq-upload-retrying .qq-upload-failed-text {
+    display: inline;
+}
+.qq-gallery .qq-upload-list li.qq-upload-success {
+    background-color: #F2F7ED;
+}
+.qq-gallery .qq-upload-list li.qq-upload-fail {
+    background-color: #F5EDED;
+    box-shadow: 0 0 1px 0 red;
+    border: 0;
+}
+.qq-gallery .qq-progress-bar {
+    display: block;
+    background: #00abc7;
+    width: 0%;
+    height: 15px;
+    border-radius: 6px;
+    margin-bottom: 3px;
+}
+
+.qq-gallery .qq-total-progress-bar {
+    height: 25px;
+    border-radius: 9px;
+}
+
+.qq-gallery .qq-total-progress-bar-container {
+    margin-left: 9px;
+    display: inline;
+    float: right;
+    width: 500px;
+}
+
+.qq-gallery .qq-upload-size {
+    float: left;
+    font-size: 11px;
+    color: #929292;
+    margin-bottom: 3px;
+    margin-right: 0;
+    display: inline-block;
+}
+
+.qq-gallery INPUT.qq-edit-filename {
+    position: absolute;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    z-index: -1;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+}
+
+.qq-gallery .qq-upload-file.qq-editable {
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.qq-gallery .qq-edit-filename-icon.qq-editable {
+    display: inline-block;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.qq-gallery INPUT.qq-edit-filename.qq-editing {
+    position: static;
+    height: 28px;
+    width: 90px;
+    width: -moz-available;
+    padding: 0 8px;
+    margin-bottom: 3px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    font-size: 13px;
+
+    opacity: 1;
+    filter: alpha(opacity=100);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+}
+
+.qq-gallery .qq-edit-filename-icon {
+    display: none;
+    background: url("edit.gif");
+    width: 15px;
+    height: 15px;
+    vertical-align: text-bottom;
+}
+.qq-gallery .qq-delete-icon {
+    background: url("trash.gif");
+    width: 15px;
+    height: 15px;
+    vertical-align: sub;
+    display: inline-block;
+}
+.qq-gallery .qq-retry-icon {
+    background: url("retry.gif");
+    width: 15px;
+    height: 15px;
+    vertical-align: sub;
+    display: inline-block;
+    float: none;
+}
+.qq-gallery .qq-continue-icon {
+    background: url("continue.gif");
+    width: 15px;
+    height: 15px;
+    vertical-align: sub;
+    display: inline-block;
+}
+.qq-gallery .qq-pause-icon {
+    background: url("pause.gif");
+    width: 15px;
+    height: 15px;
+    vertical-align: sub;
+    display: inline-block;
+}
+
+.qq-gallery .qq-hide {
+    display: none;
+}
+
+
+/* Thumbnail
+------------------------------------------ */
+.qq-gallery .qq-in-progress .qq-thumbnail-wrapper {
+    /* makes the spinner on top of the thumbnail more visible */
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+.qq-gallery .qq-thumbnail-wrapper {
+    overflow: hidden;
+    position: relative;
+
+    /* to ensure consistent size of tiles - should match qq-max-size attribute value on qq-thumbnail-selector IMG element */
+    height: 120px;
+    width: 120px;
+}
+.qq-gallery .qq-thumbnail-selector {
+    border-radius: 2px 2px 0 0;
+    bottom: 0;
+
+    /* we will override this in the :root thumbnail selector (to help center the preview) for everything other than IE8 */
+    top: 0;
+
+    /* center the thumb horizontally in the tile */
+    margin:auto;
+    display: block;
+}
+
+/* hack to ensure we don't try to center preview in IE8, since -ms-filter doesn't mimic translateY as expected in all cases */
+:root *> .qq-gallery .qq-thumbnail-selector {
+    /* vertically center preview image on tile */
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+}
+
+/* <dialog> element styles */
+.qq-gallery.qq-uploader DIALOG {
+    display: none;
+}
+
+.qq-gallery.qq-uploader DIALOG[open] {
+    display: block;
+}
+
+.qq-gallery.qq-uploader DIALOG {
+    display: none;
+}
+
+.qq-gallery.qq-uploader DIALOG[open] {
+    display: block;
+}
+
+.qq-gallery.qq-uploader DIALOG .qq-dialog-buttons {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.qq-gallery.qq-uploader DIALOG .qq-dialog-buttons BUTTON {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.qq-gallery.qq-uploader DIALOG .qq-dialog-message-selector {
+    padding-bottom: 10px;
+}
+
+.qq-gallery .qq-uploader DIALOG::backdrop {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+/*! 2016-06-16 */

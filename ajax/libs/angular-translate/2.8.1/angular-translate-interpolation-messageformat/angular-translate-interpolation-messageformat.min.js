@@ -1,0 +1,6 @@
+/*!
+ * angular-translate - v2.8.1 - 2015-10-01
+ * 
+ * Copyright (c) 2015 The angular-translate team, Pascal Precht; Licensed MIT
+ */
+!function(a,b){"function"==typeof define&&define.amd?define(["messageformat"],function(a){return b(a)}):"object"==typeof exports?module.exports=b(require("messageformat")):b(MessageFormat)}(this,function(a){function b(b,c,d){"use strict";var e={},f=c.get(d),g=new a("en"),h="messageformat";return f||(f=c(d)),f.put("en",g),e.setLocale=function(b){g=f.get(b),g||(g=new a(b),f.put(b,g))},e.getInterpolationIdentifier=function(){return h},e.useSanitizeValueStrategy=function(a){return b.useStrategy(a),this},e.interpolate=function(a,c){c=c||{},c=b.sanitize(c,"params");var d=f.get(a+angular.toJson(c));if(!d){for(var e in c)if(c.hasOwnProperty(e)){var h=parseInt(c[e],10);angular.isNumber(h)&&""+h===c[e]&&(c[e]=h)}d=g.compile(a)(c),d=b.sanitize(d,"text"),f.put(a+angular.toJson(c),d)}return d},e}return angular.module("pascalprecht.translate").constant("TRANSLATE_MF_INTERPOLATION_CACHE","$translateMessageFormatInterpolation").factory("$translateMessageFormatInterpolation",b),b.$inject=["$translateSanitization","$cacheFactory","TRANSLATE_MF_INTERPOLATION_CACHE"],b.displayName="$translateMessageFormatInterpolation","pascalprecht.translate"});

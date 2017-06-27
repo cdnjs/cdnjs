@@ -1,0 +1,1 @@
+Ext.define("Ext.container.Container",{extend:"Ext.container.AbstractContainer",alias:"widget.container",alternateClassName:"Ext.Container",getChildByElement:function(e,a){var g,c,b=0,d=this.getRefItems(),f=d.length;e=Ext.getDom(e);for(;b<f;b++){g=d[b];c=g.getEl();if(c&&((c.dom===e)||c.contains(e))){return(a&&g.getChildByElement)?g.getChildByElement(e,a):g}}return null}});

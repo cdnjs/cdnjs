@@ -1,0 +1,306 @@
+
+/* Global */
+
+.jBox-wrapper {
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.jBox-title,
+.jBox-content,
+.jBox-container {
+  position: relative;
+  word-break: break-word;
+  box-sizing: border-box;
+}
+
+.jBox-container {
+  background: #fff;
+}
+
+.jBox-content {
+  padding: 8px 10px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: opacity .2s;
+}
+
+/* jBox Tooltip */
+
+.jBox-Tooltip .jBox-container,
+.jBox-Mouse .jBox-container {
+  border-radius: 3px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+}
+
+.jBox-Tooltip .jBox-title,
+.jBox-Mouse .jBox-title {
+  padding: 8px 10px 0;
+  font-weight: bold;
+}
+
+.jBox-hasTitle.jBox-Tooltip .jBox-content,
+.jBox-hasTitle.jBox-Mouse .jBox-content {
+  padding-top: 5px;
+}
+
+.jBox-Mouse {
+  pointer-events: none;
+}
+
+/* Pointer */
+
+.jBox-pointer {
+  position: absolute;
+  overflow: hidden;
+}
+
+.jBox-pointer-top { top: 0; }
+.jBox-pointer-bottom { bottom: 0; }
+.jBox-pointer-left { left: 0; }
+.jBox-pointer-right { right: 0; }
+
+.jBox-pointer-top,
+.jBox-pointer-bottom {
+  width: 30px;
+  height: 12px;
+}
+
+.jBox-pointer-left,
+.jBox-pointer-right {
+  width: 12px;
+  height: 30px;
+}
+
+.jBox-pointer:after {
+  content: '';
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  background: #fff;
+  transform: rotate(45deg);
+}
+
+.jBox-pointer-top:after {
+  left: 5px;
+  top: 6px;
+  box-shadow: -1px -1px 4px rgba(0, 0, 0, .2);
+}
+
+.jBox-pointer-right:after {
+  top: 5px;
+  right: 6px;
+  box-shadow: 1px -1px 4px rgba(0, 0, 0, .2);
+}
+
+.jBox-pointer-bottom:after {
+  left: 5px;
+  bottom: 6px;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, .2);
+}
+
+.jBox-pointer-left:after {
+  top: 5px;
+  left: 6px;
+  box-shadow: -1px 1px 4px rgba(0, 0, 0, .2);
+}
+
+/* jBox Modal */
+
+.jBox-Modal .jBox-container {
+  border-radius: 4px;
+}
+
+.jBox-Modal .jBox-content {
+  padding: 15px 20px;
+}
+
+.jBox-Modal .jBox-title {
+  border-radius: 4px 4px 0 0;
+  padding: 15px 20px;
+  background: #fafafa;
+  border-bottom: 1px solid #eee;
+}
+
+.jBox-Modal.jBox-closeButton-title .jBox-title {
+  padding-right: 55px;
+}
+
+.jBox-Modal .jBox-container,
+.jBox-Modal.jBox-closeButton-box:before {
+  box-shadow: 0 3px 15px rgba(0, 0, 0, .4), 0 0 5px rgba(0, 0, 0, .4);
+}
+
+/* Close button */
+
+.jBox-closeButton {
+  cursor: pointer;
+  position: absolute;
+}
+
+.jBox-closeButton svg {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+}
+
+.jBox-closeButton path {
+  transition: fill .2s;
+}
+
+.jBox-closeButton path {
+  fill: #aaa;
+}
+
+.jBox-closeButton:hover path {
+  fill: #888;
+}
+
+.jBox-closeButton:active path {
+  fill: #666;
+}
+
+/* Close button in overlay */
+
+.jBox-overlay .jBox-closeButton {
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+}
+
+.jBox-overlay .jBox-closeButton svg {
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-right: -10px;
+}
+
+.jBox-overlay .jBox-closeButton path,
+.jBox-overlay .jBox-closeButton:active path {
+  fill: #ddd;
+}
+
+.jBox-overlay .jBox-closeButton:hover path {
+  fill: #fff;
+}
+
+/* Close button in title */
+
+.jBox-closeButton-title .jBox-closeButton {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 40px;
+}
+
+.jBox-closeButton-title .jBox-closeButton svg {
+  width: 12px;
+  height: 12px;
+  margin-top: -6px;
+  margin-right: -6px;
+}
+
+/* Close button in box */
+
+.jBox-closeButton-box .jBox-closeButton {
+  top: -8px;
+  right: -10px;
+  width: 24px;
+  height: 24px;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.jBox-closeButton-box .jBox-closeButton svg {
+  width: 10px;
+  height: 10px;
+  margin-top: -5px;
+  margin-right: -5px;
+}
+
+.jBox-hasTitle.jBox-Modal.jBox-closeButton-box .jBox-closeButton {
+  background: #f4f5f6;
+}
+
+.jBox-closeButton-box:before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+}
+
+.jBox-pointerPosition-top.jBox-closeButton-box:before {
+  top: 4px;
+}
+
+.jBox-pointerPosition-right.jBox-closeButton-box:before {
+  right: 2px;
+}
+
+/* Overlay */
+
+.jBox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .82);
+}
+
+/* Block scrolling */
+
+body[class^="jBox-blockScroll-"],
+body[class*=" jBox-blockScroll-"] {
+  overflow: hidden;
+}
+
+/* Draggable */
+
+.jBox-draggable {
+  cursor: move;
+}
+
+/* Spinner */
+
+@keyframes jBoxLoading {
+  to { transform: rotate(360deg); }
+}
+
+.jBox-loading .jBox-content {
+  opacity: .2;
+}
+
+.jBox-loading-spinner .jBox-content {
+  min-height: 38px !important;
+  min-width: 38px !important;
+  opacity: 0;
+}
+
+.jBox-spinner {
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  margin-top: -12px;
+  margin-left: -12px;
+}
+
+.jBox-spinner:before {
+  display: block;
+  box-sizing: border-box;
+  content: '';
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 0, 0, .2);
+  border-top-color: rgba(0, 0, 0, .8);
+  animation: jBoxLoading .6s linear infinite;
+}

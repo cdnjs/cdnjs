@@ -1,0 +1,1 @@
+Ext.define("Ext.rtl.grid.plugin.RowEditing",{override:"Ext.grid.plugin.RowEditing",initEditorConfig:function(){var a=this.callParent();a.rtl=this.grid.getHierarchyState().rtl;return a}});

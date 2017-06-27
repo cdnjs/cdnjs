@@ -1,0 +1,1 @@
+YUI.add("lang/datatable-sort_en",function(A){A.Intl.add("datatable-sort","en",{sort_asc:"Asc",sort_desc:"Desc"});},"@VERSION@");

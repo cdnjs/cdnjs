@@ -1,0 +1,1 @@
+tinyMCE.addI18n('kb.advhr_dlg',{size:"Te\u03b3zi",noshade:"ulac tili",width:"Tehri",normal:"Amagnu",widthunits:"Units"});

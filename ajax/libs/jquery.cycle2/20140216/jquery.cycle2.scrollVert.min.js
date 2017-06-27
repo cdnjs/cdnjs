@@ -1,0 +1,2 @@
+/* Plugin for Cycle2; Copyright (c) 2012 M. Alsup; v20140128 */
+(function(e){"use strict";e.fn.cycle.transitions.scrollVert={before:function(e,i,t,n){e.API.stackSlides(e,i,t,n);var s=e.container.css("overflow","hidden").height();e.cssBefore={top:n?-s:s,left:0,opacity:1,display:"block",visibility:"visible"},e.animIn={top:0},e.animOut={top:n?s:-s}}}})(jQuery);

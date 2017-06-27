@@ -1,0 +1,1 @@
+Ext.define("Ext.grid.column.Boolean",{extend:"Ext.grid.column.Column",alias:["widget.booleancolumn"],alternateClassName:"Ext.grid.BooleanColumn",trueText:"true",falseText:"false",undefinedText:"&#160;",defaultRenderer:function(a){if(a===undefined){return this.undefinedText}if(!a||a==="false"){return this.falseText}return this.trueText}});

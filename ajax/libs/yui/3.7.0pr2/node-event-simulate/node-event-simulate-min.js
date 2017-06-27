@@ -1,0 +1,1 @@
+YUI.add("node-event-simulate",function(b,a){b.Node.prototype.simulate=function(d,c){b.Event.simulate(b.Node.getDOMNode(this),d,c);};b.Node.prototype.simulateGesture=function(e,d,c){b.Event.simulateGesture(this,e,d,c);};},"@VERSION@",{"requires":["node-base","event-simulate","gesture-simulate"]});

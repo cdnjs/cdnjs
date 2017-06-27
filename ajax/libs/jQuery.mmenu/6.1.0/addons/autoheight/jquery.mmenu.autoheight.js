@@ -1,0 +1,7 @@
+/*
+ * jQuery mmenu autoHeight add-on
+ * mmenu.frebsite.nl
+ *
+ * Copyright (c) Fred Heusschen
+ */
+!function(t){var e="mmenu",i="autoHeight";t[e].addons[i]={setup:function(){var s=this.opts[i];this.conf[i];if(n=t[e].glbl,"boolean"==typeof s&&s&&(s={height:"auto"}),"string"==typeof s&&(s={height:s}),"object"!=typeof s&&(s={}),s=this.opts[i]=t.extend(!0,{},t[e].defaults[i],s),"auto"==s.height||"highest"==s.height){this.bind("initMenu:after",function(){this.$menu.addClass(h.autoheight)});var a=function(e){if(!this.opts.offCanvas||this.vars.opened){var i=Math.max(parseInt(this.$pnls.css("top"),10),0)||0,a=Math.max(parseInt(this.$pnls.css("bottom"),10),0)||0,n=0;this.$menu.addClass(h.measureheight),"auto"==s.height?(e=e||this.$pnls.children("."+h.opened),e.is("."+h.vertical)&&(e=e.parents("."+h.panel).not("."+h.vertical)),e.length||(e=this.$pnls.children("."+h.panel)),n=e.first().outerHeight()):"highest"==s.height&&this.$pnls.children().each(function(){var e=t(this);e.is("."+h.vertical)&&(e=e.parents("."+h.panel).not("."+h.vertical).first()),n=Math.max(n,e.outerHeight())}),this.$menu.height(n+i+a).removeClass(h.measureheight)}};this.opts.offCanvas&&this.bind("open:start",a),"highest"==s.height&&this.bind("initPanels:after",a),"auto"==s.height&&(this.bind("updateListview",a),this.bind("openPanel:start",a),this.bind("closePanel",a))}},add:function(){h=t[e]._c,s=t[e]._d,a=t[e]._e,h.add("autoheight measureheight"),a.add("resize")},clickAnchor:function(t,e){}},t[e].defaults[i]={height:"default"};var h,s,a,n}(jQuery);

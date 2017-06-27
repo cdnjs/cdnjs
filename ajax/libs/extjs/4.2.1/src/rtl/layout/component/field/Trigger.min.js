@@ -1,0 +1,1 @@
+Ext.define("Ext.rtl.layout.component.field.Trigger",{override:"Ext.layout.component.field.Trigger",adjustIEInputPadding:function(b){var a=this.owner;a.inputCell.setStyle(a.getHierarchyState().rtl?"padding-left":"padding-right",this.ieInputWidthAdjustment+"px")}});

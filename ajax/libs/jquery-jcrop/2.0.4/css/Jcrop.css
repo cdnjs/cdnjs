@@ -1,0 +1,372 @@
+/*! Jcrop.css v2.0.4 - build: 20151117
+ *  Copyright 2008-2015 Tapmodo Interactive LLC
+ *  Free software under MIT License
+ **/
+
+/*
+  The outer-most container in a typical Jcrop instance
+  If you are having difficulty with formatting related to styles
+  on a parent element, place any fixes here or in a like selector
+
+  You can also style this element if you want to add a border, etc
+  A better method for styling can be seen below with .jcrop-light
+  (Add a class to the holder and style elements for that extended class)
+*/
+.jcrop-active {
+  direction: ltr;
+  text-align: left;
+  box-sizing: border-box;
+  /* IE10 touch compatibility */
+  -ms-touch-action: none;
+}
+.jcrop-dragging {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.jcrop-selection {
+  z-index: 2;
+}
+.jcrop-selection.jcrop-current {
+  z-index: 4;
+}
+/* Selection Borders */
+.jcrop-border {
+  background: #ffffff url("Jcrop.gif");
+  line-height: 1px !important;
+  font-size: 0 !important;
+  overflow: hidden;
+  position: absolute;
+  filter: alpha(opacity=50) !important;
+  opacity: 0.5 !important;
+}
+.jcrop-border.ord-w,
+.jcrop-border.ord-e,
+.jcrop-border.ord-n {
+  top: 0px;
+}
+.jcrop-border.ord-n,
+.jcrop-border.ord-s {
+  width: 100%;
+  height: 1px !important;
+}
+.jcrop-border.ord-w,
+.jcrop-border.ord-e {
+  height: 100%;
+  width: 1px !important;
+}
+.jcrop-border.ord-e {
+  right: -1px;
+}
+.jcrop-border.ord-n {
+  top: -1px;
+}
+.jcrop-border.ord-w {
+  left: -1px;
+}
+.jcrop-border.ord-s {
+  bottom: -1px;
+}
+.jcrop-selection {
+  position: absolute;
+}
+.jcrop-box {
+  z-index: 2;
+  display: block;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0;
+}
+.jcrop-box:hover {
+  background: none;
+}
+.jcrop-box:active {
+  background: none;
+}
+.jcrop-box:focus {
+  outline: 1px rgba(128, 128, 128, 0.65) dotted;
+}
+.jcrop-active,
+.jcrop-box {
+  position: relative;
+}
+.jcrop-box {
+  width: 100%;
+  height: 100%;
+  cursor: move;
+}
+/* Selection Handles */
+.jcrop-handle {
+  z-index: 4;
+  background-color: rgba(49, 28, 28, 0.58);
+  border: 1px #eeeeee solid;
+  width: 9px;
+  height: 9px;
+  font-size: 0;
+  position: absolute;
+  filter: alpha(opacity=80) !important;
+  opacity: 0.8 !important;
+}
+.jcrop-handle.ord-n {
+  left: 50%;
+  margin-left: -5px;
+  margin-top: -5px;
+  top: 0;
+  cursor: n-resize;
+}
+.jcrop-handle.ord-s {
+  bottom: 0;
+  left: 50%;
+  margin-bottom: -5px;
+  margin-left: -5px;
+  cursor: s-resize;
+}
+.jcrop-handle.ord-e {
+  margin-right: -5px;
+  margin-top: -5px;
+  right: 0;
+  top: 50%;
+  cursor: e-resize;
+}
+.jcrop-handle.ord-w {
+  left: 0;
+  margin-left: -5px;
+  margin-top: -5px;
+  top: 50%;
+  cursor: w-resize;
+}
+.jcrop-handle.ord-nw {
+  left: 0;
+  margin-left: -5px;
+  margin-top: -5px;
+  top: 0;
+  cursor: nw-resize;
+}
+.jcrop-handle.ord-ne {
+  margin-right: -5px;
+  margin-top: -5px;
+  right: 0;
+  top: 0;
+  cursor: ne-resize;
+}
+.jcrop-handle.ord-se {
+  bottom: 0;
+  margin-bottom: -5px;
+  margin-right: -5px;
+  right: 0;
+  cursor: se-resize;
+}
+.jcrop-handle.ord-sw {
+  bottom: 0;
+  left: 0;
+  margin-bottom: -5px;
+  margin-left: -5px;
+  cursor: sw-resize;
+}
+/* Larger Selection Handles for Touch */
+.jcrop-touch .jcrop-handle {
+  z-index: 4;
+  background-color: rgba(49, 28, 28, 0.58);
+  border: 1px #eeeeee solid;
+  width: 18px;
+  height: 18px;
+  font-size: 0;
+  position: absolute;
+  filter: alpha(opacity=80) !important;
+  opacity: 0.8 !important;
+}
+.jcrop-touch .jcrop-handle.ord-n {
+  left: 50%;
+  margin-left: -10px;
+  margin-top: -10px;
+  top: 0;
+  cursor: n-resize;
+}
+.jcrop-touch .jcrop-handle.ord-s {
+  bottom: 0;
+  left: 50%;
+  margin-bottom: -10px;
+  margin-left: -10px;
+  cursor: s-resize;
+}
+.jcrop-touch .jcrop-handle.ord-e {
+  margin-right: -10px;
+  margin-top: -10px;
+  right: 0;
+  top: 50%;
+  cursor: e-resize;
+}
+.jcrop-touch .jcrop-handle.ord-w {
+  left: 0;
+  margin-left: -10px;
+  margin-top: -10px;
+  top: 50%;
+  cursor: w-resize;
+}
+.jcrop-touch .jcrop-handle.ord-nw {
+  left: 0;
+  margin-left: -10px;
+  margin-top: -10px;
+  top: 0;
+  cursor: nw-resize;
+}
+.jcrop-touch .jcrop-handle.ord-ne {
+  margin-right: -10px;
+  margin-top: -10px;
+  right: 0;
+  top: 0;
+  cursor: ne-resize;
+}
+.jcrop-touch .jcrop-handle.ord-se {
+  bottom: 0;
+  margin-bottom: -10px;
+  margin-right: -10px;
+  right: 0;
+  cursor: se-resize;
+}
+.jcrop-touch .jcrop-handle.ord-sw {
+  bottom: 0;
+  left: 0;
+  margin-bottom: -10px;
+  margin-left: -10px;
+  cursor: sw-resize;
+}
+/* Selection Dragbars */
+.jcrop-dragbar {
+  font-size: 0;
+  position: absolute;
+}
+.jcrop-dragbar.ord-n,
+.jcrop-dragbar.ord-s {
+  height: 9px !important;
+  width: 100%;
+}
+.jcrop-dragbar.ord-e,
+.jcrop-dragbar.ord-w {
+  top: 0px;
+  height: 100%;
+  width: 9px !important;
+}
+.jcrop-dragbar.ord-n {
+  margin-top: -5px;
+  cursor: n-resize;
+  top: 0px;
+}
+.jcrop-dragbar.ord-s {
+  bottom: 0;
+  margin-bottom: -5px;
+  cursor: s-resize;
+}
+.jcrop-dragbar.ord-e {
+  margin-right: -5px;
+  right: 0;
+  cursor: e-resize;
+}
+.jcrop-dragbar.ord-w {
+  margin-left: -5px;
+  cursor: w-resize;
+}
+/* Shading panels */
+.jcrop-shades {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.jcrop-shades div {
+  cursor: crosshair;
+}
+/* Various special states */
+.jcrop-noresize .jcrop-dragbar,
+.jcrop-noresize .jcrop-handle {
+  display: none;
+}
+.jcrop-selection.jcrop-nodrag .jcrop-box,
+.jcrop-nodrag .jcrop-shades div {
+  cursor: default;
+}
+/* The "jcrop-light" class/extension */
+.jcrop-light .jcrop-border {
+  background: #ffffff;
+  filter: alpha(opacity=70) !important;
+  opacity: .70!important;
+}
+.jcrop-light .jcrop-handle {
+  background-color: #000000;
+  border-color: #ffffff;
+}
+/* The "jcrop-dark" class/extension */
+.jcrop-dark .jcrop-border {
+  background: #000000;
+  filter: alpha(opacity=70) !important;
+  opacity: 0.7 !important;
+}
+.jcrop-dark .jcrop-handle {
+  background-color: #ffffff;
+  border-color: #000000;
+}
+/* Simple macro to turn off the antlines */
+.solid-line .jcrop-border {
+  background: #ffffff;
+}
+.jcrop-thumb {
+  position: absolute;
+  overflow: hidden;
+  z-index: 5;
+}
+/* Fix for twitter bootstrap et al. */
+.jcrop-active img,
+.jcrop-thumb img,
+.jcrop-thumb canvas {
+  min-width: none;
+  min-height: none;
+  max-width: none;
+  max-height: none;
+}
+/* Improved multiple selection styles - in progress */
+.jcrop-hl-active .jcrop-border {
+  filter: alpha(opacity=20) !important;
+  opacity: .20!important;
+}
+.jcrop-hl-active .jcrop-handle {
+  filter: alpha(opacity=10) !important;
+  opacity: .10!important;
+}
+.jcrop-hl-active .jcrop-selection:hover {
+  /*
+    .jcrop-handle {
+      filter:Alpha(opacity=35)!important;
+      opacity:.35!important;
+    }
+    */
+
+}
+.jcrop-hl-active .jcrop-selection:hover .jcrop-border {
+  background-color: #ccc;
+  filter: alpha(opacity=50) !important;
+  opacity: .50!important;
+}
+.jcrop-hl-active .jcrop-selection.jcrop-current .jcrop-border {
+  background: #808080 url('Jcrop.gif');
+  opacity: .35!important;
+  filter: alpha(opacity=35) !important;
+}
+.jcrop-hl-active .jcrop-selection.jcrop-current .jcrop-handle {
+  filter: alpha(opacity=30) !important;
+  opacity: .30!important;
+}
+.jcrop-hl-active .jcrop-selection.jcrop-focus .jcrop-border {
+  background: url('Jcrop.gif');
+  opacity: .65!important;
+  filter: alpha(opacity=65) !important;
+}
+.jcrop-hl-active .jcrop-selection.jcrop-focus .jcrop-handle {
+  filter: alpha(opacity=60) !important;
+  opacity: .60!important;
+}
+/* Prevent background on button element */
+button.jcrop-box {
+  background: none;
+}

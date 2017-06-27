@@ -1,0 +1,1 @@
+Ext.define("Ext.app.domain.Global",{extend:"Ext.app.EventDomain",singleton:true,type:"global",constructor:function(){var a=this;a.callParent();a.monitor(Ext.globalEvents)},listen:function(b,a){this.callParent([{global:b},a])},match:function(){return true}});

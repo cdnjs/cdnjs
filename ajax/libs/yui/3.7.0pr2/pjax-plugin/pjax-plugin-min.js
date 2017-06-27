@@ -1,0 +1,1 @@
+YUI.add("pjax-plugin",function(b,a){b.Plugin.Pjax=b.Base.create("pjaxPlugin",b.Pjax,[b.Plugin.Base],{initializer:function(c){this.set("container",c.host);}},{NS:"pjax"});},"@VERSION@",{"requires":["node-pluginhost","pjax","plugin"]});

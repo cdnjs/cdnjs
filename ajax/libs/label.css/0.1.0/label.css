@@ -1,0 +1,170 @@
+/*---------------------------------------
+   Label.css
+
+   Developed By Hosein Emrani:
+
+    | Twitter: (@hoseiin)
+    | Facebook: (fb.com/hosein.emrani)
+    | Mail: hoseiin[at]outlook[dot]com
+    
+   Github: http://github.com/usablica/label.css
+       
+   With love in usablica, Tehran. 
+----------------------------------------*/
+
+/* Basic CSS for the label */
+.label {
+    position: relative;
+    font-family: Arial;
+    margin: auto;
+    display: inline-block;
+    width: auto; 
+    overflow: hidden;
+}
+.label.rtl:after,
+.label.rtl:before {
+    text-align: right;
+    direction: rtl;
+    font-family: 'B yekan';
+    font-size: .9em;
+    font-weight: 200;
+}
+.label:after,
+.label:before { 
+    position: absolute;
+    
+    height: auto;
+    width: 98%;
+    display: block;
+    
+    padding:1%;
+    display: block;
+    background:rgba(242, 242, 242, 0.80);
+    
+    content: attr(data-label);
+    
+}
+
+/* Now we just wanna chose the position of the label with class names. */
+
+/*  Positions Seprated to two category: "outer","inner". 
+    Each of them have subcategories in axises left or right, top, bottom (default in inside mode) ,middle and center */
+
+/* Inside positions */
+
+/* we don't neeed these to show. */
+.label.top:after,
+.label.bottom:before,
+.label.inside.middle:before
+ { 
+    display: none;
+}
+/* top positions*/
+.label.inside.top:before {
+    top: 0px;
+}
+/* bottom positions*/
+.label.bottom:after { 
+    bottom:1%;
+}
+/* middle positions */
+.label.inside.middle:after {
+    top: 45%;
+}
+
+/* Left or Right Axis */
+.label.inside.left:after,.label.inside.left:before {
+    float: left;
+    width: auto;
+    left: 0px;
+}
+
+.label.inside.right:after,.label.inside.right:before { 
+    float: right;
+    width: auto;
+    right: 0px;
+}
+
+/* Outside Positions basics */
+.label.outside {
+    overflow: initial;
+}
+.label.outside:after,
+.label.outside:before { 
+    position: relative;
+    background: none;
+}
+.label.outside:after {
+    margin-bottom: -5%;
+}
+.label.outside:before {
+    margin-top: -5%;
+}
+
+/* let's play with CSS3 Transitions and make very cute effects for hovering! */
+
+/* fade effect */
+.label.fade:after,
+.label.fade:before,
+.label.float:after,
+.label.float:before {
+	transition:all 0.25s ease;
+    -webkit-transition:all 0.25s ease;
+    -moz-transition:all 0.25s ease;
+    -ms-transition:all 0.25s ease;
+}
+.label.fade:after,
+.label.fade:before {
+    opacity: 0;
+    visibility: hidden;
+}
+.label.fade:hover:after,
+.label.fade:hover:before {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* float effect */
+
+.label.inside.top.float:before {
+    top: -15px;
+}
+.label.inside.top.float:hover:before {
+    top: 0;
+}
+.label.inside.bottom.float:after {
+    bottom: -5px;
+}
+.label.inside.bottom.float:hover:after {
+    bottom: 1%;
+}
+.label.inside.middle.float:after {
+    margin-top: 20px;
+}
+.label.inside.middle.float:hover:after {
+    margin-top: 0px;
+}
+.label.outside.top.float:before { 
+    top: 10px;
+}
+.label.outside.top.float:hover:before {
+    top: 0px;
+}
+.label.outside.bottom.float:after { 
+    top: -10px;
+}
+.label.outside.bottom.float:hover:after {
+    top: 0px;
+}
+
+.label.float:after,
+.label.float:before {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.label.float:hover:after,
+.label.float:hover:before {
+    opacity: 1;
+    visibility: visible;
+}

@@ -1,0 +1,1 @@
+define("dollar",["dollar/origin"],function(n){return n});

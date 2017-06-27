@@ -1,0 +1,365 @@
+.gantt-task-bounds {
+    height: 125%;
+    top: -12.5%;
+    position: absolute;
+    z-index: 99;
+    border: 1px dashed;
+    pointer-events: none;
+}
+
+.gantt-task-bounds-in {
+    border-color: #2E4F2E;
+}
+
+.gantt-task-bounds-out {
+    border-color: #FF6347;
+}
+
+.gantt .gantt-body-dependencies {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.gantt .gantt-endpoint.jsplumb-endpoint-anchor {
+    z-index: 20; /* z-index must be higher than tasks z-index */
+    overflow: hidden;
+}
+
+.gantt .gantt-endpoint.fallback-endpoint.jsplumb-endpoint-anchor {
+    z-index: auto;
+    overflow: hidden;
+}
+
+.gantt .gantt-endpoint-overlay.fallback-endpoint {
+    height: 4px;
+    width: 40px;
+    top: -2px;
+}
+
+.gantt .gantt-endpoint-overlay.start-endpoint.fallback-endpoint {
+    left: -45px;
+    background-image:-webkit-linear-gradient(left, rgba(255,255,255,0), #456);
+    background-image:linear-gradient(to right, rgba(255,255,255,0), #456);
+}
+
+.gantt .gantt-endpoint-overlay.end-endpoint.fallback-endpoint {
+    left: -5px;
+    background-image:-webkit-linear-gradient(right, rgba(255,255,255,0), #456);
+    background-image:linear-gradient(to left, rgba(255,255,255,0), #456);
+}
+
+.gantt .jsplumb-overlay {
+    z-index: 20;
+}
+
+.gantt .gantt-endpoint-overlay {
+    position: absolute;
+}
+
+.gantt .gantt-endpoint-overlay.arrow-right {
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid black;
+}
+
+.gantt .gantt-endpoint-overlay.arrow-right.start-endpoint {
+    top: -5px;
+    left: -11px;
+    border-left-color: rgb(64, 64, 160); /* blue */
+}
+
+.gantt .gantt-endpoint-overlay.arrow-right.end-endpoint {
+    top: -5px;
+    left: 6px;
+    border-left-color: rgb(64, 160, 64); /* green */
+}
+
+.gantt .gantt-endpoint.source-endpoint svg * {
+    fill: rgb(64, 160, 64); /* green */
+}
+
+.gantt .gantt-endpoint.target-endpoint svg * {
+    fill: rgb(64, 64, 160); /* blue */
+}
+
+.gantt-task-group {
+    position: absolute;
+
+    background: rgb(99, 136, 205);
+
+    height: 30%;
+
+    top: -25%;
+    bottom: 0;
+    margin: auto;
+}
+
+.gantt-task-group-left-main,
+.gantt-task-group-right-main {
+    position: absolute;
+
+    width: 12px;
+    height: 100%;
+    background: rgb(99, 136, 205);
+
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+}
+
+.gantt-task-group-left-main {
+    left: -6px;
+}
+
+.gantt-task-group-right-main {
+    right: -6px;
+}
+
+.gantt-task-group-left-symbol,
+.gantt-task-group-right-symbol {
+    position: absolute;
+
+    width: 0;
+    height: 50%;
+
+    top: 75%;
+    bottom: 0;
+
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 12px solid rgb(99, 136, 205);
+}
+
+.gantt-task-group-left-symbol {
+    left: -6px;
+}
+
+.gantt-task-group-right-symbol {
+    right: -6px;
+}
+
+.gantt-task-overview {
+    height: 40%;
+    top: 40%;
+    -webkit-filter: grayscale(0.6);
+    filter: grayscale(0.6);
+}
+
+.gantt-task-overview .gantt-task-content {
+    display: none;
+}
+
+.gantt-labels-header {
+    overflow: hidden;
+}
+
+.gantt-labels-header-row {
+    box-sizing: border-box;
+    padding-left: 12px;
+    padding-right: 12px;
+    height: 2em;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.gantt-labels-header-row span {
+    box-sizing: border-box;
+    display: inline-block;
+    height: 2em;
+    text-align: center;
+    padding-top: 0.5em;
+    overflow: hidden;
+    text-overflow: clip;
+}
+
+.gantt-labels-header-row-last {
+    border-bottom: 1px solid #dddddd;
+}
+
+.gantt-labels-header {
+    overflow: hidden;
+}
+
+.gantt-labels-body {
+    overflow: hidden;
+}
+
+.gantt-task-moving, .gantt-task-resizing {
+    z-index: 750 !important;
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+    -webkit-filter: grayscale(0.7);
+    filter: grayscale(0.7);
+}
+
+.gantt-task-overlaps{
+    border: 2px solid #e00000;
+}
+
+.gantt-task-progress {
+    position: absolute;
+    overflow: hidden;
+    bottom: 0px;
+    height: 6px;
+    border-radius: 2px;
+}
+
+.gantt-row-label.on-dragging {
+    background-color: #999999 !important;
+}
+
+.gantt-row-label.on-drag-hover {
+    border: 1px solid #999999;
+}
+
+.gantt-table-header {
+    overflow: hidden;
+    position: relative;
+}
+
+.gantt-table-header-row {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.gantt-table-header-row span.gantt-label-text {
+    font-weight: bold;
+    white-space: nowrap;
+    display: inline-block;
+    padding-top: 0.5em;
+    overflow: hidden;
+    text-overflow: clip;
+}
+
+div.gantt-table-content {
+    overflow: hidden;
+}
+
+.gantt-side-content-table > div.gantt-table-column {
+    display: inline-block;
+    overflow: hidden;
+}
+
+.gantt-task-info {
+    position: fixed;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    padding: 9px 12px;
+    z-index: 999;
+}
+
+.gantt-task-info-content {
+    line-height: 1.1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.gantt-task-infoArrow:before,
+.gantt-task-infoArrowR:before {
+    position: absolute;
+    top: 100%;
+    width: 0px;
+    height: 0px;
+    border-top: 8px solid rgba(0, 0, 0, 0.1);
+    border-right: 8px solid transparent;
+    border-left: 8px solid transparent;
+    content: '';
+}
+
+.gantt-task-infoArrow:before {
+    left: 10px;
+}
+
+.gantt-task-infoArrowR:before {
+    right: 10px;
+}
+
+.gantt-task-infoArrow:after,
+.gantt-task-infoArrowR:after {
+    position: absolute;
+    top: 100%;
+    width: 0px;
+    height: 0px;
+    border-top: 7px solid #ffffff;
+    border-right: 7px solid transparent;
+    border-left: 7px solid transparent;
+    content: '';
+}
+
+.gantt-task-infoArrow:after {
+    left: 11px;
+}
+
+.gantt-task-infoArrowR:after {
+    right: 11px;
+}
+
+.gantt-row-label-background {
+    position: absolute;
+    width: 100%;
+}
+
+.gantt-tree-body .gantt-row-label span {
+    margin: 0;
+}
+
+.gantt-tree-body .gantt-row-label a.gantt-tree-handle-button {
+    padding: 0;
+    position: relative;
+}
+
+.gantt-tree-body .gantt-row-label span.gantt-tree-handle {
+    padding: 0;
+    position: relative;
+}
+
+.gantt-tree-body .gantt-row-label span.gantt-label-text {
+    padding-left: 0;
+}
+
+.gantt-tree-header {
+    overflow: hidden;
+    position: relative;
+}
+
+.gantt-tree-body {
+    overflow: hidden;
+}
+
+.gantt-tree-header-row {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.gantt-tree-header-row span.gantt-label-text {
+    display: inline-block;
+    padding-top: 0.5em;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+}
+
+.gantt-tree-body ol {
+    padding-left: 0;
+}
+
+.angular-ui-tree-handle {
+    cursor: inherit;
+    text-decoration: inherit;
+    font-weight: inherit;
+    min-height: inherit;
+    line-height: inherit;
+}
+
+.gantt-side-content-tree .gantt-tree-handle-button {
+    pointer-events: auto;
+}

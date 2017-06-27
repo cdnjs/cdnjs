@@ -1,0 +1,54 @@
+/**
+ * wallop--fade.css
+ *
+ * @fileoverview Fade animation for wallop
+ *
+ * @author Pedro Duarte
+ * @author http://pedroduarte.me/wallop
+ */
+
+ .Wallop--fade .Wallop-item--hidePrevious,
+ .Wallop--fade .Wallop-item--hideNext {
+  visibility: visible;
+  -webkit-animation: fadeOut 450ms cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+  -moz-animation: fadeOut 450ms cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+  -ms-animation: fadeOut 450ms cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+  animation: fadeOut 450ms cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+}
+
+/*
+  In order to fade out properly we need to make sure
+  that the item that is going to be the previous one
+  has a higer z-index that the next one
+ */
+.Wallop--fade .Wallop-item--hidePrevious,
+.Wallop--fade .Wallop-item--hideNext { z-index: 2; }
+.Wallop--fade .Wallop-item--showPrevious,
+.Wallop--fade .Wallop-item--showNext { z-index: 1; }
+
+ /*==========  FADE ANIMATIONS  ==========*/
+@-webkit-keyframes fadeOut {
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+@-moz-keyframes fadeOut {
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+@-ms-keyframes fadeOut {
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+@keyframes fadeOut {
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+

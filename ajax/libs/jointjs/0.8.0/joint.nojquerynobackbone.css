@@ -1,0 +1,239 @@
+/*! JointJS v0.8.0 - JavaScript diagramming library  2014-01-22 
+
+
+This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+
+/*
+A complete list of SVG properties that can be set through CSS is here:
+http://www.w3.org/TR/SVG/styling.html
+
+Important note: Presentation attributes have a lower precedence over CSS style rules.
+*/
+
+
+/* .viewport is a <g> node wrapping all diagram elements in the paper */
+.viewport {
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   user-select: none;
+}
+
+/* .magnet is an element that can be either source or a target of a link */
+/*
+.magnet {
+   fill: black;
+   fill-opacity: 0;
+   stroke: black;
+   stroke-width: 15;
+   stroke-opacity: 0;
+   pointer-events: visibleStroke;
+   cursor: crosshair;
+   vector-effect: non-scaling-stroke;
+}
+
+.magnet:hover {
+   stroke-opacity: .5;
+}
+*/
+
+[magnet=true]:not(.element) {
+   cursor: crosshair;
+}
+[magnet=true]:not(.element):hover {
+   opacity: .7;
+}
+
+/*
+
+Elements have CSS classes named by their types. E.g. type: basic.Rect has a CSS class "element basic Rect".
+This makes it possible to easilly style elements in CSS and have generic CSS rules applying to
+the whole group of elements. Each plugin can provide its own stylesheet.
+
+*/
+
+.element {
+   /* Give the user a hint that he can drag&drop the element. */
+   cursor: move;
+}
+
+.element * {
+   /* The default behavior when scaling an element is not to scale the stroke in order to prevent the ugly effect of stroke with different proportions. */
+   vector-effect: non-scaling-stroke;
+   -moz-user-select: none;
+   user-drag: none;
+}
+
+
+/* 
+
+connection-wrap is a <path> element of the joint.dia.Link that follows the .connection <path> of that link.
+In other words, the `d` attribute of the .connection-wrap contains the same data as the `d` attribute of the
+.connection <path>. The advantage of using .connection-wrap is to be able to catch pointer events
+in the neighborhood of the .connection <path>. This is especially handy if the .connection <path> is 
+very thin.
+
+*/
+
+.connection-wrap {
+   fill: none;
+   stroke: black;
+   stroke-width: 15;
+   stroke-linecap: round;
+   stroke-linejoin: round;
+   opacity: 0;
+   cursor: move;
+}
+.connection-wrap:hover {
+   opacity: .4;
+   stroke-opacity: .4;
+}
+
+
+.connection {
+   /* stroke: black; */
+   /* stroke width cannot be overriden by attribute? */
+   /*   stroke-width: 1; */
+   fill: none;
+   stroke-linejoin: round;
+}
+
+.marker-source, .marker-target {
+/* Cannot be in CSS otherwise it could not be overruled by attributes.
+   fill: black;
+   stroke: black;
+*/
+   /* This makes the arrowheads point to the border of objects even though the transform: scale() is applied on them. */
+   vector-effect: non-scaling-stroke;
+}
+
+/* 
+
+Vertex markers are `<circle>` elements that appear at connection vertex positions.
+
+*/
+
+/* <g> element wrapping .marker-vertex-group. */
+.marker-vertices {
+   opacity: 0;
+   cursor: move;
+}
+.marker-arrowheads {
+   opacity: 0;
+   cursor: move;
+   cursor: -webkit-grab;
+   cursor: -moz-grab;
+/*   display: none;   */   /* setting `display: none` on .marker-arrowheads effectivelly switches of links reconnecting */
+}
+.link-tools {
+   opacity: 0;
+   cursor: pointer;
+}
+.link-tools .tool-options {
+   display: none;       /* by default, we don't display link options tool */
+}
+.link-tools .tool-remove circle {
+   fill: red;
+}
+.link-tools .tool-remove path {
+   fill: white;
+}
+.link:hover .marker-vertices,
+.link:hover .marker-arrowheads,
+.link:hover .link-tools {
+   opacity: 1;
+}
+
+/* <circle> element inside .marker-vertex-group <g> element */
+.marker-vertex {
+   fill: #1ABC9C;
+}
+.marker-vertex:hover {
+   fill: #34495E;
+   stroke: none;
+}
+
+.marker-arrowhead {
+   fill: #1ABC9C;
+}
+.marker-arrowhead:hover {
+   fill: #F39C12;
+   stroke: none;
+}
+
+/* <circle> element used to remove a vertex */
+.marker-vertex-remove {
+   cursor: pointer;
+   opacity: .1;
+   fill: white;
+}
+
+.marker-vertex-group:hover .marker-vertex-remove {
+   opacity: 1;
+}
+
+.marker-vertex-remove-area {
+   opacity: .1;
+   cursor: pointer;
+}
+.marker-vertex-group:hover .marker-vertex-remove-area {
+   opacity: 1;
+}
+
+/*
+
+/* Cell highlighting - e.g a cell underneath the dragged link get highlighted.
+   See joint.dia.cell.js highlight(); */
+
+/* For some reason, CSS `outline` property does not work on `<text>` elements. */
+text.highlighted {
+    fill: #FF0000;
+}
+
+.highlighted {
+    outline: 2px solid #FF0000; /* `outline` doesn't work in Firefox, Opera and IE9+ correctly. */
+    opacity: 0.7 \9; /* It targets only IE9. */
+}
+
+/*
+use '@-moz-document url-prefix()' to target all versions if Firefox and nothing else.
+See `https://developer.mozilla.org/en-US/docs/Web/CSS/@document`.
+*/
+@-moz-document url-prefix() {
+    .highlighted { opacity: 0.7; } /* only for FF */
+}
+
+/*
+`-o-prefocus` is a pseudo-class that allows styles to be targeted for Opera only.
+See `http://www.opera.com/docs/specs/presto2.12/css/o-vendor/`.
+*/
+doesnotexist:-o-prefocus, .highlighted {
+    opacity: 0.7;
+}
+
+/*
+
+Example of custom changes (in pure CSS only!):
+
+Do not show marker vertices at all:  .marker-vertices { display: none; }
+Do not allow adding new vertices: .connection-wrap { pointer-events: none; }
+
+*/
+
+/* foreignObject in joint.shapes.basic.TextBlock */
+.TextBlock .fobj body {
+    background-color: transparent;
+    margin: 0px;
+}
+.TextBlock .fobj div {
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+    padding: 0px 5px 0px 5px;
+}

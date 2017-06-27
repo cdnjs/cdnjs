@@ -1,0 +1,61 @@
+/* snapper css snap points carousel */
+.snapper {}
+.snapper_pane {
+	overflow-x: auto;
+	overflow-y: hidden;
+	white-space: nowrap;
+	width: 100%;
+	-webkit-overflow-scrolling: touch;
+	-webkit-scroll-snap-type: mandatory;
+	-ms-scroll-snap-type: mandatory;
+	scroll-snap-type: mandatory;
+	-webkit-scroll-snap-destination: 50% 50%;
+	-ms-scroll-snap-destination: 50% 50%;
+	scroll-snap-destination: 50% 50%;
+	position: relative;
+}
+.snapper_items {
+	width: 400%; /* 100 times number of items */
+}
+.snapper_item {
+	width: 25%; /* 100 divided by number of items */
+	float: left;
+	position: relative;
+}
+.snapper_next,
+.snapper_prev {
+	position: absolute;
+	top: 0;
+	width: 50%;
+	height: 100%;
+	overflow: hidden;
+	text-indent: -999px;
+	opacity: 0;
+}
+.snapper_next:hover,
+.snapper_prev:hover,
+.snapper_next:focus,
+.snapper_prev:focus {
+	opacity: .4;
+}
+.snapper_next {
+	right: 0;
+	background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='50' height='50'><polygon fill='#000' points='14,12.5 0,0 0,10.4 2.3,12.5 16.3,25 2.3,37.5 0,39.6 0,50 14,37.5 28,25'/></svg>") 90% 50% no-repeat;
+}
+.snapper_prev {
+	left: 0;
+	background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='50' height='50'><polygon fill='#000' points='14,37.5 28,50 28,39.6 25.7,37.5 11.7,25 25.7,12.5 28,10.4 28,0 14,12.5 0,25'/></svg>") 10% 50% no-repeat;
+}
+.snapper_item img {
+	width: 100%;
+	-webkit-scroll-snap-coordinate: 50% 50%;
+	-ms-scroll-snap-coordinate: 50% 50%;
+	scroll-snap-coordinate: 50% 50%;
+}
+.snapper_nav {
+	overflow: hidden;
+}
+.snapper_nav a {
+	float: left;
+	margin: 0 5px 5px 0;
+}

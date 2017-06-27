@@ -1,0 +1,654 @@
+@charset "UTF-8";
+/* jspanel.sass: 2016-04-26 10:00 */
+@font-face {
+  font-family: "jsglyph";
+  src: url("fonts/jsglyph.eot?wbr2mk");
+  src: url("fonts/jsglyph.eot?wbr2mk#iefix") format("embedded-opentype"), url("fonts/jsglyph.ttf?wbr2mk") format("truetype"), url("fonts/jsglyph.woff?wbr2mk") format("woff"), url("fonts/jsglyph.svg?wbr2mk#jsglyph") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+.jsglyph {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "jsglyph" !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+.jsglyph-chevron-down:before {
+  content: ""; }
+
+.jsglyph-chevron-up:before {
+  content: ""; }
+
+.jsglyph-close:before {
+  content: ""; }
+
+.jsglyph-maximize:before {
+  content: ""; }
+
+.jsglyph-minimize:before {
+  content: ""; }
+
+.jsglyph-normalize:before {
+  content: ""; }
+
+.jsPanel {
+  border: 0;
+  box-sizing: border-box;
+  vertical-align: baseline;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  border-radius: 3px;
+  z-index: 100; }
+  .jsPanel .jsPanel-hdr {
+    border: 0;
+    box-sizing: border-box;
+    vertical-align: baseline;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    font-size: 18px;
+    padding: 3px 0 0;
+    cursor: move;
+    min-height: 40px; }
+  .jsPanel .jsPanel-content {
+    border: 0;
+    box-sizing: border-box;
+    vertical-align: baseline;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    background: #ffffff;
+    color: #000000;
+    font-size: 12px;
+    position: relative;
+    overflow: hidden; }
+  .jsPanel .jsPanel-content.jsPanel-content-noheader {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px; }
+  .jsPanel .jsPanel-content.jsPanel-content-nofooter {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px; }
+  .jsPanel .jsPanel-ftr {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+    -webkit-flex-direction: row-reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-top: 1px solid #e0e0e0;
+    cursor: move;
+    display: none;
+    box-sizing: border-box;
+    font-size: 12px;
+    height: auto;
+    padding: 7px;
+    background: #f5f5f5;
+    font-weight: normal;
+    color: black; }
+  .jsPanel .jsPanel-ftr.active {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex; }
+
+.jsPanel-headerbar, .jsPanel-hdr-toolbar {
+  font-size: 18px;
+  line-height: 1em;
+  padding: 0 5px 0 10px; }
+
+.jsPanel-headerbar {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 5px 4px 10px; }
+
+.jsPanel-titlebar {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  min-height: 32px;
+  padding-right: 6px;
+  overflow: hidden;
+  line-height: 2em; }
+  .jsPanel-titlebar h3 {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 16px;
+    font-variant: small-caps;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+    line-height: 2em; }
+    .jsPanel-titlebar h3 small {
+      font-size: 75%;
+      color: inherit; }
+
+.jsPanel-titlebar.jsPanel-rtl h3 {
+  flex: 1 0 auto; }
+
+.jsPanel-controlbar {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+  .jsPanel-controlbar div span:hover {
+    opacity: 0.5; }
+  .jsPanel-controlbar .jsPanel-btn {
+    padding: 0 3px;
+    cursor: pointer; }
+  .jsPanel-controlbar .jsPanel-btn-normalize {
+    display: none; }
+  .jsPanel-controlbar .jsPanel-btn-smallifyrev {
+    display: none; }
+
+.jsPanel-hdr-toolbar {
+  display: none;
+  width: auto;
+  height: auto;
+  font-size: 16px; }
+  .jsPanel-hdr-toolbar * {
+    margin: 0 5px 0 0; }
+
+.jsPanel-hdr-toolbar.active {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  min-height: 32px;
+  padding: 7px 10px 10px 10px; }
+
+/* styles for panels using option.rtl */
+.jsPanel-headerbar.jsPanel-rtl, .jsPanel-controlbar.jsPanel-rtl, .jsPanel-hdr-toolbar.jsPanel-rtl {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+  -webkit-flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse; }
+
+.jsPanel-headerbar.jsPanel-rtl {
+  padding: 0 5px; }
+
+.jsPanel-hdr-toolbar.active.jsPanel-rtl {
+  padding: 7px 0 10px 0; }
+
+.jsPanel-ftr.jsPanel-rtl {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row; }
+
+/* css for tooltip connectors */
+.jsPanel-connector {
+  pointer-events: none; }
+
+/* naming of connectors reflects position of tooltip and not pos of connector */
+.jsPanel-connector-top {
+  width: 0;
+  height: 0;
+  border: 12px solid transparent;
+  position: absolute;
+  border-top-width: 10px;
+  left: calc(50% - 12px);
+  bottom: -22px; }
+
+.jsPanel-connector-topleft {
+  width: 0;
+  height: 0;
+  border: 12px solid transparent;
+  position: absolute;
+  border-top-width: 10px;
+  left: 2px;
+  bottom: -22px; }
+
+.jsPanel-connector-topright {
+  width: 0;
+  height: 0;
+  border: 12px solid transparent;
+  position: absolute;
+  border-top-width: 10px;
+  left: calc(100% - 26px);
+  bottom: -22px; }
+
+.jsPanel-connector-right {
+  width: 0;
+  height: 0;
+  border: 12px solid transparent;
+  position: absolute;
+  border-right-width: 10px;
+  left: -22px;
+  top: calc(50% - 12px); }
+
+.jsPanel-connector-righttop {
+  width: 0;
+  height: 0;
+  border: 12px solid transparent;
+  position: absolute;
+  border-right-width: 10px;
+  left: -22px;
+  top: 2px; }
+
+.jsPanel-connector-rightbottom {
+  width: 0;
+  height: 0;
+  border: 12px solid transparent;
+  position: absolute;
+  border-right-width: 10px;
+  left: -22px;
+  top: calc(100% - 26px); }
+
+.jsPanel-connector-bottom {
+  width: 0;
+  height: 0;
+  border: 12px solid transparent;
+  position: absolute;
+  border-bottom-width: 10px;
+  left: calc(50% - 12px);
+  top: -22px; }
+
+.jsPanel-connector-bottomleft {
+  width: 0;
+  height: 0;
+  border: 12px solid transparent;
+  position: absolute;
+  border-bottom-width: 10px;
+  left: 2px;
+  top: -22px; }
+
+.jsPanel-connector-bottomright {
+  width: 0;
+  height: 0;
+  border: 12px solid transparent;
+  position: absolute;
+  border-bottom-width: 10px;
+  left: calc(100% - 26px);
+  top: -22px; }
+
+.jsPanel-connector-left {
+  width: 0;
+  height: 0;
+  border: 12px solid transparent;
+  position: absolute;
+  border-left-width: 10px;
+  left: 100%;
+  top: calc(50% - 12px); }
+
+.jsPanel-connector-lefttop {
+  width: 0;
+  height: 0;
+  border: 12px solid transparent;
+  position: absolute;
+  border-left-width: 10px;
+  left: 100%;
+  top: 2px; }
+
+.jsPanel-connector-leftbottom {
+  width: 0;
+  height: 0;
+  border: 12px solid transparent;
+  position: absolute;
+  border-left-width: 10px;
+  left: 100%;
+  top: calc(100% - 26px); }
+
+/* naming of connectors reflects position of tooltip and not pos of connector */
+.jsPanel-connector-lefttopcorner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: none;
+  border-radius: 50%;
+  left: calc(100% - 6px);
+  top: calc(100% - 6px); }
+
+.jsPanel-connector-righttopcorner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: none;
+  border-radius: 50%;
+  left: -6px;
+  top: calc(100% - 6px); }
+
+.jsPanel-connector-rightbottomcorner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: none;
+  border-radius: 50%;
+  left: -6px;
+  top: -6px; }
+
+.jsPanel-connector-leftbottomcorner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: none;
+  border-radius: 50%;
+  left: calc(100% - 6px);
+  top: -6px; }
+
+/* container that takes the minified jsPanels */
+#jsPanel-replacement-container, .jsPanel-minimized-box {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row wrap-reverse;
+  -ms-flex-flow: row wrap-reverse;
+  flex-flow: row wrap-reverse;
+  background: transparent none repeat scroll 0 0;
+  bottom: 0;
+  height: auto;
+  left: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 9998; }
+  #jsPanel-replacement-container .jsPanel-replacement, .jsPanel-minimized-box .jsPanel-replacement {
+    width: 180px;
+    height: 40px;
+    margin: 1px 1px 0 0;
+    z-index: 9999; }
+    #jsPanel-replacement-container .jsPanel-replacement .jsPanel-hdr, .jsPanel-minimized-box .jsPanel-replacement .jsPanel-hdr {
+      padding: 5px 5px 5px 10px; }
+    #jsPanel-replacement-container .jsPanel-replacement .jsPanel-titlebar, .jsPanel-minimized-box .jsPanel-replacement .jsPanel-titlebar {
+      -webkit-box-flex: 1;
+      -webkit-flex: 1 1 0;
+      -ms-flex: 1 1 0;
+      flex: 1 1 0; }
+    #jsPanel-replacement-container .jsPanel-replacement .jsPanel-btn.jsPanel-btn-normalize, .jsPanel-minimized-box .jsPanel-replacement .jsPanel-btn.jsPanel-btn-normalize {
+      display: block; }
+
+.jsPanel-minimized-box {
+  position: absolute;
+  width: auto; }
+
+/* css for the modal backdrop ------------------------------- */
+.jsPanel-modal .jsPanel-hdr, .jsPanel-modal .jsPanel-ftr {
+  cursor: default; }
+
+.jsPanel-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; }
+
+/* css for the hints --------------------------------------- */
+.jsPanel-hint .jsPanel-hdr, .jsPanel-hint .jsPanel-ftr {
+  cursor: default; }
+
+/* css for the tooltips --------------------------------------- */
+.jsPanel-tooltip {
+  overflow: visible; }
+  .jsPanel-tooltip .jsPanel-hdr, .jsPanel-tooltip .jsPanel-ftr {
+    cursor: default; }
+
+/* helper classes to make .jsPanel-content a flex box */
+.flexOne {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap; }
+
+/* bootstrap adjustments */
+.jsPanel.panel-default, .jsPanel.panel-primary, .jsPanel.panel-info, .jsPanel.panel-success, .jsPanel.panel-warning, .jsPanel.panel-danger, .jsPanel.card.card-inverse {
+  box-shadow: 0 0 6px rgba(0, 33, 50, 0.1), 0 7px 25px rgba(17, 38, 60, 0.4); }
+
+.jsPanel-hdr.panel-heading {
+  border-bottom: none; }
+
+.jsPanel-title.panel-title .small, .jsPanel-title.panel-title small {
+  font-size: 75%; }
+
+/* bootstrap 4 adjustments */
+.jsPanel.card.card-inverse {
+  box-shadow: 0 0 6px rgba(0, 33, 50, 0.1), 0 7px 25px rgba(17, 38, 60, 0.4); }
+
+.card-default {
+  background: #f5f5f5; }
+
+.card-primary > .jsPanel-content.jsPanel-content-filled,
+.card-success > .jsPanel-content.jsPanel-content-filled,
+.card-info > .jsPanel-content.jsPanel-content-filled,
+.card-warning > .jsPanel-content.jsPanel-content-filled,
+.card-danger > .jsPanel-content.jsPanel-content-filled {
+  background: transparent;
+  color: #f5f5f5; }
+
+.card-default > .jsPanel-content.jsPanel-content-filled {
+  background: transparent;
+  color: #000000; }
+
+/* jQuery-UI adjustments */
+.ui-icon-gripsmall-diagonal-se {
+  background: none repeat scroll 0 0 transparent;
+  color: #fff; }
+
+.ui-icon-gripsmall-diagonal-se:before {
+  content: ""; }
+
+/* css3 animations */
+@keyframes jsPanelFadeIn {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+.jsPanelFadeIn {
+  opacity: 0;
+  animation: jsPanelFadeIn ease-in 1;
+  animation-fill-mode: forwards;
+  animation-duration: 600ms; }
+
+/* _themes_mdl.sass: 2015-12-23 18:56 */
+/* default ---------------------------------------------------------------------------------------------------------- */
+.jsPanel.jsPanel-theme-default,
+.jsPanel-replacement.jsPanel-theme-default {
+  background-color: #f5f5f5; }
+
+.jsPanel-hdr.jsPanel-theme-default * {
+  color: #000000; }
+.jsPanel-hdr.jsPanel-theme-default .jsPanel-hdr-toolbar {
+  border-top: 1px solid #e0e0e0; }
+.jsPanel-hdr.jsPanel-theme-default .jsPanel-headerbar .jsPanel-controlbar div span:hover {
+  color: #e0e0e0; }
+
+.jsPanel-content.jsPanel-theme-default {
+  border-top: 1px solid #e0e0e0; }
+
+.jsPanel-content.jsPanel-theme-default.jsPanel-content-filled {
+  background-color: #f5f5f5;
+  border-top: 1px solid #e0e0e0; }
+
+.jsPanel-content.jsPanel-theme-default.jsPanel-content-filledlight {
+  background-color: #fafafa; }
+
+/* primary ---------------------------------------------------------------------------------------------------------- */
+.jsPanel.jsPanel-theme-primary,
+.jsPanel-replacement.jsPanel-theme-primary {
+  background-color: #3f51b5; }
+
+.jsPanel-hdr.jsPanel-theme-primary * {
+  color: #ffffff; }
+.jsPanel-hdr.jsPanel-theme-primary .jsPanel-hdr-toolbar {
+  border-top: 1px solid #5c6bc0; }
+.jsPanel-hdr.jsPanel-theme-primary .jsPanel-headerbar .jsPanel-controlbar div span:hover {
+  color: #5c6bc0; }
+
+.jsPanel-content.jsPanel-theme-primary {
+  border-top: 1px solid #5c6bc0; }
+
+.jsPanel-content.jsPanel-theme-primary.jsPanel-content-filled {
+  background-color: #3f51b5;
+  border-top: 1px solid #5c6bc0;
+  color: #ffffff; }
+
+.jsPanel-content.jsPanel-theme-primary.jsPanel-content-filledlight {
+  background-color: #c5cae9;
+  color: #000000; }
+
+/* info ------------------------------------------------------------------------------------------------------------- */
+.jsPanel.jsPanel-theme-info,
+.jsPanel-replacement.jsPanel-theme-info {
+  background-color: #03a9f4; }
+
+.jsPanel-hdr.jsPanel-theme-info * {
+  color: #ffffff; }
+.jsPanel-hdr.jsPanel-theme-info .jsPanel-hdr-toolbar {
+  border-top: 1px solid #29b6f6; }
+.jsPanel-hdr.jsPanel-theme-info .jsPanel-headerbar .jsPanel-controlbar div span:hover {
+  color: #29b6f6; }
+
+.jsPanel-content.jsPanel-theme-info {
+  border-top: 1px solid #29b6f6; }
+
+.jsPanel-content.jsPanel-theme-info.jsPanel-content-filled {
+  background-color: #03a9f4;
+  border-top: 1px solid #29b6f6;
+  color: #ffffff; }
+
+.jsPanel-content.jsPanel-theme-info.jsPanel-content-filledlight {
+  background-color: #b3e5fc;
+  color: #000000; }
+
+/* success ---------------------------------------------------------------------------------------------------------- */
+.jsPanel.jsPanel-theme-success,
+.jsPanel-replacement.jsPanel-theme-success {
+  background-color: #43a047; }
+
+.jsPanel-hdr.jsPanel-theme-success * {
+  color: #ffffff; }
+.jsPanel-hdr.jsPanel-theme-success .jsPanel-hdr-toolbar {
+  border-top: 1px solid #66bb6a; }
+.jsPanel-hdr.jsPanel-theme-success .jsPanel-headerbar .jsPanel-controlbar div span:hover {
+  color: #a5d6a7; }
+
+.jsPanel-content.jsPanel-theme-success.jsPanel-content-filled {
+  background-color: #43a047;
+  border-top: 1px solid #66bb6a;
+  color: #ffffff; }
+
+.jsPanel-content.jsPanel-theme-success.jsPanel-content-filledlight {
+  background-color: #c8e6c9;
+  color: #000000; }
+
+/* warning ---------------------------------------------------------------------------------------------------------- */
+.jsPanel.jsPanel-theme-warning,
+.jsPanel-replacement.jsPanel-theme-warning {
+  background-color: #fb8c00; }
+
+.jsPanel-hdr.jsPanel-theme-warning * {
+  color: #000000; }
+.jsPanel-hdr.jsPanel-theme-warning .jsPanel-hdr-toolbar {
+  border-top: 1px solid #ffb74d; }
+.jsPanel-hdr.jsPanel-theme-warning .jsPanel-headerbar .jsPanel-controlbar div span:hover {
+  color: #ffcc80; }
+
+.jsPanel-content.jsPanel-theme-warning.jsPanel-content-filled {
+  background-color: #fb8c00;
+  border-top: 1px solid #ffb74d;
+  color: #000000; }
+
+.jsPanel-content.jsPanel-theme-warning.jsPanel-content-filledlight {
+  background-color: #ffe0b2;
+  color: #000000; }
+
+/* danger ----------------------------------------------------------------------------------------------------------- */
+.jsPanel.jsPanel-theme-danger,
+.jsPanel-replacement.jsPanel-theme-danger {
+  background-color: #f4511e; }
+
+.jsPanel-hdr.jsPanel-theme-danger * {
+  color: #ffffff; }
+.jsPanel-hdr.jsPanel-theme-danger .jsPanel-hdr-toolbar {
+  border-top: 1px solid #ff7043; }
+.jsPanel-hdr.jsPanel-theme-danger .jsPanel-headerbar .jsPanel-controlbar div span:hover {
+  color: #ffab91; }
+
+.jsPanel-content.jsPanel-theme-danger.jsPanel-content-filled {
+  background-color: #f4511e;
+  border-top: 1px solid #ff7043;
+  color: #ffffff; }
+
+.jsPanel-content.jsPanel-theme-danger.jsPanel-content-filledlight {
+  background-color: #ffccbc;
+  color: #000000; }
+
+/* custom theme example myblue -------------------------------------------------------------------------------------- */
+.jsPanel.jsPanel-theme-myblue,
+.jsPanel-replacement.jsPanel-theme-myblue {
+  background-color: #1565c0; }
+
+.jsPanel-hdr.jsPanel-theme-myblue * {
+  color: #ffff00; }
+.jsPanel-hdr.jsPanel-theme-myblue .jsPanel-hdr-toolbar {
+  border-top: 1px solid #ffff00; }
+.jsPanel-hdr.jsPanel-theme-myblue .jsPanel-headerbar .jsPanel-controlbar div span:hover {
+  color: #ffff00; }
+
+.jsPanel-content.jsPanel-theme-myblue {
+  background-color: #eceff1;
+  border-top: 1px solid #ffff00;
+  color: #000000; }
+
+.jsPanel-content.jsPanel-theme-myblue.jsPanel-content-filled {
+  background-color: #42a5f5;
+  border-top: 1px solid #ffff00;
+  color: #ffff00; }
+
+.jsPanel-content.jsPanel-theme-myblue.jsPanel-content-filledlight {
+  background-color: #bbdefb;
+  border-top: 1px solid #ffff00;
+  color: #e65100; }
+
+/*# sourceMappingURL=jquery.jspanel.css.map */

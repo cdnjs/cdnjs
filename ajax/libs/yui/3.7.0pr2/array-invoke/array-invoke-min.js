@@ -1,0 +1,1 @@
+YUI.add("array-invoke",function(b,a){b.Array.invoke=function(c,f){var e=b.Array(arguments,2,true),g=b.Lang.isFunction,d=[];b.Array.each(b.Array(c),function(j,h){if(j&&g(j[f])){d[h]=j[f].apply(j,e);}});return d;};},"@VERSION@",{"requires":["yui-base"]});

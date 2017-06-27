@@ -1,0 +1,9 @@
+/**
+ * angular-strap
+ * @version v2.2.4 - 2015-05-28
+ * @link http://mgcrea.github.io/angular-strap
+ * @author Olivier Louvignes <olivier@mg-crea.com> (https://github.com/mgcrea)
+ * @license MIT License, http://www.opensource.org/licenses/MIT
+ */
+'use strict';angular.module('mgcrea.ngStrap.alert',['mgcrea.ngStrap.modal']).provider('$alert',function(){var t=this.defaults={animation:'am-fade',prefixClass:'alert',prefixEvent:'alert',placement:null,template:'alert/alert.tpl.html',container:!1,element:null,backdrop:!1,keyboard:!0,show:!0,duration:!1,type:!1,dismissable:!0};this.$get=['$modal','$timeout',function(e,n){function a(a){var r={},i=angular.extend({},t,a);r=e(i),r.$scope.dismissable=!!i.dismissable,i.type&&(r.$scope.type=i.type);var l=r.show;return i.duration&&(r.show=function(){l(),n(function(){r.hide()},1e3*i.duration)}),r}return a}]}).directive('bsAlert',['$window','$sce','$alert',function(t,e,n){t.requestAnimationFrame||t.setTimeout;return{restrict:'EAC',scope:!0,link:function(t,a,r,i){var l={scope:t,element:a,show:!1};angular.forEach(['template','placement','keyboard','html','container','animation','duration','dismissable'],function(t){angular.isDefined(r[t])&&(l[t]=r[t])});var o=/^(false|0|)$/i;angular.forEach(['keyboard','html','container','dismissable'],function(t){angular.isDefined(r[t])&&o.test(r[t])&&(l[t]=!1)}),t.hasOwnProperty('title')||(t.title=''),angular.forEach(['title','content','type'],function(n){r[n]&&r.$observe(n,function(a,r){t[n]=e.trustAsHtml(a)})}),r.bsAlert&&t.$watch(r.bsAlert,function(e,n){angular.isObject(e)?angular.extend(t,e):t.content=e},!0);var s=n(l);a.on(r.trigger||'click',s.toggle),t.$on('$destroy',function(){s&&s.destroy(),l=null,s=null})}}}]);
+//# sourceMappingURL=../modules/alert.min.js.map

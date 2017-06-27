@@ -1,0 +1,147 @@
+/**
+ * Copyright 2014 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+.ima-ad-container {
+  top: 0px;
+  position: absolute;
+  display: block;
+}
+
+/* Move overlay when controls are active. */
+.video-js.vjs-user-inactive.vjs-playing .ima-ad-container {
+  top: 0px;
+}
+
+.video-js.vjs-user-active.vjs-playing .ima-ad-container {
+  top: -40px;
+}
+
+#ima-controls-div {
+  bottom:0px;
+  height: 37px;
+  position: absolute;
+  display: none;
+  opacity: 1;
+  background-color: rgba(7, 20, 30, .7);
+  background: -moz-linear-gradient(
+      bottom,
+      rgba(7, 20, 30, .7) 0%,
+      rgba(7, 20, 30, 0) 100%); /* FF3.6+ */
+  background: -webkit-gradient(
+      linear,
+      left bottom,
+      left top,
+      color-stop(0%,rgba(7, 20, 30, .7)),
+      color-stop(100%,rgba(7, 20, 30, 0))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(
+      bottom,
+      rgba(7, 20, 30, .7) 0%,
+      rgba(7, 20, 30, 0) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(bottom,
+    rgba(7, 20, 30, .7) 0%,
+    rgba(7, 20, 30, 0) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(bottom,
+    rgba(7, 20, 30, .7) 0%,
+    rgba(7, 20, 30, 0) 100%); /* IE10+ */
+  background: linear-gradient(to top,
+    rgba(7, 20, 30, .7) 0%,
+    rgba(7, 20, 30, 0) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(
+    startColorstr='#0007141E',
+    endColorstr='#07141E',GradientType=0 ); /* IE6-9 */
+}
+
+#ima-countdown-div {
+  height: 11px;
+  color: #FFFFFF;
+  text-shadow: 0 0 0.2em #000;
+}
+
+#ima-seek-bar-div {
+  top: 12px;
+  height: 3px;
+  position: absolute;
+  background: rgba(255, 255, 255, .4);
+}
+
+#ima-progress-div {
+  width: 0px;
+  height: 3px;
+  background-color: #ECC546;
+}
+
+#ima-countdown-div {
+  height: 10px;
+}
+
+#ima-play-pause-div, #ima-mute-div, #ima-fullscreen-div {
+  width: 35px;
+  height: 20px;
+  top: 11px;
+  left: 0px;
+  position: absolute;
+  color: #CCCCCC;
+  font-family: VideoJS;
+  font-size: 1.5em;
+  line-height: 2;
+  text-align: center;
+}
+
+#ima-mute-div {
+  left: auto;
+  right: 35px;
+}
+
+#ima-fullscreen-div {
+  left: auto;
+  right: 0px;
+}
+
+.ima-playing:before {
+  content: "\e002";
+}
+
+.ima-paused:before {
+  content: "\e001";
+}
+
+.ima-playing:hover:before, .ima-paused:hover:before {
+  text-shadow: 0 0 1em #fff;
+}
+
+.ima-non-muted:before {
+  content: "\e006";
+}
+
+.ima-muted:before {
+  content: "\e003";
+}
+
+.ima-non-muted:hover:before, .ima-muted:hover:before {
+  text-shadow: 0 0 1em #fff;
+}
+
+.ima-non-fullscreen:before {
+  content: "\e000";
+}
+
+.ima-fullscreen:before {
+  content: "\e00b";
+}
+
+.ima-non-fullscreen:hover:before, .ima-fullscreen:hover:before {
+  text-shadow: 0 0 1em #fff;
+}

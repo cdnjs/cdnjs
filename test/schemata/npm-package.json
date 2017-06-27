@@ -1,0 +1,79 @@
+{
+    "type": "object",
+    "name": "NPM package.json",
+    "description": "Package manifest file for Node.JS modules. Note that this is incomplete. http://npmjs.org/doc/json.html",
+    "properties": {
+        "filename": {
+            "type": "string",
+            "required": true,
+            "description": "This makes the correct path on the cdn."
+            },
+        "name": {
+            "type": "string",
+            "required": true,
+            "description": "The name and version together form an identifier that is assumed to be completely unique."
+            },
+        "version": {
+            "type": "string",
+            "required": false,
+            "description": "Version must be parseable by node-semver, which is bundled with npm as a dependency."
+            },
+        "description": {
+            "type": "string",
+            "required": true,
+            "format": "multiline"
+            },
+        "keywords": {
+            "type": "array",
+            "required": true,
+            "uniqueItems" : true,
+            "items": "string"
+            },
+        "homepage": {
+            "type": "string",
+            "format": "url"
+            },
+        "dependencies": {
+            "type": "object",
+            "uniqueItems" : true,
+            "items": {
+                "type": "string"
+                }
+            },
+        "repository": {
+            "type": "object",
+            "uniqueItems" : true,
+            "items": {
+                "type": "string"
+                }
+            },
+        "npmName": {
+            "type": "string"
+            },
+        "npmFileMap": {
+            "type": "array",
+            "uniqueItems" : true,
+            "items": "object"
+            },
+        "author": {
+            "type": ["string", "object"],
+            "uniqueItems" : true,
+            "items": {
+                "type": ["string", "object"]
+                }
+            },
+        "autoupdate": {
+            "type": "object"
+            },
+        "license": {
+            "type": ["string", "object"]
+            },
+        "licenses": {
+            "type": "array",
+            "uniqueItems" : true,
+            "items": {
+                "type": ["string", "object"]
+                }
+            }
+        }
+    }

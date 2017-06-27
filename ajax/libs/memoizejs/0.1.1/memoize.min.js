@@ -1,0 +1,2 @@
+!function(e,n){"function"==typeof define&&define.amd?define([],n):"object"==typeof exports?module.exports=n():e.memoize=n()}(this,function(){"use strict";var e=function(e){var n=JSON.stringify,t={},r=function(){var r=n(arguments);return r in t?t[r]:t[r]=e.apply(this,arguments)};return r.__cache=function(){return t.remove||(t.remove=function(){var e=n(arguments);return delete t[e]}),t}.call(this),r};return e});
+//# sourceMappingURL=memoize.min.js.map

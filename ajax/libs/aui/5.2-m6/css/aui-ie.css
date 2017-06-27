@@ -1,0 +1,275 @@
+/*! AUI Flat Pack - version 5.2-m6 - generated 2013-05-29 03:12:37 -0400 */
+
+
+/**
+* The structure of this file pre-supposes two conditions:
+* - That the file is served via a conditional comment of [if lte IE 8] or [if lt IE 9]
+* - That de-bugging starts with IE8 and moves down through IE7 to IE6
+**/
+
+/** * Fixes for IE8, IE7 and IE6 * - each property should be written
+without CSS hacks * eg: 
+.dashboard {
+    margin: 0 0 2px 1px;
+}
+* **/
+.aui-blanket {
+    background: transparent url(bg-000-trans50.png) repeat;
+    position: fixed;
+}
+.aui-blanket-shim {
+    filter: alpha(opacity = 0);
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 2499;
+}
+
+.aui-dialog .dialog-blanket {
+    background: transparent url(bg-000-trans20.png) repeat;
+}
+/** * Fixes for IE7 and IE6 * - each property *must* be prefixed with
+an asterisk (*) * eg: 
+.dashboard {
+    *margin: 0 0 4px 2px;
+}
+* **/ 
+.aui-blanket {
+    *height: 100px;
+    *position: absolute;
+}
+
+/** * Fixes for IE6 only * - each property *must* be prefixed with an
+underscore (_) * eg: 
+.dashboard {
+    _margin: 0 0 0 1px;
+    _padding: 0 0
+    -3px 0;
+}
+* **/
+
+/**
+* The structure of this file pre-supposes two conditions:
+* - That the file is served via a conditional comment of [if lte IE 8] or [if lt IE 9]
+* - That de-bugging starts with IE8 and moves down through IE7 to IE6
+**/
+
+/**
+* Fixes for IE8, IE7 and IE6
+* - each property should be written without CSS hacks
+* eg: 
+.dashboard {
+    margin: 0 0 2px 1px;
+}
+*
+**/
+
+/* dropdown-shim */
+.dropdown-shim {
+    border: none;
+    display: none;
+    position: absolute;
+    z-index: 2000;
+}
+
+/**
+* Fixes for IE7 and IE6
+* - each property *must* be prefixed with an asterisk (*)
+* eg: 
+.dashboard {
+    *margin: 0 0 4px 2px;
+}
+*
+**/
+
+.aui-dd-parent .aui-dropdown {
+    *margin: 0;
+}
+
+/**
+* Fixes for IE6 only
+* - each property *must* be prefixed with an underscore (_)
+* eg: 
+.dashboard {
+    _margin: 0 0 0 1px;
+    _padding: 0 0 -3px 0;
+}
+*
+**/
+/* IE6 spits out screwy heights on the LIs without the zoom for hasLayout - which then blows out the width unless constrained on the parent - and then the hover effects look lame. This remedies all that - somewhat */
+.aui-dd-parent .aui-dropdown {
+    _width: 1%;
+}
+.aui-dd-parent .aui-dropdown li.dropdown-item a.item-link {
+    _zoom: 1;
+}
+.aui-dd-parent .aui-dropdown li.dropdown-item a.item-link:hover,
+.aui-dd-parent .aui-dropdown li.dropdown-item a.item-link:active,
+.aui-dd-parent .aui-dropdown li.dropdown-item a.item-link focus {
+    _background: #fff;
+    _text-decoration: none;
+}
+
+/* Firefox needs specific padding values to size the select but they cause IE8 to clip text so we need different paddings for IE */
+form.aui .select {
+    padding: 4px 5px;
+}
+form.aui .upfile {
+    border: 1px solid #ccc;
+}
+
+/*
+ Because IE8 doesn't support max-width correctly when using border-box alternate widths need to be provided.
+ - essentially these are the same as the content-box areas. The below values are the main widths minus the horizontal padding and borders (5px and 1px on each side = 12px)
+*/
+
+form.aui .text,
+form.aui .password,
+form.aui .textarea,
+form.aui .select,
+form.aui .multi-select {
+    max-width: 238px;
+}
+form.aui .short-field {
+    max-width: 63px;
+}
+form.aui .medium-field {
+    max-width: 153px;
+}
+form.aui .long-field {
+    max-width: 488px;
+}
+form.aui .full-width-field {
+    max-width: none;
+}
+/* This file is served to all versions of IE up to IE9, no hacks as all versions need the one thing it contains :) */
+.inline-dialog-shim {
+    border: none;
+    display: block;
+    height: 0;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 0;
+    z-index: -2;
+}
+
+/* @pdl.dir this space intentionally left blank. */
+.aui-toolbar .toolbar-group .first .toolbar-trigger,
+.aui-toolbar .toolbar-group .first .toolbar-trigger[aria-disabled="true"]:hover {
+    border-left-width: 1px;
+}
+
+/* note different selectors for active Dropdown/Dropdown2 */
+.aui-toolbar .toolbar-group .active .toolbar-trigger,
+.aui-toolbar .toolbar-group .toolbar-trigger.active,
+.aui-toolbar .toolbar-group .first .toolbar-trigger:hover {
+    border-left-width: 1px;
+}
+
+.aui-toolbar .toolbar-group .toolbar-item-link {
+    border-left-width: 0;
+}
+
+.aui-toolbar .toolbar-group {
+    *padding-bottom: 10px;
+}
+
+.aui-toolbar .toolbar-item,
+.aui-toolbar .toolbar-trigger,
+.aui-toolbar .toolbar-trigger span {
+    *white-space: nowrap !important; 
+}
+
+.aui-toolbar .toolbar-group button.toolbar-trigger,
+.aui-toolbar .toolbar-group input.toolbar-trigger {
+    *width: 1%; /* prevent buttons collapsing in ie7 */
+}
+
+.aui-toolbar .toolbar-group button.toolbar-trigger,
+.aui-toolbar .toolbar-group input.toolbar-trigger {
+    *width: 1%; /* prevent buttons collapsing in ie7 */
+}
+
+/* START IE7 border shenanigins
+   - remove the mysteriously-added black border on buttons
+   - put the border on the item instead
+   - has-buttons added to .toolbar-group containing buttons
+   - multi class selectors purely for human readability, IE7 only reads the last class
+*/
+.aui-toolbar button {
+    *border: 0 !important;
+    *margin: 0;
+    *padding: 0;
+}
+.aui-toolbar .toolbar-item.contains-button {
+    *border: 1px solid #ccc !important;
+    *height: 24px;
+    *padding: 0;
+}
+.aui-toolbar .toolbar-item.toolbar-item-link {
+    *border: 0 !important;
+}
+/* END IE7 border shenanigins */
+
+/* Added by forceRightSplitToRow(), removing float from left split pushes the right split to its own row */
+.toolbar-split-left.force-split {
+    float: none;
+}
+
+/* disabled triggers - IE8 screws up without this */
+
+.aui-toolbar .aui-dropdown2-trigger[aria-disabled="true"],
+.aui-toolbar .toolbar-group.disabled .toolbar-trigger,
+.aui-toolbar .toolbar-item.disabled .toolbar-trigger,
+.aui-toolbar .disabled .toolbar-trigger,
+.aui-toolbar .toolbar-trigger.disabled {
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; /*IE8*/
+    filter: alpha(opacity=50); /* IE6-7 */
+}
+
+.aui-toolbar .disabled .first .toolbar-trigger,
+.aui-toolbar .disabled .toolbar-item.first .toolbar-trigger,
+.aui-toolbar .toolbar-group .disabled.first .toolbar-trigger,
+.aui-toolbar .toolbar-group .first .disabled.toolbar-trigger {
+    border-left-width: 1px;
+}
+
+.aui-toolbar .toolbar-splitbutton .icon-dropdown {
+    *display: block;
+    *height: 20px;
+    *float: none;
+    *width: 7px;
+}
+/*! AUI Toolbar2 IE Stylesheet */
+/* IE8 - swap the spacing around; doesn't wrap as nicely (last wrapped item doesn't align) 
+   but avoids permanently showing 20px extra on the right-aligned buttons. */
+.aui-toolbar2 .aui-toolbar2-secondary > .aui-buttons {
+    margin: 0 0 0 20px;
+}
+.aui-toolbar2 .aui-toolbar2-secondary > .aui-buttons:first-child {
+	margin-left: 0;
+}
+
+/**
+ * These overrides make up for the lack of box-shadow support in IE8. They:
+ *  - add the grey/white box around the dot
+ *  - pull the grey/white bar between the dots 1px closer to the dot so that they actually touch (wouldn't be needed except for webkit's weird rounding of fractional percentages)
+ */
+
+.aui-progress-tracker-step > span:before,
+.aui-progress-tracker-step > a:before {
+    border: 3px solid #f5f5f5;
+    margin-left: -8px;
+    top: 0;
+}
+.aui-progress-tracker-step + .aui-progress-tracker-step > span:after,
+.aui-progress-tracker-step + .aui-progress-tracker-step > a:after {
+    margin-left: -15px;
+    margin-right: 5px;
+}
+.aui-progress-tracker-inverted .aui-progress-tracker-step > span:before,
+.aui-progress-tracker-inverted .aui-progress-tracker-step > a:before {
+    border-color: #fff;
+}

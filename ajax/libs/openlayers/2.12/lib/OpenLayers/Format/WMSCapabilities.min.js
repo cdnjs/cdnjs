@@ -1,0 +1,1 @@
+OpenLayers.Format.WMSCapabilities=OpenLayers.Class(OpenLayers.Format.XML.VersionedOGC,{defaultVersion:"1.1.1",profile:null,CLASS_NAME:"OpenLayers.Format.WMSCapabilities"});

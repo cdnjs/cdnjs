@@ -1,0 +1,897 @@
+/*
+ *  jQuery Custombox v1.0.2 - 2013-10-08
+ *  jQuery Modal Window Effects.
+ *  http://dixso.github.io/custombox/
+ *  (c) 2013 Julio De La Calle - http://dixso.net - @dixso9
+ *
+ *  Under MIT License - http://www.opensource.org/licenses/mit-license.php
+ */
+
+/*
+ -------------------------------------------------
+ Overlay
+ -------------------------------------------------
+ */
+.custombox-overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+/*
+ -------------------------------------------------
+ Modal
+ -------------------------------------------------
+ */
+.custombox-modal,
+.custombox-error {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+.custombox-modal {
+    height: auto;
+    visibility: hidden;
+}
+
+/*
+ -------------------------------------------------
+ Error
+ -------------------------------------------------
+ */
+.custombox-error {
+    height: auto;
+    width: 200px;
+    height: 75px;
+    line-height: 75px;
+    text-align: center;
+    color: #F00;
+    font-weight: bold;
+    font-size: 14px;
+    background-color: #FFF;
+    border-radius: 5px;
+}
+
+/*
+ -------------------------------------------------
+ Actions
+ -------------------------------------------------
+ */
+.custombox-html {
+    overflow-y: hidden;
+}
+.custombox-scrollbar {
+    position: relative;
+    overflow: hidden;
+}
+.custombox-show {
+    visibility: visible;
+}
+.custombox-show ~ .custombox-overlay {
+    opacity: 1;
+    visibility: visible;
+}
+.custombox-perspective,
+.custombox-perspective body {
+    height: 100%;
+    overflow: hidden;
+}
+.custombox-perspective body  {
+    -webkit-perspective: 600px;
+    -moz-perspective: 600px;
+    -ms-perspective: 600px;
+    -o-perspective: 600px;
+    perspective: 600px;
+}
+.custombox-container {
+    min-height: 100%;
+}
+
+/*
+ -------------------------------------------------
+ Fade in and scale up
+ -------------------------------------------------
+ */
+.custombox-fadein .custombox-modal-content {
+    -webkit-transform: scale(0.7);
+    -moz-transform: scale(0.7);
+    -ms-transform: scale(0.7);
+    -o-transform: scale(0.7);
+    transform: scale(0.7);
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    transition: all 0.3s;
+    opacity: 0;
+}
+.custombox-show.custombox-fadein .custombox-modal-content {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+}
+
+/*
+ -------------------------------------------------
+Slide and stick to top
+ -------------------------------------------------
+ */
+.custombox-slide-top {
+    top: 0;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+.custombox-slide-top .custombox-modal-content {
+    -webkit-transform: translateY(-200%);
+    -moz-transform: translateY(-200%);
+    -ms-transform: translateY(-200%);
+    -o-transform: translateY(-200%);
+    transform: translateY(-200%);
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+    opacity: 0;
+}
+.custombox-show.custombox-slide-top .custombox-modal-content {
+    -webkit-transform: translateY(0%);
+    -moz-transform: translateY(0%);
+    -ms-transform: translateY(0%);
+    -o-transform: translateY(0%);
+    transform: translateY(0%);
+    border-radius: 0 0 3px 3px;
+    opacity: 1;
+}
+
+/*
+ -------------------------------------------------
+ Slide from the right
+ -------------------------------------------------
+ */
+.custombox-slide-right .custombox-modal-content {
+    -webkit-transform: translateX(20%);
+    -moz-transform: translateX(20%);
+    -ms-transform: translateX(20%);
+    -o-transform: translateX(20%);
+    transform: translateX(20%);
+    opacity: 0;
+    -webkit-transition: all 0.3s cubic-bezier(0.25, 0.5, 0.5, 0.9);
+    -moz-transition: all 0.3s cubic-bezier(0.25, 0.5, 0.5, 0.9);
+    -o-transition: all 0.3s cubic-bezier(0.25, 0.5, 0.5, 0.9);
+    -ms-transition: all 0.3s cubic-bezier(0.25, 0.5, 0.5, 0.9);
+    transition: all 0.3s cubic-bezier(0.25, 0.5, 0.5, 0.9);
+}
+.custombox-show.custombox-slide-right .custombox-modal-content {
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/*
+ -------------------------------------------------
+Slide from the bottom
+ -------------------------------------------------
+ */
+.custombox-slide-bottom .custombox-modal-content {
+    -webkit-transform: translateY(20%);
+    -moz-transform: translateY(20%);
+    -ms-transform: translateY(20%);
+    transform: translateY(20%);
+    opacity: 0;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.custombox-show.custombox-slide-bottom .custombox-modal-content {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/*
+ -------------------------------------------------
+Slide and stick to center
+ -------------------------------------------------
+ */
+.custombox-slide-center .custombox-modal-content {
+    -webkit-transform: translateY(-200%);
+    -moz-transform: translateY(-200%);
+    -ms-transform: translateY(-200%);
+    -o-transform: translateY(-200%);
+    transform: translateY(-200%);
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+    opacity: 0;
+}
+.custombox-show.custombox-slide-center .custombox-modal-content {
+    -webkit-transform: translateY(0%);
+    -moz-transform: translateY(0%);
+    -ms-transform: translateY(0%);
+    -o-transform: translateY(0%);
+    transform: translateY(0%);
+    border-radius: 0 0 3px 3px;
+    opacity: 1;
+}
+
+/*
+ -------------------------------------------------
+Newspaper
+ -------------------------------------------------
+ */
+.custombox-newspaper .custombox-modal-content {
+    -webkit-transform: scale(0) rotate(720deg);
+    -moz-transform: scale(0) rotate(720deg);
+    -ms-transform: scale(0) rotate(720deg);
+    -o-transform: scale(0) rotate(720deg);
+    transform: scale(0) rotate(720deg);
+    opacity: 0;
+}
+.custombox-show.custombox-newspaper ~ .custombox-overlay,
+.custombox-newspaper .custombox-modal-content {
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+}
+.custombox-show.custombox-newspaper .custombox-modal-content {
+    -webkit-transform: scale(1) rotate(0deg);
+    -moz-transform: scale(1) rotate(0deg);
+    -moz-transform: scale(1) rotate(0deg);
+    -o-transform: scale(1) rotate(0deg);
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+}
+
+/*
+ -------------------------------------------------
+Fall
+ -------------------------------------------------
+ */
+.custombox-fall.custombox-modal {
+    -webkit-perspective: 1300px;
+    -moz-perspective: 1300px;
+    -o-perspective: 1300px;
+    -ms-perspective: 1300px;
+    perspective: 1300px;
+}
+.custombox-fall .custombox-modal-content {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: translateZ(600px) rotateX(20deg);
+    -moz-transform: translateZ(600px) rotateX(20deg);
+    -ms-transform: translateZ(600px) rotateX(20deg);
+    -o-transform: translateZ(600px) rotateX(20deg);
+    transform: translateZ(600px) rotateX(20deg);
+    opacity: 0;
+}
+.custombox-show.custombox-fall .custombox-modal-content {
+    -webkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    -ms-transition: all 0.3s ease-in;
+    -o-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+    -webkit-transform: translateZ(0) rotateX(0deg);
+    -moz-transform: translateZ(0) rotateX(0deg);
+    -ms-transform: translateZ(0) rotateX(0deg);
+    -o-transform: translateZ(0) rotateX(0deg);
+    transform: translateZ(0) rotateX(0deg);
+    opacity: 1;
+}
+
+/*
+ -------------------------------------------------
+Side fall
+ -------------------------------------------------
+ */
+.custombox-sidefall.custombox-modal {
+    -webkit-perspective: 1300px;
+    -moz-perspective: 1300px;
+    -ms-perspective: 1300px;
+    -o-perspective: 1300px;
+    perspective: 1300px;
+}
+.custombox-sidefall .custombox-modal-content {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: translate(30%) translateZ(600px) rotate(10deg);
+    -moz-transform: translate(30%) translateZ(600px) rotate(10deg);
+    -ms-transform: translate(30%) translateZ(600px) rotate(10deg);
+    -o-transform: translate(30%) translateZ(600px) rotate(10deg);
+    transform: translate(30%) translateZ(600px) rotate(10deg);
+    opacity: 0;
+}
+.custombox-show.custombox-sidefall .custombox-modal-content {
+    -webkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    -ms-transition: all 0.3s ease-in;
+    -o-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+    -webkit-transform: translate(0%) translateZ(0) rotate(0deg);
+    -moz-transform: translate(0%) translateZ(0) rotate(0deg);
+    -ms-transform: translate(0%) translateZ(0) rotate(0deg);
+    -o-transform: translate(0%) translateZ(0) rotate(0deg);
+    transform: translate(0%) translateZ(0) rotate(0deg);
+    opacity: 1;
+}
+
+/*
+ -------------------------------------------------
+Blur
+ -------------------------------------------------
+ */
+.custombox-show.custombox-blur ~ .custombox-container * {
+    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+    color: transparent;
+}
+.custombox-show.custombox-blur ~ .custombox-container img {
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: blur(10px);
+}
+.custombox-blur .custombox-modal-content {
+    -webkit-transform: translateY(-5%);
+    -moz-transform: translateY(-5%);
+    -ms-transform: translateY(-5%);
+    -o-transform: translateY(-5%);
+    transform: translateY(-5%);
+    opacity: 0;
+}
+.custombox-blur .custombox-modal-content,
+.custombox-show.custombox-blur ~ .custombox-container {
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.custombox-show.custombox-blur .custombox-modal-content {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -o-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/*
+ -------------------------------------------------
+3D Flip horizontal
+ -------------------------------------------------
+ */
+.custombox-flip-horizontal.custombox-modal {
+    -webkit-perspective: 1300px;
+    -moz-perspective: 1300px;
+    -ms-perspective: 1300px;
+    -o-perspective: 1300px;
+    perspective: 1300px;
+}
+.custombox-flip-horizontal .custombox-modal-content {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: rotateY(-70deg);
+    -moz-transform: rotateY(-70deg);
+    -ms-transform: rotateY(-70deg);
+    -o-transform: rotateY(-70deg);
+    transform: rotateY(-70deg);
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+    opacity: 0;
+}
+.custombox-show.custombox-flip-horizontal .custombox-modal-content {
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    -o-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+    opacity: 1;
+}
+
+/*
+ -------------------------------------------------
+3D Flip vertical
+ -------------------------------------------------
+ */
+.custombox-flip-vertical.custombox-modal {
+    -webkit-perspective: 1300px;
+    -moz-perspective: 1300px;
+    -ms-perspective: 1300px;
+    -o-perspective: 1300px;
+    perspective: 1300px;
+}
+.custombox-flip-vertical .custombox-modal-content {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: rotateX(-70deg);
+    -moz-transform: rotateX(-70deg);
+    -ms-transform: rotateX(-70deg);
+    -o-transform: rotateX(-70deg);
+    transform: rotateX(-70deg);
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+    opacity: 0;
+}
+.custombox-show.custombox-flip-vertical .custombox-modal-content {
+    -webkit-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+    -ms-transform: rotateX(0deg);
+    -o-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+    opacity: 1;
+}
+
+/*
+ -------------------------------------------------
+3D Sign
+ -------------------------------------------------
+ */
+.custombox-sign.custombox-modal {
+    -webkit-perspective: 1300px;
+    -moz-perspective: 1300px;
+    -ms-perspective: 1300px;
+    -o-perspective: 1300px;
+    perspective: 1300px;
+}
+.custombox-sign .custombox-modal-content {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: rotateX(-60deg);
+    -moz-transform: rotateX(-60deg);
+    -ms-transform: rotateX(-60deg);
+    -o-transform: rotateX(-60deg);
+    transform: rotateX(-60deg);
+    -webkit-transform-origin: 50% 0;
+    -moz-transform-origin: 50% 0;
+    -ms-transform-origin: 50% 0;
+    -o-transform-origin: 50% 0;
+    transform-origin: 50% 0;
+    opacity: 0;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.custombox-show.custombox-sign .custombox-modal-content {
+    -webkit-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+    -ms-transform: rotateX(0deg);
+    -o-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+    opacity: 1;
+}
+
+/*
+ -------------------------------------------------
+Super scaled
+ -------------------------------------------------
+ */
+.custombox-superscaled .custombox-modal-content {
+    -webkit-transform: scale(2);
+    -moz-transform: scale(2);
+    -ms-transform: scale(2);
+    -o-transform: scale(2);
+    transform: scale(2);
+    opacity: 0;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.custombox-show.custombox-superscaled .custombox-modal-content {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+}
+
+/*
+ -------------------------------------------------
+3D Slit
+ -------------------------------------------------
+ */
+.custombox-slit.custombox-modal {
+    -webkit-perspective: 1300px;
+    -moz-perspective: 1300px;
+    -ms-perspective: 1300px;
+    -o-perspective: 1300px;
+    perspective: 1300px;
+}
+.custombox-slit .custombox-modal-content {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: translateZ(-3000px) rotateY(90deg);
+    -moz-transform: translateZ(-3000px) rotateY(90deg);
+    -ms-transform: translateZ(-3000px) rotateY(90deg);
+    -o-transform: translateZ(-3000px) rotateY(90deg);
+    transform: translateZ(-3000px) rotateY(90deg);
+    opacity: 0;
+}
+.custombox-show.custombox-slit .custombox-modal-content {
+    -webkit-animation: slit .7s forwards ease-out;
+    -moz-animation: slit .7s forwards ease-out;
+    -ms-animation: slit .7s forwards ease-out;
+    -o-animation: slit .7s forwards ease-out;
+    animation: slit .7s forwards ease-out;
+}
+@-webkit-keyframes slit {
+    50% { -webkit-transform: translateZ(-250px) rotateY(89deg); opacity: .5; -webkit-animation-timing-function: ease-out;}
+    100% { -webkit-transform: translateZ(0) rotateY(0deg); opacity: 1; }
+}
+@-moz-keyframes slit {
+    50% { -moz-transform: translateZ(-250px) rotateY(89deg); opacity: .5; -moz-animation-timing-function: ease-out;}
+    100% { -moz-transform: translateZ(0) rotateY(0deg); opacity: 1; }
+}
+@-ms-keyframes slit {
+    50% { -ms-transform: translateZ(-250px) rotateY(89deg); opacity: .5; -ms-animation-timing-function: ease-out;}
+    100% { -ms-transform: translateZ(0) rotateY(0deg); opacity: 1; }
+}
+@-o-keyframes slit {
+    50% { -o-transform: translateZ(-250px) rotateY(89deg); opacity: .5; -o-animation-timing-function: ease-out;}
+    100% { -o-transform: translateZ(0) rotateY(0deg); opacity: 1; }
+}
+@keyframes slit {
+    50% { transform: translateZ(-250px) rotateY(89deg); opacity: 1; animation-timing-function: ease-out;}
+    100% { transform: translateZ(0) rotateY(0deg); opacity: 1; }
+}
+
+/*
+ -------------------------------------------------
+3D Rotate from bottom
+ -------------------------------------------------
+ */
+.custombox-rotate-bottom.custombox-modal {
+    -webkit-perspective: 1300px;
+    -moz-perspective: 1300px;
+    -ms-perspective: 1300px;
+    -o-perspective: 1300px;
+    perspective: 1300px;
+}
+.custombox-rotate-bottom .custombox-modal-content {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: translateY(100%) rotateX(90deg);
+    -moz-transform: translateY(100%) rotateX(90deg);
+    -ms-transform: translateY(100%) rotateX(90deg);
+    -o-transform: translateY(100%) rotateX(90deg);
+    transform: translateY(100%) rotateX(90deg);
+    -webkit-transform-origin: 0 100%;
+    -moz-transform-origin: 0 100%;
+    -ms-transform-origin: 0 100%;
+    -o-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+    opacity: 0;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+.custombox-show.custombox-rotate-bottom .custombox-modal-content {
+    -webkit-transform: translateY(0%) rotateX(0deg);
+    -moz-transform: translateY(0%) rotateX(0deg);
+    -ms-transform: translateY(0%) rotateX(0deg);
+    -o-transform: translateY(0%) rotateX(0deg);
+    transform: translateY(0%) rotateX(0deg);
+    opacity: 1;
+}
+
+/*
+ -------------------------------------------------
+3D Rotate in from left
+ -------------------------------------------------
+ */
+.custombox-rotate-left.custombox-modal {
+    -webkit-perspective: 1300px;
+    -moz-perspective: 1300px;
+    -ms-perspective: 1300px;
+    -o-perspective: 1300px;
+    perspective: 1300px;
+}
+.custombox-rotate-left .custombox-modal-content {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: translateZ(100px) translateX(-30%) rotateY(90deg);
+    -moz-transform: translateZ(100px) translateX(-30%) rotateY(90deg);
+    -ms-transform: translateZ(100px) translateX(-30%) rotateY(90deg);
+    -o-transform: translateZ(100px) translateX(-30%) rotateY(90deg);
+    transform: translateZ(100px) translateX(-30%) rotateY(90deg);
+    -webkit-transform-origin: 0 100%;
+    -moz-transform-origin: 0 100%;
+    -ms-transform-origin: 0 100%;
+    -o-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+    opacity: 0;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.custombox-show.custombox-rotate-left .custombox-modal-content {
+    -webkit-transform: translateZ(0px) translateX(0%) rotateY(0deg);
+    -moz-transform: translateZ(0px) translateX(0%) rotateY(0deg);
+    -ms-transform: translateZ(0px) translateX(0%) rotateY(0deg);
+    -o-transform: translateZ(0px) translateX(0%) rotateY(0deg);
+    transform: translateZ(0px) translateX(0%) rotateY(0deg);
+    opacity: 1;
+}
+
+/*
+ -------------------------------------------------
+Slide in from bottom with perspective on container
+ -------------------------------------------------
+ */
+.custombox-show.custombox-letmein ~ .custombox-container {
+    height: 100%;
+    overflow: hidden;
+    -webkit-transition: -webkit-transform 0.3s;
+    -moz-transition: -moz-transform 0.3s;
+    -ms-transition: -moz-transform 0.3s;
+    -o-transition: -moz-transform 0.3s;
+    transition: transform 0.3s;
+}
+.custombox-show.custombox-letmein ~ .custombox-container,
+.custombox-show.custombox-letmein ~ .custombox-overlay  {
+    -webkit-transform: rotateX(-2deg);
+    -moz-transform: rotateX(-2deg);
+    -ms-transform: rotateX(-2deg);
+    -o-transform: rotateX(-2deg);
+    transform: rotateX(-2deg);
+    -webkit-transform-origin: 50% 0%;
+    -moz-transform-origin: 50% 0%;
+    -ms-transform-origin: 50% 0%;
+    -o-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+.custombox-letmein .custombox-modal-content {
+    opacity: 0;
+    -webkit-transform: translateY(200%);
+    -moz-transform: translateY(200%);
+    -ms-transform: translateY(200%);
+    -o-transform: translateY(200%);
+    transform: translateY(200%);
+}
+.custombox-show.custombox-letmein .custombox-modal-content {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+    -webkit-transition: all 0.3s 0.2s;
+    -moz-transition: all 0.3s 0.2s;
+    -ms-transition: all 0.3s 0.2s;
+    -o-transition: all 0.3s 0.2s;
+    transition: all 0.3s 0.2s;
+}
+
+/*
+ -------------------------------------------------
+Slide from right with perspective on container
+ -------------------------------------------------
+ */
+.custombox-show.custombox-makeway ~ .custombox-container {
+    height: 100%;
+    overflow: hidden;
+}
+.custombox-show.custombox-makeway ~ .custombox-overlay {
+    background: rgba(143,27,15,0.8);
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+}
+.custombox-show.custombox-makeway ~ .custombox-container,
+.custombox-show.custombox-makeway ~ .custombox-overlay {
+    -webkit-transform-style: preserve-3d;
+    -webkit-transform-origin: 0% 50%;
+    -webkit-animation: rotateRightSideFirst 0.5s forwards ease-in;
+    -moz-transform-style: preserve-3d;
+    -moz-transform-origin: 0% 50%;
+    -moz-animation: rotateRightSideFirst 0.5s forwards ease-in;
+    -ms-transform-style: preserve-3d;
+    -ms-transform-origin: 0% 50%;
+    -ms-animation: rotateRightSideFirst 0.5s forwards ease-in;
+    -o-transform-style: preserve-3d;
+    -o-transform-origin: 0% 50%;
+    -o-animation: rotateRightSideFirst 0.5s forwards ease-in;
+    transform-style: preserve-3d;
+    transform-origin: 0% 50%;
+    animation: rotateRightSideFirst 0.5s forwards ease-in;
+}
+@-webkit-keyframes rotateRightSideFirst {
+    50% { -webkit-transform: translateZ(-50px) rotateY(5deg); -webkit-animation-timing-function: ease-out; }
+    100% { -webkit-transform: translateZ(-200px); }
+}
+@-moz-keyframes rotateRightSideFirst {
+    50% { -moz-transform: translateZ(-50px) rotateY(5deg); -moz-animation-timing-function: ease-out; }
+    100% { -moz-transform: translateZ(-200px); }
+}
+@-ms-keyframes rotateRightSideFirst {
+    50% { -ms-transform: translateZ(-50px) rotateY(5deg); -ms-animation-timing-function: ease-out; }
+    100% { -ms-transform: translateZ(-200px); }
+}
+@-o-keyframes rotateRightSideFirst {
+    50% { -o-transform: translateZ(-50px) rotateY(5deg); -o-animation-timing-function: ease-out; }
+    100% { -o-transform: translateZ(-200px); }
+}
+@keyframes rotateRightSideFirst {
+    50% { transform: translateZ(-50px) rotateY(5deg); animation-timing-function: ease-out; }
+    100% { transform: translateZ(-200px); }
+}
+.custombox-makeway .custombox-modal-content {
+    -webkit-transform: translateX(200%);
+    -moz-transform: translateX(200%);
+    -ms-transform: translateX(200%);
+    -o-transform: translateX(200%);
+    transform: translateX(200%);
+    opacity: 0;
+}
+.custombox-show.custombox-makeway .custombox-modal-content {
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+    -webkit-transition: all 0.5s 0.1s;
+    -moz-transition: all 0.5s 0.1s;
+    -ms-transition: all 0.5s 0.1s;
+    -o-transition: all 0.5s 0.1s;
+    transition: all 0.5s 0.1s;
+}
+
+/*
+ -------------------------------------------------
+Slip in from the top with perspective on container
+ -------------------------------------------------
+ */
+.custombox-show.custombox-slip ~ .custombox-container {
+    height: 100%;
+    overflow: hidden;
+}
+.custombox-show.custombox-slip ~ .custombox-overlay {
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+}
+.custombox-show.custombox-slip ~ .custombox-container,
+.custombox-show.custombox-slip ~ .custombox-overlay {
+    -webkit-transform-style: preserve-3d;
+    -webkit-transform-origin: 50% 100%;
+    -webkit-animation: OpenTop 0.5s forwards ease-in;
+    -moz-transform-style: preserve-3d;
+    -moz-transform-origin: 50% 100%;
+    -moz-animation: OpenTop 0.5s forwards ease-in;
+    -ms-transform-style: preserve-3d;
+    -ms-transform-origin: 50% 100%;
+    -ms-animation: OpenTop 0.5s forwards ease-in;
+    -o-transform-style: preserve-3d;
+    -o-transform-origin: 50% 100%;
+    -o-animation: OpenTop 0.5s forwards ease-in;
+    transform-style: preserve-3d;
+    transform-origin: 50% 100%;
+    animation: OpenTop 0.5s forwards ease-in;
+}
+@-webkit-keyframes OpenTop {
+    50% {
+        -webkit-transform: rotateX(10deg);
+        -webkit-animation-timing-function: ease-out;
+    }
+}
+@-moz-keyframes OpenTop {
+    50% {
+        -moz-transform: rotateX(10deg);
+        -moz-animation-timing-function: ease-out;
+    }
+}
+@-ms-keyframes OpenTop {
+    50% {
+        -ms-transform: rotateX(10deg);
+        -ms-animation-timing-function: ease-out;
+    }
+}
+@-o-keyframes OpenTop {
+    50% {
+        -o-transform: rotateX(10deg);
+        -o-animation-timing-function: ease-out;
+    }
+}
+@keyframes OpenTop {
+    50% {
+        transform: rotateX(10deg);
+        animation-timing-function: ease-out;
+    }
+}
+.custombox-slip .custombox-modal-content {
+    -webkit-transform: translateY(-200%);
+    -moz-transform: translateY(-200%);
+    -ms-transform: translateY(-200%);
+    -o-transform: translateY(-200%);
+    transform: translateY(-200%);
+    opacity: 0;
+}
+.custombox-show.custombox-slip .custombox-modal-content {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+    -webkit-transition: all 0.5s 0.1s;
+    -moz-transition: all 0.5s 0.1s;
+    -ms-transition: all 0.5s 0.1s;
+    -o-transition: all 0.5s 0.1s;
+    transition: all 0.5s 0.1s;
+}

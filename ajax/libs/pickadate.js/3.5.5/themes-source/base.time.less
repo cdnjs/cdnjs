@@ -1,0 +1,119 @@
+
+/* ==========================================================================
+   $BASE-TIME-PICKER
+   ========================================================================== */
+
+@import "_variables.less";
+
+
+/**
+ * The list of times.
+ */
+.picker__list {
+    list-style: none;
+    padding: 0.75em 0 4.2em;
+    margin: 0;
+}
+
+
+/**
+ * The times on the clock.
+ */
+.picker__list-item {
+    border-bottom: 1px solid @border-grey-light;
+    border-top: 1px solid @border-grey-light;
+    margin-bottom: -1px; // Prevent border from doubling up.
+    position: relative;
+    background: @bg-white;
+    padding: .75em 1.25em;
+
+    // For `large` screens, reduce the padding to show more in view.
+    @media ( min-height: @breakpoint-large ) {
+        padding: .5em 1em;
+    }
+}
+
+/* Hovered time */
+.picker__list-item:hover {
+    .picker-item-hovered;
+    border-color: @blue;
+    z-index: 10;
+}
+
+/* Highlighted and hovered/focused time */
+.picker__list-item--highlighted {
+    .picker-item-highlighted;
+    z-index: 10;
+}
+.picker__list-item--highlighted:hover,
+.picker--focused .picker__list-item--highlighted {
+    .picker-item-hovered;
+}
+
+/* Selected and hovered/focused time */
+.picker__list-item--selected,
+.picker__list-item--selected:hover,
+.picker--focused .picker__list-item--selected {
+    .picker-item-selected;
+    z-index: 10;
+}
+
+/* Disabled time */
+.picker__list-item--disabled,
+.picker__list-item--disabled:hover,
+.picker--focused .picker__list-item--disabled {
+    .picker-item-disabled;
+    border-color: @border-grey-light;
+    z-index: auto;
+}
+
+
+
+
+/**
+ * The clear button
+ */
+.picker--time {
+
+    .picker__button--clear {
+        display: block;
+        width: 80%;
+        margin: 1em auto 0;
+        padding: 1em 1.25em;
+
+        background: none;
+        border: 0;
+
+        font-weight: 500;
+        font-size: .67em;
+        text-align: center;
+        text-transform: uppercase;
+        color: #666;
+    }
+
+    .picker__button--clear:hover,
+    .picker__button--clear:focus {
+        .picker-item-hovered;
+        background: @clear-red;
+        border-color: @clear-red;
+        cursor: pointer;
+        color: @white;
+        outline: none;
+    }
+
+    .picker__button--clear:before {
+        top: -.25em;
+        color: #666;
+        font-size: 1.25em;
+        font-weight: bold;
+    }
+
+    .picker__button--clear:hover:before,
+    .picker__button--clear:focus:before {
+        color: @white;
+        border-color: @white;
+    }
+}
+
+
+

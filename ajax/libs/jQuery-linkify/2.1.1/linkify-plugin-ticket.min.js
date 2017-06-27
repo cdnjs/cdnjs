@@ -1,0 +1,1 @@
+"use strict";!function(n){var t=function(){function n(n){function t(n){this.v=n}var r=n.scanner.TOKENS,i=n.parser.TOKENS.Base,e=n.parser.start;n.inherits(i,t,{type:"ticket",isLink:!0});var s=e.jump(r.POUND),a=new n.parser.State(t);s.on(r.NUM,a)}return n}();t(n)}(linkify);

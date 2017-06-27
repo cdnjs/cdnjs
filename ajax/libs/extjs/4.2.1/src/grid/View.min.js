@@ -1,0 +1,1 @@
+Ext.define("Ext.grid.View",{extend:"Ext.view.Table",alias:"widget.gridview",stripeRows:true,autoScroll:true});

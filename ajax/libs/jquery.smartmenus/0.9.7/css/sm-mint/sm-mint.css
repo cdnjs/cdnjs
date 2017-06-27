@@ -1,0 +1,320 @@
+/*
+---------------------------------------------------------------
+  Note that styles you apply to the main menu items are inherited by the sub menus items too.
+  If you'd like to avoid this, you could use child selectors (not supported by IE6) - for example:
+  .sm-mint > li > a { ... } instead of .sm-mint a { ... }
+---------------------------------------------------------------*/
+
+
+/* Menu box
+===================*/
+
+	.sm-mint {
+		border-bottom:2px solid #8db863;
+		background:#fff;
+	}
+	.sm-mint-vertical {
+		border-right:2px solid #8db863;
+		border-bottom:0;
+	}
+	.sm-mint ul {
+		padding:8px 0;
+		background:#F6FFED;
+		-moz-border-radius:0 4px 4px 4px;
+		-webkit-border-radius:0 4px 4px 4px;
+		border-radius:0 4px 4px 4px;
+		-moz-box-shadow:0 4px 3px rgba(0,0,0,0.25);
+		-webkit-box-shadow:0 4px 3px rgba(0,0,0,0.25);
+		box-shadow:0 4px 3px rgba(0,0,0,0.25);
+	}
+	.sm-mint-vertical ul,
+	.sm-mint ul ul {
+		-moz-border-radius:4px;
+		-webkit-border-radius:4px;
+		border-radius:4px;
+	}
+
+
+/* Menu items
+===================*/
+
+	.sm-mint a {
+		border-bottom:2px solid #fff;
+		padding:11px 20px 9px 20px;
+		color:#000;
+		font-size:16px;
+		line-height:17px;
+		font-family:Arial,sans-serif;
+		text-decoration:none;
+		-moz-border-radius:4px 4px 0 0;
+		-webkit-border-radius:4px 4px 0 0;
+		border-radius:4px 4px 0 0;
+	}
+	.sm-mint a:hover, .sm-mint a:focus, .sm-mint a:active {
+		border-bottom-color:#8db863;
+		background:#8db863;
+		color:#F6FFED;
+	}
+	.sm-mint a.highlighted {
+		border-bottom-color:#F6FFED !important;
+		background:#F6FFED;
+		color:#000;
+		-moz-box-shadow:0 4px 3px rgba(0,0,0,0.25);
+		-webkit-box-shadow:0 4px 3px rgba(0,0,0,0.25);
+		box-shadow:0 4px 3px rgba(0,0,0,0.25);
+	}
+	.sm-mint-vertical a {
+		-moz-border-radius:4px 0 0 4px;
+		-webkit-border-radius:4px 0 0 4px;
+		border-radius:4px 0 0 4px;
+	}
+	.sm-mint-vertical a:hover, .sm-mint-vertical a:focus, .sm-mint-vertical a:active,
+	.sm-mint-vertical a.highlighted {
+		border-bottom-color:#8db863 !important;
+		background:#8db863;
+		color:#F6FFED;
+		-moz-box-shadow:none;
+		-webkit-box-shadow:none;
+		box-shadow:none;
+	}
+	.sm-mint ul a {
+		border-bottom:0;
+		padding:10px 20px;
+		font-size:14px;
+		line-height:normal;
+		-moz-border-radius:0;
+		-webkit-border-radius:0;
+		border-radius:0;
+	}
+	.sm-mint ul a:hover, .sm-mint ul a:focus, .sm-mint ul a:active,
+	.sm-mint ul a.highlighted {
+		background:#8db863;
+		color:#F6FFED;
+		-moz-box-shadow:none;
+		-webkit-box-shadow:none;
+		box-shadow:none;
+	}
+	/* current items - add the class manually to some item or check the "markCurrentItem" script option */
+	.sm-mint a.current, .sm-mint a.current:hover, .sm-mint a.current:focus, .sm-mint a.current:active {
+		border-bottom-color:#8db863;
+	}
+	.sm-mint-vertical a.current, .sm-mint-vertical a.current:hover, .sm-mint-vertical a.current:focus, .sm-mint-vertical a.current:active {
+		border-right:2px solid #8db863;
+		border-bottom-color:#fff;
+	}
+	.sm-mint ul a.current, .sm-mint ul a.current:hover, .sm-mint ul a.current:focus, .sm-mint ul a.current:active {
+		border-right:0;
+		border-bottom:0;
+		font-weight:bold;
+	}
+	.sm-mint a.has-submenu {
+		padding-right:32px;
+	}
+
+
+/* Sub menu indicators
+===================*/
+
+	.sm-mint a span.sub-arrow {
+		position:absolute;
+		right:17px;
+		top:50%;
+		margin-top:-3px;
+		/* we will use one-side border to create a triangle so that we don't use a real background image, of course, you can use a real image if you like too */
+		width:0;
+		height:0;
+		overflow:hidden;
+		border-top:6px solid #8db863; /* tweak size of the arrow */
+		border-left:4px dashed transparent;
+		border-right:4px dashed transparent;
+	}
+	.sm-mint a:hover span.sub-arrow, .sm-mint a:focus span.sub-arrow, .sm-mint a:active span.sub-arrow {
+		border-top-color:#F6FFED;
+	}
+	.sm-mint a.highlighted span.sub-arrow {
+		border-top-color:#8db863;
+	}
+	.sm-mint-vertical a span.sub-arrow,
+ 	.sm-mint ul a span.sub-arrow {
+		right:15px;
+		margin-top:-4px;
+		border-left:6px solid #8db863; /* tweak size of the arrow */
+		border-top:4px dashed transparent;
+		border-bottom:4px dashed transparent;
+	}
+	.sm-mint-vertical a:hover span.sub-arrow, .sm-mint-vertical a:focus span.sub-arrow, .sm-mint-vertical a:active span.sub-arrow,
+	.sm-mint-vertical a.highlighted span.sub-arrow,
+ 	.sm-mint ul a:hover span.sub-arrow, .sm-mint ul a:focus span.sub-arrow, .sm-mint ul a:active span.sub-arrow,
+ 	.sm-mint ul a.highlighted span.sub-arrow {
+		border-left-color:#F6FFED;
+		border-top-color:transparent;
+	}
+
+
+/* Scrolling arrows containers for tall sub menus - test sub menu: "Sub test" -> "more..." in the default download package
+===================*/
+
+	.sm-mint span.scroll-up, .sm-mint span.scroll-down {
+		position:absolute;
+		display:none;
+		visibility:hidden;
+		overflow:hidden;
+		background:#F6FFED;
+		height:20px;
+		/* width and position will be automatically set by the script */
+	}
+	.sm-mint span.scroll-up-arrow, .sm-mint span.scroll-down-arrow {
+		position:absolute;
+		top:6px;
+		left:50%;
+		margin-left:-8px;
+		/* we will use one-side border to create a triangle so that we don't use a real background image, of course, you can use a real image if you like too */
+		width:0;
+		height:0;
+		overflow:hidden;
+		border-bottom:8px solid #8db863; /* tweak size of the arrow */
+		border-left:6px dashed transparent;
+		border-right:6px dashed transparent;
+	}
+	.sm-mint span.scroll-down-arrow {
+		border-top:8px solid #8db863; /* tweak size of the arrow */
+		border-bottom:0;
+	}
+
+
+/*
+---------------------------------------------------------------
+  Responsiveness
+  These will make the sub menus collapsible when the screen width is too small.
+---------------------------------------------------------------*/
+
+
+/* decrease horizontal main menu items left/right padding to avoid wrapping */
+@media screen and (max-width: 850px) {
+	.sm-mint:not(.sm-mint-vertical) > li > a {
+		padding-left:12px;
+		padding-right:12px;
+	}
+	.sm-mint:not(.sm-mint-vertical) > li > a.has-submenu {
+		padding-right:24px;
+	}
+	.sm-mint:not(.sm-mint-vertical) a span.sub-arrow {
+		right:9px;
+	}
+}
+@media screen and (max-width: 720px) {
+	.sm-mint:not(.sm-mint-vertical) > li > a {
+		padding-left:6px;
+		padding-right:6px;
+	}
+	.sm-mint:not(.sm-mint-vertical) > li > a.has-submenu {
+		padding-right:18px;
+	}
+	.sm-mint:not(.sm-mint-vertical) a span.sub-arrow {
+		right:3px;
+	}
+}
+
+@media screen and (max-width: 640px) {
+
+	/* The following will make the sub menus collapsible for small screen devices (it's not recommended editing these) */
+	ul.sm-mint{width:auto !important;}
+	ul.sm-mint ul{display:none;position:static !important;top:auto !important;left:auto !important;margin-left:0 !important;margin-top:0 !important;width:auto !important;min-width:0 !important;max-width:none !important;}
+	ul.sm-mint>li{float:none;}
+	ul.sm-mint>li>a,ul.sm-mint ul.sm-nowrap>li>a{white-space:normal;}
+	ul.sm-mint iframe{display:none;}
+
+	/* Uncomment this rule to disable completely the sub menus for small screen devices */
+	/*.sm-mint ul, .sm-mint span.sub-arrow, .sm-mint iframe {
+		display:none !important;
+	}*/
+
+
+/* Menu box
+===================*/
+
+	.sm-mint {
+		border-top:2px solid #8db863;
+		border-bottom:2px solid #8db863;
+		border-right:0;
+	}
+	.sm-mint ul {
+		border:0;
+		padding:0;
+		/* darken the background of the sub menus */
+		background:rgba(141,184,99,0.2);
+		-moz-border-radius:0 !important;
+		-webkit-border-radius:0 !important;
+		border-radius:0 !important;
+		-moz-box-shadow:none;
+		-webkit-box-shadow:none;
+		box-shadow:none;
+	}
+
+
+/* Menu items
+===================*/
+
+	.sm-mint a {
+		border:0 !important;
+		padding:13px 23px !important;
+		background:transparent !important;
+		color:#000 !important;
+		-moz-border-radius:0 !important;
+		-webkit-border-radius:0 !important;
+		border-radius:0 !important;
+		-moz-box-shadow:none !important;
+		-webkit-box-shadow:none !important;
+		box-shadow:none !important;
+	}
+	.sm-mint a.current {
+		font-weight:bold;
+	}
+	/* add some text indentation for the 2+ level sub menu items */
+	.sm-mint ul a {
+		border-left:8px solid transparent !important;
+	}
+	.sm-mint ul ul a {
+		border-left:16px solid transparent !important;
+	}
+	.sm-mint ul ul ul a {
+		border-left:24px solid transparent !important;
+	}
+	.sm-mint ul ul ul ul a {
+		border-left:32px solid transparent !important;
+	}
+	.sm-mint ul ul ul ul ul a {
+		border-left:40px solid transparent !important;
+	}
+
+
+/* Sub menu indicators
+===================*/
+
+	.sm-mint a span.sub-arrow {
+		right:auto !important;
+		margin-top:-7px !important;
+		margin-left:-16px !important;
+		border-left:9px solid #8db863 !important; /* tweak size of the arrow */
+		border-top:6px dashed transparent !important;
+		border-bottom:6px dashed transparent !important;
+	}
+	/* Hide sub indicator when item is expanded - we enable the item link when it's expanded */
+	.sm-mint a.highlighted span.sub-arrow {
+		display:none !important;
+	}
+
+
+
+
+/* Items separators
+===================*/
+
+	.sm-mint li {
+		border-top:1px solid rgba(141,184,99,0.2);
+	}
+	.sm-mint li:first-child {
+		border-top:0;
+	}
+
+}

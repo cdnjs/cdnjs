@@ -1,0 +1,2 @@
+/* Lazy Load XT 1.1.0 | MIT License */
+!function(a){a.lazyLoadXT.updateEvent+=" collapsibleexpand filterablefilter pagechange panelopen popupafteropen tabsactivate"}(window.jQuery||window.Zepto||window.$);

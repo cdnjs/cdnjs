@@ -1,0 +1,1 @@
+YUI.add("lang/datatable-base_en",function(A){A.Intl.add("datatable-base","en",{summary:"foo",caption:"test"});},"@VERSION@");

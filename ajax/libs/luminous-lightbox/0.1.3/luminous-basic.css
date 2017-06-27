@@ -1,0 +1,120 @@
+@keyframes lum-fade {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes lum-fadeZoom {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes lum-loader-rotate {
+  0% { transform: translate(-50%, -50%) rotate(0); }
+  50% { transform: translate(-50%, -50%) rotate(-180deg); }
+  100% { transform: translate(-50%, -50%) rotate(-360deg); }
+}
+
+@keyframes lum-loader-before {
+  0% { transform: scale(1); }
+  10% { transform: scale(1.2) translateX(6px); }
+  25% { transform: scale(1.3) translateX(8px); }
+  40% { transform: scale(1.2) translateX(6px); }
+  50% { transform: scale(1); }
+  60% { transform: scale(0.8) translateX(6px); }
+  75% { transform: scale(0.7) translateX(8px); }
+  90% { transform: scale(0.8) translateX(6px); }
+  100% { transform: scale(1); }
+}
+
+@keyframes lum-loader-after {
+  0% { transform: scale(1); }
+  10% { transform: scale(1.2) translateX(-6px); }
+  25% { transform: scale(1.3) translateX(-8px); }
+  40% { transform: scale(1.2) translateX(-6px); }
+  50% { transform: scale(1); }
+  60% { transform: scale(0.8) translateX(-6px); }
+  75% { transform: scale(0.7) translateX(-8px); }
+  90% { transform: scale(0.8) translateX(-6px); }
+  100% { transform: scale(1); }
+}
+
+.lum-lightbox {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.lum-lightbox-inner {
+  top: 2.5%;
+  right: 2.5%;
+  bottom: 2.5%;
+  left: 2.5%;
+}
+
+.lum-lightbox-loader {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 66px;
+  height: 20px;
+  animation: lum-loader-rotate 1800ms infinite linear;
+}
+
+.lum-lightbox-loader:before, .lum-lightbox-loader:after {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 50%;
+  margin-top: -10px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.lum-lightbox-loader:before {
+  left: 0;
+  animation: lum-loader-before 1800ms infinite linear;
+}
+
+.lum-lightbox-loader:after {
+  right: 0;
+  animation: lum-loader-after 1800ms infinite linear;
+  animation-delay: -900ms;
+}
+
+.lum-lightbox.lum-opening {
+  animation: lum-fade 180ms ease-out;
+}
+
+.lum-lightbox.lum-opening .lum-lightbox-inner {
+  animation: lum-fadeZoom 180ms ease-out;
+}
+
+.lum-lightbox.lum-closing {
+  animation: lum-fade 300ms ease-in;
+  animation-direction: reverse;
+}
+
+.lum-lightbox.lum-closing .lum-lightbox-inner {
+  animation: lum-fadeZoom 300ms ease-in;
+  animation-direction: reverse;
+}
+
+/* This media query makes screens less than 460px wide display in a "fullscreen"-esque mode. Users can then scroll around inside the lightbox to see the entire image. */
+@media (max-width: 460px) {
+  .lum-lightbox-inner {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .lum-lightbox-inner img {
+    max-width: none;
+    max-height: none;
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+    display: block;
+  }
+}

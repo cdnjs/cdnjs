@@ -1,0 +1,1 @@
+(function(t,e){"use strict";function n(){return e.qoopido.initialize("support/element/svg",t,arguments)}"function"==typeof define&&define.amd?define(["../../support"],n):n()})(function(t,e,n,o,i){"use strict";return t.support.addTest("/element/svg",function(t){i.createElementNS&&i.createElementNS("http://www.w3.org/2000/svg","svg").createSVGRect?t.resolve():t.reject()})},window);

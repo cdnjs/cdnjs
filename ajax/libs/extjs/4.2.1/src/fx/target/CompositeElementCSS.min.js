@@ -1,0 +1,1 @@
+Ext.define("Ext.fx.target.CompositeElementCSS",{extend:"Ext.fx.target.CompositeElement",requires:["Ext.fx.target.ElementCSS"],setAttr:function(){return Ext.fx.target.ElementCSS.prototype.setAttr.apply(this,arguments)}});

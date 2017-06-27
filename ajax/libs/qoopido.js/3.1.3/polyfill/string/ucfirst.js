@@ -1,0 +1,1 @@
+(function(t){window.qoopido.register("polyfill/string/ucfirst",t)})(function(){"use strict";return String.prototype.ucfirst||(String.prototype.ucfirst=function(){var t=this;return t.charAt(0).toUpperCase()+t.slice(1)}),!0});

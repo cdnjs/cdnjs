@@ -1,0 +1,60 @@
+/*
+ * progressively 1.0.0
+ * https://github.com/thinker3197/progressively
+ * @license MIT licensed
+ *
+ * Copyright (C) 2016 Ashish
+ */
+
+.progressive {
+    overflow: hidden;
+    position: relative;
+    background: #efefef;
+}
+
+.progressive__img {
+    width: 100%;
+    height: 100%;
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+}
+
+.progressive--not-loaded {
+    filter: blur(30px);
+    -webkit-filter: blur(30px);
+    -ms-filter: blur(30px);
+}
+
+.progressive--is-loaded {
+    filter: blur(20px);
+    -webkit-filter: blur(20px);
+    -ms-filter: blur(20px);
+    -webkit-animation: sharpen 0.5s both;
+    animation: sharpen 0.5s both;
+}
+
+@-webkit-keyframes sharpen {
+    from {
+        filter: blur(20px);
+        -webkit-filter: blur(20px);
+        -ms-filter: blur(20px);
+    }
+    to {
+        filter: blur(0px);
+        -webkit-filter: blur(0px);
+        -ms-filter: blur(0px);
+    }
+}
+
+@keyframes sharpen {
+    from {
+        filter: blur(20px);
+        -webkit-filter: blur(20px);
+        -ms-filter: blur(20px);
+    }
+    to {
+        filter: blur(0px);
+        -webkit-filter: blur(0px);
+        -ms-filter: blur(0px);
+    }
+}

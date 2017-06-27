@@ -1,0 +1,1 @@
+(function(c){var d={},e=/\/(?:\d+\.){1,2}\d+\/|\D(?:\d+\.){1,2}\d+[^/]*\.(?:js|css)\W?/;c.on("fetch",function(b){b=b.uri;if(e.test(b)){var a=b.replace(e,"{version}"),a=d[a]||(d[a]=[]);a.push(b);1<a.length&&c.log("This module has multiple versions:\n"+a.join("\n"),"warn")}})})(seajs);

@@ -1,0 +1,1 @@
+YUI.add("arraylist-filter",function(b,a){b.mix(b.ArrayList.prototype,{filter:function(d){var c=[];b.Array.each(this._items,function(f,e){f=this.item(e);if(d(f)){c.push(f);}},this);return new this.constructor(c);}});},"@VERSION@",{"requires":["arraylist"]});

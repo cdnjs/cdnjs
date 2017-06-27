@@ -1,0 +1,1 @@
+(function(t){window.qoopido.register("function/unique/uuid",t)})(function(){"use strict";function t(){return"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(n,function(t){var e=0|16*Math.random(),n="x"===t?e:8|3&e;return n.toString(16)})}var e={},n=RegExp("[xy]","g");return function(){var n;do n=t();while(e[n]!==undefined);return e[n]=!0,n}});

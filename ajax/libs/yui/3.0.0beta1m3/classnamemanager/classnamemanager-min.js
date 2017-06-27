@@ -1,0 +1,1 @@
+YUI.add("classnamemanager",function(C){var B="classNamePrefix",D="classNameDelimiter",A=C.config;A[B]=A[B]||"yui";A[D]=A[D]||"-";C.ClassNameManager=function(){var E=A[B],F=A[D];return{getClassName:C.cached(function(I,G){var H=E+F+((G)?C.Array(arguments,0,true).join(F):I);return H.replace(/\s/g,"");})};}();},"@VERSION@");

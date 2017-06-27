@@ -1,0 +1,6 @@
+/*!
+ * angular-datatables - v0.5.3
+ * https://github.com/l-lin/angular-datatables
+ * License: MIT
+ */
+"undefined"!=typeof module&&"undefined"!=typeof exports&&module.exports===exports&&(module.exports="datatables.colreorder"),function(a,b,c,d){"use strict";function e(a,b){function c(a){function c(a,c){function e(){var a="R";return i.dom=i.dom?i.dom:b.dom,-1===i.dom.indexOf(a)&&(i.dom=a+i.dom),i.hasColReorder=!0,i}function f(a,b){return d.isString(a)&&(i.oColReorder=i.oColReorder&&null!==i.oColReorder?i.oColReorder:{},i.oColReorder[a]=b),i}function g(a){return d.isArray(a)&&i.withColReorderOption("aiOrder",a),i}function h(a){if(!d.isFunction(a))throw new Error("The reorder callback must be a function");return i.withColReorderOption("fnReorderCallback",a),i}var i=a(c);return i.withColReorder=e,i.withColReorderOption=f,i.withColReorderOrder=g,i.withColReorderCallback=h,i}var e=a.newOptions,f=a.fromSource,g=a.fromFnPromise;return a.newOptions=function(){return c(e)},a.fromSource=function(a){return c(f,a)},a.fromFnPromise=function(a){return c(g,a)},a}a.decorator("DTOptionsBuilder",c),c.$inject=["$delegate"]}d.module("datatables.colreorder",["datatables"]).config(e),e.$inject=["$provide","DT_DEFAULT_OPTIONS"]}(window,document,jQuery,angular);

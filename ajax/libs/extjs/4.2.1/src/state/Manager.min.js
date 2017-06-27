@@ -1,0 +1,1 @@
+Ext.define("Ext.state.Manager",{singleton:true,requires:["Ext.state.Provider"],constructor:function(){this.provider=new Ext.state.Provider()},setProvider:function(a){this.provider=a},get:function(b,a){return this.provider.get(b,a)},set:function(a,b){this.provider.set(a,b)},clear:function(a){this.provider.clear(a)},getProvider:function(){return this.provider}});

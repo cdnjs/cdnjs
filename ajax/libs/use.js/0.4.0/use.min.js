@@ -1,0 +1,5 @@
+/* Use AMD Plugin v0.4.0
+ * Copyright 2013, Tim Branyen (@tbranyen)
+ * use.js may be freely distributed under the MIT license.
+ */
+(function(n){var t={};define({version:"0.4.0",load:function(i,r,u,f){var e,o;if(f||(f=require.rawConfig),e=f.use&&f.use[i],!e)throw new TypeError("Module '"+i+"' is undefined or does not have a `use` config. Make sure it exists, add a `use` config, or don't use use! on it");o=t[i]={deps:e.deps||[],attach:e.attach||e.exports||e.init};(Array.isArray?Array.isArray(e):e.length)&&(o.deps=e,o.attach=undefined);r(o.deps||[],function(){var t=arguments;n.curl&&(i="js!"+i);r([i],function(){var i=o.attach;return f.isBuild?u():typeof i=="function"?u(i.apply(n,t)):u(n[i])})})},write:function(n,i,r){var u=t[i],e=u.deps,f={attach:null,deps:""};f.attach=typeof u.attach=="function"?u.attach.toString():["function() {","return typeof ",String(u.attach),' !== "undefined" ? ',String(u.attach)," : void 0;","}"].join("");e.length&&(f.deps="'"+e.toString().split(",").join("','")+"'");r(["define('",n,"!",i,"', ","[",f.deps,"], ",f.attach,");\n"].join(""))}})})(this);

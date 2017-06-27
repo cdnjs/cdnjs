@@ -1,0 +1,2 @@
+/*! Qoopido.js library 3.7.4, 2015-08-14 | https://github.com/dlueth/qoopido.js | (c) 2015 Dirk Lueth */
+!function(o,r){r.qoopido.register("pool/array",o,["../pool"])}(function(o,r,t,n){"use strict";var e=o.pool.extend({_dispose:function(o){return o.length=0,o},_obtain:function(){return[]}});return r.pool=r.pool||{},r.pool.array=e.create(),e},this);

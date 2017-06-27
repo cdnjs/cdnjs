@@ -1,0 +1,5 @@
+// Backbone.Wreqr, v0.0.0
+// Copyright (c)2012 Derick Bailey, Muted Solutions, LLC.
+// Distributed under MIT license
+// http://github.com/marionettejs/backbone.wreqr
+Backbone.Wreqr=function(e,t,n){"option strict";var r={};return r.Handlers=function(e,t){var n=function(){"use strict";this._handlers={}};return n.extend=e.Model.extend,t.extend(n.prototype,{addHandler:function(e,t,n){var r={callback:t,context:n};this._handlers[e]=r},getHandler:function(e){var t=this._handlers[e];if(!t)throw new Error("Handler not found for '"+e+"'");return function(){return t.callback.apply(t.context,arguments)}},removeHandler:function(e){delete this._handlers[e]},removeAllHandlers:function(){this._handlers={}}}),n}(e,n),r.Commands=function(e){return e.Handlers.extend({execute:function(e,t){this.getHandler(e)(t)}})}(r),r.RequestResponse=function(e){return e.Handlers.extend({request:function(e,t){return this.getHandler(e)(t)}})}(r),r.EventAggregator=function(e,t){var n=function(){};return n.extend=e.Model.extend,t.extend(n.prototype,e.Events),n}(e,n),r}(Backbone,Backbone.Marionette,_);

@@ -1,0 +1,168 @@
+.mdtTable {
+  font-size: 15px;
+  /* 12sp Roboto Medium, 54% black */
+  /* optional animation of sort icons: add class 'animate-sort-icon' to mdt-header-row to activate animation */
+  /* 64dp card header height */
+  /* 56do for last row */
+  /* column padding */
+  /* 48dp row height */
+  /* 13sp Roboto Regular, 87% black */
+  /* border separation color */
+  /* INTERACTION */
+  /* default icon color */
+  /* virtual repeat needed classes */
+}
+.mdtTable table {
+  width: 100%;
+}
+.mdtTable table:focus {
+  outline: none;
+}
+.mdtTable td, .mdtTable th {
+  padding: 0;
+  margin: 0;
+}
+.mdtTable th {
+  font-size: 12px;
+  font-weight: 500;
+  color: #757575;
+  white-space: nowrap;
+  /* prevent ink ripple bleeding */
+  position: relative;
+  /* no pointer cursor when disabled, could be not-allowed but i think that indication is to strong */
+  /* remove the default blue outline in Chrome for consistent button-like behaviour */
+  /* when hoverSortIcons on a non-sorted column*/
+}
+.mdtTable th.clickable {
+  cursor: pointer;
+}
+.mdtTable th[disabled] {
+  cursor: auto;
+}
+.mdtTable th:focus {
+  outline: none;
+}
+.mdtTable th .hoverSortIcons ng-md-icon {
+  visibility: hidden;
+  width: 16px;
+  height: 16px;
+  fill: #b3b3b3;
+}
+.mdtTable th .hoverSortIcons ng-md-icon svg {
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+.mdtTable th:hover .hoverSortIcons ng-md-icon {
+  visibility: visible;
+}
+.mdtTable th .sortedColumn {
+  /* when hoverSortIcons on a sorted column*/
+  /* sort icon rotated -90 degrees for descending sort */
+}
+.mdtTable th .sortedColumn .hoverSortIcons ng-md-icon {
+  display: none;
+}
+.mdtTable th .sortedColumn ng-md-icon {
+  /* specified 16px is a fix now cause angular materia generates a 24x24 icon even the passed value is 16  */
+  width: 16px;
+  height: 16px;
+  fill: #212121;
+  /* sort icon rotated 90 degrees for ascending sort (default) */
+}
+.mdtTable th .sortedColumn ng-md-icon svg {
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+.mdtTable th .sortedColumn.descending ng-md-icon > svg {
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+.mdtTable thead tr.animate-sort-icon .sortedColumn ng-md-icon svg {
+  -webkit-transition: 0.3s linear all;
+  transition: 0.3s linear all;
+}
+.mdtTable .mdt-header, .mdtTable .mdt-header-alternate {
+  height: 64px;
+  padding-left: 24px;
+  padding-right: 14px;
+}
+.mdtTable .mdt-header md-button, .mdtTable .mdt-header-alternate md-button {
+  margin-left: 24px;
+}
+.mdtTable .mdt-header ng-md-icon, .mdtTable .mdt-header-alternate ng-md-icon {
+  fill: #757575;
+}
+.mdtTable .mdt-header-alternate {
+  background-color: #e3edfd;
+}
+.mdtTable .mdt-header-alternate .alternate-text {
+  color: #0D47A1;
+}
+.mdtTable .mdt-footer, .mdtTable tr th {
+  height: 56px;
+}
+.mdtTable .mdt-footer .mdt-pagination, .mdtTable tr th .mdt-pagination {
+  font-size: 12px;
+  color: #757575;
+}
+.mdtTable .mdt-footer .mdt-pagination md-input-container, .mdtTable tr th .mdt-pagination md-input-container {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.mdtTable .checkboxCell {
+  width: 18px;
+  /*the next cell should not have just 24px padding */
+}
+.mdtTable .checkboxCell md-checkbox {
+  margin: 0;
+  padding: 0;
+}
+.mdtTable .checkboxCell + td, .mdtTable .checkboxCell + th {
+  padding-left: 24px;
+}
+.mdtTable tr td {
+  padding: 0;
+  height: 48px;
+  font-size: 13px;
+  color: #212121;
+}
+.mdtTable td:first-child, .mdtTable th:first-child {
+  padding: 0 0 0 24px;
+}
+.mdtTable td:last-child, .mdtTable th:last-child {
+  padding-right: 24px;
+}
+.mdtTable .column {
+  padding-left: 56px;
+}
+.mdtTable .leftAlignedColumn {
+  text-align: left;
+}
+.mdtTable .rightAlignedColumn {
+  text-align: right;
+}
+.mdtTable tr th {
+  border-bottom: solid 1px #DDDDDD;
+}
+.mdtTable tr td {
+  border-bottom: solid 1px #DDDDDD;
+}
+.mdtTable tr:hover td {
+  background: #EEEEEE;
+}
+.mdtTable .selectedRow td {
+  background: #F5F5F5;
+}
+.mdtTable ng-md-icon {
+  fill: #757575;
+}
+.mdtTable .virtualRepeatEnabled .originalHeader tr th {
+  height: 0px !important;
+  line-height: 0px !important;
+  margin: 0px !important;
+  overflow: hidden !important;
+  border: none !important;
+}
+.mdtTable .virtualRepeatEnabled .originalHeader md-checkbox {
+  display: none;
+}

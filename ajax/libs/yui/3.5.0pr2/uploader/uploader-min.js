@@ -1,0 +1,1 @@
+YUI.add("uploader",function(b){var a=b.config.win;if(a&&a.File&&a.FormData&&a.XMLHttpRequest){b.Uploader=b.UploaderHTML5;}else{b.Uploader=b.UploaderFlash;}},"@VERSION@",{requires:["uploader-flash","uploader-html5"]});

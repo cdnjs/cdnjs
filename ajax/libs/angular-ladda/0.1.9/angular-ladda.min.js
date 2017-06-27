@@ -1,0 +1,2 @@
+/*! angular-ladda 0.1.9 */
+!function(){"use strict";angular.module("angular-ladda",[]).directive("ladda",["$compile","$timeout",function(a,b){return{restrict:"A",link:function(c,d,e){d.addClass("ladda-button"),angular.isUndefined(d.attr("data-style"))&&d.attr("data-style","zoom-in");var f=Ladda.create(d[0]);b(function(){a(angular.element(d.children()[0]).contents())(c),c.$watch(e.ladda,function(a){a||angular.isNumber(a)?(f.isLoading()||f.start(),angular.isNumber(a)&&f.setProgress(a)):(f.stop(),e.ngDisabled&&d.attr("disabled",c.$eval(e.ngDisabled)))})},0)}}}])}();

@@ -1,0 +1,1 @@
+!function(e){"use strict";e.extend(!0,e.trumbowyg,{plugins:{pasteImage:{init:function(e){e.pasteHandlers.push(function(t){try{var a,n=(t.originalEvent||t).clipboardData.items;n[0].type.match(/^image\//)&&(a=new FileReader,a.onloadend=function(t){e.execCmd("insertImage",t.target.result,void 0,!0)},a.readAsDataURL(n[0].getAsFile()))}catch(i){}})}}}})}(jQuery);

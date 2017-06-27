@@ -1,0 +1,3 @@
+/**
+ * Select2 Japanese translation.
+ */(function(e){"use strict";e.extend(e.fn.select2.defaults,{formatNoMatches:function(){return"該当なし"},formatInputTooShort:function(e,t){var n=t-e.length;return"後"+n+"文字入れてください"},formatInputTooLong:function(e,t){var n=e.length-t;return"検索文字列が"+n+"文字長すぎます"},formatSelectionTooBig:function(e){return"最多で"+e+"項目までしか選択できません"},formatLoadMore:function(e){return"読込中･･･"},formatSearching:function(){return"検索中･･･"}})})(jQuery);

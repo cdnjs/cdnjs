@@ -1,0 +1,1 @@
+YUI.add("tabview-plugin",function(c,b){function a(){a.superclass.constructor.apply(this,arguments);}a.NAME="tabviewPlugin";a.NS="tabs";c.extend(a,c.TabviewBase);c.namespace("Plugin");c.Plugin.Tabview=a;},"@VERSION@",{"requires":["tabview-base"]});

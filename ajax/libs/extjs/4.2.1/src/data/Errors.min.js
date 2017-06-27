@@ -1,0 +1,1 @@
+Ext.define("Ext.data.Errors",{extend:"Ext.util.MixedCollection",isValid:function(){return this.length===0},getByField:function(d){var c=[],a,b;for(b=0;b<this.length;b++){a=this.items[b];if(a.field==d){c.push(a)}}return c}});

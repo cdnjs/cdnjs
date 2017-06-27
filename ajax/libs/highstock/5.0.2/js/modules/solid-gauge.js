@@ -1,0 +1,14 @@
+/*
+  Highcharts JS v5.0.2 (2016-10-26)
+ Solid angular gauge module
+
+ (c) 2010-2016 Torstein Honsi
+
+ License: www.highcharts.com/license
+*/
+(function(k){"object"===typeof module&&module.exports?module.exports=k:k(Highcharts)})(function(k){(function(d){var k=d.pInt,t=d.pick,l=d.each,u=d.isNumber,m;m={initDataClasses:function(a){var c=this,e=this.chart,h,r=0,f=this.options;this.dataClasses=h=[];l(a.dataClasses,function(g,b){g=d.merge(g);h.push(g);g.color||("category"===f.dataClassColor?(b=e.options.colors,g.color=b[r++],r===b.length&&(r=0)):g.color=c.tweenColors(d.color(f.minColor),d.color(f.maxColor),b/(a.dataClasses.length-1)))})},initStops:function(a){this.stops=
+a.stops||[[0,this.options.minColor],[1,this.options.maxColor]];l(this.stops,function(a){a.color=d.color(a[1])})},toColor:function(a,c){var e=this.stops,h,d,f=this.dataClasses,g,b;if(f)for(b=f.length;b--;){if(g=f[b],h=g.from,e=g.to,(void 0===h||a>=h)&&(void 0===e||a<=e)){d=g.color;c&&(c.dataClass=b);break}}else{this.isLog&&(a=this.val2lin(a));a=1-(this.max-a)/(this.max-this.min);for(b=e.length;b--&&!(a>e[b][0]););h=e[b]||e[b+1];e=e[b+1]||h;a=1-(e[0]-a)/(e[0]-h[0]||1);d=this.tweenColors(h.color,e.color,
+a)}return d},tweenColors:function(a,c,e){var d;c.rgba.length&&a.rgba.length?(a=a.rgba,c=c.rgba,d=1!==c[3]||1!==a[3],a=(d?"rgba(":"rgb(")+Math.round(c[0]+(a[0]-c[0])*(1-e))+","+Math.round(c[1]+(a[1]-c[1])*(1-e))+","+Math.round(c[2]+(a[2]-c[2])*(1-e))+(d?","+(c[3]+(a[3]-c[3])*(1-e)):"")+")"):a=c.input||"none";return a}};l(["fill","stroke"],function(a){d.Fx.prototype[a+"Setter"]=function(){this.elem.attr(a,m.tweenColors(d.color(this.start),d.color(this.end),this.pos))}});d.seriesType("solidgauge","gauge",
+{colorByPoint:!0},{bindAxes:function(){var a;d.seriesTypes.gauge.prototype.bindAxes.call(this);a=this.yAxis;d.extend(a,m);a.options.dataClasses&&a.initDataClasses(a.options);a.initStops(a.options)},drawPoints:function(){var a=this,c=a.yAxis,e=c.center,d=a.options,r=a.chart.renderer,f=d.overshoot,g=u(f)?f/180*Math.PI:0;l(a.points,function(b){var h=b.graphic,f=c.startAngleRad+c.translate(b.y,null,null,null,!0),l=k(t(b.options.radius,d.radius,100))*e[2]/200,n=k(t(b.options.innerRadius,d.innerRadius,
+60))*e[2]/200,p=c.toColor(b.y,b),q=Math.min(c.startAngleRad,c.endAngleRad),m=Math.max(c.startAngleRad,c.endAngleRad);"none"===p&&(p=b.color||a.color||"none");"none"!==p&&(b.color=p);f=Math.max(q-g,Math.min(m+g,f));!1===d.wrap&&(f=Math.max(q,Math.min(m,f)));q=Math.min(f,c.startAngleRad);f=Math.max(f,c.startAngleRad);f-q>2*Math.PI&&(f=q+2*Math.PI);b.shapeArgs=n={x:e[0],y:e[1],r:l,innerR:n,start:q,end:f,fill:p};b.startR=l;h?(b=n.d,h.animate(n),b&&(n.d=b)):b.graphic=r.arc(n).addClass("highcharts-point").attr({fill:p,
+"sweep-flag":0}).add(a.group)})},animate:function(a){a||(this.startAngleRad=this.yAxis.startAngleRad,d.seriesTypes.pie.prototype.animate.call(this,a))}})})(k)});

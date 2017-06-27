@@ -1,0 +1,106 @@
+/* snapper css snap points carousel */
+.snapper:before, .snapper_items:before, .snapper_nav:before, .snapper:after, .snapper_items:after, .snapper_nav:after {
+  content: " ";
+  display: table; }
+
+.snapper:after, .snapper_items:after, .snapper_nav:after {
+  clear: both; }
+
+.snapper, .snapper_items, .snapper_nav {
+  *zoom: 1; }
+
+.snapper {
+  position: relative; }
+
+.snapper:focus {
+  /* snapper div receives a tabindex to allow focus for keyboard arrow control */
+  outline: none; }
+
+/* to hide the scrollbar handles while still allowing touch and gesture scrolling, wrap the snapper pane in a div with a snapper_pane_crop class
+note: only use this if you have thumbnails or some other means of advancing slides for non-touchscreen devices */
+.enhanced .snapper_pane_crop {
+  overflow: hidden; }
+
+.enhanced .snapper_pane_crop .snapper_pane {
+  padding-bottom: 30px;
+  margin-bottom: -30px; }
+
+.snapper_pane {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+  /* snap to points */
+  -webkit-scroll-snap-type: mandatory;
+  -ms-scroll-snap-type: mandatory;
+  scroll-snap-type: mandatory;
+  /* x interval for snapping (100% of container width) */
+  -webkit-scroll-snap-points-x: repeat(100%);
+  -ms-scroll-snap-points-x: repeat(100%);
+  scroll-snap-points-x: repeat(100%);
+  position: relative; }
+
+.snapper_item {
+  width: 100%;
+  float: left;
+  position: relative; }
+
+.enhanced .snapper_item,
+.snapper-enhanced .snapper_item {
+  display: none; }
+
+.enhanced .snapper_item:first-child,
+.snapper-enhanced .snapper_item:first-child,
+.snapper-enhanced .snapper_item[style] {
+  display: block; }
+
+.snapper_nextprev,
+.snapper_nextprev_item {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+
+.snapper_nextprev_next,
+.snapper_nextprev_prev {
+  position: absolute;
+  top: 50%;
+  width: 50px;
+  height: 50px;
+  margin-top: -27px;
+  background: #fff;
+  border: 2px solid #333;
+  border-radius: 100%;
+  overflow: hidden;
+  text-indent: -999px;
+  opacity: .6; }
+
+.snapper_nextprev_next:hover,
+.snapper_nextprev_prev:hover,
+.snapper_nextprev_next:focus,
+.snapper_nextprev_prev:focus {
+  opacity: .4; }
+
+.snapper_nextprev_next {
+  right: -27px; }
+
+.snapper_nextprev_prev {
+  left: -27px; }
+
+.snapper_item img {
+  width: 100%; }
+
+.snapper_nav {
+  position: relative;
+  margin: 1em 0; }
+
+.snapper_nav a {
+  float: left;
+  margin: 0 10px 10px 0; }
+
+.snapper_nav a.snapper_nav_item-selected {
+  /* selected styles here */
+  outline: 1px solid black; }
+
+.snapper_nav img {
+  display: block; }

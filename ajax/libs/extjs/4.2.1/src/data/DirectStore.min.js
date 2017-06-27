@@ -1,0 +1,1 @@
+Ext.define("Ext.data.DirectStore",{extend:"Ext.data.Store",alias:"store.direct",requires:["Ext.data.proxy.Direct"],constructor:function(a){a=Ext.apply({},a);if(!a.proxy){var b={type:"direct",reader:{type:"json"}};Ext.copyTo(b,a,"paramOrder,paramsAsHash,directFn,api,simpleSortMode");Ext.copyTo(b.reader,a,"totalProperty,root,idProperty");a.proxy=b}this.callParent([a])}});

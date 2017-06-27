@@ -1,0 +1,90 @@
+.backdrop-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 21;
+  background-color: rgba(0,0,0,0.1);
+}
+.backdrop-panel.fadeout {
+  opacity: 0;
+  -webkit-transition: opacity 450ms linear;
+  transition: opacity 450ms linear;
+}
+.panel,
+.panel-full {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 25;
+  visibility: hidden;
+  background-color: #fff;
+}
+.panel {
+  width: 100%;
+  height: auto;
+  max-height: 80%;
+  top: auto;
+  -webkit-transform: translate3d(0, 100%, 0);
+          transform: translate3d(0, 100%, 0);
+  -webkit-transition: opacity 1ms, -webkit-transform 300ms;
+  transition: opacity 1ms, -webkit-transform 300ms;
+  transition: transform 300ms, opacity 1ms;
+  transition: transform 300ms, opacity 1ms, -webkit-transform 300ms;
+}
+.panel.active {
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+  opacity: 1;
+}
+.panel .content {
+  position: relative;
+  overflow: hidden;
+}
+.panel .content .list {
+  margin-bottom: 0;
+}
+.panel-full {
+  width: 100%;
+  height: 100%;
+  -webkit-transform: translate3d(0, 100%, 0);
+          transform: translate3d(0, 100%, 0);
+}
+.panel-full.active {
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+  opacity: 1;
+}
+.panel-full.active .content {
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+  -webkit-transition: -webkit-transform 300ms;
+  transition: -webkit-transform 300ms;
+  transition: transform 300ms;
+  transition: transform 300ms, -webkit-transform 300ms;
+}
+.panel-full .content {
+  -webkit-transform: translate3d(0, 50%, 0);
+          transform: translate3d(0, 50%, 0);
+  -webkit-transition: -webkit-transform 300ms;
+  transition: -webkit-transform 300ms;
+  transition: transform 300ms;
+  transition: transform 300ms, -webkit-transform 300ms;
+}
+.panel-closing {
+  -webkit-transition: -webkit-transform 300ms;
+  transition: -webkit-transform 300ms;
+  transition: transform 300ms;
+  transition: transform 300ms, -webkit-transform 300ms;
+}
+.panel .header-bar,
+.panel-full .header-bar {
+  visibility: hidden;
+}
+.panel.active .header-bar,
+.panel-full.active .header-bar {
+  visibility: visible;
+}

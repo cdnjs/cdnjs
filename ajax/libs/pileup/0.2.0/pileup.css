@@ -1,0 +1,155 @@
+/**
+ * This is the default stylesheet for pileup.js.
+ * In general, it attempts to look like IGV.
+ * You are encouraged to override anything you like.
+ */
+
+.pileup-root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.pileup-root > .track {
+  display: flex;
+  flex-direction: row;
+}
+.track-label {
+  flex: 0 0 100px;  /* fixed-width track labels */
+  text-align: right;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.9em;
+  position: relative;  /* make this an offset parent for positioning the label. */
+}
+.track-label > span {
+  padding-right: 5px;
+}
+/* bottom-justify these track labels */
+.track.reference .track-label > span,
+.track.variants .track-label > span
+{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.track-content {
+  flex: 1;  /* stretch to fill remaining space */
+}
+
+/* controls */
+.pileup-root > .controls {
+  flex: 0 0 30px;  /* fixed height */
+  margin-bottom: 0;  /* overrides browser default */
+}
+.pileup-root > .controls .zoom-controls {
+  display: inline-block;
+}
+.pileup-root > .controls .btn-zoom-out:before {
+  content: '-';
+}
+.pileup-root > .controls .btn-zoom-in:before {
+  content: '+';
+}
+
+/* reference track */
+.pileup-root > .reference {
+  flex: 0 0 20px;  /* fixed height */
+}
+
+.background {
+  fill: white;
+}
+.basepair.A, .basepair .A { fill: #188712; }
+.basepair.G, .basepair .G { fill: #C45C16; }
+.basepair.C, .basepair .C { fill: #0600F9; }
+.basepair.T, .basepair .T { fill: #F70016; }
+.basepair.U, .basepair .U { fill: #F70016; }
+.basepair text, text.basepair {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  text-anchor: middle;
+}
+.pair.loose text {
+  font-size: 24;
+}
+.pair.tight text {
+  font-size: 12;
+  font-weight: bold;
+}
+.pair text, .pair rect {
+  visibility: hidden;
+}
+.pair.loose text,
+.pair.tight text {
+  visibility: visible;
+}
+.pair.blocks rect {
+  visibility: visible;
+}
+
+/* gene track */
+.pileup-root > .genes {
+  flex: 0 0 50px;
+}
+.gene {
+  stroke-width: 1;
+  stroke: blue;
+}
+.gene text {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  text-anchor: middle;
+  stroke: black;
+  alignment-baseline: hanging;
+}
+#sense, #antisense .main {
+  stroke: blue;
+  fill: none;
+  stroke-width: 1;
+}
+#antisense .offset, #sense .offset {
+  stroke: white;
+  fill: none;
+  stroke-width: 1;
+}
+.exon {
+  fill: blue;
+  stroke: none;
+}
+
+/* pileup track */
+.pileup-root > .pileup {
+  flex: 1;  /* stretch to fill remaining space */
+  overflow-y: auto;
+}
+.pileup .alignment .match {
+  fill: #c8c8c8;  /* matches IGV */
+}
+.pileup text.basepair {
+  alignment-baseline: hanging;
+  font-size: 12;
+  font-weight: bold;
+}
+.pileup .insert {
+  stroke: rgb(97, 0, 216);  /* matches IGV */
+  stroke-width: 2;
+}
+.pileup .delete {
+  stroke: black;
+  stroke-width: 2;
+}
+.pileup .network-status {
+  position: absolute;
+  font-size: small;
+  background: #eee;
+  border: 1px solid #777;
+  padding: 2px;
+}
+
+/* variants */
+.pileup-root > .variants {
+  flex: 0 0 25px;  /* fixed height */
+}
+.variants rect {
+  fill: #ddd;
+  stroke: blue;
+}

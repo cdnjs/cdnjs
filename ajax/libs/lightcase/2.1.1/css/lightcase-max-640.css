@@ -1,0 +1,175 @@
+/*
+ * Lightcase - jQuery Plugin
+ * The smart and flexible Lightbox Plugin.
+ *
+ * @author		Cornel Boppart <cornel@bopp-art.com>
+ * @copyright	Author
+ *
+ * @version		2.1.1 (12/07/2015)
+ */
+
+/* Reduced layout for small devices */
+@media screen and (max-width: 640px) {
+
+	.lightcase-open body {
+		padding: 55px 0 70px 0;
+	}
+
+	.lightcase-open body > *:not([id*=lightcase-]) {
+		position: fixed !important;
+		top: -9999px !important;
+
+		width: 0 !important;
+		height: 0 !important;
+
+		overflow: hidden !important;
+	}
+
+	/* Overlay */
+	#lightcase-overlay {
+		background: #333;
+	}
+
+	/* Loading */
+	#lightcase-loading {
+		color: #aaa;
+	}
+
+	/* Case */
+	#lightcase-case {
+		font-family: arial, sans-serif;
+		font-size: 13px;
+		line-height: 18px;
+		text-align: left;
+
+		text-shadow: 0 0 10px rgba(0,0,0,0.5);
+	}
+
+	#lightcase-case:not([data-type=image]):not([data-type=video]):not([data-type=flash]):not([data-type=error]),
+	#lightcase-case:not([data-type=image]):not([data-type=video]):not([data-type=flash]):not([data-type=error]) .lightcase-contentInner,
+	#lightcase-case:not([data-type=image]):not([data-type=video]):not([data-type=flash]):not([data-type=error]) .lightcase-inlineWrap {
+		position: relative !important;
+
+		top: auto !important;
+		left: auto !important;
+
+		width: auto !important;
+		height: auto !important;
+
+		margin: 0 !important;
+		padding: 0 !important;
+
+		border: none;
+		background: none;
+	}
+
+	/*
+	 * Content - Extend with further selectors and colors in case you
+	 * have elements like <ul>, <li>, <span> or similar displayed in lightcase.
+	 */
+	#lightcase-case .lightcase-content h1,
+	#lightcase-case .lightcase-content h2,
+	#lightcase-case .lightcase-content h3,
+	#lightcase-case .lightcase-content h4,
+	#lightcase-case .lightcase-content h5,
+	#lightcase-case .lightcase-content h6,
+	#lightcase-case .lightcase-content p {
+		color: #aaa;
+	}
+
+	/* Additional info */
+	#lightcase-case .lightcase-info {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	#lightcase-case:not([data-type=image]):not([data-type=video]):not([data-type=flash]):not([data-type=error]) .lightcase-info {
+		position: static;
+	}
+
+	#lightcase-case:not([data-type=image]):not([data-type=video]):not([data-type=flash]):not([data-type=error]) .lightcase-content {
+		padding: 15px;
+		border: none;
+		background: none;
+
+		-webkit-box-shadow: none;
+		-moz-box-shadow: none;
+		-o-box-shadow: none;
+		box-shadow: none;
+	}
+	#lightcase-case:not([data-type=image]):not([data-type=video]):not([data-type=flash]):not([data-type=error]) .lightcase-contentInner,
+	#lightcase-case:not([data-type=image]):not([data-type=video]):not([data-type=flash]):not([data-type=error]) .lightcase-contentInner > * {
+		width: 100% !important;
+		max-width: none !important;
+	}
+
+	/*
+	 * Set auto height to each element except iframes, because of that
+	 * those cannot have a natural/native height and it must be especially defined.
+	 */
+	#lightcase-case:not([data-type=image]):not([data-type=video]):not([data-type=flash]):not([data-type=error]) .lightcase-contentInner > *:not(iframe) {
+		height: auto !important;
+		max-height: none !important;
+	}
+
+	/* Navigation */
+	.lightcase-open #lightcase-nav[data-ispartofsequence]:before {
+		content: '';
+		position: fixed;
+		z-index: 9998;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		height: 55px;
+
+		background: rgba(55,55,55,0.9);
+	}
+
+	#lightcase-nav a {
+		position: fixed;
+		z-index: 9999;
+		bottom: 15px;
+
+		outline: none;
+		cursor: pointer;
+		font-size: 24px;
+	}
+	#lightcase-nav a:hover {
+		text-shadow: 0 0 15px #fff;
+	}
+
+	/* Icon positioning */
+	#lightcase-nav .lightcase-icon-close {
+		position: absolute;
+		z-index: 9997;
+		top: 15px;
+		right: 15px;
+
+		opacity: 0;
+	}
+
+	#lightcase-nav .lightcase-icon-pause,
+	#lightcase-nav .lightcase-icon-play {
+		left: 50%;
+		margin-left: -0.5em;
+	}
+	#lightcase-nav .lightcase-icon-prev {
+		left: 15px;
+	}
+	#lightcase-nav .lightcase-icon-next {
+		right: 15px;
+	}
+
+	/* Error message */
+	#lightcase-case p.lightcase-error {
+		padding: 30px 0;
+		font-size: 17px;
+		text-align: center;
+		
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+
+		color: #aaa;
+	}
+
+}

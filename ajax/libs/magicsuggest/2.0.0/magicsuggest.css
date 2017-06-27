@@ -1,0 +1,221 @@
+/**
+ * Multiple Selection Component for Bootstrap
+ * Check nicolasbize.github.io/magicsuggest/ for latest updates.
+ *
+ * Author:       Nicolas Bize
+ * Created:      Feb 8th 2013
+ * Last Updated: May 17th 2014
+ * Version:      2.0.0
+ * Licence:      MagicSuggest is licenced under MIT licence (http://opensource.org/licenses/MIT)
+ */
+.ms-ctn{
+    position: relative;
+    padding: 5px 12px;
+    height: auto;
+}
+.ms-ctn-invalid{
+    border: 1px solid #CC0000;
+}
+.ms-ctn-readonly{
+    cursor: pointer;
+}
+.ms-ctn-disabled{
+    cursor: not-allowed;
+    background-color: #eeeeee;
+}
+.ms-ctn-bootstrap-focus,
+.ms-ctn-bootstrap-focus .ms-res-ctn{
+    border-color: rgba(82, 168, 236, 0.8) !important;
+    /* IE6-9 */
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6) !important;
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6) !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6) !important;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.ms-ctn-focus{
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
+.ms-ctn input{
+    border: 0;
+    box-shadow: none;
+    -webkit-transition: none;
+    outline: none;
+    display: block;
+    padding: 0;
+    line-height: 1.42857143;
+    margin: 1px 0;
+    width: 100%;
+}
+.ms-ctn .ms-sel-ctn input{
+    float: left;
+}
+.ms-ctn-disabled input{
+    cursor: not-allowed;
+    background-color: #eeeeee;
+}
+.ms-ctn .ms-input-readonly{
+    cursor: pointer;
+}
+.ms-ctn .ms-empty-text{
+    color: #DDD;
+}
+.ms-ctn input:focus{
+    border: 0;
+    box-shadow: none;
+    -webkit-transition: none;
+    background: #FFF;
+}
+.ms-ctn .ms-trigger{
+    top: 0;
+    width: 25px;
+    height:100%;
+    position:absolute;
+    right:0;
+    background: transparent;
+    border-left: 1px solid #CCC;
+    cursor: pointer;
+}
+.ms-ctn .ms-trigger .ms-trigger-ico {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    vertical-align: top;
+    border-top: 4px solid #333;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    content: "";
+    margin-left: 8px;
+    margin-top: 15px;
+}
+.ms-ctn .ms-trigger:hover{
+    background-color: #e6e6e6;
+}
+.ms-ctn .ms-trigger:hover .ms-trigger-ico{
+    background-position: 0 -4px;
+}
+.ms-ctn-disabled .ms-trigger{
+    cursor: not-allowed;
+    background-color: #eeeeee;
+}
+.ms-ctn-bootstrap-focus{
+    border-bottom: 1px solid #CCC;
+}
+.ms-res-ctn{
+    width: 100%;
+    display: block;
+    overflow-y: auto;
+}
+.ms-res-ctn .ms-res-group{
+    line-height: 23px;
+    text-align: left;
+    padding: 2px 5px;
+    font-weight: bold;
+    border-bottom: 1px dotted #CCC;
+    border-top: 1px solid #CCC;
+    background: #f3edff;
+    color: #333;
+}
+.ms-res-ctn .ms-res-item{
+    line-height: 25px;
+    text-align: left;
+    padding: 2px 5px;
+    color: #666;
+    cursor: pointer;
+}
+.ms-res-ctn .ms-res-item-grouped{
+    padding-left: 15px;
+}
+.ms-res-ctn .ms-res-odd{
+    background: #FAFAFA;
+}
+.ms-res-ctn .ms-res-item-active{
+    background-color: #F5F5F5;
+}
+.ms-sel-ctn{
+    overflow: auto;
+    line-height: 18px;
+    padding-right: 25px;
+}
+.ms-no-trigger .ms-sel-ctn{
+    padding-right: 0;
+}
+/** Outer and global tags **/
+.ms-sel-ctn .ms-sel-item{
+    background: #F3F3F3;
+    color: #999;
+    float: left;
+    font-size: 12px;
+    padding: 3px 5px;
+    border-radius: 3px;
+    border: 1px solid #DDD;
+    margin: 3px 0px 1px 0;
+}
+.ms-sel-ctn .ms-sel-item:hover{
+    border: 1px solid #BBB;
+}
+/** For inner tags **/
+.ms-ctn .ms-sel-item{
+    background: #F3F3F3;
+    color: #999;
+    float: left;
+    font-size: 12px;
+    padding: 0 5px;
+    border-radius: 3px;
+    border: 1px solid #DDD;
+    margin: 1px 5px 1px 0;
+}
+.ms-ctn .ms-sel-item:hover{
+    border: 1px solid transparent;
+}
+.ms-ctn-focus .ms-sel-item:hover{
+    border: 1px solid #BBB;
+}
+.ms-sel-ctn .ms-sel-text{
+    background: #FFF;
+    color: #666;
+    padding-right: 0;
+    margin-left: 0;
+    font-size: 14px;
+    font-weight: normal;
+}
+.ms-as-string .ms-sel-text{
+    border-color: transparent;
+}
+.ms-res-ctn .ms-res-item em{
+    font-style: normal;
+    background: #565656;
+    color: #FFF;
+}
+.ms-sel-ctn .ms-sel-text:hover{
+    background: #FFF;
+}
+.ms-sel-ctn .ms-sel-item-active{
+    border: 1px solid red;
+    background: #757575;
+}
+.ms-stacked .ms-sel-item{
+    float: inherit;
+}
+.ms-sel-ctn .ms-sel-item .ms-close-btn{
+    width: 7px;
+    cursor: pointer;
+    height: 7px;
+    float: right;
+    margin: 6px 2px 0 10px;
+    background-image: url(data:image/png;base64,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);
+    background-position: 0 -7px;
+}
+.ms-sel-ctn .ms-sel-item .ms-close-btn:hover{
+    background-position: 0 0;
+}
+.ms-helper{
+    color: #AAA;
+    font-size: 10px;
+    position: absolute;
+    top: -17px;
+    right: 0;
+}

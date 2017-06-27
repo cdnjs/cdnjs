@@ -1,0 +1,115 @@
+/*! Prelodr v1.0.6 | MIT (c) 2015 José Luis Quintana */
+.prelodr {
+  position: fixed;
+  display: table;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  background-color: rgba(225, 225, 225, 0.75);
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  overflow: hidden;
+  cursor: default;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 100; }
+  .prelodr > span {
+    position: relative;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle; }
+  .prelodr > span > span {
+    position: relative;
+    display: inline-block;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-top: 0.7em;
+    padding-bottom: 0.9em;
+    background-color: #fff;
+    color: #545454;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: normal;
+    min-width: 150px;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.16), 0px 2px 5px 0px rgba(0, 0, 0, 0.23);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scale(0.95);
+    transition-delay: .2s;
+    border-radius: 3px; }
+  .prelodr.prelodr-in {
+    opacity: 1;
+    visibility: visible; }
+  .prelodr.prelodr-out {
+    opacity: 0; }
+  .prelodr > span > span.prelodr-in {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1); }
+  .prelodr .prelodr-progressbar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding-top: 3px;
+    width: 100%;
+    background-color: #0f9d58;
+    animation: prelodr-background linear 2.5s infinite; }
+  .prelodr .prelodr-progressbar:before,
+  .prelodr .prelodr-progressbar:after {
+    display: block;
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    width: 0;
+    background-color: #0f9d58;
+    height: 3px;
+    content: '';
+    animation: prelodr-front linear 2.5s infinite; }
+  .prelodr .prelodr-progressbar:before {
+    right: 50%; }
+  .prelodr .prelodr-progressbar:after {
+    left: 50%; }
+
+@keyframes prelodr-background {
+  0%,
+  24.9% {
+    background-color: #0f9d58; }
+  25%,
+  49.9% {
+    background-color: #da4733; }
+  50%,
+  74.9% {
+    background-color: #1d6fee; }
+  75%,
+  100% {
+    background-color: #fdba2c; } }
+
+@keyframes prelodr-front {
+  0% {
+    width: 0;
+    background-color: #da4733; }
+  24.9% {
+    width: 50%;
+    background-color: #da4733; }
+  25% {
+    width: 0;
+    background-color: #1d6fee; }
+  49.9% {
+    width: 50%;
+    background-color: #1d6fee; }
+  50% {
+    width: 0;
+    background-color: #fdba2c; }
+  74.9% {
+    width: 50%;
+    background-color: #fdba2c; }
+  75% {
+    width: 0;
+    background-color: #0f9d58; }
+  100% {
+    width: 50%;
+    background-color: #0f9d58; } }

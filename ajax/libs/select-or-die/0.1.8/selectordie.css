@@ -1,0 +1,241 @@
+/* ===========================================================
+ *
+ *  Name:          selectordie_dev.css
+ *  Updated:       2014-10-10
+ *  Created by:    Per V @ Vst.mn
+ *  What?:         Base CSS for Select or Die
+ *
+ *  Copyright (c) 2014 Per Vestman
+ *  Dual licensed under the MIT and GPL licenses.
+ *
+ *  No, I don't usually comment my CSS, but in this
+ *  case it might "help" someone.
+ *
+ *  Oddny | Cogs 'n Kegs
+ * =========================================================== */
+
+/* Remove, change to fit your needs */
+@import url(http://fonts.googleapis.com/css?family=Lato:300,700);
+
+.sod_select,
+.sod_select *
+    {
+        -webkit-box-sizing: border-box;
+           -moz-box-sizing: border-box;
+                box-sizing: border-box;
+     -webkit-touch-callout: none;
+       -webkit-user-select: none;
+          -moz-user-select: none;
+           -ms-user-select: none;
+               user-select: none;
+    }
+
+/* The SoD - Please keep this first three lines intact, otherwise all hell will break looooooose */
+.sod_select
+    {
+        display: inline-block;
+        position: relative;
+        line-height: 1;
+
+        width: 200px;
+        padding: 15px 10px;
+        border: 3px solid #5e5e5e;
+        background: #ffffff;
+        color: #444444;
+        font-size: 11px;
+        font-weight: 700;
+        text-align: left;
+        text-transform: uppercase;
+        outline: 0;
+        outline-offset: -2px; /* Opera */
+        cursor: default;
+    }
+
+    /* Up/Down arrows */
+    .sod_select:before,
+    .sod_select:after
+        {
+            content: "\25B2";
+            position: absolute;
+            right: 10px;
+            top: 12px;
+            font-size: 7px;
+        }
+
+        /* Down arrow */
+        .sod_select:after
+            {
+                content: "\25BC";
+                top: auto;
+                bottom: 12px;
+            }
+
+    /* Change the border color on hover, focus and when open */
+    .sod_select:hover,
+    .sod_select.open,
+    .sod_select.focus { border-color: #000000; }
+
+        .sod_select.open { color: #919191; }
+        .sod_select.focus { box-shadow: 0 0 5px rgba(0,0,0,.2); }
+
+    /* When the entire SoD is disabled, go crazy! */
+    .sod_select.disabled
+        {
+            border-color: #828282;
+            color: #b2b2b2;
+            cursor: not-allowed;
+        }
+
+    /* The "label", or whatever we should call it. Keep the first three lines for truncating. */
+    .sod_select .sod_label
+        {
+            display: block;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+
+            padding-right: 15px;
+        }
+
+        .sod_select .sod_prefix { /* Use this if you're using a prefix and want to style it */ }
+        .sod_select .sod_placeholder { /* Use this if you're using a placeholder and want to style it */ }
+
+
+
+    /* Options list wrapper */
+    .sod_select .sod_list_wrapper
+        {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            display: none;
+            height: auto;
+            width: 200px;
+            margin: 0 0 0 -3px;
+            background: #ffffff;
+            border: 3px solid #000000;
+            border-top: none;
+            color: #444444;
+            font-weight: 300;
+            z-index: 1;
+        }
+
+        /* Shows the option list (don't edit) */
+        .sod_select.open .sod_list_wrapper { display: block;  }
+
+        /* Don't display the options when  */
+        .sod_select.disabled.open .sod_list_wrapper { display: none;  }
+
+        /* When the option list is displayed above the SoD */
+        .sod_select.above .sod_list_wrapper
+            {
+                top: auto;
+                bottom: 100%;
+                border-top: 3px solid #000000;
+                border-bottom: none;
+            }
+
+    /* Options list container */
+    .sod_select .sod_list
+        {
+            display: block;
+            overflow-y: auto;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* All the options. Keep the first three lines for truncating... */
+        .sod_select .sod_option
+            {
+                display: block;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+
+                position: relative;
+                padding: 10px 10px;
+                list-style-type: none;
+            }
+
+            /* Optgroups */
+            .sod_select .sod_option.optgroup,
+            .sod_select .sod_option.optgroup.disabled
+                {
+                    background: inherit;
+                    color: #939393;
+                    font-size: 10px;
+                    font-style: italic;
+                }
+
+                /* Children of an optgroup */
+                .sod_select .sod_option.groupchild { padding-left: 20px; }
+
+            /* Used together with placeholderOption / data-placeholder-option */
+            .sod_select .sod_option.is-placeholder {
+                display: none;
+            }
+
+            /* Disabled option */
+            .sod_select .sod_option.disabled
+                {
+                    background: inherit;
+                    color: #cccccc;
+                }
+
+            /* Hover state for options, also used when a user uses his/hers up/down keys */
+            .sod_select .sod_option.active
+                {
+                    background: #f7f7f7;
+                    color: #333333;
+                }
+
+            /*Make room for the check mark */
+            .sod_select .sod_option.selected
+                {
+                    font-weight: 700;
+                    padding-right: 25px;
+                }
+
+                /* Displays a check mark for the selected option */
+                .sod_select .sod_option.selected:before
+                    {
+                        content: "";
+                        position: absolute;
+                        right: 10px;
+                        top: 50%;
+                        -webkit-transform: translateY(-50%);
+                            -ms-transform: translateY(-50%);
+                                transform: translateY(-50%);
+                        display: inline-block;
+                        color: #808080;
+                        height: 9px;
+                        width: 10px;
+                        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNy4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgMTAgOSIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMTAgOSIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8Zz4NCgk8cGF0aCBmaWxsPSIjRDlEOUQ4IiBkPSJNNCw2LjdDMy42LDYuMywzLjUsNi4xLDMuMSw1LjdDMi42LDUuMiwyLDQuNiwxLjUsNC4xYy0wLjgtMC44LTIsMC40LTEuMiwxLjJjMC45LDAuOSwxLjksMS45LDIuOCwyLjgNCgkJYzAuNywwLjcsMS4zLDEsMiwwQzYuNyw2LDguMywzLjcsOS44LDEuNUMxMC41LDAuNSw5LTAuMyw4LjMsMC42bDAsMEM2LjcsMi45LDUuNyw0LjQsNCw2LjciLz4NCjwvZz4NCjwvc3ZnPg0K);
+                    }
+
+                /* Add a .no_highlight class to you SoD to hide the check mark and don't bold the option */
+                .sod_select.no_highlight .sod_option.selected { font-weight: 300; }
+                .sod_select.no_highlight .sod_option.selected:before { display: none; }
+
+            .sod_select .sod_option.link { /* If data-link is set on a specific option */ }
+            .sod_select .sod_option.linkexternal { /* If data-link-external is set on a specific option */ }
+
+
+
+    /* Hide native select */
+    .sod_select select { display: none !important; }
+
+        /* The native select in touch mode. Keep this first line. Sorry, keep everything. */
+        .sod_select.touch select
+            {
+                -webkit-appearance: menulist-button;
+
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: block !important;
+                height: 100%;
+                width: 100%;
+                opacity: 0;
+                z-index: 1;
+            }

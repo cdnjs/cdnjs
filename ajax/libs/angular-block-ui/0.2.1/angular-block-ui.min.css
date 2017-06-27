@@ -1,0 +1,5 @@
+/*!
+   angular-block-ui v0.2.1
+   (c) 2015 (null) McNull https://github.com/McNull/angular-block-ui
+   License: MIT
+*/.block-ui{position:relative}body.block-ui{position:static}.block-ui-main>.block-ui-container,body.block-ui>.block-ui-container{position:fixed}.block-ui-container{position:absolute;z-index:10000;top:0;right:0;bottom:0;left:0;height:0;overflow:hidden;opacity:0;filter:alpha(opacity=00)}.block-ui-active>.block-ui-container{height:100%;cursor:wait}.block-ui-active .block-ui-active>.block-ui-container{height:0}.block-ui-visible>.block-ui-container{opacity:1;filter:alpha(opacity=100)}.block-ui-overlay{width:100%;height:100%;opacity:.5;filter:alpha(opacity=50);background-color:#fff}.block-ui-message-container{position:absolute;top:35%;left:0;right:0;height:0;text-align:center;z-index:10001}.block-ui-message{display:inline-block;text-align:left;background-color:#333;color:#f5f5f5;padding:20px;border-radius:4px;font-size:20px;font-weight:700;filter:alpha(opacity=100)}.block-ui-anim-fade>.block-ui-container{transition:height 0s linear 200ms,opacity 200ms ease 0s}.block-ui-anim-fade.block-ui-active>.block-ui-container{transition-delay:0s}

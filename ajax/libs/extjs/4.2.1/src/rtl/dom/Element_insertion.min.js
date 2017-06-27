@@ -1,0 +1,1 @@
+Ext.define("Ext.rtl.dom.Element_insertion",{override:"Ext.dom.Element",wrap:function(){var e=this.parent(),d=Ext.baseCSSPrefix+"rtl",c=Ext.baseCSSPrefix+"ltr",a=this.callParent(arguments),b;if(e.hasCls(d)){b=d}else{if(e.hasCls(c)){b=c}}if(b){Ext.fly(a,"_wrap").addCls(b)}return a}});

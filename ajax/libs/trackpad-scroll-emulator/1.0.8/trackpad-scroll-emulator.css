@@ -1,0 +1,89 @@
+/**
+ * TrackpadScrollEmulator
+ * Author: Jonathan Nicol @f6design
+ * https://github.com/jnicol/trackpad-scroll-emulator
+ */
+ 
+ .tse-scrollable {
+  position: relative;
+  width: 200px; /* Default value. Overwite this if you want. */
+  height: 300px; /* Default value. Overwite this if you want. */
+  overflow: hidden;
+  }
+  .tse-scrollable .tse-scroll-content {
+    overflow: hidden;
+    overflow-y: scroll;
+    }
+    /* No longer using ::scrollbar too, since it breaks Chrome 25 */
+    .tse-scrollable .tse-scroll-content::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+      }
+.tse-scrollbar {
+  z-index: 99;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 11px;
+  }
+  .tse-scrollbar .drag-handle {
+    position: absolute;
+    right: 2px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    min-height: 10px;
+    width: 7px;
+    opacity: 0;
+    -webkit-transition: opacity 0.2s linear;
+    -moz-transition: opacity 0.2s linear;
+    -o-transition: opacity 0.2s linear;
+    -ms-transition: opacity 0.2s linear;
+    transition: opacity 0.2s linear;
+    background: #6c6e71;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    }
+  .tse-scrollbar:hover .drag-handle {
+    /* When hovered, remove all transitions from drag handle */
+    opacity: 0.7;
+    -webkit-transition: opacity 0 linear;
+    -moz-transition: opacity 0 linear;
+    -o-transition: opacity 0 linear;
+    -ms-transition: opacity 0 linear;
+    transition: opacity 0 linear;
+    }
+    .tse-scrollbar .drag-handle.visible {
+      opacity: 0.7;
+      }
+/* Used when testing the scrollbar width */
+/* No longer using ::scrollbar too, since it breaks Chrome 25 */
+.scrollbar-width-tester::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+/* Horizontal scroller */
+.tse-scrollable.horizontal .tse-scroll-content {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  }
+  .tse-scrollable.horizontal .tse-scroll-content::-webkit-scrollbar,
+  .tse-scrollable.horizontal .tse-scroll-content::scrollbar {
+    width: auto;
+    height: 0;
+    }
+.tse-scrollable.horizontal .tse-scrollbar {
+  top: auto;
+  left: 0;
+  width: auto;
+  height: 11px;
+  }
+  .tse-scrollable.horizontal .tse-scrollbar .drag-handle {
+    right: auto;
+    top: 2px;
+    height: 7px;
+    min-height: 0;
+    min-width: 10px;
+    width: auto;
+    }

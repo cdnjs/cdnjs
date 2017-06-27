@@ -1,0 +1,1 @@
+Ext.define("Ext.rtl.layout.container.Border",{override:"Ext.layout.container.Border",initLayout:function(){var a=this;if(a.owner.getHierarchyState().rtl){a.padOnContainerProp="right";a.padNotOnContainerProp="left";a.horzMarginProp="right"}else{a.padOnContainerProp="left";a.padNotOnContainerProp="right";a.horzMarginProp="left"}a.callParent(arguments)}});
