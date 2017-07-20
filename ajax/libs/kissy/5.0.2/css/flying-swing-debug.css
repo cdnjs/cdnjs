@@ -1,0 +1,106 @@
+/*
+Copyright 2014, modulex-css@1.0.1
+MIT Licensed
+build time: Thu, 16 Oct 2014 07:20:06 GMT
+*/
+/**
+* Flying Swing Grids Layout, rewrite to less by yiminghe@gmail.com
+*
+* @author lifesinger@gmail.com
+*/
+/**
+* Snippets of reusable CSS to develop faster and keep code readable from KISSY and Bootstrap.
+*
+* @author yiminghe@gmail.com
+*/
+/** 布局基础样式 **/
+.col-main {
+  float: left;
+  width: 100%;
+  min-height: 1px;
+}
+.col-sub,
+.col-extra {
+  float: left;
+}
+.layout,
+.main-wrap,
+.col-sub,
+.col-extra {
+  *zoom: 1;
+}
+.layout:before,
+.main-wrap:before,
+.col-sub:before,
+.col-extra:before,
+.layout:after,
+.main-wrap:after,
+.col-sub:after,
+.col-extra:after {
+  display: table;
+  content: "";
+}
+.layout:after,
+.main-wrap:after,
+.col-sub:after,
+.col-extra:after {
+  clear: both;
+}
+/*
+淘宝采用了 6 种栅格布局：
+950                  .grid-m
+190    750           .grid-s5m0
+750    190           .grid-m0s5
+190    510    230    .grid-s5m0e6
+230    510    190    .grid-e6m0s5
+510    230    190    .grid-m0e6s5
+*/
+/** 两栏布局 **/
+.grid-s5m0 .main-wrap {
+  margin-left: 200px;
+}
+.grid-s5m0 .col-sub {
+  width: 190px;
+  margin-left: -100%;
+}
+.grid-m0s5 .main-wrap {
+  margin-right: 200px;
+}
+.grid-m0s5 .col-sub {
+  width: 190px;
+  margin-left: -190px;
+}
+/** 三栏布局 **/
+.grid-s5m0e6 .main-wrap {
+  margin: 0 240px 0 200px;
+}
+.grid-s5m0e6 .col-sub {
+  width: 190px;
+  margin-left: -100%;
+}
+.grid-s5m0e6 .col-extra {
+  width: 230px;
+  margin-left: -230px;
+}
+.grid-e6m0s5 .main-wrap {
+  margin: 0 200px 0 240px;
+}
+.grid-e6m0s5 .col-sub {
+  width: 190px;
+  margin-left: -190px;
+}
+.grid-e6m0s5 .col-extra {
+  width: 230px;
+  margin-left: -100%;
+}
+.grid-m0e6s5 .main-wrap {
+  margin-right: 440px;
+}
+.grid-m0e6s5 .col-sub {
+  width: 190px;
+  margin-left: -190px;
+}
+.grid-m0e6s5 .col-extra {
+  width: 230px;
+  margin-left: -430px;
+}

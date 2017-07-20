@@ -1,0 +1,165 @@
+.ks-scroll-view {
+  overflow: hidden !important;
+  position: relative;
+  /*do not use move cursor of dd*/
+  cursor: default;
+  outline: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-user-drag: none;
+  -ms-touch-action: none;
+}
+.ks-scroll-view-hidden {
+  display: none;
+}
+.ks-scroll-view-content {
+  /*consider pull to refresh*/
+  position: absolute;
+  left: 0;
+  top: 0;
+  min-height: 100%;
+  min-width: 100%;
+  -webkit-user-drag: none;
+}
+.ks-ie7 .ks-scroll-view-content {
+  width: 0;
+  height: 0;
+}
+.ks-ie6 .ks-scroll-view-content {
+  height: expression(Math.max(this.parentNode.clientHeight,this.scrollHeight));
+  width: expression(Math.max(this.parentNode.clientWidth,this.scrollWidth));
+}
+.ks-scrollbar {
+  z-index: 9;
+  position: absolute;
+}
+.ks-scrollbar-hidden {
+  visibility: hidden;
+}
+.ks-scrollbar-y {
+  right: 0;
+  height: 100%;
+}
+.ks-scrollbar-y-track,
+.ks-scrollbar-y-drag,
+.ks-scrollbar-y {
+  width: 6px;
+}
+.ks-scrollbar-y-arrow-up,
+.ks-scrollbar-y-arrow-down {
+  display: none;
+}
+.ks-scrollbar-y-track {
+  position: absolute;
+  right: 3px;
+  top: 0;
+  bottom: 0;
+}
+.ks-ie6 .ks-scrollbar-y-track {
+  height: expression(this.parentNode.clientHeight);
+}
+.ks-scrollbar-y-drag {
+  position: absolute;
+  background: #333;
+  border-radius: 3px;
+  opacity: 0.5;
+}
+.ks-ie6 .ks-scrollbar-y-drag,
+.ks-ie7 .ks-scrollbar-y-drag,
+.ks-ie8 .ks-scrollbar-y-drag {
+  filter: alpha(opacity=50);
+}
+.ks-scrollbar-x {
+  bottom: 0;
+  width: 100%;
+}
+.ks-scrollbar-x-track,
+.ks-scrollbar-x-drag,
+.ks-scrollbar-x {
+  height: 6px;
+}
+.ks-scrollbar-x-arrow-up,
+.ks-scrollbar-x-arrow-down {
+  display: none;
+}
+.ks-scrollbar-x-track {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+.ks-ie6 .ks-scrollbar-x-track {
+  width: expression(this.parentNode.clientWidth);
+}
+.ks-scrollbar-x-drag {
+  position: absolute;
+  background: #333;
+  border-radius: 3px;
+  opacity: 0.5;
+}
+.ks-ie6 .ks-scrollbar-x-drag,
+.ks-ie7 .ks-scrollbar-x-drag,
+.ks-ie8 .ks-scrollbar-x-drag {
+  filter: alpha(opacity=50);
+}
+.ks-scroll-view-pull-down-to-refresh {
+  position: absolute;
+  width: 100%;
+  height: 51px;
+  top: -51px;
+  -ms-touch-action: none;
+}
+.ks-scroll-view-pull-up-to-refresh {
+  position: absolute;
+  width: 100%;
+  height: 51px;
+  bottom: -51px;
+  -ms-touch-action: none;
+}
+.ks-scroll-view-pull-down-to-refresh-content,
+.ks-scroll-view-pull-up-to-refresh-content {
+  background: #fff;
+  height: 40px;
+  line-height: 40px;
+  padding: 5px 10px;
+  border-bottom: 1px solid #ccc;
+  font-weight: bold;
+  font-size: 14px;
+  color: #888;
+}
+.ks-scroll-view-pull-up-icon,
+.ks-scroll-view-pull-down-icon {
+  display: block;
+  float: left;
+  width: 40px;
+  height: 40px;
+  background: url(//gtms04.alicdn.com/tps/i4/TB1KWt6FVXXXXcFaXXXbFt57XXX-80-160.png) 0 0 no-repeat;
+  -webkit-background-size: 40px 80px;
+  background-size: 40px 80px;
+  -webkit-transition-property: -webkit-transform;
+  -webkit-transition-duration: 250ms;
+}
+.ks-scroll-view-pulling .ks-scroll-view-pull-down-icon,
+.ks-scroll-view-releasing .ks-scroll-view-pull-up-icon {
+  -webkit-transform: rotate(0deg) translateZ(0);
+}
+.ks-scroll-view-releasing .ks-scroll-view-pull-down-icon,
+.ks-scroll-view-pulling .ks-scroll-view-pull-up-icon {
+  -webkit-transform: rotate(-180deg) translateZ(0);
+}
+.ks-scroll-view-loading .ks-scroll-view-pull-up-icon,
+.ks-scroll-view-loading .ks-scroll-view-pull-down-icon {
+  background-position: 0 100%;
+  -webkit-transform: rotate(0deg) translateZ(0);
+  -webkit-transition-duration: 0ms;
+  -webkit-animation-name: loading;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+}
+@-webkit-keyframes loading {
+  from {
+    -webkit-transform: rotate(0deg) translateZ(0);
+  }
+  to {
+    -webkit-transform: rotate(360deg) translateZ(0);
+  }
+}

@@ -1,0 +1,238 @@
+/**
+for kissy editor iframe
+@author yiminghe@gmail.com, lifesinger@gmail.com
+@from:resource://gre/res/html.css
+**/
+html {
+    /* #3658: [IE6] Editor document has horizontal scrollbar on long lines
+     To prevent this misbehavior, we show the scrollbar always */
+    _overflow-y: scroll
+}
+
+body {
+    /* Text color */
+    color: #222; /* Remove the background color to make it transparent */
+    background-color: #fff;
+}
+
+/*
+iframe body no need to reset */
+h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements 结构元素 */
+dl, dt, dd, ul, ol, li, /* list elements 列表元素 */
+pre, /* text formatting elements 文本格式元素 */
+form, fieldset, legend, button, input, textarea, /* form elements 表单元素 */
+th, td /* table elements 表格元素 */
+ {
+    margin: 0;
+    padding: 0;
+}
+
+/** 设置默认字体 **/
+body, button, input, select, /* for ie */
+textarea {
+    font: 14px/1.5 tahoma, arial, \5b8b\4f53, sans-serif;
+}
+
+h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin: .67em 0;
+}
+
+h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: .83em 0;
+}
+
+h3 {
+    font-size: 1.17em;
+    font-weight: bold;
+    margin: 1em 0;
+}
+
+h4 {
+    font-weight: bold;
+    margin: 1.33em 0;
+}
+
+h5 {
+    font-size: 0.83em;
+    font-weight: bold;
+    margin: 1.67em 0;
+}
+
+h6 {
+    font-size: 0.67em;
+    font-weight: bold;
+    margin: 2.33em 0;
+}
+
+blockquote {
+    display: block;
+    margin: 1em 40px;
+}
+
+address {
+    display: block;
+    font-style: italic;
+}
+
+i, cite, em, var, dfn {
+    font-style: italic;
+}
+
+u, ins {
+    text-decoration: underline;
+}
+
+s, strike, del {
+    text-decoration: line-through;
+}
+
+/* <hr> noshade and color attributes are handled completely by
+ * the nsHTMLHRElement attribute mapping code
+ */
+hr {
+    display: block;
+    height: 2px;
+    border: 1px inset;
+    margin: 0.5em auto 0.5em auto;
+    color: gray;
+}
+
+/* 将斜体扶正 */
+code, kbd, pre, samp {
+    font-family: courier new, courier, monospace;
+}
+
+/* 统一等宽字体 */
+small {
+    font-size: 12px;
+}
+
+sup {
+    vertical-align: text-top;
+}
+
+/* 重置，减少对行高的影响 */
+sub {
+    vertical-align: text-bottom;
+}
+
+/** 重置表单元素 **/
+legend {
+    color: #000;
+}
+
+/* for ie6 */
+fieldset, img {
+    border: 0;
+}
+
+/*
+do not need to specify
+switch to default
+*/
+table.k-e-collapse-table {
+    display: table;
+    border-color: black;
+    border-collapse: collapse;
+}
+
+table {
+    /*prevent inherit for nested table*/
+    border-collapse: separate;
+}
+
+blockquote, ul, ol, dl {
+    /* giving blockquotes and lists room to breath */
+    margin: 1em;
+}
+
+ul, ol, dl {
+    /* bringing lists on to the page with breathing room */
+    margin-left: 2em;
+}
+
+dl dd {
+    /* providing spacing for definition terms */
+    margin-left: 1em;
+}
+
+table.k-e-collapse-table >tbody>tr>th,
+table.k-e-collapse-table >tbody>tr>td {
+    /* padding to make the table readable */
+    /*padding: .5em;*/
+    /*th,td no need to specify ? inherit from table ?*/
+    border-color: black;
+}
+
+th {
+    font-weight: bold;
+}
+
+caption {
+    /* coordinated margin to match cell's padding */
+    margin-bottom: .5em;
+    /*ie6,7下会换行，强制不换行*/
+    white-space: nowrap;
+}
+
+/*编辑器内p不要有间隔了，两个p来出间隔。p,*/
+fieldset, table, pre {
+    /* so things don't run into each other */
+    /*margin-bottom: 1em;*/
+}
+
+ul, ol {
+    margin-left: 0;
+    padding-left: 40px;
+}
+
+/*
+业务调用方自己设置
+img {
+    vertical-align:middle;
+}
+*/
+img.ke_flash, img.ke_video, img.ke_music, img.ke_xiami {
+    background: url("placeholder_flash.png") center center no-repeat;
+    border: 1px solid #A9A9A9;
+    height: 80px;
+    width: 80px;
+}
+
+img.ke_video {
+    background-image: url("placeholder_video.png");
+}
+
+img.ke_xiami {
+    background-image: url("placeholder_xiami.png");
+}
+
+/*firefox 破碎图片手动定义才出现*/
+img:-moz-broken {
+    -moz-force-broken-image-icon: 1;
+    height: 24px;
+    width: 24px;
+}
+
+img.ke_pagebreak {
+    background: url("pagebreak.gif") center center no-repeat;
+    border-bottom: 1px dotted #999999;
+    border-top: 1px dotted #999999;
+    clear: both;
+    display: block;
+    float: none;
+    height: 5px !important;
+    page-break-after: always;
+    width: 100% !important;
+}
+
+pre.ks-editor-code {
+    display: block;
+    margin-right: 2em;
+    border-left: 3px solid #CCC;
+    padding: 0 1em;
+}
