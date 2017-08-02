@@ -1,0 +1,1 @@
+!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?t():"function"==typeof define&&define.amd?define(t):t()}(this,function(){"use strict";Zone.__load_patch("mediaQuery",function(e,t,n){e.MediaQueryList&&n.patchEventTarget(e,[e.MediaQueryList.prototype],{addEventListenerFnName:"addListener",removeEventListenerFnName:"removeListener"})})});

@@ -1,0 +1,7 @@
+/*
+ * jQuery mmenu scrollBugFix add-on
+ * mmenu.frebsite.nl
+ *
+ * Copyright (c) Fred Heusschen
+ */
+!function(o){var t="mmenu",n="scrollBugFix";o[t].addons[n]={setup:function(){var s=this.opts[n];this.conf[n];r=o[t].glbl,o[t].support.touch&&this.opts.offCanvas&&this.opts.offCanvas.blockUI&&("boolean"==typeof s&&(s={fix:s}),"object"!=typeof s&&(s={}),s=this.opts[n]=o.extend(!0,{},o[t].defaults[n],s),s.fix&&(this.bind("open:start",function(){this.$pnls.children("."+e.opened).scrollTop(0)}),this.bind("initMenu:after",function(){this["_initWindow_"+n]()})))},add:function(){e=o[t]._c,s=o[t]._d,i=o[t]._e},clickAnchor:function(o,t){}},o[t].defaults[n]={fix:!0},o[t].prototype["_initWindow_"+n]=function(){var t=this;r.$docu.off(i.touchmove+"-"+n).on(i.touchmove+"-"+n,function(o){r.$html.hasClass(e.opened)&&o.preventDefault()});var s=!1;r.$body.off(i.touchstart+"-"+n).on(i.touchstart+"-"+n,"."+e.panels+"> ."+e.panel,function(o){r.$html.hasClass(e.opened)&&(s||(s=!0,0===o.currentTarget.scrollTop?o.currentTarget.scrollTop=1:o.currentTarget.scrollHeight===o.currentTarget.scrollTop+o.currentTarget.offsetHeight&&(o.currentTarget.scrollTop-=1),s=!1))}).off(i.touchmove+"-"+n).on(i.touchmove+"-"+n,"."+e.panels+"> ."+e.panel,function(t){r.$html.hasClass(e.opened)&&o(this)[0].scrollHeight>o(this).innerHeight()&&t.stopPropagation()}),r.$wndw.off(i.orientationchange+"-"+n).on(i.orientationchange+"-"+n,function(){t.$pnls.children("."+e.opened).scrollTop(0).css({"-webkit-overflow-scrolling":"auto"}).css({"-webkit-overflow-scrolling":"touch"})})};var e,s,i,r}(jQuery);
