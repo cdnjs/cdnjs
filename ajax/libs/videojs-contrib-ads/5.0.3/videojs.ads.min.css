@@ -1,0 +1,2 @@
+.vjs-ad-playing.vjs-ad-playing .vjs-progress-control{pointer-events:none}.vjs-ad-playing.vjs-ad-playing .vjs-play-progress{background-color:#ffe400}.vjs-ad-playing.vjs-ad-loading .vjs-loading-spinner{display:block}.vjs-ad-playing .vjs-captions-button{display:none}.vjs-ad-playing .vjs-audio-button{display:none}
+/*# sourceMappingURL=videojs.ads.min.css.map */
