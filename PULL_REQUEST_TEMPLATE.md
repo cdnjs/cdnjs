@@ -26,8 +26,8 @@ Note that if you are using a distribution purpose repository/package, please als
  * [ ] This lib was not found on cdnjs repo
  * [ ] No already exist / duplicated issue and PR
  * [ ] The lib has notable popularity
-   * [ ] More than 100 [Stars / Watchers / Forks] on [GitHub / Bitbucket]
-   * [ ] More than 500 downloads stats per month on npm registry
+   * [ ] More than 200 [Stars / Watchers / Forks] on [GitHub / Bitbucket]
+   * [ ] More than 800 downloads stats per month on npm registry
  * [ ] Project has public repository on famous online hosting platform (or been hosted on npm)
 
 # Auto-update checklist
