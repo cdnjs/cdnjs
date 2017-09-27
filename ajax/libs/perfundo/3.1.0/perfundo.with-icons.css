@@ -1,0 +1,144 @@
+/**
+ * 1. Hide the overlay by default and show it when it is targeted or active.
+ * 2. Make the overlay full width and height.
+ */
+.perfundo__overlay {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  visibility: hidden;
+  /* [1] */
+  position: fixed;
+  /* [2] */
+  top: 0;
+  /* [2] */
+  right: 0;
+  /* [2] */
+  bottom: 0;
+  /* [2] */
+  left: 0;
+  /* [2] */
+  z-index: 999;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: rgba(0, 0, 0, 0.9); }
+  .perfundo__overlay:target, .perfundo__overlay.is-active {
+    visibility: visible;
+    /* [1] */ }
+
+/**
+ * 1. Add a scrollbar if the content doesn't fit vertically.
+ * 2. Inherit the animation name (e.g. animate.css class) from the parent.
+ */
+.perfundo__content {
+  max-height: 100%;
+  /* [1] */
+  overflow: auto;
+  /* [1] */ }
+  :target > .perfundo__content,
+  .is-active > .perfundo__content {
+    -webkit-animation: 0.4s ease-out 0.2s both;
+            animation: 0.4s ease-out 0.2s both;
+    -webkit-animation-name: inherit;
+            animation-name: inherit;
+    /* [2] */ }
+
+.perfundo__html {
+  padding: 2em;
+  max-width: 42em;
+  background-color: #fff; }
+
+/**
+ * 1. Prevent the full sized image from loading initially.
+ * 2. Trigger loading of the full sized image when the lightbox is opened.
+ */
+.perfundo__figure {
+  display: none;
+  /* [1] */
+  margin: 1.5em; }
+  :target > .perfundo__figure,
+  .is-active > .perfundo__figure {
+    display: block;
+    /* [2] */ }
+  .perfundo__figure img {
+    display: block;
+    height: 0; }
+
+.perfundo__figcaption {
+  color: #fff; }
+
+/**
+ * 1. Make the image container responsive.
+ * 2. Scale the background image to match the size of the image container.
+ */
+.perfundo__image {
+  max-width: 100%;
+  /* [1] */
+  background-size: 100%;
+  /* [2] */ }
+
+/**
+ * 1. Make the icons as big as the control element.
+ * 2. Hide the control text visually, but have it available for screen readers.
+ * 3. Make the control links readable depending on the overlay color.
+ */
+.perfundo__control {
+  position: absolute;
+  width: 3em;
+  height: 3em;
+  background-position: center center;
+  /* [1] */
+  background-size: cover;
+  /* [1] */
+  text-indent: -999em;
+  /* [2] */ }
+
+.perfundo__close {
+  top: 1em;
+  right: 1em;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20x%3D%220%22%20y%3D%220%22%20viewBox%3D%220%200%2032%2032%22%20xml%3Aspace%3D%22preserve%22%3E%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M21.7%2010.3c-0.4-0.4-1-0.4-1.4%200l-4.3%204.3-4.2-4.2c-0.4-0.4-1-0.4-1.4%200-0.4%200.4-0.4%201%200%201.4l4.2%204.2-4.3%204.3c-0.4%200.4-0.4%201%200%201.4%200.4%200.4%201%200.4%201.4%200l4.3-4.3%204.2%204.2c0.4%200.4%201%200.4%201.4%200%200.4-0.4%200.4-1%200-1.4l-4.2-4.2%204.3-4.3C22.1%2011.3%2022.1%2010.7%2021.7%2010.3zM16%200C7.2%200%200%207.2%200%2016s7.2%2016%2016%2016c8.8%200%2016-7.2%2016-16S24.8%200%2016%200zM16%2030C8.3%2030%202%2023.7%202%2016S8.3%202%2016%202s14%206.3%2014%2014S23.7%2030%2016%2030z%22%2F%3E%3C%2Fsvg%3E"); }
+
+/**
+ * 1. Rotate the control element so it is possible to use the same icon for
+ *    prev and next.
+ */
+.perfundo__prev {
+  left: 2em;
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+  /* [1] */ }
+
+.perfundo__next {
+  right: 2em; }
+
+/**
+ * 1. Move the untarget anchor to the top of the screen to prevent "jumping".
+ */
+.perfundo__untarget {
+  position: fixed;
+  /* [1] */
+  top: 0;
+  /* [1] */ }
+
+/**
+ * 1. Vertically center the prev / next controls.
+ */
+.perfundo__prev,
+.perfundo__next {
+  top: 50%;
+  /* [1] */
+  margin-top: -1.5em;
+  /* [1] */
+  opacity: 0.2;
+  -webkit-transition: opacity 0.2s;
+  transition: opacity 0.2s;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20x%3D%220%22%20y%3D%220%22%20width%3D%2244.1%22%20height%3D%2294.7%22%20viewBox%3D%220%200%2044.1%2094.7%22%20enable-background%3D%22new%200%200%2044.088%2094.67%22%20xml%3Aspace%3D%22preserve%22%3E%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M44.1%2047.3L1.5%2094.7%200%2093.3l41.4-46L0%201.3%201.5%200%2044.1%2047.3z%22%2F%3E%3C%2Fsvg%3E"); }
+  .perfundo__prev:hover, .perfundo__prev:focus,
+  .perfundo__next:hover,
+  .perfundo__next:focus {
+    opacity: 1; }
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uL3Njc3MvaW5kZXguc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFPQTs7O0dBR0c7QUFDSDtFQUNFLHFCQUFhO0VBQWIscUJBQWE7RUFBYixjQUFhO0VBQ2IsbUJBQWtCO0VBQUcsU0FBUztFQUM5QixnQkFBZTtFQUFHLFNBQVM7RUFDM0IsT0FBTTtFQUFHLFNBQVM7RUFDbEIsU0FBUTtFQUFHLFNBQVM7RUFDcEIsVUFBUztFQUFHLFNBQVM7RUFDckIsUUFBTztFQUFHLFNBQVM7RUFDbkIsYUFBWTtFQUNaLHlCQUF1QjtNQUF2QixzQkFBdUI7VUFBdkIsd0JBQXVCO0VBQ3ZCLDBCQUFtQjtNQUFuQix1QkFBbUI7VUFBbkIsb0JBQW1CO0VBQ25CLHFDQXRCbUMsRUE0QnBDO0VBakJEO0lBZUksb0JBQW1CO0lBQUcsU0FBUyxFQUNoQzs7QUFHSDs7O0dBR0c7QUFDSDtFQUNFLGlCQUFnQjtFQUFHLFNBQVM7RUFDNUIsZUFBYztFQUFHLFNBQVMsRUFPM0I7RUFMQzs7SUFFRSwyQ0FBa0M7WUFBbEMsbUNBQWtDO0lBQ2xDLGdDQUF1QjtZQUF2Qix3QkFBdUI7SUFBRyxTQUFTLEVBQ3BDOztBQUdIO0VBQ0UsYUEzQ3lCO0VBNEN6QixnQkEzQzRCO0VBNEM1Qix1QkEzQ21DLEVBNENwQzs7QUFFRDs7O0dBR0c7QUFDSDtFQUNFLGNBQWE7RUFBRyxTQUFTO0VBQ3pCLGNBQWEsRUFXZDtFQVRDOztJQUVFLGVBQWM7SUFBRyxTQUFTLEVBQzNCO0VBUEg7SUFVSSxlQUFjO0lBQ2QsVUFBUyxFQUNWOztBQUdIO0VBQ0UsWUF0RW1CLEVBdUVwQjs7QUFFRDs7O0dBR0c7QUFDSDtFQUNFLGdCQUFlO0VBQUcsU0FBUztFQUMzQixzQkFBcUI7RUFBRyxTQUFTLEVBQ2xDOztBQUVEOzs7O0dBSUc7QUFDSDtFQUNFLG1CQUFrQjtFQUdoQixXQUFVO0VBQ1YsWUFBVztFQUNYLG1DQUFrQztFQUFHLFNBQVM7RUFDOUMsdUJBQXNCO0VBQUcsU0FBUztFQUNsQyxvQkFBbUI7RUFBRyxTQUFTLEVBT2xDOztBQUVEO0VBQ0UsU0FBUTtFQUNSLFdBQVU7RUFHUiwyeEJBQTB4QixFQUU3eEI7O0FBRUQ7OztHQUdHO0FBQ0g7RUFDRSxVQUFTO0VBR1Asa0NBQXlCO1VBQXpCLDBCQUF5QjtFQUFFLFNBQVMsRUFFdkM7O0FBRUQ7RUFDRSxXQUFVLEVBQ1g7O0FBRUQ7O0dBRUc7QUFDSDtFQUNFLGdCQUFlO0VBQUcsU0FBUztFQUMzQixPQUFNO0VBQUcsU0FBUyxFQUNuQjs7QUFFRDs7R0FFRztBQUNIOztFQUVFLFNBQVE7RUFBRyxTQUFTO0VBQ3BCLG1CQUFrQjtFQUFHLFNBQVM7RUFDOUIsYUFBWTtFQUNaLGlDQUF3QjtFQUF4Qix5QkFBd0I7RUFHdEIsNmNBQTRjLEVBTy9jO0VBZkQ7OztJQWFJLFdBQVUsRUFDWCIsImZpbGUiOiJwZXJmdW5kby53aXRoLWljb25zLmNzcyJ9 */

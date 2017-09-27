@@ -1,0 +1,134 @@
+/**
+ * 1. Hide the overlay by default and show it when it is targeted or active.
+ * 2. Make the overlay full width and height.
+ */
+.perfundo__overlay {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  visibility: hidden;
+  /* [1] */
+  position: fixed;
+  /* [2] */
+  top: 0;
+  /* [2] */
+  right: 0;
+  /* [2] */
+  bottom: 0;
+  /* [2] */
+  left: 0;
+  /* [2] */
+  z-index: 999;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: rgba(0, 0, 0, 0.9); }
+  .perfundo__overlay:target, .perfundo__overlay.is-active {
+    visibility: visible;
+    /* [1] */ }
+
+/**
+ * 1. Add a scrollbar if the content doesn't fit vertically.
+ * 2. Inherit the animation name (e.g. animate.css class) from the parent.
+ */
+.perfundo__content {
+  max-height: 100%;
+  /* [1] */
+  overflow: auto;
+  /* [1] */ }
+  :target > .perfundo__content,
+  .is-active > .perfundo__content {
+    -webkit-animation: 0.4s ease-out 0.2s both;
+            animation: 0.4s ease-out 0.2s both;
+    -webkit-animation-name: inherit;
+            animation-name: inherit;
+    /* [2] */ }
+
+.perfundo__html {
+  padding: 2em;
+  max-width: 42em;
+  background-color: #fff; }
+
+/**
+ * 1. Prevent the full sized image from loading initially.
+ * 2. Trigger loading of the full sized image when the lightbox is opened.
+ */
+.perfundo__figure {
+  display: none;
+  /* [1] */
+  margin: 1.5em; }
+  :target > .perfundo__figure,
+  .is-active > .perfundo__figure {
+    display: block;
+    /* [2] */ }
+  .perfundo__figure img {
+    display: block;
+    height: 0; }
+
+.perfundo__figcaption {
+  color: #fff; }
+
+/**
+ * 1. Make the image container responsive.
+ * 2. Scale the background image to match the size of the image container.
+ */
+.perfundo__image {
+  max-width: 100%;
+  /* [1] */
+  background-size: 100%;
+  /* [2] */ }
+
+/**
+ * 1. Make the icons as big as the control element.
+ * 2. Hide the control text visually, but have it available for screen readers.
+ * 3. Make the control links readable depending on the overlay color.
+ */
+.perfundo__control {
+  position: absolute; }
+  .perfundo__control, .perfundo__control:visited {
+    color: #fff;
+    /* [3] */ }
+
+.perfundo__close {
+  top: 1em;
+  right: 1em; }
+
+/**
+ * 1. Rotate the control element so it is possible to use the same icon for
+ *    prev and next.
+ */
+.perfundo__prev {
+  left: 2em; }
+
+.perfundo__next {
+  right: 2em; }
+
+/**
+ * 1. Move the untarget anchor to the top of the screen to prevent "jumping".
+ */
+.perfundo__untarget {
+  position: fixed;
+  /* [1] */
+  top: 0;
+  /* [1] */ }
+
+/**
+ * 1. Vertically center the prev / next controls.
+ */
+.perfundo__prev,
+.perfundo__next {
+  top: 50%;
+  /* [1] */
+  margin-top: -1.5em;
+  /* [1] */
+  opacity: 0.2;
+  -webkit-transition: opacity 0.2s;
+  transition: opacity 0.2s; }
+  .perfundo__prev:hover, .perfundo__prev:focus,
+  .perfundo__next:hover,
+  .perfundo__next:focus {
+    opacity: 1; }
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uL3Njc3MvaW5kZXguc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFPQTs7O0dBR0c7QUFDSDtFQUNFLHFCQUFhO0VBQWIscUJBQWE7RUFBYixjQUFhO0VBQ2IsbUJBQWtCO0VBQUcsU0FBUztFQUM5QixnQkFBZTtFQUFHLFNBQVM7RUFDM0IsT0FBTTtFQUFHLFNBQVM7RUFDbEIsU0FBUTtFQUFHLFNBQVM7RUFDcEIsVUFBUztFQUFHLFNBQVM7RUFDckIsUUFBTztFQUFHLFNBQVM7RUFDbkIsYUFBWTtFQUNaLHlCQUF1QjtNQUF2QixzQkFBdUI7VUFBdkIsd0JBQXVCO0VBQ3ZCLDBCQUFtQjtNQUFuQix1QkFBbUI7VUFBbkIsb0JBQW1CO0VBQ25CLHFDQXRCbUMsRUE0QnBDO0VBakJEO0lBZUksb0JBQW1CO0lBQUcsU0FBUyxFQUNoQzs7QUFHSDs7O0dBR0c7QUFDSDtFQUNFLGlCQUFnQjtFQUFHLFNBQVM7RUFDNUIsZUFBYztFQUFHLFNBQVMsRUFPM0I7RUFMQzs7SUFFRSwyQ0FBa0M7WUFBbEMsbUNBQWtDO0lBQ2xDLGdDQUF1QjtZQUF2Qix3QkFBdUI7SUFBRyxTQUFTLEVBQ3BDOztBQUdIO0VBQ0UsYUEzQ3lCO0VBNEN6QixnQkEzQzRCO0VBNEM1Qix1QkEzQ21DLEVBNENwQzs7QUFFRDs7O0dBR0c7QUFDSDtFQUNFLGNBQWE7RUFBRyxTQUFTO0VBQ3pCLGNBQWEsRUFXZDtFQVRDOztJQUVFLGVBQWM7SUFBRyxTQUFTLEVBQzNCO0VBUEg7SUFVSSxlQUFjO0lBQ2QsVUFBUyxFQUNWOztBQUdIO0VBQ0UsWUF0RW1CLEVBdUVwQjs7QUFFRDs7O0dBR0c7QUFDSDtFQUNFLGdCQUFlO0VBQUcsU0FBUztFQUMzQixzQkFBcUI7RUFBRyxTQUFTLEVBQ2xDOztBQUVEOzs7O0dBSUc7QUFDSDtFQUNFLG1CQUFrQixFQWNuQjtFQWZEO0lBWU0sWUFuR2U7SUFtR1MsU0FBUyxFQUNsQzs7QUFJTDtFQUNFLFNBQVE7RUFDUixXQUFVLEVBS1g7O0FBRUQ7OztHQUdHO0FBQ0g7RUFDRSxVQUFTLEVBS1Y7O0FBRUQ7RUFDRSxXQUFVLEVBQ1g7O0FBRUQ7O0dBRUc7QUFDSDtFQUNFLGdCQUFlO0VBQUcsU0FBUztFQUMzQixPQUFNO0VBQUcsU0FBUyxFQUNuQjs7QUFFRDs7R0FFRztBQUNIOztFQUVFLFNBQVE7RUFBRyxTQUFTO0VBQ3BCLG1CQUFrQjtFQUFHLFNBQVM7RUFDOUIsYUFBWTtFQUNaLGlDQUF3QjtFQUF4Qix5QkFBd0IsRUFVekI7RUFmRDs7O0lBYUksV0FBVSxFQUNYIiwiZmlsZSI6InBlcmZ1bmRvLmNzcyJ9 */
