@@ -1,0 +1,214 @@
+/* Version 1.2.2 2014-04-19 11:49 */
+* {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; /* Firefox */
+}
+.jsPanel, .jsPanel-hdr-r, .jsPanel-hdr-l, .jsPanel-hdr-l-text, .jsPanel-hdr-r span img, .jsPanel-content{
+    margin: 0; padding: 0; border: 0;
+    font-size: 100%; font: inherit;
+    line-height: 1.5em; vertical-align: baseline;
+}
+.jsPanel{
+    margin: 0; padding: 0;
+    overflow: hidden; position: absolute;
+    border-radius: 3px;
+}
+.jsPanel-hdr{
+    font-size: 14px;
+    padding: 2px;
+    height: 46px;
+}
+.jsPanel-hdr-r{
+    float: right;
+    padding: 2px 2px 0 0;
+}
+.jsPanel-hdr-l{
+    float: left;
+    white-space: nowrap;
+    width: 100%;
+    width: -webkit-calc(100% - 70px);
+    width: calc(100% - 70px);
+    cursor: move;
+    height: 20px;
+    padding: 0 5px;
+}
+.jsPanel-hdr-l-text{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+    font-variant: small-caps;
+}
+.jsPanel-hdr-r div{
+    float: right;
+    cursor: pointer;
+	margin-left: 3px;
+    width: 16px;
+    height: 20px;
+    overflow: hidden;
+}
+
+.jsPanel-hdr-r-btn-close{ background: url("images/icon-sprite.jpg") 16px 0 repeat no-repeat; }
+.jsPanel-hdr-r-btn-max.normal{ background: url("images/icon-sprite.jpg") 32px 0 repeat no-repeat; }
+.jsPanel-hdr-r-btn-max.alternate{ background: url("images/icon-sprite.jpg") 48px 0 repeat no-repeat; }
+.jsPanel-hdr-r-btn-min{ background: url("images/icon-sprite.jpg") 64px 0 repeat no-repeat; }
+
+.jsPanel-hdr-toolbar {
+    clear: both;
+    font-size: 12px;
+    padding: 0 5px;
+    width: auto;
+}
+.jsPanel-hdr-toolbar img{
+    cursor: pointer;
+    margin-bottom: 0;
+    margin-right: 5px;
+}
+.jsPanel-content {
+    font-size: 12px;
+    height: 100%;
+    height: calc(100% - 46px);  /* has to be adjusted according to .jsPanel-hdr height */
+    position: relative;
+    width: 100%;
+}
+.jsPanel-content-footer{
+    height: calc(100% - 92px) !important;   /* has to be adjusted according to .jsPanel-hdr & .jsPanel-ftr height */
+}
+/* container that takes the minified jsPanels */
+#jsPanel-min-container{
+    position:fixed;
+    left:0;
+    bottom:0;
+    width:100%;
+    height:26px;
+    background:transparent;
+}
+.jsPanel-ftr{
+    display: none;
+    font-size: 12px;
+    height: 46px;
+    text-align: right;
+    padding-right: 25px;
+}
+.jsPanel-ftr button{
+    margin: 8px 0 0 10px;
+}
+.ui-icon, .ui-widget-content .ui-icon {
+    background-image: url("images/ui-icons_454545_256x240.png");
+}
+.ui-icon-gripsmall-diagonal-se {
+    background-position: -81px -224px;
+}
+
+/* THEMES ------------------------------------------------------------------------- */
+
+/* white ------------------------------------------- */
+.jsPanel.jsPanel-theme-white{
+    background: none repeat scroll 0 0 #fff;
+    box-shadow: 0 0 6px rgba(0, 33, 50, 0.1), 0 7px 25px rgba(17, 38, 60, 0.4);
+}
+.jsPanel-hdr.jsPanel-theme-white{
+    color: #000;
+    font-family: tahoma,arial,verdana,sans-serif;
+    font-weight: normal;
+}
+.jsPanel-content.jsPanel-theme-white{
+    border: 1px solid #BBBBBB;
+    font-size: 12px;
+    height: calc(100% - 48px);
+    left: 3px;
+    position: relative;
+    width: calc(100% - 6px);
+}
+.jsPanel-ftr.jsPanel-theme-white{
+    display: block;
+    font-size: 12px;
+    height: auto;
+    max-height: 40px;
+    min-height: 3px;
+    padding-right: 25px;
+    text-align: right;
+}
+/* light ------------------------------------------- */
+.jsPanel.jsPanel-theme-light{
+    background: none repeat scroll 0 0 #eee;
+    box-shadow: 0 0 6px rgba(0, 33, 50, 0.1), 0 7px 25px rgba(17, 38, 60, 0.4);
+}
+.jsPanel-hdr.jsPanel-theme-light{
+    color: #000;
+    font-family: tahoma,arial,verdana,sans-serif;
+    font-weight: normal;
+    background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(250,250,250,0.65) 100%);
+}
+.jsPanel-content.jsPanel-theme-light {
+    background: none repeat scroll 0 0 #FFFFFF;
+    color: #000;
+    font-family: tahoma,arial,verdana,sans-serif;
+    outline: 1px solid #bbb;
+}
+.jsPanel-ftr.jsPanel-theme-light{
+    background: linear-gradient(to bottom,  rgba(250,250,250,0.65) 0%,rgba(0,0,0,0) 100%);
+}
+/* medium -------------------------------------------- */
+.jsPanel.jsPanel-theme-medium{ background: none repeat scroll 0 0 #fff;
+    box-shadow: 0 0 6px rgba(0, 33, 50, 0.1), 0 7px 25px rgba(17, 38, 60, 0.4);
+}
+.jsPanel-hdr.jsPanel-theme-medium{ color: #000; font-family: tahoma,arial,verdana,sans-serif; font-weight: normal;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(130, 130, 130, 1) 100%);
+}
+.jsPanel-content.jsPanel-theme-medium { background: none repeat scroll 0 0 #fff; color: #000; font-family: tahoma,arial,verdana,sans-serif; outline: 1px solid #bbb; }
+.jsPanel-ftr.jsPanel-theme-medium{}
+/* dark ---------------------------------------------- */
+.jsPanel.jsPanel-theme-dark{ background: none repeat scroll 0 0 #fff;
+    box-shadow: 0 0 6px rgba(0, 33, 50, 0.1), 0 7px 25px rgba(17, 38, 60, 0.4);
+}
+.jsPanel-hdr.jsPanel-theme-dark{ color: #fff; font-family: tahoma,arial,verdana,sans-serif; font-weight: normal;
+    background: linear-gradient(to bottom, rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%);
+}
+.jsPanel-content.jsPanel-theme-dark { background: none repeat scroll 0 0 #fff; color: #000; font-family: tahoma,arial,verdana,sans-serif; outline: 1px solid #bbb; }
+.jsPanel-ftr.jsPanel-theme-dark{}
+/* primary ---------------------------------------------- */
+.jsPanel.jsPanel-theme-primary{ background: none repeat scroll 0 0 #fff;
+    box-shadow: 0 0 6px rgba(0, 33, 50, 0.1), 0 7px 25px rgba(17, 38, 60, 0.4);
+}
+.jsPanel-hdr.jsPanel-theme-primary{ color: #ffffff; font-family: tahoma,arial,verdana,sans-serif; font-weight: normal;
+    background: #2FA4E7;
+}
+.jsPanel-content.jsPanel-theme-primary { background: none repeat scroll 0 0 #ffffff; color: #000000; font-family: tahoma,arial,verdana,sans-serif; outline: 1px solid #bbb; }
+.jsPanel-ftr.jsPanel-theme-primary{}
+/* success --------------------------------------------- */
+.jsPanel.jsPanel-theme-success{ background: none repeat scroll 0 0 #fff;
+    box-shadow: 0 0 6px rgba(0, 33, 50, 0.1), 0 7px 25px rgba(17, 38, 60, 0.4);
+}
+.jsPanel-hdr.jsPanel-theme-success{ color: #fff; font-family: tahoma,arial,verdana,sans-serif; font-weight: normal;
+    background: #73A839;
+}
+.jsPanel-content.jsPanel-theme-success { background: none repeat scroll 0 0 #ffffff; color: #000000; font-family: tahoma,arial,verdana,sans-serif; outline: 1px solid #bbb; }
+.jsPanel-ftr.jsPanel-theme-success{}
+/* info ---------------------------------------------- */
+.jsPanel.jsPanel-theme-info{ background: none repeat scroll 0 0 #fff;
+    box-shadow: 0 0 6px rgba(0, 33, 50, 0.1), 0 7px 25px rgba(17, 38, 60, 0.4);
+}
+.jsPanel-hdr.jsPanel-theme-info{ color: #fff; font-family: tahoma,arial,verdana,sans-serif; font-weight: normal;
+    background: #033C73;
+}
+.jsPanel-content.jsPanel-theme-info { background: none repeat scroll 0 0 #ffffff; color: #000000; font-family: tahoma,arial,verdana,sans-serif; outline: 1px solid #bbb; }
+.jsPanel-ftr.jsPanel-theme-info{}
+/* warning ----------------------------------------------- */
+.jsPanel.jsPanel-theme-warning{ background: none repeat scroll 0 0 #fff;
+    box-shadow: 0 0 6px rgba(0, 33, 50, 0.1), 0 7px 25px rgba(17, 38, 60, 0.4);
+}
+.jsPanel-hdr.jsPanel-theme-warning{ color: #fff; font-family: tahoma,arial,verdana,sans-serif; font-weight: normal;
+    background: #DD5600;
+}
+.jsPanel-content.jsPanel-theme-warning { background: none repeat scroll 0 0 #fff; color: #000; font-family: tahoma,arial,verdana,sans-serif; outline: 1px solid #bbb; }
+.jsPanel-ftr.jsPanel-theme-warning{}
+/* danger ----------------------------------------------- */
+.jsPanel.jsPanel-theme-danger{ background: none repeat scroll 0 0 #fff;
+    box-shadow: 0 0 6px rgba(0, 33, 50, 0.1), 0 7px 25px rgba(17, 38, 60, 0.4);
+}
+.jsPanel-hdr.jsPanel-theme-danger{ color: #fff; font-family: tahoma,arial,verdana,sans-serif; font-weight: normal;
+    background: #C71C22;
+}
+.jsPanel-content.jsPanel-theme-danger { background: none repeat scroll 0 0 #ffffff; color: #000000; font-family: tahoma,arial,verdana,sans-serif; outline: 1px solid #bbb; }
+.jsPanel-ftr.jsPanel-theme-danger{}

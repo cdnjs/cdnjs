@@ -1,0 +1,476 @@
+/* Version 1.3 2014-05-14 14:46 */
+.jsPanel, .jsPanel-hdr-r, .jsPanel-hdr-l, .jsPanel-hdr-l-text, .jsPanel-hdr-r span img, .jsPanel-content{
+    margin: 0; padding: 0; border: 0;
+    font-size: 100%; font: inherit;
+    line-height: 1.5em; vertical-align: baseline;
+}
+.jsPanel{
+    display: none;
+    overflow: hidden; position: absolute;
+    border-radius: 3px;
+}
+.jsPanel-hdr{
+    font-size: 14px;
+    padding: 2px;
+    height: 25px;
+}
+.jsPanel-hdr-r{
+    float: right;
+    font-size: 13px;
+    padding: 0 2px 0 0;
+}
+.jsPanel-hdr-l{
+    float: left;
+    white-space: nowrap;
+    width: 100%;
+    width: -webkit-calc(100% - 70px);
+    width: calc(100% - 70px);
+    cursor: move;
+    height: 20px;
+    padding: 0 5px;
+}
+.jsPanel-title, .jsPanel-hdr-l-text{
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: left;
+    text-overflow: ellipsis;
+    margin: 0;
+    font-variant: small-caps;
+}
+.jsPanel-hdr-r div{
+    float: right;
+    cursor: pointer;
+	margin-left: 3px;
+    width: 16px;
+    height: 20px;
+    overflow: hidden;
+}
+
+.jsPanel-hdr-r-btn-close{ background: url("images/icon-sprite.jpg") 16px 0 repeat no-repeat; }
+.jsPanel-hdr-r-btn-max.normal{ background: url("images/icon-sprite.jpg") 32px 0 repeat no-repeat; }
+.jsPanel-hdr-r-btn-max.alternate{ background: url("images/icon-sprite.jpg") 48px 0 repeat no-repeat; }
+.jsPanel-hdr-r-btn-min{ background: url("images/icon-sprite.jpg") 64px 0 repeat no-repeat; }
+
+.jsPanel-hdr-toolbar {
+    clear: both;
+    font-size: 14px;
+    padding: 0 5px;
+    width: auto;
+    height: 20px;
+}
+.jsPanel-hdr-toolbar img{
+    cursor: pointer;
+    margin-bottom: 4px;
+    margin-right: 5px;
+}
+.jsPanel-content {
+    font-size: 12px;
+    position: relative;
+    width: 100%;
+/*
+    padding: 15px;
+*/
+}
+.jsPanel-resize0 { height: calc( 100% ); }
+.jsPanel-resize25{ height: calc( 100% - 25px ); }
+.jsPanel-resize46{ height: calc( 100% - 46px ); }
+.jsPanel-resize48{ height: calc( 100% - 48px ); }
+.jsPanel-resize69{ height: calc( 100% - 69px ); }
+.jsPanel-resize71{ height: calc( 100% - 71px ); }
+.jsPanel-resize92{ height: calc( 100% - 92px ); }
+
+
+/* container that takes the minified jsPanels */
+#jsPanel-min-container{
+    position:fixed;
+    left:0;
+    bottom:0;
+    width:100%;
+    height:26px;
+    background:transparent;
+}
+.jsPanel-ftr{
+    cursor: move;
+    display: none;
+    font-size: 12px;
+    height: 46px;
+    text-align: right;
+    padding-right: 25px;
+}
+.jsPanel-ftr button{
+    margin: 8px 0 0 10px;
+}
+.ui-icon, .ui-widget-content .ui-icon {
+    background-image: url("images/ui-icons_454545_256x240.png");
+}
+.ui-icon-gripsmall-diagonal-se {
+    background-position: -81px -224px;
+}
+
+/* css für den modal backdrop --------------------------- */
+.jsPanel-backdrop{
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:10000;
+    width:100%;
+    background:rgba(0,0,0,0.9);
+}
+.jsPanel-backdrop-inner{
+    position:absolute;
+    width:100%;
+}
+
+/* THEMES ------------------------------------------------------------------------- */
+
+/* white ------------------------------------------- */
+.jsPanel.jsPanel-theme-white{
+    background: none repeat scroll 0 0 #fff;
+    box-shadow: 0 0 6px rgba(0, 33, 50, 0.1), 0 7px 25px rgba(17, 38, 60, 0.4);
+}
+.jsPanel-hdr.jsPanel-theme-white{
+    color: #000;
+    font-family: tahoma,arial,verdana,sans-serif;
+    font-weight: normal;
+}
+.jsPanel-content.jsPanel-theme-white{
+    border: 1px solid #BBBBBB;
+    font-size: 12px;
+    height: calc(100% - 48px);
+    left: 3px;
+    position: relative;
+    width: calc(100% - 6px);
+}
+.jsPanel-ftr.jsPanel-theme-white{
+    display: block;
+    font-size: 12px;
+    height: auto;
+    max-height: 40px;
+    min-height: 3px;
+    padding-right: 25px;
+    text-align: right;
+}
+/* light ------------------------------------------- */
+.jsPanel.jsPanel-theme-light{
+    background: none repeat scroll 0 0 #eee;
+    box-shadow: 0 0 6px rgba(0, 33, 50, 0.1), 0 7px 25px rgba(17, 38, 60, 0.4);
+}
+.jsPanel-hdr.jsPanel-theme-light{
+    color: #000;
+    font-family: tahoma,arial,verdana,sans-serif;
+    font-weight: normal;
+    background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(250,250,250,0.65) 100%);
+}
+.jsPanel-content.jsPanel-theme-light {
+    background: none repeat scroll 0 0 #FFFFFF;
+    color: #000;
+    font-family: tahoma,arial,verdana,sans-serif;
+    outline: 1px solid #bbb;
+}
+.jsPanel-ftr.jsPanel-theme-light{
+    background: linear-gradient(to bottom,  rgba(250,250,250,0.65) 0%,rgba(0,0,0,0) 100%);
+}
+/* medium -------------------------------------------- */
+.jsPanel.jsPanel-theme-medium{ background: none repeat scroll 0 0 #fff;
+    box-shadow: 0 0 6px rgba(0, 33, 50, 0.1), 0 7px 25px rgba(17, 38, 60, 0.4);
+}
+.jsPanel-hdr.jsPanel-theme-medium{ color: #000; font-family: tahoma,arial,verdana,sans-serif; font-weight: normal;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(130, 130, 130, 1) 100%);
+}
+.jsPanel-content.jsPanel-theme-medium { background: none repeat scroll 0 0 #fff; color: #000; font-family: tahoma,arial,verdana,sans-serif; outline: 1px solid #bbb; }
+.jsPanel-ftr.jsPanel-theme-medium{}
+/* dark ---------------------------------------------- */
+.jsPanel.jsPanel-theme-dark{ background: none repeat scroll 0 0 #fff;
+    box-shadow: 0 0 6px rgba(0, 33, 50, 0.1), 0 7px 25px rgba(17, 38, 60, 0.4);
+}
+.jsPanel-hdr.jsPanel-theme-dark{ color: #fff; font-family: tahoma,arial,verdana,sans-serif; font-weight: normal;
+    background: linear-gradient(to bottom, rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%);
+}
+.jsPanel-content.jsPanel-theme-dark { background: none repeat scroll 0 0 #fff; color: #000; font-family: tahoma,arial,verdana,sans-serif; outline: 1px solid #bbb; }
+.jsPanel-ftr.jsPanel-theme-dark{}
+/* primary ---------------------------------------------- */
+.jsPanel.jsPanel-theme-primary{ background: none repeat scroll 0 0 #fff;
+    box-shadow: 0 0 6px rgba(0, 33, 50, 0.1), 0 7px 25px rgba(17, 38, 60, 0.4);
+}
+.jsPanel-hdr.jsPanel-theme-primary{ color: #ffffff; font-family: tahoma,arial,verdana,sans-serif; font-weight: normal;
+    background: #2FA4E7;
+}
+.jsPanel-content.jsPanel-theme-primary { background: none repeat scroll 0 0 #ffffff; color: #000000; font-family: tahoma,arial,verdana,sans-serif; outline: 1px solid #bbb; }
+.jsPanel-ftr.jsPanel-theme-primary{}
+/* success --------------------------------------------- */
+.jsPanel.jsPanel-theme-success{ background: none repeat scroll 0 0 #fff;
+    box-shadow: 0 0 6px rgba(0, 33, 50, 0.1), 0 7px 25px rgba(17, 38, 60, 0.4);
+}
+.jsPanel-hdr.jsPanel-theme-success{ color: #fff; font-family: tahoma,arial,verdana,sans-serif; font-weight: normal;
+    background: #73A839;
+}
+.jsPanel-content.jsPanel-theme-success { background: none repeat scroll 0 0 #ffffff; color: #000000; font-family: tahoma,arial,verdana,sans-serif; outline: 1px solid #bbb; }
+.jsPanel-ftr.jsPanel-theme-success{}
+/* info ---------------------------------------------- */
+.jsPanel.jsPanel-theme-info{ background: none repeat scroll 0 0 #fff;
+    box-shadow: 0 0 6px rgba(0, 33, 50, 0.1), 0 7px 25px rgba(17, 38, 60, 0.4);
+}
+.jsPanel-hdr.jsPanel-theme-info{ color: #fff; font-family: tahoma,arial,verdana,sans-serif; font-weight: normal;
+    background: #033C73;
+}
+.jsPanel-content.jsPanel-theme-info { background: none repeat scroll 0 0 #ffffff; color: #000000; font-family: tahoma,arial,verdana,sans-serif; outline: 1px solid #bbb; }
+.jsPanel-ftr.jsPanel-theme-info{}
+/* warning ----------------------------------------------- */
+.jsPanel.jsPanel-theme-warning{ background: none repeat scroll 0 0 #fff;
+    box-shadow: 0 0 6px rgba(0, 33, 50, 0.1), 0 7px 25px rgba(17, 38, 60, 0.4);
+}
+.jsPanel-hdr.jsPanel-theme-warning{ color: #fff; font-family: tahoma,arial,verdana,sans-serif; font-weight: normal;
+    background: #DD5600;
+}
+.jsPanel-content.jsPanel-theme-warning { background: none repeat scroll 0 0 #fff; color: #000; font-family: tahoma,arial,verdana,sans-serif; outline: 1px solid #bbb; }
+.jsPanel-ftr.jsPanel-theme-warning{}
+/* danger ----------------------------------------------- */
+.jsPanel.jsPanel-theme-danger{ background: none repeat scroll 0 0 #fff;
+    box-shadow: 0 0 6px rgba(0, 33, 50, 0.1), 0 7px 25px rgba(17, 38, 60, 0.4);
+}
+.jsPanel-hdr.jsPanel-theme-danger{ color: #fff; font-family: tahoma,arial,verdana,sans-serif; font-weight: normal;
+    background: #C71C22;
+}
+.jsPanel-content.jsPanel-theme-danger { background: none repeat scroll 0 0 #ffffff; color: #000000; font-family: tahoma,arial,verdana,sans-serif; outline: 1px solid #bbb; }
+.jsPanel-ftr.jsPanel-theme-danger{}
+
+/* css für den tooltip wrapper ---------------------------- */
+.jsPanel-tooltip-wrapper{
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+}
+.jsPanel-tooltip-wrapper .jsPanel{
+    border-radius: 4px;
+}
+
+
+
+
+.jsPanel-hint{
+    width: 70px;
+    height: 100%;
+    font-size: 40px;
+    padding: 15px;
+    float: left;
+}
+.jsPanel-hint-close{
+    float:right;
+    padding:5px;
+    cursor: pointer;
+}
+/* hint-default ------------------------------------------- */
+.jsPanel.jsPanel-theme-hint-default{
+    background: none repeat scroll 0 0 #fff;
+    box-shadow: 0 0 6px rgba(0, 33, 50, 0.1), 0 7px 25px rgba(17, 38, 60, 0.4);
+}
+.jsPanel-content.jsPanel-theme-hint-default {
+    background: none repeat scroll 0 0 #fff;
+    color: #333;
+    font-family: tahoma,arial,verdana,sans-serif;
+    /*outline: 1px solid #bbb;*/
+}
+/* hint-success ------------------------------------------- */
+.jsPanel.jsPanel-theme-hint-success{
+    background: none repeat scroll 0 0 #73A839;
+    box-shadow: 0 0 6px rgba(0, 33, 50, 0.1), 0 7px 25px rgba(17, 38, 60, 0.4);
+}
+.jsPanel-content.jsPanel-theme-hint-success {
+    background: none repeat scroll 0 0 #73A839;
+    color: #fff;
+    font-family: tahoma,arial,verdana,sans-serif;
+    /*outline: 1px solid #bbb;*/
+}
+/* hint-info ------------------------------------------- */
+.jsPanel.jsPanel-theme-hint-info{
+    background: none repeat scroll 0 0 #033C73;
+    box-shadow: 0 0 6px rgba(0, 33, 50, 0.1), 0 7px 25px rgba(17, 38, 60, 0.4);
+}
+.jsPanel-content.jsPanel-theme-hint-info {
+    background: none repeat scroll 0 0 #033C73;
+    color: #fff;
+    font-family: tahoma,arial,verdana,sans-serif;
+    /*outline: 1px solid #bbb;*/
+}
+/* hint-error ------------------------------------------- */
+.jsPanel.jsPanel-theme-hint-error{
+    background: none repeat scroll 0 0 #C71C22;
+    box-shadow: 0 0 6px rgba(0, 33, 50, 0.1), 0 7px 25px rgba(17, 38, 60, 0.4);
+}
+.jsPanel-content.jsPanel-theme-hint-error {
+    background: none repeat scroll 0 0 #C71C22;
+    color: #fff;
+    font-family: tahoma,arial,verdana,sans-serif;
+    /*outline: 1px solid #bbb;*/
+}
+
+
+
+
+
+
+/**
+ * CSS3 Tips v1.0.1
+ *
+ * A stylesheet for creating tooltips without using anything other than CSS3.
+ *
+ * created by c.bavota
+ * released under GPL v2
+ *
+ * March 21st, 2014
+ *
+ * HTML example code for the tooltip
+ * <a href="http://bavotasan.com" class="top-tip" data-tips="Go to bavotasan.com">bavotasan.com</a>
+*/
+
+[data-tips] {
+    position: relative;
+    text-decoration: none;
+}
+
+[data-tips]:after,
+[data-tips]:before {
+    position: absolute;
+    z-index: 100;
+    opacity: 0;
+}
+
+[data-tips]:after {
+    content: attr(data-tips);
+    height: 25px;
+    line-height: 25px;
+    padding: 0 10px;
+    font-size: 12px;
+    text-align: center;
+    color: #fff;
+    background: #3276B1;
+    border-radius: 4px;
+    /*text-shadow: 0 0 5px #000;*/
+    -moz-box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    white-space: nowrap;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+[data-tips]:before {
+    content: "";
+    width: 0;
+    height: 0;
+    border-width: 6px;
+    border-style: solid;
+}
+
+[data-tips]:hover:after,
+[data-tips]:hover:before {
+    opacity: 1;
+}
+
+/* Top tips */
+[data-tips].top-tip:after,
+[data-tips].top-tip:before {
+    -webkit-transition: bottom 0.25s ease-in-out, opacity 0.25s ease-in-out;
+    -moz-transition: bottom 0.25s ease-in-out, opacity 0.25s ease-in-out;
+    transition: bottom 0.25s ease-in-out, opacity 0.25s ease-in-out;
+    bottom: 90%;
+    left: -9999px;
+    margin-bottom: 12px;
+}
+
+[data-tips].top-tip:before {
+    border-color: #3276B1 transparent transparent transparent;
+    margin-bottom: 0;
+}
+
+[data-tips].top-tip:hover:after,
+[data-tips].top-tip:hover:before {
+    bottom: 100%;
+    left: 0;
+}
+
+[data-tips].top-tip:hover:before {
+    left: 15px;
+}
+
+/* Bottom tip */
+[data-tips].bottom-tip:after,
+[data-tips].bottom-tip:before {
+    -webkit-transition: top 0.25s ease-in-out, opacity 0.25s ease-in-out;
+    -moz-transition: top 0.25s ease-in-out, opacity 0.25s ease-in-out;
+    transition: top 0.25s ease-in-out, opacity 0.25s ease-in-out;
+    top: 90%;
+    left: -9999px;
+    margin-top: 12px;
+}
+
+[data-tips].bottom-tip:before {
+    border-color: transparent transparent #3276B1 transparent;
+    margin-top: 0;
+}
+
+[data-tips].bottom-tip:hover:after,
+[data-tips].bottom-tip:hover:before {
+    top: 100%;
+    left: 0;
+}
+
+[data-tips].bottom-tip:hover:before {
+    left: 15px;
+}
+
+/* Right tip */
+[data-tips].right-tip:after,
+[data-tips].right-tip:before {
+    -webkit-transition: left 0.25s ease-in-out, opacity 0.25s ease-in-out;
+    -moz-transition: left 0.25s ease-in-out, opacity 0.25s ease-in-out;
+    transition: left 0.25s ease-in-out, opacity 0.25s ease-in-out;
+    top: -9999px;
+    left: 96%;
+    margin-left: 12px;
+}
+
+[data-tips].right-tip:before {
+    border-color: transparent #3276B1 transparent transparent;
+    margin-left: 0;
+}
+
+[data-tips].right-tip:hover:after,
+[data-tips].right-tip:hover:before {
+    left: 100%;
+    top: 0;
+}
+
+[data-tips].right-tip:hover:before {
+    top: 7px;
+}
+
+/* Left tip */
+[data-tips].left-tip:after,
+[data-tips].left-tip:before {
+    -webkit-transition: right 0.25s ease-in-out, opacity 0.25s ease-in-out;
+    -moz-transition: right 0.25s ease-in-out, opacity 0.25s ease-in-out;
+    transition: right 0.25s ease-in-out, opacity 0.25s ease-in-out;
+    top: -9999px;
+    right: 96%;
+    margin-right: 12px;
+}
+
+[data-tips].left-tip:before {
+    border-color: transparent transparent transparent #3276B1;
+    margin-right: 0;
+}
+
+[data-tips].left-tip:hover:after,
+[data-tips].left-tip:hover:before {
+    right: 100%;
+    top: 0;
+}
+
+[data-tips].left-tip:hover:before {
+    top: 7px;
+}
