@@ -1,0 +1,2 @@
+/*! jQuery & Zepto Lazy - YouTube Plugin v1.4 - http://jquery.eisbehr.de/lazy - MIT&GPL-2.0 license - Copyright 2012-2017 Daniel 'Eisbehr' Kern */
+!function(t){t.lazy(["yt","youtube"],function(t,e){"iframe"===t[0].tagName.toLowerCase()?(t.attr("src","https://www.youtube.com/embed/"+t.attr("data-src")+"?rel=0&amp;showinfo=0"),this.config("removeAttribute")&&t.removeAttr("data-src")):e(!1)})}(window.jQuery||window.Zepto);
