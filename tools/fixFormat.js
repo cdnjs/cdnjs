@@ -21,7 +21,17 @@ function fixFormat() {
    * 3. Fix the package.json of each lib. If the minified file exists, filename field should point to it.
    *
    */
-
+  var args = process.argv;
+  if (args[2]) {
+    arg = args.slice(2)[0];
+    packages = glob.sync('./ajax/libs/' + arg + '/package.json');
+  }
+  
+  if (!packages.length){
+    console.log('No libraries were found by given pattern');
+    return;
+  }
+  
   async.each(packages, function (item, callback) {
     var pkg = JSON.parse(fs.readFileSync(item, 'utf8'));
 
