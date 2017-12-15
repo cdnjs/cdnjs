@@ -9,7 +9,10 @@
   2.3 [Auto-update example](#23-auto-update-example)  
   2.4 [Updating package.json with auto-update information](#24-updating-packagejson-with-auto-update-information)  
 3. [Update existing library with new version](#3-update-existing-library-with-new-version)  
-4. [Create a new library](#4-create-a-new-library)  
+4. [Add a new library](#4-add-a-new-library)  
+  4.1 [overview](#41-overview)  
+  4.2 [Via a single package.json](#42-via-a-single-packagejson)  
+  4.3 [With its assets](#43-with-its-assets)  
 5. [Adding and updating cdnjs](#5-adding-and-updating-cdnjs)  
   5.1 [Fork the cdnjs repository](#51-fork-the-cdnjs-repository)  
   5.2 [Make changes to your fork](#52-make-changes-to-your-fork)  
@@ -107,7 +110,186 @@ Coming soon - please refer to `README.md`.
 
 Coming soon - please refer to `README.md`.
 
-## 4. Create a new library
+## 4. Add a new library
+### 4.1 overview
+1. Libraries are stored in the `ajax/libs` directory. Each library has its own subdirectory of `ajax/libs` and each version of the library has its own subdirectory of the library directory name, for example:
+   > /ajax/libs/jquery/2.0.0/
+
+2. We use [`package.json`](https://www.npmjs.org/doc/package.json.html) to store the meta data of a library in [npm format](https://www.npmjs.org/doc/package.json.html), please don't forget to add this file at the root of the lib.
+   * If there is an official `package.json`, please try to follow the official version, the best way is just copy from the official and do a little modification of it.
+   * If there is **not** an official `package.json`, please **create** it by yourself, you should refer to [doc of package.json](https://www.npmjs.org/doc/package.json.html) or other lib's `package.json`, and the data should be as close as official data as possible.
+    * The indent of `package.json` **must** be `2 spaces`
+    * Please use [JSONLint](http://jsonlint.com/) to validate your `package.json`.
+
+3. The fields of package.json
+```js
+name
+filename
+version
+description
+keywords
+repository
+homepage
+author
+license
+npm or git auto-update
+```
+- **name**: Basically, it is the same as the library name of upstream. The folder name must be the same as name field. (CDNJS's required field)
+```js
+  "name": "pwnjs",
+```
+- **filename**: This field will point to the minified mainfile of a library. (CDNJS's required field)
+```js
+  "filename": "pwn.min.js",
+```
+- **version**: should be latest stable release version. (CDNJS's required field with its assets)
+```js
+  "version": "1.0.0",
+```
+- **description**: It’s a string. This helps people discover your package. You can find it in description field, README.md, bower.json or package.json from upstream. (CDNJS's required field)
+```js
+  "description": "A Javascript library for browser exploitation",
+```
+- **keywords**: It’s an array of string. This helps people discover your package. You can find it in bower.json, package.json from the upstream. Sometimes you need to add it by yourself. (CDNJS's required field)
+```js
+  "keywords": [
+    "pwn",
+    "exploitation"
+  ],
+```
+- **repository**: Specify the place where your code lives. This is helpful for people who want to contribute. As usual, this field is the same with upstream. (CDNJS's required field)
+```js
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theori-io/pwnjs"
+  },
+```
+- **author**: Author field can be the author, contributors or the organization. As usual, this field is the same with upstream. (CDNJS's required field)
+```js
+  "author": "Brian Pak <brianairb@gmail.com>",
+```
+- **license**: Let people know how they are permitted to use it, and any restrictions the author is placing on it. As usual, this field is the same with upstream. But, if the license is not a shortcode, please refer to our [license-list.json](https://github.com/cdnjs/cdnjs/blob/master/tools/license-list.json). (CDNJS's required field)
+```js
+  "license": "MIT",
+```
+- **homepage**: The url to the library homepage.
+```js
+  "homepage": "https://theori-io.github.io/pwnjs/",
+```
+- **npm or git auto-update**: cdnjs automatically updates libraries that are known to be hosted on npm or git repo. You can refer to [autoupdate](https://github.com/cdnjs/cdnjs/blob/master/documents/autoupdate.md). (CDNJS's required field) 
+    - **npm auto-update**
+        - **npmName**: the corresponding npmjs name.
+        - **npmFileMap**: a list of files to copy from npmjs to cdnjs
+        - **basePath**: the path in the npmjs tarball; it will be ignored when files are copied to cdnjs
+        - **files**: indicates the file(s) to copy and can be named (e.g., lodash.min.js) or wildcards (e.g., *.js).
+    ```js
+      "npmName": "pwnjs",
+      "npmFileMap": [
+        {
+          "basePath": "dist",
+          "files": [
+            "**/*"
+          ]
+        }
+      ]
+    ```
+    - **git auto-update**
+        - **autoupdate**: An autoupdate field.
+        - **source**: The type of source
+        - **target**: The link can be download files by people or bot.
+        - **fileMap**: a list of files to copy from upstream library to cdnjs
+        - **basePath**: the path in the library tarball; it will be ignored when files are copied to cdnjs
+        - **files**: indicates the file(s) to copy and can be named (e.g., lodash.min.js) or wildcards (e.g., *.js).
+    ```js
+      "autoupdate": {
+        "source": "git",
+        "target": "git://github.com/theori-io/pwnjs.git",
+        "fileMap": [
+          {
+            "basePath": "dist",
+            "files": [
+              "**/*"
+            ]
+          }
+        ]
+      }
+    ```
+    - Memo: Two fields in fileMap or npmFileMap array
+        - **basePath**: describe the place of files you want to add
+        - **files**: a pattern matcher allowing selection of multiple files
+        - Some general rules
+```js
+          {
+            "basePath": "dist",
+            "files": [
+              "**/*"
+            ]
+          }
+```
+```js
+          {
+            "basePath": "build",
+            "files": [
+              "**/*"
+            ]
+          }
+```
+```js
+          {
+            "basePath": "release",
+            "files": [
+              "**/*"
+            ]
+          }
+```
+```js
+          {
+            "basePath": "src",
+            "files": [
+              "lib_name*"
+            ]
+          }
+```
+```js
+          {
+            "basePath": "",
+            "files": [
+              "lib_name*"
+            ]
+          }
+```
+4. We use the directory/folder name and `name` property in `package.json` to identify a library, so this two string should be **totally** equal.
+
+5. Which source of auto-update can be choosed, npm or git?
+    1. Please make sure the files can be directly used in front-end and remember the path of the library.
+    2. Which source include the latest stable release version with front-end files? If both of them include the latest version, let's move on next step.
+    3. Which source include the more stable release versions with front-end files? Then, let's choose the currect source.
+
+
+
+### 4.2 Via a single package.json
+
+1. Create a branch and a `<LIBRARY_NAME>` folder under `ajax/libs/`
+2. Creating a `package.json` under `ajax/libs/<LIBRARY_NAME>`
+3. Edit the `package.json`.
+    - Required fields: `name`, `description`, `filename`, `license`, `repository`, `author`, `keywords`, auto-update config
+    - Non-Required fields (If there is no field of the upstream): `homepage`
+    - Please do not add **`version`** field
+4. Save the file with the commit message as the followings. This will be useful to us to maintain the git log and trace the history.
+    - If you use npm auto-update config, you can use the followings commit message. (Please replace `<LIBRARY_NAME>` to real library, `<THIS_ISSUE_NUMBER>` to real issue number, `<AUTHOR>` to real author of the library.)
+    ```
+    Add <LIBRARY_NAME> w/ npm auto-update via single package.json
+
+    close #<THIS_ISSUE_NUMBER>, cc @<AUTHOR>
+    ```
+    - If you use git auto-update config, please use the followings commit message. (Please replace `<LIBRARY_NAME>` to real library, `<THIS_ISSUE_NUMBER>` to real issue number, `<AUTHOR>` to real author of the library.)
+    ```
+    Add <LIBRARY_NAME> w/ git auto-update via single package.json
+
+    close #<THIS_ISSUE_NUMBER>, cc @<AUTHOR>
+    ```
+
+### 4.3 With its assets
 
 Coming soon - please refer to `README.md`.
 
