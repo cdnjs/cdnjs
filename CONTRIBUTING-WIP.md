@@ -1,5 +1,23 @@
 ﻿# Contributing to cdnjs Library
 
+## Table of Contents
+0. [Overview](#0-overview)  
+1. [Policy, rules and guidelines](#1-policy-rules-and-guidelines)  
+2. [Configure auto-update](#2-configure-auto-update)  
+  2.1 [Auto-update overview](#21-auto-update-overview)  
+  2.3 [Auto-update syntax](#23-auto-update-syntax)  
+  2.3 [Auto-update example](#23-auto-update-example)  
+  2.4 [Updating package.json with auto-update information](#24-updating-packagejson-with-auto-update-information)  
+3. [Update existing library with new version](#3-update-existing-library-with-new-version)  
+4. [Create a new library](#4-create-a-new-library)  
+5. [Adding and updating cdnjs](#5-adding-and-updating-cdnjs)  
+  5.1 [Fork the cdnjs repository](#51-fork-the-cdnjs-repository)  
+  5.2 [Make changes to your fork](#52-make-changes-to-your-fork)  
+  5.3 [Pre-flight checks](#53-pre-flight-checks)  
+  5.4 [Create a pull request](#54-create-a-pull-request)  
+  5.5 [Pull request follow-up](#55-pull-request-follow-up)  
+6. [Create an issue](#6-create-an-issue)  
+
 ## 0. Overview
 
 [cdnjs](http://github.com/cdnjs/cdnjs) is the GitHub repository mirroring all library assets on [cdnjs.cloudflare.com](http://cdnjs.cloudflare.com).
