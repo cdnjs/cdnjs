@@ -1,0 +1,72 @@
+/*Only Spinner Hue*/
+/*Global Variables*/
+/*Colors*/
+/*Box Size*/
+/*Speed*/
+/*Global Mixins*/
+/*Global Spinner*/
+.cp-spinner {
+  width: 48px;
+  height: 48px;
+  display: inline-block;
+  box-sizing: border-box;
+  position: relative;
+}
+/*Hue Spinner*/
+.cp-hue {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  box-sizing: border-box;
+  background: #F56151;
+  border-radius: 50%;
+  animation: cp-hue-animate 1s ease-in-out infinite;
+}
+.cp-hue:before {
+  border-radius: 0% 12px 12px 0%;
+  content: " ";
+  width: 12px;
+  height: 24px;
+  display: inline-block;
+  box-sizing: border-box;
+  background: white;
+  position: absolute;
+  top: 0;
+  right: 0;
+  animation: cp-hue-animate-before 1s ease-in-out infinite;
+}
+/*Hue Spinner Animation*/
+@keyframes cp-hue-animate {
+  0% {
+    background: #F56151;
+  }
+  25% {
+    background: #58bd55;
+  }
+  50% {
+    background: #eb68a1;
+  }
+  75% {
+    background: #f3d53f;
+  }
+  100% {
+    background: #F56151;
+  }
+}
+@keyframes cp-hue-animate-before {
+  0% {
+    transform: rotateY(0deg);
+    transform-origin: left center;
+    opacity: .5;
+  }
+  30%,
+  70% {
+    transform: rotateY(180deg);
+    transform-origin: left center;
+    opacity: .2;
+  }
+  100% {
+    transform: rotateY(0deg);
+    opacity: .5;
+  }
+}
