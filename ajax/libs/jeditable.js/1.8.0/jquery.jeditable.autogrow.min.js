@@ -1,0 +1,3 @@
+/*! jquery-jeditable https://github.com/NicolasCARPi/jquery_jeditable#readme */
+
+$.editable.addInputType("autogrow",{element:function(settings,original){var textarea=$("<textarea />");return settings.rows?textarea.attr("rows",settings.rows):textarea.height(settings.height),settings.cols?textarea.attr("cols",settings.cols):textarea.width(settings.width),$(this).append(textarea),textarea},plugin:function(settings,original){$("textarea",this).autogrow(settings.autogrow)}});
