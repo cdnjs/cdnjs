@@ -39,7 +39,7 @@ Note that if you are using a distribution purpose repository/package, please als
 # Git commit checklist
  * [ ] The first line of commit message is less then 50 chars; clean, clear and easy to understand.
  * [ ] The parent of the commit(s) in the PR is not older than 3 days.
- * [ ] Pull request is send from a non-master branch with a meaningful name.
+ * [ ] Pull request is sent from a non-master branch with a meaningful name.
  * [ ] Separate unrelated changes into different commits.
  * [ ] Use rebase to squash/fixup dummy/unnecessary commits into only one commit.
  * [ ] Close corresponding issue in commit message
