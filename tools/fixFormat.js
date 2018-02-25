@@ -101,23 +101,38 @@ function fixFormat() {
       delete pkg.licenses;
     }
 
+    var licenseCheck;
     if (pkg.license !== undefined) {
       if (pkg.license.type !== undefined) {
-        if (licenses.indexOf(pkg.license.type) !== -1) {
-          pkg.license = pkg.license.type;
-        } else if (adapt(pkg.license.type)) {
-          pkg.license = adapt(pkg.license.type);
-        } else {
+        licenseCheck = adaptLicenseName(pkg.name, pkg.license.type);
+        if (licenseCheck == null) {
           unRecognizedLicense(pkg.name, pkg.license.type);
+        } else {
+          pkg.license = licenseCheck;
+        }
+      } else {
+        licenseCheck = adaptLicenseName(pkg.name, pkg.license);
+        if (licenseCheck == null) {
+          unRecognizedLicense(pkg.name, pkg.license);
+        } else {
+          pkg.license = licenseCheck;
         }
       }
     } else if (pkg.licenses !== undefined) {
       for (license in pkg.licenses) {
         if (pkg.licenses[license].type !== undefined) {
-          if (licenses.indexOf(pkg.licenses[license].type) !== -1) {
-            pkg.licenses[license] = pkg.licenses[license].type;
-          } else {
+          licenseCheck = adaptLicenseName(pkg.name, pkg.licenses[license].type);
+          if (licenseCheck == null) {
             unRecognizedLicense(pkg.name, pkg.licenses[license].type);
+          } else {
+            pkg.licenses[license] = licenseCheck;
+          }
+        } else {
+          licenseCheck = adaptLicenseName(pkg.name, pkg.licenses[license]);
+          if (licenseCheck == null) {
+            unRecognizedLicense(pkg.name, pkg.licenses[license]);
+          } else {
+            pkg.licenses[license] = licenseCheck;
           }
         }
       }
@@ -187,6 +202,16 @@ function fixFormat() {
       case 'Apache License 2.0':
         return 'Apache-2.0';
         break;
+    }
+  }
+
+  function adaptLicenseName(pkgName, licenseName) {
+    if (licenses.indexOf(licenseName) !== -1) {
+      return licenseName;
+    } else if (adapt(licenseName)) {
+      return adapt(licenseName);
+    } else {
+      return;
     }
   }
 

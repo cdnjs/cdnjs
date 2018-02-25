@@ -9,6 +9,7 @@ var gitUrlParse = require('git-url-parse');
 var isThere = require('is-there');
 var libsToRun = require('./support/libsToRun');
 var recognizedFields = require('./recognizedFields.js');
+var licenseList = JSON.parse(fs.readFileSync('tools/license-list.json', 'utf8'));
 
 function parse(jsonFile, ignoreMissing) {
   var content;
@@ -229,9 +230,20 @@ packages.map(function (pkg) {
                 pkgName(pkg) + ": authors field in package.json should be an array to include multiple authors info, if there is only one author, you should use 'author' instead, you can use our tool: tools/fixFormat.js to fix it for you.");
     }
 
+    if (content.license !== undefined) {
+      assert.ok(!Array.isArray(content.license),
+                pkgName(pkg) + ": license field in package.json should be a object or string to show its license info, if there is multiple licenses, you should use 'licenses' instead, you can use our tool: tools/fixFormat.js to fix it for you.");
+      assert.ok(licenseList.indexOf(content.license) !== -1,
+                pkgName(pkg) + ": license field in package.json should be as the same with the tools/license-list.json, you can use our tool: tools/fixFormat.js to fix it for you.");
+    }
+
     if (content.licenses !== undefined) {
       assert.ok(Array.isArray(content.licenses),
                 pkgName(pkg) + ": licenses field in package.json should be an array to include multiple licenses info, if there is only one license, you should use 'license' instead, you can use our tool: tools/fixFormat.js to fix it for you.");
+      for (var license in content.licenses) {
+          assert.ok(licenseList.indexOf(content.licenses[license]) !== -1,
+                    pkgName(pkg) + ": licenses field in package.json should be as the same with tools/license-list.json, you can use our tool: tools/fixFormat.js to fix it for you.");
+      }
     }
   };
 
