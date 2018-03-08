@@ -37,6 +37,7 @@
     this.highlighter = this.options.highlighter || this.highlighter;
     this.shown = false;
     this.selected = false;
+    this.options.appendId = (this.options.appendId == undefined ? '': this.options.appendId);
     this.refresh();
     this.transferAttributes();
     this.listen();
@@ -97,8 +98,8 @@
 
   , transferAttributes: function() {
     this.options.placeholder = this.$source.attr('data-placeholder') || this.options.placeholder
-    if(this.options.appendId !== "undefined") {
-    	this.$element.attr('id', this.$source.attr('id') + this.options.appendId);
+    if(this.$source.attr('id')) {
+     this.$element.attr('id', this.$source.attr('id') + this.options.appendId);
     }
     this.$element.attr('placeholder', this.options.placeholder)
     this.$target.prop('name', this.$source.prop('name'))
