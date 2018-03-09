@@ -1,0 +1,712 @@
+/**
+ * Name: skeletonic v1.0.33
+ * Description: A dead on, lightweight, responsive and modern CSS framework.
+ * @version 1.0.33
+ * Author: Reedia Limited (https://github.com/reedia)
+ * Copyright © Reedia Limited 2018. All rights reserved.
+ * http://skeletonic.io
+ * Repository: git+https://github.com/reedia/skeletonic.git
+ * License: MIT
+ * License URI: http://www.opensource.org/licenses/mit-license.php
+ */
+
+/* Table Of Content
+==================================================
+
+	#	Configurations
+		#	Colours
+		# Variables
+
+	#	Resets
+		# Base
+		# Divider
+		# Typography
+
+	#	Core
+		# Grid
+
+	#	Components
+		# Button
+		# Code
+		# Form
+		# Image
+		# Links
+		# Lists
+		# Table
+		# Util
+
+==================================================
+/* @group Media Queries */
+@media (min-width: 576px)
+{
+    .container
+    {
+        max-width: 540px;
+    }
+}
+@media (min-width: 768px)
+{
+    .container
+    {
+        max-width: 750px;
+    }
+}
+@media (min-width: 992px)
+{
+    .container
+    {
+        max-width: 970px;
+    }
+}
+@media (min-width: 1200px)
+{
+    .container
+    {
+        max-width: 1170px;
+    }
+}
+/* @end */
+/* @group Base */
+*
+{
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+
+    margin: .25em 0;
+    padding: 0;
+
+    word-wrap: break-word;
+
+    color: #000;
+}
+html
+{
+    font-family: sans-serif;
+
+        -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+textarea
+{
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    width: 100%;
+    min-height: 70px;
+    padding: 10px;
+}
+textarea:hover
+{
+    border-color: #212121;
+}
+textarea:focus
+{
+    border-color: #eee;
+    outline: none;
+}
+input,
+textarea,
+select,
+fieldset,
+pre,
+blockquote,
+dl,
+figure,
+table,
+p,
+ul,
+ol,
+form
+{
+    margin-bottom: 1.5rem;
+}
+strong,
+b
+{
+    font-weight: bold;
+
+    color: #000;
+}
+em,
+i
+{
+    font-style: italic;
+}
+/* @end */
+/* @group Divider */
+hr
+{
+    margin-top: .25em;
+    margin-bottom: .25em;
+
+    border-top: 1px solid #000;
+}
+/* @end */
+/* @group Typography */
+h1
+{
+    font-size: 2.986rem;
+    font-weight: 500;
+    line-height: 1.2;
+
+    margin-top: 0;
+}
+h2
+{
+    font-size: 2.488rem;
+    font-weight: 500;
+    line-height: 1.25;
+
+    margin-top: 0;
+}
+h3
+{
+    font-size: 2.074rem;
+    font-weight: 500;
+    line-height: 1.3;
+
+    margin-top: 0;
+}
+h4
+{
+    font-size: 1.728rem;
+    font-weight: 500;
+    line-height: 1.35;
+
+    margin-top: 0;
+}
+h5
+{
+    font-size: 1.44rem;
+    font-weight: 500;
+    line-height: 1.5;
+
+    margin-top: 0;
+}
+h6
+{
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.6;
+}
+/* csslint ignore:start */
+@media (max-width: 768px)
+{
+    h1
+    {
+        font-size: 2.027rem;
+    }
+    h2
+    {
+        font-size: 1.802rem;
+    }
+    h3
+    {
+        font-size: 1.602rem;
+    }
+    h4
+    {
+        font-size: 1.424rem;
+    }
+    h5
+    {
+        font-size: 1.266rem;
+    }
+    h6
+    {
+        font-size: 1.125rem;
+    }
+}
+/* csslint ignore:end */
+/* @end */
+/* @group Grid */
+.container
+{
+    position: relative;
+
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    width: 100%;
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+.grid-flex
+{
+    display: -webkit-box;
+    display: flex;
+
+        flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+}
+.row:after
+{
+    display: table;
+    clear: both;
+
+    content: '';
+}
+.flex-1
+{
+    -webkit-box-flex: 1;
+       -moz-box-flex: 1;
+        -ms-box-flex: 1;
+    flex: 1;
+}
+.flex-2
+{
+    -webkit-box-flex: 2;
+       -moz-box-flex: 2;
+        -ms-box-flex: 2;
+    flex: 2;
+}
+.flex-3
+{
+    -webkit-box-flex: 3;
+       -moz-box-flex: 3;
+        -ms-box-flex: 3;
+    flex: 3;
+}
+.flex-4
+{
+    -webkit-box-flex: 4;
+       -moz-box-flex: 4;
+        -ms-box-flex: 4;
+    flex: 4;
+}
+.flex-5
+{
+    -webkit-box-flex: 5;
+       -moz-box-flex: 5;
+        -ms-box-flex: 5;
+    flex: 5;
+}
+.flex-6
+{
+    -webkit-box-flex: 6;
+       -moz-box-flex: 6;
+        -ms-box-flex: 6;
+    flex: 6;
+}
+.flex-7
+{
+    -webkit-box-flex: 7;
+       -moz-box-flex: 7;
+        -ms-box-flex: 7;
+    flex: 7;
+}
+.flex-8
+{
+    -webkit-box-flex: 8;
+       -moz-box-flex: 8;
+        -ms-box-flex: 8;
+    flex: 8;
+}
+.flex-9
+{
+    -webkit-box-flex: 9;
+       -moz-box-flex: 9;
+        -ms-box-flex: 9;
+    flex: 9;
+}
+.flex-10
+{
+    -webkit-box-flex: 10;
+       -moz-box-flex: 10;
+        -ms-box-flex: 10;
+    flex: 10;
+}
+/* @end */
+/* @group Button */
+button,
+.button,
+[type=submit]
+{
+    padding: 9px 20px;
+
+    cursor: pointer;
+    user-select: none;
+    transition: all 150ms linear;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-decoration: none;
+
+    color: #000;
+    border: 0;
+    background: #eee;
+}
+button:link,
+.button:link,
+[type=submit]:link,
+button:visited,
+.button:visited,
+[type=submit]:visited
+{
+    color: #000;
+}
+button:active,
+.button:active,
+[type=submit]:active
+{
+    transition: all 150ms linear;
+    text-decoration: none;
+
+    opacity: .75;
+    color: #000;
+}
+button:hover,
+.button:hover,
+[type=submit]:hover
+{
+    transition: all 150ms linear;
+    text-decoration: none;
+
+    opacity: .85;
+    color: #000;
+    background: #fafafa;
+}
+button:focus,
+.button:focus,
+[type=submit]:focus
+{
+    transition: all 150ms linear;
+    text-decoration: none;
+
+    opacity: .7;
+    color: #000;
+    background: #fafafa;
+}
+button[disabled],
+.button[disabled],
+[type=submit][disabled],
+button:disabled,
+.button:disabled,
+[type=submit]:disabled,
+button.disabled,
+.button.disabled,
+[type=submit].disabled
+{
+    cursor: default;
+    pointer-events: none;
+
+    opacity: .5;
+}
+/* @end */
+/* @group Code */
+pre,
+code
+{
+    font-family: 'Consolas', 'Monaco', 'Menlo', monospace;
+
+    display: block;
+
+    padding: 10px;
+
+    white-space: pre-wrap;
+    word-wrap: break-word;
+
+    background: #fafafa;
+}
+/* @end */
+/* @group Input */
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=search],
+input[type=number],
+input[type=file],
+input[type=tel],
+input[type=url],
+select,
+textarea
+{
+    font-size: 1rem;
+
+    margin-bottom: 10px;
+    padding: 10px;
+
+    transition: all 150ms linear;
+
+    background: #fff;
+}
+input[type=text]:hover,
+input[type=password]:hover,
+input[type=email]:hover,
+input[type=search]:hover,
+input[type=number]:hover,
+input[type=file]:hover,
+input[type=tel]:hover,
+input[type=url]:hover,
+select:hover,
+textarea:hover
+{
+    border-color: #212121;
+}
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=email]:focus,
+input[type=search]:focus,
+input[type=number]:focus,
+input[type=file]:focus,
+input[type=tel]:focus,
+input[type=url]:focus,
+select:focus,
+textarea:focus
+{
+    border-color: #eee;
+    outline: none;
+}
+/* @end */
+/* @group Image */
+img
+{
+    max-width: 100%;
+    height: auto;
+
+    vertical-align: bottom;
+}
+/* @end */
+/* @group Links */
+a:link
+{
+    text-decoration: none;
+
+    color: #34d;
+}
+a:visited
+{
+    color: #804180;
+}
+a:hover,
+a:active
+{
+    text-decoration: underline;
+
+    color: #b50010;
+}
+a:focus
+{
+    color: #b50010;
+    outline: thin dotted;
+    outline: 1px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+}
+/* @end */
+/* @group Lists */
+ul,
+ol
+{
+    margin: 1rem 0;
+}
+ul
+{
+    list-style: none outside;
+}
+ol
+{
+    list-style: decimal;
+}
+li
+{
+    line-height: 1rem;
+
+    margin-bottom: 1rem;
+}
+ol,
+ul.square,
+ul.circle,
+ul.disc
+{
+    margin: 1em 2.5em;
+}
+ul.square
+{
+    list-style: square outside;
+}
+ul.circle
+{
+    list-style: circle outside;
+}
+ul.disc
+{
+    list-style: disc outside;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul
+{
+    font-size: 90%;
+
+    margin: 4px 0 5px 30px;
+}
+/* @end */
+/*=============================
+  Navigation
+=============================*/
+.nav
+{
+    position: relative;
+
+    display: flex;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+.nav .nav-item
+{
+    margin-right: 10px;
+}
+.nav .nav-item:last-child
+{
+    margin-right: 0;
+}
+/* @group Pattern */
+body
+{
+    -webkit-box-sizing: content-box;
+       -moz-box-sizing: content-box;
+            box-sizing: content-box;
+
+       text-overflow: clip;
+
+    border: none;
+    background: -webkit-linear-gradient(90deg, #fff 2px, rgba(0,0,0,0) 2px), -webkit-linear-gradient(0deg, #fff 2px, rgba(0,0,0,0) 2px), -webkit-linear-gradient(90deg, rgba(255,255,255,.298) 1px, rgba(0,0,0,0) 1px), -webkit-linear-gradient(0deg, rgba(255,255,255,.298) 1px, rgba(0,0,0,0) 1px), rgba(105,105,105,.2);
+    background:    -moz-linear-gradient(0deg, #fff 2px, rgba(0,0,0,0) 2px), -moz-linear-gradient(90deg, #fff 2px, rgba(0,0,0,0) 2px), -moz-linear-gradient(0deg, rgba(255,255,255,.298) 1px, rgba(0,0,0,0) 1px), -moz-linear-gradient(90deg, rgba(255,255,255,.298) 1px, rgba(0,0,0,0) 1px), rgba(105,105,105,.2);
+    background:         linear-gradient(0deg, #fff 2px, rgba(0,0,0,0) 2px), linear-gradient(90deg, #fff 2px, rgba(0,0,0,0) 2px), linear-gradient(0deg, rgba(255,255,255,.298) 1px, rgba(0,0,0,0) 1px), linear-gradient(90deg, rgba(255,255,255,.298) 1px, rgba(0,0,0,0) 1px), rgba(105,105,105,.2);
+    background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+    -webkit-background-clip: border-box;
+            background-clip: border-box;
+            background-origin: padding-box;
+    -webkit-background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+            background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+
+    -o-text-overflow: clip;
+    -webkit-background-origin: padding-box;
+}
+/* @end */
+/* @group Lists */
+table
+{
+    padding-bottom: 25px;
+
+    empty-cells: show;
+    border-spacing: 0;
+    border-collapse: collapse;
+
+    border: 1px solid #eee;
+}
+thead
+{
+    text-align: left;
+    vertical-align: bottom;
+
+    color: #000;
+    background-color: #fafafa;
+}
+td,
+th
+{
+    font-size: inherit;
+
+    overflow: visible;
+
+    margin: 0;
+    padding: 6px 12px;
+
+    vertical-align: bottom;
+
+    border-width: 0 0 0 1px;
+    border-left: 1px solid #eee;
+    background-color: transparent;
+}
+/* @end */
+/* @group Utilities */
+.text-left
+{
+    text-align: left;
+}
+.text-center
+{
+    text-align: center;
+}
+.text-right
+{
+    text-align: right;
+}
+.size-full-height
+{
+    min-height: 100vh;
+}
+.size-full-width
+{
+    width: 100%;
+}
+.size-full
+{
+    width: 100%;
+    min-height: 100vh;
+}
+.hidden
+{
+    display: none;
+}
+.flex
+{
+    display: flex;
+}
+.justify-start
+{
+    justify-content: flex-start;
+}
+.justify-center
+{
+    justify-content: center;
+}
+.justify-end
+{
+    justify-content: flex-end;
+}
+.align-start
+{
+    align-items: flex-start;
+}
+.align-center
+{
+    align-items: center;
+}
+.align-end
+{
+    align-items: flex-end;
+}
+.direction-vertical
+{
+    flex-direction: column;
+}
+.direction-horizontal
+{
+    flex-direction: row;
+}
+.center
+{
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+}
+.color-black
+{
+    color: #000;
+}
+.color-grey
+{
+    color: #eee;
+}
+/* @end */
