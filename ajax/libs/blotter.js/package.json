@@ -10,7 +10,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bradley/blotter"
+    "url": "https://github.com/bradley/blotter.git"
   },
   "main": "build/blotter.js",
   "files": [
@@ -18,39 +18,28 @@
     "build/blotter.min.js"
   ],
   "homepage": "https://blotter.js.org/",
-  "bugs": {
-    "url": "https://github.com/bradley/blotter/issues",
-    "email": "bradley.j.griffith@gmail.com"
-  },
   "keywords": [
     "webgl",
     "glsl",
     "glsl-shaders",
-    "javascript",
     "typography",
     "text",
-    "css",
     "animation",
     "design",
     "creative-coding",
     "lsd"
   ],
-  "scripts": {
-    "build-custom-three": "npx browserify utils/three_build.js -p [ threejs-tree-shake --loose ] > third_party/three/three.custom.js",
-    "build": "npm run build-custom-three && grunt"
-  },
-  "dependencies": {
-    "three": "^0.89.0"
-  },
-  "devDependencies": {
-    "browserify": "^15.2.0",
-    "grunt": "^0.4.0",
-    "grunt-closure-tools": "^0.9.0",
-    "grunt-contrib-concat": "^0.4.0",
-    "grunt-contrib-jshint": "^0.10.0",
-    "grunt-contrib-uglify": "^0.4.0",
-    "grunt-contrib-watch": "^0.6.0",
-    "npx": "^9.7.1",
-    "threejs-tree-shake": "^1.0.0"
+  "autoupdate": {
+    "source": "git",
+    "target": "git://github.com/bradley/blotter.git",
+    "fileMap": [
+      {
+        "basePath": "build",
+        "files": [
+          "blotter.js",
+          "blotter.min.js"
+        ]
+      }
+    ]
   }
 }
