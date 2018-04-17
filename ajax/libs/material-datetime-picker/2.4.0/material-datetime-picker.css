@@ -1,0 +1,548 @@
+.c-scrim {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.541176);
+  opacity: 0;
+  transition: 200ms ease opacity;
+  will-change: opacity; }
+  .c-scrim--shown {
+    opacity: 1; }
+
+.c-datepicker {
+  min-height: 610px;
+  position: fixed;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border: 0;
+  width: 300px;
+  text-align: center;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 14px 45px rgba(0, 0, 0, 0.25), 0 10px 18px rgba(0, 0, 0, 0.22);
+  border-radius: 2px;
+  opacity: 0;
+  will-change: opacity;
+  transition: 200ms ease-in-out opacity, 200ms ease-in-out top; }
+  .c-datepicker--open {
+    opacity: 1;
+    top: 50%; }
+
+.c-datepicker__header {
+  position: relative; }
+
+.c-datepicker__header-day {
+  height: 32px;
+  background: #0097a7;
+  color: white;
+  line-height: 32px;
+  font-size: 12px;
+  font-weight: 200;
+  letter-spacing: 0.3px; }
+
+.c-datepicker__header::after {
+  content: "";
+  display: table;
+  clear: both; }
+
+.c-datepicker__header-date {
+  background: #00bcd4;
+  height: 150px;
+  padding: 16px 0; }
+
+.rd-month-label {
+  height: 56px;
+  line-height: 56px;
+  font-size: 14px;
+  font-weight: 800; }
+
+.c-datepicker__back, .c-datepicker__next, .c-datepicker__toggle {
+  position: absolute;
+  border: 0;
+  background: white;
+  font-family: 'Material Icons';
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "liga" 1;
+  font-style: normal;
+  text-transform: none;
+  line-height: 1;
+  font-size: 24px;
+  width: 56px;
+  height: 56px;
+  display: inline-block;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  cursor: pointer; }
+  .c-datepicker__back:focus, .c-datepicker__next:focus, .c-datepicker__toggle:focus {
+    outline: 0; }
+
+.c-datepicker__back {
+  left: 0; }
+
+.c-datepicker__next {
+  right: 0; }
+
+.c-datepicker__back:before {
+  content: 'chevron_left'; }
+
+.c-datepicker__next:after {
+  content: 'chevron_right'; }
+
+.c-datepicker--show-time:after {
+  content: 'access_time';
+  color: white;
+  visibility: visible; }
+
+.c-datepicker--show-calendar:after {
+  content: 'grid_on';
+  color: white;
+  visibility: visible; }
+
+.c-datepicker__header-date span {
+  display: block;
+  color: white;
+  margin: 0;
+  transition: opacity 100ms ease-in-out; }
+
+.c-datepicker__header-date__month {
+  cursor: pointer;
+  font-size: 24px;
+  opacity: 0.6; }
+
+.c-datepicker__header-date__day {
+  cursor: pointer;
+  font-size: 64px;
+  opacity: 0.6; }
+
+.c-datepicker__header-date__time {
+  font-size: 25px;
+  opacity: 0.6; }
+  .c-datepicker__header-date__time > span {
+    display: inline-block; }
+
+.c-datepicker__header-date__hours, .c-datepicker__header-date__minutes {
+  cursor: pointer; }
+
+.c-datepicker--show-time.is-selected ~ .c-datepicker__header .c-datepicker__header-date__time {
+  opacity: 1; }
+  .c-datepicker--show-time.is-selected ~ .c-datepicker__header .c-datepicker__header-date__time .c-datepicker__header-date__hours, .c-datepicker--show-time.is-selected ~ .c-datepicker__header .c-datepicker__header-date__time .c-datepicker__header-date__minutes {
+    opacity: .6; }
+    .c-datepicker--show-time.is-selected ~ .c-datepicker__header .c-datepicker__header-date__time .c-datepicker__header-date__hours.active, .c-datepicker--show-time.is-selected ~ .c-datepicker__header .c-datepicker__header-date__time .c-datepicker__header-date__minutes.active {
+      opacity: 1; }
+
+.c-datepicker--show-calendar.is-selected ~ .c-datepicker__header .c-datepicker__header-date__month, .c-datepicker--show-calendar.is-selected ~ .c-datepicker__header .c-datepicker__header-date__day {
+  opacity: 1; }
+
+.modal-btns {
+  padding: 20px;
+  position: absolute;
+  bottom: 0;
+  right: 0; }
+
+.c-datepicker__day-body {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.8);
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  position: relative; }
+  .c-datepicker__day-body:hover {
+    /* color: white; */ }
+
+.c-datepicker__day--selected::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.05); }
+
+.c-datepicker__day-head {
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 12px;
+  height: 36px; }
+
+.c-datepicker__day-head, c-datepicker__day-body {
+  -webkit-tap-highlight-color: transparent; }
+
+.modal-btns {
+  float: right; }
+
+.c-btn {
+  display: inline-block;
+  min-width: 56px;
+  cursor: pointer; }
+
+.rd-day-prev-month {
+  opacity: 0.1;
+  pointer-events: none; }
+
+.rd-day-next-month {
+  opacity: 0.1;
+  pointer-events: none; }
+
+.c-datepicker__calendar {
+  height: 300px; }
+
+.c-datepicker__date {
+  position: absolute;
+  left: 0;
+  right: 0; }
+
+.c-datepicker__days {
+  margin: 10px 20px; }
+
+.c-datepicker__header-toggle {
+  position: absolute;
+  top: 50%;
+  color: white;
+  cursor: pointer; }
+  .c-datepicker__header-toggle i {
+    font-size: 26px; }
+
+.c-datepicker__header-toggle--left {
+  left: 20px; }
+
+.c-datepicker__header-toggle--right {
+  right: 20px; }
+
+.c-datepicker__header-toggle--inactive {
+  opacity: 0.2; }
+
+.c-datepicker__toggle {
+  top: 170px;
+  width: 36px;
+  height: 30px;
+  visibility: hidden;
+  opacity: 0.5;
+  z-index: 1;
+  transition: opacity 200ms ease-in-out; }
+
+.c-datepicker__toggle--right {
+  right: 10px; }
+
+.c-datepicker__toggle--left {
+  left: 10px; }
+
+.c-datepicker__toggle.is-selected {
+  opacity: 1; }
+
+.c-datepicker--show-time.is-selected ~ .c-datepicker__calendar {
+  display: none; }
+
+.c-datepicker--show-calendar.is-selected ~ .c-datepicker__clock {
+  display: none; }
+
+.c-datepicker__clock {
+  position: relative;
+  /* [1] */
+  width: 200px;
+  height: 200px;
+  padding: 0;
+  border-radius: 50%;
+  list-style: none;
+  /* [2] */
+  font-size: 14px;
+  line-height: 50px;
+  padding: 160px 0 20px 0;
+  margin: 0 auto; }
+  .c-datepicker__clock .c-datepicker__clock__num {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    margin: -25px;
+    z-index: 98; }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(1) {
+      transform: rotate(0deg) translate(100px) rotate(-0deg); }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(1).c-datepicker__clock__num--active:not(.hide-hand) ~ .c-datepicker__clock-hands {
+      transform: translate(-50%, -50%) rotate(270deg); }
+      .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(1).c-datepicker__clock__num--active:not(.hide-hand) ~ .c-datepicker__clock-hands .c-datepicker__hour-hand {
+        opacity: 1;
+        background: #00bcd4; }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(1):hover ~ .c-datepicker__clock-hands {
+      transform: translate(-50%, -50%) rotate(270deg); }
+      .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(1):hover ~ .c-datepicker__clock-hands .c-datepicker__hour-hand {
+        opacity: 1;
+        background: #00bcd4; }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(2) {
+      transform: rotate(30deg) translate(100px) rotate(-30deg); }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(2).c-datepicker__clock__num--active:not(.hide-hand) ~ .c-datepicker__clock-hands {
+      transform: translate(-50%, -50%) rotate(300deg); }
+      .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(2).c-datepicker__clock__num--active:not(.hide-hand) ~ .c-datepicker__clock-hands .c-datepicker__hour-hand {
+        opacity: 1;
+        background: #00bcd4; }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(2):hover ~ .c-datepicker__clock-hands {
+      transform: translate(-50%, -50%) rotate(300deg); }
+      .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(2):hover ~ .c-datepicker__clock-hands .c-datepicker__hour-hand {
+        opacity: 1;
+        background: #00bcd4; }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(3) {
+      transform: rotate(60deg) translate(100px) rotate(-60deg); }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(3).c-datepicker__clock__num--active:not(.hide-hand) ~ .c-datepicker__clock-hands {
+      transform: translate(-50%, -50%) rotate(330deg); }
+      .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(3).c-datepicker__clock__num--active:not(.hide-hand) ~ .c-datepicker__clock-hands .c-datepicker__hour-hand {
+        opacity: 1;
+        background: #00bcd4; }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(3):hover ~ .c-datepicker__clock-hands {
+      transform: translate(-50%, -50%) rotate(330deg); }
+      .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(3):hover ~ .c-datepicker__clock-hands .c-datepicker__hour-hand {
+        opacity: 1;
+        background: #00bcd4; }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(4) {
+      transform: rotate(90deg) translate(100px) rotate(-90deg); }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(4).c-datepicker__clock__num--active:not(.hide-hand) ~ .c-datepicker__clock-hands {
+      transform: translate(-50%, -50%) rotate(360deg); }
+      .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(4).c-datepicker__clock__num--active:not(.hide-hand) ~ .c-datepicker__clock-hands .c-datepicker__hour-hand {
+        opacity: 1;
+        background: #00bcd4; }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(4):hover ~ .c-datepicker__clock-hands {
+      transform: translate(-50%, -50%) rotate(360deg); }
+      .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(4):hover ~ .c-datepicker__clock-hands .c-datepicker__hour-hand {
+        opacity: 1;
+        background: #00bcd4; }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(5) {
+      transform: rotate(120deg) translate(100px) rotate(-120deg); }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(5).c-datepicker__clock__num--active:not(.hide-hand) ~ .c-datepicker__clock-hands {
+      transform: translate(-50%, -50%) rotate(390deg); }
+      .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(5).c-datepicker__clock__num--active:not(.hide-hand) ~ .c-datepicker__clock-hands .c-datepicker__hour-hand {
+        opacity: 1;
+        background: #00bcd4; }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(5):hover ~ .c-datepicker__clock-hands {
+      transform: translate(-50%, -50%) rotate(390deg); }
+      .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(5):hover ~ .c-datepicker__clock-hands .c-datepicker__hour-hand {
+        opacity: 1;
+        background: #00bcd4; }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(6) {
+      transform: rotate(150deg) translate(100px) rotate(-150deg); }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(6).c-datepicker__clock__num--active:not(.hide-hand) ~ .c-datepicker__clock-hands {
+      transform: translate(-50%, -50%) rotate(420deg); }
+      .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(6).c-datepicker__clock__num--active:not(.hide-hand) ~ .c-datepicker__clock-hands .c-datepicker__hour-hand {
+        opacity: 1;
+        background: #00bcd4; }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(6):hover ~ .c-datepicker__clock-hands {
+      transform: translate(-50%, -50%) rotate(420deg); }
+      .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(6):hover ~ .c-datepicker__clock-hands .c-datepicker__hour-hand {
+        opacity: 1;
+        background: #00bcd4; }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(7) {
+      transform: rotate(180deg) translate(100px) rotate(-180deg); }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(7).c-datepicker__clock__num--active:not(.hide-hand) ~ .c-datepicker__clock-hands {
+      transform: translate(-50%, -50%) rotate(450deg); }
+      .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(7).c-datepicker__clock__num--active:not(.hide-hand) ~ .c-datepicker__clock-hands .c-datepicker__hour-hand {
+        opacity: 1;
+        background: #00bcd4; }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(7):hover ~ .c-datepicker__clock-hands {
+      transform: translate(-50%, -50%) rotate(450deg); }
+      .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(7):hover ~ .c-datepicker__clock-hands .c-datepicker__hour-hand {
+        opacity: 1;
+        background: #00bcd4; }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(8) {
+      transform: rotate(210deg) translate(100px) rotate(-210deg); }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(8).c-datepicker__clock__num--active:not(.hide-hand) ~ .c-datepicker__clock-hands {
+      transform: translate(-50%, -50%) rotate(480deg); }
+      .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(8).c-datepicker__clock__num--active:not(.hide-hand) ~ .c-datepicker__clock-hands .c-datepicker__hour-hand {
+        opacity: 1;
+        background: #00bcd4; }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(8):hover ~ .c-datepicker__clock-hands {
+      transform: translate(-50%, -50%) rotate(480deg); }
+      .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(8):hover ~ .c-datepicker__clock-hands .c-datepicker__hour-hand {
+        opacity: 1;
+        background: #00bcd4; }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(9) {
+      transform: rotate(240deg) translate(100px) rotate(-240deg); }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(9).c-datepicker__clock__num--active:not(.hide-hand) ~ .c-datepicker__clock-hands {
+      transform: translate(-50%, -50%) rotate(510deg); }
+      .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(9).c-datepicker__clock__num--active:not(.hide-hand) ~ .c-datepicker__clock-hands .c-datepicker__hour-hand {
+        opacity: 1;
+        background: #00bcd4; }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(9):hover ~ .c-datepicker__clock-hands {
+      transform: translate(-50%, -50%) rotate(510deg); }
+      .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(9):hover ~ .c-datepicker__clock-hands .c-datepicker__hour-hand {
+        opacity: 1;
+        background: #00bcd4; }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(10) {
+      transform: rotate(270deg) translate(100px) rotate(-270deg); }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(10).c-datepicker__clock__num--active:not(.hide-hand) ~ .c-datepicker__clock-hands {
+      transform: translate(-50%, -50%) rotate(540deg); }
+      .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(10).c-datepicker__clock__num--active:not(.hide-hand) ~ .c-datepicker__clock-hands .c-datepicker__hour-hand {
+        opacity: 1;
+        background: #00bcd4; }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(10):hover ~ .c-datepicker__clock-hands {
+      transform: translate(-50%, -50%) rotate(540deg); }
+      .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(10):hover ~ .c-datepicker__clock-hands .c-datepicker__hour-hand {
+        opacity: 1;
+        background: #00bcd4; }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(11) {
+      transform: rotate(300deg) translate(100px) rotate(-300deg); }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(11).c-datepicker__clock__num--active:not(.hide-hand) ~ .c-datepicker__clock-hands {
+      transform: translate(-50%, -50%) rotate(570deg); }
+      .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(11).c-datepicker__clock__num--active:not(.hide-hand) ~ .c-datepicker__clock-hands .c-datepicker__hour-hand {
+        opacity: 1;
+        background: #00bcd4; }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(11):hover ~ .c-datepicker__clock-hands {
+      transform: translate(-50%, -50%) rotate(570deg); }
+      .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(11):hover ~ .c-datepicker__clock-hands .c-datepicker__hour-hand {
+        opacity: 1;
+        background: #00bcd4; }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(12) {
+      transform: rotate(330deg) translate(100px) rotate(-330deg); }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(12).c-datepicker__clock__num--active:not(.hide-hand) ~ .c-datepicker__clock-hands {
+      transform: translate(-50%, -50%) rotate(600deg); }
+      .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(12).c-datepicker__clock__num--active:not(.hide-hand) ~ .c-datepicker__clock-hands .c-datepicker__hour-hand {
+        opacity: 1;
+        background: #00bcd4; }
+    .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(12):hover ~ .c-datepicker__clock-hands {
+      transform: translate(-50%, -50%) rotate(600deg); }
+      .c-datepicker__clock .c-datepicker__clock__num:nth-of-type(12):hover ~ .c-datepicker__clock-hands .c-datepicker__hour-hand {
+        opacity: 1;
+        background: #00bcd4; }
+  .c-datepicker__clock::before {
+    content: "";
+    position: absolute;
+    top: 70px;
+    left: -20px;
+    width: 240px;
+    height: 240px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 50%; }
+
+.u-hover-ball-effect, .c-datepicker__day-body, .c-datepicker__clock__num, .c-datepicker__clock__am-pm-toggle label {
+  position: relative;
+  cursor: pointer; }
+  .u-hover-ball-effect:before, .c-datepicker__day-body:before, .c-datepicker__clock__num:before, .c-datepicker__clock__am-pm-toggle label:before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0%;
+    height: 0%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 100ms ease-in-out, height 100ms ease-in-out; }
+  .u-hover-ball-effect:hover, .c-datepicker__day-body:hover, .c-datepicker__clock__num:hover, .c-datepicker__clock__am-pm-toggle label:hover {
+    color: white; }
+    .u-hover-ball-effect:hover:before, .c-datepicker__day-body:hover:before, .c-datepicker__clock__num:hover:before, .c-datepicker__clock__am-pm-toggle label:hover:before {
+      background: #00bcd4;
+      width: 35px;
+      height: 35px;
+      z-index: -1; }
+
+.c-datepicker__day-body--active:not(.hide-hand), .c-datepicker__clock__num--active:not(.hide-hand) {
+  color: white; }
+  .c-datepicker__day-body--active:not(.hide-hand):before, .c-datepicker__clock__num--active:not(.hide-hand):before {
+    background: #00bcd4;
+    width: 35px;
+    height: 35px;
+    z-index: -1; }
+
+.c-datepicker__clock-hands {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(180deg);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #0097a7; }
+
+.c-datepicker__hour-hand {
+  position: absolute;
+  opacity: 0;
+  height: 78px;
+  width: 2px;
+  background: #00bcd4;
+  left: 4px;
+  top: 10px; }
+
+.c-datepicker__clock__minutes {
+  display: none;
+  height: 200px;
+  margin: -69px 0 0 0;
+  width: 200px;
+  display: none; }
+  .c-datepicker__clock__minutes.active {
+    display: block; }
+
+.c-datepicker__clock__hours {
+  height: 200px;
+  margin: -69px 0 0 0;
+  width: 200px;
+  display: none; }
+  .c-datepicker__clock__hours.active {
+    display: block; }
+
+.c-datepicker__mask {
+  width: 127px;
+  height: 132px;
+  position: absolute;
+  top: 122px;
+  left: 37px;
+  z-index: 99; }
+  .c-datepicker__mask:after {
+    content: ' ';
+    width: 156px;
+    height: 70px;
+    display: block;
+    position: absolute;
+    top: 32px;
+    left: 0;
+    margin-left: -13px; }
+  .c-datepicker__mask:before {
+    content: ' ';
+    width: 75px;
+    height: 158px;
+    display: block;
+    position: absolute;
+    top: 6px;
+    left: 28px;
+    margin-top: -18px; }
+
+.c-datepicker__clock--show-minutes .c-datepicker__clock__minutes {
+  visibility: visible; }
+
+.c-datepicker__clock--show-minutes .c-datepicker__clock__hours {
+  visibility: hidden; }
+
+.c-datepicker__clock--show-hours .c-datepicker__clock__minutes {
+  visibility: hidden; }
+
+.c-datepicker__clock--show-hours .c-datepicker__clock__hours {
+  visibility: visible; }
+
+.c-datepicker__clock__am-pm-toggle {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  right: 10px;
+  height: 40px;
+  padding: 20px;
+  line-height: 40px; }
+  .c-datepicker__clock__am-pm-toggle label {
+    width: 40px;
+    position: absolute; }
+    .c-datepicker__clock__am-pm-toggle label:nth-child(1) {
+      left: 0; }
+    .c-datepicker__clock__am-pm-toggle label:nth-child(2) {
+      right: 0; }
+    .c-datepicker__clock__am-pm-toggle label.c-datepicker__toggle--checked::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 0%;
+      height: 0%;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      width: 36px;
+      height: 36px;
+      z-index: -1;
+      background: rgba(0, 0, 0, 0.05); }

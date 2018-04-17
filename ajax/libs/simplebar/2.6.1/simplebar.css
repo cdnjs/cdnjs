@@ -1,0 +1,105 @@
+/*!
+ * 
+ *         SimpleBar.js - v2.6.1
+ *         Scrollbars, simpler.
+ *         https://grsmto.github.io/simplebar/
+ *         
+ *         Made by Adrien Grsmto from a fork by Jonathan Nicol
+ *         Under MIT License
+ *       
+ */
+[data-simplebar] {
+    position: relative;
+    z-index: 0;
+    overflow: hidden!important;
+    max-height: inherit;
+    -webkit-overflow-scrolling: touch; /* Trigger native scrolling for mobile, if not supported, plugin is used. */
+}
+
+[data-simplebar="init"] {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.simplebar-scroll-content {
+    overflow-x: hidden!important;
+    overflow-y: scroll;
+    min-width: 100%!important;
+    max-height: inherit!important;
+    -webkit-box-sizing: content-box!important;
+            box-sizing: content-box!important;
+}
+
+.simplebar-content {
+    overflow-y: hidden!important;
+    overflow-x: scroll;
+    -webkit-box-sizing: border-box!important;
+            box-sizing: border-box!important;
+    min-height: 100%!important;
+}
+
+.simplebar-track {
+    z-index: 1;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 11px;
+}
+
+.simplebar-scrollbar {
+    position: absolute;
+    right: 2px;
+    width: 7px;
+    min-height: 10px;
+}
+
+.simplebar-scrollbar:before {
+    position: absolute;
+    content: "";
+    background: black;
+    border-radius: 7px;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    -webkit-transition: opacity 0.2s linear;
+    transition: opacity 0.2s linear;
+}
+
+.simplebar-track:hover .simplebar-scrollbar:before,
+.simplebar-track .simplebar-scrollbar.visible:before {
+    /* When hovered, remove all transitions from drag handle */
+    opacity: 0.5;
+    -webkit-transition: opacity 0 linear;
+    transition: opacity 0 linear;
+}
+
+.simplebar-track.vertical {
+    top: 0;
+}
+
+.simplebar-track.vertical .simplebar-scrollbar:before {
+    top: 2px;
+    bottom: 2px;
+}
+
+.simplebar-track.horizontal {
+    left: 0;
+    width: auto;
+    height: 11px;
+}
+
+.simplebar-track.horizontal .simplebar-scrollbar:before {
+    height: 100%;
+    left: 2px;
+    right: 2px;
+}
+
+.horizontal.simplebar-track .simplebar-scrollbar {
+    right: auto;
+    top: 2px;
+    height: 7px;
+    min-height: 0;
+    min-width: 10px;
+    width: auto;
+}

@@ -1,0 +1,2 @@
+/*! Parser: image - new 7/17/2014 (v2.17.5) */
+!function(t){"use strict";t.tablesorter.addParser({id:"image",is:function(){return!1},format:function(r,e,i){return t(i).find("img").attr(e.config.imgAttr||"alt")||r},parsed:!0,type:"text"})}(jQuery);
