@@ -1,0 +1,308 @@
+/**
+ * CSS file for fontIconPicker
+ * This file holds the basic CSS
+ * {@link https://github.com/micc83/fontIconPicker}
+ */
+/* Reset (thx to Eric A. and Kathryn S. Meyer) */
+.icons-selector * {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+.icons-selector,
+.icons-selector:before,
+.icons-selector:after,
+.icons-selector *,
+.icons-selector *:before,
+.icons-selector *:after {
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+}
+/* Display */
+.icons-selector {
+	display: inline-block;
+	vertical-align: middle;
+	text-align: left;
+}
+
+/* Icon selector */
+.icons-selector .selector {
+	width: 100px;
+	height: 40px;
+}
+
+/* Selector open button */
+.icons-selector .selector-button {
+	width: 39px;
+	height: 100%;
+	display:block;
+	text-align: center;
+	cursor: pointer;
+	float: left;
+}
+
+/* Selector open button icon */
+.icons-selector .selector-button i {
+	line-height: 38px;
+	text-align: center;
+}
+
+/* Selected icon container */
+.icons-selector .selected-icon {
+	display: block;
+	width: 60px;
+	height: 100%;
+	float: left;
+	text-align: center;
+}
+
+/* Selected icon */
+.icons-selector .selected-icon i {
+	line-height: 40px;
+	font-size: 18px;
+	cursor: default;
+}
+
+/* IconPicker Popup */
+.icons-selector .selector-popup {
+	position: absolute;
+	z-index: 10000;
+	background-color: #fefefe;
+	padding: 5px;
+	height: auto;
+	width: 342px;
+	margin-top:-1px;
+}
+
+/* Search input & category selector */
+.icons-selector .selector-search input[type="text"],
+.icons-selector .selector-category select {
+	border: 0;
+	line-height: 20px;
+	padding: 10px 2.5%;
+	width: 100%;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	margin-bottom: 5px;
+	font-size: 12px;
+	display: block; /* Fixes the positioning inside hidden/floated/text-aligned elements, where it would leave a margin */
+}
+.icons-selector .selector-category select {
+	height: 40px;
+}
+.icons-selector .selector-category select option {
+	padding: 10px;
+}
+
+
+/* Search input placeholder */
+.icons-selector input::-webkit-input-placeholder { text-transform: uppercase; }
+.icons-selector input:-moz-placeholder { text-transform: uppercase; }
+.icons-selector input::-moz-placeholder { text-transform: uppercase;}
+.icons-selector input:-ms-input-placeholder { text-transform: uppercase; }
+
+/* Search and cancel icon */
+.icons-selector .selector-search {
+	position: relative;
+}
+.icons-selector .selector-search i {
+	position: absolute;
+	right: 10px;
+	top: 7px;
+}
+
+/* Icon Container inside Popup */
+.icons-selector .fip-icons-container {
+	width: 100%;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 5px;
+}
+
+/* Icon container loading */
+.icons-selector .fip-icons-container .loading {
+	font-size:24px;
+	margin:0 auto;
+	padding:20px 0;
+	text-align:center;
+	width:100%;
+}
+
+/* Single icon box */
+.icons-selector .fip-box {
+	display: inline-block;
+	margin: 2px;
+	width: 60px;
+	line-height: 42px;
+	text-align: center;
+	cursor: pointer;
+	vertical-align: top;
+	height: 40px;
+}
+
+/* Popup footer */
+.icons-selector .selector-footer {
+	line-height: 12px;
+	padding: 5px 5px 0 5px;
+	text-align: center;
+}
+
+/* Pagination and footer icons */
+.icons-selector .selector-footer, .icons-selector .selector-footer i {
+	font-size: 14px;
+}
+/* Pagination arrows container */
+.icons-selector .selector-arrows {
+	float: right;
+}
+/* Pagination text */
+.icons-selector .selector-pages {
+	font-size: 11px;
+	float: left;
+}
+/* Pagination arrows icons */
+.icons-selector .selector-arrows i {
+	cursor: pointer;
+}
+/* Total icons */
+.icons-selector .selector-footer em {
+	font-style: italic;
+}
+
+
+/* No icons found */
+.icons-selector .icons-picker-error i:before {
+	color: #eee;
+}
+
+/* Icons */
+@font-face {
+  font-family: 'iconpicker';
+  src: url('iconpicker.eot?90190138');
+  src: url('iconpicker.eot?90190138#iefix') format('embedded-opentype'),
+       url('iconpicker.woff?90190138') format('woff'),
+       url('iconpicker.ttf?90190138') format('truetype'),
+       url('iconpicker.svg?90190138#iconpicker') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.icons-selector [class^="fip-icon-"]:before, .icons-selector [class*=" fip-icon-"]:before {
+	font-family: "iconpicker";
+	font-style: normal;
+	font-weight: normal;
+	speak: none;
+	display: inline-block;
+	text-decoration: inherit;
+	width: 1em;
+	margin-right: .2em;
+	text-align: center;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1em;
+	margin-left: .2em;
+}
+/* Search icon */
+.icons-selector .fip-icon-search:before { content: '\e812';cursor: default; }
+/* Cancel search icon */
+.icons-selector .fip-icon-cancel:before { content: '\e814';cursor: pointer; }
+/* No icon set */
+.icons-selector .fip-icon-block:before { content: '\e84e';color: #fed0d0; }
+/* Open picker icon */
+.icons-selector .fip-icon-down-dir:before { content: '\e800'; }
+/* Close picker icon */
+.icons-selector .fip-icon-up-dir:before { content: '\e813'; }
+/* Prev page icon */
+.icons-selector .fip-icon-left-dir:before { content: '\e801'; }
+/* Next page icon */
+.icons-selector .fip-icon-right-dir:before { content: '\e802'; }
+/* Loading icon */
+.icons-selector .fip-icon-spin3:before { content: '\e815'; }
+.icons-selector .fip-icon-spin3 {
+  -moz-animation: spin 2s infinite linear;
+  -o-animation: spin 2s infinite linear;
+  -webkit-animation: spin 2s infinite linear;
+  animation: spin 2s infinite linear;
+  display: inline-block;
+}
+@-moz-keyframes spin {
+  0% {
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -moz-transform: rotate(359deg);
+    -o-transform: rotate(359deg);
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+@-webkit-keyframes spin {
+  0% {
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -moz-transform: rotate(359deg);
+    -o-transform: rotate(359deg);
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+@-o-keyframes spin {
+  0% {
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -moz-transform: rotate(359deg);
+    -o-transform: rotate(359deg);
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+@-ms-keyframes spin {
+  0% {
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -moz-transform: rotate(359deg);
+    -o-transform: rotate(359deg);
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+@keyframes spin {
+  0% {
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -moz-transform: rotate(359deg);
+    -o-transform: rotate(359deg);
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
