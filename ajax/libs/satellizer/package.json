@@ -1,23 +1,8 @@
 {
   "name": "satellizer",
-  "filename": "satellizer.min.js",
+  "filename": "dist/satellizer.min.js",
   "description": "Token-based AngularJS Authentication",
   "version": "0.15.5",
-  "main": "dist/satellizer.js",
-  "scripts": {
-    "start": "supervisor ./examples/server/node/server.js",
-    "test": "karma start",
-    "build": "npm run clean && tsc && rollup -c && uglifyjs dist/satellizer.js -o dist/satellizer.min.js && npm run copy",
-    "clean": "rimraf build dist",
-    "copy": "npm-run-all copy:*",
-    "copy:angular": "cp dist/satellizer.js examples/client/vendor",
-    "copy:ionic": "cp -R dist examples/ionic/www/lib/satellizer",
-    "copy:php": "cp -R examples/client/ examples/server/php/public/",
-    "bump": "npm version patch",
-    "postversion": "npm test && npm run build && git add -A dist && git commit -m 'Release'",
-    "publish-please": "publish-please",
-    "prepublish": "publish-please guard"
-  },
   "author": {
     "name": "Sahat Yalkabov",
     "email": "sahat@me.com",
@@ -28,45 +13,8 @@
     "type": "git",
     "url": "https://github.com/sahat/satellizer.git"
   },
-  "bugs": {
-    "url": "https://github.com/sahat/satellizer/issues"
-  },
   "license": "MIT",
-  "devDependencies": {
-    "angular-mocks": "^1.5.8",
-    "babel-core": "^6.14.0",
-    "babel-eslint": "^7.0.0",
-    "babel-loader": "^6.2.5",
-    "babel-polyfill": "^6.13.0",
-    "babel-preset-es2015": "^6.14.0",
-    "babel-preset-es2015-rollup": "^1.2.0",
-    "jasmine-core": "^2.4.1",
-    "karma": "^1.2.0",
-    "karma-coverage": "^1.1.1",
-    "karma-jasmine": "^1.0.2",
-    "karma-phantomjs-launcher": "^1.0.1",
-    "karma-source-map-support": "^1.1.0",
-    "karma-sourcemap-loader": "^0.3.7",
-    "karma-typescript-preprocessor": "^0.3.0",
-    "karma-webpack": "^1.8.0",
-    "npm-run-all": "^3.0.0",
-    "phantomjs-prebuilt": "^2.1.12",
-    "publish-please": "^2.2.0",
-    "rollup": "^0.36.0",
-    "rollup-plugin-babel": "^2.6.1",
-    "rollup-plugin-node-resolve": "^2.0.0",
-    "rollup-plugin-typescript": "^0.8.1",
-    "rollup-plugin-uglify": "^1.0.1",
-    "supervisor": "^0.11.0",
-    "ts-loader": "^0.9.4",
-    "ts-node": "^1.3.0",
-    "tslint": "~3.15.1",
-    "tslint-loader": "^2.1.5",
-    "typescript": "^2.0.3",
-    "uglify-js": "^2.7.3",
-    "webpack": "^1.13.2"
-  },
-  "tags": [
+  "keywords": [
     "authentication",
     "login",
     "token",
@@ -91,8 +39,12 @@
     "twitch"
   ],
   "npmName": "satellizer",
-  "npmFileMap": [{
-    "basePath": "dist",
-    "files": ["**/*"]
-  }]
+  "npmFileMap": [
+    {
+      "basePath": "dist",
+      "files": [
+        "**/*"
+      ]
+    }
+  ]
 }
