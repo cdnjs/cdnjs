@@ -1,11 +1,12 @@
 # CDNJS - the best front-end resource CDN for free!
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/cdnjs/cdnjs/issues?utf8=%E2%9C%93&q=is%3Aopen%20is%3Aissue%20label%3AHacktoberfest%20-label%3A%22in%20progress%22%20)
+[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/cdnjs/cdnjs/blob/master/LICENSE)
 [![Drone CI](https://ci.cdnjs.com/api/badges/cdnjs/cdnjs/status.svg?branch=master)](https://ci.cdnjs.com/cdnjs/cdnjs)
-[![Dependency Status](https://david-dm.org/cdnjs/cdnjs.svg?theme=shields.io)](https://david-dm.org/cdnjs/cdnjs) [![devDependency Status](https://david-dm.org/cdnjs/cdnjs/dev-status.svg?theme=shields.io)](https://david-dm.org/cdnjs/cdnjs#info=devDependencies)
-[![license](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](https://github.com/cdnjs/cdnjs/blob/master/MIT-LICENSE)
-[![tip for next commit](https://tip4commit.com/projects/919.svg)](https://tip4commit.com/github/cdnjs/cdnjs) [![Bountysource](https://www.bountysource.com/badge/team?team_id=11914&style=bounties_posted)](https://www.bountysource.com/teams/cdnjs/bounties?utm_source=cdnjs&utm_medium=shield&utm_campaign=bounties_posted)
-[![GetBadges Game](https://cdnjs-cdnjs.getbadges.io/shield/company/cdnjs-cdnjs)](https://cdnjs-cdnjs.getbadges.io/?ref=shield-game)
+[![Dependency Status](https://img.shields.io/david/cdnjs/cdnjs.svg)](https://david-dm.org/cdnjs/cdnjs)
+[![devDependency Status](https://img.shields.io/david/dev/cdnjs/cdnjs.svg)](https://david-dm.org/cdnjs/cdnjs#info=devDependencies)
+[![Bountysource](https://www.bountysource.com/badge/team?team_id=11914&style=bounties_posted)](https://www.bountysource.com/teams/cdnjs/bounties?utm_source=cdnjs&utm_medium=shield&utm_campaign=bounties_posted)
+[![Commit Activity](https://img.shields.io/github/commit-activity/y/cdnjs/cdnjs.svg?style=flat)](https://github.com/cdnjs/cdnjs/commits/)
 
 [![Throughput Graph](https://graphs.waffle.io/cdnjs/cdnjs/throughput.svg)](https://waffle.io/cdnjs/cdnjs/metrics/throughput)
 
