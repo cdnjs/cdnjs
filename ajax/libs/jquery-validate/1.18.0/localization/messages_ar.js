@@ -1,3 +1,13 @@
+(function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+		define( ["jquery", "../jquery.validate"], factory );
+	} else if (typeof module === "object" && module.exports) {
+		module.exports = factory( require( "jquery" ) );
+	} else {
+		factory( jQuery );
+	}
+}(function( $ ) {
+
 /*
  * Translated default messages for the jQuery validation plugin.
  * Locale: AR (Arabic; العربية)
@@ -17,11 +27,6 @@ $.extend( $.validator.messages, {
 	maxlength: $.validator.format( "الحد الأقصى لعدد الحروف هو {0}" ),
 	minlength: $.validator.format( "الحد الأدنى لعدد الحروف هو {0}" ),
 	rangelength: $.validator.format( "عدد الحروف يجب أن يكون بين {0} و {1}" ),
-	range: $.validator.format( "رجاء إدخال عدد قيمته بين {0} و {1}" ),
-	max: $.validator.format( "رجاء إدخال عدد أقل من أو يساوي {0}" ),
-	min: $.validator.format( "رجاء إدخال عدد أكبر من أو يساوي {0}" )
-} );
-ين {0} و {1}" ),
 	range: $.validator.format( "رجاء إدخال عدد قيمته بين {0} و {1}" ),
 	max: $.validator.format( "رجاء إدخال عدد أقل من أو يساوي {0}" ),
 	min: $.validator.format( "رجاء إدخال عدد أكبر من أو يساوي {0}" )
