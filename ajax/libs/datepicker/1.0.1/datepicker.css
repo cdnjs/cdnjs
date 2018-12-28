@@ -1,0 +1,188 @@
+.datepicker-container {
+  background-color: #fff;
+  direction: ltr;
+  font-size: 12px;
+  left: 0;
+  line-height: 30px;
+  position: fixed;
+  top: 0;
+  touch-action: none;
+  user-select: none;
+  width: 210px;
+  z-index: -1;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+
+  &::before,
+  &::after {
+    border: 5px solid transparent;
+    content: " ";
+    display: block;
+    height: 0;
+    position: absolute;
+    width: 0;
+  }
+}
+
+.datepicker-dropdown {
+  border: 1px solid #ccc;
+  box-shadow: 0 3px 6px #ccc;
+  box-sizing: content-box;
+  position: absolute;
+  z-index: 1;
+}
+
+.datepicker-inline {
+  position: static;
+}
+
+.datepicker-top-left,
+.datepicker-top-right {
+  border-top-color: #39f;
+
+  &::before,
+  &::after {
+    border-top: 0;
+    left: 10px;
+    top: -5px;
+  }
+
+  &::before {
+    border-bottom-color: #39f;
+  }
+
+  &::after {
+    border-bottom-color: #fff;
+    top: -4px;
+  }
+}
+
+.datepicker-bottom-left,
+.datepicker-bottom-right {
+  border-bottom-color: #39f;
+
+  &::before,
+  &::after {
+    border-bottom: 0;
+    bottom: -5px;
+    left: 10px;
+  }
+
+  &::before {
+    border-top-color: #39f;
+  }
+
+  &::after {
+    border-top-color: #fff;
+    bottom: -4px;
+  }
+}
+
+.datepicker-top-right,
+.datepicker-bottom-right {
+  &::before,
+  &::after {
+    left: auto;
+    right: 10px;
+  }
+}
+
+.datepicker-panel {
+  & > ul {
+    margin: 0;
+    padding: 0;
+    width: 102%;
+
+    &::before,
+    &::after {
+      content: " ";
+      display: table;
+    }
+
+    &::after {
+      clear: both;
+    }
+
+    & > li {
+      background-color: #fff;
+      cursor: pointer;
+      float: left;
+      height: 30px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      width: 30px;
+
+      &:hover {
+        background-color: rgb(229, 242, 255);
+      }
+
+      &.muted,
+      &.muted:hover {
+        color: #999;
+      }
+
+      &.highlighted {
+        background-color: rgb(229, 242, 255);
+
+        &:hover {
+          background-color: rgb(204, 229, 255);
+        }
+      }
+
+      &.picked,
+      &.picked:hover {
+        color: #39f;
+      }
+
+      &.disabled,
+      &.disabled:hover {
+        background-color: #fff;
+        color: #ccc;
+        cursor: default;
+
+        &.highlighted {
+          background-color: rgb(229, 242, 255);
+        }
+      }
+
+      &[data-view="years prev"],
+      &[data-view="year prev"],
+      &[data-view="month prev"],
+      &[data-view="years next"],
+      &[data-view="year next"],
+      &[data-view="month next"],
+      &[data-view="next"] {
+        font-size: 18px;
+      }
+
+      &[data-view="years current"],
+      &[data-view="year current"],
+      &[data-view="month current"] {
+        width: 150px;
+      }
+    }
+
+    &[data-view="years"],
+    &[data-view="months"] {
+      & > li {
+        height: 52.5px;
+        line-height: 52.5px;
+        width: 52.5px;
+      }
+    }
+
+    &[data-view="week"] {
+      & > li,
+      & > li:hover {
+        background-color: #fff;
+        cursor: default;
+      }
+    }
+  }
+}
+
+.datepicker-hide {
+  display: none;
+}
