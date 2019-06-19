@@ -213,12 +213,23 @@ glob('ajax/libs/*/package.json', function (error, matches) {
           switch (fileType) {
             case 'js':
             case 'css':
-              var genSRI = 'cat "' + filespec + '" | ' +
+              var gen256SRI = 'cat "' + filespec + '" | ' +
                 'openssl dgst -sha256 -binary | ' +
                 'openssl enc -base64 -A';
-              var fileSRI = execSync(genSRI).toString();
-              if (fileSRI !== '') {
-                libSri[temp.files[i]] = 'sha256-' + fileSRI;
+              var gen384SRI = 'cat "' + filespec + '" | ' +
+                'openssl dgst -sha384 -binary | ' +
+                'openssl enc -base64 -A';
+              var gen512SRI = 'cat "' + filespec + '" | ' +
+                'openssl dgst -sha512 -binary | ' +
+                'openssl enc -base64 -A';
+              var file256SRI = execSync(gen256SRI).toString();
+              var file384SRI = execSync(gen384SRI).toString();
+              var file512SRI = execSync(gen512SRI).toString();            
+
+              if (file256SRI !== '' && file384SRI !== '' && file512SRI !== '') {
+                libSri[temp.files[i]] = 'sha256-' + file256SRI + 
+                  ' sha384-' + file384SRI + 
+                  ' sha512-' + file512SRI;
               }
 
               break;
