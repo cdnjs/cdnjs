@@ -198,6 +198,8 @@ var processNewVersion = function (pkg, version) {
           fs.mkdirsSync(path.dirname(copyPath));
           fs.copySync(extractFilePath, copyPath);
           fs.chmodSync(copyPath, '0644');
+        } else {
+          console.log('Warning! '.warn + copyPart.gray + ' is empty, file will not be copied!');
         }
         updated = true;
       });
