@@ -1,0 +1,2191 @@
+/*
+
+Core
+
+The core of Cutestrap is a large set of Custom Properties. Some are set on an
+`html {}` ruleset and will be inherited by all children. Others are set on an
+`* {}` ruleset and are used as mixins, which are special because they rely on
+formulas. The only explicit styling performed here is setting `font-size` and
+`line-height` on a `body {}` ruleset.
+
+Markup:
+<p>
+    Example paragraph
+</p>
+
+Styleguide 1.0
+
+*/
+
+body {
+    font-size: calc(2rem / 1.4);
+    line-height: 2rem;
+}
+
+@media (max-width: 65rem) {
+
+    body {
+    line-height: 2rem;
+    }
+}
+
+@media (max-width: 65rem) {
+
+    body {
+    font-size: calc(2rem / 1.4);
+    }
+}
+
+/*
+
+Base
+
+The base stylesheet requires `core.css` and uses it to set all html elements
+to adhere to the Baseline Grid and gives them default styles.
+
+Markup:
+<div>
+  <h1>Headline 1</h1>
+  <p>
+    Paragraph
+  </p>
+  <h2>Headline 2</h2>
+  <ul>
+    <li>Unordered item</li>
+    <li>Unordered item</li>
+  </ul>
+  <h3>Headline 3</h3>
+  <ol>
+    <li>Ordered item</li>
+    <li>Ordered item</li>
+  </ol>
+  <h4>Headline 4</h4>
+<pre>
+  Preformatted
+</pre>
+  <h5>Headline 5</h5>
+  <blockquote>
+    Blockquote
+  </blockquote>
+  <h6>Headline 6</h6>
+  <table>
+    <tr>
+      <th>Table Header</th>
+      <th>Table Header</th>
+    </tr>
+    <tr>
+      <td>Table Cell</td>
+      <td>Table Cell</td>
+    </tr>
+  </table>
+</div>
+
+Styleguide 2.0
+
+*/
+
+* {
+    border: 0;
+    font: inherit;
+    margin: 0;
+    padding: 0;
+    text-rendering: geometricPrecision;
+}
+
+:focus {
+    outline: calc((1/12) * 2rem) dotted hsl(350, 80%, 60%);
+    outline-offset: calc((1/12) * 2rem);
+}
+
+@media (max-width: 65rem) {
+
+    :focus {
+    outline-offset: calc((1/12) * 1.5rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    :focus {
+    outline: calc((1/12) * 1.5rem) dotted hsl(350, 80%, 60%);
+    }
+}
+
+html {
+    box-sizing: border-box;
+    height: 100%;
+}
+
+body {
+    box-sizing: border-box;
+    background-color: hsl(170, 10%, 98%);
+    color: hsl(170, 10%, 2%);
+    font-family: 'Avenir', 'Avenir Next', 'Helvetica Neue', 'Segoe UI', 'Verdana', sans-serif;
+    min-height: 100%;
+    position: relative;
+}
+
+h1 {
+    font-family: 'Avenir', 'Avenir Next', 'Helvetica Neue', 'Segoe UI', 'Verdana', sans-serif;
+    font-size: calc(2rem / 1.4);
+    line-height: 2rem;
+    margin: 2rem 0;
+}
+
+@media (max-width: 65rem) {
+
+    h1 {
+    margin: 1.5rem 0;
+    }
+}
+
+@media (max-width: 65rem) {
+
+    h1 {
+    line-height: 2rem;
+    }
+}
+
+@media (max-width: 65rem) {
+
+    h1 {
+    font-size: calc(2rem / 1.4);
+    }
+}
+
+h2 {
+    font-family: 'Avenir', 'Avenir Next', 'Helvetica Neue', 'Segoe UI', 'Verdana', sans-serif;
+    font-size: calc(2rem / 1.4);
+    line-height: 2rem;
+    margin: 2rem 0;
+}
+
+@media (max-width: 65rem) {
+
+    h2 {
+    margin: 1.5rem 0;
+    }
+}
+
+@media (max-width: 65rem) {
+
+    h2 {
+    line-height: 2rem;
+    }
+}
+
+@media (max-width: 65rem) {
+
+    h2 {
+    font-size: calc(2rem / 1.4);
+    }
+}
+
+h3 {
+    font-family: 'Avenir', 'Avenir Next', 'Helvetica Neue', 'Segoe UI', 'Verdana', sans-serif;
+    font-size: calc(2rem / 1.4);
+    line-height: 2rem;
+    margin: 2rem 0;
+}
+
+@media (max-width: 65rem) {
+
+    h3 {
+    margin: 1.5rem 0;
+    }
+}
+
+@media (max-width: 65rem) {
+
+    h3 {
+    line-height: 2rem;
+    }
+}
+
+@media (max-width: 65rem) {
+
+    h3 {
+    font-size: calc(2rem / 1.4);
+    }
+}
+
+h4 {
+    font-family: 'Avenir', 'Avenir Next', 'Helvetica Neue', 'Segoe UI', 'Verdana', sans-serif;
+    font-size: calc(2rem / 1.4);
+    line-height: 2rem;
+    margin: 2rem 0;
+}
+
+@media (max-width: 65rem) {
+
+    h4 {
+    margin: 1.5rem 0;
+    }
+}
+
+@media (max-width: 65rem) {
+
+    h4 {
+    line-height: 2rem;
+    }
+}
+
+@media (max-width: 65rem) {
+
+    h4 {
+    font-size: calc(2rem / 1.4);
+    }
+}
+
+h5 {
+    font-family: 'Avenir', 'Avenir Next', 'Helvetica Neue', 'Segoe UI', 'Verdana', sans-serif;
+    font-size: calc(2rem / 1.4);
+    line-height: 2rem;
+    margin: 2rem 0;
+}
+
+@media (max-width: 65rem) {
+
+    h5 {
+    margin: 1.5rem 0;
+    }
+}
+
+@media (max-width: 65rem) {
+
+    h5 {
+    line-height: 2rem;
+    }
+}
+
+@media (max-width: 65rem) {
+
+    h5 {
+    font-size: calc(2rem / 1.4);
+    }
+}
+
+h6 {
+    font-family: 'Avenir', 'Avenir Next', 'Helvetica Neue', 'Segoe UI', 'Verdana', sans-serif;
+    font-size: calc(2rem / 1.4);
+    line-height: 2rem;
+    margin: 2rem 0;
+}
+
+@media (max-width: 65rem) {
+
+    h6 {
+    margin: 1.5rem 0;
+    }
+}
+
+@media (max-width: 65rem) {
+
+    h6 {
+    line-height: 2rem;
+    }
+}
+
+@media (max-width: 65rem) {
+
+    h6 {
+    font-size: calc(2rem / 1.4);
+    }
+}
+
+h1 {
+
+    font-weight: 700;
+    margin-bottom: calc(2 * 2rem);
+}
+
+@media (max-width: 65rem) {
+
+    h1 {
+    margin-bottom: calc(2 * 1.5rem);
+    }
+}
+
+h3 {
+
+    font-weight: 700;
+}
+
+h5 {
+    font-weight: 700;
+}
+
+p {
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 65rem) {
+
+    p {
+    margin-bottom: 1.5rem;
+    }
+}
+
+form {
+    margin: 2rem 0;
+}
+
+@media (max-width: 65rem) {
+
+    form {
+    margin: 1.5rem 0;
+    }
+}
+
+pre {
+    background-color: hsl(170, 10%, 94%);
+    font-size: calc(2rem / 1.4);
+    color: hsl(350, 80%, 35%);
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    line-height: 1;
+}
+
+@media (max-width: 65rem) {
+
+    pre {
+    font-size: calc(2rem / 1.4);
+    }
+}
+
+code {
+    background-color: hsl(170, 10%, 94%);
+    font-size: calc(2rem / 1.4);
+    color: hsl(350, 80%, 35%);
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    line-height: 1;
+}
+
+@media (max-width: 65rem) {
+
+    code {
+    font-size: calc(2rem / 1.4);
+    }
+}
+
+samp {
+    background-color: hsl(170, 10%, 94%);
+    font-size: calc(2rem / 1.4);
+    color: hsl(350, 80%, 35%);
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    line-height: 1;
+}
+
+@media (max-width: 65rem) {
+
+    samp {
+    font-size: calc(2rem / 1.4);
+    }
+}
+
+kbd {
+    background-color: hsl(170, 10%, 94%);
+    font-size: calc(2rem / 1.4);
+    color: hsl(350, 80%, 35%);
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    line-height: 1;
+}
+
+@media (max-width: 65rem) {
+
+    kbd {
+    font-size: calc(2rem / 1.4);
+    }
+}
+
+code {
+    border-radius: 4px;
+    overflow-y: hidden;
+    overflow-x: auto;
+    padding: calc((1/6) * 2rem);
+}
+
+@media (max-width: 65rem) {
+
+    code {
+    padding: calc((1/6) * 1.5rem);
+    }
+}
+
+samp {
+    border-radius: 4px;
+    overflow-y: hidden;
+    overflow-x: auto;
+    padding: calc((1/6) * 2rem);
+}
+
+@media (max-width: 65rem) {
+
+    samp {
+    padding: calc((1/6) * 1.5rem);
+    }
+}
+
+kbd {
+    border-radius: 4px;
+    overflow-y: hidden;
+    overflow-x: auto;
+    padding: calc((1/6) * 2rem);
+}
+
+@media (max-width: 65rem) {
+
+    kbd {
+    padding: calc((1/6) * 1.5rem);
+    }
+}
+
+pre {
+    border-radius: 4px;
+    line-height: 2rem;
+    overflow-y: hidden;
+    overflow-x: auto;
+    padding: calc((1/2) * 2rem);
+    margin: 0 0 2rem;
+}
+
+@media (max-width: 65rem) {
+
+    pre {
+    margin: 0 0 1.5rem;
+    }
+}
+
+@media (max-width: 65rem) {
+
+    pre {
+    padding: calc((1/2) * 1.5rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    pre {
+    line-height: 2rem;
+    }
+}
+
+pre code,
+pre samp,
+pre kbd {
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+}
+
+a:link {
+    color: hsl(230, 60%, 50%);
+}
+
+a:visited {
+    color: hsl(290, 60%, 50%);
+}
+
+a:hover {
+    color: hsl(230, 80%, 60%);
+}
+
+a:focus {
+    color: hsl(230, 80%, 60%);
+}
+
+a:active {
+    color: hsl(350, 60%, 50%);
+}
+
+img,
+video {
+    max-width: 100%;
+    vertical-align: top;
+}
+
+hr {
+    height: calc(2 * 2rem);
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+@media (max-width: 65rem) {
+
+    hr {
+    margin-bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 65rem) {
+
+    hr {
+    height: calc(2 * 1.5rem);
+    }
+}
+
+hr::before {
+    background-color: hsl(170, 10%, 68%);
+    content: '';
+    height: 1px;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+}
+
+ol {
+    margin: 0 0 2rem 2rem;
+}
+
+@media (max-width: 65rem) {
+
+    ol {
+    margin: 0 0 1.5rem 1.5rem;
+    }
+}
+
+ul {
+    margin: 0 0 2rem 2rem;
+}
+
+@media (max-width: 65rem) {
+
+    ul {
+    margin: 0 0 1.5rem 1.5rem;
+    }
+}
+
+ol {
+    list-style-type: decimal;
+}
+
+ol ol {
+    margin-bottom: 0;
+}
+
+ul {
+    list-style-type: disc;
+}
+
+ul ul {
+    margin-bottom: 0;
+}
+
+dt {
+    font-style: italic;
+}
+
+dd {
+    margin-left: 2rem;
+}
+
+@media (max-width: 65rem) {
+
+    dd {
+    margin-left: 1.5rem;
+    }
+}
+
+blockquote {
+    margin: 0 0 2rem calc((1/2) * 2rem);
+    border-left: calc((1/8) * 2rem) solid hsl(170, 10%, 68%);
+    padding: 2rem calc((1/2) * 2rem);
+}
+
+@media (max-width: 65rem) {
+
+    blockquote {
+    padding: 1.5rem calc((1/2) * 2rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    blockquote {
+    padding: 1.5rem calc((1/2) * 2rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    blockquote {
+    border-left: calc((1/8) * 1.5rem) solid hsl(170, 10%, 68%);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    blockquote {
+    border-left: calc((1/8) * 1.5rem) solid hsl(170, 10%, 68%);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    blockquote {
+    margin: 0 0 1.5rem calc((1/2) * 2rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    blockquote {
+    margin: 0 0 1.5rem calc((1/2) * 2rem);
+    }
+}
+
+blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+figure {
+    margin: 0 auto 2rem;
+}
+
+@media (max-width: 65rem) {
+
+    figure {
+    margin: 0 auto 1.5rem;
+    }
+}
+
+small {
+    font-size: calc(2 * calc((1/3) * 2rem));
+    vertical-align: top;
+}
+
+@media (max-width: 65rem) {
+
+    small {
+    font-size: calc(2 * calc((1/3) * 1.5rem));
+    }
+}
+
+sub {
+    font-size: calc(2 * calc((1/3) * 2rem));
+    vertical-align: top;
+}
+
+@media (max-width: 65rem) {
+
+    sub {
+    font-size: calc(2 * calc((1/3) * 1.5rem));
+    }
+}
+
+sup {
+    font-size: calc(2 * calc((1/3) * 2rem));
+    vertical-align: top;
+}
+
+@media (max-width: 65rem) {
+
+    sup {
+    font-size: calc(2 * calc((1/3) * 1.5rem));
+    }
+}
+
+caption {
+    font-size: calc(2 * calc((1/3) * 2rem));
+    vertical-align: top;
+}
+
+@media (max-width: 65rem) {
+
+    caption {
+    font-size: calc(2 * calc((1/3) * 1.5rem));
+    }
+}
+
+figcaption {
+    font-size: calc(2 * calc((1/3) * 2rem));
+    vertical-align: top;
+}
+
+@media (max-width: 65rem) {
+
+    figcaption {
+    font-size: calc(2 * calc((1/3) * 1.5rem));
+    }
+}
+
+sub,
+sup {
+    position: relative;
+}
+
+sub {
+    top: calc((1/3) * 2rem);
+}
+
+@media (max-width: 65rem) {
+
+    sub {
+    top: calc((1/3) * 1.5rem);
+    }
+}
+
+sup {
+    bottom: calc((1/3) * 2rem);
+}
+
+@media (max-width: 65rem) {
+
+    sup {
+    bottom: calc((1/3) * 1.5rem);
+    }
+}
+
+caption,
+figcaption {
+    font-style: italic;
+    text-align: center;
+}
+
+em,
+cite,
+i {
+    font-style: italic;
+}
+
+strong,
+var,
+b {
+    font-weight: bold;
+}
+
+q::before {
+    content: "'";
+}
+
+q::after {
+    content: "'";
+}
+
+q > q {
+    font-style: italic;
+}
+
+dfn {
+    border-bottom: calc((1/16) * 2rem) dotted hsl(170, 10%, 30%);
+    cursor: default;
+}
+
+@media (max-width: 65rem) {
+
+    dfn {
+    border-bottom: calc((1/16) * 1.5rem) dotted hsl(170, 10%, 30%);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    dfn {
+    border-bottom: calc((1/16) * 1.5rem) dotted hsl(170, 10%, 30%);
+    }
+}
+
+abbr {
+    border-bottom: calc((1/16) * 2rem) dotted hsl(170, 10%, 30%);
+    cursor: default;
+}
+
+@media (max-width: 65rem) {
+
+    abbr {
+    border-bottom: calc((1/16) * 1.5rem) dotted hsl(170, 10%, 30%);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    abbr {
+    border-bottom: calc((1/16) * 1.5rem) dotted hsl(170, 10%, 30%);
+    }
+}
+
+table {
+    border-radius: 4px;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+@media (max-width: 65rem) {
+
+    table {
+    margin-bottom: 1.5rem;
+    }
+}
+
+table th {
+    text-align: left;
+}
+
+table th {
+    padding: 0 calc((1/4) * 2rem);
+}
+
+@media (max-width: 65rem) {
+
+    table th {
+    padding: 0 calc((1/4) * 1.5rem);
+    }
+}
+
+table td {
+    padding: 0 calc((1/4) * 2rem);
+}
+
+@media (max-width: 65rem) {
+
+    table td {
+    padding: 0 calc((1/4) * 1.5rem);
+    }
+}
+
+input {
+    color: hsl(170, 10%, 2%);
+    display: block;
+    padding: calc((1/2) * 2rem);
+    resize: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+@media (max-width: 65rem) {
+
+    input {
+    padding: calc((1/2) * 1.5rem);
+    }
+}
+
+label {
+    color: hsl(170, 10%, 2%);
+    display: block;
+    padding: calc((1/2) * 2rem);
+    resize: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+@media (max-width: 65rem) {
+
+    label {
+    padding: calc((1/2) * 1.5rem);
+    }
+}
+
+select {
+    color: hsl(170, 10%, 2%);
+    display: block;
+    padding: calc((1/2) * 2rem);
+    resize: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+@media (max-width: 65rem) {
+
+    select {
+    padding: calc((1/2) * 1.5rem);
+    }
+}
+
+button {
+    color: hsl(170, 10%, 2%);
+    display: block;
+    padding: calc((1/2) * 2rem);
+    resize: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+@media (max-width: 65rem) {
+
+    button {
+    padding: calc((1/2) * 1.5rem);
+    }
+}
+
+textarea {
+    color: hsl(170, 10%, 2%);
+    display: block;
+    padding: calc((1/2) * 2rem);
+    resize: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+@media (max-width: 65rem) {
+
+    textarea {
+    padding: calc((1/2) * 1.5rem);
+    }
+}
+
+/* Firefox detection for keeping exact rhythm */
+@-moz-document url-prefix() {
+    select {
+        line-height: calc(2rem - 2px);
+    }
+    @media (max-width: 65rem) {
+
+        select {
+        line-height: calc(1.5rem - 2px);
+        }
+    }
+}
+
+label {
+    color: hsl(170, 10%, 41%);
+    padding: 0;
+}
+
+/*
+
+Buttons
+
+Buttons and their variations
+
+Markup:
+<button class="button {{modifier_class}}">Button</button>
+
+.-secondary - A button with secondary colors
+.-outlined - An outlined button
+.-link - A button that looks like a link
+.-block - Block level button
+.-large - A large button
+.-small - A small button
+.-small.-outlined - A small, outlined button
+
+Styleguide 3.0
+
+*/
+
+.button {
+
+    align-items: center;
+    align-content: center;
+    background-color: hsl(350, 80%, 45%);
+    border: calc((1/12) * 2rem) solid transparent;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: hsl(170, 10%, 98%);
+    cursor: pointer;
+    display: inline-block;
+    font-size: calc(2rem / 1.4);
+    justify-content: center;
+    line-height: 2rem;
+    max-width: 100%;
+    min-height: calc(2 * 2rem);
+    padding: calc(5 * calc((1/12) * 2rem)) 2rem;
+    text-align: center;
+    transition-duration: 250ms;
+    transition-property: all;
+    user-select: none;
+    width: auto;
+    vertical-align: middle;
+}
+
+@media (max-width: 65rem) {
+
+    .button {
+    padding: calc(5 * calc((1/12) * 2rem)) 1.5rem;
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .button {
+    padding: calc(5 * calc((1/12) * 2rem)) 1.5rem;
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .button {
+    min-height: calc(2 * 1.5rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .button {
+    line-height: 1.5rem;
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .button {
+    font-size: calc(2rem / 1.4);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .button {
+    border: calc((1/12) * 2rem) solid transparent;
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .button {
+    border: calc((1/12) * 2rem) solid transparent;
+    }
+}
+
+.button::-moz-focus-inner {
+    border: 0;
+}
+
+.button:link {
+    color: hsl(170, 10%, 98%);
+    text-decoration: none;
+}
+
+.button:visited {
+    color: hsl(170, 10%, 98%);
+    text-decoration: none;
+}
+
+.button:focus {
+    background-color: hsl(350, 80%, 35%);
+    border-color: transparent;
+    color: hsl(170, 10%, 98%);
+}
+
+.button:hover {
+    background-color: hsl(350, 80%, 35%);
+    border-color: transparent;
+    color: hsl(170, 10%, 98%);
+}
+
+.button:active {
+    background-color: hsl(350, 80%, 45%);
+    color: hsl(170, 10%, 98%);
+}
+
+.button:disabled {
+    opacity: .5;
+    pointer-events: none;
+}
+
+.button.-link {
+
+    text-decoration: underline;
+}
+
+.button.-block {
+    display: block;
+    width: 100%;
+}
+
+.button.-small {
+
+    font-size: calc(2rem / 1.4);
+    line-height: 2rem;
+    margin-top: calc(-2 * calc((1/16) * 2rem));
+    min-height: calc(14 * calc((1/16) * 2rem));
+    padding: 0 calc((1/2) * 2rem);
+}
+
+@media (max-width: 65rem) {
+
+    .button.-small {
+    padding: 0 calc((1/2) * 1.5rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .button.-small {
+    min-height: calc(14 * calc((1/16) * 2rem));
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .button.-small {
+    margin-top: calc(-2 * calc((1/16) * 1.5rem));
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .button.-small {
+    line-height: 2rem;
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .button.-small {
+
+    font-size: calc(2rem / 1.4);
+    }
+}
+
+.button.-large {
+
+    font-size: calc(2rem / 1.4);
+    line-height: 2rem;
+    min-height: calc(3 * 2rem);
+    padding: calc(3 * calc((1/8) * 2rem)) calc(2 * 2rem);
+}
+
+@media (max-width: 65rem) {
+
+    .button.-large {
+    padding: calc(3 * calc((1/8) * 2rem)) calc(2 * 1.5rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .button.-large {
+    padding: calc(3 * calc((1/8) * 2rem)) calc(2 * 1.5rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .button.-large {
+    min-height: calc(3 * 1.5rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .button.-large {
+    line-height: 2rem;
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .button.-large {
+
+    font-size: calc(2rem / 1.4);
+    }
+}
+
+/*
+
+Forms
+
+Markup:
+<form>
+    <label class="field">
+        <input type="text" />
+        <span class="label">Name</span>
+    </label>
+    <label class="field -inline">
+        <input type="radio" name="example" />
+        <span class="label">Cone</span>
+    </label>
+    <label class="field -inline">
+        <input type="radio" name="example" />
+        <span class="label">Bowl</span>
+    </label>
+    <label for="select" class="field">
+        <select name="select">
+            <option disabled="disabled" selected="selected">Flavors</option>
+            <option>Chocolate</option>
+            <option>Vanilla</option>
+        </select>
+        <span class="label">Favorite Ice Cream</span>
+    </label>
+    <label class="field">
+        <textarea></textarea>
+        <span class="label">Comments</span>
+    </label>
+    <label class="field">
+        <input type="checkbox" />
+        <span class="label">
+            I consent to my ice cream flavors being saved into a database for
+            eternity and understand and acknowledge this will have consequences
+            for all of my decendants for decades to come.
+        </span>
+    </label>
+</form>
+
+Styleguide 4.0
+
+*/
+
+.field [disabled] + *,
+[disabled] {
+    cursor: default;
+    opacity: .5;
+    pointer-events: none;
+}
+
+.field {
+    display: block;
+    margin-bottom: 2rem;
+    position: relative;
+    text-align: left;
+}
+
+@media (max-width: 65rem) {
+
+    .field {
+    margin-bottom: 1.5rem;
+    }
+}
+
+.field .label {
+    z-index: 2;
+}
+
+.field [type=checkbox] + .label {
+    color: hsl(170, 10%, 2%);
+    cursor: pointer;
+    display: inline-block;
+    padding-left: 2rem;
+}
+
+@media (max-width: 65rem) {
+
+    .field [type=checkbox] + .label {
+    padding-left: 1.5rem;
+    }
+}
+
+.field [type=radio] + .label {
+    color: hsl(170, 10%, 2%);
+    cursor: pointer;
+    display: inline-block;
+    padding-left: 2rem;
+}
+
+@media (max-width: 65rem) {
+
+    .field [type=radio] + .label {
+    padding-left: 1.5rem;
+    }
+}
+
+.field *:not([type=radio]):not([type=checkbox]) + .label {
+    background-color: hsl(170, 10%, 98%);
+    font-size: calc((1/2) * 2rem);
+    position: absolute;
+    left: calc((1/16) * 2rem);
+    line-height: 1;
+    padding: calc((1/4) * 2rem) calc((1/4) * 2rem) 0;
+    right: calc((1/16) * 2rem);
+    top: calc((1/16) * 2rem);
+}
+
+@media (max-width: 65rem) {
+
+    .field *:not([type=radio]):not([type=checkbox]) + .label {
+    top: calc((1/16) * 1.5rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .field *:not([type=radio]):not([type=checkbox]) + .label {
+    right: calc((1/16) * 1.5rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .field *:not([type=radio]):not([type=checkbox]) + .label {
+    padding: calc((1/4) * 1.5rem) calc((1/4) * 1.5rem) 0;
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .field *:not([type=radio]):not([type=checkbox]) + .label {
+    left: calc((1/16) * 1.5rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .field *:not([type=radio]):not([type=checkbox]) + .label {
+    font-size: calc((1/2) * 1.5rem);
+    }
+}
+
+.field input {
+    background-color: hsl(170, 10%, 98%);
+    border: 1px solid hsl(170, 10%, 41%);
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: -2px;
+    padding: calc(7 * calc((1/8) * 2rem)) calc((1/4) * 2rem) calc((1/8) * 2rem);
+    position: relative;
+    width: 100%;
+}
+
+@media (max-width: 65rem) {
+
+    .field input {
+    padding: calc(7 * calc((1/8) * 2rem)) calc((1/4) * 2rem) calc((1/8) * 2rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .field input {
+    padding: calc(7 * calc((1/8) * 2rem)) calc((1/4) * 2rem) calc((1/8) * 2rem);
+    }
+}
+
+.field textarea {
+    background-color: hsl(170, 10%, 98%);
+    border: 1px solid hsl(170, 10%, 41%);
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: -2px;
+    padding: calc(7 * calc((1/8) * 2rem)) calc((1/4) * 2rem) calc((1/8) * 2rem);
+    position: relative;
+    width: 100%;
+}
+
+@media (max-width: 65rem) {
+
+    .field textarea {
+    padding: calc(7 * calc((1/8) * 2rem)) calc((1/4) * 2rem) calc((1/8) * 2rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .field textarea {
+    padding: calc(7 * calc((1/8) * 2rem)) calc((1/4) * 2rem) calc((1/8) * 2rem);
+    }
+}
+
+.field select {
+    background-color: hsl(170, 10%, 98%);
+    border: 1px solid hsl(170, 10%, 41%);
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: -2px;
+    padding: calc(7 * calc((1/8) * 2rem)) calc((1/4) * 2rem) calc((1/8) * 2rem);
+    position: relative;
+    width: 100%;
+}
+
+@media (max-width: 65rem) {
+
+    .field select {
+    padding: calc(7 * calc((1/8) * 2rem)) calc((1/4) * 2rem) calc((1/8) * 2rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .field select {
+    padding: calc(7 * calc((1/8) * 2rem)) calc((1/4) * 2rem) calc((1/8) * 2rem);
+    }
+}
+
+.field select {
+    z-index: 1;
+}
+
+/*
+
+Select
+
+Markup:
+<label class="field {{modifier_class}}">
+    <select>
+        <option disabled="disabled" selected="selected">Select</option>
+        <option>Option 1</option>
+        <option>Option 2</option>
+        <option>Option 3</option>
+    </select>
+    <span class="label">Select Label</span>
+</label>
+
+Styleguide 4.1
+
+*/
+
+.field select + .label::after {
+    content: '';
+    border-left: calc((1/4) * 2rem) solid transparent;
+    border-right: calc((1/4) * 2rem) solid transparent;
+    border-top: calc((1/4) * 2rem) solid hsl(170, 10%, 41%);
+    height: 0;
+    position: absolute;
+    right: calc((1/2) * 2rem);
+    bottom: calc(-2 * calc((1/3) * 2rem));
+    width: 0;
+}
+
+@media (max-width: 65rem) {
+
+    .field select + .label::after {
+    bottom: calc(-2 * calc((1/3) * 1.5rem));
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .field select + .label::after {
+    right: calc((1/2) * 1.5rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .field select + .label::after {
+    border-top: calc((1/4) * 1.5rem) solid hsl(170, 10%, 41%);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .field select + .label::after {
+    border-top: calc((1/4) * 1.5rem) solid hsl(170, 10%, 41%);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .field select + .label::after {
+    border-right: calc((1/4) * 1.5rem) solid transparent;
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .field select + .label::after {
+    border-left: calc((1/4) * 1.5rem) solid transparent;
+    }
+}
+
+.field option[disabled] {
+    background-color: hsl(170, 10%, 94%);
+    color: hsl(170, 10%, 30%);
+}
+
+.field.-inline {
+    display: inline-block;
+    margin-right: calc((1/2) * 2rem);
+}
+
+@media (max-width: 65rem) {
+
+    .field.-inline {
+    margin-right: calc((1/2) * 1.5rem);
+    }
+}
+
+.field [type=checkbox],
+.field [type=radio] {
+    opacity: 0;
+    position: absolute;
+    z-index: 0;
+}
+
+.field [type=checkbox] + .label::before {
+    background-color: hsl(170, 10%, 98%);
+    border: 2px solid hsl(170, 10%, 41%);
+    content: '';
+    height: calc((1/2) * 2rem);
+    left: 0;
+    position: absolute;
+    top: calc((1/8) * 2rem);
+    transform: translateY(calc((1/16) * 2rem));
+    width: calc((1/2) * 2rem);
+}
+
+@media (max-width: 65rem) {
+
+    .field [type=checkbox] + .label::before {
+    width: calc((1/2) * 1.5rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .field [type=checkbox] + .label::before {
+    transform: translateY(calc((1/16) * 1.5rem));
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .field [type=checkbox] + .label::before {
+    top: calc((1/8) * 1.5rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .field [type=checkbox] + .label::before {
+    height: calc((1/2) * 1.5rem);
+    }
+}
+
+.field [type=radio] + .label::before {
+    background-color: hsl(170, 10%, 98%);
+    border: 2px solid hsl(170, 10%, 41%);
+    content: '';
+    height: calc((1/2) * 2rem);
+    left: 0;
+    position: absolute;
+    top: calc((1/8) * 2rem);
+    transform: translateY(calc((1/16) * 2rem));
+    width: calc((1/2) * 2rem);
+}
+
+@media (max-width: 65rem) {
+
+    .field [type=radio] + .label::before {
+    width: calc((1/2) * 1.5rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .field [type=radio] + .label::before {
+    transform: translateY(calc((1/16) * 1.5rem));
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .field [type=radio] + .label::before {
+    top: calc((1/8) * 1.5rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .field [type=radio] + .label::before {
+    height: calc((1/2) * 1.5rem);
+    }
+}
+
+.field [type=checkbox] + .label::after {
+    background-color: hsl(350, 80%, 45%);
+    border: 2px solid transparent;
+    color: hsl(170, 10%, 98%);
+    height: calc((1/4) * 2rem);
+    left: calc((1/8) * 2rem);
+    position: absolute;
+    top: calc((1/4) * 2rem);
+    transform: translateY(calc((1/16) * 2rem));
+    width: calc((1/4) * 2rem);
+}
+
+@media (max-width: 65rem) {
+
+    .field [type=checkbox] + .label::after {
+    width: calc((1/4) * 1.5rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .field [type=checkbox] + .label::after {
+    transform: translateY(calc((1/16) * 1.5rem));
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .field [type=checkbox] + .label::after {
+    top: calc((1/4) * 1.5rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .field [type=checkbox] + .label::after {
+    left: calc((1/8) * 1.5rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .field [type=checkbox] + .label::after {
+    height: calc((1/4) * 1.5rem);
+    }
+}
+
+.field [type=radio] + .label::after {
+    background-color: hsl(350, 80%, 45%);
+    border: 2px solid transparent;
+    color: hsl(170, 10%, 98%);
+    height: calc((1/4) * 2rem);
+    left: calc((1/8) * 2rem);
+    position: absolute;
+    top: calc((1/4) * 2rem);
+    transform: translateY(calc((1/16) * 2rem));
+    width: calc((1/4) * 2rem);
+}
+
+@media (max-width: 65rem) {
+
+    .field [type=radio] + .label::after {
+    width: calc((1/4) * 1.5rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .field [type=radio] + .label::after {
+    transform: translateY(calc((1/16) * 1.5rem));
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .field [type=radio] + .label::after {
+    top: calc((1/4) * 1.5rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .field [type=radio] + .label::after {
+    left: calc((1/8) * 1.5rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .field [type=radio] + .label::after {
+    height: calc((1/4) * 1.5rem);
+    }
+}
+
+/*
+
+Checkbox
+
+Markup:
+<label class="field {{modifier_class}}">
+    <input type="checkbox" />
+    <span class="label">Checkbox</span>
+</label>
+
+Styleguide 4.2
+
+*/
+
+.field [type=checkbox] + .label::before {
+    border-radius: 4px;
+}
+
+.field [type=checkbox] + .label::after {
+    border-radius: 4px;
+}
+
+/*
+
+Radio
+
+Markup:
+<label class="field {{modifier_class}}">
+    <input type="radio" />
+    <span class="label">Radio</span>
+</label>
+
+Styleguide 4.3
+
+*/
+
+.field [type=radio] + .label::before {
+    border-radius: 2rem;
+}
+
+@media (max-width: 65rem) {
+
+    .field [type=radio] + .label::before {
+    border-radius: 1.5rem;
+    }
+}
+
+.field [type=radio] + .label::after {
+    border-radius: 2rem;
+}
+
+@media (max-width: 65rem) {
+
+    .field [type=radio] + .label::after {
+    border-radius: 1.5rem;
+    }
+}
+
+.field [type=radio]:focus + .label::before {
+    outline: calc((1/12) * 2rem) dotted hsl(350, 80%, 60%);
+    outline-offset: calc((1/12) * 2rem);
+}
+
+@media (max-width: 65rem) {
+
+    .field [type=radio]:focus + .label::before {
+    outline-offset: calc((1/12) * 1.5rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .field [type=radio]:focus + .label::before {
+    outline: calc((1/12) * 1.5rem) dotted hsl(350, 80%, 60%);
+    }
+}
+
+.field [type=checkbox]:focus + .label::before {
+    outline: calc((1/12) * 2rem) dotted hsl(350, 80%, 60%);
+    outline-offset: calc((1/12) * 2rem);
+}
+
+@media (max-width: 65rem) {
+
+    .field [type=checkbox]:focus + .label::before {
+    outline-offset: calc((1/12) * 1.5rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .field [type=checkbox]:focus + .label::before {
+    outline: calc((1/12) * 1.5rem) dotted hsl(350, 80%, 60%);
+    }
+}
+
+.field [type=checkbox]:checked + .label::after,
+.field [type=radio]:checked + .label::after {
+    content: '';
+}
+
+/*
+
+Input and text areas
+
+Markup:
+<label class="field {{modifier_class}}">
+    <input type="text" />
+    <span class="label">Input</span>
+</label>
+<label class="field {{modifier_class}}">
+    <textarea></textarea>
+    <span class="label">Textarea</span>
+</label>
+
+Styleguide 4.4
+
+*/
+
+.field textarea {
+    margin-top: 0;
+    min-height: calc(4 * 2rem);
+}
+
+@media (max-width: 65rem) {
+
+    .field textarea {
+    min-height: calc(4 * 1.5rem);
+    }
+}
+
+/*
+
+Disabled Fields
+
+Markup:
+<form>
+    <label class="field">
+        <input type="text" value="Someone" disabled />
+        <span class="label">Name</span>
+    </label>
+    <label class="field -inline">
+        <input type="radio" name="example" disabled />
+        <span class="label">Cone</span>
+    </label>
+    <label class="field -inline">
+        <input type="radio" name="example" disabled />
+        <span class="label">Bowl</span>
+    </label>
+    <label for="select" class="field">
+        <select name="select" disabled>
+            <option disabled="disabled" selected="selected">Flavors</option>
+            <option>Chocolate</option>
+            <option>Vanilla</option>
+        </select>
+        <span class="label">Favorite Ice Cream</span>
+    </label>
+    <label class="field">
+        <textarea disabled>I am some comments</textarea>
+        <span class="label">Comments</span>
+    </label>
+    <label class="field">
+        <input type="checkbox" disabled />
+        <span class="label">
+            I consent to my ice cream flavors being saved into a database for
+            eternity and understand and acknowledge this will have consequences
+            for all of my decendants for decades to come.
+        </span>
+    </label>
+</form>
+
+Styleguide 4.5
+
+*/
+
+/*
+
+Grid
+
+A simple grid with automatic columns
+
+Markup:
+<div class="grid {{modifier_class}}">
+    <div>Column</div>
+    <div>Column</div>
+    <div>Column</div>
+    <div>Column</div>
+    <div>Column</div>
+    <div>Column</div>
+</div>
+
+.-medium - start at 45rem
+.-large - start at 80rem
+
+Styleguide 5.0
+
+*/
+
+.grid {
+
+    display: grid;
+    column-gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+}
+
+@media (max-width: 65rem) {
+
+    .grid {
+    column-gap: 1.5rem;
+    }
+}
+
+@media (max-width: 45rem) {
+    .grid.-medium {
+        display: block;
+    }
+}
+
+@media (max-width: 80rem) {
+    .grid.-large {
+        display: block;
+    }
+}
+
+/*
+
+Columns
+
+Manually set column widths (Note: the syntax is passing a custom property with
+a number value. KSS Docs only support modified classes, so ignore the term
+[modifier class] and the dot before the number in the examples below).
+
+Markup:
+<div class="grid" style="--columns: {{modifier_class}}">
+    <div>Column</div>
+    <div>Column</div>
+    <div>Column</div>
+    <div>Column</div>
+    <div>Column</div>
+    <div>Column</div>
+</div>
+
+.2 - Two columns
+.3 - Three columns
+.4 - Four columns
+
+Styleguide 5.1
+
+*/
+
+/*
+
+Wrappers
+
+Elements with max widths and paddings that can be used to separate content
+
+Markup:
+<div class="wrapper {{modifier_class}}">
+    Wrapper
+</div>
+
+.-thin - A max-width of 45rem
+.-wide - A max-width of 80rem
+.-flush - No vertical or horizontal spacing
+
+Styleguide 6.0
+
+*/
+
+.wrapper {
+    box-sizing: border-box;
+    margin: 0 auto;
+    max-width: 60rem;
+    padding: calc(2 * 2rem) calc((1/2) * 2rem);
+    width: 100%;
+}
+
+@media (max-width: 65rem) {
+
+    .wrapper {
+    padding: calc(2 * 2rem) calc((1/2) * 2rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .wrapper {
+    padding: calc(2 * 2rem) calc((1/2) * 2rem);
+    }
+}
+
+.wrapper.-thin {
+    max-width: 45rem;
+    padding: 2rem calc((1/2) * 2rem);
+}
+
+@media (max-width: 65rem) {
+
+    .wrapper.-thin {
+    padding: 1.5rem calc((1/2) * 2rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .wrapper.-thin {
+    padding: 1.5rem calc((1/2) * 2rem);
+    }
+}
+
+.wrapper.-wide {
+    max-width: 80rem;
+    padding: calc(3 * 2rem) calc((1/2) * 2rem);
+}
+
+@media (max-width: 65rem) {
+
+    .wrapper.-wide {
+    padding: calc(3 * 2rem) calc((1/2) * 2rem);
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .wrapper.-wide {
+    padding: calc(3 * 2rem) calc((1/2) * 2rem);
+    }
+}
+
+.wrapper.-flush {
+    padding: 0 calc((1/2) * 2rem);
+}
+
+@media (max-width: 65rem) {
+
+    .wrapper.-flush {
+    padding: 0 calc((1/2) * 1.5rem);
+    }
+}
+
+/*
+
+Utilities
+
+These utility classes have one or two CSS properties that are meant to save you from creating several identical classes to do the same thing, like just centering some text.
+
+Markup:
+<div class="{{modifier_class}}">
+    Example Text
+</div>
+
+.disabled                - Disable an Element
+.clearfix                - Clear floats to keep the parent container in shape
+.f-none                  - float: none;
+.f-left                  - float: left;
+.f-right                 - float: right;
+.ta-left                 - text-align: left;
+.ta-center               - text-align: center;
+.ta-right                - text-align: right;
+
+Styleguide 7.0
+
+*/
+
+.disabled {
+    cursor: default;
+    opacity: .5;
+    pointer-events: none;
+}
+
+.f-none {
+    float: none;
+}
+
+.f-left {
+    float: left;
+}
+
+.f-right {
+    float: right;
+}
+
+.clearfix {
+    clear: both;
+    overflow: hidden;
+}
+
+.ta-left {
+    text-align: left;
+}
+
+.ta-center {
+    text-align: center;
+}
+
+.ta-right {
+    text-align: right;
+}
+
+/*
+
+Type Utilities
+
+These are specific typography related utilities
+
+Markup:
+<div class="type {{modifier_class}}">
+    The quick<br />
+    brown fox<br />
+    jumps over<br />
+    the lazy dog.
+</div>
+
+.fw-light            - Changes the type to be 300 weight
+.fw-normal           - Changes the type to be 400 weight
+.fw-bold             - Changes the type to be 700 weight
+.fs-small            - Small font-size
+.fs-base             - Base font-size
+.fs-large            - Large font-size
+
+Styleguide 7.1
+
+*/
+
+.fw-light {
+    font-weight: 300;
+}
+
+.fw-normal {
+    font-weight: 400;
+}
+
+.fw-bold {
+    font-weight: 700;
+}
+
+.fs-small {
+    font-size: calc(2rem / 1.4);
+    line-height: 2rem;
+}
+
+@media (max-width: 65rem) {
+
+    .fs-small {
+    line-height: 2rem;
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .fs-small {
+    font-size: calc(2rem / 1.4);
+    }
+}
+
+.fs-base {
+    font-size: calc(2rem / 1.4);
+    line-height: 2rem;
+}
+
+@media (max-width: 65rem) {
+
+    .fs-base {
+    line-height: 2rem;
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .fs-base {
+    font-size: calc(2rem / 1.4);
+    }
+}
+
+.fs-large {
+    font-size: calc(2rem / 1.4);
+    line-height: 2rem;
+}
+
+@media (max-width: 65rem) {
+
+    .fs-large {
+    line-height: 2rem;
+    }
+}
+
+@media (max-width: 65rem) {
+
+    .fs-large {
+    font-size: calc(2rem / 1.4);
+    }
+}
+
+/*
+
+Margin Utilities
+
+These utilities allow you to easily remove margins that you don't want
+
+Markup:
+<h1 class="{{modifier_class}}">
+    Do you like margins?
+</h1>
+
+.m-zero - Remove margins
+.mt-zero - Remove top margin only
+.mb-zero - Remove bottom margin only
+
+Styleguide 7.2
+
+*/
+
+.m-zero {
+    margin: 0;
+}
+
+.mt-zero {
+    margin-top: 0;
+}
+
+.mb-zero {
+    margin-bottom: 0;
+}

@@ -1,0 +1,306 @@
+/*!
+FullCalendar Timeline Plugin v4.2.0
+Docs & License: https://fullcalendar.io/scheduler
+(c) 2019 Adam Shaw
+*/
+/* Scroller
+--------------------------------------------------------------------------------------------------*/
+.fc-scroller-clip {
+  overflow: hidden;
+  /* for clipping scrollbars */
+  position: relative;
+  /* so things like scrollfollowers can attach to this */ }
+
+/* supresses rendering of native scrollbars */
+/* on .fc-scroller */
+.fc-no-scrollbars {
+  background: rgba(255, 255, 255, 0);
+  /* hack for dynamic DOM nodes (in Chrome OSX at least) */ }
+
+.fc-no-scrollbars::-webkit-scrollbar {
+  width: 0;
+  height: 0; }
+
+.fc-scroller-canvas {
+  position: relative;
+  /* origin for bg */
+  box-sizing: border-box;
+  /* so that padding (for gutter) will be part of height */
+  min-height: 100%; }
+
+.fc-scroller-canvas > .fc-bg {
+  z-index: 1;
+  /* make default? */ }
+
+.fc-scroller-canvas > .fc-content {
+  z-index: 2;
+  /* make default? */
+  position: relative;
+  /* origin for inner content */
+  border-style: solid;
+  border-width: 0; }
+
+.fc-scroller-canvas.fc-gutter-left > .fc-content {
+  border-left-width: 1px;
+  margin-left: -1px; }
+
+.fc-scroller-canvas.fc-gutter-right > .fc-content {
+  border-right-width: 1px;
+  margin-right: -1px; }
+
+.fc-scroller-canvas.fc-gutter-top > .fc-content {
+  border-top-width: 1px;
+  margin-top: -1px; }
+
+/* content is responsible for bottom border */
+/* View Structure
+--------------------------------------------------------------------------------------------------*/
+.fc-rtl .fc-timeline {
+  direction: rtl; }
+
+.fc-scrolled .fc-head .fc-scroller {
+  z-index: 2;
+  /* so drop shadow will go above body panes */ }
+
+.fc-timeline.fc-scrolled .fc-head .fc-scroller {
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.075); }
+
+.fc-timeline .fc-body .fc-scroller {
+  z-index: 1; }
+
+/*
+on most tables that expand to the edges, kill the outer border,
+because the container elements take care of it.
+example tables:
+.fc-scroller-canvas .fc-content table
+.fc-scroller-canvas .fc-bg .fc-slats table
+*/
+.fc-timeline .fc-scroller-canvas > div > table,
+.fc-timeline .fc-scroller-canvas > div > div > table {
+  border-style: hidden; }
+
+/*
+for resource rows (in both the spreadsheet and timeline areas),
+undo previous rule in order to always show last border.
+*/
+.fc-timeline .fc-scroller-canvas > .fc-content > .fc-rows > table {
+  border-bottom-style: none; }
+
+/* Table Cell Common
+--------------------------------------------------------------------------------------------------*/
+.fc-timeline th,
+.fc-timeline td {
+  white-space: nowrap; }
+
+.fc-timeline .fc-cell-content {
+  overflow: hidden; }
+
+.fc-timeline .fc-cell-text {
+  display: inline-block;
+  padding-left: 4px;
+  padding-right: 4px; }
+
+/*
+Cells at the start of a week
+TODO: figure out better styling
+
+.fc-ltr .fc-timeline .fc-em-cell div {
+  border-left: 3px solid #eee;
+  height: 100%;
+}
+.fc-rtl .fc-timeline .fc-em-cell {
+  border-right-width: 3px;
+}
+*/
+/* head */
+.fc-timeline th {
+  vertical-align: middle; }
+
+.fc-timeline .fc-head .fc-cell-content {
+  padding-top: 3px;
+  padding-bottom: 3px; }
+
+.fc-timeline .fc-head .fc-time-area .fc-cell-content {
+  overflow: visible; }
+
+/* Time Area
+--------------------------------------------------------------------------------------------------*/
+.fc-time-area col {
+  min-width: 2.2em;
+  /* detected by JS */ }
+
+/* head */
+.fc-ltr .fc-time-area .fc-chrono th {
+  text-align: left; }
+
+.fc-rtl .fc-time-area .fc-chrono th {
+  text-align: right; }
+
+/* body slats (vertical lines) */
+.fc-time-area .fc-slats {
+  /* fc-bg is responsible for a lot of this now! */
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; }
+
+.fc-time-area .fc-slats table {
+  height: 100%; }
+
+.fc-time-area .fc-slats .fc-minor {
+  border-style: dotted; }
+
+.fc-time-area .fc-slats td {
+  border-width: 0 1px;
+  /* need to do this. sometimes -1 margin wouldn't hide the dotted */ }
+
+.fc-ltr .fc-time-area .fc-slats td {
+  border-right-width: 0; }
+
+.fc-rtl .fc-time-area .fc-slats td {
+  border-left-width: 0; }
+
+/* body content containers
+   can be within rows or directly within the pane's content
+*/
+.fc-time-area .fc-bgevent-container,
+.fc-time-area .fc-highlight-container {
+  position: absolute;
+  z-index: 2;
+  /* only for directly within pane. not for row. overridden later */
+  top: 0;
+  bottom: 0;
+  width: 0; }
+
+.fc-ltr .fc-time-area .fc-mirror-container,
+.fc-ltr .fc-time-area .fc-bgevent-container,
+.fc-ltr .fc-time-area .fc-highlight-container {
+  left: 0; }
+
+.fc-rtl .fc-time-area .fc-mirror-container,
+.fc-rtl .fc-time-area .fc-bgevent-container,
+.fc-rtl .fc-time-area .fc-highlight-container {
+  right: 0; }
+
+.fc-time-area .fc-bgevent,
+.fc-time-area .fc-highlight {
+  position: absolute;
+  top: 0;
+  bottom: 0; }
+
+/* Now Indicator
+--------------------------------------------------------------------------------------------------*/
+.fc-timeline .fc-now-indicator {
+  /* both the arrow and the line */
+  z-index: 3;
+  /* one above scroller's fc-content */
+  top: 0; }
+
+.fc-time-area .fc-now-indicator-arrow {
+  margin: 0 -6px;
+  /* 5, then one more to counteract scroller's negative margins */
+  /* triangle pointing down... */
+  border-width: 6px 5px 0 5px;
+  border-left-color: transparent;
+  border-right-color: transparent; }
+
+.fc-time-area .fc-now-indicator-line {
+  margin: 0 -1px;
+  /* counteract scroller's negative margins */
+  bottom: 0;
+  border-left-width: 1px; }
+
+/* Event Container
+--------------------------------------------------------------------------------------------------*/
+.fc-time-area .fc-event-container {
+  position: relative;
+  z-index: 2;
+  /* above bgevent and highlight */
+  width: 0;
+  /* for event positioning. will end up on correct side based on dir */ }
+
+.fc-time-area .fc-mirror-container {
+  /* also an fc-event-container */
+  position: absolute;
+  z-index: 3;
+  top: 0; }
+
+.fc-time-area .fc-event-container {
+  padding-bottom: 8px;
+  top: -1px; }
+
+.fc-time-area tr:first-child .fc-event-container {
+  top: 0; }
+
+.fc-no-overlap .fc-time-area .fc-event-container {
+  padding-bottom: 0;
+  top: 0; }
+
+/* Time Grid Events
+--------------------------------------------------------------------------------------------------*/
+.fc-timeline-event {
+  position: absolute;
+  border-radius: 0;
+  padding: 2px 0;
+  margin-bottom: 1px; }
+
+.fc-no-overlap .fc-timeline-event {
+  padding: 5px 0;
+  margin-bottom: 0; }
+
+/* don't overlap grid lines at the event's end */
+.fc-ltr .fc-timeline-event {
+  margin-right: 1px; }
+
+.fc-rtl .fc-timeline-event {
+  margin-left: 1px; }
+
+.fc-timeline-event .fc-time {
+  font-weight: bold;
+  padding: 0 1px; }
+
+.fc-rtl .fc-timeline-event .fc-time {
+  display: inline-block;
+  /* will force it on the other side */ }
+
+.fc-timeline-event .fc-title {
+  padding: 0 3px;
+  display: inline-block;
+  vertical-align: top;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden; }
+
+.fc-ltr .fc-timeline-event.fc-not-start .fc-content,
+.fc-rtl .fc-timeline-event.fc-not-end .fc-content {
+  margin-left: 8px; }
+
+.fc-rtl .fc-timeline-event.fc-not-start .fc-content,
+.fc-ltr .fc-timeline-event.fc-not-end .fc-content {
+  margin-right: 8px; }
+
+.fc-timeline-event.fc-not-start .fc-content:before,
+.fc-timeline-event.fc-not-end .fc-content:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  margin-top: -5px;
+  border: 5px solid #000;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  opacity: .5; }
+
+.fc-ltr .fc-timeline-event.fc-not-start .fc-content:before,
+.fc-rtl .fc-timeline-event.fc-not-end .fc-content:after {
+  border-left: 0;
+  left: -6px; }
+
+.fc-rtl .fc-timeline-event.fc-not-start .fc-content:before,
+.fc-ltr .fc-timeline-event.fc-not-end .fc-content:after {
+  border-right: 0;
+  right: -6px; }

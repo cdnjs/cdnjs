@@ -1,0 +1,287 @@
+/*
+
+Forms
+
+Markup:
+<form>
+    <label class="field">
+        <input type="text" />
+        <span class="label">Name</span>
+    </label>
+    <label class="field -inline">
+        <input type="radio" name="example" />
+        <span class="label">Cone</span>
+    </label>
+    <label class="field -inline">
+        <input type="radio" name="example" />
+        <span class="label">Bowl</span>
+    </label>
+    <label for="select" class="field">
+        <select name="select">
+            <option disabled="disabled" selected="selected">Flavors</option>
+            <option>Chocolate</option>
+            <option>Vanilla</option>
+        </select>
+        <span class="label">Favorite Ice Cream</span>
+    </label>
+    <label class="field">
+        <textarea></textarea>
+        <span class="label">Comments</span>
+    </label>
+    <label class="field">
+        <input type="checkbox" />
+        <span class="label">
+            I consent to my ice cream flavors being saved into a database for
+            eternity and understand and acknowledge this will have consequences
+            for all of my decendants for decades to come.
+        </span>
+    </label>
+</form>
+
+Styleguide 4.0
+
+*/
+
+.field [disabled] + *,
+[disabled] {
+    cursor: default;
+    opacity: .5;
+    pointer-events: none;
+}
+
+.field {
+    display: block;
+    margin-bottom: var(--rhythm);
+    position: relative;
+    text-align: left;
+}
+
+.field .label {
+    z-index: 2;
+}
+
+.field [type=checkbox] + .label,
+.field [type=radio] + .label {
+    color: var(--color-neutral-shade4);
+    cursor: pointer;
+    display: inline-block;
+    padding-left: var(--rhythm);
+}
+
+.field *:not([type=radio]):not([type=checkbox]) + .label {
+    background-color: var(--color-neutral-tint4);
+    font-size: var(--rhythm-half);
+    position: absolute;
+    left: var(--rhythm-sixteenth);
+    line-height: 1;
+    padding: var(--rhythm-fourth) var(--rhythm-fourth) 0;
+    right: var(--rhythm-sixteenth);
+    top: var(--rhythm-sixteenth);
+}
+
+.field input,
+.field textarea,
+.field select {
+    background-color: var(--color-neutral-tint4);
+    border: 1px solid var(--color-neutral-shade1);
+    border-radius: var(--border-radius);
+    box-sizing: border-box;
+    margin-top: -2px;
+    padding: calc(7 * var(--rhythm-eighth)) var(--rhythm-fourth) var(--rhythm-eighth);
+    position: relative;
+    width: 100%;
+}
+
+.field select {
+    z-index: 1;
+}
+
+/*
+
+Select
+
+Markup:
+<label class="field {{modifier_class}}">
+    <select>
+        <option disabled="disabled" selected="selected">Select</option>
+        <option>Option 1</option>
+        <option>Option 2</option>
+        <option>Option 3</option>
+    </select>
+    <span class="label">Select Label</span>
+</label>
+
+Styleguide 4.1
+
+*/
+
+.field select + .label::after {
+    content: '';
+    border-left: var(--rhythm-fourth) solid transparent;
+    border-right: var(--rhythm-fourth) solid transparent;
+    border-top: var(--rhythm-fourth) solid var(--color-neutral-shade1);
+    height: 0;
+    position: absolute;
+    right: var(--rhythm-half);
+    bottom: calc(-2 * var(--rhythm-third));
+    width: 0;
+}
+
+.field option[disabled] {
+    background-color: var(--color-neutral-tint3);
+    color: var(--color-neutral-shade2);
+}
+
+.field.-inline {
+    display: inline-block;
+    margin-right: var(--rhythm-half);
+}
+
+.field [type=checkbox],
+.field [type=radio] {
+    opacity: 0;
+    position: absolute;
+    z-index: 0;
+}
+
+.field [type=checkbox] + .label::before,
+.field [type=radio] + .label::before {
+    background-color: var(--color-neutral-tint4);
+    border: 2px solid var(--color-neutral-shade1);
+    content: '';
+    height: var(--rhythm-half);
+    left: 0;
+    position: absolute;
+    top: var(--rhythm-eighth);
+    transform: translateY(var(--rhythm-sixteenth));
+    width: var(--rhythm-half);
+}
+
+.field [type=checkbox] + .label::after,
+.field [type=radio] + .label::after {
+    background-color: var(--color-primary);
+    border: 2px solid transparent;
+    color: var(--color-neutral-tint4);
+    height: var(--rhythm-fourth);
+    left: var(--rhythm-eighth);
+    position: absolute;
+    top: var(--rhythm-fourth);
+    transform: translateY(var(--rhythm-sixteenth));
+    width: var(--rhythm-fourth);
+}
+
+/*
+
+Checkbox
+
+Markup:
+<label class="field {{modifier_class}}">
+    <input type="checkbox" />
+    <span class="label">Checkbox</span>
+</label>
+
+Styleguide 4.2
+
+*/
+
+.field [type=checkbox] + .label::before,
+.field [type=checkbox] + .label::after {
+    border-radius: var(--border-radius);
+}
+
+/*
+
+Radio
+
+Markup:
+<label class="field {{modifier_class}}">
+    <input type="radio" />
+    <span class="label">Radio</span>
+</label>
+
+Styleguide 4.3
+
+*/
+
+.field [type=radio] + .label::before,
+.field [type=radio] + .label::after {
+    border-radius: var(--rhythm);
+}
+
+.field [type=radio]:focus + .label::before,
+.field [type=checkbox]:focus + .label::before {
+    outline: var(--focus-outline);
+    outline-offset: var(--focus-outline-offset);
+}
+
+.field [type=checkbox]:checked + .label::after,
+.field [type=radio]:checked + .label::after {
+    content: '';
+}
+
+/*
+
+Input and text areas
+
+Markup:
+<label class="field {{modifier_class}}">
+    <input type="text" />
+    <span class="label">Input</span>
+</label>
+<label class="field {{modifier_class}}">
+    <textarea></textarea>
+    <span class="label">Textarea</span>
+</label>
+
+Styleguide 4.4
+
+*/
+
+.field textarea {
+    margin-top: 0;
+    min-height: calc(4 * var(--rhythm));
+}
+
+/*
+
+Disabled Fields
+
+Markup:
+<form>
+    <label class="field">
+        <input type="text" value="Someone" disabled />
+        <span class="label">Name</span>
+    </label>
+    <label class="field -inline">
+        <input type="radio" name="example" disabled />
+        <span class="label">Cone</span>
+    </label>
+    <label class="field -inline">
+        <input type="radio" name="example" disabled />
+        <span class="label">Bowl</span>
+    </label>
+    <label for="select" class="field">
+        <select name="select" disabled>
+            <option disabled="disabled" selected="selected">Flavors</option>
+            <option>Chocolate</option>
+            <option>Vanilla</option>
+        </select>
+        <span class="label">Favorite Ice Cream</span>
+    </label>
+    <label class="field">
+        <textarea disabled>I am some comments</textarea>
+        <span class="label">Comments</span>
+    </label>
+    <label class="field">
+        <input type="checkbox" disabled />
+        <span class="label">
+            I consent to my ice cream flavors being saved into a database for
+            eternity and understand and acknowledge this will have consequences
+            for all of my decendants for decades to come.
+        </span>
+    </label>
+</form>
+
+Styleguide 4.5
+
+*/
