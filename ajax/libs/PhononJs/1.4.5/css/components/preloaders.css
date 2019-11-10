@@ -1,0 +1,114 @@
+/*
+ * Circle progress
+*/
+.circle-progress {
+  width: 36px;
+  height: 36px;
+  position: relative;
+  text-align: center;
+  display: block;
+  left: 50%;
+  right: 0;
+  margin-left: -18px;
+  z-index: 20;
+  opacity: 0;
+  -webkit-transition: opacity 0.65s ease;
+  transition: opacity 0.65s ease;
+  background-color: #fff;
+  border-radius: 50%;
+}
+.circle-progress.center {
+  top: 50%;
+  left: 50%;
+  margin-top: -18px;
+  position: absolute;
+}
+.circle-progress.active {
+  opacity: 1;
+}
+.circle-progress.active .spinner {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border-top: 3px solid #0084e7;
+  border-right: 3px solid #0084e7;
+  border-bottom: 3px solid #0084e7;
+  border-left: 3px solid #eee;
+  -webkit-animation: circleLoading 900ms infinite linear;
+          animation: circleLoading 900ms infinite linear;
+}
+.circle-progress.primary,
+.circle-progress.negative,
+.circle-progress.positive {
+  background-color: #fff !important;
+}
+.circle-progress.primary .spinner {
+  border-top: 3px solid #0084e7;
+  border-right: 3px solid #0084e7;
+  border-bottom: 3px solid #0084e7;
+}
+.circle-progress.negative .spinner {
+  border-top: 3px solid #f40b00;
+  border-right: 3px solid #f40b00;
+  border-bottom: 3px solid #f40b00;
+}
+.circle-progress.positive .spinner {
+  border-top: 3px solid #0ae700;
+  border-right: 3px solid #0ae700;
+  border-bottom: 3px solid #0ae700;
+}
+.progress {
+  position: relative;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  height: 6px;
+  display: none;
+  width: 100%;
+  background-color: rgba(255,255,255,0.4);
+  border-radius: 2px;
+  background-clip: padding-box;
+  overflow: hidden;
+}
+.progress.active {
+  display: block;
+}
+.progress .determinate {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background-color: #0084e7;
+  -webkit-transition: width 0.2s linear;
+  transition: width 0.2s linear;
+}
+.progress.primary .determinate {
+  background-color: #0067b5 !important;
+}
+.progress.negative .determinate {
+  background-color: #c20900 !important;
+}
+.progress.positive .determinate {
+  background-color: #08b500 !important;
+}
+@-webkit-keyframes circleLoading {
+  0% {
+    -webkit-transform: rotate(0deg) translateZ(0);
+            transform: rotate(0deg) translateZ(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg) translateZ(0);
+            transform: rotate(360deg) translateZ(0);
+  }
+}
+@keyframes circleLoading {
+  0% {
+    -webkit-transform: rotate(0deg) translateZ(0);
+            transform: rotate(0deg) translateZ(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg) translateZ(0);
+            transform: rotate(360deg) translateZ(0);
+  }
+}

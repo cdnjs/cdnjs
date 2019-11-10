@@ -1,0 +1,1802 @@
+@font-face {
+  font-family: "Atlassian Icons";
+  src: url('fonts/atlassian-icons.eot');
+  src: url('fonts/atlassian-icons.eot?#iefix') format('embedded-opentype'), url('fonts/atlassian-icons.woff') format('woff'), url('fonts/atlassian-icons.ttf') format('truetype'), url('fonts/atlassian-icons.svg#atlassian-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Adgs Icons";
+  src: url('fonts/adgs-icons.eot');
+  src: url('fonts/adgs-icons.eot?#iefix') format('embedded-opentype'), url('fonts/adgs-icons.woff') format('woff'), url('fonts/adgs-icons.ttf') format('truetype'), url('fonts/adgs-icons.svg#adgs-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/**
+* Basic icon styles. Allows you to easily render sprite icons.
+*
+* .aui-icon must be present on all iconified elements
+* All iconified elements must include class names prefixed with 'aui-icon-'
+* Icons assume light backgrounds. Icon classnames for dark backgrounds must be suffixed with '-d'
+* For elements whose background changes in app, we advise maintaining light/dark state in the app.
+*
+*/
+.aui-icon {
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  border: none;
+  display: inline-block;
+  height: 16px;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  text-indent: -999em;
+  vertical-align: text-bottom;
+  width: 16px;
+}
+.aui-icon-small,
+.aui-icon-large {
+  line-height: 0;
+  position: relative;
+  vertical-align: text-top;
+}
+.aui-icon-small::before,
+.aui-icon-large::before {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0;
+  font-family: "Adgs Icons";
+  font-weight: normal;
+  font-style: normal;
+  speak: none;
+  color: inherit;
+  left: 0;
+  line-height: 1;
+  position: absolute;
+  text-indent: 0;
+  top: 50%;
+}
+.aui-icon-small {
+  height: 16px;
+  width: 16px;
+}
+.aui-icon-large {
+  height: 32px;
+  width: 32px;
+}
+.aui-icon-small:before {
+  font-size: 16px;
+  margin-top: -8px;
+}
+.aui-icon-large:before {
+  font-size: 32px;
+  margin-top: -16px;
+}
+.icon-move,
+.icon-move-d,
+.icon-dropdown,
+.icon-dropdown-d,
+.icon-dropdown-active,
+.icon-dropdown-active-d,
+.icon-minimize,
+.icon-minimize-d,
+.icon-maximize,
+.icon-maximize-d {
+  background-repeat: no-repeat;
+}
+.aui-icon.icon-move,
+.aui-icon.icon-move-d,
+.aui-icon.icon-dropdown,
+.aui-icon.icon-dropdown-d,
+.aui-icon.icon-dropdown-active,
+.aui-icon.icon-dropdown-active-d,
+.aui-icon.icon-minimize,
+.aui-icon.icon-minimize-d,
+.aui-icon.icon-maximize,
+.aui-icon.icon-maximize-d {
+  background-position: 0 0 !important;
+  /* This is for legacy support */
+  height: 13px;
+  vertical-align: baseline;
+  width: 13px;
+}
+/* Core icons - deprecated */
+.icon-move {
+  /* icon-move.png */
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANAQAAAABakNnRAAAAAnRSTlMAAHaTzTgAAAAlSURBVHgBY2BiYGBnYOBvADGUFBiSDBj+/wCSIDYTSBwoC2QAAF4LBNQUu22rAAAAAElFTkSuQmCC');
+  cursor: move;
+}
+.icon-move-d {
+  /* icon-move-d.png */
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAAAAABXgLugAAAAAnRSTlMAAHaTzTgAAAAtSURBVHgBY4CAXDAJ4+TmInOgXAyVuXAMIuC8XCBGBqhyMBaaSTjtg3DQVQIAa64U3lyaxpQAAAAASUVORK5CYII=');
+  cursor: move;
+}
+.icon-dropdown {
+  /* icon-dropdown.png */
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAQAAADY4iz3AAAAKUlEQVQY02NgwAf+YwFQCezKKZRCtwdFF4oD0A1ESFDBGVil8IQGbgAAiaBjnU8tP0kAAAAASUVORK5CYII=');
+}
+.icon-dropdown-d {
+  /* icon-dropdown-d.png */
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAQAAADY4iz3AAAAKklEQVQY02NgwAdy/2NCqAR25RRKoduDogvFAegGIiSo4AysUnhCAzcAAJOYRxkKj+5hAAAAAElFTkSuQmCC');
+}
+.icon-dropdown-active {
+  /* icon-dropdown-active.png */
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAQAAADY4iz3AAAAKElEQVQY02NgwAf+YwE4JaCSlEhh2o2kC91RKAYyoPOo7kI8oYEbAACHhecZSiXhsAAAAABJRU5ErkJggg==');
+}
+.icon-dropdown-active-d {
+  /* icon-dropdown-active-d.png */
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAQAAADY4iz3AAAAKElEQVQY02NgwAdy/2NCnBJQSUqkMO1G0oXuKBQDGdB5VHchntDADQAE0qTxqu2HqgAAAABJRU5ErkJggg==');
+}
+.icon-minimize {
+  /* icon-minimize.png */
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAQAAADY4iz3AAAAHklEQVQY02NgwAf+YwE4JaCS5Epht3/wSOEJDdwAAFcvh3lwBRT4AAAAAElFTkSuQmCC');
+}
+.icon-minimize-d {
+  /* icon-minimize-d.png */
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAQAAADY4iz3AAAAH0lEQVQY02NgwAdy/2NCnBJQSXKlsNs/eKTwhAZuAAAbK2Cx/Io00wAAAABJRU5ErkJggg==');
+}
+.icon-maximize {
+  /* icon-maximize.png */
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAQAAADY4iz3AAAAJUlEQVQY02NgIAT+YwDipNBNwS+F3SjCUtjdSoYDiJDC6VncAAAKY3uF7U/mdQAAAABJRU5ErkJggg==');
+}
+.icon-maximize-d {
+  /* icon-maximize-d.png */
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAQAAADY4iz3AAAAJklEQVQY02NgIARy/6ND4qTQTcEvhd0owlLY3UqGA4iQwulZ3AAAn8BYKXiL6OYAAAAASUVORK5CYII=');
+}
+/* Form icons - deprecated */
+form.aui .icon-date,
+.aui-icon-date {
+  /* icon-date.png */
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAARElEQVR4AWMoIBGANFgXr8dE927fw0TkaCDLSf/B4O7duwQZ5Gq4iwNccDGHI4gIARuA6tAYJGig1En0DyVMQFcnkQgA7103vYurRvEAAAAASUVORK5CYII=');
+}
+form.aui .icon-range,
+.aui-icon-range {
+  /* icon-range.png */
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAARklEQVR4AWMoIBGANFgXr8dEd7EBcjSQ5aT/YAA0gCCDXA0Q911wMSeIUGwA8gkyyNWAsJRyJ6F5mmQNhJ2EFtN0ijgSAQD0WQfB7IGD0QAAAABJRU5ErkJggg==');
+}
+.aui-icon-required {
+  /* icon-required.png */
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAARUlEQVR4AWOAgQsu5v8ZSAIIjaVAbA4yAEqXkmpAMxDfABkApZtJNYARiHtABkBpRlIN0AbiK0AcBMQrQHyGkQdGwSgAAPtCJnBUV/TSAAAAAElFTkSuQmCC');
+}
+form.aui .icon-users,
+.aui-icon-users {
+  /* icon-users.png */
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAArElEQVR4AWOgCbAuXi8HxLuA+DOUliPVgN1A/B8J78epuKCgwBOIn0GxJ9SAz2gG/MSllgHK+Q/Fz/C5AFMtpuBzWBhADfkCpeWxqoUKeoE4QPwExMbhU9LUAm2UAuK9IL8D8R4glmQgYLIGCCMZsBYtDNZiqkUIlCH5qxxqwCc0Az5jVQsVfI4k+A5qwH90jEstA4SDwLgNwFQ7jAy4gSR4F2rAaTQDjuFSCwBFeGK4drVwMAAAAABJRU5ErkJggg==');
+}
+form.aui .icon-help,
+.aui-icon-help,
+form.aui .icon-inline-help,
+.aui-icon-inline-help {
+  /* icon-help.png */
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAABG0lEQVR4AU2RNVYtQRiE+7m7IxHRlRxnHWwAty9lDbg7K4AUh7kJ7vDwEGLcvU6f6cP8NVJVXe3GFWGqWedSWBcLm2DxjmZuuSFGgxATu9X/tWt+zTAPdBNnnBNHl5whP0KDRJm1ezjimn6SpArlNhqRCLd02eA0h+SSzS47PJfuUEvEUMMN/yR/8UC5DVaKJej/T6PVGNbxjC1SeKtvBgfMawQVHhuGS9oC+8ninGW3XNq4MlwRDAyzx1enFDgxbOAFAhP0BpTHf7dIZyW64f1F1hqi3NLhW584Ej77StskKkIjD5Ra6y0bwlvLC7inyR31iCJd2MF5Zs+0U84wr58uq5U7bvBoEDxupBrVHCwi1LLJNaf8F4s4/xGiuqDPs2tUOAAAAABJRU5ErkJggg==');
+}
+/* Message icons */
+.aui-message .icon-close,
+.aui-icon-close {
+  /* icon-close.png */
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAAOUlEQVR4AWOgGogCQjQ+KrcfCKMw+MgCECEMHqYSdGlMJZjSCCWo0oQVELaCsCMJe5NwQBEOasoBAGP2Kx0Yi3q/AAAAAElFTkSuQmCC');
+}
+.aui-message .icon-close-inverted,
+.aui-message.error .icon-close,
+.aui-icon-close-inverted {
+  /* icon-close-inverted.png */
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAAOklEQVR4AWOgFvi/4P8CdD4qFwQWYPCRBSBCGDxMJejSmEowpRFKUKUJKyBsBWFHEvYm4YAiHNSUAwDHH6hxrraMqwAAAABJRU5ErkJggg==');
+}
+/* Dropdown icon (downwards arrow)
+* - achieved via pseudo element
+*/
+.aui-icon-dropdown {
+  border: 4px solid transparent;
+  border-top-color: #172B4D;
+  content: "";
+  display: inline-block;
+  height: 0;
+  overflow: hidden;
+  text-align: left;
+  text-indent: -999em;
+  position: relative;
+  vertical-align: baseline;
+  width: 0;
+}
+/*
+* Icon Font
+* - use when you need to change the colour of the icon via CSS - eg on hover or to match Look and Feel customisations
+*
+* Ranges
+*
+* UTF+E001 - UTF+E3FF - Global
+* UTF+E400 - UTF+E7FF - Conf
+* UTF+E800 - UTF+EBFF - JIRA
+* UTF+EC00 - UTF+EFFF - Dev Tools
+*/
+.aui-iconfont-add:before {
+  content: "\f101";
+}
+.aui-iconfont-add-comment:before {
+  content: "\f102";
+}
+.aui-iconfont-add-small:before {
+  content: "\f103";
+}
+.aui-iconfont-approve:before {
+  content: "\f104";
+}
+.aui-iconfont-appswitcher:before {
+  content: "\f105";
+}
+.aui-iconfont-arrows-down:before {
+  content: "\f106";
+}
+.aui-iconfont-arrows-left:before {
+  content: "\f107";
+}
+.aui-iconfont-arrows-right:before {
+  content: "\f108";
+}
+.aui-iconfont-arrows-up:before {
+  content: "\f109";
+}
+.aui-iconfont-attachment:before {
+  content: "\f10a";
+}
+.aui-iconfont-attachment-small:before {
+  content: "\f10b";
+}
+.aui-iconfont-autocomplete-date:before {
+  content: "\f10c";
+}
+.aui-iconfont-back-page:before {
+  content: "\f10d";
+}
+.aui-iconfont-blogroll:before {
+  content: "\f10e";
+}
+.aui-iconfont-bp-decisions:before {
+  content: "\f10f";
+}
+.aui-iconfont-bp-default:before {
+  content: "\f110";
+}
+.aui-iconfont-bp-files:before {
+  content: "\f111";
+}
+.aui-iconfont-bp-requirements:before {
+  content: "\f112";
+}
+.aui-iconfont-bp-howto:before {
+  content: "\f113";
+}
+.aui-iconfont-bp-jira:before {
+  content: "\f114";
+}
+.aui-iconfont-bp-meeting:before {
+  content: "\f115";
+}
+.aui-iconfont-bp-retrospective:before {
+  content: "\f116";
+}
+.aui-iconfont-bp-sharedlinks:before {
+  content: "\f117";
+}
+.aui-iconfont-bp-troubleshooting:before {
+  content: "\f118";
+}
+.aui-iconfont-build:before {
+  content: "\f119";
+}
+.aui-iconfont-calendar:before {
+  content: "\f11a";
+}
+.aui-iconfont-close-dialog:before {
+  content: "\f11b";
+}
+.aui-iconfont-collapsed:before {
+  content: "\f11c";
+}
+.aui-iconfont-comment:before {
+  content: "\f11d";
+}
+.aui-iconfont-configure:before {
+  content: "\f11e";
+}
+.aui-iconfont-confluence:before {
+  content: "\f11f";
+}
+.aui-iconfont-copy-clipboard:before {
+  content: "\f120";
+}
+.aui-iconfont-custom-bullet:before {
+  content: "\f121";
+}
+.aui-iconfont-delete:before {
+  content: "\f122";
+}
+.aui-iconfont-deploy:before {
+  content: "\f123";
+}
+.aui-iconfont-details:before {
+  content: "\f124";
+}
+.aui-iconfont-devtools-arrow-left:before {
+  content: "\f125";
+}
+.aui-iconfont-devtools-arrow-right:before {
+  content: "\f126";
+}
+.aui-iconfont-devtools-branch:before {
+  content: "\f127";
+}
+.aui-iconfont-devtools-branch-small:before {
+  content: "\f128";
+}
+.aui-iconfont-devtools-browse-up:before {
+  content: "\f129";
+}
+.aui-iconfont-devtools-checkout:before {
+  content: "\f12a";
+}
+.aui-iconfont-devtools-clone:before {
+  content: "\f12b";
+}
+.aui-iconfont-devtools-commit:before {
+  content: "\f12c";
+}
+.aui-iconfont-devtools-compare:before {
+  content: "\f12d";
+}
+.aui-iconfont-devtools-file:before {
+  content: "\f12e";
+}
+.aui-iconfont-devtools-file-binary:before {
+  content: "\f12f";
+}
+.aui-iconfont-devtools-file-commented:before {
+  content: "\f130";
+}
+.aui-iconfont-devtools-folder-closed:before {
+  content: "\f131";
+}
+.aui-iconfont-devtools-folder-open:before {
+  content: "\f132";
+}
+.aui-iconfont-devtools-fork:before {
+  content: "\f133";
+}
+.aui-iconfont-devtools-pull-request:before {
+  content: "\f134";
+}
+.aui-iconfont-devtools-repository:before {
+  content: "\f135";
+}
+.aui-iconfont-devtools-repository-forked:before {
+  content: "\f136";
+}
+.aui-iconfont-devtools-repository-locked:before {
+  content: "\f137";
+}
+.aui-iconfont-devtools-side-diff:before {
+  content: "\f138";
+}
+.aui-iconfont-devtools-submodule:before {
+  content: "\f139";
+}
+.aui-iconfont-devtools-tag:before {
+  content: "\f13a";
+}
+.aui-iconfont-devtools-tag-small:before {
+  content: "\f13b";
+}
+.aui-iconfont-devtools-task-cancelled:before {
+  content: "\f13c";
+}
+.aui-iconfont-devtools-task-disabled:before {
+  content: "\f13d";
+}
+.aui-iconfont-devtools-task-in-progress:before {
+  content: "\f13e";
+}
+.aui-iconfont-doc:before {
+  content: "\f13f";
+}
+.aui-iconfont-down:before {
+  content: "\f140";
+}
+.aui-iconfont-drag-vertical:before {
+  content: "\f141";
+}
+.aui-iconfont-edit:before {
+  content: "\f142";
+}
+.aui-iconfont-edit-small:before {
+  content: "\f143";
+}
+.aui-iconfont-editor-align-center:before {
+  content: "\f144";
+}
+.aui-iconfont-editor-align-left:before {
+  content: "\f145";
+}
+.aui-iconfont-editor-align-right:before {
+  content: "\f146";
+}
+.aui-iconfont-editor-bold:before {
+  content: "\f147";
+}
+.aui-iconfont-editor-color:before {
+  content: "\f148";
+}
+.aui-iconfont-editor-emoticon:before {
+  content: "\f149";
+}
+.aui-iconfont-editor-help:before {
+  content: "\f14a";
+}
+.aui-iconfont-editor-hr:before {
+  content: "\f14b";
+}
+.aui-iconfont-editor-indent:before {
+  content: "\f14c";
+}
+.aui-iconfont-editor-italic:before {
+  content: "\f14d";
+}
+.aui-iconfont-editor-layout:before {
+  content: "\f14e";
+}
+.aui-iconfont-editor-list-bullet:before {
+  content: "\f14f";
+}
+.aui-iconfont-editor-list-number:before {
+  content: "\f150";
+}
+.aui-iconfont-editor-macro-toc:before {
+  content: "\f151";
+}
+.aui-iconfont-editor-mention:before {
+  content: "\f152";
+}
+.aui-iconfont-editor-outdent:before {
+  content: "\f153";
+}
+.aui-iconfont-editor-styles:before {
+  content: "\f154";
+}
+.aui-iconfont-editor-symbol:before {
+  content: "\f155";
+}
+.aui-iconfont-editor-table:before {
+  content: "\f156";
+}
+.aui-iconfont-editor-task:before {
+  content: "\f157";
+}
+.aui-iconfont-editor-underline:before {
+  content: "\f158";
+}
+.aui-iconfont-email:before {
+  content: "\f159";
+}
+.aui-iconfont-error:before {
+  content: "\f15a";
+}
+.aui-iconfont-expanded:before {
+  content: "\f15b";
+}
+.aui-iconfont-file-code:before {
+  content: "\f15c";
+}
+.aui-iconfont-file-doc:before {
+  content: "\f15d";
+}
+.aui-iconfont-file-java:before {
+  content: "\f15e";
+}
+.aui-iconfont-file-pdf:before {
+  content: "\f15f";
+}
+.aui-iconfont-file-ppt:before {
+  content: "\f160";
+}
+.aui-iconfont-file-txt:before {
+  content: "\f161";
+}
+.aui-iconfont-file-wav:before {
+  content: "\f162";
+}
+.aui-iconfont-file-xls:before {
+  content: "\f163";
+}
+.aui-iconfont-file-zip:before {
+  content: "\f164";
+}
+.aui-iconfont-flag:before {
+  content: "\f165";
+}
+.aui-iconfont-focus:before {
+  content: "\f166";
+}
+.aui-iconfont-group:before {
+  content: "\f167";
+}
+.aui-iconfont-handle-horizontal:before {
+  content: "\f168";
+}
+.aui-iconfont-help:before {
+  content: "\f169";
+}
+.aui-iconfont-hipchat:before {
+  content: "\f16a";
+}
+.aui-iconfont-homepage:before {
+  content: "\f16b";
+}
+.aui-iconfont-image:before {
+  content: "\f16c";
+}
+.aui-iconfont-image-extrasmall:before {
+  content: "\f16d";
+}
+.aui-iconfont-image-small:before {
+  content: "\f16e";
+}
+.aui-iconfont-info:before {
+  content: "\f16f";
+}
+.aui-iconfont-jira:before {
+  content: "\f170";
+}
+.aui-iconfont-jira-completed-task:before {
+  content: "\f171";
+}
+.aui-iconfont-jira-test-session:before {
+  content: "\f172";
+}
+.aui-iconfont-like:before {
+  content: "\f173";
+}
+.aui-iconfont-like-small:before {
+  content: "\f174";
+}
+.aui-iconfont-weblink:before {
+  content: "\f175";
+}
+.aui-iconfont-link:before {
+  content: "\f176";
+}
+.aui-iconfont-list-add:before {
+  content: "\f177";
+}
+.aui-iconfont-list-remove:before {
+  content: "\f178";
+}
+.aui-iconfont-locked:before {
+  content: "\f179";
+}
+.aui-iconfont-locked-small:before {
+  content: "\f17a";
+}
+.aui-iconfont-macro-code:before {
+  content: "\f17b";
+}
+.aui-iconfont-macro-default:before {
+  content: "\f17c";
+}
+.aui-iconfont-macro-gallery:before {
+  content: "\f17d";
+}
+.aui-iconfont-macro-status:before {
+  content: "\f17e";
+}
+.aui-iconfont-more:before {
+  content: "\f17f";
+}
+.aui-iconfont-nav-children:before {
+  content: "\f180";
+}
+.aui-iconfont-page-blank:before {
+  content: "\f181";
+}
+.aui-iconfont-page-blogpost:before {
+  content: "\f182";
+}
+.aui-iconfont-page-default:before {
+  content: "\f183";
+}
+.aui-iconfont-page-template:before {
+  content: "\f184";
+}
+.aui-iconfont-pages:before {
+  content: "\f185";
+}
+.aui-iconfont-quote:before {
+  content: "\f186";
+}
+.aui-iconfont-redo:before {
+  content: "\f187";
+}
+.aui-iconfont-remove:before {
+  content: "\f188";
+}
+.aui-iconfont-remove-label:before {
+  content: "\f189";
+}
+.aui-iconfont-review:before {
+  content: "\f18a";
+}
+.aui-iconfont-rss:before {
+  content: "\f18b";
+}
+.aui-iconfont-search:before {
+  content: "\f18c";
+}
+.aui-iconfont-search-small:before {
+  content: "\f18d";
+}
+.aui-iconfont-share:before {
+  content: "\f18e";
+}
+.aui-iconfont-sidebar-link:before {
+  content: "\f18f";
+}
+.aui-iconfont-sourcetree:before {
+  content: "\f190";
+}
+.aui-iconfont-space-default:before {
+  content: "\f191";
+}
+.aui-iconfont-space-personal:before {
+  content: "\f192";
+}
+.aui-iconfont-star:before {
+  content: "\f193";
+}
+.aui-iconfont-success:before {
+  content: "\f194";
+}
+.aui-iconfont-table-bg:before {
+  content: "\f195";
+}
+.aui-iconfont-table-col-left:before {
+  content: "\f196";
+}
+.aui-iconfont-table-col-remove:before {
+  content: "\f197";
+}
+.aui-iconfont-table-col-right:before {
+  content: "\f198";
+}
+.aui-iconfont-table-copy-row:before {
+  content: "\f199";
+}
+.aui-iconfont-table-cut-row:before {
+  content: "\f19a";
+}
+.aui-iconfont-table-header-column:before {
+  content: "\f19b";
+}
+.aui-iconfont-table-header-row:before {
+  content: "\f19c";
+}
+.aui-iconfont-table-merge:before {
+  content: "\f19d";
+}
+.aui-iconfont-table-no-bg:before {
+  content: "\f19e";
+}
+.aui-iconfont-table-paste-row:before {
+  content: "\f19f";
+}
+.aui-iconfont-table-remove:before {
+  content: "\f1a0";
+}
+.aui-iconfont-table-row-down:before {
+  content: "\f1a1";
+}
+.aui-iconfont-table-row-remove:before {
+  content: "\f1a2";
+}
+.aui-iconfont-table-row-up:before {
+  content: "\f1a3";
+}
+.aui-iconfont-table-split:before {
+  content: "\f1a4";
+}
+.aui-iconfont-teamcals:before {
+  content: "\f1a5";
+}
+.aui-iconfont-time:before {
+  content: "\f1a6";
+}
+.aui-iconfont-undo:before {
+  content: "\f1a7";
+}
+.aui-iconfont-unfocus:before {
+  content: "\f1a8";
+}
+.aui-iconfont-unlocked:before {
+  content: "\f1a9";
+}
+.aui-iconfont-unstar:before {
+  content: "\f1aa";
+}
+.aui-iconfont-unwatch:before {
+  content: "\f1ab";
+}
+.aui-iconfont-up:before {
+  content: "\f1ac";
+}
+.aui-iconfont-user:before {
+  content: "\f1ad";
+}
+.aui-iconfont-user-status:before {
+  content: "\f1ae";
+}
+.aui-iconfont-view:before {
+  content: "\f1af";
+}
+.aui-iconfont-view-card:before {
+  content: "\f1b0";
+}
+.aui-iconfont-view-list:before {
+  content: "\f1b1";
+}
+.aui-iconfont-view-table:before {
+  content: "\f1b2";
+}
+.aui-iconfont-warning:before {
+  content: "\f1b3";
+}
+.aui-iconfont-watch:before {
+  content: "\f1b4";
+}
+.aui-iconfont-workbox:before {
+  content: "\f1b5";
+}
+.aui-iconfont-workbox-empty:before {
+  content: "\f1b6";
+}
+.aui-iconfont-configure-columns:before {
+  content: "\f1b7";
+}
+.aui-iconfont-export:before {
+  content: "\f1b8";
+}
+.aui-iconfont-export-list:before {
+  content: "\f1b9";
+}
+.aui-iconfont-file-image:before {
+  content: "\f1ba";
+}
+.aui-iconfont-admin-fusion:before {
+  content: "\f1bb";
+}
+.aui-iconfont-admin-jira-fields:before {
+  content: "\f1bc";
+}
+.aui-iconfont-admin-issue:before {
+  content: "\f1bd";
+}
+.aui-iconfont-admin-notifications:before {
+  content: "\f1be";
+}
+.aui-iconfont-admin-roles:before {
+  content: "\f1bf";
+}
+.aui-iconfont-admin-jira-screens:before {
+  content: "\f1c0";
+}
+.aui-iconfont-pause:before {
+  content: "\f1c1";
+}
+.aui-iconfont-priority-highest:before {
+  content: "\f1c2";
+}
+.aui-iconfont-priority-high:before {
+  content: "\f1c3";
+}
+.aui-iconfont-priority-medium:before {
+  content: "\f1c4";
+}
+.aui-iconfont-priority-low:before {
+  content: "\f1c5";
+}
+.aui-iconfont-priority-lowest:before {
+  content: "\f1c6";
+}
+.aui-iconfont-refresh-small:before {
+  content: "\f1c7";
+}
+.aui-iconfont-share-list:before {
+  content: "\f1c8";
+}
+.aui-iconfont-switch-small:before {
+  content: "\f1c9";
+}
+.aui-iconfont-version:before {
+  content: "\f1ca";
+}
+.aui-iconfont-workflow:before {
+  content: "\f1cb";
+}
+.aui-iconfont-admin-jira-settings:before {
+  content: "\f1cc";
+}
+.aui-iconfont-component:before {
+  content: "\f1cd";
+}
+.aui-iconfont-reopen:before {
+  content: "\f1ce";
+}
+.aui-iconfont-roadmap:before {
+  content: "\f1cf";
+}
+.aui-iconfont-deploy-success:before {
+  content: "\f1d0";
+}
+.aui-iconfont-deploy-fail:before {
+  content: "\f1d1";
+}
+.aui-iconfont-file-generic:before {
+  content: "\f1d2";
+}
+.aui-iconfont-arrow-down:before {
+  content: "\f1d3";
+}
+.aui-iconfont-arrow-up:before {
+  content: "\f1d4";
+}
+.aui-iconfont-file-video:before {
+  content: "\f1d5";
+}
+.aui-iconfont-filter:before {
+  content: "\f1d6";
+}
+.aui-iconfont-table-copy-column:before {
+  content: "\f1d7";
+}
+.aui-iconfont-table-paste-column:before {
+  content: "\f1d8";
+}
+.aui-iconfont-table-cut-column:before {
+  content: "\f1d9";
+}
+.aui-iconfont-maximise-small:before {
+  content: "\f1da";
+}
+.aui-iconfont-minimise-small:before {
+  content: "\f1db";
+}
+.aui-iconfont-more-small:before {
+  content: "\f1dc";
+}
+.aui-iconfont-move-small:before {
+  content: "\f1dd";
+}
+.aui-iconfont-download:before {
+  content: "\f1de";
+}
+.aui-iconfont-upload:before {
+  content: "\f1df";
+}
+.aui-iconfont-version-unreleased:before {
+  content: "\f1e0";
+}
+.aui-iconfont-puzzle:before {
+  content: "\f1e1";
+}
+.aui-iconfont-editor-files:before {
+  content: "\f1e2";
+}
+.aui-iconfont-bp-sprint:before {
+  content: "\f1e3";
+}
+.aui-iconfont-jira-issues:before {
+  content: "\f1e4";
+}
+.aui-iconfont-bitbucket:before {
+  content: "\f1e5";
+}
+.aui-iconfont-blogroll-large:before {
+  content: "\f1e6";
+}
+.aui-iconfont-email-large:before {
+  content: "\f1e7";
+}
+.aui-iconfont-layout-1col-large:before {
+  content: "\f1e8";
+}
+.aui-iconfont-layout-2col-large:before {
+  content: "\f1e9";
+}
+.aui-iconfont-layout-2col-left-large:before {
+  content: "\f1ea";
+}
+.aui-iconfont-layout-2col-right-large:before {
+  content: "\f1eb";
+}
+.aui-iconfont-layout-3col-center-large:before {
+  content: "\f1ec";
+}
+.aui-iconfont-layout-3col-large:before {
+  content: "\f1ed";
+}
+.aui-iconfont-nav-children-large:before {
+  content: "\f1ee";
+}
+.aui-iconfont-pages-large:before {
+  content: "\f1ef";
+}
+.aui-iconfont-sidebar-link-large:before {
+  content: "\f1f0";
+}
+.aui-iconfont-teamcals-large:before {
+  content: "\f1f1";
+}
+.aui-iconfont-user-large:before {
+  content: "\f1f2";
+}
+.aui-iconfont-autocomplete-date::before,
+.aui-iconfont-blogroll::before,
+.aui-iconfont-devtools-browse-up::before,
+.aui-iconfont-deploy::before,
+.aui-iconfont-custom-bullet::before,
+.aui-iconfont-hipchat::before,
+.aui-iconfont-file-code::before,
+.aui-iconfont-file-doc::before,
+.aui-iconfont-file-java::before,
+.aui-iconfont-file-pdf::before,
+.aui-iconfont-file-ppt::before,
+.aui-iconfont-file-txt::before,
+.aui-iconfont-file-wav::before,
+.aui-iconfont-file-xls::before,
+.aui-iconfont-file-zip::before,
+.aui-iconfont-page-blogpost::before,
+.aui-iconfont-page-template::before,
+.aui-iconfont-macro-default::before,
+.aui-iconfont-macro-gallery::before,
+.aui-iconfont-macro-status::before,
+.aui-iconfont-user-status::before,
+.aui-iconfont-view-card::before,
+.aui-iconfont-workbox-empty::before,
+.aui-iconfont-export-list::before,
+.aui-iconfont-admin-fusion::before,
+.aui-iconfont-admin-jira-fields::before,
+.aui-iconfont-admin-issue::before,
+.aui-iconfont-admin-notifications::before,
+.aui-iconfont-admin-jira-screens::before,
+.aui-iconfont-priority-highest::before,
+.aui-iconfont-priority-high::before,
+.aui-iconfont-priority-medium::before,
+.aui-iconfont-share-list::before,
+.aui-iconfont-version::before,
+.aui-iconfont-workflow::before,
+.aui-iconfont-admin-jira-settings::before,
+.aui-iconfont-reopen::before,
+.aui-iconfont-roadmap::before,
+.aui-iconfont-deploy-success::before,
+.aui-iconfont-deploy-fail::before,
+.aui-iconfont-file-generic::before,
+.aui-iconfont-file-video::before,
+.aui-iconfont-blogroll-large::before,
+.aui-iconfont-priority-low::before,
+.aui-iconfont-priority-lowest::before,
+.aui-iconfont-review::before,
+.aui-iconfont-rss::before,
+.aui-iconfont-sourcetree::before,
+.aui-iconfont-space-default::before,
+.aui-iconfont-table-bg::before,
+.aui-iconfont-table-no-bg::before,
+.aui-iconfont-devtools-folder-open::before,
+.aui-iconfont-devtools-compare::before,
+.aui-iconfont-devtools-file::before,
+.aui-iconfont-devtools-file-binary::before,
+.aui-iconfont-devtools-file-commented::before,
+.aui-iconfont-devtools-repository::before,
+.aui-iconfont-devtools-repository-forked::before,
+.aui-iconfont-devtools-repository-locked::before,
+.aui-iconfont-devtools-side-diff::before,
+.aui-iconfont-devtools-submodule::before,
+.aui-iconfont-table-cut-row::before,
+.aui-iconfont-table-copy-row::before,
+.aui-iconfont-table-paste-row::before,
+.aui-iconfont-table-cut-column::before,
+.aui-iconfont-table-copy-column::before,
+.aui-iconfont-table-paste-column::before,
+.aui-iconfont-maximise-small::before,
+.aui-iconfont-minimise-small::before,
+.aui-iconfont-more-small::before,
+.aui-iconfont-move-small::before,
+.aui-iconfont-version-unreleased::before,
+.aui-iconfont-puzzle::before,
+.aui-iconfont-editor-files::before,
+.aui-iconfont-bp-sprint::before,
+.aui-iconfont-jira-issues::before,
+.aui-iconfont-bitbucket::before,
+.aui-iconfont-jira-completed-task::before,
+.aui-iconfont-jira-test-session::before,
+.aui-iconfont-back-page::before,
+.aui-iconfont-macro-code::before {
+  font-family: "Atlassian Icons";
+}
+.aui-iconfont-add::before {
+  content: "\f101";
+}
+.aui-iconfont-add-comment::before {
+  content: "\f102";
+}
+.aui-iconfont-approve::before {
+  content: "\f104";
+}
+.aui-iconfont-menu::before {
+  content: "\f105";
+}
+.aui-iconfont-chevron-double-down::before {
+  content: "\f106";
+}
+.aui-iconfont-chevron-double-left::before {
+  content: "\f107";
+}
+.aui-iconfont-chevron-double-right::before {
+  content: "\f108";
+}
+.aui-iconfont-chevron-double-up::before {
+  content: "\f109";
+}
+.aui-iconfont-attachment::before {
+  content: "\f10a";
+}
+.aui-iconfont-documents::before {
+  content: "\f10f";
+}
+.aui-iconfont-refresh::before {
+  content: "\f119";
+}
+.aui-iconfont-calendar::before {
+  content: "\f11a";
+}
+.aui-iconfont-cross::before {
+  content: "\f11b";
+}
+.aui-iconfont-chevron-right::before {
+  content: "\f11c";
+}
+.aui-iconfont-comment::before {
+  content: "\f11d";
+}
+.aui-iconfont-settings::before {
+  content: "\f11e";
+}
+.aui-iconfont-confluence::before {
+  content: "\f11f";
+}
+.aui-iconfont-copy::before {
+  content: "\f120";
+}
+.aui-iconfont-trash::before {
+  content: "\f122";
+}
+.aui-iconfont-upload::before {
+  content: "\f123";
+}
+.aui-iconfont-detail-view::before {
+  content: "\f124";
+}
+.aui-iconfont-arrow-left::before {
+  content: "\f125";
+}
+.aui-iconfont-arrow-right::before {
+  content: "\f126";
+}
+.aui-iconfont-sign-in::before {
+  content: "\f12a";
+}
+.aui-iconfont-import::before {
+  content: "\f12b";
+}
+.aui-iconfont-branch::before {
+  content: "\f127";
+}
+.aui-iconfont-commits::before {
+  content: "\f12c";
+}
+.aui-iconfont-folder-filled::before {
+  content: "\f131";
+}
+.aui-iconfont-create-fork::before {
+  content: "\f133";
+}
+.aui-iconfont-export::before {
+  content: "\f134";
+}
+.aui-iconfont-tag::before {
+  content: "\f13a";
+}
+.aui-iconfont-incomplete-build::before {
+  content: "\f13c";
+}
+.aui-iconfont-plan-disabled::before {
+  content: "\f13d";
+}
+.aui-iconfont-queued-build::before {
+  content: "\f13e";
+}
+.aui-iconfont-document::before {
+  content: "\f13f";
+}
+.aui-iconfont-new-arrow-down::before {
+  content: "\f140";
+}
+.aui-iconfont-edit-filled::before {
+  content: "\f142";
+}
+.aui-iconfont-center-alignment::before {
+  content: "\f144";
+}
+.aui-iconfont-left-alignment::before {
+  content: "\f145";
+}
+.aui-iconfont-right-alignment::before {
+  content: "\f146";
+}
+.aui-iconfont-bold::before {
+  content: "\f147";
+}
+.aui-iconfont-text-color::before {
+  content: "\f148";
+}
+.aui-iconfont-emoji::before {
+  content: "\f149";
+}
+.aui-iconfont-new-help::before {
+  content: "\f14a";
+}
+.aui-iconfont-horizontal-rule::before {
+  content: "\f14b";
+}
+.aui-iconfont-indent-left::before {
+  content: "\f14c";
+}
+.aui-iconfont-italic::before {
+  content: "\f14d";
+}
+.aui-iconfont-page-layout-toggle::before {
+  content: "\f14e";
+}
+.aui-iconfont-bullet-list::before {
+  content: "\f14f";
+}
+.aui-iconfont-number-list::before {
+  content: "\f150";
+}
+.aui-iconfont-table-of-contents::before {
+  content: "\f151";
+}
+.aui-iconfont-mention::before {
+  content: "\f152";
+}
+.aui-iconfont-indent-right::before {
+  content: "\f153";
+}
+.aui-iconfont-advanced::before {
+  content: "\f154";
+}
+.aui-iconfont-symbol::before {
+  content: "\f155";
+}
+.aui-iconfont-table::before {
+  content: "\f156";
+}
+.aui-iconfont-task::before {
+  content: "\f157";
+}
+.aui-iconfont-underline::before {
+  content: "\f158";
+}
+.aui-iconfont-email::before {
+  content: "\f159";
+}
+.aui-iconfont-error::before {
+  content: "\f15a";
+}
+.aui-iconfont-chevron-down::before {
+  content: "\f15b";
+}
+.aui-iconfont-flag::before {
+  content: "\f165";
+}
+.aui-iconfont-vid-full-screen-on::before {
+  content: "\f166";
+}
+.aui-iconfont-group::before {
+  content: "\f167";
+}
+.aui-iconfont-more-vertical::before {
+  content: "\f168";
+}
+.aui-iconfont-question-circle::before {
+  content: "\f169";
+}
+.aui-iconfont-home-circle::before {
+  content: "\f16b";
+}
+.aui-iconfont-image::before {
+  content: "\f16c";
+}
+.aui-iconfont-info-circle::before {
+  content: "\f16f";
+}
+.aui-iconfont-jira::before {
+  content: "\f170";
+}
+.aui-iconfont-like::before {
+  content: "\f173";
+}
+.aui-iconfont-world::before {
+  content: "\f175";
+}
+.aui-iconfont-link::before {
+  content: "\f176";
+}
+.aui-iconfont-add-circle::before {
+  content: "\f177";
+}
+.aui-iconfont-cross-circle::before {
+  content: "\f178";
+}
+.aui-iconfont-lock-filled::before {
+  content: "\f179";
+}
+.aui-iconfont-more::before {
+  content: "\f17f";
+}
+.aui-iconfont-nav-children::before {
+  content: "\f180";
+}
+.aui-iconfont-file::before {
+  content: "\f183";
+}
+.aui-iconfont-quote::before {
+  content: "\f186";
+}
+.aui-iconfont-redo::before {
+  content: "\f187";
+}
+.aui-iconfont-search::before {
+  content: "\f18c";
+}
+.aui-iconfont-share::before {
+  content: "\f18e";
+}
+.aui-iconfont-shortcut::before {
+  content: "\f18f";
+}
+.aui-iconfont-person-circle::before {
+  content: "\f192";
+}
+.aui-iconfont-star-filled::before {
+  content: "\f193";
+}
+.aui-iconfont-check::before {
+  content: "\f194";
+}
+.aui-iconfont-insert-column-before::before {
+  content: "\f196";
+}
+.aui-iconfont-remove-column::before {
+  content: "\f197";
+}
+.aui-iconfont-insert-column-after::before {
+  content: "\f198";
+}
+.aui-iconfont-copy-table-row::before {
+  content: "\f199";
+}
+.aui-iconfont-cut-table-row::before {
+  content: "\f19a";
+}
+.aui-iconfont-heading-column::before {
+  content: "\f19b";
+}
+.aui-iconfont-heading-row::before {
+  content: "\f19c";
+}
+.aui-iconfont-merge-table-cells::before {
+  content: "\f19d";
+}
+.aui-iconfont-paste-table-row::before {
+  content: "\f19f";
+}
+.aui-iconfont-remove-table::before {
+  content: "\f1a0";
+}
+.aui-iconfont-insert-row-after::before {
+  content: "\f1a1";
+}
+.aui-iconfont-remove-row::before {
+  content: "\f1a2";
+}
+.aui-iconfont-insert-row-before::before {
+  content: "\f1a3";
+}
+.aui-iconfont-split-merged-table-cells::before {
+  content: "\f1a4";
+}
+.aui-iconfont-team-calendar::before {
+  content: "\f1a5";
+}
+.aui-iconfont-recent::before {
+  content: "\f1a6";
+}
+.aui-iconfont-undo::before {
+  content: "\f1a7";
+}
+.aui-iconfont-vid-full-screen-off::before {
+  content: "\f1a8";
+}
+.aui-iconfont-unlock-filled::before {
+  content: "\f1a9";
+}
+.aui-iconfont-new-star::before {
+  content: "\f1aa";
+}
+.aui-iconfont-new-watch::before {
+  content: "\f1ab";
+}
+.aui-iconfont-new-arrow-up::before {
+  content: "\f1ac";
+}
+.aui-iconfont-person::before {
+  content: "\f1ad";
+}
+.aui-iconfont-watch-filled::before {
+  content: "\f1af";
+}
+.aui-iconfont-room-menu::before {
+  content: "\f1b1";
+}
+.aui-iconfont-warning::before {
+  content: "\f1b3";
+}
+.aui-iconfont-tray::before {
+  content: "\f1b5";
+}
+.aui-iconfont-vid-pause::before {
+  content: "\f1c1";
+}
+.aui-iconfont-swap::before {
+  content: "\f1c9";
+}
+.aui-iconfont-component::before {
+  content: "\f1cd";
+}
+.aui-iconfont-arrow-down-small::before {
+  content: "\f1d3";
+}
+.aui-iconfont-arrow-up-small::before {
+  content: "\f1d4";
+}
+.aui-iconfont-filter::before {
+  content: "\f1d6";
+}
+.aui-iconfont-download::before {
+  content: "\f1de";
+}
+.aui-iconfont-single-column::before {
+  content: "\f1e8";
+}
+.aui-iconfont-two-column::before {
+  content: "\f1e9";
+}
+.aui-iconfont-right-side-bar::before {
+  content: "\f1ea";
+}
+.aui-iconfont-left-side-bar::before {
+  content: "\f1eb";
+}
+.aui-iconfont-three-column-side-bars::before {
+  content: "\f1ec";
+}
+.aui-iconfont-three-column::before {
+  content: "\f1ed";
+}
+.aui-iconfont-location::before {
+  content: "\f1ee";
+}
+.aui-iconfont-radio::before {
+  content: "\f256";
+}
+.aui-iconfont-activity::before {
+  content: "\f1f3";
+}
+.aui-iconfont-add-item::before {
+  content: "\f1f4";
+}
+.aui-iconfont-addon::before {
+  content: "\f1f5";
+}
+.aui-iconfont-app-access::before {
+  content: "\f1f6";
+}
+.aui-iconfont-app-switcher::before {
+  content: "\f1f7";
+}
+.aui-iconfont-arrow-down-circle::before {
+  content: "\f1f8";
+}
+.aui-iconfont-arrow-down-left::before {
+  content: "\f1f9";
+}
+.aui-iconfont-arrow-down-right::before {
+  content: "\f1fa";
+}
+.aui-iconfont-arrow-left-circle::before {
+  content: "\f1fb";
+}
+.aui-iconfont-arrow-right-circle::before {
+  content: "\f1fc";
+}
+.aui-iconfont-arrow-up-circle::before {
+  content: "\f1fd";
+}
+.aui-iconfont-audio-circle::before {
+  content: "\f1fe";
+}
+.aui-iconfont-audio::before {
+  content: "\f1ff";
+}
+.aui-iconfont-backlog::before {
+  content: "\f200";
+}
+.aui-iconfont-billing-filled::before {
+  content: "\f201";
+}
+.aui-iconfont-billing::before {
+  content: "\f202";
+}
+.aui-iconfont-board::before {
+  content: "\f203";
+}
+.aui-iconfont-book::before {
+  content: "\f204";
+}
+.aui-iconfont-calendar-filled::before {
+  content: "\f205";
+}
+.aui-iconfont-camera-filled::before {
+  content: "\f206";
+}
+.aui-iconfont-camera-rotate::before {
+  content: "\f207";
+}
+.aui-iconfont-camera-take-picture::before {
+  content: "\f208";
+}
+.aui-iconfont-camera::before {
+  content: "\f209";
+}
+.aui-iconfont-canvas::before {
+  content: "\f20a";
+}
+.aui-iconfont-cell-color-underline::before {
+  content: "\f20b";
+}
+.aui-iconfont-cell-color::before {
+  content: "\f20c";
+}
+.aui-iconfont-check-circle-filled::before {
+  content: "\f20d";
+}
+.aui-iconfont-check-circle::before {
+  content: "\f20e";
+}
+.aui-iconfont-checkbox::before {
+  content: "\f20f";
+}
+.aui-iconfont-chevron-down-circle::before {
+  content: "\f210";
+}
+.aui-iconfont-chevron-left-circle::before {
+  content: "\f211";
+}
+.aui-iconfont-chevron-left::before {
+  content: "\f212";
+}
+.aui-iconfont-chevron-right-circle::before {
+  content: "\f213";
+}
+.aui-iconfont-chevron-up-circle::before {
+  content: "\f214";
+}
+.aui-iconfont-chevron-up::before {
+  content: "\f215";
+}
+.aui-iconfont-clone-small::before {
+  content: "\f216";
+}
+.aui-iconfont-code::before {
+  content: "\f217";
+}
+.aui-iconfont-copy-table-column::before {
+  content: "\f218";
+}
+.aui-iconfont-create-branch::before {
+  content: "\f219";
+}
+.aui-iconfont-create-pull-request::before {
+  content: "\f21a";
+}
+.aui-iconfont-credit-card::before {
+  content: "\f21b";
+}
+.aui-iconfont-credit-card-filled::before {
+  content: "\f21c";
+}
+.aui-iconfont-cut-table-column::before {
+  content: "\f21d";
+}
+.aui-iconfont-dashboard::before {
+  content: "\f21e";
+}
+.aui-iconfont-decision::before {
+  content: "\f21f";
+}
+.aui-iconfont-discover-filled::before {
+  content: "\f220";
+}
+.aui-iconfont-discover::before {
+  content: "\f221";
+}
+.aui-iconfont-document-filled::before {
+  content: "\f222";
+}
+.aui-iconfont-dropbox::before {
+  content: "\f223";
+}
+.aui-iconfont-new-edit::before {
+  content: "\f224";
+}
+.aui-iconfont-failed-build::before {
+  content: "\f225";
+}
+.aui-iconfont-feedback::before {
+  content: "\f226";
+}
+.aui-iconfont-folder::before {
+  content: "\f227";
+}
+.aui-iconfont-followers::before {
+  content: "\f228";
+}
+.aui-iconfont-following::before {
+  content: "\f229";
+}
+.aui-iconfont-fork-small::before {
+  content: "\f22a";
+}
+.aui-iconfont-gallery::before {
+  content: "\f22b";
+}
+.aui-iconfont-google-drive::before {
+  content: "\f22c";
+}
+.aui-iconfont-google::before {
+  content: "\f22d";
+}
+.aui-iconfont-graph-bar::before {
+  content: "\f22e";
+}
+.aui-iconfont-graph-line::before {
+  content: "\f22f";
+}
+.aui-iconfont-highlights::before {
+  content: "\f230";
+}
+.aui-iconfont-home-filled::before {
+  content: "\f231";
+}
+.aui-iconfont-image-border::before {
+  content: "\f232";
+}
+.aui-iconfont-image-resize::before {
+  content: "\f233";
+}
+.aui-iconfont-info-filled::before {
+  content: "\f234";
+}
+.aui-iconfont-insert-numbered-column::before {
+  content: "\f235";
+}
+.aui-iconfont-invite-team::before {
+  content: "\f236";
+}
+.aui-iconfont-issue-raise::before {
+  content: "\f237";
+}
+.aui-iconfont-issue::before {
+  content: "\f238";
+}
+.aui-iconfont-issues::before {
+  content: "\f239";
+}
+.aui-iconfont-lightbulb-filled::before {
+  content: "\f23a";
+}
+.aui-iconfont-lightbulb::before {
+  content: "\f23b";
+}
+.aui-iconfont-link-filled::before {
+  content: "\f23c";
+}
+.aui-iconfont-list::before {
+  content: "\f23d";
+}
+.aui-iconfont-lock-circle-small::before {
+  content: "\f23e";
+}
+.aui-iconfont-lock::before {
+  content: "\f23f";
+}
+.aui-iconfont-marketplace::before {
+  content: "\f240";
+}
+.aui-iconfont-needs-work::before {
+  content: "\f241";
+}
+.aui-iconfont-notification-all::before {
+  content: "\f242";
+}
+.aui-iconfont-notification-direct::before {
+  content: "\f243";
+}
+.aui-iconfont-notification::before {
+  content: "\f244";
+}
+.aui-iconfont-office-building-filled::before {
+  content: "\f245";
+}
+.aui-iconfont-office-building::before {
+  content: "\f246";
+}
+.aui-iconfont-open::before {
+  content: "\f247";
+}
+.aui-iconfont-overview::before {
+  content: "\f248";
+}
+.aui-iconfont-page-filled::before {
+  content: "\f249";
+}
+.aui-iconfont-page::before {
+  content: "\f24a";
+}
+.aui-iconfont-paint-bucket::before {
+  content: "\f24b";
+}
+.aui-iconfont-paste-table-column::before {
+  content: "\f24c";
+}
+.aui-iconfont-pdf::before {
+  content: "\f24d";
+}
+.aui-iconfont-people-group::before {
+  content: "\f24e";
+}
+.aui-iconfont-people::before {
+  content: "\f24f";
+}
+.aui-iconfont-portfolio::before {
+  content: "\f250";
+}
+.aui-iconfont-preferences::before {
+  content: "\f251";
+}
+.aui-iconfont-progress::before {
+  content: "\f252";
+}
+.aui-iconfont-pull-requests::before {
+  content: "\f253";
+}
+.aui-iconfont-question-filled::before {
+  content: "\f254";
+}
+.aui-iconfont-queues::before {
+  content: "\f255";
+}
+.aui-iconfont-recent-filled::before {
+  content: "\f256";
+}
+.aui-iconfont-repository-small::before {
+  content: "\f257";
+}
+.aui-iconfont-running-build::before {
+  content: "\f258";
+}
+.aui-iconfont-schedule-filled::before {
+  content: "\f259";
+}
+.aui-iconfont-schedule::before {
+  content: "\f25a";
+}
+.aui-iconfont-screen::before {
+  content: "\f25b";
+}
+.aui-iconfont-send::before {
+  content: "\f25c";
+}
+.aui-iconfont-ship::before {
+  content: "\f25d";
+}
+.aui-iconfont-sign-out::before {
+  content: "\f25e";
+}
+.aui-iconfont-source::before {
+  content: "\f25f";
+}
+.aui-iconfont-subtask::before {
+  content: "\f260";
+}
+.aui-iconfont-successful-build::before {
+  content: "\f261";
+}
+.aui-iconfont-task-list::before {
+  content: "\f262";
+}
+.aui-iconfont-text-color-underline::before {
+  content: "\f263";
+}
+.aui-iconfont-tray-empty::before {
+  content: "\f264";
+}
+.aui-iconfont-unlink::before {
+  content: "\f265";
+}
+.aui-iconfont-unlock-circle::before {
+  content: "\f266";
+}
+.aui-iconfont-unlock::before {
+  content: "\f267";
+}
+.aui-iconfont-vid-audio-muted::before {
+  content: "\f268";
+}
+.aui-iconfont-vid-audio-on::before {
+  content: "\f269";
+}
+.aui-iconfont-vid-backward::before {
+  content: "\f26a";
+}
+.aui-iconfont-vid-forward::before {
+  content: "\f26b";
+}
+.aui-iconfont-vid-full-connection-circle::before {
+  content: "\f26c";
+}
+.aui-iconfont-vid-full-speaking-circle::before {
+  content: "\f26d";
+}
+.aui-iconfont-vid-hang-up::before {
+  content: "\f26e";
+}
+.aui-iconfont-vid-hd-circle::before {
+  content: "\f26f";
+}
+.aui-iconfont-vid-play::before {
+  content: "\f270";
+}
+.aui-iconfont-vid-raised-hand::before {
+  content: "\f271";
+}
+.aui-iconfont-vid-share-screen::before {
+  content: "\f272";
+}
+.aui-iconfont-video-camera-off::before {
+  content: "\f273";
+}
+.aui-iconfont-video-circle::before {
+  content: "\f274";
+}
+.aui-iconfont-video-filled::before {
+  content: "\f275";
+}
+
+/*# sourceMappingURL=aui-iconfonts.css.map */

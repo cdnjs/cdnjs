@@ -1,0 +1,675 @@
+/*
+* FooTable v3 - FooTable is a jQuery plugin that aims to make HTML tables on smaller devices look awesome.
+* @version 3.1.5
+* @link http://fooplugins.com
+* @copyright Steven Usher & Brad Vincent 2015
+* @license Released under the GPLv3 license.
+*/
+/* globals - instead we house them under the .footable.table class as the root of FooTable is always the table itself. */
+.footable.table, .footable.table *,
+.footable-details.table, .footable-details.table * {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.footable.table th,
+.footable-details.table th {
+	text-align: left;
+}
+/* tables */
+.footable.table,
+.footable-details.table {
+	width: 100%;
+	max-width: 100%;
+	margin-bottom: 20px;
+}
+.footable.table > caption + thead > tr:first-child > th,
+.footable.table > colgroup + thead > tr:first-child > th,
+.footable.table > thead:first-child > tr:first-child > th,
+.footable.table > caption + thead > tr:first-child > td,
+.footable.table > colgroup + thead > tr:first-child > td,
+.footable.table > thead:first-child > tr:first-child > td,
+.footable-details.table > caption + thead > tr:first-child > th,
+.footable-details.table > colgroup + thead > tr:first-child > th,
+.footable-details.table > thead:first-child > tr:first-child > th,
+.footable-details.table > caption + thead > tr:first-child > td,
+.footable-details.table > colgroup + thead > tr:first-child > td,
+.footable-details.table > thead:first-child > tr:first-child > td {
+	border-top: 0;
+}
+.footable.table > thead > tr > th,
+.footable.table > tbody > tr > th,
+.footable.table > tfoot > tr > th,
+.footable.table > thead > tr > td,
+.footable.table > tbody > tr > td,
+.footable.table > tfoot > tr > td,
+.footable-details.table > thead > tr > th,
+.footable-details.table > tbody > tr > th,
+.footable-details.table > tfoot > tr > th,
+.footable-details.table > thead > tr > td,
+.footable-details.table > tbody > tr > td,
+.footable-details.table > tfoot > tr > td {
+	padding: 8px;
+	line-height: 1.42857143;
+	vertical-align: top;
+	border-top: 1px solid #ddd;
+}
+.footable.table > thead > tr > th,
+.footable.table > thead > tr > td,
+.footable-details.table > thead > tr > th,
+.footable-details.table > thead > tr > td {
+	vertical-align: bottom;
+	border-bottom: 2px solid #ddd;
+}
+.footable.table-condensed > thead > tr > th,
+.footable.table-condensed > tbody > tr > th,
+.footable.table-condensed > tfoot > tr > th,
+.footable.table-condensed > thead > tr > td,
+.footable.table-condensed > tbody > tr > td,
+.footable.table-condensed > tfoot > tr > td,
+.footable-details.table-condensed > thead > tr > th,
+.footable-details.table-condensed > tbody > tr > th,
+.footable-details.table-condensed > tfoot > tr > th,
+.footable-details.table-condensed > thead > tr > td,
+.footable-details.table-condensed > tbody > tr > td,
+.footable-details.table-condensed > tfoot > tr > td {
+	padding: 5px;
+}
+.footable.table-bordered,
+.footable-details.table-bordered {
+	border: 1px solid #ddd;
+}
+.footable.table-bordered > thead > tr > th,
+.footable.table-bordered > tbody > tr > th,
+.footable.table-bordered > tfoot > tr > th,
+.footable.table-bordered > thead > tr > td,
+.footable.table-bordered > tbody > tr > td,
+.footable.table-bordered > tfoot > tr > td,
+.footable-details.table-bordered > thead > tr > th,
+.footable-details.table-bordered > tbody > tr > th,
+.footable-details.table-bordered > tfoot > tr > th,
+.footable-details.table-bordered > thead > tr > td,
+.footable-details.table-bordered > tbody > tr > td,
+.footable-details.table-bordered > tfoot > tr > td {
+	border: 1px solid #ddd;
+}
+.footable.table-bordered > thead > tr > th,
+.footable.table-bordered > thead > tr > td,
+.footable-details.table-bordered > thead > tr > th,
+.footable-details.table-bordered > thead > tr > td {
+	border-bottom-width: 2px;
+}
+.footable.table-striped > tbody > tr:nth-child(odd),
+.footable-details.table-striped > tbody > tr:nth-child(odd) {
+	background-color: #f9f9f9;
+}
+.footable.table-hover > tbody > tr:hover,
+.footable-details.table-hover > tbody > tr:hover {
+	background-color: #f5f5f5;
+}
+/* buttons */
+.footable .btn {
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	cursor: pointer;
+	-webkit-appearance: button;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	overflow: visible;
+	text-transform: none;
+}
+.footable .btn:hover,
+.footable .btn:focus,
+.footable .btn.focus {
+	color: #333;
+	text-decoration: none;
+}
+.footable .btn-default {
+	color: #333;
+	background-color: #fff;
+	border-color: #ccc;
+}
+.footable .btn-default:hover,
+.footable .btn-default:focus,
+.footable .btn-default.focus,
+.footable .btn-default:active,
+.footable .btn-default.active,
+.footable .open > .dropdown-toggle.btn-default {
+	color: #333;
+	background-color: #e6e6e6;
+	border-color: #adadad;
+}
+.footable .btn-primary {
+	color: #fff;
+	background-color: #337ab7;
+	border-color: #2e6da4;
+}
+.footable .btn-primary:hover,
+.footable .btn-primary:focus,
+.footable .btn-primary.focus,
+.footable .btn-primary:active,
+.footable .btn-primary.active,
+.footable .open > .dropdown-toggle.btn-primary {
+	color: #fff;
+	background-color: #286090;
+	border-color: #204d74;
+}
+/* button groups */
+.footable .btn-group, .footable .btn-group-vertical {
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+}
+.footable .btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+.footable .btn-group > .btn:first-child {
+	margin-left: 0;
+}
+.footable .btn-group-vertical > .btn,
+.footable .btn-group > .btn {
+	position: relative;
+	float: left;
+}
+.footable .btn-group-xs > .btn,
+.footable .btn-xs {
+	padding: 1px 5px;
+	font-size: 12px;
+	line-height: 1.5;
+	border-radius: 3px;
+}
+.footable .btn-group-sm > .btn,
+.footable .btn-sm {
+	padding: 5px 10px;
+	font-size: 12px;
+	line-height: 1.5;
+	border-radius: 3px;
+}
+.footable .btn-group-lg > .btn,
+.footable .btn-lg {
+	padding: 10px 16px;
+	font-size: 18px;
+	line-height: 1.3333333;
+	border-radius: 6px;
+}
+/* caret */
+.footable .caret {
+	display: inline-block;
+	width: 0;
+	height: 0;
+	margin-left: 2px;
+	vertical-align: middle;
+	border-top: 4px solid;
+	border-right: 4px solid transparent;
+	border-left: 4px solid transparent;
+}
+.footable .btn .caret {
+	margin-left: 0;
+}
+/* form-group */
+.form-group {
+	margin-bottom: 15px;
+}
+/* form-control */
+.footable .form-control {
+	display: block;
+	width: 100%;
+	height: 34px;
+	padding: 6px 12px;
+	margin: 0;
+	font-family: inherit;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+/* input-group */
+.footable .input-group {
+	position: relative;
+	display: table;
+	border-collapse: separate;
+}
+.footable .input-group .form-control {
+	position: relative;
+	z-index: 2;
+	float: left;
+	width: 100%;
+	margin-bottom: 0;
+}
+.footable .input-group-btn {
+	position: relative;
+	font-size: 0;
+	white-space: nowrap;
+}
+.footable .input-group-addon,
+.footable .input-group-btn {
+	width: 1%;
+	white-space: nowrap;
+	vertical-align: middle;
+}
+.footable .input-group-addon,
+.footable .input-group-btn,
+.footable .input-group .form-control {
+	display: table-cell;
+}
+.footable .input-group-btn > .btn + .btn,
+.footable .input-group-btn:last-child > .btn,
+.footable .input-group-btn:last-child > .btn-group {
+	margin-left: -1px;
+}
+.footable .input-group-btn > .btn {
+	position: relative;
+}
+.footable .input-group-btn > .btn:hover,
+.footable .input-group-btn > .btn:focus,
+.footable .input-group-btn > .btn:active {
+	z-index: 2;
+}
+.footable .input-group .form-control:first-child,
+.footable .input-group-addon:first-child,
+.footable .input-group-btn:first-child > .btn,
+.footable .input-group-btn:first-child > .btn-group > .btn,
+.footable .input-group-btn:first-child > .dropdown-toggle,
+.footable .input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle),
+.footable .input-group-btn:last-child > .btn-group:not(:last-child) > .btn {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+.footable .input-group .form-control:last-child,
+.footable .input-group-addon:last-child,
+.footable .input-group-btn:last-child > .btn,
+.footable .input-group-btn:last-child > .btn-group > .btn,
+.footable .input-group-btn:last-child > .dropdown-toggle,
+.footable .input-group-btn:first-child > .btn:not(:first-child),
+.footable .input-group-btn:first-child > .btn-group:not(:first-child) > .btn {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+/* checkboxes & radios */
+.footable .radio,
+.footable .checkbox {
+	position: relative;
+	display: block;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.footable .radio label,
+.footable .checkbox label {
+	max-width: 100%;
+	min-height: 20px;
+	padding-left: 20px;
+	margin-bottom: 0;
+	font-weight: 400;
+	cursor: pointer;
+}
+.footable .radio input[type=radio],
+.footable .radio-inline input[type=radio],
+.footable .checkbox input[type=checkbox],
+.footable .checkbox-inline input[type=checkbox] {
+	position: absolute;
+	margin: 4px 0 0 -20px;
+	line-height: normal;
+}
+/* dropdown-menu */
+.footable .dropdown-menu {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 1000;
+	display: none;
+	float: left;
+	min-width: 160px;
+	padding: 5px 0;
+	margin: 2px 0 0;
+	font-size: 14px;
+	text-align: left;
+	list-style: none;
+	background-color: #fff;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0, 0, 0, .15);
+	border-radius: 4px;
+	-webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+	box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+}
+.footable .open > .dropdown-menu {
+	display: block;
+}
+.footable .dropdown-menu-right {
+	right: 0;
+	left: auto;
+}
+.footable .dropdown-menu > li > a {
+	display: block;
+	padding: 3px 20px;
+	clear: both;
+	font-weight: 400;
+	line-height: 1.42857143;
+	color: #333;
+	white-space: nowrap;
+}
+.footable .dropdown-menu > li > a:hover,
+.footable .dropdown-menu > li > a:focus {
+	color: #262626;
+	text-decoration: none;
+	background-color: #f5f5f5;
+}
+/* pagination */
+.footable .pagination {
+	display: inline-block;
+	padding-left: 0;
+	margin: 20px 0;
+	border-radius: 4px;
+}
+.footable .pagination > li {
+	display: inline;
+}
+.footable .pagination > li:first-child > a,
+.footable .pagination > li:first-child > span {
+	margin-left: 0;
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+}
+.footable .pagination > li > a,
+.footable .pagination > li > span {
+	position: relative;
+	float: left;
+	padding: 6px 12px;
+	margin-left: -1px;
+	line-height: 1.42857143;
+	color: #337ab7;
+	text-decoration: none;
+	background-color: #fff;
+	border: 1px solid #ddd;
+}
+.footable .pagination > li > a:hover,
+.footable .pagination > li > span:hover,
+.footable .pagination > li > a:focus,
+.footable .pagination > li > span:focus {
+	color: #23527c;
+	background-color: #eee;
+	border-color: #ddd;
+}
+.footable .pagination > .active > a,
+.footable .pagination > .active > span,
+.footable .pagination > .active > a:hover,
+.footable .pagination > .active > span:hover,
+.footable .pagination > .active > a:focus,
+.footable .pagination > .active > span:focus {
+	z-index: 2;
+	color: #fff;
+	cursor: default;
+	background-color: #337ab7;
+	border-color: #337ab7;
+}
+.footable .pagination > .disabled > span,
+.footable .pagination > .disabled > span:hover,
+.footable .pagination > .disabled > span:focus,
+.footable .pagination > .disabled > a,
+.footable .pagination > .disabled > a:hover,
+.footable .pagination > .disabled > a:focus {
+	color: #777;
+	cursor: not-allowed;
+	background-color: #fff;
+	border-color: #ddd;
+}
+/* labels */
+.footable .label {
+	display: inline;
+	padding: .2em .6em .3em;
+	font-size: 75%;
+	font-weight: 700;
+	line-height: 1;
+	color: #fff;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: baseline;
+	border-radius: .25em;
+}
+.footable .label-default {
+	background-color: #777;
+}
+/* wells */
+.footable-loader.well {
+	min-height: 20px;
+	padding: 19px;
+	margin-bottom: 20px;
+	background-color: #f5f5f5;
+	border: 1px solid #e3e3e3;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+}
+/* screen reader only */
+.footable .sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0,0,0,0);
+	border: 0;
+}
+/* form-inline */
+@media (min-width: 768px) {
+	.footable .form-inline .form-group {
+		display:inline-block;
+		margin-bottom: 0;
+		vertical-align: middle
+	}
+
+	.footable .form-inline .form-control {
+		display: inline-block;
+		width: auto;
+		vertical-align: middle
+	}
+
+	.footable .form-inline .input-group {
+		display: inline-table;
+		vertical-align: middle
+	}
+
+	.footable .form-inline .input-group .input-group-addon,
+	.footable .form-inline .input-group .input-group-btn,
+	.footable .form-inline .input-group .form-control {
+		width: auto
+	}
+
+	.footable .form-inline .input-group>.form-control {
+		width: 100%
+	}
+}
+table.footable,
+table.footable-details {
+	position: relative;
+	width: 100%;
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+table.footable-details {
+	margin-bottom: 0;
+}
+table.footable-hide-fouc {
+	display: none;
+}
+table > tbody > tr > td > span.footable-toggle {
+	margin-right: 8px;
+	opacity: 0.3;
+}
+table > tbody > tr > td > span.footable-toggle.last-column {
+	margin-left: 8px;
+	float: right;
+}
+table.table-condensed > tbody > tr > td > span.footable-toggle {
+	margin-right: 5px;
+}
+table.footable-details > tbody > tr > th:nth-child(1) {
+	min-width: 40px;
+	width: 120px;
+}
+table.footable-details > tbody > tr > td:nth-child(2) {
+	word-break: break-all;
+}
+
+table.footable-details > thead > tr:first-child > th,
+table.footable-details > thead > tr:first-child > td,
+table.footable-details > tbody > tr:first-child > th,
+table.footable-details > tbody > tr:first-child > td,
+table.footable-details > tfoot > tr:first-child > th,
+table.footable-details > tfoot > tr:first-child > td {
+	border-top-width: 0;
+}
+table.footable-details.table-bordered > thead > tr:first-child > th,
+table.footable-details.table-bordered > thead > tr:first-child > td,
+table.footable-details.table-bordered > tbody > tr:first-child > th,
+table.footable-details.table-bordered > tbody > tr:first-child > td,
+table.footable-details.table-bordered > tfoot > tr:first-child > th,
+table.footable-details.table-bordered > tfoot > tr:first-child > td {
+	border-top-width: 1px;
+}
+
+div.footable-loader {
+	vertical-align: middle;
+	text-align: center;
+	height: 300px;
+	position: relative;
+}
+div.footable-loader > span.fooicon {
+	display: inline-block;
+	opacity: 0.3;
+	font-size: 30px;
+	line-height: 32px;
+	width: 32px;
+	height: 32px;
+	margin-top: -16px;
+	margin-left: -16px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-animation: fooicon-spin-r 2s infinite linear;
+	animation: fooicon-spin-r 2s infinite linear;
+}
+table.footable > tbody > tr.footable-empty > td {
+	vertical-align: middle;
+	text-align: center;
+	font-size: 30px;
+}
+table.footable > tbody > tr > td,
+table.footable > tbody > tr > th {
+	display: none;
+}
+table.footable > tbody > tr.footable-empty > td,
+table.footable > tbody > tr.footable-empty > th,
+table.footable > tbody > tr.footable-detail-row > td,
+table.footable > tbody > tr.footable-detail-row > th {
+	display: table-cell;
+}
+@-webkit-keyframes fooicon-spin-r {
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+
+	100% {
+		-webkit-transform: rotate(359deg);
+		transform: rotate(359deg);
+	}
+}
+
+@keyframes fooicon-spin-r {
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+
+	100% {
+		-webkit-transform: rotate(359deg);
+		transform: rotate(359deg);
+	}
+}
+
+.fooicon {
+	display: inline-block;
+	font-size: inherit;
+	font-family: FontAwesome !important;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 1;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	transform: translate(0, 0);
+}
+.fooicon:before,
+.fooicon:after {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.fooicon-loader:before {
+	content: "\f01e";
+}
+.fooicon-plus:before {
+	content: "\f067";
+}
+.fooicon-minus:before {
+	content: "\f068";
+}
+.fooicon-search:before {
+	content: "\f002";
+}
+.fooicon-remove:before {
+	content: "\f00d";
+}
+.fooicon-sort:before {
+	content: "\f0dc";
+}
+.fooicon-sort-asc:before {
+	content: "\f160";
+}
+.fooicon-sort-desc:before {
+	content: "\f161";
+}
+.fooicon-pencil:before {
+	content: "\f040";
+}
+.fooicon-trash:before {
+	content: "\f1f8";
+}
+.fooicon-eye-close:before {
+	content: "\f070";
+}
+.fooicon-flash:before {
+	content: "\f0e7";
+}
+.fooicon-cog:before {
+	content: "\f013";
+}
+.fooicon-stats:before {
+	content: "\f080";
+}

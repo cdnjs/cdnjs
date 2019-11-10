@@ -1,0 +1,3 @@
+/*! /hooks/css 2.0.1 | http://nucleus.qoopido.com | (c) 2016 Dirk Lueth */
+!function(t){"use strict";function e(e){function n(t,e){t&&e&&i[t]&&(i[t]=e)}function o(t){return t&&i[t]?i[t]:void 0}function u(t,r,n,u){var i;return n=e(n,r),n?((i=o(n[1]))&&i[t]||o("general")[t])(r,n,u):void 0}var i={general:{get:function(e,r){return t(e,null).getPropertyValue(r[0])},set:function(t,e,n){n.replace?t.style.setProperty(e[0],n.replace(r,"")||n,r.test(n)?"important":""):t.style[e[1]]=n}}};return{add:n,get:o,process:u}}var r=/\s*!important$/;provide(["../support/css/property"],e)}(getComputedStyle);
+//# sourceMappingURL=css.js.map

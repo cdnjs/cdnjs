@@ -1,0 +1,2 @@
+!function(t){"use strict";function e(e){function n(t,e){t&&e&&i[t]&&(i[t]=e)}function o(t){if(t&&i[t])return i[t]}function u(t,r,n,u){var i;if(n=e(n,r))return((i=o(n[1]))&&i[t]||o("general")[t])(r,n,u)}var i={general:{get:function(e,r){return t(e,null).getPropertyValue(r[0])},set:function(t,e,n){n.replace?t.style.setProperty(e[0],n.replace(r,"")||n,r.test(n)?"important":""):t.style[e[1]]=n}}};return{add:n,get:o,process:u}}var r=/\s*!important$/;provide(["../support/css/property"],e)}(getComputedStyle);
+//# sourceMappingURL=css.js.map

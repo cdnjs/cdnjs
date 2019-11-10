@@ -1,0 +1,1 @@
+!function(e){"use strict";e.countdown.regionalOptions.sv={labels:["År","Månader","Veckor","Dagar","Timmar","Minuter","Sekunder"],labels1:["År","Månad","Vecka","Dag","Timme","Minut","Sekund"],compactLabels:["Å","M","V","D"],whichLabels:null,digits:["0","1","2","3","4","5","6","7","8","9"],timeSeparator:":",isRTL:!1},e.countdown.setDefaults(e.countdown.regionalOptions.sv)}(jQuery);

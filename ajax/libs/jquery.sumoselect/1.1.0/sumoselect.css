@@ -1,0 +1,70 @@
+﻿body, p, div, select { padding: 0; margin: 0; outline: none; color: #000; font-family: calibri; }
+.SlectBox, .SlectBoxa { width: 200px; padding: 5px; }
+
+/*this is applied on that hidden select. DO NOT USE display:none; or visiblity:hidden; and Do not override any of these properties. */
+.SelectClass { position: absolute; top: 0px; left: 0px; right: 0px; height: 100%; width: 100%; border: none; z-index: 1; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; filter: alpha(opacity=0); -moz-opacity: 0; -khtml-opacity: 0; opacity: 0; }
+
+.SumoSelect > .optWrapper > .options > li { -moz-transition: 200ms ease; -webkit-transition: 200ms ease; transition: 200ms ease; }
+    .SumoSelect > .optWrapper > .options > li label, .SumoSelect > .CaptionCont { user-select: none; -o-user-select: none; -moz-user-select: none; -khtml-user-select: none; -webkit-user-select: none; }
+
+.SumoSelect { display: inline-block; position: relative; }
+    .SumoSelect > .CaptionCont { position: relative; border: 1px solid #ccc; min-height: 20px; background-color: #fff; }
+        .SumoSelect > .CaptionCont > span { display: block; padding-right: 30px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }
+            /*placeholder style*/
+            .SumoSelect > .CaptionCont > span.placeholder { color: #ccc; font-style: italic; }
+
+        .SumoSelect > .CaptionCont > label { position: absolute; top: 0px; right: 0px; bottom: 0px; width: 30px; background-color: #E0D8D8; }
+            .SumoSelect > .CaptionCont > label > i { background-image: url('https://cdn2.iconfinder.com/data/icons/picol-vector/32/arrow_sans_down-16.png'); background-position: center center; width: 16px; height: 16px; display: block; position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto; }
+
+    .SumoSelect > .optWrapper { top: 30px; width: 100%; position: absolute; left: 0; opacity: 0; visibility: hidden; transition: opacity 300ms ease-out, top 300ms ease-out, visibility 300ms ease-out; -webkit-transition: opacity 300ms ease-out, top 300ms ease-out, visibility 300ms ease-out; -moz-transition: opacity 300ms ease-out, top 300ms ease-out, visibility 300ms ease-out; -ms-transition: opacity 300ms ease-out, top 300ms ease-out, visibility 300ms ease-out; -o-transition: opacity 300ms ease-out, top 300ms ease-out, visibility 300ms ease-out; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; z-index: -100; background: #fff; border: 1px solid #ddd; box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.11); border-radius: 3px; }
+        .SumoSelect > .optWrapper.open { top: 40px; visibility: visible; opacity: 1; z-index: 1000; }
+
+        .SumoSelect > .optWrapper > .options { list-style: none; display: block; padding: 0px; margin: 0px; overflow: auto; border-radius: 3px; /*Set the height of pop up here (only for desktop mode)*/ max-height: 250px; /*height*/ }
+        .SumoSelect > .optWrapper.isFloating > .options { max-height: 100%; }
+        .SumoSelect > .optWrapper > .options > li { padding: 4px 6px; border-bottom: 1px solid #F3F3F3; position: relative; }
+            .SumoSelect > .optWrapper > .options > li:first-child { border-radius: 3px 3px 0px 0px; }
+            .SumoSelect > .optWrapper > .options > li:last-child { border-bottom: none; border-radius: 0px 0px 3px 3px; }
+            .SumoSelect > .optWrapper > .options > li:hover { background-color: #CBD0FF; }
+
+            .SumoSelect > .optWrapper > .options > li label { text-overflow: ellipsis; white-space: nowrap; overflow: hidden; display: block; }
+            .SumoSelect > .optWrapper > .options > li span { display: none; }
+
+        /*Floating styles*/
+        .SumoSelect > .optWrapper.isFloating { position: fixed; top: 0px; left: 0px; right: 0px; width: 90%; bottom: 0px; margin: auto; max-height: 90%; }
+
+    /*Hover*/
+    .SumoSelect:hover > .CaptionCont > label { background-color: #F1F1F1; }
+
+    /*disabled state*/
+    .SumoSelect > .optWrapper > .options > li.disabled { background-color: inherit; }
+        .SumoSelect > .optWrapper > .options > li.disabled * { -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; /* IE 5-7 */ filter: alpha(opacity=50); /* Netscape */ -moz-opacity: 0.5; /* Safari 1.x */ -khtml-opacity: 0.5; /* Good browsers */ opacity: 0.5; }
+
+
+    /*styling for multiple select*/
+    .SumoSelect > .optWrapper.multiple > .options > li { padding-left: 35px; }
+        .SumoSelect > .optWrapper.multiple > .options > li span { position: absolute; display: block; width: 30px; top: 0px; left: 0px; bottom: 0px; }
+            .SumoSelect > .optWrapper.multiple > .options > li span i { background-image: url('http://graphics8.nytimes.com/packages/flash/business/20100325-FinancialTuneUp/gfx/checkbox.png'); position: absolute; margin: auto; left: 0px; right: 0px; top: 0px; bottom: 0px; background-repeat: no-repeat; background-position: center center; width: 16px; height: 16px; }
+    .SumoSelect > .optWrapper > .MultiControls { display: none; border-top: 1px solid #ddd; background-color: #fff; box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.13); border-radius: 0px 0px 3px 3px; }
+    .SumoSelect > .optWrapper.multiple.isFloating > .MultiControls { display: block; margin-top: 5px; position: absolute; bottom: 0px; width: 100%; }
+
+    .SumoSelect > .optWrapper.multiple.okCancelInMulti > .MultiControls { display: block; }
+        .SumoSelect > .optWrapper.multiple.okCancelInMulti > .MultiControls > p { padding: 6px; }
+
+    .SumoSelect > .optWrapper.multiple > .MultiControls > p { display: inline-block; cursor: pointer; padding: 12px; width: 50%; box-sizing: border-box; text-align: center; }
+        .SumoSelect > .optWrapper.multiple > .MultiControls > p:hover { background-color: #f1f1f1; }
+        .SumoSelect > .optWrapper.multiple > .MultiControls > p.btnOk { border-right: 1px solid #DBDBDB; border-radius: 0px 0px 0px 3px; }
+        .SumoSelect > .optWrapper.multiple > .MultiControls > p.btnCancel { border-radius: 0px 0px 3px 0px; }
+    /*styling for select on popup mode*/
+    .SumoSelect > .optWrapper.isFloating > .options > li { padding: 12px 6px; }
+
+    /*styling for only multiple select on popup mode*/
+    .SumoSelect > .optWrapper.multiple.isFloating > .options > li { padding-left: 35px; }
+    .SumoSelect > .optWrapper.multiple.isFloating { padding-bottom: 43px; }
+    /*selected state*/
+    .SumoSelect > .optWrapper.multiple > .options > li.selected span i { background-image: url('https://cdn1.iconfinder.com/data/icons/Keyamoon-IcoMoon--limited/16/checkbox-checked.png'); }
+
+    /*disabled state*/
+    .SumoSelect.disabled { opacity: 0.7;}
+     .SumoSelect.disabled > .CaptionCont > label { background-color: #F1F1F1; }
+/*Background overlay*/
+body > .BackdropSelect { display: none; position: fixed; top: 0px; right: 0px; left: 0px; bottom: 0px; width: 100%; z-index: 100; }

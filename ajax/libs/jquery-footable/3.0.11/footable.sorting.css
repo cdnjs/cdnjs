@@ -1,0 +1,46 @@
+/*
+* FooTable v3 - FooTable is a jQuery plugin that aims to make HTML tables on smaller devices look awesome.
+* @version 3.0.11
+* @link http://fooplugins.com
+* @copyright Steven Usher & Brad Vincent 2015
+* @license Released under the GPLv3 license.
+*/
+table.footable > thead > tr > td.footable-sortable,
+table.footable > thead > tr > th.footable-sortable,
+table.footable > tbody > tr > td.footable-sortable,
+table.footable > tbody > tr > th.footable-sortable,
+table.footable > tfoot > tr > td.footable-sortable,
+table.footable > tfoot > tr > th.footable-sortable {
+	position: relative;
+	padding-right: 30px;
+	cursor: pointer;
+}
+td.footable-sortable > span.fooicon,
+th.footable-sortable > span.fooicon {
+	position: absolute;
+	right: 6px;
+	top: 50%;
+	margin-top: -7px;
+	opacity: 0;
+	transition: opacity 0.3s ease-in;
+}
+td.footable-sortable:hover > span.fooicon,
+th.footable-sortable:hover > span.fooicon {
+	opacity: 1;
+}
+td.footable-sortable.footable-asc > span.fooicon,
+th.footable-sortable.footable-asc > span.fooicon,
+td.footable-sortable.footable-desc > span.fooicon,
+th.footable-sortable.footable-desc > span.fooicon {
+	opacity: 1;
+}
+/* hides the sort icons when sorting is not allowed */
+table.footable-sorting-disabled td.footable-sortable.footable-asc > span.fooicon,
+table.footable-sorting-disabled td.footable-sortable.footable-desc > span.fooicon,
+table.footable-sorting-disabled td.footable-sortable:hover > span.fooicon,
+table.footable-sorting-disabled th.footable-sortable.footable-asc > span.fooicon,
+table.footable-sorting-disabled th.footable-sortable.footable-desc > span.fooicon,
+table.footable-sorting-disabled th.footable-sortable:hover > span.fooicon {
+	opacity: 0;
+	visibility: hidden;
+}

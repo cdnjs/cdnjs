@@ -1,0 +1,1 @@
+!function(e){"use strict";e.countdown.regionalOptions.he={labels:["שנים","חודשים","שבועות","ימים","שעות","דקות","שניות"],labels1:["שנה","חודש","שבוע","יום","שעה","דקה","שנייה"],compactLabels:["שנ","ח","שב","י"],whichLabels:null,digits:["0","1","2","3","4","5","6","7","8","9"],timeSeparator:":",isRTL:!0},e.countdown.setDefaults(e.countdown.regionalOptions.he)}(jQuery);

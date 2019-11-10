@@ -1,0 +1,6 @@
+/*!
+ * angular-datatables - v0.4.3
+ * https://github.com/l-lin/angular-datatables
+ * License: MIT
+ */
+!function(a,b,c,d){"use strict";function e(a,b){function c(a){function c(a,c){function e(a){var c="T";return h.dom=h.dom?h.dom:b.dom,-1===h.dom.indexOf(c)&&(h.dom=c+h.dom),h.hasTableTools=!0,d.isString(a)&&h.withTableToolsOption("sSwfPath",a),h}function f(a,b){return d.isString(a)&&(h.oTableTools=h.oTableTools&&null!==h.oTableTools?h.oTableTools:{},h.oTableTools[a]=b),h}function g(a){return d.isArray(a)&&h.withTableToolsOption("aButtons",a),h}var h=a(c);return h.withTableTools=e,h.withTableToolsOption=f,h.withTableToolsButtons=g,h}var e=a.newOptions,f=a.fromSource,g=a.fromFnPromise;return a.newOptions=function(){return c(e)},a.fromSource=function(a){return c(f,a)},a.fromFnPromise=function(a){return c(g,a)},a}a.decorator("DTOptionsBuilder",c),c.$inject=["$delegate"]}d.module("datatables.tabletools",["datatables"]).config(e),e.$inject=["$provide","DT_DEFAULT_OPTIONS"]}(window,document,jQuery,angular);

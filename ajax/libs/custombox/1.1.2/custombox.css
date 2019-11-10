@@ -1,0 +1,752 @@
+/*
+ *  jQuery Custombox v1.1.2 - 2013/12/10
+ *  jQuery Modal Window Effects.
+ *  http://dixso.github.io/custombox/
+ *  (c) 2013 Julio De La Calle - http://dixso.net - @dixso9
+ *
+ *  Under MIT License - http://www.opensource.org/licenses/mit-license.php
+ */
+
+/*
+ -------------------------------------------------
+ Overlay
+ -------------------------------------------------
+ */
+.custombox-overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+/*
+ -------------------------------------------------
+ Modal
+ -------------------------------------------------
+ */
+.custombox-modal,
+.custombox-error {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.custombox-modal {
+    height: auto;
+    visibility: hidden;
+}
+
+/*
+ -------------------------------------------------
+ Error
+ -------------------------------------------------
+ */
+.custombox-error {
+    height: auto;
+    width: 200px;
+    height: 75px;
+    line-height: 75px;
+    text-align: center;
+    color: #F00;
+    font-weight: bold;
+    font-size: 14px;
+    background-color: #FFF;
+    border-radius: 5px;
+}
+
+/*
+ -------------------------------------------------
+ Actions
+ -------------------------------------------------
+ */
+.custombox-show {
+    visibility: visible;
+}
+.custombox-show ~ .custombox-overlay {
+    opacity: 1;
+    visibility: visible;
+}
+.custombox-perspective,
+.custombox-perspective body {
+    height: 100%;
+    overflow: hidden;
+}
+.custombox-perspective body  {
+    -webkit-perspective: 600px;
+    perspective: 600px;
+}
+.custombox-container {
+    min-height: 100%;
+}
+.custombox-hide-scrollbar {
+    overflow-y: hidden;
+}
+.custombox-hide-scrollbar body {
+    position: relative;
+    overflow: hidden;
+}
+
+/*
+ -------------------------------------------------
+ Fade in and scale up
+ -------------------------------------------------
+ */
+.custombox-fadein .custombox-modal-content {
+    -webkit-transform: scale(0.7);
+    -ms-transform: scale(0.7);
+    transform: scale(0.7);
+    -webkit-transition-property: all;
+    -ms-transition-property: all;
+    transition-property: all;
+    opacity: 0;
+}
+.custombox-show.custombox-fadein .custombox-modal-content {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+}
+
+/*
+ -------------------------------------------------
+Slide and stick to top
+ -------------------------------------------------
+ */
+.custombox-slide-top {
+    top: 0;
+}
+.custombox-slide-top .custombox-modal-content,
+.custombox-close.custombox-slide-left-top .custombox-modal-content,
+.custombox-close.custombox-slide-right-top .custombox-modal-content {
+    -webkit-transform: translateY(-200%);
+    -ms-transform: translateY(-200%);
+    transform: translateY(-200%);
+    -webkit-transition-property: all;
+    -ms-transition-property: all;
+    transition-property: all;
+    opacity: 0;
+}
+.custombox-show.custombox-slide-top .custombox-modal-content {
+    -webkit-transform: translateY(0%);
+    -ms-transform: translateY(0%);
+    transform: translateY(0%);
+    border-radius: 0 0 3px 3px;
+    opacity: 1;
+}
+.custombox-close.custombox-slide-top-bottom .custombox-modal-content,
+.custombox-close.custombox-slide-right-bottom .custombox-modal-content,
+.custombox-close.custombox-slide-bottom-bottom .custombox-modal-content,
+.custombox-close.custombox-slide-left-bottom .custombox-modal-content {
+    -webkit-transform: translateY(200%);
+    -ms-transform: translateY(200%);
+    transform: translateY(200%);
+}
+
+/*
+ -------------------------------------------------
+ Slide from the right
+ -------------------------------------------------
+ */
+.custombox-slide-right .custombox-modal-content,
+.custombox-close.custombox-slide-bottom-right .custombox-modal-content,
+.custombox-close.custombox-slide-top-right .custombox-modal-content,
+.custombox-close.custombox-slide-center-right .custombox-modal-content {
+    -webkit-transform: translateX(20%);
+    -ms-transform: translateX(20%);
+    transform: translateX(20%);
+    opacity: 0;
+    -webkit-transition-timing-function: cubic-bezier(0.25, 0.5, 0.5, 0.9);
+    -ms-transition-timing-function: cubic-bezier(0.25, 0.5, 0.5, 0.9);
+    transition-timing-function: cubic-bezier(0.25, 0.5, 0.5, 0.9);
+    -webkit-transition-property: all;
+    -ms-transition-property: all;
+    transition-property: all;
+}
+.custombox-show.custombox-slide-right .custombox-modal-content {
+    -webkit-transform: translateX(0);
+    -ms-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+}
+.custombox-close.custombox-slide-right-left .custombox-modal-content {
+    -webkit-transform: translateX(-20%);
+    -ms-transform: translateX(-20%);
+    transform: translateX(-20%);
+}
+
+/*
+ -------------------------------------------------
+Slide from the bottom
+ -------------------------------------------------
+ */
+.custombox-slide-bottom .custombox-modal-content {
+    -webkit-transform: translateY(20%);
+    -ms-transform: translateY(20%);
+    transform: translateY(20%);
+    opacity: 0;
+    -webkit-transition-property: all;
+    -ms-transition-property: all;
+    transition-property: all;
+}
+.custombox-show.custombox-slide-bottom .custombox-modal-content {
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+}
+.custombox-close.custombox-slide-bottom-top .custombox-modal-content {
+    -webkit-transform: translateY(-20%);
+    -ms-transform: translateY(-20%);
+    transform: translateY(-20%);
+}
+
+/*
+ -------------------------------------------------
+ Slide from the left
+ -------------------------------------------------
+ */
+.custombox-slide-left .custombox-modal-content,
+.custombox-close.custombox-slide-top-left .custombox-modal-content,
+.custombox-close.custombox-slide-center-left .custombox-modal-content {
+    -webkit-transform: translateX(-20%);
+    -ms-transform: translateX(-20%);
+    transform: translateX(-20%);
+    opacity: 0;
+    -webkit-transition-timing-function: cubic-bezier(0.25, 0.5, 0.5, 0.9);
+    -ms-transition-timing-function: cubic-bezier(0.25, 0.5, 0.5, 0.9);
+    transition-timing-function: cubic-bezier(0.25, 0.5, 0.5, 0.9);
+    -webkit-transition-property: all;
+    -ms-transition-property: all;
+    transition-property: all;
+}
+.custombox-show.custombox-slide-left .custombox-modal-content {
+    -webkit-transform: translateX(0);
+    -ms-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+}
+.custombox-close.custombox-slide-left-right .custombox-modal-content {
+    -webkit-transform: translateX(20%);
+    -ms-transform: translateX(20%);
+    transform: translateX(20%);
+}
+
+/*
+ -------------------------------------------------
+Slide and stick to center
+ -------------------------------------------------
+ */
+.custombox-slide-center .custombox-modal-content {
+    -webkit-transform: translateY(-200%);
+    -ms-transform: translateY(-200%);
+    transform: translateY(-200%);
+    -webkit-transition-property: all;
+    -ms-transition-property: all;
+    transition-property: all;
+    opacity: 0;
+}
+.custombox-show.custombox-slide-center .custombox-modal-content {
+    -webkit-transform: translateY(0%);
+    -ms-transform: translateY(0%);
+    transform: translateY(0%);
+    border-radius: 0 0 3px 3px;
+    opacity: 1;
+}
+
+/*
+ -------------------------------------------------
+Newspaper
+ -------------------------------------------------
+ */
+.custombox-newspaper .custombox-modal-content {
+    -webkit-transform: scale(0) rotate(720deg);
+    -ms-transform: scale(0) rotate(720deg);
+    transform: scale(0) rotate(720deg);
+    opacity: 0;
+}
+.custombox-show.custombox-newspaper ~ .custombox-overlay,
+.custombox-newspaper .custombox-modal-content {
+    -webkit-transition-property: all;
+    -ms-transition-property: all;
+    transition-property: all;
+}
+.custombox-show.custombox-newspaper .custombox-modal-content {
+    -webkit-transform: scale(1) rotate(0deg);
+    -ms-transform: scale(1) rotate(0deg);
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+}
+
+/*
+ -------------------------------------------------
+Fall
+ -------------------------------------------------
+ */
+.custombox-fall.custombox-modal {
+    -webkit-perspective: 1300px;
+    -ms-perspective: 1300px;
+    perspective: 1300px;
+}
+.custombox-fall .custombox-modal-content {
+    -webkit-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: translateZ(600px) rotateX(20deg);
+    -ms-transform: translateZ(600px) rotateX(20deg);
+    transform: translateZ(600px) rotateX(20deg);
+    opacity: 0;
+}
+.custombox-show.custombox-fall .custombox-modal-content {
+    -webkit-transition-timing-function: ease-in;
+    -ms-transition-timing-function: ease-in;
+    transition-timing-function: ease-in;
+    -webkit-transition-property: all;
+    -ms-transition-property: all;
+    transition-property: all;
+    -webkit-transform: translateZ(0) rotateX(0deg);
+    -ms-transform: translateZ(0) rotateX(0deg);
+    transform: translateZ(0) rotateX(0deg);
+    opacity: 1;
+}
+
+/*
+ -------------------------------------------------
+Side fall
+ -------------------------------------------------
+ */
+.custombox-sidefall.custombox-modal {
+    -webkit-perspective: 1300px;
+    -ms-perspective: 1300px;
+    perspective: 1300px;
+}
+.custombox-sidefall .custombox-modal-content {
+    -webkit-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: translate(30%) translateZ(600px) rotate(10deg);
+    -ms-transform: translate(30%) translateZ(600px) rotate(10deg);
+    transform: translate(30%) translateZ(600px) rotate(10deg);
+    opacity: 0;
+}
+.custombox-show.custombox-sidefall .custombox-modal-content {
+    -webkit-transition-timing-function: ease-in;
+    -ms-transition-timing-function: ease-in;
+    transition-timing-function: ease-in;
+    -webkit-transition-property: all;
+    -ms-transition-property: all;
+    transition-property: all;
+    -webkit-transform: translate(0%) translateZ(0) rotate(0deg);
+    -ms-transform: translate(0%) translateZ(0) rotate(0deg);
+    transform: translate(0%) translateZ(0) rotate(0deg);
+    opacity: 1;
+}
+
+/*
+ -------------------------------------------------
+Blur
+ -------------------------------------------------
+ */
+.custombox-show.custombox-blur ~ .custombox-container * {
+    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+    color: transparent;
+}
+.custombox-show.custombox-blur ~ .custombox-container img {
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: blur(10px);
+}
+.custombox-blur .custombox-modal-content {
+    -webkit-transform: translateY(-5%);
+    -ms-transform: translateY(-5%);
+    transform: translateY(-5%);
+    opacity: 0;
+}
+.custombox-blur .custombox-modal-content,
+.custombox-show.custombox-blur ~ .custombox-container {
+    -webkit-transition-property: all;
+    -ms-transition-property: all;
+    transition-property: all;
+}
+.custombox-show.custombox-blur .custombox-modal-content {
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/*
+ -------------------------------------------------
+3D Flip horizontal
+ -------------------------------------------------
+ */
+.custombox-flip-horizontal.custombox-modal {
+    -webkit-perspective: 1300px;
+    -ms-perspective: 1300px;
+    perspective: 1300px;
+}
+.custombox-flip-horizontal .custombox-modal-content {
+    -webkit-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: rotateY(-70deg);
+    transform: rotateY(-70deg);
+    -webkit-transition-property: all;
+    -ms-transition-property: all;
+    transition-property: all;
+    opacity: 0;
+}
+.custombox-show.custombox-flip-horizontal .custombox-modal-content {
+    -webkit-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+    opacity: 1;
+}
+
+/*
+ -------------------------------------------------
+3D Flip vertical
+ -------------------------------------------------
+ */
+.custombox-flip-vertical.custombox-modal {
+    -webkit-perspective: 1300px;
+    -ms-perspective: 1300px;
+    perspective: 1300px;
+}
+.custombox-flip-vertical .custombox-modal-content {
+    -webkit-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: rotateX(-70deg);
+    -ms-transform: rotateX(-70deg);
+    transform: rotateX(-70deg);
+    -webkit-transition-property: all;
+    -ms-transition-property: all;
+    transition-property: all;
+    opacity: 0;
+}
+.custombox-show.custombox-flip-vertical .custombox-modal-content {
+    -webkit-transform: rotateX(0deg);
+    -ms-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+    opacity: 1;
+}
+
+/*
+ -------------------------------------------------
+3D Sign
+ -------------------------------------------------
+ */
+.custombox-sign.custombox-modal {
+    -webkit-perspective: 1300px;
+    -ms-perspective: 1300px;
+    perspective: 1300px;
+}
+.custombox-sign .custombox-modal-content {
+    -webkit-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: rotateX(-60deg);
+    -ms-transform: rotateX(-60deg);
+    transform: rotateX(-60deg);
+    -webkit-transform-origin: 50% 0;
+    -ms-transform-origin: 50% 0;
+    transform-origin: 50% 0;
+    opacity: 0;
+    -webkit-transition-property: all;
+    -ms-transition-property: all;
+    transition-property: all;
+}
+.custombox-show.custombox-sign .custombox-modal-content {
+    -webkit-transform: rotateX(0deg);
+    -ms-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+    opacity: 1;
+}
+
+/*
+ -------------------------------------------------
+Super scaled
+ -------------------------------------------------
+ */
+.custombox-superscaled .custombox-modal-content {
+    -webkit-transform: scale(2);
+    -ms-transform: scale(2);
+    transform: scale(2);
+    opacity: 0;
+    -webkit-transition-property: all;
+    -ms-transition-property: all;
+    transition-property: all;
+}
+.custombox-show.custombox-superscaled .custombox-modal-content {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+}
+
+/*
+ -------------------------------------------------
+3D Slit
+ -------------------------------------------------
+ */
+.custombox-slit.custombox-modal {
+    -webkit-perspective: 1300px;
+    -ms-perspective: 1300px;
+    perspective: 1300px;
+}
+.custombox-slit .custombox-modal-content {
+    -webkit-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: translateZ(-3000px) rotateY(90deg);
+    -ms-transform: translateZ(-3000px) rotateY(90deg);
+    transform: translateZ(-3000px) rotateY(90deg);
+    opacity: 0;
+}
+.custombox-show.custombox-slit .custombox-modal-content {
+    -webkit-animation: slit .7s forwards ease-out;
+    -ms-animation: slit .7s forwards ease-out;
+    animation: slit .7s forwards ease-out;
+}
+@-webkit-keyframes slit {
+    50% { -webkit-transform: translateZ(-250px) rotateY(89deg); opacity: .5; -webkit-animation-timing-function: ease-out;}
+    100% { -webkit-transform: translateZ(0) rotateY(0deg); opacity: 1; }
+}
+@-ms-keyframes slit {
+    50% { -ms-transform: translateZ(-250px) rotateY(89deg); opacity: .5; -ms-animation-timing-function: ease-out;}
+    100% { -ms-transform: translateZ(0) rotateY(0deg); opacity: 1; }
+}
+@keyframes slit {
+    50% { transform: translateZ(-250px) rotateY(89deg); opacity: 1; animation-timing-function: ease-out;}
+    100% { transform: translateZ(0) rotateY(0deg); opacity: 1; }
+}
+
+/*
+ -------------------------------------------------
+3D Rotate from bottom
+ -------------------------------------------------
+ */
+.custombox-rotate-bottom.custombox-modal {
+    -webkit-perspective: 1300px;
+    -ms-perspective: 1300px;
+    perspective: 1300px;
+}
+.custombox-rotate-bottom .custombox-modal-content {
+    -webkit-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: translateY(100%) rotateX(90deg);
+    -ms-transform: translateY(100%) rotateX(90deg);
+    transform: translateY(100%) rotateX(90deg);
+    -webkit-transform-origin: 0 100%;
+    -ms-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+    opacity: 0;
+    -webkit-transition-timing-function: ease-out;
+    -ms-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+    -webkit-transition-property: all;
+    -ms-transition-property: all;
+    transition-property: all;
+}
+.custombox-show.custombox-rotate-bottom .custombox-modal-content {
+    -webkit-transform: translateY(0%) rotateX(0deg);
+    -ms-transform: translateY(0%) rotateX(0deg);
+    transform: translateY(0%) rotateX(0deg);
+    opacity: 1;
+}
+
+/*
+ -------------------------------------------------
+3D Rotate in from left
+ -------------------------------------------------
+ */
+.custombox-rotate-left.custombox-modal {
+    -webkit-perspective: 1300px;
+    -ms-perspective: 1300px;
+    perspective: 1300px;
+}
+.custombox-rotate-left .custombox-modal-content {
+    -webkit-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: translateZ(100px) translateX(-30%) rotateY(90deg);
+    -ms-transform: translateZ(100px) translateX(-30%) rotateY(90deg);
+    transform: translateZ(100px) translateX(-30%) rotateY(90deg);
+    -webkit-transform-origin: 0 100%;
+    -ms-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+    opacity: 0;
+    -webkit-transition-property: all;
+    -ms-transition-property: all;
+    transition-property: all;
+}
+.custombox-show.custombox-rotate-left .custombox-modal-content {
+    -webkit-transform: translateZ(0px) translateX(0%) rotateY(0deg);
+    -ms-transform: translateZ(0px) translateX(0%) rotateY(0deg);
+    transform: translateZ(0px) translateX(0%) rotateY(0deg);
+    opacity: 1;
+}
+
+/*
+ -------------------------------------------------
+Slide in from bottom with perspective on container
+ -------------------------------------------------
+ */
+.custombox-show.custombox-letmein ~ .custombox-container {
+    height: 100%;
+    overflow: hidden;
+    -webkit-transition-property: -webkit-transform;
+    -ms-transition-property: -ms-transform;
+    transition-property: transform;
+}
+.custombox-show.custombox-letmein ~ .custombox-container,
+.custombox-show.custombox-letmein ~ .custombox-overlay  {
+    -webkit-transform: rotateX(-2deg);
+    -ms-transform: rotateX(-2deg);
+    transform: rotateX(-2deg);
+    -webkit-transform-origin: 50% 0%;
+    -ms-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+    -webkit-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+.custombox-letmein .custombox-modal-content {
+    opacity: 0;
+    -webkit-transform: translateY(200%);
+    -ms-transform: translateY(200%);
+    transform: translateY(200%);
+}
+.custombox-show.custombox-letmein .custombox-modal-content {
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+    -webkit-transition-property: all;
+    -ms-transition-property: all;
+    transition-property: all;
+}
+
+/*
+ -------------------------------------------------
+Slide from right with perspective on container
+ -------------------------------------------------
+ */
+.custombox-show.custombox-makeway ~ .custombox-container {
+    height: 100%;
+    overflow: hidden;
+}
+.custombox-show.custombox-makeway ~ .custombox-overlay {
+    background: rgba(143,27,15,0.8);
+    -webkit-transition-property: all;
+    -ms-transition-property: all;
+    transition-property: all;
+}
+.custombox-show.custombox-makeway ~ .custombox-container,
+.custombox-show.custombox-makeway ~ .custombox-overlay {
+    -webkit-transform-style: preserve-3d;
+    -webkit-transform-origin: 0% 50%;
+    -webkit-animation: rotateRightSideFirst 0.5s forwards ease-in;
+    -ms-transform-style: preserve-3d;
+    -ms-transform-origin: 0% 50%;
+    -ms-animation: rotateRightSideFirst 0.5s forwards ease-in;
+    transform-style: preserve-3d;
+    transform-origin: 0% 50%;
+    animation: rotateRightSideFirst 0.5s forwards ease-in;
+}
+@-webkit-keyframes rotateRightSideFirst {
+    50% { -webkit-transform: translateZ(-50px) rotateY(5deg); -webkit-animation-timing-function: ease-out; }
+    100% { -webkit-transform: translateZ(-200px); }
+}
+@-ms-keyframes rotateRightSideFirst {
+    50% { -ms-transform: translateZ(-50px) rotateY(5deg); -ms-animation-timing-function: ease-out; }
+    100% { -ms-transform: translateZ(-200px); }
+}
+@keyframes rotateRightSideFirst {
+    50% { transform: translateZ(-50px) rotateY(5deg); animation-timing-function: ease-out; }
+    100% { transform: translateZ(-200px); }
+}
+.custombox-makeway .custombox-modal-content {
+    -webkit-transform: translateX(200%);
+    -ms-transform: translateX(200%);
+    transform: translateX(200%);
+    opacity: 0;
+}
+.custombox-show.custombox-makeway .custombox-modal-content {
+    -webkit-transform: translateX(0);
+    -ms-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+    -webkit-transition-property: all;
+    -ms-transition-property: all;
+    transition-property: all;
+}
+
+/*
+ -------------------------------------------------
+Slip in from the top with perspective on container
+ -------------------------------------------------
+ */
+.custombox-show.custombox-slip ~ .custombox-container {
+    height: 100%;
+    overflow: hidden;
+}
+.custombox-show.custombox-slip ~ .custombox-overlay {
+    -webkit-transition-property: all;
+    -ms-transition-property: all;
+    transition-property: all;
+}
+.custombox-show.custombox-slip ~ .custombox-container,
+.custombox-show.custombox-slip ~ .custombox-overlay {
+    -webkit-transform-style: preserve-3d;
+    -webkit-transform-origin: 50% 100%;
+    -webkit-animation: OpenTop 0.5s forwards ease-in;
+    -ms-transform-style: preserve-3d;
+    -ms-transform-origin: 50% 100%;
+    -ms-animation: OpenTop 0.5s forwards ease-in;
+    transform-style: preserve-3d;
+    transform-origin: 50% 100%;
+    animation: OpenTop 0.5s forwards ease-in;
+}
+@-webkit-keyframes OpenTop {
+    50% {
+        -webkit-transform: rotateX(10deg);
+        -webkit-animation-timing-function: ease-out;
+    }
+}
+@-ms-keyframes OpenTop {
+    50% {
+        -ms-transform: rotateX(10deg);
+        -ms-animation-timing-function: ease-out;
+    }
+}
+@keyframes OpenTop {
+    50% {
+        transform: rotateX(10deg);
+        animation-timing-function: ease-out;
+    }
+}
+.custombox-slip .custombox-modal-content {
+    -webkit-transform: translateY(-200%);
+    -ms-transform: translateY(-200%);
+    transform: translateY(-200%);
+    opacity: 0;
+}
+.custombox-show.custombox-slip .custombox-modal-content {
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+    -webkit-transition-property: all;
+    -ms-transition-property: all;
+    transition-property: all;
+}

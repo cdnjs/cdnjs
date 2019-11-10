@@ -1,0 +1,6 @@
+/*!
+ * angular-datatables - v0.5.6
+ * https://github.com/l-lin/angular-datatables
+ * License: MIT
+ */
+"undefined"!=typeof module&&"undefined"!=typeof exports&&module.exports===exports&&(module.exports="datatables.fixedcolumns"),function(a,b,c,d){"use strict";function e(a){function b(a){function b(a,b){function c(a){return d.fixedColumns=!0,a&&(d.fixedColumns=a),d}var d=a(b);return d.withFixedColumns=c,d}var c=a.newOptions,d=a.fromSource,e=a.fromFnPromise;return a.newOptions=function(){return b(c)},a.fromSource=function(a){return b(d,a)},a.fromFnPromise=function(a){return b(e,a)},a}a.decorator("DTOptionsBuilder",b),b.$inject=["$delegate"]}d.module("datatables.fixedcolumns",["datatables"]).config(e),e.$inject=["$provide"]}(window,document,jQuery,angular);

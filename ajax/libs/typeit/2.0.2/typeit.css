@@ -1,0 +1,58 @@
+@-webkit-keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.ti-container {
+  display: block;
+  font-size: inherit;
+}
+
+.ti-text-container {
+  position: relative;
+  display: inline;
+  font-size: inherit;
+}
+
+.ti-text-container:before {
+  content: '';
+  display: inline-block;
+  width: 1px;
+  height: 1em;
+  position: relative;
+}
+
+.ti-text-container.active-container.ti-cursor:after {
+  display: inline;
+}
+
+.ti-cursor:after {
+  display: none;
+  content: '|';
+  bottom: .05em;
+  right: -.25em;
+  position: absolute;
+  line-height: normal;
+  font-size: inherit;
+  -webkit-animation: blink 1s infinite;
+          animation: blink 1s infinite;
+}

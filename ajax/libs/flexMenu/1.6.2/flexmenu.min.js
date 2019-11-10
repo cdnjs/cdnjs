@@ -1,0 +1,16 @@
+/*	jQuery.flexMenu 1.6.2
+	https://github.com/352Media/flexMenu
+	Description: If a list is too long for all items to fit on one line, display a popup menu instead.
+	Dependencies: jQuery, Modernizr (optional). Without Modernizr, the menu can only be shown on click (not hover). */
+
+!function(e){"function"==typeof define&&define.amd?define(["jquery"],e):e(jQuery)}(function(e){function i(){(e(window).width()!==o||e(window).height()!==t)&&(e(f).each(function(){e(this).flexMenu({undo:!0}).flexMenu(this.options)}),o=e(window).width(),t=e(window).height())}function n(i){var n,l
+	n=e("li.flexMenu-viewMore.active"),l=n.not(i),l.removeClass("active").find("> ul").hide()}var l,o=e(window).width(),t=e(window).height(),f=[]
+	e(window).resize(function(){clearTimeout(l),l=setTimeout(function(){i()},200)}),e.fn.flexMenu=function(i){var l,o=e.extend({threshold:2,cutoff:2,linkText:"More",linkTitle:"View More",linkTextAll:"Menu",linkTitleAll:"Open/Close Menu",shouldApply:function(){return!0},showOnHover:!0,popupAbsolute:!0,popupClass:"",undo:!1},i)
+	return this.options=o,l=e.inArray(this,f),l>=0?f.splice(l,1):f.push(this),this.each(function(){function i(e){var i=Math.ceil(e.offset().top)>=v+w?!0:!1
+	return i}var l,t,f,u,s,d,r,p=e(this),a=p.find("> li"),h=a.first(),c=a.last(),M=a.length,v=Math.floor(h.offset().top),w=Math.floor(h.outerHeight(!0)),x=!1
+	if(i(c)&&M>o.threshold&&!o.undo&&p.is(":visible")&&o.shouldApply()){var T=e('<ul class="flexMenu-popup" style="display:none;'+(o.popupAbsolute?" position: absolute;":"")+'"></ul>')
+	for(T.addClass(o.popupClass),r=M;r>1;r--){if(l=p.find("> li:last-child"),t=i(l),r-1<=o.cutoff){e(p.children().get().reverse()).appendTo(T),x=!0
+	break}if(!t)break
+	l.appendTo(T)}x?p.append('<li class="flexMenu-viewMore flexMenu-allInPopup"><a href="#" title="'+o.linkTitleAll+'">'+o.linkTextAll+"</a></li>"):p.append('<li class="flexMenu-viewMore"><a href="#" title="'+o.linkTitle+'">'+o.linkText+"</a></li>"),f=p.find("> li.flexMenu-viewMore"),i(f)&&p.find("> li:nth-last-child(2)").appendTo(T),T.children().each(function(e,i){T.prepend(i)}),f.append(T),u=p.find("> li.flexMenu-viewMore > a"),u.click(function(e){n(f),T.toggle(),f.toggleClass("active"),e.preventDefault()}),o.showOnHover&&"undefined"!=typeof Modernizr&&!Modernizr.touch&&f.hover(function(){T.show(),e(this).addClass("active")},function(){T.hide(),e(this).removeClass("active")})}else if(o.undo&&p.find("ul.flexMenu-popup")){for(d=p.find("ul.flexMenu-popup"),s=d.find("li").length,r=1;s>=r;r++)d.find("> li:first-child").appendTo(p)
+	d.remove(),p.find("> li.flexMenu-viewMore").remove()}})}})
+	

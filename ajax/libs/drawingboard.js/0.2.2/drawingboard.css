@@ -1,0 +1,85 @@
+/* drawingboard.js v0.2.2 - https://github.com/Leimi/drawingboard.js
+* Copyright (c) 2013 Emmanuel Pelletier
+* Licensed MIT */
+.drawing-board, .drawing-board * { -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; }
+
+.drawing-board-utils-hidden, .drawing-board-controls-hidden { display: none !important; }
+
+.drawing-board { position: relative; display: block; }
+
+.drawing-board-canvas-wrapper { position: relative; margin: 0; border: 1px solid #dddddd; }
+
+.drawing-board-bg-canvas, .drawing-board-canvas { position: absolute; top: 0; left: 0; z-index: 10; width: auto; }
+
+.drawing-board-canvas { cursor: crosshair; z-index: 20; }
+
+.drawing-board-cursor { position: absolute; top: 0; left: 0; pointer-events: none; border-radius: 50%; background: #ccc; background: rgba(0, 0, 0, 0.2); z-index: 30; }
+
+.drawing-board-control > button, .drawing-board-control-colors[data-drawing-board-type="background"] .drawing-board-control-colors-current, .drawing-board-control-colors-rainbows, .drawing-board-control-size .drawing-board-control-inner, .drawing-board-control-size-dropdown { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; overflow: hidden; border: none; background-color: #eee; padding: 2px 4px; border: 1px solid #cccccc; box-shadow: 0 1px 3px -2px #121212, inset 0 2px 5px 0 rgba(255, 255, 255, 0.3); -webkit-box-shadow: 0 1px 3px -2px #121212, inset 0 2px 5px 0 rgba(255, 255, 255, 0.3); height: 28px; }
+
+.drawing-board-control > button, .drawing-board-control-colors[data-drawing-board-type="background"] .drawing-board-control-colors-current { cursor: pointer; min-width: 28px; line-height: 14px; }
+.drawing-board-control > button:hover, .drawing-board-control-colors[data-drawing-board-type="background"] .drawing-board-control-colors-current:hover { background-color: #ddd; }
+.drawing-board-control > button:active, .drawing-board-control-colors[data-drawing-board-type="background"] .drawing-board-control-colors-current:active, .drawing-board-control > button.active, .drawing-board-control-colors[data-drawing-board-type="background"] .active.drawing-board-control-colors-current { box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.2); -webkit-box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.2); background-color: #ddd; }
+
+.drawing-board-controls { margin: 0 auto; text-align: center; font-size: 0; display: table; border-spacing: 9.33333px 0; position: relative; min-height: 28px; }
+.drawing-board-controls[data-align="left"] { margin: 0; left: -9.33333px; }
+.drawing-board-controls[data-align="right"] { margin: 0 0 0 auto; right: -9.33333px; }
+.drawing-board-canvas-wrapper + .drawing-board-controls, .drawing-board-controls + .drawing-board-canvas-wrapper { margin-top: 5px; }
+
+.drawing-board-controls-hidden { height: 0; min-height: 0; padding: 0; margin: 0; border: 0; }
+
+.drawing-board-control { display: table-cell; border-collapse: separate; vertical-align: middle; font-size: 16px; height: 100%; }
+
+.drawing-board-control-inner { position: relative; height: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+
+.drawing-board-control > button { margin: 0; vertical-align: middle; }
+
+.drawing-board-control-colors { font-size: 0; line-height: 0; }
+
+.drawing-board-control-colors[data-drawing-board-type="color"] .drawing-board-control-colors-current { border: 1px solid #cccccc; cursor: pointer; display: inline-block; width: 26px; height: 26px; }
+.drawing-board-control-colors[data-drawing-board-type="background"] .drawing-board-control-colors-current { vertical-align: middle; overflow: hidden; *text-indent: -9999px; background-image: url('../img/paint-can.png?1376392336'); background-position: 50% 50%; background-repeat: no-repeat; }
+.drawing-board-control-colors[data-drawing-board-type="background"] .drawing-board-control-colors-current:before { content: ""; display: block; width: 0; height: 100%; }
+
+.drawing-board-control-colors-rainbows { display: inline-block; margin-left: 5px; position: absolute; left: 0; top: 33px; margin-left: 0; z-index: 100; width: 250px; height: auto; padding: 4px; }
+
+.drawing-board-control-colors-rainbow { height: 18px; }
+
+.drawing-board-control-colors-picker:first-child { margin-right: 5px; }
+
+.drawing-board-control-colors-picker { display: inline-block; width: 18px; height: 18px; cursor: pointer; }
+
+.drawing-board-control-colors-picker[data-color="rgba(255, 255, 255, 1)"] { width: 16px; height: 17px; border: 1px solid #cccccc; border-bottom: none; }
+
+.drawing-board-control-colors-picker:hover { width: 16px; height: 16px; border: 1px solid #555555; }
+
+.drawing-board-control-drawingmode > button { margin-right: 2px; }
+.drawing-board-control-drawingmode > button:last-child { margin-right: 0; }
+
+.drawing-board-control-drawingmode-pencil-button { overflow: hidden; *text-indent: -9999px; background-image: url('../img/pencil.png?1375892528'); background-position: 50% 50%; background-repeat: no-repeat; }
+.drawing-board-control-drawingmode-pencil-button:before { content: ""; display: block; width: 0; height: 100%; }
+
+.drawing-board-control-drawingmode-eraser-button { overflow: hidden; *text-indent: -9999px; background-image: url('../img/eraser.png?1375892528'); background-position: 50% 50%; background-repeat: no-repeat; }
+.drawing-board-control-drawingmode-eraser-button:before { content: ""; display: block; width: 0; height: 100%; }
+
+.drawing-board-control-navigation > button { font-weight: bold; margin-right: 2px; }
+.drawing-board-control-navigation > button:last-child { margin-right: 0; }
+
+.drawing-board-control-size[data-drawing-board-type="range"] .drawing-board-control-inner { width: 75px; }
+.drawing-board-control-size[data-drawing-board-type="dropdown"] .drawing-board-control-inner { overflow: visible; }
+
+.drawing-board-control-size-range-input { position: relative; width: 100%; z-index: 100; margin: 0; padding: 0; border: 0; }
+
+.drawing-board-control-size-range-current, .drawing-board-control-size-dropdown-current span, .drawing-board-control-size-dropdown span { display: block; background: #333; opacity: .8; }
+
+.drawing-board-control-size-range-current { display: inline-block; opacity: .15; position: absolute; pointer-events: none; left: 50%; top: 50%; z-index: 50; }
+
+.drawing-board-control-size-dropdown-current { display: block; height: 100%; width: 40px; overflow: hidden; position: relative; }
+.drawing-board-control-size-dropdown-current span { position: absolute; left: 50%; top: 50%; }
+
+.drawing-board-control-size-dropdown { position: absolute; left: -6px; top: 33px; height: auto; list-style-type: none; margin: 0; padding: 0; z-index: 100; }
+.drawing-board-control-size-dropdown li { display: block; padding: 4px; margin: 3px 0; min-height: 16px; }
+.drawing-board-control-size-dropdown li:hover { background: #ccc; }
+.drawing-board-control-size-dropdown span { margin: 0 auto; }
+
+.drawing-board-control-download-button { overflow: hidden; *text-indent: -9999px; background-image: url('../img/download.png?1375892528'); background-position: 50% 50%; background-repeat: no-repeat; }
+.drawing-board-control-download-button:before { content: ""; display: block; width: 0; height: 100%; }

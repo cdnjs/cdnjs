@@ -1,0 +1,8 @@
+/*!
+ * Bootstrap-select v1.13.3 (https://developer.snapappointments.com/bootstrap-select)
+ *
+ * Copyright 2012-2018 SnapAppointments, LLC
+ * Licensed under MIT (https://github.com/snapappointments/bootstrap-select/blob/master/LICENSE)
+ */
+
+!function(e,t){void 0===e&&void 0!==window&&(e=window),"function"==typeof define&&define.amd?define(["jquery"],function(e){return t(e)}):"object"==typeof module&&module.exports?module.exports=t(require("jquery")):t(e.jQuery)}(this,function(e){e.fn.selectpicker.defaults={noneSelectedText:"Aucune sélection",noneResultsText:"Aucun résultat pour {0}",countSelectedText:function(e,t){return 1<e?"{0} éléments sélectionnés":"{0} élément sélectionné"},maxOptionsText:function(e,t){return[1<e?"Limite atteinte ({n} éléments max)":"Limite atteinte ({n} élément max)",1<t?"Limite du groupe atteinte ({n} éléments max)":"Limite du groupe atteinte ({n} élément max)"]},multipleSeparator:", ",selectAllText:"Tout sélectionner",deselectAllText:"Tout désélectionner"}});

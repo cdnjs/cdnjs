@@ -1,0 +1,1 @@
+!function(s){s.mmenu.wrappers.wordpress=function(){this.conf.classNames.selected="current-menu-item",s("#wpadminbar").css("position","fixed").addClass("mm-slideout")}}(jQuery);

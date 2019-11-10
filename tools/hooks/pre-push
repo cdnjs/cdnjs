@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+#
+# Do these works before push
+#   1. check if working directory is clean
+#   2. npm test
+#   3. pull with rebase from master branch
+set -e
+
+if ! git diff --quiet; then
+  >&2 echo "Working directory not clean"
+  exit 1
+fi
+
+npm test -- --silent || npm test
+git pull --rebase origin master

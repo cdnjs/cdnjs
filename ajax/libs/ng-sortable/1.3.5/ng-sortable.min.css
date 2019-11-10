@@ -1,0 +1,2 @@
+/* ng-sortable css file */
+.as-sortable-item,.as-sortable-placeholder{display:block}.as-sortable-item{-ms-touch-action:none;touch-action:none;-webkit-touch-callout:none}.as-sortable-item-handle{cursor:move;cursor:-webkit-grab;cursor:-moz-grab}.as-sortable-drag{position:absolute;pointer-events:none;z-index:9999}.as-sortable-hidden{display:none!important}.as-sortable-un-selectable{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}

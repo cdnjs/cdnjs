@@ -1,0 +1,17 @@
+/*
+ Highstock JS v7.1.3 (2019-08-14)
+
+ Indicator series type for Highstock
+
+ (c) 2010-2019 Daniel Studencki
+
+ License: www.highcharts.com/license
+*/
+(function(a){"object"===typeof module&&module.exports?(a["default"]=a,module.exports=a):"function"===typeof define&&define.amd?define("highcharts/indicators/price-channel",["highcharts","highcharts/modules/stock"],function(d){a(d);a.Highcharts=d;return a}):a("undefined"!==typeof Highcharts?Highcharts:void 0)})(function(a){function d(a,c,u,b){a.hasOwnProperty(c)||(a[c]=b.apply(null,u))}a=a?a._modules:{};d(a,"mixins/reduce-array.js",[a["parts/Globals.js"]],function(a){var c=a.reduce;return{minInArray:function(a,
+b){return c(a,function(a,e){return Math.min(a,e[b])},Number.MAX_VALUE)},maxInArray:function(a,b){return c(a,function(a,e){return Math.max(a,e[b])},-Number.MAX_VALUE)},getArrayExtremes:function(a,b,r){return c(a,function(a,c){return[Math.min(a[0],c[b]),Math.max(a[1],c[r])]},[Number.MAX_VALUE,-Number.MAX_VALUE])}}});d(a,"mixins/multipe-lines.js",[a["parts/Globals.js"],a["parts/Utilities.js"]],function(a,c){var d=c.defined,b=a.each,r=a.merge,e=a.error,t=a.seriesTypes.sma;return{pointArrayMap:["top",
+"bottom"],pointValKey:"top",linesApiNames:["bottomLine"],getTranslatedLinesNames:function(a){var f=[];b(this.pointArrayMap,function(b){b!==a&&f.push("plot"+b.charAt(0).toUpperCase()+b.slice(1))});return f},toYData:function(a){var f=[];b(this.pointArrayMap,function(b){f.push(a[b])});return f},translate:function(){var a=this,c=a.pointArrayMap,e=[],h;e=a.getTranslatedLinesNames();t.prototype.translate.apply(a,arguments);b(a.points,function(f){b(c,function(b,c){h=f[b];null!==h&&(f[e[c]]=a.yAxis.toPixels(h,
+!0))})})},drawGraph:function(){var a=this,c=a.linesApiNames,l=a.points,h=l.length,g=a.options,q=a.graph,m={options:{gapSize:g.gapSize}},k=[],n=a.getTranslatedLinesNames(a.pointValKey),p;b(n,function(a,b){for(k[b]=[];h--;)p=l[h],k[b].push({x:p.x,plotX:p.plotX,plotY:p[a],isNull:!d(p[a])});h=l.length});b(c,function(b,c){k[c]?(a.points=k[c],g[b]?a.options=r(g[b].styles,m):e('Error: "There is no '+b+' in DOCS options declared. Check if linesApiNames are consistent with your DOCS line names." at mixin/multiple-line.js:34'),
+a.graph=a["graph"+b],t.prototype.drawGraph.call(a),a["graph"+b]=a.graph):e('Error: "'+b+" doesn't have equivalent in pointArrayMap. To many elements in linesApiNames relative to pointArrayMap.\"")});a.points=l;a.options=g;a.graph=q;t.prototype.drawGraph.call(a)}}});d(a,"indicators/price-channel.src.js",[a["parts/Globals.js"],a["mixins/reduce-array.js"],a["mixins/multipe-lines.js"]],function(a,c,d){var b=c.getArrayExtremes;c=a.merge;a.seriesType("pc","sma",{params:{period:20},lineWidth:1,topLine:{styles:{lineColor:"#90ed7d",
+lineWidth:1}},bottomLine:{styles:{lineColor:"#f45b5b",lineWidth:1}},dataGrouping:{approximation:"averages"}},c(d,{pointArrayMap:["top","middle","bottom"],pointValKey:"middle",nameBase:"Price Channel",nameComponents:["period"],linesApiNames:["topLine","bottomLine"],getValues:function(a,c){c=c.period;var d=a.xData,f=(a=a.yData)?a.length:0,e=[],l=[],h=[],g;if(f<c)return!1;for(g=c;g<=f;g++){var q=d[g-1];var m=a.slice(g-c,g);var k=b(m,2,1);m=k[1];var n=k[0];k=(m+n)/2;e.push([q,m,k,n]);l.push(q);h.push([m,
+k,n])}return{values:e,xData:l,yData:h}}}))});d(a,"masters/indicators/price-channel.src.js",[],function(){})});
+//# sourceMappingURL=price-channel.js.map

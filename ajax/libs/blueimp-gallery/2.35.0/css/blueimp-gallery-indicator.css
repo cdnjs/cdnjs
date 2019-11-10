@@ -1,0 +1,95 @@
+@charset "UTF-8";
+/*
+ * blueimp Gallery Indicator CSS
+ * https://github.com/blueimp/Gallery
+ *
+ * Copyright 2013, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * https://opensource.org/licenses/MIT
+ */
+
+.blueimp-gallery > .indicator {
+  position: absolute;
+  top: auto;
+  right: 15px;
+  bottom: 15px;
+  left: 15px;
+  margin: 0 40px;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+  line-height: 10px;
+  display: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.blueimp-gallery > .indicator > li {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin: 6px 3px 0 3px;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  border: 1px solid transparent;
+  background: #ccc;
+  background: rgba(255, 255, 255, 0.25) center no-repeat;
+  border-radius: 5px;
+  box-shadow: 0 0 2px #000;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+/* IE7 fixes */
+* + html .blueimp-gallery > .indicator > li {
+  display: inline;
+}
+
+.blueimp-gallery > .indicator > li:hover,
+.blueimp-gallery > .indicator > .active {
+  background-color: #fff;
+  border-color: #fff;
+  opacity: 1;
+}
+
+.blueimp-gallery > .indicator > li:after {
+  opacity: 0;
+  display: block;
+  position: absolute;
+  content: '';
+  top: -5em;
+  width: 75px;
+  height: 75px;
+  transition: transform 600ms ease-out, opacity 400ms ease-out;
+  transform: translateX(-50%) translateY(0) translateZ(0px);
+  pointer-events: none;
+}
+
+.blueimp-gallery > .indicator > li:hover:after {
+  opacity: 1;
+  border-radius: 50%;
+  background: inherit;
+  transform: translateX(-50%) translateY(-5px) translateZ(0px);
+}
+
+.blueimp-gallery > .indicator > .active:after {
+  display: none;
+}
+
+.blueimp-gallery-controls > .indicator {
+  display: block;
+  /* Fix z-index issues (controls behind slide element) on Android: */
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+}
+.blueimp-gallery-single > .indicator {
+  display: none;
+}

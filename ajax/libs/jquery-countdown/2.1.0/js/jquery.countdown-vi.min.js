@@ -1,0 +1,1 @@
+!function(n){"use strict";n.countdown.regionalOptions.vi={labels:["Năm","Tháng","Tuần","Ngày","Giờ","Phút","Giây"],labels1:["Năm","Tháng","Tuần","Ngày","Giờ","Phút","Giây"],compactLabels:["năm","th","tu","ng"],whichLabels:null,digits:["0","1","2","3","4","5","6","7","8","9"],timeSeparator:":",isRTL:!1},n.countdown.setDefaults(n.countdown.regionalOptions.vi)}(jQuery);

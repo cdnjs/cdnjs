@@ -1,0 +1,1 @@
+!function(n){"use strict";n.countdown.regionalOptions.ro={labels:["Ani","Luni","Saptamani","Zile","Ore","Minute","Secunde"],labels1:["An","Luna","Saptamana","Ziua","Ora","Minutul","Secunda"],compactLabels:["A","L","S","Z"],whichLabels:null,digits:["0","1","2","3","4","5","6","7","8","9"],timeSeparator:":",isRTL:!1},n.countdown.setDefaults(n.countdown.regionalOptions.ro)}(jQuery);

@@ -1,0 +1,2 @@
+var hyperappTime=function(n){"use strict";function t(n,t){const e=setInterval(function(){t(n.action,{time:Date.now()})},n.interval);return function(){clearInterval(e)}}return n.tick=function(n){return[t,{action:n.action,interval:n.interval}]},n}({});
+//# sourceMappingURL=hyperappTime.js.map

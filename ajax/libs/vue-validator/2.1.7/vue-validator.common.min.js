@@ -1,0 +1,2 @@
+"use strict";function plugin(n){arguments.length<=1||void 0===arguments[1]?{}:arguments[1];n.prototype.$add=function(n,e){return n+e}}plugin.version="2.1.3","undefined"!=typeof window&&window.Vue&&window.Vue.use(plugin),module.exports=plugin;
+//# sourceMappingURL=vue-validator.common.min.js.map

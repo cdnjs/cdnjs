@@ -1,0 +1,271 @@
+/**
+ * jQuery Bracket - release 2
+ *
+ * Copyright (c) 2011-2012, Teijo Laine,
+ * http://aropupu.fi/bracket/
+ *
+ * Licenced under the MIT licence
+ */
+div.jQBracket {
+  font-family: "Arial";
+  font-size: 14px;
+  float: left;
+  clear: both;
+  position: relative;
+  background-color: #333;
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#222), to(#333));
+  background: -moz-linear-gradient(-90deg, #222, #333);
+}
+
+div.jQBracket .tools {
+  position: absolute;
+  top: 0px;
+  color: #FFF;
+}
+
+div.jQBracket .tools span {
+  cursor: pointer;
+  margin: 5px;
+  display: block;
+  text-align: center;
+  width: 18px;
+  height: 18px;
+  background-color: #666;
+}
+
+div.jQBracket .tools span:hover {
+  background-color: #999;
+}
+
+div.jQBracket .finals {
+  float: right;
+  right: 0px;
+  clear: right;
+  position: relative;
+}
+
+div.jQBracket .bracket {
+  float: right;
+  height: 400px;
+  clear: left;
+}
+
+div.jQBracket .loserBracket {
+  float: right;
+  height: 200px;
+  clear: left;
+  position: relative;
+}
+
+div.jQBracket .round {
+  position: relative;
+  width: 100px;
+  margin-right: 40px;
+  float: left;
+}
+
+div.jQBracket .match {
+  position: relative;
+  float: left;
+  display: block;
+  width: 100%;
+}
+
+div.jQBracket .team {
+  position: relative;
+  float: left;
+  background-color: #666;
+  color: #FFF;
+  width: 100px;
+  height: 16px;
+  border-radius: 5px;
+  margin: 1px 0px;
+  cursor: default;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+}
+
+div.jQBracket .team b {
+  font-weight: normal;
+  padding-left: 3px;
+  cursor: pointer;
+  height: inherit;
+  position: absolute;
+  width: 70px;
+}
+
+div.jQBracket .team b[disabled] {
+  cursor: default;
+}
+
+div.jQBracket .team b input {
+  font-size: 10px;
+  padding: 0px;
+  width: 60px;
+  height: 16px;
+  position: absolute;
+}
+
+div.jQBracket .team span {
+  font-weight: bold;
+  float: right;
+  cursor: pointer;
+  padding: 0px;
+  padding-right: 5px;
+  background-color: rgba(0,0,0,0.5);
+  border-radius: 3px;
+  text-align: right;
+  width: 20px;
+}
+
+div.jQBracket .team span[disabled] {
+  color: #999;
+  cursor: default;
+}
+
+div.jQBracket .team span input {
+  font-size: 10px;
+  padding: 0px;
+  width: inherit;
+  height: 16px;
+}
+
+div.jQBracket .team b input.error,
+div.jQBracket .team span input.error {
+  background-color: #FCC;
+}
+
+div.jQBracket .team.np {
+  background-color: #666;
+  color: #EEE;
+}
+
+div.jQBracket .team.na {
+  background-color: #999;
+  color: #CCC;
+}
+
+div.jQBracket .team.win {
+  color: #EEE;
+}
+
+div.jQBracket .team.win span {
+  color: #0F0;
+}
+
+div.jQBracket .team.lose span {
+  color: #900;
+}
+
+div.jQBracket .team.lose {
+  background-color: #666;
+  color: #333;
+}
+
+div.jQBracket .team.tie span {
+  color: #00F;
+}
+
+div.jQBracket .teamContainer {
+  position: relative;
+  float: left;
+  display: block;
+}
+
+div.jQBracket .connector {
+  border: 2px solid #666;
+  border-left: none;
+  position: absolute;
+  display: block;
+  z-index: 1;
+}
+
+div.jQBracket .connector div.connector {
+  border: none;
+  border-bottom: 2px solid #666;
+  height: 0px;
+  z-index: 1;
+  position: absolute;
+  display: block;
+}
+
+div.jQBracket .connector.highlight,
+div.jQBracket .connector div.connector.highlight {
+  border-color: #0C0;
+}
+
+div.jQBracket .team.highlight {
+  background-color: #3C0;
+  color: #000;
+}
+
+div.jQBracket .connector.highlightWinner,
+div.jQBracket .connector div.connector.highlightWinner {
+  border-color: #C90;
+}
+
+div.jQBracket .team.highlightWinner {
+  background-color: #C90;
+  color: #000;
+}
+
+div.jQBracket .connector.highlightLoser,
+div.jQBracket .connector div.connector.highlightLoser {
+  border-color: #DDD;
+}
+
+div.jQBracket .np .connector,
+div.jQBracket .np .connector div.connector {
+  border-color: #222;
+}
+
+div.jQBracket .team.highlightLoser {
+  background-color: #DDD;
+  color: #000;
+}
+
+div.jQBracket .bubble {
+  display: block;
+  width: 30px;
+  right: -35px;
+  position: absolute;
+  background-color: #963;
+  text-align: center;
+  font-size: 11px;
+  height: 16px;
+  color: #310;
+}
+
+div.jQBracket .bubble:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 3px;
+  width: 0;
+  height: 0;
+  border-top:    5px solid transparent;
+  border-left:   5px solid transparent;
+  border-right:  5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+
+div.jQBracket .bubble:after {
+  left: -5px;
+  border-left: 0;
+  border-right: 6px solid #963;
+}
+
+div.jQBracket .highlightWinner .bubble {
+  background-color: #FC0;
+  color: #960;
+}
+div.jQBracket .highlightWinner .bubble:after {
+  border-right-color: #FC0;
+}
+div.jQBracket .highlightLoser .bubble {
+  background-color: #CCC;
+  color: #333;
+}
+div.jQBracket .highlightLoser .bubble:after {
+  border-right-color: #CCC;
+}
+

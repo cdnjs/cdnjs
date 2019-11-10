@@ -1,0 +1,1 @@
+!function(o,t){"object"==typeof exports&&"undefined"!=typeof module?t():"function"==typeof define&&define.amd?define(t):t()}(this,function(){"use strict";Zone.__load_patch("notification",function(o,t,e){var n=_global.Notification;if(n&&n.prototype){var i=Object.getOwnPropertyDescriptor(n.prototype,"onerror");i&&i.configurable&&e.patchOnProperties(n.prototype,null)}})});

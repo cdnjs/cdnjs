@@ -1,0 +1,20 @@
+/*! esri-leaflet - v0.0.1-beta.7 - 2014-10-13
+*   Copyright (c) 2014 Environmental Systems Research Institute, Inc.
+*   Apache License*/
+(function (factory) {
+  //define an AMD module that relies on 'leaflet'
+  if (typeof define === 'function' && define.amd) {
+    define(['leaflet', 'esri-leaflet'], function (L, Esri) {
+      return (exports = factory(L, Esri));
+    });
+  //define a common js module that relies on 'leaflet'
+  } else if (typeof module === 'object' && typeof module.exports === 'object') {
+    module.exports = factory(require('leaflet'), require('esri-leaflet'));
+  }
+}(function (L, Esri) {
+
+L.esri.Layers.ClusteredFeatureLayer=L.esri.Layers.FeatureManager.extend({statics:{EVENTS:"click dblclick mouseover mouseout mousemove contextmenu popupopen popupclose",CLUSTEREVENTS:"clusterclick clusterdblclick clustermouseover clustermouseout clustermousemove clustercontextmenu"},initialize:function(a,b){L.esri.Layers.FeatureManager.prototype.initialize.call(this,a,b),b=L.setOptions(this,b),this._layers={},this._leafletIds={},this.cluster=new window.L.MarkerClusterGroup(b),this._key="c"+(1e9*Math.random()).toString(36).replace(".","_"),this.cluster.on(L.esri.ClusteredFeatureLayer.EVENTS,this._propagateEvent,this),this.cluster.on(L.esri.ClusteredFeatureLayer.CLUSTEREVENTS,this._propagateClusterEvent,this)},onAdd:function(a){L.esri.Layers.FeatureManager.prototype.onAdd.call(this,a),this._map.addLayer(this.cluster)},onRemove:function(a){L.esri.Layers.FeatureManager.prototype.onRemove.call(this,a),this._map.removeLayer(this.cluster)},createLayers:function(a){for(var b=[],c=a.length-1;c>=0;c--){var d=a[c],e=this._layers[d.id];if(!e){var f=L.GeoJSON.geometryToLayer(d,this.options.pointToLayer,L.GeoJSON.coordsToLatLng,this.options);f.feature=L.GeoJSON.asFeature(d),f.defaultOptions=f.options,f._leaflet_id=this._key+"_"+d.id,this.resetStyle(f.feature.id),this._popup&&f.bindPopup&&f.bindPopup(this._popup(f.feature,f)),this._layers[f.feature.id]=f,this._leafletIds[f._leaflet_id]=d.id,this.options.onEachFeature&&this.options.onEachFeature(f.feature,f),this.fire("createfeature",{feature:f.feature}),(!this.options.timeField||this.options.timeField&&this._featureWithinTimeRange(d))&&b.push(f)}}b.length&&this.cluster.addLayers(b)},addLayers:function(a){for(var b=[],c=a.length-1;c>=0;c--){var d=this._layers[a[c]];this.fire("addfeature",{feature:d.feature}),b.push(d)}this.cluster.addLayers(b)},removeLayers:function(a,b){for(var c=[],d=a.length-1;d>=0;d--){var e=a[d],f=this._layers[e];this.fire("removefeature",{feature:f.feature,permanent:b}),c.push(f),this._layers[e]&&b&&delete this._layers[e]}this.cluster.removeLayers(c)},resetStyle:function(a){var b=this._layers[a];return b&&(b.options=b.defaultOptions,this.setFeatureStyle(b.feature.id,this.options.style)),this},setStyle:function(a){return this.eachFeature(function(b){this.setFeatureStyle(b.feature.id,a)},this),this},setFeatureStyle:function(a,b){var c=this._layers[a];"function"==typeof b&&(b=b(c.feature)),c.setStyle&&c.setStyle(b)},bindPopup:function(a,b){this._popup=a;for(var c in this._layers){var d=this._layers[c],e=this._popup(d.feature,d);d.bindPopup(e,b)}},unbindPopup:function(){this._popup=!1;for(var a in this._layers)this._layers[a].unbindPopup()},eachFeature:function(a,b){for(var c in this._layers)a.call(b,this._layers[c]);return this},getFeature:function(a){return this._layers[a]},_propagateEvent:function(a){a=L.extend({layer:this._layers[this._leafletIds[a.target._leaflet_id]],target:this},a),this.fire(a.type,a)},_propagateClusterEvent:function(a){a=L.extend({layer:a.target,target:this},a),this.fire(a.type,a)}}),L.esri.ClusteredFeatureLayer=L.esri.Layers.ClusteredFeatureLayer,L.esri.Layers.clusteredFeatureLayer=function(a,b){return new L.esri.Layers.ClusteredFeatureLayer(a,b)},L.esri.clusteredFeatureLayer=function(a,b){return new L.esri.Layers.ClusteredFeatureLayer(a,b)};
+//# sourceMappingURL=esri-leaflet-clustered-feature-layer.js.map
+
+  return EsriLeaflet;
+}));

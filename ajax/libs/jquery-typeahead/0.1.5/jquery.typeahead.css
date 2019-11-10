@@ -1,0 +1,422 @@
+/*------------------------------------*\
+    CONTENTS
+\*------------------------------------*/
+/*
+NORMALIZE BUTTON & INPUT - https://github.com/necolas/normalize.css
+LAYOUT
+INPUT, BUTTON & DROPDOWN
+LAYOUT2
+*/
+
+/*------------------------------------*\
+    NORMALIZE BUTTON & INPUT
+\*------------------------------------*/
+
+/**
+ * Known limitation: by default, Chrome and Safari on OS X allow very limited
+ * styling of `select`, unless a `border` property is set.
+ */
+
+/**
+ * 1. Correct color not being inherited.
+ *    Known issue: affects color of disabled elements.
+ * 2. Correct font properties not being inherited.
+ * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
+ */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    color: inherit; /* 1 */
+    font: inherit; /* 2 */
+    margin: 0; /* 3 */
+}
+
+/**
+ * Address `overflow` set to `hidden` in IE 8/9/10/11.
+ */
+
+button {
+    overflow: visible;
+}
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
+ * Correct `select` style inheritance in Firefox.
+ */
+
+button,
+select {
+    text-transform: none;
+}
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ */
+
+button,
+html input[type="button"], /* 1 */
+input[type="reset"],
+input[type="submit"] {
+    -webkit-appearance: button; /* 2 */
+    cursor: pointer; /* 3 */
+}
+
+/**
+ * Re-set default cursor for disabled elements.
+ */
+
+button[disabled],
+html input[disabled] {
+    cursor: default;
+}
+
+/**
+ * Remove inner padding and border in Firefox 4+.
+ */
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+/**
+ * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+
+input {
+    line-height: normal;
+}
+
+
+/*------------------------------------*\
+    LAYOUT
+\*------------------------------------*/
+
+.typeahead-search-container {
+    position: relative;
+    z-index: 998;
+    background-color: #fff;
+    font-family: "Helvetica Neue", "Helvetica", Arial;
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 1em;
+    padding: 1em;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 0.25em;
+    -webkit-box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1) inset;
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1) inset;
+}
+
+.typeahead-search-container.result {
+    border-radius: 0.25em 0.25em 0 0;
+}
+
+.typeahead-search-field {
+    width: 100%;
+    font-size: 1em;
+    display: table-row;
+    text-align: left;
+    border-spacing: 0;
+    border-collapse: separate;
+}
+
+.typeahead-search-field > span {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.typeahead-search-field .query {
+    width: 96%;
+}
+
+.typeahead-search-field .list {
+    width: 2%;
+    min-width: 5em;
+}
+
+.typeahead-search-field .button {
+    width: 2%;
+    min-width: 4em;
+}
+
+.typeahead-search-result {
+    position: absolute;
+    top: 4.5em;
+    left: 0;
+    background-color: #fff;
+    width: 100%;
+    padding: 1px;
+    -webkit-box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1) inset;
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1) inset;
+}
+
+.typeahead-search-result > ul {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    font-size: 1em;
+    text-align: left;
+    list-style: none;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+}
+
+.typeahead-search-result > ul > li:first-child {
+    border-top: none;
+}
+
+.typeahead-search-result > ul > li {
+    border-top: solid 1px rgba(0, 0, 0, 0.15);
+}
+
+.typeahead-search-result > ul > li > a {
+    display: block;
+    padding: 0.7em 1em;
+    white-space: nowrap;
+    text-decoration: none;
+    color: #333;
+    clear: both;
+    background-color: #fff;
+    position: relative;
+}
+
+.typeahead-search-result > ul > li > a:hover {
+    background-color: #ebebeb;
+}
+
+.typeahead-search-result > ul > li.typeahead-search-group a {
+    background-color: #37a3eb;
+    background: -webkit-linear-gradient(top, #37a3eb 0, #2181cf 100%);
+    background: linear-gradient(to bottom, #37a3eb 0, #2181cf 100%);
+
+    font-size: 0.85em;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.75);
+    -moz-text-shadow: 0 1px 0 rgba(0,0,0,0.75);
+    -webkit-text-shadow: 0 1px 0 rgba(0,0,0,0.75);
+}
+
+.typeahead-search-result > ul > li > a small {
+    padding-left: 1em;
+    color: #b6b6b6;
+}
+
+
+/*------------------------------------*\
+    INPUT, BUTTON & DROPDOWN
+\*------------------------------------*/
+
+.typeahead-search-container * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.typeahead-search-container input[type="search"],
+.typeahead-search-container .list button {
+    outline: 0 none;
+    display: inline;
+    width: 100%;
+    margin: 0;
+    padding: 0.65em 1em;
+    vertical-align: middle;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.typeahead-search-container input[type="search"] {
+    border-radius: 0.25em 0 0 0.25em;
+    border-right-width: 0;
+}
+
+.typeahead-search-container .list button {
+    white-space: nowrap;
+    background-color: #fff;
+    border-radius: 0;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-right-width: 0;
+    border-left-width: 0;
+    padding-left: 0;
+    padding-right: 1.25em;
+    line-height: normal;
+}
+
+.typeahead-search-container .list button:before {
+    content: "";
+    border-left: 1px solid rgba(0, 0, 0, 0.15);
+    padding-left: 0.8em;
+}
+
+.typeahead-search-container .list {
+    position: relative;
+}
+
+.typeahead-search-container .typeahead-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 10em;
+    padding: 0.5em 0;
+    margin: 2px 0 0;
+    font-size: 1em;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+
+.typeahead-search-container .typeahead-filter {
+    text-transform: capitalize;
+}
+
+.typeahead-search-container .typeahead-dropdown a {
+    display: block;
+    padding: 0.5em 1em;
+    white-space: nowrap;
+    text-decoration: none;
+    color: #333;
+    text-transform: capitalize;
+}
+
+.typeahead-search-container .typeahead-dropdown a:hover,
+.typeahead-search-container .typeahead-dropdown a:focus {
+    color: #262626;
+    background-color: #f5f5f5;
+}
+
+.typeahead-search-container .caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px solid;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+
+.typeahead-search-container .typeahead-dropdown .divider {
+    height: 1px;
+    overflow: hidden;
+    background-color: #e5e5e5;
+}
+
+.typeahead-search-container button[type="submit"] {
+    padding: 0.8em 1em;
+    margin: 0em;
+    cursor: pointer;
+    vertical-align: middle;
+    min-height: 1em;
+    min-width: 4em;
+    outline: none;
+    border: none;
+    background-color: #FAFAFA;
+    text-align: center;
+    text-decoration: none;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.05)));
+    background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05));
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05));
+    border-radius: 0 0.25em 0.25em 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-transition: opacity 0.25s ease, background-color 0.25s ease, color 0.25s ease, background 0.25s ease, -webkit-box-shadow 0.25s ease;
+    transition: opacity 0.25s ease, background-color 0.25s ease, color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+
+    -webkit-box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1) inset;
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1) inset;
+}
+
+.typeahead-search-container button[type="submit"]:hover {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.08)));
+    background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.08));
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.08));
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.typeahead-search-container .search-icon {
+    width: 1em;
+    height: 1em;
+    display: block;
+    margin: 0 auto;
+    background:url(icon-search-16px.png) no-repeat scroll left top transparent;
+}
+
+
+/*------------------------------------*\
+    LAYOUT2
+\*------------------------------------*/
+
+.typeahead-search-container.layout2 {
+    font-size: 13px;
+    padding: 0.4em;
+    background-color: #e6e6e6;
+    border: none
+}
+
+.typeahead-search-container.layout2 input[type="search"],
+.typeahead-search-container.layout2 .list button {
+    border-color: rgba(0, 0, 0, 0.4);
+}
+
+.typeahead-search-container.layout2 button[type="submit"] {
+    padding: 0.7em 2em;
+    background-color: #8b8d90;
+    background: -webkit-linear-gradient(top, #eceded 0, #8b8d90 3%, #64676b 100%);
+    background: linear-gradient(to bottom, #eceded 0, #8b8d90 3%, #64676b 100%);
+    -webkit-box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.35) inset;
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.35) inset;
+}
+
+.typeahead-search-container.layout2 button[type="submit"]:hover {
+    background-color: #96989b;
+    background: -webkit-linear-gradient(top, #eceded 0, #8b8d90 3%, #8b8d90 100%);
+    background: linear-gradient(to bottom, #eceded 0, #8b8d90 3%, #8b8d90 100%);
+}
+
+.typeahead-search-container.layout2 .typeahead-search-result {
+    top: 3.4em;
+    -webkit-box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.25) inset;
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.25) inset;
+}
+
+.typeahead-search-container.layout2 .typeahead-search-result > ul > li.typeahead-search-group > a {
+    color: #fff;
+    background-color: #e85b54;
+    background: -webkit-linear-gradient(top, #e85b54 0, #b22520 100%);
+    background: linear-gradient(to bottom, #e85b54 0, #b22520 100%);
+}
+
+.typeahead-search-container.layout2 .search-icon {
+    width: 1.2em;
+    height: 1.3em;
+    background-position: -16px top;
+}
+
+.typeahead-search-container.layout2 .typeahead-dropdown {
+    top: 2.8em;
+}
+

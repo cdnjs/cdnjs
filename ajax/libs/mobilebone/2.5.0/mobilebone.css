@@ -1,0 +1,137 @@
+/*!
+ * mobilebone.css
+ * by zhangxinxu(.com) 2014-09-26
+ * some necessary CSS for mobilebone.js
+ * good luck for U, ^_^
+**/
+
+a, img {
+    -webkit-touch-callout: none;
+}
+body {
+	margin: 0;
+	-webkit-user-select: none;
+	user-select: none;
+	-ms-touch-action: none;
+}
+
+/* construction */
+html, body, .page {
+	height: 100%; width: 100%;
+	overflow: hidden;
+}
+.page {
+	position: absolute; left: 0; top: 0;
+}
+
+.out {
+	display: none;
+}
+
+.in, .out {
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+}
+
+.in {
+	-webkit-animation-timing-function: ease-out;
+	-webkit-animation-duration: 350ms;
+	animation-timing-function: ease-out;
+	animation-duration: 350ms;
+}
+.out {
+	-webkit-animation-timing-function: ease-in;
+	-webkit-animation-duration: 225ms;
+	animation-timing-function: ease-in;
+	animation-duration: 225ms;
+}
+
+/* mask layer when ajax sending... */
+.mask {
+	height: 100%; width: 100%;
+	background-color: rgba(255,255,255,.35);
+	position: absolute;
+	z-index: 9;
+}
+.loading { /* more info: http://www.zhangxinxu.com/wordpress/?p=3357 */
+    width: 3px; height:3px;
+    border-radius: 100%;
+    box-shadow: 0 -10px 0 1px currentColor,           /* top, 1px expand */
+                10px 0px currentColor,                /* right */
+                0 10px currentColor,                  /* bottom */
+                -10px 0 currentColor,                 /* left */
+
+                -7px -7px 0 .5px currentColor,        /* left-top, 0.5px expand */
+                7px -7px 0 1.5px currentColor,        /* right-top, 1.5px expand */
+                7px 7px currentColor,                 /* right-bottom */
+                -7px 7px currentColor;                /* left-bottom */
+	-webkit-animation: spin 1s steps(8) infinite;
+	animation: spin 1s steps(8) infinite;
+	/*center*/
+	position: absolute;
+	top: 0; right: 0; bottom: 0; left: 0;
+	margin: auto;
+}
+
+/* Default animation - slide, you can visit 'src/mobilebone.aniamte.css' to get more styles of animation */
+.slide.in {
+	-webkit-animation-name: slideinfromright;
+	animation-name: slideinfromright;
+}
+.slide.out {
+	-webkit-animation-name: slideouttoleft;
+	animation-name: slideouttoleft;
+}
+.slide.reverse.out {
+	-webkit-animation-name: slideouttoright;
+	animation-name: slideouttoright;
+}
+.slide.reverse.in {
+	-webkit-animation-name: slideinfromleft;
+	animation-name: slideinfromleft;
+}
+
+/* keyframes for slidein from sides */
+@-webkit-keyframes slideinfromright {
+    from { -webkit-transform: translate3d(100%,0,0); }
+    to { -webkit-transform: translate3d(0,0,0); }
+}
+@keyframes slideinfromright {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+@-webkit-keyframes slideinfromleft {
+    from { -webkit-transform: translate3d(-100%,0,0); }
+    to { -webkit-transform: translate3d(0,0,0); }
+}
+@keyframes slideinfromleft {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+/* keyframes for slideout to sides */
+@-webkit-keyframes slideouttoleft {
+    from { -webkit-transform: translate3d(0,0,0); }
+    to { -webkit-transform: translate3d(-100%,0,0); }
+}
+@keyframes slideouttoleft {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+}
+@-webkit-keyframes slideouttoright {
+    from { -webkit-transform: translate3d(0,0,0); }
+    to { -webkit-transform: translate3d(100%,0,0); }
+}
+@keyframes slideouttoright {
+    from { transform: translateX(0); }
+    to { transform: translateX(100%); }
+}
+
+/* chrysanthemum loading effect */
+@-webkit-keyframes spin {
+     0% { -webkit-transform: rotate(0deg); }
+   100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+     0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

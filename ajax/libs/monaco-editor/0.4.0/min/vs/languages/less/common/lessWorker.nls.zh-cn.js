@@ -1,0 +1,8 @@
+/*!-----------------------------------------------------------
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Version: 0.4.2(1ebfb1b687c4345ac9c6da39051431a46c120a65)
+ * Released under the MIT license
+ * https://github.com/Microsoft/vscode/blob/master/LICENSE.txt
+ *-----------------------------------------------------------*/
+define("vs/languages/less/common/lessWorker.nls.zh-cn",{"vs/languages/less/common/services/intelliSense":["对字符串进行 URL 编码","转义字符串内容","字符串替换","删除或更改维度单位","将字符串分析为颜色","将数字从一种类型转换为另一种类型",'内联一个资源并回退到 "url()"',"返回值列表中元素的数量","返回列表中指定位置上的值","数字的绝对值","反余弦 - 余弦函数的反函数","反正弦 - 正弦函数的反函数","向上取整到整数","余弦函数","向下取整到整数","转换为 %，例如 0.5 > 50%","将数字取整到多个位置","计算数字的平方根","正弦函数","正切函数","反正切 - 正切函数的反函数","返回 pi","第一个参数的第二参数次方","第一个参数对第二个参数进行取模运算","返回一个或多个值中的最小值","返回一个或多个值中的最小值","创建 #AARRGGBB","创建颜色","创建颜色","创建颜色","创建颜色","返回 HSL 空间中“@color”的“色调”通道","返回 HSL 空间中“@color”的“饱和度”通道","返回 HSL 空间中“@color”的“亮度”通道","返回 HSV 空间中“@color”的“色调”通道","返回 HSV 空间中“@color”的“饱和度”通道","返回 HSV 空间中“@color”的“值”通道","返回“@color”的“红色”通道","返回“@color”的“绿色”通道","返回“@color”的“蓝色”通道",'返回“@color”的 "Alpha" 通道','返回“@color”的 "luma" 值(感知亮度)','返回饱和度增加 10% 点的 "@color"','返回饱和度降低 10% 点的 "@color"','返回亮度增加 10% 点的 "@color"','返回亮度暗 10% 点的 "@color"','返回透明度降低 10% 点的 "@color"','返回透明度增加 10% 点的 "@color"',"返回透明度为 50% 的“@color”","返回色调增加 10 度的“@color”","返回“@color1”和“@color2”的混合色","返回灰色的 100% 不饱和色","如果“@color1 > 43% luma”，则返回“@darkcolor”，否则返回“@lightcolor”，请参阅注释"]});
+//# sourceMappingURL=../../../../../min-maps/vs/languages/less/common/lessWorker.nls.zh-cn.js.map

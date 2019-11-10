@@ -1,0 +1,254 @@
+/*! Spectre.css Experimentals | MIT License | github.com/picturepan2/spectre */
+.meter {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: #f8f8f8;
+  border: 0;
+  border-radius: .2rem;
+  display: block;
+  height: 1.6rem;
+  width: 100%;
+}
+.meter::-webkit-meter-inner-element {
+  display: block;
+}
+.meter::-webkit-meter-bar,
+.meter::-webkit-meter-optimum-value,
+.meter::-webkit-meter-suboptimum-value,
+.meter::-webkit-meter-even-less-good-value {
+  border-radius: .2rem;
+}
+.meter::-webkit-meter-bar {
+  background: #f8f8f8;
+}
+.meter::-webkit-meter-optimum-value {
+  background: #32b643;
+}
+.meter::-webkit-meter-suboptimum-value {
+  background: #ffb700;
+}
+.meter::-webkit-meter-even-less-good-value {
+  background: #e85600;
+}
+.meter::-moz-meter-bar,
+.meter:-moz-meter-optimum,
+.meter:-moz-meter-sub-optimum,
+.meter:-moz-meter-sub-sub-optimum {
+  border-radius: .2rem;
+}
+.meter:-moz-meter-optimum::-moz-meter-bar {
+  background: #32b643;
+}
+.meter:-moz-meter-sub-optimum::-moz-meter-bar {
+  background: #ffb700;
+}
+.meter:-moz-meter-sub-sub-optimum::-moz-meter-bar {
+  background: #e85600;
+}
+.parallax {
+  display: block;
+  height: auto;
+  position: relative;
+  width: auto;
+}
+.parallax .parallax-content {
+  box-shadow: 0 2.5rem 5rem rgba(0, 0, 0, .45);
+  height: auto;
+  -webkit-transform: perspective(600px);
+  transform: perspective(600px);
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  transition: all .4s ease;
+  width: 100%;
+}
+.parallax .parallax-content::before {
+  content: "";
+  display: block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.parallax .parallax-top-left {
+  height: 50%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 50%;
+  z-index: 99;
+}
+.parallax .parallax-top-left:hover ~ .parallax-content {
+  -webkit-transform: perspective(600px) rotateX(3deg) rotateY(-3deg);
+  transform: perspective(600px) rotateX(3deg) rotateY(-3deg);
+}
+.parallax .parallax-top-left:hover ~ .parallax-content::before {
+  background: linear-gradient(135deg, rgba(255, 255, 255, .25) 0%, rgba(255, 255, 255, 0) 50%);
+}
+.parallax .parallax-top-right {
+  height: 50%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50%;
+  z-index: 99;
+}
+.parallax .parallax-top-right:hover ~ .parallax-content {
+  -webkit-transform: perspective(600px) rotateX(3deg) rotateY(3deg);
+  transform: perspective(600px) rotateX(3deg) rotateY(3deg);
+}
+.parallax .parallax-top-right:hover ~ .parallax-content::before {
+  background: linear-gradient(-135deg, rgba(255, 255, 255, .25) 0%, rgba(255, 255, 255, 0) 50%);
+}
+.parallax .parallax-bottom-left {
+  bottom: 0;
+  height: 50%;
+  left: 0;
+  position: absolute;
+  width: 50%;
+  z-index: 99;
+}
+.parallax .parallax-bottom-left:hover ~ .parallax-content {
+  -webkit-transform: perspective(600px) rotateX(-3deg) rotateY(-3deg);
+  transform: perspective(600px) rotateX(-3deg) rotateY(-3deg);
+}
+.parallax .parallax-bottom-left:hover ~ .parallax-content::before {
+  background: linear-gradient(45deg, rgba(255, 255, 255, .25) 0%, rgba(255, 255, 255, 0) 50%);
+}
+.parallax .parallax-bottom-right {
+  bottom: 0;
+  height: 50%;
+  position: absolute;
+  right: 0;
+  width: 50%;
+  z-index: 99;
+}
+.parallax .parallax-bottom-right:hover ~ .parallax-content {
+  -webkit-transform: perspective(600px) rotateX(-3deg) rotateY(3deg);
+  transform: perspective(600px) rotateX(-3deg) rotateY(3deg);
+}
+.parallax .parallax-bottom-right:hover ~ .parallax-content::before {
+  background: linear-gradient(-45deg, rgba(255, 255, 255, .25) 0%, rgba(255, 255, 255, 0) 50%);
+}
+.progress {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: #efefef;
+  border: 0;
+  border-radius: .2rem;
+  color: #5764c6;
+  height: .4rem;
+  position: relative;
+  width: 100%;
+}
+.progress::-webkit-progress-bar {
+  background: transparent;
+  border-radius: .2rem;
+}
+.progress::-webkit-progress-value {
+  background: #5764c6;
+  border-radius: .2rem;
+}
+.progress::-moz-progress-bar {
+  background: #5764c6;
+  border-radius: .2rem;
+}
+.progress:indeterminate {
+  -webkit-animation: progress-indeterminate 1.5s linear infinite;
+  animation: progress-indeterminate 1.5s linear infinite;
+  background: #efefef linear-gradient(to right, #5764c6 30%, #efefef 30%) top left / 150% 150% no-repeat;
+}
+.progress:indeterminate::-moz-progress-bar {
+  background: transparent;
+}
+@-webkit-keyframes progress-indeterminate {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+@keyframes progress-indeterminate {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+.slider {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: transparent;
+  display: block;
+  height: 2.4rem;
+  width: 100%;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background: #5764c6;
+  border: 0;
+  border-radius: 50%;
+  height: 1.2rem;
+  margin-top: -.4rem;
+  transition: transform .2s ease, -webkit-transform .2s ease;
+  transition: transform .2s ease;
+  transition: -webkit-transform .2s ease;
+  width: 1.2rem;
+}
+.slider::-moz-range-thumb {
+  background: #5764c6;
+  border: 0;
+  border-radius: 50%;
+  height: 1.2rem;
+  transition: transform .2s ease, -webkit-transform .2s ease;
+  transition: transform .2s ease;
+  transition: -webkit-transform .2s ease;
+  width: 1.2rem;
+}
+.slider::-ms-thumb {
+  background: #5764c6;
+  border: 0;
+  border-radius: 50%;
+  height: 1.2rem;
+  transition: transform .2s ease, -webkit-transform .2s ease;
+  transition: transform .2s ease;
+  transition: -webkit-transform .2s ease;
+  width: 1.2rem;
+}
+.slider:active::-webkit-slider-thumb {
+  -webkit-transform: scale(1.25);
+  transform: scale(1.25);
+}
+.slider:active::-moz-range-thumb {
+  transform: scale(1.25);
+}
+.slider:active::-ms-thumb {
+  -ms-transform: scale(1.25);
+  transform: scale(1.25);
+}
+.slider::-webkit-slider-runnable-track {
+  background: #efefef;
+  border-radius: .2rem;
+  height: .4rem;
+  width: 100%;
+}
+.slider::-moz-range-track {
+  background: #efefef;
+  border-radius: .2rem;
+  height: .4rem;
+  width: 100%;
+}
+.slider::-ms-track {
+  background: #efefef;
+  border-radius: .2rem;
+  height: .4rem;
+  width: 100%;
+}
+.slider::-ms-fill-lower {
+  background: #5764c6;
+}

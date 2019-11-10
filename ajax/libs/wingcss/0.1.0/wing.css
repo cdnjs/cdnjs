@@ -1,0 +1,544 @@
+/*
+* Wing 0.1.0
+* Copyright 2016, Kabir Shah
+* http://kingpixil.github.io/wing/
+* Free to use under the MIT license.
+* http://www.opensource.org/licenses/mit-license.php
+*/
+
+/* Table of contents
+––––––––––––––––––––––––––––––––––––––––––––––––––
+- Base
+- Typography
+- Grid
+- Links
+- Buttons
+- Forms
+- Lists
+- Animations
+- Utilities
+- Misc
+- Clear
+*/
+@import url(https://fonts.googleapis.com/css?family=Quicksand);
+@import url(https://fonts.googleapis.com/css?family=Raleway:100,400,700);
+/*------------------------------------------------------------
+  Base Style
+------------------------------------------------------------*/
+
+/*making font-sizes base 10*/
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+/*setting up font sizes and base font family*/
+body {
+  letter-spacing: 0.01em;
+  line-height: 1.6;
+  font-size: 1.5em;
+  font-weight: 400;
+  font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/*------------------------------------------------------------
+  Typography
+------------------------------------------------------------*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 2rem;
+  font-weight: 300;
+  font-family: "Quicksand";
+}
+
+h1 {
+  font-size: 4.0rem;
+  line-height: 1.2;
+  letter-spacing: -.1rem;
+}
+
+h2 {
+  font-size: 3.6rem;
+  line-height: 1.25;
+  letter-spacing: -.1rem;
+}
+
+h3 {
+  font-size: 3.0rem;
+  line-height: 1.3;
+  letter-spacing: -.1rem;
+}
+
+h4 {
+  font-size: 2.4rem;
+  line-height: 1.35;
+  letter-spacing: -.08rem;
+}
+
+h5 {
+  font-size: 1.8rem;
+  line-height: 1.5;
+  letter-spacing: -.05rem;
+}
+
+h6 {
+  font-size: 1.5rem;
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+
+
+/* Larger than phablet */
+
+@media (min-width: 550px) {
+  h1 {
+    font-size: 5.0rem;
+  }
+  h2 {
+    font-size: 4.2rem;
+  }
+  h3 {
+    font-size: 3.6rem;
+  }
+  h4 {
+    font-size: 3.0rem;
+  }
+  h5 {
+    font-size: 2.4rem;
+  }
+  h6 {
+    font-size: 1.5rem;
+  }
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto 1.5em;
+  width: 80%;
+}
+
+/* .row */
+.row {
+  margin-top: 2.0833%;
+  padding: 0 1.04165%;
+}
+
+.row:after {
+  display: table;
+  clear: both;
+  content: '';
+}
+
+/* col */
+.row [class^='col-'] {
+  float: left;
+  min-height: 50px;
+  margin-left: 2.083333%;
+}
+
+.row [class^='col-']:first-child {
+  margin-left: 0;
+}
+
+/* .col-1 */
+.row .col-1 {
+  width: 6.42291%;
+}
+
+/* .col-2 */
+.row .col-2 {
+  width: 14.930208%;
+}
+
+/* .col-3 */
+.row .col-3 {
+  width: 23.4375%;
+}
+
+/* .col-4 */
+.row .col-4 {
+  width: 31.94375%;
+}
+
+/* .col-5 */
+.row .col-5 {
+  width: 40.25%;
+}
+
+/* .col-6 */
+.row .col-6 {
+  width: 48.958333%;
+}
+
+/* .col-7 */
+.row .col-7 {
+  width: 57.464583%;
+}
+
+/* .col-8 */
+.row .col-8 {
+  width: 65.970833%;
+}
+
+/* .col-9 */
+.row .col-9 {
+  width: 74.404166%;
+}
+
+/* .col-10 */
+.row .col-10 {
+  width: 82.9833%;
+}
+
+/* .col-11 */
+.row .col-11 {
+  width: 91.489583%;
+}
+
+/* .col-12 */
+.row .col-12 {
+  width: 100%;
+}
+
+/* 
+
+    Mediaqueries 
+
+*/
+@media screen and (max-width: 768px) {
+  .row {
+    margin-top: 0;
+  }
+
+  .row [class^='col-'] {
+    width: 100%;
+    margin-top: 2.0833%;
+    margin-left: 0;
+  }
+}
+
+
+/*------------------------------------------------------------
+  Buttons/Components
+------------------------------------------------------------*/
+
+.btn {
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  cursor: pointer;
+  padding: 2vh 8vh;
+  display: inline-block;
+  margin: 15px 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  outline: none;
+  position: relative;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.btn:after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+
+/* Button Outline */
+
+.btn-outline {
+  border: 3px solid #fff;
+  color: #fff;
+}
+
+.btn-outline:hover,
+.btn-outline:active {
+  color: #000;
+  background: #fff;
+}
+
+.btn-outline-inverted {
+  border: 3px solid #000;
+  color: #000;
+}
+
+.btn-outline-inverted:hover,
+.btn-outline-inverted:active {
+  color: #fff;
+  background: #000;
+}
+
+
+/* Button 3D */
+
+.btn-3d {
+  background: #323133;
+  color: #fff;
+  box-shadow: 0 6px #3C3B3D;
+  -webkit-transition: none;
+  transition: none;
+  border-radius: 5px;
+}
+
+.btn-3d:hover {
+  box-shadow: 0 4px #3C3B3D;
+  top: 2px;
+}
+
+.btn-3d:active {
+  box-shadow: 0 0 #3C3B3D;
+  top: 6px;
+}
+
+
+/* Button Round */
+
+.btn-round {
+  border-radius: 50px;
+  border: 3px solid #fff;
+  color: #fff;
+}
+
+
+.btn-round:hover, .btn-round:active {
+  color: #000;
+  background: #fff;
+}
+
+.btn-round-inverted {
+  border-radius: 50px;
+  border: 3px solid #000;
+  color: #000;
+}
+
+
+.btn-round-inverted:hover, .btn-round-inverted:active {
+  color: #fff;
+  background: #000;
+}
+
+/* Button Clear */
+
+.btn-clear {
+    background: transparent;
+    color: gray;
+}
+
+/*------------------------------------------------------------
+  Forms
+------------------------------------------------------------*/
+
+/*base form styles*/
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+    font-family: 'Raleway';
+}
+
+/*set border on focus*/
+input[type=text]:focus {
+    border: 1px solid #99b3ff;
+    border-radius: 4px;
+}
+
+/*styling textarea*/
+textarea, textarea[type=text] {
+    font-family: 'Raleway';
+    width: 100%;
+    height: 100px;
+    margin: 8px 0;
+    padding: 14px 20px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+textarea:focus {
+    border: 1px solid #99b3ff;
+    border-radius: 4px;
+}
+/*------------------------------------------------------------
+  Lists
+------------------------------------------------------------*/
+
+ul {
+  list-style: circle inside;
+}
+
+ol {
+  list-style: decimal inside;
+}
+
+ol,
+ul {
+  padding-left: 0;
+  margin-top: 0;
+}
+
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+  margin: 1.5rem 0 1.5rem 3rem;
+  font-size: 90%;
+}
+
+li {
+  margin-bottom: 1rem;
+}
+/*------------------------------------------------------------
+  Animations
+------------------------------------------------------------*/
+
+/*fadeIn*/
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* fade in class */
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+/*fade out keyframes */
+
+@-webkit-keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/*class name for fadeOut*/
+
+.fadeOut {
+  -webkit-animation-name: fadeOut;
+  animation-name: fadeOut;
+}
+
+/*animate class*/
+
+.animate {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+/*------------------------------------------------------------
+  Utilities
+------------------------------------------------------------*/
+
+.full-width {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.max-full-width {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.pull-right {
+  float: right;
+}
+
+.pull-left {
+  float: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.full-screen {
+  width: 100vw;
+  height: 100vh;
+}
+/*------------------------------------------------------------
+  Misc
+------------------------------------------------------------*/
+
+.horizontal-rule {
+  height: 1px;
+  background: white;
+  border: none;
+  margin: 3em 3em 5em;
+  position: relative;
+}
+
+code {
+  padding: .2rem .5rem;
+  margin: 0 .2rem;
+  font-size: 90%;
+  white-space: nowrap;
+  background: #F1F1F1;
+  border: 1px solid #E1E1E1;
+  border-radius: 4px; 
+}
+pre > code {
+  display: block;
+  padding: 1rem 1.5rem;
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+ /*Just Clearing */

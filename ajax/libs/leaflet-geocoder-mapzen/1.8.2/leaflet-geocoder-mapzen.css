@@ -1,0 +1,306 @@
+.leaflet-pelias-input {
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  border: none;
+  border-radius: 4px;
+  padding-left: 26px;
+  text-indent: 6px;
+  font-size: 14px;
+  background-color: transparent; /* Should inherit color from control */
+  cursor: pointer;
+}
+
+.leaflet-pelias-control {
+  width: 26px;
+  height: 26px;
+  background-color: white;
+  -webkit-transition: width .1s, height .1s;
+  -moz-transition: width .1s, height .1s;
+  -ms-transition: width .1s, height .1s;
+  -o-transition: width .1s, height .1s;
+  transition: width .1s, height .1s;
+  z-index: 810; /* place above .leaflet-control; z-index is 7 in Leaflet v0.7, 800 in v1 */
+  box-sizing: content-box;
+}
+
+/* For old IE, match other leaflet controls' appearance */
+.leaflet-oldie .leaflet-pelias-control {
+  border: 1px solid #999;
+}
+
+/* Match touch styles in Leaflet v1 */
+.leaflet-touch .leaflet-pelias-control {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+}
+
+/* Expanded state in touch style, overrides touch style above */
+.leaflet-touch .leaflet-pelias-control.leaflet-pelias-expanded {
+  width: 280px;
+  height: 44px;
+  line-height: 32px; /* The height will be expanded with additional padding */
+}
+
+.leaflet-touch .leaflet-pelias-input {
+  background-size: 30px;
+}
+
+.leaflet-pelias-expanded {
+  width: 280px;
+  height: 44px;
+}
+
+.leaflet-pelias-expanded .leaflet-pelias-input {
+  padding-right: 30px; /* Space for close button */
+  /*background-color: white; /* Only show background color when expanded */
+
+  /* The properties below should be tweaked if height of .leaflet-pelias-expanded is changed */
+  padding-top: 5px;
+  padding-bottom: 5px;
+  line-height: 32px;
+}
+
+/* This layer icon has different margins */
+/* In popup */
+span.leaflet-pelias-layer-icon-container {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+  vertical-align: text-bottom;
+}
+
+/* in results list */
+.leaflet-pelias-results span.leaflet-pelias-layer-icon-container {
+  margin-right: 9px;
+}
+
+img.leaflet-pelias-layer-icon {
+  width: 16px;
+}
+
+.leaflet-pelias-layer-icon {
+  vertical-align: top;
+}
+
+.leaflet-pelias-layer-icon-point,
+.leaflet-pelias-layer-icon-polygon {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+}
+
+.leaflet-pelias-layer-icon-point {
+  background-image: url('images/point_icon.png');
+}
+
+.leaflet-pelias-layer-icon-polygon {
+  background-image: url('images/polygon_icon.png');
+}
+
+@media only screen and (min--moz-device-pixel-ratio: 2),
+only screen and (-o-min-device-pixel-ratio: 2/1),
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min-device-pixel-ratio: 2) {
+  .leaflet-pelias-layer-icon-point {
+    background-image: url('images/point_icon@2x.png');
+  }
+
+  .leaflet-pelias-layer-icon-polygon {
+    background-image: url('images/polygon_icon@2x.png');
+  }
+}
+
+.leaflet-pelias-close {
+  display: none; /* Do not show by default */
+  position: absolute;
+  right: 0;
+  width: 26px;
+  height: 100%;
+  padding-right: 2px;
+  text-align: center;
+  vertical-align: middle;
+  font: normal 18px/26px 'Lucida Console', Monaco, monospace;
+  background-color: transparent;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.leaflet-pelias-expanded .leaflet-pelias-close {
+  display: table-cell; /* Show when expanded by default */
+  background-color: inherit; /* Masks input on IE8 */
+  border-top-right-radius: 4px; /* Need to match input border radius if this has a solid background, overflow:hidden is not available; */
+  border-bottom-right-radius: 4px;
+}
+
+/* Plugin logic dictates when the reset button is hidden
+   while the search bar is expanded. This hidden helper class
+   is only ever used on the reset button */
+.leaflet-pelias-expanded .leaflet-pelias-close.leaflet-pelias-hidden {
+  display: none;
+}
+
+/* Vertical centering ghost element - IE8+ */
+.leaflet-pelias-close:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.leaflet-touch .leaflet-pelias-input.leaflet-bar {
+  border-radius: 4px;
+  border: 0 none;
+}
+
+.leaflet-touch .leaflet-pelias-results.leaflet-bar {
+  border-radius: 2px;
+  border: 0 none;
+}
+
+.leaflet-pelias-search-icon {
+  position: absolute;
+  height: 100%;
+  background-image: url('images/search.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 16px;
+  z-index: 10; /* Places the icon above the input */
+  cursor: pointer;
+}
+
+/* Overrides to .leaflet-bar a */
+.leaflet-bar a.leaflet-pelias-search-icon {
+  border-radius: 4px;
+  border-bottom: 0;
+  height: 100%;
+}
+
+/* Overrides to .leaflet-bar a, which provides a white background
+   By making it transparent (unless hovered) it prevents situations
+   where the background color overlaps a parent element unexpectedly */
+.leaflet-bar a.leaflet-pelias-search-icon:not(:hover) {
+  background-color: transparent;
+}
+
+/* When expanded, search icon doesn't need right-side radii */
+.leaflet-pelias-expanded a.leaflet-pelias-search-icon {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.leaflet-pelias-search-icon.leaflet-pelias-loading {
+  background-image: url('images/loading.gif');
+}
+
+@media only screen and (min--moz-device-pixel-ratio: 2),
+only screen and (-o-min-device-pixel-ratio: 2/1),
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min-device-pixel-ratio: 2) {
+  .leaflet-pelias-search-icon {
+    background-image: url('images/search@2x.png');
+  }
+  .leaflet-pelias-search-icon.leaflet-pelias-loading {
+    background-image: url('images/loading@2x.gif');
+  }
+}
+
+.leaflet-pelias-input:focus {
+  outline: none;
+  cursor: text;
+}
+
+.leaflet-pelias-input::-ms-clear {
+  display: none;
+}
+
+.leaflet-pelias-results {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: none;
+}
+
+.leaflet-touch .leaflet-pelias-results {
+  box-shadow: 0 0 0 2px rgba(0,0,0,0.2);
+}
+
+/* For old IE, match other leaflet controls' appearance */
+.leaflet-oldie .leaflet-pelias-results {
+  border: 1px solid #999;
+  left: -1px;
+}
+
+.leaflet-top .leaflet-pelias-results {
+  /* This should be adjusted for proper positioning if height of .leaflet-pelias-expanded is changed */
+  top: 50px;
+}
+
+.leaflet-bottom .leaflet-pelias-results {
+  /* This should be adjusted for proper positioning if height of .leaflet-pelias-expanded is changed */
+  bottom: 50px;
+}
+
+.leaflet-pelias-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.leaflet-pelias-results .leaflet-pelias-result {
+  font-size: 13px;
+  padding: 7px;
+  background-color: white;
+  border-top: 1px solid #f1f1f1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.leaflet-pelias-results .leaflet-pelias-result:first-child {
+  border: none;
+}
+
+.leaflet-pelias-results .leaflet-pelias-result:hover {
+  background-color: #d5f1f3;
+  border-color: #d5f1f3;
+}
+
+.leaflet-pelias-results .leaflet-pelias-result.leaflet-pelias-selected,
+.leaflet-pelias-results .leaflet-pelias-result.leaflet-pelias-selected:hover {
+  background-color: #b2e3e7;
+  border-color: #b2e3e7;
+}
+
+.leaflet-pelias-message {
+  font-size: 13px;
+  padding: 7px;
+  background-color: white;
+  overflow-x: auto;
+}
+
+/* styles when positioned on right */
+
+.leaflet-right .leaflet-pelias-results {
+  left: auto;
+  right: 0;
+}
+
+.leaflet-right .leaflet-pelias-input {
+  left: auto;
+  right: 0;
+}

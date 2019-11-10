@@ -1,0 +1,191 @@
+/* -------- NG-WIG -------- */
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css");
+/**
+ *
+ *  RESET BOX MODEL
+ *
+ */
+.ng-wig,
+[class^="nw-"] {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+
+/**
+ *   main wrapper for the editor
+ *
+ *  .ng-wig
+ *
+ */
+.ng-wig {
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+
+
+/**
+ *  styling for toolbar and its items
+ *
+ *  .nw-toolbar
+ *    &__item
+ *
+ */
+.nw-toolbar {
+  display: block;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+  font-size: 12px;
+  color: #6B7277;
+
+  background: -webkit-linear-gradient(90deg, #ffffff 0%, #f9f9f9 100%);
+  background:    -moz-linear-gradient(90deg, #ffffff 0%, #f9f9f9 100%);
+  background:         linear-gradient(180deg, #ffffff 0%, #f9f9f9 100%);
+  border: 1px solid #CCCCCC;
+  border-radius: 3px 3px 0 0;
+}
+
+.nw-toolbar__item {
+  display: inline-block;
+  vertical-align: top;
+
+  border-right: 1px solid #DEDEDE;
+}
+
+.nw-toolbar label {
+  line-height: 30px;
+  display: inline-block;
+  padding: 0 6px 0 3px;
+}
+
+.nw-toolbar input[type=checkbox] {
+  vertical-align: -3px;
+  margin-right: -1px;
+}
+
+/**
+ *  styling for the editor part: source code (original textarea) and resulting div
+ *
+ *  .nw-editor
+ *    &__src
+ *    &__res
+ *
+ */
+.nw-editor {
+  display: block;
+  position: relative;
+  overflow-y: auto;
+  padding: 0 8px;
+  /* Default when height is not set */
+  min-height: 300px;
+  background: #fff;
+  cursor: text;
+}
+
+.nw-invisible {
+  display: none;
+}
+
+.nw-editor-container {
+  border: 1px solid #CCCCCC;
+  border-top: none;
+  border-radius: 0 0 3px 3px;
+}
+
+.nw-editor__res {
+  min-height: 100%;
+  margin: -1px 0;
+  padding: 1px 0;
+}
+
+.nw-editor__src,
+.nw-editor__res {
+  width: 100%;
+  outline: none;
+  box-sizing: border-box;
+  border: none;
+}
+
+.nw-editor__src {
+  resize: none;
+  display: block;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 8px;
+}
+
+
+/**
+ *  styling for toolbar button, has two modifiers: active and type of icon for background
+ *
+ *  .nw-button
+ *    &--active
+ *    &--{button type}
+ *
+ */
+.nw-button {
+  -webkit-appearance: none;
+  -moz-appearance:    none;
+  appearance:         none;
+
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  opacity: 0.5;
+
+  background-color: transparent;
+  background-position: center center;
+  background-repeat: no-repeat;
+  border: none;
+  border-radius: 2px;
+
+  cursor: pointer;
+}
+
+.nw-button:focus {
+  outline: none;
+}
+
+.nw-button:hover,
+.nw-button.nw-button--active {
+  opacity: 1
+}
+
+.nw-button--active {
+  background-color: #EEEEEE;
+}
+
+/**
+ *  styling & formatting of content inside contenteditable div
+ *
+ *  .nw-content
+ *
+ */
+.nw-content {
+  padding: 12px;
+  margin: 0;
+
+  font-family: sans-serif;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.nw-select {
+  height: auto;
+  padding: 6px;
+  color: #555;
+  background-color: inherit;
+  border: 0;
+}
+
+.nw-select:focus { outline: none; }
+

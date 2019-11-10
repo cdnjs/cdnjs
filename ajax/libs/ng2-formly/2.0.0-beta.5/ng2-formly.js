@@ -1,0 +1,1329 @@
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+System.register("services/formly.expression", [], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
+    function evalExpression(expression, thisArg, argNames, argVal) {
+        try {
+            return Function.bind.apply(Function, [void 0].concat(argNames.concat("return " + expression + ";")))().apply(thisArg, argVal);
+        }
+        catch (error) {
+            console.error(error);
+        }
+    }
+    exports_1("evalExpression", evalExpression);
+    function expressionValueSetter(expression, expressionValue, thisArg, argNames, argVal) {
+        try {
+            return Function.bind.apply(Function, [void 0].concat(["expressionValue"].concat(argNames.concat(expression + "= expressionValue;"))))().apply(thisArg, [expressionValue].concat(argVal));
+        }
+        catch (error) {
+            console.error(error);
+        }
+    }
+    exports_1("expressionValueSetter", expressionValueSetter);
+    return {
+        setters:[],
+        execute: function() {
+        }
+    }
+});
+System.register("services/formly.field.delegates", ["services/formly.expression"], function(exports_2, context_2) {
+    "use strict";
+    var __moduleName = context_2 && context_2.id;
+    var formly_expression_1;
+    var FormlyFieldVisibilityDelegate, FormlyFieldExpressionDelegate;
+    return {
+        setters:[
+            function (formly_expression_1_1) {
+                formly_expression_1 = formly_expression_1_1;
+            }],
+        execute: function() {
+            FormlyFieldVisibilityDelegate = (function () {
+                function FormlyFieldVisibilityDelegate(formlyCommon) {
+                    this.formlyCommon = formlyCommon;
+                }
+                FormlyFieldVisibilityDelegate.prototype.eval = function (expression) {
+                    if (expression instanceof Function) {
+                        return expression();
+                    }
+                    else if (typeof expression === "string") {
+                        return formly_expression_1.evalExpression(expression, this.formlyCommon, ["model", "fieldModel"], [this.formlyCommon.formModel, this.formlyCommon.model]);
+                    }
+                    else {
+                        return expression ? true : false;
+                    }
+                };
+                FormlyFieldVisibilityDelegate.prototype.hasHideExpression = function () {
+                    return (this.formlyCommon.field && this.formlyCommon.field.hideExpression !== undefined) && this.formlyCommon.field.hideExpression ? true : false;
+                };
+                FormlyFieldVisibilityDelegate.prototype.checkVisibilityChange = function () {
+                    if (this.hasHideExpression()) {
+                        var hideExpressionResult = this.eval(this.formlyCommon.field.hideExpression);
+                        if (hideExpressionResult !== this.formlyCommon.isHidden()) {
+                            this.formlyCommon.setHidden(hideExpressionResult);
+                        }
+                    }
+                };
+                return FormlyFieldVisibilityDelegate;
+            }());
+            exports_2("FormlyFieldVisibilityDelegate", FormlyFieldVisibilityDelegate);
+            FormlyFieldExpressionDelegate = (function () {
+                function FormlyFieldExpressionDelegate(formlyCommon) {
+                    this.formlyCommon = formlyCommon;
+                }
+                FormlyFieldExpressionDelegate.prototype.hasExpression = function () {
+                    return (this.formlyCommon.field && this.formlyCommon.field.expressionProperties !== undefined);
+                };
+                FormlyFieldExpressionDelegate.prototype.checkExpressionChange = function () {
+                    if (this.hasExpression()) {
+                        var expressionProperties = this.formlyCommon.field.expressionProperties;
+                        if (expressionProperties) {
+                            for (var key in expressionProperties) {
+                                var expressionValue = formly_expression_1.evalExpression(expressionProperties[key], this.formlyCommon, ["model", "fieldValue"], [this.formlyCommon.formModel, this.formlyCommon.model]);
+                                formly_expression_1.expressionValueSetter(key, expressionValue, this.formlyCommon, ["model", "fieldModel", "templateOptions"], [this.formlyCommon.formModel, this.formlyCommon.model, this.formlyCommon.field.templateOptions]);
+                            }
+                        }
+                    }
+                };
+                return FormlyFieldExpressionDelegate;
+            }());
+            exports_2("FormlyFieldExpressionDelegate", FormlyFieldExpressionDelegate);
+        }
+    }
+});
+System.register("services/formly.event.emitter", ["rxjs/Subject"], function(exports_3, context_3) {
+    "use strict";
+    var __moduleName = context_3 && context_3.id;
+    var Subject_1;
+    var FormlyValueChangeEvent, FormlyEventEmitter, FormlyPubSub;
+    return {
+        setters:[
+            function (Subject_1_1) {
+                Subject_1 = Subject_1_1;
+            }],
+        execute: function() {
+            FormlyValueChangeEvent = (function () {
+                function FormlyValueChangeEvent(key, value) {
+                    this.key = key;
+                    this.value = value;
+                }
+                return FormlyValueChangeEvent;
+            }());
+            exports_3("FormlyValueChangeEvent", FormlyValueChangeEvent);
+            FormlyEventEmitter = (function (_super) {
+                __extends(FormlyEventEmitter, _super);
+                function FormlyEventEmitter() {
+                    _super.call(this);
+                }
+                FormlyEventEmitter.prototype.emit = function (value) {
+                    _super.prototype.next.call(this, value);
+                };
+                return FormlyEventEmitter;
+            }(Subject_1.Subject));
+            exports_3("FormlyEventEmitter", FormlyEventEmitter);
+            FormlyPubSub = (function () {
+                function FormlyPubSub() {
+                    this.emitters = {};
+                    this.updated = false;
+                    this.Stream = new FormlyEventEmitter();
+                }
+                FormlyPubSub.prototype.getUpdated = function () {
+                    return this.updated;
+                };
+                FormlyPubSub.prototype.setUpdated = function (value) {
+                    this.updated = value;
+                };
+                FormlyPubSub.prototype.setEmitter = function (key, emitter) {
+                    this.emitters[key] = emitter;
+                };
+                FormlyPubSub.prototype.getEmitter = function (key) {
+                    return this.emitters[key];
+                };
+                return FormlyPubSub;
+            }());
+            exports_3("FormlyPubSub", FormlyPubSub);
+        }
+    }
+});
+System.register("services/formly.config", ["@angular/core"], function(exports_4, context_4) {
+    "use strict";
+    var __moduleName = context_4 && context_4.id;
+    var core_1;
+    var FormlyConfig;
+    return {
+        setters:[
+            function (core_1_1) {
+                core_1 = core_1_1;
+            }],
+        execute: function() {
+            FormlyConfig = (function () {
+                function FormlyConfig() {
+                    this.types = {};
+                    this.manipulators = {};
+                }
+                FormlyConfig.prototype.setType = function (options) {
+                    this.types[options.name] = options.component;
+                };
+                FormlyConfig.prototype.getDirectives = function () {
+                    return this.types;
+                };
+                FormlyConfig.prototype.getDirective = function (name) {
+                    return this.types[name];
+                };
+                FormlyConfig.prototype.addTemplateManipulator = function (option) {
+                    this.manipulators[option.name] = option.manipulator;
+                };
+                FormlyConfig.prototype.getManipulator = function (name) {
+                    return this.manipulators[name];
+                };
+                FormlyConfig = __decorate([
+                    core_1.Injectable(), 
+                    __metadata('design:paramtypes', [])
+                ], FormlyConfig);
+                return FormlyConfig;
+            }());
+            exports_4("FormlyConfig", FormlyConfig);
+        }
+    }
+});
+System.register("components/formly.field.config", [], function(exports_5, context_5) {
+    "use strict";
+    var __moduleName = context_5 && context_5.id;
+    return {
+        setters:[],
+        execute: function() {
+        }
+    }
+});
+System.register("components/formly.common.component", ["@angular/core", "services/formly.field.delegates"], function(exports_6, context_6) {
+    "use strict";
+    var __moduleName = context_6 && context_6.id;
+    var core_2, formly_field_delegates_1;
+    var FormlyCommon;
+    return {
+        setters:[
+            function (core_2_1) {
+                core_2 = core_2_1;
+            },
+            function (formly_field_delegates_1_1) {
+                formly_field_delegates_1 = formly_field_delegates_1_1;
+            }],
+        execute: function() {
+            FormlyCommon = (function () {
+                function FormlyCommon(elem, ps, formlyConfig) {
+                    this.elem = elem;
+                    this.ps = ps;
+                    this.formlyConfig = formlyConfig;
+                    this.formSubmit = new core_2.EventEmitter();
+                    this.visibilityDelegate = new formly_field_delegates_1.FormlyFieldVisibilityDelegate(this);
+                    this.expressionDelegate = new formly_field_delegates_1.FormlyFieldExpressionDelegate(this);
+                }
+                Object.defineProperty(FormlyCommon.prototype, "model", {
+                    get: function () {
+                        return this._model;
+                    },
+                    set: function (value) {
+                        this._model = value;
+                        this.ps.Stream.emit(this.form);
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                ;
+                FormlyCommon.prototype.isHidden = function () {
+                    return this.hide;
+                };
+                FormlyCommon.prototype.setHidden = function (cond) {
+                    this.hide = cond;
+                    this.elem.nativeElement.style.display = cond ? "none" : "";
+                    if (this.field.fieldGroup) {
+                        for (var i = 0; i < this.field.fieldGroup.length; i++) {
+                            this.psEmit(this.field.fieldGroup[i].key, "hidden", this.hide);
+                        }
+                    }
+                    else {
+                        this.psEmit(this.field.key, "hidden", this.hide);
+                    }
+                };
+                FormlyCommon.prototype.psEmit = function (fieldKey, eventKey, value) {
+                    if (this.ps && this.ps.getEmitter(fieldKey) && this.ps.getEmitter(fieldKey).emit) {
+                        this.ps.getEmitter(fieldKey).emit({
+                            key: eventKey,
+                            value: value
+                        });
+                    }
+                };
+                FormlyCommon.prototype.ngDoCheck = function () {
+                    this.visibilityDelegate.checkVisibilityChange();
+                    this.expressionDelegate.checkExpressionChange();
+                };
+                __decorate([
+                    core_2.Input(), 
+                    __metadata('design:type', Object)
+                ], FormlyCommon.prototype, "formModel", void 0);
+                __decorate([
+                    core_2.Input(), 
+                    __metadata('design:type', Object)
+                ], FormlyCommon.prototype, "field", void 0);
+                __decorate([
+                    core_2.Input(), 
+                    __metadata('design:type', Object)
+                ], FormlyCommon.prototype, "form", void 0);
+                __decorate([
+                    core_2.Input(), 
+                    __metadata('design:type', String)
+                ], FormlyCommon.prototype, "key", void 0);
+                __decorate([
+                    core_2.Input(), 
+                    __metadata('design:type', Object)
+                ], FormlyCommon.prototype, "hide", void 0);
+                __decorate([
+                    core_2.Output(), 
+                    __metadata('design:type', Object)
+                ], FormlyCommon.prototype, "formSubmit", void 0);
+                __decorate([
+                    core_2.Input(), 
+                    __metadata('design:type', Object)
+                ], FormlyCommon.prototype, "model", null);
+                return FormlyCommon;
+            }());
+            exports_6("FormlyCommon", FormlyCommon);
+        }
+    }
+});
+System.register("services/formly.field.builder", ["@angular/core"], function(exports_7, context_7) {
+    "use strict";
+    var __moduleName = context_7 && context_7.id;
+    var core_3;
+    var FormlyFieldBuilder;
+    return {
+        setters:[
+            function (core_3_1) {
+                core_3 = core_3_1;
+            }],
+        execute: function() {
+            FormlyFieldBuilder = (function () {
+                function FormlyFieldBuilder(cr) {
+                    this.cr = cr;
+                }
+                FormlyFieldBuilder.prototype.createChildFields = function (fieldConfig, formlyField, formlyConfig) {
+                    formlyField.hide = fieldConfig.hideExpression ? true : false;
+                    return this.cr.resolveComponent(formlyConfig.getDirective(fieldConfig.type))
+                        .then(function (cf) {
+                        var ref = formlyField.myChild.viewContainer.createComponent(cf);
+                        ref.instance.model = formlyField.model;
+                        ref.instance.type = fieldConfig.type;
+                        ref.instance.templateOptions = fieldConfig.templateOptions;
+                        ref.instance.key = formlyField.key;
+                        ref.instance.form = formlyField.form;
+                        ref.instance.update = formlyField.update;
+                        ref.instance.field = fieldConfig;
+                        ref.instance.formModel = formlyField.formModel;
+                        formlyField.form.addControl(formlyField.key, ref.instance.formControl);
+                        return ref;
+                    });
+                };
+                FormlyFieldBuilder = __decorate([
+                    core_3.Injectable(), 
+                    __metadata('design:paramtypes', [core_3.ComponentResolver])
+                ], FormlyFieldBuilder);
+                return FormlyFieldBuilder;
+            }());
+            exports_7("FormlyFieldBuilder", FormlyFieldBuilder);
+        }
+    }
+});
+System.register("services/formly.messages", ["@angular/core", "@angular/common"], function(exports_8, context_8) {
+    "use strict";
+    var __moduleName = context_8 && context_8.id;
+    var core_4, common_1;
+    var FormlyMessages, FormlyMessage;
+    return {
+        setters:[
+            function (core_4_1) {
+                core_4 = core_4_1;
+            },
+            function (common_1_1) {
+                common_1 = common_1_1;
+            }],
+        execute: function() {
+            FormlyMessages = (function () {
+                function FormlyMessages() {
+                    this.messages = {};
+                }
+                FormlyMessages.prototype.addStringMessage = function (validator, message) {
+                    this.messages[validator] = message;
+                };
+                FormlyMessages.prototype.getMessages = function () {
+                    return this.messages;
+                };
+                FormlyMessages.prototype.getValidatorErrorMessage = function (prop) {
+                    return this.messages[prop];
+                };
+                FormlyMessages = __decorate([
+                    core_4.Injectable(), 
+                    __metadata('design:paramtypes', [])
+                ], FormlyMessages);
+                return FormlyMessages;
+            }());
+            exports_8("FormlyMessages", FormlyMessages);
+            FormlyMessage = (function () {
+                function FormlyMessage(_formDir, fm) {
+                    this._formDir = _formDir;
+                    this.fm = fm;
+                }
+                Object.defineProperty(FormlyMessage.prototype, "errorMessage", {
+                    get: function () {
+                        var c = this._formDir.form.find(this.control);
+                        for (var propertyName in c.errors) {
+                            if (c.errors.hasOwnProperty(propertyName)) {
+                                return this.fm.getValidatorErrorMessage(propertyName);
+                            }
+                        }
+                        return null;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                __decorate([
+                    core_4.Input(), 
+                    __metadata('design:type', String)
+                ], FormlyMessage.prototype, "control", void 0);
+                FormlyMessage = __decorate([
+                    core_4.Component({
+                        selector: "formly-message",
+                        template: "<div *ngIf=\"errorMessage !== null\">{{errorMessage}}</div>"
+                    }),
+                    __param(0, core_4.Host()), 
+                    __metadata('design:paramtypes', [common_1.NgFormModel, FormlyMessages])
+                ], FormlyMessage);
+                return FormlyMessage;
+            }());
+            exports_8("FormlyMessage", FormlyMessage);
+        }
+    }
+});
+System.register("templates/field", ["@angular/core", "services/formly.event.emitter", "@angular/common"], function(exports_9, context_9) {
+    "use strict";
+    var __moduleName = context_9 && context_9.id;
+    var core_5, formly_event_emitter_1, common_2;
+    var Field;
+    return {
+        setters:[
+            function (core_5_1) {
+                core_5 = core_5_1;
+            },
+            function (formly_event_emitter_1_1) {
+                formly_event_emitter_1 = formly_event_emitter_1_1;
+            },
+            function (common_2_1) {
+                common_2 = common_2_1;
+            }],
+        execute: function() {
+            Field = (function () {
+                function Field(fm, ps) {
+                    var _this = this;
+                    this.ps = ps;
+                    this.changeFn = new core_5.EventEmitter();
+                    this.messages = fm.getMessages();
+                    this.ps.Stream.subscribe(function (form) {
+                        _this.form = form;
+                    });
+                }
+                Object.defineProperty(Field.prototype, "modelUpdateReceiver", {
+                    set: function (modelUpdateReceiver) {
+                        var _this = this;
+                        this._modelUpdateReceiver = modelUpdateReceiver;
+                        this._modelUpdateReceiver.subscribe(function (model) {
+                            _this.model = model;
+                        });
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Object.defineProperty(Field.prototype, "model", {
+                    get: function () {
+                        return this._model;
+                    },
+                    set: function (value) {
+                        this._model = value;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Field.prototype.ngOnInit = function () {
+                    var _this = this;
+                    if (this.update) {
+                        this.update.subscribe(function (update) {
+                            _this.templateOptions[update.key] = update.value;
+                        });
+                    }
+                };
+                Field.prototype.inputChange = function (e, val) {
+                    this._model = e.target[val];
+                    this.changeFn.emit(new formly_event_emitter_1.FormlyValueChangeEvent(this.key, e.target[val]));
+                    this.ps.setUpdated(true);
+                };
+                Object.defineProperty(Field.prototype, "formControl", {
+                    get: function () {
+                        if (!this._control) {
+                            this._control = this.createControl();
+                        }
+                        return this._control;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Field.prototype.createControl = function () {
+                    return new common_2.Control(this._model || "", this.field.validation);
+                };
+                __decorate([
+                    core_5.Input(), 
+                    __metadata('design:type', Object)
+                ], Field.prototype, "form", void 0);
+                __decorate([
+                    core_5.Input(), 
+                    __metadata('design:type', Object)
+                ], Field.prototype, "update", void 0);
+                __decorate([
+                    core_5.Input(), 
+                    __metadata('design:type', Object)
+                ], Field.prototype, "templateOptions", void 0);
+                __decorate([
+                    core_5.Input(), 
+                    __metadata('design:type', String)
+                ], Field.prototype, "key", void 0);
+                __decorate([
+                    core_5.Input(), 
+                    __metadata('design:type', Object)
+                ], Field.prototype, "field", void 0);
+                __decorate([
+                    core_5.Input(), 
+                    __metadata('design:type', Object)
+                ], Field.prototype, "formModel", void 0);
+                __decorate([
+                    core_5.Output(), 
+                    __metadata('design:type', core_5.EventEmitter)
+                ], Field.prototype, "changeFn", void 0);
+                __decorate([
+                    core_5.Input(), 
+                    __metadata('design:type', Object)
+                ], Field.prototype, "model", null);
+                return Field;
+            }());
+            exports_9("Field", Field);
+        }
+    }
+});
+System.register("components/formly.field", ["@angular/core", "components/formly.common.component", "services/formly.event.emitter", "services/formly.field.builder", "services/formly.config"], function(exports_10, context_10) {
+    "use strict";
+    var __moduleName = context_10 && context_10.id;
+    var core_6, formly_common_component_1, formly_event_emitter_2, formly_field_builder_1, formly_config_1;
+    var DivComponent, FormlyField;
+    return {
+        setters:[
+            function (core_6_1) {
+                core_6 = core_6_1;
+            },
+            function (formly_common_component_1_1) {
+                formly_common_component_1 = formly_common_component_1_1;
+            },
+            function (formly_event_emitter_2_1) {
+                formly_event_emitter_2 = formly_event_emitter_2_1;
+            },
+            function (formly_field_builder_1_1) {
+                formly_field_builder_1 = formly_field_builder_1_1;
+            },
+            function (formly_config_1_1) {
+                formly_config_1 = formly_config_1_1;
+            }],
+        execute: function() {
+            DivComponent = (function () {
+                function DivComponent(viewContainer) {
+                    this.viewContainer = viewContainer;
+                }
+                DivComponent = __decorate([
+                    core_6.Directive({
+                        selector: "[child-host]"
+                    }), 
+                    __metadata('design:paramtypes', [core_6.ViewContainerRef])
+                ], DivComponent);
+                return DivComponent;
+            }());
+            exports_10("DivComponent", DivComponent);
+            FormlyField = (function (_super) {
+                __extends(FormlyField, _super);
+                function FormlyField(elem, ps, fb, formlyConfig) {
+                    _super.call(this, elem, ps, formlyConfig);
+                    this.fb = fb;
+                    this.changeFn = new core_6.EventEmitter();
+                    this.modelUpdateEmitter = new core_6.EventEmitter();
+                }
+                FormlyField.prototype.ngOnInit = function () {
+                    this.createChildFields();
+                };
+                FormlyField.prototype.ngAfterViewInit = function () { };
+                FormlyField.prototype.createChildFields = function () {
+                    var _this = this;
+                    if (this.field && !this.field.template && !this.field.fieldGroup) {
+                        this.update = new formly_event_emitter_2.FormlyEventEmitter();
+                        this.fb.createChildFields(this.field, this, this.formlyConfig).then(function (ref) {
+                            _this.childFieldRef = ref;
+                            _this.childFieldRef.instance.modelUpdateReceiver = _this.modelUpdateEmitter;
+                            ref.instance.changeFn.subscribe(function (event) {
+                                _this.changeFunction(event, _this.field);
+                            });
+                        });
+                        this.ps.setEmitter(this.key, this.update);
+                    }
+                };
+                FormlyField.prototype.changeFunction = function (event, field) {
+                    if (this.key && this.key === event.key) {
+                        this._model = event.value;
+                        this.changeFn.emit(event);
+                        this.formSubmit.emit(event);
+                    }
+                    else if (this.key && this.key !== event.key) {
+                        this._model[event.key] = event.value;
+                        this.changeFn.emit(new formly_event_emitter_2.FormlyValueChangeEvent(this.key, this._model));
+                        this.formSubmit.emit(event);
+                    }
+                    else {
+                        this.changeFn.emit(event);
+                        this.formSubmit.emit(event);
+                    }
+                };
+                FormlyField.prototype.ngOnChanges = function (changes) {
+                    if (changes["model"]) {
+                        this.modelUpdateEmitter.emit(changes["model"].currentValue);
+                    }
+                };
+                __decorate([
+                    core_6.ViewChild(DivComponent), 
+                    __metadata('design:type', DivComponent)
+                ], FormlyField.prototype, "myChild", void 0);
+                FormlyField = __decorate([
+                    core_6.Component({
+                        selector: "formly-field",
+                        template: "\n        <div child-host #child></div>\n        <div *ngIf=\"field.template\" [innerHtml]=\"field.template\"></div>\n    ",
+                        directives: [FormlyField, DivComponent],
+                        inputs: ["field", "formModel", "form", "hide", "model", "key", "eventEmitter"],
+                        outputs: ["formSubmit", "changeFn", "eventEmitter"]
+                    }), 
+                    __metadata('design:paramtypes', [core_6.ElementRef, formly_event_emitter_2.FormlyPubSub, formly_field_builder_1.FormlyFieldBuilder, formly_config_1.FormlyConfig])
+                ], FormlyField);
+                return FormlyField;
+            }(formly_common_component_1.FormlyCommon));
+            exports_10("FormlyField", FormlyField);
+        }
+    }
+});
+System.register("components/formly.field.group", ["@angular/core", "components/formly.common.component", "services/formly.event.emitter", "services/formly.config", "components/formly.field"], function(exports_11, context_11) {
+    "use strict";
+    var __moduleName = context_11 && context_11.id;
+    var core_7, formly_common_component_2, formly_event_emitter_3, formly_config_2, formly_field_1;
+    var FormlyFieldGroup;
+    return {
+        setters:[
+            function (core_7_1) {
+                core_7 = core_7_1;
+            },
+            function (formly_common_component_2_1) {
+                formly_common_component_2 = formly_common_component_2_1;
+            },
+            function (formly_event_emitter_3_1) {
+                formly_event_emitter_3 = formly_event_emitter_3_1;
+            },
+            function (formly_config_2_1) {
+                formly_config_2 = formly_config_2_1;
+            },
+            function (formly_field_1_1) {
+                formly_field_1 = formly_field_1_1;
+            }],
+        execute: function() {
+            FormlyFieldGroup = (function (_super) {
+                __extends(FormlyFieldGroup, _super);
+                function FormlyFieldGroup(elem, ps, formlyConfig) {
+                    _super.call(this, elem, ps, formlyConfig);
+                    this.elem = elem;
+                    this.ps = ps;
+                    this.formlyConfig = formlyConfig;
+                    this.changeFn = new core_7.EventEmitter();
+                }
+                FormlyFieldGroup.prototype.ngOnInit = function () {
+                    if (!this.fields) {
+                        this.fields = this.field.fieldGroup;
+                    }
+                };
+                FormlyFieldGroup.prototype.changeFunction = function (event, field) {
+                    if (this.key && this.key === event.key) {
+                        this._model = event.value;
+                        this.changeFn.emit(event);
+                        this.formSubmit.emit(event);
+                    }
+                    else if (this.key && this.key !== event.key) {
+                        this._model[event.key] = event.value;
+                        this.changeFn.emit(new formly_event_emitter_3.FormlyValueChangeEvent(this.key, this._model));
+                        this.formSubmit.emit(event);
+                    }
+                    else {
+                        this.changeFn.emit(event);
+                        this.formSubmit.emit(event);
+                    }
+                };
+                __decorate([
+                    core_7.Input(), 
+                    __metadata('design:type', Object)
+                ], FormlyFieldGroup.prototype, "eventEmitter", void 0);
+                __decorate([
+                    core_7.Output(), 
+                    __metadata('design:type', core_7.EventEmitter)
+                ], FormlyFieldGroup.prototype, "changeFn", void 0);
+                FormlyFieldGroup = __decorate([
+                    core_7.Component({
+                        selector: "formly-field-group",
+                        template: "\n        <div class=\"formly-field\"\n          *ngFor=\"let f of field.fieldGroup\">\n          <formly-field [hide]=\"f.hideExpression\" [model]=\"model?model[f.key]:''\" [key]=\"f.key\" [form]=\"form\" [field]=\"f\"\n            [formModel] = \"formModel\" (changeFn)=\"changeFunction($event, f)\" [ngClass]=\"f.className\" [eventEmitter]=\"eventEmitter\">\n          </formly-field>\n          <formly-field-group *ngIf=\"f.fieldGroup\" [hide]=\"field.hideExpression\" [model]=\"f.key ? model[f.key]: model\" [key]=\"f.key\" [form]=\"form\" [field]=\"f\"\n            [fields]=\"f.fieldGroup\" [formModel]= \"formModel\" (changeFn)=\"changeFunction($event, f)\" [eventEmitter]=\"event\">\n          </formly-field-group>\n        </div> \n    ",
+                        directives: [formly_field_1.FormlyField],
+                        inputs: ["field", "formModel", "form", "hide", "model", "key", "fields"]
+                    }), 
+                    __metadata('design:paramtypes', [core_7.ElementRef, formly_event_emitter_3.FormlyPubSub, formly_config_2.FormlyConfig])
+                ], FormlyFieldGroup);
+                return FormlyFieldGroup;
+            }(formly_common_component_2.FormlyCommon));
+            exports_11("FormlyFieldGroup", FormlyFieldGroup);
+        }
+    }
+});
+System.register("components/formly.form", ["@angular/core", "@angular/common", "components/formly.field", "services/formly.event.emitter", "components/formly.field.group", "services/formly.config"], function(exports_12, context_12) {
+    "use strict";
+    var __moduleName = context_12 && context_12.id;
+    var core_8, common_3, formly_field_2, formly_event_emitter_4, formly_field_group_1, formly_config_3;
+    var FormlyForm;
+    return {
+        setters:[
+            function (core_8_1) {
+                core_8 = core_8_1;
+            },
+            function (common_3_1) {
+                common_3 = common_3_1;
+            },
+            function (formly_field_2_1) {
+                formly_field_2 = formly_field_2_1;
+            },
+            function (formly_event_emitter_4_1) {
+                formly_event_emitter_4 = formly_event_emitter_4_1;
+            },
+            function (formly_field_group_1_1) {
+                formly_field_group_1 = formly_field_group_1_1;
+            },
+            function (formly_config_3_1) {
+                formly_config_3 = formly_config_3_1;
+            }],
+        execute: function() {
+            FormlyForm = (function (_super) {
+                __extends(FormlyForm, _super);
+                function FormlyForm(elem, _fm, ps, fb, formlyConfig) {
+                    _super.call(this, elem, ps, formlyConfig);
+                    this._fm = _fm;
+                    this.fb = fb;
+                    this.event = new formly_event_emitter_4.FormlyEventEmitter();
+                }
+                FormlyForm.prototype.ngOnInit = function () {
+                    if (!this._model) {
+                        this._model = {};
+                    }
+                    if (!this.formModel) {
+                        this.formModel = this.model;
+                    }
+                    if (!this.form) {
+                        this.form = this.fb.group({});
+                    }
+                };
+                FormlyForm.prototype.changeFunction = function (event, field) {
+                    this._model[event.key] = event.value;
+                    this.formSubmit.emit(event);
+                };
+                FormlyForm = __decorate([
+                    core_8.Component({
+                        selector: "formly-form",
+                        directives: [formly_field_2.FormlyField, formly_field_group_1.FormlyFieldGroup],
+                        template: "\n            <form class=\"formly\" role=\"form\" novalidate [ngFormModel]=\"form\">\n              <div class=\"formly-field\"\n                *ngFor=\"let f of fields\"\n                [ngClass]=\"f.className\">\n                <formly-field *ngIf=\"!f.fieldGroup\" [hide]=\"f.hideExpression\" [model]=\"model[f.key]\"\n                  [key]=\"f.key\" [form]=\"form\" [field]=\"f\" [formModel]= \"model\"\n                  (changeFn)=\"changeFunction($event, field)\" [eventEmitter]=\"event\">\n                </formly-field>\n                <formly-field-group *ngIf=\"f.fieldGroup\" [hide]=\"f.hideExpression\" [fields]=\"f.fieldGroup\"\n                  [model]=\"f.key ? model[f.key]: model\" [key]=\"f.key\" [form]=\"form\" [field]=\"f\"\n                  [formModel]= \"model\" (changeFn)=\"changeFunction($event, f)\" [eventEmitter]=\"event\">\n                </formly-field-group>\n              </div>\n              <ng-content></ng-content>\n            </form>\n            ",
+                        providers: [common_3.NgFormModel, formly_event_emitter_4.FormlyPubSub],
+                        inputs: ["field", "formModel", "form", "hide", "model", "key", "fields"]
+                    }), 
+                    __metadata('design:paramtypes', [core_8.ElementRef, common_3.NgFormModel, formly_event_emitter_4.FormlyPubSub, common_3.FormBuilder, formly_config_3.FormlyConfig])
+                ], FormlyForm);
+                return FormlyForm;
+            }(formly_field_group_1.FormlyFieldGroup));
+            exports_12("FormlyForm", FormlyForm);
+        }
+    }
+});
+System.register("services/formly.providers", ["services/formly.event.emitter", "services/formly.messages", "services/formly.field.builder"], function(exports_13, context_13) {
+    "use strict";
+    var __moduleName = context_13 && context_13.id;
+    var formly_event_emitter_5, formly_messages_1, formly_field_builder_2;
+    var FormlyProviders;
+    return {
+        setters:[
+            function (formly_event_emitter_5_1) {
+                formly_event_emitter_5 = formly_event_emitter_5_1;
+            },
+            function (formly_messages_1_1) {
+                formly_messages_1 = formly_messages_1_1;
+            },
+            function (formly_field_builder_2_1) {
+                formly_field_builder_2 = formly_field_builder_2_1;
+            }],
+        execute: function() {
+            exports_13("FormlyProviders", FormlyProviders = [
+                formly_event_emitter_5.FormlyPubSub,
+                formly_messages_1.FormlyMessages,
+                formly_field_builder_2.FormlyFieldBuilder
+            ]);
+        }
+    }
+});
+System.register("services/formly.processor", [], function(exports_14, context_14) {
+    "use strict";
+    var __moduleName = context_14 && context_14.id;
+    var FormlyConfigProcessor, FormlyConfigValidator;
+    return {
+        setters:[],
+        execute: function() {
+            FormlyConfigProcessor = (function () {
+                function FormlyConfigProcessor() {
+                    this.visitors = [new FormlyConfigValidator()];
+                }
+                FormlyConfigProcessor.prototype.process = function (fieldConfigs) {
+                    var _this = this;
+                    fieldConfigs.forEach(function (field) {
+                        _this.visitors.forEach(function (visitor) {
+                            visitor.visit(field);
+                        });
+                    });
+                };
+                return FormlyConfigProcessor;
+            }());
+            exports_14("FormlyConfigProcessor", FormlyConfigProcessor);
+            FormlyConfigValidator = (function () {
+                function FormlyConfigValidator() {
+                }
+                FormlyConfigValidator.prototype.visit = function (field) { };
+                return FormlyConfigValidator;
+            }());
+        }
+    }
+});
+System.register("core", ["components/formly.common.component", "components/formly.field", "components/formly.form", "services/formly.config", "services/formly.event.emitter", "services/formly.messages", "services/formly.field.delegates", "services/formly.providers", "services/formly.processor"], function(exports_15, context_15) {
+    "use strict";
+    var __moduleName = context_15 && context_15.id;
+    return {
+        setters:[
+            function (formly_common_component_3_1) {
+                exports_15({
+                    "FormlyCommon": formly_common_component_3_1["FormlyCommon"]
+                });
+            },
+            function (formly_field_3_1) {
+                exports_15({
+                    "FormlyField": formly_field_3_1["FormlyField"]
+                });
+            },
+            function (formly_form_1_1) {
+                exports_15({
+                    "FormlyForm": formly_form_1_1["FormlyForm"]
+                });
+            },
+            function (formly_config_4_1) {
+                exports_15({
+                    "FormlyConfig": formly_config_4_1["FormlyConfig"]
+                });
+            },
+            function (formly_event_emitter_6_1) {
+                exports_15({
+                    "FormlyPubSub": formly_event_emitter_6_1["FormlyPubSub"],
+                    "FormlyEventEmitter": formly_event_emitter_6_1["FormlyEventEmitter"]
+                });
+            },
+            function (formly_messages_2_1) {
+                exports_15({
+                    "FormlyMessage": formly_messages_2_1["FormlyMessage"],
+                    "FormlyMessages": formly_messages_2_1["FormlyMessages"]
+                });
+            },
+            function (formly_field_delegates_2_1) {
+                exports_15({
+                    "FormlyFieldVisibilityDelegate": formly_field_delegates_2_1["FormlyFieldVisibilityDelegate"]
+                });
+            },
+            function (formly_providers_1_1) {
+                exports_15({
+                    "FormlyProviders": formly_providers_1_1["FormlyProviders"]
+                });
+            },
+            function (formly_processor_1_1) {
+                exports_15({
+                    "FormlyConfigProcessor": formly_processor_1_1["FormlyConfigProcessor"]
+                });
+            }],
+        execute: function() {
+        }
+    }
+});
+System.register("templates/formlyfield.checkbox", ["@angular/core", "templates/field", "services/formly.messages", "services/formly.event.emitter", "@angular/common"], function(exports_16, context_16) {
+    "use strict";
+    var __moduleName = context_16 && context_16.id;
+    var core_9, field_1, formly_messages_3, formly_event_emitter_7, common_4;
+    var FormlyFieldCheckbox;
+    return {
+        setters:[
+            function (core_9_1) {
+                core_9 = core_9_1;
+            },
+            function (field_1_1) {
+                field_1 = field_1_1;
+            },
+            function (formly_messages_3_1) {
+                formly_messages_3 = formly_messages_3_1;
+            },
+            function (formly_event_emitter_7_1) {
+                formly_event_emitter_7 = formly_event_emitter_7_1;
+            },
+            function (common_4_1) {
+                common_4 = common_4_1;
+            }],
+        execute: function() {
+            FormlyFieldCheckbox = (function (_super) {
+                __extends(FormlyFieldCheckbox, _super);
+                function FormlyFieldCheckbox(fm, ps, formBuilder) {
+                    _super.call(this, fm, ps);
+                    this.formBuilder = formBuilder;
+                }
+                FormlyFieldCheckbox.prototype.createControl = function () {
+                    return this.formBuilder.control(this._model ? "on" : undefined);
+                };
+                FormlyFieldCheckbox = __decorate([
+                    core_9.Component({
+                        selector: "formly-field-checkbox",
+                        template: "\n    <div class=\"form-group\">\n      <div [ngFormModel]=\"form\">\n        <label class=\"c-input c-checkbox\">\n          <input type=\"checkbox\" [ngControl]=\"key\" (change)=\"inputChange($event, 'checked')\" [(ngModel)]=\"model\"\n            *ngIf=\"!templateOptions.hidden\" [disabled]=\"templateOptions.disabled\" value=\"on\"> {{templateOptions.label}}\n            <span class=\"c-indicator\"></span>\n          </label>\n      </div>\n      <small class=\"text-muted\">{{templateOptions.description}}</small>\n    </div>\n    ",
+                        inputs: ["form", "update", "templateOptions", "key", "field", "formModel", "model"]
+                    }), 
+                    __metadata('design:paramtypes', [formly_messages_3.FormlyMessages, formly_event_emitter_7.FormlyPubSub, common_4.FormBuilder])
+                ], FormlyFieldCheckbox);
+                return FormlyFieldCheckbox;
+            }(field_1.Field));
+            exports_16("FormlyFieldCheckbox", FormlyFieldCheckbox);
+        }
+    }
+});
+System.register("templates/formlyfield.multicheckbox", ["@angular/core", "services/formly.event.emitter", "services/formly.messages", "templates/field", "@angular/common"], function(exports_17, context_17) {
+    "use strict";
+    var __moduleName = context_17 && context_17.id;
+    var core_10, formly_event_emitter_8, formly_messages_4, field_2, common_5;
+    var FormlyFieldMultiCheckbox;
+    return {
+        setters:[
+            function (core_10_1) {
+                core_10 = core_10_1;
+            },
+            function (formly_event_emitter_8_1) {
+                formly_event_emitter_8 = formly_event_emitter_8_1;
+            },
+            function (formly_messages_4_1) {
+                formly_messages_4 = formly_messages_4_1;
+            },
+            function (field_2_1) {
+                field_2 = field_2_1;
+            },
+            function (common_5_1) {
+                common_5 = common_5_1;
+            }],
+        execute: function() {
+            FormlyFieldMultiCheckbox = (function (_super) {
+                __extends(FormlyFieldMultiCheckbox, _super);
+                function FormlyFieldMultiCheckbox(fm, fps, formBuilder) {
+                    _super.call(this, fm, fps);
+                    this.fps = fps;
+                    this.formBuilder = formBuilder;
+                }
+                FormlyFieldMultiCheckbox.prototype.inputChange = function (e, val) {
+                    this._model[val] = e.target.checked;
+                    this.changeFn.emit(new formly_event_emitter_8.FormlyValueChangeEvent(this.key, this._model));
+                    this.fps.setUpdated(true);
+                };
+                FormlyFieldMultiCheckbox.prototype.createControl = function () {
+                    var _this = this;
+                    var controlGroupConfig = this.templateOptions.options.reduce(function (previous, option) {
+                        previous[option.key] = [_this._model ? _this._model[option.key] : undefined];
+                        return previous;
+                    }, {});
+                    return this.formBuilder.group(controlGroupConfig);
+                };
+                FormlyFieldMultiCheckbox = __decorate([
+                    core_10.Component({
+                        selector: "formly-field-multicheckbox",
+                        template: "\n        <div [ngFormModel]=\"form\">\n            <div [ngControlGroup]=\"key\" class=\"form-group\">\n                <label class=\"form-control-label\" for=\"\">{{templateOptions.label}}</label>\n                <div *ngFor=\"let option of templateOptions.options\">\n                    <label class=\"c-input c-radio\">\n                        <input type=\"checkbox\" name=\"choose\" value=\"{{option.value}}\" [ngControl]=\"option.key\"\n                          [(ngModel)]=\"model[option.key]\" (change)=\"inputChange($event, option.key)\">{{option.value}}\n                        <span class=\"c-indicator\"></span>\n                    </label>\n                </div>\n                <small class=\"text-muted\">{{templateOptions.description}}</small>\n            </div>\n        </div>\n    ",
+                        inputs: ["form", "update", "templateOptions", "key", "field", "formModel", "model"]
+                    }), 
+                    __metadata('design:paramtypes', [formly_messages_4.FormlyMessages, formly_event_emitter_8.FormlyPubSub, common_5.FormBuilder])
+                ], FormlyFieldMultiCheckbox);
+                return FormlyFieldMultiCheckbox;
+            }(field_2.Field));
+            exports_17("FormlyFieldMultiCheckbox", FormlyFieldMultiCheckbox);
+        }
+    }
+});
+System.register("templates/formlyfield.input", ["@angular/core", "services/formly.messages", "services/formly.event.emitter", "templates/field"], function(exports_18, context_18) {
+    "use strict";
+    var __moduleName = context_18 && context_18.id;
+    var core_11, formly_messages_5, formly_event_emitter_9, field_3;
+    var FormlyFieldInput;
+    return {
+        setters:[
+            function (core_11_1) {
+                core_11 = core_11_1;
+            },
+            function (formly_messages_5_1) {
+                formly_messages_5 = formly_messages_5_1;
+            },
+            function (formly_event_emitter_9_1) {
+                formly_event_emitter_9 = formly_event_emitter_9_1;
+            },
+            function (field_3_1) {
+                field_3 = field_3_1;
+            }],
+        execute: function() {
+            FormlyFieldInput = (function (_super) {
+                __extends(FormlyFieldInput, _super);
+                function FormlyFieldInput(fm, ps, elem) {
+                    _super.call(this, fm, ps);
+                    this.elem = elem;
+                }
+                FormlyFieldInput.prototype.ngAfterViewInit = function () {
+                    if (this.templateOptions.focus) {
+                        this.elem.nativeElement.querySelector("input").focus();
+                    }
+                };
+                FormlyFieldInput = __decorate([
+                    core_11.Component({
+                        selector: "formly-field-input",
+                        template: "\n    <div class=\"form-group\" [ngFormModel]=\"form\" [ngClass]=\"{'has-danger': !formControl.valid}\" *ngIf=\"!templateOptions.hidden\">\n      <label attr.for=\"{{key}}\" class=\"form-control-label\">{{templateOptions.label}}</label>\n        <input type=\"{{templateOptions.type}}\" [ngControl]=\"key\" class=\"form-control\" id=\"{{key}}\"\n          placeholder=\"{{templateOptions.placeholder}}\" [disabled]=\"templateOptions.disabled\"\n          (keyup)=\"inputChange($event, 'value')\" (change)=\"inputChange($event, 'value')\" [(ngModel)]=\"model\"\n          [ngClass]=\"{'form-control-danger': !form.controls[key].valid}\">\n        <small class=\"text-muted\">{{templateOptions.description}}</small>\n        <small class=\"text-muted text-danger\"><formly-message [control]=\"key\"></formly-message></small>\n      </div>\n    ",
+                        directives: [formly_messages_5.FormlyMessage],
+                        inputs: ["form", "update", "templateOptions", "key", "field", "formModel", "model"]
+                    }), 
+                    __metadata('design:paramtypes', [formly_messages_5.FormlyMessages, formly_event_emitter_9.FormlyPubSub, core_11.ElementRef])
+                ], FormlyFieldInput);
+                return FormlyFieldInput;
+            }(field_3.Field));
+            exports_18("FormlyFieldInput", FormlyFieldInput);
+        }
+    }
+});
+System.register("templates/formlyfield.radio", ["@angular/core", "services/formly.event.emitter", "services/formly.messages", "templates/field", "@angular/common"], function(exports_19, context_19) {
+    "use strict";
+    var __moduleName = context_19 && context_19.id;
+    var core_12, formly_event_emitter_10, formly_messages_6, field_4, common_6;
+    var FormlyFieldRadio;
+    return {
+        setters:[
+            function (core_12_1) {
+                core_12 = core_12_1;
+            },
+            function (formly_event_emitter_10_1) {
+                formly_event_emitter_10 = formly_event_emitter_10_1;
+            },
+            function (formly_messages_6_1) {
+                formly_messages_6 = formly_messages_6_1;
+            },
+            function (field_4_1) {
+                field_4 = field_4_1;
+            },
+            function (common_6_1) {
+                common_6 = common_6_1;
+            }],
+        execute: function() {
+            FormlyFieldRadio = (function (_super) {
+                __extends(FormlyFieldRadio, _super);
+                function FormlyFieldRadio(fm, ps, formBuilder) {
+                    _super.call(this, fm, ps);
+                    this.formBuilder = formBuilder;
+                }
+                FormlyFieldRadio.prototype.createControl = function () {
+                    var _this = this;
+                    var controlGroupConfig = this.templateOptions.options.reduce(function (previous, option) {
+                        previous[option.key] = [new common_6.RadioButtonState(_this._model === option.value, option.value)];
+                        return previous;
+                    }, {});
+                    return this.formBuilder.group(controlGroupConfig);
+                };
+                FormlyFieldRadio = __decorate([
+                    core_12.Component({
+                        selector: "formly-field-radio",
+                        template: "\n    <div [ngFormModel]=\"form\">\n      <div [ngControlGroup]=\"key\" class=\"form-group\">\n        <label class=\"form-control-label\" for=\"\">{{templateOptions.label}}</label>\n        <div *ngFor=\"let option of templateOptions.options\">\n          <label class=\"c-input c-radio\">\n            <input type=\"radio\" name=\"choose\" value=\"{{option.value}}\" [ngControl]=\"option.key\"\n              (change)=\"inputChange($event, 'value')\">{{option.value}}\n            <span class=\"c-indicator\"></span>\n          </label>\n        </div>\n        <small class=\"text-muted\">{{templateOptions.description}}</small>\n      </div>\n    </div>",
+                        inputs: ["form", "update", "templateOptions", "key", "field", "formModel", "model"]
+                    }), 
+                    __metadata('design:paramtypes', [formly_messages_6.FormlyMessages, formly_event_emitter_10.FormlyPubSub, common_6.FormBuilder])
+                ], FormlyFieldRadio);
+                return FormlyFieldRadio;
+            }(field_4.Field));
+            exports_19("FormlyFieldRadio", FormlyFieldRadio);
+        }
+    }
+});
+System.register("templates/formlyfield.textarea", ["@angular/core", "services/formly.event.emitter", "services/formly.messages", "templates/field"], function(exports_20, context_20) {
+    "use strict";
+    var __moduleName = context_20 && context_20.id;
+    var core_13, formly_event_emitter_11, formly_messages_7, field_5;
+    var FormlyFieldTextArea;
+    return {
+        setters:[
+            function (core_13_1) {
+                core_13 = core_13_1;
+            },
+            function (formly_event_emitter_11_1) {
+                formly_event_emitter_11 = formly_event_emitter_11_1;
+            },
+            function (formly_messages_7_1) {
+                formly_messages_7 = formly_messages_7_1;
+            },
+            function (field_5_1) {
+                field_5 = field_5_1;
+            }],
+        execute: function() {
+            FormlyFieldTextArea = (function (_super) {
+                __extends(FormlyFieldTextArea, _super);
+                function FormlyFieldTextArea(fm, ps, elem) {
+                    _super.call(this, fm, ps);
+                    this.elem = elem;
+                }
+                FormlyFieldTextArea.prototype.ngAfterViewInit = function () {
+                    if (this.templateOptions.focus) {
+                        this.elem.nativeElement.querySelector("textarea").focus();
+                    }
+                };
+                FormlyFieldTextArea = __decorate([
+                    core_13.Component({
+                        selector: "formly-field-textarea",
+                        template: "\n    <fieldset class=\"form-group\" [ngFormModel]=\"form\" *ngIf=\"!templateOptions.hidden\">\n      <label attr.for=\"{{key}}\" class=\"form-control-label\">{{templateOptions.label}}</label>\n      <textarea name=\"{{key}}\" [ngControl]=\"key\" id=\"{{key}}\" [(ngModel)]=\"model\" cols=\"{{templateOptions.cols}}\"\n        rows=\"{{templateOptions.rows}}\" (change)=\"inputChange($event, 'value')\" (keyup)=\"inputChange($event, 'value')\"\n        placeholder=\"{{templateOptions.placeholder}}\" class=\"form-control\" [disabled]=\"templateOptions.disabled\"></textarea>\n      <small class=\"text-muted\">{{templateOptions.description}}</small>\n    </fieldset>",
+                        inputs: ["form", "update", "templateOptions", "key", "field", "formModel", "model"]
+                    }), 
+                    __metadata('design:paramtypes', [formly_messages_7.FormlyMessages, formly_event_emitter_11.FormlyPubSub, core_13.ElementRef])
+                ], FormlyFieldTextArea);
+                return FormlyFieldTextArea;
+            }(field_5.Field));
+            exports_20("FormlyFieldTextArea", FormlyFieldTextArea);
+        }
+    }
+});
+System.register("templates/formlyfield.select", ["@angular/core", "services/formly.event.emitter", "services/formly.messages", "templates/field"], function(exports_21, context_21) {
+    "use strict";
+    var __moduleName = context_21 && context_21.id;
+    var core_14, formly_event_emitter_12, formly_messages_8, field_6;
+    var FormlyFieldSelect;
+    return {
+        setters:[
+            function (core_14_1) {
+                core_14 = core_14_1;
+            },
+            function (formly_event_emitter_12_1) {
+                formly_event_emitter_12 = formly_event_emitter_12_1;
+            },
+            function (formly_messages_8_1) {
+                formly_messages_8 = formly_messages_8_1;
+            },
+            function (field_6_1) {
+                field_6 = field_6_1;
+            }],
+        execute: function() {
+            FormlyFieldSelect = (function (_super) {
+                __extends(FormlyFieldSelect, _super);
+                function FormlyFieldSelect(fm, ps) {
+                    _super.call(this, fm, ps);
+                }
+                FormlyFieldSelect = __decorate([
+                    core_14.Component({
+                        selector: "formly-field-select",
+                        template: "\n        <div class=\"select\" [ngFormModel]=\"form\">\n          <label for=\"\" class=\"form-control-label\">{{templateOptions.label}}</label>\n          <select [id]=\"key\" [ngControl]=\"key\" (change)=\"inputChange($event, 'value')\" class=\"c-select\" [(ngModel)]=\"model\">\n            <option value=\"\" *ngIf=\"templateOptions.placeholder\">{{templateOptions.placeholder}}</option>\n            <option *ngFor=\"let opt of templateOptions.options\" [value]=\"opt.value\">{{opt.label}}</option>\n          </select>\n          <small class=\"text-muted\">{{templateOptions.description}}</small>\n        </div>\n    ",
+                        inputs: ["form", "update", "templateOptions", "key", "field", "formModel", "model"]
+                    }), 
+                    __metadata('design:paramtypes', [formly_messages_8.FormlyMessages, formly_event_emitter_12.FormlyPubSub])
+                ], FormlyFieldSelect);
+                return FormlyFieldSelect;
+            }(field_6.Field));
+            exports_21("FormlyFieldSelect", FormlyFieldSelect);
+        }
+    }
+});
+System.register("templates/templates", ["templates/formlyfield.input", "templates/formlyfield.checkbox", "templates/formlyfield.radio", "templates/formlyfield.select", "templates/formlyfield.textarea", "templates/formlyfield.multicheckbox"], function(exports_22, context_22) {
+    "use strict";
+    var __moduleName = context_22 && context_22.id;
+    var formlyfield_input_1, formlyfield_checkbox_1, formlyfield_radio_1, formlyfield_select_1, formlyfield_textarea_1, formlyfield_multicheckbox_1;
+    var TemplateDirectives;
+    return {
+        setters:[
+            function (formlyfield_input_1_1) {
+                formlyfield_input_1 = formlyfield_input_1_1;
+            },
+            function (formlyfield_checkbox_1_1) {
+                formlyfield_checkbox_1 = formlyfield_checkbox_1_1;
+            },
+            function (formlyfield_radio_1_1) {
+                formlyfield_radio_1 = formlyfield_radio_1_1;
+            },
+            function (formlyfield_select_1_1) {
+                formlyfield_select_1 = formlyfield_select_1_1;
+            },
+            function (formlyfield_textarea_1_1) {
+                formlyfield_textarea_1 = formlyfield_textarea_1_1;
+            },
+            function (formlyfield_multicheckbox_1_1) {
+                formlyfield_multicheckbox_1 = formlyfield_multicheckbox_1_1;
+            }],
+        execute: function() {
+            exports_22("TemplateDirectives", TemplateDirectives = {
+                input: formlyfield_input_1.FormlyFieldInput,
+                checkbox: formlyfield_checkbox_1.FormlyFieldCheckbox,
+                radio: formlyfield_radio_1.FormlyFieldRadio,
+                select: formlyfield_select_1.FormlyFieldSelect,
+                textarea: formlyfield_textarea_1.FormlyFieldTextArea,
+                multicheckbox: formlyfield_multicheckbox_1.FormlyFieldMultiCheckbox
+            });
+        }
+    }
+});
+System.register("templates/formlyBootstrap", ["services/formly.config", "services/formly.messages", "templates/templates", "@angular/core"], function(exports_23, context_23) {
+    "use strict";
+    var __moduleName = context_23 && context_23.id;
+    var formly_config_5, formly_messages_9, templates_1, core_15;
+    var FormlyBootstrap;
+    return {
+        setters:[
+            function (formly_config_5_1) {
+                formly_config_5 = formly_config_5_1;
+            },
+            function (formly_messages_9_1) {
+                formly_messages_9 = formly_messages_9_1;
+            },
+            function (templates_1_1) {
+                templates_1 = templates_1_1;
+            },
+            function (core_15_1) {
+                core_15 = core_15_1;
+            }],
+        execute: function() {
+            FormlyBootstrap = (function () {
+                function FormlyBootstrap(fc, fm) {
+                    fm.addStringMessage("required", "This field is required.");
+                    fm.addStringMessage("invalidEmailAddress", "Invalid Email Address");
+                    fm.addStringMessage("maxlength", "Maximum Length Exceeded.");
+                    fm.addStringMessage("minlength", "Should have atleast 2 Characters");
+                    ["input", "checkbox", "radio", "select"].forEach(function (field) {
+                        fc.setType({
+                            name: field,
+                            component: templates_1.TemplateDirectives[field]
+                        });
+                    });
+                }
+                FormlyBootstrap = __decorate([
+                    core_15.Injectable(), 
+                    __metadata('design:paramtypes', [formly_config_5.FormlyConfig, formly_messages_9.FormlyMessages])
+                ], FormlyBootstrap);
+                return FormlyBootstrap;
+            }());
+            exports_23("FormlyBootstrap", FormlyBootstrap);
+        }
+    }
+});
+System.register("templates", ["templates/formlyfield.checkbox", "templates/formlyfield.multicheckbox", "templates/formlyfield.input", "templates/formlyfield.radio", "templates/formlyfield.textarea", "templates/formlyfield.select", "templates/field", "templates/templates", "templates/formlyBootstrap"], function(exports_24, context_24) {
+    "use strict";
+    var __moduleName = context_24 && context_24.id;
+    return {
+        setters:[
+            function (formlyfield_checkbox_2_1) {
+                exports_24({
+                    "FormlyFieldCheckbox": formlyfield_checkbox_2_1["FormlyFieldCheckbox"]
+                });
+            },
+            function (formlyfield_multicheckbox_2_1) {
+                exports_24({
+                    "FormlyFieldMultiCheckbox": formlyfield_multicheckbox_2_1["FormlyFieldMultiCheckbox"]
+                });
+            },
+            function (formlyfield_input_2_1) {
+                exports_24({
+                    "FormlyFieldInput": formlyfield_input_2_1["FormlyFieldInput"]
+                });
+            },
+            function (formlyfield_radio_2_1) {
+                exports_24({
+                    "FormlyFieldRadio": formlyfield_radio_2_1["FormlyFieldRadio"]
+                });
+            },
+            function (formlyfield_textarea_2_1) {
+                exports_24({
+                    "FormlyFieldTextArea": formlyfield_textarea_2_1["FormlyFieldTextArea"]
+                });
+            },
+            function (formlyfield_select_2_1) {
+                exports_24({
+                    "FormlyFieldSelect": formlyfield_select_2_1["FormlyFieldSelect"]
+                });
+            },
+            function (field_7_1) {
+                exports_24({
+                    "Field": field_7_1["Field"]
+                });
+            },
+            function (templates_2_1) {
+                exports_24({
+                    "TemplateDirectives": templates_2_1["TemplateDirectives"]
+                });
+            },
+            function (formlyBootstrap_1_1) {
+                exports_24({
+                    "FormlyBootstrap": formlyBootstrap_1_1["FormlyBootstrap"]
+                });
+            }],
+        execute: function() {
+        }
+    }
+});
+System.register("index", ["core", "templates"], function(exports_25, context_25) {
+    "use strict";
+    var __moduleName = context_25 && context_25.id;
+    function exportStar_1(m) {
+        var exports = {};
+        for(var n in m) {
+            if (n !== "default") exports[n] = m[n];
+        }
+        exports_25(exports);
+    }
+    return {
+        setters:[
+            function (core_16_1) {
+                exportStar_1(core_16_1);
+            },
+            function (templates_3_1) {
+                exportStar_1(templates_3_1);
+            }],
+        execute: function() {
+        }
+    }
+});
+//# sourceMappingURL=ng2-formly.js.map

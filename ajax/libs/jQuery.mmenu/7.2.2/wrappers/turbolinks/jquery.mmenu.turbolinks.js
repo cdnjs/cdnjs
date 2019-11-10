@@ -1,0 +1,1 @@
+!function(o){var r="mmenu";o[r].wrappers.turbolinks=function(){var n,t;o(document).on("turbolinks:before-visit",function(){t=o("html"),n=t.attr("class"),n=o.grep(n.split(/\s+/),function(n){return!/mm-/.test(n)}).join(" ")}).on("turbolinks:load",function(){void 0!==t&&(t.attr("class",n),o[r].glbl=!1)})}}(jQuery);

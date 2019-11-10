@@ -1,0 +1,6 @@
+(function(factory){if (typeof define === 'function' && define.amd){define(['jquery'], factory);} else if (typeof module === 'object' && typeof module.exports === 'object'){module.exports = factory(require('jquery'));} else {factory(jQuery);}}(function(jQuery){
+
+/*! Parser: duration & countdown - updated 2/7/2015 (v2.19.0) */
+!function(e){"use strict";e.tablesorter.addParser({id:"duration",is:function(){return!1},format:function(e,r){var t,n,s=r.config,i="",o="",a=s.durationLength||4,u=new Array(a+1).join("0"),d=(s.durationLabels||"(?:years|year|y),(?:days|day|d),(?:hours|hour|h),(?:minutes|minute|min|m),(?:seconds|second|sec|s)").split(/\s*,\s*/),c=d.length;if(!s.durationRegex){for(t=0;t<c;t++)i+="(?:(\\d+)\\s*"+d[t]+"\\s*)?";s.durationRegex=new RegExp(i,"i")}for(n=(s.usNumberFormat?e.replace(/,/g,""):e.replace(/(\d)(?:\.|\s*)(\d)/g,"$1$2")).match(s.durationRegex),t=1;t<c+1;t++)o+=(u+(n[t]||0)).slice(-a);return o},type:"text"}),
+/*! Countdown parser ( hh:mm:ss ) */
+e.tablesorter.addParser({id:"countdown",is:function(){return!1},format:function(e,r){for(var t=r.config.durationLength||4,n=new Array(t+1).join("0"),s=e.split(/\s*:\s*/),i=s.length,o=[];i;)o.push((n+(s[--i]||0)).slice(-t));return o.length?o.reverse().join(""):e},type:"text"})}(jQuery);return jQuery;}));

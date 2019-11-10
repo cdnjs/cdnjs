@@ -1,0 +1,140 @@
+/*
+ * Lightcase - jQuery Plugin
+ * The smart and flexible Lightbox Plugin.
+ *
+ * @author		Cornel Boppart <cornel@bopp-art.com>
+ * @copyright	Author
+ *
+ * @version		2.1.1 (12/07/2015)
+ */
+
+@media screen and (min-width: 641px) {
+
+	/* Overlay */
+	#lightcase-overlay {
+		background: #333;
+	}
+
+	/* Loading */
+	#lightcase-loading {
+		color: #fff;
+		text-shadow: 0 0 15px #fff;
+	}
+
+	/* Case */
+	#lightcase-case {
+		font-family: arial, sans-serif;
+		font-size: 13px;
+		line-height: 18px;
+		text-align: left;
+
+		color: #aaa;
+		text-shadow: 0 0 10px rgba(0,0,0,0.5);
+	}
+
+	/* Content */
+	#lightcase-case:not([data-type=error]) .lightcase-content {
+		position: relative;
+		z-index: 1;
+		overflow: hidden;
+
+		text-shadow: none;
+
+		background-color: #fff;
+
+		-webkit-box-shadow: 0 0 30px rgba(0,0,0,0.5);
+		-moz-box-shadow: 0 0 30px rgba(0,0,0,0.5);
+		-o-box-shadow: 0 0 30px rgba(0,0,0,0.5);
+		box-shadow: 0 0 30px rgba(0,0,0,0.5);
+
+		-webkit-backface-visibility: hidden;
+	}
+	#lightcase-case[data-type=image] .lightcase-content,
+	#lightcase-case[data-type=video] .lightcase-content {
+		background-color: #333;
+	}
+	#lightcase-case[data-type=image] .lightcase-contentInner,
+	#lightcase-case[data-type=video] .lightcase-contentInner {
+		line-height: 0.75;
+	}
+	#lightcase-case:not([data-type=error]) .lightcase-inlineWrap {
+		padding: 30px;
+
+		overflow: auto;
+
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		-o-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+
+	/*
+	 * Content - Extend with further selectors and colors in case you
+	 * have elements like <ul>, <li>, <span> or similar displayed in lightcase.
+	 */
+	#lightcase-case .lightcase-content h1,
+	#lightcase-case .lightcase-content h2,
+	#lightcase-case .lightcase-content h3,
+	#lightcase-case .lightcase-content h4,
+	#lightcase-case .lightcase-content h5,
+	#lightcase-case .lightcase-content h6,
+	#lightcase-case .lightcase-content p {
+		color: #333;
+	}
+
+	/* Navigation */
+	#lightcase-nav a {
+		bottom: 50%;
+		margin-bottom: -0.5em;
+
+		outline: none;
+		cursor: pointer;
+	}
+	#lightcase-nav a.lightcase-icon-close {
+		margin: 0;
+	}
+	#lightcase-nav a.lightcase-icon-close,
+	#lightcase-nav a.lightcase-icon-play,
+	#lightcase-nav a.lightcase-icon-pause {
+		opacity: 0;
+	}
+	#lightcase-nav a:hover {
+		text-shadow: 0 0 15px #fff;
+	}
+	#lightcase-nav a:hover,
+	#lightcase-case:hover ~ #lightcase-nav a {
+		opacity: 1;
+	}
+
+	/* Icon positioning */
+	#lightcase-nav a.lightcase-icon-close {
+		position: fixed;
+		z-index: 9997;
+
+		top: 15px;
+		right: 15px;
+
+		outline: none;
+	}
+	#lightcase-nav a.lightcase-icon-play,
+	#lightcase-nav a.lightcase-icon-pause {
+		left: 50%;
+		margin-left: -0.5em;
+	}
+	#lightcase-nav a.lightcase-icon-prev {
+		left: 15px;
+	}
+	#lightcase-nav a.lightcase-icon-next {
+		right: 15px;
+	}
+
+	/* Error message */
+	#lightcase-case p.lightcase-error {
+		margin: 0;
+		padding: 0;
+
+		font-size: 17px;
+		color: #aaa;
+	}
+
+}

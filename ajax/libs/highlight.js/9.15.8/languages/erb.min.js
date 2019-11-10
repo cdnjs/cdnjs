@@ -1,0 +1,1 @@
+hljs.registerLanguage("erb",function(e){return{sL:"xml",c:[e.C("<%#","%>"),{b:"<%[%=-]?",e:"[%-]?%>",sL:"ruby",eB:!0,eE:!0}]}});

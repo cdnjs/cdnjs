@@ -1,0 +1,398 @@
+/**
+* html5tooltips.js
+* Tooltips with smooth 3D animation.
+* https://github.com/ytiurin/html5tooltipsjs
+*
+* Yevhen Tiurin <yevhentiurin@gmail.com>
+* The MIT License (MIT)
+* https://github.com/ytiurin/html5tooltipsjs/raw/master/LICENSE
+*
+* Aug 5, 2015
+**/
+
+.html5tooltip-bottom,
+.html5tooltip-left,
+.html5tooltip-right,
+.html5tooltip-top
+{
+  -moz-perspective: 300px;
+  -ms-perspective: 300px;
+  -o-perspective: 300px;
+  -webkit-perspective: 300px;
+  perspective: 300px;
+}
+
+.html5tooltip-bottom.animating,
+.html5tooltip-left.animating,
+.html5tooltip-right.animating,
+.html5tooltip-top.animating
+{
+  transition: top .3s;
+}
+
+.html5tooltip-box.animating
+{
+  -moz-transition: opacity .3s, -moz-transform .3s;
+  -ms-transition: opacity .3s, -ms-transform .3s;
+  -o-transition: opacity .3s, -o-transform .3s;
+  -webkit-transition: opacity .3s, -webkit-transform .3s;
+  transition: opacity .3s, transform .3s;
+}
+
+.html5tooltip-more.animating
+{
+  -moz-transition: height .3s;
+  -ms-transition: height .3s;
+  -o-transition: height .3s;
+  -webkit-transition: height .3s;
+  transition: height .3s;
+}
+
+/* Fadein */
+.fadein-from { opacity: 0; }
+.fadein-to { opacity: 1; }
+/*
+.fadein-from,
+.fadein-to
+{
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  -webkit-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+*/
+/* Scalein */
+.scalein-from
+{
+  opacity: 0;
+  -moz-transform: scale3d(.7,.7,.7);
+  -ms-transform: scale3d(.7,.7,.7);
+  -o-transform: scale3d(.7,.7,.7);
+  -webkit-transform: scale3d(.7,.7,.7);
+  transform: scale3d(.7,.7,.7);
+}
+
+.scalein-to
+{
+  opacity: 1;
+  -moz-transform: scale3d(1,1,1);
+  -ms-transform: scale3d(1,1,1);
+  -o-transform: scale3d(1,1,1);
+  -webkit-transform: scale3d(1,1,1);
+  transform: scale3d(1,1,1);
+}
+
+.html5tooltip-bottom .scalein-to
+{
+  -moz-transform-origin: center top;
+  -ms-transform-origin: center top;
+  -o-transform-origin: center top;
+  -webkit-transform-origin: center top;
+  transform-origin: center top;
+}
+
+.html5tooltip-left .scalein-to
+{
+  -moz-transform-origin: right center;
+  -ms-transform-origin: right center;
+  -o-transform-origin: right center;
+  -webkit-transform-origin: right center;
+  transform-origin: right center;
+}
+
+.html5tooltip-right .scalein-to
+{
+  -moz-transform-origin: left center;
+  -ms-transform-origin: left center;
+  -o-transform-origin: left center;
+  -webkit-transform-origin: left center;
+  transform-origin: left center;
+}
+
+.html5tooltip-top .scalein-to
+{
+  -moz-transform-origin: center bottom;
+  -ms-transform-origin: center bottom;
+  -o-transform-origin: center bottom;
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+}
+
+/* Fold */
+.foldin-from,
+.foldout-from { opacity: 0; }
+
+.foldin-to,
+.foldout-to
+{
+  opacity: 1;
+  -moz-transform: rotate3d(0,0,0,0);
+  -ms-transform: rotate3d(0,0,0,0);
+  -o-transform: rotate3d(0,0,0,0);
+  -webkit-transform: rotate3d(0,0,0,0);
+  transform: rotate3d(0,0,0,0);
+}
+
+.html5tooltip-bottom .foldin-from,
+.html5tooltip-top .foldout-from
+{
+  -moz-transform: rotate3d(1,0,0,-90deg);
+  -ms-transform: rotate3d(1,0,0,-90deg);
+  -o-transform: rotate3d(1,0,0,-90deg);
+  -webkit-transform: rotate3d(1,0,0,-90deg);
+  transform: rotate3d(1,0,0,-90deg);
+}
+
+.html5tooltip-bottom .foldin-to,
+.html5tooltip-bottom .foldout-to
+{
+  -moz-transform-origin: center top;
+  -ms-transform-origin: center top;
+  -o-transform-origin: center top;
+  -webkit-transform-origin: center top;
+  transform-origin: center top;
+}
+
+.html5tooltip-left .foldin-from,
+.html5tooltip-right .foldout-from
+{
+  -moz-transform: rotate3d(0,1,0,-90deg);
+  -ms-transform: rotate3d(0,1,0,-90deg);
+  -o-transform: rotate3d(0,1,0,-90deg);
+  -webkit-transform: rotate3d(0,1,0,-90deg);
+  transform: rotate3d(0,1,0,-90deg);
+}
+
+.html5tooltip-left .foldin-to,
+.html5tooltip-left .foldout-to
+{
+  -moz-transform-origin: right center;
+  -ms-transform-origin: right center;
+  -o-transform-origin: right center;
+  -webkit-transform-origin: right center;
+  transform-origin: right center;
+}
+
+.html5tooltip-right .foldin-from,
+.html5tooltip-left .foldout-from
+{
+  -moz-transform: rotate3d(0,1,0,90deg);
+  -ms-transform: rotate3d(0,1,0,90deg);
+  -o-transform: rotate3d(0,1,0,90deg);
+  -webkit-transform: rotate3d(0,1,0,90deg);
+  transform: rotate3d(0,1,0,90deg);
+}
+
+.html5tooltip-right .foldin-to,
+.html5tooltip-right .foldout-to
+{
+  -moz-transform-origin: left center;
+  -ms-transform-origin: left center;
+  -o-transform-origin: left center;
+  -webkit-transform-origin: left center;
+  transform-origin: left center;
+}
+
+.html5tooltip-top .foldin-from,
+.html5tooltip-bottom .foldout-from
+{
+  -moz-transform: rotate3d(1,0,0,90deg);
+  -ms-transform: rotate3d(1,0,0,90deg);
+  -o-transform: rotate3d(1,0,0,90deg);
+  -webkit-transform: rotate3d(1,0,0,90deg);
+  transform: rotate3d(1,0,0,90deg);
+}
+
+.html5tooltip-top .foldin-to,
+.html5tooltip-top .foldout-to
+{
+  -moz-transform-origin: center bottom;
+  -ms-transform-origin: center bottom;
+  -o-transform-origin: center bottom;
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+}
+
+/* Slidein */
+.slidein-from { opacity: 0; }
+
+.slidein-to
+{
+  opacity: 1;
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  -webkit-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+.html5tooltip-bottom .slidein-from
+{
+  -moz-transform: translate3d(0,20px,0);
+  -ms-transform: translate3d(0,20px,0);
+  -o-transform: translate3d(0,20px,0);
+  -webkit-transform: translate3d(0,20px,0);
+  transform: translate3d(0,20px,0);
+}
+
+.html5tooltip-left .slidein-from
+{
+  -moz-transform:  translate3d(-20px,0,0);
+  -ms-transform: translate3d(-20px,0,0);
+  -o-transform: translate3d(-20px,0,0);
+  -webkit-transform: translate3d(-20px,0,0);
+  transform: translate3d(-20px,0,0);
+}
+
+.html5tooltip-right .slidein-from
+{
+  -moz-transform:  translate3d(20px,0,0);
+  -ms-transform: translate3d(20px,0,0);
+  -o-transform: translate3d(20px,0,0);
+  -webkit-transform: translate3d(20px,0,0);
+  transform: translate3d(20px,0,0);
+}
+
+.html5tooltip-top .slidein-from
+{
+  -moz-transform: translate3d(0,-20px,0);
+  -ms-transform: translate3d(0,-20px,0);
+  -o-transform: translate3d(0,-20px,0);
+  -webkit-transform: translate3d(0,-20px,0);
+  transform: translate3d(0,-20px,0);
+}
+
+/* Roll */
+.roll-from { opacity: 0; }
+
+.roll-to
+{
+  opacity: 1;
+  -moz-transform: rotate3d(0,0,0,0);
+  -ms-transform: rotate3d(0,0,0,0);
+  -o-transform: rotate3d(0,0,0,0);
+  -webkit-transform: rotate3d(0,0,0,0);
+  transform: rotate3d(0,0,0,0);
+}
+
+.html5tooltip-bottom .roll-from
+{
+  -moz-transform: rotate3d(0,0,1,-30deg);
+  -ms-transform: rotate3d(0,0,1,-30deg);
+  -o-transform: rotate3d(0,0,1,-30deg);
+  -webkit-transform: rotate3d(0,0,1,-30deg);
+  transform: rotate3d(0,0,1,-30deg);
+}
+
+.html5tooltip-bottom .roll-to
+{
+  -moz-transform-origin: center top;
+  -ms-transform-origin: center top;
+  -o-transform-origin: center top;
+  -webkit-transform-origin: center top;
+  transform-origin: center top;
+}
+
+.html5tooltip-left .roll-from
+{
+  -moz-transform: rotate3d(0,0,1,30deg);
+  -ms-transform: rotate3d(0,0,1,30deg);
+  -o-transform: rotate3d(0,0,1,30deg);
+  -webkit-transform: rotate3d(0,0,1,30deg);
+  transform: rotate3d(0,0,1,30deg);
+}
+
+.html5tooltip-left .roll-to
+{
+  -moz-transform-origin: right center;
+  -ms-transform-origin: right center;
+  -o-transform-origin: right center;
+  -webkit-transform-origin: right center;
+  transform-origin: right center;
+}
+
+.html5tooltip-right .roll-from
+{
+  -moz-transform: rotate3d(0,0,1,-30deg);
+  -ms-transform: rotate3d(0,0,1,-30deg);
+  -o-transform: rotate3d(0,0,1,-30deg);
+  -webkit-transform: rotate3d(0,0,1,-30deg);
+  transform: rotate3d(0,0,1,-30deg);
+}
+
+.html5tooltip-right .roll-to
+{
+  -moz-transform-origin: left center;
+  -ms-transform-origin: left center;
+  -o-transform-origin: left center;
+  -webkit-transform-origin: left center;
+  transform-origin: left center;
+}
+
+.html5tooltip-top .roll-from
+{
+  -moz-transform: rotate3d(0,0,1,30deg);
+  -ms-transform: rotate3d(0,0,1,30deg);
+  -o-transform: rotate3d(0,0,1,30deg);
+  -webkit-transform: rotate3d(0,0,1,30deg);
+  transform: rotate3d(0,0,1,30deg);
+}
+
+.html5tooltip-top .roll-to
+{
+  -moz-transform-origin: center bottom;
+  -ms-transform-origin: center bottom;
+  -o-transform-origin: center bottom;
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+}
+
+/* Spin */
+.spin-from { opacity: 0; }
+
+.spin-to
+{
+  opacity: 1;
+  -moz-transform: rotate3d(0,0,0,0) translate3d(0,0,0);
+  -ms-transform: rotate3d(0,0,0,0) translate3d(0,0,0);
+  -o-transform: rotate3d(0,0,0,0) translate3d(0,0,0);
+  -webkit-transform: rotate3d(0,0,0,0) translate3d(0,0,0);
+  transform: rotate3d(0,0,0,0) translate3d(0,0,0);
+}
+
+.html5tooltip-bottom .spin-from
+{
+  -moz-transform: rotate3d(0,1,0,90deg) translate3d(0,20px,0);
+  -ms-transform: rotate3d(0,1,0,90deg) translate3d(0,20px,0);
+  -o-transform: rotate3d(0,1,0,90deg) translate3d(0,20px,0);
+  -webkit-transform: rotate3d(0,1,0,90deg) translate3d(0,20px,0);
+  transform: rotate3d(0,1,0,90deg) translate3d(0,20px,0);
+}
+
+.html5tooltip-left .spin-from
+{
+  -moz-transform: rotate3d(1,0,0,-90deg) translate3d(-20px,0,0);
+  -ms-transform: rotate3d(1,0,0,-90deg) translate3d(-20px,0,0);
+  -o-transform: rotate3d(1,0,0,-90deg) translate3d(-20px,0,0);
+  -webkit-transform: rotate3d(1,0,0,-90deg) translate3d(-20px,0,0);
+  transform: rotate3d(1,0,0,-90deg) translate3d(-20px,0,0);
+}
+
+.html5tooltip-right .spin-from
+{
+  -moz-transform: rotate3d(1,0,0,-90deg) translate3d(20px,0,0);
+  -ms-transform: rotate3d(1,0,0,-90deg) translate3d(20px,0,0);
+  -o-transform: rotate3d(1,0,0,-90deg) translate3d(20px,0,0);
+  -webkit-transform: rotate3d(1,0,0,-90deg) translate3d(20px,0,0);
+  transform: rotate3d(1,0,0,-90deg) translate3d(20px,0,0);
+}
+
+.html5tooltip-top .spin-from
+{
+  -moz-transform: rotate3d(0,1,0,90deg) translate3d(0,-20px,0);
+  -ms-transform: rotate3d(0,1,0,90deg) translate3d(0,-20px,0);
+  -o-transform: rotate3d(0,1,0,90deg) translate3d(0,-20px,0);
+  -webkit-transform: rotate3d(0,1,0,90deg) translate3d(0,-20px,0);
+  transform: rotate3d(0,1,0,90deg) translate3d(0,-20px,0);
+}

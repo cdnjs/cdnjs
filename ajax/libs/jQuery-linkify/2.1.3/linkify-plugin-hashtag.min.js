@@ -1,0 +1,1 @@
+"use strict";!function(n){var r=function(){function n(n){function r(n){this.v=n}var t=n.scanner.TOKENS,a=n.parser.TOKENS.Base,i=n.parser.start;n.inherits(a,r,{type:"hashtag",isLink:!0});var s=i.jump(t.POUND),e=new n.parser.State(r);s.on(t.DOMAIN,e),s.on(t.TLD,e),s.on(t.LOCALHOST,e)}return n}();r(n)}(linkify);

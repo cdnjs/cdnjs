@@ -1,0 +1,16 @@
+/*
+  Highcharts JS v7.0.3 (2019-02-06)
+
+ Indicator series type for Highstock
+
+ (c) 2010-2019 Daniel Studencki
+
+ License: www.highcharts.com/license
+*/
+(function(d){"object"===typeof module&&module.exports?(d["default"]=d,module.exports=d):"function"===typeof define&&define.amd?define(function(){return d}):d("undefined"!==typeof Highcharts?Highcharts:void 0)})(function(d){var t=function(b){var d=b.each,k=b.merge,q=b.error,r=b.defined,h=b.seriesTypes.sma;return{pointArrayMap:["top","bottom"],pointValKey:"top",linesApiNames:["bottomLine"],getTranslatedLinesNames:function(a){var c=[];d(this.pointArrayMap,function(e){e!==a&&c.push("plot"+e.charAt(0).toUpperCase()+
+e.slice(1))});return c},toYData:function(a){var c=[];d(this.pointArrayMap,function(e){c.push(a[e])});return c},translate:function(){var a=this,c=a.pointArrayMap,e=[],b,e=a.getTranslatedLinesNames();h.prototype.translate.apply(a,arguments);d(a.points,function(l){d(c,function(c,d){b=l[c];null!==b&&(l[e[d]]=a.yAxis.toPixels(b,!0))})})},drawGraph:function(){var a=this,c=a.linesApiNames,e=a.points,b=e.length,l=a.options,w=a.graph,m={options:{gapSize:l.gapSize}},n=[],g=a.getTranslatedLinesNames(a.pointValKey),
+f;d(g,function(a,c){for(n[c]=[];b--;)f=e[b],n[c].push({x:f.x,plotX:f.plotX,plotY:f[a],isNull:!r(f[a])});b=e.length});d(c,function(c,b){n[b]?(a.points=n[b],l[c]?a.options=k(l[c].styles,m):q('Error: "There is no '+c+' in DOCS options declared. Check if linesApiNames are consistent with your DOCS line names." at mixin/multiple-line.js:34'),a.graph=a["graph"+c],h.prototype.drawGraph.call(a),a["graph"+c]=a.graph):q('Error: "'+c+" doesn't have equivalent in pointArrayMap. To many elements in linesApiNames relative to pointArrayMap.\"")});
+a.points=e;a.options=l;a.graph=w;h.prototype.drawGraph.call(a)}}}(d);(function(b,d){var k=b.seriesTypes.sma,q=b.seriesTypes.ema,r=b.seriesTypes.atr,h=b.merge,a=b.correctFloat;b.seriesType("keltnerchannels","sma",{params:{period:20,periodATR:10,multiplierATR:2},bottomLine:{styles:{lineWidth:1,lineColor:void 0}},topLine:{styles:{lineWidth:1,lineColor:void 0}},tooltip:{pointFormat:'\x3cspan style\x3d"color:{point.color}"\x3e\u25cf\x3c/span\x3e\x3cb\x3e {series.name}\x3c/b\x3e\x3cbr/\x3eUpper Channel: {point.top}\x3cbr/\x3eEMA({series.options.params.period}): {point.middle}\x3cbr/\x3eLower Channel: {point.bottom}\x3cbr/\x3e'},
+marker:{enabled:!1},dataGrouping:{approximation:"averages"},lineWidth:1},h(d,{pointArrayMap:["top","middle","bottom"],pointValKey:"middle",nameBase:"Keltner Channels",nameComponents:["period","periodATR","multiplierATR"],linesApiNames:["topLine","bottomLine"],requiredIndicators:["ema","atr"],init:function(){k.prototype.init.apply(this,arguments);this.options=h({topLine:{styles:{lineColor:this.color}},bottomLine:{styles:{lineColor:this.color}}},this.options)},getValues:function(c,b){var d=b.period,
+e=b.periodATR,h=b.multiplierATR,m=c.yData,m=m?m.length:0,n=[],g,f,k;b=q.prototype.getValues(c,{period:d,index:b.index});var t=r.prototype.getValues(c,{period:e}),u=[],v=[],p;if(m<d)return!1;for(p=d;p<=m;p++)g=b.values[p-d],f=t.values[p-e],k=g[0],c=a(g[1]+h*f[1]),f=a(g[1]-h*f[1]),g=g[1],n.push([k,c,g,f]),u.push(k),v.push([c,g,f]);return{values:n,xData:u,yData:v}}}))})(d,t)});
+//# sourceMappingURL=keltner-channels.js.map

@@ -1,0 +1,160 @@
+/**
+ * @file src/better-dateinput-polyfill.css
+ * @version 1.4.1 2014-08-29T19:17:56
+ * @overview input[type=date] polyfill for better-dom
+ * @copyright Maksim Chemerisuk 2014
+ * @license MIT
+ * @see https://github.com/chemerisuk/better-dateinput-polyfill
+ */
+/*
+    #555    - font color
+    #FFF    - day background color
+    #2DA4D6 - header background color
+    #207FB1 - active background color
+    #DDD    - border color
+    #BBB    - gray text color
+    #F3F3F3 - gray background color
+ */
+
+.better-dateinput-value {
+    position: absolute;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    border-style: none solid;
+    border-color: transparent;
+}
+
+.better-dateinput-calendar {
+    position: absolute;
+    visibility: hidden; /* initially calendar is hidden */
+
+    overflow: hidden;
+    cursor: default;
+
+    color: #FFF;
+    background: #2DA4D6;
+
+    border: 1px solid #DDD;
+    border-radius: 3px;
+    box-shadow: 0 0.25em 0.5em rgba(0,0,0,0.2);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-align: center;
+
+    opacity: 1;
+
+    -webkit-transform: scale(1,1);
+    transform: scale(1,1);
+
+    -webkit-transform-origin: 50% 0;
+    transform-origin: 50% 0;
+
+    -webkit-transition: 0.15s ease-in-out;
+    transition: 0.15s ease-in-out;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.better-dateinput-calendar[aria-hidden=true] {
+    opacity: 0;
+
+    -webkit-transform: scale(0,0);
+    transform: scale(0,0);
+}
+
+.better-dateinput-calendar-header {
+    font-weight: bold;
+    line-height: 2.5;
+}
+
+.better-dateinput-calendar > a {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    width: 3em;
+    line-height: 3.25;
+    font-size: 0.75em;
+}
+
+.better-dateinput-calendar > a:before {
+    content: "";
+    display: inline-block;
+    height: 0;
+    width: 0;
+    border-style: solid;
+    border-width: 0.5em 0.75em 0.5em 0;
+    border-color: transparent;
+    border-right-color: inherit;
+    vertical-align: middle;
+}
+
+.better-dateinput-calendar > a + a {
+    left: auto;
+    right: 0;
+}
+
+.better-dateinput-calendar > a + a:before {
+    border-width: 0.5em 0 0.5em 0.75em;
+    border-color: transparent;
+    border-left-color: inherit;
+}
+
+.better-dateinput-calendar-days {
+    table-layout: fixed;
+    border-spacing: 0;
+    border-collapse: collapse;
+
+    color: #555;
+    background: #FFF;
+}
+
+.better-dateinput-calendar-days td,
+.better-dateinput-calendar-days th {
+    width: 2em;
+    height: 2em;
+    line-height: 2;
+}
+
+.better-dateinput-calendar-days th {
+    font-size: 0.75em;
+    background-color: #DDD;
+    font-weight: bold;
+}
+
+.better-dateinput-calendar-days td {
+    border: 1px solid #DDD;
+
+    -webkit-transition: background-color 0.1s ease-out;
+    transition: background-color 0.1s ease-out;
+}
+
+.better-dateinput-calendar-past,
+.better-dateinput-calendar-future {
+    color: #BBB;
+}
+
+.better-dateinput-calendar-today {
+    color: #FFF;
+    background-color: #2DA4D6;
+    font-weight: bold;
+}
+
+.better-dateinput-calendar-days td:hover {
+    background-color: #F3F3F3;
+}
+
+.better-dateinput-calendar > a:hover,
+td.better-dateinput-calendar-today:hover {
+    background-color: #207FB1;
+}
+
+/* fix firefox issue with color:transparent */
+.better-dateinput-value + input::-moz-placeholder {
+    color: initial;
+}

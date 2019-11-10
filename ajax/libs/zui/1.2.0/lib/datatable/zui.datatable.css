@@ -1,0 +1,200 @@
+/*!
+ * ZUI - v1.2.0 - 2014-11-18
+ * http://zui.sexy
+ * GitHub: https://github.com/easysoft/zui.git 
+ * Copyright (c) 2014 cnezsoft.com; Licensed MIT
+ */
+
+
+.datatable-head,
+.datatable-rows {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+.datatable {
+  margin-bottom: 20px;
+}
+.datatable > .datatable-head {
+  -webkit-transition: -webkit-box-shadow .2s;
+       -o-transition:         box-shadow .2s;
+          transition:         box-shadow .2s;
+}
+.datatable .table {
+  margin: 0;
+  table-layout: fixed;
+}
+.datatable .table > tbody > tr > td,
+.datatable .table > thead > tr > th {
+  min-width: 20px;
+}
+.datatable .table > tbody > tr > td.check-btn,
+.datatable .table > thead > tr > th.check-btn {
+  width: 30px;
+  color: #999;
+  text-align: center;
+  cursor: pointer;
+}
+.datatable .table > tbody > tr.hover > td.check-btn,
+.datatable .table > tbody > tr.active > td.check-btn,
+.datatable .table > thead > tr > th.check-btn:hover,
+.datatable .table > tbody > tr > td.check-btn:hover,
+.datatable .table > thead > tr > th.check-btn.checked,
+.datatable .table > tbody > tr > td.check-btn.checked {
+  color: #4d4d4d;
+}
+.datatable .table > thead > tr > th.check-btn.checked > .icon-check-empty:before,
+.datatable .table > tbody > tr > td.check-btn.checked > .icon-check-empty:before,
+.datatable .table > tbody > tr.active > td.check-btn > .icon-check-empty:before {
+  content: "\e642";
+}
+.datatable .table > thead > tr > th.col-hover {
+  background-color: #e2e2e2;
+}
+.datatable .table > tbody > tr > td.col-hover,
+.datatable .table > tbody > tr.hover > td {
+  background-color: #ebf2f9;
+}
+.datatable .table > tbody > tr.active.hover td {
+  background-color: #ffdfb2;
+}
+.datatable.head-fixed > .datatable-head {
+  position: fixed;
+  z-index: 10000;
+  -webkit-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .15);
+          box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .15);
+}
+.datatable.sortable .datatable-head-span .table > thead > tr > th {
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.datatable.sortable .datatable-head-span .table > thead > tr > th.text-center {
+  padding-right: 0;
+  padding-left: 0;
+}
+.datatable.sortable .datatable-head-span .table > thead > tr > th:after {
+  display: inline-block;
+  margin-left: 5px;
+  font-family: ZenIcon;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  color: #808080;
+  text-transform: none;
+  content: "\e6bd";
+
+  speak: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.datatable.sortable .datatable-head-span .table > thead > tr > th.sort-down:after {
+  color: #145ccd;
+  content: "\e6b8";
+}
+.datatable.sortable .datatable-head-span .table > thead > tr > th.sort-up:after {
+  color: #145ccd;
+  content: "\e6b9";
+}
+.datatable.sortable .datatable-head-span .table > thead > tr > th.check-btn:after,
+.datatable.sortable .datatable-head-span .table > thead > tr > th.sort-disabled:after {
+  display: none;
+}
+.datatable.sortable .datatable-head-span .table > thead > tr > th.sort-disabled {
+  cursor: default;
+}
+.datatable-wrapper {
+  position: relative;
+}
+.datatable-span {
+  display: table-cell;
+  vertical-align: top;
+}
+.datatable-span.flexarea {
+  overflow: hidden;
+}
+.datatable-span.flexarea.datatable-head-span.dragging {
+  cursor: move !important;
+}
+.datatable-span.flexarea .table {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.datatable-span.flexarea .scrolled-shadow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: none;
+  width: 20px;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+          box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+  opacity: 0;
+  -webkit-transition: all .5s cubic-bezier(.175, .885, .32, 1);
+       -o-transition: all .5s cubic-bezier(.175, .885, .32, 1);
+          transition: all .5s cubic-bezier(.175, .885, .32, 1);
+}
+.datatable-span.flexarea .scrolled-in-shadow {
+  left: -30px;
+}
+.datatable-span.flexarea .scrolled-out-shadow {
+  right: -30px;
+}
+.datatable > .scroll-wrapper {
+  position: relative;
+  width: 100%;
+}
+.datatable .scroll-slide {
+  position: absolute;
+  right: -1px;
+  bottom: 0;
+  left: -1px;
+  display: none;
+  height: 11px;
+  background: #e5e5e5;
+  background: rgba(128, 128, 128, .1);
+  border: 1px solid #e5e5e5;
+  border-bottom: none;
+  opacity: 0;
+  -webkit-transition: opacity .5s, background .3s;
+       -o-transition: opacity .5s, background .3s;
+          transition: opacity .5s, background .3s;
+}
+.datatable .scroll-slide > .bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 50px;
+  height: 10px;
+  background-color: #a6a6a6;
+}
+.datatable .scroll-slide:hover > .bar {
+  background-color: #808080;
+}
+.datatable .scroll-slide.scroll-pos-out {
+  bottom: -14px;
+  height: 15px;
+}
+.datatable .scroll-slide.scroll-pos-out > .bar {
+  height: 14px;
+}
+.datatable.show-scroll-slide:hover .scroll-slide,
+.datatable.show-scroll-slide.scrolling .scroll-slide,
+.datatable.show-scroll-slide:hover .scrolled-shadow,
+.datatable.show-scroll-slide.scrolling .scrolled-shadow {
+  opacity: 1;
+}
+.datatable.show-scroll-slide .scroll-slide,
+.datatable.show-scroll-slide .scrolled-shadow {
+  display: block;
+}
+.datatable.show-scroll-slide.scrolled-in .scrolled-in-shadow {
+  left: -20px;
+}
+.datatable.show-scroll-slide.scrolled-out .scrolled-out-shadow {
+  right: -20px;
+}
+
+/*# sourceMappingURL=zui.datatable.css.map */

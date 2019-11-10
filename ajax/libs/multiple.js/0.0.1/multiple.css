@@ -1,0 +1,64 @@
+.multiple-desktop {
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+/* http://nimbupani.com/using-background-clip-for-text-with-css-fallback.html */
+.multiple-desktop-text {
+    background: -webkit-linear-gradient(transparent, transparent);
+    background: -o-linear-gradient(transparent, transparent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+.multiple-mobile-wrapper {
+    position: relative;
+    height: 100%; 
+}
+
+/* http://stackoverflow.com/a/23859719/1221082
+ * http://stackoverflow.com/a/23795792/1221082
+ */
+.multiple-mobile {
+    /* old browsers */
+    clip: rect(0 auto auto 0);
+    clip: rect(0, auto, auto, 0);
+    /* ios workaround */
+    -webkit-mask-image: -webkit-linear-gradient(top, #fff 0%, #fff 100%);
+    /* new browsers */
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    overflow: hidden;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    z-index: -1;
+}
+
+.multiple-mobile-content {
+    height: 100%;
+}
+
+.multiple-mobile:before {
+    content: '';
+    
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}

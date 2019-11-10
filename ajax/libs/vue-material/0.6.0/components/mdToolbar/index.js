@@ -1,0 +1,6 @@
+/*!
+ * Vue Material v0.6.0
+ * Made with love by Marcos Moura
+ * Released under the MIT License.
+ */
+!(function(o,e){"object"==typeof exports&&"object"==typeof module?module.exports=e():"function"==typeof define&&define.amd?define([],e):"object"==typeof exports?exports.VueMaterial=e():o.VueMaterial=e()})(this,(function(){return (function(o){function e(r){if(t[r])return t[r].exports;var n=t[r]={exports:{},id:r,loaded:!1};return o[r].call(n.exports,n,n.exports,e),n.loaded=!0,n.exports}var t={};return e.m=o,e.c=t,e.p="/",e(0)})({0:function(o,e,t){o.exports=t(36)},36:function(o,e,t){"use strict";function r(o){return o&&o.__esModule?o:{default:o}}function n(o){o.component("md-toolbar",o.extend(d.default)),o.material.styles.push(c.default)}Object.defineProperty(e,"__esModule",{value:!0}),e.default=n;var a=t(!(function(){var o=new Error('Cannot find module "./mdToolbar.vue"');throw o.code="MODULE_NOT_FOUND",o})()),d=r(a),u=t(97),c=r(u);o.exports=e.default},97:function(o,e){o.exports=".THEME_NAME.md-toolbar{background-color:PRIMARY-COLOR;color:PRIMARY-CONTRAST}.THEME_NAME.md-toolbar.md-accent{background-color:ACCENT-COLOR;color:ACCENT-CONTRAST}.THEME_NAME.md-toolbar.md-warn{background-color:WARN-COLOR;color:WARN-CONTRAST}.THEME_NAME.md-toolbar.md-transparent{background-color:transparent;color:BACKGROUND-CONTRAST}\n"}})}));

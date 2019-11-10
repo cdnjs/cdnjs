@@ -1,0 +1,6 @@
+/**
+ * @license ng-bs-daterangepicker v0.0.1
+ * (c) 2013 Luis Farzati http://github.com/luisfarzati/ng-bs-daterangepicker
+ * License: MIT
+ */
+!function(a){"use strict";a.module("ngBootstrap",[]).directive("input",function(){return{restrict:"E",require:"ngModel",link:function(a,b,c,d){function e(a){return a.format(g.format)}function f(a){return[e(a.startDate),e(a.endDate)].join(g.separator)}if("daterange"===c.type){var g={};g.format=c.format||"YYYY-MM-DD",g.separator=c.separator||" - ",g.minDate=c.minDate&&moment(c.minDate),g.maxDate=c.maxDate&&moment(c.maxDate),g.dateLimit=c.limit&&moment.duration.apply(this,c.limit.split(" ").map(function(a,b){return 0===b&&parseInt(a,10)||a})),d.$formatters.unshift(function(a){return a?a:""}),d.$parsers.unshift(function(a){return a}),d.$render=function(){d.$viewValue&&d.$viewValue.startDate&&b.val(f(d.$viewValue))},a.$watch(c.ngModel,function(a){return a&&a.startDate?(b.data("daterangepicker").startDate=a.startDate,b.data("daterangepicker").endDate=a.endDate,b.data("daterangepicker").updateView(),b.data("daterangepicker").updateCalendars(),b.data("daterangepicker").updateInputText(),void 0):(d.$setViewValue({startDate:moment().startOf("day"),endDate:moment().startOf("day")}),void 0)}),b.daterangepicker(g,function(b,c){a.$apply(function(){d.$setViewValue({startDate:b,endDate:c}),d.$render()})})}}}})}(angular);

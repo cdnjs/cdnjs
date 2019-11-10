@@ -1,0 +1,8 @@
+/*!-----------------------------------------------------------
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Version: 0.4.2(1ebfb1b687c4345ac9c6da39051431a46c120a65)
+ * Released under the MIT license
+ * https://github.com/Microsoft/vscode/blob/master/LICENSE.txt
+ *-----------------------------------------------------------*/
+(function(){var o=["vs/languages/razor/common/razorWorker","require","exports","vs/languages/html/common/htmlWorker"],t=function(t){for(var r=[],n=0,a=t.length;a>n;n++)r[n]=o[t[n]];return r},r=this&&this.__extends||function(o,t){function r(){this.constructor=o}for(var n in t)t.hasOwnProperty(n)&&(o[n]=t[n]);o.prototype=null===t?Object.create(t):(r.prototype=t.prototype,new r)};define(o[0],t([1,2,3]),function(o,t,n){"use strict";function a(){var o={a:["asp-action","asp-controller","asp-fragment","asp-host","asp-protocol","asp-route"],div:["asp-validation-summary"],form:["asp-action","asp-controller","asp-anti-forgery"],input:["asp-for","asp-format"],label:["asp-for"],select:["asp-for","asp-items"],span:["asp-validation-for"]};return{collectTags:function(o){},collectAttributes:function(t,r){if(t){var n=o[t];n&&n.forEach(function(o){return r(o,null)})}},collectValues:function(o,t,r){}}}t.getRazorTagProvider=a;var e=function(o){function t(){o.apply(this,arguments)}return r(t,o),t.prototype.addCustomTagProviders=function(o){o.push(a())},t}(n.HTMLWorker);t.RAZORWorker=e})}).call(this);
+//# sourceMappingURL=../../../../../min-maps/vs/languages/razor/common/razorWorker.js.map

@@ -1,0 +1,130 @@
+/**
+ * @file src/better-dateinput-polyfill.css
+ * @version 1.3.1 2013-12-27T08:01:17
+ * @overview input[type=date] polyfill for better-dom
+ * @copyright Maksim Chemerisuk 2013
+ * @license MIT
+ * @see https://github.com/chemerisuk/better-dateinput-polyfill
+ */
+.better-dateinput, input[type=date] {
+    width: 8em;
+    text-align: center;
+}
+
+.better-dateinput-calendar {
+    display: inline-block;
+
+    position: relative;
+    z-index: 99;
+    overflow: hidden;
+    cursor: default;
+
+    width: 19em;
+    height: 18.5em;
+    overflow: hidden;
+    vertical-align: bottom;
+    margin-left: -12.5em;
+    margin-bottom: -18.5em;
+
+    color: #333;
+    background: #FFF;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.better-dateinput-calendar[aria-hidden=true] {
+    display: inline-block;
+
+    height: 0;
+    width: 0;
+    margin-left: -3em;
+    margin-bottom: 0;
+
+     -webkit-transition: 0;
+    transition: 0;
+}
+
+.better-dateinput-calendar-header {
+    font-size: 1.25em;
+    line-height: 2em;
+    margin: 0 2em;
+    text-align: center;
+}
+
+.better-dateinput-calendar > a {
+    float: left;
+    width: 1em;
+    padding: 0.25em;
+    margin: 0.5em;
+    text-align: center;
+    border-radius: 0.25em;
+}
+
+.better-dateinput-calendar > a:before {
+    content: "";
+    display: inline-block;
+    height: 0;
+    width: 0;
+    border-style: solid;
+    border-width: 0.45em 0.75em 0.45em 0;
+    border-color: transparent;
+    border-right-color: inherit;
+}
+
+.better-dateinput-calendar > a + a {
+    float: right;
+}
+
+.better-dateinput-calendar > a + a:before {
+    border-width: 0.45em 0 0.45em 0.75em;
+    border-color: transparent;
+    border-left-color: inherit;
+}
+
+.better-dateinput-calendar-days {
+    table-layout: fixed;
+    border-spacing: 0;
+    border-bottom: 1px solid #DDD;
+}
+
+.better-dateinput-calendar-days td,
+.better-dateinput-calendar-days th {
+    width: 2.5em;
+    height: 2em;
+    border: 1px solid #DDD;
+    text-indent: 0.5em;
+    text-align: left;
+}
+
+.better-dateinput-calendar-days th {
+    font-weight: bold;
+    background: #DDD;
+    text-shadow: 1px 1px 0 #EEE;
+}
+
+.better-dateinput-calendar > a:hover,
+.better-dateinput-calendar-days td:hover {
+    background: #EEE;
+}
+
+.better-dateinput-calendar-days .current-calendar-day {
+    background: #498CE2 !important;
+    color: #FFF;
+    text-shadow: 1px 1px 0 #333;
+}
+
+.better-dateinput-calendar-days .prev-calendar-day,
+.better-dateinput-calendar-days .next-calendar-day {
+    color: #AAA;
+}

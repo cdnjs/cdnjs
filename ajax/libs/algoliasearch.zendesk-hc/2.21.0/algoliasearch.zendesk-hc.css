@@ -1,0 +1,366 @@
+/*!
+* Algolia Search for Zendesk's Help Center v2.21.0
+* https://github.com/algolia/algoliasearch-zendesk
+* Copyright 2018 Algolia <support@algolia.com>; Licensed MIT
+*/
+@charset "UTF-8";
+/* Search by */
+.ais-search-box--powered-by-link, .aa-powered-by-link {
+  display: inline-block;
+  width: 64px;
+  height: 18px;
+  text-indent: 101%;
+  overflow: hidden;
+  white-space: nowrap;
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgYmFzZVByb2ZpbGU9ImJhc2ljIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCAxMzY2IDM2MiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHN0eWxlIHR5cGU9InRleHQvY3NzIj4uc3Qwe2ZpbGw6dXJsKCNTVkdJRF8xXyk7fS5zdDF7ZmlsbDojRkZGRkZGO30uc3Qye2ZpbGw6IzE4MjM1OTt9PC9zdHlsZT48Zz48bGluZWFyR3JhZGllbnQgaWQ9IlNWR0lEXzFfIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjQyOC4yNTc4IiB5MT0iNDA0LjE1MDQiIHgyPSI0MzQuMTQ1MyIgeTI9IjQwOS44NTA0IiBncmFkaWVudFRyYW5zZm9ybT0ibWF0cml4KDk0LjA0NSAwIDAgLTk0LjA3MiAtNDAzODEuNTI3MyAzODQ3OS41MTk1KSI+PHN0b3Agb2Zmc2V0PSIwIiBzdHlsZT0ic3RvcC1jb2xvcjojMDBBRUZGIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdHlsZT0ic3RvcC1jb2xvcjojMzM2OUU3Ii8+PC9saW5lYXJHcmFkaWVudD48cGF0aCBjbGFzcz0ic3QwIiBkPSJNNjEuOCwxNS40aDI0Mi44YzIzLjksMCw0My40LDE5LjQsNDMuNCw0My40djI0Mi45YzAsMjMuOS0xOS40LDQzLjQtNDMuNCw0My40SDYxLjggICBjLTIzLjksMC00My40LTE5LjQtNDMuNC00My40VjU4LjdDMTguNCwzNC44LDM3LjgsMTUuNCw2MS44LDE1LjR6Ii8+PHBhdGggY2xhc3M9InN0MSIgZD0iTTE4Nyw5OC43Yy01MS40LDAtOTMuMSw0MS43LTkzLjEsOTMuMlMxMzUuNiwyODUsMTg3LDI4NXM5My4xLTQxLjcsOTMuMS05My4yUzIzOC41LDk4LjcsMTg3LDk4Ljd6ICAgIE0xODcsMjU3LjVjLTM2LjIsMC02NS42LTI5LjQtNjUuNi02NS42czI5LjQtNjUuNiw2NS42LTY1LjZzNjUuNiwyOS40LDY1LjYsNjUuNlMyMjMuMywyNTcuNSwxODcsMjU3LjV6IE0xODcsMTM5Ljd2NDguOSAgIGMwLDEuNCwxLjUsMi40LDIuOCwxLjdsNDMuNC0yMi41YzEtMC41LDEuMy0xLjcsMC44LTIuN2MtOS0xNS44LTI1LjctMjYuNi00NS0yNy4zQzE4OCwxMzcuOCwxODcsMTM4LjYsMTg3LDEzOS43eiBNMTI2LjIsMTAzLjggICBsLTUuNy01LjdjLTUuNi01LjYtMTQuNi01LjYtMjAuMiwwbC02LjgsNi44Yy01LjYsNS42LTUuNiwxNC42LDAsMjAuMmw1LjYsNS42YzAuOSwwLjksMi4yLDAuNywzLTAuMmMzLjMtNC41LDYuOS04LjgsMTAuOS0xMi44ICAgYzQuMS00LjEsOC4zLTcuNywxMi45LTExQzEyNi45LDEwNi4xLDEyNywxMDQuNywxMjYuMiwxMDMuOHogTTIxNy41LDg5Vjc3LjdjMC03LjktNi40LTE0LjMtMTQuMy0xNC4zaC0zMy4zICAgYy03LjksMC0xNC4zLDYuNC0xNC4zLDE0LjN2MTEuNmMwLDEuMywxLjIsMi4yLDIuNSwxLjljOS4zLTIuNywxOS4xLTQuMSwyOS00LjFjOS41LDAsMTguOSwxLjMsMjgsMy44ICAgQzIxNi4zLDkxLjIsMjE3LjUsOTAuMywyMTcuNSw4OXoiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMjEgMikiPjxwYXRoIGNsYXNzPSJzdDIiIGQ9Ik03MjEuNSwyNjUuNmMwLDI2LjctNi44LDQ2LjItMjAuNSw1OC42Yy0xMy43LDEyLjQtMzQuNiwxOC42LTYyLjgsMTguNmMtMTAuMywwLTMxLjctMi00OC44LTUuOGw2LjMtMzEgICAgYzE0LjMsMywzMy4yLDMuOCw0My4xLDMuOGMxNS43LDAsMjYuOS0zLjIsMzMuNi05LjZzMTAtMTUuOSwxMC0yOC41di02LjRjLTMuOSwxLjktOSwzLjgtMTUuMyw1LjhjLTYuMywxLjktMTMuNiwyLjktMjEuOCwyLjkgICAgYy0xMC44LDAtMjAuNi0xLjctMjkuNS01LjFjLTguOS0zLjQtMTYuNi04LjQtMjIuOS0xNWMtNi4zLTYuNi0xMS4zLTE0LjktMTQuOC0yNC44Yy0zLjUtOS45LTUuMy0yNy42LTUuMy00MC42ICAgIGMwLTEyLjIsMS45LTI3LjUsNS42LTM3LjdjMy44LTEwLjIsOS4yLTE5LDE2LjUtMjYuM2M3LjItNy4zLDE2LTEyLjksMjYuMy0xN2MxMC4zLTQuMSwyMi40LTYuNywzNS41LTYuNyAgICBjMTIuNywwLDI0LjQsMS42LDM1LjgsMy41YzExLjQsMS45LDIxLjEsMy45LDI5LDYuMVYyNjUuNnogTTYxMi44LDE4OC40YzAsMTYuNCwzLjYsMzQuNiwxMC44LDQyLjJjNy4yLDcuNiwxNi41LDExLjQsMjcuOSwxMS40ICAgIGM2LjIsMCwxMi4xLTAuOSwxNy42LTIuNmM1LjUtMS43LDkuOS0zLjcsMTMuNC02LjF2LTk3LjFjLTIuOC0wLjYtMTQuNS0zLTI1LjgtMy4zYy0xNC4yLTAuNC0yNSw1LjQtMzIuNiwxNC43ICAgIEM2MTYuNiwxNTYuOSw2MTIuOCwxNzMuMiw2MTIuOCwxODguNHogTTkwNy4xLDE4OC40YzAsMTMuMi0xLjksMjMuMi01LjgsMzQuMXMtOS40LDIwLjItMTYuNSwyNy45Yy03LjEsNy43LTE1LjYsMTMuNy0yNS42LDE3LjkgICAgcy0yNS40LDYuNi0zMy4xLDYuNmMtNy43LTAuMS0yMy0yLjMtMzIuOS02LjZjLTkuOS00LjMtMTguNC0xMC4yLTI1LjUtMTcuOWMtNy4xLTcuNy0xMi42LTE3LTE2LjYtMjcuOXMtNi0yMC45LTYtMzQuMSAgICBjMC0xMy4yLDEuOC0yNS45LDUuOC0zNi43YzQtMTAuOCw5LjYtMjAsMTYuOC0yNy43czE1LjgtMTMuNiwyNS42LTE3LjhjOS45LTQuMiwyMC44LTYuMiwzMi42LTYuMmMxMS44LDAsMjIuNywyLjEsMzIuNyw2LjIgICAgYzEwLDQuMiwxOC42LDEwLjEsMjUuNiwxNy44YzcuMSw3LjcsMTIuNiwxNi45LDE2LjYsMjcuN0M5MDUsMTYyLjUsOTA3LjEsMTc1LjIsOTA3LjEsMTg4LjR6IE04NjcuMSwxODguNSAgICBjMC0xNi45LTMuNy0zMS0xMC45LTQwLjhjLTcuMi05LjktMTcuMy0xNC44LTMwLjItMTQuOGMtMTIuOSwwLTIzLDQuOS0zMC4yLDE0LjhjLTcuMiw5LjktMTAuNywyMy45LTEwLjcsNDAuOCAgICBjMCwxNy4xLDMuNiwyOC42LDEwLjgsMzguNWM3LjIsMTAsMTcuMywxNC45LDMwLjIsMTQuOWMxMi45LDAsMjMtNSwzMC4yLTE0LjlDODYzLjUsMjE3LDg2Ny4xLDIwNS42LDg2Ny4xLDE4OC41eiBNOTk0LjIsMjc0LjkgICAgYy02NC4xLDAuMy02NC4xLTUxLjgtNjQuMS02MC4xTDkzMCwzMGwzOS4xLTYuMnYxODMuNmMwLDQuNywwLDM0LjUsMjUuMSwzNC42VjI3NC45eiBNMTA2My4xLDI3NC45aC0zOS4zVjEwNi4xbDM5LjMtNi4yVjI3NC45eiAgICAgTTEwNDMuNCw4MS40YzEzLjEsMCwyMy44LTEwLjYsMjMuOC0yMy43cy0xMC42LTIzLjctMjMuOC0yMy43cy0yMy44LDEwLjYtMjMuOCwyMy43UzEwMzAuMyw4MS40LDEwNDMuNCw4MS40eiBNMTE2MC44LDEwMCAgICBjMTIuOSwwLDIzLjgsMS42LDMyLjYsNC44YzguOCwzLjIsMTUuOSw3LjcsMjEuMSwxMy40czguOSwxMy41LDExLjEsMjEuN2MyLjMsOC4yLDMuNCwxNy4yLDMuNCwyNy4xdjEwMC42ICAgIGMtNiwxLjMtMTUuMSwyLjgtMjcuMyw0LjZzLTI1LjksMi43LTQxLjEsMi43Yy0xMC4xLDAtMTkuNC0xLTI3LjctMi45Yy04LjQtMS45LTE1LjUtNS0yMS41LTkuM2MtNS45LTQuMy0xMC41LTkuOC0xMy45LTE2LjYgICAgYy0zLjMtNi44LTUtMTYuNC01LTI2LjRjMC05LjYsMS45LTE1LjcsNS42LTIyLjNjMy44LTYuNiw4LjktMTIsMTUuMy0xNi4yYzYuNS00LjIsMTMuOS03LjIsMjIuNC05czE3LjQtMi43LDI2LjYtMi43ICAgIGM0LjMsMCw4LjgsMC4zLDEzLjYsMC44czkuOCwxLjQsMTUuMiwyLjd2LTYuNGMwLTQuNS0wLjUtOC44LTEuNi0xMi44Yy0xLjEtNC4xLTMtNy42LTUuNi0xMC43Yy0yLjctMy4xLTYuMi01LjUtMTAuNi03LjIgICAgcy0xMC0zLTE2LjctM2MtOSwwLTE3LjIsMS4xLTI0LjcsMi40Yy03LjUsMS4zLTEzLjcsMi44LTE4LjQsNC41bC00LjctMzIuMWM0LjktMS43LDEyLjItMy40LDIxLjYtNS4xUzExNTAsMTAwLDExNjAuOCwxMDB6ICAgICBNMTE2NC4xLDI0MS45YzEyLDAsMjAuOS0wLjcsMjcuMS0xLjl2LTM5LjhjLTIuMi0wLjYtNS4zLTEuMy05LjQtMS45Yy00LjEtMC42LTguNi0xLTEzLjYtMWMtNC4zLDAtOC43LDAuMy0xMy4xLDEgICAgYy00LjQsMC42LTguNCwxLjgtMTEuOSwzLjVzLTYuNCw0LjEtOC41LDcuMmMtMi4yLDMuMS0zLjIsNC45LTMuMiw5LjZjMCw5LjIsMy4yLDE0LjUsOSwxOCAgICBDMTE0Ni40LDI0MC4yLDExNTQuMiwyNDEuOSwxMTY0LjEsMjQxLjl6IE0zOTEuOSwxMDFjMTIuOSwwLDIzLjgsMS42LDMyLjYsNC44YzguOCwzLjIsMTUuOSw3LjcsMjEuMSwxMy40ICAgIGM1LjMsNS44LDguOSwxMy41LDExLjEsMjEuN2MyLjMsOC4yLDMuNCwxNy4yLDMuNCwyNy4xdjEwMC42Yy02LDEuMy0xNS4xLDIuOC0yNy4zLDQuNmMtMTIuMiwxLjgtMjUuOSwyLjctNDEuMSwyLjcgICAgYy0xMC4xLDAtMTkuNC0xLTI3LjctMi45Yy04LjQtMS45LTE1LjUtNS0yMS41LTkuM2MtNS45LTQuMy0xMC41LTkuOC0xMy45LTE2LjZjLTMuMy02LjgtNS0xNi40LTUtMjYuNGMwLTkuNiwxLjktMTUuNyw1LjYtMjIuMyAgICBjMy44LTYuNiw4LjktMTIsMTUuMy0xNi4yYzYuNS00LjIsMTMuOS03LjIsMjIuNC05czE3LjQtMi43LDI2LjYtMi43YzQuMywwLDguOCwwLjMsMTMuNiwwLjhjNC43LDAuNSw5LjgsMS40LDE1LjIsMi43di02LjQgICAgYzAtNC41LTAuNS04LjgtMS42LTEyLjhjLTEuMS00LjEtMy03LjYtNS42LTEwLjdjLTIuNy0zLjEtNi4yLTUuNS0xMC42LTcuMmMtNC40LTEuNy0xMC0zLTE2LjctM2MtOSwwLTE3LjIsMS4xLTI0LjcsMi40ICAgIGMtNy41LDEuMy0xMy43LDIuOC0xOC40LDQuNWwtNC43LTMyLjFjNC45LTEuNywxMi4yLTMuNCwyMS42LTUuMUMzNzEsMTAxLjgsMzgxLjEsMTAxLDM5MS45LDEwMXogTTM5NS4zLDI0MyAgICBjMTIsMCwyMC45LTAuNywyNy4xLTEuOXYtMzkuOGMtMi4yLTAuNi01LjMtMS4zLTkuNC0xLjljLTQuMS0wLjYtOC42LTEtMTMuNi0xYy00LjMsMC04LjcsMC4zLTEzLjEsMWMtNC40LDAuNi04LjQsMS44LTExLjksMy41ICAgIGMtMy41LDEuNy02LjQsNC4xLTguNSw3LjJjLTIuMiwzLjEtMy4yLDQuOS0zLjIsOS42YzAsOS4yLDMuMiwxNC41LDksMThDMzc3LjUsMjQxLjIsMzg1LjQsMjQzLDM5NS4zLDI0M3ogTTU1My44LDI3NC45ICAgIGMtNjQuMSwwLjMtNjQuMS01MS44LTY0LjEtNjAuMUw0ODkuNiwzMGwzOS4xLTYuMnYxODMuNmMwLDQuNywwLDM0LjUsMjUuMSwzNC42VjI3NC45eiIvPjwvZz48L2c+PC9zdmc+);
+  background-repeat: no-repeat;
+  background-size: contain;
+  vertical-align: middle; }
+
+.clearfix {
+  clear: both; }
+
+/***************************/
+/* autocomplete.js */
+/***************************/
+.algolia-autocomplete {
+  width: 100%;
+  line-height: normal; }
+
+.aa-input {
+  width: 100%;
+  outline: none; }
+
+.aa-hint {
+  width: 100%;
+  color: #999; }
+
+.aa-dropdown-menu {
+  margin-top: 9px;
+  border: 1px solid #d9d9d9;
+  border-radius: 3px;
+  background-color: #fff;
+  box-shadow: 0 1px 0 0 #ccc, 0 2px 3px 0 #e6e6e6;
+  font-size: 14px;
+  padding: 20px 16px 16px 16px;
+  text-align: left;
+  position: relative; }
+
+.aa-suggestion {
+  cursor: pointer;
+  padding-top: 5px; }
+
+.aa-powered-by {
+  position: absolute;
+  right: 16px;
+  top: 8px;
+  text-align: right;
+  font-size: .8em;
+  color: #999; }
+
+/** category **/
+.aa-article-hit--category {
+  height: 18px;
+  font-size: 18px;
+  border-bottom: 1px solid #e6e6e6;
+  height: 18px;
+  margin-bottom: 16px;
+  color: #aaa !important; }
+
+.aa-article-hit--category--content {
+  background-color: #fff;
+  padding-right: 16px;
+  display: inline-block;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis; }
+
+.aa-article-hit .aa-article-hit--category {
+  display: none; }
+
+.aa-article-hit.aa-article-hit__category-first .aa-article-hit--category {
+  display: block; }
+
+.aa-article-hit__xs .aa-article-hit--category,
+.aa-article-hit__sm .aa-article-hit--category {
+  margin-bottom: 8px; }
+
+/** line **/
+.aa-article-hit--line {
+  width: 100%;
+  margin-bottom: 8px;
+  float: left;
+  line-height: 1.35em; }
+
+.aa-article-hit__section-first .aa-article-hit--line {
+  margin-top: 12px; }
+
+.aa-article-hit__xs .aa-article-hit--line,
+.aa-article-hit__sm .aa-article-hit--line {
+  margin: 0; }
+
+/** section **/
+.aa-article-hit--section {
+  display: none;
+  width: 20%;
+  text-align: right;
+  float: left;
+  padding-right: 16px;
+  padding-top: 4px;
+  font-size: 1.1em;
+  letter-spacing: .2px; }
+
+.aa-article-hit__section-first .aa-article-hit--section {
+  display: block; }
+
+.aa-article-hit__xs .aa-article-hit--section,
+.aa-article-hit__sm .aa-article-hit--section {
+  width: 100%;
+  text-align: left;
+  margin-top: 8px; }
+
+.aa-article-hit__sm .aa-article-hit--section {
+  font-size: 1.2em; }
+
+/** content **/
+.aa-article-hit--content {
+  width: 80%;
+  float: right;
+  border-left: 1px solid #ddd;
+  padding: 4px 10% 4px 8px; }
+
+.aa-suggestion.aa-cursor .aa-article-hit--content {
+  background-color: #f8f8f8; }
+
+.aa-article-hit__category-first.aa-article-hit__section-first .aa-article-hit--content {
+  border-top: none; }
+
+.aa-article-hit__xs .aa-article-hit--content,
+.aa-article-hit__sm .aa-article-hit--content {
+  width: 100%; }
+
+.aa-article-hit__xs .aa-article-hit--content {
+  padding: 0 8px;
+  border-left: none; }
+
+.aa-article-hit__sm .aa-article-hit--content {
+  padding: 4px 8px;
+  margin: 4px 0;
+  border: none; }
+
+/** title **/
+.aa-article-hit--title {
+  font-size: 1.1em;
+  font-weight: bold; }
+  .aa-article-hit--title .aa-article-hit--highlight {
+    position: relative;
+    z-index: 1; }
+    .aa-article-hit--title .aa-article-hit--highlight::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: .1;
+      z-index: -1; }
+
+.aa-article-hit__xs .aa-article-hit--title,
+.aa-article-hit__sm .aa-article-hit--title {
+  font-size: 1em;
+  line-height: 1.25em;
+  display: block; }
+
+.aa-article-hit__xs .aa-article-hit--title {
+  font-weight: normal;
+  padding: 8px 0;
+  border-top: solid 1px #eee; }
+
+.aa-article-hit__xs.aa-article-hit__section-first .aa-article-hit--title {
+  border: none; }
+
+/** body **/
+.aa-article-hit--body {
+  font-size: 13px;
+  color: #797979;
+  margin-top: 4px;
+  line-height: 1.25em; }
+  .aa-article-hit--body .aa-article-hit--highlight {
+    color: #666;
+    font-weight: bold; }
+
+.aa-article-hit__xs .aa-article-hit--body {
+  display: none; }
+
+.aa-article-hit__sm .aa-article-hit--body {
+  font-size: .9em;
+  line-height: 1.25em; }
+
+/***************************/
+/*! instantsearch.js 1.1.0 | © Algolia Inc. and other contributors; Licensed MIT | github.com/algolia/instantsearch.js */
+/***************************/
+.ais-with-style.ais-search-box {
+  margin-left: 30%;
+  position: relative; }
+  .ais-with-style.ais-search-box:before {
+    content: "\1F50D";
+    font-family: "entypo";
+    font-size: 1.25em;
+    line-height: 0;
+    position: absolute;
+    text-align: center;
+    top: 18px;
+    width: 2.2em;
+    z-index: 1; }
+  .ais-with-style.ais-search-box input {
+    outline: none;
+    padding: 10px;
+    padding-left: 32px; }
+
+.ais-search-box--powered-by {
+  font-size: .8em;
+  text-align: right;
+  margin-top: 3px;
+  height: 0; }
+
+#algolia-hits {
+  float: left;
+  width: 70%; }
+  #algolia-hits .search-result {
+    border-top: 1px solid #efefef;
+    margin-top: 10px;
+    padding: 7px 0 10px;
+    position: relative; }
+    #algolia-hits .search-result:first-child {
+      margin-top: 0; }
+  #algolia-hits .search-result-meta {
+    padding: 0 10px;
+    float: right;
+    font-size: 0.8em; }
+  #algolia-hits .search-result-body {
+    margin-top: 5px;
+    opacity: .7; }
+    #algolia-hits .search-result-body .ais-highlight {
+      font-weight: bold; }
+  #algolia-hits .search-result-link-wrapper {
+    margin-right: 75px; }
+  #algolia-hits .search-result-link {
+    display: inline-block;
+    cursor: pointer; }
+  #algolia-hits .search-result-link .ais-highlight {
+    position: relative;
+    z-index: 1; }
+    #algolia-hits .search-result-link .ais-highlight::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: .1;
+      z-index: -1; }
+
+#algolia-stats {
+  margin-left: 30%;
+  margin-top: 15px;
+  text-transform: uppercase; }
+  #algolia-stats .ais-stats--time {
+    text-transform: lowercase;
+    color: #BBB;
+    margin-left: 2px; }
+
+#algolia-facets {
+  float: left;
+  width: 25%;
+  margin-right: 5%;
+  min-height: 1px; }
+  #algolia-facets .algolia-facet-block {
+    border: 1px solid #efefef; }
+  #algolia-facets .ais-header {
+    text-align: left;
+    text-transform: uppercase;
+    font-weight: 300;
+    font-size: 1em;
+    border-bottom: 1px solid #efefef; }
+  #algolia-facets .ais-header, #algolia-facets .ais-hierarchical-menu--body, #algolia-facets .ais-refinement-list--body {
+    padding: 10px; }
+  #algolia-facets .ais-hierarchical-menu--list__lvl1 {
+    margin-left: 10px; }
+  #algolia-facets .ais-hierarchical-menu--list__lvl2 {
+    margin-left: 10px; }
+  #algolia-facets .ais-hierarchical-menu--link {
+    display: block;
+    width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer; }
+  #algolia-facets .ais-hierarchical-menu--item {
+    line-height: 2em; }
+  #algolia-facets .ais-hierarchical-menu--item__active > div > .ais-hierarchical-menu--link {
+    font-weight: bold; }
+    #algolia-facets .ais-hierarchical-menu--item__active > div > .ais-hierarchical-menu--link:hover {
+      text-decoration: line-through;
+      border: none; }
+  #algolia-facets .ais-hierarchical-menu--count {
+    display: none; }
+  #algolia-facets #algolia-labels {
+    margin-top: 20px; }
+    #algolia-facets #algolia-labels .ais-refinement-list--body {
+      margin-top: 5px; }
+    #algolia-facets #algolia-labels .ais-refinement-list--list {
+      margin-left: -4px;
+      margin-right: -4px; }
+    #algolia-facets #algolia-labels .ais-refinement-list--item {
+      display: inline-block;
+      max-width: 100%; }
+      #algolia-facets #algolia-labels .ais-refinement-list--item label {
+        display: inline-block;
+        padding: 4px 8px;
+        margin: 4px;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        background: #efefef;
+        cursor: pointer; }
+    #algolia-facets #algolia-labels .ais-refinement-list--item label:hover, #algolia-facets #algolia-labels .ais-refinement-list--item__active label {
+      text-decoration: none;
+      background: #158EC2;
+      color: white;
+      -webkit-transition: all 0.3s ease;
+      transition: all 0.3s ease; }
+    #algolia-facets #algolia-labels .ais-refinement-list--item__active label:hover {
+      text-decoration: line-through; }
+    #algolia-facets #algolia-labels .ais-refinement-list--count, #algolia-facets #algolia-labels .ais-refinement-list--checkbox {
+      display: none; }
+
+.ais-link {
+  cursor: pointer; }
+
+.ais-hits__empty {
+  text-align: center;
+  font-size: 1.8em;
+  margin-top: 100px;
+  font-style: italic; }
+
+#algolia-pagination {
+  text-align: center;
+  margin-top: 80px; }
+  #algolia-pagination ul.ais-pagination {
+    display: inline-block; }
+  #algolia-pagination .ais-pagination--item {
+    display: inline-block;
+    padding: 3px; }
+  #algolia-pagination .ais-pagination--item__disabled {
+    visibility: hidden; }
+  #algolia-pagination .ais-pagination--item__active {
+    font-weight: bold;
+    background: #efefef; }
+
+/** Responsiveness **/
+#algolia-facets-open {
+  display: none; }
+
+#algolia-facets-close {
+  display: none; }

@@ -1,0 +1,7 @@
+/*
+ * jQuery mmenu backButton add-on
+ * mmenu.frebsite.nl
+ *
+ * Copyright (c) Fred Heusschen
+ */
+!function(n){var t="mmenu",o="backButton";n[t].addons[o]={setup:function(){function e(){l=[c],this.$pnls.children("."+i.panel+"_opened-parent").add(s.$pnls.children("."+i.panel+"_opened")).each(function(){l.push("#"+n(this).attr("id"))})}if(this.opts.offCanvas){var s=this,h=this.opts[o];this.conf[o];a=n[t].glbl,"boolean"==typeof h&&(h={close:h}),"object"!=typeof h&&(h={}),h=n.extend(!0,{},n[t].defaults[o],h);var c="#"+this.$menu.attr("id");if(h.close){var l=[];this.bind("open:finish",function(){history.pushState(null,document.title,c)}),this.bind("open:finish",e),this.bind("openPanel:finish",e),this.bind("close:finish",function(){l=[],history.back(),history.pushState(null,document.title,location.pathname+location.search)}),n(window).on("popstate",function(t){if(s.vars.opened&&l.length){l=l.slice(0,-1);var o=l[l.length-1];o==c?s.close():(s.openPanel(n(o)),history.pushState(null,document.title,c))}})}h.open&&n(window).on("popstate",function(n){s.vars.opened||location.hash!=c||s.open()})}},add:function(){return window.history&&window.history.pushState?(i=n[t]._c,e=n[t]._d,void(s=n[t]._e)):void(n[t].addons[o].setup=function(){})},clickAnchor:function(n,t){}},n[t].defaults[o]={close:!1,open:!1};var i,e,s,a}(jQuery);

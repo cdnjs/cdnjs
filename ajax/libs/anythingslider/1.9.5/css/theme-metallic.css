@@ -1,0 +1,313 @@
+/*
+	AnythingSlider v1.8+ Metallic theme
+	By Rob Garrison
+*/
+/*****************************
+  SET DEFAULT DIMENSIONS HERE
+ *****************************/
+/* change the ID & dimensions to match your slider */
+#slider {
+	width: 700px;
+	height: 390px;
+	list-style: none;
+	/* Prevent FOUC (see FAQ page) and keep things readable if javascript is disabled */
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+/******************
+  SET STYLING HERE
+ ******************
+ =================================
+ Default state (no keyboard focus)
+ ==================================*/
+/* Overall Wrapper */
+.anythingSlider-metallic {
+	margin: 0 auto;
+	/* 23px right & left padding for the navigation arrows */
+	padding: 0 23px;
+}
+/* slider window - top & bottom borders, default state */
+.anythingSlider-metallic .anythingWindow {
+	border-top: 3px solid #333;
+	border-bottom: 3px solid #333;
+}
+/* Navigation buttons + start/stop button, default state */
+.anythingSlider-metallic .anythingControls a {
+	background: transparent url(../images/arrows-metallic.png) -68px -40px repeat-x;
+	color: #000;
+	border: #000 1px solid;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+/* Navigation current button, default state */
+.anythingSlider-metallic .anythingControls a.cur,
+.anythingSlider-metallic .anythingControls a:hover {
+	background-position: -70px -137px;
+	background-color: #888;
+	color: #000;
+}
+
+/* start-stop button, stopped, default state */
+.anythingSlider-metallic .anythingControls a.start-stop {
+	background: #040;
+	color: #ddd;
+	/* top shadow */
+	-moz-box-shadow: inset 1px 2px 5px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: inset 1px 2px 5px rgba(0, 0, 0, 0.5);
+	box-shadow: inset 1px 2px 5px rgba(0, 0, 0, 0.5);
+}
+/* start-stop button, playing, default state */
+.anythingSlider-metallic .anythingControls a.start-stop.playing {
+	background-color: #800;
+}
+
+/* start-stop button, default hovered text color (when visible) */
+/* hide nav/start-stop background image shadow on hover - makes the button appear to come forward */
+.anythingSlider-metallic .anythingControls a.start-stop:hover,
+.anythingSlider-metallic .anythingControls a.start-stop.hover,
+.anythingSlider-metallic .anythingControls a.start-stop .anythingControls ul a:hover {
+	color: #fff;
+	/* clear top shadow */
+	-moz-box-shadow: inset 0 0 0 #000000;
+	-webkit-box-shadow: inset 0 0 0 #000000;
+	box-shadow: inset 0 0 0 #000000;
+}
+
+/*
+ =================================
+ Active State (has keyboard focus)
+ =================================
+*/
+/* slider window - top & bottom borders, active state */
+.anythingSlider-metallic.activeSlider .anythingWindow {
+	border-color: #0355a3;
+}
+
+/* Navigation buttons, active state */
+.anythingSlider-metallic.activeSlider .anythingControls a {
+	background-color: transparent;
+}
+/* Navigation current button, active state */
+.anythingSlider-metallic.activeSlider .anythingControls a.cur,
+.anythingSlider-metallic.activeSlider .anythingControls a:hover {
+	background-position: -76px -57px;
+	background-color: #ccc;
+}
+
+/* start-stop button, stopped, active state */
+.anythingSlider-metallic.activeSlider .anythingControls a.start-stop {
+	background: #080;
+	color: #fff;
+}
+/* start-stop button, playing, active state */
+.anythingSlider-metallic.activeSlider .anythingControls a.start-stop.playing {
+	color: #fff;
+	background: #d00;
+}
+/* start-stop button, active slider hovered text color (when visible) */
+.anythingSlider-metallic.activeSlider .start-stop:hover,
+.anythingSlider-metallic.activeSlider .start-stop.hover {
+	color: #fff;
+}
+
+/************************
+  NAVIGATION POSITIONING
+ ************************/
+/* Navigation Arrows */
+.anythingSlider-metallic .arrow {
+	top: 50%;
+	position: absolute;
+	display: block;
+	z-index: 100;
+}
+
+.anythingSlider-metallic .arrow a {
+	display: block;
+	width: 45px;
+	height: 95px;
+	margin: -47.5px 0 0 0; /* half height of image */
+	text-align: center;
+	outline: 0;
+	background: url(../images/arrows-metallic.png) no-repeat;
+}
+
+/* back arrow */
+.anythingSlider-metallic .back { left: 0; }
+.anythingSlider-metallic .back a { background-position: left bottom; }
+.anythingSlider-metallic .back a:hover,
+.anythingSlider-metallic .back a.hover { background-position: left top; }
+/* forward arrow */
+.anythingSlider-metallic .forward { right: 0; }
+.anythingSlider-metallic .forward a { background-position: right bottom; }
+.anythingSlider-metallic .forward a:hover,
+.anythingSlider-metallic .forward a.hover { background-position: right top; }
+
+/* Navigation Links */
+.anythingSlider-metallic .anythingControls {
+	height: 15px; /* limit height, needed for IE9 of all things */
+	outline: 0;
+	display: none;
+	float: right;
+	position: absolute;
+	bottom: 5px;
+	right: 20px;
+	margin: 0 45px;
+	z-index: 100;
+	opacity: 0.90;
+	filter: alpha(opacity=90);
+}
+
+.anythingSlider-metallic .anythingControls ul {
+	margin: 0;
+	padding: 0;
+	float: left;
+}
+.anythingSlider-metallic .anythingControls ul li {
+	list-style: none;
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+.anythingSlider-metallic .anythingControls ul a {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	margin: 3px;
+	padding: 0;
+	text-decoration: none;
+	text-align: center;
+	outline: 0;
+}
+
+.anythingSlider-metallic .anythingControls span {
+	display: block;
+	visibility: hidden;
+}
+
+/* navigationSize window */
+.anythingSlider-metallic .anythingControls .anythingNavWindow {
+	overflow: hidden;
+	float: left;
+}
+/* navigationSize nav arrow positioning */
+.anythingSlider-metallic .anythingControls li.prev a span,
+.anythingSlider-metallic .anythingControls li.next a span {
+	visibility: visible;
+	position: relative;
+	top: -6px; /* bring navigationSize text arrows into view */
+	color: #fff;
+}
+
+/* Autoplay Start/Stop button */
+.anythingSlider-metallic .anythingControls .start-stop {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	margin: 3px;
+	padding: 0;
+	text-align: center;
+	text-decoration: none;
+	z-index: 100;
+	outline: 0;
+}
+
+/***********************
+IE8 AND OLDER STYLING
+***********************/
+/* Navigation Arrows */
+.as-oldie .anythingSlider-metallic .arrow {
+	top: 40%;
+}
+.as-oldie .anythingSlider-metallic .arrow a {
+	margin: 0;
+}
+
+/***********************
+  COMMON SLIDER STYLING
+ ***********************/
+/* Overall Wrapper */
+.anythingSlider {
+	display: block;
+	overflow: visible !important;
+	position: relative;
+}
+/* anythingSlider viewport window */
+.anythingSlider .anythingWindow {
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+/* anythingSlider base (original element) */
+.anythingSlider .anythingBase {
+	background: transparent;
+	list-style: none;
+	position: absolute;
+	overflow: visible !important;
+	top: 0;
+	left: 0;
+	margin: 0;
+	padding: 0;
+}
+
+/* Navigation arrow text; indent moved to span inside "a", for IE7;
+	apparently, a negative text-indent on an "a" link moves the link as well as the text */
+.anythingSlider .arrow span {
+	display: block;
+	visibility: hidden;
+}
+/* disabled arrows, hide or reduce opacity: opacity: .5; filter: alpha(opacity=50); */
+.anythingSlider .arrow.disabled {
+	display: none;
+}
+/* all panels inside the slider; horizontal mode */
+.anythingSlider .panel {
+	background: transparent;
+	display: block;
+	overflow: hidden;
+	float: left;
+	padding: 0;
+	margin: 0;
+}
+/* vertical mode */
+.anythingSlider .vertical .panel {
+	float: none;
+}
+
+/* fade mode */
+.anythingSlider .fade .panel {
+	float: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 0;
+}
+/* fade mode active page - visible & on top */
+.anythingSlider .fade .activePage {
+	z-index: 1;
+}
+
+/***********************
+  RTL STYLING
+ ***********************/
+/* slider autoplay right-to-left, reverse order of nav links to look better */
+.anythingSlider.rtl .anythingWindow {
+	direction: ltr;
+	unicode-bidi: bidi-override;
+}
+.anythingSlider.rtl .anythingControls ul { float: left; } /* move nav link group to left */
+.anythingSlider.rtl .anythingControls ul a { float: right; } /* reverse order of nav links */
+.anythingSlider.rtl .start-stop { /* float: right; */ } /* move start/stop button - in case you want to switch sides */
+
+/* probably not necessary, but added just in case */
+.anythingSlider .anythingWindow,
+.anythingSlider .anythingControls ul a,
+.anythingSlider .arrow a,
+.anythingSlider .start-stop {
+	transition-duration: 0s;
+	-o-transition-duration: 0s;
+	-moz-transition-duration: 0s;
+	-webkit-transition-duration: 0s;
+}

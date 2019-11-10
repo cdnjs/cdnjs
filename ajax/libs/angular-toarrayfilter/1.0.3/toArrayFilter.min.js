@@ -1,0 +1,1 @@
+angular.module("angular-toArrayFilter",[]).filter("toArray",function(){return function(e,r){return angular.isObject(e)?!1===r?Object.keys(e).map(function(r){return e[r]}):Object.keys(e).map(function(r){var n=e[r];return angular.isObject(n)?Object.defineProperty(n,"$key",{enumerable:!1,value:r}):{$key:r,$value:n}}):e}});

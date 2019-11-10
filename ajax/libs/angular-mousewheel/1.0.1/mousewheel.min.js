@@ -1,0 +1,2 @@
+angular.module("monospaced.mousewheel",[]).directive("msdWheel",["$parse",function(e){return{restrict:"A, C",link:function(n,t,a){var d,o=e(a.msdWheel),i=function(e,t,a,d){n.$apply(function(){o(n,{$event:e,$delta:t,$deltaX:a,$deltaY:d})})};return"undefined"==typeof Hamster?void t.bind("wheel",function(e){n.$apply(function(){o(n,{$event:e})})}):((d=t.data("hamster"))||(d=Hamster(t[0]),t.data("hamster",d)),d.wheel(i),void n.$on("$destroy",function(){d.unwheel(i)}))}}}]);
+//# sourceMappingURL=./mousewheel.min.js.map

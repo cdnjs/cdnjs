@@ -1,0 +1,308 @@
+/*
+ *  tabellajs - v0.4.1
+ *  2016-11-09
+ *
+ *  https://github.com/iliketomatoes/tabellajs
+ */
+
+/*
+ *  Copyright (C) 2014-2016  Interpromotion <info@interpromotion.com>
+ *  Copyright (C) 2014-2016  Giancarlo Soverini <giancarlosoverini@gmail.com>
+ *
+ *  This file is part of Tabellajs.
+ *
+ *  Tabellajs is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU Affero General Public License as
+ *  published by the Free Software Foundation, either version 3 of the
+ *  License, or (at your option) any later version.
+ *
+ *  Tabellajs is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU Affero General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Affero General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>
+ */
+
+.tabella-ctr *,
+.tabella-ctr *:after,
+.tabella-ctr *:before {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.tabella-ctr {
+  display: block;
+  position: relative;
+  width: 100%;
+  margin: 1rem 0 2rem;
+  transition: all 100ms ease-out;
+}
+
+/*
+===========================
+TABLE HEADER
+===========================*/
+.t-fixed-header {
+  display: block;
+  z-index: -1;
+}
+
+.t-first-row {
+  z-index: 100;
+}
+
+.t-shadow {
+  -moz-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  -moz-perspective: 1000;
+  -ms-perspective: 1000;
+  -o-perspective: 1000;
+  perspective: 1000;
+  -webkit-box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.1);
+}
+
+.t-shadow::before {
+  position: absolute;
+  content: '';
+  top: -1px;
+  width: 100%;
+  height: 1px;
+  background-color: #ccc;
+}
+
+/**
+* WATCH OUT! The height property given to a table displayed element, is equal to min-height.
+* Hence, it is going to expand when the content is higher than that height.
+*/
+.t-first-row .t-row-cell {
+  height: 3.4rem;
+}
+
+/*
+===========================
+MAIN RULES
+===========================*/
+.t-row {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin-top: 1.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.t-row-content-wrapper {
+  position: relative;
+  display: block;
+  height: 100%;
+  overflow: hidden;
+}
+
+.t-row-content {
+  position: relative;
+  display: block;
+  height: 100%;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.t-row-header {
+  display: block;
+  position: relative;
+  width: 100%;
+  padding: 0.3rem 0.5rem;
+  float: none;
+  overflow: auto;
+  color: #3F51B5;
+}
+
+.t-cell-desc-l .t-header-devider,
+.t-cell-desc-s .t-header-devider {
+  text-align: left;
+}
+
+.t-header-devider {
+  display: block;
+  clear: both;
+  text-align: center;
+  line-height: 0.4rem;
+  margin-bottom: 0.2rem;
+}
+
+.t-sliding-row {
+  position: relative;
+  overflow: auto;
+  will-change: transform;
+}
+
+.t-row-values {
+  float: left;
+  position: relative;
+  font-size: 1rem;
+  overflow: hidden;
+}
+
+.t-row-desc {
+  float: left;
+  display: table;
+  position: relative;
+  overflow: hidden;
+  padding: 0.4rem 0.1rem;
+  font-size: 1rem;
+  background-color: #fff;
+  text-align: center;
+}
+
+.t-row-cell {
+  float: left;
+  display: table;
+  position: relative;
+  text-align: center;
+  padding: 0.4rem 0.1rem;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.t-row-cell:nth-of-type(odd) {
+  background-color: #C5CAE9;
+}
+
+.t-row-cell:nth-of-type(even) {
+  background-color: #9FA8DA;
+}
+
+.t-cell-border-top::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0.9rem;
+  right: 0.9rem;
+  height: 0;
+  border-top: 1px dotted rgba(0, 0, 0, 0.12);
+}
+
+.t-element {
+  display: table-cell;
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  line-height: 1.4;
+  vertical-align: middle;
+}
+
+.t-cell-value {
+  display: inline-block;
+  text-align: left;
+  cursor: default;
+}
+
+.t-cell-desc-s {
+  display: inline-block;
+  margin-right: 0.4rem;
+  text-align: left;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.t-cell-desc-l {
+  display: inline-block;
+  position: relative;
+  height: 100%;
+  margin: 0 auto;
+  text-align: left;
+  color: rgba(0, 0, 0, 0.54);
+  font-style: italic;
+}
+
+.t-hide {
+  display: none !important;
+  width: 0;
+  height: 0;
+  z-index: -1;
+}
+
+.t-arrow, .t-arr-right, .t-arr-left {
+  position: absolute;
+  z-index: 500;
+  width: 3rem;
+  height: 3rem;
+  top: 0;
+  margin-top: 0.25rem;
+  line-height: 1.4;
+  font-size: 2rem;
+  text-align: center;
+  border-radius: 50%;
+  background-color: #FF4081;
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+  -webkit-box-shadow: 1px 0px 2px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow: 1px 0px 2px 0px rgba(50, 50, 50, 0.75);
+  box-shadow: 1px 0px 2px 0px rgba(50, 50, 50, 0.75);
+  transition: all 100ms ease-out;
+}
+
+.t-arrow:active, .t-arr-right:active, .t-arr-left:active {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  margin-top: 0.28rem;
+}
+
+.t-arr-right {
+  right: 0;
+  margin-right: -0.7rem;
+}
+
+.t-arr-right svg {
+  position: relative;
+  width: 60%;
+  height: 60%;
+  top: 10%;
+}
+
+.t-arr-left {
+  left: 0;
+  margin-left: -0.7rem;
+}
+
+.t-arr-left svg {
+  position: relative;
+  width: 60%;
+  height: 60%;
+  top: 10%;
+}
+
+.t-svg-arrow {
+  fill: #fff;
+}
+
+.t-bold {
+  font-weight: bold;
+}
+
+/*
+=====================
+ COMMON RULES
+=====================*/
+.t-no-select, .t-sliding-row, .t-cell-value, .t-arr-right, .t-arr-left {
+  -webkit-user-select: none;
+  /* Chrome all / Safari all */
+  -moz-user-select: none;
+  /* Firefox all */
+  -ms-user-select: none;
+  /* IE 10+ */
+  /* No support for these yet, use at own risk */
+  -o-user-select: none;
+  user-select: none;
+}

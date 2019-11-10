@@ -1,0 +1,1 @@
+!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):e.dayjs_plugin_isBetween=t()}(this,function(){"use strict";return function(e,t,i){t.prototype.isBetween=function(e,t){var n=i(e),o=i(t);return this.isAfter(n)&&this.isBefore(o)||this.isBefore(n)&&this.isAfter(o)}}});

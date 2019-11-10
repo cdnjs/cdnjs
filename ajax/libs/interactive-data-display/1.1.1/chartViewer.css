@@ -1,0 +1,462 @@
+﻿html {
+    width:100%;
+    height:100%;
+}
+body {
+    width:100%;
+    height:100%;
+    display: block;
+    margin: 0px;
+    font-family: "Segoe UI Light", "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", "TeXGyreHerosRegular", "Helvetica", "Tahoma", "Geneva", "Arial", "sans-serif";
+}
+/*Probes*/
+.probe {
+    width: 18px;
+    height: 55px;
+}
+.dragPoint {
+    width: 18px;
+    height: 55px;
+    position: absolute;
+    cursor: pointer;
+}
+.probeCard {
+    border: 1px solid black;
+    cursor: pointer;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    padding: 4px;
+    position: relative;
+}
+.probeCard-selected {
+    /*background-color: #F1F9FF;*/
+}
+.probeCard-remove {
+    width: 20px;
+    height: 20px;
+    background-image: url('icons/remove.png');
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    margin: 5px;
+    float: left;
+    cursor: pointer;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+.probeCard-fit {
+    width: 20px;
+    height: 20px;
+    background-image: url('icons/cs.png');
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    margin: 5px;
+    margin-right: 50px;
+    float: left;
+    cursor: pointer;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+.probecard-record {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.probecard-highlighted {
+    background-color: #F1F9FF;
+}
+
+.probecard-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    margin-bottom: 10px;
+}
+.checkButton {
+    width: 13px;
+    height: 13px;
+    margin-left: 10px;
+    margin-top: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+    background-color: #F1F9FF;
+    border: 1px solid #888;
+    float: left;
+}
+
+.checkButton-checked {
+    background-color: #365C95;
+}
+.dsv-propagate {
+    z-index: 1000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+}
+.dsv-onscreennavigationcontainer {
+    background-color: transparent;
+    position: relative;
+}
+
+.dsv-onscreennavigation {
+    display: block;
+    background-color: transparent;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.dsv-ploteditor-record {
+    display: inline-block;
+    margin-left: 30px;
+    margin-top: 10px;
+}
+.dsv-visualizaition-control {
+    width: 100%;
+    height: 100%;
+    display: block;
+    /*border: 1px solid black;*/
+    overflow: hidden;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color: white;
+    position: relative;
+}
+.dsv-visualization-preview {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: white;
+    /*border-left: 1px solid black;*/
+    padding-left: 5px;
+    position: relative;
+}
+.dsv-leftpanelcontainer {
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: white;
+    float: left;
+    z-index: 9999;
+}
+.dsv-leftpanel {
+    width: 260px;
+    height: 100%;
+    display: inline-block;
+    position: relative;
+    background-color: white;
+    float: left;
+}
+.dsv-rightpanel {
+    display: inline-block;
+    height: 100%;
+    position: absolute;
+    right: 65px;
+    top: 0;
+    /*float: right;*/
+}
+.dsv-plot-editor {
+    width: 100%;
+    height: 100%;
+    display: block;
+    float: right;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+/*Plot list base style*/
+.dsv-plotlist {
+    width: 100%;
+    height: 100%;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+.dsv-navigation-container {
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 65px;
+}
+.dsv-onscreennavigation-panner {
+    width: 40px;
+    height: 40px;
+    display: block;
+    background-image: url('icons/pan.png');
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dsv-onscreennavigation-zoomin {
+    width: 40px;
+    height: 40px;
+    display: block;
+    background-image: url('icons/plus.png');
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+}
+.dsv-onscreennavigation-zoomout {
+    width: 40px;
+    height: 40px;
+    display: block;
+    background-image: url('icons/minus.png');
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+}
+.dsv-onscreennavigation-logscale {
+    width: 40px;
+    height: 40px;
+    display: block;
+    background-image: url('icons/logscale.png');
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+}
+
+.dsv-onscreennavigation-fit {
+    width: 40px;
+    height: 40px;
+    display: block;
+    background-image: url('icons/fit.png');
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+}
+.dsv-onscreennavigation-probepull {
+    width: 40px;
+    height: 40px;
+    display: block;
+    position: relative;
+}
+.dsv-onscreennavigation-fit-pressed {
+    width: 40px;
+    height: 40px;
+    display: block;
+    background-image: url('icons/fitPressed.png');
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+}
+.dsv-onscreennavigation-navigationlock {
+    width: 40px;
+    height: 40px;
+    display: block;
+    background-image: url('icons/lock.png');
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+}
+.dsv-onscreennavigation-navigationlockpressed {
+    width: 40px;
+    height: 40px;
+    display: block;
+    background-image: url('icons/lockpressed.png');
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+}
+.dsv-leftpanelhidebutton {
+    width: 10px;
+    height: 100%;
+    display: inline-block;
+    background-image: url('icons/toLeft.png');
+    -moz-background-size: 10px;
+    -o-background-size: 10px;
+    -webkit-background-size: 10px;
+    background-size: 10px;
+    background-repeat: no-repeat;
+    background-position-y: center;
+}
+
+    .dsv-leftpanelhidebutton:hover {
+        background-color: #F1F9FF;
+    }
+
+.dsv-leftpanelshowbutton {
+    width: 10px;
+    height: 100%;
+    display: inline-block;
+    background-image: url('icons/toRight.png');
+    -moz-background-size: 10px;
+    -o-background-size: 10px;
+    -webkit-background-size: 10px;
+    background-size: 10px;
+    background-repeat: no-repeat;
+    background-position-y: center;
+}
+
+    .dsv-leftpanelshowbutton:hover {
+        background-color: #F1F9FF;
+    }
+.dsv-leftaxistitle {
+    width: 20px;
+    max-width: 20px;
+    white-space: nowrap;
+    text-align: center;
+    -ms-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    display: table-cell;
+    vertical-align: middle;
+}
+.dsv-plotlist-card-islog {
+    height: 20px;
+    width: 20px;
+    background-image: url('icons/excl.png');
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    z-index: 1000;
+    position: absolute;
+    top: 7px;
+    right: 28px;
+    visibility: collapse;
+}
+.dsv-plotlist-card {
+    background-color: white;
+    border: 1px solid black;
+    margin-top: 10px;
+    margin-right: 2px;
+    padding: 5px;
+    cursor: pointer;
+    position: relative;
+}
+.dsv-plotcard-isselected-true {
+    height: 20px;
+    width: 20px;
+    background-image: url('icons/eyeBlue.png');
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    z-index: 1000;
+    position: absolute;
+    top: 7px;
+    right: 4px;
+}
+
+.dsv-plotcard-isselected-false {
+    height: 20px;
+    width: 20px;
+    background-image: url('icons/eye.png');
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    z-index: 1000;
+    position: absolute;
+    top: 7px;
+    right: 4px;
+}
+.dsv-plotcard-thumbnail {
+    display: inline;
+    vertical-align: middle;
+    margin-right: 4px;
+    margin-left: 4px;
+}
+.dsv-plotcard-resolved {
+    display: inline-block;
+    color: black;
+}
+
+.dsv-plotcard-unresolved {
+    display: inline-block;
+    color: gray;
+    font-style: italic;
+}
+.dsv-plotcard-title {
+    margin-left: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    font-size: 18px;
+    vertical-align: middle;
+}
+
+.dsv-plotcard-regular {
+    margin-left: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    vertical-align: middle;
+}
+.dsv-plotlist-ul {
+    margin: 0px;
+    padding-left: 10px;
+    list-style-type: none;
+}
+.dsv-plotlist-addplotbutton {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    height: 20px;
+    display: table;
+    text-align: center;
+    float: left;
+    max-width: 100px;
+    cursor: pointer;
+}
+.dsv-plotcard-palette {
+    font-size: 10px;
+    margin-left: 10px;
+    margin-top: 3px;
+}

@@ -1,0 +1,272 @@
+/*!
+ * ZUI: 数据表格② - v1.8.1 - 2018-01-18
+ * http://zui.sexy
+ * GitHub: https://github.com/easysoft/zui.git 
+ * Copyright (c) 2018 cnezsoft.com; Licensed MIT
+ */
+
+.datagrid-container {
+  position: relative;
+  overflow: hidden;
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  }
+.datagrid-cells {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: visible;
+  }
+.datagrid-cell {
+  position: absolute;
+  padding: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  -webkit-transition: .4s cubic-bezier(.175, .885, .32, 1);
+       -o-transition: .4s cubic-bezier(.175, .885, .32, 1);
+          transition: .4s cubic-bezier(.175, .885, .32, 1);
+  -webkit-transition-property: background, outline;
+       -o-transition-property: background, outline;
+          transition-property: background, outline;
+  }
+.datagrid-cell.datagrid-cell-index {
+  font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+  color: #808080;
+  text-align: right;
+  background-color: #f1f1f1;
+  }
+.datagrid-cell.datagrid-cell-head {
+  background-color: #f1f1f1;
+  }
+.datagrid-cell-span {
+  z-index: 10;
+  }
+.datagrid-row {
+  position: absolute;
+  width: 100%;
+  background-color: #fff;
+  -webkit-transition: .4s cubic-bezier(.175, .885, .32, 1);
+       -o-transition: .4s cubic-bezier(.175, .885, .32, 1);
+          transition: .4s cubic-bezier(.175, .885, .32, 1);
+  -webkit-transition-property: background, outline;
+       -o-transition-property: background, outline;
+          transition-property: background, outline;
+  }
+.datagrid-row-head {
+  font-weight: bold;
+  color: #808080;
+  background-color: #f1f1f1;
+  }
+.datagrid-fixed.datagrid-row {
+  z-index: 35;
+  }
+.datagrid-fixed.datagrid-cell {
+  z-index: 30;
+  }
+.datagrid-fixed-edge-top {
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .125), 0 1px 0 rgba(0, 0, 0, .25);
+          box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .125), 0 1px 0 rgba(0, 0, 0, .25);
+  }
+.datagrid-fixed-edge-bottom {
+  -webkit-box-shadow: 0 -2px 5px 0 rgba(0, 0, 0, .125), 0 -1px 0 rgba(0, 0, 0, .25);
+          box-shadow: 0 -2px 5px 0 rgba(0, 0, 0, .125), 0 -1px 0 rgba(0, 0, 0, .25);
+  }
+.datagrid-fixed-edge-left {
+  -webkit-box-shadow: -1px 0 0 rgba(0, 0, 0, .25) inset;
+          box-shadow: -1px 0 0 rgba(0, 0, 0, .25) inset;
+  }
+.datagrid-fixed-edge-right {
+  -webkit-box-shadow: 1px 0 0 rgba(0, 0, 0, .25) inset;
+          box-shadow: 1px 0 0 rgba(0, 0, 0, .25) inset;
+  }
+.datagrid-row-cell.active .datagrid-cell {
+  background-color: #fff0d5;
+  }
+.datagrid-row-cell.active .datagrid-cell.datagrid-cell-index {
+  background-color: #ffe7bc;
+  }
+.datagrid-hover-row .datagrid-row-cell:hover {
+  z-index: 20;
+  }
+.datagrid-hover-row .datagrid-row-cell:hover .datagrid-cell {
+  background-color: #ebf2f9;
+  }
+.datagrid-hover-row .datagrid-row-cell:hover.datagrid-fixed {
+  z-index: 38;
+  }
+.datagrid-hover-row .datagrid-row-cell:hover > .datagrid-cell-index {
+  background-color: #ddd;
+  }
+.datagrid-hover-row .datagrid-row-cell:hover.active .datagrid-cell {
+  background-color: #ffe1ac;
+  }
+.datagrid-hover-row .datagrid-row-cell:hover.active .datagrid-cell-index {
+  background-color: #ffda98;
+  }
+.datagrid-hover-row.datagrid-hover-shadow .datagrid-row-cell:hover {
+  -webkit-box-shadow: 0 1px 3px 2px rgba(0, 0, 0, .05), 0 0 2px 1px rgba(0, 0, 0, .075);
+          box-shadow: 0 1px 3px 2px rgba(0, 0, 0, .05), 0 0 2px 1px rgba(0, 0, 0, .075);
+  }
+.datagrid-hover-cell .datagrid-row-cell .datagrid-cell-cell:hover {
+  z-index: 40;
+  background-color: #fff;
+  outline: 1px solid #808080;
+  outline-offset: -1px;
+  }
+.datagrid-hover-cell .datagrid-row-cell .datagrid-cell-cell.datagrid-fixed:hover,
+.datagrid-hover-cell .datagrid-row-cell.datagrid-fixed .datagrid-cell-cell:hover {
+  z-index: 42;
+  }
+.datagrid-hover-cell.datagrid-hover-shadow .datagrid-row-cell .datagrid-cell:hover {
+  -webkit-box-shadow: 0 1px 3px 3px rgba(0, 0, 0, .075), 0 0 2px rgba(0, 0, 0, .1);
+          box-shadow: 0 1px 3px 3px rgba(0, 0, 0, .075), 0 0 2px rgba(0, 0, 0, .1);
+  }
+.datagrid-hover-col .datagrid-cell.hover {
+  background-color: #ebf2f9;
+  }
+.datagrid-hover-col .datagrid-cell-head.hover,
+.datagrid-hover-col .datagrid-cell-index.hover {
+  background-color: #ddd;
+  }
+.datagrid-hover-col .datagrid-row-cell.active .datagrid-cell.hover {
+  background-color: #d7e5f3;
+  }
+.datagrid-scrollbar {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  opacity: 0;
+  -webkit-transition: 2.5s cubic-bezier(.175, .885, .32, 1);
+       -o-transition: 2.5s cubic-bezier(.175, .885, .32, 1);
+          transition: 2.5s cubic-bezier(.175, .885, .32, 1);
+  -webkit-transition-property: background, opacity;
+       -o-transition-property: background, opacity;
+          transition-property: background, opacity;
+  }
+.datagrid-scrollbar.scrolling,
+.datagrid-container:hover .datagrid-scrollbar {
+  opacity: 1;
+  }
+.datagrid-scrollbar > .bar {
+  position: absolute;
+  min-width: 10px;
+  background-color: #ddd;
+  background-color: rgba(0, 0, 0, .25);
+  }
+.datagrid-scrollbar.scrolling,
+.datagrid-scrollbar:hover {
+  background-color: rgba(0, 0, 0, .075);
+  }
+.datagrid-scrollbar.scrolling > .bar,
+.datagrid-scrollbar:hover > .bar {
+  position: absolute;
+  background-color: #808080;
+  background-color: rgba(0, 0, 0, .5);
+  }
+.datagrid-scrollbar-h {
+  left: 0;
+  height: 10px;
+  }
+.datagrid-scrollbar-h > .bar {
+  top: 0!important;
+  bottom: 0!important;
+  min-width: 20px;
+  }
+.datagrid-scrollbar-v {
+  top: 0;
+  width: 10px;
+  }
+.datagrid-scrollbar-v > .bar {
+  right: 0!important;
+  left: 0!important;
+  min-height: 20px;
+  }
+.datagrid-messager {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 60;
+  padding: 5px 10px;
+  text-align: center;
+  }
+.datagrid-messager > .close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  width: 30px;
+  height: 30px;
+  padding-bottom: 5px;
+  line-height: 20px;
+  text-align: center;
+  }
+.datagrid-messager > .close:hover {
+  background-color: rgba(0, 0, 0, .1);
+  }
+.datagrid-loading {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 61;
+  background-color: rgba(255, 255, 255, .6);
+  }
+.datagrid-loading > .content {
+  position: relative;
+  top: 50%;
+  display: block;
+  height: 50px;
+  margin-top: -25px;
+  text-align: center;
+  }
+.datagrid-loading > .content > .icon {
+  color: #3280fc;
+  }
+.datagrid-col-sortable {
+  padding-right: 20px;
+  cursor: pointer;
+  }
+.datagrid-sorter {
+  position: absolute;
+  top: 3px;
+  right: 0;
+  bottom: 0;
+  width: 20px;
+  line-height: 30px;
+  text-align: center;
+  }
+.datagrid-sort-down > .icon-sort:before {
+  color: #3280fc;
+  content: '\e6b8';
+  }
+.datagrid-sort-up > .icon-sort:before {
+  color: #3280fc;
+  content: '\e6b9';
+  }
+.datagrid-borderless .datagrid-container {
+  border-color: transparent;
+  }
+.datagrid-borderless .datagrid-cell {
+  border-right-color: transparent;
+  border-left-color: transparent;
+  }
+.datagrid-borderless .datagrid-fixed-edge-left {
+  -webkit-box-shadow: -1px 0 0 rgba(0, 0, 0, .1) inset;
+          box-shadow: -1px 0 0 rgba(0, 0, 0, .1) inset;
+  }
+.datagrid-borderless .datagrid-fixed-edge-right {
+  -webkit-box-shadow: 1px 0 0 rgba(0, 0, 0, .1) inset;
+          box-shadow: 1px 0 0 rgba(0, 0, 0, .1) inset;
+  }
+.datagrid-borderless .datagrid-row-cell:not(:hover) .datagrid-cell.datagrid-cell-index {
+  background-color: #fff;
+  }
+.datagrid-striped .datagrid-cells > .datagrid-row-cell:nth-child(odd) .datagrid-cell-cell {
+  background-color: #f9f9f9;
+  }

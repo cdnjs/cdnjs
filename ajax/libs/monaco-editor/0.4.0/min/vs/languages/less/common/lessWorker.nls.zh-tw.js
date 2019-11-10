@@ -1,0 +1,8 @@
+/*!-----------------------------------------------------------
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Version: 0.4.2(1ebfb1b687c4345ac9c6da39051431a46c120a65)
+ * Released under the MIT license
+ * https://github.com/Microsoft/vscode/blob/master/LICENSE.txt
+ *-----------------------------------------------------------*/
+define("vs/languages/less/common/lessWorker.nls.zh-tw",{"vs/languages/less/common/services/intelliSense":["URL 會編碼字串","逸出字串內容","字串取代","移除或變更維度的單位","將字串剖析為色彩","將數字從某種類型轉換成另一種類型","內嵌一項資源並回復為 `url()`","傳回值清單中的項目數","傳回清單中指定位置的值","數字的絕對值","反餘弦值 - 反餘弦函數","反正弦值 - 反正弦函數","無條件進位到一個整數","餘弦函數","無條件捨去到一個整數","轉換成 %，例如 0.5 > 50%","將數字四捨五入到某個小數位數","計算數字的平方根","正弦函數","正切函數","反正切值 - 反正切函數","傳回圓周率","自乘至第二個引數乘冪的第一個引數","第一個引數模組的第二個引數","傳回一或多個值的最低值","傳回一或多個值的最低值","建立 #AARRGGBB","建立色彩","建立色彩","建立色彩","建立色彩","傳回 HSL 空間中 `@color` 的 `hue` 色板","傳回 HSL 空間中 `@color` 的 `saturation` 色板","傳回 HSL 空間中 `@color` 的 `lightness` 色板","傳回 HSV 空間中 `@color` 的 `hue` 色板","傳回 HSV 空間中 `@color` 的 `saturation` 色板","傳回 HSV 空間中 `@color` 的 `value` 色板","傳回 `@color` 的 `red` 色板","傳回 `@color` 的 `green` 色板","傳回 `@color` 的 `blue` 色板","傳回 `@color` 的 `alpha` 色板","傳回 `@color` 的 `luma` 值 (感知亮度)","傳回 `@color` (較飽和 10% 點)","傳回 `@color` (較不飽和 10% 點)","傳回 `@color` (亮 10% 點)","傳回 `@color` (暗 10% 點)","傳回 `@color` (較不透明 10% 點)","傳回 `@color` (較為透明 10% 點)","傳回透明度為 50% 的 `@color`","傳回色調放大 10 度的 '@color' ","傳回 `@color1` 和 `@color2` 的混合","傳回灰色，100% 欠飽和色","如果 `@color1 is> 43% luma`，則傳回 `@darkcolor`，否則傳回 `@lightcolor`，請參閱＜備註＞"]});
+//# sourceMappingURL=../../../../../min-maps/vs/languages/less/common/lessWorker.nls.zh-tw.js.map

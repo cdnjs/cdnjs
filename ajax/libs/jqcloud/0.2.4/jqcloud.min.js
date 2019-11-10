@@ -1,0 +1,11 @@
+/*!
+ * jQCloud Plugin for jQuery
+ *
+ * Version 0.2.4
+ *
+ * Copyright 2011, Luca Ongaro
+ * Licensed under the MIT license.
+ *
+ * Date: Sun Aug 14 00:09:07 +0200 2011
+ */
+(function(a){a.fn.jQCloud=function(b,c){var d=this,e=d.attr("id"),f={width:d.width(),height:d.height(),center:{x:d.width()/2,y:d.height()/2},delayedMode:b.length>50,randomClasses:0};typeof c=="function"&&(c={callback:c}),c=a.extend(f,c||{}),d.addClass("jqcloud");var g=function(){var f=function(a,b){var c=function(a,b){if(Math.abs(2*a.offsetLeft+a.offsetWidth-2*b.offsetLeft-b.offsetWidth)<a.offsetWidth+b.offsetWidth&&Math.abs(2*a.offsetTop+a.offsetHeight-2*b.offsetTop-b.offsetHeight)<a.offsetHeight+b.offsetHeight)return!0;return!1},d=0;for(d=0;d<b.length;d++)if(c(a,b[d]))return!0;return!1};for(i=0;i<b.length;i++)b[i].weight=parseFloat(b[i].weight,10);b.sort(function(a,b){return a.weight<b.weight?1:a.weight>b.weight?-1:0});var g=2,h=[],j=c.width/c.height,k=function(i,k){var l=e+"_word_"+i,m="#"+l,n=typeof c.randomClasses=="number"&&c.randomClasses>0?" r"+Math.ceil(Math.random()*c.randomClasses):a.isArray(c.randomClasses)&&c.randomClasses.length>0?" "+c.randomClasses[Math.floor(Math.random()*c.randomClasses.length)]:"",o=6.28*Math.random(),p=0,q=Math.round((k.weight-b[b.length-1].weight)/(b[0].weight-b[b.length-1].weight)*9)+1,r=k.url!==undefined?"<a href='"+encodeURI(k.url).replace(/'/g,"%27")+"'>"+k.text+"</a>":k.text;d.append("<span id='"+l+"' class='w"+q+n+"' title='"+(k.title||"")+"'>"+r+"</span>");var s=a(m,d),t=s.width(),u=s.height(),v=c.center.x-t/2,w=c.center.y-u/2,x=s[0].style;x.position="absolute",x.left=v+"px",x.top=w+"px";while(f(document.getElementById(l),h))p+=g,o+=(i%2===0?1:-1)*g,v=c.center.x-t/2+p*Math.cos(o)*j,w=c.center.y+p*Math.sin(o)-u/2,x.left=v+"px",x.top=w+"px";h.push(document.getElementById(l))},l=function(a){a=a||0,a<b.length?(k(a,b[a]),setTimeout(function(){l(a+1)},10)):typeof c.callback=="function"&&c.callback.call(this)};c.delayedMode||c.delayed_mode?l():(a.each(b,k),typeof c.callback=="function"&&c.callback.call(this))};setTimeout(function(){g()},10);return this}})(jQuery)

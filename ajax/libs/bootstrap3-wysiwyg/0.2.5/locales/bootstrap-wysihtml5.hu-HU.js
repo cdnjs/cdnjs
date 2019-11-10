@@ -1,0 +1,52 @@
+/**
+ * Hungarian translation for bootstrap-wysihtml5
+ */
+(function($){
+  $.fn.wysihtml5.locale["hu-HU"] = {
+    font_styles: {
+      normal: "Szövegtörzs",
+      h1: "Főcím",
+      h2: "Alcím",
+      h3: "Harmadrangú alcím",
+      h4: "Negyedrangú alcím",
+      h5: "Ötödrangú alcím",
+      h6: "Hatodrangú alcím"
+    },
+    emphasis: {
+      bold: "Vastag",
+      italic: "Dölt",
+      underline: "Aláhúzott"
+    },
+    lists: {
+      unordered: "Pontozott lista",
+      ordered: "Számozott lista",
+      outdent: "Behúzás növelése",
+      indent: "Behúzás csökkentése"
+    },
+    link: {
+      insert: "Hivatkozás beszúrása",
+      cancel: "Mégsem",
+      target: "Hivatkozás megnyitása új ablakban"
+    },
+    image: {
+      insert: "Kép beszúrása",
+      cancel: "Mégsem"
+    },
+    html: {
+      edit: "HTML szerkesztése"
+    },
+    colours: {
+      black: "Fekete",
+      silver: "Ezüst",
+      gray: "Szürke",
+      maroon: "Gesztenyebarna",
+      red: "Piros",
+      purple: "Lila",
+      green: "Zöld",
+      olive: "Olajzöld",
+      navy: "Tengerkék",
+      blue: "Kék",
+      orange: "Narancs"
+    }
+  };
+}(jQuery));

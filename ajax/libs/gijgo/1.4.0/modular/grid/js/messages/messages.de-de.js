@@ -1,0 +1,21 @@
+﻿gj.grid.messages['de-de'] = {
+    First: 'Erste',
+    Previous: 'Vorherige',
+    Next: 'N\u00e4chste',
+    Last: 'Letzte',
+    Page: 'Seite',
+    FirstPageTooltip: 'Erste Seite',
+    PreviousPageTooltip: 'Vorherige Seite',
+    NextPageTooltip: 'N\u00e4chste Seite',
+    LastPageTooltip: 'Letzte Seite',
+    Refresh: 'Aktualisieren',
+    Of: 'von',
+    DisplayingRecords: 'Zeige Datens\u00e4tze',
+    RowsPerPage: 'Zeilen pro Seite:',
+    Edit: 'Editieren',
+    Delete: 'L\u00f6schen',
+    Update: 'Aktualisieren',
+    Cancel: 'Abbrechen',
+    NoRecordsFound: 'Es wurden keine Datens\u00e4tze gefunden.',
+    Loading: 'Laden...'
+};

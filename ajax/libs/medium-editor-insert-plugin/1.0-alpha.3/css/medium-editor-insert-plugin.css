@@ -1,0 +1,277 @@
+/*! 
+ * medium-editor-insert-plugin v0.3.2 - jQuery insert plugin for MediumEditor
+ *
+ * https://github.com/orthes/medium-editor-insert-plugin
+ * 
+ * Copyright (c) 2014 Pavel Linkesch (http://linkesch.sk)
+ * Released under the MIT license
+ */
+
+.mediumInsert {
+  margin: -1em 0; }
+  .mediumInsert figure {
+    margin: 0;
+    display: inline-block; }
+  .mediumInsert img {
+    max-width: 100%; }
+  .mediumInsert .mediumInsert-embeds {
+    text-align: center;
+    padding: 15px 0; }
+    .mediumInsert .mediumInsert-embeds iframe {
+      margin: 0px auto !important; }
+    .mediumInsert .mediumInsert-embeds div {
+      margin: 0px auto !important; }
+  .mediumInsert .mediumInsert-images {
+    margin-right: 10px;
+    width: 20%; }
+    .mediumInsert .mediumInsert-images img {
+      margin-top: 1em;
+      margin-bottom: 10px;
+      vertical-align: top; }
+    .mediumInsert .mediumInsert-images:first-child {
+      margin-right: 0;
+      width: 100%; }
+      .mediumInsert .mediumInsert-images:first-child:after {
+        content: "\a";
+        white-space: pre; }
+  .mediumInsert .mediumInsert-maps {
+    padding: 10px;
+    background: #ccc; }
+  .mediumInsert table.mediumInsert-table {
+    border-top: 2px solid #333;
+    border-left: 2px solid #333;
+    width: 90%;
+    margin: 30px auto; }
+    .mediumInsert table.mediumInsert-table td {
+      border-right: 2px solid #333;
+      border-bottom: 2px solid #333;
+      padding: 12px; }
+  .mediumInsert.small {
+    max-width: 33.33%;
+    float: left;
+    margin-right: 30px;
+    margin-bottom: 20px; }
+  .mediumInsert.mediumInsert-first {
+    margin-top: 0; }
+
+.medium-editor-insert-plugin {
+  /* Prevent the text contents of draggable elements from being selectable. */ }
+  .medium-editor-insert-plugin .clearfix:before, .medium-editor-insert-plugin:before, .medium-editor-insert-plugin .clearfix:after, .medium-editor-insert-plugin:after {
+    content: " ";
+    /* 1 */
+    display: table;
+    /* 2 */ }
+  .medium-editor-insert-plugin .clearfix:after, .medium-editor-insert-plugin:after {
+    clear: both; }
+  .medium-editor-insert-plugin img {
+    max-width: 100%; }
+  .medium-editor-insert-plugin q, .medium-editor-insert-plugin blockquote {
+    display: block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    border-left: 5px solid #efefef;
+    padding-left: 20px;
+    margin-left: -25px; }
+  .medium-editor-insert-plugin [draggable] {
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none; }
+  .medium-editor-insert-plugin[contenteditable], .medium-editor-insert-plugin [contenteditable] {
+    outline: 0px solid transparent; }
+    .medium-editor-insert-plugin[contenteditable]:focus, .medium-editor-insert-plugin [contenteditable]:focus {
+      outline: 0px solid transparent; }
+  .medium-editor-insert-plugin * {
+    -moz-box-sizing: content-box;
+         box-sizing: content-box; }
+  .medium-editor-insert-plugin p {
+    margin: 1em 0; }
+  .medium-editor-insert-plugin progress {
+    display: block;
+    margin: 1em auto; }
+  .medium-editor-insert-plugin .hide {
+    display: none !important; }
+  .medium-editor-insert-plugin.hover .mediumInsert-placeholder {
+    min-height: 14px;
+    border: 1px dashed #ddd;
+    margin-top: -1px;
+    margin-bottom: -1px; }
+
+.medium-editor-insert-plugin.medium-editor-placeholder {
+  padding-bottom: 0 !important;
+  min-height: 58px; }
+
+.medium-editor-insert-plugin.medium-editor-placeholder:after {
+  content: attr(data-placeholder) !important;
+  top: 1em; }
+
+.mediumInsert {
+  position: relative;
+  margin-left: -40px !important;
+  min-height: 18px; }
+  .mediumInsert.small {
+    max-width: calc(33.33% + 40px); }
+  .mediumInsert .mediumInsert-buttonsShow {
+    opacity: 0;
+    -webkit-transform: scale(0);
+        -ms-transform: scale(0);
+            transform: scale(0);
+    -webkit-transition: all 0.08s cubic-bezier(0.2, 0.3, 0.25, 0.9);
+            transition: all 0.08s cubic-bezier(0.2, 0.3, 0.25, 0.9);
+    display: block;
+    width: 18px;
+    height: 18px;
+    margin-top: -5px;
+    border-radius: 10px;
+    border: 2px solid;
+    font-size: 18px;
+    line-height: 18px;
+    text-align: center;
+    text-decoration: none !important; }
+    .mediumInsert .mediumInsert-buttonsShow:after {
+      left: auto;
+      right: 100%;
+      top: 50%;
+      margin-top: -4px; }
+  .mediumInsert .mediumInsert-buttons {
+    position: absolute;
+    width: 40px;
+    bottom: 0;
+    left: 0;
+    color: #ddd;
+    font-size: 0.9em; }
+    .mediumInsert .mediumInsert-buttons a {
+      text-decoration: underline;
+      cursor: pointer; }
+      .mediumInsert .mediumInsert-buttons a.active {
+        font-weight: bold; }
+  .mediumInsert ul.mediumInsert-buttonsOptions {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: none;
+    position: absolute;
+    z-index: 2;
+    left: 40px;
+    top: -10px;
+    border-radius: 5px; }
+    .mediumInsert ul.mediumInsert-buttonsOptions button {
+      min-height: auto;
+      height: auto;
+      padding: 5px;
+      border-left: none;
+      float: none; }
+      .mediumInsert ul.mediumInsert-buttonsOptions button .fa {
+        font-size: 20px; }
+  .mediumInsert .mediumInsert-placeholder {
+    position: relative;
+    margin-left: 40px;
+    text-align: center; }
+  .mediumInsert .mediumInsert-images .mediumInsert-imageIcon {
+    position: absolute;
+    top: 1em;
+    width: 30px;
+    height: 30px;
+    background-color: #3b3b3b;
+    background-repeat: no-repeat;
+    background-position: center center;
+    cursor: pointer; }
+  .mediumInsert .mediumInsert-imageRemove {
+    right: 0;
+    background-image: url(../images/remove.png); }
+  .mediumInsert .mediumInsert-imageResizeSmaller, .mediumInsert .mediumInsert-imageResizeBigger, .mediumInsert .mediumInsert-imageResizeBigger {
+    right: 31px;
+    background-image: url(../images/resize-smaller.png); }
+  .mediumInsert .mediumInsert-imageResizeBigger {
+    background-image: url(../images/resize-bigger.png); }
+  .mediumInsert .mediumInsert-imageLink, .mediumInsert .mediumInsert-imageUnlink {
+    right: 62px;
+    background-image: url(../images/link.png); }
+  .mediumInsert .mediumInsert-imageUnlink {
+    background-image: url(../images/unlink.png); }
+  .mediumInsert .mediumInsert-error {
+    background-color: #f2dede;
+    border: 1px solid #ebccd1;
+    color: #a94442;
+    padding: 15px; }
+  .mediumInsert .mediumInsert-embedsPlaceholder {
+    position: relative;
+    padding: 24px;
+    height: 160px;
+    text-align: center;
+    background-color: #fff; }
+  .mediumInsert .mediumInsert-embedsWire {
+    position: absolute;
+    left: 50%;
+    text-align: center; }
+  .mediumInsert .mediumInsert-imageLinkWire {
+    position: absolute;
+    top: -40px;
+    left: auto;
+    right: 0; }
+  .mediumInsert .mediumInsert-embedsBox {
+    position: relative;
+    left: -250px; }
+    .mediumInsert .mediumInsert-embedsBox input[type="text"] {
+      margin: 0 auto;
+      padding: 10px;
+      width: 330px;
+      border: solid 3px #ccc;
+      font-size: 1em;
+      font-family: Arial, sans-serif;
+      color: #aaa; }
+      .mediumInsert .mediumInsert-embedsBox input[type="text"]:focus {
+        border: solid 1px #EEA34A; }
+    .mediumInsert .mediumInsert-embedsBox input::-webkit-input-placeholder {
+      color: #aaa; }
+    .mediumInsert .mediumInsert-embedsBox button {
+      border: solid 1px #2fbbfc;
+      padding: 11px 30px;
+      font-family: Arial, sans-serif;
+      font-size: 1.2em;
+      color: #fff;
+      cursor: pointer;
+      background-color: #2fbbfc; }
+  .mediumInsert .mediumInsert-embedsImage {
+    font-size: 100px;
+    color: #999; }
+  .mediumInsert.hover .mediumInsert-placeholder {
+    background: #f0f0f0; }
+  .mediumInsert:hover .mediumInsert-buttonsShow {
+    -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+            transform: scale(1);
+    opacity: 1; }
+  .mediumInsert .medium-editor-toolbar-form-anchor.mediumInsert-tableDemoBox {
+    background-color: #fff;
+    border: 2px solid #333;
+    display: inline-block;
+    z-index: 50;
+    position: relative; }
+    .mediumInsert .medium-editor-toolbar-form-anchor.mediumInsert-tableDemoBox label, .mediumInsert .medium-editor-toolbar-form-anchor.mediumInsert-tableDemoBox button {
+      color: #333;
+      text-transform: capitalize; }
+    .mediumInsert .medium-editor-toolbar-form-anchor.mediumInsert-tableDemoBox button.mediumInsert-tableReadyButton {
+      background-color: #fff;
+      border: 1px solid #333; }
+    .mediumInsert .medium-editor-toolbar-form-anchor.mediumInsert-tableDemoBox input.mediumInsert-tableCols, .mediumInsert .medium-editor-toolbar-form-anchor.mediumInsert-tableDemoBox input.mediumInsert-tableRows {
+      width: 50px;
+      display: block;
+      height: initial;
+      background-color: inherit;
+      border: 1px solid #333;
+      color: #333;
+      margin: 0 auto;
+      text-align: center; }
+    .mediumInsert .medium-editor-toolbar-form-anchor.mediumInsert-tableDemoBox table {
+      margin: 10px; }
+      .mediumInsert .medium-editor-toolbar-form-anchor.mediumInsert-tableDemoBox table td {
+        text-align: center; }
+      .mediumInsert .medium-editor-toolbar-form-anchor.mediumInsert-tableDemoBox table.mediumInsert-demoTable {
+        border-top: 2px solid #333;
+        border-left: 2px solid #333;
+        height: 100px;
+        width: 100px; }
+        .mediumInsert .medium-editor-toolbar-form-anchor.mediumInsert-tableDemoBox table.mediumInsert-demoTable td {
+          border-bottom: 2px solid #333;
+          border-right: 2px solid #333; }

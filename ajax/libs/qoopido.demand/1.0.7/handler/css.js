@@ -1,0 +1,3 @@
+/*! Qoopido.demand 1.0.7 | https://github.com/dlueth/qoopido.demand | (c) 2015 Dirk Lueth */
+!function(e,t){"use strict";function n(n,u){return{prepare:function(e){return".css"!==e.slice(-4)?e+".css":e},resolve:function(s,u){var c=e.createElement("style");c.type="text/css",c.media="only x",c.styleSheet?c.styleSheet.cssText=u:c.innerHTML=u,c.setAttribute("demand-path",s),r.appendChild(c),t(function(){n(function(){return c})})},modify:function(e,t){for(var n,r=u(e+"/..");n=s.exec(t);)t=t.replace(n[0],"url("+u(r+n[1])+")");return t}}}var r=e.getElementsByTagName("head")[0],s=/url\(\s*(?:"|'|)(?!data:|http:|https:|\/)(.+?)(?:"|'|)\)/g;provide(n).when("/provide","/resolve/url")}(document,setTimeout);
+//# sourceMappingURL=../handler/css.js.map

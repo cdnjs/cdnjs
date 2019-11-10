@@ -1,0 +1,139 @@
+/*! UIkit 2.25.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/* ========================================================================
+   Component: Nestable
+ ========================================================================== */
+.uk-nestable {
+  padding: 0;
+  list-style: none;
+}
+/*
+ * Disables the default callout shown when you touch and hold a touch target
+ * Currently only works in Webkit
+ */
+.uk-nestable a,
+.uk-nestable img {
+  -webkit-touch-callout: none;
+}
+/* Sub-object `uk-nestable-list`
+ ========================================================================== */
+.uk-nestable-list {
+  margin: 0;
+  padding-left: 40px;
+  list-style: none;
+}
+/* Sub-modifier `uk-nestable-item`
+ ========================================================================== */
+/*
+ * 1. Deactivate browser touch actions in IE11
+ */
+.uk-nestable-item {
+  /* 1 */
+  touch-action: none;
+}
+.uk-nestable-item + .uk-nestable-item {
+  margin-top: 10px;
+}
+.uk-nestable-list:not(.uk-nestable-dragged) > .uk-nestable-item:first-child {
+  margin-top: 10px;
+}
+/* Sub-modifier `uk-nestable-dragged`
+ ========================================================================== */
+/*
+ * 1. Reset style
+ */
+.uk-nestable-dragged {
+  position: absolute;
+  z-index: 1050;
+  pointer-events: none;
+  /* 1 */
+  padding-left: 0;
+}
+/* Sub-modifier `uk-nestable-placeholder`
+ ========================================================================== */
+.uk-nestable-placeholder {
+  position: relative;
+}
+.uk-nestable-placeholder > * {
+  opacity: 0;
+}
+.uk-nestable-placeholder:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border: 1px dashed #dddddd;
+  opacity: 1;
+}
+/* Empty List
+ ========================================================================== */
+.uk-nestable-empty {
+  min-height: 30px;
+}
+/* Sub-object `uk-nestable-handle`
+ ========================================================================== */
+/*
+ * Deactivate browser touch actions in IE11
+ */
+.uk-nestable-handle {
+  touch-action: none;
+}
+/* Hover */
+.uk-nestable-handle:hover {
+  cursor: move;
+}
+/* Sub-object `uk-nestable-moving`
+ ========================================================================== */
+.uk-nestable-moving,
+.uk-nestable-moving * {
+  cursor: move;
+}
+/* [data-nestable-action='toggle']
+ ========================================================================== */
+/*
+ * 1. Makes text unselectable. Happens if double clicked by mistake
+ */
+[data-nestable-action='toggle'] {
+  cursor: pointer;
+  /* 1 */
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+/* Sub-object `.uk-nestable-toggle`
+ ========================================================================== */
+.uk-nestable-toggle {
+  display: inline-block;
+  visibility: hidden;
+}
+.uk-nestable-toggle:after {
+  content: "\f147";
+  font-family: FontAwesome;
+}
+.uk-parent > :not(.uk-nestable-list) .uk-nestable-toggle {
+  visibility: visible;
+}
+/*
+ * Collapsed
+ */
+.uk-collapsed .uk-nestable-list {
+  display: none;
+}
+.uk-collapsed .uk-nestable-toggle:after {
+  content: "\f196";
+}
+/* Sub-object `uk-nestable-panel`
+ ========================================================================== */
+.uk-nestable-panel {
+  padding: 5px;
+  background: #f7f7f7;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom-color: rgba(0, 0, 0, 0.3);
+  background-origin: border-box;
+  background-image: -webkit-linear-gradient(top, #ffffff, #eeeeee);
+  background-image: linear-gradient(to bottom, #ffffff, #eeeeee);
+  text-shadow: 0 1px 0 #ffffff;
+}

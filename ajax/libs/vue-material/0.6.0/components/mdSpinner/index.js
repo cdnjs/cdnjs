@@ -1,0 +1,6 @@
+/*!
+ * Vue Material v0.6.0
+ * Made with love by Marcos Moura
+ * Released under the MIT License.
+ */
+!(function(e,t){"object"==typeof exports&&"object"==typeof module?module.exports=t():"function"==typeof define&&define.amd?define([],t):"object"==typeof exports?exports.VueMaterial=t():e.VueMaterial=t()})(this,(function(){return (function(e){function t(r){if(n[r])return n[r].exports;var o=n[r]={exports:{},id:r,loaded:!1};return e[r].call(o.exports,o,o.exports,t),o.loaded=!0,o.exports}var n={};return t.m=e,t.c=n,t.p="/",t(0)})({0:function(e,t,n){e.exports=n(31)},31:function(e,t,n){"use strict";function r(e){return e&&e.__esModule?e:{default:e}}function o(e){e.component("md-spinner",e.extend(u.default)),e.material.styles.push(p.default)}Object.defineProperty(t,"__esModule",{value:!0}),t.default=o;var d=n(!(function(){var e=new Error('Cannot find module "./mdSpinner.vue"');throw e.code="MODULE_NOT_FOUND",e})()),u=r(d),i=n(92),p=r(i);e.exports=t.default},92:function(e,t){e.exports=".THEME_NAME.md-spinner .md-spinner-path{stroke:PRIMARY-COLOR}.THEME_NAME.md-spinner.md-accent .md-spinner-path{stroke:ACCENT-COLOR}.THEME_NAME.md-spinner.md-warn .md-spinner-path{stroke:WARN-COLOR}\n"}})}));

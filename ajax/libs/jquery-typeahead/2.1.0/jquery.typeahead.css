@@ -1,0 +1,409 @@
+/*------------------------------------*\
+    CONTENTS
+\*------------------------------------*/
+/*
+NORMALIZE BUTTON & INPUT - https://github.com/necolas/normalize.css
+LAYOUT
+INPUT, BUTTON, A & DROPDOWN
+EXTRA
+*/
+
+/*------------------------------------*\
+    NORMALIZE BUTTON & INPUT
+\*------------------------------------*/
+
+/**
+ * Known limitation: by default, Chrome and Safari on OS X allow very limited
+ * styling of `select`, unless a `border` property is set.
+ */
+
+/**
+ * 1. Correct color not being inherited.
+ *    Known issue: affects color of disabled elements.
+ * 2. Correct font properties not being inherited.
+ * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
+ */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    color: inherit; /* 1 */
+    font: inherit; /* 2 */
+    margin: 0; /* 3 */
+}
+
+/**
+ * Address `overflow` set to `hidden` in IE 8/9/10/11.
+ */
+
+button {
+    overflow: visible;
+}
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
+ * Correct `select` style inheritance in Firefox.
+ */
+
+button,
+select {
+    text-transform: none;
+}
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ */
+
+button,
+html input[type="button"], /* 1 */
+input[type="reset"],
+input[type="submit"] {
+    -webkit-appearance: button; /* 2 */
+    cursor: pointer; /* 3 */
+}
+
+/**
+ * Re-set default cursor for disabled elements.
+ */
+
+button[disabled],
+html input[disabled] {
+    cursor: default;
+}
+
+/**
+ * Remove inner padding and border in Firefox 4+.
+ */
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+/**
+ * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+
+input {
+    line-height: normal;
+}
+
+
+/*------------------------------------*\
+    LAYOUT
+\*------------------------------------*/
+
+.typeahead-container {
+    position: relative;
+    font-family: "Open Sans", Arial, Helvetica, Sans-Serif;
+}
+
+.typeahead-container * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.typeahead-query {
+    width: 100%;
+}
+
+.typeahead-filter {
+    position: relative;
+}
+
+.typeahead-filter button {
+    min-width: 66px;
+}
+
+.typeahead-field {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+    width: 100%;
+}
+
+.typeahead-button {
+    position: relative;
+    font-size: 0;
+    white-space: nowrap;
+    width: 1%;
+    vertical-align: middle;
+}
+
+.typeahead-field > span {
+    display: table-cell;
+    vertical-align: top;
+}
+
+
+/*------------------------------------*\
+    INPUT, BUTTON, A & DROPDOWN
+\*------------------------------------*/
+
+.typeahead-button button {
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.typeahead-field input,
+.typeahead-select {
+    display: block;
+    width: 100%;
+    height: 32px;
+    padding: 6px 12px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    color: #555555;
+    background: transparent;
+    border: 1px solid #cccccc;
+    border-radius: 2px 0 0 2px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.typeahead-field input {
+    -webkit-appearance: none;
+    background: transparent;
+}
+
+.typeahead-field input:last-child,
+.typeahead-hint {
+    background: #fff;
+}
+
+.typeahead-container button {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 13px;
+    height: 32px;
+    line-height: 1.42857143;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: #333333;
+    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.05);
+    -webkit-box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.typeahead-container button:focus,
+.typeahead-container button:active {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+}
+
+.typeahead-container button:hover,
+.typeahead-container button:focus {
+    color: #333333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+
+.typeahead-container button:active,
+.typeahead-container button.active {
+    outline: 0;
+    background-image: none;
+    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+
+.typeahead-field input.disabled,
+.typeahead-field input[disabled],
+.typeahead-container button.disabled,
+.typeahead-container button[disabled] {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background-color: #ffffff;
+    border-color: #cccccc;
+}
+
+.typeahead-filter button,
+.typeahead-button button {
+    margin-left: -1px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.typeahead-query {
+    position: relative;
+    z-index: 2;
+}
+
+.typeahead-filter,
+.typeahead-button {
+    z-index: 1;
+}
+
+.typeahead-container.filter .typeahead-filter,
+.typeahead-filter:hover,
+.typeahead-filter:hover,
+.typeahead-filter:active,
+.typeahead-filter:focus,
+.typeahead-button:hover,
+.typeahead-button:active,
+.typeahead-button:focus,
+.typeahead-button:focus button:focus,
+.typeahead-button:active button:active {
+    z-index: 1001;
+}
+
+.typeahead-list,
+.typeahead-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    list-style: none;
+    font-size: 13px;
+    text-align: left;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 2px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    background-clip: padding-box;
+}
+
+.typeahead-result.detached .typeahead-list {
+    font-family: "Open Sans", Arial, Helvetica, Sans-Serif;
+    position: relative;
+    z-index: 1041;
+    top: auto;
+    left: auto;
+}
+
+.typeahead-dropdown {
+    right: 0;
+    left: auto;
+    z-index: 1001;
+}
+
+.typeahead-list > li:first-child {
+    border-top: none;
+}
+
+.typeahead-list > li {
+    position: relative;
+    border-top: solid 1px rgba(0, 0, 0, 0.15);
+}
+
+.typeahead-list > li > a,
+.typeahead-dropdown > li > a {
+    display: block;
+    padding: 6px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.42857143;
+    color: #333333;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.typeahead-list > li > a:hover,
+.typeahead-list > li > a:focus,
+.typeahead-list > li.active > a,
+.typeahead-dropdown > li > a:hover,
+.typeahead-dropdown > li > a:focus,
+.typeahead-dropdown > li.active > a {
+    background-color: #ebebeb;
+    color: #333;
+}
+
+.typeahead-list.empty > li > a:hover,
+.typeahead-list.empty > li > a:focus,
+.typeahead-list.empty > li.active > a {
+    background-color: transparent;
+}
+
+.typeahead-list.empty > li > a {
+    cursor: default;
+}
+
+.typeahead-list > li.typeahead-group > a,
+.typeahead-list > li.typeahead-group > a:hover,
+.typeahead-list > li.typeahead-group > a:focus,
+.typeahead-list > li.typeahead-group.active > a {
+    border-color: #9cb4c5;
+    color: #305d8c;
+    background-color: #d6dde7;
+    cursor: default;
+}
+
+.typeahead-container.result .typeahead-list,
+.typeahead-container.filter .typeahead-dropdown,
+.typeahead-container.hint .typeahead-hint,
+.typeahead-container.backdrop + .typeahead-backdrop {
+    display: block !important;
+}
+
+.typeahead-container .typeahead-list,
+.typeahead-container .typeahead-dropdown,
+.typeahead-container .typeahead-hint,
+.typeahead-container + .typeahead-backdrop {
+    display: none !important;
+}
+
+
+/*------------------------------------*\
+    EXTRA
+\*------------------------------------*/
+
+.typeahead-dropdown .divider {
+    height: 1px;
+    margin: 5px 0;
+    overflow: hidden;
+    background-color: #e5e5e5;
+}
+
+.typeahead-caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px solid;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+
+.typeahead-search-icon {
+    min-width: 40px;
+    height: 18px;
+    font-size: 13px;
+    display: block;
+    background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABH0lEQVR4nJ3SvyvFYRTH8deVkkJ3UUZJIbJ8bzJjMtyMym6w2Njs/gCDP0AGCyWjxYDF5GdJYpS6xaIUw/d8771dT7qc+vZ8vs95zvuc5zmnlGWZsG6sYBGjsXeNHWzjQ8JKARjCEUZSh3CJeTy3OjoicxF8hwX0oi/0HSZwiK4UYKUpeBoHeMdb6OnwTWI5BVgMvYZaovwa1kMvpQBjoY8TwVp84ylAO/YV62cKcBt65hfAbKwPKcBu6E2UE8Hl8MF+CrCFG/nwnKKKnviqONOYj6NWQDFIg/I+/3ikFnuUX6d+lY4mR4ZVnMvnoIYLbKCCp0h0otG5egXt2HAED+BFPmAP7bYR7jGHV/RjCjr/AICryFzB3n8ARSX3xc83qRk4q9rDNWcAAAAASUVORK5CYII=) no-repeat scroll center center transparent;
+}

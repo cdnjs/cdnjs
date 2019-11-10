@@ -1,0 +1,1 @@
+!function(t){var a="mmenu";t[a].addons.navbars.searchfield=function(s,e){t[a]._c;"object"!=typeof this.opts.searchfield&&(this.opts.searchfield={}),this.opts.searchfield.add=!0,this.opts.searchfield.addTo=s}}(jQuery);

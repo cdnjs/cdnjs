@@ -1,0 +1,6 @@
+/*	
+ * jQuery mmenu dragClose addon
+ *
+ * Copyright (c) ...
+ */
+!function(e){var n="mmenu",o="dragClose";e[n].addons[o]={setup:function(){var s=this,i=this.opts[o];if(this.conf[o],a=e[n].glbl,"boolean"==typeof i&&(i={close:i}),"object"!=typeof i&&(i={}),i=this.opts[o]=e.extend(!0,{},e[n].defaults[o],i),i.close){var f,r;switch(this.opts.offCanvas.position){case"left":f="swipeleft";break;case"right":f="swiperight";break;case"top":f="swipeup";break;case"bottom":f="swipedown"}r=-1!=this.opts.extensions.indexOf("mm-leftsubpanel")?"swipeleft":"swiperight";var c=new Hammer(this.$menu[0],i.vendors.hammer);c.on(f,function(){if(s.opts.offCanvas){var e=s.$menu.find("."+t.prev+":visible");0==e.length?s.close():f!=r&&s.close()}}).on(r,function(){var e=s.$menu.find("."+t.prev+":visible");e.length>0&&e.click()})}},add:function(){return"function"!=typeof Hammer||Hammer.VERSION<2?void(e[n].addons[o].setup=function(){}):(t=e[n]._c,s=e[n]._d,void(i=e[n]._e))},clickAnchor:function(){}},e[n].defaults[o]={close:!1,vendors:{hammer:{}}},e[n].configuration[o]={};var t,s,i,a}(jQuery);

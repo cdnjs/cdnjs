@@ -1,0 +1,895 @@
+.idd-plot-master
+{
+    position: relative;
+    background-color: white;
+    color: black;
+    -ms-touch-action: none;
+    cursor: default;
+}
+
+.idd-plot-dependant
+{
+    position: absolute;
+    display: block;
+}
+
+.idd-plot-canvas
+{
+    position: absolute;
+}
+
+.idd-axis
+{
+    overflow: hidden;
+    cursor: default;
+}
+
+.idd-axis-label
+{
+    position: absolute;
+    display: block;
+    float: left;
+    white-space: nowrap;
+    font-size: small;
+    left: 0;
+    top: 0;
+}
+
+.idd-figure-container
+{
+    position: absolute;
+}
+
+.idd-dom-marker
+{
+    position: absolute;
+    overflow: hidden;
+    display: block;
+}
+
+.idd-title
+{
+    width: 100%;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.idd-horizontalTitle
+{
+    text-align: center;
+    font-size: smaller;
+    margin-bottom: 10px;
+
+}
+/*ToolTips*/
+.idd-tooltip
+{
+    background-color: rgb(249, 251, 195);
+    color: black;
+    border: 1px solid lightgray;
+    font-size: smaller;
+    -moz-box-shadow: 0 0 1em lightgray;
+    -webkit-box-shadow: 0 0 1em lightgray;
+    box-shadow: 0 0 1em lightgray; 
+    padding: 5px;
+    position: absolute;
+    display: block;
+    box-sizing: content-box;
+}
+
+.idd-tooltip-coordinates
+{
+    color: gray;
+}
+
+.idd-tooltip-item
+{
+    margin-bottom: 5px;
+}
+.idd-tooltip-name 
+{
+    font-size:14px;
+    font-weight:bold;
+}
+.idd-tooltip-compositevalue 
+{
+    margin-left: 8px;
+    box-sizing: content-box;
+}
+.idd-tooltip-itemvalues {
+    margin-bottom: 8px;
+    margin-left: 0px;
+    box-sizing: content-box;
+}
+.checkButton {
+    width: 13px;
+    height: 13px;
+    margin-top: 3px;
+    margin-right: 5px;
+    cursor: pointer;
+    background-color: #F1F9FF;
+    border: 1px solid #888;
+    float: left;
+}
+.checkButton-checked {
+    background-color: #365C95;
+}
+
+.idd-verticalTitle {
+    width: 20px;
+    max-width: 20px;
+    white-space: nowrap;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    font-size: smaller;
+    padding-bottom: 7px;
+}
+
+.idd-verticalTitle-inner {
+    position: absolute;
+    top: 50%;
+    left:50%;
+    -ms-transform: translateX(-50%) translateY(-50%) rotate(-90deg);
+    -moz-transform: translateX(-50%) translateY(-50%) rotate(-90deg);
+    -o-transform: translateX(-50%) translateY(-50%) rotate(-90deg);
+    -webkit-transform: translateX(-50%) translateY(-50%) rotate(-90deg);
+    transform: translateX(-50%) translateY(-50%) rotate(-90deg);    
+    
+}
+
+.unselectable
+{
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+/*legend elements*/
+.idd-legend
+{
+    background-color: #f5f5f5;
+    position: relative;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0,0,0,0.12);
+    padding: 5px;
+    /*max-height: 400px;*/
+    max-width: 225px;
+    cursor: default;
+    overflow: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
+    list-style-type: none;
+    box-sizing: content-box;
+}
+.idd-legend-item
+{
+    /*position: relative;*/
+    width: 215px;
+    height: auto;
+    background-color: white;
+    box-shadow: 0 0 2px rgba(0,0,0, 0.2);
+    border: 1px solid rgba(0,0,0,0.12);
+    border-radius: 2px;
+    margin-bottom: 6px;   
+    cursor: pointer;
+    padding-right: 4px;
+    padding-left:4px;
+    box-sizing: content-box;
+}
+.idd-legend-item-title
+{    
+    width: 190px;
+    vertical-align: top;
+    padding-bottom: 16px;
+    padding-left: 16px;
+    padding-top: 16px;
+    padding-right: 8px;
+    height: 24px;
+    box-sizing: content-box;
+}
+.idd-legend-item-title-name
+{
+    width: 95px;
+    height: 24px;
+    line-height: 24px;
+    vertical-align: top;
+    font-size: 19px;
+    margin-left: 16px;
+    margin-right: 16px;
+    display:inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    word-wrap: normal; /* для IE */
+    text-overflow: ellipsis;
+}
+.idd-legend-item-title-thumb 
+{
+    width: 24px;
+    height: 24px;
+    display:inline-block;
+    box-sizing: content-box;
+}
+.idd-legend-item-info
+{
+    width: 180px;
+    padding-bottom: 16px;
+    padding-right: 16px;
+    padding-left: 16px;
+    box-sizing: content-box;
+}
+.idd-legend-item-info:empty {
+    display:none;
+}
+/*elements for compact legend*/
+.idd-legend-compact
+{
+    background-color: rgba(255, 255, 255, 0.5);
+    position: relative;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0,0,0,0.12);
+    max-height: 400px;
+    max-width: 180px;
+    cursor: default;
+    overflow: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: content-box;
+    opacity: 0.4;
+}
+.idd-legend-compact:hover 
+{
+    opacity: 1.0;
+}
+.idd-legend-item-compact
+{
+    position: relative;
+    width: 200px;
+    height: auto;
+    background-color: rgba(255,255,255,0.5);
+    border-bottom: 1px solid rgba(0,0,0,0.12); 
+    box-sizing: content-box;
+}
+.idd-legend-item-title-compact
+{    
+    width: 170px;
+    vertical-align: top;
+    padding: 6px;
+    height: 18px;
+    box-sizing: content-box;
+}
+.idd-legend-item-title-name-compact
+{
+    width: 80px;
+    height: 18px;
+    line-height: 18px;
+    vertical-align: top;
+    font-size: 14px;
+    margin-left: 6px;
+    margin-right: 6px;
+    display:inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    word-wrap: normal; /* для IE */
+    text-overflow: ellipsis;
+}
+.idd-legend-item-title-thumb-compact 
+{
+    width: 18px;
+    height: 18px;
+    display:inline-block;
+    box-sizing: content-box;
+}
+.idd-legend-item-info-compact
+{
+    width: 180px;
+    padding-bottom: 6px;
+    padding-right: 6px;
+    padding-left: 6px;
+    box-sizing: content-box;
+}
+/*legend elements*/
+.idd-legend-item-property
+{    
+    margin-bottom: 1px;
+    font-size: smaller;
+}
+.idd-legend-item-palette 
+{
+    width: 170px; 
+    margin-top: 5px; 
+    margin-bottom: 5px;
+    color: black; 
+}
+.idd-legend-isselected-true {
+    vertical-align: top;
+    display:inline-block;
+    float:right;
+    height: 20px;
+    width: 20px;
+    background-image: url('icons/ic_visibility_off-grey.png');
+    background-size: cover;
+    cursor: pointer;
+}
+.idd-legend-isselected-false {
+    vertical-align: top;
+    display:inline-block;
+    float:right;
+    height: 20px;
+    width: 20px;
+    background-image: url('icons/ic_visibility-grey.png');
+    background-size: cover;
+    cursor: pointer;
+}
+.idd-legend-isselected-error {
+    vertical-align: top;
+    display:inline-block;
+    float:right;
+    height: 20px;
+    width: 20px;
+    background-image: url('icons/ic_visibility_off-red.png');
+    background-size: cover;
+    cursor: pointer;
+}
+
+.idd-verticalText
+{
+    transform: rotate(-90deg);
+    transform-origin: center;
+    -moz-transform: rotate(-90deg);
+    -moz-transform-origin: center;
+    -ms-transform: rotate(-90deg);
+    -ms-transform-origin: center;
+    -o-transform: rotate(-90deg);
+    -o-transform-origin: center;
+    -webkit-transform: rotate(-90deg);
+    -webkit-transform-origin: center;
+}
+/*Navigation panel*/
+.idd-navigation-container {
+    height: auto;
+    position: relative;
+    width: 65px;
+    display:inline-block;
+}
+.idd-navigation-container:focus {
+    outline: none;
+    border: transparent;
+    border-color: inherit;
+}
+.idd-onscreennavigation-panner {
+    width: 40px;
+    height: 40px;
+    display: block;
+    background-image: url('icons/ic_pan.png');
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    margin-top: 5px;
+}
+.idd-onscreennavigation-panner-moved {
+    width: 40px;
+    height: 40px;
+    display: block;
+    background-image: url('icons/ic_pan_black.png');
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    margin-top: 5px;
+}
+.idd-onscreennavigation-panner:hover {
+    background-image: url('icons/ic_pan_black.png');
+}
+.idd-onscreennavigation-zoomin {
+    width: 40px;
+    height: 40px;
+    display: block;
+    background-image: url('icons/ic_zoom_in.png');
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.idd-onscreennavigation-zoomin:hover {
+    background-image: url('icons/ic_zoom_in_black.png');
+}
+.idd-onscreennavigation-zoomout {
+    width: 40px;
+    height: 40px;
+    display: block;
+    background-image: url('icons/ic_zoom_out.png');
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.idd-onscreennavigation-zoomout:hover {
+    background-image: url('icons/ic_zoom_out_black.png');
+}
+.idd-onscreennavigation-logscale {
+    width: 40px;
+    height: 40px;
+    display: block;
+    background-image: url('icons/ic_straighten.png');
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.idd-onscreennavigation-logscale:hover {
+    background-image: url('icons/ic_straighten_black.png');
+}
+.idd-onscreennavigation-fit {
+    width: 40px;
+    height: 40px;
+    display: block;
+    background-image: url('icons/ic_center_focus_weak.png');
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.idd-onscreennavigation-fit:hover {
+    background-image: url('icons/ic_center_focus_weak_black.png');
+}
+.idd-onscreennavigation-fit-pressed {
+    width: 40px;
+    height: 40px;
+    display: block;
+    background-image: url('icons/ic_center_focus_strong.png');
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.idd-onscreennavigation-fit-pressed:hover {
+    background-image: url('icons/ic_center_focus_strong_black.png');
+}
+.idd-onscreennavigation-navigationlock {
+    width: 40px;
+    height: 40px;
+    display: block;
+    background-image: url('icons/ic_lock_open.png');
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.idd-onscreennavigation-navigationlock:hover {
+    background-image: url('icons/ic_lock_open_black.png');
+}
+.idd-onscreennavigation-navigationlockpressed {
+    width: 40px;
+    height: 40px;
+    display: block;
+    background-image: url('icons/ic_lock.png');
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.idd-onscreennavigation-navigationlockpressed:hover {
+    background-image: url('icons/ic_lock_black.png');
+}
+.idd-onscreennavigation-help {
+    width: 40px;
+    height: 40px;
+    display: block;
+    background-image: url('icons/ic_help.png');
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.idd-onscreennavigation-help:hover {
+    background-image: url('icons/ic_help_black.png');
+}
+.idd-onscreennavigation-showlegend {
+    width: 40px;
+    height: 40px;
+    display: block;
+    background-image: url('icons/ic_info.png');
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.idd-onscreennavigation-showlegend:hover {
+    background-image: url('icons/ic_info_black.png');
+}
+.idd-onscreennavigation-hidelegend {
+    width: 40px;
+    height: 40px;
+    display: block;
+    background-image: url('icons/ic_info_outline.png');
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.idd-onscreennavigation-hidelegend:hover {
+    background-image: url('icons/ic_info_outline_black.png');
+}
+.idd-onscreennavigation-exportsvg {
+    width: 40px;
+    height: 40px;
+    display: block;
+    background-image: url('icons/ic_file_download.png');
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.idd-onscreennavigation-exportsvg:hover {
+    background-image: url('icons/ic_file_download_black.png');
+}
+.idd-colorPaletteEditor {
+    cursor: cursor;
+}
+.idd-colorPaletteEditor .idd-colorPaletteEditor-bar {    
+    position: relative;    
+}
+.idd-colorPaletteEditor .idd-colorPaletteEditor-colorPicker {
+    border-color: gray;
+    border-width: 1px;
+    border-style: solid;
+    background-color: white;
+    padding: 2px;
+    font-size:smaller;
+    cursor: default;
+}
+
+.idd-subplots-slot-left {
+    float: right
+}
+
+.idd-subplots-slot-right {
+    float: left
+}
+
+.idd-subplots-slot-top {
+    vertical-align: bottom;
+}
+
+.idd-subplots-slot-bottom {
+    vertical-align: top;
+}
+
+table.idd-subplots-table {
+    border-spacing: 0;
+}
+
+.idd-subplot-title {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+div.idd-subplots {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+div.idd-subplots > div.idd-legend div.idd-legend-isselected-false {
+    display: none
+}
+
+div.idd-subplots > div.idd-legend div.idd-legend-isselected-true {
+    display: none
+}
+
+table.idd-subplots-table td, tr {
+    margin: 0;
+    padding: 0;
+}
+
+div.idd-plot-master.idd-subplot {
+    border: 1px solid gray;
+}
+
+.ui-helper-hidden-accessible { display:none; }/*Probes*/
+.probes 
+{
+    margin-top: 20px;
+    box-sizing: content-box;
+}
+.probes-list
+{
+    background-color: #f5f5f5;
+    position: relative;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0,0,0,0.12);
+    padding: 5px;
+    /*max-height: 400px;*/
+    max-width: 225px;
+    cursor: default;
+    overflow: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
+    list-style-type: none;
+    box-sizing: content-box;
+}
+.probe {
+    width: 40px;
+    height: 40px;
+}
+.dragPoint {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    cursor: pointer;
+    z-index: 2500;
+}
+.probeCard {
+    position: relative;
+    width: 215px;
+    height: auto;
+    background-color: white;
+    box-shadow: 0 0 2px rgba(0,0,0, 0.2);
+    border: 1px solid rgba(0,0,0,0.12);
+    border-radius: 2px;
+    margin-bottom: 6px;   
+    cursor: pointer;
+    display: inline-block;
+    padding-right: 4px;
+    padding-left:4px;
+    box-sizing: content-box;
+}
+.probeCard-selected {
+    /*background-color: #F1F9FF;*/
+}
+.probecard-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+.probeHeader {
+    width: 160px;
+    height: 40px;
+    line-height: 24px;
+    vertical-align: top;
+    font-size: 19px;
+    display:inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    word-wrap: normal; /* для IE */
+    text-overflow: ellipsis;
+    padding-top: 16px;
+    padding-left: 16px;
+    box-sizing: content-box;
+}
+.probeHeader-name {
+    width: 110px;
+    height: 24px;
+    line-height: 24px;
+    vertical-align: top;
+    font-size: 17px;
+    margin-left: 8px;
+    margin-right: 8px;
+    display:inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    word-wrap: normal; /* для IE */
+    text-overflow: ellipsis;
+    box-sizing: content-box;
+}
+.probeActionPanel {
+    width: 22px;
+    height: 60px;
+    float:right;
+    padding-bottom: 16px;
+    padding-right:7px;
+    padding-top: 16px;
+    box-sizing: content-box;
+}
+.probeCard-remove {
+    width: 20px;
+    height: 20px;
+    background-image: url('icons/ic_delete_gray.png');
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    margin: 5px;
+    float: right;
+    cursor: pointer;
+    /*position: absolute;*/
+    top: 0px;
+    right: 0px;
+}
+.probeCard-fit {
+    width: 20px;
+    height: 20px;
+    background-image: url('icons/ic_my_location_gray.png');
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    margin: 5px;
+    margin-bottom: 15px;
+    float: right;
+    cursor: pointer;
+    /*position: absolute;*/
+    top: 0px;
+    right: 0px;
+}
+.probecard-record {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 16px 16px 0px 16px;
+    font-size: 14px;
+    overflow:hidden;
+    width: 140px;
+}
+
+.dsv-onscreennavigationcontainer {
+    background-color: transparent;
+    position: relative;
+}
+.dsv-onscreennavigation {
+    display: block;
+    background-color: transparent;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.dsv-visualizaition-control {
+    width: 100%;
+    height: 100%;
+    display: block;
+    /*border: 1px solid black;*/
+    overflow: hidden;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color: white;
+    position: relative;
+}
+.dsv-visualization-preview {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: white;
+    /*border-left: 1px solid black;*/
+    padding-left: 5px;
+    position: relative;
+}
+.dsv-leftpanelcontainer {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background-color: white;
+    z-index: 9999;
+    right: 65px;
+}
+.dsv-leftpanel {
+    width: 270px;
+    height: 100%;
+    display: inline-block;
+    position: relative;
+    background-color: white;
+    float: left;
+    overflow: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.dsv-rightpanel {
+    display: inline-block;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    float: left;
+    top: 0;
+    /*float: right;*/
+}
+
+/*Plot list base style*/
+.dsv-plotlist {
+    width: 100%;
+    height: 100%;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    margin-left: 12px;
+}
+.dsv-navigation-container {
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 65px;
+}
+.dsv-onscreennavigation-probepull {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    background-image: url('icons/ic_place_standart.png');
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    /*margin-left: auto;
+    margin-right: auto;*/
+    margin-top: 5px;
+    cursor: pointer;
+    position: relative;
+}
+.dsv-onscreennavigation-probepull:hover {
+    background-image: url('icons/ic_place_black.png');
+}
+
+.plotcard-error {
+    color: red;
+    font-style: italic;
+}
+@media print {    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}

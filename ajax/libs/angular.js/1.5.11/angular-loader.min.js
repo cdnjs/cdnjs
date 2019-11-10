@@ -1,0 +1,10 @@
+/*
+ AngularJS v1.5.11
+ (c) 2010-2017 Google, Inc. http://angularjs.org
+ License: MIT
+*/
+(function(){'use strict';function g(a,c){c=c||Error;return function(){var d=arguments[0],f;f="["+(a?a+":":"")+d+"] http://errors.angularjs.org/1.5.11/"+(a?a+"/":"")+d;for(d=1;d<arguments.length;d++){f=f+(1==d?"?":"&")+"p"+(d-1)+"=";var n=encodeURIComponent,b;b=arguments[d];b="function"==typeof b?b.toString().replace(/ \{[\s\S]*$/,""):"undefined"==typeof b?"undefined":"string"!=typeof b?JSON.stringify(b):b;f+=n(b)}return new c(f)}}(function(a){function c(a,b,d){return a[b]||(a[b]=d())}var d=g("$injector"),
+f=g("ng");a=c(a,"angular",Object);a.$$minErr=a.$$minErr||g;return c(a,"module",function(){var a={};return function(b,g,k){if("hasOwnProperty"===b)throw f("badname","module");g&&a.hasOwnProperty(b)&&(a[b]=null);return c(a,b,function(){function a(b,d,c,e){e||(e=f);return function(){e[c||"push"]([b,d,arguments]);return h}}function e(a,d){return function(e,c){c&&"function"===typeof c&&(c.$$moduleName=b);f.push([a,d,arguments]);return h}}if(!g)throw d("nomod",b);var f=[],c=[],l=[],m=a("$injector","invoke",
+"push",c),h={_invokeQueue:f,_configBlocks:c,_runBlocks:l,requires:g,name:b,provider:e("$provide","provider"),factory:e("$provide","factory"),service:e("$provide","service"),value:a("$provide","value"),constant:a("$provide","constant","unshift"),decorator:e("$provide","decorator"),animation:e("$animateProvider","register"),filter:e("$filterProvider","register"),controller:e("$controllerProvider","register"),directive:e("$compileProvider","directive"),component:e("$compileProvider","component"),config:m,
+run:function(a){l.push(a);return this}};k&&m(k);return h})}})})(window)})(window);
+//# sourceMappingURL=angular-loader.min.js.map

@@ -1,0 +1,51 @@
+@keyframes caret{ 
+	50%{ opacity:0.1; transform:scaleY(.8); } 
+}
+@-webkit-keyframes caret{
+	50%{ opacity:0.1; -webkit-transform:scaleY(.8); } 
+}
+
+.fancyInput :-moz-placeholder{ color:rgba(255,255,255,0.2); } /* deprecated. but works for now. should use double '::'*/
+.fancyInput :-webkit-placeholder{ color:rgba(255,255,255,0.2); }
+
+.fancyInput{ display:inline-block; letter-spacing:-1px; text-shadow:0 2px 5px rgba(0,0,0,.6); white-space:nowrap; width:auto; font-family:'Fjalla One', sans-serif; position:relative; }
+.fancyInput.textarea{ white-space:normal; overflow:auto; }
+	.fancyInput input, textarea{ color:transparent; position:absolute; z-index:2; width:100%; border:0; outline:0; top:0px; left:0; background:none; padding:inherit; padding-bottom:0; font-family:'Fjalla One', sans-serif; font-size:inherit; letter-spacing:-1px;  -moz-box-sizing:border-box; -webkit-box-sizing:border-box; }
+	.fancyInput input{ top:1px; left:-1px; padding-right:0; }
+	.fancyInput textarea{ word-break:break-all; overflow:hidden; height:100%; }
+	.fancyInput > div{ display:inline-block; }
+	.fancyInput.textarea > div{ width:99.9%%; }
+
+	.fancyInput *:focus ~ .caret,
+	.fancyInput *:focus ~ div .caret{ opacity:.8; box-shadow:0 0 8px #FFF; -webkit-animation:0.4s 40ms caret infinite; animation:0.4s 40ms caret infinite; }
+	.fancyInput .caret:only-child{  }
+	.fancyInput .caret{ font-weight:normal; opacity:0; display:inline-block; width:3px; margin-left:-3px; background:#FFF; border-radius:4px; -moz-user-select:none; }
+	.fancyInput span:not(.deleted) ~ .caret{ position:absolute; margin:0; } /* only Caret which is  */
+
+		/* lettes */
+		.fancyInput > div span{ -webkit-transition:100ms cubic-bezier(0.08, 0.6, 0.56, 1.4); transition:100ms cubic-bezier(0.08, 0.6, 0.56, 1.4); display:inline-block; position:relative; }
+		.fancyInput > div .deleted{ opacity:0; -webkit-transition:140ms; transition:140ms; -webkit-transform:translateX(12px); transform:translateX(12px); }
+
+		/*.fancyInput > div span:last-of-type ~ br{ display:block; white-space:pre; }*/
+		/*.fancyInput br:last-of-type + .caret{ position:static; display:inline-block; }*/
+		
+		/* text effects */
+		.fancyInput > div span.state1{ -webkit-transform:translateY(-25px) rotateX(90deg); transform:translateY(-25px) rotateX(90deg); }
+		.fancyInput > div span.state2{ -webkit-transform:translateY(25px) rotateX(90deg); transform:translateY(25px) rotateX(90deg); }
+
+
+/* DEMO text effects */
+.effect2 .fancyInput > div span.state1,
+.effect2 .fancyInput > div span.state2{ -webkit-transform:translateX(10px) scale(1.8); transform:translateX(10px) scale(1.8); }
+
+.effect3 .fancyInput > div span{ -webkit-transition:200ms cubic-bezier(0.08, 0.6, 0.56, 1.4); transition:200ms cubic-bezier(0.08, 0.6, 0.56, 1.4); }
+.effect3 .fancyInput > div span.state1,
+.effect3 .fancyInput > div span.state2{ opacity:0; -webkit-transform:scale(0.4); transform:scale(0.4); -webkit-filter:blur(2px); }
+
+.effect4 .fancyInput > div span{ -webkit-transition-duration:150ms; transition-duration:150ms; }
+.effect4 .fancyInput > div span.state1,
+.effect4 .fancyInput > div span.state2{ opacity:0; -webkit-transform:translateY(-60px); transform:translateY(-60px); }
+
+.effect5 .fancyInput > div span{ -webkit-transition-duration:150ms; transition-duration:150ms; }
+.effect5 .fancyInput > div span.state1,
+.effect5 .fancyInput > div span.state2{ opacity:0; -webkit-transform:translateX(-30px); transform:translateX(-30px); opacity:0; }

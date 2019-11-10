@@ -1,0 +1,351 @@
+/*! formstone v0.6.4 [dropdown.css] 2015-06-08 | MIT License | formstone.it */
+
+/**
+	 * @class
+	 * @name .fs-dropdown-element
+	 * @type element
+	 * @description Target element
+	 */
+/**
+	 * @class
+	 * @name .fs-dropdown
+	 * @type element
+	 * @description Base widget class
+	 */
+/**
+	 * @class
+	 * @name .fs-dropdown.fs-dropdown-multiple
+	 * @type modifer
+	 * @description Indicates multi-selected element
+	 */
+/**
+	 * @class
+	 * @name .fs-dropdown.fs-dropdown-cover
+	 * @type modifer
+	 * @description Indicates cover positioning
+	 */
+/**
+	 * @class
+	 * @name .fs-dropdown.fs-dropdown-bottom
+	 * @type modifer
+	 * @description Indicates bottom positioning
+	 */
+/**
+	 * @class
+	 * @name .fs-dropdown.fs-dropdown-disabled
+	 * @type modifer
+	 * @description Indicates disabled state
+	 */
+/**
+	 * @class
+	 * @name .fs-dropdown.fs-dropdown-open
+	 * @type modifer
+	 * @description Indicates open state
+	 */
+/**
+	 * @class
+	 * @name .fs-dropdown.fs-dropdown-focus
+	 * @type modifer
+	 * @description Indicates focus state
+	 */
+.fs-dropdown {
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin: 10px 0;
+  max-width: 100%;
+  /*
+			@media screen and (min-width: 740px) {
+				max-width: 30%;
+			}
+			*/
+  /**
+		 * @class
+		 * @name .fs-dropdown-selected
+		 * @type element
+		 * @description Handle item
+		 */
+  /**
+		 * @class
+		 * @name .fs-dropdown-options
+		 * @type element
+		 * @description Options container
+		 */
+  /**
+		 * @class
+		 * @name .fs-dropdown-group
+		 * @type element
+		 * @description Option group label
+		 */
+  /**
+		 * @class
+		 * @name .fs-dropdown-item
+		 * @type element
+		 * @description Option item
+		 */
+  /*
+		&-options.fs-scrollbar {
+			overflow: hidden;
+		}
+
+		&-options.fs-scrollbar-content {
+			max-height: @fs-dropdown-max-height;
+
+			padding: 0;
+		}
+*/
+}
+.fs-dropdown:focus {
+  box-shadow: none;
+  outline: none;
+}
+.fs-dropdown,
+.fs-dropdown:after,
+.fs-dropdown:before,
+.fs-dropdown *,
+.fs-dropdown *:after,
+.fs-dropdown *:before {
+  box-sizing: border-box;
+  -webkit-transition: none;
+          transition: none;
+  -webkit-user-select: none !important;
+     -moz-user-select: none !important;
+      -ms-user-select: none !important;
+          user-select: none !important;
+}
+.fs-dropdown-element {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  opacity: 0;
+  z-index: -1;
+}
+.fs-dropdown-element,
+.fs-dropdown-element:focus {
+  outline: none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  -webkit-tap-highlight-color: transparent;
+}
+.no-opacity .fs-dropdown-element {
+  left: -999999px;
+}
+.fs-dropdown-selected {
+  width: 100%;
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+  color: #222222;
+  cursor: pointer;
+  display: block;
+  font-size: 14px;
+  height: 40px;
+  line-height: 40px;
+  margin: 0;
+  overflow: hidden;
+  padding: 0 40px 0 15px;
+  text-align: left;
+  text-overflow: clip;
+  z-index: 2;
+}
+.fs-dropdown-selected:after {
+  height: 0;
+  width: 0;
+  position: absolute;
+  top: 0;
+  right: 15px;
+  bottom: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #cccccc;
+  content: '';
+  display: block;
+  margin: auto 0;
+}
+.no-touch .fs-dropdown-selected:hover {
+  color: #222222;
+}
+.no-touch .fs-dropdown-disabled .fs-dropdown-selected:hover {
+  color: #cccccc;
+}
+.fs-dropdown-options {
+  width: 100%;
+  max-height: 260px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  border: 1px solid #cccccc;
+  border-width: 0 1px 1px;
+  border-radius: 0 0 3px 3px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
+  display: none;
+  margin: 0;
+  overflow: auto;
+  overflow-x: hidden;
+  padding: 0;
+  z-index: 50;
+}
+.fs-dropdown-options.fs-scrollbar {
+  position: absolute;
+}
+.no-opacity .fs-dropdown-options {
+  width: auto;
+}
+.fs-dropdown-group {
+  border-bottom: 1px solid #cccccc;
+  color: #999999;
+  display: block;
+  font-size: 11px;
+  padding: 10px 15px;
+  text-transform: uppercase;
+}
+.fs-dropdown-item {
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid #cccccc;
+  color: #222222;
+  cursor: pointer;
+  display: block;
+  font-size: 14px;
+  margin: 0;
+  height: 40px;
+  line-height: 40px;
+  overflow: hidden;
+  padding: 0 15px;
+  text-align: left;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  /**
+			 * @class
+			 * @name .fs-dropdown-item.fs-dropdown-item_placeholder
+			 * @type modifier
+			 * @description Indicates placeholder item
+			 */
+  /**
+			 * @class
+			 * @name .fs-dropdown-item.fs-dropdown-item_selected
+			 * @type modifier
+			 * @description Indicates selected item
+			 */
+  /**
+			 * @class
+			 * @name .fs-dropdown-item.fs-dropdown-item_disabled
+			 * @type modifier
+			 * @description Indicates disabled item
+			 */
+}
+.fs-dropdown-item_placeholder {
+  display: none;
+}
+.fs-dropdown-item_selected {
+  background: #eeeeee;
+}
+.fs-dropdown-item_disabled {
+  color: #999999;
+  cursor: default;
+}
+.fs-dropdown-item:first-child {
+  border-radius: 0;
+}
+.fs-dropdown-item:last-child {
+  border-bottom: 0;
+  border-radius: 0 0 3px 3px;
+}
+.no-touch .fs-dropdown-item:hover,
+.no-touch .fs-dropdown-item_selected:hover {
+  color: #222222;
+  background-color: #dddddd;
+  border-color: #cccccc;
+}
+.fs-dropdown-item_disabled,
+.no-touch .fs-dropdown-item_disabled:hover {
+  color: #cccccc;
+  background-color: #ffffff;
+  border-color: #cccccc;
+}
+.fs-dropdown-open {
+  z-index: 3;
+}
+.fs-dropdown-open .fs-dropdown-options {
+  display: block;
+  border-radius: 0 0 3px 3px;
+}
+.fs-dropdown-open .fs-dropdown-selected {
+  z-index: 51;
+  border-radius: 3px 3px 0 0;
+}
+.fs-dropdown-open .fs-dropdown-selected,
+.fs-dropdown-focus .fs-dropdown-selected {
+  background-color: #ffffff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+.fs-dropdown-cover.fs-dropdown-open .fs-dropdown-selected {
+  z-index: 49;
+}
+.fs-dropdown-cover .fs-dropdown-options {
+  top: 0;
+  border-radius: 3px;
+  border-width: 1px;
+}
+.fs-dropdown-cover .fs-dropdown-item:first-child {
+  border-radius: 3px 3px 0 0;
+}
+.fs-dropdown-bottom .fs-dropdown-options {
+  top: auto;
+  bottom: 100%;
+  border-width: 1px 1px 0;
+}
+.fs-dropdown-bottom .fs-dropdown-item:last-child {
+  border: none;
+}
+.fs-dropdown-bottom.fs-dropdown-open .fs-dropdown-selected {
+  border-radius: 0 0 3px 3px;
+}
+.fs-dropdown-bottom.fs-dropdown-open .fs-dropdown-options {
+  border-radius: 3px 3px 0 0;
+}
+.fs-dropdown-bottom.fs-dropdown-cover .fs-dropdown-options {
+  top: auto;
+  bottom: 0;
+}
+.fs-dropdown-bottom.fs-dropdown-cover.fs-dropdown-open .fs-dropdown-selected {
+  border-radius: 3px;
+}
+.fs-dropdown-bottom.fs-dropdown-cover.fs-dropdown-open .fs-dropdown-options {
+  border-radius: 3px;
+}
+.fs-dropdown-multiple .fs-dropdown-options {
+  width: 100%;
+  position: static;
+  border-radius: 3px;
+  border-width: 1px;
+  box-shadow: none;
+  display: block;
+}
+.fs-dropdown-disabled .fs-dropdown-selected {
+  background: #ffffff;
+  border-color: #cccccc;
+  color: #cccccc;
+  cursor: default;
+}
+.fs-dropdown-disabled .fs-dropdown-options {
+  background: #ffffff;
+  border-color: #cccccc;
+}
+.fs-dropdown-disabled .fs-dropdown-group,
+.fs-dropdown-disabled .fs-dropdown-item {
+  border-color: #cccccc;
+  color: #cccccc;
+  cursor: default;
+}
+.fs-dropdown-disabled .fs-dropdown-item,
+.no-touch .fs-dropdown-disabled .fs-dropdown-item:hover {
+  color: #cccccc;
+  background-color: #ffffff;
+}
+.fs-dropdown-disabled .fs-dropdown-item_selected,
+.no-touch .fs-dropdown-disabled .fs-dropdown-item_selected:hover {
+  background: #fafafa;
+}

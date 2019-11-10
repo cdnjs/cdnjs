@@ -1,0 +1,1 @@
+!function(e,o){"object"==typeof exports&&"undefined"!=typeof module?o():"function"==typeof define&&define.amd?define(o):o()}(this,function(){"use strict";!function(e){var o=Zone.__symbol__;Zone[o("bluebird")]=function(e){e.setScheduler(function(e){Zone.current.scheduleMicroTask("bluebird",e)})}}("object"==typeof window&&window||"object"==typeof self&&self||global)});

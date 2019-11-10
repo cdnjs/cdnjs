@@ -1,0 +1,7 @@
+/*!
+ * ZUI: Ajax 响应模拟工具 - v1.9.1 - 2019-05-10
+ * http://zui.sexy
+ * GitHub: https://github.com/easysoft/zui.git 
+ * Copyright (c) 2019 cnezsoft.com; Licensed MIT
+ */
+!function(e){"use strict";var r=[],n=e.ajax,o=function(e){for(var n=r.length-1;n>=0;--n){var o=r[n];if(o.urlMatch instanceof RegExp){if(o.urlMatch.test(e))return o}else if("function"==typeof o.urlMatch){if(o.urlMatch(e))return o}else if(0===e.indexOf(o.urlMatch))return o}},t=function(r){var t=r.url,u=o(t);if(u){var l=function(n,o){var t=r.dataType;"json"===t?"string"==typeof n&&(n=e.parseJSON(n)):"string"!=typeof n&&(n=JSON.stringify(n)),r.success&&r.success(n,o),r.complete&&r.complete(null,o)},a=function(e,n){r.error&&r.error(null,e,n),r.complete&&r.complete(null,e)};r.beforeSend&&r.beforeSend(null,r);var c=function(){var n=e.isFunction(u.route)?u.route(r,l,a):u.route;return n!==!0&&(n===!1?a():l(n)),console.groupCollapsed("FakeAjax: "+t+" %c"+(n===!1?"Error":"Success"),n===!1?"color: red":"color: green"),console.log("response",n),console.log("ajax options",r),console.groupEnd(),n};return u.delay?setTimeout(c,u.delay):c(),u}return n.apply(null,arguments)},u=function(o,u,l){e.ajax_origin||(e.ajax_origin=n,e.ajax=t);var a={};e.isPlainObject(o)?e.extend(a,o):(a.urlMatch=o,a.route=u,e.isPlainObject(l)&&e.extend(a,l)),r.push(a)};e.fakeServer=u}(jQuery);
