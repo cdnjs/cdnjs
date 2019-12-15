@@ -1,0 +1,510 @@
+/*!
+ * FullCalendar Scheduler v1.3.2
+ * Docs & License: http://fullcalendar.io/scheduler/
+ * (c) 2016 Adam Shaw
+ */
+
+/* TODO: break this file up */
+
+/* Scroller
+--------------------------------------------------------------------------------------------------*/
+
+.fc-scroller-clip {
+	overflow: hidden; /* for clipping scrollbars */
+	position: relative; /* so things like scrollfollowers can attach to this */
+}
+
+/* supresses rendering of native scrollbars */
+/* on .fc-scroller */
+.fc-no-scrollbars {
+	background: rgba(255, 255, 255, 0); /* hack for dynamic DOM nodes (in Chrome OSX at least) */
+}
+.fc-no-scrollbars::-webkit-scrollbar {
+	width: 0;
+	height: 0;
+}
+
+.fc-scroller-canvas {
+	position: relative; /* origin for bg */
+	box-sizing: border-box; /* so that padding (for gutter) will be part of height */
+	min-height: 100%;
+}
+
+.fc-scroller-canvas > .fc-bg {
+	z-index: 1; /* make default? */
+}
+
+.fc-scroller-canvas > .fc-content {
+	z-index: 2; /* make default? */
+	position: relative; /* origin for inner content */
+	border-style: solid;
+	border-width: 0;
+}
+
+/* for themed, hard to get the border-color, so just forget it (REVISIT) */
+.ui-widget .fc-scroller-canvas > .fc-content {
+	border-color: transparent;
+}
+
+.fc-scroller-canvas.fc-gutter-left > .fc-content { border-left-width: 1px; margin-left: -1px }
+.fc-scroller-canvas.fc-gutter-right > .fc-content { border-right-width: 1px; margin-right: -1px }
+.fc-scroller-canvas.fc-gutter-top > .fc-content { border-top-width: 1px; margin-top: -1px }
+.fc-scroller-canvas.fc-gutter-bottom > .fc-content { border-bottom-width: 1px; margin-bottom: -1px }
+
+
+/* View Structure
+--------------------------------------------------------------------------------------------------*/
+
+.fc-rtl .fc-timeline {
+	direction: rtl;
+}
+
+.fc-timeline .fc-divider {
+	width: 3px;
+	border-style: double; /* overcome neighboring borders */
+}
+
+.fc-timeline .fc-head > tr > .fc-divider {
+	border-bottom: 0;
+}
+
+.fc-timeline .fc-body > tr > .fc-divider {
+	border-top: 0;
+}
+
+.fc-timeline .fc-body .fc-divider.ui-widget-header {
+	background-image: none;
+}
+
+.fc-scrolled .fc-head .fc-scroller {
+	z-index: 2; /* so drop shadow will go above body panes */
+}
+
+.fc-timeline.fc-scrolled .fc-head .fc-scroller {
+	box-shadow: 0 3px 4px rgba(0,0,0,0.075);
+}
+
+.fc-timeline .fc-body .fc-scroller {
+	z-index: 1;
+}
+
+/*
+on all tables that expand to the edges, kill the outer border,
+because the container elements take care of it
+*/
+.fc-timeline .fc-scroller-canvas > div > table,
+.fc-timeline .fc-scroller-canvas > div > div > table {
+	border-style: hidden;
+}
+
+
+/* Table Cell Common
+--------------------------------------------------------------------------------------------------*/
+
+.fc-timeline th,
+.fc-timeline td {
+	white-space: nowrap;
+}
+
+.fc-timeline .fc-cell-content {
+	overflow: hidden;
+}
+
+.fc-timeline .fc-cell-text {
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
+.fc-timeline .fc-col-resizer {
+	cursor: col-resize;
+}
+
+/*
+Cells at the start of a week
+TODO: figure out better styling
+
+.fc-ltr .fc-timeline .fc-em-cell div {
+	border-left: 3px solid #eee;
+	height: 100%;
+}
+.fc-rtl .fc-timeline .fc-em-cell {
+	border-right-width: 3px;
+}
+*/
+
+/* head */
+
+.fc-timeline th {
+	vertical-align: middle;
+}
+
+.fc-timeline .fc-head .fc-cell-content {
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+/* body */
+
+.fc-timeline .fc-body .ui-widget-content {
+	background-image: none;
+}
+
+
+/* Resource Area
+--------------------------------------------------------------------------------------------------*/
+
+.fc-resource-area {
+	width: 30%;
+}
+
+.fc-resource-area col {
+	width: 40%;
+	min-width: 70px; /* will be read by JS */
+}
+
+.fc-resource-area col.fc-main-col {
+	width: 60%; /* make the first column in a nested setup bigger */
+}
+
+
+.fc-flat .fc-expander-space { /* fc-flat is opposite of fc-nested */
+	display: none;
+}
+
+
+.fc-ltr .fc-resource-area tr > * {
+	text-align: left;
+}
+.fc-rtl .fc-resource-area tr > * {
+	text-align: right;
+}
+
+.fc-resource-area .fc-cell-content {
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
+/* head */
+
+.fc-resource-area .fc-super th {
+	text-align: center;
+}
+
+.fc-resource-area th > div {
+	position: relative;
+}
+
+.fc-resource-area th .fc-cell-content {
+	position: relative;
+	z-index: 1;
+}
+
+.fc-resource-area th .fc-col-resizer {
+	position: absolute;
+	z-index: 2;
+	top: 0;
+	bottom: 0;
+	width: 5px;
+}
+
+.fc-ltr .fc-resource-area th .fc-col-resizer {
+	right: -3px;
+}
+.fc-rtl .fc-resource-area th .fc-col-resizer {
+	left: -3px;
+}
+
+/* body */
+
+tr.fc-collapsed > td, /* before the transition (prevents initial flicker) */
+tr.fc-transitioning > td { /* during the transition */
+	overflow: hidden; /* prevents absolutely-positioned events from bleeding out */
+}
+
+tr.fc-transitioning > td > div {
+	transition: margin-top 0.2s;
+}
+
+tr.fc-collapsed > td > div {
+	margin-top: -10px;
+}
+
+
+.fc-body .fc-resource-area .fc-cell-content { /* might BE the cell */
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+
+.fc-no-overlap .fc-body .fc-resource-area .fc-cell-content { /* might BE the cell */
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.fc-resource-area .fc-icon { /* the expander and spacers before the expander */
+	width: 1em; /* ensure constant width, esp for empty icons */
+	font-size: .9em;
+	vertical-align: middle;
+	margin-top: -1%;
+}
+
+.fc-resource-area .fc-expander {
+	cursor: pointer;
+	color: #666; /* for the icon within */
+}
+
+
+/* Time Area
+--------------------------------------------------------------------------------------------------*/
+
+.fc-time-area col {
+	min-width: 2.2em; /* detected by JS */
+}
+
+/* head */
+
+.fc-ltr .fc-time-area .fc-chrono th {
+	text-align: left;
+}
+.fc-rtl .fc-time-area .fc-chrono th {
+	text-align: right;
+}
+
+/* body slats (vertical lines) */
+
+.fc-time-area .fc-slats { /* fc-bg is responsible for a lot of this now! */
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.fc-time-area .fc-slats table {
+	height: 100%;
+}
+
+.fc-time-area .fc-slats .fc-minor {
+	border-style: dotted;
+}
+
+.fc-time-area .fc-slats td {
+	border-width: 0 1px; /* need to do this. sometimes -1 margin wouldn't hide the dotted */
+}
+
+.fc-ltr .fc-time-area .fc-slats td {
+	border-right-width: 0;
+}
+.fc-rtl .fc-time-area .fc-slats td {
+	border-left-width: 0;
+}
+
+/* body content containers
+   can be within rows or directly within the pane's content
+*/
+
+.fc-time-area .fc-bgevent-container,
+.fc-time-area .fc-highlight-container {
+	position: absolute;
+	z-index: 2; /* only for directly within pane. not for row. overridden later */
+	top: 0;
+	bottom: 0;
+	width: 0;
+}
+
+.fc-ltr .fc-time-area .fc-helper-container, /* only within row */
+.fc-ltr .fc-time-area .fc-bgevent-container,
+.fc-ltr .fc-time-area .fc-highlight-container {
+	left: 0;
+}
+.fc-rtl .fc-time-area .fc-helper-container, /* only within row */
+.fc-rtl .fc-time-area .fc-bgevent-container,
+.fc-rtl .fc-time-area .fc-highlight-container {
+	right: 0;
+}
+
+.fc-time-area .fc-bgevent,
+.fc-time-area .fc-highlight {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+}
+
+/* body resource rows */
+
+.fc-time-area .fc-rows {
+	position: relative;
+	z-index: 3;
+}
+
+.fc-time-area .fc-rows .ui-widget-content {
+	background: none;
+}
+
+.fc-time-area .fc-rows td > div {
+	position: relative;
+}
+
+.fc-time-area .fc-rows .fc-bgevent-container,
+.fc-time-area .fc-rows .fc-highlight-container {
+	z-index: 1;
+}
+
+.fc-time-area .fc-event-container {
+	position: relative;
+	z-index: 2; /* above bgevent and highlight */
+	width: 0; /* for event positioning. will end up on correct side based on dir */
+}
+
+.fc-time-area .fc-helper-container { /* also an fc-event-container */
+	position: absolute;
+	z-index: 3;
+	top: 0;
+}
+
+.fc-time-area .fc-event-container {
+	padding-bottom: 8px;
+	top: -1px;
+}
+
+.fc-time-area tr:first-child .fc-event-container {
+	top: 0;
+}
+
+.fc-no-overlap .fc-time-area .fc-event-container {
+	padding-bottom: 0;
+	top: 0;
+}
+
+
+/* Now Indicator
+--------------------------------------------------------------------------------------------------*/
+
+.fc-timeline .fc-now-indicator { /* both the arrow and the line */
+	z-index: 3; /* one above scroller's fc-content */
+	top: 0;
+}
+
+.fc-time-area .fc-now-indicator-arrow {
+	margin: 0 -6px; /* 5, then one more to counteract scroller's negative margins */
+	/* triangle pointing down... */
+	border-width: 6px 5px 0 5px;
+	border-left-color: transparent;
+	border-right-color: transparent;
+}
+
+.fc-time-area .fc-now-indicator-line {
+	margin: 0 -1px; /* counteract scroller's negative margins */
+	bottom: 0;
+	border-left-width: 1px;
+}
+
+
+/* Time Grid Events
+--------------------------------------------------------------------------------------------------*/
+
+.fc-timeline-event {
+	position: absolute;
+	border-radius: 0;
+	padding: 2px 0;
+	margin-bottom: 1px;
+}
+
+.fc-no-overlap .fc-timeline-event {
+	padding: 5px 0;
+	margin-bottom: 0;
+}
+
+/* don't overlap grid lines at the event's end */
+.fc-ltr .fc-timeline-event { margin-right: 1px }
+.fc-rtl .fc-timeline-event { margin-left: 1px }
+
+.fc-timeline-event .fc-content {
+	padding: 0 1px;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.fc-timeline-event .fc-time {
+	font-weight: bold;
+	padding: 0 1px;
+}
+
+.fc-rtl .fc-timeline-event .fc-time {
+	display: inline-block; /* will force it on the other side */
+}
+
+.fc-timeline-event .fc-title {
+	padding: 0 1px;
+}
+
+.fc-timeline-event.fc-selected .fc-bg {
+	display: none; /* hide semi-white background, to appear darker */
+}
+
+
+/* follower logic */
+
+
+.fc-ltr .fc-timeline-event .fc-title {
+	padding-left: 10px;
+	margin-left: -8px;
+}
+.fc-rtl .fc-timeline-event .fc-title {
+	padding-right: 10px;
+	margin-right: -8px;
+}
+
+.fc-ltr .fc-timeline-event.fc-not-start .fc-title {
+	margin-left: -2px;
+}
+.fc-rtl .fc-timeline-event.fc-not-start .fc-title {
+	margin-right: -2px;
+}
+
+.fc-timeline-event.fc-not-start .fc-title,
+.fc-body .fc-time-area .fc-following {
+	position: relative;
+}
+
+.fc-timeline-event.fc-not-start .fc-title:before,
+.fc-body .fc-time-area .fc-following:before { /* generic arrow */
+	content: "";
+	position: absolute;
+	top: 50%;
+	margin-top: -5px;
+	border: 5px solid #000;
+	border-top-color: transparent;
+	border-bottom-color: transparent;
+	opacity: .5;
+}
+
+.fc-ltr .fc-timeline-event.fc-not-start .fc-title:before,
+.fc-ltr .fc-body .fc-time-area .fc-following:before { /* LTR. left pointing arrow */
+	border-left: 0;
+	left: 2px;
+}
+
+.fc-rtl .fc-timeline-event.fc-not-start .fc-title:before,
+.fc-rtl .fc-body .fc-time-area .fc-following:before { /* RTL. right pointing arrow */
+	border-right: 0;
+	right: 2px;
+}
+
+
+/* License Message
+--------------------------------------------------------------------------------------------------*/
+
+.fc-license-message {
+	position: absolute;
+	z-index: 99999;
+	bottom: 1px;
+	left: 1px;
+	background: #eee;
+	border-color: #ddd;
+	border-style: solid;
+	border-width: 1px 1px 0 0;
+	padding: 2px 4px;
+	font-size: 12px;
+	border-top-right-radius: 3px;
+}

@@ -1,0 +1,39 @@
+/*
+ * progressively 1.1.2
+ * https://github.com/thinker3197/progressively
+ * @license MIT licensed
+ *
+ * Copyright (C) 2016-17 Ashish
+ */
+
+.progressive {
+  overflow: hidden;
+  position: relative;
+  background: #efefef;
+}
+
+.progressive__img {
+  width: 100%;
+  height: 100%;
+  transform: translateZ(0);
+}
+
+.progressive--not-loaded {
+  filter: blur(30px);
+  transform: scale(1.1);
+}
+
+.progressive--is-loaded {
+  filter: blur(20px);
+  animation: sharpen 0.5s both;
+  transform: scale(1);
+}
+
+@keyframes sharpen {
+  from {
+    filter: blur(20px);
+  }
+  to {
+    filter: blur(0px);
+  }
+}

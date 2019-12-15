@@ -1,0 +1,4 @@
+(function(factory){if (typeof define === 'function' && define.amd){define(['jquery'], factory);} else if (typeof module === 'object' && typeof module.exports === 'object'){module.exports = factory(require('jquery'));} else {factory(jQuery);}}(function(jQuery){
+
+/*! Widget: filter, insideRange filter type - updated 12/10/2015 (v2.25.0) */
+!function(){"use strict";function f(t){return isNaN(t)?t:parseFloat(t)}var t=jQuery.tablesorter,o=/\d+/,p=/\s+-\s+/;t.filter.types.insideRange=function(t,e){if(!e.anyMatch&&o.test(e.iFilter)&&p.test(e.iExact)){var r,i,n,a,s=e.index,l=e.$cells[s],u=e.iExact.split(p),c=t.parsers[e.index]&&t.parsers[e.index].format;return u&&u.length<2||"function"!=typeof c?null:(n=f(c(u[0],t.table,l,s)),(a=f(c(u[1],t.table,l,s)))<n&&(r=a,a=n,n=r),n<=(i=f(c(e.iFilter,t.table,l,s)))&&i<=a)}return null}}();return jQuery;}));

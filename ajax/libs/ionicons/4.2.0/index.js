@@ -1,0 +1,1 @@
+// ionicons: CommonJS Main

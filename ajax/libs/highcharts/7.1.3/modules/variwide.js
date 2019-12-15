@@ -1,0 +1,16 @@
+/*
+ Highcharts JS v7.1.3 (2019-08-14)
+
+ Highcharts variwide module
+
+ (c) 2010-2019 Torstein Honsi
+
+ License: www.highcharts.com/license
+*/
+(function(a){"object"===typeof module&&module.exports?(a["default"]=a,module.exports=a):"function"===typeof define&&define.amd?define("highcharts/modules/variwide",["highcharts"],function(c){a(c);a.Highcharts=c;return a}):a("undefined"!==typeof Highcharts?Highcharts:void 0)})(function(a){function c(a,e,c,k){a.hasOwnProperty(e)||(a[e]=k.apply(null,c))}a=a?a._modules:{};c(a,"modules/variwide.src.js",[a["parts/Globals.js"],a["parts/Utilities.js"]],function(a,e){var c=e.isNumber;e=a.addEvent;var k=a.seriesType,
+l=a.seriesTypes,p=a.pick;k("variwide","column",{pointPadding:0,groupPadding:0},{pointArrayMap:["y","z"],parallelArrays:["x","y","z"],processData:function(a){this.totalZ=0;this.relZ=[];l.column.prototype.processData.call(this,a);(this.xAxis.reversed?this.zData.slice().reverse():this.zData).forEach(function(a,b){this.relZ[b]=this.totalZ;this.totalZ+=a},this);this.xAxis.categories&&(this.xAxis.variwide=!0,this.xAxis.zData=this.zData)},postTranslate:function(a,g,m){var b=this.xAxis,d=this.relZ;a=b.reversed?
+d.length-a:a;var n=b.reversed?-1:1,h=b.len,c=this.totalZ;b=a/d.length*h;var e=(a+n)/d.length*h,f=p(d[a],c)/c*h;d=p(d[a+n],c)/c*h;m&&(m.crosshairWidth=d-f);return f+(g-b)*(d-f)/(e-b)},translate:function(){var a=this.options.crisp,g=this.xAxis;this.options.crisp=!1;l.column.prototype.translate.call(this);this.options.crisp=a;var c=this.chart.inverted,q=this.borderWidth%2/2;this.points.forEach(function(a,b){if(g.variwide){var d=this.postTranslate(b,a.shapeArgs.x,a);b=this.postTranslate(b,a.shapeArgs.x+
+a.shapeArgs.width)}else d=a.plotX,b=g.translate(a.x+a.z,0,0,0,1);this.options.crisp&&(d=Math.round(d)-q,b=Math.round(b)-q);a.shapeArgs.x=d;a.shapeArgs.width=b-d;a.plotX=(d+b)/2;c?a.tooltipPos[1]=g.len-a.shapeArgs.x-a.shapeArgs.width/2:a.tooltipPos[0]=a.shapeArgs.x+a.shapeArgs.width/2},this)}},{isValid:function(){return c(this.y)&&c(this.z)}});a.Tick.prototype.postTranslate=function(a,c,m){var b=this.axis,d=a[c]-b.pos;b.horiz||(d=b.len-d);d=b.series[0].postTranslate(m,d);b.horiz||(d=b.len-d);a[c]=
+b.pos+d};e(a.Axis,"afterDrawCrosshair",function(a){this.variwide&&this.cross&&this.cross.attr("stroke-width",a.point&&a.point.crosshairWidth)});e(a.Axis,"afterRender",function(){var a=this;!this.horiz&&this.variwide&&this.chart.labelCollectors.push(function(){return a.tickPositions.map(function(b,c){b=a.ticks[b].label;b.labelrank=a.zData[c];return b})})});e(a.Tick,"afterGetPosition",function(a){var b=this.axis,c=b.horiz?"x":"y";b.variwide&&(this[c+"Orig"]=a.pos[c],this.postTranslate(a.pos,c,this.pos))});
+a.wrap(a.Tick.prototype,"getLabelPosition",function(a,c,e,k,d,n,h,l){var b=Array.prototype.slice.call(arguments,1),f=d?"x":"y";this.axis.variwide&&"number"===typeof this[f+"Orig"]&&(b[d?0:1]=this[f+"Orig"]);b=a.apply(this,b);this.axis.variwide&&this.axis.categories&&this.postTranslate(b,f,l);return b})});c(a,"masters/modules/variwide.src.js",[],function(){})});
+//# sourceMappingURL=variwide.js.map

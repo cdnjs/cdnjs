@@ -1,0 +1,2 @@
+!function(u,c){"use strict";provide(["../function/string/ucfirst"],function(t){var e,i=u.getComputedStyle(c.documentElement,""),n=/^-(webkit|apple|moz|ms|o)-/,o=null,r=0;return function(){if(null===o){for(o=!1;e=i[r];r++)if(n.test(e)){o=e.match(n)[1];break}!o&&"WebkitOpacity"in i&&(o="WebKit"),!o&&"KhtmlOpacity"in i&&(o="Khtml"),o=o?[o.toLowerCase(),t(o.toLowerCase()),o]:[]}return o}})}(this,document);
+//# sourceMappingURL=prefix.js.map

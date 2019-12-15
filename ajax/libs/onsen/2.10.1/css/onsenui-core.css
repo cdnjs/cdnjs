@@ -1,0 +1,725 @@
+/*! onsenui - v2.10.1 - 2018-05-28 */
+ons-page, ons-navigator,
+ons-tabbar,
+ons-gesture-detector {
+  display: block;
+  touch-action: manipulation; /* Remove click delay */
+}
+
+ons-navigator,
+ons-tabbar,
+ons-splitter,
+ons-action-sheet,
+ons-dialog,
+ons-toast,
+ons-alert-dialog {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+  touch-action: manipulation; /* Remove click delay */
+}
+
+ons-toast {
+  pointer-events: none;
+}
+
+ons-toast .toast {
+  pointer-events: auto;
+}
+
+ons-tab {
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+
+ons-page, ons-navigator, ons-tabbar, ons-dialog, ons-alert-dialog, ons-action-sheet, ons-toast {
+  z-index: 2;
+}
+
+ons-fab, ons-speed-dial {
+  z-index: 10001;
+}
+
+ons-toolbar:not([inline]), ons-bottom-toolbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+}
+
+ons-toolbar:not([inline]) {
+  top: 0;
+}
+
+ons-bottom-toolbar {
+  bottom: 0;
+}
+
+.page, .page__content,
+.page--material, .page--material__content {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+.page__content {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  z-index: 0;
+  -ms-touch-action: pan-y;
+}
+
+.page.overflow-visible,
+.page.overflow-visible .page,
+.page.overflow-visible .page__content,
+.page.overflow-visible ons-navigator,
+.page.overflow-visible ons-splitter {
+  overflow: visible;
+}
+
+.page.overflow-visible .page__content.content-swiping,
+.page.overflow-visible .page__content.content-swiping .page,
+.page.overflow-visible .page__content.content-swiping .page__content {
+  overflow: auto;
+}
+
+.page[status-bar-fill] > .page__content {
+  top: 20px;
+}
+
+.page[status-bar-fill] > .toolbar {
+  padding-top: 20px;
+  box-sizing: content-box;
+}
+
+.page[status-bar-fill] > .toolbar:not(.toolbar--transparent) + .page__background,
+.page[status-bar-fill] > .toolbar:not(.toolbar--cover-content) + .page__background + .page__content {
+  top: 64px;
+}
+
+.page[status-bar-fill] > .toolbar--material:not(.toolbar-transparent) + .page__background,
+.page[status-bar-fill] > .toolbar--material:not(.toolbar--cover-content) + .page__background + .page__content {
+  top: 76px;
+}
+
+.page[status-bar-fill] > .toolbar.toolbar--transparent + .page__background {
+  top: 0;
+}
+
+ons-tabbar[status-bar-fill] > .tabbar--top__content {
+  top: 71px;
+}
+
+ons-tabbar[status-bar-fill] > .tabbar--top {
+  padding-top: 22px;
+}
+
+ons-tabbar[position="top"] .page[status-bar-fill] > .page__content {
+  top: 0px;
+}
+
+.toolbar + .page__background + .page__content ons-tabbar[status-bar-fill] > .tabbar--top {
+  top: 0px;
+}
+
+.toolbar + .page__background + .page__content ons-tabbar[status-bar-fill] > .tabbar--top__content {
+  top: 49px;
+}
+
+.page__content > .list:not(.list--material):first-child {
+  margin-top: -1px; /* Avoid double border with toolbar */
+}
+
+.page--wrapper > .page__background {
+  display: none;
+}
+
+ons-action-sheet[disabled],
+ons-dialog[disabled],
+ons-alert-dialog[disabled],
+ons-popover[disabled] {
+  pointer-events: none;
+  opacity: 0.75;
+}
+
+ons-list-item[disabled] {
+   pointer-events: none;
+}
+
+ons-range[disabled] {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+ons-pull-hook {
+  position: relative;
+  display: block;
+  margin: auto;
+  text-align: center;
+  z-index: 20002;
+}
+
+ons-splitter, ons-splitter-mask, ons-splitter-content, ons-splitter-side {
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  box-sizing: border-box;
+  z-index: 0;
+}
+
+ons-splitter-mask {
+  z-index: 4;
+  background-color: rgba(0, 0, 0, 0.1);
+  display: none;
+  opacity: 0;
+}
+
+ons-splitter-content {
+  z-index: 2;
+}
+
+ons-splitter-side {
+  right: auto;
+  z-index: 2;
+}
+
+ons-splitter-side[side="right"] {
+  right: 0;
+  left: auto;
+}
+
+ons-splitter-side[mode="collapse"] {
+  z-index: 5;
+  left: auto;
+  right: 100%;
+}
+
+ons-splitter-side[side="right"][mode="collapse"] {
+  right: auto;
+  left: 100%;
+}
+
+ons-splitter-side[mode="split"] {
+  z-index: 3;
+}
+
+ons-toolbar-button > ons-icon[icon*="ion-"] {
+  font-size: 26px;
+}
+
+ons-range, ons-select {
+  display: inline-block;
+}
+
+ons-range > input {
+  min-width: 50px;
+  width: 100%;
+}
+
+ons-select > select {
+  width: 100%;
+}
+
+ons-carousel[disabled] {
+  pointer-events: none;
+  opacity: 0.75;
+}
+
+ons-carousel[fullscreen] {
+  height: 100%;
+}
+
+.ons-status-bar-mock {
+  position: absolute;
+  width: 100%;
+  height: 20px;
+  padding: 0 16px 0 6px;
+  box-sizing: border-box;
+  z-index: 30000;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  font-size: 12px;
+  line-height: 20px;
+  font-family: Arial, Helvetica;
+}
+
+.ons-status-bar-mock i {
+  padding: 0 2px;
+}
+
+.ons-status-bar-mock.android {
+  color: white;
+  background-color: #222;
+  font-family: Roboto, Arial, Helvetica;
+}
+
+.ons-status-bar-mock.android ~ * {
+  top: 20px;
+  bottom: 0;
+  position: inherit;
+  width: 100%;
+}
+
+.ons-ios-scroll-fix .page:not(.page--wrapper)[shown] > .page__content {
+  overflow-y: hidden;
+}
+.ons-ios-scroll-fix ons-splitter-side > .page:not(.page--wrapper)[shown] > .page__content {
+  overflow-y: auto;
+}
+
+ons-row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+ons-row[vertical-align="top"], ons-row[align="top"] {
+  -webkit-box-align: start;
+  box-align: start;
+  -ms-flex-align: start;
+  -webkit-align-items: flex-start;
+  -moz-align-items: flex-start;
+  align-items: flex-start;
+}
+
+ons-row[vertical-align="bottom"], ons-row[align="bottom"] {
+  -webkit-box-align: end;
+  box-align: end;
+  -ms-flex-align: end;
+  -webkit-align-items: flex-end;
+  -moz-align-items: flex-end;
+  align-items: flex-end;
+}
+
+ons-row[vertical-align="center"], ons-row[align="center"] {
+  -webkit-box-align: center;
+  box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center;
+  text-align: inherit;
+}
+
+ons-row + ons-row {
+  padding-top: 0;
+}
+
+ons-col {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -moz-box-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+ons-col[vertical-align="top"], ons-col[align="top"] {
+  -webkit-align-self: flex-start;
+  -moz-align-self: flex-start;
+  -ms-flex-item-align: start;
+  align-self: flex-start;
+}
+
+ons-col[vertical-align="bottom"], ons-col[align="bottom"] {
+  -webkit-align-self: flex-end;
+  -moz-align-self: flex-end;
+  -ms-flex-item-align: end;
+  align-self: flex-end; }
+
+ons-col[vertical-align="center"], ons-col[align="center"] {
+  -webkit-align-self: center;
+  -moz-align-self: center;
+  -ms-flex-item-align: center;
+  text-align: inherit;
+}
+
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+ */
+
+.ons-icon {
+  display: inline-block;
+  line-height: inherit;
+  font-style: normal;
+  font-weight: normal;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.segment__button .ons-icon {
+  line-height: initial;
+}
+
+:not(ons-toolbar-button):not(ons-action-sheet-button):not(.segment__button) > .ons-icon--ion {
+  line-height: 0.75em;
+  vertical-align: -25%;
+}
+
+.ons-icon[spin] {
+  -webkit-animation: ons-icon-spin 2s infinite linear;
+  -moz-animation: ons-icon-spin 2s infinite linear;
+  animation: ons-icon-spin 2s infinite linear;
+}
+
+@-moz-keyframes ons-icon-spin {
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(359deg);
+  }
+}
+
+@-webkit-keyframes ons-icon-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+  }
+}
+
+@keyframes ons-icon-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+
+.ons-icon[rotate="90"] {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.ons-icon[rotate="180"] {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.ons-icon[rotate="270"] {
+  -webkit-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+
+.ons-icon[fixed-width] {
+  width: 1.28571429em;
+  text-align: center;
+}
+
+.ons-icon--lg {
+  font-size: 1.33333333em;
+  line-height: 0.75em;
+  vertical-align: -15%;
+}
+
+.ons-icon--2x {
+  font-size: 2em;
+}
+
+.ons-icon--3x {
+  font-size: 3em;
+}
+
+.ons-icon--4x {
+  font-size: 4em;
+}
+
+.ons-icon--5x {
+  font-size: 5em;
+}
+
+ons-input, ons-radio, ons-checkbox, ons-search-input {
+  display: inline-block;
+  position: relative;
+}
+
+ons-input .text-input,
+ons-search-input .search-input {
+  width: 100%;
+  display: inline-block;
+}
+
+ons-input .text-input__label:not(.text-input--material__label) {
+  display: none;
+}
+
+ons-input:not([float]) .text-input--material__label--active {
+  display: none;
+}
+
+ons-input[disabled],
+ons-radio[disabled],
+ons-checkbox[disabled],
+ons-segment[disabled],
+ons-search-input[disabled] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+ons-input input.text-input--material::-webkit-input-placeholder {
+  color: transparent;
+}
+
+ons-input input.text-input--material::-moz-placeholder {
+  color: transparent;
+}
+
+ons-input input.text-input--material:-ms-input-placeholder {
+  color: transparent;
+}
+
+/* Suppress safe area support for pages in splitter sides */
+@media (orientation: landscape) {
+  html[onsflag-iphonex-landscape] ons-splitter-side[side="left"] .page__content {
+    padding-right: 0;
+  }
+  html[onsflag-iphonex-landscape] ons-splitter-side[side="right"] .page__content {
+    padding-left: 0;
+  }
+}
+/* Support the situation that a progress bar is located just below a toolbar */
+@media (orientation: landscape) {
+  html[onsflag-iphonex-landscape] .page__content > ons-progress-bar > .progress-bar {
+    margin-left: -44px;
+    margin-right: -44px;
+    width: calc(100% + 88px);
+  }
+}
+/* Lists in .page__content in splitter-sides */
+@media (orientation: landscape) {
+  /* Suppress left safe area support for pages in right splitter sides */
+  html[onsflag-iphonex-landscape] ons-splitter-side[side="right"] .page__content > .list:not(.list--inset) {
+    margin-left: 0;
+  }
+  html[onsflag-iphonex-landscape] ons-splitter-side[side="right"] .page__content > .list:not(.list--inset) > .list-header {
+    padding-left: 15px;
+  }
+  html[onsflag-iphonex-landscape] ons-splitter-side[side="right"] .page__content > .list:not(.list--inset) > .list-item {
+    padding-left: 14px;
+  }
+
+  /* Suppress right safe area support for pages in left splitter sides */
+  html[onsflag-iphonex-landscape] ons-splitter-side[side="left"] .page__content > .list:not(.list--inset) {
+    margin-right: 0;
+  }
+  html[onsflag-iphonex-landscape] ons-splitter-side[side="left"] .page__content > .list:not(.list--inset) > .list-item--chevron:before {
+    right: 16px;
+  }
+  html[onsflag-iphonex-landscape] ons-splitter-side[side="left"] .page__content > .list:not(.list--inset) > .list-item > .list-item__center:last-child {
+    padding-right: 6px;
+  }
+  html[onsflag-iphonex-landscape] ons-splitter-side[side="left"] .page__content > .list:not(.list--inset) > .list-item > .list-item__right {
+    padding-right: 12px;
+  }
+  html[onsflag-iphonex-landscape] ons-splitter-side[side="left"] .page__content > .list:not(.list--inset) > .list-item > .list-item--chevron__right {
+    padding-right: 30px;
+  }
+}
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+ */
+
+ons-progress-bar {
+  display: block;
+}
+
+ons-progress-circular {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+}
+
+ons-progress-circular > svg.progress-circular {
+  width: 100%;
+  height: 100%;
+}
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+ */
+.ripple {
+  display: block;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.ripple__background {
+  background: rgba(255, 255, 255, 0.2);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ripple__wave {
+  background: rgba(255, 255, 255, 0.2);
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* FIXME */
+ons-list-item .ripple__wave,
+ons-list-item .ripple__background,
+.button--material--flat .ripple__wave,
+.button--material--flat .ripple__background {
+  background: rgba(189, 189, 189, 0.3);
+}
+
+.ripple--light-gray__wave,
+.ripple--light-gray__background {
+  background: rgba(189, 189, 189, 0.3);
+}
+
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+ */
+
+.ons-swiper {
+  overflow: hidden;
+  display: block;
+  box-sizing: border-box;
+}
+
+.ons-swiper-target {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  height: 100%;
+  z-index: 1;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+}
+
+.ons-swiper-target--vertical {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+
+.ons-swiper-target > * {
+  height: inherit;
+  -webkit-flex-shrink: 0;
+          flex-shrink: 0;
+  box-sizing: border-box;
+  width: 100%;
+  position: relative !important;
+}
+
+.ons-swiper-target.active:not(.swiping) > .page:not([shown]) {
+  visibility: hidden;
+}
+
+.ons-swiper-tabbar .tabbar--material__button:after {
+  display: none;
+}
+
+.ons-swiper-blocker {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none
+}

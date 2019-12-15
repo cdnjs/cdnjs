@@ -16,12 +16,10 @@ var semver = require('semver');
 var tempDirPath;
 var args;
 
-if (fs.existsSync('/run/shm')) {
-  tempDirPath = '/run/shm/' + process.env.USER + '/cdnjs_NPM_temp';
-  fs.mkdirsSync(tempDirPath);
-} else {
-  tempDirPath = path.join(__dirname, 'temp');
+if (process.env.BOT_CDNJS_NPM_TEMP === undefined) {
+  throw 'BOT_CDNJS_NPM_TEMP is missing';
 }
+tempDirPath = process.env.BOT_CDNJS_NPM_TEMP;
 
 colors.setTheme({
   prompt: 'cyan',
@@ -165,7 +163,10 @@ var processNewVersion = function (pkg, version) {
   var updated = false;
   _.each(npmFileMap, function (fileSpec) {
     var basePath = fileSpec.basePath || '';
-
+    if (fileSpec.files.length === 0) {
+      fs.mkdirsSync(libPath);
+      return;
+    }
     _.each(fileSpec.files, function (file) {
       var libContentsPath = path.normalize(path.join(extractLibPath, basePath));
       if (!isAllowedPath(libContentsPath)) {
@@ -185,15 +186,20 @@ var processNewVersion = function (pkg, version) {
       }
 
       _.each(files, function (extractFilePath) {
-        if (extractFilePath.match(/(dependencies|\.zip\s*$)/i)) {
+        if (extractFilePath.match(/(\.zip\s*$)/i)) {
           return;
         }
 
         var copyPart = path.relative(libContentsPath, extractFilePath);
         var copyPath = path.join(libPath, copyPart);
-        fs.mkdirsSync(path.dirname(copyPath));
-        fs.copySync(extractFilePath, copyPath);
-        fs.chmodSync(copyPath, '0644');
+        if (fs.statSync(extractFilePath).size !== 0){
+          // don't copy the empty file from the source
+          fs.mkdirsSync(path.dirname(copyPath));
+          fs.copySync(extractFilePath, copyPath);
+          fs.chmodSync(copyPath, '0644');
+        } else {
+          console.log('Warning! '.warn + copyPart.gray + ' is empty, file will not be copied!');
+        }
         updated = true;
       });
     });
@@ -316,7 +322,8 @@ var updateLibrary = function (pkg, cb) {
 };
 
 exports.run = function () {
-  fs.removeSync(path.join(tempDirPath, '/*'));
+  fs.removeSync(path.join(tempDirPath));
+  fs.mkdirsSync(tempDirPath);
 
   console.log('Looking for npm enabled libraries...');
 
@@ -339,7 +346,6 @@ exports.run = function () {
     var msg = 'Auto Update Completed - ' + newVersionCount +
       ' versions were updated';
     console.log(msg.prompt);
-    fs.removeSync(path.join(tempDirPath, '/*'));
     if (err) {
       console.dir(err);
     }
@@ -360,3 +366,7 @@ if (args.length > 0 && args[0] === 'run') {
 } else {
   console.log('to start "npm auto-update", pass the "run" arg'.prompt);
 }
+
+process.on('uncaughtException', (err) => {
+  console.log(err);
+});

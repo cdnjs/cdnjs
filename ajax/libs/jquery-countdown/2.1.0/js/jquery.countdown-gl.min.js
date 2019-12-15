@@ -1,0 +1,1 @@
+!function(s){"use strict";s.countdown.regionalOptions.gl={labels:["Anos","Meses","Semanas","Días","Horas","Minutos","Segundos"],labels1:["Ano","Mes","Semana","Día","Hora","Minuto","Segundo"],compactLabels:["a","m","s","g"],whichLabels:null,digits:["0","1","2","3","4","5","6","7","8","9"],timeSeparator:":",isRTL:!1},s.countdown.setDefaults(s.countdown.regionalOptions.gl)}(jQuery);

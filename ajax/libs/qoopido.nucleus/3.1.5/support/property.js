@@ -1,0 +1,2 @@
+!function(b){"use strict";provide(["/demand/validator/isObject","../function/property/unify","../function/string/ucfirst","./prefix"],function(a,s,d,n){var p=n(),v={};return function(n){var i,r,t,u,o,e=a(arguments[1])?arguments[1]:null,f=!!arguments[e?2:1],l=null,c=0;if(e=e||b,n=s(n),(r=e===b?"#window":e.nodeName)&&(l=(i=v[r]=v[r]||{})[n]=v[r][n]||null),null===l){for(l=!1,o=d(n),t=p?(n+" "+o+" "+p.join(o+" ")+o).split(" "):[n];u=t[c];c++)if(u in e){l=u;break}i&&(i[n]=l)}return l&&f?e[l]:l}})}(this);
+//# sourceMappingURL=property.js.map

@@ -1,0 +1,66 @@
+/* flatpickr v4.0.6, @license MIT */
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+	typeof define === 'function' && define.amd ? define(['exports'], factory) :
+	(factory((global.tr = {})));
+}(this, (function (exports) { 'use strict';
+
+var fp = typeof window !== "undefined" && window.flatpickr !== undefined
+    ? window.flatpickr
+    : {
+        l10ns: {},
+    };
+var Turkish = {
+    firstDayOfWeek: 1,
+    weekdays: {
+        shorthand: ["Paz", "Pzt", "Sal", "Çar", "Per", "Cum", "Cmt"],
+        longhand: [
+            "Pazar",
+            "Pazartesi",
+            "Salı",
+            "Çarşamba",
+            "Perşembe",
+            "Cuma",
+            "Cumartesi",
+        ],
+    },
+    months: {
+        shorthand: [
+            "Oca",
+            "Şub",
+            "Mar",
+            "Nis",
+            "May",
+            "Haz",
+            "Tem",
+            "Ağu",
+            "Eyl",
+            "Eki",
+            "Kas",
+            "Ara",
+        ],
+        longhand: [
+            "Ocak",
+            "Şubat",
+            "Mart",
+            "Nisan",
+            "Mayıs",
+            "Haziran",
+            "Temmuz",
+            "Ağustos",
+            "Eylül",
+            "Ekim",
+            "Kasım",
+            "Aralık",
+        ],
+    },
+};
+fp.l10ns.tr = Turkish;
+var tr = fp.l10ns;
+
+exports.Turkish = Turkish;
+exports['default'] = tr;
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+})));

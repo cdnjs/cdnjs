@@ -1,0 +1,2 @@
+!function(s){"use strict";provide(["/demand/validator/isObject","/demand/validator/isTypeOf","./property"],function(a,d,c){var f={};return function(n){var t,i,r,e,u=a(arguments[1])?arguments[1]:null,l=!!arguments[u?2:1],o=null;return(t=(u=u||s)===s?"#window":u.nodeName)&&(o=(i=f[t]=f[t]||{})[n]=f[t][n]||null),null===o&&(o=!1,(r=c(n,u))&&(e=u[r])&&(d(e,"function")||a(e))&&(o=r),i&&(i[n]=o)),o&&l?u[o]:o}})}(this);
+//# sourceMappingURL=method.js.map

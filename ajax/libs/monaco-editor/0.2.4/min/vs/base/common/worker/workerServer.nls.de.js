@@ -1,0 +1,8 @@
+/*!-----------------------------------------------------------
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Version: 0.2.3(84e204b238a1eff25d4c6f611fdcd76a494005a7)
+ * Released under the MIT license
+ * https://github.com/Microsoft/vscode/blob/master/LICENSE.txt
+ *-----------------------------------------------------------*/
+define("vs/base/common/worker/workerServer.nls.de",{"vs/base/common/errors":["{0}. Fehlercode: {1}","Berechtigung verweigert (HTTP {0})","Berechtigung verweigert","{0} (HTTP {1}: {2})","{0} (HTTP {1})","Unbekannter Verbindungsfehler ({0})","Es ist ein unbekannter Verbindungsfehler aufgetreten. Entweder besteht keine Internetverbindung mehr, oder der verbundene Server ist offline.","{0}: {1}","Ein unbekannter Fehler ist aufgetreten. Weitere Details dazu finden Sie im Protokoll.","Systemfehler ({0})","Ein unbekannter Fehler ist aufgetreten. Weitere Details dazu finden Sie im Protokoll.","{0} ({1} Fehler gesamt)","Ein unbekannter Fehler ist aufgetreten. Weitere Details dazu finden Sie im Protokoll.","Nicht implementiert","ungültiges Argument: {0}","ungültiges Argument","ungültiger Status: {0}","ungültiger Status","Eine erforderliche Datei konnte nicht geladen werden. Entweder sind Sie nicht mehr mit dem Internet verbunden oder der verbundene Server ist offline. Aktualisieren Sie den Browser, und wiederholen Sie den Vorgang.","Fehler beim Laden einer erforderlichen Datei. Bitte starten Sie die Anwendung neu, und versuchen Sie es dann erneut. Details: {0}"]});
+//# sourceMappingURL=../../../../../min-maps/vs/base/common/worker/workerServer.nls.de.js.map

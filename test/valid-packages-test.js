@@ -135,7 +135,7 @@ packages.map(function (pkg) {
     var json = parse(pkg, true);
     if (json.repository) {
       assert.ok(
-                 ((json.repository.type !== undefined) && (json.repository.url !== undefined)),
+                ((json.repository.type !== undefined) && (json.repository.url !== undefined)),
                 'There repository field in ' + json.name + "'s package.json should follow npm's format, must have type and url field."
             );
     }
@@ -148,7 +148,7 @@ packages.map(function (pkg) {
     }
 
     assert.ok((json.npmName !== undefined && json.npmFileMap !== undefined && Array.isArray(json.npmFileMap)) || (json.autoupdate !== undefined),
-                   pkgName(pkg) + ': must have a valid auto-update config');
+                  pkgName(pkg) + ': must have a valid auto-update config');
   };
 
   packageVows[pname + ': npmName and npmFileMap should be a pair'] = function (pkg) {
@@ -216,9 +216,6 @@ packages.map(function (pkg) {
     var orig = fs.readFileSync(pkg, 'utf8');
     var correct = JSON.stringify(JSON.parse(orig), null, 2) + '\n';
     var content = JSON.parse(correct);
-    if (content.version === undefined) {
-      return;
-    }
 
     assert.ok(orig === correct,
             pkgName(pkg) + ': package.json wrong indent, please use 2-spaces as indent, remove trailing spaces, you can use our tool: tools/fixFormat.js to fix it for you, here is an example: (Please ignore the first 2 spaces and the wildcard symbol in autoupadte config due to a bug)\n' + correct + '\n');
@@ -323,11 +320,11 @@ packages.map(function (pkg) {
         if (json.npmFileMap[i].basePath) {
           var basePath = json.npmFileMap[i].basePath;
           assert.ok(
-             (
-                 (basePath.length == 0) ||
-                 (basePath[0] != '/' && basePath[basePath.length - 1] != '/')
-             ),
-             pkgName(pkg) + ': Need to remove leading/trailing slash ("/") in basePath in package.json');
+            (
+                (basePath.length == 0) ||
+                (basePath[0] != '/' && basePath[basePath.length - 1] != '/')
+            ),
+            pkgName(pkg) + ': Need to remove leading/trailing slash ("/") in basePath in package.json');
         }
       }
     } else if (json.autoupdate) {

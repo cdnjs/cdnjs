@@ -1,0 +1,2 @@
+!function(){"use strict";provide(function(){var t=Object,e=t.create,r=t.getOwnPropertyNames,o=t.getOwnPropertyDescriptor;function n(t,e,r,o){return{__proto__:null,value:t,enumerable:!!o,configurable:!!r,writable:!!e}}return t.defineProperty(Function.prototype,"extends",new n(function(t){for(var i,p=this.prototype,u={},c=r(p),s=0;i=c[s];s++)u[i]=o(p,i);return u.constructor=new n(this),this.prototype=e(t.prototype||t,u),this})),!0})}();
+//# sourceMappingURL=base.js.map

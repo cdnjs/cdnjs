@@ -1,0 +1,3 @@
+!function(n){var u="mmenu",e="ru";n[u].i18n({Menu:"Меню"},e)}(jQuery);
+!function(u){var e="mmenu",n="ru";u[e].i18n({"Close menu":"Закрыть меню","Close submenu":"Закрыть подменю","Open submenu":"Открыть подменю","Toggle submenu":"Переключить подменю"},n)}(jQuery);
+!function(r){var u="mmenu",e="ru";r[u].i18n({Search:"Найти","No results found.":"Ничего не найдено.","Search results":"Результаты поиска"},e)}(jQuery);

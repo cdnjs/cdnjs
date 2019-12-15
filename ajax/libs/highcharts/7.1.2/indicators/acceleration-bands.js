@@ -1,0 +1,16 @@
+/*
+  Highcharts JS v7.1.2 (2019-06-03)
+
+ Indicator series type for Highstock
+
+ (c) 2010-2019 Daniel Studencki
+
+ License: www.highcharts.com/license
+*/
+(function(a){"object"===typeof module&&module.exports?(a["default"]=a,module.exports=a):"function"===typeof define&&define.amd?define("highcharts/indicators/acceleration-bands",["highcharts","highcharts/modules/stock"],function(c){a(c);a.Highcharts=c;return a}):a("undefined"!==typeof Highcharts?Highcharts:void 0)})(function(a){function c(a,f,t,c){a.hasOwnProperty(f)||(a[f]=c.apply(null,t))}a=a?a._modules:{};c(a,"mixins/multipe-lines.js",[a["parts/Globals.js"]],function(a){var f=a.each,c=a.merge,q=
+a.error,u=a.defined,m=a.seriesTypes.sma;return{pointArrayMap:["top","bottom"],pointValKey:"top",linesApiNames:["bottomLine"],getTranslatedLinesNames:function(h){var a=[];f(this.pointArrayMap,function(b){b!==h&&a.push("plot"+b.charAt(0).toUpperCase()+b.slice(1))});return a},toYData:function(h){var a=[];f(this.pointArrayMap,function(b){a.push(h[b])});return a},translate:function(){var h=this,a=h.pointArrayMap,c=[],l,c=h.getTranslatedLinesNames();m.prototype.translate.apply(h,arguments);f(h.points,function(b){f(a,
+function(a,m){l=b[a];null!==l&&(b[c[m]]=h.yAxis.toPixels(l,!0))})})},drawGraph:function(){var a=this,b=a.linesApiNames,v=a.points,l=v.length,n=a.options,t=a.graph,x={options:{gapSize:n.gapSize}},r=[],k=a.getTranslatedLinesNames(a.pointValKey),g;f(k,function(a,b){for(r[b]=[];l--;)g=v[l],r[b].push({x:g.x,plotX:g.plotX,plotY:g[a],isNull:!u(g[a])});l=v.length});f(b,function(b,e){r[e]?(a.points=r[e],n[b]?a.options=c(n[b].styles,x):q('Error: "There is no '+b+' in DOCS options declared. Check if linesApiNames are consistent with your DOCS line names." at mixin/multiple-line.js:34'),
+a.graph=a["graph"+b],m.prototype.drawGraph.call(a),a["graph"+b]=a.graph):q('Error: "'+b+" doesn't have equivalent in pointArrayMap. To many elements in linesApiNames relative to pointArrayMap.\"")});a.points=v;a.options=n;a.graph=t;m.prototype.drawGraph.call(a)}}});c(a,"indicators/acceleration-bands.src.js",[a["parts/Globals.js"],a["mixins/multipe-lines.js"]],function(a,c){var f=a.seriesTypes.sma,q=a.merge,u=a.correctFloat;a.seriesType("abands","sma",{params:{period:20,factor:.001,index:3},lineWidth:1,
+topLine:{styles:{lineWidth:1}},bottomLine:{styles:{lineWidth:1}},dataGrouping:{approximation:"averages"}},q(c,{pointArrayMap:["top","middle","bottom"],pointValKey:"middle",nameBase:"Acceleration Bands",nameComponents:["period","factor"],linesApiNames:["topLine","bottomLine"],getValues:function(a,c){var b=c.period,h=c.factor;c=c.index;var l=a.xData,n=(a=a.yData)?a.length:0,m=[],q=[],r=[],k,g,p,e,t=[],w=[],d;if(n<b)return!1;for(d=0;d<=n;d++)d<n&&(e=a[d][2],p=a[d][1],g=h,e=u(p-e)/(u(p+e)/2)*1E3*g,m.push(a[d][1]*
+u(1+2*e)),q.push(a[d][2]*u(1-2*e))),d>=b&&(e=l.slice(d-b,d),k=a.slice(d-b,d),g=f.prototype.getValues.call(this,{xData:e,yData:m.slice(d-b,d)},{period:b}),p=f.prototype.getValues.call(this,{xData:e,yData:q.slice(d-b,d)},{period:b}),k=f.prototype.getValues.call(this,{xData:e,yData:k},{period:b,index:c}),e=k.xData[0],g=g.yData[0],p=p.yData[0],k=k.yData[0],r.push([e,g,k,p]),t.push(e),w.push([g,k,p]));return{values:r,xData:t,yData:w}}}))});c(a,"masters/indicators/acceleration-bands.src.js",[],function(){})});
+//# sourceMappingURL=acceleration-bands.js.map

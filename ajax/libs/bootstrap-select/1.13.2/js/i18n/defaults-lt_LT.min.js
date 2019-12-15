@@ -1,0 +1,8 @@
+/*!
+ * Bootstrap-select v1.13.2 (https://developer.snapappointments.com/bootstrap-select)
+ *
+ * Copyright 2012-2018 SnapAppointments, LLC
+ * Licensed under MIT (https://github.com/snapappointments/bootstrap-select/blob/master/LICENSE)
+ */
+
+!function(e,i){void 0===e&&void 0!==window&&(e=window),"function"==typeof define&&define.amd?define(["jquery"],function(e){return i(e)}):"object"==typeof module&&module.exports?module.exports=i(require("jquery")):i(e.jQuery)}(this,function(e){e.fn.selectpicker.defaults={noneSelectedText:"Niekas nepasirinkta",noneResultsText:"Niekas nesutapo su {0}",countSelectedText:function(e,i){return 1==e?"{0} elementas pasirinktas":"{0} elementai(-ų) pasirinkta"},maxOptionsText:function(e,i){return[1==e?"Pasiekta riba ({n} elementas daugiausiai)":"Riba pasiekta ({n} elementai(-ų) daugiausiai)",1==i?"Grupės riba pasiekta ({n} elementas daugiausiai)":"Grupės riba pasiekta ({n} elementai(-ų) daugiausiai)"]},selectAllText:"Pasirinkti visus",deselectAllText:"Atmesti visus",multipleSeparator:", "}});

@@ -1,0 +1,1 @@
+jQuery.mmenu.wrappers.angular=function(){this.opts.onClick={close:!0,preventDefault:!1,setSelected:!0}};

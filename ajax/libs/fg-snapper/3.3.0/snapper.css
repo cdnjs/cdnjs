@@ -1,0 +1,119 @@
+/* snapper css snap points carousel */
+.snapper:before,
+.snapper_nextprev_contain:before, .snapper_items:before, .snapper_nav:before, .snapper:after,
+.snapper_nextprev_contain:after, .snapper_items:after, .snapper_nav:after {
+  content: " ";
+  display: table; }
+
+.snapper:after,
+.snapper_nextprev_contain:after, .snapper_items:after, .snapper_nav:after {
+  clear: both; }
+
+.snapper,
+.snapper_nextprev_contain, .snapper_items, .snapper_nav {
+  *zoom: 1; }
+
+.snapper * {
+  box-sizing: border-box; }
+
+.snapper,
+.snapper_nextprev_contain {
+  position: relative; }
+
+.snapper:focus {
+  /* snapper div receives a tabindex to allow focus for keyboard arrow control */
+  outline: none; }
+
+/* to hide the scrollbar handles while still allowing touch and gesture scrolling, wrap the snapper pane in a div with a snapper_pane_crop class
+note: only use this if you have thumbnails or some other means of advancing slides for non-touchscreen devices */
+.snapper-enhanced .snapper_pane_crop,
+.enhanced .snapper_pane_crop {
+  overflow: hidden; }
+
+.snapper-enhanced .snapper_pane_crop .snapper_pane,
+.enhanced .snapper_pane_crop .snapper_pane {
+  /* IE and edge */
+  -ms-overflow-style: none;
+  /* Firefox */
+  scrollbar-width: none; }
+
+.snapper-enhanced .snapper_pane_crop .snapper_pane::-webkit-scrollbar,
+.enhanced .snapper_pane_crop .snapper_pane::-webkit-scrollbar {
+  display: none; }
+
+.snapper_pane {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  width: 100%;
+  /* snap to points */
+  scroll-snap-type: mandatory;
+  scroll-snap-type: x mandatory;
+  /* x interval for snapping (100% of container width) */
+  scroll-snap-points-x: repeat(100%);
+  position: relative;
+  z-index: 0; }
+
+.snapper_item {
+  width: 100%;
+  position: relative;
+  white-space: normal;
+  scroll-snap-align: start;
+  box-sizing: border-box;
+  padding-right: 1px;
+  padding-left: 1px; }
+
+.enhanced .snapper_item,
+.snapper-enhanced .snapper_item {
+  display: none; }
+
+.enhanced .snapper_item:first-child,
+.snapper-enhanced .snapper_item:first-child,
+.snapper-enhanced .snapper_item[style] {
+  display: block; }
+
+.snapper-enhanced .snapper_item:first-child,
+.snapper-enhanced .snapper_item[style] {
+  float: left !important;
+  /* important to ensure default float nones don't leak through */
+  clear: none !important;
+  /* important to ensure default clears don't leak through */ }
+
+/* next prev arrow selectors */
+.snapper_item img {
+  width: 100%; }
+
+.snapper_nav {
+  position: relative;
+  margin: 1em 0;
+  overflow: hidden; }
+
+.snapper_nav_inner {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  white-space: nowrap;
+  padding: 2px 1px 30px;
+  margin-bottom: -30px;
+  /* leave room for thumb outline to show up.. don't fully offset */
+  height: 84px; }
+
+.snapper_nav a {
+  overflow: hidden;
+  border: 1px solid #ddd;
+  white-space: normal;
+  display: inline-block;
+  float: none;
+  vertical-align: middle;
+  height: 50px;
+  width: auto;
+  margin: 0 5px 0 0; }
+
+.snapper_nav a.snapper_nav_item-selected {
+  /* selected styles here */
+  outline: 1px solid black; }
+
+.snapper_nav img {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: 100%; }

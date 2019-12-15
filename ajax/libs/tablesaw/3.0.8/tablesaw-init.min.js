@@ -1,0 +1,1 @@
+!function(i){"use strict";if(!("Tablesaw"in i))throw new Error("Tablesaw library not found.");if(!("init"in Tablesaw))throw new Error("Your tablesaw-init.js is newer than the core Tablesaw version.");Tablesaw.init()}("undefined"!=typeof window?window:this);

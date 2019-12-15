@@ -1,0 +1,95 @@
+@keyframes checkmark {
+  0% {
+    transform: translateX(-15px);
+  }
+  60% {
+    opacity: 1;
+  }
+  70% {
+    transform: none;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.starability-checkmark {
+  display: block;
+  position: relative;
+  width: 150px;
+  min-height: 60px;
+  padding: 0;
+  border: none;
+}
+
+.starability-checkmark > input {
+  position: absolute;
+  margin-right: -100%;
+  opacity: 0;
+}
+
+.starability-checkmark > input:checked ~ label,
+.starability-checkmark > input:focus ~ label {
+  background-position: 0 -30px;
+}
+
+.starability-checkmark > input:hover ~ label {
+  background-position: 0 -30px;
+}
+
+.starability-checkmark > input:focus + label {
+  outline: 1px dotted #999;
+}
+
+.starability-checkmark > label {
+  position: relative;
+  display: inline-block;
+  float: right;
+  width: 30px;
+  height: 30px;
+  color: transparent;
+  cursor: pointer;
+  background-image: url("../starability-images/icons-checkmark.png");
+  background-repeat: no-repeat;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 2), screen and (min-resolution: 192dpi) {
+  .starability-checkmark > label {
+    background-image: url("../starability-images/icons-checkmark@2x.png");
+    background-size: 30px auto;
+  }
+}
+
+.starability-checkmark > label {
+  position: static;
+  z-index: 2;
+}
+
+.starability-checkmark > label:before {
+  display: none;
+  position: absolute;
+  content: ' ';
+  width: 30px;
+  height: 30px;
+  background-image: url("../starability-images/icons-checkmark.png");
+  background-repeat: no-repeat;
+  background-position: 0 -60px;
+  right: -30px;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 2), screen and (min-resolution: 192dpi) {
+  .starability-checkmark > label:before {
+    background-image: url("../starability-images/icons-checkmark@2x.png");
+    background-size: 30px auto;
+  }
+}
+
+.starability-checkmark > input:checked + label:before {
+  display: block;
+  animation-name: checkmark;
+  animation-duration: .7s;
+  animation-fill-mode: forwards;
+}

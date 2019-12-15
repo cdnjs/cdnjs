@@ -1,0 +1,1 @@
+!function(e){"use strict";e.i18n.languages.bs=e.extend({},e.i18n.languages.default,{convertGrammar:function(e,n){switch(n){case"instrumental":e="s "+e;break;case"lokativ":e="o "+e}return e}})}(jQuery);

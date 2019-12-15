@@ -1,0 +1,8 @@
+/***************************************************************************************************
+LoadingOverlay Extras - Progress
+    Author          : Gaspare Sganga
+    Version         : 1.6.0
+    License         : MIT
+    Documentation   : https://gasparesganga.com/labs/jquery-loading-overlay/
+****************************************************************************************************/
+var LoadingOverlayProgress=function(t){var e,o,s=jQuery,r=s.extend(!0,{},{bar:{bottom:"25px",height:"20px",background:"#9bbb59"},text:{bottom:"50px",font:"14pt/1.2 sans-serif",color:"#303030"}},t);return{Init:function(){var t=s("<div>",{class:"loadingoverlay_progress_wrapper",css:{position:"absolute",top:0,left:0,width:"100%",height:"100%"}});return e=s("<div>",{class:"loadingoverlay_progress_bar",css:s.extend(!0,{position:"absolute",left:"0"},r.bar)}).appendTo(t),o=!1!==r.text&&s("<div>",{class:"loadingoverlay_progress_text",css:s.extend(!0,{position:"absolute",left:"0","text-align":"right","white-space":"nowrap"},r.text),text:"0 %"}).appendTo(t),a(0),t},Update:a};function a(t){t<0&&(t=0),t>100&&(t=100);var s={right:100-t+"%"};e.css(s),!1!==o&&(o.css(s),o.text(t+"%"))}};

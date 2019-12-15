@@ -1,0 +1,2 @@
+!function(r,v){"use strict";provide(["../../function/property/unify","../../function/string/ucfirst","../prefix"],function(f,c,n){var l=n(),a=r.createElement("div").style,s=/([A-Z])/g,p={};return function(n){n=f(n);var r=p[n]||null;if(null===r){r=!1;for(var t,e=0,i=c(n),u=(n+" "+i+" "+l.join(i+" ")+i).split(" "),o="";(t=u[e])!==v;e++)if(a[t]!==v){r=t,0<e&&(o="-");break}p[n]=r=!!r&&[o+r.replace(s,"-$1").toLowerCase(),r]}return r}})}(document);
+//# sourceMappingURL=property.js.map

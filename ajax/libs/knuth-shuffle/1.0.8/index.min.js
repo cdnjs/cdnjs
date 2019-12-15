@@ -1,0 +1,1 @@
+!function(n){"use strict";n.knuthShuffle=function(n){for(var o,t,e=n.length;0!==e;)t=Math.floor(Math.random()*e),o=n[e-=1],n[e]=n[t],n[t]=o;return n}}("undefined"!=typeof exports&&exports||"undefined"!=typeof window&&window||global);

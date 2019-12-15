@@ -1,0 +1,228 @@
+/**
+ * (c) 2013 Jcalendar Plugin | Bossanova UI
+ * http://www.github.com/paulhodel/jcalendar
+ *
+ * @author: Paul Hodel <paul.hodel@gmail.com>
+ * @description: Date/Datetime jquery Plugin
+ */
+
+.jcalendar
+{
+    position:absolute;
+    z-index:1000;
+    box-sizing:border-box;
+    display:none;
+    min-width:280px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.jcalendar_focus
+{
+    display:block;
+}
+
+.jcalendar_backdrop
+{
+    position:fixed;
+    top:0px;
+    left:0px;
+    min-width:100%;
+    min-height:100%;
+    background-color:rgba(0,0,0,0.5);
+    border:0px;
+    padding:0px;
+    z-index:1000;
+    display:none;
+}
+
+.jcalendar_container
+{
+    -webkit-box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.39);
+    -moz-box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.39);
+    box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.39);
+    background-color:#fff;
+}
+
+.jcalendar_container > table
+{
+    width:100%;
+    background-color:#fff;
+    border-top:1px solid #ddd;
+}
+
+.jcalendar_container > table > tbody td
+{
+    box-sizing:border-box;
+    cursor:pointer;
+    padding:9px;
+    font-size:0.9em;
+}
+
+.jcalendar_container > table > thead
+{
+    cursor:pointer;
+}
+
+.jcalendar tbody > tr:first-child > td
+{
+    font-weight:550;
+    background-color:#fcfcfc;
+    padding:14px;
+}
+
+.jcalendar tfoot td
+{
+    padding:10px;
+}
+
+.jcalendar_months td, .jcalendar_years td
+{
+    height:24px;
+} 
+
+.jcalendar_input
+{
+    padding-right:18px;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'%3E%3Cpath d='M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z'/%3E%3Cpath fill='none' d='M0 0h24v24H0z'/%3E%3C/svg%3E");
+    background-position:right;
+    background-repeat:no-repeat;
+    box-sizing: border-box;
+}
+
+.jcalendar_icon_up
+{
+    width:24px;
+    height:24px;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z' fill='%23000' /%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E");
+    background-position:right;
+    background-repeat:no-repeat;
+}
+
+.jcalendar_down
+{
+    width:24px;
+    height:24px;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z' fill='%23000' /%3E%3Cpath fill='none' d='M0 0h24v24H0V0z'/%3E%3C/svg%3E");
+    background-position:right;
+    background-repeat:no-repeat;
+}
+
+.jcalendar_left
+{
+    width:24px;
+    height:24px;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z' fill='%23000' /%3E%3Cpath fill='none' d='M0 0h24v24H0V0z'/%3E%3C/svg%3E");
+    background-position:right;
+    background-repeat:no-repeat;
+}
+
+.jcalendar_right
+{
+    width:24px;
+    height:24px;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z' fill='%23000' /%3E%3Cpath fill='none' d='M0 0h24v24H0V0z'/%3E%3C/svg%3E");
+    background-position:right;
+    background-repeat:no-repeat;
+}
+
+.jcalendar_done
+{
+    -webkit-box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.39);
+    -moz-box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.39);
+    box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.39);
+    background-color:#fff;
+}
+
+.jcalendar_update
+{
+    border:1px solid #ccc;
+    background-color:#fff;
+    border-radius:4px;
+    padding:5px;
+    width:100%;
+}
+
+.jcalendar_hour, .jcalendar_min
+{
+    width:50px;
+    display:inline-block;
+    border:1px solid #ddd;
+    border-radius:4px;
+    padding:4px;
+    text-align:center;
+}
+.jcalendar_min
+{
+    margin-left:2px;
+    margin-right:10px;
+}
+
+.jcalendar_prev, .jcalendar_next
+{
+    cursor:pointer;
+}
+
+.jcalendar_selected
+{
+    background-color:#eee;
+}
+
+.jcalendar_reset, .jcalendar_confirm
+{
+    text-transform:uppercase;
+    cursor:pointer;
+}
+
+.jcalendar_controls
+{
+    padding:15px;
+
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    vertical-align:middle;
+
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    -webkit-flex-flow: row wrap;
+    justify-content: space-between;
+    align-items:center;
+}
+
+.jcalendar_controls div
+{
+    font-weight:bold;
+}
+
+@media only screen and (max-device-width : 800px)
+{
+    .jcalendar
+    {
+        width:100%;
+        min-height:100%;
+        left:0px;
+        top:0px;
+    }
+
+    .jcalendar.jcalendar_focus .jcalendar_backdrop
+    {
+        display:block;
+    }
+
+    .jcalendar .jcalendar_container
+    {
+        width:100%;
+        position:absolute;
+        z-index:2000;
+        left:0px;
+        bottom:0px;
+    }
+}

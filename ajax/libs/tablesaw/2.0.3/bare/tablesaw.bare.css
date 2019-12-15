@@ -1,0 +1,731 @@
+/*! Tablesaw - v2.0.3 - 2016-05-02
+* https://github.com/filamentgroup/tablesaw
+* Copyright (c) 2016 Filament Group; Licensed MIT */
+
+table.tablesaw {
+  empty-cells: show;
+  max-width: 100%;
+  width: 100%;
+}
+
+.tablesaw {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/* Structure */
+
+.tablesaw {
+  border: 0;
+  padding: 0;
+}
+
+.tablesaw th,
+.tablesaw td {
+  box-sizing: border-box;
+  padding: .5em .7em;
+}
+
+.tablesaw thead tr:first-child th {
+  padding-top: .9em;
+  padding-bottom: .7em;
+}
+
+.tablesaw-enhanced .tablesaw-bar .btn {
+  border: 1px solid #ccc;
+  background: none;
+  background-color: #fafafa;
+  box-shadow: 0 1px 0 rgba(255,255,255,1);
+  color: #4a4a4a;
+  clear: both;
+  cursor: pointer;
+  display: block;
+  font: bold 20px/1 sans-serif;
+  margin: 0;
+  padding: .5em .85em .4em .85em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-transform: capitalize;
+  text-shadow: 0 1px 0 #fff;
+  width: 100%;
+  /* Theming */
+  background-image: -webkit-linear-gradient(top, rgba( 255,255,255,.1 ) 0%, rgba( 255,255,255,.1 ) 50%, rgba( 170,170,170,.1 ) 55%, rgba( 120,120,120,.15 ) 100%);
+  background-image: linear-gradient( top, rgba( 255,255,255,.1 ) 0%, rgba( 255,255,255,.1 ) 50%, rgba( 170,170,170,.1 ) 55%, rgba( 120,120,120,.15 ) 100% );
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  border-radius: .25em;
+}
+
+.tablesaw-enhanced .tablesaw-bar a.btn {
+  color: #1c95d4;
+}
+
+.tablesaw-enhanced .tablesaw-bar .btn:hover {
+  text-decoration: none;
+}
+
+/* Default radio/checkbox styling horizonal controlgroups. */
+
+.tablesaw-enhanced .tablesaw-bar .btn:active {
+  background-color: #ddd;
+  background-image: -webkit-linear-gradient(top, rgba( 100,100,100,.35 ) 0%, rgba( 255,255,255,0 ) 70%);
+  background-image: linear-gradient( top, rgba( 100,100,100,.35 ) 0%, rgba( 255,255,255,0 ) 70% );
+}
+
+.tablesaw-enhanced .tablesaw-bar .btn:hover,
+.tablesaw-enhanced .tablesaw-bar .btn:focus {
+  color: #208de3;
+  background-color: #fff;
+  outline: none;
+}
+
+.tablesaw-bar .btn:focus {
+  box-shadow: 0 0 .35em #4faeef !important;
+}
+
+.tablesaw-bar .btn-select select {
+  background: none;
+  border: none;
+  display: block;
+  position: absolute;
+  font-weight: inherit;
+  left: 0;
+  top: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  min-height: 1em;
+}
+
+.tablesaw-bar .btn-select select {
+  opacity: 0;
+  filter: alpha(opacity=0);
+  display: inline-block;
+  color: transparent;
+}
+
+.tablesaw-bar .btn select option {
+  background: #fff;
+  color: #000;
+  font-family: sans-serif;
+}
+
+.tablesaw-enhanced .tablesaw-bar .btn.btn-select {
+  color: #4d4d4d;
+  padding-right: 2.5em;
+  min-width: 7.25em;
+  text-align: left;
+  text-indent: 0;
+}
+
+.tablesaw-bar .btn.btn-small,
+.tablesaw-bar .btn.btn-micro {
+  display: inline-block;
+  width: auto;
+  height: auto;
+  position: relative;
+  top: 0;
+}
+
+.tablesaw-bar .btn.btn-small {
+  font-size: 1.0625em;
+  line-height: 19px;
+  padding: .3em 1em .3em 1em;
+}
+
+.tablesaw-bar .btn.btn-micro {
+  font-size: .8125em;
+  padding: .4em .7em .25em .7em;
+}
+
+.tablesaw-enhanced .tablesaw-bar .btn-select {
+  text-align: left;
+}
+
+.tablesaw-bar .btn-select:after {
+  background: #e5e5e5;
+  background: rgba(0,0,0,.1);
+  box-shadow: 0 2px 2px rgba(255,255,255,.25);
+  content: " ";
+  display: block;
+  position: absolute;
+}
+
+.tablesaw-bar .btn-select.btn-small,
+.tablesaw-bar .btn-select.btn-micro {
+  padding-right: 1.5em;
+}
+
+.tablesaw-bar .btn-select:after {
+  background: none;
+  background-repeat: no-repeat;
+  background-position: .25em .45em;
+  content: "\25bc";
+  font-size: .55em;
+  padding-top: 1.2em;
+  padding-left: 1em;
+  left: auto;
+  right: 0;
+  margin: 0;
+  top: 0;
+  bottom: 0;
+  width: 1.8em;
+}
+
+.tablesaw-bar .btn-select.btn-small:after,
+.tablesaw-bar .btn-select.btn-micro:after {
+  width: 1.2em;
+  font-size: .5em;
+  padding-top: 1em;
+  padding-right: .5em;
+  line-height: 1.65;
+  background: none;
+  box-shadow: none;
+  border-left-width: 0;
+}
+
+/* Column navigation buttons for swipe and columntoggle tables */
+
+.tablesaw-advance .btn {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  box-sizing: border-box;
+  text-shadow: 0 1px 0 #fff;
+  border-radius: .25em;
+}
+
+.tablesaw-advance .btn.btn-micro {
+  font-size: .8125em;
+  padding: .3em .7em .25em .7em;
+}
+
+.tablesaw-bar .tablesaw-advance a.tablesaw-nav-btn {
+  display: inline-block;
+  overflow: hidden;
+  width: 1.8em;
+  height: 1.8em;
+  background-position: 50% 50%;
+  margin-left: .5em;
+  position: relative;
+}
+
+.tablesaw-bar .tablesaw-advance a.tablesaw-nav-btn.left:before,
+.tablesaw-bar .tablesaw-advance a.tablesaw-nav-btn.right:before,
+.tablesaw-bar .tablesaw-advance a.tablesaw-nav-btn.down:before,
+.tablesaw-bar .tablesaw-advance a.tablesaw-nav-btn.up:before {
+  content: "\0020";
+  overflow: hidden;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.tablesaw-bar .tablesaw-advance a.tablesaw-nav-btn.down:before {
+  left: .5em;
+  top: .65em;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #808080;
+}
+
+.tablesaw-bar .tablesaw-advance a.tablesaw-nav-btn.up:before {
+  left: .5em;
+  top: .65em;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #808080;
+}
+
+.tablesaw-bar .tablesaw-advance a.tablesaw-nav-btn.left:before,
+.tablesaw-bar .tablesaw-advance a.tablesaw-nav-btn.right:before {
+  top: .45em;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+
+.tablesaw-bar .tablesaw-advance a.tablesaw-nav-btn.left:before {
+  left: .6em;
+  border-right: 5px solid #808080;
+}
+
+.tablesaw-bar .tablesaw-advance a.tablesaw-nav-btn.right:before {
+  left: .7em;
+  border-left: 5px solid #808080;
+}
+
+.tablesaw-advance a.tablesaw-nav-btn.disabled {
+  opacity: .25;
+  filter: alpha(opacity=25);
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Table Toolbar */
+
+.tablesaw-bar {
+  clear: both;
+  font-family: sans-serif;
+}
+
+.tablesaw-toolbar {
+  font-size: .875em;
+  float: left;
+}
+
+.tablesaw-toolbar label {
+  padding: .5em 0;
+  clear: both;
+  display: block;
+  color: #888;
+  margin-right: .5em;
+  text-transform: uppercase;
+}
+
+.tablesaw-bar .btn,
+.tablesaw-enhanced .tablesaw-bar .btn {
+  margin-top: .5em;
+  margin-bottom: .5em;
+}
+
+.tablesaw-bar .btn-select,
+.tablesaw-enhanced .tablesaw-bar .btn-select {
+  margin-bottom: 0;
+}
+
+.tablesaw-bar .tablesaw-toolbar .btn {
+  margin-left: .4em;
+  margin-top: 0;
+  text-transform: uppercase;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  font-family: sans-serif;
+  font-size: 1em;
+  padding-left: .3em;
+}
+
+.tablesaw-bar .tablesaw-toolbar .btn-select {
+  min-width: 0;
+}
+
+.tablesaw-bar .tablesaw-toolbar .btn-select:after {
+  padding-top: .9em;
+}
+
+.tablesaw-bar .tablesaw-toolbar select {
+  color: #888;
+  text-transform: none;
+  background: transparent;
+}
+
+.tablesaw-toolbar ~ table {
+  clear: both;
+}
+
+.tablesaw-toolbar .a11y-sm {
+  clip: rect(0 0 0 0);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+}
+
+@media (min-width: 24em) {
+  .tablesaw-toolbar .a11y-sm {
+    clip: none;
+    height: auto;
+    width: auto;
+    position: static;
+    overflow: visible;
+  }
+}
+
+/* Table rows have a gray bottom stroke by default */
+
+.tablesaw-stack tbody tr {
+  border-bottom: 1px solid #dfdfdf;
+}
+
+.tablesaw-stack td .tablesaw-cell-label,
+.tablesaw-stack th .tablesaw-cell-label {
+  display: none;
+}
+
+/* Mobile first styles: Begin with the stacked presentation at narrow widths */
+
+@media only all {
+  /* Show the table cells as a block level element */
+
+  .tablesaw-stack td,
+  .tablesaw-stack th {
+    text-align: left;
+    display: block;
+  }
+
+  .tablesaw-stack tr {
+    clear: both;
+    display: table-row;
+  }
+
+  /* Make the label elements a percentage width */
+
+  .tablesaw-stack td .tablesaw-cell-label,
+  .tablesaw-stack th .tablesaw-cell-label {
+    display: block;
+    padding: 0 .6em 0 0;
+    width: 30%;
+    display: inline-block;
+  }
+
+  /* For grouped headers, have a different style to visually separate the levels by classing the first label in each col group */
+
+  .tablesaw-stack th .tablesaw-cell-label-top,
+  .tablesaw-stack td .tablesaw-cell-label-top {
+    display: block;
+    padding: .4em 0;
+    margin: .4em 0;
+  }
+
+  .tablesaw-cell-label {
+    display: block;
+  }
+
+  /* Avoid double strokes when stacked */
+
+  .tablesaw-stack tbody th.group {
+    margin-top: -1px;
+  }
+
+  /* Avoid double strokes when stacked */
+
+  .tablesaw-stack th.group b.tablesaw-cell-label {
+    display: none !important;
+  }
+}
+
+@media (max-width: 39.9375em) {
+  .tablesaw-stack thead td,
+  .tablesaw-stack thead th {
+    display: none;
+  }
+
+  .tablesaw-stack tbody td,
+  .tablesaw-stack tbody th {
+    clear: left;
+    float: left;
+    width: 100%;
+  }
+
+  .tablesaw-cell-label {
+    vertical-align: top;
+  }
+
+  .tablesaw-cell-content {
+    max-width: 67%;
+    display: inline-block;
+  }
+
+  .tablesaw-stack td:empty,
+  .tablesaw-stack th:empty {
+    display: none;
+  }
+}
+
+/* Media query to show as a standard table at 560px (35em x 16px) or wider */
+
+@media (min-width: 40em) {
+  .tablesaw-stack tr {
+    display: table-row;
+  }
+
+  /* Show the table header rows */
+
+  .tablesaw-stack td,
+  .tablesaw-stack th,
+  .tablesaw-stack thead td,
+  .tablesaw-stack thead th {
+    display: table-cell;
+    margin: 0;
+  }
+
+  /* Hide the labels in each cell */
+
+  .tablesaw-stack td .tablesaw-cell-label,
+  .tablesaw-stack th .tablesaw-cell-label {
+    display: none !important;
+  }
+}
+
+.tablesaw-fix-persist {
+  table-layout: fixed;
+}
+
+@media only all {
+  /* Unchecked manually: Always hide */
+
+  .tablesaw-swipe th.tablesaw-cell-hidden,
+  .tablesaw-swipe td.tablesaw-cell-hidden {
+    display: none;
+  }
+}
+
+.btn.tablesaw-columntoggle-btn span {
+  text-indent: -9999px;
+  display: inline-block;
+}
+
+.tablesaw-columntoggle-btnwrap {
+  position: relative;
+  /* for dialog positioning */
+}
+
+.tablesaw-columntoggle-btnwrap .dialog-content {
+  padding: .5em;
+}
+
+.tablesaw-columntoggle tbody td {
+  line-height: 1.5;
+}
+
+/* Remove top/bottom margins around the fieldcontain on check list */
+
+.tablesaw-columntoggle-popup {
+  display: none;
+}
+
+.tablesaw-columntoggle-btnwrap.visible .tablesaw-columntoggle-popup {
+  display: block;
+  position: absolute;
+  top: 2em;
+  right: 0;
+  background-color: #fff;
+  padding: .5em .8em;
+  border: 1px solid #ccc;
+  box-shadow: 0 1px 2px #ccc;
+  border-radius: .2em;
+  z-index: 1;
+}
+
+.tablesaw-columntoggle-popup fieldset {
+  margin: 0;
+}
+
+/* Hide all prioritized columns by default */
+
+@media only all {
+  .tablesaw-columntoggle th.tablesaw-priority-6,
+  .tablesaw-columntoggle td.tablesaw-priority-6,
+  .tablesaw-columntoggle th.tablesaw-priority-5,
+  .tablesaw-columntoggle td.tablesaw-priority-5,
+  .tablesaw-columntoggle th.tablesaw-priority-4,
+  .tablesaw-columntoggle td.tablesaw-priority-4,
+  .tablesaw-columntoggle th.tablesaw-priority-3,
+  .tablesaw-columntoggle td.tablesaw-priority-3,
+  .tablesaw-columntoggle th.tablesaw-priority-2,
+  .tablesaw-columntoggle td.tablesaw-priority-2,
+  .tablesaw-columntoggle th.tablesaw-priority-1,
+  .tablesaw-columntoggle td.tablesaw-priority-1 {
+    display: none;
+  }
+}
+
+.tablesaw-columntoggle-btnwrap .dialog-content {
+  top: 0 !important;
+  right: 1em;
+  left: auto !important;
+  width: 12em;
+  max-width: 18em;
+  margin: -.5em auto 0;
+}
+
+.tablesaw-columntoggle-btnwrap .dialog-content:focus {
+  outline-style: none;
+}
+
+/* Preset breakpoints if "" class added to table */
+
+/* Show priority 1 at 320px (20em x 16px) */
+
+@media (min-width: 20em) {
+  .tablesaw-columntoggle th.tablesaw-priority-1,
+  .tablesaw-columntoggle td.tablesaw-priority-1 {
+    display: table-cell;
+  }
+}
+
+/* Show priority 2 at 480px (30em x 16px) */
+
+@media (min-width: 30em) {
+  .tablesaw-columntoggle th.tablesaw-priority-2,
+  .tablesaw-columntoggle td.tablesaw-priority-2 {
+    display: table-cell;
+  }
+}
+
+/* Show priority 3 at 640px (40em x 16px) */
+
+@media (min-width: 40em) {
+  .tablesaw-columntoggle th.tablesaw-priority-3,
+  .tablesaw-columntoggle td.tablesaw-priority-3 {
+    display: table-cell;
+  }
+
+  .tablesaw-columntoggle tbody td {
+    line-height: 2;
+  }
+}
+
+/* Show priority 4 at 800px (50em x 16px) */
+
+@media (min-width: 50em) {
+  .tablesaw-columntoggle th.tablesaw-priority-4,
+  .tablesaw-columntoggle td.tablesaw-priority-4 {
+    display: table-cell;
+  }
+}
+
+/* Show priority 5 at 960px (60em x 16px) */
+
+@media (min-width: 60em) {
+  .tablesaw-columntoggle th.tablesaw-priority-5,
+  .tablesaw-columntoggle td.tablesaw-priority-5 {
+    display: table-cell;
+  }
+}
+
+/* Show priority 6 at 1,120px (70em x 16px) */
+
+@media (min-width: 70em) {
+  .tablesaw-columntoggle th.tablesaw-priority-6,
+  .tablesaw-columntoggle td.tablesaw-priority-6 {
+    display: table-cell;
+  }
+}
+
+@media only all {
+  /* Unchecked manually: Always hide */
+
+  .tablesaw-columntoggle th.tablesaw-cell-hidden,
+  .tablesaw-columntoggle td.tablesaw-cell-hidden {
+    display: none;
+  }
+
+  /* Checked manually: Always show */
+
+  .tablesaw-columntoggle th.tablesaw-cell-visible,
+  .tablesaw-columntoggle td.tablesaw-cell-visible {
+    display: table-cell;
+  }
+}
+
+.tablesaw-columntoggle-popup .btn-group > label {
+  display: block;
+  padding: .2em 0;
+  white-space: nowrap;
+}
+
+.tablesaw-columntoggle-popup .btn-group > label input {
+  margin-right: .8em;
+}
+
+.tablesaw-sortable,
+.tablesaw-sortable thead,
+.tablesaw-sortable thead tr,
+.tablesaw-sortable thead tr th {
+  position: relative;
+}
+
+.tablesaw-sortable thead tr th {
+  padding-right: 1.6em;
+  vertical-align: top;
+}
+
+.tablesaw-sortable th.tablesaw-sortable-head,
+.tablesaw-sortable tr:first-child th.tablesaw-sortable-head {
+  padding: 0;
+}
+
+.tablesaw-sortable th.tablesaw-sortable-head button {
+  padding-top: .9em;
+  padding-bottom: .7em;
+  padding-left: .6em;
+  padding-right: 1.6em;
+}
+
+.tablesaw-sortable .tablesaw-sortable-head button {
+  min-width: 100%;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  text-align: left;
+  font: inherit;
+  text-transform: inherit;
+  position: relative;
+}
+
+.tablesaw-sortable .tablesaw-sortable-head.tablesaw-sortable-ascending button:after,
+.tablesaw-sortable .tablesaw-sortable-head.tablesaw-sortable-descending button:after {
+  width: 7px;
+  height: 10px;
+  content: "\0020";
+  position: absolute;
+  right: .5em;
+}
+
+.tablesaw-sortable .tablesaw-sortable-head.tablesaw-sortable-ascending button:after {
+  content: "\2191";
+}
+
+.tablesaw-sortable .tablesaw-sortable-head.tablesaw-sortable-descending button:after {
+  content: "\2193";
+}
+
+.tablesaw-sortable .not-applicable:after {
+  content: "--";
+  display: block;
+}
+
+.tablesaw-sortable .not-applicable span {
+  display: none;
+}
+
+.tablesaw-advance {
+  float: right;
+}
+
+.tablesaw-advance.minimap {
+  margin-right: .4em;
+}
+
+.tablesaw-advance-dots {
+  float: left;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tablesaw-advance-dots li {
+  display: table-cell;
+  margin: 0;
+  padding: .4em .2em;
+}
+
+.tablesaw-advance-dots li i {
+  width: .25em;
+  height: .25em;
+  background: #555;
+  border-radius: 100%;
+  display: inline-block;
+}
+
+.tablesaw-advance-dots-hide {
+  opacity: .25;
+  filter: alpha(opacity=25);
+  cursor: default;
+  pointer-events: none;
+}

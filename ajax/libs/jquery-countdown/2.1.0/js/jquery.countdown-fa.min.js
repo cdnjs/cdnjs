@@ -1,0 +1,1 @@
+!function(t){"use strict";t.countdown.regionalOptions.fa={labels:["سال","ماه","هفته","روز","ساعت","دقیقه","ثانیه"],labels1:["سال","ماه","هفته","روز","ساعت","دقیقه","ثانیه"],compactLabels:["س","م","ه","ر"],whichLabels:null,digits:["۰","۱","۲","۳","۴","۵","۶","۷","۸","۹"],timeSeparator:":",isRTL:!0},t.countdown.setDefaults(t.countdown.regionalOptions.fa)}(jQuery);

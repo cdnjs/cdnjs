@@ -1,0 +1,3 @@
+!function(n){var e="mmenu",u="de";n[e].i18n({Menu:"Menü"},u)}(jQuery);
+!function(e){var n="mmenu",u="de";e[n].i18n({"Close menu":"Menü schließen","Close submenu":"Untermenü schließen","Open submenu":"Untermenü öffnen","Toggle submenu":"Untermenü wechseln"},u)}(jQuery);
+!function(e){var n="mmenu",u="de";e[n].i18n({Search:"Suche","No results found.":"Keine Ergebnisse gefunden.",cancel:"beenden"},u)}(jQuery);

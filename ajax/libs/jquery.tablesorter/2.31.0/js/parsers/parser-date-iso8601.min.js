@@ -1,0 +1,4 @@
+(function(factory){if (typeof define === 'function' && define.amd){define(['jquery'], factory);} else if (typeof module === 'object' && typeof module.exports === 'object'){module.exports = factory(require('jquery'));} else {factory(jQuery);}}(function(jQuery){
+
+/*! Parser: ISO-8601 date - updated 10/26/2014 (v2.18.0) */
+!function(e){"use strict";var s=/^([0-9]{4})(-([0-9]{2})(-([0-9]{2})(T([0-9]{2}):([0-9]{2})(:([0-9]{2})(\.([0-9]+))?)?(Z|(([-+])([0-9]{2}):([0-9]{2})))?)?)?)?$/;e.tablesorter.addParser({id:"iso8601date",is:function(e){return!!e&&e.match(s)},format:function(e){var t=e?e.match(s):e;if(t){var r=new Date(t[1],0,1);return t[3]&&r.setMonth(t[3]-1),t[5]&&r.setDate(t[5]),t[7]&&r.setHours(t[7]),t[8]&&r.setMinutes(t[8]),t[10]&&r.setSeconds(t[10]),t[12]&&r.setMilliseconds(1e3*Number("0."+t[12])),r.getTime()}return e},type:"numeric"})}(jQuery);return jQuery;}));

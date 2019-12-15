@@ -1,0 +1,3 @@
+!function(n){var u="mmenu",e="nl";n[u].i18n({Menu:"Menu"},e)}(jQuery);
+!function(e){var n="mmenu",u="nl";e[n].i18n({"Close menu":"Menu sluiten","Close submenu":"Submenu sluiten","Open submenu":"Submenu openen","Toggle submenu":"Submenu wisselen"},u)}(jQuery);
+!function(e){var n="mmenu",u="nl";e[n].i18n({Search:"Zoeken","No results found.":"Geen resultaten gevonden.",cancel:"annuleren"},u)}(jQuery);

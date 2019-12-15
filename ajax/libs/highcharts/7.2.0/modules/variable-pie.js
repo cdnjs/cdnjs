@@ -1,0 +1,17 @@
+/*
+ Highcharts JS v7.2.0 (2019-09-03)
+
+ Variable Pie module for Highcharts
+
+ (c) 2010-2019 Grzegorz Blachliski
+
+ License: www.highcharts.com/license
+*/
+(function(a){"object"===typeof module&&module.exports?(a["default"]=a,module.exports=a):"function"===typeof define&&define.amd?define("highcharts/modules/variable-pie",["highcharts"],function(e){a(e);a.Highcharts=e;return a}):a("undefined"!==typeof Highcharts?Highcharts:void 0)})(function(a){function e(a,t,e,p){a.hasOwnProperty(t)||(a[t]=p.apply(null,e))}a=a?a._modules:{};e(a,"modules/variable-pie.src.js",[a["parts/Globals.js"]],function(a){var e=a.pick,w=a.fireEvent,p=a.arrayMin,x=a.arrayMax,y=a.seriesType,
+z=a.seriesTypes.pie.prototype;y("variablepie","pie",{minPointSize:"10%",maxPointSize:"100%",zMin:void 0,zMax:void 0,sizeBy:"area",tooltip:{pointFormat:'<span style="color:{point.color}">\u25cf</span> {series.name}<br/>Value: {point.y}<br/>Size: {point.z}<br/>'}},{pointArrayMap:["y","z"],parallelArrays:["x","y","z"],redraw:function(){this.center=null;z.redraw.call(this,arguments)},zValEval:function(b){return"number"!==typeof b||isNaN(b)?null:!0},calculateExtremes:function(){var b=this.chart,a=this.options;
+var c=this.zData;var m=Math.min(b.plotWidth,b.plotHeight)-2*(a.slicedOffset||0),h={};b=this.center||this.getCenter();["minPointSize","maxPointSize"].forEach(function(b){var c=a[b],e=/%$/.test(c);c=parseInt(c,10);h[b]=e?m*c/100:2*c});this.minPxSize=b[3]+h.minPointSize;this.maxPxSize=Math.max(Math.min(b[2],h.maxPointSize),b[3]+h.minPointSize);c.length&&(b=e(a.zMin,p(c.filter(this.zValEval))),c=e(a.zMax,x(c.filter(this.zValEval))),this.getRadii(b,c,this.minPxSize,this.maxPxSize))},getRadii:function(b,
+a,c,e){var h=0,l=this.zData,q=l.length,k=[],m="radius"!==this.options.sizeBy,u=a-b;for(h;h<q;h++){var g=this.zValEval(l[h])?l[h]:b;g<=b?g=c/2:g>=a?g=e/2:(g=0<u?(g-b)/u:.5,m&&(g=Math.sqrt(g)),g=Math.ceil(c+g*(e-c))/2);k.push(g)}this.radii=k},translate:function(b){this.generatePoints();var a=0,c=this.options,m=c.slicedOffset,h=m+(c.borderWidth||0),l=c.startAngle||0,q=Math.PI/180*(l-90),k=Math.PI/180*(e(c.endAngle,l+360)-90);l=k-q;var p=this.points,u=c.dataLabels.distance;c=c.ignoreHiddenPoint;var g=
+p.length;this.startAngleRad=q;this.endAngleRad=k;this.calculateExtremes();b||(this.center=b=this.getCenter());for(k=0;k<g;k++){var f=p[k];var n=this.radii[k];f.labelDistance=e(f.options.dataLabels&&f.options.dataLabels.distance,u);this.maxLabelDistance=Math.max(this.maxLabelDistance||0,f.labelDistance);var d=q+a*l;if(!c||f.visible)a+=f.percentage/100;var r=q+a*l;f.shapeType="arc";f.shapeArgs={x:b[0],y:b[1],r:n,innerR:b[3]/2,start:Math.round(1E3*d)/1E3,end:Math.round(1E3*r)/1E3};d=(r+d)/2;d>1.5*Math.PI?
+d-=2*Math.PI:d<-Math.PI/2&&(d+=2*Math.PI);f.slicedTranslation={translateX:Math.round(Math.cos(d)*m),translateY:Math.round(Math.sin(d)*m)};var v=Math.cos(d)*b[2]/2;var t=Math.sin(d)*b[2]/2;r=Math.cos(d)*n;n*=Math.sin(d);f.tooltipPos=[b[0]+.7*v,b[1]+.7*t];f.half=d<-Math.PI/2||d>Math.PI/2?1:0;f.angle=d;v=Math.min(h,f.labelDistance/5);f.labelPosition={natural:{x:b[0]+r+Math.cos(d)*f.labelDistance,y:b[1]+n+Math.sin(d)*f.labelDistance},"final":{},alignment:f.half?"right":"left",connectorPosition:{breakAt:{x:b[0]+
+r+Math.cos(d)*v,y:b[1]+n+Math.sin(d)*v},touchingSliceAt:{x:b[0]+r,y:b[1]+n}}}}w(this,"afterTranslate")}})});e(a,"masters/modules/variable-pie.src.js",[],function(){})});
+//# sourceMappingURL=variable-pie.js.map
