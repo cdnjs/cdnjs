@@ -144,7 +144,7 @@ CDNJS now supports adding a new library by a single `package.json`: you just nee
 * Enter `<LIBRARY_NAME>/package.json`, compose a valid [`package.json`] for the library being added, enter commit message and click "Commit new file".
 * Submit a pull request.
 
-Note that you should have a `filename` to point to the main file of a lib, if that file is not minified, please still use `filename.min.js` or `filename.min.css` structure naming, we'll do the minify job.
+Note that you should have `filename` point to the main file of the lib.
 
 ### f. pre-flight checks
 
