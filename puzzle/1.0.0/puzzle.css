@@ -1,0 +1,143 @@
+*{
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+/* *是通配符，给所有的元素去掉默认样式，*/
+/*因为有的浏览器会默认加上一些样式，这可能会给布局带来问题*/
+
+body{
+	width: 100%;
+	height: 100%;
+}
+/*给body设置100%的高度和宽度，这样就会根据浏览器屏幕大小自动适配*/
+
+#container{
+	position: relative;
+	width: 620px;
+	height: 450px;
+	margin: 0 auto;
+	margin-top: 100px;
+	border-radius: 1px;
+}
+/* 这是包裹所有元素的DIV，给他设置620px的宽和450px的高，*/
+/*这个大小可以设置为更大，但是不能小，至少要能包含里面所有的元素 */
+#game{
+	position: absolute;
+	width: 450px;
+	height: 450px;
+	border-radius: 5px;
+	display: inline-block;
+	background-color: #ffe171;
+	box-shadow: 0 0 10px #ffe171;
+}
+/* 这是游戏区的DIV，这个大小是计算出来的，取决于你的小方块的大小。*/
+/*这里我们设置小方块的大小为150px 150px，所以这个大小是150px*3，为450px */
+
+#game div{
+	position: absolute;
+	width: 149px;
+	height: 149px;
+	box-shadow: 1px 1px 2px #777;
+	background-color: #20a6fa;
+	color: white;
+	text-align: center;
+	font-size: 150px;
+	line-height: 150px;
+	cursor: pointer;
+	-webkit-transition: 0.3s;/*浏览器前缀，兼容其他浏览器 chrome*/
+	-moz-transition: 0.3s;/*firefox*/
+	-ms-transition: 0.3s;/*ie*/
+	-o-transition: 0.3s;/*opera*/
+	transition: 0.3s;
+}
+/* 这就是小方块的大小了，定位为绝对定位，这样改变位置不会影响其他元素的位置。*/
+/*宽高都是149px。注意了，我们还设置了box-shadow:1px 1px 2px #777;它还有边框阴影，*/
+/*所以149px 加上边框1px，它的总宽度是150px*/
+/*下面的transition：0.3s是设置过渡时间，*/
+/*这是css3的属性，它会让属性改变呈现过渡动画，*/
+/*所以当我们改变方块的位置时，它会有一个动画，我们不必自己编写动画函数，这回让你疯狂*/
+
+#game div:hover{
+	color: #ffe171;
+}
+/*给方块设置鼠标悬停动画，当鼠标悬停在元素上面时，会用这里的属性替换上面的属性，*/
+/*移开后又会变为原来的，这里我们是把字体颜色改变*/
+
+#control{
+	width: 150px;
+	height: 450px;
+	display: inline-block;
+	float: right;
+}
+/*控制区，display:inline-block会让元素呈现块状元素的特性,使得可以改变大小*/
+/*同时也会具有行内元素的特性，使得不会占据一行空间，*/
+/*float:right让元素浮动到右边*/
+
+#control rowspan{
+	height: 25px;
+	font-size: 20px;
+	color: #222;
+	margin-top: 10px;
+}
+/*设置控制区按钮的共同样式*/
+
+#start{
+	display: inline-block;
+	font-size: 28px;
+	width: 100px;
+	height: 28px;
+	background-color: #20a6fa;
+	color: #ffe171;
+	text-shadow: 1px 1px 2px #ffe171;/*字体阴影*/
+	border-radius: 5px;/*圆角属性*/
+	box-shadow: 2px 2px 5px #4c98f5;/*盒子阴影*/
+	text-align: center;
+	cursor: pointer;
+}
+/*给start按钮设置属性。*/
+/*cursor:pointer属性让鼠标移到元素上面时会显示不同的鼠标形状，pointer是手型*/
+
+#reset{
+	display: inline-block;
+	font-size: 28px;
+	width: 100px;
+	height: 28px;
+	background-color: #20a6fa;
+	color: #ffe171;
+	text-shadow: 1px 1px 2px #ffe171;
+	border-radius: 5px;
+	box-shadow: 2px 2px 5px #4c98f5;
+	text-align: center;
+	cursor: pointer;
+}
+/*给Reset按钮设置属性*/
+
+#d1{
+	left: 0px;
+}
+#d2{
+	left: 150px;
+}
+#d3{
+	left: 300px;
+}
+#d4{
+	top: 150px;
+}
+#d5{
+	top: 150px;
+	left: 150px;
+}
+#d6{
+	top: 150px;
+	left: 300px;
+}
+#d7{
+	top: 300px;
+}
+#d8{
+	top: 300px;
+	left: 150px;
+}
+/*预先给每个小方块按照顺序排好位置*/
