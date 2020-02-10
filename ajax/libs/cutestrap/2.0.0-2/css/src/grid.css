@@ -1,0 +1,68 @@
+/*
+
+Grid
+
+A simple grid with automatic columns
+
+Markup:
+<div class="grid {{modifier_class}}">
+    <div>Column</div>
+    <div>Column</div>
+    <div>Column</div>
+    <div>Column</div>
+    <div>Column</div>
+    <div>Column</div>
+</div>
+
+.-medium - start at 45rem
+.-large - start at 80rem
+
+Styleguide 5.0
+
+*/
+
+.grid {
+    --columns: auto-fit;
+
+    display: grid;
+    column-gap: var(--rhythm);
+    grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+}
+
+@media (max-width: 45rem) {
+    .grid.-medium {
+        display: block;
+    }
+}
+
+@media (max-width: 80rem) {
+    .grid.-large {
+        display: block;
+    }
+}
+
+/*
+
+Columns
+
+Manually set column widths (Note: the syntax is passing a custom property with
+a number value. KSS Docs only support modified classes, so ignore the term
+[modifier class] and the dot before the number in the examples below).
+
+Markup:
+<div class="grid" style="--columns: {{modifier_class}}">
+    <div>Column</div>
+    <div>Column</div>
+    <div>Column</div>
+    <div>Column</div>
+    <div>Column</div>
+    <div>Column</div>
+</div>
+
+.2 - Two columns
+.3 - Three columns
+.4 - Four columns
+
+Styleguide 5.1
+
+*/

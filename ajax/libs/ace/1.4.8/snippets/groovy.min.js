@@ -1,0 +1,1 @@
+define("ace/snippets/groovy",["require","exports","module"],function(e,o,t){"use strict";o.snippetText=void 0,o.scope="groovy"}),window.require(["ace/snippets/groovy"],function(e){"object"==typeof module&&"object"==typeof exports&&module&&(module.exports=e)});

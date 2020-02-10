@@ -1,0 +1,1 @@
+define("ace/snippets/fsharp",["require","exports","module"],function(e,o,p){"use strict";o.snippetText=void 0,o.scope="fsharp"}),window.require(["ace/snippets/fsharp"],function(e){"object"==typeof module&&"object"==typeof exports&&module&&(module.exports=e)});

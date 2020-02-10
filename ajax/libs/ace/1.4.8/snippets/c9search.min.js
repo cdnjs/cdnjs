@@ -1,0 +1,1 @@
+define("ace/snippets/c9search",["require","exports","module"],function(e,o,t){"use strict";o.snippetText=void 0,o.scope="c9search"}),window.require(["ace/snippets/c9search"],function(e){"object"==typeof module&&"object"==typeof exports&&module&&(module.exports=e)});

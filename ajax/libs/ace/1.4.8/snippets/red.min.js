@@ -1,0 +1,1 @@
+define("ace/snippets/red",["require","exports","module"],function(e,o,t){"use strict";o.snippetText=" ",o.scope="red"}),window.require(["ace/snippets/red"],function(e){"object"==typeof module&&"object"==typeof exports&&module&&(module.exports=e)});

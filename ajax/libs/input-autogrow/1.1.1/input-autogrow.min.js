@@ -1,0 +1,7 @@
+/**
+ * input-autogrow
+ * @version v1.1.1
+ * @link https://github.com/westonganger/input-autogrow
+ * @license MIT
+ */
+!function(d){var s=("oninput"in document.createElement("input")?"input":"keydown")+".autogrow change.autogrow autogrow";d.fn.inputAutogrow=function(i){return"destroy"===i?this.each(function(){if(d(this).data("autogrow-span")){var t=d(this);t.off(s),t.data("autogrow-span").remove(),t.data("autogrow-span",""),t.data("original-width","")}}):this.each(function(){var n=d(this);if(n.data("original-width"))var t=n.data("original-width");else{t=n.width();n.data("original-width",t)}var o={maxWidth:n.parent().width(),minWidth:t,trailingSpace:0};i&&function(t){return t===Object(t)}(i)&&(o=d.extend(o,i));function a(t){if(e!==(e=n.val())||"autogrow"===t.type){null==e&&(e=n.attr("placeholder")||""),r.html(e.replace(/&/g,"&amp;").replace(/\s/g,"&nbsp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"));var a=r.width()+parseInt(n.css("fontSize"))+o.trailingSpace,i="function"==typeof o.maxWidth?o.maxWidth():o.maxWidth;i<a?a=i:a<o.minWidth&&(a=o.minWidth),a!=n.width()&&n.width(a)}}var e=null,r=d("<span/>").css({position:"absolute",top:-9999,left:-9999,width:"auto",fontSize:n.css("fontSize"),fontFamily:n.css("fontFamily"),fontWeight:n.css("fontWeight"),letterSpacing:n.css("letterSpacing"),textTransform:n.css("textTransform"),whiteSpace:"nowrap",ariaHidden:!0}).appendTo("body");n.data("autogrow-span",r),n.off(s).on(s,a),a()}),this}}(window.jQuery||window.Zepto||window.$);

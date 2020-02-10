@@ -1,0 +1,1 @@
+define("ace/snippets/forth",["require","exports","module"],function(e,o,t){"use strict";o.snippetText=void 0,o.scope="forth"}),window.require(["ace/snippets/forth"],function(e){"object"==typeof module&&"object"==typeof exports&&module&&(module.exports=e)});

@@ -1,0 +1,1 @@
+define("ace/snippets/dot",["require","exports","module"],function(e,o,t){"use strict";o.snippetText=void 0,o.scope="dot"}),window.require(["ace/snippets/dot"],function(e){"object"==typeof module&&"object"==typeof exports&&module&&(module.exports=e)});

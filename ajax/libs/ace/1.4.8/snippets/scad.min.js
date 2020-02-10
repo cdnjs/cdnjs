@@ -1,0 +1,1 @@
+define("ace/snippets/scad",["require","exports","module"],function(e,o,t){"use strict";o.snippetText=void 0,o.scope="scad"}),window.require(["ace/snippets/scad"],function(e){"object"==typeof module&&"object"==typeof exports&&module&&(module.exports=e)});

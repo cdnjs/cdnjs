@@ -1,0 +1,1 @@
+define("ace/snippets/sjs",["require","exports","module"],function(e,s,o){"use strict";s.snippetText=void 0,s.scope="sjs"}),window.require(["ace/snippets/sjs"],function(e){"object"==typeof module&&"object"==typeof exports&&module&&(module.exports=e)});

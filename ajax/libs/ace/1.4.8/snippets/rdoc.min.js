@@ -1,0 +1,1 @@
+define("ace/snippets/rdoc",["require","exports","module"],function(e,o,t){"use strict";o.snippetText=void 0,o.scope="rdoc"}),window.require(["ace/snippets/rdoc"],function(e){"object"==typeof module&&"object"==typeof exports&&module&&(module.exports=e)});

@@ -1,0 +1,1 @@
+define("ace/snippets/html_elixir",["require","exports","module"],function(e,t,i){"use strict";t.snippetText=void 0,t.scope="html_elixir"}),window.require(["ace/snippets/html_elixir"],function(e){"object"==typeof module&&"object"==typeof exports&&module&&(module.exports=e)});
