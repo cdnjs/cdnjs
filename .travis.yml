@@ -1,0 +1,7 @@
+language: bash
+
+before_script:
+    - curl https://github.com/cdnjs/tools/releases/download/v1.0.3/checker
+
+script:
+    - git show --name-only --pretty="" $TRAVIS_COMMIT | awk -F/ '{ print $3 }' | xargs ./checker lint
