@@ -1,0 +1,1 @@
+define("ace/snippets/perl6",["require","exports","module"],function(e,o,p){"use strict";o.snippetText=void 0,o.scope="perl6"}),window.require(["ace/snippets/perl6"],function(e){"object"==typeof module&&"object"==typeof exports&&module&&(module.exports=e)});

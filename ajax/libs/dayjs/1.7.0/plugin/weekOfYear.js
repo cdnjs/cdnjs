@@ -1,0 +1,1 @@
+!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):e.dayjs_plugin_weekOfYear=t()}(this,function(){"use strict";return function(e,t){t.prototype.week=function(){var e=this.$W||7,t=new Date(this.$y,this.$M,this.$D-e+4),n=new Date(Date.UTC(this.$y,0,1));return Math.ceil(((t-n)/864e5+1)/7)}}});

@@ -1,0 +1,17 @@
+/*
+ Highcharts JS v8.0.0 (2019-12-10)
+
+ Dependency wheel module
+
+ (c) 2010-2018 Torstein Honsi
+
+ License: www.highcharts.com/license
+*/
+(function(a){"object"===typeof module&&module.exports?(a["default"]=a,module.exports=a):"function"===typeof define&&define.amd?define("highcharts/modules/dependency-wheel",["highcharts","highcharts/modules/sankey"],function(e){a(e);a.Highcharts=e;return a}):a("undefined"!==typeof Highcharts?Highcharts:void 0)})(function(a){function e(a,e,n,g){a.hasOwnProperty(e)||(a[e]=g.apply(null,n))}a=a?a._modules:{};e(a,"modules/dependency-wheel.src.js",[a["parts/Globals.js"],a["parts/Utilities.js"]],function(a,
+e){var n=e.animObject,g=a.seriesTypes.sankey.prototype;a.seriesType("dependencywheel","sankey",{center:[null,null],curveFactor:.6,startAngle:0},{orderNodes:!1,getCenter:a.seriesTypes.pie.prototype.getCenter,createNodeColumns:function(){var a=[this.createNodeColumn()];this.nodes.forEach(function(c){c.column=0;a[0].push(c)});return a},getNodePadding:function(){return this.options.nodePadding/Math.PI},createNode:function(a){var c=g.createNode.call(this,a);c.index=this.nodes.length-1;c.getSum=function(){return c.linksFrom.concat(c.linksTo).reduce(function(a,
+c){return a+c.weight},0)};c.offset=function(a){function l(a){return a.fromNode===c?a.toNode:a.fromNode}var p=0,b,h=c.linksFrom.concat(c.linksTo);h.sort(function(a,c){return l(a).index-l(c).index});for(b=0;b<h.length;b++)if(l(h[b]).index>c.index){h=h.slice(0,b).reverse().concat(h.slice(b).reverse());var f=!0;break}f||h.reverse();for(b=0;b<h.length;b++){if(h[b]===a)return p;p+=h[b].weight}};return c},translate:function(){var e=this.options,c=2*Math.PI/(this.chart.plotHeight+this.getNodePadding()),f=
+this.getCenter(),l=(e.startAngle-90)*a.deg2rad;g.translate.call(this);this.nodeColumns[0].forEach(function(a){var b=a.shapeArgs,h=f[0],p=f[1],g=f[2]/2,k=g-e.nodeWidth,m=l+c*b.y;b=l+c*(b.y+b.height);a.angle=m+(b-m)/2;a.shapeType="arc";a.shapeArgs={x:h,y:p,r:g,innerR:k,start:m,end:b};a.dlBox={x:h+Math.cos((m+b)/2)*(g+k)/2,y:p+Math.sin((m+b)/2)*(g+k)/2,width:1,height:1};a.linksFrom.forEach(function(a){var b,d=a.linkBase.map(function(d,f){d*=c;var g=Math.cos(l+d)*(k+1),m=Math.sin(l+d)*(k+1),n=e.curveFactor;
+b=Math.abs(a.linkBase[3-f]*c-d);b>Math.PI&&(b=2*Math.PI-b);b*=k;b<k&&(n*=b/k);return{x:h+g,y:p+m,cpX:h+(1-n)*g,cpY:p+(1-n)*m}});a.shapeArgs={d:["M",d[0].x,d[0].y,"A",k,k,0,0,1,d[1].x,d[1].y,"C",d[1].cpX,d[1].cpY,d[2].cpX,d[2].cpY,d[2].x,d[2].y,"A",k,k,0,0,1,d[3].x,d[3].y,"C",d[3].cpX,d[3].cpY,d[0].cpX,d[0].cpY,d[0].x,d[0].y]}})})},animate:function(a){if(!a){var c=n(this.options.animation).duration/2/this.nodes.length;this.nodes.forEach(function(a,l){var f=a.graphic;f&&(f.attr({opacity:0}),setTimeout(function(){f.animate({opacity:1},
+{duration:c})},c*l))},this);this.points.forEach(function(a){var c=a.graphic;!a.isNode&&c&&c.attr({opacity:0}).animate({opacity:1},this.options.animation)},this);this.animate=null}}},{setState:a.NodesMixin.setNodeState,getDataLabelPath:function(a){var c=this.series.chart.renderer,f=this.shapeArgs,e=0>this.angle||this.angle>Math.PI,g=f.start,b=f.end;this.dataLabelPath||(this.dataLabelPath=c.arc({open:!0}).add(a));this.dataLabelPath.attr({x:f.x,y:f.y,r:f.r+(this.dataLabel.options.distance||0),start:e?
+g:b,end:e?b:g,clockwise:+e});return this.dataLabelPath},isValid:function(){return!0}});""});e(a,"masters/modules/dependency-wheel.src.js",[],function(){})});
+//# sourceMappingURL=dependency-wheel.js.map

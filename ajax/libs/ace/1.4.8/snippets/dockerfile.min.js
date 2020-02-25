@@ -1,0 +1,1 @@
+define("ace/snippets/dockerfile",["require","exports","module"],function(e,o,t){"use strict";o.snippetText=void 0,o.scope="dockerfile"}),window.require(["ace/snippets/dockerfile"],function(e){"object"==typeof module&&"object"==typeof exports&&module&&(module.exports=e)});

@@ -1,0 +1,14 @@
+/** @license React v16.12.0
+ * react-dom-unstable-flight-server.browser.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+'use strict';(function(k,g){"object"===typeof exports&&"undefined"!==typeof module?module.exports=g(require("react-dom/server")):"function"===typeof define&&define.amd?define(["react-dom/server"],g):k.ReactFlightDOMServer=g(k.ReactDOMServer)})(this,function(k){function g(a,b){var c=[],d={destination:b,nextChunkId:0,pendingChunks:0,pingedSegments:c,completedJSONChunks:[],completedErrorChunks:[],flowing:!1,toJSON:function(a,b){return z(d,b)}};d.pendingChunks++;a=p(d,a);c.push(a);return d}function q(a){var b=
+a.type,c=a.props;if("function"===typeof b)return b(c);if("string"===typeof b)return k.renderToStaticMarkup(a);throw Error("Unsupported type.");}function p(a,b){var c={id:a.nextChunkId++,model:b,ping:function(){var b=a.pingedSegments;b.push(c);1===b.length&&r(a)}};return c}function z(a,b){if("string"===typeof b)return a="$"===b[0]?"$"+b:b,a;for(;"object"===typeof b&&null!==b&&b.$$typeof===t;){var c=b;try{b=q(c)}catch(d){if("object"===typeof d&&null!==d&&"function"===typeof d.then)return a.pendingChunks++,
+a=p(a,c),b=a.ping,d.then(b,b),"$"+a.id.toString(16);a.pendingChunks++;b=a.nextChunkId++;u(a,b,d);return"$"+b.toString(16)}}return b}function u(a,b,c){var d="";try{if(c instanceof Error){var e=""+c.message;d=""+c.stack}else e="Error: "+c}catch(f){e="An error occurred but serializing the error message failed."}c={message:e,stack:d};b="E"+b.toString(16)+":"+v(c)+"\n";a.completedErrorChunks.push(w.encode(b))}function r(a){var b=a.pingedSegments;a.pingedSegments=[];for(var c=0;c<b.length;c++){var d=void 0,
+e=a,f=b[c],l=f.model;try{for(;"object"===typeof l&&null!==l&&l.$$typeof===t;){var g=l;f.model=g;l=q(g)}var h=v(l,e.toJSON),k=f.id;d=0===k?h+"\n":"J"+k.toString(16)+":"+h+"\n";e.completedJSONChunks.push(w.encode(d))}catch(m){"object"===typeof m&&null!==m&&"function"===typeof m.then?(d=f.ping,m.then(d,d)):u(e,f.id,m)}}a.flowing&&x(a)}function x(a){if(!n){n=!0;var b=a.destination;try{for(var c=a.completedJSONChunks,d=0;d<c.length;d++){a.pendingChunks--;var e=b;e.enqueue(c[d]);if(!(0<e.desiredSize)){a.flowing=
+!1;d++;break}}c.splice(0,d);var f=a.completedErrorChunks;for(d=0;d<f.length;d++)if(a.pendingChunks--,c=b,c.enqueue(f[d]),!(0<c.desiredSize)){a.flowing=!1;d++;break}f.splice(0,d)}finally{n=!1}0===a.pendingChunks&&b.close()}}var w=new TextEncoder,t="function"===typeof Symbol&&Symbol.for?Symbol.for("react.element"):60103,v=JSON.stringify,n=!1,h={renderToReadableStream:function(a){var b;return new ReadableStream({start:function(c){c=b=g(a,c);c.flowing=!0;r(c)},pull:function(a){a=b;a.flowing=!0;x(a)},
+cancel:function(a){}})}},y={default:h};h=y&&h||y;return h.default||h});

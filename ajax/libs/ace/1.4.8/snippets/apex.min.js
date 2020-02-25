@@ -1,0 +1,1 @@
+define("ace/snippets/apex",["require","exports","module"],function(e,o,p){"use strict";o.snippetText=void 0,o.scope="apex"}),window.require(["ace/snippets/apex"],function(e){"object"==typeof module&&"object"==typeof exports&&module&&(module.exports=e)});

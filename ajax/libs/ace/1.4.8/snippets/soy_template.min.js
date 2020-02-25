@@ -1,0 +1,1 @@
+define("ace/snippets/soy_template",["require","exports","module"],function(e,t,o){"use strict";t.snippetText=void 0,t.scope="soy_template"}),window.require(["ace/snippets/soy_template"],function(e){"object"==typeof module&&"object"==typeof exports&&module&&(module.exports=e)});

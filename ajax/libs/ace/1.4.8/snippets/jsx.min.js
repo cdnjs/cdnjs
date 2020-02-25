@@ -1,0 +1,1 @@
+define("ace/snippets/jsx",["require","exports","module"],function(e,o,t){"use strict";o.snippetText=void 0,o.scope="jsx"}),window.require(["ace/snippets/jsx"],function(e){"object"==typeof module&&"object"==typeof exports&&module&&(module.exports=e)});

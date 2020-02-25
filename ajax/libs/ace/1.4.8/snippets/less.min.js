@@ -1,0 +1,1 @@
+define("ace/snippets/less",["require","exports","module"],function(e,s,o){"use strict";s.snippetText=void 0,s.scope="less"}),window.require(["ace/snippets/less"],function(e){"object"==typeof module&&"object"==typeof exports&&module&&(module.exports=e)});

@@ -1,0 +1,133 @@
+/*
+
+Buttons
+
+Buttons and their variations
+
+Markup:
+<button class="button {{modifier_class}}">Button</button>
+
+.-secondary - A button with secondary colors
+.-outlined - An outlined button
+.-link - A button that looks like a link
+.-block - Block level button
+.-large - A large button
+.-small - A small button
+.-small.-outlined - A small, outlined button
+
+Styleguide 3.0
+
+*/
+
+.button {
+    --border-color: transparent;
+    --border-color-hover: transparent;
+    --border-thickness: var(--rhythm-twelfth);
+    --background-color: var(--color-primary);
+    --background-color-hover: var(--color-primary-shade1);
+    --text-color: var(--color-neutral-tint4);
+    --text-color-hover: var(--color-neutral-tint4);
+
+    align-items: center;
+    align-content: center;
+    background-color: var(--background-color);
+    border: var(--border-thickness) solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-sizing: border-box;
+    color: var(--text-color);
+    cursor: pointer;
+    display: inline-block;
+    font-size: var(--font-size);
+    justify-content: center;
+    line-height: var(--rhythm);
+    max-width: 100%;
+    min-height: calc(2 * var(--rhythm));
+    padding: calc(5 * var(--rhythm-twelfth)) var(--rhythm);
+    text-align: center;
+    transition-duration: 250ms;
+    transition-property: all;
+    user-select: none;
+    width: auto;
+    vertical-align: middle;
+}
+
+.button::-moz-focus-inner {
+    border: 0;
+}
+
+.button:link,
+.button:visited {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.button:focus,
+.button:hover {
+    background-color: var(--background-color-hover);
+    border-color: var(--border-color-hover);
+    color: var(--text-color-hover);
+}
+
+.button:active {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.button:disabled {
+    opacity: .5;
+    pointer-events: none;
+}
+
+.button.-outlined {
+    --background-color: transparent;
+    --background-color-hover: var(--color-primary-shade1);
+    --border-color: var(--color-primary);
+    --border-color-hover: var(--color-primary-shade1);
+    --text-color: var(--color-primary);
+}
+
+.button.-secondary {
+    --background-color: var(--color-neutral-tint2);
+    --background-color-hover: var(--color-neutral-tint1);
+    --border-color: var(--color-neutral-tint2);
+    --border-color-hover: var(--color-neutral-tint1);
+    --text-color: var(--color-neutral-shade3);
+    --text-color-hover: var(--color-neutral-shade3);
+}
+
+.button.-link {
+    --background-color: transparent;
+    --background-color-hover: transparent;
+    --border-color: transparent;
+    --border-color-hover: transparent;
+    --text-color: var(--color-link);
+    --text-color-hover: var(--color-link-hover);
+
+    text-decoration: underline;
+}
+
+.button.-block {
+    display: block;
+    width: 100%;
+}
+
+.button.-small {
+    --sub-rhythm: calc(14 * var(--rhythm-sixteenth));
+    --border-thickness: var(--rhythm-sixteenth);
+
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    margin-top: calc(-2 * var(--rhythm-sixteenth));
+    min-height: var(--sub-rhythm);
+    padding: 0 var(--rhythm-half);
+}
+
+.button.-large {
+    --sub-rhythm: calc(1.5 * var(--rhythm));
+    --border-thickness: var(--rhythm-eighth);
+
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    min-height: calc(3 * var(--rhythm));
+    padding: calc(3 * var(--rhythm-eighth)) calc(2 * var(--rhythm));
+}

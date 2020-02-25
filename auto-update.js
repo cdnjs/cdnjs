@@ -286,6 +286,13 @@ var updateLibrary = function (pkg, cb) {
     return cb(null);
   }
 
+  // if the package has a .do_not_update file we ignore the update process for
+  // it and move on.
+  if (fs.existsSync("./ajax/libs/" + pkg.name + "/.do_not_update")) {
+    console.log('package has .do_not_update; ignore');
+    return cb(null)
+  }
+
   msg = 'Checking versions for ' + pkg.npmName;
   if (pkg.name !== pkg.npmName) {
     msg += ' (' + pkg.name + ')';

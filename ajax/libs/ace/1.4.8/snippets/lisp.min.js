@@ -1,0 +1,1 @@
+define("ace/snippets/lisp",["require","exports","module"],function(e,o,p){"use strict";o.snippetText=void 0,o.scope="lisp"}),window.require(["ace/snippets/lisp"],function(e){"object"==typeof module&&"object"==typeof exports&&module&&(module.exports=e)});

@@ -1,0 +1,1 @@
+define("ace/snippets/golang",["require","exports","module"],function(e,o,t){"use strict";o.snippetText=void 0,o.scope="golang"}),window.require(["ace/snippets/golang"],function(e){"object"==typeof module&&"object"==typeof exports&&module&&(module.exports=e)});

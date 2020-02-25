@@ -1,0 +1,75 @@
+/*
+
+Core
+
+The core of Cutestrap is a large set of Custom Properties. Some are set on an
+`html {}` ruleset and will be inherited by all children. Others are set on an
+`* {}` ruleset and are used as mixins, which are special because they rely on
+formulas. The only explicit styling performed here is setting `font-size` and
+`line-height` on a `body {}` ruleset.
+
+Markup:
+<p>
+    Example paragraph
+</p>
+
+Styleguide 1.0
+
+*/
+
+* {
+    --rhythm: 2rem;
+    --rhythm-quadruple: calc(4 * var(--rhythm));
+    --rhythm-triple: calc(3 * var(--rhythm));
+    --rhythm-double: calc(2 * var(--rhythm));
+    --rhythm-half: calc((1/2) * var(--rhythm));
+    --rhythm-third: calc((1/3) * var(--rhythm));
+    --rhythm-fourth: calc((1/4) * var(--rhythm));
+    --rhythm-sixth: calc((1/6) * var(--rhythm));
+    --rhythm-eighth: calc((1/8) * var(--rhythm));
+    --rhythm-twelfth: calc((1/12) * var(--rhythm));
+    --rhythm-sixteenth: calc((1/16) * var(--rhythm));
+    --line-height: var(--sub-rhythm, var(--rhythm));
+    --line-height-ratio: 1.4;
+    --font-size: calc(var(--line-height) / var(--line-height-ratio));
+}
+
+html {
+    --border-radius: 4px;
+    --color-primary-tint1: hsl(350, 80%, 60%);
+    --color-primary: hsl(350, 80%, 45%);
+    --color-primary-shade1: hsl(350, 80%, 35%);
+    --color-accent-tint1: hsl(170, 80%, 60%);
+    --color-accent: hsl(170, 80%, 45%);
+    --color-accent-shade1: hsl(170, 80%, 35%);
+    --color-link: hsl(230, 60%, 50%);
+    --color-link-visited: hsl(290, 60%, 50%);
+    --color-link-hover: hsl(230, 80%, 60%);
+    --color-link-active: hsl(350, 60%, 50%);
+    --color-neutral-tint4: hsl(170, 10%, 98%);
+    --color-neutral-tint3: hsl(170, 10%, 94%);
+    --color-neutral-tint2: hsl(170, 10%, 85%);
+    --color-neutral-tint1: hsl(170, 10%, 68%);
+    --color-neutral: hsl(170, 10%, 55%);
+    --color-neutral-shade1: hsl(170, 10%, 41%);
+    --color-neutral-shade2: hsl(170, 10%, 30%);
+    --color-neutral-shade3: hsl(170, 10%, 18%);
+    --color-neutral-shade4: hsl(170, 10%, 2%);
+    --focus-outline: var(--rhythm-twelfth) dotted var(--color-primary-tint1);
+    --focus-outline-offset: var(--rhythm-twelfth);
+    --font-family: 'Avenir', 'Avenir Next', 'Helvetica Neue', 'Segoe UI', 'Verdana', sans-serif;
+    --font-mono: 'Consolas', 'Monaco', 'Courier New', monospace;
+    --font-heading: var(--font-family);
+    --font-body: var(--font-family);
+}
+
+body {
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+}
+
+@media (max-width: 65rem) {
+    * {
+        --rhythm: 1.5rem;
+    }
+}

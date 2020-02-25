@@ -1,0 +1,1 @@
+define("ace/snippets/curly",["require","exports","module"],function(e,o,t){"use strict";o.snippetText=void 0,o.scope="curly"}),window.require(["ace/snippets/curly"],function(e){"object"==typeof module&&"object"==typeof exports&&module&&(module.exports=e)});

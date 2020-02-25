@@ -1,0 +1,1 @@
+define("ace/snippets/gitignore",["require","exports","module"],function(e,o,t){"use strict";o.snippetText=void 0,o.scope="gitignore"}),window.require(["ace/snippets/gitignore"],function(e){"object"==typeof module&&"object"==typeof exports&&module&&(module.exports=e)});

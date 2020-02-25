@@ -1,0 +1,1 @@
+define("ace/snippets/csound_score",["require","exports","module"],function(e,o,s){"use strict";o.snippetText=void 0,o.scope="csound_score"}),window.require(["ace/snippets/csound_score"],function(e){"object"==typeof module&&"object"==typeof exports&&module&&(module.exports=e)});

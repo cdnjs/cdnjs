@@ -1,0 +1,1 @@
+define("ace/snippets/applescript",["require","exports","module"],function(e,p,t){"use strict";p.snippetText=void 0,p.scope="applescript"}),window.require(["ace/snippets/applescript"],function(e){"object"==typeof module&&"object"==typeof exports&&module&&(module.exports=e)});

@@ -1,0 +1,1 @@
+define("ace/snippets/properties",["require","exports","module"],function(e,o,p){"use strict";o.snippetText=void 0,o.scope="properties"}),window.require(["ace/snippets/properties"],function(e){"object"==typeof module&&"object"==typeof exports&&module&&(module.exports=e)});

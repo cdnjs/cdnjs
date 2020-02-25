@@ -28,24 +28,29 @@ Each cdnjs library has a `package.json` file. This file contains required and so
 
 ### 2.3 Auto-update syntax
 
-* `npmName` is the corresponding npmjs name
-* `npmFileMap` is a list of files to copy from npmjs to cdnjs
-* `basePath` is the path in the npmjs tarball; it will be ignored when files are copied to cdnjs
-* `files` indicates the file(s) to copy and can be named (e.g., lodash.min.js) or wildcards (e.g., *.js).
+* `target` is the corresponding npmjs name when `autoupdate.source` is `npm`
+* `fileMap` is a list of files to copy from npmjs/git repository to cdnjs
+  * `basePath` is the path in the npmjs tarball; it will be ignored when files are copied to cdnjs
+  * `files` indicates the file(s) to copy and can be named (e.g., lodash.min.js) or wildcards (e.g., *.js).
+
 
 ### 2.3 Auto-update example
 
 ```js
-  "npmName": "function-plot",
-  "npmFileMap": [
-    {
-      "basePath": "dist",
-      "files": [
-        "**/*"
-      ]
-    }
-  ],
+  "autoupdate": {
+    "source": "npm"
+    "target": "function-plot",
+    "fileMap": [
+      {
+        "basePath": "dist",
+        "files": [
+          "**/*"
+        ]
+      }
+    ],
+  }
 ```
+
 
 The example in 2.3. parses the `function-plot` tarball, which has this structure:
 

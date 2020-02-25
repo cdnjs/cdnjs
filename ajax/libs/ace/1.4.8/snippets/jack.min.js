@@ -1,0 +1,1 @@
+define("ace/snippets/jack",["require","exports","module"],function(e,o,t){"use strict";o.snippetText=void 0,o.scope="jack"}),window.require(["ace/snippets/jack"],function(e){"object"==typeof module&&"object"==typeof exports&&module&&(module.exports=e)});

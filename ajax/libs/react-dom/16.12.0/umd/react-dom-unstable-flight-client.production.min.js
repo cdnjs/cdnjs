@@ -1,0 +1,14 @@
+/** @license React v16.12.0
+ * react-dom-unstable-flight-client.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+'use strict';(function(f,h){"object"===typeof exports&&"undefined"!==typeof module?module.exports=h():"function"===typeof define&&define.amd?define(h):f.ReactFlightDOMClient=h()})(this,function(){function f(b){var a={},c=h();n(a,"model",c);var e=new Map;e.set(0,c);var g={source:b,partialRow:"",modelRoot:a,chunks:e,fromJSON:function(b,a){a:{var c=g;if("string"===typeof a&&"$"===a[0])if("$"===a[1])b=a.substring(1);else{a=parseInt(a.substring(1),16);c=c.chunks;var d=c.get(a);if(!d)d=h(),c.set(a,d);else if(1===
+d.status){b=d.value;break a}n(this,b,d);b=void 0}else b=a}return b}};g.stringDecoder=new TextDecoder;return g}function h(){var b=null;return{status:0,value:new Promise(function(a){return b=a}),resolve:b}}function p(b,a){if(0===b.status){var c=b.resolve;b.status=2;b.value=a;b.resolve=null;c()}}function m(b,a){b.chunks.forEach(function(b){p(b,a)})}function n(b,a,c){Object.defineProperty(b,a,{configurable:!1,enumerable:!0,get:function(){if(1===c.status)return c.value;throw c.value;}})}function q(b,a,
+c){c=JSON.parse(c,b.fromJSON);var e=b.chunks;(b=e.get(a))?0===b.status&&(a=b.resolve,b.status=1,b.value=c,b.resolve=null,a()):e.set(a,{status:1,value:c,resolve:null})}function r(b,a){if(""!==a)switch(a[0]){case "J":var c=a.indexOf(":",1),e=parseInt(a.substring(1,c),16);a=a.substring(c+1);q(b,e,a);break;case "E":c=a.indexOf(":",1);e=parseInt(a.substring(1,c),16);a=a.substring(c+1);c=JSON.parse(a);a=Error(c.message);a.stack=c.stack;b=b.chunks;(c=b.get(e))?p(c,a):b.set(e,{status:2,value:a,resolve:null});
+break;default:q(b,0,a)}}function t(b){m(b,Error("Connection closed."))}function u(b,a){function c(a){var d=a.value;if(a.done)t(b);else{a=d;d=b.stringDecoder;for(var l=a.indexOf(10);-1<l;){var h=b.partialRow;var f=a.subarray(0,l);f=d.decode(f);r(b,h+f);b.partialRow="";a=a.subarray(l+1);l=a.indexOf(10)}b.partialRow+=d.decode(a,w);return g.read().then(c,e)}}function e(a){m(b,a)}var g=a.getReader();g.read().then(c,e)}var w={stream:!0},k={readFromXHR:function(b){function a(a){a=b.responseText;for(var c=
+e,d=g,f=a.indexOf("\n",d);-1<f;)d=c.partialRow+a.substring(d,f),r(c,d),c.partialRow="",d=f+1,f=a.indexOf("\n",d);c.partialRow+=a.substring(d);g=a.length}function c(a){m(e,new TypeError("Network error"))}var e=f(b),g=0;b.addEventListener("progress",a);b.addEventListener("load",function(b){a(b);t(e)});b.addEventListener("error",c);b.addEventListener("abort",c);b.addEventListener("timeout",c);return e.modelRoot},readFromFetch:function(b){var a=f(b);b.then(function(b){u(a,b.body)},function(b){m(a,b)});
+return a.modelRoot},readFromReadableStream:function(b){var a=f(b);u(a,b);return a.modelRoot}},v={default:k};k=v&&k||v;return k.default||k});

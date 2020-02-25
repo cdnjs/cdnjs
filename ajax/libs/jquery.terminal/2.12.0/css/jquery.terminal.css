@@ -1,0 +1,898 @@
+/*!
+ *       __ _____                     ________                              __
+ *      / // _  /__ __ _____ ___ __ _/__  ___/__ ___ ______ __ __  __ ___  / /
+ *  __ / // // // // // _  // _// // / / // _  // _//     // //  \/ // _ \/ /
+ * /  / // // // // // ___// / / // / / // ___// / / / / // // /\  // // / /__
+ * \___//____ \\___//____//_/ _\_  / /_//____//_/ /_/ /_//_//_/ /_/ \__\_\___/
+ *           \/              /____/                              version 2.12.0
+ * http://terminal.jcubic.pl
+ *
+ * This file is part of jQuery Terminal.
+ *
+ * Copyright (c) 2011-2019 Jakub Jankiewicz <https://jcubic.pl/me>
+ * Released under the MIT license
+ *
+ * Date: Wed, 01 Jan 2020 17:03:16 +0000
+ */
+.terminal .terminal-output .format, .cmd .format,
+.cmd-prompt, .cmd-prompt div {
+    display: inline-block;
+}
+.terminal h1, .terminal h2, .terminal h3, .terminal h4, .terminal h5, .terminal h6, .terminal pre, .cmd {
+    margin: 0;
+}
+/*
+.terminal h1, .terminal h2, .terminal h3, .terminal h4, .terminal h5, .terminal h6 {
+    line-height: 1.2em;
+}
+/*
+.cmd .mask {
+    width: 10px;
+    height: 11px;
+    background: black;
+    z-index: 100;
+}
+*/
+.cmd .cmd-clipboard {
+    position: absolute;
+    left: -16px;
+    top: 0;
+    width: 16px;
+    height: 16px;
+    /* this seems to work after all on Android */
+    /*left: -99999px;
+    clip: rect(1px,1px,1px,1px);
+    /* on desktop textarea appear when paste */
+    /* opacity is needed for Edge and IE
+    opacity: 0.01;
+    filter: alpha(opacity = 0.01);
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0.01);*/
+    background-color: transparent;
+    border: none;
+    color: transparent;
+    outline: none;
+    padding: 0;
+    resize: none;
+    z-index: 1000;
+    overflow: hidden;
+    white-space: pre;
+    text-indent: -9999em; /* better cursor hiding for Safari and IE */
+    top: calc(var(--cursor-line, 0) * 1em);
+}
+
+.cmd span.cmd-end-line,
+.cmd span.cmd-end-line span,
+.cmd div.cmd-end-line span[data-text]:last-child,
+.cmd div.cmd-end-line span[data-text]:last-child span,
+.cmd .cursor + span:empty {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+.terminal img, .terminal audio, .terminal object, .terminal canvas {
+    cursor: default;
+}
+.terminal {
+    position: relative;
+    /*overflow: hidden;*/
+    overflow-y: auto;
+    /* overflow-x: hidden; */
+}
+terminal.terminal-temp {
+    visibility: hidden;
+}
+.terminal {
+    contain: content;
+}
+body.terminal {
+    min-height: 100vh;
+    height: 100%;
+}
+html {
+    height: 100%;
+}
+body.terminal, body.full-screen-terminal {
+    margin: 0;
+    height: 100%;
+}
+body.full-screen-terminal .terminal {
+    height: 100%;
+}
+.terminal > div.terminal-fill {
+    min-height: 100%;
+    height: 100%;
+}
+.terminal > .terminal-resizer, .terminal > .terminal-font .terminal-resizer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+    height: 100%;
+    border: none;
+    padding: 0;
+    width: 100%
+}
+.cmd {
+    padding: 0;
+    position: relative;
+    width: 100%;
+}
+.terminal a[tabindex="1000"],
+.terminal a[tabindex="1000"]:active,
+.terminal a[tabindex="1000"]:focus {
+    outline: none;
+}
+.terminal .inverted, .cmd .inverted,
+.terminal .terminal-inverted, .cmd .cmd-inverted {
+    background-color: #aaa;
+    color: #000;
+}
+.terminal .terminal-output > :not(.raw) a[href] span,
+.cmd a[href] span {
+    /*
+     * shorter and simple solution
+     * it's hard to overwrite long :not selector (:not(a span) don't work)
+     */
+    color: #0F60FF !important;
+    --color: var(--link-color, #0F60FF);
+    color: var(--link-color, #0F60FF) !important;
+    text-decoration: underline;
+}
+.terminal .terminal-output > :not(.raw) a[href]:hover span,
+.cmd a[href]:hover span {
+    background-color: #0F60FF !important;
+    background-color: var(--link-color, #0F60FF) !important;
+    color: var(--background, #000) !important;
+    text-decoration: none;
+}
+.cmd .cmd-cursor {
+    display: inline-block;
+    vertical-align: top;
+}
+.cmd .cmd-cursor-line > span,
+.cmd .cmd-cursor-line img {
+    display: inline-block;
+}
+.cmd-wrapper div [data-text] {
+    /* fix for images */
+    vertical-align: top;
+}
+.cmd .cmd-cursor.cmd-blink span:not(.emoji) span {
+    -webkit-animation: terminal-blink 1s infinite linear;
+       -moz-animation: terminal-blink 1s infinite linear;
+        -ms-animation: terminal-blink 1s infinite linear;
+            animation: terminal-blink 1s infinite linear;
+}
+.cmd .cmd-cursor .emoji {
+        -webkit-animation: terminal-blink 1s infinite linear;
+           -moz-animation: terminal-blink 1s infinite linear;
+            -ms-animation: terminal-blink 1s infinite linear;
+                animation: terminal-blink 1s infinite linear;
+}
+.bar.terminal .inverted, .bar.cmd .cmd-inverted {
+    box-shadow: -2px 0 0 -1px #aaa;
+    box-shadow: -2px 0 0 -1px var(--original-color, #aaa);
+}
+.terminal .terminal .terminal-output > div > div, .cmd .cmd-prompt {
+    display: block;
+    /*line-height: 15px;*/
+    height: auto;
+}
+.terminal .terminal-output > div > div, .cmd div {
+    min-height: 14px;
+    min-height: calc(var(--size, 1) * 14px);
+}
+.terminal .terminal-output > div:not(.raw) div {
+    white-space: nowrap;
+}
+.cmd .cmd-prompt > span {
+    float: left;
+}
+.cmd span[style*="width"], .terminal span[style*="width"] {
+    display: inline-block;
+}
+.terminal,
+.terminal-output > :not(.raw) span,
+.terminal-output > :not(.raw) a,
+.terminal-output > :not(.raw) div,
+.cmd,
+.cmd span,
+.cmd div {
+    font-family: monospace;
+    /*font-family: FreeMono, monospace; this don't work on Android */
+    font-size: 12px;
+    line-height: 15px;
+}
+.terminal-output > :not(.raw) span:not(.token):not(.inverted):not(.terminal-inverted):not(.cmd-inverted):not(.terminal-error):not(.emoji),
+.cmd span:not(.cmd-inverted):not(.token):not(.emoji) {
+    color: #aaa;
+    background-color: #000;
+}
+.terminal-output > :not(.raw) .emoji, .cmd .emoji {
+    height: 14px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    color: transparent;
+    position: relative;
+}
+.terminal-output > :not(.raw) .emoji, .terminal-output > :not(.raw) .emoji span,
+.cmd .emoji, .cmd .emoji span {
+    display: inline-block;
+    width: 2ch;
+}
+
+.terminal, .cmd {
+    box-sizing: border-box;
+    cursor: text;
+}
+.cmd .cmd-cursor span:not(.token):not(.inverted) {
+    color: inherit;
+    background-color: inherit;
+}
+.cmd .emoji.emoji.emoji.emoji, .cmd .emoji.emoji.emoji.emoji span {
+    color: transparent;
+    background-color: transparent;
+}
+.cmd .cmd-cursor * {
+    background-color: transparent;
+}
+.cmd div {
+    clear: both;
+}
+.cmd .cmd-prompt + div {
+    clear: right;
+}
+.terminal-output > div > div, .cmd div {
+    min-height: 15px;
+}
+terminal .terminal-output > div {
+    margin-top: -1px;
+}
+.terminal-output > div.raw > div * {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+.terminal .terminal-font {
+    position: absolute;
+    float: left;
+    font-size: inherit;
+    line-height: inherit;
+    top: -100%;
+    left: 0;
+    margin-bottom: 1px;
+}
+.cmd > span:not(.cmd-prompt) {
+    float: left;
+}
+.cmd .cmd-prompt span.cmd-line {
+    display: block;
+    float: none;
+}
+.terminal table {
+    border-collapse: collapse;
+}
+.terminal td {
+    border: 1px solid #aaa;
+}
+.cmd.cmd span[data-text]:not(.emoji) span {
+    background-color: inherit;
+    color: inherit;
+}
+/* fix for underline on middle line */
+.cmd [role="presentation"].cmd-cursor-line {
+    position: relative;
+    z-index: 100;
+}
+/* prompt above cursor line */
+.cmd .cmd-prompt {
+    position: relative;
+    z-index: 200;
+}
+.cmd [role="presentation"]:not(.cmd-cursor-line) {
+    overflow: hidden;
+}
+/*
+ * this is set so animation can select original color as backgound for cursor
+ * so span can have --color for selection
+ */
+.cmd {
+    --original-color: var(--color, #aaa);
+}
+.cmd a[href] {
+    --original-color: var(--link-color, #0F60FF);
+}
+/* DEFAULT ANIMATION */
+@-webkit-keyframes terminal-blink {
+    0%, 50% {
+        background-color: #bbb;
+        background-color: var(--original-color, #bbb);
+        color: #000;
+        color: var(--background, #000);
+    }
+    50.1%, 100% {
+        background-color: inherit;
+        color: inherit;
+    }
+}
+@-moz-keyframes terminal-blink {
+    0%, 50% {
+        background-color: #aaa;
+        background-color: var(--original-color, #aaa);
+        color: #000;
+        color: var(--background, #000);
+    }
+    50.1%, 100% {
+        background-color: inherit;
+        color: inherit;
+    }
+}
+@keyframes terminal-blink {
+    0%, 50% {
+        background-color: #aaa;
+        background-color: var(--original-color, #aaa);
+        color: #000;
+        color: var(--background, #000);
+    }
+    50.1%, 100% {
+        background-color: inherit;
+        color: inherit;
+    }
+}
+/* GLOW ANIMATION */
+@-webkit-keyframes terminal-glow {
+    0%, 50% {
+        background-color: #aaa;
+        background-color: var(--original-color, #aaa);
+        color: #000;
+        color: var(--background, #000);
+        box-shadow: 0 0 3px #aaa;
+        -webkit-box-shadow: 0 0 3px var(--color, #aaa);
+        box-shadow: 0 0 3px var(--color, #aaa);
+    }
+    50.1%, 100% {
+        background-color: inherit;
+        color: inherit;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+}
+@-moz-keyframes terminal-glow {
+    0%, 50% {
+        background-color: #aaa;
+        background-color: var(--original-color, #aaa);
+        color: #000;
+        color: var(--background, #000);
+        box-shadow: 0 0 3px #aaa;
+        -moz-box-shadow: 0 0 3px var(--color, #aaa);
+        box-shadow: 0 0 3px var(--color, #aaa);
+    }
+    50.1%, 100% {
+        background-color: inherit;
+        color: inherit;
+        -moz-box-shadow: none;
+        box-shadow: none;
+    }
+}
+@keyframes terminal-glow {
+    0%, 50% {
+        background-color: #aaa;
+        background-color: var(--original-color, #aaa);
+        color: #000;
+        color: var(--background, #000);
+        box-shadow: 0 0 3px #aaa;
+        box-shadow: 0 0 3px var(--color, #aaa);
+    }
+    50.1%, 100% {
+        background-color: inherit;
+        color: inherit;
+        box-shadow: none;
+    }
+}
+/* BAR ANIMATION */
+@-webkit-keyframes terminal-bar {
+  0%, 50% {
+      box-shadow: -2px 0 0 -1px #aaa;
+      box-shadow: -2px 0 0 -1px var(--original-color, #aaa);
+  }
+  50.1%, 100% {
+      box-shadow: none;
+  }
+}
+@-moz-keyframes terminal-bar {
+  0%, 50% {
+      box-shadow: -2px 0 0 -1px #aaa;
+      box-shadow: -2px 0 0 -1px var(--original-color, #aaa);
+  }
+  50.1%, 100% {
+      box-shadow: none;
+  }
+}
+@keyframes terminal-bar {
+  0%, 50% {
+      box-shadow: -2px 0 0 -1px #aaa;
+      box-shadow: -2px 0 0 -1px var(--original-color, #aaa);
+  }
+  50.1%, 100% {
+      box-shadow: none;
+  }
+}
+/* UNDERLINE ANIMATION */
+@-webkit-keyframes terminal-underline {
+  0%, 50% {
+      box-shadow: 0 2px 0 #aaa;
+      box-shadow: 0 2px 0 var(--original-color, #aaa);
+  }
+  50.1%, 100% {
+      box-shadow: none;
+  }
+}
+@-moz-keyframes terminal-underline {
+  0%, 50% {
+      box-shadow: 0 2px 0 #aaa;
+      box-shadow: 0 2px 0 var(--original-color, #aaa);
+  }
+  50.1%, 100% {
+      box-shadow: none;
+  }
+}
+@keyframes terminal-underline {
+  0%, 50% {
+      box-shadow: 0 2px 0 #aaa;
+      box-shadow: 0 2px 0 var(--original-color, #aaa);
+  }
+  50.1%, 100% {
+      box-shadow: none;
+  }
+}
+.underline-animation .cmd-cursor.cmd-blink span span,
+.underline-animation .cmd-cursor.cmd-blink a {
+    -webkit-animation-name: terminal-underline;
+       -moz-animation-name: terminal-underline;
+        -ms-animation-name: terminal-underline;
+            animation-name: terminal-underline;
+}
+.glow-animation .cmd-cursor.cmd-blink span span,
+.glow-animation .cmd-cursor.cmd-blink a {
+    -webkit-animation-name: terminal-glow;
+       -moz-animation-name: terminal-glow;
+        -ms-animation-name: terminal-glow;
+            animation-name: terminal-glow;
+}
+.bar-animation .cmd-cursor.cmd-blink span span,
+.bar-animation .cmd-cursor.cmd-blink a {
+    -webkit-animation-name: terminal-bar;
+       -moz-animation-name: terminal-bar;
+        -ms-animation-name: terminal-bar;
+            animation-name: terminal-bar;
+}
+/*
+   Internet Explorer & Edge *, Safari ≤ 6
+   source: https://w3reign.com/internet-explorer-edge-css-hacks/
+*/
+
+
+@supports (-ms-ime-align:auto) {
+    .cmd .cmd-clipboard {
+        margin-left: -9999px;
+    }
+    @keyframes terminal-blink {
+        0%, 50% {
+            background-color: var(--original-color, #aaa);
+            color: var(--background, #000);
+        }
+        50.1%, 100% {
+            background-color: var(--background, #000);
+            color: var(--original-color, #aaa);
+        }
+    }
+    @keyframes terminal-bar {
+        0%, 50% {
+            border-left-color: var(--color, #aaa);
+        }
+        50.1%, 100% {
+            border-left-color: var(--background, #000);
+        }
+    }
+    @keyframes terminal-underline {
+        0%, 50% {
+            border-bottom-color: var(--color, #aaa);
+            line-height: 12px;
+            line-height: calc(var(--size, 1) * 12px);
+        }
+        50.1%, 100% {
+            border-bottom-color: var(--background, #000);
+            line-height: 12px;
+            line-height: calc(var(--size, 1) * 12px);
+        }
+    }
+}
+/* IE hack Edge one don't work in IE11 */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    .cmd .cmd-clipboard {
+        margin-left: -9999px;
+    }
+    .underline-animation .cursor.blink span span {
+        margin-top: 1px;
+    }
+    @-ms-keyframes terminal-blink {
+        0%, 50% {
+            background-color: #aaa;
+            color: #000;
+        }
+        50.1%, 100% {
+            background-color: #000;
+            color: #aaa;
+        }
+    }
+}
+.terminal h1::-moz-selection,
+.terminal h2::-moz-selection,
+.terminal h3::-moz-selection,
+.terminal h4::-moz-selection,
+.terminal h5::-moz-selection,
+.terminal h6::-moz-selection,
+.terminal pre::-moz-selection,
+.terminal td::-moz-selection,
+.terminal .terminal-output div div::-moz-selection,
+.terminal .terminal-output div span::-moz-selection,
+.terminal .terminal-output div div a::-moz-selection,
+.terminal .terminal-output .raw div::-moz-selection,
+.cmd div::-moz-selection,
+.cmd > span::-moz-selection,
+.cmd > span span::-moz-selection,
+.cmd > div::-moz-selection,
+.cmd > div span::-moz-selection,
+.cmd .prompt span::-moz-selection {
+    background-color: #aaa;
+    color: #000;
+}
+/* this don't work in Chrome
+.terminal tr td::-moz-selection {
+    border-color: #000;
+}
+.terminal tr td::selection {
+    border-color: #000;
+}
+*/
+.terminal h1::selection,
+.terminal h2::selection,
+.terminal h3::selection,
+.terminal h4::selection,
+.terminal h5::selection,
+.terminal h6::selection,
+.terminal pre::selection,
+.terminal td::selection,
+.terminal .terminal-output::selection,
+.terminal .terminal-output div div::selection,
+.terminal .terminal-output div div a::selection,
+.terminal .terminal-output div span::selection,
+.terminal .terminal-output .raw div::selection,
+.cmd div::selection,
+.cmd > span::selection,
+.cmd > span span::selection,
+.cmd > div::selection,
+.cmd > div span::selection,
+.cmd .prompt span::selection {
+    /*
+     * use rgba to fix transparent selection in chrome
+     * http://stackoverflow.com/questions/7224445/css3-selection-behaves-differently-in-ff-chrome
+     */
+    background-color: rgba(170, 170, 170, 0.99);
+    color: #000;
+}
+
+.terminal .terminal-output > :not(.raw) .terminal-error,
+.terminal .terminal-output > :not(.raw) .terminal-error * {
+    color: red;
+    color: var(--error-color, red);
+}
+.tilda {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1100;
+}
+.ui-dialog-content .terminal {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+.ui-dialog .ui-dialog-content.dterm {
+    padding: 0;
+}
+.clear {
+    clear: both;
+}
+.terminal .terminal-output > :not(.raw) a[href], .cmd a[href] {
+    color: #0F60FF;
+    color: var(--link-color, #0F60FF);
+    cursor: pointer;
+}
+.cmd a[href]:not(.terminal-inverted),
+.terminal .terminal-output > :not(.raw) a[href]:not(.terminal-inverted) {
+    --color: var(--link-color, #0F60FF);
+}
+.terminal .terminal-output > :not(.raw) a[href].terminal-inverted {
+    background: var(--color, #ccc);
+}
+.terminal .terminal-output > :not(.raw) a[href]:hover, .cmd a[href]:hover {
+    background-color: #0F60FF;
+    background-color: var(--link-color, #0F60FF);
+    color: var(--background, #000) !important;
+    text-decoration: none;
+}
+.terminal .terminal-fill {
+    position: absolute;
+    left: 0;
+    top: -100%;
+    width: 100%;
+    height: 100%;
+    margin: 1px 0 0;
+    border: none;
+    opacity: 0.01;
+    pointer-events: none;
+    box-sizing: border-box;
+}
+.terminal, .terminal .terminal-fill {
+    padding: 10px;
+}
+/* padding added as margin to .cmd to fix FireFox bug see: https://stackoverflow.com/q/29986977/387194 */
+.terminal {
+    padding-bottom: 0;
+}
+.terminal .cmd {
+    margin-bottom: 10px;
+}
+@supports (--css: variables) {
+    .terminal,
+    .terminal-output > :not(.raw) span:not(.token):not(.inverted):not(.terminal-inverted):not(.cmd-inverted):not(.terminal-error):not(.emoji),
+    .terminal-output > :not(.raw) a,
+    .terminal-output > :not(.raw) div,
+    .cmd,
+    .cmd span:not(.cmd-inverted):not(.token):not(.emoji),
+    .cmd div {
+        color: var(--color, #aaa);
+        background-color: var(--background, #000);
+    }
+    .terminal span[style*="--length"] {
+        /*
+         * default value for char-width taken from Google Chrome for default font
+         * to silence warning in webpack #371
+         */
+        width: calc(var(--length, 1) * var(--char-width, 7.23438) * 1px);
+        display: inline-block;
+    }
+    .terminal,
+    .terminal-output > :not(.raw) span,
+    .terminal-output > :not(.raw) a,
+    .terminal-output > :not(.raw) div,
+    .cmd,
+    .cmd span,
+    .cmd div {
+        font-size: calc(var(--size, 1) * 12px);
+        /* TODO: investigate + 1px below that create space in selection it suppose to fix
+         *       cutting off underlines
+         */
+        line-height: calc(var(--size, 1) * 14px);
+    }
+    .terminal-output > :not(.raw) .emoji, .cmd .emoji {
+        height: calc(var(--size, 1) * 14px);
+    }
+    .cmd .clipboard {
+        top: calc(var(--size, 1) * 14 * var(--cursor-line, 0) * 1px);
+    }
+    .terminal .inverted, .cmd .inverted {
+        background-color: var(--color, #aaa);
+        color: var(--background, #000);
+    }
+    .cmd div {
+        min-height: calc(var(--size, 1) * 14px);
+    }
+    .cmd .cmd-cursor.cmd-blink {
+        color: var(--color, #aaa);
+        background-color: var(--background, #000);
+    }
+    .cmd .cmd-cursor.cmd-blink span:not(.emoji) span,
+    .cmd .cmd-cursor.cmd-blink a {
+        -webkit-animation: var(--animation, terminal-blink) 1s infinite linear;
+           -moz-animation: var(--animation, terminal-blink) 1s infinite linear;
+            -ms-animation: var(--animation, terminal-blink) 1s infinite linear;
+                animation: var(--animation, terminal-blink) 1s infinite linear;
+    }
+    .cmd .cmd-cursor.cmd-blink .emoji {
+        -webkit-animation: var(--animation, terminal-blink) 1s infinite linear;
+           -moz-animation: var(--animation, terminal-blink) 1s infinite linear;
+            -ms-animation: var(--animation, terminal-blink) 1s infinite linear;
+                animation: var(--animation, terminal-blink) 1s infinite linear;
+    }
+    .cmd .cmd-cursor.cmd-blink .emoji span {
+        color: transparent;
+    }
+    .terminal h1::-moz-selection,
+    .terminal h2::-moz-selection,
+    .terminal h3::-moz-selection,
+    .terminal h4::-moz-selection,
+    .terminal h5::-moz-selection,
+    .terminal h6::-moz-selection,
+    .terminal pre::-moz-selection,
+    .terminal td::-moz-selection,
+    .terminal .terminal-output div div::-moz-selection,
+    .terminal .terminal-output div span::-moz-selection,
+    .cmd div::-moz-selection,
+    .cmd > span::-moz-selection,
+    .cmd > span span::-moz-selection,
+    .cmd > div::-moz-selection,
+    .cmd > div span::-moz-selection,
+    .cmd .cmd-prompt span::-moz-selection {
+        background-color: var(--color, #aaa);
+        color: var(--background, #000);
+    }
+    .terminal .terminal-output div div a::-moz-selection {
+        background-color: var(--link-color, rgba(15, 96, 255, 0.99)) !important;
+        color: var(--background, #000) !important;
+    }
+    .terminal .terminal-output div div a:hover::-moz-selection {
+        background-color: var(--link-color, rgba(2, 50, 144, 0.99)) !important;
+    }
+    .terminal h1::selection,
+    .terminal h2::selection,
+    .terminal h3::selection,
+    .terminal h4::selection,
+    .terminal h5::selection,
+    .terminal h6::selection,
+    .terminal pre::selection,
+    .terminal td::selection,
+    .terminal .terminal-output div div::selection,
+    .terminal .terminal-output div span::selection,
+    .cmd div::selection,
+    .cmd > span::selection,
+    .cmd > span span::selection,
+    .cmd > div::selection,
+    .cmd > div span::selection,
+    .cmd .cmd-prompt span::selection {
+        background-color: var(--color, rgba(170, 170, 170, 0.99)) !important;
+        color: var(--background, #000) !important;
+    }
+    .terminal .terminal-output div div a::selection {
+        background-color: var(--link-color, rgba(15, 96, 255, 0.99)) !important;
+        color: var(--background, #000) !important;
+    }
+    .terminal .terminal-output div div a:hover::selection {
+        background-color: var(--link-color, rgba(2, 50, 144, 0.99)) !important;
+    }
+}
+/*
+ * overwrite css variables that don't work with selection in Edge
+ */
+@supports (-ms-ime-align:auto) {
+    .terminal h1::selection,
+    .terminal h2::selection,
+    .terminal h3::selection,
+    .terminal h4::selection,
+    .terminal h5::selection,
+    .terminal h6::selection,
+    .terminal pre::selection,
+    .terminal td::selection,
+    .terminal .terminal-output div div::selection,
+    .terminal .terminal-output div div a::selection,
+    .terminal .terminal-output div span::selection,
+    .cmd div::selection,
+    .cmd > span::selection,
+    .cmd > span span::selection,
+    .cmd > div::selection,
+    .cmd > div span::selection,
+    .cmd .prompt span::selection {
+        background-color: rgba(170, 170, 170, 0.99);
+        color: #000;
+    }
+}
+/* PrismJS style overwrites */
+.terminal .token.operator,
+.terminal .token.entity,
+.terminal .token.variable,
+.terminal .token.url,
+.terminal .token.string,
+.terminal .style .token.string,
+.terminal .token.token,
+.cmd .token.operator,
+.cmd .token.entity,
+.cmd .token.variable,
+.cmd .token.url,
+.cmd .token.string,
+.cmd .style .token.string,
+.cmd .token.token {
+    background-color: inherit;
+}
+/* FireFox hack
+@supports (-moz-animation: foo) {
+    .terminal,
+    .terminal .terminal-output > :not(.raw) span,
+    .terminal .terminal-output > :not(.raw) a,
+    .terminal .terminal-output > :not(.raw) div,
+    .cmd,
+    .cmd span,
+    .cmd div {
+        line-height: calc(var(--size, 1) * 13px);
+    }
+}
+*/
+/* style for autocomplete menu */
+.cmd .cursor-wrapper ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    float: left;
+    position: absolute;
+    top: 14px;
+    left: 0;
+}
+.cmd .cursor-wrapper li {
+    cursor: pointer;
+    white-space: nowrap;
+}
+.cmd .cursor-wrapper li:hover {
+    background: #aaa;
+    color: #000;
+}
+.cursor-wrapper {
+    position: relative;
+}
+/* images */
+.terminal-output div[style*="100%;"] {
+    overflow: hidden;
+}
+.terminal-output img {
+    display: block;
+}
+.cmd img {
+    height: 14px;
+    height: calc(var(--size, 1) * 14px);
+    border: 1px solid transparent;
+}
+.cmd-cursor img {
+    border-color: #ccc;
+    border-color: var(--color, #ccc);
+}
+.terminal-output svg.terminal-broken-image {
+    height: calc(var(--size, 1) * 14px);
+}
+.terminal-output svg.terminal-broken-image use {
+    fill: var(--color, #ccc);
+}
+.terminal-error {
+    --color: var(--error-color);
+}
+.terminal-glow {
+    --animation: terminal-glow;
+}
+.terminal-glow span[data-text],
+.terminal-glow .cmd-prompt > span,
+.terminal-glow a[data-text],
+.terminal-glow [data-text] span,
+.terminal-glow .terminal-output > div span,
+.terminal-glow .terminal-output > div a[href] {
+    text-shadow: 1px 1px 5px #ccc;
+    text-shadow: 1px 1px 5px var(--color, #ccc);
+}
+/* is_bottom detection */
+.terminal-scroll-marker {
+    position: relative;
+    height: 1px;
+    margin-top: -1px;
+    z-index: 100;
+}
+.terminal-scroll-marker div {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+}

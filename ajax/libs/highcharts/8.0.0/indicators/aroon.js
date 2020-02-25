@@ -1,0 +1,16 @@
+/*
+ Highstock JS v8.0.0 (2019-12-10)
+
+ Indicator series type for Highstock
+
+ (c) 2010-2019 Wojciech Chmiel
+
+ License: www.highcharts.com/license
+*/
+(function(a){"object"===typeof module&&module.exports?(a["default"]=a,module.exports=a):"function"===typeof define&&define.amd?define("highcharts/indicators/aroon",["highcharts","highcharts/modules/stock"],function(c){a(c);a.Highcharts=c;return a}):a("undefined"!==typeof Highcharts?Highcharts:void 0)})(function(a){function c(a,c,n,f){a.hasOwnProperty(c)||(a[c]=f.apply(null,n))}a=a?a._modules:{};c(a,"mixins/multipe-lines.js",[a["parts/Globals.js"],a["parts/Utilities.js"]],function(a,c){var n=c.defined,
+f=a.each,q=a.merge,e=a.error,h=a.seriesTypes.sma;return{pointArrayMap:["top","bottom"],pointValKey:"top",linesApiNames:["bottomLine"],getTranslatedLinesNames:function(d){var a=[];f(this.pointArrayMap,function(b){b!==d&&a.push("plot"+b.charAt(0).toUpperCase()+b.slice(1))});return a},toYData:function(d){var a=[];f(this.pointArrayMap,function(b){a.push(d[b])});return a},translate:function(){var d=this,a=d.pointArrayMap,b=[],e;b=d.getTranslatedLinesNames();h.prototype.translate.apply(d,arguments);f(d.points,
+function(h){f(a,function(a,c){e=h[a];null!==e&&(h[b[c]]=d.yAxis.toPixels(e,!0))})})},drawGraph:function(){var a=this,c=a.linesApiNames,b=a.points,r=b.length,m=a.options,g=a.graph,k={options:{gapSize:m.gapSize}},l=[],t=a.getTranslatedLinesNames(a.pointValKey),p;f(t,function(a,e){for(l[e]=[];r--;)p=b[r],l[e].push({x:p.x,plotX:p.plotX,plotY:p[a],isNull:!n(p[a])});r=b.length});f(c,function(b,d){l[d]?(a.points=l[d],m[b]?a.options=q(m[b].styles,k):e('Error: "There is no '+b+' in DOCS options declared. Check if linesApiNames are consistent with your DOCS line names." at mixin/multiple-line.js:34'),
+a.graph=a["graph"+b],h.prototype.drawGraph.call(a),a["graph"+b]=a.graph):e('Error: "'+b+" doesn't have equivalent in pointArrayMap. To many elements in linesApiNames relative to pointArrayMap.\"")});a.points=b;a.options=m;a.graph=g;h.prototype.drawGraph.call(a)}}});c(a,"indicators/aroon.src.js",[a["parts/Globals.js"],a["parts/Utilities.js"],a["mixins/multipe-lines.js"]],function(a,c,n){function f(a,c){var d=a[0],e=0,b;for(b=1;b<a.length;b++)if("max"===c&&a[b]>=d||"min"===c&&a[b]<=d)d=a[b],e=b;return e}
+var q=c.pick;a.seriesType("aroon","sma",{params:{period:25},marker:{enabled:!1},tooltip:{pointFormat:'<span style="color:{point.color}">\u25cf</span><b> {series.name}</b><br/>Aroon Up: {point.y}<br/>Aroon Down: {point.aroonDown}<br/>'},aroonDown:{styles:{lineWidth:1,lineColor:void 0}},dataGrouping:{approximation:"averages"}},a.merge(n,{nameBase:"Aroon",pointArrayMap:["y","aroonDown"],pointValKey:"y",linesApiNames:["aroonDown"],getValues:function(a,c){c=c.period;var d=a.xData,e=(a=a.yData)?a.length:
+0,b=[],h=[],m=[],g;for(g=c-1;g<e;g++){var k=a.slice(g-c+1,g+2);var l=f(k.map(function(a){return q(a[2],a)}),"min");k=f(k.map(function(a){return q(a[1],a)}),"max");k=k/c*100;l=l/c*100;d[g+1]&&(b.push([d[g+1],k,l]),h.push(d[g+1]),m.push([k,l]))}return{values:b,xData:h,yData:m}}}));""});c(a,"masters/indicators/aroon.src.js",[],function(){})});
+//# sourceMappingURL=aroon.js.map

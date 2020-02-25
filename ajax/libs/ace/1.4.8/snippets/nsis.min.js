@@ -1,0 +1,1 @@
+define("ace/snippets/nsis",["require","exports","module"],function(e,o,s){"use strict";o.snippetText=void 0,o.scope=""}),window.require(["ace/snippets/nsis"],function(e){"object"==typeof module&&"object"==typeof exports&&module&&(module.exports=e)});

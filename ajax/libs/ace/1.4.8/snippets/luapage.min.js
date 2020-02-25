@@ -1,0 +1,1 @@
+define("ace/snippets/luapage",["require","exports","module"],function(e,o,p){"use strict";o.snippetText=void 0,o.scope="luapage"}),window.require(["ace/snippets/luapage"],function(e){"object"==typeof module&&"object"==typeof exports&&module&&(module.exports=e)});

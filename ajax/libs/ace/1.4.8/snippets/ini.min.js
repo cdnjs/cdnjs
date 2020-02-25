@@ -1,0 +1,1 @@
+define("ace/snippets/ini",["require","exports","module"],function(e,i,o){"use strict";i.snippetText=void 0,i.scope="ini"}),window.require(["ace/snippets/ini"],function(e){"object"==typeof module&&"object"==typeof exports&&module&&(module.exports=e)});
