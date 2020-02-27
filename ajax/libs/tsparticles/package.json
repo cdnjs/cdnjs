@@ -1,0 +1,56 @@
+{
+  "name": "tsparticles",
+  "version": "1.6.0",
+  "description": "Porting of Vincent Garreau's particles.js, converted in TypeScript.",
+  "homepage": "https://github.com/matteobruni/tsparticles",
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch",
+    "copy:js": "cpx \"src/**/*.{js,d.ts}\" dist/",
+    "build": "npm run copy:js && npm run build:types && npm run build:js && npx webpack --mode production",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "babel src --out-dir dist --ignore \"src/**/*.d.ts\" --extensions \".ts,.tsx\" --source-maps inline"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matteobruni/tsparticles.git"
+  },
+  "keywords": [
+    "particles",
+    "particle",
+    "canvas",
+    "particles-js",
+    "particles.js",
+    "typescript",
+    "javascript",
+    "animation"
+  ],
+  "author": "Matteo Bruni",
+  "license": "MIT",
+  "files": [
+    "dist/**/*"
+  ],
+  "bugs": {
+    "url": "https://github.com/matteobruni/tsparticles/issues"
+  },
+  "main": "dist/tsparticles.min.js",
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-typescript": "^7.8.3",
+    "@babel/runtime": "^7.8.4",
+    "babel-loader": "^8.0.6",
+    "cpx": "^1.5.0",
+    "terser-webpack-plugin": "^2.3.5",
+    "typescript": "^3.7.5",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "pathseg": "^1.2.0"
+  }
+}
