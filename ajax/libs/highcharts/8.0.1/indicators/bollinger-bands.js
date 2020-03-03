@@ -1,0 +1,17 @@
+/*
+ Highstock JS v8.0.1 (2020-03-02)
+
+ Indicator series type for Highstock
+
+ (c) 2010-2019 Pawe Fus
+
+ License: www.highcharts.com/license
+*/
+(function(a){"object"===typeof module&&module.exports?(a["default"]=a,module.exports=a):"function"===typeof define&&define.amd?define("highcharts/indicators/bollinger-bands",["highcharts","highcharts/modules/stock"],function(c){a(c);a.Highcharts=c;return a}):a("undefined"!==typeof Highcharts?Highcharts:void 0)})(function(a){function c(a,b,c,r){a.hasOwnProperty(b)||(a[b]=r.apply(null,c))}a=a?a._modules:{};c(a,"mixins/multipe-lines.js",[a["parts/Globals.js"],a["parts/Utilities.js"]],function(a,b){var c=
+b.defined,r=b.error,m=b.merge,f=a.each,h=a.seriesTypes.sma;return{pointArrayMap:["top","bottom"],pointValKey:"top",linesApiNames:["bottomLine"],getTranslatedLinesNames:function(e){var a=[];f(this.pointArrayMap,function(d){d!==e&&a.push("plot"+d.charAt(0).toUpperCase()+d.slice(1))});return a},toYData:function(e){var a=[];f(this.pointArrayMap,function(d){a.push(e[d])});return a},translate:function(){var e=this,a=e.pointArrayMap,d=[],b;d=e.getTranslatedLinesNames();h.prototype.translate.apply(e,arguments);
+f(e.points,function(c){f(a,function(a,h){b=c[a];null!==b&&(c[d[h]]=e.yAxis.toPixels(b,!0))})})},drawGraph:function(){var a=this,b=a.linesApiNames,d=a.points,w=d.length,t=a.options,z=a.graph,A={options:{gapSize:t.gapSize}},n=[],g=a.getTranslatedLinesNames(a.pointValKey),p;f(g,function(a,b){for(n[b]=[];w--;)p=d[w],n[b].push({x:p.x,plotX:p.plotX,plotY:p[a],isNull:!c(p[a])});w=d.length});f(b,function(b,d){n[d]?(a.points=n[d],t[b]?a.options=m(t[b].styles,A):r('Error: "There is no '+b+' in DOCS options declared. Check if linesApiNames are consistent with your DOCS line names." at mixin/multiple-line.js:34'),
+a.graph=a["graph"+b],h.prototype.drawGraph.call(a),a["graph"+b]=a.graph):r('Error: "'+b+" doesn't have equivalent in pointArrayMap. To many elements in linesApiNames relative to pointArrayMap.\"")});a.points=d;a.options=t;a.graph=z;h.prototype.drawGraph.call(a)}}});c(a,"indicators/bollinger-bands.src.js",[a["parts/Globals.js"],a["parts/Utilities.js"],a["mixins/multipe-lines.js"]],function(a,b,c){var r=b.isArray,m=b.merge;b=b.seriesType;var f=a.seriesTypes.sma;b("bb","sma",{params:{period:20,standardDeviation:2,
+index:3},bottomLine:{styles:{lineWidth:1,lineColor:void 0}},topLine:{styles:{lineWidth:1,lineColor:void 0}},tooltip:{pointFormat:'<span style="color:{point.color}">\u25cf</span><b> {series.name}</b><br/>Top: {point.top}<br/>Middle: {point.middle}<br/>Bottom: {point.bottom}<br/>'},marker:{enabled:!1},dataGrouping:{approximation:"averages"}},m(c,{pointArrayMap:["top","middle","bottom"],pointValKey:"middle",nameComponents:["period","standardDeviation"],linesApiNames:["topLine","bottomLine"],init:function(){f.prototype.init.apply(this,
+arguments);this.options=m({topLine:{styles:{lineColor:this.color}},bottomLine:{styles:{lineColor:this.color}}},this.options)},getValues:function(a,b){var c=b.period,d=b.standardDeviation,e=a.xData,t=(a=a.yData)?a.length:0,h=[],m=[],n=[],g;if(!(e.length<c)){var p=r(a[0]);for(g=c;g<=t;g++){var u=e.slice(g-c,g);var q=a.slice(g-c,g);var k=f.prototype.getValues.call(this,{xData:u,yData:q},b);u=k.xData[0];k=k.yData[0];for(var x=0,y=q.length,v=0;v<y;v++){var l=(p?q[v][b.index]:q[v])-k;x+=l*l}l=Math.sqrt(x/
+(y-1));q=k+d*l;l=k-d*l;h.push([u,q,k,l]);m.push(u);n.push([q,k,l])}return{values:h,xData:m,yData:n}}}}));""});c(a,"masters/indicators/bollinger-bands.src.js",[],function(){})});
+//# sourceMappingURL=bollinger-bands.js.map
