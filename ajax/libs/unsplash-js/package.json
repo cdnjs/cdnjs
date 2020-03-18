@@ -1,0 +1,79 @@
+{
+  "name": "unsplash-js",
+  "filename": "unsplash.min.js",
+  "description": "A Universal JavaScript wrapper for the Unsplash API",
+  "main": "lib/unsplash.js",
+  "scripts": {
+    "build": "npm run build:lib && npm run build:umd && npm run build:umd:min && npm run build:examples",
+    "build:examples": "cp dist/unsplash.min.js examples/umd/public/unsplash.min.js",
+    "build:lib": "babel src --out-dir lib",
+    "build:umd": "webpack src/unsplash.js dist/unsplash.js --config webpack.config.development.js",
+    "build:umd:min": "webpack src/unsplash.js dist/unsplash.min.js --config webpack.config.production.js",
+    "build:watch": "babel src --watch --out-dir lib",
+    "lint": "eslint src",
+    "flow": "flow status",
+    "test": "npm run lint && npm run flow && npm run test:node && npm run test:browser",
+    "test:browser": "karma start",
+    "test:ci": "npm run lint && npm run flow && npm run test:browser && npm run test:coverage",
+    "test:coverage": "babel-node ./node_modules/.bin/isparta cover _mocha -- --require test/setup",
+    "test:node": "mocha --compilers js:babel-core/register --require test/setup --recursive",
+    "test:watch": "npm test -- --watch",
+    "prepublish": "npm run build",
+    "publish:major": "npm run build && npm version major",
+    "publish:minor": "npm run build && npm version minor",
+    "publish:patch": "npm run build && npm version patch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unsplash/unsplash-js.git"
+  },
+  "keywords": [
+    "unsplash",
+    "photos",
+    "api",
+    "images",
+    "splash",
+    "free"
+  ],
+  "author": "Unsplash",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/unsplash/unsplash-js/issues"
+  },
+  "homepage": "https://github.com/unsplash/unsplash-js#readme",
+  "devDependencies": {
+    "babel": "6.3.26",
+    "babel-cli": "6.4.0",
+    "babel-core": "6.4.0",
+    "babel-eslint": "5.0.0-beta10",
+    "babel-loader": "6.2.1",
+    "babel-plugin-transform-class-properties": "6.4.0",
+    "babel-plugin-transform-flow-strip-types": "6.4.0",
+    "babel-plugin-transform-object-assign": "6.3.13",
+    "babel-preset-es2015": "6.3.13",
+    "coveralls": "2.11.4",
+    "eslint": "1.10.2",
+    "expect": "1.12.2",
+    "flow-bin": "0.40.0",
+    "isparta": "4.0.0",
+    "istanbul": "0.4.2",
+    "karma": "0.13.21",
+    "karma-browserstack-launcher": "0.1.10",
+    "karma-chrome-launcher": "0.2.2",
+    "karma-firefox-launcher": "0.1.7",
+    "karma-mocha": "0.2.2",
+    "karma-safari-launcher": "0.1.1",
+    "karma-sourcemap-loader": "0.3.7",
+    "karma-webpack": "1.7.0",
+    "mocha": "2.3.3",
+    "mockery": "1.4.0",
+    "node-fetch": "1.5.0",
+    "webpack": "1.12.14"
+  },
+  "dependencies": {
+    "form-urlencoded": "1.2.0",
+    "lodash.get": "4.4.2",
+    "querystring": "0.2.0",
+    "url-parse": "1.2.0"
+  }
+}
