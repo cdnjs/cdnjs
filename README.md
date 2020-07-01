@@ -36,6 +36,7 @@
 
 * [Introduction](#introduction)
   * [Other Repositories](#other-repositories)
+  * [Cloning tips](#cloning-tips)
 * [Contributing](#contributing)
 * [Sponsors](#sponsors)
 * [License](#license)
@@ -57,6 +58,37 @@ For the full cdnjs branding and brand-related assets/guidelines, please see the 
 For our monthly CDN stats and usage reports, check out the [`cdnjs/cf-stats`](https://github.com/cdnjs/cf-stats) repository.
 
 You can find all our repositories at [github.com/cdnjs](https://github.com/cdnjs)!
+
+### Cloning tips
+
+This repository is very big and contains many files, so cloning the full repository is slow. If you only need part of repository, combining [partial clone](https://git-scm.com/docs/partial-clone) and [sparse checkout](https://git-scm.com/docs/git-sparse-checkout) is much faster:
+```
+$ time git clone --filter=blob:none --sparse https://github.com/cdnjs/cdnjs.git
+[...]
+real 1m17,683s
+$ cd cdnjs
+$ ls
+CONTRIBUTING.md  LICENSE  README.md
+$ time git sparse-checkout add ajax/libs/font-awesome/4.7.0
+real 0m19,090s
+$ tree ajax/libs/font-awesome/4.7.0
+ajax/libs/font-awesome/4.7.0
+├── css
+│   ├── font-awesome.css
+│   ├── font-awesome.css.map
+│   └── font-awesome.min.css
+└── fonts
+    ├── FontAwesome.otf
+    ├── fontawesome-webfont.eot
+    ├── fontawesome-webfont.svg
+    ├── fontawesome-webfont.ttf
+    ├── fontawesome-webfont.woff
+    └── fontawesome-webfont.woff2
+
+2 directories, 9 files
+$ du -hs
+1,1G .
+```
 
 ## Contributing
 
