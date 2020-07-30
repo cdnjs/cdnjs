@@ -48,7 +48,7 @@ This is the robot-only repository for cdnjs, where all the library assets that a
 
 For the JSON files controlling the libraries we host on cdnjs, please take a look at the "human" [`cdnjs/packages`](https://github.com/cdnjs/packages) repository.
 
-For our website, please refer to the [`cdnjs/new-website`](https://github.com/cdnjs/new-website) repository.
+For our website, please refer to the [`cdnjs/static-website`](https://github.com/cdnjs/static-website) repository.
 
 For the cdnjs API, please refer to the [`cdnjs/api-server`](https://github.com/cdnjs/api-server) repository.
 
