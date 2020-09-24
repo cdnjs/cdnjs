@@ -60,7 +60,7 @@ You can find all our repositories at [github.com/cdnjs](https://github.com/cdnjs
 
 ## Contributing
 
-As this repository is now considered robot-only, pull requests are no longer excepted for this repository. If you are looking to contribute to cdnjs, please take a look at the [`cdnjs/packages`](https://github.com/cdnjs/packages) repository or any of our other [open-source repositories on GitHub](https://github.com/cdnjs)!
+As this repository is now considered robot-only, pull requests are no longer accepted for this repository. If you are looking to contribute to cdnjs, please take a look at the [`cdnjs/packages`](https://github.com/cdnjs/packages) repository or any of our other [open-source repositories on GitHub](https://github.com/cdnjs)!
 
 ## Sponsors
 
