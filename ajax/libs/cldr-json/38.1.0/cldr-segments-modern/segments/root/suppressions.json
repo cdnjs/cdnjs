@@ -1,0 +1,673 @@
+{
+  "segments": {
+    "identity": {
+      "version": {
+        "_cldrVersion": "38"
+      },
+      "language": "root"
+    },
+    "segmentations": {
+      "GraphemeClusterBreak": {
+        "variables": [
+          {
+            "$CR": "\\\\p{Grapheme_Cluster_Break=CR}"
+          },
+          {
+            "$LF": "\\\\p{Grapheme_Cluster_Break=LF}"
+          },
+          {
+            "$Control": "\\\\p{Grapheme_Cluster_Break=Control}"
+          },
+          {
+            "$Extend": "\\\\p{Grapheme_Cluster_Break=Extend}"
+          },
+          {
+            "$ZWJ": "\\\\p{Grapheme_Cluster_Break=ZWJ}"
+          },
+          {
+            "$RI": "\\\\p{Grapheme_Cluster_Break=Regional_Indicator}"
+          },
+          {
+            "$Prepend": "\\\\p{Grapheme_Cluster_Break=Prepend}"
+          },
+          {
+            "$SpacingMark": "\\\\p{Grapheme_Cluster_Break=SpacingMark}"
+          },
+          {
+            "$L": "\\\\p{Grapheme_Cluster_Break=L}"
+          },
+          {
+            "$V": "\\\\p{Grapheme_Cluster_Break=V}"
+          },
+          {
+            "$T": "\\\\p{Grapheme_Cluster_Break=T}"
+          },
+          {
+            "$LV": "\\\\p{Grapheme_Cluster_Break=LV}"
+          },
+          {
+            "$LVT": "\\\\p{Grapheme_Cluster_Break=LVT}"
+          },
+          {
+            "$Virama": "[\\\\p{Gujr}\\\\p{sc=Telu}\\\\p{sc=Mlym}\\\\p{sc=Orya}\\\\p{sc=Beng}\\\\p{sc=Deva}&\\\\p{Indic_Syllabic_Category=Virama}]"
+          },
+          {
+            "$LinkingConsonant": "[\\\\p{Gujr}\\\\p{sc=Telu}\\\\p{sc=Mlym}\\\\p{sc=Orya}\\\\p{sc=Beng}\\\\p{sc=Deva}&\\\\p{Indic_Syllabic_Category=Consonant}]"
+          },
+          {
+            "$ExtPict": "\\\\p{Extended_Pictographic}"
+          },
+          {
+            "$ExtCccZwj": "[[$Extend-\\\\p{ccc=0}] $ZWJ]"
+          }
+        ],
+        "segmentRules": {
+          "3": " $CR × $LF ",
+          "4": " ( $Control | $CR | $LF ) ÷ ",
+          "5": " ÷ ( $Control | $CR | $LF ) ",
+          "6": " $L × ( $L | $V | $LV | $LVT ) ",
+          "7": " ( $LV | $V ) × ( $V | $T ) ",
+          "8": " ( $LVT | $T) × $T ",
+          "9": " × ($Extend | $ZWJ) ",
+          "9.1": " × $SpacingMark ",
+          "9.2": " $Prepend × ",
+          "9.3": " $LinkingConsonant $ExtCccZwj* $Virama $ExtCccZwj* × $LinkingConsonant ",
+          "11": " $ExtPict $Extend* $ZWJ × $ExtPict ",
+          "12": " ^ ($RI $RI)* $RI × $RI ",
+          "13": " [^$RI] ($RI $RI)* $RI × $RI "
+        }
+      },
+      "LineBreak": {
+        "variables": [
+          {
+            "$AI": "\\\\p{Line_Break=Ambiguous}"
+          },
+          {
+            "$AL": "\\\\p{Line_Break=Alphabetic}"
+          },
+          {
+            "$B2": "\\\\p{Line_Break=Break_Both}"
+          },
+          {
+            "$BA": "\\\\p{Line_Break=Break_After}"
+          },
+          {
+            "$BB": "\\\\p{Line_Break=Break_Before}"
+          },
+          {
+            "$BK": "\\\\p{Line_Break=Mandatory_Break}"
+          },
+          {
+            "$CB": "\\\\p{Line_Break=Contingent_Break}"
+          },
+          {
+            "$CL": "\\\\p{Line_Break=Close_Punctuation}"
+          },
+          {
+            "$CP": "\\\\p{Line_Break=CP}"
+          },
+          {
+            "$CP30": "[$CP - [\\\\p{ea=F}\\\\p{ea=W}\\\\p{ea=H}]]"
+          },
+          {
+            "$CM1": "\\\\p{Line_Break=Combining_Mark}"
+          },
+          {
+            "$CR": "\\\\p{Line_Break=Carriage_Return}"
+          },
+          {
+            "$EX": "\\\\p{Line_Break=Exclamation}"
+          },
+          {
+            "$GL": "\\\\p{Line_Break=Glue}"
+          },
+          {
+            "$H2": "\\\\p{Line_Break=H2}"
+          },
+          {
+            "$H3": "\\\\p{Line_Break=H3}"
+          },
+          {
+            "$HL": "\\\\p{Line_Break=HL}"
+          },
+          {
+            "$HY": "\\\\p{Line_Break=Hyphen}"
+          },
+          {
+            "$ID": "\\\\p{Line_Break=Ideographic}"
+          },
+          {
+            "$IN": "\\\\p{Line_Break=Inseparable}"
+          },
+          {
+            "$IS": "\\\\p{Line_Break=Infix_Numeric}"
+          },
+          {
+            "$JL": "\\\\p{Line_Break=JL}"
+          },
+          {
+            "$JT": "\\\\p{Line_Break=JT}"
+          },
+          {
+            "$JV": "\\\\p{Line_Break=JV}"
+          },
+          {
+            "$LF": "\\\\p{Line_Break=Line_Feed}"
+          },
+          {
+            "$NL": "\\\\p{Line_Break=Next_Line}"
+          },
+          {
+            "$NS": "\\\\p{Line_Break=Nonstarter}"
+          },
+          {
+            "$NU": "\\\\p{Line_Break=Numeric}"
+          },
+          {
+            "$OP": "\\\\p{Line_Break=Open_Punctuation}"
+          },
+          {
+            "$OP30": "[$OP - [\\\\p{ea=F}\\\\p{ea=W}\\\\p{ea=H}]]"
+          },
+          {
+            "$PO": "\\\\p{Line_Break=Postfix_Numeric}"
+          },
+          {
+            "$PR": "\\\\p{Line_Break=Prefix_Numeric}"
+          },
+          {
+            "$QU": "\\\\p{Line_Break=Quotation}"
+          },
+          {
+            "$SA": "\\\\p{Line_Break=Complex_Context}"
+          },
+          {
+            "$SG": "\\\\p{Line_Break=Surrogate}"
+          },
+          {
+            "$SP": "\\\\p{Line_Break=Space}"
+          },
+          {
+            "$SY": "\\\\p{Line_Break=Break_Symbols}"
+          },
+          {
+            "$WJ": "\\\\p{Line_Break=Word_Joiner}"
+          },
+          {
+            "$XX": "\\\\p{Line_Break=Unknown}"
+          },
+          {
+            "$ZW": "\\\\p{Line_Break=ZWSpace}"
+          },
+          {
+            "$CJ": "\\\\p{Line_Break=Conditional_Japanese_Starter}"
+          },
+          {
+            "$RI": "\\\\p{Line_Break=Regional_Indicator}"
+          },
+          {
+            "$EB": "\\\\p{Line_Break=E_Base}"
+          },
+          {
+            "$EM": "\\\\p{Line_Break=E_Modifier}"
+          },
+          {
+            "$ZWJ_O": "\\\\p{Line_Break=ZWJ}"
+          },
+          {
+            "$ZWJ": "\\\\p{Line_Break=ZWJ}"
+          },
+          {
+            "$CM": "[$CM1 $ZWJ]"
+          },
+          {
+            "$AL": "[$AI $AL $SG $XX $SA]"
+          },
+          {
+            "$NS": "[$NS $CJ]"
+          },
+          {
+            "$X": "$CM*"
+          },
+          {
+            "$Spec1_": "[$SP $BK $CR $LF $NL $ZW]"
+          },
+          {
+            "$Spec2_": "[^ $SP $BK $CR $LF $NL $ZW]"
+          },
+          {
+            "$Spec3a_": "[^ $SP $BA $HY $CM]"
+          },
+          {
+            "$Spec3b_": "[^ $BA $HY $CM]"
+          },
+          {
+            "$Spec4_": "[^ $NU $CM]"
+          },
+          {
+            "$Spec5_": "[$BK $CB $CR $LF $NL $SP $ZW]"
+          },
+          {
+            "$AI": "($AI $X)"
+          },
+          {
+            "$AL": "($AL $X)"
+          },
+          {
+            "$B2": "($B2 $X)"
+          },
+          {
+            "$BA": "($BA $X)"
+          },
+          {
+            "$BB": "($BB $X)"
+          },
+          {
+            "$CB": "($CB $X)"
+          },
+          {
+            "$CL": "($CL $X)"
+          },
+          {
+            "$CP": "($CP $X)"
+          },
+          {
+            "$CP30": "($CP30 $X)"
+          },
+          {
+            "$CM": "($CM $X)"
+          },
+          {
+            "$EX": "($EX $X)"
+          },
+          {
+            "$GL": "($GL $X)"
+          },
+          {
+            "$H2": "($H2 $X)"
+          },
+          {
+            "$H3": "($H3 $X)"
+          },
+          {
+            "$HL": "($HL $X)"
+          },
+          {
+            "$HY": "($HY $X)"
+          },
+          {
+            "$ID": "($ID $X)"
+          },
+          {
+            "$IN": "($IN $X)"
+          },
+          {
+            "$IS": "($IS $X)"
+          },
+          {
+            "$JL": "($JL $X)"
+          },
+          {
+            "$JT": "($JT $X)"
+          },
+          {
+            "$JV": "($JV $X)"
+          },
+          {
+            "$NS": "($NS $X)"
+          },
+          {
+            "$NU": "($NU $X)"
+          },
+          {
+            "$OP": "($OP $X)"
+          },
+          {
+            "$OP30": "($OP30 $X)"
+          },
+          {
+            "$PO": "($PO $X)"
+          },
+          {
+            "$PR": "($PR $X)"
+          },
+          {
+            "$QU": "($QU $X)"
+          },
+          {
+            "$SA": "($SA $X)"
+          },
+          {
+            "$SG": "($SG $X)"
+          },
+          {
+            "$SY": "($SY $X)"
+          },
+          {
+            "$WJ": "($WJ $X)"
+          },
+          {
+            "$XX": "($XX $X)"
+          },
+          {
+            "$RI": "($RI $X)"
+          },
+          {
+            "$EB": "($EB $X)"
+          },
+          {
+            "$EM": "($EM $X)"
+          },
+          {
+            "$ZWJ": "($ZWJ $X)"
+          },
+          {
+            "$AL": "($AL | ^ $CM | (?<=$Spec1_) $CM)"
+          }
+        ],
+        "segmentRules": {
+          "4": " $BK ÷ ",
+          "5.01": " $CR × $LF ",
+          "5.02": " $CR ÷ ",
+          "5.03": " $LF ÷ ",
+          "5.04": " $NL ÷ ",
+          "6": " × ( $BK | $CR | $LF | $NL ) ",
+          "7.01": " × $SP ",
+          "7.02": " × $ZW ",
+          "8": " $ZW $SP* ÷ ",
+          "8.1": " $ZWJ_O × ",
+          "9": " $Spec2_ × $CM ",
+          "11.01": " × $WJ ",
+          "11.02": " $WJ × ",
+          "12": " $GL × ",
+          "12.1": " $Spec3a_ × $GL ",
+          "12.2": " $Spec3b_ $CM+ × $GL ",
+          "12.3": " ^ $CM+ × $GL ",
+          "13.01": " × $EX ",
+          "13.02": " $Spec4_ × ($CL | $CP | $IS | $SY) ",
+          "13.03": " $Spec4_ $CM+ × ($CL | $CP | $IS | $SY) ",
+          "13.04": " ^ $CM+ × ($CL | $CP | $IS | $SY) ",
+          "14": " $OP $SP* × ",
+          "15": " $QU $SP* × $OP ",
+          "16": " ($CL | $CP) $SP* × $NS ",
+          "17": " $B2 $SP* × $B2 ",
+          "18": " $SP ÷ ",
+          "19.01": " × $QU ",
+          "19.02": " $QU × ",
+          "20.01": " ÷ $CB ",
+          "20.02": " $CB ÷ ",
+          "20.09": " $Spec5_ $HY × $AL ",
+          "21.01": " × $BA ",
+          "21.02": " × $HY ",
+          "21.03": " × $NS ",
+          "21.04": " $BB × ",
+          "21.1": " $HL ($HY | $BA) × ",
+          "21.2": " $SY × $HL ",
+          "22.01": " × $IN ",
+          "23.02": " ($AL | $HL) × $NU ",
+          "23.03": " $NU × ($AL | $HL) ",
+          "23.12": " $PR × ($ID | $EB | $EM) ",
+          "23.13": " ($ID | $EB | $EM) × $PO ",
+          "24.02": " ($PR | $PO) × ($AL | $HL) ",
+          "24.03": " ($AL | $HL) × ($PR | $PO) ",
+          "25.01": " ($PR | $PO) × ( $OP | $HY )? $NU ",
+          "25.02": " ( $OP | $HY ) × $NU ",
+          "25.03": " $NU × ($NU | $SY | $IS) ",
+          "25.04": " $NU ($NU | $SY | $IS)* × ($NU | $SY | $IS | $CL | $CP) ",
+          "25.05": " $NU ($NU | $SY | $IS)* ($CL | $CP)? × ($PO | $PR) ",
+          "26.01": " $JL × $JL | $JV | $H2 | $H3 ",
+          "26.02": " $JV | $H2 × $JV | $JT ",
+          "26.03": " $JT | $H3 × $JT ",
+          "27.01": " $JL | $JV | $JT | $H2 | $H3 × $IN ",
+          "27.02": " $JL | $JV | $JT | $H2 | $H3 × $PO ",
+          "27.03": " $PR × $JL | $JV | $JT | $H2 | $H3 ",
+          "28": " ($AL | $HL) × ($AL | $HL) ",
+          "29": " $IS × ($AL | $HL) ",
+          "30.01": " ($AL | $HL | $NU) × $OP30 ",
+          "30.02": " $CP30 × ($AL | $HL | $NU) ",
+          "30.11": " ^ ($RI $RI)* $RI × $RI ",
+          "30.12": " [^$RI] ($RI $RI)* $RI × $RI ",
+          "30.13": " $RI ÷ $RI ",
+          "30.2": " $EB × $EM "
+        }
+      },
+      "SentenceBreak": {
+        "variables": [
+          {
+            "$CR": "\\\\p{Sentence_Break=CR}"
+          },
+          {
+            "$LF": "\\\\p{Sentence_Break=LF}"
+          },
+          {
+            "$Extend": "\\\\p{Sentence_Break=Extend}"
+          },
+          {
+            "$Format": "\\\\p{Sentence_Break=Format}"
+          },
+          {
+            "$Sep": "\\\\p{Sentence_Break=Sep}"
+          },
+          {
+            "$Sp": "\\\\p{Sentence_Break=Sp}"
+          },
+          {
+            "$Lower": "\\\\p{Sentence_Break=Lower}"
+          },
+          {
+            "$Upper": "\\\\p{Sentence_Break=Upper}"
+          },
+          {
+            "$OLetter": "\\\\p{Sentence_Break=OLetter}"
+          },
+          {
+            "$Numeric": "\\\\p{Sentence_Break=Numeric}"
+          },
+          {
+            "$ATerm": "\\\\p{Sentence_Break=ATerm}"
+          },
+          {
+            "$STerm": "\\\\p{Sentence_Break=STerm}"
+          },
+          {
+            "$Close": "\\\\p{Sentence_Break=Close}"
+          },
+          {
+            "$SContinue": "\\\\p{Sentence_Break=SContinue}"
+          },
+          {
+            "$Any": "."
+          },
+          {
+            "$FE": "[$Format $Extend]"
+          },
+          {
+            "$NotPreLower_": "[^ $OLetter $Upper $Lower $Sep $CR $LF $STerm $ATerm]"
+          },
+          {
+            "$Sp": "($Sp $FE*)"
+          },
+          {
+            "$Lower": "($Lower $FE*)"
+          },
+          {
+            "$Upper": "($Upper $FE*)"
+          },
+          {
+            "$OLetter": "($OLetter $FE*)"
+          },
+          {
+            "$Numeric": "($Numeric $FE*)"
+          },
+          {
+            "$ATerm": "($ATerm $FE*)"
+          },
+          {
+            "$STerm": "($STerm $FE*)"
+          },
+          {
+            "$Close": "($Close $FE*)"
+          },
+          {
+            "$SContinue": "($SContinue $FE*)"
+          },
+          {
+            "$ParaSep": "($Sep | $CR | $LF)"
+          },
+          {
+            "$SATerm": "($STerm | $ATerm)"
+          }
+        ],
+        "segmentRules": {
+          "3": " $CR × $LF ",
+          "4": " $ParaSep ÷ ",
+          "5": " × [$Format $Extend] ",
+          "6": " $ATerm × $Numeric ",
+          "7": " ($Upper | $Lower) $ATerm × $Upper ",
+          "8": " $ATerm $Close* $Sp* × $NotPreLower_* $Lower ",
+          "8.1": " $SATerm $Close* $Sp* × ($SContinue | $SATerm) ",
+          "9": " $SATerm $Close* × ( $Close | $Sp | $ParaSep ) ",
+          "10": " $SATerm $Close* $Sp* × ( $Sp | $ParaSep ) ",
+          "11": " $SATerm $Close* $Sp* $ParaSep? ÷ ",
+          "998": " × $Any "
+        }
+      },
+      "WordBreak": {
+        "variables": [
+          {
+            "$CR": "\\\\p{Word_Break=CR}"
+          },
+          {
+            "$LF": "\\\\p{Word_Break=LF}"
+          },
+          {
+            "$Newline": "\\\\p{Word_Break=Newline}"
+          },
+          {
+            "$Extend": "\\\\p{Word_Break=Extend}"
+          },
+          {
+            "$Format": "\\\\p{Word_Break=Format}"
+          },
+          {
+            "$Katakana": "\\\\p{Word_Break=Katakana}"
+          },
+          {
+            "$ALetter": "\\\\p{Word_Break=ALetter}"
+          },
+          {
+            "$MidLetter": "\\\\p{Word_Break=MidLetter}"
+          },
+          {
+            "$MidNum": "\\\\p{Word_Break=MidNum}"
+          },
+          {
+            "$MidNumLet": "\\\\p{Word_Break=MidNumLet}"
+          },
+          {
+            "$Numeric": "\\\\p{Word_Break=Numeric}"
+          },
+          {
+            "$ExtendNumLet": "\\\\p{Word_Break=ExtendNumLet}"
+          },
+          {
+            "$RI": "\\\\p{Word_Break=Regional_Indicator}"
+          },
+          {
+            "$Hebrew_Letter": "\\\\p{Word_Break=Hebrew_Letter}"
+          },
+          {
+            "$Double_Quote": "\\\\p{Word_Break=Double_Quote}"
+          },
+          {
+            "$Single_Quote": "\\\\p{Word_Break=Single_Quote}"
+          },
+          {
+            "$ZWJ": "\\\\p{Word_Break=ZWJ}"
+          },
+          {
+            "$ExtPict": "\\\\p{Extended_Pictographic}"
+          },
+          {
+            "$WSegSpace": "\\\\p{Word_Break=WSegSpace}"
+          },
+          {
+            "$AHLetter": "($ALetter | $Hebrew_Letter)"
+          },
+          {
+            "$MidNumLetQ": "($MidNumLet | $Single_Quote)"
+          },
+          {
+            "$FE": "[$Format $Extend $ZWJ]"
+          },
+          {
+            "$NotBreak_": "[^ $Newline $CR $LF ]"
+          },
+          {
+            "$Katakana": "($Katakana $FE*)"
+          },
+          {
+            "$ALetter": "($ALetter $FE*)"
+          },
+          {
+            "$MidLetter": "($MidLetter $FE*)"
+          },
+          {
+            "$MidNum": "($MidNum $FE*)"
+          },
+          {
+            "$MidNumLet": "($MidNumLet $FE*)"
+          },
+          {
+            "$Numeric": "($Numeric $FE*)"
+          },
+          {
+            "$ExtendNumLet": "($ExtendNumLet $FE*)"
+          },
+          {
+            "$RI": "($RI $FE*)"
+          },
+          {
+            "$Hebrew_Letter": "($Hebrew_Letter $FE*)"
+          },
+          {
+            "$Double_Quote": "($Double_Quote $FE*)"
+          },
+          {
+            "$Single_Quote": "($Single_Quote $FE*)"
+          },
+          {
+            "$AHLetter": "($AHLetter $FE*)"
+          },
+          {
+            "$MidNumLetQ": "($MidNumLetQ $FE*)"
+          }
+        ],
+        "segmentRules": {
+          "3": " $CR × $LF ",
+          "3.1": " ($Newline | $CR | $LF) ÷ ",
+          "3.2": " ÷ ($Newline | $CR | $LF) ",
+          "3.3": " $ZWJ × $ExtPict ",
+          "3.4": " $WSegSpace × $WSegSpace ",
+          "4": " $NotBreak_ × [$Format $Extend $ZWJ] ",
+          "5": " $AHLetter × $AHLetter ",
+          "6": " $AHLetter × ($MidLetter | $MidNumLetQ) $AHLetter ",
+          "7": " $AHLetter ($MidLetter | $MidNumLetQ) × $AHLetter ",
+          "7.1": " $Hebrew_Letter × $Single_Quote ",
+          "7.2": " $Hebrew_Letter × $Double_Quote $Hebrew_Letter ",
+          "7.3": " $Hebrew_Letter $Double_Quote × $Hebrew_Letter ",
+          "8": " $Numeric × $Numeric ",
+          "9": " $AHLetter × $Numeric ",
+          "10": " $Numeric × $AHLetter ",
+          "11": " $Numeric ($MidNum | $MidNumLetQ) × $Numeric ",
+          "12": " $Numeric × ($MidNum | $MidNumLetQ) $Numeric ",
+          "13": " $Katakana × $Katakana ",
+          "13.1": " ($AHLetter | $Numeric | $Katakana | $ExtendNumLet) × $ExtendNumLet ",
+          "13.2": " $ExtendNumLet × ($AHLetter | $Numeric | $Katakana) ",
+          "15": " ^ ($RI $RI)* $RI × $RI ",
+          "16": " [^$RI] ($RI $RI)* $RI × $RI "
+        }
+      }
+    }
+  }
+}
