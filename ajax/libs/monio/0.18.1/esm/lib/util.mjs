@@ -1,0 +1,5 @@
+/*! Monio: util.mjs
+    v0.18.1 (c) 2021 Kyle Simpson
+    MIT License: http://getify.mit-license.org
+*/
+export default{getMonadFlatMap:getMonadFlatMap,isFunction:isFunction,isPromise:isPromise,isMonad:isMonad,curry:curry};export{getMonadFlatMap};export{isFunction};export{isPromise};export{isMonad};export{curry};function getMonadFlatMap(n){var t=n["flatMap"in n?"flatMap":"chain"in n?"chain":"bind"];return isFunction(t)&&t!==Function.prototype.bind&&t!==Array.prototype.flatMap?t:void 0}function isFunction(n){return!(!n||"function"!=typeof n)}function isPromise(n){return!(!n||!isFunction(n.then))}function isMonad(n){return!(!n||"object"!=typeof n&&!isFunction(n)||!isFunction(getMonadFlatMap(n)))}function curry(n,t=n.length){return function nextCurried(i){return(...o)=>{var r=[...i,...o];return r.length>=t?n(...r):nextCurried(r)}}([])}
