@@ -1,0 +1,1 @@
+import{generateUtilityClass,generateUtilityClasses}from"@material-ui/unstyled";export function getCardActionAreaUtilityClass(t){return generateUtilityClass("MuiCardActionArea",t)};var cardActionAreaClasses=generateUtilityClasses("MuiCardActionArea",["root","focusVisible","focusHighlight"]);export default cardActionAreaClasses;
