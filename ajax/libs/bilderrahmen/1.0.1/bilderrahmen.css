@@ -1,0 +1,105 @@
+/*!
+ * @license MIT
+ * Copyright (c) 2017 - 2018 Bernhard Grünewaldt
+ * https://github.com/codeclou/bilderrahmen
+ */
+.bilderrahmen-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 777;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+.bilderrahmen--top {
+  width: 100vw;
+  height: 3rem;
+  position: fixed;
+}
+.bilderrahmen--top-title {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 3rem;
+  width: calc(100vw - 3rem);
+  color: #fff;
+  font-family: 'Open Sans', Helvetica, 'Helvetica Neue', Arial, sans-serif;
+  padding: 0.8rem;
+  text-align: center;
+}
+.bilderrahmen--top-close {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 3rem;
+  width: 3rem;
+  cursor: pointer;
+  /* closeIfOpen.svg */
+  background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjciIGhlaWdodD0iMjciIHZpZXdCb3g9IjAgMCAyNzAgMjcwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjx0aXRsZT5jbG9zZTwvdGl0bGU+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBmaWxsLW9wYWNpdHk9Ii4wMSIgZmlsbD0iI0Q4RDhEOCIgZD0iTTI3MCAwSDB2MjcwaDI3MHoiLz48cGF0aCBkPSJNMTA3LjQ2IDEzNC41NUwyMi44MiA0OC45MDQgNTEuODE0IDIybDgzLjU5NyA4NC4zNDdMMjE5LjAwOCAyMiAyNDggNDguOTA0bC04NC42MzggODUuNjQ2IDg0LjUxMyA4NS4yNy0yOC44NCAyOC4wMS0yNy4zMDgtMjguMDEtNTYuMzE2LTU2Ljk4NS01Ni4zMTYgNTYuOTg2LTI3LjMwOCAyOC4wMS0yOC44NC0yOC4wMSA4NC41MTMtODUuMjd6IiBzdHJva2U9IiM5Nzk3OTciIHN0cm9rZS13aWR0aD0iOCIgZmlsbD0iI0ZGRiIvPjwvZz48L3N2Zz4=)
+    center center no-repeat;
+}
+.bilderrahmen--left {
+  top: 3rem;
+  width: 3rem;
+  height: calc(100vh - 3rem);
+  position: fixed;
+}
+.bilderrahmen--left--has-previous {
+  cursor: pointer;
+  /* prev svg */
+  background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iNDUiIHZpZXdCb3g9IjAgMCA1MDAgNDUwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjx0aXRsZT5wcmV2PC90aXRsZT48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGZpbGwtb3BhY2l0eT0iLjAxIiBmaWxsPSIjRDhEOEQ4IiBkPSJNNTAwIDBIMHY0NTBoNTAweiIvPjxwYXRoIHN0cm9rZT0iIzk3OTc5NyIgc3Ryb2tlLXdpZHRoPSI4IiBmaWxsPSIjRkZGIiBkPSJNNDE3LjMyIDQ3Ljg1MkwyMzkuNDkgMjI3LjI3OCA0MTEuMjEyIDM5OWwyNi40NTItMjUuNDY1LTE0Ny4yNDgtMTQ2LjI1NyAxNTMuMi0xNTUuMDI0eiIvPjwvZz48L3N2Zz4=)
+    left 48% no-repeat;
+}
+.bilderrahmen--right {
+  top: 3rem;
+  width: 3rem;
+  height: calc(100vh - 3rem);
+  right: 0;
+  position: fixed;
+}
+.bilderrahmen--right--has-next {
+  cursor: pointer;
+  /* next.svg */
+  background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iNDUiIHZpZXdCb3g9IjAgMCA1MDAgNDUwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjx0aXRsZT5uZXh0PC90aXRsZT48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGZpbGwtb3BhY2l0eT0iLjAxIiBmaWxsPSIjRDhEOEQ4IiBkPSJNMCAwaDUwMHY0NTBIMHoiLz48cGF0aCBzdHJva2U9IiM5Nzk3OTciIHN0cm9rZS13aWR0aD0iOCIgZmlsbD0iI0ZGRiIgZD0iTTgyLjY3NyA0Ny44NTJsMTc3LjgzIDE3OS40MjZMODguNzgzIDM5OWwtMjYuNDUyLTI1LjQ2NUwyMDkuNTggMjI3LjI3OCA1Ni4zOCA3Mi4yNTR6Ii8+PC9nPjwvc3ZnPg==)
+    right 48% no-repeat;
+}
+.bilderrahmen--right--has-next:hover,
+.bilderrahmen--left--has-previous:hover,
+.bilderrahmen--top-close:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.bilderrahmen--image {
+  top: 3rem;
+  width: calc(100vw - 6rem);
+  height: calc(100vh - 3rem);
+  left: 3rem;
+  position: fixed;
+  text-align: center;
+  /* loading.svg */
+  background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+ICA8c3R5bGU+ICAgIC8qIDwhW0NEQVRBWyAqLyAgICBAa2V5ZnJhbWVzIHJvdGF0ZUFuaW1hdGlvbiB7ICAgICAgMCUgeyB0cmFuc2Zvcm06IHJvdGF0ZSgwZGVnKTt9ICAgICAgMTAwJSB7dHJhbnNmb3JtOiByb3RhdGUoMzYwZGVnKTt9ICAgIH0gICAgLmNpcmNsZSB7ICAgICAgYW5pbWF0aW9uLW5hbWU6IHJvdGF0ZUFuaW1hdGlvbjsgICAgICBhbmltYXRpb24tZHVyYXRpb246IDguNXM7ICAgICAgYW5pbWF0aW9uLWl0ZXJhdGlvbi1jb3VudDogaW5maW5pdGU7ICAgICAgdHJhbnNmb3JtLW9yaWdpbjogNTAlIDUwJTsgICAgfSAgICAvKiBdXT4gKi8gIDwvc3R5bGU+ICA8ZyBjbGFzcz0iY2lyY2xlIj4gICAgPHBhdGggZD0iTTE3My41NCAzMS42NjVDOTAuNjM1IDY0LjUwNyAzMiAxNDUuNDA1IDMyIDI0MGMwIDEyMy43MTIgMTAwLjI4OCAyMjQgMjI0IDIyNHMyMjQtMTAwLjI4OCAyMjQtMjI0YzAtOTIuMjEtNTUuNzE3LTE3MS40MDctMTM1LjMyLTIwNS43NmwtMTUuNDIgNDcuNjA2QzM4OS4zMDUgMTA5LjQzIDQzMSAxNzAuMDk2IDQzMSAyNDAuNWMwIDk2LjM3NC03OC4xMjYgMTc0LjUtMTc0LjUgMTc0LjVTODIgMzM2Ljg3NCA4MiAyNDAuNWMwLTcyLjk1IDQ0Ljc2NC0xMzUuNDQ0IDEwOC4zMi0xNjEuNTE0bC0xNi43OC00Ny4zMnoiIGZpbGw9IiNGRkYiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPiAgPC9nPjwvc3ZnPg==)
+    center center no-repeat;
+  background-size: 4rem;
+}
+.bilderrahmen--image-loaded {
+  background: transparent;
+}
+.bilderrahmen--image-inner {
+  height: 100%;
+  width: 100%;
+}
+.bilderrahmen--image-inner-wrap {
+  height: 100%;
+  width: 100%;
+}
+.bilderrahmen--image-img {
+  max-height: 100%;
+  max-width: 100%;
+  height: auto;
+  width: auto;
+}
