@@ -1,0 +1,5 @@
+/*! Monio: nothing.js
+    v0.24.2 (c) 2021 Kyle Simpson
+    MIT License: http://getify.mit-license.org
+*/
+!function UMD(n,o,t,i){"function"==typeof define&&define.amd?(t=Object.values(t),define(n,t,i)):"undefined"!=typeof module&&module.exports?(t=Object.keys(t).map((n=>require(n))),module.exports=i(...t)):(t=Object.values(t).map((n=>o[n])),o[n]=i(...t))}("Nothing","undefined"!=typeof globalThis?globalThis:"undefined"!=typeof global?global:"undefined"!=typeof window?window:"undefined"!=typeof self?self:new Function("return this")(),{"./lib/util.js":"MonioUtil"},(function DEF(n){"use strict";var{isFunction:o}=n,t={};let i={};function Nothing(){var n={map:noop,chain:noop,flatMap:noop,bind:noop,ap:noop,concat:noop,_inspect:function _inspect(){return`${n[Symbol.toStringTag]}()`},_is:function _is(n){return n===t},[Symbol.toStringTag]:"Nothing"};return n;function noop(){return n}}return i=Object.assign(Nothing,{of:Nothing,pure:Nothing,unit:Nothing,is:function is(n){return n&&o(n._is)&&n._is(t)},isEmpty:function isEmpty(n){return null==n}}),i}));
