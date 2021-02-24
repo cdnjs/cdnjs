@@ -1,0 +1,1 @@
+import{B as t}from"./index-923e9709.js";export default class extends t{init(){this.on("focusin",(()=>{this.setMod("focus",!0)})),this.on("focusout",(()=>{this.setMod("focus",!1)})),this.on("click",(()=>{const t=this.host.querySelector('input, [tabindex]:not([tabindex="-1"])');t&&t.focus()}))}connected(){this.setContext("inputgroup",this)}}
