@@ -1,0 +1,232 @@
+@use "../goldenlayout-base.scss";
+
+// TODO
+// Images should be changed to SVG sprites so that colors can be changed
+
+// Color variables (appears count calculates by raw css)
+$baseBkgdColor: var(--color-layout-base-bkgd, #000000); // Appears 7 times
+$singlePaneContentBkgdColor: var(--color-layout-single-pane-content-bkgd, #222222); // Appears 3 times
+$popinIconBorderForeColor: var(--color-layout-popin-icon-border-fore, #eeeeee); // Appears 2 times
+$activeTabForeColor: var(--color-layout-active-tab-fore, #dddddd); // Appears 2 times
+
+$dropTargetIndicatorOutlineForeColor: var(--color-layout-drop-target-indicator-outline-fore, #cccccc); // Appears 1 time
+$splitterDraggingBkgdColor: var(--color-layout-splitter-dragging-bkgd, #444444); // Appears 1 time
+$singleTabContainerForeColor: var(--color-layout-single-tab-container-fore, #999999); // Appears 1 time
+$singleTablContainerBkgdColor: var(--color-layout-single-tab-container-bkgd, #111111); // Appears 1 time
+$selectedHeaderBkgdColor: var(--color-layout-selected-header-bkgd, #452500); // Appears 1 time
+$transitionIndicatorBorderForeColor: var(--color-layout-transition-indicator-border-fore, #555555); // Appears 1 time
+$dropDownArrowForeColor: var(--color-layout-drop-down-arrow-fore, #ffffff); // Appears 2 time
+
+$focusedTabBkgdColor: var(--color-layout-focused-tab-bkgd, #354be3); // Appears 1 time
+
+// ".lm_dragging" is applied to BODY tag during Drag and is also directly applied to the root of the object being dragged
+
+// Entire GoldenLayout Container, if a background is set, it is visible as color of "pane header" and "splitters" (if these latest has opacity very low)
+.lm_goldenlayout {
+    background: $baseBkgdColor;
+}
+
+// Single Pane content (area in which final dragged content is contained)
+.lm_content {
+    background: $singlePaneContentBkgdColor;
+}
+
+// Single Pane content during Drag (style of moving window following mouse)
+.lm_dragProxy {
+    .lm_content {
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+    }
+}
+
+// Placeholder Container of target position
+.lm_dropTargetIndicator {
+    box-shadow: inset 0 0 30px $baseBkgdColor;
+    outline: 1px dashed $dropTargetIndicatorOutlineForeColor;
+    transition: all 200ms ease;
+
+    // Inner Placeholder
+    .lm_inner {
+        background: $baseBkgdColor;
+        opacity: 0.2;
+    }
+}
+
+// Separator line (handle to change pane size)
+.lm_splitter {
+    background: $baseBkgdColor;
+    opacity: 0.001;
+    transition: opacity 200ms ease;
+
+    &:hover, // When hovered by mouse...
+    &.lm_dragging {
+        background: $splitterDraggingBkgdColor;
+        opacity: 1;
+    }
+}
+
+// Pane Header (container of Tabs for each pane)
+.lm_header {
+    height: 20px;
+    user-select: none;
+
+    .lm_controls {
+        background: $singlePaneContentBkgdColor;
+        top: 2px;
+        right: 0;
+        display: flex;
+    }
+
+    // Single Tab container. A single Tab is set for each pane, a group of Tabs are contained in ".lm_header"
+    .lm_tab {
+        font-size: 12px;
+        color: $singleTabContainerForeColor;
+        background: $singleTablContainerBkgdColor;
+        margin-right: 2px;
+        padding-bottom: 2px;
+        padding-top: 2px;
+
+        // .lm_title         // Present in LIGHT Theme
+        // {
+        //     padding-top:1px;
+        // }
+
+        // Close Tab Icon
+        .lm_close_tab {
+            width: 11px;
+            height: 11px;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAATElEQVR4nG3OwQ0DMQwDwZGRBtR/j1YJzMc5+IDoR+yCVO29g+pu981MFgqZmRdAfU7+CYWcbF11LwALjpBL0N0qybNx/RPU+gOeiS/+XCRwDlTgkQAAAABJRU5ErkJggg==);
+            background-position: center center;
+            background-repeat: no-repeat;
+            top: 4px;
+            right: 6px;
+            opacity: 0.4;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+
+        // If Tab is active, so if it's in foreground
+        &.lm_active {
+            border-bottom: none;
+            padding-bottom: 3px;
+
+            .lm_close_tab {
+                opacity: 1;
+            }
+
+            &.lm_focused {
+                background-color: $focusedTabBkgdColor;
+            }
+        }
+    }
+}
+
+.lm_dragProxy.lm_bottom,
+.lm_stack.lm_bottom {
+    .lm_header .lm_tab {
+        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+        &.lm_active {
+            box-shadow: 0 2px 2px $baseBkgdColor;
+        }
+    }
+}
+
+// If Pane Header (container of Tabs for each pane) is selected (used only if addition of new Contents is made "by selection" and not "by drag")
+.lm_selected {
+    .lm_header {
+        background-color: $selectedHeaderBkgdColor;
+    }
+}
+
+.lm_tab {
+    &:hover, // If Tab is hovered
+    &.lm_active // If Tab is active, so if it's in foreground
+    {
+        background: $singlePaneContentBkgdColor;
+        color: $activeTabForeColor;
+    }
+}
+
+// Dropdown arrow for additional tabs when too many to be displayed
+.lm_header .lm_controls .lm_tabdropdown:before {
+    color: $dropDownArrowForeColor;
+}
+
+// Pane controls (popout, maximize, minimize, close)
+.lm_controls {
+    // All Pane controls shares these
+    > * {
+        position: relative;
+        background-position: center center;
+        background-repeat: no-repeat;
+        opacity: 0.4;
+        transition: opacity 300ms ease;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    // Icon to PopOut Pane, so move it to a different Browser Window
+    .lm_popout {
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAPklEQVR4nI2Q0QoAIAwCNfr/X7aXCpGN8snBdgejJOzckpkxs9jR6K6T5JpU0nWl5pSXTk7qwh8SnNT+CAAWCgkKFpuSWsUAAAAASUVORK5CYII=);
+    }
+
+    // Icon to Maximize Pane, so it will fill the entire GoldenLayout Container
+    .lm_maximise {
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAKElEQVR4nGP8////fwYCgImQAgYGBgYWKM2IR81/okwajIpgvsMbVgAwgQYRVakEKQAAAABJRU5ErkJggg==);
+    }
+
+    // Icon to Close Pane and so remove it from GoldenLayout Container
+    .lm_close {
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAQUlEQVR4nHXOQQ4AMAgCQeT/f6aXpsGK3jSTuCVJAAr7iBdoAwCKd0nwfaAdHbYERw5b44+E8JoBjEYGMBq5gAYP3usUDu2IvoUAAAAASUVORK5CYII=);
+    }
+}
+
+// If a specific Pane is maximized
+.lm_maximised {
+    // Pane Header (container of Tabs for each pane) can have different style when is Maximized
+    .lm_header {
+        background-color: $baseBkgdColor;
+    }
+
+    // Pane controls are different in Maximized Mode, especially the old Icon "Maximise" that now has a different meaning, so "Minimize" (even if CSS Class did not change)
+    .lm_controls {
+        .lm_maximise {
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAJ0lEQVR4nGP8//8/AzGAiShVI1YhCwMDA8OsWbPwBmZaWhoj0SYCAN1lBxMAX4n0AAAAAElFTkSuQmCC);
+        }
+    }
+}
+
+.lm_transition_indicator {
+    background-color: $baseBkgdColor;
+    border: 1px dashed $transitionIndicatorBorderForeColor;
+}
+
+// If a specific Pane is Popped Out, so move it to a different Browser Window, Icon to restore original position is:
+.lm_popin {
+    cursor: pointer;
+
+    // Background of Icon
+    .lm_bg {
+        background: $dropDownArrowForeColor;
+        opacity: 0.3;
+    }
+
+    // Icon to Restore original position in Golden Layout Container
+    .lm_icon {
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAJCAYAAADpeqZqAAAAWklEQVR4nJWOyw3AIAxDHcQC7L8jbwT3AlJBfNp3SiI7dtRaLSlKKeoA1oEsKSQZCEluexw8Tm3ohk+E7bnOUHUGcNh+HwbBygw4AZ7FN/Lt84p0l+yTflV8AKQyLdcCRJi/AAAAAElFTkSuQmCC);
+        background-position: center center;
+        background-repeat: no-repeat;
+        border-left: 1px solid $popinIconBorderForeColor;
+        border-top: 1px solid $popinIconBorderForeColor;
+        opacity: 0.7;
+    }
+
+    &:hover {
+        .lm_icon {
+            opacity: 1;
+        }
+    }
+}
