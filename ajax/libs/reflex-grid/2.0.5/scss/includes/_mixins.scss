@@ -1,0 +1,427 @@
+// --------------------------------------------------
+// reflex mixins
+// --------------------------------------------------
+//
+// --------------------------------------------------
+// reflex grid generation mixins
+// --------------------------------------------------
+
+@mixin make-reflex-grid($class) {
+    @include loop-reflex-columns($reflex-columns, $class, width);
+}
+
+@mixin calc-reflex-columns($index, $class, $type) {
+    @if $type == width and $index > 0 {
+        .#{$reflex-prefix}#{$class}#{$index} {
+            width: percentage(($index / $reflex-columns));
+            @if $legacy-support == true {
+                *width: percentage(($index / $reflex-columns)) - .1; // ie7 css hack
+            }
+        }
+    }
+}
+
+@mixin loop-reflex-columns($index, $class, $type) {
+    @if $index >= 0 {
+        @include calc-reflex-columns($index, $class, $type);
+        // next iteration
+        @include loop-reflex-columns(($index - 1), $class, $type);
+    }
+}
+
+// defaults for auto cols
+@mixin setup-auto-cols() {
+    @include flex(1, 0, 0px); // a unit on last value is required by IE10-11
+
+    @if $legacy-support == true {
+        width: auto;
+    }
+}
+
+// --------------------------------------------------
+// inline-block specific mixins
+// --------------------------------------------------
+
+@mixin setup-whitespace() {
+    @if $legacy-support == true {
+        letter-spacing: -.31em;
+        *letter-spacing: normal;
+        word-spacing: -.43em;
+    }
+}
+
+@mixin reset-whitespace() {
+    @if $legacy-support == true {
+        letter-spacing: normal;
+        word-spacing: normal;
+        white-space: normal;
+    }
+}
+
+@mixin reset-text-align() {
+    //
+    // We want to reset any text-align properties set by the grid
+    // (required for the inline-block fallback)
+    // but we don't want to override any text-align properties
+    // set on the individual col-x element
+    // or on any of it's child elements
+    //
+    // 1) set to left by default (works everywhere)
+    // 2) set to start (respects right to left text)
+    //
+    text-align: left;
+    text-align: start;
+    -moz-text-align-last: left;
+    -moz-text-align-last: start;
+    text-align-last: left;
+    text-align-last: start;
+}
+
+// --------------------------------------------------
+// order class generation mixins
+// --------------------------------------------------
+
+@mixin order($order: 0) {
+    -ms-flex-order: $order;
+    -webkit-order: $order;
+    order: $order;
+}
+
+@mixin make-order-helpers() {
+    @include loop-order-helpers($reflex-columns);
+}
+
+@mixin loop-order-helpers($index, $breakpoint: null) {
+    @if $index >= 0 {
+        .#{$reflex-prefix}order#{$breakpoint}-#{$index} {
+            @include order($index);
+        }
+        // next iteration
+        @include loop-order-helpers(($index - 1), $breakpoint);
+    }
+}
+
+// --------------------------------------------------
+// offset class generation mixins
+// --------------------------------------------------
+@mixin offset($index: 0) {
+    $offset: ($index / $reflex-columns);
+    // convert to percentage only if not zero
+    @if $offset != 0 {
+        $offset: percentage($offset);
+    }
+    margin-left: $offset;
+    @if $legacy-support == true {
+        *margin-left: percentage(($index / $reflex-columns)) - .1; // ie7 css hack
+    }
+}
+
+@mixin make-offset-helpers() {
+    @include loop-offset-helpers($reflex-columns - 1);
+}
+
+@mixin loop-offset-helpers($index, $breakpoint: null) {
+    @if $index > 0 and $breakpoint == null {
+        .#{$reflex-prefix}offset#{$breakpoint}-#{$index} {
+            @include offset($index);
+        }
+        // next iteration
+        @include loop-offset-helpers(($index - 1), $breakpoint);
+    } @else if $index >= 0 and $breakpoint != null {
+        .#{$reflex-prefix}offset#{$breakpoint}-#{$index} {
+            @include offset($index);
+        }
+        // next iteration
+        @include loop-offset-helpers(($index - 1), $breakpoint);
+    }
+}
+
+// --------------------------------------------------
+// reflex modifier mixins
+// --------------------------------------------------
+
+//
+// display
+// ---
+
+@mixin display-flex() {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+//
+// flex
+// ---
+
+@mixin flex($grow: 0, $shrink: 1, $basis: auto) {
+    @if $basis == 0 {
+        -ms-flex: $grow $shrink auto; //ie10 needs auto
+    } @else {
+        -ms-flex: $grow $shrink $basis;
+    }
+
+    -webkit-flex: $grow $shrink $basis;
+    flex: $grow $shrink $basis;
+}
+
+@mixin flex-grow($grow:1) {
+    -ms-flex-positive: $grow;
+    -webkit-flex-grow: $grow;
+    flex-grow: $grow;
+}
+
+@mixin flex-shrink($shrink:1) {
+    -ms-flex-negative: $shrink;
+    -webkit-flex-shrink: $shrink;
+    flex-shrink: $shrink;
+}
+
+@mixin flex-basis($basis:auto) {
+    -ms-flex-preferred-size: $basis;
+    -webkit-flex-basis: $basis;
+    flex-basis: $basis;
+}
+
+@mixin flex-flow($direction: row, $wrap: nowrap) {
+    -ms-flex-wrap: $wrap;
+    -ms-flex-direction: $direction;
+    -webkit-flex-flow: $direction $wrap;
+    flex-flow: $direction $wrap;
+}
+
+@mixin flex-wrap($wrap: wrap) {
+    -ms-flex-wrap: $wrap;
+    -webkit-flex-wrap: $wrap;
+    flex-wrap: $wrap;
+}
+
+@mixin flex-direction($direction: row) {
+    -ms-flex-direction: $direction;
+    -webkit-flex-direction: $direction;
+    flex-direction: $direction;
+}
+
+//
+// align
+// ---
+
+@mixin align-items($align: stretch) {
+    @include ms-align-items($align);
+    -webkit-align-items: $align;
+    align-items: $align;
+}
+
+@mixin align-self($align: stretch) {
+    @include ms-align-self($align);
+    -webkit-align-self: $align;
+    align-self: $align;
+}
+
+@mixin align-content($align: stretch) {
+    @include ms-align-content($align);
+    -webkit-align-content: $align;
+    align-content: $align;
+}
+
+//
+// ie10 syntax for align
+// ---
+
+@mixin ms-align-items($align) {
+    @if $align == 'flex-start' {
+        -ms-flex-align: start;
+    } @else if $align == 'flex-end' {
+        -ms-flex-align: end;
+    } @else {
+        -ms-flex-align: $align;
+    }
+}
+
+@mixin ms-align-self($align) {
+    @if $align == 'flex-start' {
+        -ms-flex-item-align: start;
+    } @else if $align == 'flex-end' {
+        -ms-flex-item-align: end;
+    } @else {
+        -ms-flex-item-align: $align;
+    }
+}
+
+@mixin ms-align-content($align) {
+    @if $align == 'flex-start' {
+        -ms-flex-line-pack: start;
+    } @else if $align == 'flex-end' {
+        -ms-flex-line-pack: end;
+    } @else if $align == 'space-between' {
+        -ms-flex-line-pack: justify;
+    } @else if $align == 'space-around' {
+        -ms-flex-line-pack: distribute;
+    } @else {
+        -ms-flex-line-pack: $align;
+    }
+}
+
+//
+// justify-content
+//
+// Uses "text-align" for the fallback inline-block grid
+// "text-align" is globally supported and works on all rows except the last
+// "text-align-last", where supported, handles the last line (and, happily, grids with only one row)
+// ---
+
+@mixin justify-content-start() {
+    -ms-flex-pack: start;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+}
+
+@mixin justify-content-end() {
+    -ms-flex-pack: end;
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end;
+}
+
+@mixin justify-content-center() {
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+@mixin justify-content-space-between() {
+    -ms-flex-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+
+@mixin justify-content-space-around() {
+    -ms-flex-pack: distribute;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+}
+
+// --------------------------------------------------
+// Responsible Visibility
+// --------------------------------------------------
+
+@mixin responsive-visibility-helpers() {
+    @if $visibility-helpers == true {
+        // We need to handle xxs and xlg breakpoints differently
+        $map-reflex-breakpoints: map-remove($reflex-breakpoints, xxs, xlg);
+
+        .#{$reflex-prefix}hidden-xxs {
+            @include media-breakpoint-only('xxs') {
+                display: none;
+            }
+        }
+
+        @each $bp in map-keys($map-reflex-breakpoints) {
+            .#{$reflex-prefix}hidden-#{$bp}-up {
+                @include media-breakpoint-up($bp) {
+                    display: none;
+                }
+            }
+        
+
+            .#{$reflex-prefix}hidden-#{$bp}-down {
+                @include media-breakpoint-down($bp) {
+                    display: none;
+                }
+            }
+
+            .#{$reflex-prefix}hidden-#{$bp} {
+                @include media-breakpoint-only($bp) {
+                    display: none;
+                }
+            }
+        }
+
+        .#{$reflex-prefix}hidden-xlg {
+            @include media-breakpoint-only('xlg') {
+                display: none;
+            }
+        }
+    }
+}
+
+// Breakpoint viewport sizes and media queries.
+//
+// Breakpoints are defined as a map of (name: minimum width), order from small to large:
+// (xs: 576px, sm: 768px, md: 992px)
+// The map defined in the `$reflex-breakpoints` global variable is used as the `$breakpoints` argument by default.
+// Name of the next breakpoint, or null for the last breakpoint.
+// >> breakpoint-next(sm) -> md
+// >> breakpoint-next(sm, $breakpoints: (xs: 576px, sm: 768px, md: 992px)) -> md
+// >> breakpoint-next(sm, $breakpoint-names: (xs sm md)) -> md
+@function breakpoint-next($name, $breakpoints: $reflex-breakpoints, $breakpoint-names: map-keys($breakpoints)) {
+    $n: index($breakpoint-names, $name);
+    @return if($n < length($breakpoint-names), nth($breakpoint-names, $n + 1), null);
+}
+
+// Minimum breakpoint width. Null for the smallest (first) breakpoint.
+// >> breakpoint-min(sm, (xs: 576px, sm: 768px, md: 992px)) -> 768px
+@function breakpoint-min($name, $breakpoints: $reflex-breakpoints) {
+    $min: map-get($breakpoints, $name);
+    @return if($min !=0, $min, null);
+}
+
+// Maximum breakpoint width. Null for the largest (last) breakpoint.
+// The maximum value is calculated as the minimum of the next one less 0.1.
+// >> breakpoint-max(sm, (xs: 576px, sm: 768px, md: 992px)) -> 991px
+@function breakpoint-max($name, $breakpoints: $reflex-breakpoints) {
+    $next: breakpoint-next($name, $breakpoints);
+    @return if($next, breakpoint-min($next, $breakpoints) - 1, null);
+}
+
+// Media of at least the minimum breakpoint width. No query for the smallest breakpoint.
+// Makes the @content apply to the given breakpoint and wider.
+@mixin media-breakpoint-up($name, $breakpoints: $reflex-breakpoints) {
+    $min: breakpoint-min($name, $breakpoints);
+
+    @if $min {
+        @media (min-width: $min) {
+            @content;
+        }
+    }
+
+    @else {
+        @content;
+    }
+}
+
+// Media of at most the maximum breakpoint width. No query for the largest breakpoint.
+// Makes the @content apply to the given breakpoint and narrower.
+@mixin media-breakpoint-down($name, $breakpoints: $reflex-breakpoints) {
+    $max: breakpoint-max($name, $breakpoints);
+
+    @if $max {
+        @media (max-width: $max) {
+            @content;
+        }
+    }
+
+    @else {
+        @content;
+    }
+}
+
+// Media between the breakpoint's minimum and maximum widths.
+// No minimum for the smallest breakpoint, and no maximum for the largest one.
+// Makes the @content apply only to the given breakpoint, not viewports any wider or narrower.
+@mixin media-breakpoint-only($name, $breakpoints: $reflex-breakpoints) {
+    @include media-breakpoint-up($name, $breakpoints) {
+        @include media-breakpoint-down($name, $breakpoints) {
+            @content;
+        }
+    }
+}
+
+// --------------------------------------------------
+// other mixins
+// --------------------------------------------------
+
+@mixin box-sizing($boxmodel) {
+    -webkit-box-sizing: $boxmodel;
+    -moz-box-sizing: $boxmodel;
+    box-sizing: $boxmodel;
+}
