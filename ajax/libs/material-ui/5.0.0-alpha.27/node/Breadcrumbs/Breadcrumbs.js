@@ -1,0 +1,253 @@
+"use strict";
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
+
+var React = _interopRequireWildcard(require("react"));
+
+var _reactIs = require("react-is");
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _clsx = _interopRequireDefault(require("clsx"));
+
+var _utils = require("@material-ui/utils");
+
+var _unstyled = require("@material-ui/unstyled");
+
+var _experimentalStyled = _interopRequireDefault(require("../styles/experimentalStyled"));
+
+var _useThemeProps = _interopRequireDefault(require("../styles/useThemeProps"));
+
+var _Typography = _interopRequireDefault(require("../Typography"));
+
+var _BreadcrumbCollapsed = _interopRequireDefault(require("./BreadcrumbCollapsed"));
+
+var _breadcrumbsClasses = _interopRequireWildcard(require("./breadcrumbsClasses"));
+
+const overridesResolver = (props, styles) => {
+  return (0, _utils.deepmerge)({
+    [`& .${_breadcrumbsClasses.default.ol}`]: styles.ol,
+    [`& .${_breadcrumbsClasses.default.li}`]: styles.li,
+    [`& .${_breadcrumbsClasses.default.separator}`]: styles.separator
+  }, styles.root || {});
+};
+
+const useUtilityClasses = styleProps => {
+  const {
+    classes
+  } = styleProps;
+  const slots = {
+    root: ['root'],
+    li: ['li'],
+    ol: ['ol'],
+    separator: ['separator']
+  };
+  return (0, _unstyled.unstable_composeClasses)(slots, _breadcrumbsClasses.getBreadcrumbsUtilityClass, classes);
+};
+
+const BreadcrumbsRoot = (0, _experimentalStyled.default)(_Typography.default, {}, {
+  name: 'MuiBreadcrumbs',
+  slot: 'Root',
+  overridesResolver
+})({});
+const BreadcrumbsOl = (0, _experimentalStyled.default)('ol', {}, {
+  name: 'MuiBreadcrumbs',
+  slot: 'Ol'
+})({
+  display: 'flex',
+  flexWrap: 'wrap',
+  alignItems: 'center',
+  padding: 0,
+  margin: 0,
+  listStyle: 'none'
+});
+const BreadcrumbsSeparator = (0, _experimentalStyled.default)('li', {}, {
+  name: 'MuiBreadcrumbs',
+  slot: 'Separator'
+})({
+  display: 'flex',
+  userSelect: 'none',
+  marginLeft: 8,
+  marginRight: 8
+});
+
+function insertSeparators(items, className, separator, styleProps) {
+  return items.reduce((acc, current, index) => {
+    if (index < items.length - 1) {
+      acc = acc.concat(current, /*#__PURE__*/React.createElement(BreadcrumbsSeparator, {
+        "aria-hidden": true,
+        key: `separator-${index}`,
+        className: className,
+        styleProps: styleProps
+      }, separator));
+    } else {
+      acc.push(current);
+    }
+
+    return acc;
+  }, []);
+}
+
+const Breadcrumbs = /*#__PURE__*/React.forwardRef(function Breadcrumbs(inProps, ref) {
+  const props = (0, _useThemeProps.default)({
+    props: inProps,
+    name: 'MuiBreadcrumbs'
+  });
+  const {
+    children,
+    className,
+    component = 'nav',
+    expandText = 'Show path',
+    itemsAfterCollapse = 1,
+    itemsBeforeCollapse = 1,
+    maxItems = 8,
+    separator = '/'
+  } = props,
+        other = (0, _objectWithoutPropertiesLoose2.default)(props, ["children", "className", "component", "expandText", "itemsAfterCollapse", "itemsBeforeCollapse", "maxItems", "separator"]);
+  const [expanded, setExpanded] = React.useState(false);
+  const styleProps = (0, _extends2.default)({}, props, {
+    component,
+    expanded,
+    expandText,
+    itemsAfterCollapse,
+    itemsBeforeCollapse,
+    maxItems,
+    separator
+  });
+  const classes = useUtilityClasses(styleProps);
+  const listRef = React.useRef(null);
+
+  const renderItemsBeforeAndAfter = allItems => {
+    const handleClickExpand = () => {
+      setExpanded(true); // The clicked element received the focus but gets removed from the DOM.
+      // Let's keep the focus in the component after expanding.
+      // Moving it to the <ol> or <nav> does not cause any announcement in NVDA.
+      // By moving it to some link/button at least we have some announcement.
+
+      const focusable = listRef.current.querySelector('a[href],button,[tabindex]');
+
+      if (focusable) {
+        focusable.focus();
+      }
+    }; // This defends against someone passing weird input, to ensure that if all
+    // items would be shown anyway, we just show all items without the EllipsisItem
+
+
+    if (itemsBeforeCollapse + itemsAfterCollapse >= allItems.length) {
+      if (process.env.NODE_ENV !== 'production') {
+        console.error(['Material-UI: You have provided an invalid combination of props to the Breadcrumbs.', `itemsAfterCollapse={${itemsAfterCollapse}} + itemsBeforeCollapse={${itemsBeforeCollapse}} >= maxItems={${maxItems}}`].join('\n'));
+      }
+
+      return allItems;
+    }
+
+    return [...allItems.slice(0, itemsBeforeCollapse), /*#__PURE__*/React.createElement(_BreadcrumbCollapsed.default, {
+      "aria-label": expandText,
+      key: "ellipsis",
+      onClick: handleClickExpand
+    }), ...allItems.slice(allItems.length - itemsAfterCollapse, allItems.length)];
+  };
+
+  const allItems = React.Children.toArray(children).filter(child => {
+    if (process.env.NODE_ENV !== 'production') {
+      if ((0, _reactIs.isFragment)(child)) {
+        console.error(["Material-UI: The Breadcrumbs component doesn't accept a Fragment as a child.", 'Consider providing an array instead.'].join('\n'));
+      }
+    }
+
+    return /*#__PURE__*/React.isValidElement(child);
+  }).map((child, index) => /*#__PURE__*/React.createElement("li", {
+    className: classes.li,
+    key: `child-${index}`
+  }, child));
+  return /*#__PURE__*/React.createElement(BreadcrumbsRoot, (0, _extends2.default)({
+    ref: ref,
+    component: component,
+    color: "textSecondary",
+    className: (0, _clsx.default)(classes.root, className),
+    styleProps: styleProps
+  }, other), /*#__PURE__*/React.createElement(BreadcrumbsOl, {
+    className: classes.ol,
+    ref: listRef,
+    styleProps: styleProps
+  }, insertSeparators(expanded || maxItems && allItems.length <= maxItems ? allItems : renderItemsBeforeAndAfter(allItems), classes.separator, separator, styleProps)));
+});
+process.env.NODE_ENV !== "production" ? Breadcrumbs.propTypes = {
+  // ----------------------------- Warning --------------------------------
+  // | These PropTypes are generated from the TypeScript type definitions |
+  // |     To update them edit the d.ts file and run "yarn proptypes"     |
+  // ----------------------------------------------------------------------
+
+  /**
+   * The content of the component.
+   */
+  children: _propTypes.default.node,
+
+  /**
+   * Override or extend the styles applied to the component.
+   */
+  classes: _propTypes.default.object,
+
+  /**
+   * @ignore
+   */
+  className: _propTypes.default.string,
+
+  /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */
+  component: _propTypes.default.elementType,
+
+  /**
+   * Override the default label for the expand button.
+   *
+   * For localization purposes, you can use the provided [translations](/guides/localization/).
+   * @default 'Show path'
+   */
+  expandText: _propTypes.default.string,
+
+  /**
+   * If max items is exceeded, the number of items to show after the ellipsis.
+   * @default 1
+   */
+  itemsAfterCollapse: _propTypes.default.number,
+
+  /**
+   * If max items is exceeded, the number of items to show before the ellipsis.
+   * @default 1
+   */
+  itemsBeforeCollapse: _propTypes.default.number,
+
+  /**
+   * Specifies the maximum number of breadcrumbs to display. When there are more
+   * than the maximum number, only the first `itemsBeforeCollapse` and last `itemsAfterCollapse`
+   * will be shown, with an ellipsis in between.
+   * @default 8
+   */
+  maxItems: _propTypes.default.number,
+
+  /**
+   * Custom separator node.
+   * @default '/'
+   */
+  separator: _propTypes.default.node,
+
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx: _propTypes.default.object
+} : void 0;
+var _default = Breadcrumbs;
+exports.default = _default;
