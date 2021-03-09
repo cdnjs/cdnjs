@@ -1,0 +1,1 @@
+$.fn.dataTable.ext.order["dom-checkbox"]=function(e,n){return this.api().column(n,{order:"index"}).nodes().map(function(e,n){return $("input",e).prop("checked")?"1":"0"})};

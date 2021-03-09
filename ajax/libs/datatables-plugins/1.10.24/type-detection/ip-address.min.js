@@ -1,0 +1,1 @@
+jQuery.fn.dataTableExt.aTypes.unshift(function(d){return/^\d{1,3}[\.]\d{1,3}[\.]\d{1,3}[\.]\d{1,3}$/.test(d)?"ip-address":null});

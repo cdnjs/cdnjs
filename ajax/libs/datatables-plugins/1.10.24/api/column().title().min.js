@@ -1,0 +1,1 @@
+$.fn.dataTable.Api.register("column().title()",function(){var t=this.header();return $(t).text().trim()});
