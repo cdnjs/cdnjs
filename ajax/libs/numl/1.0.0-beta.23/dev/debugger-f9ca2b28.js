@@ -1,0 +1,13 @@
+import './index-903a7eb6.js';
+import { C as ComponentBehavior } from './component-513dc429.js';
+
+class DebuggerBehaviour extends ComponentBehavior {
+  static get params() {
+    return {
+      component: 'debugger',
+      props: ['target'],
+    };
+  }
+}
+
+export default DebuggerBehaviour;
