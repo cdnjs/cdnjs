@@ -1,0 +1,1 @@
+(function(e){var n={test:"foo"};"function"==typeof define&&define.amd?define("nodeamd",[],function(){return n}):"undefined"!=typeof module&&module.exports?module.exports=n:"undefined"==typeof ender&&(this.nodeamd=n)}).call(this);

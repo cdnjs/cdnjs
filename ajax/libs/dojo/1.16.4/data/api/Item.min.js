@@ -1,0 +1,1 @@
+define(["../../_base/declare"],function(e){return e(null,{})});
