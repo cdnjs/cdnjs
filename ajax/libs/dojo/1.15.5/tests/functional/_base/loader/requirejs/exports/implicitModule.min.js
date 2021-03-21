@@ -1,0 +1,1 @@
+define(function(e,i,n){n.exports&&(n.exports=function(){return"implicitModule"})});
