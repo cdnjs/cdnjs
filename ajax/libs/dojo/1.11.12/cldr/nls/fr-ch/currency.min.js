@@ -1,0 +1,1 @@
+define({CHF_symbol:"CHF"});
