@@ -1,0 +1,1 @@
+define({CAD_symbol:"$"});
