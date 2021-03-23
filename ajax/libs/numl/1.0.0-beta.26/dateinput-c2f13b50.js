@@ -1,0 +1,1 @@
+import{C as e}from"./component-21c3e12a.js";import"./index-dc3cba26.js";export default class extends e{static get params(){return{input:!0,localized:!0,component:"dateinput",props:["value","begin","end","mode","host","placeholder"]}}}
