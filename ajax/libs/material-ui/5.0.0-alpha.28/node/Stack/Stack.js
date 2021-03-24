@@ -1,0 +1,195 @@
+"use strict";
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.style = void 0;
+
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var React = _interopRequireWildcard(require("react"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _system = require("@material-ui/system");
+
+var _utils = require("@material-ui/utils");
+
+var _experimentalStyled = _interopRequireDefault(require("../styles/experimentalStyled"));
+
+var _useThemeProps = _interopRequireDefault(require("../styles/useThemeProps"));
+
+var _jsxRuntime = require("react/jsx-runtime");
+
+/**
+ * Return an array with the separator React element interspersed between
+ * each React node of the input children.
+ *
+ * > joinChildren([1,2,3], 0)
+ * [1,0,2,0,3]
+ */
+function joinChildren(children, separator) {
+  const childrenArray = React.Children.toArray(children).filter(Boolean);
+  return childrenArray.reduce((output, child, index) => {
+    output.push(child);
+
+    if (index < childrenArray.length - 1) {
+      output.push( /*#__PURE__*/React.cloneElement(separator, {
+        key: `separator-${index}`
+      }));
+    }
+
+    return output;
+  }, []);
+}
+
+function resolveBreakpointValues({
+  values,
+  base
+}) {
+  const keys = Object.keys(base);
+
+  if (keys.length === 0) {
+    return values;
+  }
+
+  let previous;
+  return keys.reduce((acc, breakpoint) => {
+    if (typeof values === 'object') {
+      acc[breakpoint] = values[breakpoint] || values[previous];
+    } else {
+      acc[breakpoint] = values;
+    }
+
+    previous = breakpoint;
+    return acc;
+  }, {});
+}
+
+const getSideFromDirection = direction => {
+  return {
+    row: 'Left',
+    'row-reverse': 'Right',
+    column: 'Top',
+    'column-reverse': 'Bottom'
+  }[direction];
+};
+
+const style = ({
+  styleProps,
+  theme
+}) => {
+  let styles = (0, _extends2.default)({
+    display: 'flex'
+  }, (0, _system.handleBreakpoints)({
+    theme
+  }, styleProps.direction, propValue => ({
+    flexDirection: propValue
+  })));
+
+  if (styleProps.spacing) {
+    const transformer = (0, _system.createUnarySpacing)(theme);
+    const base = Object.keys(theme.breakpoints.values).reduce((acc, breakpoint) => {
+      if (styleProps.spacing[breakpoint] || styleProps.direction[breakpoint]) {
+        acc[breakpoint] = true;
+      }
+
+      return acc;
+    }, {});
+    const directionValues = resolveBreakpointValues({
+      values: styleProps.direction,
+      base
+    });
+    const spacingValues = resolveBreakpointValues({
+      values: styleProps.spacing,
+      base
+    });
+
+    const styleFromPropValue = (propValue, breakpoint) => {
+      return {
+        '& > :not(styles) + :not(styles)': {
+          margin: 0,
+          [`margin${getSideFromDirection(breakpoint ? directionValues[breakpoint] : styleProps.direction)}`]: (0, _system.getValue)(transformer, propValue)
+        }
+      };
+    };
+
+    styles = (0, _utils.deepmerge)(styles, (0, _system.handleBreakpoints)({
+      theme
+    }, spacingValues, styleFromPropValue));
+  }
+
+  return styles;
+};
+
+exports.style = style;
+const StackRoot = (0, _experimentalStyled.default)('div', {}, {
+  name: 'Stack'
+})(style);
+const Stack = /*#__PURE__*/React.forwardRef(function Stack(inProps, ref) {
+  const themeProps = (0, _useThemeProps.default)({
+    props: inProps,
+    name: 'MuiStack'
+  });
+  const props = (0, _system.unstable_extendSxProp)(themeProps);
+  const {
+    direction = 'column',
+    spacing,
+    divider,
+    children
+  } = props,
+        other = (0, _objectWithoutPropertiesLoose2.default)(props, ["direction", "spacing", "divider", "children"]);
+  const styleProps = {
+    direction,
+    spacing
+  };
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(StackRoot, (0, _extends2.default)({
+    styleProps: styleProps,
+    ref: ref
+  }, other, {
+    children: divider ? joinChildren(children, divider) : children
+  }));
+});
+process.env.NODE_ENV !== "production" ? Stack.propTypes
+/* remove-proptypes */
+= {
+  // ----------------------------- Warning --------------------------------
+  // | These PropTypes are generated from the TypeScript type definitions |
+  // |     To update them edit the d.ts file and run "yarn proptypes"     |
+  // ----------------------------------------------------------------------
+
+  /**
+   * The content of the component.
+   */
+  children: _propTypes.default.node,
+
+  /**
+   * Defines the `flex-direction` style property.
+   * It is applied for all screen sizes.
+   * @default 'column'
+   */
+  direction: _propTypes.default.oneOfType([_propTypes.default.oneOf(['column-reverse', 'column', 'row-reverse', 'row']), _propTypes.default.arrayOf(_propTypes.default.oneOf(['column-reverse', 'column', 'row-reverse', 'row'])), _propTypes.default.object]),
+
+  /**
+   * Add an element between each child.
+   */
+  divider: _propTypes.default.node,
+
+  /**
+   * Defines the space between immediate children.
+   */
+  spacing: _propTypes.default.oneOfType([_propTypes.default.arrayOf(_propTypes.default.number), _propTypes.default.number, _propTypes.default.object]),
+
+  /**
+   * The system prop, which allows defining system overrides as well as additional CSS styles.
+   */
+  sx: _propTypes.default.object
+} : void 0;
+var _default = Stack;
+exports.default = _default;

@@ -1,0 +1,171 @@
+"use strict";
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var React = _interopRequireWildcard(require("react"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _clsx = _interopRequireDefault(require("clsx"));
+
+var _utils = require("@material-ui/utils");
+
+var _unstyled = require("@material-ui/unstyled");
+
+var _experimentalStyled = _interopRequireDefault(require("../styles/experimentalStyled"));
+
+var _useThemeProps = _interopRequireDefault(require("../styles/useThemeProps"));
+
+var _colorManipulator = require("../styles/colorManipulator");
+
+var _Paper = _interopRequireDefault(require("../Paper"));
+
+var _snackbarContentClasses = _interopRequireWildcard(require("./snackbarContentClasses"));
+
+var _jsxRuntime = require("react/jsx-runtime");
+
+const overridesResolver = (props, styles) => {
+  return (0, _utils.deepmerge)({
+    [`& .${_snackbarContentClasses.default.action}`]: styles.action,
+    [`& .${_snackbarContentClasses.default.message}`]: styles.message
+  }, styles.root || {});
+};
+
+const useUtilityClasses = styleProps => {
+  const {
+    classes
+  } = styleProps;
+  const slots = {
+    root: ['root'],
+    action: ['action'],
+    message: ['message']
+  };
+  return (0, _unstyled.unstable_composeClasses)(slots, _snackbarContentClasses.getSnackbarContentUtilityClass, classes);
+};
+
+const SnackbarContentRoot = (0, _experimentalStyled.default)(_Paper.default, {}, {
+  name: 'MuiSnackbarContent',
+  slot: 'Root',
+  overridesResolver
+})(({
+  theme
+}) => {
+  const emphasis = theme.palette.mode === 'light' ? 0.8 : 0.98;
+  const backgroundColor = (0, _colorManipulator.emphasize)(theme.palette.background.default, emphasis);
+  return (0, _extends2.default)({}, theme.typography.body2, {
+    color: theme.palette.getContrastText(backgroundColor),
+    backgroundColor,
+    display: 'flex',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    padding: '6px 16px',
+    borderRadius: theme.shape.borderRadius,
+    flexGrow: 1,
+    [theme.breakpoints.up('sm')]: {
+      flexGrow: 'initial',
+      minWidth: 288
+    }
+  });
+});
+const SnackbarContentMessage = (0, _experimentalStyled.default)('div', {}, {
+  name: 'MuiSnackbarContent',
+  slot: 'Message'
+})({
+  padding: '8px 0'
+});
+const SnackbarContentAction = (0, _experimentalStyled.default)('div', {}, {
+  name: 'MuiSnackbarContent',
+  slot: 'Action'
+})({
+  display: 'flex',
+  alignItems: 'center',
+  marginLeft: 'auto',
+  paddingLeft: 16,
+  marginRight: -8
+});
+const SnackbarContent = /*#__PURE__*/React.forwardRef(function SnackbarContent(inProps, ref) {
+  const props = (0, _useThemeProps.default)({
+    props: inProps,
+    name: 'MuiSnackbarContent'
+  });
+  const {
+    action,
+    className,
+    message,
+    role = 'alert'
+  } = props,
+        other = (0, _objectWithoutPropertiesLoose2.default)(props, ["action", "className", "message", "role"]); // TODO: convert to simple assignment after the type error in defaultPropsHandler.js:60:6 is fixed
+
+  const styleProps = (0, _extends2.default)({}, props);
+  const classes = useUtilityClasses(styleProps);
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(SnackbarContentRoot, (0, _extends2.default)({
+    role: role,
+    square: true,
+    elevation: 6,
+    className: (0, _clsx.default)(classes.root, className),
+    styleProps: styleProps,
+    ref: ref
+  }, other, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(SnackbarContentMessage, {
+      className: classes.message,
+      styleProps: styleProps,
+      children: message
+    }), action ? /*#__PURE__*/(0, _jsxRuntime.jsx)(SnackbarContentAction, {
+      className: classes.action,
+      styleProps: styleProps,
+      children: action
+    }) : null]
+  }));
+});
+process.env.NODE_ENV !== "production" ? SnackbarContent.propTypes
+/* remove-proptypes */
+= {
+  // ----------------------------- Warning --------------------------------
+  // | These PropTypes are generated from the TypeScript type definitions |
+  // |     To update them edit the d.ts file and run "yarn proptypes"     |
+  // ----------------------------------------------------------------------
+
+  /**
+   * The action to display. It renders after the message, at the end of the snackbar.
+   */
+  action: _propTypes.default.node,
+
+  /**
+   * Override or extend the styles applied to the component.
+   */
+  classes: _propTypes.default.object,
+
+  /**
+   * @ignore
+   */
+  className: _propTypes.default.string,
+
+  /**
+   * The message to display.
+   */
+  message: _propTypes.default.node,
+
+  /**
+   * The ARIA role attribute of the element.
+   * @default 'alert'
+   */
+  role: _propTypes.default.string,
+
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx: _propTypes.default.object
+} : void 0;
+var _default = SnackbarContent;
+exports.default = _default;
