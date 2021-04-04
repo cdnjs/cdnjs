@@ -1,0 +1,243 @@
+import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutProperties";
+import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
+import _extends from "@babel/runtime/helpers/esm/extends";
+import * as React from 'react';
+import PropTypes from 'prop-types';
+import clsx from 'clsx';
+import { deepmerge } from '@material-ui/utils';
+import { unstable_composeClasses as composeClasses } from '@material-ui/unstyled';
+import experimentalStyled from '../styles/experimentalStyled';
+import useThemeProps from '../styles/useThemeProps';
+import Typography from '../Typography';
+import StepIcon from '../StepIcon';
+import StepperContext from '../Stepper/StepperContext';
+import StepContext from '../Step/StepContext';
+import stepLabelClasses, { getStepLabelUtilityClass } from './stepLabelClasses';
+import { jsx as _jsx } from "react/jsx-runtime";
+import { jsxs as _jsxs } from "react/jsx-runtime";
+
+var overridesResolver = function overridesResolver(props, styles) {
+  var _extends2;
+
+  var styleProps = props.styleProps;
+  return deepmerge(_extends({}, styles[styleProps.orientation], (_extends2 = {}, _defineProperty(_extends2, "& .".concat(stepLabelClasses.label), styles.label), _defineProperty(_extends2, "& .".concat(stepLabelClasses.iconContainer), styles.iconContainer), _defineProperty(_extends2, "& .".concat(stepLabelClasses.labelContainer), styles.labelContainer), _extends2)), styles.root || {});
+};
+
+var useUtilityClasses = function useUtilityClasses(styleProps) {
+  var classes = styleProps.classes,
+      orientation = styleProps.orientation,
+      active = styleProps.active,
+      completed = styleProps.completed,
+      error = styleProps.error,
+      disabled = styleProps.disabled,
+      alternativeLabel = styleProps.alternativeLabel;
+  var slots = {
+    root: ['root', orientation, error && 'error', disabled && 'disabled', alternativeLabel && 'alternativeLabel'],
+    label: ['label', active && 'active', completed && 'completed', error && 'error', disabled && 'disabled', alternativeLabel && 'alternativeLabel'],
+    iconContainer: ['iconContainer', alternativeLabel && 'alternativeLabel'],
+    labelContainer: ['labelContainer']
+  };
+  return composeClasses(slots, getStepLabelUtilityClass, classes);
+};
+
+var StepLabelRoot = experimentalStyled('span', {}, {
+  name: 'MuiStepLabel',
+  slot: 'Root',
+  overridesResolver: overridesResolver
+})(function (_ref) {
+  var _extends3;
+
+  var styleProps = _ref.styleProps;
+  return _extends((_extends3 = {
+    /* Styles applied to the root element. */
+    display: 'flex',
+    alignItems: 'center'
+  }, _defineProperty(_extends3, "&.".concat(stepLabelClasses.alternativeLabel), {
+    flexDirection: 'column'
+  }), _defineProperty(_extends3, "&.".concat(stepLabelClasses.disabled), {
+    cursor: 'default'
+  }), _extends3), styleProps.orientation === 'vertical' && {
+    textAlign: 'left',
+    padding: '8px 0'
+  });
+});
+var StepLabelLabel = experimentalStyled(Typography, {}, {
+  name: 'MuiStepLabel',
+  slot: 'Label',
+  overridesResolver: overridesResolver
+})(function (_ref2) {
+  var _ref3;
+
+  var theme = _ref2.theme;
+  return _ref3 = {
+    /* Styles applied to the Typography component that wraps `children`. */
+    transition: theme.transitions.create('color', {
+      duration: theme.transitions.duration.shortest
+    })
+  }, _defineProperty(_ref3, "&.".concat(stepLabelClasses.active), {
+    color: theme.palette.text.primary,
+    fontWeight: 500
+  }), _defineProperty(_ref3, "&.".concat(stepLabelClasses.completed), {
+    color: theme.palette.text.primary,
+    fontWeight: 500
+  }), _defineProperty(_ref3, "&.".concat(stepLabelClasses.alternativeLabel), {
+    textAlign: 'center',
+    marginTop: 16
+  }), _defineProperty(_ref3, "&.".concat(stepLabelClasses.error), {
+    color: theme.palette.error.main
+  }), _ref3;
+});
+var StepLabelIconContainer = experimentalStyled('span', {}, {
+  name: 'MuiStepLabel',
+  slot: 'IconContainer',
+  overridesResolver: overridesResolver
+})(function () {
+  return _defineProperty({
+    /* Styles applied to the `icon` container element. */
+    flexShrink: 0,
+    // Fix IE11 issue
+    display: 'flex',
+    paddingRight: 8
+  }, "&.".concat(stepLabelClasses.alternativeLabel), {
+    paddingRight: 0
+  });
+});
+var StepLabelLabelContainer = experimentalStyled('span', {}, {
+  name: 'MuiStepLabel',
+  slot: 'LabelContainer',
+  overridesResolver: overridesResolver
+})(function (_ref5) {
+  var theme = _ref5.theme;
+  return {
+    /* Styles applied to the container element which wraps `Typography` and `optional`. */
+    width: '100%',
+    color: theme.palette.text.secondary
+  };
+});
+var StepLabel = /*#__PURE__*/React.forwardRef(function StepLabel(inProps, ref) {
+  var props = useThemeProps({
+    props: inProps,
+    name: 'MuiStepLabel'
+  });
+
+  var children = props.children,
+      className = props.className,
+      _props$error = props.error,
+      error = _props$error === void 0 ? false : _props$error,
+      iconProp = props.icon,
+      optional = props.optional,
+      StepIconComponentProp = props.StepIconComponent,
+      StepIconProps = props.StepIconProps,
+      other = _objectWithoutProperties(props, ["children", "className", "error", "icon", "optional", "StepIconComponent", "StepIconProps"]);
+
+  var _React$useContext = React.useContext(StepperContext),
+      alternativeLabel = _React$useContext.alternativeLabel,
+      orientation = _React$useContext.orientation;
+
+  var _React$useContext2 = React.useContext(StepContext),
+      active = _React$useContext2.active,
+      disabled = _React$useContext2.disabled,
+      completed = _React$useContext2.completed,
+      iconContext = _React$useContext2.icon;
+
+  var icon = iconProp || iconContext;
+  var StepIconComponent = StepIconComponentProp;
+
+  if (icon && !StepIconComponent) {
+    StepIconComponent = StepIcon;
+  }
+
+  var styleProps = _extends({}, props, {
+    active: active,
+    alternativeLabel: alternativeLabel,
+    completed: completed,
+    disabled: disabled,
+    error: error,
+    orientation: orientation
+  });
+
+  var classes = useUtilityClasses(styleProps);
+  return /*#__PURE__*/_jsxs(StepLabelRoot, _extends({
+    className: clsx(classes.root, className),
+    ref: ref,
+    styleProps: styleProps
+  }, other, {
+    children: [icon || StepIconComponent ? /*#__PURE__*/_jsx(StepLabelIconContainer, {
+      className: classes.iconContainer,
+      styleProps: styleProps,
+      children: /*#__PURE__*/_jsx(StepIconComponent, _extends({
+        completed: completed,
+        active: active,
+        error: error,
+        icon: icon
+      }, StepIconProps))
+    }) : null, /*#__PURE__*/_jsxs(StepLabelLabelContainer, {
+      className: classes.labelContainer,
+      styleProps: styleProps,
+      children: [children ? /*#__PURE__*/_jsx(StepLabelLabel, {
+        variant: "body2",
+        component: "span",
+        display: "block",
+        className: classes.label,
+        styleProps: styleProps,
+        children: children
+      }) : null, optional]
+    })]
+  }));
+});
+process.env.NODE_ENV !== "production" ? StepLabel.propTypes
+/* remove-proptypes */
+= {
+  // ----------------------------- Warning --------------------------------
+  // | These PropTypes are generated from the TypeScript type definitions |
+  // |     To update them edit the d.ts file and run "yarn proptypes"     |
+  // ----------------------------------------------------------------------
+
+  /**
+   * In most cases will simply be a string containing a title for the label.
+   */
+  children: PropTypes.node,
+
+  /**
+   * Override or extend the styles applied to the component.
+   */
+  classes: PropTypes.object,
+
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+
+  /**
+   * If `true`, the step is marked as failed.
+   * @default false
+   */
+  error: PropTypes.bool,
+
+  /**
+   * Override the default label of the step icon.
+   */
+  icon: PropTypes.node,
+
+  /**
+   * The optional node to display.
+   */
+  optional: PropTypes.node,
+
+  /**
+   * The component to render in place of the [`StepIcon`](/api/step-icon/).
+   */
+  StepIconComponent: PropTypes.elementType,
+
+  /**
+   * Props applied to the [`StepIcon`](/api/step-icon/) element.
+   */
+  StepIconProps: PropTypes.object,
+
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx: PropTypes.object
+} : void 0;
+StepLabel.muiName = 'StepLabel';
+export default StepLabel;

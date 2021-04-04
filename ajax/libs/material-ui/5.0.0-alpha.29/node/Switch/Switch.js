@@ -1,0 +1,350 @@
+"use strict";
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var React = _interopRequireWildcard(require("react"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _clsx = _interopRequireDefault(require("clsx"));
+
+var _utils = require("@material-ui/utils");
+
+var _unstyled = require("@material-ui/unstyled");
+
+var _colorManipulator = require("../styles/colorManipulator");
+
+var _capitalize = _interopRequireDefault(require("../utils/capitalize"));
+
+var _SwitchBase = _interopRequireDefault(require("../internal/SwitchBase"));
+
+var _useThemeProps = _interopRequireDefault(require("../styles/useThemeProps"));
+
+var _experimentalStyled = _interopRequireWildcard(require("../styles/experimentalStyled"));
+
+var _switchClasses = _interopRequireWildcard(require("./switchClasses"));
+
+var _jsxRuntime = require("react/jsx-runtime");
+
+// @inheritedComponent IconButton
+const overridesResolver = (props, styles) => {
+  const {
+    styleProps
+  } = props;
+  return (0, _utils.deepmerge)((0, _extends2.default)({}, styleProps.edge && styles[`edge${(0, _capitalize.default)(styleProps.edge)}`], styles[`size${(0, _capitalize.default)(styleProps.size)}`], {
+    [`& .${_switchClasses.default.switchBase}`]: (0, _extends2.default)({}, styles.switchBase, styles.input, styleProps.color !== 'default' && styles[`color${(0, _capitalize.default)(styleProps.color)}`]),
+    [`& .${_switchClasses.default.thumb}`]: styles.thumb,
+    [`& .${_switchClasses.default.track}`]: styles.track
+  }), styles.root || {});
+};
+
+const useUtilityClasses = styleProps => {
+  const {
+    classes,
+    edge,
+    size,
+    color,
+    checked,
+    disabled
+  } = styleProps;
+  const slots = {
+    root: ['root', edge && `edge${(0, _capitalize.default)(edge)}`, `size${(0, _capitalize.default)(size)}`],
+    switchBase: ['switchBase', `color${(0, _capitalize.default)(color)}`, checked && 'checked', disabled && 'disabled'],
+    thumb: ['thumb'],
+    track: ['track'],
+    input: ['input']
+  };
+  const composedClasses = (0, _unstyled.unstable_composeClasses)(slots, _switchClasses.getSwitchUtilityClass, classes);
+  return (0, _extends2.default)({}, classes, composedClasses);
+};
+
+const SwitchRoot = (0, _experimentalStyled.default)('span', {}, {
+  name: 'MuiSwitch',
+  slot: 'Root',
+  overridesResolver
+})(({
+  styleProps
+}) => (0, _extends2.default)({
+  /* Styles applied to the root element. */
+  display: 'inline-flex',
+  width: 34 + 12 * 2,
+  height: 14 + 12 * 2,
+  overflow: 'hidden',
+  padding: 12,
+  boxSizing: 'border-box',
+  position: 'relative',
+  flexShrink: 0,
+  zIndex: 0,
+  // Reset the stacking context.
+  verticalAlign: 'middle',
+  // For correct alignment with the text.
+  '@media print': {
+    colorAdjust: 'exact'
+  }
+}, styleProps.edge === 'start' && {
+  marginLeft: -8
+}, styleProps.edge === 'end' && {
+  marginRight: -8
+}, styleProps.size === 'small' && {
+  width: 40,
+  height: 24,
+  padding: 7,
+  [`& .${_switchClasses.default.thumb}`]: {
+    width: 16,
+    height: 16
+  },
+  [`& .${_switchClasses.default.switchBase}`]: {
+    padding: 4,
+    '&.Mui-checked': {
+      transform: 'translateX(16px)'
+    }
+  }
+}));
+const SwitchSwitchBase = (0, _experimentalStyled.default)(_SwitchBase.default, {
+  shouldForwardProp: prop => (0, _experimentalStyled.shouldForwardProp)(prop) || prop === 'classes'
+}, {
+  name: 'MuiSwitch',
+  slot: 'SwitchBase'
+})(({
+  theme
+}) => ({
+  /* Styles applied to the internal `SwitchBase` component's `root` class. */
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  zIndex: 1,
+  // Render above the focus ripple.
+  color: theme.palette.mode === 'light' ? theme.palette.common.white : theme.palette.grey[300],
+  transition: theme.transitions.create(['left', 'transform'], {
+    duration: theme.transitions.duration.shortest
+  }),
+  '&.Mui-checked': {
+    transform: 'translateX(20px)'
+  },
+  '&.Mui-disabled': {
+    color: theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[600]
+  },
+  [`&.Mui-checked + .${_switchClasses.default.track}`]: {
+    opacity: 0.5
+  },
+  [`&.Mui-disabled + .${_switchClasses.default.track}`]: {
+    opacity: theme.palette.mode === 'light' ? 0.12 : 0.2
+  },
+  [`& .${_switchClasses.default.input}`]: {
+    /* Styles applied to the internal SwitchBase component's input element. */
+    left: '-100%',
+    width: '300%'
+  }
+}), ({
+  theme,
+  styleProps
+}) => (0, _extends2.default)({}, styleProps.color !== 'default' && {
+  '&.Mui-checked': {
+    color: theme.palette[styleProps.color].main,
+    '&:hover': {
+      backgroundColor: (0, _colorManipulator.alpha)(theme.palette[styleProps.color].main, theme.palette.action.hoverOpacity),
+      '@media (hover: none)': {
+        backgroundColor: 'transparent'
+      }
+    },
+    '&.Mui-disabled': {
+      color: theme.palette.mode === 'light' ? (0, _colorManipulator.lighten)(theme.palette[styleProps.color].main, 0.62) : (0, _colorManipulator.darken)(theme.palette[styleProps.color].main, 0.55)
+    }
+  },
+  [`&.Mui-checked + .${_switchClasses.default.track}`]: {
+    backgroundColor: theme.palette[styleProps.color].main
+  }
+}));
+const SwitchTrack = (0, _experimentalStyled.default)('span', {}, {
+  name: 'MuiSwitch',
+  slot: 'Track'
+})(({
+  theme
+}) => ({
+  /* Styles applied to the track element. */
+  height: '100%',
+  width: '100%',
+  borderRadius: 14 / 2,
+  zIndex: -1,
+  transition: theme.transitions.create(['opacity', 'background-color'], {
+    duration: theme.transitions.duration.shortest
+  }),
+  backgroundColor: theme.palette.mode === 'light' ? theme.palette.common.black : theme.palette.common.white,
+  opacity: theme.palette.mode === 'light' ? 0.38 : 0.3
+}));
+const SwitchThumb = (0, _experimentalStyled.default)('span', {}, {
+  name: 'MuiSwitch',
+  slot: 'Thumb'
+})(({
+  theme
+}) => ({
+  /* Styles used to create the thumb passed to the internal `SwitchBase` component `icon` prop. */
+  boxShadow: theme.shadows[1],
+  backgroundColor: 'currentColor',
+  width: 20,
+  height: 20,
+  borderRadius: '50%'
+}));
+const Switch = /*#__PURE__*/React.forwardRef(function Switch(inProps, ref) {
+  const props = (0, _useThemeProps.default)({
+    props: inProps,
+    name: 'MuiSwitch'
+  });
+  const {
+    className,
+    color = 'secondary',
+    edge = false,
+    size = 'medium'
+  } = props,
+        other = (0, _objectWithoutPropertiesLoose2.default)(props, ["className", "color", "edge", "size"]);
+  const styleProps = (0, _extends2.default)({}, props, {
+    color,
+    edge,
+    size
+  });
+  const classes = useUtilityClasses(styleProps);
+  const icon = /*#__PURE__*/(0, _jsxRuntime.jsx)(SwitchThumb, {
+    className: classes.thumb,
+    styleProps: styleProps
+  });
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(SwitchRoot, {
+    className: (0, _clsx.default)(classes.root, className),
+    styleProps: styleProps,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(SwitchSwitchBase, (0, _extends2.default)({
+      className: classes.switchBase,
+      type: "checkbox",
+      icon: icon,
+      checkedIcon: icon,
+      ref: ref,
+      styleProps: styleProps
+    }, other, {
+      classes: classes
+    })), /*#__PURE__*/(0, _jsxRuntime.jsx)(SwitchTrack, {
+      className: classes.track,
+      styleProps: styleProps
+    })]
+  });
+});
+process.env.NODE_ENV !== "production" ? Switch.propTypes
+/* remove-proptypes */
+= {
+  // ----------------------------- Warning --------------------------------
+  // | These PropTypes are generated from the TypeScript type definitions |
+  // |     To update them edit the d.ts file and run "yarn proptypes"     |
+  // ----------------------------------------------------------------------
+
+  /**
+   * If `true`, the component is checked.
+   */
+  checked: _propTypes.default.bool,
+
+  /**
+   * The icon to display when the component is checked.
+   */
+  checkedIcon: _propTypes.default.node,
+
+  /**
+   * Override or extend the styles applied to the component.
+   */
+  classes: _propTypes.default.object,
+
+  /**
+   * @ignore
+   */
+  className: _propTypes.default.string,
+
+  /**
+   * The color of the component. It supports those theme colors that make sense for this component.
+   * @default 'secondary'
+   */
+  color: _propTypes.default.oneOf(['default', 'primary', 'secondary']),
+
+  /**
+   * The default checked state. Use when the component is not controlled.
+   */
+  defaultChecked: _propTypes.default.bool,
+
+  /**
+   * If `true`, the component is disabled.
+   */
+  disabled: _propTypes.default.bool,
+
+  /**
+   * If `true`, the ripple effect is disabled.
+   */
+  disableRipple: _propTypes.default.bool,
+
+  /**
+   * If given, uses a negative margin to counteract the padding on one
+   * side (this is often helpful for aligning the left or right
+   * side of the icon with content above or below, without ruining the border
+   * size and shape).
+   * @default false
+   */
+  edge: _propTypes.default.oneOf(['end', 'start', false]),
+
+  /**
+   * The icon to display when the component is unchecked.
+   */
+  icon: _propTypes.default.node,
+
+  /**
+   * The id of the `input` element.
+   */
+  id: _propTypes.default.string,
+
+  /**
+   * [Attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Attributes) applied to the `input` element.
+   */
+  inputProps: _propTypes.default.object,
+
+  /**
+   * Pass a ref to the `input` element.
+   */
+  inputRef: _utils.refType,
+
+  /**
+   * Callback fired when the state is changed.
+   *
+   * @param {object} event The event source of the callback.
+   * You can pull out the new value by accessing `event.target.value` (string).
+   * You can pull out the new checked state by accessing `event.target.checked` (boolean).
+   */
+  onChange: _propTypes.default.func,
+
+  /**
+   * If `true`, the `input` element is required.
+   */
+  required: _propTypes.default.bool,
+
+  /**
+   * The size of the component.
+   * `small` is equivalent to the dense switch styling.
+   * @default 'medium'
+   */
+  size: _propTypes.default.oneOf(['medium', 'small']),
+
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx: _propTypes.default.object,
+
+  /**
+   * The value of the component. The DOM API casts this to a string.
+   * The browser uses "on" as the default value.
+   */
+  value: _propTypes.default.any
+} : void 0;
+var _default = Switch;
+exports.default = _default;
