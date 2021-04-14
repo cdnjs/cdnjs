@@ -1,0 +1,14 @@
+@if $enable-media-queries and $enable-flex-media-queries
+  @if $enable-flex-align-justify-media-queries
+    $values: ('start' 'end' 'flex-start' 'flex-end' 'center' 'normal' 'space-between' 'space-around' 'space-evenly' 'stretch' 'baseline')
+
+    @each $modifier in 'align' 'justify'
+      @if $modifier == 'justify'
+        +mq('justify-left')
+          justify-content: left !important
+        +mq('justify-right')
+          justify-content: right !important
+
+      @each $value in $values
+        +mq('#{$modifier}-#{$value}')
+          #{$modifier}-content: #{$value} !important
