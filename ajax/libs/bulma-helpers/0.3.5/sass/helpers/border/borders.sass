@@ -1,0 +1,28 @@
+.is-borderless
+  border: 0 !important
+
+table.is-completely-borderless
+  td, 
+  th,
+  tr
+    border: 0 !important
+
+$sides: (top, bottom, left, right)
+@each $side in $sides
+  .is-#{$side}-borderless
+    border-#{$side}: 0px !important
+
+// sizing helpers settings
+$range-start: 1
+$range-end: 10
+$interval: 1
+
+$current: $range-start
+@while $current < $range-end
+  .has-border-width-#{$current}
+    border-width: #{$current}px !important
+  @each $side in $sides
+    .has-border-#{$side}-width-#{$current} 
+      border-#{$side}-width: #{$current}px !important
+        
+  $current: $current + $interval
