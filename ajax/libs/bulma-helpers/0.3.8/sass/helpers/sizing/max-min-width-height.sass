@@ -1,0 +1,13 @@
+// sizing helpers settings
+$range-start: $sizing-max-min-width-height-range-start
+$range-end: $sizing-max-min-width-height-range-end
+$interval: $sizing-max-min-width-height-interval
+
+$current: $range-start
+@while $current < $range-end
+  @each $dimension in 'width' 'height'
+    @each $modifier in 'max' 'min'
+      .has-#{$modifier}-#{$dimension}-#{$current} 
+        #{$modifier}-#{$dimension}: #{$current}px !important
+        
+  $current: $current + $interval

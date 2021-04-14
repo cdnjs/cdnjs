@@ -1,0 +1,276 @@
+@if $enable-media-queries
+  @if $enable-sizing-media-queries
+    @if $enable-sizing-width-height-media-queries
+      $range-start: $mq-sizing-range-start
+      $range-end: $mq-sizing-range-end
+      $interval: $mq-sizing-interval
+
+      $current: $range-start
+      @while $current < $range-end
+        @each $dimension in 'width' 'height'
+          +mq('has-#{$dimension}-#{$current}')
+            #{$dimension}: #{$current}px !important
+        $current: $current + $interval
+    
+    @if $enable-sizing-max-min-width-height-media-queries
+      $range-start: $mq-sizing-max-min-width-height-range-start
+      $range-end: $mq-sizing-max-min-width-height-range-end
+      $interval: $mq-sizing-max-min-width-height-interval
+
+      $current: $range-start
+      @while $current < $range-end
+        @each $dimension in 'width' 'height'
+          @each $modifier in 'max' 'min'
+            +mq('has-#{$modifier}-#{$dimension}-#{$current}')
+              #{$modifier}-#{$dimension}: #{$current}px !important
+              
+        $current: $current + $interval
+    
+    @if $enable-sizing-misc-media-queries
+      $modifiers: ('height', 'width')
+
+      @each $modifier in $modifiers
+        +mobile
+          .is-full-#{$modifier}-mobile
+            #{$modifier}: 100% !important
+
+          .has-page-#{$modifier}-mobile
+            @if ($modifier == 'height')
+              #{$modifier}: 100vh !important
+            @else if $modifier == 'width'
+              #{$modifier}: 100vw !important
+
+          .is-half-#{$modifier}-mobile
+            #{$modifier}: 50% !important
+
+          .has-half-page-#{$modifier}-mobile
+            @if ($modifier == 'height')
+              #{$modifier}: 50vh !important
+            @else if $modifier == 'width'
+              #{$modifier}: 50vw !important
+
+          .is-quarter-#{$modifier}-mobile
+            #{$modifier}: 25% !important
+
+          .has-quarter-page-#{$modifier}-mobile
+            @if ($modifier == 'height')
+              #{$modifier}: 25vh !important
+            @else if $modifier == 'width'
+              #{$modifier}: 25vw !important
+        +tablet
+          .is-full-#{$modifier}-tablet
+            #{$modifier}: 100% !important
+
+          .has-page-#{$modifier}-tablet
+            @if ($modifier == 'height')
+              #{$modifier}: 100vh !important
+            @else if $modifier == 'width'
+              #{$modifier}: 100vw !important
+
+          .is-half-#{$modifier}-tablet
+            #{$modifier}: 50% !important
+
+          .has-half-page-#{$modifier}-tablet
+            @if ($modifier == 'height')
+              #{$modifier}: 50vh !important
+            @else if $modifier == 'width'
+              #{$modifier}: 50vw !important
+
+          .is-quarter-#{$modifier}-tablet
+            #{$modifier}: 25% !important
+
+          .has-quarter-page-#{$modifier}-tablet
+            @if ($modifier == 'height')
+              #{$modifier}: 25vh !important
+            @else if $modifier == 'width'
+              #{$modifier}: 25vw !important
+        +tablet-only
+          .is-full-#{$modifier}-tablet-only
+            #{$modifier}: 100% !important
+
+          .has-page-#{$modifier}-tablet-only
+            @if ($modifier == 'height')
+              #{$modifier}: 100vh !important
+            @else if $modifier == 'width'
+              #{$modifier}: 100vw !important
+
+          .is-half-#{$modifier}-tablet-only
+            #{$modifier}: 50% !important
+
+          .has-half-page-#{$modifier}-tablet-only
+            @if ($modifier == 'height')
+              #{$modifier}: 50vh !important
+            @else if $modifier == 'width'
+              #{$modifier}: 50vw !important
+
+          .is-quarter-#{$modifier}-tablet-only
+            #{$modifier}: 25% !important
+
+          .has-quarter-page-#{$modifier}-tablet-only
+            @if ($modifier == 'height')
+              #{$modifier}: 25vh !important
+            @else if $modifier == 'width'
+              #{$modifier}: 25vw !important
+        +touch
+          .is-full-#{$modifier}-touch
+            #{$modifier}: 100% !important
+
+          .has-page-#{$modifier}-touch
+            @if ($modifier == 'height')
+              #{$modifier}: 100vh !important
+            @else if $modifier == 'width'
+              #{$modifier}: 100vw !important
+
+          .is-half-#{$modifier}-touch
+            #{$modifier}: 50% !important
+
+          .has-half-page-#{$modifier}-touch
+            @if ($modifier == 'height')
+              #{$modifier}: 50vh !important
+            @else if $modifier == 'width'
+              #{$modifier}: 50vw !important
+
+          .is-quarter-#{$modifier}-touch
+            #{$modifier}: 25% !important
+
+          .has-quarter-page-#{$modifier}-touch
+            @if ($modifier == 'height')
+              #{$modifier}: 25vh !important
+            @else if $modifier == 'width'
+              #{$modifier}: 25vw !important
+        +desktop
+          .is-full-#{$modifier}-desktop
+            #{$modifier}: 100% !important
+
+          .has-page-#{$modifier}-desktop
+            @if ($modifier == 'height')
+              #{$modifier}: 100vh !important
+            @else if $modifier == 'width'
+              #{$modifier}: 100vw !important
+
+          .is-half-#{$modifier}-desktop
+            #{$modifier}: 50% !important
+
+          .has-half-page-#{$modifier}-desktop
+            @if ($modifier == 'height')
+              #{$modifier}: 50vh !important
+            @else if $modifier == 'width'
+              #{$modifier}: 50vw !important
+
+          .is-quarter-#{$modifier}-desktop
+            #{$modifier}: 25% !important
+
+          .has-quarter-page-#{$modifier}-desktop
+            @if ($modifier == 'height')
+              #{$modifier}: 25vh !important
+            @else if $modifier == 'width'
+              #{$modifier}: 25vw !important
+        +desktop-only
+          .is-full-#{$modifier}-desktop-only
+            #{$modifier}: 100% !important
+
+          .has-page-#{$modifier}-desktop-only
+            @if ($modifier == 'height')
+              #{$modifier}: 100vh !important
+            @else if $modifier == 'width'
+              #{$modifier}: 100vw !important
+
+          .is-half-#{$modifier}-desktop-only
+            #{$modifier}: 50% !important
+
+          .has-half-page-#{$modifier}-desktop-only
+            @if ($modifier == 'height')
+              #{$modifier}: 50vh !important
+            @else if $modifier == 'width'
+              #{$modifier}: 50vw !important
+
+          .is-quarter-#{$modifier}-desktop-only
+            #{$modifier}: 25% !important
+
+          .has-quarter-page-#{$modifier}-desktop-only
+            @if ($modifier == 'height')
+              #{$modifier}: 25vh !important
+            @else if $modifier == 'width'
+              #{$modifier}: 25vw !important
+        +widescreen
+          .is-full-#{$modifier}-widescreen
+            #{$modifier}: 100% !important
+
+          .has-page-#{$modifier}-widescreen
+            @if ($modifier == 'height')
+              #{$modifier}: 100vh !important
+            @else if $modifier == 'width'
+              #{$modifier}: 100vw !important
+
+          .is-half-#{$modifier}-widescreen
+            #{$modifier}: 50% !important
+
+          .has-half-page-#{$modifier}-widescreen
+            @if ($modifier == 'height')
+              #{$modifier}: 50vh !important
+            @else if $modifier == 'width'
+              #{$modifier}: 50vw !important
+
+          .is-quarter-#{$modifier}-widescreen
+            #{$modifier}: 25% !important
+
+          .has-quarter-page-#{$modifier}-widescreen
+            @if ($modifier == 'height')
+              #{$modifier}: 25vh !important
+            @else if $modifier == 'width'
+              #{$modifier}: 25vw !important
+        +widescreen-only
+          .is-full-#{$modifier}-widescreen-only
+            #{$modifier}: 100% !important
+
+          .has-page-#{$modifier}-widescreen-only
+            @if ($modifier == 'height')
+              #{$modifier}: 100vh !important
+            @else if $modifier == 'width'
+              #{$modifier}: 100vw !important
+
+          .is-half-#{$modifier}-widescreen-only
+            #{$modifier}: 50% !important
+
+          .has-half-page-#{$modifier}-widescreen-only
+            @if ($modifier == 'height')
+              #{$modifier}: 50vh !important
+            @else if $modifier == 'width'
+              #{$modifier}: 50vw !important
+
+          .is-quarter-#{$modifier}-widescreen-only
+            #{$modifier}: 25% !important
+
+          .has-quarter-page-#{$modifier}-widescreen-only
+            @if ($modifier == 'height')
+              #{$modifier}: 25vh !important
+            @else if $modifier == 'width'
+              #{$modifier}: 25vw !important
+        +fullhd
+          .is-full-#{$modifier}-fullhd
+            #{$modifier}: 100% !important
+
+          .has-page-#{$modifier}-fullhd
+            @if ($modifier == 'height')
+              #{$modifier}: 100vh !important
+            @else if $modifier == 'width'
+              #{$modifier}: 100vw !important
+
+          .is-half-#{$modifier}-fullhd
+            #{$modifier}: 50% !important
+
+          .has-half-page-#{$modifier}-fullhd
+            @if ($modifier == 'height')
+              #{$modifier}: 50vh !important
+            @else if $modifier == 'width'
+              #{$modifier}: 50vw !important
+
+          .is-quarter-#{$modifier}-fullhd
+            #{$modifier}: 25% !important
+
+          .has-quarter-page-#{$modifier}-fullhd
+            @if ($modifier == 'height')
+              #{$modifier}: 25vh !important
+            @else if $modifier == 'width'
+              #{$modifier}: 25vw !important
+        
