@@ -1,0 +1,1 @@
+module.exports={title:"Monster",slug:"monster",svg:'<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Monster icon</title><path d="M0 0V24H5.42V12.39L12 18.19L18.58 12.39V24H24V0L12 11.23L0 0Z"/></svg>',get path(){return this.svg.match(/<path\s+d="([^"]*)/)[1]},source:"https://www.monster.com/press/",hex:"6D4C9F",guidelines:void 0,license:void 0};
