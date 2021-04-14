@@ -1,0 +1,179 @@
+@if $enable-media-queries
+  @if $enable-spacing-media-queries
+    $range-start: $mq-spacing-range-start
+    $range-end: $mq-spacing-range-end
+    $interval: $mq-spacing-interval
+    $sides: (top, bottom, left, right)
+
+    $current: $range-start
+    @while $current < $range-end
+      +mobile
+        .has-margin-#{$current}-mobile
+          margin: #{$current}px !important
+        .has-padding-#{$current}-mobile
+          padding: #{$current}px !important
+      +tablet
+        .has-margin-#{$current}-tablet
+          margin: #{$current}px !important
+        .has-padding-#{$current}-tablet
+          padding: #{$current}px !important
+      +tablet-only
+        .has-margin-#{$current}-tablet-only
+          margin: #{$current}px !important
+        .has-padding-#{$current}-tablet-only
+          padding: #{$current}px !important
+      +touch
+        .has-margin-#{$current}-touch
+          margin: #{$current}px !important
+        .has-padding-#{$current}-touch
+          padding: #{$current}px !important
+      +desktop
+        .has-margin-#{$current}-desktop
+          margin: #{$current}px !important
+        .has-padding-#{$current}-desktop
+          padding: #{$current}px !important
+      +desktop-only
+        .has-margin-#{$current}-desktop-only
+          margin: #{$current}px !important
+        .has-padding-#{$current}-desktop-only
+          padding: #{$current}px !important
+      +widescreen
+        .has-margin-#{$current}-widescreen
+          margin: #{$current}px !important
+        .has-padding-#{$current}-widescreen
+          padding: #{$current}px !important
+      +widescreen-only
+        .has-margin-#{$current}-widescreen-only
+          margin: #{$current}px !important
+        .has-padding-#{$current}-widescreen-only
+          padding: #{$current}px !important
+      +fullhd
+        .has-margin-#{$current}-fullhd
+          margin: #{$current}px !important
+        .has-padding-#{$current}-fullhd
+          padding: #{$current}px !important
+
+      @each $side in $sides
+        +mobile
+          .has-margin-#{$side}-#{$current}-mobile
+            margin-#{$side}: #{$current}px !important
+          .has-padding-#{$side}-#{$current}-mobile
+            padding-#{$side}: #{$current}px !important
+        +tablet
+          .has-margin-#{$side}-#{$current}-tablet
+            margin-#{$side}: #{$current}px !important
+          .has-padding-#{$side}-#{$current}-tablet
+            padding-#{$side}: #{$current}px !important
+        +tablet-only
+          .has-margin-#{$side}-#{$current}-tablet-only
+            margin-#{$side}: #{$current}px !important
+          .has-padding-#{$side}-#{$current}-tablet-only
+            padding-#{$side}: #{$current}px !important
+        +touch
+          .has-margin-#{$side}-#{$current}-touch
+            margin-#{$side}: #{$current}px !important
+          .has-padding-#{$side}-#{$current}-touch
+            padding-#{$side}: #{$current}px !important
+        +desktop
+          .has-margin-#{$side}-#{$current}-desktop
+            margin-#{$side}: #{$current}px !important
+          .has-padding-#{$side}-#{$current}-desktop
+            padding-#{$side}: #{$current}px !important
+        +desktop-only
+          .has-margin-#{$side}-#{$current}-desktop-only
+            margin-#{$side}: #{$current}px !important
+          .has-padding-#{$side}-#{$current}-desktop-only
+            padding-#{$side}: #{$current}px !important
+        +widescreen
+          .has-margin-#{$side}-#{$current}-widescreen
+            margin-#{$side}: #{$current}px !important
+          .has-padding-#{$side}-#{$current}-widescreen
+            padding-#{$side}: #{$current}px !important
+        +widescreen-only
+          .has-margin-#{$side}-#{$current}-widescreen-only
+            margin-#{$side}: #{$current}px !important
+          .has-padding-#{$side}-#{$current}-widescreen-only
+            padding-#{$side}: #{$current}px !important
+        +fullhd
+          .has-margin-#{$side}-#{$current}-fullhd
+            margin-#{$side}: #{$current}px !important
+          .has-padding-#{$side}-#{$current}-fullhd
+            padding-#{$side}: #{$current}px !important
+      
+      $current: $current + $interval
+
+    @each $side in $sides
+      +mobile
+        .is-#{$side}-marginless-mobile
+          margin-#{$side}: 0 !important
+        .is-#{$side}-paddingless-mobile
+          padding-#{$side}: 0 !important
+      +tablet
+        .is-#{$side}-marginless-tablet
+          margin-#{$side}: 0 !important
+        .is-#{$side}-paddingless-tablet
+          padding-#{$side}: 0 !important
+      +tablet-only
+        .is-#{$side}-marginless-tablet-only
+          margin-#{$side}: 0 !important
+        .is-#{$side}-paddingless-tablet-only
+          padding-#{$side}: 0 !important
+      +touch
+        .is-#{$side}-marginless-touch
+          margin-#{$side}: 0 !important
+        .is-#{$side}-paddingless-touch
+          padding-#{$side}: 0 !important
+      +desktop
+        .is-#{$side}-marginless-desktop
+          margin-#{$side}: 0 !important
+        .is-#{$side}-paddingless-desktop
+          padding-#{$side}: 0 !important
+      +desktop-only
+        .is-#{$side}-marginless-desktop-only
+          margin-#{$side}: 0 !important
+        .is-#{$side}-paddingless-desktop-only
+          padding-#{$side}: 0 !important
+      +widescreen
+        .is-#{$side}-marginless-widescreen
+          margin-#{$side}: 0 !important
+        .is-#{$side}-paddingless-widescreen
+          padding-#{$side}: 0 !important
+      +widescreen-only
+        .is-#{$side}-marginless-widescreen-only
+          margin-#{$side}: 0 !important
+        .is-#{$side}-paddingless-widescreen-only
+          padding-#{$side}: 0 !important
+      +fullhd
+        .is-#{$side}-marginless-fullhd
+          margin-#{$side}: 0 !important
+        .is-#{$side}-paddingless-fullhd
+          padding-#{$side}: 0 !important
+    
+    @each $side in (left, right)
+      +mobile
+        .has-margin-#{$side}-auto-mobile
+          margin-#{$side}: auto !important
+      +tablet
+        .has-margin-#{$side}-auto-tablet
+          margin-#{$side}: auto !important
+      +tablet-only
+        .has-margin-#{$side}-auto-tablet-only
+          margin-#{$side}: auto !important
+      +touch
+        .has-margin-#{$side}-auto-touch
+          margin-#{$side}: auto !important
+      +desktop
+        .has-margin-#{$side}-auto-desktop
+          margin-#{$side}: auto !important
+      +desktop-only
+        .has-margin-#{$side}-auto-desktop-only
+          margin-#{$side}: auto !important
+      +widescreen
+        .has-margin-#{$side}-auto-widescreen
+          margin-#{$side}: auto !important
+      +widescreen-only
+        .has-margin-#{$side}-auto-widescreen-only
+          margin-#{$side}: auto !important
+      +fullhd
+        .has-margin-#{$side}-auto-fullhd
+          margin-#{$side}: auto !important
