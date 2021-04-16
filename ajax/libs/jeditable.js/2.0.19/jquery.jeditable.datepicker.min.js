@@ -1,0 +1,3 @@
+/*! jquery-jeditable https://github.com/NicolasCARPi/jquery_jeditable#readme */
+
+"use strict";!function($){$.editable.addInputType("datepicker",{element:function(settings,original){var input=$("<input />");return settings.datepicker?input.datepicker(settings.datepicker):input.datepicker(),settings.datepicker.format&&input.datepicker("option","dateFormat",settings.datepicker.format),$(this).append(input),input},submit:function(settings,original){var dateFormatted,dateRaw=$("input",this).datepicker("getDate");dateFormatted=settings.datepicker.format?$.datepicker.formatDate(settings.datepicker.format,new Date(dateRaw)):dateRaw,$("input",this).val(dateFormatted)},plugin:function(settings,original){settings.onblur=null}})}(jQuery);
