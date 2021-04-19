@@ -1,0 +1,154 @@
+.autoComplete_wrapper {
+  position: relative;
+  display: inline-block;
+  width: 370px;
+}
+
+#autoComplete {
+  height: 3rem;
+  width: 370px;
+  margin: 0;
+  padding: 0 2rem 0 3.2rem;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  font-size: 1rem;
+  text-overflow: ellipsis;
+  color: rgba(255, 122, 122, 0.3);
+  outline: none;
+  border-radius: 10rem;
+  border: 0;
+  border: 0.05rem solid rgba(255, 122, 122, 0.5);
+  background-image: url(./images/search.svg);
+  background-size: 1.4rem;
+  background-position: left 1.05rem top 0.8rem;
+  background-repeat: no-repeat;
+  background-origin: border-box;
+  background-color: #fff;
+  transition: all 0.4s ease;
+  -webkit-transition: all -webkit-transform 0.4s ease;
+}
+
+#autoComplete::placeholder {
+  color: rgba(255, 122, 122, 0.5);
+  transition: all 0.3s ease;
+  -webkit-transition: all -webkit-transform 0.3s ease;
+}
+
+#autoComplete:hover::placeholder {
+  color: rgba(255, 122, 122, 0.6);
+  transition: all 0.3s ease;
+  -webkit-transition: all -webkit-transform 0.3s ease;
+}
+
+#autoComplete:focus::placeholder {
+  padding: 0.1rem 0.6rem;
+  font-size: 0.95rem;
+  color: rgba(255, 122, 122, 0.4);
+}
+
+#autoComplete:focus::selection {
+  background-color: rgba(255, 122, 122, 0.15);
+}
+
+#autoComplete::selection {
+  background-color: rgba(255, 122, 122, 0.15);
+}
+
+#autoComplete:hover {
+  color: rgba(255, 122, 122, 0.8);
+  transition: all 0.3s ease;
+  -webkit-transition: all -webkit-transform 0.3s ease;
+}
+
+#autoComplete:focus {
+  color: rgba(255, 122, 122, 1);
+  border: 0.06rem solid rgba(255, 122, 122, 0.8);
+}
+
+#autoComplete_list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  padding: 0;
+  margin-top: 0.5rem;
+  border-radius: 0.6rem;
+  background-color: #fff;
+  box-shadow: 0 3px 6px rgba(149, 157, 165, 0.15);
+  border: 1px solid rgba(33, 33, 33, 0.07);
+  z-index: 1000;
+  outline: none;
+}
+
+.autoComplete_result {
+  margin: 0.3rem;
+  padding: 0.3rem 0.5rem;
+  list-style: none;
+  text-align: left;
+  font-size: 1rem;
+  color: #212121;
+  transition: all 0.1s ease-in-out;
+  border-radius: 0.35rem;
+  background-color: rgba(255, 255, 255, 1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.2s ease;
+}
+
+.autoComplete_result::selection {
+  color: rgba(#ffffff, 0);
+  background-color: rgba(#ffffff, 0);
+}
+
+.autoComplete_result:hover {
+  cursor: pointer;
+  background-color: rgba(255, 122, 122, 0.15);
+}
+
+.autoComplete_highlighted {
+  color: rgba(255, 122, 122, 1);
+  font-weight: bold;
+}
+
+.autoComplete_highlighted::selection {
+  color: rgba(#ffffff, 0);
+  background-color: rgba(#ffffff, 0);
+}
+
+.autoComplete_selected {
+  cursor: pointer;
+  background-color: rgba(255, 122, 122, 0.15);
+}
+
+@media only screen and (max-width: 600px) {
+  .autoComplete_wrapper {
+    width: 320px;
+  }
+
+  #autoComplete {
+    width: 18rem;
+    background-size: 1.6rem;
+    background-position: left 1.1rem top 0.75rem;
+  }
+
+  #autoComplete_list {
+    margin: 10px;
+  }
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  #autoComplete {
+    border-width: 1px;
+  }
+}
+
+@-moz-document url-prefix() {
+  #autoComplete {
+    background-size: 1.2rem;
+    background-origin: border-box;
+    border-width: 1px;
+    background-position: left 1.1rem top 0.8rem;
+  }
+}
