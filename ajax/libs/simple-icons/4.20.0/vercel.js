@@ -1,0 +1,1 @@
+module.exports={title:"Vercel",slug:"vercel",svg:'<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Vercel icon</title><path d="M24 22.525H0l12-21.05 12 21.05z"/></svg>',get path(){return this.svg.match(/<path\s+d="([^"]*)/)[1]},source:"https://vercel.com/design",hex:"000000",guidelines:void 0,license:void 0};

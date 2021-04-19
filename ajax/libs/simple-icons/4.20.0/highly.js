@@ -1,0 +1,1 @@
+module.exports={title:"Highly",slug:"highly",svg:'<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Highly icon</title><path d="M10.2 20.4H13.799999999999999V24H10.2zM9 0H15V18H9z"/></svg>',get path(){return this.svg.match(/<path\s+d="([^"]*)/)[1]},source:"https://highly.co/",hex:"FF3C00",guidelines:void 0,license:void 0};
