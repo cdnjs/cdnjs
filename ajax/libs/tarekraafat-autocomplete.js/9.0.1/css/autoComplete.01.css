@@ -1,0 +1,109 @@
+.autoComplete_wrapper {
+  position: relative;
+  display: inline-block;
+  width: 370px;
+}
+
+#autoComplete {
+  width: 90%;
+  height: 40px;
+  padding-left: 20px;
+  font-size: 1rem;
+  color: rgba(123, 123, 123, 1);
+  border-radius: 8px;
+  border: 0;
+  outline: none;
+  background-color: #f1f3f4;
+}
+
+#autoComplete::placeholder {
+  color: rgba(123, 123, 123, 0.5);
+  transition: all 0.3s ease;
+}
+
+#autoComplete_list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  padding: 0;
+  margin: 10px 0;
+  border-radius: 0.6rem;
+  background-color: #fff;
+  box-shadow: 0 3px 6px rgba(149, 157, 165, 0.15);
+  border: 1px solid rgba(33, 33, 33, 0.07);
+  z-index: 1000;
+  outline: none;
+}
+
+.autoComplete_result {
+  margin: 0.3rem;
+  padding: 0.3rem 0.5rem;
+  list-style: none;
+  text-align: left;
+  font-size: 1rem;
+  color: #212121;
+  transition: all 0.1s ease-in-out;
+  border-radius: 0.35rem;
+  background-color: rgba(255, 255, 255, 1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.2s ease;
+}
+
+.autoComplete_result::selection {
+  color: rgba(#ffffff, 0);
+  background-color: rgba(#ffffff, 0);
+}
+
+.autoComplete_result:hover {
+  cursor: pointer;
+  background-color: rgba(123, 123, 123, 0.1);
+}
+
+.autoComplete_highlighted {
+  color: rgba(123, 123, 123, 0.5);
+  font-weight: bold;
+}
+
+.autoComplete_highlighted::selection {
+  color: rgba(#ffffff, 0);
+  background-color: rgba(#ffffff, 0);
+}
+
+.autoComplete_selected {
+  cursor: pointer;
+  background-color: rgba(123, 123, 123, 0.1);
+}
+
+@media only screen and (max-width: 600px) {
+  .autoComplete_wrapper {
+    width: 320px;
+  }
+
+  #autoComplete {
+    width: 18rem;
+    background-size: 1.6rem;
+    background-position: left 1.1rem top 0.75rem;
+  }
+
+  #autoComplete_list {
+    margin: 10px;
+  }
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  #autoComplete {
+    border-width: 1px;
+  }
+}
+
+@-moz-document url-prefix() {
+  #autoComplete {
+    background-size: 1.2rem;
+    background-origin: border-box;
+    border-width: 1px;
+    background-position: left 1.1rem top 0.8rem;
+  }
+}
