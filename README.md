@@ -13,8 +13,8 @@
  <a href="https://github.com/cdnjs/cdnjs/blob/master/LICENSE">
   <img src="https://img.shields.io/badge/License-MIT-brightgreen.svg?style=flat-square" alt="MIT License">
  </a>
- <a href="https://cdnjs.discourse.group/">
-  <img src="https://img.shields.io/discourse/https/cdnjs.discourse.group/status.svg?label=Community%20Discourse&style=flat-square" alt="Community">
+ <a href="https://github.com/cdnjs/cdnjs/discussions">
+  <img src="https://img.shields.io/badge/GitHub-Discussions-brightgreen.svg?style=flat-square" alt="Discussions">
  </a>
 </p>
 
