@@ -71,8 +71,6 @@ cdnjs wouldn't be the success that it is today without our sponsors' kind suppor
 * [DigitalOcean](https://www.digitalocean.com/?utm_source=cdnjs&utm_medium=link&utm_campaign=cdnjs_readme)
 * [Heroku](https://www.heroku.com/?utm_source=cdnjs&utm_medium=link&utm_campaign=cdnjs_readme)
 * [Statuspage](https://www.statuspage.io/?utm_source=cdnjs&utm_medium=cdnjs_link&utm_campaign=cdnjs_readme)
-* [Discourse](https://www.discourse.org/?utm_source=cdnjs&utm_medium=cdnjs_link&utm_campaign=cdnjs_readme)
-* [SolarWinds](https://www.solarwinds.com/?utm_source=cdnjs&utm_medium=cdnjs_link&utm_campaign=cdnjs_readme)
 * [Sentry](https://sentry.io/welcome/?utm_source=cdnjs&utm_medium=cdnjs_link&utm_campaign=cdnjs_readme)
 
 If you are interested in becoming a sponsor, please feel free to contact us!
