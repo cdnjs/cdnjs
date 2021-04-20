@@ -1,0 +1,646 @@
+"use strict";
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.SliderMarkLabel = exports.SliderMark = exports.SliderValueLabel = exports.SliderThumb = exports.SliderTrack = exports.SliderRail = exports.SliderRoot = exports.sliderClasses = void 0;
+
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var React = _interopRequireWildcard(require("react"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _clsx = _interopRequireDefault(require("clsx"));
+
+var _utils = require("@material-ui/utils");
+
+var _unstyled = require("@material-ui/unstyled");
+
+var _SliderUnstyled = _interopRequireWildcard(require("@material-ui/unstyled/SliderUnstyled"));
+
+var _useThemeProps = _interopRequireDefault(require("../styles/useThemeProps"));
+
+var _experimentalStyled = _interopRequireDefault(require("../styles/experimentalStyled"));
+
+var _colorManipulator = require("../styles/colorManipulator");
+
+var _capitalize = _interopRequireDefault(require("../utils/capitalize"));
+
+var _jsxRuntime = require("react/jsx-runtime");
+
+const sliderClasses = (0, _extends2.default)({}, _SliderUnstyled.sliderUnstyledClasses, (0, _unstyled.generateUtilityClasses)('MuiSlider', ['colorPrimary', 'colorSecondary', 'thumbColorPrimary', 'thumbColorSecondary']));
+exports.sliderClasses = sliderClasses;
+
+const overridesResolver = (props, styles) => {
+  const {
+    styleProps
+  } = props;
+  const marks = styleProps.marksProp === true && styleProps.step !== null ? [...Array(Math.floor((styleProps.max - styleProps.min) / styleProps.step) + 1)].map((_, index) => ({
+    value: styleProps.min + styleProps.step * index
+  })) : styleProps.marksProp || [];
+  const marked = marks.length > 0 && marks.some(mark => mark.label);
+  return (0, _utils.deepmerge)((0, _extends2.default)({}, styles[`color${(0, _capitalize.default)(styleProps.color)}`], {
+    [`&.${sliderClasses.disabled}`]: styles.disabled
+  }, marked && styles.marked, styleProps.orientation === 'vertical' && styles.vertical, styleProps.track === 'inverted' && styles.trackInverted, styleProps.track === false && styles.trackFalse, {
+    [`& .${sliderClasses.rail}`]: styles.rail,
+    [`& .${sliderClasses.track}`]: styles.track,
+    [`& .${sliderClasses.mark}`]: styles.mark,
+    [`& .${sliderClasses.markLabel}`]: styles.markLabel,
+    [`& .${sliderClasses.valueLabel}`]: styles.valueLabel,
+    [`& .${sliderClasses.thumb}`]: (0, _extends2.default)({}, styles.thumb, styles[`thumbColor${(0, _capitalize.default)(styleProps.color)}`], {
+      [`&.${sliderClasses.disabled}`]: styles.disabled
+    })
+  }), styles.root || {});
+};
+
+const SliderRoot = (0, _experimentalStyled.default)('span', {}, {
+  name: 'MuiSlider',
+  slot: 'Root',
+  overridesResolver
+})(({
+  theme,
+  styleProps
+}) => (0, _extends2.default)({
+  height: 2,
+  width: '100%',
+  boxSizing: 'content-box',
+  padding: '13px 0',
+  display: 'inline-block',
+  position: 'relative',
+  cursor: 'pointer',
+  touchAction: 'none',
+  color: theme.palette.primary.main,
+  WebkitTapHighlightColor: 'transparent'
+}, styleProps.color === 'secondary' && {
+  color: theme.palette.secondary.main
+}, {
+  [`&.${sliderClasses.disabled}`]: {
+    pointerEvents: 'none',
+    cursor: 'default',
+    color: theme.palette.grey[400]
+  }
+}, styleProps.orientation === 'vertical' && {
+  width: 2,
+  height: '100%',
+  padding: '0 13px'
+}, {
+  // The primary input mechanism of the device includes a pointing device of limited accuracy.
+  '@media (pointer: coarse)': (0, _extends2.default)({
+    // Reach 42px touch target, about ~8mm on screen.
+    padding: '20px 0'
+  }, styleProps.orientation === 'vertical' && {
+    padding: '0 20px'
+  }),
+  '@media print': {
+    colorAdjust: 'exact'
+  }
+}, styleProps.marked && (0, _extends2.default)({
+  marginBottom: 20
+}, styleProps.orientation === 'vertical' && {
+  marginBottom: 'auto',
+  marginRight: 20
+}), {
+  [`& .${sliderClasses.valueLabelCircle}`]: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 32,
+    height: 32,
+    borderRadius: '50% 50% 50% 0',
+    backgroundColor: 'currentColor',
+    transform: 'rotate(-45deg)'
+  },
+  [`& .${sliderClasses.valueLabelLabel}`]: {
+    color: theme.palette.primary.contrastText,
+    transform: 'rotate(45deg)',
+    textAlign: 'center'
+  },
+  [`&.${sliderClasses.dragging}`]: {
+    [`& .${sliderClasses.thumb}, & .${sliderClasses.track}`]: {
+      transition: 'none'
+    }
+  }
+}));
+exports.SliderRoot = SliderRoot;
+const SliderRail = (0, _experimentalStyled.default)('span', {}, {
+  name: 'MuiSlider',
+  slot: 'Rail'
+})(({
+  styleProps
+}) => (0, _extends2.default)({
+  display: 'block',
+  position: 'absolute',
+  width: '100%',
+  height: 2,
+  borderRadius: 1,
+  backgroundColor: 'currentColor',
+  opacity: 0.38
+}, styleProps.orientation === 'vertical' && {
+  height: '100%',
+  width: 2
+}, styleProps.track === 'inverted' && {
+  opacity: 1
+}));
+exports.SliderRail = SliderRail;
+const SliderTrack = (0, _experimentalStyled.default)('span', {}, {
+  name: 'MuiSlider',
+  slot: 'Track'
+})(({
+  theme,
+  styleProps
+}) => (0, _extends2.default)({
+  display: 'block',
+  position: 'absolute',
+  height: 2,
+  borderRadius: 1,
+  backgroundColor: 'currentColor',
+  transition: theme.transitions.create(['left', 'width'], {
+    duration: theme.transitions.duration.shortest
+  })
+}, styleProps.orientation === 'vertical' && {
+  width: 2
+}, styleProps.track === false && {
+  display: 'none'
+}, styleProps.track === 'inverted' && {
+  backgroundColor: // Same logic as the LinearProgress track color
+  theme.palette.mode === 'light' ? (0, _colorManipulator.lighten)(theme.palette.primary.main, 0.62) : (0, _colorManipulator.darken)(theme.palette.primary.main, 0.5)
+}));
+exports.SliderTrack = SliderTrack;
+const SliderThumb = (0, _experimentalStyled.default)('span', {}, {
+  name: 'MuiSlider',
+  slot: 'Thumb'
+})(({
+  theme,
+  styleProps
+}) => (0, _extends2.default)({
+  position: 'absolute',
+  width: 12,
+  height: 12,
+  marginLeft: -6,
+  marginTop: -5,
+  boxSizing: 'border-box',
+  borderRadius: '50%',
+  outline: 0,
+  backgroundColor: 'currentColor',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  transition: theme.transitions.create(['box-shadow', 'left'], {
+    duration: theme.transitions.duration.shortest
+  }),
+  '&::after': {
+    position: 'absolute',
+    content: '""',
+    borderRadius: '50%',
+    // reach 42px hit target (2 * 15 + thumb diameter)
+    left: -15,
+    top: -15,
+    right: -15,
+    bottom: -15
+  },
+  [`&:hover, &.${sliderClasses.focusVisible}`]: {
+    boxShadow: `0px 0px 0px 8px ${(0, _colorManipulator.alpha)(theme.palette.primary.main, 0.16)}`,
+    '@media (hover: none)': {
+      boxShadow: 'none'
+    }
+  },
+  [`&.${sliderClasses.active}`]: {
+    boxShadow: `0px 0px 0px 14px ${(0, _colorManipulator.alpha)(theme.palette.primary.main, 0.16)}`
+  },
+  [`&.${sliderClasses.disabled}`]: (0, _extends2.default)({
+    width: 8,
+    height: 8,
+    marginLeft: -4,
+    marginTop: -3
+  }, styleProps.orientation === 'vertical' && {
+    marginLeft: -3,
+    marginBottom: -4
+  }, {
+    '&:hover': {
+      boxShadow: 'none'
+    }
+  })
+}, styleProps.orientation === 'vertical' && {
+  marginLeft: -5,
+  marginBottom: -6
+}, styleProps.color === 'secondary' && {
+  [`&:hover, &.${sliderClasses.focusVisible}`]: {
+    boxShadow: `0px 0px 0px 8px ${(0, _colorManipulator.alpha)(theme.palette.secondary.main, 0.16)}`
+  },
+  [`&.${sliderClasses.active}`]: {
+    boxShadow: `0px 0px 0px 14px ${(0, _colorManipulator.alpha)(theme.palette.secondary.main, 0.16)}`
+  }
+}));
+exports.SliderThumb = SliderThumb;
+const SliderValueLabel = (0, _experimentalStyled.default)(_SliderUnstyled.SliderValueLabelUnstyled, {}, {
+  name: 'MuiSlider',
+  slot: 'ValueLabel'
+})(({
+  theme
+}) => (0, _extends2.default)({
+  // IE 11 centering bug, to remove from the customization demos once no longer supported
+  left: 'calc(-50% - 4px)',
+  [`&.${sliderClasses.valueLabelOpen}`]: {
+    transform: 'scale(1) translateY(-10px)'
+  },
+  zIndex: 1
+}, theme.typography.body2, {
+  fontSize: theme.typography.pxToRem(12),
+  lineHeight: 1.2,
+  transition: theme.transitions.create(['transform'], {
+    duration: theme.transitions.duration.shortest
+  }),
+  top: -34,
+  transformOrigin: 'bottom center',
+  transform: 'scale(0)',
+  position: 'absolute'
+}));
+exports.SliderValueLabel = SliderValueLabel;
+const SliderMark = (0, _experimentalStyled.default)('span', {}, {
+  name: 'MuiSlider',
+  slot: 'Mark'
+})(({
+  theme,
+  styleProps
+}) => (0, _extends2.default)({
+  position: 'absolute',
+  width: 2,
+  height: 2,
+  borderRadius: 1,
+  backgroundColor: 'currentColor'
+}, styleProps.markActive && {
+  backgroundColor: theme.palette.background.paper,
+  opacity: 0.8
+}));
+exports.SliderMark = SliderMark;
+const SliderMarkLabel = (0, _experimentalStyled.default)('span', {}, {
+  name: 'MuiSlider',
+  slot: 'MarkLabel'
+})(({
+  theme,
+  styleProps
+}) => (0, _extends2.default)({}, theme.typography.body2, {
+  color: theme.palette.text.secondary,
+  position: 'absolute',
+  top: 26,
+  transform: 'translateX(-50%)',
+  whiteSpace: 'nowrap'
+}, styleProps.orientation === 'vertical' && {
+  top: 'auto',
+  left: 26,
+  transform: 'translateY(50%)'
+}, {
+  '@media (pointer: coarse)': (0, _extends2.default)({
+    top: 40
+  }, styleProps.orientation === 'vertical' && {
+    left: 31
+  })
+}, styleProps.markLabelActive && {
+  color: theme.palette.text.primary
+}));
+exports.SliderMarkLabel = SliderMarkLabel;
+SliderRoot.propTypes = {
+  // ----------------------------- Warning --------------------------------
+  // | These PropTypes are generated from the TypeScript type definitions |
+  // |     To update them edit the d.ts file and run "yarn proptypes"     |
+  // ----------------------------------------------------------------------
+
+  /**
+   * @ignore
+   */
+  children: _propTypes.default.node,
+
+  /**
+   * @ignore
+   */
+  styleProps: _propTypes.default.shape({
+    'aria-label': _propTypes.default.string,
+    'aria-labelledby': _propTypes.default.string,
+    'aria-valuetext': _propTypes.default.string,
+    classes: _propTypes.default.object,
+    color: _propTypes.default.oneOf(['primary', 'secondary']),
+    defaultValue: _propTypes.default.oneOfType([_propTypes.default.arrayOf(_propTypes.default.number), _propTypes.default.number]),
+    disabled: _propTypes.default.bool,
+    getAriaLabel: _propTypes.default.func,
+    getAriaValueText: _propTypes.default.func,
+    isRtl: _propTypes.default.bool,
+    marks: _propTypes.default.oneOfType([_propTypes.default.arrayOf(_propTypes.default.shape({
+      label: _propTypes.default.node,
+      value: _propTypes.default.number.isRequired
+    })), _propTypes.default.bool]),
+    max: _propTypes.default.number,
+    min: _propTypes.default.number,
+    name: _propTypes.default.string,
+    onChange: _propTypes.default.func,
+    onChangeCommitted: _propTypes.default.func,
+    orientation: _propTypes.default.oneOf(['horizontal', 'vertical']),
+    scale: _propTypes.default.func,
+    step: _propTypes.default.number,
+    track: _propTypes.default.oneOf(['inverted', 'normal', false]),
+    value: _propTypes.default.oneOfType([_propTypes.default.arrayOf(_propTypes.default.number), _propTypes.default.number]),
+    valueLabelDisplay: _propTypes.default.oneOf(['auto', 'off', 'on']),
+    valueLabelFormat: _propTypes.default.oneOfType([_propTypes.default.func, _propTypes.default.string])
+  })
+};
+
+const extendUtilityClasses = styleProps => {
+  const {
+    color,
+    classes = {}
+  } = styleProps;
+  return (0, _extends2.default)({}, classes, {
+    root: (0, _clsx.default)(classes.root, (0, _SliderUnstyled.getSliderUtilityClass)(`color${(0, _capitalize.default)(color)}`), classes[`color${(0, _capitalize.default)(color)}`]),
+    thumb: (0, _clsx.default)(classes.thumb, (0, _SliderUnstyled.getSliderUtilityClass)(`thumbColor${(0, _capitalize.default)(color)}`), classes[`thumbColor${(0, _capitalize.default)(color)}`])
+  });
+};
+
+const shouldSpreadStyleProps = Component => {
+  return !Component || !(0, _unstyled.isHostComponent)(Component);
+};
+
+const Slider = /*#__PURE__*/React.forwardRef(function Slider(inputProps, ref) {
+  var _componentsProps$root, _componentsProps$thum;
+
+  const props = (0, _useThemeProps.default)({
+    props: inputProps,
+    name: 'MuiSlider'
+  });
+  const {
+    components = {},
+    componentsProps = {},
+    color = 'primary'
+  } = props,
+        other = (0, _objectWithoutPropertiesLoose2.default)(props, ["components", "componentsProps", "color"]);
+  const styleProps = (0, _extends2.default)({}, props, {
+    color
+  });
+  const classes = extendUtilityClasses(styleProps);
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_SliderUnstyled.default, (0, _extends2.default)({}, other, {
+    components: (0, _extends2.default)({
+      Root: SliderRoot,
+      Rail: SliderRail,
+      Track: SliderTrack,
+      Thumb: SliderThumb,
+      ValueLabel: SliderValueLabel,
+      Mark: SliderMark,
+      MarkLabel: SliderMarkLabel
+    }, components),
+    componentsProps: (0, _extends2.default)({}, componentsProps, {
+      root: (0, _extends2.default)({}, componentsProps.root, shouldSpreadStyleProps(components.Root) && {
+        styleProps: (0, _extends2.default)({}, (_componentsProps$root = componentsProps.root) === null || _componentsProps$root === void 0 ? void 0 : _componentsProps$root.styleProps, {
+          color
+        })
+      }),
+      thumb: (0, _extends2.default)({}, componentsProps.thumb, shouldSpreadStyleProps(components.Thumb) && {
+        styleProps: (0, _extends2.default)({}, (_componentsProps$thum = componentsProps.thumb) === null || _componentsProps$thum === void 0 ? void 0 : _componentsProps$thum.styleProps, {
+          color
+        })
+      })
+    }),
+    classes: classes,
+    ref: ref
+  }));
+});
+process.env.NODE_ENV !== "production" ? Slider.propTypes
+/* remove-proptypes */
+= {
+  // ----------------------------- Warning --------------------------------
+  // | These PropTypes are generated from the TypeScript type definitions |
+  // |     To update them edit the d.ts file and run "yarn proptypes"     |
+  // ----------------------------------------------------------------------
+
+  /**
+   * The label of the slider.
+   */
+  'aria-label': (0, _utils.chainPropTypes)(_propTypes.default.string, props => {
+    const range = Array.isArray(props.value || props.defaultValue);
+
+    if (range && props['aria-label'] != null) {
+      return new Error('Material-UI: You need to use the `getAriaLabel` prop instead of `aria-label` when using a range slider.');
+    }
+
+    return null;
+  }),
+
+  /**
+   * The id of the element containing a label for the slider.
+   */
+  'aria-labelledby': _propTypes.default.string,
+
+  /**
+   * A string value that provides a user-friendly name for the current value of the slider.
+   */
+  'aria-valuetext': (0, _utils.chainPropTypes)(_propTypes.default.string, props => {
+    const range = Array.isArray(props.value || props.defaultValue);
+
+    if (range && props['aria-valuetext'] != null) {
+      return new Error('Material-UI: You need to use the `getAriaValueText` prop instead of `aria-valuetext` when using a range slider.');
+    }
+
+    return null;
+  }),
+
+  /**
+   * @ignore
+   */
+  children: _propTypes.default.node,
+
+  /**
+   * Override or extend the styles applied to the component.
+   */
+  classes: _propTypes.default.object,
+
+  /**
+   * The color of the component. It supports those theme colors that make sense for this component.
+   * @default 'primary'
+   */
+  color: _propTypes.default.oneOf(['primary', 'secondary']),
+
+  /**
+   * The components used for each slot inside the Slider.
+   * Either a string to use a HTML element or a component.
+   * @default {}
+   */
+  components: _propTypes.default.shape({
+    Mark: _propTypes.default.elementType,
+    MarkLabel: _propTypes.default.elementType,
+    Rail: _propTypes.default.elementType,
+    Root: _propTypes.default.elementType,
+    Thumb: _propTypes.default.elementType,
+    Track: _propTypes.default.elementType,
+    ValueLabel: _propTypes.default.elementType
+  }),
+
+  /**
+   * The props used for each slot inside the Slider.
+   * @default {}
+   */
+  componentsProps: _propTypes.default.object,
+
+  /**
+   * The default value. Use when the component is not controlled.
+   */
+  defaultValue: _propTypes.default.oneOfType([_propTypes.default.arrayOf(_propTypes.default.number), _propTypes.default.number]),
+
+  /**
+   * If `true`, the component is disabled.
+   * @default false
+   */
+  disabled: _propTypes.default.bool,
+
+  /**
+   * If `true`, the active thumb doesn't swap when moving pointer over a thumb while dragging another thumb.
+   * @default false
+   */
+  disableSwap: _propTypes.default.bool,
+
+  /**
+   * Accepts a function which returns a string value that provides a user-friendly name for the thumb labels of the slider.
+   *
+   * @param {number} index The thumb label's index to format.
+   * @returns {string}
+   */
+  getAriaLabel: _propTypes.default.func,
+
+  /**
+   * Accepts a function which returns a string value that provides a user-friendly name for the current value of the slider.
+   *
+   * @param {number} value The thumb label's value to format.
+   * @param {number} index The thumb label's index to format.
+   * @returns {string}
+   */
+  getAriaValueText: _propTypes.default.func,
+
+  /**
+   * Indicates whether the theme context has rtl direction. It is set automatically.
+   * @default false
+   */
+  isRtl: _propTypes.default.bool,
+
+  /**
+   * Marks indicate predetermined values to which the user can move the slider.
+   * If `true` the marks are spaced according the value of the `step` prop.
+   * If an array, it should contain objects with `value` and an optional `label` keys.
+   * @default false
+   */
+  marks: _propTypes.default.oneOfType([_propTypes.default.arrayOf(_propTypes.default.shape({
+    label: _propTypes.default.node,
+    value: _propTypes.default.number.isRequired
+  })), _propTypes.default.bool]),
+
+  /**
+   * The maximum allowed value of the slider.
+   * Should not be equal to min.
+   * @default 100
+   */
+  max: _propTypes.default.number,
+
+  /**
+   * The minimum allowed value of the slider.
+   * Should not be equal to max.
+   * @default 0
+   */
+  min: _propTypes.default.number,
+
+  /**
+   * Name attribute of the hidden `input` element.
+   */
+  name: _propTypes.default.string,
+
+  /**
+   * Callback function that is fired when the slider's value changed.
+   *
+   * @param {object} event The event source of the callback.
+   * You can pull out the new value by accessing `event.target.value` (any).
+   * **Warning**: This is a generic event not a change event.
+   * @param {number | number[]} value The new value.
+   * @param {number} activeThumb Index of the currently moved thumb.
+   */
+  onChange: _propTypes.default.func,
+
+  /**
+   * Callback function that is fired when the `mouseup` is triggered.
+   *
+   * @param {object} event The event source of the callback. **Warning**: This is a generic event not a change event.
+   * @param {number | number[]} value The new value.
+   */
+  onChangeCommitted: _propTypes.default.func,
+
+  /**
+   * The component orientation.
+   * @default 'horizontal'
+   */
+  orientation: _propTypes.default.oneOf(['horizontal', 'vertical']),
+
+  /**
+   * A transformation function, to change the scale of the slider.
+   * @default (x) => x
+   */
+  scale: _propTypes.default.func,
+
+  /**
+   * The granularity with which the slider can step through values. (A "discrete" slider.)
+   * The `min` prop serves as the origin for the valid values.
+   * We recommend (max - min) to be evenly divisible by the step.
+   *
+   * When step is `null`, the thumb can only be slid onto marks provided with the `marks` prop.
+   * @default 1
+   */
+  step: _propTypes.default.number,
+
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx: _propTypes.default.object,
+
+  /**
+   * Tab index attribute of the hidden `input` element.
+   */
+  tabIndex: _propTypes.default.number,
+
+  /**
+   * The track presentation:
+   *
+   * - `normal` the track will render a bar representing the slider value.
+   * - `inverted` the track will render a bar representing the remaining slider value.
+   * - `false` the track will render without a bar.
+   * @default 'normal'
+   */
+  track: _propTypes.default.oneOf(['inverted', 'normal', false]),
+
+  /**
+   * The value of the slider.
+   * For ranged sliders, provide an array with two values.
+   */
+  value: _propTypes.default.oneOfType([_propTypes.default.arrayOf(_propTypes.default.number), _propTypes.default.number]),
+
+  /**
+   * Controls when the value label is displayed:
+   *
+   * - `auto` the value label will display when the thumb is hovered or focused.
+   * - `on` will display persistently.
+   * - `off` will never display.
+   * @default 'off'
+   */
+  valueLabelDisplay: _propTypes.default.oneOf(['auto', 'off', 'on']),
+
+  /**
+   * The format function the value label's value.
+   *
+   * When a function is provided, it should have the following signature:
+   *
+   * - {number} value The value label's value to format
+   * - {number} index The value label's index to format
+   * @default (x) => x
+   */
+  valueLabelFormat: _propTypes.default.oneOfType([_propTypes.default.func, _propTypes.default.string])
+} : void 0;
+var _default = Slider;
+exports.default = _default;
