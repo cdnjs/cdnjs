@@ -1,0 +1,12 @@
+import React from 'react';
+import { Props } from './types';
+import ChartComponent from './chart';
+export declare const Line: React.ForwardRefExoticComponent<Props & React.RefAttributes<any>>;
+export declare const Bar: React.ForwardRefExoticComponent<Props & React.RefAttributes<any>>;
+export declare const Radar: React.ForwardRefExoticComponent<Props & React.RefAttributes<any>>;
+export declare const Doughnut: React.ForwardRefExoticComponent<Props & React.RefAttributes<any>>;
+export declare const PolarArea: React.ForwardRefExoticComponent<Props & React.RefAttributes<any>>;
+export declare const Bubble: React.ForwardRefExoticComponent<Props & React.RefAttributes<any>>;
+export declare const Pie: React.ForwardRefExoticComponent<Props & React.RefAttributes<any>>;
+export declare const Scatter: React.ForwardRefExoticComponent<Props & React.RefAttributes<any>>;
+export default ChartComponent;
