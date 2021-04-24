@@ -1,0 +1,32 @@
+import { WiredBase, Point } from './wired-base';
+import { TemplateResult, CSSResultArray } from 'lit';
+import './wired-icon-button.js';
+export declare class WiredVideo extends WiredBase {
+    src: string;
+    autoplay: boolean;
+    loop: boolean;
+    muted: boolean;
+    playsinline: boolean;
+    private playing;
+    private timeDisplay;
+    private progressBar?;
+    private slider?;
+    private video?;
+    private resizeObserver?;
+    private windowResizeHandler?;
+    constructor();
+    static get styles(): CSSResultArray;
+    render(): TemplateResult;
+    updated(): void;
+    disconnectedCallback(): void;
+    private attachResizeListener;
+    private detachResizeListener;
+    wiredRender(): void;
+    protected canvasSize(): Point;
+    protected draw(svg: SVGSVGElement, size: Point): void;
+    private updateTime;
+    private getTimeDisplay;
+    private togglePause;
+    private volumeChange;
+    private canPlay;
+}
