@@ -16,7 +16,7 @@ jobs:
            --depth 1  \
            --filter=blob:none \
            --sparse \
-           https://${{ github.token }}@github.com/cdnjs/cdnjs.git
+           https://${{ secrets.ROBOCDNJS_TOKEN }}@github.com/cdnjs/cdnjs.git
      - name: sync
        run: |
          wget https://github.com/cdnjs/tools/releases/latest/download/git-sync
@@ -29,4 +29,4 @@ jobs:
      - name: push
        run: |
          cd cdnjs
-         git push https://${{ github.actor }}:${{ github.token }}@github.com/cdnjs/cdnjs.git
+         git push https://robocdnjs:${{ secrets.ROBOCDNJS_TOKEN }}@github.com/cdnjs/cdnjs.git
