@@ -1,0 +1,32 @@
+name: sync
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+     - name: clone
+       run: |
+         git clone \
+           --depth 1  \
+           --filter=blob:none \
+           --sparse \
+           https://${{ github.token }}@github.com/cdnjs/cdnjs.git
+     - name: sync
+       run: |
+         wget https://github.com/cdnjs/tools/releases/latest/download/git-sync
+         chmod +x ./git-sync
+         cd cdnjs
+         git config user.name robocdnjs
+         git config user.email cdnjs-github@cloudflare.com
+         ../git-sync ./last-sync cdnjs-outgoing-prod
+         
+     - name: push
+       run: |
+         cd cdnjs
+         git push https://${{ github.actor }}:${{ github.token }}@github.com/cdnjs/cdnjs.git
