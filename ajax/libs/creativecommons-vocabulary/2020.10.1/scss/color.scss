@@ -1,0 +1,65 @@
+// Brand
+$color-tomato: rgb(209, 69, 0);
+$color-gold: rgb(251, 212, 60);
+$color-forest-green: rgb(0, 128, 0);
+$color-dark-turquoise: rgb(5, 181, 218);
+$color-dark-slate-blue: rgb(21, 71, 168);
+$color-dark-slate-gray: rgb(51, 51, 51);
+
+//Soft Brand
+$color-soft-tomato: rgb(254, 237, 233);
+$color-soft-gold: rgb(254, 246, 216);
+$color-soft-green: rgb(224, 245, 224);
+$color-soft-turquoise: rgb(223, 246, 252);
+$color-soft-blue: rgb(227, 235, 253);
+
+// Neutral
+$color-dark-gray: rgb(118, 118, 118);
+$color-gray: rgb(176, 176, 176);
+$color-light-gray: rgb(216, 216, 216);
+$color-lighter-gray: rgb(245, 245, 245);
+
+// Binary
+$color-black: rgb(0, 0, 0);
+$color-white: rgb(255, 255, 255);
+
+// Interaction
+$color-brighter-tomato: rgb(224, 77, 3);
+$color-brighter-gold: rgb(248, 204, 44);
+$color-brighter-forest-green: rgb(0, 139, 0);
+$color-brighter-blue: rgb(23, 78, 188);
+
+// Feedback
+$color-dark-success: rgb(0, 128, 0);
+$color-light-success: rgb(224, 242, 191);
+$color-dark-warning: rgb(242, 171, 32);
+$color-light-warning: rgb(250, 236, 188);
+$color-dark-error: rgb(200, 59, 30);
+$color-light-error: rgb(255, 201, 201);
+$color-dark-info: rgb(23, 78, 188);
+$color-light-info: rgb(209, 220, 241);
+
+// Classes
+$brand-colors: (
+  "tomato": $color-tomato,
+  "gold": $color-gold,
+  "forest-green": $color-forest-green,
+  "dark-turquoise": $color-dark-turquoise,
+  "dark-slate-blue": $color-dark-slate-blue,
+  "dark-slate-gray": $color-dark-slate-gray,
+);
+
+@mixin color-classes($color-namespace, $brand-color) {
+  .has-background-#{$color-namespace} {
+    background-color: $brand-color;
+  }
+
+  .has-text-#{$color-namespace}, // Bulma convention
+  .has-color-#{$color-namespace} {
+    color: $brand-color;
+  }
+}
+
+@each $color-namespace, $brand-color in $brand-colors {
+  @include color-classes($color-namespace, $brand-color);
+}
