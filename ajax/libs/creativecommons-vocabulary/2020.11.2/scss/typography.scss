@@ -1,0 +1,125 @@
+@import url("https://unpkg.com/@creativecommons/fonts@2020.9.4/css/fonts.css");
+
+// Families
+$family-roboto-condensed: 'Roboto Condensed', sans-serif;
+$family-source-sans-pro: 'Source Sans Pro', sans-serif;
+$family-accidenz-commons: 'Accidenz Commons', sans-serif;
+$family-jetbrains-mono: 'JetBrains Mono', monospace;
+$family-vocabulary-icons: 'Vocabulary Icons';
+$family-system: BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto',
+  'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  'Helvetica', 'Arial', sans-serif;
+
+$family-heading: $family-roboto-condensed;
+$family-body: $family-source-sans-pro;
+$family-logo: $family-accidenz-commons;
+$family-code: $family-jetbrains-mono;
+$family-icons: $family-vocabulary-icons;
+
+// Sizes
+$font-size-h1: 3.56rem;
+$font-size-h2: 2.25rem;
+$font-size-h3: 1.75rem;
+$font-size-h4: 1.43rem;
+$font-size-h5: 1.25rem;
+$font-size-h6: 1.15rem; // Not in Figma, extrapolated
+
+$font-size-value: 4.37rem;
+
+$font-size-body-bigger: 1.43rem;
+$font-size-body-big: 1.12rem;
+$font-size-body-normal: 1rem;
+$font-size-body-list: 1rem;
+
+$font-size-caption: 0.8rem;
+
+// Classes
+$body-font-sizes: (
+  "-bigger": $font-size-body-bigger,
+  "-big": $font-size-body-big,
+  "-normal": $font-size-body-normal,
+  "-list": $font-size-body-list,
+);
+
+@mixin body-typography($body-name, $body-font-size) {
+  .body#{$body-name} {
+    line-height: 1.6;
+    font-size: $body-font-size;
+  }
+}
+
+@each $body-name, $body-font-size in $body-font-sizes {
+  @include body-typography($body-name, $body-font-size);
+}
+
+.caption {
+  font-size: $font-size-caption;
+}
+
+.value {
+  font-family: $family-heading;
+  font-size: $font-size-value;
+  font-weight: bold;
+
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+}
+
+.monospace {
+  font-family: $family-code;
+  font-size: 0.875em; // Code fonts at 14px are similar to other fonts at 16px
+}
+
+// Usage
+h1, h2, h3, h4, h5, h6, .title {
+    color: $color-dark-slate-gray;
+
+    font-family: $family-heading;
+    font-weight: bold;
+
+    text-transform: uppercase;
+    line-height: 1.3;
+    letter-spacing: 0.02rem;
+}
+
+.b-header, .subtitle {
+  color: $color-dark-slate-gray;
+
+  font-family: $family-body;
+  font-weight: bold;
+
+  text-transform: none;
+  line-height: 1.3;
+  letter-spacing: 0.02rem;
+}
+
+
+$header-font-sizes: (
+  "1": $font-size-h1,
+  "2": $font-size-h2,
+  "3": $font-size-h3,
+  "4": $font-size-h4,
+  "5": $font-size-h5,
+  "6": $font-size-h6,
+);
+
+@mixin header-typography($header-level, $header-font-size) {
+  h#{$header-level},
+  .title.is-#{$header-level},
+  .subtitle.is-#{$header-level} {
+    font-size: $header-font-size;
+  }
+}
+
+@each $header-level, $header-font-size in $header-font-sizes {
+  @include header-typography($header-level, $header-font-size);
+}
+
+body {
+  font-family: $family-body;
+  font-size: $font-size-body-normal;
+}
+
+a:hover {
+  text-decoration: underline;
+}
