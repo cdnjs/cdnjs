@@ -1,0 +1,58 @@
+.table-of-progress {
+  .step-header {
+    @extend .b-header;
+    @extend .margin-bottom-big;
+
+    line-height: 1.6875;
+  }
+
+  .step {
+    .link {
+      @extend .has-color-dark-slate-gray;
+      @extend .body-normal;
+
+      text-decoration: none;
+      line-height: 1.25;
+      font-weight: bold;
+    }
+
+    .number {
+      @extend .has-text-centered;
+      @extend .padding-vertical-smaller;
+
+      background-color: $color-lighter-gray;
+      width: 1.8125rem;
+      height: 1.8125rem;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .is-active {
+      @extend .number;
+
+      background-color: $color-dark-slate-gray;
+      color: $color-white;
+      position: relative;
+    }
+
+    .name {
+      @extend .margin-left-normal;
+    }
+
+    :hover {
+      .number {
+        @extend .is-active;
+      }
+    }
+
+    &:not(:last-of-type)::after {
+      content: '';
+
+      display: block;
+
+      height: 1.5rem;
+      border-left: 0.1875rem solid $color-lighter-gray;
+      margin-left: 0.8125rem;
+    }
+  }
+}
