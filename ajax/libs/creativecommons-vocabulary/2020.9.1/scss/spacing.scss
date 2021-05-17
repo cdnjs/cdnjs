@@ -1,0 +1,56 @@
+// Spacings
+$space-smaller: 0.25rem;
+$space-small: 0.5rem;
+$space-normal: 1rem;
+$space-big: 1.5rem;
+$space-bigger: 2rem;
+$space-large: 2.5rem;
+$space-larger: 3rem;
+$space-xl: 4rem;
+$space-xxl: 6rem;
+
+// Classes
+$spacing-sizes: (
+  "-smaller": $space-smaller,
+  "-small": $space-small,
+  "-normal": $space-normal,
+  "-big": $space-big,
+  "-bigger": $space-bigger,
+  "-large": $space-large,
+  "-larger": $space-larger,
+  "-xl": $space-xl,
+  "-xxl": $space-xxl
+);
+
+$spacing-properties: (
+  "padding",
+  "margin"
+);
+
+$spacing-direction-groups: (
+  "-top": "-top",
+  "-right": "-right",
+  "-bottom": "-bottom",
+  "-left": "-left",
+  "-horizontal": "-left" "-right",
+  "-vertical": "-top" "-bottom"
+);
+
+@mixin undirected-spacing($property, $size-namespace, $size) {
+  .#{$property}#{$size-namespace} {
+    #{$property}: $size !important;
+  }
+}
+
+// This generates paddings and margins of each size
+// on each direction: left, right, top, bottom,
+// horizontal (left and right), vertical (top and bottom)
+// and around (all sides).
+//
+// Bulma already has classes for zero padding and margin:
+// `is-paddingless` and `is-marginless` respectively.
+@each $property in $spacing-properties {
+  @each $size-namespace, $size in $spacing-sizes {
+    @include undirected-spacing($property, $size-namespace, $size);
+  }
+}

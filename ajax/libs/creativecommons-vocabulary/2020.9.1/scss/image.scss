@@ -1,0 +1,84 @@
+.image {
+  position: relative;
+  overflow: hidden;
+
+  img {
+    display: block;
+    width: 100%;
+  }
+
+  .image-title,
+  .image-icons,
+  .bookmark-icon {
+    @extend .padding-vertical-small;
+
+    transition: transform 0.2s linear;
+    position: absolute;
+  }
+
+  .image-title {
+    @extend .padding-horizontal-normal;
+    @extend .has-text-white;
+    @extend .has-background-black;
+    @extend .caption;
+
+    transform: translateY(100%);
+    left: 0;
+    bottom: 0;
+
+    font-weight: 600;
+
+    &.is-ellipsised:not(:hover) {
+      white-space: nowrap;
+
+      width: 100%;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .image-icons {
+    @extend .padding-horizontal-normal;
+    @extend .has-text-black;
+
+    transform: translateY(-100%);
+    left: 0;
+    top: 0;
+
+    font-size: 1.625rem;
+  }
+
+  .bookmark-icon {
+    @extend .padding-horizontal-small;
+    @extend .has-text-white;
+    @extend .has-background-black;
+
+    right: 0;
+    top: 0;
+    line-height: 1;
+
+    transform: translateY(-100%);
+  }
+
+  &:hover {
+    .image-title,
+    .image-icons,
+    .bookmark-icon {
+      transform: translateY(0%);
+    }
+  }
+
+  &.is-compact {
+    .image-icons {
+      @extend .is-paddingless;
+      @extend .padding-horizontal-small;
+
+      font-size: 1.3rem;
+    }
+  }
+
+  &.is-selected {
+    border: 6px solid $color-gold;
+  }
+}

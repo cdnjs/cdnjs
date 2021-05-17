@@ -1,0 +1,132 @@
+$navbar-item-color: $color-dark-gray;
+$navbar-item-hover-color: $color-dark-slate-gray;
+$navbar-item-active-color: $color-dark-slate-gray;
+
+$navbar-item-hover-background-color: transparent;
+
+$navbar-dropdown-border-top: none;
+$navbar-dropdown-radius: 0;
+
+@import "bulma/sass/components/navbar.sass";
+
+
+.navbar {
+  padding: $space-bigger;
+
+  .logo {
+    height: 46px;
+  }
+
+  .navbar-burger span {
+    height: 2px;
+  }
+
+  .navbar-burger {
+    width: 3.25rem;
+  }
+
+  .navbar-link {
+    text-decoration: none;
+  }
+
+  .navbar-end {
+    .navbar-item {
+      font-family: $family-roboto-condensed;
+      font-size: $font-size-h5;
+      font-weight: bold;
+      text-transform: uppercase;
+      line-height:  1.5;
+      letter-spacing: 2%;
+
+      .icon {
+        margin-left: $space-small;
+      }
+
+    }
+
+    & > .navbar-item {
+      margin-left: $space-large;
+    }
+
+    & .navbar-item:hover {
+      text-decoration: none;
+      color: $color-dark-slate-gray;
+    }
+    @include desktop-only() {
+      .navbar-item {
+        margin-left: 0;
+        font-size: $font-size-h6;
+      }
+    }
+  }
+
+  &.small {
+    padding: $space-normal;
+
+    .logo {
+      height: 42px;
+    }
+
+    .navbar-menu {
+      margin-right: 20rem;
+
+      &.is-active {
+        margin-right: 0;
+      }
+    }
+  }
+
+  &.is-compact {
+    @extend .padding-vertical-normal;
+    @extend .padding-horizontal-bigger;
+
+    height: 72px;
+    display: flex;
+
+    .logo {
+      height: 36px;
+    }
+
+    .navbar-end {
+      .navbar-item {
+        font-family: $family-source-sans-pro;
+        font-size: $font-size-body-normal;
+        font-weight: 600;
+        text-transform: capitalize;
+      }
+
+      & > .navbar-item {
+        @extend .padding-horizontal-smaller;
+        margin-left: $space-normal;
+      }
+    }
+
+    @include mobile() {
+      .navbar-end {
+        display: flex;
+        align-items: stretch;
+        justify-content: flex-end;
+        margin-left: auto;
+      }
+
+      .navbar-item {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    @include tablet() {
+      .navbar-end {
+        display: flex;
+        align-items: stretch;
+        justify-content: flex-end;
+        margin-left: auto;
+      }
+
+      .navbar-item {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+}
