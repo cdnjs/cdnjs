@@ -1,0 +1,230 @@
+@import "bulma/sass/components/level.sass";
+
+// Global header with explore button
+.cc-global-header {
+  position: relative;
+  background-color: $color-black;
+  color: $color-white;
+  z-index: 90;
+  padding-right: $space-bigger;
+  padding-left: $space-bigger;
+
+  &.is-active {
+    .global-header-content {
+      max-height: 60rem;
+      padding: 0.75rem 0.15rem;
+    }
+  }
+  .open-tab {
+    display: none;
+    position: absolute;
+    padding: $space-normal 0.7rem $space-smaller;
+    right: 0;
+    background-color: $black;
+    color: $white;
+    border-radius: 0 0 $space-smaller $space-smaller;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 0;
+    &:hover {
+      cursor: pointer;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  .global-header-content {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    overflow: hidden;
+    transition: all 1s ease;
+    .global-header-head {
+      padding-top: $space-normal;
+      .main-logo {
+        svg {
+          width: 11.5rem;
+        }
+      }
+    }
+    .visit-button-cover {
+      padding-top: 0;
+    }
+    .visit-button-section {
+      h5 {
+        color: $white;
+      }
+      .donate {
+        color: $color-dark-slate-gray;
+        text-transform: none;
+        font-size: $font-size-body-normal;
+        padding: $space-smaller $space-normal $space-smaller 0.75rem;
+        line-height: 25px;
+        .icon {
+          color: $color-dark-gray;
+        }
+        svg {
+          margin-right: $space-normal;
+          width: $space-bigger;
+          height: $space-bigger;
+        }
+      }
+    }
+    .products {
+      .product-list {
+        .product-item {
+          flex-direction: column;
+          align-items: flex-start;
+          flex-shrink: 1;
+          color: $color-white;
+          border: 2px solid $color-gray;
+          margin-bottom: $space-normal;
+          font-size: 0.813rem;
+          padding: $space-normal;
+          font-weight: 600;
+          strong {
+            display: flex;
+            color: $color-white;
+            line-height: 1.2rem;
+            margin-bottom: 0.75rem;
+            text-transform: lowercase;
+            font-family: $family-logo;
+            font-size: $font-size-h5;
+            &:before {
+              content: "";
+              display: inline-block;
+              width: 1.4rem;
+              height: 1.4rem;
+              background-image: url("data:image/svg+xml,%3Csvg%0A%20%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%0A%20%20preserveAspectRatio%3D%22xMidYMid%20meet%22%0A%20%20viewBox%3D%220%200%2072%2072%22%3E%0A%20%20%3Cg%20id%3D%22lettermark%22%20fill%3D%22%23fff%22%3E%0A%20%20%20%20%3Cpath%0A%20%20%20%20%20%20d%3D%22m%2035.934186%2C0%20c%2010.070033%2C0%2018.643792%2C3.5156799%2025.714527%2C10.543665%203.384053%2C3.385178%205.956968%2C7.254113%207.714246%2C11.603431%20C%2071.119111%2C26.497539%2072%2C31.114611%2072%2C36.000563%20c%200%2C4.928702%20-0.869639%2C9.546899%20-2.603291%2C13.852341%20-1.735902%2C4.306567%20-4.297567%2C8.111377%20-7.68162%2C11.411053%20-3.51343%2C3.470679%20-7.499367%2C6.129096%20-11.957812%2C7.971875%20C%2045.301083%2C71.078611%2040.693011%2C72%2035.936437%2C72%2031.179862%2C72%2026.625791%2C71.090986%2022.275348%2C69.267332%2017.92603%2C67.447054%2014.025594%2C64.811138%2010.575165%2C61.361834%207.1247364%2C57.91253%204.5000703%2C54.022219%202.7000422%2C49.693151%200.90001406%2C45.364084%200%2C40.801013%200%2C36.000563%200%2C31.242863%200.91013922%2C26.668542%202.7315427%2C22.275348%204.5529461%2C17.882154%207.2001126%2C13.950218%2010.670791%2C10.478414%2017.527774%2C3.4943046%2025.94853%2C0%2035.934186%2C0%20Z%20m%200.130503%2C6.4936015%20c%20-8.228379%2C0%20-15.150612%2C2.87217%20-20.765575%2C8.6142595%20-2.829419%2C2.87217%20-5.004078%2C6.09647%20-6.5251022%2C9.675151%20-1.5232734%2C3.578681%20-2.2826603%2C7.31824%20-2.2826603%2C11.218676%200%2C3.857685%200.7593869%2C7.575868%202.2826603%2C11.152299%201.5221492%2C3.580931%203.6956832%2C6.773731%206.5251022%2C9.580649%202.828294%2C2.808044%206.019969%2C4.948953%209.579525%2C6.429476%203.55618%2C1.478273%207.285614%2C2.21741%2011.18605%2C2.21741%203.85656%2C0%207.593868%2C-0.748137%2011.2198%2C-2.248911%203.621431%2C-1.501898%206.886232%2C-3.664182%209.802278%2C-6.492476%205.613838%2C-5.485586%208.419632%2C-12.363943%208.419632%2C-20.637322%200%2C-3.985938%20-0.729012%2C-7.756997%20-2.18591%2C-11.314302%20C%2061.865842%2C21.131205%2059.742933%2C17.960906%2056.95964%2C15.173112%2051.1703%2C9.3871468%2044.207566%2C6.4936015%2036.064689%2C6.4936015%20Z%20m%20-0.451133%2C23.5297425%20-4.82295%2C2.507664%20c%20-0.515258%2C-1.069891%20-1.146393%2C-1.821403%20-1.895655%2C-2.250035%20-0.750386%2C-0.427507%20-1.446772%2C-0.642385%20-2.090282%2C-0.642385%20-3.21305%2C0%20-4.821826%2C2.120658%20-4.821826%2C6.364225%200%2C1.92828%200.407257%2C3.469554%201.220645%2C4.627197%200.814512%2C1.157643%202.014906%2C1.737027%203.601181%2C1.737027%202.100408%2C0%203.578681%2C-1.029391%204.437069%2C-3.085923%20l%204.434819%2C2.250035%20c%20-0.942764%2C1.758402%20-2.250035%2C3.139924%20-3.921811%2C4.146815%20-1.669526%2C1.008015%20-3.51343%2C1.510898%20-5.528336%2C1.510898%20-3.214175%2C0%20-5.808466%2C-0.98439%20-7.779497%2C-2.957671%20-1.971031%2C-1.971031%20-2.956546%2C-4.713824%20-2.956546%2C-8.227253%200%2C-3.429054%200.996766%2C-6.149347%202.989172%2C-8.164253%201.992406%2C-2.013781%204.510195%2C-3.021797%207.554493%2C-3.021797%204.458444%2C-0.0023%207.650119%2C1.733652%209.579524%2C5.205456%20z%20m%2020.76445%2C0%20-4.757699%2C2.507664%20c%20-0.514133%2C-1.069891%20-1.147518%2C-1.821403%20-1.89678%2C-2.250035%20-0.751512%2C-0.427507%20-1.470398%2C-0.642385%20-2.153284%2C-0.642385%20-3.214175%2C0%20-4.82295%2C2.120658%20-4.82295%2C6.364225%200%2C1.92828%200.408381%2C3.469554%201.221769%2C4.627197%200.813388%2C1.157643%202.012656%2C1.737027%203.601181%2C1.737027%202.098158%2C0%203.577556%2C-1.029391%204.433695%2C-3.085923%20l%204.50007%2C2.250035%20c%20-0.984391%2C1.758402%20-2.314161%2C3.139924%20-3.983687%2C4.146815%20-1.671776%2C1.008015%20-3.49318%2C1.510898%20-5.464211%2C1.510898%20-3.258051%2C0%20-5.860216%2C-0.98439%20-7.808747%2C-2.957671%20-1.95303%2C-1.971031%20-2.927295%2C-4.713824%20-2.927295%2C-8.227253%200%2C-3.429054%200.99564%2C-6.149347%202.990296%2C-8.164253%201.991281%2C-2.013781%204.509071%2C-3.021797%207.552243%2C-3.021797%204.45732%2C-0.0023%207.630994%2C1.733652%209.515399%2C5.205456%20z%22%0A%20%20%20%20%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A");
+              background-repeat: no-repeat;
+            }
+          }
+          &:hover {
+            text-decoration: none;
+            .item-description {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }
+  @include tablet() {
+    padding-right: $space-larger;
+    padding-left: $space-larger;
+    .open-tab {
+      display: block;
+    }
+    &.is-active {
+      .global-header-content {
+        padding: $space-big 0.15rem;
+      }
+    }
+    .global-header-content {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 0;
+      .global-header-head {
+        align-items: center;
+        padding-left: $size-7;
+        margin-bottom: 0;
+        .main-logo {
+          svg {
+            width: 13rem;
+          }
+        }
+      }
+      .global-header-main {
+        margin-top: 0;
+      }
+      .visit-button-section {
+        .donate {
+          text-transform: uppercase;
+          font-size: 1.125rem;
+        }
+      }
+      .products {
+        .product-list {
+          display: grid;
+          grid-template-columns: repeat(2, auto);
+          .product-item {
+            border: none;
+            font-size: $font-size-body-normal;
+            font-weight: normal;
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+
+  @include desktop() {
+    padding-right: 7.5rem;
+    padding-left: 7.5rem;
+    .open-tab {
+      display: none;
+    }
+    &.is-active {
+      .global-header-content {
+        padding: $space-normal 0rem $space-big;
+      }
+    }
+    .global-header-content {
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      .global-header-head {
+        display: grid;
+        grid-template-rows: auto auto 1fr;
+        padding-top: $space-big;
+        padding-left: 0;
+        flex: 40%;
+      }
+      .products {
+        flex: 60%;
+        .product-list {
+          grid-gap: 0 $space-normal;
+        }
+      }
+    }
+  }
+  @include fullhd() {
+    padding-right: $space-xxl;
+    padding-left: $space-xxl;
+    .global-header-content {
+      .global-header-head {
+        flex: 30%;
+      }
+      .products {
+        flex: 70%;
+        .product-list {
+          grid-template-columns: repeat(3, auto);
+        }
+      }
+    }
+  }
+}
+
+// explore button only
+.explore-button {
+  display: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  position: relative;
+  padding: $space-big 0.7rem 0.5rem;
+  right: 0;
+  top: -0.5rem;
+  background-color: $black;
+  color: $white;
+  border-radius: 0 0 $space-smaller $space-smaller;
+  border: 0;
+  &:hover {
+    color: $white;
+    cursor: pointer;
+  }
+  &:focus {
+    outline: none;
+  }
+  @include desktop() {
+    display: block;
+  }
+}

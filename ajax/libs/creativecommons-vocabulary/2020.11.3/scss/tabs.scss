@@ -1,0 +1,83 @@
+$tabs-border-bottom-color: $color-light-gray;
+$tabs-border-bottom-width: 2px;
+$tabs-link-color: $color-dark-slate-gray;
+$tabs-link-padding: 0 0 $space-normal 0;
+$tabs-link-active-border-bottom-color: $color-dark-slate-gray;
+$tabs-link-active-color: $color-dark-slate-gray;
+$tabs-boxed-link-radius: 0;
+$tabs-boxed-link-hover-background-color: $color-white;
+$tabs-boxed-link-hover-border-bottom-color: $color-white;
+$tabs-boxed-link-active-background-color: $color-white;
+$tabs-boxed-link-active-border-color: $color-light-gray;
+
+@import "bulma/sass/components/tabs.sass";
+
+.tabs {
+  font-family: $family-source-sans-pro;
+
+  a {
+    font-size: $font-size-h5;
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 4px solid transparent;
+
+    margin: 0 $space-normal -2px $space-normal;
+
+    &:hover {
+      border-bottom-color: $color-dark-slate-gray;
+    }
+  }
+
+  li {
+    &:first-child a {
+      margin-left: 0;
+    }
+
+    &:last-child a {
+      margin-right: 0;
+    }
+  }
+
+  &.is-boxed {
+    a {
+      padding-top: $space-small;
+      padding-bottom: $space-small;
+      padding-left: $space-normal;
+      padding-right: $space-normal;
+
+      margin: 0 0 -2px;
+      border: 2px solid $color-light-gray;
+      border-right: 0;
+      background-color: $color-lighter-gray;
+
+      font-size: $font-size-body-normal;
+    }
+
+    li {
+      &:last-child a {
+        border-right: 2px solid $color-light-gray;
+      }
+    }
+  }
+}
+
+.tabs-content {
+  margin-top: -$space-big;
+  padding-top: $space-bigger;
+
+  .tabs-panel {
+    display: none;
+
+    &.is-active {
+      display: block;
+    }
+  }
+
+  &.is-boxed {
+    padding: $space-normal;
+
+    border: 2px solid $color-light-gray;
+    border-top: 0;
+    background-color: $color-white;
+  }
+}

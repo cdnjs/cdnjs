@@ -1,0 +1,80 @@
+.navbar .locale {
+  position:relative;
+  height: fit-content;
+  border-radius: 4px;
+  font-family: $family-source-sans-pro;
+
+  .select:not(.is-multiple):not(.is-loading){
+    height: unset;
+    select:not(.is-multiple):not(.is-loading) {
+      border-color: transparent;
+      border-width: 0.125rem;
+      width: 8.125rem;
+      padding: calc(#{$space-smaller} - 1.3px) calc(#{$space-big} - 1.3px) calc(#{$space-smaller} - 1.3px) 1.7rem;
+      height: unset;
+      line-height: 1.118rem;
+      font-size: 0.813rem;
+      font-weight: 700;
+      &:focus,
+      &:active,
+      &:hover {
+        border-color: #b0b0b0;
+        outline: none;
+      }
+    }
+
+    &:not(.is-multiple):not(.is-loading)::after {
+      content: unset;
+    }
+  }
+
+  .icon {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    display:flex;
+    align-items:center;
+    pointer-events: none;
+    &.is-right {
+      left: 6.5rem;
+    }
+    &.is-left {
+     left:0.625rem;
+    }
+    & svg {
+      height: 0.625rem;
+      width: auto;
+    }
+    &.caret-down {
+      color: black;
+      width: 0.938rem;
+
+      & svg {
+        height: 0.938rem;
+        width: auto;
+      }
+    }
+    &.globe {
+      z-index:1;
+      color: $color-gray;
+    }
+  }
+  @include tablet() {
+    background-color: $color-lighter-gray;
+    .select:not(.is-multiple):not(.is-loading) {
+      select:not(.is-multiple):not(.is-loading) {
+        width: 100%;
+        font-size: 0.75rem;
+        background-color: $color-lighter-gray;
+      }
+      &:not(.is-multiple):not(.is-loading)::after {
+         content: unset;
+       }
+    }
+    .icon.is-right {
+      right: 0.625rem;
+      left: unset;
+    }
+  }
+}
+

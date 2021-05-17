@@ -1,0 +1,217 @@
+$button-family: $family-secondary;
+$button-color: #fff;
+$button-background-color: $color-tomato;
+
+$button-border-color: transparent;
+$button-border-width: 0.125rem;
+
+$button-padding-vertical: calc(#{$space-normal} - #{$button-border-width});
+$button-padding-horizontal: $space-small;
+
+$button-hover-color: #fff;
+$button-hover-border-color: transparent;
+
+$button-focus-color: $color-brighter-tomato;
+
+$button-focus-border-color: transparent;
+$button-focus-box-shadow-color: rgba(226,54,0,.25);
+
+$button-text-color: $color-tomato;
+$button-text-hover-background-color: transparent;
+$button-text-hover-color: $color-tomato;
+
+@import "bulma/sass/elements/button.sass";
+
+.button {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 1.125rem;
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: #fff;
+    text-decoration: none;
+    border-color: transparent;
+    background-color: $color-brighter-tomato;
+  }
+  &:focus, &:focus:not(:active) {
+    box-shadow: 0 0 0 0.125em var(--button-focus-outline, rgba(226,54,0,.25));
+  }
+
+  &[disabled],
+  &.is-border[disabled],
+  &.is-primary[disabled],
+  &.is-success[disabled],
+  &.is-info[disabled]
+  {
+    background-color: $color-light-gray;
+    color: $color-dark-gray;
+    border-color: transparent;
+    &:hover {
+      background-color: $color-light-gray;
+      color: $color-dark-gray;
+      border-color: transparent;
+    }
+  }
+
+  &.big {
+    font-size: 1.75rem;
+    padding: $space-big $space-large;
+  }
+
+  &.medium {
+    font-size: 1.43rem;
+    padding: $space-normal $space-large;
+  }
+
+  &.small {
+    height: unset;
+    font-family: $family-source-sans-pro;
+    font-size: 1rem;
+    text-transform: none;
+    padding: calc(#{$space-smaller} - 0.125rem) calc(#{$space-normal} - 0.125rem);
+  }
+
+  &.tiny {
+    font-family: $family-source-sans-pro;
+    padding: 0 $space-small;
+    font-size: 1rem;
+    text-transform: none;
+    height: 2rem;
+  }
+
+  &.tag {
+    font-family: $family-source-sans-pro;
+    padding: 0 $space-normal;
+    font-size: 0.81rem;
+    text-transform: none;
+    min-height: 1.81rem;
+    height: auto;
+    line-height: normal;
+    white-space: normal;
+    border-radius: 18.75rem;
+    border: 0.125rem solid $color-light-gray;
+    &:hover {
+      border-color: $color-dark-gray;
+    }
+
+    &--removable {
+      font-family: $family-source-sans-pro;
+      padding: 0 $space-normal;
+      font-size: 0.81rem;
+      text-transform: none;
+      height: 1.81rem;
+      border-radius: 18.75rem;
+      border: 0.125rem solid $color-light-gray;
+      &:hover {
+        color: $color-dark-gray;
+        background-color: $color-white;
+        border: 0.125rem solid $color-dark-gray;
+      }
+
+      &:hover > .icon {
+        color: $color-white;
+        background-color: $color-dark-gray;
+
+        &:first-child:last-child {
+          margin-right: calc(-1rem - 1px);
+        }
+      }
+    }
+
+    &--removable .icon {
+      height: 1.56rem;
+      width: 1.9rem;
+      line-height: 1.56rem;
+      font-size: 1rem;
+      background-color: $color-white;
+      color: $color-light-gray;
+      border-top-right-radius: 18.75rem;
+      border-bottom-right-radius: 18.75rem;
+
+      &:first-child:last-child {
+        margin-left: 0.3rem;
+        margin-right: -1rem;
+      }
+    }
+  }
+
+  &.is-border {
+    border: 0.125rem solid $color-dark-gray;
+    color: $color-dark-gray;
+    background-color: $color-white;
+    padding: calc(#{$space-small} - 0.125rem) calc(#{$space-normal} - 0.125rem);
+    &:hover, &:active {
+      background-color: $color-dark-gray;
+      border-color: $color-dark-gray;
+      color: $color-white;
+    }
+    &:focus {
+      --button-focus-outline: rgb(176, 176, 176);
+    }
+  }
+
+  &.is-primary {
+    --button-focus-outline: #{$color-lighter-gray};
+    &:hover, &:focus, &:active {
+      background-color: $color-brighter-tomato;
+    }
+  }
+
+  &.is-success {
+    --button-focus-outline: #{$color-lighter-gray};
+    &:hover, &:focus, &:active {
+      background-color: $color-brighter-forest-green;
+    }
+  }
+
+  &.is-info {
+    --button-focus-outline: #{$color-lighter-gray};
+    &:hover, &:focus, &:active {
+      background-color: $color-dark-slate-blue;
+    }
+  }
+
+  &.donate {
+    background-color: $color-gold;
+    border-color: $color-gold;
+    color: $color-black;
+
+    &:hover, &:active, &:focus {
+      background-color: $color-brighter-gold;
+      border-color: $color-brighter-gold;
+      color: $color-black;
+      text-decoration: none;
+    }
+  }
+
+  &.is-text {
+    padding: 0;
+    height: auto !important;
+    line-height: normal;
+
+    font-family: $family-source-sans-pro;
+   
+    text-align: left;
+    text-decoration: none;
+    text-transform: none;
+    white-space: normal;
+
+    &:hover,
+    &:active,
+    &:focus {
+      text-decoration: underline;
+      box-shadow: none;
+    }
+    &[disabled] {
+      color: $color-gray;
+      &:hover,
+      &:active,
+      &:focus {
+        background-color: transparent;
+        text-decoration: none;
+      }
+    }
+  }
+}

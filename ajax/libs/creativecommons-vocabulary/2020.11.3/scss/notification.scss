@@ -1,0 +1,102 @@
+.notification {
+  .notification-container {
+    display: block;
+    position: relative;
+    width: 100%;
+    color: $color-black;
+    border-radius: .25rem;
+    .icon-container {
+      position: absolute;
+      display: flex;
+      right: $space-larger;
+      top: 0;
+      bottom: 0;
+      width: 2.5rem;
+      height: 2.5rem;
+      margin: auto;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      border-width: 2px;
+      border-style: solid;
+    }
+  }
+  &.warning {
+    .notification-container {
+      padding: $space-larger 6rem $space-larger $space-larger;
+      background-color: $color-light-warning;
+
+      .icon-container {
+        color: $color-dark-warning;
+        border-color: $color-dark-warning;
+      }
+      &:hover {
+        .b-header {
+          text-decoration: underline;
+        }
+      }
+    }
+    @include mobile() {
+      .notification-container {
+        padding: $space-bigger;
+        .icon-container {
+          display: none;
+        }
+      }
+    }
+  }
+  &.content {
+    .notification-container {
+      display: flex;
+      background-color: $color-white;
+      border: 2px solid $color-light-gray;
+      .content-image {
+        img {
+          object-fit: cover;
+          width: 100%;
+          height: 100%;
+          border-radius: .25rem 0 0 .25rem;
+        }
+      }
+      .content-wrap {
+        width: 100%;
+        padding: $space-larger 6rem $space-larger $space-larger;
+        .icon-container {
+          color: $color-gray;
+          border-color: $color-gray;
+        }
+      }
+      &:hover {
+        border: 2px solid $color-gray;
+        box-shadow: .5rem .5rem 0 rgba($color-black,.06);
+      }
+    }
+    @include mobile() {
+      .notification-container {
+        .content-image {
+          display: none;
+        }
+        .content-wrap {
+          padding: $space-bigger;
+          .icon-container {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  &.is-compact {
+    .notification-container {
+      padding-top: $space-normal;
+      padding-bottom: $space-normal;
+      padding-left: $space-big;
+
+      p {
+        font-weight: bold;
+        line-height: $space-big;
+        color: $color-dark-slate-gray;
+      }
+
+    }
+  }
+}
