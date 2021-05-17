@@ -1,0 +1,120 @@
+@import "bulma/sass/components/level.sass";
+
+.cc-global-header {
+	position: relative;
+	background-color: $color-black;
+	color: $color-white;
+	z-index: 90;
+
+	&.is-active {
+		.global-header-content {
+			max-height: 60rem;
+			padding-top: $space-big;
+			padding-bottom: $space-big;
+		}
+	}
+	.open-tab {
+		position: absolute;
+		padding: 0.5rem 1rem;
+		right: 0;
+		bottom: -2rem;
+		background-color: $color-black;
+		color: $white;
+		border-radius: 0 0 0.25rem 0.25rem;
+	}
+	.global-header-content {
+		max-height: 0;
+		padding-top: 0;
+		padding-bottom: 0;
+		overflow: hidden;
+		transition: all 1s ease;
+
+		.global-header-header {
+			padding-top: $space-normal;
+			.main-logo {
+				svg {
+					width: 16rem;
+				}
+			}
+		}
+		.donate-section {
+			h5 {
+				color: $white;
+			}
+			.donate {
+				margin-top: $space-big;
+				color: $color-black;
+				svg {
+					margin-right: 1rem;
+					width: 2rem;
+					height: 2rem;
+				}
+			}
+		}
+		.products {
+			padding-bottom: $space-normal;
+			.product-list {
+				display: grid;
+				grid-gap: 1rem;
+				grid-template-columns: repeat(3, auto);
+				width: 100%;
+				.product-item {
+					flex-direction: column;
+					align-items: flex-start;
+					flex-shrink: 1;
+					color: $color-white;
+					strong {
+						display: flex;
+						color: $color-dark-turquoise;
+						line-height: 1.2rem;
+						margin-bottom: 0.5rem;
+						&:after {
+							content: "";
+							display: inline-block;
+							width: 1.2rem;
+							height: 1.2rem;
+							margin-left: 0.5rem;
+							background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 6C7.55228 6 8 5.55228 8 5C8 4.44772 7.55228 4 7 4L7 6ZM17 13C17 12.4477 16.5523 12 16 12C15.4477 12 15 12.4477 15 13H17ZM7 4L4 4L4 6L7 6L7 4ZM2 6V16H4V6H2ZM4 18H15V16H4V18ZM17 16V13H15V16H17ZM15 18C16.1046 18 17 17.1046 17 16H15H15V18ZM2 16C2 17.1046 2.89543 18 4 18V16L4 16H2ZM4 4C2.89543 4 2 4.89543 2 6H4L4 6L4 4Z' fill='%2305B5DA'/%3E%3Cpath d='M8.29289 10.2656C7.90237 10.6562 7.90237 11.2893 8.29289 11.6798C8.68342 12.0704 9.31658 12.0704 9.70711 11.6798L8.29289 10.2656ZM16.9727 3H17.9727V2H16.9727V3ZM15.9727 9C15.9727 9.55228 16.4205 10 16.9727 10C17.525 10 17.9727 9.55228 17.9727 9H15.9727ZM11 2C10.4477 2 10 2.44772 10 3C10 3.55228 10.4477 4 11 4V2ZM9.70711 11.6798L17.6799 3.70711L16.2656 2.29289L8.29289 10.2656L9.70711 11.6798ZM15.9727 3V9H17.9727V3H15.9727ZM16.9727 2H11V4H16.9727V2Z' fill='%2305B5DA'/%3E%3C/svg%3E%0A");
+						}
+					}
+					&:hover {
+						strong {
+							text-decoration: underline;
+						}
+					}
+				}
+			}
+		}
+	}
+	@include tablet() {
+		padding: 0 $space-big;
+	}
+	@include mobile() {
+		padding-right: $space-bigger;
+		padding-left: $space-bigger;
+		.global-header-header {
+			.main-logo {
+				svg {
+					width: 14rem;
+				}
+			}
+		}
+		.global-header-header {
+			text-align: center;
+		}
+		.donate-section {
+			text-align: center;
+			h5 {
+				line-height: 2rem;
+			}
+			.donate {
+				margin-top: $space-small;
+			}
+		}
+		.products {
+			.product-list {
+				grid-template-columns: repeat(2, auto);
+			}
+		}
+	}
+}
