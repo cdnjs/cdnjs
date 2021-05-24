@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("language","es",{button:"Fijar lenguaje",remove:"Quitar lenguaje"});
