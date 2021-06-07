@@ -1,0 +1,11 @@
+import { F as FormatterBehavior } from './formatter-37b0c444.js';
+import { n as numberFormat } from './number-b2f168b5.js';
+import './index-8f126d7b.js';
+
+class NumberBehavior extends FormatterBehavior {
+  static get formatter() {
+    return numberFormat;
+  }
+}
+
+export default NumberBehavior;
