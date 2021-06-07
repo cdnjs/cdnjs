@@ -1,0 +1,1 @@
+import{B as t}from"./index-fe8be053.js";export default class extends t{static get params(){return{provideValue:!1}}init(){this.host.nuMenuItem=this,this.on(["click","tap"],(()=>{this.menu&&(this.menu.setCurrent(this),this.hasPopup||this.doAction("close",!0))}))}connected(){this.linkContext("menu",(t=>{this.menu&&this.menu.removeItem(this),this.menu=t,t&&t.addItem(this)}),!1)}}

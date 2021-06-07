@@ -1,0 +1,1 @@
+import{B as s}from"./index-fe8be053.js";export default class extends s{init(){this.on("focusin",(()=>{this.setMod("focus",!0)})),this.on("focusout",(()=>{this.setMod("focus",!1)})),this.on("click",(()=>{const s=this.host.querySelector("input");s&&s.focus()}),{passive:!0})}connected(){this.setContext("inputgroup",this)}}
