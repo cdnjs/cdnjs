@@ -1,0 +1,103 @@
+/**
+ * ==============================================
+ * Dot Elastic
+ * ==============================================
+ */
+
+.dot-elastic {
+  position: relative;
+
+  @include dot;
+
+  animation: dot-elastic 1s infinite linear;
+
+  &::before,
+  &::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0;
+  }
+
+  &::before {
+    left: -$dot-spacing;
+
+    @include dot($bg-color: $dot-before-color);
+
+    animation: dot-elastic-before 1s infinite linear;
+  }
+
+  &::after {
+    left: $dot-spacing;
+
+    @include dot($bg-color: $dot-after-color);
+
+    animation: dot-elastic-after 1s infinite linear;
+  }
+}
+
+@keyframes dot-elastic-before {
+  0% {
+    transform: scale(1, 1);
+  }
+
+  25% {
+    transform: scale(1, 1.5);
+  }
+
+  50% {
+    transform: scale(1, .67);
+  }
+
+  75% {
+    transform: scale(1, 1);
+  }
+
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes dot-elastic {
+  0% {
+    transform: scale(1, 1);
+  }
+
+  25% {
+    transform: scale(1, 1);
+  }
+
+  50% {
+    transform: scale(1, 1.5);
+  }
+
+  75% {
+    transform: scale(1, 1);
+  }
+
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes dot-elastic-after {
+  0% {
+    transform: scale(1, 1);
+  }
+
+  25% {
+    transform: scale(1, 1);
+  }
+
+  50% {
+    transform: scale(1, .67);
+  }
+
+  75% {
+    transform: scale(1, 1.5);
+  }
+
+  100% {
+    transform: scale(1, 1);
+  }
+}

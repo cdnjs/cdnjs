@@ -1,0 +1,46 @@
+/**
+ * ==============================================
+ * Dot Carousel
+ * ==============================================
+ */
+
+$left-pos: -9999px;
+$x1: -$left-pos - $dot-spacing;
+$x2: -$left-pos;
+$x3: -$left-pos + $dot-spacing;
+
+.dot-carousel {
+  position: relative;
+  left: $left-pos;
+
+  @include dot;
+
+  box-shadow:
+    $x1 0 0 0 $dot-before-color,
+    $x2 0 0 0 $dot-color,
+    $x3 0 0 0 $dot-after-color;
+  animation: dot-carousel 1.5s infinite linear;
+}
+
+@keyframes dot-carousel {
+  0% {
+    box-shadow:
+      $x1 0 0 -1px $dot-before-color,
+      $x2 0 0 1px $dot-color,
+      $x3 0 0 -1px $dot-after-color;
+  }
+
+  50% {
+    box-shadow:
+      $x3 0 0 -1px $dot-before-color,
+      $x1 0 0 -1px $dot-color,
+      $x2 0 0 1px $dot-after-color;
+  }
+
+  100% {
+    box-shadow:
+      $x2 0 0 1px $dot-before-color,
+      $x3 0 0 -1px $dot-color,
+      $x1 0 0 -1px $dot-after-color;
+  }
+}
