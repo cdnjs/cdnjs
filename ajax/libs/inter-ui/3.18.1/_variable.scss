@@ -1,0 +1,75 @@
+$inter-font-display: swap !default;
+$inter-font-path: 'Inter (web)' !default;
+$inter-font-path-suffix: '?v=3.18' !default;
+
+@mixin normal {
+  @font-face {
+    font-family: 'Inter var';
+    font-weight: 100 900;
+    font-style: normal;
+    font-named-instance: 'Regular';
+    font-display: $inter-font-display;
+    src: url("#{$inter-font-path}/Inter-roman.var.woff2#{$inter-font-path-suffix}") format("woff2 supports variations(gvar)"),
+    url("#{$inter-font-path}/Inter-roman.var.woff2#{$inter-font-path-suffix}") format("woff2-variations"),
+    url("#{$inter-font-path}/Inter-roman.var.woff2#{$inter-font-path-suffix}") format("woff2");
+  }
+}
+
+@mixin italic {
+  @font-face {
+    font-family: 'Inter var';
+    font-weight: 100 900;
+    font-style: italic;
+    font-named-instance: 'Italic';
+    font-display: $inter-font-display;
+    src: url("#{$inter-font-path}/Inter-italic.var.woff2#{$inter-font-path-suffix}") format("woff2 supports variations(gvar)"),
+    url("#{$inter-font-path}/Inter-italic.var.woff2#{$inter-font-path-suffix}") format("woff2-variations"),
+    url("#{$inter-font-path}/Inter-italic.var.woff2#{$inter-font-path-suffix}") format("woff2");
+  }
+}
+
+@mixin default {
+  /* -------------------------------------------------------
+  Variable font.
+  Usage:
+
+    html { font-family: 'Inter', sans-serif; }
+    @supports (font-variation-settings: normal) {
+      html { font-family: 'Inter var', sans-serif; }
+    }
+  */
+
+  @include normal;
+  @include italic;
+}
+
+
+@mixin experimental {
+  /* --------------------------------------------------------------------------
+  [EXPERIMENTAL] Multi-axis, single variable font.
+
+  Slant axis is not yet widely supported (as of February 2019) and thus this
+  multi-axis single variable font is opt-in rather than the default.
+
+  When using this, you will probably need to set font-variation-settings
+  explicitly, e.g.
+
+    * { font-variation-settings: "slnt" 0deg }
+    .italic { font-variation-settings: "slnt" 10deg }
+
+  */
+
+  @font-face {
+    font-family: 'Inter var experimental';
+    font-weight: 100 900;
+    font-style: oblique 0deg 10deg;
+    font-display: $inter-font-display;
+    src: url("#{$inter-font-path}/Inter.var.woff2#{$inter-font-path-suffix}") format("woff2-variations"),
+    url("#{$inter-font-path}/Inter.var.woff2#{$inter-font-path-suffix}") format("woff2");
+  }
+}
+
+@mixin all {
+  @include default;
+  @include experimental;
+}
