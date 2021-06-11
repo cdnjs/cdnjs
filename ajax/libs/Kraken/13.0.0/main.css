@@ -1,0 +1,968 @@
+/*! Kraken v13.0.0 | (c) 2021 Chris Ferdinandi | MIT License | http://github.com/cferdinandi/kraken */
+@charset "UTF-8";
+/**
+ * Configs
+ */
+:root {
+	/* Colors */
+	--color-primary: #0088cc;
+	--color-primary-dark: #005580;
+	--color-secondary: #377f31;
+	--color-secondary-dark: #2C6327;
+	--color-code: #dd1144;
+	--color-highlight: #fbf9c9;
+	--color-black: #272727;
+	--color-white: #ffffff;
+	--color-gray-dark: #808080;
+	--color-gray-darker: #555555;
+	--color-gray-medium: #B8B8B8;
+	--color-gray-light: #e5e5e5;
+	--color-gray-lighter: #f7f7f7;
+	/* Fonts */
+	--font-primary: "Helvetica Neue", Arial, sans-serif;
+	--font-monospace: Menlo, Monaco, "Courier New", monospace;
+	/* Sizes */
+	--font-size: 100%;
+	--spacing: 1.5625em;
+	--container-width: 88%;
+	--container-max-width: 80em;
+}
+
+/**
+ * @section CSS Reset
+ * Adapted from Andy Bell's modern CSS reset
+ * @link https://hankchizljaw.com/wrote/a-modern-css-reset/
+ */
+/**
+ * Remove the tap delay in webkit
+ * @link https://medium.com/@adactio/delay-a9df9edceef3#.7dmbl3xow
+ */
+a,
+button,
+input,
+select,
+textarea,
+label,
+summary {
+	touch-action: manipulation;
+}
+
+/**
+ * Add box sizing to everything
+ * @link http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+ */
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+/**
+ * 1. Force scrollbar display to prevent jumping on pages.
+ * 2. Prevent iOS text size adjust after orientation change, without disabling
+ *    user zoom.
+ */
+html {
+	overflow-y: scroll;
+	/* 1 */
+	text-size-adjust: 100%;
+	/* 2 */
+}
+
+/**
+ * 1. Remove the margin in all browsers (opinionated).
+ * 2. For the body to fill the viewport
+ */
+body {
+	margin: 0;
+	/* 1 */
+	min-height: 100vh;
+	/* 2 */
+}
+
+/**
+ * Prevent img and video elements from spilling outside of the page on smaller screens.
+ */
+img,
+video {
+	max-width: 100%;
+	height: auto;
+}
+
+/**
+ * Prevent iframe, object, and embed elements from spilling outside of the page on smaller screens.
+ * height: auto causes iframes to smush, so it's omitted here.
+ */
+iframe,
+object,
+embed {
+	max-width: 100%;
+}
+
+/**
+ * @workaround Remove focus from tabindex="-1" elements which are only script focusable
+ * @link https://code.google.com/p/chromium/issues/detail?id=37721
+ */
+[tabindex="-1"]:focus {
+	outline: none;
+}
+
+/**
+ * @section Grid
+ * Structure and layout
+ */
+/**
+ * Base wrapper class
+ */
+.container {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: var(--container-max-width);
+	width: var(--container-width);
+}
+
+/**
+ * Grids
+ */
+@media (min-width: 40em) {
+	.row {
+		display: grid;
+		grid-template-columns: repeat(12, 1fr);
+		grid-template-rows: 1fr auto;
+		gap: 1.4%;
+	}
+
+	.row-gap-large {
+		gap: 2.4%;
+	}
+
+	.row-no-gap {
+		gap: 0;
+	}
+
+	.row-auto {
+		grid-template-columns: repeat(auto-fit, minmax(1em, 1fr));
+	}
+
+	.grid-fourth {
+		grid-column: auto/span 3;
+	}
+
+	.grid-third {
+		grid-column: auto/span 4;
+	}
+
+	.grid-two-thirds {
+		grid-column: auto/span 8;
+	}
+
+	.grid-half {
+		grid-column: auto/span 6;
+	}
+
+	.grid-three-fourths {
+		grid-column: auto/span 9;
+	}
+
+	[class*=grid-start-] {
+		grid-row-start: 1;
+	}
+
+	.grid-start-first {
+		grid-column-start: 1;
+	}
+
+	.grid-start-fourth {
+		grid-column-start: 4;
+	}
+
+	.grid-start-third {
+		grid-column-start: 5;
+	}
+
+	.grid-start-half {
+		grid-column-start: 7;
+	}
+
+	.grid-start-two-thirds {
+		grid-column-start: 9;
+	}
+
+	.grid-start-three-fourths {
+		grid-column-start: 10;
+	}
+}
+/**
+ * @section Typography
+ * Sets font styles for entire site
+ */
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	background: var(--color-white);
+	color: var(--color-black);
+	font-family: var(--font-primary);
+	font-size: var(--font-size);
+	line-height: 1.5;
+}
+@media (min-width: 40em) {
+	body {
+		line-height: 1.5625;
+	}
+}
+
+p {
+	margin: 0 0 var(--spacing);
+}
+
+/**
+ * Hyperlink styling
+ */
+a {
+	color: var(--color-primary);
+	text-decoration-skip-ink: auto;
+	word-wrap: break-word;
+}
+a:active, a:focus, a:hover {
+	color: var(--color-primary-dark);
+}
+
+/**
+ * List styling
+ */
+ul,
+ol {
+	margin: 0 0 var(--spacing) 2em;
+	padding: 0;
+}
+
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+	margin-bottom: 0;
+}
+
+dl,
+dd {
+	margin: 0;
+	padding: 0;
+}
+
+dd {
+	margin-bottom: var(--spacing);
+}
+
+dt {
+	font-weight: bold;
+}
+
+/**
+ * @bugfix Prevent webkit from removing list semantics
+ * 1. Add a non-breaking space
+ * 2. Make sure it doesn't mess up the DOM flow
+ */
+.list-inline, .list-unstyled {
+	list-style: none;
+	margin-left: 0;
+}
+.list-inline > li::before, .list-unstyled > li::before {
+	content: "​";
+	/* 1 */
+	position: absolute;
+	/* 2 */
+}
+
+/**
+ * Removes list styling.
+ * For semantic reasons, should only be used on unordered lists.
+ */
+.list-unstyled {
+	margin-left: 0;
+}
+
+/**
+ * Display lists on a single line.
+ */
+.list-inline {
+	margin-left: -0.5em;
+	margin-right: -0.5em;
+	padding: 0;
+}
+.list-inline > li {
+	display: inline-block;
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+/**
+ * Heading styling for h1 through h6 elements.
+ * Heading class lets you use one heading type for semantics, but style it as another heading type.
+ */
+h1, h2, h3, h4, h5, h6 {
+	line-height: 1.2;
+	margin: 0 0 1em;
+	padding: 1em 0 0;
+	word-wrap: break-word;
+}
+
+h1,
+.h1 {
+	font-size: 1.5em;
+	padding-top: 0.5em;
+}
+@media (min-width: 40em) {
+	h1,
+.h1 {
+		font-size: 1.75em;
+	}
+}
+
+h2,
+.h2 {
+	font-size: 1.3125em;
+}
+
+h3,
+.h3 {
+	font-size: 1.1875em;
+}
+
+h4, h5, h6,
+.h4, .h5, .h6 {
+	font-size: 1em;
+}
+
+h4,
+.h4 {
+	font-size: 0.8125em;
+	text-transform: uppercase;
+}
+
+/**
+ * Lines, Quotes and Emphasis
+ */
+/**
+ * Lines
+ */
+hr {
+	border: 0;
+	border-top: 1px solid var(--color-gray-light);
+	margin: 2em auto;
+}
+
+/**
+ * Use a lighter yellow for better readability
+ */
+mark {
+	background: var(--color-highlight);
+	color: var(--color-black);
+}
+
+/**
+ * Blockquotes
+ */
+blockquote {
+	font-size: 1.1875em;
+	font-style: italic;
+	margin: 0 0 var(--spacing);
+	padding-left: 0.8125em;
+	padding-right: 0.8125em;
+}
+
+cite {
+	color: var(--color-gray-dark);
+	display: block;
+	font-size: 0.8125em;
+	padding-top: 1em;
+}
+
+/**
+ * @section Code
+ * Styling for code and preformatted text.
+ */
+code,
+kbd,
+pre,
+samp {
+	font-family: var(--font-monospace);
+	font-size: 0.875em;
+}
+
+code {
+	color: var(--color-code);
+	word-wrap: break-word;
+}
+
+pre {
+	background-color: var(--color-gray-lighter);
+	display: block;
+	line-height: 1.5;
+	margin-bottom: var(--spacing);
+	overflow: auto;
+	padding: 0.8125em;
+	tab-size: 4;
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+pre code {
+	color: inherit;
+	font-size: 1em;
+}
+
+/**
+ * @section Buttons
+ * Styling for CSS buttons.
+ */
+/**
+ * Primary buttons
+ */
+.btn {
+	background-color: var(--color-primary);
+	border: 1px solid var(--color-primary);
+	color: var(--color-white);
+	display: inline-block;
+	font-size: 0.9375em;
+	font-weight: normal;
+	line-height: 1.2;
+	margin-right: 0.3125em;
+	margin-bottom: 0.3125em;
+	padding: 0.5em 0.6875em;
+	text-decoration: none;
+	white-space: normal;
+}
+.btn, .btn:focus, .btn:visited {
+	color: var(--color-white);
+}
+.btn:hover, .btn:active {
+	background-color: var(--color-primary-dark);
+	border-color: var(--color-primary-dark);
+	color: var(--color-white);
+	text-decoration: none;
+}
+
+/**
+ * Secondary buttons
+ */
+.btn-secondary {
+	background-color: var(--color-secondary);
+	border-color: var(--color-secondary);
+}
+.btn-secondary:hover, .btn-secondary:active {
+	background-color: var(--color-secondary-dark);
+	border-color: var(--color-secondary-dark);
+}
+
+/**
+ * Active state
+ */
+.btn:active {
+	box-shadow: inset 0 0.15625em 0.25em rgba(0, 0, 0, 0.15), 0 1px 0.15625em rgba(0, 0, 0, 0.05);
+	outline: 0;
+}
+
+/**
+ * Disabled state
+ */
+.btn[disabled] {
+	box-shadow: none;
+	cursor: not-allowed;
+	opacity: 0.5;
+	pointer-events: none;
+}
+
+/**
+ * Button size
+ */
+.btn-large {
+	font-size: 1em;
+	line-height: normal;
+	padding: 0.6875em 0.9375em;
+}
+
+/**
+ * Block-level buttons
+ */
+.btn-block {
+	display: block;
+	margin-right: 0;
+	padding-right: 0;
+	padding-left: 0;
+	width: 100%;
+}
+
+/**
+ * General styles
+ */
+.btn,
+button,
+html input[type=button],
+input[type=reset],
+input[type=submit] {
+	cursor: pointer;
+	text-align: center;
+	vertical-align: middle;
+}
+
+/**
+ * Remove right margin on last element and inputs
+ */
+.btn:last-child,
+input.btn {
+	margin-right: 0;
+}
+
+/**
+ * @section Forms
+ * Styling for form elements.
+ */
+form,
+fieldset {
+	margin-bottom: var(--spacing);
+}
+
+fieldset {
+	border: 0;
+	padding: 0;
+}
+
+legend,
+label {
+	display: block;
+	margin: 0 0 0.3125em;
+	padding: 0;
+}
+
+/**
+ * 1. Correct color not being inherited.
+ *    Known issue: affects color of disabled elements.
+ * 2. Correct font properties not being inherited.
+ * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
+ */
+button,
+input,
+optgroup,
+select,
+textarea {
+	color: var(--color-gray-darker);
+	/* 1 */
+	font: inherit;
+	/* 2 */
+	margin: 0;
+	/* 3 */
+	padding: 0.3125em;
+}
+
+input,
+textarea,
+select {
+	border: 1px solid var(--color-gray-medium);
+	display: block;
+	line-height: 1.5;
+	margin-bottom: 1.1875em;
+	width: 100%;
+}
+@media (min-width: 40em) {
+	input,
+textarea,
+select {
+		line-height: 1.5625;
+	}
+}
+
+form button,
+form .btn {
+	margin-bottom: 1.1875em;
+}
+
+textarea {
+	height: 8em;
+	overflow: auto;
+	resize: vertical;
+}
+
+[type=image],
+[type=checkbox],
+[type=radio] {
+	cursor: pointer;
+	display: inline-block;
+	height: auto;
+	margin-bottom: 0.3125em;
+	padding: 0;
+	width: auto;
+}
+
+input:focus,
+textarea:focus {
+	border-color: rgba(82, 168, 236, 0.8);
+}
+
+/**
+ * Inline inputs
+ */
+.input-inline {
+	display: inline-block;
+	vertical-align: middle;
+	width: auto;
+}
+
+/**
+ * Condensed inputs
+ */
+.input-condensed {
+	padding: 1px 0.3125em;
+	font-size: 0.9375em;
+}
+
+/**
+ * Search
+ */
+/**
+ * Create rounded search bar
+ */
+.input-search {
+	width: 85%;
+	padding-left: 0.9375em;
+	padding-right: 2.5em;
+	border-radius: 1.3125em;
+	transition: width 300ms ease-in;
+}
+@media (min-width: 40em) {
+	.input-search {
+		width: 65%;
+	}
+}
+
+/**
+ * Special styling for search icon as button
+ */
+.btn-search {
+	display: inline;
+	color: var(--color-gray-dark);
+	border: none;
+	background: none;
+	margin-left: -2.5em;
+	margin-bottom: 0;
+}
+.btn-search:hover {
+	color: var(--color-gray-darker);
+}
+
+/**
+ * @section Tables
+ * Styling for tables
+ */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	margin-bottom: var(--spacing);
+	max-width: 100%;
+	width: 100%;
+}
+
+th,
+td {
+	text-align: left;
+	padding: 0.5em;
+}
+
+th {
+	border-bottom: 0.125em solid var(--color-gray-light);
+	font-weight: bold;
+	vertical-align: bottom;
+}
+
+td {
+	border-top: 1px solid var(--color-gray-light);
+	vertical-align: top;
+}
+
+/**
+ * Adds zebra striping
+ */
+.table-striped tbody tr:nth-child(odd) {
+	background-color: var(--color-gray-lighter);
+}
+
+/**
+ * Reduces padding on condensed tables
+ */
+.table-condensed th,
+.table-condensed td {
+	padding: 0.25em;
+}
+
+/**
+ * @section Overrides
+ * Nudge and tweak alignment, spacing, and visibility.
+ */
+/**
+ * Text sizes
+ */
+.text-small {
+	font-size: 0.9375em;
+}
+
+.text-large {
+	font-size: 1.1875em;
+	line-height: 1.4;
+}
+@media (min-width: 40em) {
+	.text-large {
+		font-size: 1.3125em;
+	}
+}
+
+/**
+ * Text colors
+ */
+.text-muted {
+	color: var(--color-gray-dark);
+}
+
+/**
+ * Text alignment
+ */
+.text-center {
+	text-align: center;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.text-left {
+	text-align: left;
+}
+
+/**
+ * Floats
+ */
+.float-left {
+	float: left;
+}
+
+.float-center {
+	float: none;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.float-right {
+	float: right;
+}
+
+/**
+ * Margins
+ */
+.no-margin-top {
+	margin-top: 0;
+}
+
+.no-margin-bottom {
+	margin-bottom: 0;
+}
+
+.margin-top {
+	margin-top: var(--spacing);
+}
+
+.margin-bottom {
+	margin-bottom: var(--spacing);
+}
+
+.margin-bottom-small {
+	margin-bottom: 0.5em;
+}
+
+.margin-bottom-large {
+	margin-bottom: 2em;
+}
+
+/**
+ * Padding
+ */
+.no-padding-top {
+	padding-top: 0;
+}
+
+.no-padding-bottom {
+	padding-bottom: 0;
+}
+
+.padding-top {
+	padding-top: var(--spacing);
+}
+
+.padding-top-small {
+	padding-top: 0.5em;
+}
+
+.padding-top-large {
+	padding-top: 2em;
+}
+
+.padding-bottom {
+	padding-bottom: var(--spacing);
+}
+
+.padding-bottom-small {
+	padding-bottom: 0.5em;
+}
+
+.padding-bottom-large {
+	padding-bottom: 2em;
+}
+
+/**
+ * Accessibility
+ */
+/*
+ * Hide only visually, but have it available for screen readers:
+ * @link https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+ *
+ * 1. For long content, line feeds are not interpreted as spaces and small width
+ *    causes content to wrap 1 word per line:
+ *    https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
+ */
+.visually-hidden {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	white-space: nowrap;
+	/* 1 */
+	width: 1px;
+}
+
+/*
+ * Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard
+ * @link https://www.drupal.org/node/897638
+ */
+.visually-hidden.focusable:active,
+.visually-hidden.focusable:focus {
+	clip: auto;
+	height: auto;
+	margin: 0;
+	overflow: visible;
+	position: static;
+	white-space: inherit;
+	width: auto;
+}
+
+/**
+ * Remove all animations and transitions for people that prefer not to see them
+ */
+@media (prefers-reduced-motion: reduce) {
+	* {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+/**
+ * Clear any floats
+ */
+.clearfix:before, .container:before,
+.clearfix:after,
+.container:after {
+	display: table;
+	content: " ";
+}
+
+.clearfix:after, .container:after {
+	clear: both;
+}
+
+/**
+ * @section Print
+ * Styling for printed content. Adapted from HTML5BP.
+ * @link http://html5boilerplate.com
+ */
+@media print {
+	/**
+	 * Universal selector.
+	 * Reset all content to transparent background, black color, and remove box and text shadows.
+	 */
+	* {
+		background: transparent !important;
+		color: #000 !important;
+		box-shadow: none !important;
+		text-shadow: none !important;
+	}
+
+	/**
+	 * Specifies page margin
+	 */
+	@page {
+		margin: 0.5cm;
+	}
+	/**
+	 * Underline all links
+	 */
+	a,
+a:visited {
+		text-decoration: underline;
+	}
+
+	/**
+	 * Show URL after links
+	 */
+	a[href]:after {
+		content: " (" attr(href) ")";
+	}
+
+	/**
+	 * Don't show URL for internal links
+	 */
+	a[href^="#"]:after {
+		content: "";
+	}
+
+	/**
+	 * Specifies the minimum number of lines to print at the top and bottom of a page.
+	 */
+	p,
+h1, h2, h3 {
+		orphans: 3;
+		widows: 3;
+	}
+
+	/**
+	 * Avoid inserting a page break after headers
+	 */
+	h1, h2, h3 {
+		page-break-after: avoid;
+	}
+
+	/**
+	 * Change border color on blockquotes and preformatted text.
+	 * Avoid page breaks inside the content
+	 */
+	pre,
+blockquote {
+		border-color: #999;
+		page-break-inside: avoid;
+	}
+
+	/**
+	 * Displayed as a table header row group
+	 */
+	thead {
+		display: table-header-group;
+	}
+
+	/**
+	 * Avoid inserting a page break inside table rows and images
+	 */
+	tr,
+img {
+		page-break-inside: avoid;
+	}
+}
