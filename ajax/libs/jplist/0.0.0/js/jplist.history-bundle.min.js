@@ -1,0 +1,6 @@
+/**
+* jPList - jQuery Data Grid Controls 5.2.0.6 - http://jplist.com 
+* Copyright 2016 Miriam Zusin
+*/
+(function(){var c=function(a){!a.history.statusesQueue||0>=a.history.statusesQueue.length?a.$control.addClass("jplist-disabled"):a.$control.removeClass("jplist-disabled")},d=function(a){a.observer.on(a.observer.events.unknownStatusesChanged,function(){c(a)});a.observer.on(a.observer.events.knownStatusesChanged,function(){c(a)});a.$control.on("click",function(){var b;a.history.popList();b=a.history.getLastList()||[];a.observer.one(a.observer.events.statusesAppliedToList,function(){a.history.popList()});
+b?a.observer.trigger(a.observer.events.knownStatusesChanged,[b]):a.observer.trigger(a.observer.events.unknownStatusesChanged,[!0]);c(a)})},b=function(a){c(a);d(a);return jQuery.extend(this,a)};jQuery.fn.jplist.controls.BackButton=function(a){return new b(a)};jQuery.fn.jplist.controlTypes["back-button"]={className:"BackButton",options:{}}})();(function(){var c=function(b){b.$control.on("click",function(){b.observer.trigger(b.observer.events.unknownStatusesChanged,[!0])})},d=function(b){c(b);return jQuery.extend(this,b)};jQuery.fn.jplist.controls.Reset=function(b){return new d(b)};jQuery.fn.jplist.controlTypes.reset={className:"Reset",options:{}}})();
