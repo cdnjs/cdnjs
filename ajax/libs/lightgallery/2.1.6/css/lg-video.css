@@ -1,0 +1,144 @@
+.lg-outer .lg-video-cont {
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+}
+
+.lg-outer .lg-video-cont .lg-object {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.lg-outer .lg-has-iframe .lg-video-cont {
+  -webkit-overflow-scrolling: touch;
+  overflow: auto;
+}
+
+.lg-outer .lg-video-object {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  z-index: 3;
+}
+
+.lg-outer .lg-video-poster {
+  z-index: 1;
+}
+
+.lg-outer .lg-has-video .lg-video-object {
+  opacity: 0;
+  will-change: opacity;
+  -webkit-transition: opacity 0.3s ease-in;
+  -o-transition: opacity 0.3s ease-in;
+  transition: opacity 0.3s ease-in;
+}
+
+.lg-outer .lg-has-video.lg-video-loaded .lg-video-poster,
+.lg-outer .lg-has-video.lg-video-loaded .lg-video-play-button {
+  opacity: 0 !important;
+}
+
+.lg-outer .lg-has-video.lg-video-loaded .lg-video-object {
+  opacity: 1;
+}
+
+@keyframes lg-play-stroke {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+}
+
+@keyframes lg-play-rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.lg-video-play-button {
+  width: 18%;
+  max-width: 140px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  cursor: pointer;
+  transform: translate(-50%, -50%) scale(1);
+  will-change: opacity, transform;
+  -webkit-transition: -webkit-transform 0.25s cubic-bezier(0.17, 0.88, 0.32, 1.28), opacity 0.1s;
+  -moz-transition: -moz-transform 0.25s cubic-bezier(0.17, 0.88, 0.32, 1.28), opacity 0.1s;
+  -o-transition: -o-transform 0.25s cubic-bezier(0.17, 0.88, 0.32, 1.28), opacity 0.1s;
+  transition: transform 0.25s cubic-bezier(0.17, 0.88, 0.32, 1.28), opacity 0.1s;
+}
+
+.lg-video-play-button:hover .lg-video-play-icon-bg,
+.lg-video-play-button:hover .lg-video-play-icon {
+  opacity: 1;
+}
+
+.lg-video-play-icon-bg {
+  fill: none;
+  stroke-width: 3%;
+  stroke: #fcfcfc;
+  opacity: 0.6;
+  will-change: opacity;
+  -webkit-transition: opacity 0.12s ease-in;
+  -o-transition: opacity 0.12s ease-in;
+  transition: opacity 0.12s ease-in;
+}
+
+.lg-video-play-icon-circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  fill: none;
+  stroke-width: 3%;
+  stroke: rgba(30, 30, 30, 0.9);
+  stroke-opacity: 1;
+  stroke-linecap: round;
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+}
+
+.lg-video-play-icon {
+  position: absolute;
+  width: 25%;
+  max-width: 120px;
+  left: 50%;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  opacity: 0.6;
+  will-change: opacity;
+  -webkit-transition: opacity 0.12s ease-in;
+  -o-transition: opacity 0.12s ease-in;
+  transition: opacity 0.12s ease-in;
+}
+
+.lg-video-play-icon .lg-video-play-icon-inner {
+  fill: #fcfcfc;
+}
+
+.lg-video-loading .lg-video-play-icon-circle {
+  animation: lg-play-rotate 2s linear 0.25s infinite, lg-play-stroke 1.5s ease-in-out 0.25s infinite;
+}
+
+.lg-video-loaded .lg-video-play-button {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.7);
+}
