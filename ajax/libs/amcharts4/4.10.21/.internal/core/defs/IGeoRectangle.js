@@ -1,0 +1,1 @@
+//# sourceMappingURL=IGeoRectangle.js.map
