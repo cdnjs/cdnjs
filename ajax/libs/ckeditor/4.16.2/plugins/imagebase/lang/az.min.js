@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("imagebase","az",{captionPlaceholder:"Təsvir başlığını daxil edin"});

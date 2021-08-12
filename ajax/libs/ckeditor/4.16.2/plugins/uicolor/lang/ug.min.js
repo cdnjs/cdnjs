@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("uicolor","ug",{title:"ئىشلەتكۈچى ئارايۈزى رەڭ تاللىغۇچ",options:"رەڭ تاللانمىسى",highlight:"يورۇت",selected:"تاللانغان رەڭ",predefined:"ئالدىن بەلگىلەنگەن رەڭلەر",config:"بۇ ھەرپ تىزىقىنى config.js ھۆججەتكە چاپلايدۇ"});

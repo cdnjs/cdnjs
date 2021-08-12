@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("easyimage","sq",{commands:{fullImage:"Madhësia e plotë e fotos",sideImage:"Foto anësore",altText:"Ndrysho tekstin zgjedhorë të fotos",upload:"Ngarko Foto"},uploadFailed:"Fotoja juaj nuk mundej të ngarkohej për shkak të problemeve me rrjetin."});

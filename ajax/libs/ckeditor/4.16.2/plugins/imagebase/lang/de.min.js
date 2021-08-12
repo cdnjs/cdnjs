@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("imagebase","de",{captionPlaceholder:"Bildunterschrift eingeben"});

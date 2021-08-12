@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("easyimage","ro",{commands:{fullImage:"Imagine mărime întreagă",sideImage:"Imagine laterală",altText:"Modificați textul alternativ al imaginii",upload:"Upload Image"},uploadFailed:"Imaginea dumneavoastră se poate să nu se fi încărcat datorită unei erori de rețea."});

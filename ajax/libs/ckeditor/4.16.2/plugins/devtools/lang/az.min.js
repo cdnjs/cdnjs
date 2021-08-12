@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("devtools","az",{title:"Element haqqında məlumat",dialogName:"Açılan pəncərənin adı",tabName:"Vərəqin adı",elementId:"Elementin İD",elementType:"Elementin növü"});
