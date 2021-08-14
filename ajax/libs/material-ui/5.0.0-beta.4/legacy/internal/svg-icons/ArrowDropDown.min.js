@@ -1,0 +1,1 @@
+import*as React from"react";import createSvgIcon from"../../utils/createSvgIcon";import{jsx as _jsx}from"react/jsx-runtime";export default createSvgIcon(_jsx("path",{d:"M7 10l5 5 5-5z"}),"ArrowDropDown");
