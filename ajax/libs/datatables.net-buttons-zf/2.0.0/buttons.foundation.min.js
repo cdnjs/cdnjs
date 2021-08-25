@@ -1,0 +1,7 @@
+/*!
+ Foundation integration for DataTables' Buttons
+ ©2016 SpryMedia Ltd - datatables.net/license
+*/
+(function(b){"function"===typeof define&&define.amd?define(["jquery","datatables.net-zf","datatables.net-buttons"],function(a){return b(a,window,document)}):"object"===typeof exports?module.exports=function(a,c){a||(a=window);c&&c.fn.dataTable||(c=require("datatables.net-zf")(a,c).$);c.fn.dataTable.Buttons||require("datatables.net-buttons")(a,c);return b(c,a,a.document)}:b(jQuery,window,document)})(function(b,a,c,e){a=b.fn.dataTable;b.extend(!0,a.Buttons.defaults,{dom:{container:{tag:"div",className:"dt-buttons button-group"},
+buttonContainer:{tag:null,className:""},button:{tag:"a",className:"button small",active:"secondary"},buttonLiner:{tag:null},collection:6===a.ext.foundationVersion?{tag:"div",className:"dropdown-pane is-open button-group stacked"}:{tag:"ul",className:"f-dropdown open dropdown-pane is-open",button:{tag:"li",className:"small",active:"active",disabled:"disabled"},buttonLiner:{tag:"a"}},splitWrapper:{tag:"div",className:"dt-btn-split-wrapper button-group"},splitDropdown:{tag:"button",text:"",className:"button dt-btn-split-drop dropdown arrow-only"},
+splitDropdownButton:{tag:"button",className:"dt-btn-split-drop-button button small"}}});a.ext.buttons.collection.className="dropdown";b(c).on("buttons-popover.dt",function(){var d=!1;b(".dtsp-panesContainer").each(function(){b(this).is("button")||(d=!0)});d&&b(".dtsp-panesContainer").removeClass("button-group stacked")});return a.Buttons});
