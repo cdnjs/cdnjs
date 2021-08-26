@@ -1,0 +1,17 @@
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+require('redux');
+require('./turn-order-507ec6e9.js');
+require('immer');
+require('lodash.isplainobject');
+require('./reducer-2e18823b.js');
+require('rfc6902');
+require('./initialize-0eb4be8e.js');
+require('./base-3237f024.js');
+var master = require('./master-80f6e7a1.js');
+
+
+
+exports.Master = master.Master;
