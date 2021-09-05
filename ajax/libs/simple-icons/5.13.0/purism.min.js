@@ -1,0 +1,1 @@
+module.exports={title:"Purism",slug:"purism",svg:'<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Purism</title><path d="M24 19.588H0V4.412h24zM2.824 16.765h18.352v-9.53H2.824Z"/></svg>',get path(){return this.svg.match(/<path\s+d="([^"]*)/)[1]},source:"https://puri.sm/pr/images/",hex:"2D2D2D",guidelines:void 0,license:void 0};
