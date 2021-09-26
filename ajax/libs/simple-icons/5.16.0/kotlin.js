@@ -1,0 +1,1 @@
+module.exports={title:"Kotlin",slug:"kotlin",svg:'<svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Kotlin</title><path d="M24 24H0V0h24L12 12Z"/></svg>',get path(){return this.svg.match(/<path\s+d="([^"]*)/)[1]},source:"https://www.jetbrains.com/company/brand/logos/",hex:"7F52FF",guidelines:"https://www.jetbrains.com/company/brand/",license:void 0};
