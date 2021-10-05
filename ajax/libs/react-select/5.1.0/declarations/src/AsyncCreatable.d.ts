@@ -1,0 +1,10 @@
+import Select from './Select';
+import { GroupBase } from './types';
+import { ReactElement, RefAttributes } from 'react';
+import { AsyncAdditionalProps } from './useAsync';
+import { StateManagerProps } from './useStateManager';
+import { CreatableAdditionalProps } from './useCreatable';
+export declare type AsyncCreatableProps<Option, IsMulti extends boolean, Group extends GroupBase<Option>> = StateManagerProps<Option, IsMulti, Group> & CreatableAdditionalProps<Option, Group> & AsyncAdditionalProps<Option, Group>;
+declare type AsyncCreatableSelect = <Option = unknown, IsMulti extends boolean = false, Group extends GroupBase<Option> = GroupBase<Option>>(props: AsyncCreatableProps<Option, IsMulti, Group> & RefAttributes<Select<Option, IsMulti, Group>>) => ReactElement;
+declare const AsyncCreatableSelect: AsyncCreatableSelect;
+export default AsyncCreatableSelect;
