@@ -1,0 +1,30 @@
+import { Injectable } from '@angular/core';
+import * as i0 from "@angular/core";
+export class Angulartics2GoogleAnalyticsEnhancedEcommerce {
+    /**
+     * Add impression in GA enhanced ecommerce tracking
+     * @link https://developers.google.com/analytics/devguides/collection/analyticsjs/enhanced-ecommerce#measuring-activities
+     */
+    ecAddImpression(properties) {
+        ga('ec:addImpression', properties);
+    }
+    /**
+     * Add product in GA enhanced ecommerce tracking
+     * @link https://developers.google.com/analytics/devguides/collection/analyticsjs/ecommerce
+     */
+    ecAddProduct(product) {
+        ga('ec:addProduct', product);
+    }
+    /**
+     * Set action in GA enhanced ecommerce tracking
+     * @link https://developers.google.com/analytics/devguides/collection/analyticsjs/ecommerce
+     */
+    ecSetAction(action, properties) {
+        ga('ec:setAction', action, properties);
+    }
+}
+Angulartics2GoogleAnalyticsEnhancedEcommerce.ɵprov = i0.ɵɵdefineInjectable({ factory: function Angulartics2GoogleAnalyticsEnhancedEcommerce_Factory() { return new Angulartics2GoogleAnalyticsEnhancedEcommerce(); }, token: Angulartics2GoogleAnalyticsEnhancedEcommerce, providedIn: "root" });
+Angulartics2GoogleAnalyticsEnhancedEcommerce.decorators = [
+    { type: Injectable, args: [{ providedIn: 'root' },] }
+];
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ2EtZW5oYW5jZWQtZWNvbS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3NyYy9saWIvcHJvdmlkZXJzL2dhLWVuaGFuY2VkLWVjb20vZ2EtZW5oYW5jZWQtZWNvbS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLEVBQUUsVUFBVSxFQUFFLE1BQU0sZUFBZSxDQUFDOztBQVczQyxNQUFNLE9BQU8sNENBQTRDO0lBQ3ZEOzs7T0FHRztJQUNILGVBQWUsQ0FBQyxVQUF3RDtRQUN0RSxFQUFFLENBQUMsa0JBQWtCLEVBQUUsVUFBVSxDQUFDLENBQUM7SUFDckMsQ0FBQztJQUVEOzs7T0FHRztJQUNILFlBQVksQ0FBQyxPQUFrRDtRQUM3RCxFQUFFLENBQUMsZUFBZSxFQUFFLE9BQU8sQ0FBQyxDQUFDO0lBQy9CLENBQUM7SUFFRDs7O09BR0c7SUFDSCxXQUFXLENBQ1QsTUFBNEIsRUFDNUIsVUFBb0Q7UUFFcEQsRUFBRSxDQUFDLGNBQWMsRUFBRSxNQUFNLEVBQUUsVUFBVSxDQUFDLENBQUM7SUFDekMsQ0FBQzs7OztZQTNCRixVQUFVLFNBQUMsRUFBRSxVQUFVLEVBQUUsTUFBTSxFQUFFIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgSW5qZWN0YWJsZSB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuaW1wb3J0IHtcbiAgR2FFbmhhbmNlZEVjb21BY3Rpb24sXG4gIEdhRW5oYW5jZWRFY29tQWN0aW9uRmllbGRPYmplY3QsXG4gIEdhRW5oYW5jZWRFY29tSW1wcmVzc2lvbkZpZWxkT2JqZWN0LFxuICBHYUVuaGFuY2VkRWNvbVByb2R1Y3RGaWVsZE9iamVjdCxcbn0gZnJvbSAnLi9nYS1lbmhhbmNlZC1lY29tLW9wdGlvbnMnO1xuXG5kZWNsYXJlIHZhciBnYTogVW5pdmVyc2FsQW5hbHl0aWNzLmdhO1xuXG5ASW5qZWN0YWJsZSh7IHByb3ZpZGVkSW46ICdyb290JyB9KVxuZXhwb3J0IGNsYXNzIEFuZ3VsYXJ0aWNzMkdvb2dsZUFuYWx5dGljc0VuaGFuY2VkRWNvbW1lcmNlIHtcbiAgLyoqXG4gICAqIEFkZCBpbXByZXNzaW9uIGluIEdBIGVuaGFuY2VkIGVjb21tZXJjZSB0cmFja2luZ1xuICAgKiBAbGluayBodHRwczovL2RldmVsb3BlcnMuZ29vZ2xlLmNvbS9hbmFseXRpY3MvZGV2Z3VpZGVzL2NvbGxlY3Rpb24vYW5hbHl0aWNzanMvZW5oYW5jZWQtZWNvbW1lcmNlI21lYXN1cmluZy1hY3Rpdml0aWVzXG4gICAqL1xuICBlY0FkZEltcHJlc3Npb24ocHJvcGVydGllczogUGFydGlhbDxHYUVuaGFuY2VkRWNvbUltcHJlc3Npb25GaWVsZE9iamVjdD4pIHtcbiAgICBnYSgnZWM6YWRkSW1wcmVzc2lvbicsIHByb3BlcnRpZXMpO1xuICB9XG5cbiAgLyoqXG4gICAqIEFkZCBwcm9kdWN0IGluIEdBIGVuaGFuY2VkIGVjb21tZXJjZSB0cmFja2luZ1xuICAgKiBAbGluayBodHRwczovL2RldmVsb3BlcnMuZ29vZ2xlLmNvbS9hbmFseXRpY3MvZGV2Z3VpZGVzL2NvbGxlY3Rpb24vYW5hbHl0aWNzanMvZWNvbW1lcmNlXG4gICAqL1xuICBlY0FkZFByb2R1Y3QocHJvZHVjdDogUGFydGlhbDxHYUVuaGFuY2VkRWNvbVByb2R1Y3RGaWVsZE9iamVjdD4pIHtcbiAgICBnYSgnZWM6YWRkUHJvZHVjdCcsIHByb2R1Y3QpO1xuICB9XG5cbiAgLyoqXG4gICAqIFNldCBhY3Rpb24gaW4gR0EgZW5oYW5jZWQgZWNvbW1lcmNlIHRyYWNraW5nXG4gICAqIEBsaW5rIGh0dHBzOi8vZGV2ZWxvcGVycy5nb29nbGUuY29tL2FuYWx5dGljcy9kZXZndWlkZXMvY29sbGVjdGlvbi9hbmFseXRpY3Nqcy9lY29tbWVyY2VcbiAgICovXG4gIGVjU2V0QWN0aW9uKFxuICAgIGFjdGlvbjogR2FFbmhhbmNlZEVjb21BY3Rpb24sXG4gICAgcHJvcGVydGllczogUGFydGlhbDxHYUVuaGFuY2VkRWNvbUFjdGlvbkZpZWxkT2JqZWN0PixcbiAgKSB7XG4gICAgZ2EoJ2VjOnNldEFjdGlvbicsIGFjdGlvbiwgcHJvcGVydGllcyk7XG4gIH1cbn1cbiJdfQ==
