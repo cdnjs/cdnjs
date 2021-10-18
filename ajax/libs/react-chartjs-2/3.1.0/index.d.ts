@@ -1,0 +1,15 @@
+import React from 'react';
+import Chart from 'chart.js/auto';
+import { defaults } from 'chart.js';
+import { Props } from './types';
+import ChartComponent from './chart';
+export declare const Line: React.ForwardRefExoticComponent<Omit<Props, "type"> & React.RefAttributes<Chart<keyof import("chart.js").ChartTypeRegistry, (number | import("chart.js").ScatterDataPoint | import("chart.js").BubbleDataPoint | null)[], unknown> | undefined>>;
+export declare const Bar: React.ForwardRefExoticComponent<Omit<Props, "type"> & React.RefAttributes<Chart<keyof import("chart.js").ChartTypeRegistry, (number | import("chart.js").ScatterDataPoint | import("chart.js").BubbleDataPoint | null)[], unknown> | undefined>>;
+export declare const Radar: React.ForwardRefExoticComponent<Omit<Props, "type"> & React.RefAttributes<Chart<keyof import("chart.js").ChartTypeRegistry, (number | import("chart.js").ScatterDataPoint | import("chart.js").BubbleDataPoint | null)[], unknown> | undefined>>;
+export declare const Doughnut: React.ForwardRefExoticComponent<Omit<Props, "type"> & React.RefAttributes<Chart<keyof import("chart.js").ChartTypeRegistry, (number | import("chart.js").ScatterDataPoint | import("chart.js").BubbleDataPoint | null)[], unknown> | undefined>>;
+export declare const PolarArea: React.ForwardRefExoticComponent<Omit<Props, "type"> & React.RefAttributes<Chart<keyof import("chart.js").ChartTypeRegistry, (number | import("chart.js").ScatterDataPoint | import("chart.js").BubbleDataPoint | null)[], unknown> | undefined>>;
+export declare const Bubble: React.ForwardRefExoticComponent<Omit<Props, "type"> & React.RefAttributes<Chart<keyof import("chart.js").ChartTypeRegistry, (number | import("chart.js").ScatterDataPoint | import("chart.js").BubbleDataPoint | null)[], unknown> | undefined>>;
+export declare const Pie: React.ForwardRefExoticComponent<Omit<Props, "type"> & React.RefAttributes<Chart<keyof import("chart.js").ChartTypeRegistry, (number | import("chart.js").ScatterDataPoint | import("chart.js").BubbleDataPoint | null)[], unknown> | undefined>>;
+export declare const Scatter: React.ForwardRefExoticComponent<Omit<Props, "type"> & React.RefAttributes<Chart<keyof import("chart.js").ChartTypeRegistry, (number | import("chart.js").ScatterDataPoint | import("chart.js").BubbleDataPoint | null)[], unknown> | undefined>>;
+export { Chart, defaults };
+export default ChartComponent;
