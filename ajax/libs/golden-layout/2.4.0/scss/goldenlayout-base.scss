@@ -1,0 +1,423 @@
+// IMPORTANT NOTE
+// Base styling is done in less.  However it is converted to goldenlayout-base.scss so that themes
+// can also be developed using SCSS.
+// All changes to base style should be done in goldenlayout-base.scss.
+// Do NOT make changes directly in goldenlayout-base.scss.  goldenlayout-base.scss should only be updated by
+// running the npm script "update-scss"
+// Make sure that less code in goldenlayout.base.scss can be correctly correctly converted to scss with less2sass (ie keep it basic)
+
+// Width variables (appears count calculates by raw css)
+$width0: 100%; // Appears 3 times
+$width1: 20px; // Appears 2 times
+$width2: 100px; // Appears 1 time
+$width3: 14px; // Appears 1 time
+$width4: 18px; // Appears 1 time
+$width5: 15px; // Appears 1 time
+$width6: 2px; // Appears 1 time
+
+// Height variables (appears count calculates by raw css)
+$height0: 100%; // Appears 4 times
+$height1: 20px; // Appears 2 times
+$height2: 14px; // Appears 2 times
+$height3: 10px; // Appears 1 time
+$height4: 19px; // Appears 1 time
+$height5: 18px; // Appears 1 time
+$height6: 15px; // Appears 1 time
+
+.lm_root {
+  position: relative;
+}
+
+.lm_row > .lm_item {
+  float: left;
+}
+
+// Single Pane content (area in which final dragged content is contained)
+.lm_content {
+  overflow: hidden;
+  position: relative;
+}
+
+// ".lm_dragging" is applied to BODY tag during Drag and is also directly applied to the root of the object being dragged
+.lm_dragging,
+.lm_dragging * {
+  cursor: move !important;
+  user-select: none;
+}
+
+// If a specific Pane is maximized
+.lm_maximised {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 40;
+}
+
+.lm_maximise_placeholder {
+  display: none;
+}
+
+// Separator line (handle to change pane size)
+.lm_splitter {
+  position: relative;
+  z-index: 2;
+  touch-action: none;
+
+  &.lm_vertical {
+    .lm_drag_handle {
+      width: $width0;
+      position: absolute;
+      cursor: ns-resize;
+      touch-action: none;
+      user-select: none;
+    }
+  }
+
+  &.lm_horizontal {
+    float: left;
+    height: $height0;
+
+    .lm_drag_handle {
+      height: $height0;
+      position: absolute;
+      cursor: ew-resize;
+      touch-action: none;
+      user-select: none;
+    }
+  }
+}
+
+// Pane Header (container of Tabs for each pane)
+.lm_header {
+  overflow: visible;
+  position: relative;
+  z-index: 1;
+  user-select: none;
+
+  [class^=lm_] {
+    box-sizing: content-box !important;
+  }
+
+  // Pane controls (popout, maximize, minimize, close)
+  .lm_controls {
+    position: absolute;
+    right: 3px;
+    display: flex;
+
+    > * {
+      cursor: pointer;
+      float: left;
+      width: $width4;
+      height: $height5;
+      text-align: center;
+    }
+  }
+
+  .lm_tabs {
+    position: absolute;
+    display: flex;
+  }
+
+  // Single Tab container. A single Tab is set for each pane, a group of Tabs are contained in ".lm_header"
+  .lm_tab {
+    cursor: pointer;
+    float: left;
+    height: $height2;
+    margin-top: 1px;
+    padding: 0px 10px 5px;
+    padding-right: 25px;
+    position: relative;
+    touch-action: none;
+
+    i {
+      width: $width6;
+      height: $height4;
+      position: absolute;
+
+      &.lm_left {
+        top: 0;
+        left: -2px;
+      }
+
+      &.lm_right {
+        top: 0;
+        right: -2px;
+      }
+    }
+
+    .lm_title {
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    // Close Tab Icon
+    .lm_close_tab {
+      width: $width3;
+      height: $height2;
+      position: absolute;
+      top: 0;
+      right: 0;
+      text-align: center;
+    }
+  }
+}
+
+// Change stack style to absolute positioning for docking transition ability
+.lm_stack {
+  position: relative;
+
+  > .lm_items {
+      overflow: hidden;
+  }
+
+  &.lm_left {
+    > .lm_items {
+      position: absolute;
+      left: 20px;
+      top: 0;
+    }
+  }
+  &.lm_right {
+    > .lm_items {
+      position: absolute;
+      right: 20px;
+      top: 0;
+    }
+
+    > .lm_header {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+  &.lm_bottom {
+    > .lm_items {
+      position: absolute;
+      bottom: 20px;
+    }
+
+    > .lm_header {
+      position: absolute;
+      bottom: 0;
+    }
+  }
+}
+
+// Headers positions
+.lm_left,
+.lm_right {
+  &.lm_stack {
+    .lm_header {
+      height: 100%;
+    }
+  }
+
+  &.lm_dragProxy {
+    .lm_header,
+    .lm_items {
+      float: left;
+    }
+  }
+
+  &.lm_dragProxy,
+  &.lm_stack {
+    .lm_header {
+      width: 20px;
+      vertical-align: top;
+
+      .lm_tabs {
+        transform-origin: left top;
+        top: 0;
+        width: 1000px; /*hack*/
+      }
+
+      .lm_controls {
+        bottom: 0;
+        flex-flow: column;
+      }
+    }
+  }
+}
+
+.lm_dragProxy.lm_left,
+.lm_stack.lm_left {
+  .lm_header {
+    .lm_tabs {
+      transform: rotate(-90deg) scaleX(-1);
+      left: 0;
+      .lm_tab {
+        transform: scaleX(-1);
+        margin-top: 1px;
+      }
+    }
+
+    .lm_tabdropdown_list {
+      top:initial;
+      right:initial;
+      left:20px;
+    }
+  }
+}
+
+.lm_dragProxy.lm_right .lm_content {
+  float: left;
+}
+
+.lm_dragProxy.lm_right,
+.lm_stack.lm_right {
+  .lm_header {
+    .lm_tabs {
+      transform: rotate(90deg) scaleX(1);
+      left: 100%;
+      margin-left: 0;
+    }
+
+    .lm_controls {
+      left: 3px;
+    }
+
+    .lm_tabdropdown_list {
+      top:initial;
+      right:20px;
+    }
+  }
+}
+
+.lm_dragProxy.lm_bottom,
+.lm_stack.lm_bottom {
+  .lm_header {
+    width: 100%;
+    .lm_tab {
+      margin-top:0;
+      border-top: none;
+    }
+
+    .lm_controls {
+      top: 3px;
+    }
+
+    .lm_tabdropdown_list {
+      top:initial;
+      bottom:20px;
+    }
+  }
+}
+
+.lm_drop_tab_placeholder {
+  float: left;
+  width: $width2;
+  height: $height3;
+  visibility: hidden;
+}
+
+// Dropdown arrow for additional tabs when too many to be displayed
+.lm_header {
+  .lm_controls .lm_tabdropdown:before {
+    content: '';
+    width: 0;
+    height: 0;
+    vertical-align: middle;
+    display: inline-block;
+    border-top: 5px dashed;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    color: white; // Overriden in specific Themes
+  }
+
+  .lm_tabdropdown_list {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    z-index: 5;
+    overflow: hidden;
+
+    .lm_tab {
+      clear: both;
+      padding-right: 10px;
+      margin: 0;
+
+      .lm_title {
+        width: 100px;
+      }
+    }
+
+    .lm_close_tab {
+      display: none !important;
+    }
+  }
+}
+
+/***********************************
+* Drag Proxy
+***********************************/
+
+// Single Pane content during Drag (style of moving window following mouse)
+.lm_dragProxy {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 30;
+
+  .lm_header {
+    background: transparent;
+  }
+
+  .lm_content {
+    border-top: none;
+    overflow: hidden;
+  }
+}
+
+// Placeholder Container of target position
+.lm_dropTargetIndicator {
+  display: none;
+  position: absolute;
+  z-index: 35;
+  transition: all 200ms ease;
+
+  // Inner Placeholder
+  .lm_inner {
+    width: $width0;
+    height: $height0;
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+}
+
+.lm_transition_indicator {
+  display: none;
+  width: $width1;
+  height: $height1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+}
+
+// If a specific Pane is Popped Out, so move it to a different Browser Window, Icon to restore original position is:
+.lm_popin {
+  width: $width1;
+  height: $height1;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 9999;
+
+  > * {
+    width: $width0;
+    height: $height0;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  > .lm_bg {
+    z-index: 10;
+  }
+
+  > .lm_icon {
+    z-index: 20;
+  }
+}
