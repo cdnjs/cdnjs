@@ -1,0 +1,630 @@
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+var core = require('primereact/core');
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+var FilterMatchMode = Object.freeze({
+  STARTS_WITH: 'startsWith',
+  CONTAINS: 'contains',
+  NOT_CONTAINS: 'notContains',
+  ENDS_WITH: 'endsWith',
+  EQUALS: 'equals',
+  NOT_EQUALS: 'notEquals',
+  IN: 'in',
+  LESS_THAN: 'lt',
+  LESS_THAN_OR_EQUAL_TO: 'lte',
+  GREATER_THAN: 'gt',
+  GREATER_THAN_OR_EQUAL_TO: 'gte',
+  BETWEEN: 'between',
+  DATE_IS: 'dateIs',
+  DATE_IS_NOT: 'dateIsNot',
+  DATE_BEFORE: 'dateBefore',
+  DATE_AFTER: 'dateAfter',
+  CUSTOM: 'custom'
+});
+
+var PrimeReact = function PrimeReact() {
+  _classCallCheck(this, PrimeReact);
+};
+
+_defineProperty(PrimeReact, "ripple", false);
+
+_defineProperty(PrimeReact, "inputStyle", 'outlined');
+
+_defineProperty(PrimeReact, "locale", 'en');
+
+_defineProperty(PrimeReact, "appendTo", null);
+
+_defineProperty(PrimeReact, "autoZIndex", true);
+
+_defineProperty(PrimeReact, "zIndex", {
+  modal: 1100,
+  overlay: 1000,
+  menu: 1000,
+  tooltip: 1100,
+  toast: 1200
+});
+
+_defineProperty(PrimeReact, "filterMatchModeOptions", {
+  text: [FilterMatchMode.STARTS_WITH, FilterMatchMode.CONTAINS, FilterMatchMode.NOT_CONTAINS, FilterMatchMode.ENDS_WITH, FilterMatchMode.EQUALS, FilterMatchMode.NOT_EQUALS],
+  numeric: [FilterMatchMode.EQUALS, FilterMatchMode.NOT_EQUALS, FilterMatchMode.LESS_THAN, FilterMatchMode.LESS_THAN_OR_EQUAL_TO, FilterMatchMode.GREATER_THAN, FilterMatchMode.GREATER_THAN_OR_EQUAL_TO],
+  date: [FilterMatchMode.DATE_IS, FilterMatchMode.DATE_IS_NOT, FilterMatchMode.DATE_BEFORE, FilterMatchMode.DATE_AFTER]
+});
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+var locales = {
+  'en': {
+    startsWith: 'Starts with',
+    contains: 'Contains',
+    notContains: 'Not contains',
+    endsWith: 'Ends with',
+    equals: 'Equals',
+    notEquals: 'Not equals',
+    noFilter: 'No Filter',
+    lt: 'Less than',
+    lte: 'Less than or equal to',
+    gt: 'Greater than',
+    gte: 'Greater than or equal to',
+    dateIs: 'Date is',
+    dateIsNot: 'Date is not',
+    dateBefore: 'Date is before',
+    dateAfter: 'Date is after',
+    custom: 'Custom',
+    clear: 'Clear',
+    apply: 'Apply',
+    matchAll: 'Match All',
+    matchAny: 'Match Any',
+    addRule: 'Add Rule',
+    removeRule: 'Remove Rule',
+    accept: 'Yes',
+    reject: 'No',
+    choose: 'Choose',
+    upload: 'Upload',
+    cancel: 'Cancel',
+    dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    dayNamesMin: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+    monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    today: 'Today',
+    weekHeader: 'Wk',
+    firstDayOfWeek: 0,
+    dateFormat: 'mm/dd/yy',
+    weak: 'Weak',
+    medium: 'Medium',
+    strong: 'Strong',
+    passwordPrompt: 'Enter a password',
+    emptyFilterMessage: 'No results found',
+    emptyMessage: 'No available options'
+  }
+};
+
+function locale(locale) {
+  locale && (PrimeReact.locale = locale);
+  return {
+    locale: PrimeReact.locale,
+    options: locales[PrimeReact.locale]
+  };
+}
+
+function addLocale(locale, options) {
+  locales[locale] = _objectSpread(_objectSpread({}, locales['en']), options);
+}
+
+function updateLocaleOption(key, value, locale) {
+  localeOptions(locale)[key] = value;
+}
+
+function updateLocaleOptions(options, locale) {
+  var _locale = locale || PrimeReact.locale;
+
+  locales[_locale] = _objectSpread(_objectSpread({}, locales[_locale]), options);
+}
+
+function localeOption(key, locale) {
+  var _locale = locale || PrimeReact.locale;
+
+  try {
+    return localeOptions(_locale)[key];
+  } catch (error) {
+    throw new Error("The ".concat(key, " option is not found in the current locale('").concat(_locale, "')."));
+  }
+}
+
+function localeOptions(locale) {
+  var _locale = locale || PrimeReact.locale;
+
+  return locales[_locale];
+}
+
+var PrimeIcons = Object.freeze({
+  ALIGN_CENTER: 'pi pi-align-center',
+  ALIGN_JUSTIFY: 'pi pi-align-justify',
+  ALIGN_LEFT: 'pi pi-align-left',
+  ALIGN_RIGHT: 'pi pi-align-right',
+  AMAZON: 'pi pi-amazon',
+  ANDROID: 'pi pi-android',
+  ANGLE_DOUBLE_DOWN: 'pi pi-angle-double-down',
+  ANGLE_DOUBLE_LEFT: 'pi pi-angle-double-left',
+  ANGLE_DOUBLE_RIGHT: 'pi pi-angle-double-right',
+  ANGLE_DOUBLE_UP: 'pi pi-angle-double-up',
+  ANGLE_DOWN: 'pi pi-angle-down',
+  ANGLE_LEFT: 'pi pi-angle-left',
+  ANGLE_RIGHT: 'pi pi-angle-right',
+  ANGLE_UP: 'pi pi-angle-up',
+  APPLE: 'pi pi-apple',
+  ARROW_CIRCLE_DOWN: 'pi pi-arrow-circle-down',
+  ARROW_CIRCLE_LEFT: 'pi pi-arrow-circle-left',
+  ARROW_CIRCLE_RIGHT: 'pi pi-arrow-circle-right',
+  ARROW_CIRCLE_UP: 'pi pi-arrow-circle-up',
+  ARROW_DOWN: 'pi pi-arrow-down',
+  ARROW_LEFT: 'pi pi-arrow-left',
+  ARROW_RIGHT: 'pi pi-arrow-right',
+  ARROW_UP: 'pi pi-arrow-up',
+  BACKWARD: 'pi pi-backward',
+  BAN: 'pi pi-ban',
+  BARS: 'pi pi-bars',
+  BELL: 'pi pi-bell',
+  BOOK: 'pi pi-book',
+  BOOKMARK: 'pi pi-bookmark',
+  BRIEFCASE: 'pi pi-briefcase',
+  CALENDAR_MINUS: 'pi pi-calendar-minus',
+  CALENDAR_PLUS: 'pi pi-calendar-plus',
+  CALENDAR_TIMES: 'pi pi-calendar-times',
+  CALENDAR: 'pi pi-calendar',
+  CAMERA: 'pi pi-camera',
+  CARET_DOWN: 'pi pi-caret-down',
+  CARET_LEFT: 'pi pi-caret-left',
+  CARET_RIGHT: 'pi pi-caret-right',
+  CARET_UP: 'pi pi-caret-up',
+  CHART_BAR: 'pi pi-chart-bar',
+  CHART_LINE: 'pi pi-chart-line',
+  CHECK_CIRCLE: 'pi pi-check-circle',
+  CHECK_SQUARE: 'pi pi-check-square',
+  CHECK: 'pi pi-check',
+  CHEVRON_CIRCLE_DOWN: 'pi pi-chevron-circle-down',
+  CHEVRON_CIRCLE_LEFT: 'pi pi-chevron-circle-left',
+  CHEVRON_CIRCLE_RIGHT: 'pi pi-chevron-circle-right',
+  CHEVRON_CIRCLE_UP: 'pi pi-chevron-circle-up',
+  CHEVRON_DOWN: 'pi pi-chevron-down',
+  CHEVRON_LEFT: 'pi pi-chevron-left',
+  CHEVRON_RIGHT: 'pi pi-chevron-right',
+  CHEVRON_UP: 'pi pi-chevron-up',
+  CLOCK: 'pi pi-clock',
+  CLONE: 'pi pi-clone',
+  CLOUD_DOWNLOAD: 'pi pi-cloud-download',
+  CLOUD_UPLOAD: 'pi pi-cloud-upload',
+  CLOUD: 'pi pi-cloud',
+  COG: 'pi pi-cog',
+  COMMENT: 'pi pi-comment',
+  COMMENTS: 'pi pi-comments',
+  COMPASS: 'pi pi-compass',
+  COPY: 'pi pi-copy',
+  CREDIT_CARD: 'pi pi-credit-card',
+  DESKTOP: 'pi pi-desktop',
+  DISCORD: 'pi pi-discord',
+  DIRECTIONS_ALT: 'pi pi-directions-alt',
+  DIRECTIONS: 'pi pi-directions',
+  DOLLAR: 'pi pi-dollar',
+  DOWNLOAD: 'pi pi-download',
+  EJECT: 'pi pi-eject',
+  ELLIPSIS_H: 'pi pi-ellipsis-h',
+  ELLIPSIS_V: 'pi pi-ellipsis-v',
+  ENVELOPE: 'pi pi-envelope',
+  EXCLAMATION_CIRCLE: 'pi pi-exclamation-circle',
+  EXCLAMATION_TRIANGLE: 'pi pi-exclamation-triangle ',
+  EXTERNAL_LINK: 'pi pi-external-link',
+  EYE_SLASH: 'pi pi-eye-slash',
+  EYE: 'pi pi-eye',
+  FACEBOOK: 'pi pi-facebook',
+  FAST_BACKWARD: 'pi pi-fast-backward',
+  FAST_FORWARD: 'pi pi-fast-forward',
+  FILE_EXCEL: 'pi pi-file-excel',
+  FILE_O: 'pi pi-file-o',
+  FILE_PDF: 'pi pi-file-pdf',
+  FILE: 'pi pi-file',
+  FILTER: 'pi pi-filter',
+  FILTER_SLASH: 'pi pi-filter-slash',
+  FLAG: 'pi pi-flag',
+  FOLDER_OPEN: 'pi pi-folder-open',
+  FOLDER: 'pi pi-folder',
+  FORWARD: 'pi pi-forward',
+  GITHUB: 'pi pi-github',
+  GLOBE: 'pi pi-globe',
+  GOOGLE: 'pi pi-google',
+  HEART: 'pi pi-heart',
+  HOME: 'pi pi-home',
+  ID_CARD: 'pi pi-id-card',
+  IMAGE: 'pi pi-image',
+  IMAGES: 'pi pi-images',
+  INBOX: 'pi pi-inbox',
+  INFO_CIRCLE: 'pi pi-info-circle',
+  INFO: 'pi pi-info',
+  KEY: 'pi pi-key',
+  LINK: 'pi pi-link',
+  LIST: 'pi pi-list',
+  LOCK_OPEN: 'pi pi-lock-open',
+  LOCK: 'pi pi-lock',
+  MAP: 'pi pi-map',
+  MAP_MARKER: 'pi pi-map-marker',
+  MICROSOFT: 'pi pi-microsoft',
+  MINUS_CIRCLE: 'pi pi-minus-circle',
+  MINUS: 'pi pi-minus',
+  MOBILE: 'pi pi-mobile',
+  MONEY_BILL: 'pi pi-money-bill',
+  MOON: 'pi pi-moon',
+  PALETTE: 'pi pi-palette',
+  PAPERCLIP: 'pi pi-paperclip',
+  PAUSE: 'pi pi-pause',
+  PAYPAL: 'pi pi-paypal',
+  PENCIL: 'pi pi-pencil',
+  PERCENTAGE: 'pi pi-percentage',
+  PHONE: 'pi pi-phone',
+  PLAY: 'pi pi-play',
+  PLUS_CIRCLE: 'pi pi-plus-circle',
+  PLUS: 'pi pi-plus',
+  POWER_OFF: 'pi pi-power-off',
+  PRINT: 'pi pi-print',
+  QUESTION_CIRCLE: 'pi pi-question-circle',
+  QUESTION: 'pi pi-question',
+  RADIO_OFF: 'pi pi-radio-off',
+  RADIO_ON: 'pi pi-radio-on',
+  REFRESH: 'pi pi-refresh',
+  REPLAY: 'pi pi-replay',
+  REPLY: 'pi pi-reply',
+  SAVE: 'pi pi-save',
+  SEARCH_MINUS: 'pi pi-search-minus',
+  SEARCH_PLUS: 'pi pi-search-plus',
+  SEARCH: 'pi pi-search',
+  SEND: 'pi pi-send',
+  SHARE_ALT: 'pi pi-share-alt',
+  SHIELD: 'pi pi-shield',
+  SHOPPING_CART: 'pi pi-shopping-cart',
+  SIGN_IN: 'pi pi-sign-in',
+  SIGN_OUT: 'pi pi-sign-out',
+  SITEMAP: 'pi pi-sitemap',
+  SLACK: 'pi pi-slack',
+  SLIDERS_H: 'pi pi-sliders-h',
+  SLIDERS_V: 'pi pi-sliders-v',
+  SORT_ALPHA_ALT_DOWN: 'pi pi-sort-alpha-alt-down',
+  SORT_ALPHA_ALT_UP: 'pi pi-sort-alpha-alt-up',
+  SORT_ALPHA_DOWN: 'pi pi-sort-alpha-down',
+  SORT_ALPHA_UP: 'pi pi-sort-alpha-up',
+  SORT_ALT: 'pi pi-sort-alt',
+  SORT_AMOUNT_DOWN_ALT: 'pi pi-sort-amount-down-alt',
+  SORT_AMOUNT_DOWN: 'pi pi-sort-amount-down',
+  SORT_AMOUNT_UP_ALT: 'pi pi-sort-amount-up-alt',
+  SORT_AMOUNT_UP: 'pi pi-sort-amount-up',
+  SORT_DOWN: 'pi pi-sort-down',
+  SORT_NUMERIC_ALT_DOWN: 'pi pi-sort-numeric-alt-down',
+  SORT_NUMERIC_ALT_UP: 'pi pi-sort-numeric-alt-up',
+  SORT_NUMERIC_DOWN: 'pi pi-sort-numeric-down',
+  SORT_NUMERIC_UP: 'pi pi-sort-numeric-up',
+  SORT_UP: 'pi pi-sort-up',
+  SORT: 'pi pi-sort',
+  SPINNER: 'pi pi-spinner',
+  STAR_O: 'pi pi-star-o',
+  STAR: 'pi pi-star',
+  STEP_BACKWARD_ALT: 'pi pi-step-backward-alt',
+  STEP_BACKWARD: 'pi pi-step-backward',
+  STEP_FORWARD_ALT: 'pi pi-step-forward-alt',
+  STEP_FORWARD: 'pi pi-step-forward',
+  SUN: 'pi pi-sun',
+  TABLE: 'pi pi-table',
+  TABLET: 'pi pi-tablet',
+  TAG: 'pi pi-tag',
+  TAGS: 'pi pi-tags',
+  TH_LARGE: 'pi pi-th-large',
+  THUMBS_DOWN: 'pi pi-thumbs-down',
+  THUMBS_UP: 'pi pi-thumbs-up',
+  TICKET: 'pi pi-ticket',
+  TIMES_CIRCLE: 'pi pi-times-circle',
+  TIMES: 'pi pi-times',
+  TRASH: 'pi pi-trash',
+  TWITTER: 'pi pi-twitter',
+  UNDO: 'pi pi-undo',
+  UNLOCK: 'pi pi-unlock',
+  UPLOAD: 'pi pi-upload',
+  USER_EDIT: 'pi pi-user-edit',
+  USER_MINUS: 'pi pi-user-minus',
+  USER_PLUS: 'pi pi-user-plus',
+  USER: 'pi pi-user',
+  USERS: 'pi pi-users',
+  VIDEO: 'pi pi-video',
+  VIMEO: 'pi pi-vimeo',
+  VOLUME_DOWN: 'pi pi-volume-down',
+  VOLUME_OFF: 'pi pi-volume-off',
+  VOLUME_UP: 'pi pi-volume-up',
+  YOUTUBE: 'pi pi-youtube',
+  WALLET: 'pi pi-wallet',
+  WIFI: 'pi pi-wifi',
+  WINDOW_MAXIMIZE: 'pi pi-window-maximize',
+  WINDOW_MINIMIZE: 'pi pi-window-minimize'
+});
+
+var MessageSeverity = Object.freeze({
+  SUCCESS: 'success',
+  INFO: 'info',
+  WARN: 'warn',
+  ERROR: 'error'
+});
+
+var FilterOperator = Object.freeze({
+  AND: 'and',
+  OR: 'or'
+});
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+var FilterService = {
+  filter: function filter(value, fields, filterValue, filterMatchMode, filterLocale) {
+    var filteredItems = [];
+
+    if (value) {
+      var _iterator = _createForOfIteratorHelper(value),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var item = _step.value;
+
+          var _iterator2 = _createForOfIteratorHelper(fields),
+              _step2;
+
+          try {
+            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+              var field = _step2.value;
+              var fieldValue = core.ObjectUtils.resolveFieldData(item, field);
+
+              if (this.filters[filterMatchMode](fieldValue, filterValue, filterLocale)) {
+                filteredItems.push(item);
+                break;
+              }
+            }
+          } catch (err) {
+            _iterator2.e(err);
+          } finally {
+            _iterator2.f();
+          }
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+    }
+
+    return filteredItems;
+  },
+  filters: {
+    startsWith: function startsWith(value, filter, filterLocale) {
+      if (filter === undefined || filter === null || filter.trim() === '') {
+        return true;
+      }
+
+      if (value === undefined || value === null) {
+        return false;
+      }
+
+      var filterValue = core.ObjectUtils.removeAccents(filter.toString()).toLocaleLowerCase(filterLocale);
+      var stringValue = core.ObjectUtils.removeAccents(value.toString()).toLocaleLowerCase(filterLocale);
+      return stringValue.slice(0, filterValue.length) === filterValue;
+    },
+    contains: function contains(value, filter, filterLocale) {
+      if (filter === undefined || filter === null || typeof filter === 'string' && filter.trim() === '') {
+        return true;
+      }
+
+      if (value === undefined || value === null) {
+        return false;
+      }
+
+      var filterValue = core.ObjectUtils.removeAccents(filter.toString()).toLocaleLowerCase(filterLocale);
+      var stringValue = core.ObjectUtils.removeAccents(value.toString()).toLocaleLowerCase(filterLocale);
+      return stringValue.indexOf(filterValue) !== -1;
+    },
+    notContains: function notContains(value, filter, filterLocale) {
+      if (filter === undefined || filter === null || typeof filter === 'string' && filter.trim() === '') {
+        return true;
+      }
+
+      if (value === undefined || value === null) {
+        return false;
+      }
+
+      var filterValue = core.ObjectUtils.removeAccents(filter.toString()).toLocaleLowerCase(filterLocale);
+      var stringValue = core.ObjectUtils.removeAccents(value.toString()).toLocaleLowerCase(filterLocale);
+      return stringValue.indexOf(filterValue) === -1;
+    },
+    endsWith: function endsWith(value, filter, filterLocale) {
+      if (filter === undefined || filter === null || filter.trim() === '') {
+        return true;
+      }
+
+      if (value === undefined || value === null) {
+        return false;
+      }
+
+      var filterValue = core.ObjectUtils.removeAccents(filter.toString()).toLocaleLowerCase(filterLocale);
+      var stringValue = core.ObjectUtils.removeAccents(value.toString()).toLocaleLowerCase(filterLocale);
+      return stringValue.indexOf(filterValue, stringValue.length - filterValue.length) !== -1;
+    },
+    equals: function equals(value, filter, filterLocale) {
+      if (filter === undefined || filter === null || typeof filter === 'string' && filter.trim() === '') {
+        return true;
+      }
+
+      if (value === undefined || value === null) {
+        return false;
+      }
+
+      if (value.getTime && filter.getTime) return value.getTime() === filter.getTime();else return core.ObjectUtils.removeAccents(value.toString()).toLocaleLowerCase(filterLocale) === core.ObjectUtils.removeAccents(filter.toString()).toLocaleLowerCase(filterLocale);
+    },
+    notEquals: function notEquals(value, filter, filterLocale) {
+      if (filter === undefined || filter === null || typeof filter === 'string' && filter.trim() === '') {
+        return false;
+      }
+
+      if (value === undefined || value === null) {
+        return true;
+      }
+
+      if (value.getTime && filter.getTime) return value.getTime() !== filter.getTime();else return core.ObjectUtils.removeAccents(value.toString()).toLocaleLowerCase(filterLocale) !== core.ObjectUtils.removeAccents(filter.toString()).toLocaleLowerCase(filterLocale);
+    },
+    in: function _in(value, filter) {
+      if (filter === undefined || filter === null || filter.length === 0) {
+        return true;
+      }
+
+      for (var i = 0; i < filter.length; i++) {
+        if (core.ObjectUtils.equals(value, filter[i])) {
+          return true;
+        }
+      }
+
+      return false;
+    },
+    between: function between(value, filter) {
+      if (filter == null || filter[0] == null || filter[1] == null) {
+        return true;
+      }
+
+      if (value === undefined || value === null) {
+        return false;
+      }
+
+      if (value.getTime) return filter[0].getTime() <= value.getTime() && value.getTime() <= filter[1].getTime();else return filter[0] <= value && value <= filter[1];
+    },
+    lt: function lt(value, filter) {
+      if (filter === undefined || filter === null) {
+        return true;
+      }
+
+      if (value === undefined || value === null) {
+        return false;
+      }
+
+      if (value.getTime && filter.getTime) return value.getTime() < filter.getTime();else return value < filter;
+    },
+    lte: function lte(value, filter) {
+      if (filter === undefined || filter === null) {
+        return true;
+      }
+
+      if (value === undefined || value === null) {
+        return false;
+      }
+
+      if (value.getTime && filter.getTime) return value.getTime() <= filter.getTime();else return value <= filter;
+    },
+    gt: function gt(value, filter) {
+      if (filter === undefined || filter === null) {
+        return true;
+      }
+
+      if (value === undefined || value === null) {
+        return false;
+      }
+
+      if (value.getTime && filter.getTime) return value.getTime() > filter.getTime();else return value > filter;
+    },
+    gte: function gte(value, filter) {
+      if (filter === undefined || filter === null) {
+        return true;
+      }
+
+      if (value === undefined || value === null) {
+        return false;
+      }
+
+      if (value.getTime && filter.getTime) return value.getTime() >= filter.getTime();else return value >= filter;
+    },
+    dateIs: function dateIs(value, filter) {
+      if (filter === undefined || filter === null) {
+        return true;
+      }
+
+      if (value === undefined || value === null) {
+        return false;
+      }
+
+      return value.toDateString() === filter.toDateString();
+    },
+    dateIsNot: function dateIsNot(value, filter) {
+      if (filter === undefined || filter === null) {
+        return true;
+      }
+
+      if (value === undefined || value === null) {
+        return false;
+      }
+
+      return value.toDateString() !== filter.toDateString();
+    },
+    dateBefore: function dateBefore(value, filter) {
+      if (filter === undefined || filter === null) {
+        return true;
+      }
+
+      if (value === undefined || value === null) {
+        return false;
+      }
+
+      return value.getTime() < filter.getTime();
+    },
+    dateAfter: function dateAfter(value, filter) {
+      if (filter === undefined || filter === null) {
+        return true;
+      }
+
+      if (value === undefined || value === null) {
+        return false;
+      }
+
+      return value.getTime() > filter.getTime();
+    }
+  },
+  register: function register(rule, fn) {
+    this.filters[rule] = fn;
+  }
+};
+
+exports.FilterMatchMode = FilterMatchMode;
+exports.FilterOperator = FilterOperator;
+exports.FilterService = FilterService;
+exports.MessageSeverity = MessageSeverity;
+exports.PrimeIcons = PrimeIcons;
+exports.addLocale = addLocale;
+exports['default'] = PrimeReact;
+exports.locale = locale;
+exports.localeOption = localeOption;
+exports.localeOptions = localeOptions;
+exports.updateLocaleOption = updateLocaleOption;
+exports.updateLocaleOptions = updateLocaleOptions;
