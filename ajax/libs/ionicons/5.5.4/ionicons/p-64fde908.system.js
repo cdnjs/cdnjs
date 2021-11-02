@@ -1,0 +1,1 @@
+System.register(["./p-ec3e6805.system.js","./p-ef5fa223.system.js"],(function(e){"use strict";return{setters:[function(t){e("addIcons",t.a)},function(){}],execute:function(){}}}));
