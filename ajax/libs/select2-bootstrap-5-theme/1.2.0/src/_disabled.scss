@@ -1,0 +1,37 @@
+.select2-container--bootstrap-5 {
+    &.select2-container--disabled,
+    &.select2-container--disabled.select2-container--focus {
+        // Base styling
+        .select2-selection {
+            color: $s2bs5-disabled-color;
+            cursor: not-allowed;
+            background-color: $s2bs5-disabled-bg;
+            border-color: $s2bs5-disabled-border-color;
+            box-shadow: none;
+        }
+
+        // Multiple
+        .select2-selection--multiple {
+            .select2-selection__clear {
+                display: none;
+            }
+
+            // Items
+            .select2-selection__choice {
+                cursor: not-allowed;
+                .select2-selection__choice__remove {
+                    display: none;
+                }
+            }
+
+            // Remove search field if no items selected
+            .select2-selection__rendered:not(:empty) {
+                padding-bottom: 0;
+
+                + .select2-search {
+                    display: none;
+                }
+            }
+        }
+    }
+}
