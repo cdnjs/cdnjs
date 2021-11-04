@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><title>bold</title><path d="M15 5V3H5v14h3v-6h5.833V9H8V5z"/></svg>
