@@ -1,0 +1,1 @@
+module.exports={title:"FutureLearn",slug:"futurelearn",get svg(){return'<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>FutureLearn</title><path d="'+this.path+'"/></svg>'},path:"M22.081.61v7.566h-7.223v6.661H7.566v6.634H0v1.92h9.471v-6.649h7.306v-6.66H24V.61Z",source:"https://www.futurelearn.com/",hex:"DE00A5",guidelines:void 0,license:void 0};

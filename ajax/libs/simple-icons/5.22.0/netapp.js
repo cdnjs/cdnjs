@@ -1,0 +1,1 @@
+module.exports={title:"NetApp",slug:"netapp",get svg(){return'<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>NetApp</title><path d="'+this.path+'"/></svg>'},path:"M0 2v20h9.33V10h5.34v12H24V2Z",source:"http://www.netapp.com/",hex:"0067C5",guidelines:"https://www.netapp.com/company/legal/trademark-guidelines/",license:void 0};
