@@ -1,0 +1,23 @@
+import './chunk-2452e3d3.js';
+import './helpers.js';
+import './chunk-8ed29c41.js';
+import './chunk-161dac72.js';
+import './chunk-9957ac1a.js';
+import { r as registerComponent, u as use } from './chunk-cca88db8.js';
+import './chunk-3098b0e9.js';
+import './chunk-18fcd4ac.js';
+import './chunk-42f463e6.js';
+import './chunk-7ee6c15c.js';
+import './chunk-0f30042f.js';
+import './chunk-6b53dd42.js';
+import { D as Datepicker } from './chunk-a146937d.js';
+export { D as BDatepicker } from './chunk-a146937d.js';
+
+var Plugin = {
+  install: function install(Vue) {
+    registerComponent(Vue, Datepicker);
+  }
+};
+use(Plugin);
+
+export default Plugin;
