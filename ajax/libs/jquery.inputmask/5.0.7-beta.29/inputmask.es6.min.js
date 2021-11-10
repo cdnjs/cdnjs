@@ -1,0 +1,1 @@
+import"./inputmask.js";const inputmask=window.Inputmask;window.Inputmask=void 0;export default inputmask;
