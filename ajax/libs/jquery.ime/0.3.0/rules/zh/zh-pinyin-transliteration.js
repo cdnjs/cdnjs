@@ -1,0 +1,60 @@
+( function ( $ ) {
+	'use strict';
+
+	var zhPinyinTransliteration = {
+		id: 'zh-pinyin-transliteration',
+		name: '拼音符号输入法',
+		description: 'Mandarin PinYin Transliteration input method',
+		date: '2018-12-28',
+		URL: 'http://github.com/wikimedia/jquery.ime',
+		author: 'Yuping Zuo',
+		license: 'MIT',
+		version: '1.0',
+		maxKeyLength: 4,
+		patterns: [
+			[ 'iou', 'iu' ],
+			[ 'uei', 'ui' ],
+			[ 'uen', 'un' ],
+			[ '([jqxy])v', '$1u' ],
+			[ 'v', 'ü' ],
+			[ 'a(ng?)?1', 'ā$1' ],
+			[ 'a(ng?)?2', 'á$1' ],
+			[ 'a(ng?)?3', 'ǎ$1' ],
+			[ 'a(ng?)?4', 'à$1' ],
+			[ 'a([io])1', 'ā$1' ],
+			[ 'a([io])2', 'á$1' ],
+			[ 'a([io])3', 'ǎ$1' ],
+			[ 'a([io])4', 'à$1' ],
+			[ 'o(ng)?1', 'ō$1' ],
+			[ 'o(ng)?2', 'ó$1' ],
+			[ 'o(ng)?3', 'ǒ$1' ],
+			[ 'o(ng)?4', 'ò$1' ],
+			[ 'ou1', 'ōu' ],
+			[ 'ou2', 'óu' ],
+			[ 'ou3', 'ǒu' ],
+			[ 'ou4', 'òu' ],
+			[ 'e(ng?)?1', 'ē$1' ],
+			[ 'e(ng?)?2', 'é$1' ],
+			[ 'e(ng?)?3', 'ě$1' ],
+			[ 'e(ng?)?4', 'è$1' ],
+			[ 'ei1', 'ēi' ],
+			[ 'ei2', 'éi' ],
+			[ 'ei3', 'ěi' ],
+			[ 'ei4', 'èi' ],
+			[ 'i(ng?)?1', 'ī$1' ],
+			[ 'i(ng?)?2', 'í$1' ],
+			[ 'i(ng?)?3', 'ǐ$1' ],
+			[ 'i(ng?)?4', 'ì$1' ],
+			[ 'u(n)?1', 'ū$1' ],
+			[ 'u(n)?2', 'ú$1' ],
+			[ 'u(n)?3', 'ǔ$1' ],
+			[ 'u(n)?4', 'ù$1' ],
+			[ 'ü(n)?1', 'ǖ$1' ],
+			[ 'ü(n)?2', 'ǘ$1' ],
+			[ 'ü(n)?3', 'ǚ$1' ],
+			[ 'ü(n)?4', 'ǜ$1' ]
+		]
+	};
+
+	$.ime.register( zhPinyinTransliteration );
+}( jQuery ) );

@@ -1,0 +1,215 @@
+.imeselector {
+	position: absolute;
+	/* @embed */
+	background: url( ../images/ime-active.png ) no-repeat left center;
+	/* @embed */
+	background-image: -webkit-linear-gradient( transparent, transparent ), url( ../images/ime-active.svg );
+	/* @embed */
+	background-image: linear-gradient( transparent, transparent ), url( ../images/ime-active.svg );
+	background-color: rgba( 255, 255, 255, 0.75 );
+	background-position: left 3px center;
+	height: 15px;
+	font-size: small;
+	padding: 2px 2px 1px 20px;
+	box-shadow: 0 1px 3px 0 #777;
+	margin-top: 0;
+	text-align: left;
+	font-family: sans-serif;
+	white-space: nowrap;
+	z-index: 1000;
+}
+
+.imeselector:hover {
+	box-shadow: 0 1px 3px 0 #565656;
+	border-top: none;
+	background-color: rgba( 255, 255, 255, 0.85 );
+}
+
+.imeselector a,
+.ime-disable {
+	cursor: pointer;
+	text-decoration: none;
+	outline: none;
+	color: #222;
+	line-height: 1em;
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+
+.ime-setting-caret {
+	margin-left: 2px;
+	margin-top: 8px;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-top: 4px solid #565656;
+	content: '';
+	display: inline-block;
+	height: 0;
+	vertical-align: top;
+	width: 0;
+}
+
+span.ime-disable-link {
+	padding-left: 20px;
+	white-space: nowrap;
+}
+
+span.ime-disable-shortcut {
+	text-align: right;
+	margin-left: 10px;
+	color: #888;
+	font-size: smaller;
+	padding-right: 4px;
+}
+
+.ime-list-title,
+.ime-lang-title {
+	color: #39d;
+	border-bottom: solid 1px #39d;
+	text-align: left;
+	font-size: larger;
+	font-weight: normal;
+	padding-bottom: 5px;
+	padding-left: 20px;
+	padding-top: 9px;
+	margin: 0 0 1px;
+}
+
+.ime-language-list-wrapper {
+	position: relative;
+	padding: 0;
+	display: block;
+	overflow-y: auto;
+	max-height: 150px;
+}
+
+.imeselector-menu {
+	background-color: #fff;
+	-webkit-background-clip: padding-box;
+	-moz-background-clip: padding-box;
+	background-clip: padding-box;
+	position: absolute;
+	top: 14px;
+	right: 0;
+	z-index: 1000;
+	display: none;
+	float: left;
+	margin-top: 13px;
+	min-width: 160px;
+	padding: 0;
+	border: 1px solid #a2a9b1;
+	border-radius: 2px;
+	-webkit-box-shadow: 0 5px 10px rgba( 0, 0, 0, 0.2 );
+	-moz-box-shadow: 0 5px 10px rgba( 0, 0, 0, 0.2 );
+	box-shadow: 0 5px 10px rgba( 0, 0, 0, 0.2 );
+	text-align: left;
+}
+
+.imeselector-menu.ime-right {
+	right: auto;
+}
+
+.imeselector-menu ul {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+/* The triangle shaped callout */
+.imeselector-menu:before {
+	border-bottom: 7px solid #a2a9b1;
+	border-left: 7px solid transparent;
+	border-right: 7px solid transparent;
+	content: '';
+	display: inline-block;
+	right: 9px;
+	position: absolute;
+	top: -7px;
+}
+
+.imeselector-menu.ime-right:before {
+	right: auto;
+	left: 9px;
+}
+
+.imeselector-menu:after {
+	border-bottom: 6px solid #fff;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	content: '';
+	display: inline-block;
+	right: 10px;
+	position: absolute;
+	top: -6px;
+}
+
+.imeselector-menu.ime-right:after {
+	right: auto;
+	left: 10px;
+}
+
+.imeselector-menu.ime-position-top:before {
+	border-bottom: 0;
+	border-top: 7px solid #a2a9b1;
+	top: auto;
+	bottom: -7px;
+}
+
+.imeselector-menu.ime-position-top:after {
+	border-bottom: 0;
+	border-top: 6px solid #fff;
+	top: auto;
+	bottom: -6px;
+}
+
+.imeselector-menu .ime-checked {
+	/* @embed */
+	background: url( ../images/tick.png ) no-repeat left 4px center;
+	/* @embed */
+	background-image: -webkit-linear-gradient( transparent, transparent ), url( ../images/tick.svg );
+	/* @embed */
+	background-image: linear-gradient( transparent, transparent ), url( ../images/tick.svg );
+}
+
+.imeselector-menu .ime-help-link {
+	background-color: #f0f0f0;
+	border-radius: 0 0 2px 2px;
+	border-top: 1px solid #ddd;
+	margin-top: 6px;
+	padding: 2px 0;
+	color: #444;
+}
+
+.imeselector-menu .ime-help-link > a:hover {
+	background-color: #f0f0f0;
+	color: #000;
+}
+
+.imeselector-menu .selectable-row-item {
+	color: #333;
+	display: block;
+	padding-left: 20px;
+	padding-right: 20px;
+	font-weight: normal;
+	outline: none;
+	white-space: nowrap;
+	position: relative;
+}
+
+.imeselector-menu .selectable-row {
+	cursor: pointer;
+}
+
+.imeselector-menu .selectable-row:hover {
+	background-color: #f0f0f0;
+}
+
+.ime-open {
+	*z-index: 1000;
+	display: block;
+}
+
+.imeselector-menu li {
+	position: relative;
+}
