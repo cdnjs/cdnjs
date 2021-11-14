@@ -1,0 +1,1 @@
+module.exports={title:"Koding",slug:"koding",get svg(){return'<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Koding</title><path d="'+this.path+'"/></svg>'},path:"M.8 0H23v6H1V0zm0 9H18v6H.7V9zm0 9H23v6H1v-6z",source:"https://koding.com/About",hex:"00B057",guidelines:void 0,license:void 0};

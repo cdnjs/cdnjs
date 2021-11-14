@@ -1,0 +1,1 @@
+module.exports={title:"Square Enix",slug:"squareenix",get svg(){return'<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Square Enix</title><path d="'+this.path+'"/></svg>'},path:"M1.723 0v24h20.554v-4.496H7.037V4.088h15.006V0zm9.751 9.46v4.497h8.584V9.459z",source:"https://www.square-enix.com/",hex:"ED1C24",guidelines:void 0,license:void 0};

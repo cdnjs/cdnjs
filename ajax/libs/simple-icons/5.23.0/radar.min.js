@@ -1,0 +1,1 @@
+module.exports={title:"Radar",slug:"radar",get svg(){return'<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Radar</title><path d="'+this.path+'"/></svg>'},path:"M12 0L2.197 23.975 12 19.952 21.803 24z",source:"https://radar.io/",hex:"007AFF",guidelines:void 0,license:void 0};
