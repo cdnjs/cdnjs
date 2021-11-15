@@ -1,0 +1,30 @@
+import { MetadataService } from './MetadataService';
+import { UserInfoService } from './UserInfoService';
+import { TokenClient } from './TokenClient';
+import { OidcClientSettingsStore } from './OidcClientSettings';
+import { SigninState } from './SigninState';
+import { SigninResponse } from './SigninResponse';
+import { State } from './State';
+import { SignoutResponse } from './SignoutResponse';
+export declare class ResponseValidator {
+    private _settings;
+    private _metadataService;
+    private _userInfoService;
+    private _tokenClient;
+    constructor(settings: OidcClientSettingsStore, MetadataServiceCtor?: typeof MetadataService, UserInfoServiceCtor?: typeof UserInfoService, TokenClientCtor?: typeof TokenClient);
+    validateSigninResponse(state: SigninState, response: SigninResponse): Promise<SigninResponse>;
+    validateSignoutResponse(state: State, response: SignoutResponse): Promise<SignoutResponse>;
+    _processSigninParams(state: SigninState, response: SigninResponse): Promise<SigninResponse>;
+    _processClaims(state: SigninState, response: SigninResponse): Promise<SigninResponse>;
+    _mergeClaims(claims1: any, claims2: any): any;
+    _filterProtocolClaims(claims: any): any;
+    _validateTokens(state: SigninState, response: SigninResponse): Promise<SigninResponse>;
+    _processCode(state: SigninState, response: SigninResponse): Promise<SigninResponse>;
+    _validateIdTokenAttributes(state: SigninState, response: SigninResponse): Promise<SigninResponse>;
+    _validateIdTokenAndAccessToken(state: SigninState, response: SigninResponse): Promise<SigninResponse>;
+    _getSigningKeyForJwt(jwt: any): Promise<any>;
+    _getSigningKeyForJwtWithSingleRetry(jwt: any): Promise<any>;
+    _validateIdToken(state: SigninState, response: SigninResponse): Promise<SigninResponse>;
+    _filterByAlg(keys: any[], alg: string): any[];
+    _validateAccessToken(response: SigninResponse): Promise<SigninResponse>;
+}

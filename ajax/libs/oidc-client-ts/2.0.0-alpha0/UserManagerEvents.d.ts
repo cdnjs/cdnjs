@@ -1,0 +1,36 @@
+import { AccessTokenEvents } from './AccessTokenEvents';
+import { UserManagerSettingsStore } from './UserManagerSettings';
+import { User } from './User';
+export declare type UserLoadedCallback = (user: User) => void;
+export declare type UserUnloadedCallback = () => void;
+export declare type SilentRenewErrorCallback = (error: Error) => void;
+export declare type UserSignedInCallback = () => void;
+export declare type UserSignedOutCallback = () => void;
+export declare type UserSessionChangedCallback = () => void;
+export declare class UserManagerEvents extends AccessTokenEvents {
+    private _userLoaded;
+    private _userUnloaded;
+    private _silentRenewError;
+    private _userSignedIn;
+    private _userSignedOut;
+    private _userSessionChanged;
+    constructor(settings: UserManagerSettingsStore);
+    load(user: User, raiseEvent?: boolean): void;
+    unload(): void;
+    addUserLoaded(cb: UserLoadedCallback): void;
+    removeUserLoaded(cb: UserLoadedCallback): void;
+    addUserUnloaded(cb: UserUnloadedCallback): void;
+    removeUserUnloaded(cb: UserUnloadedCallback): void;
+    addSilentRenewError(cb: SilentRenewErrorCallback): void;
+    removeSilentRenewError(cb: SilentRenewErrorCallback): void;
+    _raiseSilentRenewError(e: Error): void;
+    addUserSignedIn(cb: UserSignedInCallback): void;
+    removeUserSignedIn(cb: UserSignedInCallback): void;
+    _raiseUserSignedIn(): void;
+    addUserSignedOut(cb: UserSignedOutCallback): void;
+    removeUserSignedOut(cb: UserSignedOutCallback): void;
+    _raiseUserSignedOut(): void;
+    addUserSessionChanged(cb: UserSessionChangedCallback): void;
+    removeUserSessionChanged(cb: UserSessionChangedCallback): void;
+    _raiseUserSessionChanged(): void;
+}
