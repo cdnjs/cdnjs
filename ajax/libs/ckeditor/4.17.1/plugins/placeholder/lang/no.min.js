@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("placeholder","no",{title:"Egenskaper for plassholder",toolbar:"Opprett plassholder",name:"Navn på plassholder",invalidName:"Plassholderen kan ikke være tom, og kan ikke inneholde følgende tegn: [, ], <, >",pathName:"plassholder"});
