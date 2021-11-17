@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("codesnippet","et",{button:"Koodijupi sisestamine",codeContents:"Koodi sisu",emptySnippetError:"Koodijupp ei saa olla tühi.",language:"Keel",title:"Koodijupp",pathName:"koodijupp"});

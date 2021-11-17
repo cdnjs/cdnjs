@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("imagebase","hu",{captionPlaceholder:"Adja meg a kép leírását"});
