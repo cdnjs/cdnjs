@@ -1,0 +1,134 @@
+/**
+ * ==============================================
+ * Dot Spin
+ * ==============================================
+ */
+
+$x1: $dot-spacing * 1.2;
+$y1: $dot-spacing * 1.2;
+$-x1: -$x1;
+$-y1: -$y1;
+
+$x2: $x1 * .707107; // 1/√2
+$y2: $y1 * .707107; // 1/√2
+$-x2: -$x2;
+$-y2: -$y2;
+
+$color-0: rgba($dot-color, 0);
+$color-1: rgba($dot-color, 1);
+
+.dot-spin {
+  position: relative;
+
+  @include dot($bg-color: transparent, $color: transparent);
+
+  box-shadow:
+    0 $-y1 0 0 $color-1,
+    $x2 $-y2 0 0 $color-1,
+    $x1 0 0 0 $color-1,
+    $x2 $y2 0 0 $color-0,
+    0 $y1 0 0 $color-0,
+    $-x2 $y2 0 0 $color-0,
+    $-x1 0 0 0 $color-0,
+    $-x2 $-y2 0 0 $color-0;
+  animation: dot-spin 1.5s infinite linear;
+}
+
+@keyframes dot-spin {
+  0%,
+  100% {
+    box-shadow:
+      0 $-y1 0 0 $color-1,
+      $x2 $-y2 0 0 $color-1,
+      $x1 0 0 0 $color-1,
+      $x2 $y2 0 -5px $color-0,
+      0 $y1 0 -5px $color-0,
+      $-x2 $y2 0 -5px $color-0,
+      $-x1 0 0 -5px $color-0,
+      $-x2 $-y2 0 -5px $color-0;
+  }
+
+  12.5% {
+    box-shadow:
+      0 $-y1 0 -5px $color-0,
+      $x2 $-y2 0 0 $color-1,
+      $x1 0 0 0 $color-1,
+      $x2 $y2 0 0 $color-1,
+      0 $y1 0 -5px $color-0,
+      $-x2 $y2 0 -5px $color-0,
+      $-x1 0 0 -5px $color-0,
+      $-x2 $-y2 0 -5px $color-0;
+  }
+
+  25% {
+    box-shadow:
+      0 $-y1 0 -5px $color-0,
+      $x2 $-y2 0 -5px $color-0,
+      $x1 0 0 0 $color-1,
+      $x2 $y2 0 0 $color-1,
+      0 $y1 0 0 $color-1,
+      $-x2 $y2 0 -5px $color-0,
+      $-x1 0 0 -5px $color-0,
+      $-x2 $-y2 0 -5px $color-0;
+  }
+
+  37.5% {
+    box-shadow:
+      0 $-y1 0 -5px $color-0,
+      $x2 $-y2 0 -5px $color-0,
+      $x1 0 0 -5px $color-0,
+      $x2 $y2 0 0 $color-1,
+      0 $y1 0 0 $color-1,
+      $-x2 $y2 0 0 $color-1,
+      $-x1 0 0 -5px $color-0,
+      $-x2 $-y2 0 -5px $color-0;
+  }
+
+  50% {
+    box-shadow:
+      0 $-y1 0 -5px $color-0,
+      $x2 $-y2 0 -5px $color-0,
+      $x1 0 0 -5px $color-0,
+      $x2 $y2 0 -5px $color-0,
+      0 $y1 0 0 $color-1,
+      $-x2 $y2 0 0 $color-1,
+      $-x1 0 0 0 $color-1,
+      $-x2 $-y2 0 -5px $color-0;
+  }
+
+  62.5% {
+    box-shadow:
+      0 $-y1 0 -5px $color-0,
+      $x2 $-y2 0 -5px $color-0,
+      $x1 0 0 -5px $color-0,
+      $x2 $y2 0 -5px $color-0,
+      0 $y1 0 -5px $color-0,
+      $-x2 $y2 0 0 $color-1,
+      $-x1 0 0 0 $color-1,
+      $-x2 $-y2 0 0 $color-1;
+  }
+
+  75% {
+    box-shadow:
+      0 $-y1 0 0 $color-1,
+      $x2 $-y2 0 -5px $color-0,
+      $x1 0 0 -5px $color-0,
+      $x2 $y2 0 -5px $color-0,
+      0 $y1 0 -5px $color-0,
+      $-x2 $y2 0 -5px $color-0,
+      $-x1 0 0 0 $color-1,
+      $-x2 $-y2 0 0 $color-1;
+  }
+
+  87.5% {
+    box-shadow:
+      0 $-y1 0 0 $color-1,
+      $x2 $-y2 0 0 $color-1,
+      $x1 0 0 -5px $color-0,
+      $x2 $y2 0 -5px $color-0,
+      0 $y1 0 -5px $color-0,
+      $-x2 $y2 0 -5px $color-0,
+      $-x1 0 0 -5px $color-0,
+      $-x2 $-y2 0 0 $color-1;
+  }
+}

@@ -1,0 +1,48 @@
+/**
+ * ==============================================
+ * Dot Revolution
+ * ==============================================
+ */
+
+.dot-revolution {
+  position: relative;
+
+  @include dot;
+
+  &::before,
+  &::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+  }
+
+  &::before {
+    left: 0;
+    top: -$dot-spacing;
+
+    @include dot($bg-color: $dot-before-color);
+
+    transform-origin: ($dot-width * .5) ($dot-spacing + $dot-width * .5);
+    animation: dot-revolution 1.4s linear infinite;
+  }
+
+  &::after {
+    left: 0;
+    top: -$dot-spacing * 2;
+
+    @include dot($bg-color: $dot-after-color);
+
+    transform-origin: ($dot-width * .5) ($dot-spacing * 2 + $dot-width * .5);
+    animation: dot-revolution 1s linear infinite;
+  }
+}
+
+@keyframes dot-revolution {
+  0% {
+    transform: rotateZ(0deg) translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: rotateZ(360deg) translate3d(0, 0, 0);
+  }
+}

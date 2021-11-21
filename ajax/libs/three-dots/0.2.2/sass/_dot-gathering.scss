@@ -1,0 +1,68 @@
+/**
+ * ==============================================
+ * Experimental: Gooey Effect
+ * Dot Gathering
+ * ==============================================
+ */
+
+$dot-color-hsl: hsl(0, 100%, 0%);
+
+$d: 50px;
+
+.dot-gathering {
+  position: relative;
+
+  @include dot(
+    $width: 12px,
+    $height: 12px,
+    $radius: 6px,
+    $bg-color: $dot-color-hsl,
+    $color: transparent
+  );
+
+  margin: -1px 0;
+  filter: blur(2px);
+
+  &::before,
+  &::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: -$d;
+
+    @include dot(
+      $width: 12px,
+      $height: 12px,
+      $radius: 6px,
+      $bg-color: $dot-color-hsl,
+      $color: transparent
+    );
+
+    opacity: 0;
+    filter: blur(2px);
+    animation: dot-gathering 2s infinite ease-in;
+  }
+
+  &::after {
+    animation-delay: .5s;
+  }
+}
+
+@keyframes dot-gathering {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+
+  35%,
+  60% {
+    opacity: 1;
+    transform: translateX($d);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX($d * 2);
+  }
+}

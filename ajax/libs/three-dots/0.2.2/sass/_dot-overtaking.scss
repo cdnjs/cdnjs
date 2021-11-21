@@ -1,0 +1,65 @@
+/**
+ * ==============================================
+ * Experimental: Gooey Effect
+ * Dot Overtaking
+ * ==============================================
+ */
+
+$dot-color-hsl: hsl(0, 100%, 0%);
+
+.dot-overtaking {
+  position: relative;
+
+  @include dot(
+    $width: 12px,
+    $height: 12px,
+    $radius: 6px,
+    $bg-color: transparent,
+    $color: $dot-color-hsl
+  );
+
+  margin: -1px 0;
+  box-shadow: 0 -20px 0 0;
+  filter: blur(2px);
+  animation: dot-overtaking 2s infinite cubic-bezier(.2, .6, .8, .2);
+
+  &::before,
+  &::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    @include dot(
+      $width: 12px,
+      $height: 12px,
+      $radius: 6px,
+      $bg-color: transparent,
+      $color: $dot-color-hsl
+    );
+
+    box-shadow: 0 -20px 0 0;
+    filter: blur(2px);
+  }
+
+  &::before {
+    animation: dot-overtaking 2s infinite cubic-bezier(.2, .6, .8, .2);
+    animation-delay: .3s;
+  }
+
+  &::after {
+    animation: dot-overtaking 1.5s infinite cubic-bezier(.2, .6, .8, .2);
+    animation-delay: .6s;
+  }
+}
+
+@keyframes dot-overtaking {
+  0% {
+    transform: rotateZ(0deg);
+  }
+
+  100% {
+    transform: rotateZ(360deg);
+  }
+}

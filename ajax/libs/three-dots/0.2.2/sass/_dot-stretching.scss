@@ -1,0 +1,82 @@
+/**
+ * ==============================================
+ * Dot Stretching
+ * ==============================================
+ */
+
+$ratio1: .8;
+$ratio2: .7;
+
+.dot-stretching {
+  position: relative;
+
+  @include dot;
+
+  transform: scale(1.25, 1.25);
+  animation: dot-stretching 2s infinite ease-in;
+
+  &::before,
+  &::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0;
+  }
+
+  &::before {
+    @include dot($bg-color: $dot-before-color);
+
+    animation: dot-stretching-before 2s infinite ease-in;
+  }
+
+  &::after {
+    @include dot($bg-color: $dot-after-color);
+
+    animation: dot-stretching-after 2s infinite ease-in;
+  }
+}
+
+@keyframes dot-stretching {
+  0% {
+    transform: scale(1.25, 1.25);
+  }
+
+  50%,
+  60% {
+    transform: scale($ratio1, $ratio1);
+  }
+
+  100% {
+    transform: scale(1.25, 1.25);
+  }
+}
+
+@keyframes dot-stretching-before {
+  0% {
+    transform: translate(0) scale($ratio2, $ratio2);
+  }
+
+  50%,
+  60% {
+    transform: translate(-20px) scale(1, 1);
+  }
+
+  100% {
+    transform: translate(0) scale($ratio2, $ratio2);
+  }
+}
+
+@keyframes dot-stretching-after {
+  0% {
+    transform: translate(0) scale($ratio2, $ratio2);
+  }
+
+  50%,
+  60% {
+    transform: translate(20px) scale(1, 1);
+  }
+
+  100% {
+    transform: translate(0) scale($ratio2, $ratio2);
+  }
+}

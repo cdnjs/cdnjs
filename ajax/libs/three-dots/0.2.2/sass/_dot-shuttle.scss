@@ -1,0 +1,68 @@
+/**
+ * ==============================================
+ * Experimental: Gooey Effect
+ * Dot Shuttle
+ * ==============================================
+ */
+
+$d: 3 * $dot-spacing;
+$dot-color-hsl: hsl(0, 100%, 0%);
+
+.dot-shuttle {
+  position: relative;
+  left: -$dot-spacing;
+
+  @include dot(
+    $width: 12px,
+    $height: 12px,
+    $radius: 6px,
+    $bg-color: $dot-color-hsl,
+    $color: transparent
+  );
+
+  margin: -1px 0;
+  filter: blur(2px);
+
+  &::before,
+  &::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0;
+
+    @include dot(
+      $width: 12px,
+      $height: 12px,
+      $radius: 6px,
+      $bg-color: $dot-color-hsl,
+      $color: transparent
+    );
+
+    filter: blur(2px);
+  }
+
+  &::before {
+    left: $dot-spacing;
+    animation: dot-shuttle 2s infinite ease-out;
+  }
+
+  &::after {
+    left: 2 * $dot-spacing;
+  }
+}
+
+@keyframes dot-shuttle {
+  0%,
+  50%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-$d);
+  }
+
+  75% {
+    transform: translateX($d);
+  }
+}
