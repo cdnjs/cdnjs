@@ -1,0 +1,1 @@
+module.exports={title:"Accenture",slug:"accenture",get svg(){return'<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Accenture</title><path d="'+this.path+'"/></svg>'},path:"M23.297 14.74L.434 24v-5.263L16.8 12.11l6.497 2.631zm.27-5.371L.433 0v5.263l23.132 9.368V9.37z",source:"https://www.accenture.com/",hex:"A100FF",guidelines:void 0,license:void 0};

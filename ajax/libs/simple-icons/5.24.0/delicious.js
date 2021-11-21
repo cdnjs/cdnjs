@@ -1,0 +1,1 @@
+module.exports={title:"del.icio.us",slug:"delicious",get svg(){return'<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>del.icio.us</title><path d="'+this.path+'"/></svg>'},path:"M12 12H0v12h12V12zM24 0H12v12h12V0z",source:"http://del.icio.us/",hex:"0000FF",guidelines:void 0,license:void 0};
