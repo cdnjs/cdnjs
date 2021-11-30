@@ -69,7 +69,6 @@ cdnjs wouldn't be the success that it is today without our sponsors' kind suppor
 * [Cloudflare](https://www.cloudflare.com/?utm_source=cdnjs&utm_medium=link&utm_campaign=cdnjs_readme)
 * [Algolia](https://www.algolia.com/?utm_source=cdnjs&utm_medium=link&utm_campaign=cdnjs_readme)
 * [DigitalOcean](https://www.digitalocean.com/?utm_source=cdnjs&utm_medium=link&utm_campaign=cdnjs_readme)
-* [Heroku](https://www.heroku.com/?utm_source=cdnjs&utm_medium=link&utm_campaign=cdnjs_readme)
 * [Statuspage](https://www.statuspage.io/?utm_source=cdnjs&utm_medium=cdnjs_link&utm_campaign=cdnjs_readme)
 * [Sentry](https://sentry.io/welcome/?utm_source=cdnjs&utm_medium=cdnjs_link&utm_campaign=cdnjs_readme)
 * [Lean20](https://lean20.com/?utm_source=cdnjs&utm_medium=cdnjs_link&utm_campaign=cdnjs_readme)
