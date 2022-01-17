@@ -1,0 +1,90 @@
+/**
+ * ==============================================
+ * Dot Floating
+ * ==============================================
+ */
+
+$d-max: 50px;
+$d-min: 12px;
+
+.dot-floating {
+  position: relative;
+
+  @include dot;
+
+  animation: dot-floating 3s infinite cubic-bezier(.15, .6, .9, .1);
+
+  &::before,
+  &::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0;
+  }
+
+  &::before {
+    left: -$d-min;
+
+    @include dot($bg-color: $dot-before-color);
+
+    animation: dot-floating-before 3s infinite ease-in-out;
+  }
+
+  &::after {
+    left: -$d-min * 2;
+
+    @include dot($bg-color: $dot-after-color);
+
+    animation: dot-floating-after 3s infinite cubic-bezier(.4, 0, 1, 1);
+  }
+}
+
+@keyframes dot-floating {
+  0% {
+    left: calc(-50% - #{$dot-width * .5});
+  }
+
+  75% {
+    left: calc(50% + #{$d-max * 2 + $dot-width * .5});
+  }
+
+  100% {
+    left: calc(50% + #{$d-max * 2 + $dot-width * .5});
+  }
+}
+
+@keyframes dot-floating-before {
+  0% {
+    left: -$d-max;
+  }
+
+  50% {
+    left: -$d-min;
+  }
+
+  75% {
+    left: -$d-max;
+  }
+
+  100% {
+    left: -$d-max;
+  }
+}
+
+@keyframes dot-floating-after {
+  0% {
+    left: -$d-max * 2;
+  }
+
+  50% {
+    left: -$d-min * 2;
+  }
+
+  75% {
+    left: -$d-max * 2;
+  }
+
+  100% {
+    left: -$d-max * 2;
+  }
+}

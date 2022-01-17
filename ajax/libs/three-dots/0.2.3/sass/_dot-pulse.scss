@@ -1,0 +1,88 @@
+/**
+ * ==============================================
+ * Dot Pulse
+ * ==============================================
+ */
+
+$left-pos: -9999px;
+$x1: -$left-pos - $dot-spacing;
+$x2: -$left-pos;
+$x3: -$left-pos + $dot-spacing;
+
+.dot-pulse {
+  position: relative;
+  left: $left-pos;
+
+  @include dot;
+
+  box-shadow: $x2 0 0 -5px;
+  animation: dot-pulse 1.5s infinite linear;
+  animation-delay: .25s;
+
+  &::before,
+  &::after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 0;
+
+    @include dot;
+  }
+
+  &::before {
+    box-shadow: $x1 0 0 -5px;
+    animation: dot-pulse-before 1.5s infinite linear;
+    animation-delay: 0s;
+  }
+
+  &::after {
+    box-shadow: $x3 0 0 -5px;
+    animation: dot-pulse-after 1.5s infinite linear;
+    animation-delay: .5s;
+  }
+}
+
+@keyframes dot-pulse-before {
+  0% {
+    box-shadow: $x1 0 0 -5px;
+  }
+
+  30% {
+    box-shadow: $x1 0 0 2px;
+  }
+
+  60%,
+  100% {
+    box-shadow: $x1 0 0 -5px;
+  }
+}
+
+@keyframes dot-pulse {
+  0% {
+    box-shadow: $x2 0 0 -5px;
+  }
+
+  30% {
+    box-shadow: $x2 0 0 2px;
+  }
+
+  60%,
+  100% {
+    box-shadow: $x2 0 0 -5px;
+  }
+}
+
+@keyframes dot-pulse-after {
+  0% {
+    box-shadow: $x3 0 0 -5px;
+  }
+
+  30% {
+    box-shadow: $x3 0 0 2px;
+  }
+
+  60%,
+  100% {
+    box-shadow: $x3 0 0 -5px;
+  }
+}
