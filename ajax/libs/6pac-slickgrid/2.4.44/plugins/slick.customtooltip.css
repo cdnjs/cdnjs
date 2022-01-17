@@ -1,0 +1,42 @@
+.slick-custom-tooltip {
+  position: absolute;
+  background-color: #ffffff;
+  border: 2px solid #acacac;
+  border-radius: 4px;
+  color: inherit;
+  font-size: 7.5pt;
+  padding: 7px;
+  height: auto;
+  width: auto;
+  z-index: 9999;
+  overflow: inherit;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+
+/** 
+ * tooltip arrow styling, arrow styled following this article
+ * https://blog.logrocket.com/creating-beautiful-tooltips-with-only-css/
+ */
+.slick-custom-tooltip.tooltip-arrow::after {
+  content: "";
+  left: 0px;
+  position: absolute;
+  border: transparent;
+  border-style: solid;
+  border-width: 8px; /* arrow size */
+}
+.slick-custom-tooltip.tooltip-arrow.arrow-up::after {
+  top: -16px; /* arrow size, negative(8px * 2) */
+  border-bottom-color: #BFBDBD;
+}
+.slick-custom-tooltip.tooltip-arrow.arrow-down::after {
+  top: 100%;
+  border-top-color: #BFBDBD;
+}
+.slick-custom-tooltip.tooltip-arrow.arrow-left-align::after {
+  margin-left: 9px;
+}
+.slick-custom-tooltip.tooltip-arrow.arrow-right-align::after {
+  margin-left: calc(100% - 16px - 9px); /* arrow size * 2 => 16px, extra margin of 9px */
+}
