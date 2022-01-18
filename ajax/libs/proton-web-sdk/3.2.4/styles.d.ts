@@ -1,0 +1,3 @@
+import { CustomStyleOptions } from './index';
+declare const _default: (customStyleOptions: CustomStyleOptions | undefined) => string;
+export default _default;
