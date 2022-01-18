@@ -1,0 +1,1 @@
+"use strict";var Dict=require("./_dict"),PropertyChanges=require("./listen/property-changes"),MapChanges=require("./listen/map-changes");module.exports=Dict,Object.addEach(Dict.prototype,PropertyChanges.prototype),Object.addEach(Dict.prototype,MapChanges.prototype);

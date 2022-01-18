@@ -1,0 +1,1 @@
+module.exports="undefined"!=typeof WeakMap?WeakMap:require("weak-map");

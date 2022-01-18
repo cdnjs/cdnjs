@@ -1,0 +1,1 @@
+"use strict";var Shim=require("./shim"),FastSet=require("./_fast-set"),PropertyChanges=require("./listen/property-changes");module.exports=FastSet,Object.addEach(FastSet.prototype,PropertyChanges.prototype);
