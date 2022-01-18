@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../src/runtime.ts"],
+  "sourcesContent": ["import { Twind, BaseTheme, TwindConfig, cx, Class } from '@twind/core'\nimport { twind, cssom, observe } from '@twind/core'\n\nlet active: Twind | undefined\n\nexport function runtime<Theme extends BaseTheme = BaseTheme>(\n  config: TwindConfig<Theme>,\n  target?: HTMLElement,\n): Twind<Theme, CSSStyleSheet> {\n  active?.destroy()\n\n  return (active = observe(twind(config, cssom()), target))\n}\n\nexport function apply(strings: TemplateStringsArray | Class, ...interpolations: Class[]): string {\n  return '~{' + cx(strings, ...interpolations) + '}'\n}\n\nexport function tw(strings: TemplateStringsArray | Class, ...interpolations: Class[]): string {\n  const tokens = cx(strings, ...interpolations)\n  return active ? active.inject(tokens) : tokens\n}\n\n// TODO theme function\nexport function theme() {\n  // return active?.theme(...args)\n}\n"],
+  "mappings": ";AAAA;AACA;AAEA,IAAI;AAEG,iBACL,QACA,QAC6B;AAC7B,UAAQ;AAER,SAAQ,SAAS,QAAQ,MAAM,QAAQ,UAAU;AAAA;AAG5C,eAAe,YAA0C,gBAAiC;AAC/F,SAAO,OAAO,GAAG,SAAS,GAAG,kBAAkB;AAAA;AAG1C,YAAY,YAA0C,gBAAiC;AAC5F,QAAM,SAAS,GAAG,SAAS,GAAG;AAC9B,SAAO,SAAS,OAAO,OAAO,UAAU;AAAA;AAInC,iBAAiB;AAAA;",
+  "names": []
+}
