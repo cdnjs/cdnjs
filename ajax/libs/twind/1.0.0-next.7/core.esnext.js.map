@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/core.ts"],
+  "sourcesContent": ["/* eslint-disable @typescript-eslint/no-unsafe-return */\n/* eslint-disable @typescript-eslint/no-explicit-any */\nimport type {\n  Twind,\n  BaseTheme,\n  TwindConfig,\n  TwindUserConfig,\n  Preset,\n  ExtractThemes,\n  Sheet,\n} from '@twind/core'\n\nimport { init, autoInit } from '@twind/runtime'\n\nexport * from '@twind/core'\nexport { tw, theme } from '@twind/runtime'\n\nconst cancelAutoInit = autoInit(setup)\n\nexport function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = CSSStyleSheet | string[]>(\n  config?: TwindConfig<Theme>,\n  target?: HTMLElement,\n  sheet?: Sheet<SheetTarget>,\n): Twind<Theme, SheetTarget>\n\nexport function setup<\n  Theme = BaseTheme,\n  Presets extends Preset<any>[] = Preset[],\n  SheetTarget = CSSStyleSheet | string[],\n>(\n  config?: TwindUserConfig<Theme, Presets>,\n  target?: HTMLElement,\n  sheet?: Sheet<SheetTarget>,\n): Twind<BaseTheme & ExtractThemes<Theme, Presets>, SheetTarget>\n\nexport function setup(\n  config: TwindConfig<any> | TwindUserConfig<any> = {},\n  target?: HTMLElement,\n  sheet?: Sheet,\n): Twind {\n  cancelAutoInit()\n\n  return init(config as TwindConfig<any>, target, sheet)\n}\n"],
+  "mappings": ";AAYA;AAEA;AACA;AAEA,IAAM,iBAAiB,SAAS;AAkBzB,eACL,SAAkD,IAClD,QACA,OACO;AACP;AAEA,SAAO,KAAK,QAA4B,QAAQ;AAAA;",
+  "names": []
+}
