@@ -1,0 +1,118 @@
+{
+  "name": "twind",
+  "version": "1.0.0-next.4",
+  "description": "tailwindcss compat based on twind",
+  "homepage": "https://twind.dev",
+  "bugs": {
+    "url": "https://github.com/tw-in-js/twind/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tw-in-js/twind.git",
+    "directory": "packages/twind"
+  },
+  "keywords": [
+    "twind",
+    "tw-in-js",
+    "tailwind",
+    "tailwindcss",
+    "tailwind-in-js"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Sascha Tandel",
+    "url": "https://github.com/sastan"
+  },
+  "engines": {
+    "node": ">=12.4"
+  },
+  "publishConfig": {
+    "tag": "next",
+    "access": "public",
+    "directory": "dist"
+  },
+  "contributors": [
+    {
+      "name": "Luke Jackson",
+      "url": "lukejacksonn.github.io"
+    },
+    {
+      "name": "Sascha Tandel",
+      "url": "https://github.com/sastan"
+    }
+  ],
+  "type": "module",
+  "main": "./twind.cjs",
+  "exports": {
+    ".": {
+      "esnext": "./twind.esnext.js",
+      "module": "./twind.js",
+      "script": "./twind.global.js",
+      "types": "./twind.d.ts",
+      "node": {
+        "module": "./twind.js",
+        "import": "./twind.mjs",
+        "require": "./twind.cjs"
+      },
+      "default": "./twind.js"
+    },
+    "./package.json": "./package.json",
+    "./core": {
+      "esnext": "./core.esnext.js",
+      "module": "./core.js",
+      "script": "./core.global.js",
+      "types": "./core.d.ts",
+      "node": {
+        "module": "./core.js",
+        "import": "./core.mjs",
+        "require": "./core.cjs"
+      },
+      "default": "./core.js"
+    },
+    "./mini": {
+      "esnext": "./mini.esnext.js",
+      "module": "./mini.js",
+      "script": "./mini.global.js",
+      "types": "./mini.d.ts",
+      "node": {
+        "module": "./mini.js",
+        "import": "./mini.mjs",
+        "require": "./mini.cjs"
+      },
+      "default": "./mini.js"
+    },
+    "./colors": {
+      "esnext": "./colors.esnext.js",
+      "module": "./colors.js",
+      "script": "./colors.global.js",
+      "types": "./colors.d.ts",
+      "node": {
+        "module": "./colors.js",
+        "import": "./colors.mjs",
+        "require": "./colors.cjs"
+      },
+      "default": "./colors.js"
+    }
+  },
+  "sideEffects": true,
+  "dependencies": {
+    "@twind/core": "1.0.0-next.3",
+    "@twind/preset-autoprefix": "1.0.0-next.3",
+    "@twind/preset-mini": "1.0.0-next.3",
+    "@twind/preset-tailwind": "1.0.0-next.3"
+  },
+  "peerDependencies": {
+    "typescript": "^4.4.0"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "module": "./twind.js",
+  "esnext": "./twind.esnext.js",
+  "unpkg": "./twind.global.js",
+  "jsdelivr": "./twind.global.js",
+  "types": "./twind.d.ts",
+  "readme": "# twind\n\n---\n\n## READ THIS FIRST!\n\n**Twind v1 is still in beta. Expect bugs!**\n\nTwind v1 is a complete rewrite aiming to be compatible with Tailwind v3 classes\n\n---\n\nTailwind right in the browser without any build step.\n\n## CDN Usage\n\nAdd this line to your `index.html`:\n\n```html\n<script src=\"https://cdn.jsdelivr.net/npm/twind@next\"></script>\n```\n\nTo configure Twind (optional):\n\n```html\n<script>\n  twind.setup({\n    presets: [\n      // custom presets...\n    ],\n    theme: {\n      extend: {\n        colors: {\n          clifford: '#da373d',\n        }\n      }\n    }\n    rules: [\n      // custom rules...\n    ],\n    // ...\n  })\n</script>\n```\n\nBy default, [@twind/autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix) and [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind) will be applied.\n\n### CDN Builds\n\n#### Core\n\nWithout any preset:\n\n```html\n<script src=\"https://cdn.jsdelivr.net/npm/twind@next/core.global.js\"></script>\n```\n\n#### Tailwind\n\nWith [@twind/autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix) and [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind):\n\n```html\n<script src=\"https://cdn.jsdelivr.net/npm/twind@next\"></script>\n```\n\n#### Mini\n\nWith [@twind/autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix) and [@twind/preset-mini](https://www.npmjs.com/package/@twind/preset-mini):\n\n```html\n<script src=\"https://cdn.jsdelivr.net/npm/twind@next/mini.global.js\"></script>\n```\n\n## Bundler Usage\n\n```sh\nnpm i twind\n```\n\n```js\nimport { setup } from 'twind'\n\nsetup({\n  /* options */\n})\n```\n\n## API\n\nEverything from [@twind/core](https://www.npmjs.com/package/@twind/core) is available.\n\n### setup\n\nCan be called as many times as you want.\n\n### cx (from [@twind/core](https://www.npmjs.com/package/@twind/core))\n\n```js\nimport { cx } from 'twind'\n\n// Set a className\nelement.className = cx`\n  underline\n  /* multi\n    line\n    comment\n  */\n  hover:focus:!{\n    sm:{italic why}\n    lg:-{px}\n    -mx-1\n  }\n  // Position\n  !top-1 !-bottom-2\n  text-{xl black}\n`\n```\n\n### tw\n\nTDB\n\n### apply\n\nTDB\n\n### theme\n\nTDB\n"
+}

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/core.ts"],
+  "sourcesContent": ["/* eslint-disable @typescript-eslint/no-unsafe-return */\n/* eslint-disable @typescript-eslint/no-explicit-any */\nimport type {\n  Twind,\n  BaseTheme,\n  TwindConfig,\n  TwindUserConfig,\n  Preset,\n  ExtractThemes,\n} from '@twind/core'\n\nimport { runtime } from './runtime'\n\nexport * from '@twind/core'\nexport { apply, tw, theme } from './runtime'\n\nif (typeof document != 'undefined' && document.currentScript) {\n  // running as global script eg non module\n  // invoke on next tick to allow other setup methods to run\n  // eslint-disable-next-line no-var\n  var autoSetupTimeoutRef = setTimeout(setup)\n}\n\nexport function setup<Theme extends BaseTheme = BaseTheme>(\n  config: TwindConfig<Theme>,\n  target?: HTMLElement,\n): Twind<Theme, CSSStyleSheet>\n\nexport function setup<Theme = BaseTheme, Presets extends Preset<any>[] = Preset[]>(\n  config: TwindUserConfig<Theme, Presets>,\n  target?: HTMLElement,\n): Twind<BaseTheme & ExtractThemes<Theme, Presets>, CSSStyleSheet>\n\nexport function setup(\n  config: TwindConfig<any> | TwindUserConfig<any> = {},\n  target?: HTMLElement,\n): Twind {\n  clearTimeout(autoSetupTimeoutRef)\n\n  return runtime(config as TwindConfig<any>, target)\n}\n"],
+  "mappings": ";;;;;;;;AAaA;AAGA,IAAI,OAAO,YAAY,eAAe,SAAS,eAAe;AAIxD,wBAAsB,WAAW;AAAA;AAAjC;AAaC,eACL,SAAkD,IAClD,QACO;AACP,eAAa;AAEb,SAAO,QAAQ,QAA4B;AAAA;",
+  "names": []
+}
