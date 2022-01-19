@@ -1,0 +1,108 @@
+{
+  "name": "twind",
+  "version": "1.0.0-next.16",
+  "description": "tailwindcss compat based on twind",
+  "type": "module",
+  "homepage": "https://twind.dev",
+  "bugs": {
+    "url": "https://github.com/tw-in-js/twind/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tw-in-js/twind.git",
+    "directory": "packages/twind"
+  },
+  "keywords": [
+    "twind",
+    "tw-in-js",
+    "tailwind",
+    "tailwindcss",
+    "tailwind-in-js"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Sascha Tandel",
+    "url": "https://github.com/sastan"
+  },
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/twind"
+  },
+  "engines": {
+    "node": ">=12.4"
+  },
+  "dependencies": {
+    "@swc/helpers": "^0.3.2",
+    "@twind/core": "1.0.0-next.14",
+    "@twind/preset-autoprefix": "1.0.0-next.14",
+    "@twind/preset-tailwind": "1.0.0-next.15",
+    "@twind/runtime": "1.0.0-next.14"
+  },
+  "publishConfig": {
+    "tag": "next",
+    "access": "public",
+    "directory": "dist"
+  },
+  "contributors": [
+    {
+      "name": "Luke Jackson",
+      "url": "lukejacksonn.github.io"
+    },
+    {
+      "name": "Sascha Tandel",
+      "url": "https://github.com/sastan"
+    }
+  ],
+  "main": "./twind.cjs",
+  "exports": {
+    ".": {
+      "esnext": "./twind.esnext.js",
+      "module": "./twind.js",
+      "script": "./twind.global.js",
+      "types": "./twind.d.ts",
+      "node": {
+        "import": "./twind.mjs",
+        "require": "./twind.cjs"
+      },
+      "default": "./twind.js"
+    },
+    "./package.json": "./package.json",
+    "./cdn": {
+      "esnext": "./cdn.esnext.js",
+      "module": "./cdn.js",
+      "script": "./cdn.global.js",
+      "types": "./cdn.d.ts",
+      "node": {
+        "import": "./cdn.mjs",
+        "require": "./cdn.cjs"
+      },
+      "default": "./cdn.js"
+    },
+    "./core": {
+      "esnext": "./core.esnext.js",
+      "module": "./core.js",
+      "script": "./core.global.js",
+      "types": "./core.d.ts",
+      "node": {
+        "import": "./core.mjs",
+        "require": "./core.cjs"
+      },
+      "default": "./core.js"
+    }
+  },
+  "sideEffects": false,
+  "peerDependencies": {
+    "typescript": "^4.4.0"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "module": "./twind.js",
+  "esnext": "./twind.esnext.js",
+  "unpkg": "./twind.global.js",
+  "jsdelivr": "./twind.global.js",
+  "types": "./twind.d.ts",
+  "readme": "# twind\n\n---\n\n## READ THIS FIRST!\n\n**Twind v1 is still in beta. Expect bugs!**\n\nTwind v1 is a complete rewrite aiming to be compatible with Tailwind v3 classes\n\n---\n\nTailwind right in the browser without any build step.\n\n## Usage\n\n```sh\nnpm i twind@next\n```\n\n```js\nimport { setup } from 'twind'\n\n// You must call setup atleast once, but can call it multiple times\nsetup({\n  /* options */\n})\n```\n\nIncase you are not using SSR to inject the pre-computed styles apply the following pattern to prevent [FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content):\n\n```html\n<body class=\"!block\" style=\"display: none\">\n  <!-- ... -->\n</body>\n```\n\n**Script tag without a build step**\n\nAdd this line to your `index.html`:\n\n```html\n<head>\n  <!-- ... -->\n  <script src=\"https://cdn.jsdelivr.net/npm/twind@next\" crossorigin></script>\n  <!-- ... -->\n</head>\n```\n\nTo configure Twind add a script block _after_ the previous one (optional):\n\n```html\n<script>\n  twind.setup({\n    presets: [\n      // custom presets...\n    ],\n    theme: {\n      extend: {\n        colors: {\n          clifford: '#da373d',\n        },\n      },\n    },\n    rules: [\n      // custom rules...\n    ],\n    // ...\n  })\n</script>\n```\n\n**Presets**\n\n- [@twind/preset-autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix)\n- [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind)\n\nTo add another preset add its script after the current one:\n\n```html\n<head>\n  <!-- ... -->\n  <script src=\"https://cdn.jsdelivr.net/npm/twind@next\" crossorigin></script>\n  <script src=\"https://cdn.jsdelivr.net/npm/@twind/preset-ext@next\" crossorigin></script>\n  <script>\n    twind.setup({\n      presets: [twind_presetExt()],\n      // ...\n    })\n  </script>\n  <!-- ... -->\n</head>\n```\n\n**API**: accessible through the global `twind` variable\n\n- [`twind.setup`](#setupconfig--sheet--target)\n- `twind.tw` — from [@twind/runtime](https://www.npmjs.com/package/@twind/runtime#tw)\n- `twind.*` — everything from [@twind/core](https://www.npmjs.com/package/@twind/core#api)\n\n### `twind/cdn`\n\nA drop-in replacement for Tailwind CSS Play CDN that is almost 6 times smaller (96.4kb vs 16.9kB).\n\n```js\nimport { setup } from 'twind/play-cdn'\n```\n\n```html\n<script src=\"https://cdn.jsdelivr.net/npm/twind@next/cdn.global.js\" crossorigin></script>\n```\n\n**Presets**\n\n- [@twind/preset-autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix)\n- [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind)\n\n**API** — accessible through the global `twind` variable\n\n- [`twind.setup`](#setupconfig--sheet--target)\n- `twind.tw` — from [@twind/runtime](https://www.npmjs.com/package/@twind/runtime#tw)\n\n### `twind/core`\n\n```js\nimport { setup } from 'twind/core'\n```\n\n```html\n<script src=\"https://cdn.jsdelivr.net/npm/twind@next/core.global.js\" crossorigin></script>\n```\n\n**Presets**\n\nNone\n\n**API** — accessible through the global `twind` variable\n\n- [`twind.setup`](#setupconfig--sheet--target)\n- `twind.tw` — from [@twind/runtime](https://www.npmjs.com/package/@twind/runtime#tw)\n- `twind.*` — everything from [@twind/core](https://www.npmjs.com/package/@twind/core#api)\n\n## API\n\n### `setup(config [, sheet [, target]])`\n\nCan be called as many times as you want.\n\n```js\nimport { setup } from 'twind'\n\n// can be called as many times as you want.\nconst tw = setup({\n  /* config */\n})\n```\n\n### `tw(...tokens)` — the current Twind instance\n\n```js\nimport { tw } from 'twind'\n\ntw`underline`\ntw({ underline: true })\n\ntw.theme('colors.blue.500', 'blue')\n```\n\n### `extract(html, tw)`\n\nUsed for static HTML processing (usually to provide SSR support for your javascript-powered web apps) — powered by [consume(html, tw)](#consumehtml-tw)\n\n**Note**: This clears the Twind instance before processing the HTML.\n\n```js\nimport { setup, extract, tw } from 'twind'\n\n// can be in a different file — but should be called at least once\nsetup({\n  /* config */\n})\n\nfunction render() {\n  const { html, css } = extract(renderApp(), tw)\n\n  // inject as last element into the head\n  return html.replace('</head>', `<style data-twind>${css}</style></head>`)\n}\n```\n\n### `consume(html, tw)`\n\nUsed for static HTML processing (usually to provide SSR support for your javascript-powered web apps)\n\n1. parse the markup and process element classes with the provided Twind instance\n2. update the class attributes _if_ necessary\n3. return the HTML string with the final element classes\n\n```js\nimport { setup, tw, consume, stringify } from 'twind'\n\n// can be in a different file — but should be called at least once\nsetup({\n  /* config */\n})\n\nfunction render() {\n  const html = renderApp()\n\n  // clear all styles\n  tw.clear()\n\n  // generated markup\n  const markup = comsume(html, tw)\n\n  // create CSS\n  const css = stringify(tw.target)\n\n  // inject as last element into the head\n  return markup.replace('</head>', `<style data-twind>${css}</style></head>`)\n}\n```\n"
+}
