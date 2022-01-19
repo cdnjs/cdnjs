@@ -1,0 +1,564 @@
+/*!
+ * DevExpress Diagram (dx-diagram)
+ * Version: 2.1.47
+ * Build date: Wed Jan 19 2022
+ * 
+ * Copyright (c) 2012 - 2022 Developer Express Inc. ALL RIGHTS RESERVED
+ * Read about DevExpress licensing here: https://www.devexpress.com/Support/EULAs
+ */
+.dxdi-control {
+  overflow: visible;
+  box-sizing: border-box;
+  position: relative; }
+  .dxdi-control.dxdi-read-only .dxdi-canvas.dxdi-drag-scroll {
+    cursor: grab !important; }
+    .dxdi-control.dxdi-read-only .dxdi-canvas.dxdi-drag-scroll .shape,
+    .dxdi-control.dxdi-read-only .dxdi-canvas.dxdi-drag-scroll .shape-expand-btn,
+    .dxdi-control.dxdi-read-only .dxdi-canvas.dxdi-drag-scroll text {
+      cursor: grab; }
+  .dxdi-control.dxdi-read-only .dxdi-canvas .shape,
+  .dxdi-control.dxdi-read-only .dxdi-canvas .shape-expand-btn,
+  .dxdi-control.dxdi-read-only .dxdi-canvas text {
+    cursor: default; }
+  .dxdi-control .dxdi-canvas {
+    display: block;
+    background-color: #d9d9d9;
+    transform-origin: 0 0;
+    overflow: hidden;
+    /* Fix excess scroll size in IE */ }
+
+.dxdi-canvas.dxdi-drag-scroll {
+  cursor: grab !important; }
+  .dxdi-canvas.dxdi-drag-scroll .shape,
+  .dxdi-canvas.dxdi-drag-scroll .shape .shape-expand-btn,
+  .dxdi-canvas.dxdi-drag-scroll .connector,
+  .dxdi-canvas.dxdi-drag-scroll .connection-point,
+  .dxdi-canvas.dxdi-drag-scroll .connector text,
+  .dxdi-canvas.dxdi-drag-scroll .connector-side-mark.vertical,
+  .dxdi-canvas.dxdi-drag-scroll .connector-side-mark.horizontal,
+  .dxdi-canvas.dxdi-drag-scroll .selection-mark[data-type="9"][data-value="1"],
+  .dxdi-canvas.dxdi-drag-scroll .selection-mark[data-type="9"][data-value="2"],
+  .dxdi-canvas.dxdi-drag-scroll .selection-mark[data-type="9"][data-value="3"],
+  .dxdi-canvas.dxdi-drag-scroll .selection-mark[data-type="9"][data-value="4"],
+  .dxdi-canvas.dxdi-drag-scroll .selection-mark[data-type="9"][data-value="5"],
+  .dxdi-canvas.dxdi-drag-scroll .selection-mark[data-type="9"][data-value="6"],
+  .dxdi-canvas.dxdi-drag-scroll .selection-mark[data-type="9"][data-value="7"],
+  .dxdi-canvas.dxdi-drag-scroll .selection-mark[data-type="9"][data-value="8"],
+  .dxdi-canvas.dxdi-drag-scroll .selection-mark[data-type="4"],
+  .dxdi-canvas.dxdi-drag-scroll .selection-mark[data-type="5"] {
+    cursor: grab; }
+
+.dxdi-canvas * {
+  user-select: none; }
+
+.dxdi-canvas text {
+  font-family: arial, helvetica, sans-serif;
+  font-size: 10pt; }
+
+.dxdi-canvas .page {
+  fill: white; }
+
+.dxdi-canvas .pages-grid-line {
+  fill: none;
+  stroke: rgba(0, 0, 0, 0.15);
+  stroke-dasharray: 8;
+  stroke-width: 2; }
+
+.dxdi-canvas .grid-outer-line,
+.dxdi-canvas .grid-inner-line {
+  fill: none; }
+
+.dxdi-canvas .grid-outer-line {
+  stroke: rgba(0, 0, 0, 0.1); }
+
+.dxdi-canvas .grid-inner-line {
+  stroke: rgba(0, 0, 0, 0.05); }
+
+.dxdi-canvas .shape,
+.dxdi-canvas .toolbox-item {
+  pointer-events: bounding-box; }
+  .dxdi-canvas .shape rect,
+  .dxdi-canvas .shape path,
+  .dxdi-canvas .shape line,
+  .dxdi-canvas .shape ellipse,
+  .dxdi-canvas .toolbox-item rect,
+  .dxdi-canvas .toolbox-item path,
+  .dxdi-canvas .toolbox-item line,
+  .dxdi-canvas .toolbox-item ellipse {
+    fill: white;
+    stroke-width: 2;
+    stroke: black; }
+  .dxdi-canvas .shape text,
+  .dxdi-canvas .toolbox-item text {
+    fill: black;
+    text-anchor: middle; }
+  .dxdi-canvas .shape rect.selector,
+  .dxdi-canvas .toolbox-item rect.selector {
+    stroke-width: 48;
+    stroke: transparent;
+    fill: transparent;
+    pointer-events: initial; }
+
+.dxdi-canvas .shape.not-valid rect,
+.dxdi-canvas .shape.not-valid path,
+.dxdi-canvas .shape.not-valid line,
+.dxdi-canvas .shape.not-valid ellipse {
+  stroke: red; }
+
+.dxdi-canvas .shape {
+  cursor: move; }
+  .dxdi-canvas .shape.text-input > text {
+    display: none; }
+  .dxdi-canvas .shape.container > rect:first-child {
+    fill: none; }
+  .dxdi-canvas .shape .shape-expand-btn {
+    cursor: pointer; }
+    .dxdi-canvas .shape .shape-expand-btn > rect,
+    .dxdi-canvas .shape .shape-expand-btn > path {
+      stroke-dasharray: initial !important; }
+    .dxdi-canvas .shape .shape-expand-btn > path {
+      stroke-width: 2 !important; }
+  .dxdi-canvas .shape .dxdi-image .dxdi-spinner {
+    animation: loading-spinner 1s linear infinite; }
+    .dxdi-canvas .shape .dxdi-image .dxdi-spinner ellipse {
+      stroke: black;
+      stroke-opacity: 0.2; }
+    .dxdi-canvas .shape .dxdi-image .dxdi-spinner path {
+      stroke: #fd7010;
+      stroke-linecap: round; }
+    .dxdi-canvas .shape .dxdi-image .dxdi-spinner ellipse,
+    .dxdi-canvas .shape .dxdi-image .dxdi-spinner path {
+      fill: none;
+      stroke-width: 5; }
+
+@keyframes loading-spinner {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
+  .dxdi-canvas .shape .dxdi-image .dxdi-user .dxdi-background {
+    fill: black;
+    opacity: 0.2;
+    stroke: none; }
+  .dxdi-canvas .shape .dxdi-image .dxdi-user ellipse,
+  .dxdi-canvas .shape .dxdi-image .dxdi-user path {
+    fill: white;
+    stroke: none; }
+  .dxdi-canvas .shape .dxdi-image .dxdi-warning ellipse {
+    stroke: none;
+    fill: #ee1616; }
+  .dxdi-canvas .shape .dxdi-image .dxdi-warning rect {
+    stroke: none;
+    fill: white; }
+
+.dxdi-canvas .shape.locked,
+.dxdi-canvas .shape.locked + .container-children .shape {
+  cursor: inherit !important; }
+  .dxdi-canvas .shape.locked .shape-expand-btn,
+  .dxdi-canvas .shape.locked + .container-children .shape .shape-expand-btn {
+    cursor: inherit !important; }
+
+.dxdi-canvas .container-children .shape .selector {
+  stroke-width: 8; }
+
+.dxdi-canvas .toolbox-item {
+  cursor: pointer; }
+  .dxdi-canvas .toolbox-item .selector {
+    stroke-width: 0 !important; }
+
+.dxdi-canvas .connector path,
+.dxdi-canvas .connector line {
+  stroke-width: 2;
+  stroke: black;
+  stroke-linejoin: round;
+  pointer-events: stroke; }
+
+.dxdi-canvas .connector path:not(.outlined-line-ending):not(.filled-line-ending) {
+  fill: none !important; }
+
+.dxdi-canvas .connector path.outlined-line-ending {
+  fill: white; }
+
+.dxdi-canvas .connector path.filled-line-ending {
+  fill: black; }
+
+.dxdi-canvas .connector path.selector,
+.dxdi-canvas .connector line.selector {
+  stroke-width: 16;
+  stroke: transparent; }
+
+.dxdi-canvas .connector text {
+  cursor: move;
+  fill: black;
+  text-anchor: middle; }
+
+.dxdi-canvas .connector .text-filter-flood {
+  flood-color: white; }
+
+.dxdi-canvas .connector.not-valid path,
+.dxdi-canvas .connector.not-valid line {
+  stroke: red; }
+
+.dxdi-canvas .connector.can-move {
+  cursor: move; }
+
+.dxdi-canvas .selection-mark,
+.dxdi-canvas .geometry-mark,
+.dxdi-canvas .connection-point,
+.dxdi-canvas .connection-mark,
+.dxdi-canvas .connector-point-mark,
+.dxdi-canvas .connector-side-mark {
+  fill: white;
+  stroke-width: 2; }
+
+.dxdi-canvas .selection-mark {
+  stroke: dodgerblue; }
+
+.dxdi-canvas .selection-mark[data-type="9"][data-value="1"] {
+  cursor: nw-resize; }
+
+.dxdi-canvas .selection-mark[data-type="9"][data-value="2"] {
+  cursor: ne-resize; }
+
+.dxdi-canvas .selection-mark[data-type="9"][data-value="3"] {
+  cursor: se-resize; }
+
+.dxdi-canvas .selection-mark[data-type="9"][data-value="4"] {
+  cursor: sw-resize; }
+
+.dxdi-canvas .selection-mark[data-type="9"][data-value="5"] {
+  cursor: n-resize; }
+
+.dxdi-canvas .selection-mark[data-type="9"][data-value="6"] {
+  cursor: e-resize; }
+
+.dxdi-canvas .selection-mark[data-type="9"][data-value="7"] {
+  cursor: s-resize; }
+
+.dxdi-canvas .selection-mark[data-type="9"][data-value="8"] {
+  cursor: w-resize; }
+
+.dxdi-canvas .selection-mark[data-type="4"],
+.dxdi-canvas .selection-mark[data-type="5"] {
+  cursor: move; }
+
+.dxdi-canvas .locked-selection-mark {
+  fill: white;
+  stroke-width: 1;
+  stroke: #666; }
+
+.dxdi-canvas .geometry-mark {
+  cursor: pointer;
+  stroke: goldenrod; }
+
+.dxdi-canvas .container-target,
+.dxdi-canvas .connection-target {
+  fill: transparent;
+  stroke: orchid;
+  stroke-width: 2;
+  pointer-events: none; }
+
+.dxdi-canvas .connection-point {
+  cursor: crosshair;
+  stroke: orchid; }
+
+.dxdi-canvas .connection-point.not-valid {
+  stroke: grey;
+  display: none; }
+
+.dxdi-canvas .connection-mark {
+  cursor: crosshair;
+  stroke: orchid; }
+
+.dxdi-canvas .connection-point.selector,
+.dxdi-canvas .connection-mark.selector {
+  stroke-width: 10px;
+  stroke: transparent;
+  fill: transparent; }
+
+.dxdi-canvas .connection-point.active {
+  fill: orchid; }
+
+.dxdi-canvas .connection-mark.active {
+  fill: orchid; }
+
+.dxdi-canvas .connector-point-mark,
+.dxdi-canvas .connector-side-mark {
+  cursor: move;
+  stroke: dodgerblue; }
+
+.dxdi-canvas .connector-point-mark.disabled {
+  cursor: default;
+  display: none; }
+
+.dxdi-canvas .connector-side-mark {
+  fill: dodgerblue; }
+
+.dxdi-canvas .connector-side-mark.vertical {
+  cursor: col-resize; }
+
+.dxdi-canvas .connector-side-mark.horizontal {
+  cursor: row-resize; }
+
+.dxdi-canvas .item-selection-rect,
+.dxdi-canvas .items-selection-rect {
+  fill: transparent;
+  stroke-width: 1;
+  stroke: dodgerblue;
+  stroke-dasharray: 2px;
+  pointer-events: none; }
+
+.dxdi-canvas .items-selection-rect {
+  fill: rgba(30, 144, 255, 0.02); }
+
+.dxdi-canvas .item-multi-selection-rect {
+  fill: rgba(30, 144, 255, 0.02);
+  stroke-width: 1;
+  stroke: dodgerblue;
+  pointer-events: none; }
+
+.dxdi-canvas .selection-rect {
+  fill: rgba(30, 144, 255, 0.2);
+  stroke-width: 1;
+  stroke: dodgerblue;
+  pointer-events: none; }
+
+.dxdi-canvas .connector-selection,
+.dxdi-canvas .connector-multi-selection {
+  fill: transparent;
+  stroke-width: 1;
+  stroke: dodgerblue;
+  pointer-events: none; }
+
+.dxdi-canvas .connector-selection.text,
+.dxdi-canvas .connector-multi-selection.text {
+  fill: transparent;
+  stroke-width: 1; }
+
+.dxdi-canvas .connector-selection {
+  stroke-dasharray: 2px; }
+
+.dxdi-canvas .connector-selection-mask rect {
+  fill: black; }
+
+.dxdi-canvas .connector-selection-mask rect.background {
+  fill: white; }
+
+.dxdi-canvas .connector-selection-mask path,
+.dxdi-canvas .connector-selection-mask line {
+  fill: white;
+  stroke: black;
+  stroke-width: 4; }
+
+.dxdi-canvas .connector-selection-mask text {
+  text-anchor: middle; }
+
+.dxdi-canvas .extension-line path {
+  stroke: dodgerblue;
+  stroke-width: 1; }
+
+.dxdi-canvas .extension-line path.size-line {
+  stroke-dasharray: 4px; }
+
+.dxdi-canvas .extension-line text {
+  fill: dodgerblue;
+  font-size: 0.8em;
+  text-anchor: middle; }
+
+.dxdi-canvas .extension-line.center > path.size-line,
+.dxdi-canvas .extension-line.page > path.size-line {
+  stroke-dasharray: 0; }
+
+.dxdi-canvas .extension-line:not(.center) > path:not(:first-child) {
+  display: none; }
+
+.dxdi-canvas .resize-info text {
+  fill: rgba(0, 0, 0, 0.8);
+  font-size: 0.8em;
+  text-anchor: middle; }
+
+.dxdi-canvas .resize-info rect {
+  fill: white;
+  stroke: rgba(0, 0, 0, 0.3);
+  stroke-width: 1; }
+
+.dxdi-canvas .dxdi-active-selection .shape {
+  cursor: default; }
+
+.dxdi-control:not(.focused) .dxdi-canvas .selection-mark {
+  stroke: #666; }
+
+.dxdi-control:not(.focused) .dxdi-canvas .geometry-mark {
+  stroke: #666; }
+
+.dxdi-control:not(.focused) .dxdi-canvas .item-selection-rect,
+.dxdi-control:not(.focused) .dxdi-canvas .items-selection-rect {
+  fill: transparent;
+  stroke: #666; }
+
+.dxdi-control:not(.focused) .dxdi-canvas .items-selection-rect {
+  fill: rgba(144, 144, 144, 0.02); }
+
+.dxdi-control:not(.focused) .dxdi-canvas .item-multi-selection-rect {
+  fill: rgba(144, 144, 144, 0.02);
+  stroke: #666; }
+
+.dxdi-control:not(.focused) .dxdi-canvas .connection-point,
+.dxdi-control:not(.focused) .dxdi-canvas .connection-point.selector,
+.dxdi-control:not(.focused) .dxdi-canvas .connection-mark,
+.dxdi-control:not(.focused) .dxdi-canvas .connection-mark.selector {
+  display: none; }
+
+.dxdi-control:not(.focused) .dxdi-canvas .connector-selection,
+.dxdi-control:not(.focused) .dxdi-canvas .connector-multi-selection {
+  stroke: #666; }
+
+.dxdi-control:not(.focused) .dxdi-canvas .connector-point-mark,
+.dxdi-control:not(.focused) .dxdi-canvas .connector-side-mark {
+  stroke: #666; }
+
+.dxdi-control:not(.focused) .dxdi-canvas .connector-side-mark {
+  fill: #666; }
+
+.dxdi-dragging,
+.dxdi-dragging * {
+  user-select: none; }
+
+.dxdi-touch-action {
+  touch-action: none; }
+
+.dxdi-canvas.export * {
+  cursor: inherit !important;
+  pointer-events: all !important; }
+
+.dxdi-toolbox,
+.dxdi-toolbox svg {
+  user-select: none;
+  outline: none; }
+
+.dxdi-toolbox,
+.dxdi-toolbox .dxdi-canvas,
+.dxdi-toolbox-drag-item .dxdi-canvas {
+  width: 100%;
+  height: 100%; }
+
+.dxdi-toolbox .dxdi-canvas .toolbox-item rect,
+.dxdi-toolbox .dxdi-canvas .toolbox-item path,
+.dxdi-toolbox .dxdi-canvas .toolbox-item line,
+.dxdi-toolbox .dxdi-canvas .toolbox-item ellipse {
+  fill: transparent;
+  stroke: currentColor; }
+
+.dxdi-toolbox .dxdi-canvas .toolbox-item .dxdi-image-placeholder {
+  opacity: 0.75;
+  fill: currentColor;
+  stroke: none; }
+
+.dxdi-toolbox .dxdi-canvas .toolbox-item .dxdi-shape-text {
+  opacity: 0.25; }
+
+.dxdi-toolbox .dxdi-canvas .toolbox-item text,
+.dxdi-toolbox-drag-item .dxdi-canvas text {
+  font-weight: bold;
+  font-family: "Segoe UI", "Helvetica Neue", Helvetica, arial, sans-serif;
+  fill: currentColor; }
+
+.dxdi-toolbox-drag-item .dxdi-canvas .dxdi-image-placeholder {
+  opacity: 0.75;
+  fill: currentColor;
+  stroke: none; }
+
+.dxdi-toolbox-drag-item .dxdi-canvas .dxdi-shape-text {
+  display: none; }
+
+.dxdi-toolbox .toolbox-text-item {
+  cursor: pointer;
+  user-select: none;
+  margin: 0 0 0.6em; }
+
+.dxdi-toolbox-drag-item,
+.dxdi-toolbox-drag-text-item {
+  font-family: arial, helvetica, sans-serif;
+  font-size: 10pt;
+  color: black;
+  position: absolute;
+  z-index: 10000;
+  pointer-events: none !important; }
+  .dxdi-toolbox-drag-item *,
+  .dxdi-toolbox-drag-text-item * {
+    pointer-events: none !important; }
+
+.dxdi-toolbox-drag-item text {
+  pointer-events: none; }
+
+.dxdi-toolbox-drag-text-item {
+  background-color: white;
+  border: 2px solid black;
+  padding: 0.5em; }
+
+.dxdi-tb-drag-captured {
+  display: none; }
+
+.dxdi-focus-input,
+.dxdi-text-input-container,
+.dxdi-text-input {
+  padding: 0;
+  outline: none;
+  border: none;
+  resize: none; }
+
+.dxdi-clipboard-input,
+.dxdi-focus-input {
+  position: absolute;
+  overflow: hidden;
+  left: -1000px !important;
+  top: -1000px !important;
+  opacity: 0; }
+
+.dxdi-text-input-container {
+  display: none; }
+
+.dxdi-text-input-container.shape-text,
+.dxdi-text-input-container.connector-text {
+  display: inherit;
+  position: absolute;
+  overflow: hidden;
+  background-color: transparent;
+  transform-origin: 0 0; }
+
+.dxdi-text-input-container.shape-text .dxdi-text-input {
+  display: table-cell;
+  overflow: hidden;
+  padding: 1px 0 0;
+  outline: none;
+  background-color: transparent;
+  font-family: arial, helvetica, sans-serif;
+  font-size: 10pt;
+  color: black;
+  line-height: 1.1em;
+  text-align: center;
+  vertical-align: middle; }
+
+.dxdi-text-input-container.connector-text {
+  overflow: visible; }
+
+.dxdi-text-input-container.connector-text .dxdi-text-input {
+  padding: 2px;
+  outline: none;
+  height: calc(1.1em + 6px);
+  width: calc(8em + 6px);
+  margin-top: calc(-0.55em - 3px);
+  margin-left: calc(-4em - 3px);
+  background-color: white;
+  border: 1px solid dodgerblue;
+  font-family: arial, helvetica, sans-serif;
+  font-size: 10pt;
+  color: black;
+  line-height: 1.1em;
+  text-align: center;
+  vertical-align: middle;
+  overflow: hidden; }
+
+.dxdi-page-shadow {
+  fill: #808080; }
+
