@@ -1,0 +1,1 @@
+jQuery.extend(jQuery.fn.dataTableExt.oSort,{"formatted-num-pre":function(t){return t="-"===t||""===t?0:t.replace(/[^\d\-\.]/g,""),parseFloat(t)},"formatted-num-asc":function(t,e){return t-e},"formatted-num-desc":function(t,e){return e-t}});
