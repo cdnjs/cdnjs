@@ -1,0 +1,5 @@
+/*! Monio: index.js
+    v0.40.0 (c) 2022 Kyle Simpson
+    MIT License: http://getify.mit-license.org
+*/
+!function UMD(e,i,n,t){"function"==typeof define&&define.amd?(n=Object.values(n),define(e,n,t)):"undefined"!=typeof module&&module.exports?(n=Object.keys(n).map((e=>require(e))),module.exports=t(...n)):(n=Object.values(n).map((e=>i[e])),i[e]=t(...n))}("Monio","undefined"!=typeof globalThis?globalThis:"undefined"!=typeof global?global:"undefined"!=typeof window?window:"undefined"!=typeof self?self:new Function("return this")(),{"./just.js":"Just","./nothing.js":"Nothing","./maybe.js":"Maybe","./either.js":"Either","./async-either.js":"AsyncEither","./io/io.js":"IO","./io/iox.js":"IOx","./io/any.js":"AnyIO","./io/all.js":"AllIO","./io/event-stream.js":"IOEventStream","./io/helpers.js":"IOHelpers","./io/x-helpers.js":"IOxHelpers","./lib/util.js":"MonioUtil"},(function DEF(e,i,n,t,o,s,l,r,u,d,f,a,O){"use strict";let j={};return j.Just=e,j.Nothing=i,j.Maybe=n,j.Either=t,j.AsyncEither=o,j.IO=s,j.RIO=s,j.IOx=l,j.AnyIO=r,j.AllIO=u,j.IOEventStream=d,j.IOHelpers=f,j.IOxHelpers=a,j.MonioUtil=O,j}));
