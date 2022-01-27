@@ -1,0 +1,5 @@
+/*! Monio: just.mjs
+    v0.40.2 (c) 2022 Kyle Simpson
+    MIT License: http://getify.mit-license.org
+*/
+import{isFunction}from"./lib/util.mjs";const BRAND={};export default Object.assign(Just,{of:Just,pure:Just,unit:Just,is:is});function Just(n){var t={map:function map(t){return Just(t(n))},chain:chain,flatMap:chain,bind:chain,fold:function fold(t){return t(n)},ap:function ap(t){return t.map(n)},concat:function concat(t){return t.map((t=>n.concat(t)))},_inspect:function _inspect(){return`${t[Symbol.toStringTag]}(${_serialize(n)})`},_is:function _is(n){return n===BRAND},[Symbol.toStringTag]:"Just"};return t;function chain(t){return t(n)}function _serialize(n){return"string"==typeof n?`"${n}"`:void 0===n?"":isFunction(n)?n.name||"anonymous function":n&&isFunction(n._inspect)?n._inspect():Array.isArray(n)?`[${n.map((n=>null==n?String(n):_serialize(n)))}]`:String(n)}}function is(n){return!!(n&&isFunction(n._is)&&n._is(BRAND))}
