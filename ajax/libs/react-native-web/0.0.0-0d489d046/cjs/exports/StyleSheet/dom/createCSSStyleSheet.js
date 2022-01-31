@@ -1,0 +1,47 @@
+"use strict";
+
+exports.__esModule = true;
+exports.default = createCSSStyleSheet;
+
+var _ExecutionEnvironment = require("fbjs/lib/ExecutionEnvironment");
+
+/**
+ * Copyright (c) Nicolas Gallagher.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * 
+ */
+// $FlowFixMe: HTMLStyleElement is incorrectly typed - https://github.com/facebook/flow/issues/2696
+function createCSSStyleSheet(id, textContent, rootNode) {
+  if (_ExecutionEnvironment.canUseDOM) {
+    var root = rootNode != null ? rootNode : document;
+    var element = root.getElementById(id);
+
+    if (element == null) {
+      element = document.createElement('style');
+      element.setAttribute('id', id);
+      element.appendChild(document.createTextNode(typeof textContent === 'string' ? textContent : '[stylesheet-group="0"]{}' + // minimal top-level reset
+      'html{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:rgba(0,0,0,0);}' + 'body{margin:0;}' + 'body:not(.focusvisible) :focus {outline:none;}' + // minimal form pseudo-element reset
+      'button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0;}' + 'input::-webkit-search-cancel-button,input::-webkit-search-decoration' + 'input::-webkit-search-results-button,input::-webkit-search-results-decoration{display:none;}'));
+
+      if (root instanceof ShadowRoot) {
+        root.insertBefore(element, root.firstChild);
+      } else {
+        var head = root.head;
+
+        if (head) {
+          head.insertBefore(element, head.firstChild);
+        }
+      }
+    } // $FlowFixMe: HTMLElement is incorrectly typed
+
+
+    return element.sheet;
+  } else {
+    return null;
+  }
+}
+
+module.exports = exports.default;
