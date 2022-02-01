@@ -1,0 +1,79 @@
+{
+  "name": "twind",
+  "version": "1.0.0-next.32",
+  "description": "The core engine without any presets.",
+  "type": "module",
+  "homepage": "https://twind.dev",
+  "bugs": {
+    "url": "https://github.com/tw-in-js/twind/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tw-in-js/twind.git",
+    "direction": "packages/twind"
+  },
+  "keywords": [
+    "twind",
+    "tw-in-js",
+    "tailwind",
+    "tailwindcss",
+    "tailwind-in-js"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Sascha Tandel",
+    "url": "https://github.com/sastan"
+  },
+  "funding": [
+    {
+      "type": "Open Collective",
+      "url": "https://opencollective.com/twind"
+    },
+    {
+      "type": "Github Sponsor",
+      "url": "https://github.com/sponsors/tw-in-js"
+    }
+  ],
+  "engines": {
+    "node": ">=12.4"
+  },
+  "dependencies": {
+    "@swc/helpers": "^0.3.2",
+    "csstype": "^3.0.10"
+  },
+  "publishConfig": {
+    "tag": "next",
+    "access": "public",
+    "directory": "dist"
+  },
+  "main": "./twind.cjs",
+  "exports": {
+    ".": {
+      "esnext": "./twind.esnext.js",
+      "module": "./twind.js",
+      "script": "./twind.global.js",
+      "types": "./twind.d.ts",
+      "node": {
+        "import": "./twind.mjs",
+        "require": "./twind.cjs"
+      },
+      "default": "./twind.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": false,
+  "peerDependencies": {
+    "typescript": "^4.4.0"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "module": "./twind.js",
+  "esnext": "./twind.esnext.js",
+  "unpkg": "./twind.global.js",
+  "jsdelivr": "./twind.global.js",
+  "types": "./twind.d.ts",
+  "readme": "# twind [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/twind/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/twind) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23twind?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/twind)\n\n---\n\n## READ THIS FIRST!\n\n**Twind v1 is still in beta. Expect bugs!**\n\n---\n\nUtility-first CSS without any build step right in the browser or any other environment like Node.js, deno, workers, ...\n\nTwind does **not** include any core utilities — use one of the existing presets:\n\n- [@twind/tailwind](https://www.npmjs.com/package/@twind/tailwind) to get a full Tailwind v3 experience. It includes the following presets:\n\n  - [@twind/preset-autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix)\n  - [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind)\n\n- [@twind/preset-tailwind-forms](https://www.npmjs.com/package/@twind/preset-tailwind-forms) to get Tailwind v3 and Tailwind Forms.\n- [@twind/preset-ext](https://www.npmjs.com/package/@twind/preset-ext)\n\nHere are some examples of how to write your own rules or variants:\n\n- preset-tailwind: [rules](https://github.com/tw-in-js/twind/blob/next/packages/preset-tailwind/src/rules.ts) and [variants](https://github.com/tw-in-js/twind/blob/next/packages/preset-tailwind/src/variants.ts)\n- preset-ext: [rules](https://github.com/tw-in-js/twind/blob/next/packages/preset-ext/src/rules.ts) and [variants](https://github.com/tw-in-js/twind/blob/next/packages/preset-ext/src/variants.ts)\n\nAdditionally we provides several integrations:\n\n- [Gatsby](https://github.com/gatsbyjs/gatsby) — [gatsby-plugin-twind](https://www.npmjs.com/package/gatsby-plugin-twind)\n- [SvelteKit](https://kit.svelte.dev) — [@twind/sveltekit](https://www.npmjs.com/package/@twind/sveltekit)\n\nTo get you started, take a look at the [examples](https://github.com/tw-in-js/twind/tree/next/examples).\n\n## Usage\n\n```sh\nnpm install twind@next\n```\n\n```js\nimport { setup } from 'twind'\n\n// You must call setup at least once, but can call it multiple times\nsetup({\n  /* options */\n})\n```\n\nIncase you are not using SSR to inject the pre-computed styles apply the following pattern to prevent [FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content):\n\n```html\n<body class=\"!block\" style=\"display: none\">\n  <!-- ... -->\n</body>\n```\n\nIf any element has the `autofocus` attribute, Twind will focus it after all styles are injected.\n\n<details><summary>Usage with a script tag</summary>\n\nAdd this line to your `index.html`:\n\n```html\n<head>\n  <script src=\"https://cdn.jsdelivr.net/npm/twind@next\" crossorigin></script>\n  <script>\n    twind.setup({\n      /* options */\n    })\n  </script>\n</head>\n```\n\nTo add presets add their ids to the script `src` attribute:\n\n```html\n<head>\n  <!-- ... -->\n  <script\n    src=\"https://cdn.jsdelivr.net/npm/twind@next,npm/@twind/preset-tailwind@next\"\n    crossorigin\n  ></script>\n  <script>\n    twind.setup({\n      presets: [twind.presetTailwind()],\n      // ...\n    })\n  </script>\n  <!-- ... -->\n</head>\n```\n\n</details>\n\n## API\n\n> If you are using the `script` tag these methods are available via the `twind` global object (eg `twind.setup`).\n\n### `setup(config [, sheet [, target]])`\n\nInitializes Twind and can be called as many times as you want.\n\n```js\nimport { setup } from 'twind'\n\n// can be called as many times as you want.\nconst tw = setup({\n  /* config */\n})\n// -> tw === import { tw } from 'twind'\n```\n\n### `tw(...tokens)` — the current Twind instance\n\n```js\nimport { tw } from 'twind'\n\ntw`underline`\ntw({ underline: true })\n\ntw.theme('colors.blue.500', 'blue')\n```\n\n### `cx`\n\n```js\nimport { cx } from 'twind'\n\n// Set a className\nelement.className = cx`\n  underline\n  /* multi\n    line\n    comment\n  */\n  hover:focus:!{\n    sm:{italic why}\n    lg:-{px}\n    -mx-1\n  }\n  // Position\n  !top-1 !-bottom-2\n  text-{xl black}\n`\n```\n\n### `shortcut`\n\nTDB\n\n### `css`\n\nTDB\n\n### `style`\n\nTDB\n\n### `extract(html, tw)`\n\nUsed for static HTML processing (usually to provide SSR support for your javascript-powered web apps) — powered by [consume(html, tw)](#consumehtml-tw)\n\n**Note**: Consider using [inject](#injecthtml-tw) instead.\n\n**Note**: This clears the Twind instance before processing the HTML.\n\n```js\nimport { setup, extract, tw } from 'twind'\n\n// can be in a different file — but should be called at least once\nsetup({\n  /* config */\n})\n\nfunction render() {\n  const { html, css } = extract(renderApp(), tw)\n\n  // inject as last element into the head\n  return html.replace('</head>', `<style data-twind>${css}</style></head>`)\n}\n```\n\n## Low-Level API\n\n### `twind`\n\nTDB\n\n### `consume(html, tw)`\n\nUsed for static HTML processing (usually to provide SSR support for your javascript-powered web apps)\n\n1. parse the markup and process element classes with the provided Twind instance\n2. update the class attributes _if_ necessary\n3. return the HTML string with the final element classes\n\n```js\nimport { setup, tw, consume, stringify } from 'twind'\n\n// can be in a different file — but should be called at least once\nsetup({\n  /* config */\n})\n\nfunction render() {\n  const html = renderApp()\n\n  // clear all styles\n  tw.clear()\n\n  // generated markup\n  const markup = comsume(html, tw)\n\n  // create CSS\n  const css = stringify(tw.target)\n\n  // inject as last element into the head\n  return markup.replace('</head>', `<style data-twind>${css}</style></head>`)\n}\n```\n"
+}
