@@ -1,0 +1,152 @@
+:root {
+    --spacer-size: 8px;
+    --padding-bg: #c8ccd1d9;
+    --margin-bg: #1da1f22b;
+}
+
+/* Spacers Styling */
+.spacer {
+    position: absolute;
+    z-index: 2;
+    user-select: none;
+    touch-action: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spacer-bottom {
+    bottom: 0;
+}
+
+.spacer-right {
+    right: 0;
+}
+
+/* colors */
+.spacer[data-type=padding] {
+    background: var(--padding-bg);
+}
+
+.spacer[data-type=margin] {
+    background: var(--margin-bg);
+}
+
+/* Padding */
+.spacer[data-position=top],
+.spacer[data-position=bottom] {
+    cursor: ns-resize;
+    height: var(--spacer-size);
+    width: 100%;
+    left: 0;
+    right: 0;
+}
+
+.spacer[data-position=right],
+.spacer[data-position=left] {
+    cursor: ew-resize;
+    width: var(--spacer-size);
+    height: 100%;
+    top: 0;
+    bottom: 0;
+}
+
+/* Padding Drag Position */
+.spacer[data-type=padding].spacer[data-position=top] {
+    top: 0;
+}
+
+.spacer[data-type=padding].spacer[data-position=bottom] {
+    bottom: 0;
+}
+
+.spacer[data-type=padding].spacer[data-position=left] {
+    left: 0;
+}
+
+.spacer[data-type=padding].spacer[data-position=left] {
+    right: 0;
+}
+
+/* Margin Drag Position */
+.spacer[data-type=margin].spacer[data-position=top] {
+    bottom: 100%;
+}
+
+.spacer[data-type=margin].spacer[data-position=bottom] {
+    top: 100%;
+}
+
+.spacer[data-type=margin].spacer[data-position=left] {
+    right: 100%;
+}
+
+.spacer[data-type=margin].spacer[data-position=right] {
+    left: 100%;
+}
+
+/* On-hover */
+.spacer-wrapper.on-hover .spacer {
+    background: transparent;
+}
+
+.spacer-wrapper.on-hover .spacer[data-type=padding]:hover,
+.spacer[data-type=padding].spacer-active {
+    background: var(--padding-bg);
+}
+
+.spacer-wrapper.on-hover .spacer[data-type=margin]:hover,
+.spacer[data-type=margin].spacer-active {
+    background: var(--margin-bg);
+}
+
+/* Spacer Indicator */
+.spacer .spacer-indicator .spacer-size {
+    color: white;
+    background: #8080ff;
+    padding: 0 4px;
+    border-radius: 3px;
+    margin-right: 6px;
+}
+
+.spacer .spacer-indicator {
+    font-size: 12px;
+    user-select: none;
+    color: white;
+}
+
+.spacer .spacer-indicator {
+    display: none;
+}
+
+.spacer:hover .spacer-indicator,
+.spacer.spacer-active .spacer-indicator {
+    display: block;
+}
+
+.display-none {
+    display: none;
+}
+
+.spacer .spacer-indicator .spacer-lock {
+    cursor: pointer;
+    font-size: 17px;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+}
+
+/* Lock/unlock icon */
+.spacer-lock .icon {
+    width: 17px;
+    height: 17px;
+    display: inline-block;
+    margin-left: 3px;
+}
+
+.spacer-lock.locked .icon {
+    background-image: url('icons/padlock-lock.svg');
+}
+
+.spacer-lock.unlocked .icon {
+    background-image: url('icons/padlock-unlock.svg');
+}
