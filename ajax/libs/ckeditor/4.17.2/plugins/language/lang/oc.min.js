@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("language","oc",{button:"Definir la lenga",remove:"Suprimir la lenga"});

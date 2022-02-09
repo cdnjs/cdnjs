@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("language","tr",{button:"Dili seç",remove:"Dili kaldır"});

@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("imagebase","tr",{captionPlaceholder:"Resim yazısını girin"});
