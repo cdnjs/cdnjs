@@ -1,0 +1,5 @@
+/*! Monio: just.mjs
+    v0.50.1 (c) 2022 Kyle Simpson
+    MIT License: http://getify.mit-license.org
+*/
+import{isFunction,definePipeWithMethodChaining,definePipeWithFunctionComposition}from"./lib/util.mjs";const BRAND={};export default Object.assign(Just,{of:Just,pure:Just,unit:Just,is:is});function Just(i){var n={map:function map(n){return Just(n(i))},chain:chain,flatMap:chain,bind:chain,fold:function fold(n){return n(i)},ap:function ap(n){return n.map(i)},concat:function concat(n){return n.map((n=>i.concat(n)))},_inspect:function _inspect(){return`${n[Symbol.toStringTag]}(${_serialize(i)})`},_is:function _is(i){return i===BRAND},[Symbol.toStringTag]:"Just"};return definePipeWithFunctionComposition(n,"map"),definePipeWithMethodChaining(n,"chain"),definePipeWithMethodChaining(n,"ap"),definePipeWithMethodChaining(n,"concat"),n;function chain(n){return n(i)}function _serialize(i){return"string"==typeof i?`"${i}"`:void 0===i?"":isFunction(i)?i.name||"anonymous function":i&&isFunction(i._inspect)?i._inspect():Array.isArray(i)?`[${i.map((i=>null==i?String(i):_serialize(i)))}]`:String(i)}}function is(i){return!!(i&&isFunction(i._is)&&i._is(BRAND))}
