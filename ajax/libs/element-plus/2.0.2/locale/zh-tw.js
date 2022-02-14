@@ -1,0 +1,132 @@
+/*! Element Plus v2.0.2 */
+
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.ElementPlusLocaleZhTw = factory());
+})(this, (function () { 'use strict';
+
+  var zhTw = {
+    name: "zh-tw",
+    el: {
+      colorpicker: {
+        confirm: "\u78BA\u8A8D",
+        clear: "\u6E05\u7A7A"
+      },
+      datepicker: {
+        now: "\u73FE\u5728",
+        today: "\u4ECA\u5929",
+        cancel: "\u53D6\u6D88",
+        clear: "\u6E05\u7A7A",
+        confirm: "\u78BA\u8A8D",
+        selectDate: "\u9078\u64C7\u65E5\u671F",
+        selectTime: "\u9078\u64C7\u6642\u9593",
+        startDate: "\u958B\u59CB\u65E5\u671F",
+        startTime: "\u958B\u59CB\u6642\u9593",
+        endDate: "\u7D50\u675F\u65E5\u671F",
+        endTime: "\u7D50\u675F\u6642\u9593",
+        prevYear: "\u524D\u4E00\u5E74",
+        nextYear: "\u5F8C\u4E00\u5E74",
+        prevMonth: "\u4E0A\u500B\u6708",
+        nextMonth: "\u4E0B\u500B\u6708",
+        year: "\u5E74",
+        month1: "1 \u6708",
+        month2: "2 \u6708",
+        month3: "3 \u6708",
+        month4: "4 \u6708",
+        month5: "5 \u6708",
+        month6: "6 \u6708",
+        month7: "7 \u6708",
+        month8: "8 \u6708",
+        month9: "9 \u6708",
+        month10: "10 \u6708",
+        month11: "11 \u6708",
+        month12: "12 \u6708",
+        weeks: {
+          sun: "\u65E5",
+          mon: "\u4E00",
+          tue: "\u4E8C",
+          wed: "\u4E09",
+          thu: "\u56DB",
+          fri: "\u4E94",
+          sat: "\u516D"
+        },
+        months: {
+          jan: "\u4E00\u6708",
+          feb: "\u4E8C\u6708",
+          mar: "\u4E09\u6708",
+          apr: "\u56DB\u6708",
+          may: "\u4E94\u6708",
+          jun: "\u516D\u6708",
+          jul: "\u4E03\u6708",
+          aug: "\u516B\u6708",
+          sep: "\u4E5D\u6708",
+          oct: "\u5341\u6708",
+          nov: "\u5341\u4E00\u6708",
+          dec: "\u5341\u4E8C\u6708"
+        }
+      },
+      select: {
+        loading: "\u52A0\u8F09\u4E2D",
+        noMatch: "\u7121\u5339\u914D\u8CC7\u6599",
+        noData: "\u7121\u8CC7\u6599",
+        placeholder: "\u8ACB\u9078\u64C7"
+      },
+      cascader: {
+        noMatch: "\u7121\u5339\u914D\u8CC7\u6599",
+        loading: "\u52A0\u8F09\u4E2D",
+        placeholder: "\u8ACB\u9078\u64C7",
+        noData: "\u7121\u8CC7\u6599"
+      },
+      pagination: {
+        goto: "\u524D\u5F80",
+        pagesize: "\u9805/\u9801",
+        total: "\u5171 {total} \u9805",
+        pageClassifier: "\u9801"
+      },
+      messagebox: {
+        title: "\u63D0\u793A",
+        confirm: "\u78BA\u5B9A",
+        cancel: "\u53D6\u6D88",
+        error: "\u8F38\u5165\u7684\u8CC7\u6599\u4E0D\u7B26\u898F\u5B9A!"
+      },
+      upload: {
+        deleteTip: "\u6309 delete \u9375\u53EF\u522A\u9664",
+        delete: "\u522A\u9664",
+        preview: "\u67E5\u770B\u5716\u7247",
+        continue: "\u7E7C\u7E8C\u4E0A\u50B3"
+      },
+      table: {
+        emptyText: "\u66AB\u7121\u8CC7\u6599",
+        confirmFilter: "\u7BE9\u9078",
+        resetFilter: "\u91CD\u7F6E",
+        clearFilter: "\u5168\u90E8",
+        sumText: "\u5408\u8A08"
+      },
+      tree: {
+        emptyText: "\u66AB\u7121\u8CC7\u6599"
+      },
+      transfer: {
+        noMatch: "\u7121\u5339\u914D\u8CC7\u6599",
+        noData: "\u7121\u8CC7\u6599",
+        titles: ["\u5217\u8868 1", "\u5217\u8868 2"],
+        filterPlaceholder: "\u8ACB\u8F38\u5165\u641C\u7D22\u5167\u5BB9",
+        noCheckedFormat: "\u5171 {total} \u9805",
+        hasCheckedFormat: "\u5DF2\u9078 {checked}/{total} \u9805"
+      },
+      image: {
+        error: "\u52A0\u8F09\u5931\u6557"
+      },
+      pageHeader: {
+        title: "\u8FD4\u56DE"
+      },
+      popconfirm: {
+        confirmButtonText: "\u78BA\u8A8D",
+        cancelButtonText: "\u53D6\u6D88"
+      }
+    }
+  };
+
+  return zhTw;
+
+}));
