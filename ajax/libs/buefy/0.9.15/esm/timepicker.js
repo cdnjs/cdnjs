@@ -1,0 +1,24 @@
+import './chunk-455cdeae.js';
+import './helpers.js';
+import './chunk-8ed29c41.js';
+import './chunk-b5f9de0c.js';
+import './chunk-1128eb6f.js';
+import { r as registerComponent, u as use } from './chunk-cca88db8.js';
+import './chunk-b081344b.js';
+import './chunk-ad27431e.js';
+import './chunk-92a4051e.js';
+import './chunk-42f463e6.js';
+import './chunk-c807a518.js';
+import './chunk-71aa9de4.js';
+import './chunk-a2afd253.js';
+import { T as Timepicker } from './chunk-7af12535.js';
+export { T as BTimepicker } from './chunk-7af12535.js';
+
+var Plugin = {
+  install: function install(Vue) {
+    registerComponent(Vue, Timepicker);
+  }
+};
+use(Plugin);
+
+export default Plugin;

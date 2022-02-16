@@ -1,0 +1,17 @@
+import './chunk-455cdeae.js';
+import './helpers.js';
+import './chunk-8ed29c41.js';
+import './chunk-b5f9de0c.js';
+import './chunk-1128eb6f.js';
+import { r as registerComponent, u as use } from './chunk-cca88db8.js';
+import { I as Input } from './chunk-b081344b.js';
+export { I as BInput } from './chunk-b081344b.js';
+
+var Plugin = {
+  install: function install(Vue) {
+    registerComponent(Vue, Input);
+  }
+};
+use(Plugin);
+
+export default Plugin;
