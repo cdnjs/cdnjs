@@ -1,0 +1,1 @@
+/**@deprecated use "const { siSmashingmagazine } = require('simple-icons/icons');" instead*/declare const i:import("../alias").I;export default i;
