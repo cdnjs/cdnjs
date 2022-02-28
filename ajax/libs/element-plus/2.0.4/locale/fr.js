@@ -1,0 +1,131 @@
+/*! Element Plus v2.0.4 */
+
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.ElementPlusLocaleFr = factory());
+})(this, (function () { 'use strict';
+
+  var fr = {
+    name: "fr",
+    el: {
+      colorpicker: {
+        confirm: "OK",
+        clear: "Effacer"
+      },
+      datepicker: {
+        now: "Maintenant",
+        today: "Auj.",
+        cancel: "Annuler",
+        clear: "Effacer",
+        confirm: "OK",
+        selectDate: "Choisir date",
+        selectTime: "Choisir horaire",
+        startDate: "Date d\xE9but",
+        startTime: "Horaire d\xE9but",
+        endDate: "Date fin",
+        endTime: "Horaire fin",
+        prevYear: "Ann\xE9e pr\xE9c\xE9dente",
+        nextYear: "Ann\xE9e suivante",
+        prevMonth: "Mois pr\xE9c\xE9dent",
+        nextMonth: "Mois suivant",
+        year: "",
+        month1: "Janvier",
+        month2: "F\xE9vrier",
+        month3: "Mars",
+        month4: "Avril",
+        month5: "Mai",
+        month6: "Juin",
+        month7: "Juillet",
+        month8: "Ao\xFBt",
+        month9: "Septembre",
+        month10: "Octobre",
+        month11: "Novembre",
+        month12: "D\xE9cembre",
+        weeks: {
+          sun: "Dim",
+          mon: "Lun",
+          tue: "Mar",
+          wed: "Mer",
+          thu: "Jeu",
+          fri: "Ven",
+          sat: "Sam"
+        },
+        months: {
+          jan: "Jan",
+          feb: "F\xE9v",
+          mar: "Mar",
+          apr: "Avr",
+          may: "Mai",
+          jun: "Jun",
+          jul: "Jul",
+          aug: "Ao\xFB",
+          sep: "Sep",
+          oct: "Oct",
+          nov: "Nov",
+          dec: "D\xE9c"
+        }
+      },
+      select: {
+        loading: "Chargement",
+        noMatch: "Aucune correspondance",
+        noData: "Aucune donn\xE9e",
+        placeholder: "Choisir"
+      },
+      cascader: {
+        noMatch: "Aucune correspondance",
+        loading: "Chargement",
+        placeholder: "Choisir",
+        noData: "Aucune donn\xE9e"
+      },
+      pagination: {
+        goto: "Aller \xE0",
+        pagesize: "/page",
+        total: "Total {total}",
+        pageClassifier: ""
+      },
+      messagebox: {
+        confirm: "Confirmer",
+        cancel: "Annuler",
+        error: "Erreur"
+      },
+      upload: {
+        deleteTip: "Cliquer sur supprimer pour retirer le fichier",
+        delete: "Supprimer",
+        preview: "Aper\xE7u",
+        continue: "Continuer"
+      },
+      table: {
+        emptyText: "Aucune donn\xE9e",
+        confirmFilter: "Confirmer",
+        resetFilter: "R\xE9initialiser",
+        clearFilter: "Tous",
+        sumText: "Somme"
+      },
+      tree: {
+        emptyText: "Aucune donn\xE9e"
+      },
+      transfer: {
+        noMatch: "Aucune correspondance",
+        noData: "Aucune donn\xE9e",
+        titles: ["Liste 1", "Liste 2"],
+        filterPlaceholder: "Entrer un mot clef",
+        noCheckedFormat: "{total} elements",
+        hasCheckedFormat: "{checked}/{total} coch\xE9(s)"
+      },
+      image: {
+        error: "ECHEC"
+      },
+      pageHeader: {
+        title: "Retour"
+      },
+      popconfirm: {
+        confirmButtonText: "Oui",
+        cancelButtonText: "Non"
+      }
+    }
+  };
+
+  return fr;
+
+}));
