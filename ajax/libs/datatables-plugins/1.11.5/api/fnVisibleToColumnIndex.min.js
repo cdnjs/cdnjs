@@ -1,0 +1,1 @@
+jQuery.fn.dataTableExt.oApi.fnVisibleToColumnIndex=function(n,e){return n.oApi._fnVisibleToColumnIndex(n,e)};
