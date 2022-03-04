@@ -1,0 +1,14 @@
+"use strict";
+/**
+ * @license Angular v14.0.0-next.5
+ * (c) 2010-2022 Google LLC. https://angular.io/
+ * License: MIT
+ */!function(n){"function"==typeof define&&define.amd?define(n):n()}((function(){
+/**
+     * @license
+     * Copyright Google LLC All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+!function(n){var e,o=null,c=null,t=!(!(e=n.wtf)||!(o=e.trace)||(c=o.events,0)),a=function(){function n(){this.name="WTF"}return n.prototype.onFork=function(e,o,c,t){var a=e.fork(c,t);return n.forkInstance(i(c),a.name),a},n.prototype.onInvoke=function(e,t,a,r,s,u,f){var l=f||"unknown",p=n.invokeScope[l];return p||(p=n.invokeScope[l]=c.createScope("Zone:invoke:".concat(f,"(ascii zone)"))),o.leaveScope(p(i(a)),e.invoke(a,r,s,u,f))},n.prototype.onHandleError=function(n,e,o,c){return n.handleError(o,c)},n.prototype.onScheduleTask=function(e,o,t,a){var s=a.type+":"+a.source,u=n.scheduleInstance[s];u||(u=n.scheduleInstance[s]=c.createInstance("Zone:schedule:".concat(s,"(ascii zone, any data)")));var f=e.scheduleTask(t,a);return u(i(t),r(a.data,2)),f},n.prototype.onInvokeTask=function(e,t,a,r,s,u){var f=r.source,l=n.invokeTaskScope[f];return l||(l=n.invokeTaskScope[f]=c.createScope("Zone:invokeTask:".concat(f,"(ascii zone)"))),o.leaveScope(l(i(a)),e.invokeTask(a,r,s,u))},n.prototype.onCancelTask=function(e,o,t,a){var s=a.source,u=n.cancelInstance[s];u||(u=n.cancelInstance[s]=c.createInstance("Zone:cancel:".concat(s,"(ascii zone, any options)")));var f=e.cancelTask(t,a);return u(i(t),r(a.data,2)),f},n}();function r(n,e){if(!n||!e)return null;var o={};for(var c in n)if(n.hasOwnProperty(c)){var t=n[c];switch(typeof t){case"object":var a=t&&t.constructor&&t.constructor.name;t=a==Object.name?r(t,e-1):a;break;case"function":t=t.name||void 0}o[c]=t}return o}function i(n){for(var e=n.name,o=n.parent;null!=o;)e=o.name+"::"+e,o=o.parent;return e}a.forkInstance=t?c.createInstance("Zone:fork(ascii zone, ascii newZone)"):null,a.scheduleInstance={},a.cancelInstance={},a.invokeScope={},a.invokeTaskScope={},Zone.wtfZoneSpec=t?new a:null}("object"==typeof window&&window||"object"==typeof self&&self||global)}));
