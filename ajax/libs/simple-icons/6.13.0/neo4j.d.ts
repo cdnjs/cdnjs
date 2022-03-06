@@ -1,0 +1,1 @@
+/**@deprecated use "const { siNeo4j } = require('simple-icons/icons');" instead*/declare const i:import("../alias").I;export default i;
