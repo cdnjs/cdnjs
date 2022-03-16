@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("uicolor","sq",{title:"UI Mbledhës i Ngjyrave",options:"Variantet e Ngjyrave",highlight:"Theksuar",selected:"Ngjyra e Përzgjedhur",predefined:"Setet e paradefinuara të ngjyrave",config:"Hidhni këtë varg në skedën tuaj config.js"});
