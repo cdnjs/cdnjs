@@ -1,0 +1,135 @@
+/**
+ * placeholder-loading v0.5.0
+ * Author: Zalog (https://www.zalog.ro/)
+ * License: MIT
+ **/
+.ph-item {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+  padding: 30px 15px 15px 15px;
+  overflow: hidden;
+  direction: ltr;
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 2px;
+}
+.ph-item,
+.ph-item *,
+.ph-item ::after,
+.ph-item ::before {
+  box-sizing: border-box;
+}
+.ph-item::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 50%;
+  z-index: 1;
+  width: 500%;
+  margin-left: -250%;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 46%, rgba(255, 255, 255, 0.35) 50%, rgba(255, 255, 255, 0) 54%) 50% 50%;
+  -webkit-animation: phAnimation 0.8s linear infinite;
+          animation: phAnimation 0.8s linear infinite;
+  content: " ";
+  pointer-events: none;
+}
+.ph-item > * {
+  display: flex;
+  flex: 1 1 auto;
+  flex-flow: column;
+  margin-bottom: 15px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.ph-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: -7.5px;
+}
+.ph-row div {
+  height: 10px;
+  margin-top: 7.5px;
+  background-color: #ced4da;
+}
+.ph-row .big, .ph-row.big div {
+  height: 20px;
+}
+.ph-row .empty {
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.ph-col-2 {
+  flex: 0 0 16.6666666667%;
+}
+
+.ph-col-4 {
+  flex: 0 0 33.3333333333%;
+}
+
+.ph-col-6 {
+  flex: 0 0 50%;
+}
+
+.ph-col-8 {
+  flex: 0 0 66.6666666667%;
+}
+
+.ph-col-10 {
+  flex: 0 0 83.3333333333%;
+}
+
+.ph-col-12 {
+  flex: 0 0 100%;
+}
+
+[class*=ph-col] {
+  direction: ltr;
+}
+[class*=ph-col] > * + .ph-row {
+  margin-top: 0;
+}
+[class*=ph-col] > * + * {
+  margin-top: 7.5px;
+}
+
+.ph-avatar {
+  position: relative;
+  width: 100%;
+  min-width: 60px;
+  overflow: hidden;
+  background-color: #ced4da;
+  border-radius: 50%;
+}
+.ph-avatar::before {
+  display: block;
+  padding-top: 100%;
+  content: " ";
+}
+
+.ph-picture {
+  width: 100%;
+  height: 120px;
+  background-color: #ced4da;
+}
+
+@-webkit-keyframes phAnimation {
+  0% {
+    transform: translate3d(-30%, 0, 0);
+  }
+  100% {
+    transform: translate3d(30%, 0, 0);
+  }
+}
+
+@keyframes phAnimation {
+  0% {
+    transform: translate3d(-30%, 0, 0);
+  }
+  100% {
+    transform: translate3d(30%, 0, 0);
+  }
+}
