@@ -71,7 +71,7 @@ cdnjs wouldn't be the success that it is today without our sponsors' kind suppor
 * [DigitalOcean](https://www.digitalocean.com/?utm_source=cdnjs&utm_medium=link&utm_campaign=cdnjs_readme)
 * [Statuspage](https://www.statuspage.io/?utm_source=cdnjs&utm_medium=cdnjs_link&utm_campaign=cdnjs_readme)
 * [Sentry](https://sentry.io/welcome/?utm_source=cdnjs&utm_medium=cdnjs_link&utm_campaign=cdnjs_readme)
-* [Lean20](https://lean20.com/?utm_source=cdnjs&utm_medium=cdnjs_link&utm_campaign=cdnjs_readme)
+* [UptimeRobot](https://uptimerobot.com/?utm_source=cdnjs&utm_medium=cdnjs_link&utm_campaign=cdnjs_readme)
 
 If you are interested in becoming a sponsor, please feel free to contact us!
 
