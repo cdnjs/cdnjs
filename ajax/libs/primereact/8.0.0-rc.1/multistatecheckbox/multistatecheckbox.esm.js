@@ -1,0 +1,265 @@
+import * as React from 'react';
+import { useMountEffect } from 'primereact/hooks';
+import { Tooltip } from 'primereact/tooltip';
+import { ObjectUtils, classNames } from 'primereact/utils';
+
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+function _iterableToArrayLimit(arr, i) {
+  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
+
+  if (_i == null) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+
+  var _s, _e;
+
+  try {
+    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
+
+var MultiStateCheckbox = /*#__PURE__*/React.memo( /*#__PURE__*/React.forwardRef(function (props, ref) {
+  var _React$useState = React.useState(false),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      focusedState = _React$useState2[0],
+      setFocusedState = _React$useState2[1];
+
+  var elementRef = React.useRef(null);
+  var inputRef = React.useRef(props.inputRef);
+  var equalityKey = props.optionValue ? null : props.dataKey;
+
+  var onClick = function onClick(event) {
+    if (!props.disabled && !props.readOnly) {
+      toggle(event);
+      inputRef.current.focus();
+    }
+  };
+
+  var getOptionValue = function getOptionValue(option) {
+    return props.optionValue ? ObjectUtils.resolveFieldData(option, props.optionValue) : option;
+  };
+
+  var findNextOption = function findNextOption() {
+    if (props.options) {
+      return selectedOptionIndex === props.options.length - 1 ? props.empty ? null : props.options[0] : props.options[selectedOptionIndex + 1];
+    }
+
+    return null;
+  };
+
+  var toggle = function toggle(event) {
+    if (props.onChange) {
+      var newValue = getOptionValue(findNextOption());
+      props.onChange({
+        originalEvent: event,
+        value: newValue,
+        stopPropagation: function stopPropagation() {},
+        preventDefault: function preventDefault() {},
+        target: {
+          name: props.name,
+          id: props.id,
+          value: newValue
+        }
+      });
+    }
+  };
+
+  var onFocus = function onFocus() {
+    setFocusedState(true);
+  };
+
+  var onBlur = function onBlur() {
+    setFocusedState(false);
+  };
+
+  var getSelectedOptionMap = function getSelectedOptionMap() {
+    var option, index;
+
+    if (props.options) {
+      index = props.options.findIndex(function (option) {
+        return ObjectUtils.equals(props.value, getOptionValue(option), equalityKey);
+      });
+      option = props.options[index];
+    }
+
+    return {
+      option: option,
+      index: index
+    };
+  };
+
+  React.useEffect(function () {
+    ObjectUtils.combinedRefs(inputRef, props.inputRef);
+  }, [inputRef, props.inputRef]);
+  useMountEffect(function () {
+    if (!props.empty && props.value === null) {
+      toggle();
+    }
+  });
+
+  var createIcon = function createIcon() {
+    var icon = selectedOption && selectedOption.icon || '';
+    var className = classNames('p-checkbox-icon p-c', _defineProperty({}, "".concat(icon), true));
+    var content = /*#__PURE__*/React.createElement("span", {
+      className: className
+    });
+
+    if (props.iconTemplate) {
+      var defaultOptions = {
+        option: selectedOption,
+        className: className,
+        element: content,
+        props: props
+      };
+      return ObjectUtils.getJSXElement(props.iconTemplate, defaultOptions);
+    }
+
+    return content;
+  };
+
+  var _getSelectedOptionMap = getSelectedOptionMap(),
+      selectedOption = _getSelectedOptionMap.option,
+      selectedOptionIndex = _getSelectedOptionMap.index;
+
+  var hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+  var otherProps = ObjectUtils.findDiffKeys(props, MultiStateCheckbox.defaultProps);
+  var className = classNames('p-multistatecheckbox p-checkbox p-component', props.className);
+  var boxClassName = classNames('p-checkbox-box', {
+    'p-highlight': !!selectedOption,
+    'p-disabled': props.disabled,
+    'p-focus': focusedState
+  }, selectedOption && selectedOption.className);
+  var icon = createIcon();
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", _extends({
+    ref: elementRef,
+    id: props.id,
+    className: className,
+    style: props.style
+  }, otherProps, {
+    onClick: onClick
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "p-hidden-accessible"
+  }, /*#__PURE__*/React.createElement("input", {
+    ref: inputRef,
+    type: "checkbox",
+    "aria-labelledby": props.ariaLabelledBy,
+    id: props.inputId,
+    name: props.name,
+    onFocus: onFocus,
+    onBlur: onBlur,
+    disabled: props.disabled,
+    readOnly: props.readOnly,
+    defaultChecked: !!selectedOption
+  })), /*#__PURE__*/React.createElement("div", {
+    className: boxClassName,
+    role: "checkbox",
+    "aria-checked": !!selectedOption,
+    style: selectedOption && selectedOption.style
+  }, icon)), hasTooltip && /*#__PURE__*/React.createElement(Tooltip, _extends({
+    target: elementRef,
+    content: props.tooltip
+  }, props.tooltipOptions)));
+}));
+MultiStateCheckbox.displayName = 'MultiStateCheckbox';
+MultiStateCheckbox.defaultProps = {
+  __TYPE: 'MultiStateCheckbox',
+  id: null,
+  inputRef: null,
+  inputId: null,
+  value: null,
+  options: null,
+  optionValue: null,
+  iconTemplate: null,
+  dataKey: null,
+  name: null,
+  style: null,
+  className: null,
+  disabled: false,
+  readOnly: false,
+  empty: true,
+  tooltip: null,
+  tooltipOptions: null,
+  ariaLabelledBy: null,
+  onChange: null
+};
+
+export { MultiStateCheckbox };

@@ -1,0 +1,409 @@
+this.primereact = this.primereact || {};
+this.primereact.splitbutton = (function (exports, React, PrimeReact, button, hooks, overlayservice, tooltip, utils, csstransition, portal) {
+  'use strict';
+
+  function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+  function _interopNamespace(e) {
+    if (e && e.__esModule) return e;
+    var n = Object.create(null);
+    if (e) {
+      Object.keys(e).forEach(function (k) {
+        if (k !== 'default') {
+          var d = Object.getOwnPropertyDescriptor(e, k);
+          Object.defineProperty(n, k, d.get ? d : {
+            enumerable: true,
+            get: function () { return e[k]; }
+          });
+        }
+      });
+    }
+    n["default"] = e;
+    return Object.freeze(n);
+  }
+
+  var React__namespace = /*#__PURE__*/_interopNamespace(React);
+  var PrimeReact__default = /*#__PURE__*/_interopDefaultLegacy(PrimeReact);
+
+  function _extends() {
+    _extends = Object.assign || function (target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+
+      return target;
+    };
+
+    return _extends.apply(this, arguments);
+  }
+
+  function _arrayWithHoles(arr) {
+    if (Array.isArray(arr)) return arr;
+  }
+
+  function _iterableToArrayLimit(arr, i) {
+    var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
+
+    if (_i == null) return;
+    var _arr = [];
+    var _n = true;
+    var _d = false;
+
+    var _s, _e;
+
+    try {
+      for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
+        _arr.push(_s.value);
+
+        if (i && _arr.length === i) break;
+      }
+    } catch (err) {
+      _d = true;
+      _e = err;
+    } finally {
+      try {
+        if (!_n && _i["return"] != null) _i["return"]();
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+
+    return _arr;
+  }
+
+  function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+
+    for (var i = 0, arr2 = new Array(len); i < len; i++) {
+      arr2[i] = arr[i];
+    }
+
+    return arr2;
+  }
+
+  function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+  }
+
+  function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+
+  function _slicedToArray(arr, i) {
+    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+  }
+
+  var SplitButtonItem = /*#__PURE__*/React__namespace.memo(function (props) {
+    var onClick = function onClick(e) {
+      if (props.menuitem.command) {
+        props.menuitem.command({
+          originalEvent: e,
+          item: props.menuitem
+        });
+      }
+
+      if (props.onItemClick) {
+        props.onItemClick(e);
+      }
+
+      e.preventDefault();
+    };
+
+    var createSeparator = function createSeparator() {
+      return /*#__PURE__*/React__namespace.createElement("li", {
+        className: "p-menu-separator",
+        role: "separator"
+      });
+    };
+
+    var createMenuitem = function createMenuitem() {
+      var _props$menuitem = props.menuitem,
+          disabled = _props$menuitem.disabled,
+          _icon = _props$menuitem.icon,
+          _label = _props$menuitem.label,
+          template = _props$menuitem.template,
+          url = _props$menuitem.url,
+          target = _props$menuitem.target;
+      var className = utils.classNames('p-menuitem-link', {
+        'p-disabled': disabled
+      });
+      var iconClassName = utils.classNames('p-menuitem-icon', _icon);
+
+      var icon = _icon && /*#__PURE__*/React__namespace.createElement("span", {
+        className: iconClassName
+      });
+
+      var label = _label && /*#__PURE__*/React__namespace.createElement("span", {
+        className: "p-menuitem-text"
+      }, _label);
+
+      var content = /*#__PURE__*/React__namespace.createElement("a", {
+        href: url || '#',
+        role: "menuitem",
+        className: className,
+        target: target,
+        onClick: onClick
+      }, icon, label);
+
+      if (template) {
+        var defaultContentOptions = {
+          onClick: onClick,
+          className: className,
+          labelClassName: 'p-menuitem-text',
+          iconClassName: iconClassName,
+          element: content,
+          props: props
+        };
+        content = utils.ObjectUtils.getJSXElement(template, props.menuitem, defaultContentOptions);
+      }
+
+      return /*#__PURE__*/React__namespace.createElement("li", {
+        className: "p-menuitem",
+        role: "none"
+      }, content);
+    };
+
+    var createItem = function createItem() {
+      return props.menuitem.separator ? createSeparator() : createMenuitem();
+    };
+
+    var item = createItem();
+    return item;
+  });
+  SplitButtonItem.displayName = 'SplitButtonItem';
+
+  var SplitButtonPanel = /*#__PURE__*/React__namespace.forwardRef(function (props, ref) {
+    var createElement = function createElement() {
+      var className = utils.classNames('p-menu p-menu-overlay p-component', props.menuClassName);
+      return /*#__PURE__*/React__namespace.createElement(csstransition.CSSTransition, {
+        nodeRef: ref,
+        classNames: "p-connected-overlay",
+        "in": props["in"],
+        timeout: {
+          enter: 120,
+          exit: 100
+        },
+        options: props.transitionOptions,
+        unmountOnExit: true,
+        onEnter: props.onEnter,
+        onEntered: props.onEntered,
+        onExit: props.onExit,
+        onExited: props.onExited
+      }, /*#__PURE__*/React__namespace.createElement("div", {
+        ref: ref,
+        className: className,
+        style: props.menuStyle,
+        id: props.id,
+        onClick: props.onClick
+      }, /*#__PURE__*/React__namespace.createElement("ul", {
+        className: "p-menu-list p-reset",
+        role: "menu"
+      }, props.children)));
+    };
+
+    var element = createElement();
+    return /*#__PURE__*/React__namespace.createElement(portal.Portal, {
+      element: element,
+      appendTo: props.appendTo
+    });
+  });
+  SplitButtonPanel.displayName = 'SplitButtonPanel';
+
+  var SplitButton = /*#__PURE__*/React__namespace.memo( /*#__PURE__*/React__namespace.forwardRef(function (props, ref) {
+    var _React$useState = React__namespace.useState(props.id),
+        _React$useState2 = _slicedToArray(_React$useState, 2),
+        idState = _React$useState2[0],
+        setIdState = _React$useState2[1];
+
+    var _React$useState3 = React__namespace.useState(false),
+        _React$useState4 = _slicedToArray(_React$useState3, 2),
+        overlayVisibleState = _React$useState4[0],
+        setOverlayVisibleState = _React$useState4[1];
+
+    var elementRef = React__namespace.useRef(null);
+    var defaultButtonRef = React__namespace.useRef(null);
+    var overlayRef = React__namespace.useRef(null);
+
+    var _useOverlayListener = hooks.useOverlayListener({
+      target: elementRef,
+      overlay: overlayRef,
+      listener: function listener(event, _ref) {
+        var valid = _ref.valid;
+        valid && hide();
+      },
+      when: overlayVisibleState
+    }),
+        _useOverlayListener2 = _slicedToArray(_useOverlayListener, 2),
+        bindOverlayListener = _useOverlayListener2[0],
+        unbindOverlayListener = _useOverlayListener2[1];
+
+    var onPanelClick = function onPanelClick(event) {
+      overlayservice.OverlayService.emit('overlay-click', {
+        originalEvent: event,
+        target: elementRef.current
+      });
+    };
+
+    var onDropdownButtonClick = function onDropdownButtonClick() {
+      overlayVisibleState ? hide() : show();
+    };
+
+    var onItemClick = function onItemClick() {
+      hide();
+    };
+
+    var show = function show() {
+      setOverlayVisibleState(true);
+    };
+
+    var hide = function hide() {
+      setOverlayVisibleState(false);
+    };
+
+    var onOverlayEnter = function onOverlayEnter() {
+      utils.ZIndexUtils.set('overlay', overlayRef.current, PrimeReact__default["default"].autoZIndex, PrimeReact__default["default"].zIndex['overlay']);
+      alignOverlay();
+    };
+
+    var onOverlayEntered = function onOverlayEntered() {
+      bindOverlayListener();
+      props.onShow && props.onShow();
+    };
+
+    var onOverlayExit = function onOverlayExit() {
+      unbindOverlayListener();
+    };
+
+    var onOverlayExited = function onOverlayExited() {
+      utils.ZIndexUtils.clear(overlayRef.current);
+      props.onHide && props.onHide();
+    };
+
+    var alignOverlay = function alignOverlay() {
+      utils.DomHandler.alignOverlay(overlayRef.current, defaultButtonRef.current.parentElement, props.appendTo || PrimeReact__default["default"].appendTo);
+    };
+
+    hooks.useMountEffect(function () {
+      if (!idState) {
+        setIdState(utils.UniqueComponentId());
+      }
+    });
+    hooks.useUnmountEffect(function () {
+      utils.ZIndexUtils.clear(overlayRef.current);
+    });
+    React__namespace.useImperativeHandle(ref, function () {
+      return {
+        show: show,
+        hide: hide
+      };
+    });
+
+    var createItems = function createItems() {
+      if (props.model) {
+        return props.model.map(function (menuitem, index) {
+          return /*#__PURE__*/React__namespace.createElement(SplitButtonItem, {
+            menuitem: menuitem,
+            key: index,
+            onItemClick: onItemClick
+          });
+        });
+      }
+
+      return null;
+    };
+
+    var hasTooltip = utils.ObjectUtils.isNotEmpty(props.tooltip);
+    var otherProps = utils.ObjectUtils.findDiffKeys(props, SplitButton.defaultProps);
+    var className = utils.classNames('p-splitbutton p-component', props.className, {
+      'p-disabled': props.disabled
+    });
+    var buttonClassName = utils.classNames('p-splitbutton-defaultbutton', props.buttonClassName);
+    var menuButtonClassName = utils.classNames('p-splitbutton-menubutton', props.menuButtonClassName);
+    var buttonContent = props.buttonTemplate ? utils.ObjectUtils.getJSXElement(props.buttonTemplate, props) : null;
+    var items = createItems();
+    var panelId = idState + '_overlay';
+    return /*#__PURE__*/React__namespace.createElement(React__namespace.Fragment, null, /*#__PURE__*/React__namespace.createElement("div", _extends({
+      ref: elementRef,
+      id: idState,
+      className: className,
+      style: props.style
+    }, otherProps), /*#__PURE__*/React__namespace.createElement(button.Button, {
+      ref: defaultButtonRef,
+      type: "button",
+      className: buttonClassName,
+      icon: props.icon,
+      label: props.label,
+      onClick: props.onClick,
+      disabled: props.disabled,
+      tabIndex: props.tabIndex
+    }, buttonContent), /*#__PURE__*/React__namespace.createElement(button.Button, {
+      type: "button",
+      className: menuButtonClassName,
+      icon: props.dropdownIcon,
+      onClick: onDropdownButtonClick,
+      disabled: props.disabled,
+      "aria-expanded": overlayVisibleState,
+      "aria-haspopup": true,
+      "aria-owns": panelId
+    }), /*#__PURE__*/React__namespace.createElement(SplitButtonPanel, {
+      ref: overlayRef,
+      appendTo: props.appendTo,
+      id: panelId,
+      menuStyle: props.menuStyle,
+      menuClassName: props.menuClassName,
+      onClick: onPanelClick,
+      "in": overlayVisibleState,
+      onEnter: onOverlayEnter,
+      onEntered: onOverlayEntered,
+      onExit: onOverlayExit,
+      onExited: onOverlayExited,
+      transitionOptions: props.transitionOptions
+    }, items)), hasTooltip && /*#__PURE__*/React__namespace.createElement(tooltip.Tooltip, _extends({
+      target: elementRef,
+      content: props.tooltip
+    }, props.tooltipOptions)));
+  }));
+  SplitButton.displayName = 'SplitButton';
+  SplitButton.defaultProps = {
+    __TYPE: 'SplitButton',
+    id: null,
+    label: null,
+    icon: null,
+    model: null,
+    disabled: null,
+    style: null,
+    className: null,
+    buttonClassName: null,
+    menuStyle: null,
+    menuClassName: null,
+    menuButtonClassName: null,
+    tabIndex: null,
+    appendTo: null,
+    tooltip: null,
+    tooltipOptions: null,
+    buttonTemplate: null,
+    transitionOptions: null,
+    dropdownIcon: 'pi pi-chevron-down',
+    onClick: null,
+    onShow: null,
+    onHide: null
+  };
+
+  exports.SplitButton = SplitButton;
+
+  Object.defineProperty(exports, '__esModule', { value: true });
+
+  return exports;
+
+})({}, React, primereact.api, primereact.button, primereact.hooks, primereact.overlayservice, primereact.tooltip, primereact.utils, primereact.csstransition, primereact.portal);

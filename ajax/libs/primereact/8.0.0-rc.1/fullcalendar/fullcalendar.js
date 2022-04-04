@@ -1,0 +1,125 @@
+this.primereact = this.primereact || {};
+this.primereact.fullcalendar = (function (exports, React, hooks, utils) {
+  'use strict';
+
+  function _interopNamespace(e) {
+    if (e && e.__esModule) return e;
+    var n = Object.create(null);
+    if (e) {
+      Object.keys(e).forEach(function (k) {
+        if (k !== 'default') {
+          var d = Object.getOwnPropertyDescriptor(e, k);
+          Object.defineProperty(n, k, d.get ? d : {
+            enumerable: true,
+            get: function () { return e[k]; }
+          });
+        }
+      });
+    }
+    n["default"] = e;
+    return Object.freeze(n);
+  }
+
+  var React__namespace = /*#__PURE__*/_interopNamespace(React);
+
+  function _extends() {
+    _extends = Object.assign || function (target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+
+      return target;
+    };
+
+    return _extends.apply(this, arguments);
+  }
+
+  var FullCalendar = /*#__PURE__*/React__namespace.memo( /*#__PURE__*/React__namespace.forwardRef(function (props, ref) {
+    var elementRef = React__namespace.useRef(null);
+    var config = React__namespace.useRef({});
+    var calendar = React__namespace.useRef(null);
+    var prevEvents = hooks.usePrevious(props.events);
+    var prevOptions = hooks.usePrevious(props.options);
+
+    var initialize = function initialize() {
+      import('@fullcalendar/core').then(function (module) {
+        if (module && module.Calendar) {
+          calendar.current = new module.Calendar(elementRef.current, config.current);
+          calendar.current.render();
+
+          if (props.events) {
+            calendar.current.removeAllEventSources();
+            calendar.current.addEventSource(props.events);
+          }
+        }
+      });
+    };
+
+    hooks.useMountEffect(function () {
+      console.warn("FullCalendar component is deprecated. Use FullCalendar component of '@fullcalendar/react' package.");
+      config.current = {
+        theme: true
+      };
+
+      if (props.options) {
+        for (var prop in props.options) {
+          config.current[prop] = props.options[prop];
+        }
+      }
+
+      initialize();
+    });
+    hooks.useUpdateEffect(function () {
+      if (!calendar.current) {
+        initialize();
+      } else {
+        if (!utils.ObjectUtils.equals(prevEvents, props.events)) {
+          calendar.current.removeAllEventSources();
+          calendar.addEventSource(props.events);
+        }
+
+        if (!utils.ObjectUtils.equals(prevOptions, props.options)) {
+          for (var prop in props.options) {
+            var optionValue = props.options[prop];
+            config.current[prop] = optionValue;
+            calendar.current.setOption(prop, optionValue);
+          }
+        }
+      }
+    });
+    hooks.useUnmountEffect(function () {
+      if (calendar.current) {
+        calendar.current.destroy();
+      }
+    });
+    var otherProps = utils.ObjectUtils.findDiffKeys(props, FullCalendar.defaultProps);
+    return /*#__PURE__*/React__namespace.createElement("div", _extends({
+      ref: elementRef,
+      id: props.id,
+      style: props.style,
+      className: props.className
+    }, otherProps));
+  }));
+  FullCalendar.displayName = 'FullCalendar';
+  FullCalendar.defaultProps = {
+    __TYPE: 'FullCalendar',
+    id: null,
+    events: [],
+    style: null,
+    className: null,
+    options: null
+  };
+
+  exports.FullCalendar = FullCalendar;
+
+  Object.defineProperty(exports, '__esModule', { value: true });
+
+  return exports;
+
+})({}, React, primereact.hooks, primereact.utils);

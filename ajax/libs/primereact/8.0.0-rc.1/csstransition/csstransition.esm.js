@@ -1,0 +1,110 @@
+import * as React from 'react';
+import { CSSTransition as CSSTransition$1 } from 'react-transition-group';
+import PrimeReact from 'primereact/api';
+import { useUpdateEffect } from 'primereact/hooks';
+import { ObjectUtils } from 'primereact/utils';
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+var CSSTransition = /*#__PURE__*/React.forwardRef(function (props, ref) {
+  var disabled = props.disabled || props.options && props.options.disabled || !PrimeReact.cssTransition;
+
+  var onEnter = function onEnter(node, isAppearing) {
+    props.onEnter && props.onEnter(node, isAppearing); // component
+
+    props.options && props.options.onEnter && props.options.onEnter(node, isAppearing); // user option
+  };
+
+  var onEntering = function onEntering(node, isAppearing) {
+    props.onEntering && props.onEntering(node, isAppearing); // component
+
+    props.options && props.options.onEntering && props.options.onEntering(node, isAppearing); // user option
+  };
+
+  var onEntered = function onEntered(node, isAppearing) {
+    props.onEntered && props.onEntered(node, isAppearing); // component
+
+    props.options && props.options.onEntered && props.options.onEntered(node, isAppearing); // user option
+  };
+
+  var onExit = function onExit(node) {
+    props.onExit && props.onExit(node); // component
+
+    props.options && props.options.onExit && props.options.onExit(node); // user option
+  };
+
+  var onExiting = function onExiting(node) {
+    props.onExiting && props.onExiting(node); // component
+
+    props.options && props.options.onExiting && props.options.onExiting(node); // user option
+  };
+
+  var onExited = function onExited(node) {
+    props.onExited && props.onExited(node); // component
+
+    props.options && props.options.onExited && props.options.onExited(node); // user option
+  };
+
+  useUpdateEffect(function () {
+    if (disabled) {
+      // no animation
+      var node = ObjectUtils.getRefElement(props.nodeRef);
+
+      if (props["in"]) {
+        onEnter(node, true);
+        onEntering(node, true);
+        onEntered(node, true);
+      } else {
+        onExit(node);
+        onExiting(node);
+        onExited(node);
+      }
+    }
+  }, [props["in"]]);
+
+  if (disabled) {
+    return props["in"] ? props.children : null;
+  } else {
+    var immutableProps = {
+      nodeRef: props.nodeRef,
+      "in": props["in"],
+      onEnter: onEnter,
+      onEntering: onEntering,
+      onEntered: onEntered,
+      onExit: onExit,
+      onExiting: onExiting,
+      onExited: onExited
+    };
+    var mutableProps = {
+      classNames: props.classNames,
+      timeout: props.timeout,
+      unmountOnExit: props.unmountOnExit
+    };
+
+    var mergedProps = _objectSpread(_objectSpread(_objectSpread({}, mutableProps), props.options || {}), immutableProps);
+
+    return /*#__PURE__*/React.createElement(CSSTransition$1, mergedProps, props.children);
+  }
+});
+CSSTransition.displayName = 'CSSTransition';
+CSSTransition.defaultProps = {
+  __TYPE: 'CSSTransition'
+};
+
+export { CSSTransition };
