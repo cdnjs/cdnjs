@@ -1,0 +1,304 @@
+$dp_background: #666;
+$dp_border_radius: 4px;
+$dp_box_shadow: 0px 0px 10px #888;
+$dp_color: #222;
+$dp_font_size: 13px;
+$dp_font_family: Tahoma, Arial, Helvetica, sans-serif;
+$dp_padding_width_horizontal: 3px;
+$dp_padding_width_vertical: 3px;
+
+$dp_header_background: $dp_background;
+$dp_header_color: #fff;
+$dp_header_hover_background: lighten($dp_background, 15%);
+$dp_header_hover_color: $dp_header_color;
+$dp_header_padding: 5px;
+
+$dp_cell_border: 1px solid lighten($dp_background, 35%);
+$dp_cell_hover_background: #88a09e;
+$dp_cell_hover_color: #fff;
+$dp_cell_min_width: 25px;
+$dp_cell_padding: 5px;
+
+$dp_weekday_background: lighten($dp_background, 50%);
+$dp_weekday_color: $dp_color;
+$dp_weekday_disabled_background: lighten($dp_background, 55%);
+$dp_weekday_disabled_color: darken($dp_weekday_disabled_background, 15%);
+
+$dp_weekend_background: lighten($dp_background, 44%);
+$dp_weekend_color: $dp_color;
+$dp_weekend_disabled_background: $dp_weekday_disabled_background;
+$dp_weekend_disabled_color: $dp_weekday_disabled_color;
+
+$dp_not_in_month_background: #e0e6f2;
+$dp_not_in_month_color: darken($dp_not_in_month_background, 20%);
+$dp_not_in_month_disabled_background: $dp_weekday_disabled_background;
+$dp_not_in_month_disabled_color: $dp_weekday_disabled_color;
+
+$dp_current_date_color: #cc236b;
+$dp_current_date_disabled_color: #b56a6a;
+
+$dp_selected_date_background: #b56a6a;
+$dp_selected_date_color: $dp_cell_hover_color;
+
+$dp_heading_background: #ffcc33;
+$dp_heading_color: $dp_color;
+
+$dp_time_control_background: $dp_weekday_background;
+$dp_time_control_color: $dp_weekday_color;
+
+$dp_time_background: $dp_weekday_disabled_background;
+$dp_time_color: $dp_weekday_color;
+$dp_time_separator_color: $dp_cell_border;
+
+.Zebra_DatePicker {
+    background: $dp_background;
+    @if variable-exists(dp_border) { border: $dp_border; }
+    @if variable-exists(dp_border_radius) { border-radius: $dp_border_radius; }
+    @if variable-exists(dp_box_shadow) { box-shadow: $dp_box_shadow; }
+    color: $dp_color;
+    font: $dp_font_size $dp_font_family;
+    padding: $dp_padding_width_vertical $dp_padding_width_horizontal;
+    position: absolute;
+    display: table;
+    *width: 255px; // for IE6 & 7
+    z-index: 1200;
+
+    & *,
+    & *:after,
+    & *:before {
+        box-sizing: content-box !important;
+    }
+
+    & * {
+        padding: 0;
+    }
+
+    table {
+        border-collapse: collapse;
+        @if variable-exists(dp_border_radius) { border-radius: $dp_border_radius; }
+        border-spacing: 0;
+        width: 100%;
+    }
+
+    th, td {
+        @if variable-exists(dp_cell_border_radius) { border-radius: $dp_cell_border_radius; }
+        @if variable-exists(dp_cell_padding) { padding: $dp_cell_padding; }
+        cursor: pointer;
+        text-align: center;
+        min-width: $dp_cell_min_width;
+        width: $dp_cell_min_width;
+    }
+
+    .dp_body {
+        @if variable-exists(dp_cell_border) {
+            th, td {
+                border: $dp_cell_border;
+                &:first-child {
+                    border-left: none;
+                }
+                &:last-child {
+                    border-right: none;
+                }
+            }
+
+            tr:first-child th,
+            tr:first-child td {
+                border-top: none;
+            }
+
+            tr:last-child th,
+            tr:last-child td {
+                border-bottom: none;
+            }
+        }
+
+        td {
+            @if variable-exists(dp_weekday_background) and $dp_weekday_background != $dp_background { background: $dp_weekday_background; }
+            @if variable-exists(dp_weekday_color) and $dp_weekday_color != $dp_color { color: $dp_weekday_color; }
+        }
+
+        .dp_weekend {
+            @if variable-exists(dp_weekend_background) and $dp_weekend_background != (if(variable_exists(dp_weekday_background), $dp_weekday_background, $dp_background)) { background: $dp_weekend_background; }
+            @if variable-exists(dp_weekend_color) and $dp_weekend_color != (if(variable_exists(dp_weekday_color), $dp_weekday_color, $dp_color)) { color: $dp_weekend_color; }
+        }
+
+        .dp_not_in_month {
+            @if variable-exists(dp_not_in_month_background) and $dp_not_in_month_background != (if(variable_exists(dp_weekday_background), $dp_weekday_background, $dp_background)) { background: $dp_not_in_month_background; }
+            @if variable-exists(dp_not_in_month_color) and $dp_not_in_month_color != (if(variable_exists(dp_weekday_color), $dp_weekday_color, $dp_color)) { color: $dp_not_in_month_color; }
+        }
+        .dp_time_control {
+            @if variable-exists(dp_time_control_background) and $dp_time_control_background != $dp_weekday_background { background: $dp_time_control_background; }
+            @if variable-exists(dp_time_control_color) and $dp_time_control_color != $dp_weekday_color { background: $dp_time_control_color; }
+        }
+
+        .dp_time_controls_condensed {
+            td {
+                width: 25%;
+            }
+        }
+
+        .dp_current {
+            @if variable-exists(dp_current_date_background) and $dp_current_date_background != $dp_background { background: $dp_current_date_background; }
+            @if variable-exists(dp_current_date_color) and $dp_current_date_color != $dp_color { color: $dp_current_date_color; }
+        }
+
+        .dp_selected {
+            @if variable-exists(dp_selected_date_background) and $dp_selected_date_background != $dp_background { background: $dp_selected_date_background; }
+            @if variable-exists(dp_selected_date_color) { color: $dp_selected_date_color; }
+        }
+
+        .dp_disabled {
+            @if variable-exists(dp_weekday_disabled_background) and $dp_weekday_disabled_background != $dp_background { background: $dp_weekday_disabled_background; }
+            @if variable-exists(dp_weekday_disabled_color) and $dp_weekday_disabled_color != $dp_color { color: $dp_weekday_disabled_color; }
+            cursor: text;
+
+            &.dp_not_in_month {
+                @if variable-exists(dp_not_in_month_disabled_background) and $dp_not_in_month_disabled_background != (if(variable_exists(dp_weekday_disabled_background), $dp_weekday_disabled_background, $dp_background)) { background: $dp_not_in_month_disabled_background; }
+                @if variable-exists(dp_not_in_month_disabled_color) and $dp_not_in_month_disabled_color != (if(variable_exists(dp_weekday_disabled_color), $dp_weekday_disabled_color, $dp_color)) { color: $dp_not_in_month_disabled_color; }
+            }
+
+            &.dp_weekend {
+                @if variable-exists(dp_weekend_disabled_background) and $dp_weekend_disabled_background != (if(variable_exists(dp_weekday_disabled_background), $dp_weekday_disabled_background, $dp_background)) { background: $dp_weekend_disabled_background; }
+                @if variable-exists(dp_weekend_disabled_color) and $dp_weekend_disabled_color != (if(variable_exists(dp_weekday_disabled_color), $dp_weekday_disabled_color, $dp_color)) { color: $dp_weekend_disabled_color; }
+            }
+
+            &.dp_current {
+                @if variable-exists(dp_current_date_disabled_background) and $dp_current_date_disabled_background != (if(variable_exists(dp_weekday_disabled_background), $dp_weekday_disabled_background, $dp_background)) { background: $dp_current_date_disabled_background; }
+                @if variable-exists(dp_current_date_disabled_color) and $dp_current_date_disabled_color != (if(variable_exists(dp_weekday_disabled_color), $dp_weekday_disabled_color, $dp_color)) { color: $dp_current_date_disabled_color; }
+            }
+        }
+
+        .dp_hover {
+            @if variable-exists(dp_cell_hover_color) { color: $dp_cell_hover_color; }
+            @if variable-exists(dp_cell_hover_background) { background: $dp_cell_hover_background; }
+            &.dp_time_control {
+                @if variable-exists(dp_header_hover_background) and $dp_header_hover_background != $dp_background { background-color: $dp_header_hover_background; }
+                @if variable-exists(dp_header_hover_color) and $dp_header_hover_color != $dp_color { color: $dp_header_hover_color; }
+            }
+        }
+    }
+
+    .dp_monthpicker,
+    .dp_yearpicker,
+    .dp_timepicker {
+        td {
+            width: 33.3333%;
+        }
+    }
+
+    .dp_timepicker .dp_disabled {
+        @if variable-exists(dp_time_background) and $dp_time_background != $dp_weekday_disabled_background { background: $dp_time_background; }
+        border: none;
+        color: if(variable-exists(dp_time_color), $dp_time_color, if(variable-exists(dp_weekday_color), $dp_weekday_color, $dp_color));
+        font-size: ceil($dp_font_size * 2);
+        font-weight: bold;
+    }
+
+    .dp_time_separator {
+        div {
+            position: relative;
+            &:after {
+                content: ":";
+                color: if(variable-exists(dp_time_separator_color), $dp_time_separator_color, if(variable-exists(dp_weekday_color), $dp_weekday_color, $dp_color));
+                font-size: ceil($dp_font_size * 1.5);
+                left: 100%;
+                margin-left: 2px;
+                margin-top: -$dp_font_size;
+                position: absolute;
+                top: 50%;
+                z-index: 1;
+            }
+        }
+    }
+
+    .dp_header {
+        @if variable-exists(dp_padding_width_vertical) { margin-bottom: $dp_padding_width_vertical; }
+
+        // fix for Edge replacing &#9664; and &#9654; Unicode symbols with emojis
+        // https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/11844964/
+        @supports (-ms-ime-align:auto) {
+            font-family: 'Segoe UI Symbol', Tahoma, Arial, Helvetica, sans-serif;
+        }
+    }
+
+    .dp_footer {
+        @if variable-exists(dp_padding_width_vertical) { margin-top: $dp_padding_width_vertical; }
+        .dp_icon {
+            width: 50%;
+        }
+    }
+
+    .dp_actions {
+        td {
+            @if variable-exists(dp_header_background) and $dp_header_background != $dp_background { background: $dp_header_background; }
+            @if variable-exists(dp_border_radius) { border-radius: $dp_border_radius; }
+            @if variable-exists(dp_header_color) and $dp_header_color != $dp_color { color: $dp_header_color; }
+            @if variable-exists(dp_header_padding) and $dp_header_padding != $dp_cell_padding { padding: $dp_header_padding; }
+        }
+
+        .dp_caption {
+            font-weight: bold;
+            width: 100%;
+        }
+
+        .dp_previous,
+        .dp_next {
+            *padding: 0 10px; // for IE6 & 7
+        }
+
+        .dp_hover {
+            @if variable-exists(dp_header_hover_background) and $dp_header_hover_background != $dp_background { background-color: $dp_header_hover_background; }
+            @if variable-exists(dp_header_hover_color) and $dp_header_hover_color != $dp_color { color: $dp_header_hover_color; }
+        }
+    }
+
+    .dp_daypicker th {
+        @if variable-exists(dp_heading_background) and $dp_heading_background != $dp_background { background: $dp_heading_background; }
+        @if variable-exists(dp_heading_color) and $dp_heading_color != $dp_color { color: $dp_heading_color; }
+        cursor: text;
+        font-weight: bold;
+    }
+
+    &.dp_hidden {
+        display: none;
+    }
+
+    .dp_icon {
+        height: 16px;
+        background-image: url('icons.png');
+        background-repeat: no-repeat;
+        text-indent: -9999px;
+        *text-indent: 0; // for IE6 & 7
+
+        &.dp_confirm {
+            background-position: center -#{128 - $dp_header_padding};
+        }
+
+        &.dp_view_toggler {
+            background-position: center -#{96 - $dp_header_padding};
+
+            &.dp_calendar {
+                background-position: center -#{64 - $dp_header_padding};
+            }
+        }
+    }
+}
+
+button.Zebra_DatePicker_Icon {
+    background: url('icons.png') no-repeat center top;
+    border: none;
+    cursor: pointer;
+    display: block;
+    height: 16px;
+    line-height: 0;
+    padding: 0;
+    position: absolute;
+    text-indent: -9000px;
+    width: 16px;
+
+    &.Zebra_DatePicker_Icon_Disabled {
+        background-position: center -32px;
+        cursor: default;
+    }
+}
+
