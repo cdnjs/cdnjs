@@ -1,0 +1,117 @@
+
+/*~
+  name: Dialog
+  category: Dialog
+  elements: ons-dialog
+  markup: |
+    <div class="dialog-mask"></div>
+    <div class="dialog">
+      <div class="dialog-container">
+        <p style="text-align:center;margin-top:40px;opacity:0.4;">Content</p>
+      </div>
+    </div>
+*/
+
+.dialog {
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+
+  /* mixin: reset-base */
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+
+  /* mixin: reset-cursor */
+  cursor: default;
+  user-select: none;
+
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: auto auto;
+  overflow: hidden;
+  min-width: 270px;
+  min-height: 100px;
+  text-align: left;
+}
+
+.dialog-container {
+  height: inherit;
+  min-height: inherit;
+  overflow: hidden;
+  border-radius: 4px;
+  background-color: var(--dialog-background-color);
+  -webkit-mask-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC');
+  color: var(--dialog-text-color);
+}
+
+.dialog-mask {
+  /* mixin: reset-base */
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+
+  /* mixin: reset-cursor */
+  cursor: default;
+  user-select: none;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+/*~
+  name: Material Dialog
+  category: Dialog
+  elements: ons-dialog
+  markup: |
+    <div class="dialog-mask dialog-mask--material"></div>
+    <div class="dialog dialog--material">
+      <div class="dialog dialog-container--material">
+        <p style="margin-left:24px;margin-right:24px">The quick brown fox jumps over the lazy dog.</p>
+      </div>
+    </div>
+*/
+
+.dialog--material {
+
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: var(--material-font-weight);
+
+  text-align: left;
+
+  /* mixin: material-shadow-5 */
+  box-shadow:
+    0 16px 24px 2px rgba(0, 0, 0, 0.14),
+    0 6px 30px 5px rgba(0, 0, 0, 0.12),
+    0 8px 10px -5px rgba(0, 0, 0, 0.4);
+}
+
+.dialog-container--material {
+  border-radius: 2px;
+  background-color: var(--material-dialog-background-color);
+  color: var(--material-dialog-text-color);
+}
+
+.dialog-mask--material {
+  background-color: rgba(0, 0, 0, 0.3);
+}

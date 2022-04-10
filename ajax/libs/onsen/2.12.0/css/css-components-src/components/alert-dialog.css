@@ -1,0 +1,417 @@
+
+:root {
+}
+
+/*~
+  name: Alert Dialog
+  category: Alert Dialog
+  elements: ons-alert-dialog
+  markup: |
+    <div class="alert-dialog-mask"></div>
+    <div class="alert-dialog">
+      <div class="alert-dialog-container">
+        <div class="alert-dialog-title">Alert</div>
+
+        <div class="alert-dialog-content">
+          Hello World!
+        </div>
+
+        <div class="alert-dialog-footer">
+          <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
+        </div>
+      </div>
+    </div>
+*/
+
+.alert-dialog {
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+
+  /* mixin: reset-base */
+  padding: 0;
+  font: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+
+  /* mixin: reset-cursor */
+  cursor: default;
+  user-select: none;
+
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 270px;
+  margin: auto;
+  background-color: var(--alert-dialog-background-color);
+  border-radius: 8px;
+  overflow: visible;
+  max-width: 95%;
+  color: var(--alert-dialog-text-color);
+}
+
+.alert-dialog-container {
+  height: inherit;
+  padding-top: 16px;
+  overflow: hidden;
+}
+
+.alert-dialog-title {
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  font-size: var(--font-size);
+  font-weight: var(--font-weight--large);
+  padding: 0 8px;
+  text-align: center;
+  color: var(--alert-dialog-text-color);
+}
+
+.alert-dialog-content {
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+  background-clip: padding-box;
+
+  padding: 4px 12px 8px;
+  font-size: var(--font-size--mini);
+  min-height: 36px;
+  text-align: center;
+  color: var(--alert-dialog-text-color);
+}
+
+.alert-dialog-footer {
+  width: 100%;
+}
+
+.alert-dialog-button {
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+
+  /* mixin: reset-base */
+  font: inherit;
+  background: transparent;
+
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+
+  /* mixin: reset-cursor */
+  cursor: default;
+  user-select: none;
+
+  /* mixin: ellipsis */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+  text-decoration: none;
+  letter-spacing: 0;
+  vertical-align: middle;
+  border: none;
+  border-top: 1px solid var(--alert-dialog-separator-color);
+  font-size: calc(var(--font-size) - 1px);
+  padding: 0 8px;
+  margin: 0;
+  display: block;
+  width: 100%;
+  background-color: transparent;
+  text-align: center;
+  height: 44px;
+  line-height: 44px;
+  outline: none;
+  color: var(--alert-dialog-button-color);
+}
+
+/* @media (--retina-query) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .alert-dialog-button {
+    border-top: none;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-image: linear-gradient(180deg, var(--alert-dialog-separator-color), var(--alert-dialog-separator-color) 50%, transparent 50%);
+  }
+}
+
+.alert-dialog-button:active {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.alert-dialog-button--primal {
+  font-weight: var(--font-weight--large);
+}
+
+.alert-dialog-footer--rowfooter {
+  white-space: nowrap;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.alert-dialog-button--rowfooter {
+  flex: 1;
+  display: block;
+  width: 100%;
+  border-left: 1px solid var(--alert-dialog-separator-color);
+}
+
+/* @media (--retina-query) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .alert-dialog-button--rowfooter {
+    border-top: none;
+    border-left: none;
+    background-size: 100% 1px, 1px 100%;
+    background-repeat: no-repeat;
+    background-position: top, left;
+    background-image:
+      linear-gradient(0deg, transparent, transparent 50%, var(--alert-dialog-separator-color) 50%),
+      linear-gradient(90deg, transparent, transparent 50%, var(--alert-dialog-separator-color) 50%);
+  }
+}
+
+.alert-dialog-button--rowfooter:first-child {
+  border-left: none;
+}
+
+/* @media (--retina-query) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .alert-dialog-button--rowfooter:first-child {
+    border-top: none;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top, left;
+    background-image: linear-gradient(0deg, transparent, transparent 50%, var(--alert-dialog-separator-color) 50%);
+  }
+}
+
+.alert-dialog-mask {
+  /* mixin: reset-base */
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+
+  /* mixin: reset-cursor */
+  cursor: default;
+  user-select: none;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+/*~
+  name: Alert Dialog without Title
+  category: Alert Dialog
+  elements: ons-alert-dialog
+  markup: |
+    <div class="alert-dialog-mask"></div>
+    <div class="alert-dialog">
+      <div class="alert-dialog-container">
+        <div class="alert-dialog-content">
+          Hello World!
+        </div>
+
+        <div class="alert-dialog-footer">
+          <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
+        </div>
+      </div>
+    </div>
+*/
+
+/*~
+  name: Alert Dialog with Multiple Buttons
+  category: Alert Dialog
+  elements: ons-alert-dialog
+  markup: |
+    <div class="alert-dialog-mask"></div>
+    <div class="alert-dialog">
+      <div class="alert-dialog-container">
+        <div class="alert-dialog-content">
+          Hello World!
+        </div>
+
+        <div class="alert-dialog-footer">
+          <button class="alert-dialog-button">Cancel</button>
+          <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
+        </div>
+      </div>
+    </div>
+*/
+
+/*~
+  name: Alert Dialog with Multiple Buttons 2
+  category: Alert Dialog
+  elements: ons-alert-dialog
+  markup: |
+    <div class="alert-dialog-mask"></div>
+    <div class="alert-dialog">
+      <div class="alert-dialog-container">
+        <div class="alert-dialog-title">Alert</div>
+
+        <div class="alert-dialog-content">
+          Hello World!
+        </div>
+
+        <div class="alert-dialog-footer alert-dialog-footer--rowfooter">
+          <button class="alert-dialog-button alert-dialog-button--rowfooter">Left</button>
+          <button class="alert-dialog-button alert-dialog-button--primal alert-dialog-button--rowfooter">Center</button>
+          <button class="alert-dialog-button alert-dialog-button--rowfooter">Right</button>
+        </div>
+      </div>
+    </div>
+*/
+
+/*~
+  name: Material Alert Dialog
+  category: Alert Dialog
+  elements: ons-alert-dialog
+  markup: |
+    <div class="alert-dialog-mask alert-dialog-mask--material"></div>
+    <div class="alert-dialog alert-dialog--material">
+      <div class="alert-dialog-container alert-dialog-container--material">
+        <div class="alert-dialog-title alert-dialog-title--material">
+          Dialog title
+        </div>
+        <div class="alert-dialog-content alert-dialog-content--material">
+          Some dialog content.
+        </div>
+        <div class="alert-dialog-footer alert-dialog-footer--material">
+          <button class="alert-dialog-button alert-dialog-button--material">OK</button>
+          <button class="alert-dialog-button alert-dialog-button--material">CANCEL</button>
+        </div>
+      </div>
+    </div>
+*/
+
+.alert-dialog--material {
+  border-radius: 2px;
+  background-color: var(--material-alert-dialog-background-color);
+}
+
+.alert-dialog-container--material {
+  padding: 22px 0 0 0;
+
+  /* mixin: material-shadow-5 */
+  box-shadow:
+    0 16px 24px 2px rgba(0, 0, 0, 0.14),
+    0 6px 30px 5px rgba(0, 0, 0, 0.12),
+    0 8px 10px -5px rgba(0, 0, 0, 0.4);
+}
+
+.alert-dialog-title--material {
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+
+  text-align: left;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 0 24px;
+  color: var(--material-alert-dialog-title-color);
+}
+
+.alert-dialog-content--material {
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+
+  text-align: left;
+  font-size: 16px;
+  font-weight: var(--material-font-weight);
+  line-height: 20px;
+  padding: 0 24px;
+  margin: 24px 0 10px 0;
+  min-height: 0;
+  color: var(--material-alert-dialog-content-color);
+}
+
+.alert-dialog-footer--material {
+  display: block;
+  padding: 0;
+  height: 52px;
+  box-sizing: border-box;
+  margin: 0;
+  line-height: 1;
+}
+
+.alert-dialog-button--material {
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+
+  text-transform: uppercase;
+  display: inline-block;
+  width: auto;
+  float: right;
+  background: none;
+  border: none;
+  border-radius: 2px;
+  font-size: 14px;
+  font-weight: 500;
+  outline: none;
+  height: 36px;
+  line-height: 36px;
+  padding: 0 8px;
+  margin: 8px 8px 8px 0;
+  box-sizing: border-box;
+  min-width: 50px;
+  color: var(--material-alert-dialog-button-color);
+}
+
+/* @media (--retina-query) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .alert-dialog-button--material {
+    background: none;
+  }
+}
+
+.alert-dialog-button--material:active {
+  background-color: initial;
+}
+
+/* stylelint-disable-next-line selector-class-pattern */
+.alert-dialog-button--rowfooter--material, .alert-dialog-button--rowfooter--material:first-child {
+  border: 0;
+}
+
+/* @media (--retina-query) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  /* stylelint-disable-next-line selector-class-pattern */
+  .alert-dialog-button--rowfooter--material, .alert-dialog-button--rowfooter--material:first-child {
+    background: none;
+  }
+}
+
+/* stylelint-disable-next-line selector-class-pattern */
+.alert-dialog-button--primal--material {
+  font-weight: 500;
+}
+
+/* @media (--retina-query) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  /* stylelint-disable-next-line selector-class-pattern */
+  .alert-dialog-button--primal--material {
+    background: none;
+  }
+}
+
+.alert-dialog-mask--material {
+  background-color: rgba(0, 0, 0, 0.3);
+}

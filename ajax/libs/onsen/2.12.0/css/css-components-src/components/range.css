@@ -1,0 +1,292 @@
+
+:root {
+  --range-thumb-size: 28px;
+  --range-track-height: 2px;
+
+  --material-range-track-height: 2px;
+  --material-range-thumb-size: 14px;
+  --material-range-thumb-radius: calc(var(--material-range-thumb-size) / 2);
+  --material-range-thumb-vertical-margin: 24px;
+  --material-range-thumb-horizontal-margin: 2px;
+}
+
+/*~
+  name: Range
+  category: Range
+  elements: ons-range
+  markup: |
+    <div class="range">
+      <input type="range" class="range__input">
+      <input type="range" class="range__focus-ring">
+    </div>
+
+    <div class="range range--disabled">
+      <input type="range" class="range__input" disabled>
+      <input type="range" class="range__focus-ring" disabled>
+    </div>
+*/
+
+.range {
+  display: inline-block;
+  position: relative;
+  width: 100px;
+  height: calc(var(--range-thumb-size) + 2px);
+  margin: 0;
+  padding: 0;
+  background-image: linear-gradient(var(--range-track-background-color), var(--range-track-background-color));
+  background-position: left center;
+  background-size: 100% var(--range-track-height);
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+
+.range__input {
+  /* mixin: reset-input */
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  vertical-align: top;
+  outline: none;
+  line-height: 1;
+
+  appearance: none;
+  background-image: linear-gradient(var(--range-track-background-color-active), var(--range-track-background-color-active));
+  background-position: left center;
+  background-size: 0% var(--range-track-height);
+  background-repeat: no-repeat;
+  height: calc(var(--range-thumb-size) + 2px);
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.range__input::-moz-range-track {
+  position: relative;
+  border: none;
+  background: none;
+  box-shadow: none;
+  top: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.range__input::-ms-track {
+  position: relative;
+  border: none;
+  background-color: var(--range-track-background-color);
+  height: 0;
+  border-radius: 50%;
+}
+
+.range__input::-webkit-slider-thumb {
+  /* mixin: range__thumb */
+  cursor: pointer;
+  position: relative;
+  height: var(--range-thumb-size);
+  width: var(--range-thumb-size);
+  background-color: var(--range-thumb-background-color);
+  border: none;
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.25), 0 3px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+  appearance: none;
+  top: 0;
+  z-index: 1;
+}
+
+.range__input::-moz-range-thumb {
+  /* mixin: range__thumb */
+  cursor: pointer;
+  position: relative;
+  height: var(--range-thumb-size);
+  width: var(--range-thumb-size);
+  background-color: var(--range-thumb-background-color);
+  border: none;
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.25), 0 3px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  margin: 0;
+  padding: 0;
+}
+
+.range__input::-ms-thumb {
+  /* mixin: range__thumb */
+  cursor: pointer;
+  position: relative;
+  height: var(--range-thumb-size);
+  width: var(--range-thumb-size);
+  background-color: var(--range-thumb-background-color);
+  border: none;
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.25), 0 3px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  margin: 0;
+  padding: 0;
+
+  top: 0;
+}
+
+.range__input::-ms-fill-lower {
+  height: 2px;
+  background-color: var(--range-track-background-color-active);
+}
+
+.range__input::-ms-tooltip {
+  display: none;
+}
+
+.range__input:disabled {
+  opacity: 1;
+  pointer-events: none;
+}
+
+.range__focus-ring {
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  display: none;
+
+  /* mixin: reset-input */
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  border: none;
+  vertical-align: top;
+  outline: none;
+  line-height: 1;
+
+  appearance: none;
+  background: none;
+  height: calc(var(--range-thumb-size) + 2px);
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+}
+
+.range--disabled {
+  /* mixin: disabled */
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+/*~
+  name: Material Range
+  category: Range
+  elements: ons-range
+  markup: |
+    <div class="range range--material">
+      <input type="range" class="range__input range--material__input" min="0" max="100">
+      <!-- <input type="range" class="range__focus-ring range--material__focus-ring"> -->
+    </div>
+
+    <div class="range range--material range--disabled">
+      <input type="range" class="range__input range--material__input" disabled>
+      <!-- <input type="range" class="range__focus-ring range--material__focus-ring" disabled> -->
+    </div>
+*/
+
+.range--material {
+  position: relative;
+  background-image: linear-gradient(var(--material-range-track-color), var(--material-range-track-color));
+}
+
+.range--material__input {
+  background-image: linear-gradient(var(--material-range-thumb-color), var(--material-range-thumb-color));
+  background-position: center left;
+  background-size: 0% 2px;
+}
+
+.range--material__focus-ring {
+  display: block;
+}
+
+.range--material__focus-ring::-webkit-slider-thumb {
+  appearance: none;
+  width: var(--material-range-thumb-size);
+  height: var(--material-range-thumb-size);
+  border: none;
+  box-shadow: 0 0 0 calc((32px - var(--material-range-thumb-size)) / 2) var(--material-range-thumb-color);
+  background-color: var(--material-range-thumb-color);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+}
+
+.range--material__input.range__input--active + .range--material__focus-ring::-webkit-slider-thumb {
+  opacity: 0.2;
+  transform: scale(1.5, 1.5, 1.5);
+}
+
+.range--material__input::-webkit-slider-thumb {
+  position: relative;
+  box-sizing: border-box;
+  border: none;
+  background-color: transparent;
+  width: var(--material-range-thumb-size);
+  height: 32px;
+  border-radius: 0;
+  box-shadow: none;
+  background-image: radial-gradient(circle farthest-corner, var(--material-range-thumb-color) 0%, var(--material-range-thumb-color) calc(var(--material-range-thumb-radius) - 0.4px), transparent var(--material-range-thumb-radius));
+  transition: transform 0.1s linear;
+  overflow: visible;
+}
+
+.range--material__input[_zero]::-webkit-slider-thumb {
+  background-image: radial-gradient(circle farthest-corner, var(--material-range-zero-thumb-color) 0%, var(--material-range-zero-thumb-color) 4px, var(--material-range-track-color) 4px, var(--material-range-track-color) calc(var(--material-range-thumb-radius) - 0.6px), transparent calc(var(--material-range-thumb-radius)));
+}
+
+.range--material__input[_zero] + .range--material__focus-ring::-webkit-slider-thumb {
+  box-shadow: 0 0 0 calc((32px - var(--material-range-thumb-size)) / 2) var(--material-range-track-color);
+}
+
+.range--material__input::-moz-range-track {
+  background: none;
+}
+
+.range--material__input::-moz-range-thumb,
+.range--material__input:focus::-moz-range-thumb {
+  box-sizing: border-box;
+  border: none;
+  width: var(--material-range-thumb-size);
+  height: 32px;
+  border-radius: 0;
+  background-color: transparent;
+  background-image: -moz-radial-gradient(circle farthest-corner, var(--material-range-thumb-color) 0%, var(--material-range-thumb-color) calc(var(--material-range-thumb-radius) - 0.4px), transparent var(--material-range-thumb-radius)); /* stylelint-disable-line */
+  box-shadow: none;
+}
+
+.range--material__input:active::-webkit-slider-thumb,
+.range--material__input.range__input--active::-webkit-slider-thumb { /* NOTICE: ":active" does not work on Android Chrome. */
+  transform: scale(1.5);
+  transition: transform 0.1s linear;
+}
+
+/* stylelint-disable */ .range--disabled.range--material { /* stylelint-enable */
+  opacity: 1;
+}
+
+/* stylelint-disable */ .range--disabled > .range--material__input { /* stylelint-enable */
+  background-image: none;
+}
+
+.range--material__input:disabled::-webkit-slider-thumb {
+  background-image: radial-gradient(circle farthest-corner, var(--material-range-disabled-thumb-color) 0%, var(--material-range-disabled-thumb-color) 4px, var(--material-range-disabled-thumb-border-color) 4.4px, var(--material-range-disabled-thumb-border-color) calc(var(--material-range-thumb-radius) + 0.6px), transparent calc(var(--material-range-thumb-radius) + 0.6px));
+  transition: none;
+}
+
+.range--material__input:disabled::-moz-range-thumb {
+  background-image: -moz-radial-gradient(circle farthest-corner, var(--material-range-disabled-thumb-color) 0%, var(--material-range-disabled-thumb-color) 4px, var(--material-range-disabled-thumb-border-color) 4.4px, var(--material-range-disabled-thumb-border-color) calc(var(--material-range-thumb-radius) + 0.6px), transparent calc(var(--material-range-thumb-radius) + 0.6px)); /* stylelint-disable-line */
+  transition: none;
+}
