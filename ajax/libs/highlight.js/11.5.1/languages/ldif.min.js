@@ -1,0 +1,5 @@
+/*! `ldif` grammar compiled for Highlight.js 11.5.1 */
+(()=>{var a=(()=>{"use strict";return a=>({name:"LDIF",contains:[{
+className:"attribute",match:"^dn(?=:)",relevance:10},{className:"attribute",
+match:"^\\w+(?=:)"},{className:"literal",match:"^-"},a.HASH_COMMENT_MODE]})})()
+;hljs.registerLanguage("ldif",a)})();
