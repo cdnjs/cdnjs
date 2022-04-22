@@ -1,0 +1,302 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+/**
+ * @module ol/geom/SimpleGeometry
+ */
+import { abstract } from '../util.js';
+import { createOrUpdateFromFlatCoordinates, getCenter } from '../extent.js';
+import Geometry from './Geometry.js';
+import GeometryLayout from './GeometryLayout.js';
+import { rotate, scale, translate, transform2D } from './flat/transform.js';
+import { clear } from '../obj.js';
+/**
+ * @classdesc
+ * Abstract base class; only used for creating subclasses; do not instantiate
+ * in apps, as cannot be rendered.
+ *
+ * @abstract
+ * @api
+ */
+var SimpleGeometry = /** @class */ (function (_super) {
+    __extends(SimpleGeometry, _super);
+    function SimpleGeometry() {
+        var _this = _super.call(this) || this;
+        /**
+         * @protected
+         * @type {GeometryLayout}
+         */
+        _this.layout = GeometryLayout.XY;
+        /**
+         * @protected
+         * @type {number}
+         */
+        _this.stride = 2;
+        /**
+         * @protected
+         * @type {Array<number>}
+         */
+        _this.flatCoordinates = null;
+        return _this;
+    }
+    /**
+     * @inheritDoc
+     */
+    SimpleGeometry.prototype.computeExtent = function (extent) {
+        return createOrUpdateFromFlatCoordinates(this.flatCoordinates, 0, this.flatCoordinates.length, this.stride, extent);
+    };
+    /**
+     * @abstract
+     * @return {Array<*>} Coordinates.
+     */
+    SimpleGeometry.prototype.getCoordinates = function () {
+        return abstract();
+    };
+    /**
+     * Return the first coordinate of the geometry.
+     * @return {import("../coordinate.js").Coordinate} First coordinate.
+     * @api
+     */
+    SimpleGeometry.prototype.getFirstCoordinate = function () {
+        return this.flatCoordinates.slice(0, this.stride);
+    };
+    /**
+     * @return {Array<number>} Flat coordinates.
+     */
+    SimpleGeometry.prototype.getFlatCoordinates = function () {
+        return this.flatCoordinates;
+    };
+    /**
+     * Return the last coordinate of the geometry.
+     * @return {import("../coordinate.js").Coordinate} Last point.
+     * @api
+     */
+    SimpleGeometry.prototype.getLastCoordinate = function () {
+        return this.flatCoordinates.slice(this.flatCoordinates.length - this.stride);
+    };
+    /**
+     * Return the {@link module:ol/geom/GeometryLayout layout} of the geometry.
+     * @return {GeometryLayout} Layout.
+     * @api
+     */
+    SimpleGeometry.prototype.getLayout = function () {
+        return this.layout;
+    };
+    /**
+     * @inheritDoc
+     */
+    SimpleGeometry.prototype.getSimplifiedGeometry = function (squaredTolerance) {
+        if (this.simplifiedGeometryRevision != this.getRevision()) {
+            clear(this.simplifiedGeometryCache);
+            this.simplifiedGeometryMaxMinSquaredTolerance = 0;
+            this.simplifiedGeometryRevision = this.getRevision();
+        }
+        // If squaredTolerance is negative or if we know that simplification will not
+        // have any effect then just return this.
+        if (squaredTolerance < 0 ||
+            (this.simplifiedGeometryMaxMinSquaredTolerance !== 0 &&
+                squaredTolerance <= this.simplifiedGeometryMaxMinSquaredTolerance)) {
+            return this;
+        }
+        var key = squaredTolerance.toString();
+        if (this.simplifiedGeometryCache.hasOwnProperty(key)) {
+            return this.simplifiedGeometryCache[key];
+        }
+        else {
+            var simplifiedGeometry = this.getSimplifiedGeometryInternal(squaredTolerance);
+            var simplifiedFlatCoordinates = simplifiedGeometry.getFlatCoordinates();
+            if (simplifiedFlatCoordinates.length < this.flatCoordinates.length) {
+                this.simplifiedGeometryCache[key] = simplifiedGeometry;
+                return simplifiedGeometry;
+            }
+            else {
+                // Simplification did not actually remove any coordinates.  We now know
+                // that any calls to getSimplifiedGeometry with a squaredTolerance less
+                // than or equal to the current squaredTolerance will also not have any
+                // effect.  This allows us to short circuit simplification (saving CPU
+                // cycles) and prevents the cache of simplified geometries from filling
+                // up with useless identical copies of this geometry (saving memory).
+                this.simplifiedGeometryMaxMinSquaredTolerance = squaredTolerance;
+                return this;
+            }
+        }
+    };
+    /**
+     * @param {number} squaredTolerance Squared tolerance.
+     * @return {SimpleGeometry} Simplified geometry.
+     * @protected
+     */
+    SimpleGeometry.prototype.getSimplifiedGeometryInternal = function (squaredTolerance) {
+        return this;
+    };
+    /**
+     * @return {number} Stride.
+     */
+    SimpleGeometry.prototype.getStride = function () {
+        return this.stride;
+    };
+    /**
+     * @param {GeometryLayout} layout Layout.
+     * @param {Array<number>} flatCoordinates Flat coordinates.
+     */
+    SimpleGeometry.prototype.setFlatCoordinates = function (layout, flatCoordinates) {
+        this.stride = getStrideForLayout(layout);
+        this.layout = layout;
+        this.flatCoordinates = flatCoordinates;
+    };
+    /**
+     * @abstract
+     * @param {!Array<*>} coordinates Coordinates.
+     * @param {GeometryLayout=} opt_layout Layout.
+     */
+    SimpleGeometry.prototype.setCoordinates = function (coordinates, opt_layout) {
+        abstract();
+    };
+    /**
+     * @param {GeometryLayout|undefined} layout Layout.
+     * @param {Array<*>} coordinates Coordinates.
+     * @param {number} nesting Nesting.
+     * @protected
+     */
+    SimpleGeometry.prototype.setLayout = function (layout, coordinates, nesting) {
+        /** @type {number} */
+        var stride;
+        if (layout) {
+            stride = getStrideForLayout(layout);
+        }
+        else {
+            for (var i = 0; i < nesting; ++i) {
+                if (coordinates.length === 0) {
+                    this.layout = GeometryLayout.XY;
+                    this.stride = 2;
+                    return;
+                }
+                else {
+                    coordinates = /** @type {Array} */ (coordinates[0]);
+                }
+            }
+            stride = coordinates.length;
+            layout = getLayoutForStride(stride);
+        }
+        this.layout = layout;
+        this.stride = stride;
+    };
+    /**
+     * @inheritDoc
+     * @api
+     */
+    SimpleGeometry.prototype.applyTransform = function (transformFn) {
+        if (this.flatCoordinates) {
+            transformFn(this.flatCoordinates, this.flatCoordinates, this.stride);
+            this.changed();
+        }
+    };
+    /**
+     * @inheritDoc
+     * @api
+     */
+    SimpleGeometry.prototype.rotate = function (angle, anchor) {
+        var flatCoordinates = this.getFlatCoordinates();
+        if (flatCoordinates) {
+            var stride = this.getStride();
+            rotate(flatCoordinates, 0, flatCoordinates.length, stride, angle, anchor, flatCoordinates);
+            this.changed();
+        }
+    };
+    /**
+     * @inheritDoc
+     * @api
+     */
+    SimpleGeometry.prototype.scale = function (sx, opt_sy, opt_anchor) {
+        var sy = opt_sy;
+        if (sy === undefined) {
+            sy = sx;
+        }
+        var anchor = opt_anchor;
+        if (!anchor) {
+            anchor = getCenter(this.getExtent());
+        }
+        var flatCoordinates = this.getFlatCoordinates();
+        if (flatCoordinates) {
+            var stride = this.getStride();
+            scale(flatCoordinates, 0, flatCoordinates.length, stride, sx, sy, anchor, flatCoordinates);
+            this.changed();
+        }
+    };
+    /**
+     * @inheritDoc
+     * @api
+     */
+    SimpleGeometry.prototype.translate = function (deltaX, deltaY) {
+        var flatCoordinates = this.getFlatCoordinates();
+        if (flatCoordinates) {
+            var stride = this.getStride();
+            translate(flatCoordinates, 0, flatCoordinates.length, stride, deltaX, deltaY, flatCoordinates);
+            this.changed();
+        }
+    };
+    return SimpleGeometry;
+}(Geometry));
+/**
+ * @param {number} stride Stride.
+ * @return {GeometryLayout} layout Layout.
+ */
+function getLayoutForStride(stride) {
+    var layout;
+    if (stride == 2) {
+        layout = GeometryLayout.XY;
+    }
+    else if (stride == 3) {
+        layout = GeometryLayout.XYZ;
+    }
+    else if (stride == 4) {
+        layout = GeometryLayout.XYZM;
+    }
+    return (
+    /** @type {GeometryLayout} */ (layout));
+}
+/**
+ * @param {GeometryLayout} layout Layout.
+ * @return {number} Stride.
+ */
+export function getStrideForLayout(layout) {
+    var stride;
+    if (layout == GeometryLayout.XY) {
+        stride = 2;
+    }
+    else if (layout == GeometryLayout.XYZ || layout == GeometryLayout.XYM) {
+        stride = 3;
+    }
+    else if (layout == GeometryLayout.XYZM) {
+        stride = 4;
+    }
+    return /** @type {number} */ (stride);
+}
+/**
+ * @param {SimpleGeometry} simpleGeometry Simple geometry.
+ * @param {import("../transform.js").Transform} transform Transform.
+ * @param {Array<number>=} opt_dest Destination.
+ * @return {Array<number>} Transformed flat coordinates.
+ */
+export function transformGeom2D(simpleGeometry, transform, opt_dest) {
+    var flatCoordinates = simpleGeometry.getFlatCoordinates();
+    if (!flatCoordinates) {
+        return null;
+    }
+    else {
+        var stride = simpleGeometry.getStride();
+        return transform2D(flatCoordinates, 0, flatCoordinates.length, stride, transform, opt_dest);
+    }
+}
+export default SimpleGeometry;
+//# sourceMappingURL=SimpleGeometry.js.map
