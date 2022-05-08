@@ -1,0 +1,38 @@
+// Duplicated & altered from Bootstrap 5
+.input-group {
+    &:not(.has-validation) {
+        > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu) {
+            &.select2-container--bootstrap-5 {
+                .select2-selection {
+                    @include border-end-radius(0);
+                }
+            }
+        }
+    }
+
+    &.has-validation {
+        > :nth-last-child(n + 3):not(.dropdown-toggle):not(.dropdown-menu) {
+            &.select2-container--bootstrap-5 {
+                .select2-selection {
+                    @include border-end-radius(0);
+                }
+            }
+        }
+    }
+
+    > .input-group-text ~ .select2-container--bootstrap-5,
+    > .btn ~ .select2-container--bootstrap-5,
+    > .dropdown-menu ~ .select2-container--bootstrap-5 {
+        .select2-selection {
+            @include border-start-radius(0);
+        }
+    }
+
+    // Ensure container takes up remaining room
+    .select2-container--bootstrap-5 {
+        flex-grow: 1;
+        .select2-selection {
+            height: 100%;
+        }
+    }
+}

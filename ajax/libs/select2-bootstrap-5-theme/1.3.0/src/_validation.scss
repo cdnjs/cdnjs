@@ -1,0 +1,63 @@
+.select2-container--bootstrap-5 {
+    // Valid
+    .is-valid + &,
+    .was-validated select:valid + & {
+        // Set border color
+        .select2-selection {
+            border-color: $s2bs5-valid-border-color;
+        }
+
+        &.select2-container--focus,
+        &.select2-container--open {
+            // Set border color & box shadow
+            .select2-selection {
+                border-color: $s2bs5-valid-border-color;
+                box-shadow: $s2bs5-valid-focus-box-shadow;
+            }
+        }
+
+        &.select2-container--open {
+            // Hide bottom border when open and below
+            &.select2-container--below .select2-selection {
+                border-bottom: 0 solid transparent;
+            }
+
+            // Hide top border when open and above
+            &.select2-container--above .select2-selection {
+                border-top: 0 solid transparent;
+                @include border-top-radius(0);
+            }
+        }
+    }
+
+    // Invalid
+    .is-invalid + &,
+    .was-validated select:invalid + & {
+        // Set border color
+        .select2-selection {
+            border-color: $s2bs5-invalid-border-color;
+        }
+
+        &.select2-container--focus,
+        &.select2-container--open {
+            // Set border color & box shadow
+            .select2-selection {
+                border-color: $s2bs5-invalid-border-color;
+                box-shadow: $s2bs5-invalid-focus-box-shadow;
+            }
+        }
+
+        &.select2-container--open {
+            // Hide bottom border when open and below
+            &.select2-container--below .select2-selection {
+                border-bottom: 0 solid transparent;
+            }
+
+            // Hide top border when open and above
+            &.select2-container--above .select2-selection {
+                border-top: 0 solid transparent;
+                @include border-top-radius(0);
+            }
+        }
+    }
+}

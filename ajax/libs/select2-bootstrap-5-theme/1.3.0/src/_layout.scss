@@ -1,0 +1,90 @@
+// Base layout
+.select2-container--bootstrap-5 {
+    display: block;
+
+    @at-root select + & {
+        z-index: 1;
+    }
+
+    *:focus {
+        outline: 0;
+    }
+
+    // Input
+    .select2-selection {
+        width: 100%;
+        min-height: $s2bs5-height;
+        padding: $s2bs5-padding-y $s2bs5-padding-x;
+        font-family: $s2bs5-font-family;
+        @include font-size($s2bs5-font-size);
+        font-weight: $s2bs5-font-weight;
+        line-height: $s2bs5-line-height;
+        color: $s2bs5-color;
+        background-color: $s2bs5-bg;
+        border: $s2bs5-border-width solid $s2bs5-border-color;
+        @include border-radius($s2bs5-border-radius, 0);
+        @include box-shadow($s2bs5-box-shadow);
+        @include transition($s2bs5-transition);
+        appearance: none;
+    }
+
+    // Focused/Open Input
+    &.select2-container--focus,
+    &.select2-container--open {
+        .select2-selection {
+            border-color: $s2bs5-focus-border-color;
+            box-shadow: $s2bs5-focus-box-shadow;
+        }
+    }
+
+    // Hide bottom border when open and below
+    &.select2-container--open.select2-container--below .select2-selection {
+        border-bottom: 0 solid transparent;
+        @include border-bottom-radius(0);
+    }
+
+    // Hide top border when open and above
+    &.select2-container--open.select2-container--above .select2-selection {
+        border-top: 0 solid transparent;
+        @include border-top-radius(0);
+    }
+
+    // Placeholder Width
+    .select2-search {
+        width: 100%;
+    }
+
+    .select2-search--inline {
+        .select2-search__field {
+            vertical-align: top;
+        }
+    }
+
+    // Clear Button
+    .select2-selection--single,
+    .select2-selection--multiple {
+        .select2-selection__clear {
+            position: absolute;
+            top: 50%;
+            right: $s2bs5-indicator-padding;
+            width: $s2bs5-clear-width;
+            height: $s2bs5-clear-height;
+            padding: $s2bs5-clear-padding-y $s2bs5-clear-padding-x;
+            overflow: hidden;
+            text-indent: 100%;
+            white-space: nowrap;
+            background: $s2bs5-clear-bg;
+            transform: translateY(-50%);
+
+            // Change icon on hover
+            &:hover {
+                background: $s2bs5-clear-hover-bg;
+            }
+
+            // Hide children
+            >span {
+                display: none;
+            }
+        }
+    }
+}

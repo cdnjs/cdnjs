@@ -1,0 +1,117 @@
+.select2-container--bootstrap-5 {
+    + .select2-container--bootstrap-5 {
+        z-index: $s2bs5-zindex;
+    }
+
+    // Dropdown
+    .select2-dropdown {
+        z-index: $s2bs5-zindex;
+        overflow: hidden;
+        color: $s2bs5-color;
+        background-color: $s2bs5-bg;
+        border-color: $s2bs5-focus-border-color;
+        @include border-radius($s2bs5-border-radius);
+
+        // Open Below
+        &.select2-dropdown--below {
+            border-top: 0 solid transparent;
+            @include border-top-radius(0);
+        }
+
+        // Open Above
+        &.select2-dropdown--above {
+            border-bottom: 0 solid transparent;
+            @include border-bottom-radius(0);
+        }
+
+        // Search box
+        .select2-search {
+            padding: $s2bs5-padding-y $s2bs5-padding-x;
+
+            // Search field
+            .select2-search__field {
+                display: block;
+                width: 100%;
+                padding: $s2bs5-padding-y $s2bs5-padding-x;
+                font-family: $s2bs5-font-family;
+                @include font-size($s2bs5-font-size);
+                font-weight: $s2bs5-font-weight;
+                line-height: $s2bs5-line-height;
+                color: $s2bs5-color;
+                background-color: $s2bs5-bg;
+                background-clip: padding-box;
+                border: $s2bs5-border-width solid $s2bs5-border-color;
+                appearance: none;
+
+                @include border-radius($s2bs5-border-radius, 0);
+                @include box-shadow($s2bs5-box-shadow);
+                @include transition($s2bs5-transition);
+
+                &:focus {
+                    border-color: $s2bs5-focus-border-color;
+                    box-shadow: $s2bs5-focus-box-shadow;
+                }
+            }
+        }
+
+        // Items
+        .select2-results__options {
+            &:not(.select2-results__options--nested) {
+                max-height: $s2bs5-options-max-height;
+                overflow-y: auto;
+            }
+
+            // Item
+            .select2-results__option {
+                padding: $s2bs5-item-padding-y $s2bs5-item-padding-x;
+                @include font-size($s2bs5-font-size);
+                font-weight: $s2bs5-font-weight;
+                line-height: $s2bs5-line-height;
+
+                // No results message
+                &.select2-results__message {
+                    color: $s2bs5-placeholder-color;
+                }
+
+                // Highlighted Item
+                &.select2-results__option--highlighted {
+                    color: color-contrast($s2bs5-item-hover-bg);
+                    background-color: $s2bs5-item-hover-bg;
+                }
+
+                // Selected Item
+                &.select2-results__option--selected,
+                &[aria-selected="true"]:not(.select2-results__option--highlighted) {
+                    color: color-contrast($s2bs5-item-active-bg);
+                    background-color: $s2bs5-item-active-bg;
+                }
+
+                // Disabled Item
+                &.select2-results__option--disabled,
+                &[aria-disabled="true"] {
+                    color: $s2bs5-disabled-color;
+                }
+
+                // Optgroup
+                &[role="group"] {
+                    padding: 0;
+
+                    // Group Header
+                    .select2-results__group {
+                        padding: $s2bs5-group-padding-y $s2bs5-group-padding-x;
+                        font-weight: $s2bs5-group-font-weight;
+                        line-height: $s2bs5-line-height;
+                        color: $s2bs5-group-color;
+                    }
+
+                    // Group Item
+                    .select2-results__options--nested {
+                        .select2-results__option {
+                            padding: $s2bs5-item-padding-y $s2bs5-item-padding-x;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

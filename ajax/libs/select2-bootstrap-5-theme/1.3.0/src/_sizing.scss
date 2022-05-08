@@ -1,0 +1,125 @@
+@mixin s2bs5-sizing($size-list: $s2bs5-small, $selector: "") {
+    // Layout
+    #{$selector}.select2-selection {
+        min-height: map-get($size-list, height);
+        padding: map-get($size-list, padding-y) map-get($size-list, padding-x);
+        @include font-size(map-get($size-list, font-size));
+        @include border-radius(map-get($size-list, border-radius), 0);
+    }
+
+    #{$selector}.select2-selection--single,
+    #{$selector}.select2-selection--multiple {
+        .select2-selection__clear {
+            width: map-get($size-list, clear-width);
+            height: map-get($size-list, clear-height);
+            padding: map-get($size-list, clear-padding-y) map-get($size-list, clear-padding-x);
+            background: map-get($size-list, clear-bg);
+
+            &:hover {
+                background: map-get($size-list, clear-hover-bg);
+            }
+        }
+
+        .select2-search {
+            &,
+            .select2-search__field {
+                height: map-get($size-list, height-inner);
+            }
+        }
+    }
+
+    // Dropdown
+    #{$selector}.select2-dropdown {
+        @include border-radius(map-get($size-list, border-radius));
+
+        // Open Below
+        &.select2-dropdown--below {
+            @include border-top-radius(0);
+        }
+
+        // Open Above
+        &.select2-dropdown--above {
+            @include border-bottom-radius(0);
+        }
+
+        .select2-search {
+            .select2-search__field {
+                padding: map-get($size-list, padding-y) map-get($size-list, padding-x);
+                @include font-size(map-get($size-list, font-size));
+            }
+        }
+
+        .select2-results__options {
+            .select2-results__option {
+                padding: map-get($size-list, item-padding-y) map-get($size-list, item-padding-x);
+                @include font-size(map-get($size-list, font-size));
+
+                &[role="group"] {
+                    .select2-results__group {
+                        padding: map-get($size-list, group-padding-y) map-get($size-list, group-padding-x);
+                    }
+
+                    .select2-results__options--nested {
+                        .select2-results__option {
+                            padding: map-get($size-list, item-padding-y) map-get($size-list, item-padding-x);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Single
+    #{$selector}.select2-selection--single {
+        padding: map-get($size-list, padding-y) $s2bs5-indicator-padding map-get($size-list, padding-y) map-get($size-list, padding-x);
+    }
+
+    // Multiple
+    #{$selector}.select2-selection--multiple {
+        .select2-selection__rendered {
+            .select2-selection__choice {
+                padding: $s2bs5-multi-item-padding-y $s2bs5-multi-item-padding-x;
+                @include font-size(map-get($size-list, font-size));
+
+                .select2-selection__choice__remove {
+                    width: map-get($size-list, clear-width);
+                    height: map-get($size-list, clear-height);
+                    padding: map-get($size-list, clear-padding-y) map-get($size-list, clear-padding-x);
+                    background: map-get($size-list, clear-bg);
+
+                    &:hover {
+                        background: map-get($size-list, clear-hover-bg);
+                    }
+                }
+            }
+        }
+
+        .select2-selection__clear {
+            right: map-get($size-list, padding-x);
+        }
+    }
+}
+
+// Using options
+.select2-container--bootstrap-5 {
+    // Small
+    @include s2bs5-sizing($s2bs5-small, ".select2--small");
+
+    // Large
+    @include s2bs5-sizing($s2bs5-large, ".select2--large");
+}
+
+// Using bootstrap classes
+// Small
+.form-select-sm {
+    ~ .select2-container--bootstrap-5 {
+        @include s2bs5-sizing($s2bs5-small);
+    }
+}
+
+// Large
+.form-select-lg {
+    ~ .select2-container--bootstrap-5 {
+        @include s2bs5-sizing($s2bs5-large);
+    }
+}
