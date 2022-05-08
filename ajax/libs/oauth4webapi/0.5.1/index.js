@@ -1,0 +1,1757 @@
+const NAME = 'oauth4webapi';
+const VERSION = 'v0.5.1';
+const HOMEPAGE = 'https://github.com/panva/oauth4webapi';
+const USER_AGENT = `${NAME}/${VERSION} (${HOMEPAGE})`;
+const encoder = new TextEncoder();
+const decoder = new TextDecoder();
+function buf(input) {
+    if (typeof input === 'string') {
+        return encoder.encode(input);
+    }
+    return decoder.decode(input);
+}
+const CHUNK_SIZE = 0x8000;
+function encodeBase64Url(input) {
+    if (input instanceof ArrayBuffer) {
+        input = new Uint8Array(input);
+    }
+    const arr = [];
+    for (let i = 0; i < input.byteLength; i += CHUNK_SIZE) {
+        arr.push(String.fromCharCode.apply(null, input.subarray(i, i + CHUNK_SIZE)));
+    }
+    return btoa(arr.join('')).replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
+}
+function decodeBase64Url(input) {
+    try {
+        const binary = atob(input.replace(/-/g, '+').replace(/_/g, '/').replace(/\s/g, ''));
+        const bytes = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) {
+            bytes[i] = binary.charCodeAt(i);
+        }
+        return bytes;
+    }
+    catch {
+        throw new TypeError('The input to be decoded is not correctly encoded.');
+    }
+}
+function b64u(input) {
+    if (typeof input === 'string') {
+        return decodeBase64Url(input);
+    }
+    return encodeBase64Url(input);
+}
+class LRU {
+    constructor(maxSize) {
+        this.cache = new Map();
+        this._cache = new Map();
+        this.maxSize = maxSize;
+    }
+    get(key) {
+        let v = this.cache.get(key);
+        if (v) {
+            return v;
+        }
+        if ((v = this._cache.get(key))) {
+            this.update(key, v);
+            return v;
+        }
+        return undefined;
+    }
+    has(key) {
+        return this.cache.has(key) || this._cache.has(key);
+    }
+    set(key, value) {
+        if (this.cache.has(key)) {
+            this.cache.set(key, value);
+        }
+        else {
+            this.update(key, value);
+        }
+        return this;
+    }
+    delete(key) {
+        if (this.cache.has(key)) {
+            return this.cache.delete(key);
+        }
+        if (this._cache.has(key)) {
+            return this._cache.delete(key);
+        }
+        return false;
+    }
+    update(key, value) {
+        this.cache.set(key, value);
+        if (this.cache.size >= this.maxSize) {
+            this._cache = this.cache;
+            this.cache = new Map();
+        }
+    }
+}
+export class UnsupportedOperationError extends Error {
+    constructor(message = 'operation not supported') {
+        super(message);
+        this.name = this.constructor.name;
+        Error.captureStackTrace?.(this, this.constructor);
+    }
+}
+export class OperationProcessingError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = this.constructor.name;
+        Error.captureStackTrace?.(this, this.constructor);
+    }
+}
+const OPE = OperationProcessingError;
+const dpopNonces = new LRU(100);
+function isCryptoKey(key) {
+    return key instanceof CryptoKey;
+}
+function isPrivateKey(key) {
+    return isCryptoKey(key) && key.type === 'private';
+}
+function isPublicKey(key) {
+    return isCryptoKey(key) && key.type === 'public';
+}
+const SUPPORTED_JWS_ALGS = ['PS256', 'ES256', 'RS256'];
+const SUPPORTED_JWE_ALGS = ['ECDH-ES', 'RSA-OAEP', 'RSA-OAEP-256'];
+const SUPPORTED_JWE_ENCS = [
+    'A128GCM',
+    'A256GCM',
+    'A128CBC-HS256',
+    'A256CBC-HS512',
+];
+function preserveBodyStream(response) {
+    assertReadableResponse(response);
+    return response.clone();
+}
+function processDpopNonce(response) {
+    const url = new URL(response.url);
+    if (response.headers.has('dpop-nonce')) {
+        dpopNonces.set(url.origin, response.headers.get('dpop-nonce'));
+    }
+    return response;
+}
+function normalizeTyp(value) {
+    return value.toLowerCase().replace(/^application\//, '');
+}
+function isObjectLike(value) {
+    return typeof value === 'object' && value !== null;
+}
+function isTopLevelObject(input) {
+    if (!isObjectLike(input) || Object.prototype.toString.call(input) !== '[object Object]') {
+        return false;
+    }
+    if (Object.getPrototypeOf(input) === null) {
+        return true;
+    }
+    let proto = input;
+    while (Object.getPrototypeOf(proto) !== null) {
+        proto = Object.getPrototypeOf(proto);
+    }
+    return Object.getPrototypeOf(input) === proto;
+}
+function prepareHeaders({ headers } = {}) {
+    if (headers !== undefined && !(headers instanceof Headers)) {
+        throw new TypeError('"options.headers" must be an instance of Headers');
+    }
+    headers = new Headers(headers);
+    if (!headers.has('user-agent')) {
+        headers.set('user-agent', USER_AGENT);
+    }
+    if (headers.has('authorization')) {
+        throw new TypeError('"options.headers" must not include the "authorization" header name');
+    }
+    if (headers.has('dpop')) {
+        throw new TypeError('"options.headers" must not include the "dpop" header name');
+    }
+    return headers;
+}
+export async function discoveryRequest(issuerIdentifier, options) {
+    if (!(issuerIdentifier instanceof URL)) {
+        throw new TypeError('"issuer" must be an instance of URL');
+    }
+    if (issuerIdentifier.protocol !== 'https:' && issuerIdentifier.protocol !== 'http:') {
+        throw new TypeError('"issuer.protocol" must be "https:" or "http:"');
+    }
+    const url = new URL(issuerIdentifier.href);
+    switch (options?.algorithm) {
+        case undefined:
+        case 'oidc':
+            url.pathname = `${url.pathname}/.well-known/openid-configuration`.replace('//', '/');
+            break;
+        case 'oauth2':
+            if (url.pathname === '/') {
+                url.pathname = `.well-known/oauth-authorization-server`;
+            }
+            else {
+                url.pathname = `.well-known/oauth-authorization-server/${url.pathname}`.replace('//', '/');
+            }
+            break;
+        default:
+            throw new TypeError('"options.algorithm" must be "oidc" (default), or "oauth2"');
+    }
+    const headers = prepareHeaders(options);
+    headers.set('accept', 'application/json');
+    return fetch(url.href, {
+        headers,
+        method: 'GET',
+        redirect: 'manual',
+        signal: options?.signal,
+    }).then(processDpopNonce);
+}
+export async function processDiscoveryResponse(expectedIssuerIdentifier, response) {
+    if (!(expectedIssuerIdentifier instanceof URL)) {
+        throw new TypeError('"expectedIssuer" must be an instance of URL');
+    }
+    if (!(response instanceof Response)) {
+        throw new TypeError('"response" must be an instance of Response');
+    }
+    if (response.status !== 200) {
+        throw new OPE('"response" is not a conform Authorization Server Metadata response');
+    }
+    let json;
+    try {
+        json = await preserveBodyStream(response).json();
+    }
+    catch {
+        throw new OPE('failed to parsed "response" body as JSON');
+    }
+    if (!isTopLevelObject(json)) {
+        throw new OPE('"response" body must be a top level object');
+    }
+    if (typeof json.issuer !== 'string' || json.issuer.length === 0) {
+        throw new OPE('"response" body "issuer" property must be a non-empty string');
+    }
+    if (new URL(json.issuer).href !== expectedIssuerIdentifier.href) {
+        throw new OPE('"response" body "issuer" does not match "expectedIssuer"');
+    }
+    return json;
+}
+function randomBytes() {
+    return b64u(crypto.getRandomValues(new Uint8Array(32)));
+}
+export function generateRandomCodeVerifier() {
+    return randomBytes();
+}
+export function generateRandomState() {
+    return randomBytes();
+}
+export function generateRandomNonce() {
+    return randomBytes();
+}
+export async function calculatePKCECodeChallenge(codeVerifier) {
+    if (typeof codeVerifier !== 'string' || codeVerifier.length === 0) {
+        throw new TypeError('"codeVerifier" must be a non-empty string');
+    }
+    return b64u(await crypto.subtle.digest('SHA-256', buf(codeVerifier)));
+}
+function getKeyAndKid(input) {
+    if (input instanceof CryptoKey) {
+        return { key: input };
+    }
+    if (!(input?.key instanceof CryptoKey)) {
+        return {};
+    }
+    if (input.kid !== undefined && (typeof input.kid !== 'string' || input.kid.length === 0)) {
+        throw new TypeError('"kid" must be a non-empty string');
+    }
+    return { key: input.key, kid: input.kid };
+}
+function formUrlEncode(token) {
+    return encodeURIComponent(token).replace(/%20/g, '+');
+}
+function clientSecretBasic(clientId, clientSecret) {
+    const username = formUrlEncode(clientId);
+    const password = formUrlEncode(clientSecret);
+    const credentials = btoa(`${username}:${password}`);
+    return `Basic ${credentials}`;
+}
+function psAlg(key) {
+    switch (key.algorithm.hash.name) {
+        case 'SHA-256':
+            return 'PS256';
+        default:
+            throw new UnsupportedOperationError('unsupported RsaHashedKeyAlgorithm hash name');
+    }
+}
+function rsAlg(key) {
+    switch (key.algorithm.hash.name) {
+        case 'SHA-256':
+            return 'RS256';
+        default:
+            throw new UnsupportedOperationError('unsupported RsaHashedKeyAlgorithm hash name');
+    }
+}
+function esAlg(key) {
+    switch (key.algorithm.namedCurve) {
+        case 'P-256':
+            return 'ES256';
+        default:
+            throw new UnsupportedOperationError('unsupported EcKeyAlgorithm namedCurve');
+    }
+}
+function determineJWSAlgorithm(key) {
+    switch (key.algorithm.name) {
+        case 'RSA-PSS':
+            return psAlg(key);
+        case 'RSASSA-PKCS1-v1_5':
+            return rsAlg(key);
+        case 'ECDSA':
+            return esAlg(key);
+        default:
+            throw new UnsupportedOperationError('unsupported CryptoKey algorithm name');
+    }
+}
+function oaepAlg(key) {
+    switch (key.algorithm.hash.name) {
+        case 'SHA-1':
+            return 'RSA-OAEP';
+        case 'SHA-256':
+            return 'RSA-OAEP-256';
+        default:
+            throw new UnsupportedOperationError('unsupported RsaHashedKeyAlgorithm hash name');
+    }
+}
+function jweAlg(key) {
+    switch (key.algorithm.name) {
+        case 'ECDH':
+            switch (key.algorithm.namedCurve) {
+                case 'P-256':
+                    return 'ECDH-ES';
+                default:
+                    throw new UnsupportedOperationError('unsupported EcKeyAlgorithm namedCurve');
+            }
+        case 'RSA-OAEP':
+            checkRsaKeyAlgorithm(key.algorithm);
+            return oaepAlg(key);
+        default:
+            throw new UnsupportedOperationError('unsupported CryptoKey algorithm name');
+    }
+}
+function currentTimestamp() {
+    return Math.floor(Date.now() / 1000);
+}
+function clientAssertion(as, client) {
+    const now = currentTimestamp();
+    return {
+        jti: randomBytes(),
+        aud: [as.issuer, as.token_endpoint],
+        exp: now + 60,
+        iat: now,
+        nbf: now,
+        iss: client.client_id,
+        sub: client.client_id,
+    };
+}
+async function privateKeyJwt(as, client, key, kid) {
+    return jwt({
+        alg: checkSupportedJwsAlg(determineJWSAlgorithm(key)),
+        kid,
+    }, clientAssertion(as, client), key);
+}
+async function clientSecretJwt(as, client, secret) {
+    const key = await crypto.subtle.importKey('raw', buf(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+    return jwt({ alg: 'HS256' }, clientAssertion(as, client), key);
+}
+function assertIssuer(metadata) {
+    if (typeof metadata !== 'object' || metadata === null) {
+        throw new TypeError('"issuer" must be an object');
+    }
+    if (typeof metadata.issuer !== 'string' || metadata.issuer.length === 0) {
+        throw new TypeError('"issuer.issuer" property must be a non-empty string');
+    }
+    return true;
+}
+function assertClient(metadata) {
+    if (typeof metadata !== 'object' || metadata === null) {
+        throw new TypeError('"client" must be an object');
+    }
+    if (typeof metadata.client_id !== 'string' || metadata.client_id.length === 0) {
+        throw new TypeError('"client.client_id" property must be a non-empty string');
+    }
+    return true;
+}
+function assertClientSecret(clientSecret) {
+    if (typeof clientSecret !== 'string' || clientSecret.length === 0) {
+        throw new TypeError('"client.client_secret" property must be a non-empty string');
+    }
+    return clientSecret;
+}
+function assertNoClientPrivateKey(clientAuthMethod, clientPrivateKey) {
+    if (clientPrivateKey !== undefined) {
+        throw new TypeError(`"options.clientPrivateKey" property must not be provided when ${clientAuthMethod} client authentication method is used.`);
+    }
+}
+function assertNoClientSecret(clientAuthMethod, clientSecret) {
+    if (clientSecret !== undefined) {
+        throw new TypeError(`"client.client_secret" property must not be provided when ${clientAuthMethod} client authentication method is used.`);
+    }
+}
+async function clientAuthentication(as, client, body, headers, clientPrivateKey) {
+    body.delete('client_secret');
+    body.delete('client_assertion_type');
+    body.delete('client_assertion');
+    switch (client.token_endpoint_auth_method) {
+        case undefined:
+        case 'client_secret_basic': {
+            assertNoClientPrivateKey('client_secret_basic', clientPrivateKey);
+            headers.set('authorization', clientSecretBasic(client.client_id, assertClientSecret(client.client_secret)));
+            break;
+        }
+        case 'client_secret_post': {
+            assertNoClientPrivateKey('client_secret_post', clientPrivateKey);
+            body.set('client_id', client.client_id);
+            body.set('client_secret', assertClientSecret(client.client_secret));
+            break;
+        }
+        case 'client_secret_jwt': {
+            assertNoClientPrivateKey('client_secret_jwt', clientPrivateKey);
+            body.set('client_id', client.client_id);
+            body.set('client_assertion_type', 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer');
+            body.set('client_assertion', await clientSecretJwt(as, client, assertClientSecret(client.client_secret)));
+            break;
+        }
+        case 'private_key_jwt': {
+            assertNoClientSecret('private_key_jwt', client.client_secret);
+            if (clientPrivateKey === undefined) {
+                throw new TypeError('"options.clientPrivateKey" must be provided when "client.token_endpoint_auth_method" is "private_key_jwt"');
+            }
+            const { key, kid } = getKeyAndKid(clientPrivateKey);
+            if (!isPrivateKey(key)) {
+                throw new TypeError('"options.clientPrivateKey.key" must be a private CryptoKey');
+            }
+            body.set('client_id', client.client_id);
+            body.set('client_assertion_type', 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer');
+            body.set('client_assertion', await privateKeyJwt(as, client, key, kid));
+            break;
+        }
+        case 'none': {
+            assertNoClientSecret('none', client.client_secret);
+            assertNoClientPrivateKey('none', clientPrivateKey);
+            body.set('client_id', client.client_id);
+            break;
+        }
+        default:
+            throw new UnsupportedOperationError('unsupported client token_endpoint_auth_method');
+    }
+}
+async function jwt(header, claimsSet, key) {
+    if (key.usages.includes('sign') === false) {
+        throw new TypeError('private CryptoKey instances used for signing assertions must include "sign" in their "usages"');
+    }
+    const input = `${b64u(buf(JSON.stringify(header)))}.${b64u(buf(JSON.stringify(claimsSet)))}`;
+    const signature = b64u(await crypto.subtle.sign(subtleAlgorithm(key), key, buf(input)));
+    return `${input}.${signature}`;
+}
+export async function issueRequestObject(as, client, parameters, privateKey, publicKey) {
+    assertIssuer(as);
+    assertClient(client);
+    if (!(parameters instanceof URLSearchParams)) {
+        throw new TypeError('"parameters" must be an instance of URLSearchParams');
+    }
+    parameters = new URLSearchParams(parameters);
+    const { key, kid } = getKeyAndKid(privateKey);
+    if (!isPrivateKey(key)) {
+        throw new TypeError('"privateKey.key" must be a private CryptoKey');
+    }
+    parameters.set('client_id', client.client_id);
+    const now = currentTimestamp();
+    const claims = {
+        ...Object.fromEntries(parameters.entries()),
+        jti: randomBytes(),
+        aud: as.issuer,
+        exp: now + 60,
+        iat: now,
+        nbf: now,
+        iss: client.client_id,
+        sub: client.client_id,
+    };
+    let resource;
+    if (parameters.has('resource') &&
+        (resource = parameters.getAll('resource')) &&
+        resource.length > 1) {
+        claims.resource = resource;
+    }
+    let request = await jwt({
+        alg: checkSupportedJwsAlg(determineJWSAlgorithm(key)),
+        typ: 'oauth-authz-req+jwt',
+        kid,
+    }, claims, key);
+    if (publicKey !== undefined) {
+        const { key, kid } = getKeyAndKid(publicKey);
+        if (!isPublicKey(key)) {
+            throw new TypeError('"publicKey.key" must be a public CryptoKey');
+        }
+        request = await jwe({
+            alg: checkSupportedJweAlg(jweAlg(key)),
+            enc: checkSupportedJweEnc(client.request_object_encryption_enc || 'A128CBC-HS256'),
+            cty: 'oauth-authz-req+jwt',
+            kid,
+            iss: client.client_id,
+            sub: client.client_id,
+            aud: as.issuer,
+        }, buf(request), key);
+    }
+    return request;
+}
+async function dpopProofJwt(headers, options, url, htm, accessToken) {
+    const { privateKey, publicKey, nonce = dpopNonces.get(url.origin) } = options;
+    if (!isPrivateKey(privateKey)) {
+        throw new TypeError('"DPoP.privateKey" must be a private CryptoKey');
+    }
+    if (!isPublicKey(publicKey)) {
+        throw new TypeError('"DPoP.publicKey" must be a public CryptoKey');
+    }
+    if (nonce !== undefined && (typeof nonce !== 'string' || nonce.length === 0)) {
+        throw new TypeError('"DPoP.nonce" must be a non-empty string or undefined');
+    }
+    if (publicKey.extractable !== true) {
+        throw new TypeError('"DPoP.publicKey.extractable" must be true');
+    }
+    const proof = await jwt({
+        alg: checkSupportedJwsAlg(determineJWSAlgorithm(privateKey)),
+        typ: 'dpop+jwt',
+        jwk: await publicJwk(publicKey),
+    }, {
+        iat: currentTimestamp(),
+        jti: randomBytes(),
+        htm,
+        nonce,
+        htu: `${url.origin}${url.pathname}`,
+        ath: accessToken ? b64u(await crypto.subtle.digest('SHA-256', buf(accessToken))) : undefined,
+    }, privateKey);
+    headers.set('dpop', proof);
+}
+async function publicJwk(key) {
+    const { kty, e, n, x, y, crv } = await crypto.subtle.exportKey('jwk', key);
+    return { kty, crv, e, n, x, y };
+}
+export async function pushedAuthorizationRequest(as, client, parameters, options) {
+    assertIssuer(as);
+    assertClient(client);
+    if (!(parameters instanceof URLSearchParams)) {
+        throw new TypeError('"parameters" must be an instance of URLSearchParams');
+    }
+    if (typeof as.pushed_authorization_request_endpoint !== 'string') {
+        throw new TypeError('"issuer.pushed_authorization_request_endpoint" must be a string');
+    }
+    const url = new URL(as.pushed_authorization_request_endpoint);
+    const body = new URLSearchParams(parameters);
+    body.set('client_id', client.client_id);
+    const headers = prepareHeaders(options);
+    headers.set('accept', 'application/json');
+    if (options?.DPoP !== undefined) {
+        await dpopProofJwt(headers, options.DPoP, url, 'POST');
+    }
+    return authenticatedRequest(as, client, 'POST', url, body, headers, options);
+}
+export function isOAuth2Error(input) {
+    const value = input;
+    if (typeof value !== 'object' || Array.isArray(value) || value === null) {
+        return false;
+    }
+    return value.error !== undefined;
+}
+function unquote(value) {
+    if (value.length >= 2 && value[0] === '"' && value[value.length - 1] === '"') {
+        return value.slice(1, -1);
+    }
+    return value;
+}
+const SPLIT_REGEXP = /((?:,|, )?[0-9a-zA-Z!#$%&'*+-.^_`|~]+=)/;
+const SCHEMES_REGEXP = /(?:^|, ?)([0-9a-zA-Z!#$%&'*+\-.^_`|~]+)(?=$|[ ,])/g;
+function wwwAuth(scheme, params) {
+    const arr = params.split(SPLIT_REGEXP).slice(1);
+    if (arr.length === 0) {
+        return { scheme: scheme.toLowerCase(), parameters: {} };
+    }
+    arr[arr.length - 1] = arr[arr.length - 1].replace(/,$/, '');
+    const parameters = {};
+    for (let i = 1; i < arr.length; i += 2) {
+        const idx = i;
+        if (arr[idx][0] === '"') {
+            while (arr[idx].slice(-1) !== '"' && ++i < arr.length) {
+                arr[idx] += arr[i];
+            }
+        }
+        const key = arr[idx - 1].replace(/^(?:, ?)|=$/g, '').toLowerCase();
+        parameters[key] = unquote(arr[idx]);
+    }
+    return {
+        scheme: scheme.toLowerCase(),
+        parameters,
+    };
+}
+export function parseWwwAuthenticateChallenges(response) {
+    if (!(response instanceof Response)) {
+        throw new TypeError('"response" must be an instance of Response');
+    }
+    if (response.headers.has('www-authenticate') === false) {
+        return undefined;
+    }
+    const header = response.headers.get('www-authenticate');
+    const result = [];
+    for (const { 1: scheme, index } of header.matchAll(SCHEMES_REGEXP)) {
+        result.push([scheme, index]);
+    }
+    if (result.length === 0) {
+        return undefined;
+    }
+    const challenges = result.map(([scheme, indexOf], i, others) => {
+        const next = others[i + 1];
+        let parameters;
+        if (next) {
+            parameters = header.slice(indexOf, next[1]);
+        }
+        else {
+            parameters = header.slice(indexOf);
+        }
+        return wwwAuth(scheme, parameters);
+    });
+    return challenges;
+}
+export async function processPushedAuthorizationResponse(as, client, response) {
+    assertIssuer(as);
+    assertClient(client);
+    if (!(response instanceof Response)) {
+        throw new TypeError('"response" must be an instance of Response');
+    }
+    if (response.status !== 201) {
+        let err;
+        if ((err = await handleOAuthBodyError(response))) {
+            return err;
+        }
+        throw new OPE('"response" is not a conform Pushed Authorization Request Endpoint response');
+    }
+    let json;
+    try {
+        json = await preserveBodyStream(response).json();
+    }
+    catch {
+        throw new OPE('failed to parsed "response" body as JSON');
+    }
+    if (!isTopLevelObject(json)) {
+        throw new OPE('"response" body must be a top level object');
+    }
+    if (typeof json.request_uri !== 'string' || json.request_uri.length === 0) {
+        throw new OPE('"response" body "request_uri" property must be a non-empty string');
+    }
+    if (typeof json.expires_in !== 'number' || json.expires_in <= 0) {
+        throw new OPE('"response" body "expires_in" property must be a positive number');
+    }
+    return json;
+}
+export async function protectedResourceRequest(accessToken, method, url, headers, body, options) {
+    if (typeof accessToken !== 'string' || accessToken.length === 0) {
+        throw new TypeError('"accessToken" must be a non-empty string');
+    }
+    if (!(url instanceof URL)) {
+        throw new TypeError('"url" must be an instance of URL');
+    }
+    if (!(headers instanceof Headers)) {
+        throw new TypeError('"headers" must be an instance of Headers');
+    }
+    headers = prepareHeaders({ headers });
+    if (options?.DPoP === undefined) {
+        headers.set('authorization', `Bearer ${accessToken}`);
+    }
+    else {
+        await dpopProofJwt(headers, options.DPoP, url, 'GET', accessToken);
+        headers.set('authorization', `DPoP ${accessToken}`);
+    }
+    return fetch(url.href, {
+        body,
+        headers,
+        method,
+        redirect: 'manual',
+        signal: options?.signal,
+    }).then(processDpopNonce);
+}
+export async function userInfoRequest(as, client, accessToken, options) {
+    assertIssuer(as);
+    assertClient(client);
+    if (typeof as.userinfo_endpoint !== 'string') {
+        throw new TypeError('"issuer.userinfo_endpoint" must be a string');
+    }
+    const url = new URL(as.userinfo_endpoint);
+    const headers = prepareHeaders(options);
+    if (client.userinfo_signed_response_alg) {
+        headers.set('accept', 'application/jwt');
+    }
+    else {
+        headers.set('accept', 'application/json');
+        headers.append('accept', 'application/jwt');
+    }
+    return protectedResourceRequest(accessToken, 'GET', url, headers, null, options);
+}
+const jwksCache = new LRU(20);
+const cryptoKeyCaches = {};
+async function getPublicSigKeyFromIssuerJwksUri(as, options, header) {
+    const { alg, kid } = header;
+    checkSupportedJwsAlg(alg);
+    let kty;
+    switch (alg[0]) {
+        case 'R':
+        case 'P':
+            kty = 'RSA';
+            break;
+        case 'E':
+            kty = 'EC';
+            break;
+        default:
+            throw new UnsupportedOperationError();
+    }
+    let jwks;
+    let stale;
+    if (jwksCache.has(as.jwks_uri)) {
+        ;
+        ({ jwks, stale } = jwksCache.get(as.jwks_uri));
+    }
+    else {
+        jwks = await jwksRequest(as, options).then(processJwksResponse);
+        stale = false;
+        jwksCache.set(as.jwks_uri, {
+            jwks,
+            iat: currentTimestamp(),
+            get stale() {
+                return this.iat + 5 * 60 * 60 < currentTimestamp();
+            },
+        });
+    }
+    const candidates = jwks.keys.filter((jwk) => {
+        let candidate = jwk.kty === kty;
+        if (candidate && typeof kid === 'string') {
+            candidate = kid === jwk.kid;
+        }
+        if (candidate && typeof jwk.alg === 'string') {
+            candidate = alg === jwk.alg;
+        }
+        if (candidate && typeof jwk.use === 'string') {
+            candidate = jwk.use === 'sig';
+        }
+        if (candidate && Array.isArray(jwk.key_ops)) {
+            candidate = jwk.key_ops.includes('verify');
+        }
+        if (candidate) {
+            switch (alg) {
+                case 'ES256':
+                    candidate = jwk.crv === 'P-256';
+                    break;
+            }
+        }
+        return candidate;
+    });
+    const { 0: jwk, length } = candidates;
+    if (length === 0) {
+        if (stale) {
+            jwksCache.delete(as.jwks_uri);
+            return getPublicSigKeyFromIssuerJwksUri(as, options, header);
+        }
+        throw new OPE('error when selecting a JWT verification key, no applicable keys found');
+    }
+    else if (length !== 1) {
+        throw new OPE('error when selecting a JWT verification key, multiple applicable keys found, a "kid" JWT Header Parameter is required');
+    }
+    cryptoKeyCaches[alg] || (cryptoKeyCaches[alg] = new WeakMap());
+    let key = cryptoKeyCaches[alg].get(jwk);
+    if (!key) {
+        key = await importJwk({ ...jwk, alg });
+        if (key.type !== 'public') {
+            throw new OPE('jwks_uri must only contain public keys');
+        }
+        cryptoKeyCaches[alg].set(jwk, key);
+    }
+    return key;
+}
+export const skipSubjectCheck = Symbol();
+export async function processUserInfoResponse(as, client, expectedSubject, response, options) {
+    assertIssuer(as);
+    assertClient(client);
+    if (!(response instanceof Response)) {
+        throw new TypeError('"response" must be an instance of Response');
+    }
+    if (response.status !== 200) {
+        throw new OPE('"response" is not a conform UserInfo Endpoint response');
+    }
+    let json;
+    const [contentType] = (response.headers.get('content-type') || '').split(';');
+    if (contentType === 'application/jwt') {
+        if (typeof as.jwks_uri !== 'string') {
+            throw new TypeError('"issuer.jwks_uri" must be a string');
+        }
+        const { claims } = await validateJwt(await preserveBodyStream(response).text(), checkSigningAlgorithm.bind(undefined, client.userinfo_signed_response_alg, as.userinfo_signing_alg_values_supported, 'RS256'), getPublicSigKeyFromIssuerJwksUri.bind(undefined, as, options))
+            .then(validateOptionalAudience.bind(undefined, as.issuer))
+            .then(validateOptionalIssuer.bind(undefined, client.client_id));
+        json = claims;
+    }
+    else {
+        if (client.userinfo_signed_response_alg) {
+            throw new OPE('JWT UserInfo Response expected');
+        }
+        try {
+            json = await preserveBodyStream(response).json();
+        }
+        catch {
+            throw new OPE('failed to parsed "response" body as JSON');
+        }
+    }
+    if (!isTopLevelObject(json)) {
+        throw new OPE('"response" body must be a top level object');
+    }
+    if (typeof json.sub !== 'string' || json.sub.length === 0) {
+        throw new OPE('"response" body "sub" property must be a non-empty string');
+    }
+    switch (expectedSubject) {
+        case skipSubjectCheck:
+            break;
+        default:
+            if (typeof expectedSubject !== 'string' || expectedSubject.length === 0) {
+                throw new OPE('"expectedSubject" must be a non-empty string');
+            }
+            if (json.sub !== expectedSubject) {
+                throw new OPE('unexpected "response" body "sub" value');
+            }
+    }
+    return json;
+}
+async function timingSafeEqual(a, b) {
+    if (!(a instanceof Uint8Array)) {
+        throw new TypeError('"a" must be an instance of Uint8Array');
+    }
+    if (!(b instanceof Uint8Array)) {
+        throw new TypeError('"b" must be an instance of Uint8Array');
+    }
+    if (a.length !== b.length) {
+        return false;
+    }
+    const len = a.length;
+    let out = 0;
+    let i = -1;
+    while (++i < len) {
+        out |= a[i] ^ b[i];
+    }
+    return out === 0;
+}
+async function idTokenHash(jwsAlg, data) {
+    let algorithm;
+    switch (jwsAlg) {
+        case 'RS256':
+        case 'PS256':
+        case 'ES256':
+            algorithm = 'SHA-256';
+            break;
+        default:
+            throw new UnsupportedOperationError();
+    }
+    const digest = await crypto.subtle.digest(algorithm, buf(data));
+    return b64u(digest.slice(0, digest.byteLength / 2));
+}
+async function idTokenHashMatches(jwsAlg, data, actual) {
+    const expected = await idTokenHash(jwsAlg, data);
+    return timingSafeEqual(buf(actual), buf(expected));
+}
+async function authenticatedRequest(as, client, method, url, body, headers, options) {
+    await clientAuthentication(as, client, body, headers, options?.clientPrivateKey);
+    return fetch(url.href, {
+        body,
+        headers,
+        method,
+        redirect: 'manual',
+        signal: options?.signal,
+    }).then(processDpopNonce);
+}
+async function tokenEndpointRequest(as, client, grantType, parameters, options) {
+    if (typeof grantType !== 'string' || grantType.length === 0) {
+        throw new TypeError('"grantType" must be a non-empty string');
+    }
+    if (!(parameters instanceof URLSearchParams)) {
+        throw new TypeError('"parameters" must be an instance of URLSearchParams');
+    }
+    if (typeof as.token_endpoint !== 'string') {
+        throw new TypeError('"issuer.token_endpoint" must be a string');
+    }
+    const url = new URL(as.token_endpoint);
+    parameters.set('grant_type', grantType);
+    const headers = prepareHeaders(options);
+    headers.set('accept', 'application/json');
+    if (options?.DPoP !== undefined) {
+        await dpopProofJwt(headers, options.DPoP, url, 'POST');
+    }
+    return authenticatedRequest(as, client, 'POST', url, parameters, headers, options);
+}
+export async function refreshTokenGrantRequest(as, client, refreshToken, options) {
+    assertIssuer(as);
+    assertClient(client);
+    if (typeof refreshToken !== 'string' || refreshToken.length === 0) {
+        throw new TypeError('"refreshToken" must be a non-empty string');
+    }
+    const parameters = new URLSearchParams(options?.additionalParameters);
+    parameters.set('refresh_token', refreshToken);
+    return tokenEndpointRequest(as, client, 'refresh_token', parameters, options);
+}
+const idTokenClaims = new WeakMap();
+export function getValidatedIdTokenClaims(ref) {
+    return idTokenClaims.get(ref);
+}
+async function processGenericAccessTokenResponse(as, client, response, options, ignoreIdToken = false, ignoreRefreshToken = false) {
+    assertIssuer(as);
+    assertClient(client);
+    if (!(response instanceof Response)) {
+        throw new TypeError('"response" must be an instance of Response');
+    }
+    if (response.status !== 200) {
+        let err;
+        if ((err = await handleOAuthBodyError(response))) {
+            return err;
+        }
+        throw new OPE('"response" is not a conform Token Endpoint response');
+    }
+    let json;
+    try {
+        json = await preserveBodyStream(response).json();
+    }
+    catch {
+        throw new OPE('failed to parsed "response" body as JSON');
+    }
+    if (!isTopLevelObject(json)) {
+        throw new OPE('"response" body must be a top level object');
+    }
+    if (typeof json.access_token !== 'string' || json.access_token.length === 0) {
+        throw new OPE('"response" body "access_token" property must be a non-empty string');
+    }
+    if (typeof json.token_type !== 'string' || json.token_type.length === 0) {
+        throw new OPE('"response" body "token_type" property must be a non-empty string');
+    }
+    json.token_type = json.token_type.toLowerCase();
+    if (json.expires_in !== undefined &&
+        (typeof json.expires_in !== 'number' || json.expires_in <= 0)) {
+        throw new OPE('"response" body "expires_in" property must be a positive number');
+    }
+    if (ignoreRefreshToken === false &&
+        json.refresh_token !== undefined &&
+        (typeof json.refresh_token !== 'string' || json.refresh_token.length === 0)) {
+        throw new OPE('"response" body "refresh_token" property must be a non-empty string');
+    }
+    if (json.scope !== undefined && (typeof json.scope !== 'string' || json.scope.length === 0)) {
+        throw new OPE('"response" body "scope" property must be a non-empty string');
+    }
+    if (ignoreIdToken === false) {
+        if (json.id_token !== undefined &&
+            (typeof json.id_token !== 'string' || json.id_token.length === 0)) {
+            throw new OPE('"response" body "id_token" property must be a non-empty string');
+        }
+        if (json.id_token) {
+            if (typeof as.jwks_uri !== 'string') {
+                throw new TypeError('"issuer.jwks_uri" must be a string');
+            }
+            const { header, claims } = await validateJwt(json.id_token, checkSigningAlgorithm.bind(undefined, client.id_token_signed_response_alg, as.id_token_signing_alg_values_supported, 'RS256'), getPublicSigKeyFromIssuerJwksUri.bind(undefined, as, options))
+                .then(validatePresence.bind(undefined, [
+                ['iss', 'issuer'],
+                ['aud', 'audience'],
+                ['sub', 'subject'],
+                ['iat', 'issued at'],
+                ['exp', 'expiration time'],
+            ]))
+                .then(validateIssuer.bind(undefined, as.issuer))
+                .then(validateAudience.bind(undefined, client.client_id));
+            if (Array.isArray(claims.aud) && claims.aud.length !== 1 && claims.azp !== client.client_id) {
+                throw new OPE('unexpected ID Token "azp" (authorized party)');
+            }
+            if (client.require_auth_time && typeof claims.auth_time !== 'number') {
+                throw new OPE('invalid ID Token "auth_time"');
+            }
+            if (claims.at_hash !== undefined) {
+                if (typeof claims.at_hash !== 'string' ||
+                    (await idTokenHashMatches(header.alg, json.access_token, claims.at_hash)) !== true) {
+                    throw new OPE('invalid ID Token "at_hash"');
+                }
+            }
+            idTokenClaims.set(json, claims);
+        }
+    }
+    return json;
+}
+export async function processRefreshTokenResponse(as, client, response, options) {
+    return processGenericAccessTokenResponse(as, client, response, options);
+}
+function validateOptionalAudience(expected, result) {
+    if (result.claims.aud !== undefined) {
+        return validateAudience(expected, result);
+    }
+    return result;
+}
+function validateAudience(expected, result) {
+    if (Array.isArray(result.claims.aud)) {
+        if (result.claims.aud.includes(expected) === false) {
+            throw new OPE('unexpected JWT "aud" (audience)');
+        }
+    }
+    else if (result.claims.aud !== expected) {
+        throw new OPE('unexpected JWT "aud" (audience)');
+    }
+    return result;
+}
+function validateOptionalIssuer(expected, result) {
+    if (result.claims.iss !== undefined) {
+        return validateIssuer(expected, result);
+    }
+    return result;
+}
+function validateIssuer(expected, result) {
+    if (result.claims.iss !== expected) {
+        throw new OPE('unexpected JWT "iss" (issuer)');
+    }
+    return result;
+}
+export async function authorizationCodeGrantRequest(as, client, callbackParameters, redirectUri, codeVerifier, options) {
+    assertIssuer(as);
+    assertClient(client);
+    if (!(callbackParameters instanceof CallbackParameters)) {
+        throw new TypeError('"callbackParameters" must be an instance of CallbackParameters obtained from "validateAuthResponse()"');
+    }
+    if (typeof redirectUri !== 'string' || redirectUri.length === 0) {
+        throw new TypeError('"redirectUri" must be a non-empty string');
+    }
+    if (typeof codeVerifier !== 'string' || codeVerifier.length === 0) {
+        throw new TypeError('"codeVerifier" must be a non-empty string');
+    }
+    const code = getURLSearchParameter(callbackParameters, 'code');
+    if (!code) {
+        throw new OPE('no authorization code received');
+    }
+    const parameters = new URLSearchParams(options?.additionalParameters);
+    parameters.set('redirect_uri', redirectUri);
+    parameters.set('code_verifier', codeVerifier);
+    parameters.set('code', code);
+    return tokenEndpointRequest(as, client, 'authorization_code', parameters, options);
+}
+function validatePresence(required, result) {
+    for (const [claim, name] of required) {
+        if (result.claims[claim] === undefined) {
+            throw new OPE(`missing JWT "${claim}" (${name})`);
+        }
+    }
+    return result;
+}
+export const expectNoNonce = Symbol();
+export const skipAuthTimeCheck = Symbol();
+export async function processAuthorizationCodeOpenIDResponse(as, client, response, expectedNonce = expectNoNonce, maxAge = client.default_max_age ?? skipAuthTimeCheck, options) {
+    const result = await processGenericAccessTokenResponse(as, client, response, options);
+    if (isOAuth2Error(result)) {
+        return result;
+    }
+    if (typeof result.id_token !== 'string' || result.id_token.length === 0) {
+        throw new OPE('"response" body "id_token" property must be a non-empty string');
+    }
+    const claims = getValidatedIdTokenClaims(result);
+    if ((client.require_auth_time || maxAge !== skipAuthTimeCheck) &&
+        claims.auth_time === undefined) {
+        throw new OPE('missing ID Token "auth_time" claims');
+    }
+    if (maxAge !== skipAuthTimeCheck) {
+        if (typeof maxAge !== 'number' || maxAge < 0) {
+            throw new TypeError('"options.max_age" must be a non-negative number');
+        }
+        const now = currentTimestamp();
+        const tolerance = 30;
+        if (claims.auth_time + maxAge < now - tolerance) {
+            throw new OPE('too much time has elapsed since the last End-User authentication');
+        }
+    }
+    switch (expectedNonce) {
+        case expectNoNonce:
+            if (claims.nonce !== undefined) {
+                throw new OPE('unexpected ID Token "nonce" claim value received');
+            }
+            break;
+        default:
+            if (typeof expectedNonce !== 'string' || expectedNonce.length === 0) {
+                throw new TypeError('"expectedNonce" must be a non-empty string');
+            }
+            if (claims.nonce === undefined) {
+                throw new OPE('ID Token "nonce" claim missing');
+            }
+            if (claims.nonce !== expectedNonce) {
+                throw new OPE('unexpected ID Token "nonce" claim value received');
+            }
+    }
+    return result;
+}
+export async function processAuthorizationCodeOAuth2Response(as, client, response) {
+    const result = await processGenericAccessTokenResponse(as, client, response);
+    if (isOAuth2Error(result)) {
+        return result;
+    }
+    if (result.id_token !== undefined) {
+        throw new OPE('Unexpected ID Token returned, use processAuthorizationCodeOpenIDResponse() for OpenID Connect callback processing');
+    }
+    return result;
+}
+function checkJwtType(expected, result) {
+    if (typeof result.header.typ !== 'string' || normalizeTyp(result.header.typ) !== expected) {
+        throw new OPE('unexpected JWT "typ" header parameter value');
+    }
+    return result;
+}
+export async function clientCredentialsGrantRequest(as, client, options) {
+    assertIssuer(as);
+    assertClient(client);
+    const parameters = new URLSearchParams(options?.additionalParameters);
+    return tokenEndpointRequest(as, client, 'client_credentials', parameters, options);
+}
+export async function processClientCredentialsResponse(as, client, response) {
+    const result = await processGenericAccessTokenResponse(as, client, response, undefined, true, true);
+    if (isOAuth2Error(result)) {
+        return result;
+    }
+    return result;
+}
+export async function revocationRequest(as, client, token, options) {
+    assertIssuer(as);
+    assertClient(client);
+    if (typeof token !== 'string' || token.length === 0) {
+        throw new TypeError('"token" must be a non-empty string');
+    }
+    if (typeof as.revocation_endpoint !== 'string') {
+        throw new TypeError('"issuer.revocation_endpoint" must be a string');
+    }
+    const url = new URL(as.revocation_endpoint);
+    const body = new URLSearchParams(options?.additionalParameters);
+    body.set('token', token);
+    const headers = prepareHeaders(options);
+    headers.delete('accept');
+    return authenticatedRequest(as, client, 'POST', url, body, headers, options);
+}
+export async function processRevocationResponse(response) {
+    if (!(response instanceof Response)) {
+        throw new TypeError('"response" must be an instance of Response');
+    }
+    if (response.status !== 200) {
+        let err;
+        if ((err = await handleOAuthBodyError(response))) {
+            return err;
+        }
+        throw new OPE('"response" is not a conform Revocation Endpoint response');
+    }
+    return undefined;
+}
+function assertReadableResponse(response) {
+    if (response.bodyUsed === true) {
+        throw new TypeError('"response" body has been used already');
+    }
+}
+export async function introspectionRequest(as, client, token, options) {
+    assertIssuer(as);
+    assertClient(client);
+    if (typeof token !== 'string' || token.length === 0) {
+        throw new TypeError('"token" must be a non-empty string');
+    }
+    if (typeof as.introspection_endpoint !== 'string') {
+        throw new TypeError('"issuer.introspection_endpoint" must be a string');
+    }
+    const url = new URL(as.introspection_endpoint);
+    const body = new URLSearchParams(options?.additionalParameters);
+    body.set('token', token);
+    const headers = prepareHeaders(options);
+    if (options?.requestJwtResponse ?? client.introspection_signed_response_alg) {
+        headers.set('accept', 'application/token-introspection+jwt');
+    }
+    else {
+        headers.set('accept', 'application/json');
+    }
+    return authenticatedRequest(as, client, 'POST', url, body, headers, options);
+}
+export async function processIntrospectionResponse(as, client, response, options) {
+    assertIssuer(as);
+    assertClient(client);
+    if (!(response instanceof Response)) {
+        throw new TypeError('"response" must be an instance of Response');
+    }
+    if (response.status !== 200) {
+        let err;
+        if ((err = await handleOAuthBodyError(response))) {
+            return err;
+        }
+        throw new OPE('"response" is not a conform Introspection Endpoint response');
+    }
+    let json;
+    const [contentType] = (response.headers.get('content-type') || '').split(';');
+    if (contentType === 'application/token-introspection+jwt') {
+        if (typeof as.jwks_uri !== 'string') {
+            throw new TypeError('"issuer.jwks_uri" must be a string');
+        }
+        const { claims } = await validateJwt(await preserveBodyStream(response).text(), checkSigningAlgorithm.bind(undefined, client.introspection_signed_response_alg, as.introspection_signing_alg_values_supported, 'RS256'), getPublicSigKeyFromIssuerJwksUri.bind(undefined, as, options))
+            .then(checkJwtType.bind(undefined, 'token-introspection+jwt'))
+            .then(validatePresence.bind(undefined, [
+            ['iss', 'issuer'],
+            ['aud', 'audience'],
+            ['iat', 'issued at'],
+        ]))
+            .then(validateIssuer.bind(undefined, as.issuer))
+            .then(validateAudience.bind(undefined, client.client_id));
+        json = claims.token_introspection;
+        if (!isTopLevelObject(json)) {
+            throw new OPE('JWT payload must be a top level object');
+        }
+    }
+    else {
+        try {
+            json = await preserveBodyStream(response).json();
+        }
+        catch {
+            throw new OPE('failed to parsed "response" body as JSON');
+        }
+    }
+    if (!isTopLevelObject(json)) {
+        throw new OPE('"response" body must be a top level object');
+    }
+    if (typeof json.active !== 'boolean') {
+        throw new OPE('"response" body "active" property must be a boolean');
+    }
+    return json;
+}
+export async function jwksRequest(as, options) {
+    assertIssuer(as);
+    if (typeof as.jwks_uri !== 'string') {
+        throw new TypeError('"issuer.jwks_uri" must be a string');
+    }
+    const url = new URL(as.jwks_uri);
+    const headers = prepareHeaders(options);
+    headers.set('accept', 'application/json');
+    headers.append('accept', 'application/jwk-set+json');
+    return fetch(url.href, {
+        headers,
+        method: 'GET',
+        redirect: 'manual',
+        signal: options?.signal,
+    }).then(processDpopNonce);
+}
+export async function processJwksResponse(response) {
+    if (!(response instanceof Response)) {
+        throw new TypeError('"response" must be an instance of Response');
+    }
+    if (response.status !== 200) {
+        throw new OPE('"response" is not a conform JSON Web Key Set response');
+    }
+    let json;
+    try {
+        json = await preserveBodyStream(response).json();
+    }
+    catch {
+        throw new OPE('failed to parsed "response" body as JSON');
+    }
+    if (!isTopLevelObject(json)) {
+        throw new OPE('"response" body must be a top level object');
+    }
+    if (!Array.isArray(json.keys)) {
+        throw new OPE('"response" body "keys" property must be an array');
+    }
+    if (!Array.prototype.every.call(json.keys, isTopLevelObject)) {
+        throw new OPE('"response" body "keys" property members must be JWK formatted objects');
+    }
+    return json;
+}
+async function handleOAuthBodyError(response) {
+    if (response.status > 399 && response.status < 500) {
+        try {
+            const json = await preserveBodyStream(response).json();
+            if (isTopLevelObject(json) &&
+                typeof json.error === 'string' &&
+                json.error.length !== 0) {
+                if (typeof json.error_description !== 'string') {
+                    delete json.error_description;
+                }
+                if (typeof json.error_uri !== 'string') {
+                    delete json.error_uri;
+                }
+                return json;
+            }
+        }
+        catch { }
+    }
+    return undefined;
+}
+function checkSupportedJweEnc(enc) {
+    if (SUPPORTED_JWE_ENCS.includes(enc) === false) {
+        throw new UnsupportedOperationError('unsupported JWE "enc" identifier');
+    }
+    return enc;
+}
+function checkSupportedJweAlg(alg) {
+    if (SUPPORTED_JWE_ALGS.includes(alg) === false) {
+        throw new UnsupportedOperationError('unsupported JWE "alg" identifier');
+    }
+    return alg;
+}
+function checkSupportedJwsAlg(alg) {
+    if (SUPPORTED_JWS_ALGS.includes(alg) === false) {
+        throw new UnsupportedOperationError('unsupported JWS "alg" identifier');
+    }
+    return alg;
+}
+function checkRsaKeyAlgorithm(algorithm) {
+    if (typeof algorithm.modulusLength !== 'number' || algorithm.modulusLength < 2048) {
+        throw new OPE(`${algorithm.name} modulusLength must be at least 2048 bits`);
+    }
+}
+function subtleAlgorithm(key) {
+    switch (key.algorithm.name) {
+        case 'ECDSA':
+            return { name: key.algorithm.name, hash: 'SHA-256' };
+        case 'RSA-PSS':
+            checkRsaKeyAlgorithm(key.algorithm);
+            return {
+                name: key.algorithm.name,
+                saltLength: 256 >> 3,
+            };
+        case 'RSASSA-PKCS1-v1_5':
+            checkRsaKeyAlgorithm(key.algorithm);
+            return { name: key.algorithm.name };
+        case 'HMAC':
+            return { name: key.algorithm.name };
+    }
+    throw new UnsupportedOperationError();
+}
+async function validateJwt(jws, checkAlg, getKey) {
+    const { 0: protectedHeader, 1: payload, 2: signature, length } = jws.split('.');
+    if (length === 5) {
+        throw new UnsupportedOperationError('JWE structure JWTs are not supported');
+    }
+    if (length !== 3) {
+        throw new OPE('Invalid JWT');
+    }
+    const header = JSON.parse(buf(b64u(protectedHeader)));
+    checkAlg(header);
+    if (header.crit !== undefined) {
+        throw new OPE('unexpected JWT "crit" header parameter');
+    }
+    const key = await getKey(header);
+    const input = `${protectedHeader}.${payload}`;
+    const verified = await crypto.subtle.verify(subtleAlgorithm(key), key, b64u(signature), buf(input));
+    if (verified !== true) {
+        throw new OPE('JWT signature verification failed');
+    }
+    let claims;
+    try {
+        claims = JSON.parse(buf(b64u(payload)));
+    }
+    catch { }
+    if (!isTopLevelObject(claims)) {
+        throw new OPE('JWT Payload must be a top level object');
+    }
+    const now = currentTimestamp();
+    const tolerance = 30;
+    if (claims.exp !== undefined) {
+        if (typeof claims.exp !== 'number') {
+            throw new OPE('invalid JWT "exp" (expiration time)');
+        }
+        if (claims.exp <= now - tolerance) {
+            throw new OPE('JWT "exp" (expiration time) timestamp is <= now()');
+        }
+    }
+    if (claims.iat !== undefined) {
+        if (typeof claims.iat !== 'number') {
+            throw new OPE('invalid JWT "iat" (issued at)');
+        }
+    }
+    if (claims.iss !== undefined) {
+        if (typeof claims.iss !== 'string') {
+            throw new OPE('invalid JWT "iss" (issuer)');
+        }
+    }
+    if (claims.nbf !== undefined) {
+        if (typeof claims.nbf !== 'number') {
+            throw new OPE('invalid JWT "nbf" (not before)');
+        }
+        if (claims.nbf > now + tolerance) {
+            throw new OPE('JWT "nbf" (not before) timestamp is > now()');
+        }
+    }
+    if (claims.aud !== undefined) {
+        if (typeof claims.aud !== 'string' && !Array.isArray(claims.aud)) {
+            throw new OPE('invalid JWT "aud" (audience)');
+        }
+    }
+    return { header, claims };
+}
+export async function validateJwtAuthResponse(as, client, parameters, expectedState, options) {
+    assertIssuer(as);
+    assertClient(client);
+    if (parameters instanceof URL) {
+        parameters = parameters.searchParams;
+    }
+    if (!(parameters instanceof URLSearchParams)) {
+        throw new TypeError('"parameters" must be an instance of URLSearchParams, or URL');
+    }
+    const response = getURLSearchParameter(parameters, 'response');
+    if (!response) {
+        throw new OPE('"parameters" does not contain a JARM response');
+    }
+    if (typeof as.jwks_uri !== 'string') {
+        throw new TypeError('"issuer.jwks_uri" must be a string');
+    }
+    const { claims } = await validateJwt(response, checkSigningAlgorithm.bind(undefined, client.authorization_signed_response_alg, as.authorization_signing_alg_values_supported, 'RS256'), getPublicSigKeyFromIssuerJwksUri.bind(undefined, as, options))
+        .then(validatePresence.bind(undefined, [
+        ['iss', 'issuer'],
+        ['aud', 'audience'],
+        ['exp', 'expiration time'],
+    ]))
+        .then(validateIssuer.bind(undefined, as.issuer))
+        .then(validateAudience.bind(undefined, client.client_id));
+    const result = new URLSearchParams();
+    for (const [key, value] of Object.entries(claims)) {
+        if (typeof value === 'string' && key !== 'aud') {
+            result.set(key, value);
+        }
+    }
+    return validateAuthResponse(as, client, result, expectedState);
+}
+function checkSigningAlgorithm(client, issuer, fallback, header) {
+    switch (true) {
+        case client !== undefined: {
+            if (header.alg !== client) {
+                throw new OPE('unexpected JWT "alg" header parameter');
+            }
+            break;
+        }
+        case Array.isArray(issuer): {
+            if (issuer.includes(header.alg) === false) {
+                throw new OPE('unexpected JWT "alg" header parameter');
+            }
+            break;
+        }
+        default: {
+            if (header.alg !== fallback) {
+                throw new OPE('unexpected JWT "alg" header parameter');
+            }
+        }
+    }
+}
+function getURLSearchParameter(parameters, name) {
+    const { 0: value, length } = parameters.getAll(name);
+    if (length > 1) {
+        throw new OPE(`"${name}" parameter must be provided only once`);
+    }
+    return value;
+}
+export const skipStateCheck = Symbol();
+export const expectNoState = Symbol();
+class CallbackParameters extends URLSearchParams {
+}
+export function validateAuthResponse(as, client, parameters, expectedState = expectNoState) {
+    assertIssuer(as);
+    assertClient(client);
+    if (parameters instanceof URL) {
+        parameters = parameters.searchParams;
+    }
+    if (!(parameters instanceof URLSearchParams)) {
+        throw new TypeError('"parameters" must be an instance of URLSearchParams, or URL');
+    }
+    if (getURLSearchParameter(parameters, 'response')) {
+        throw new OPE('"parameters" contains a JARM response, use validateJwtAuthResponse() instead of validateAuthResponse()');
+    }
+    const iss = getURLSearchParameter(parameters, 'iss');
+    const state = getURLSearchParameter(parameters, 'state');
+    if (!iss && as.authorization_response_iss_parameter_supported === true) {
+        throw new OPE('"iss" issuer parameter expected');
+    }
+    if (iss && iss !== as.issuer) {
+        throw new OPE('unexpected "iss" issuer parameter value');
+    }
+    switch (expectedState) {
+        case expectNoState:
+            if (state !== undefined) {
+                throw new OPE('unexpected "state" parameter received');
+            }
+            break;
+        case skipStateCheck:
+            break;
+        default:
+            if (typeof expectedState !== 'string' || expectedState.length === 0) {
+                throw new OPE('"expectedState" must be a non-empty string');
+            }
+            if (state === undefined) {
+                throw new OPE('"state" callback parameter missing');
+            }
+            if (state !== expectedState) {
+                throw new OPE('unexpected "state" parameter value received');
+            }
+    }
+    const error = getURLSearchParameter(parameters, 'error');
+    if (error) {
+        return {
+            error,
+            error_description: getURLSearchParameter(parameters, 'error_description'),
+            error_uri: getURLSearchParameter(parameters, 'error_uri'),
+        };
+    }
+    const id_token = getURLSearchParameter(parameters, 'id_token');
+    const token = getURLSearchParameter(parameters, 'token');
+    if (id_token !== undefined || token !== undefined) {
+        throw new UnsupportedOperationError('implicit and hybrid flows are not supported');
+    }
+    return new CallbackParameters(parameters);
+}
+function cekBitLength(enc) {
+    switch (enc) {
+        case 'A128GCM':
+            return 128;
+        case 'A256GCM':
+        case 'A128CBC-HS256':
+            return 256;
+        case 'A256CBC-HS512':
+            return 512;
+        default:
+            throw new UnsupportedOperationError();
+    }
+}
+function randomCek(enc) {
+    return crypto.getRandomValues(new Uint8Array(cekBitLength(enc) >> 3));
+}
+function randomIv(enc) {
+    let bitLength;
+    switch (enc) {
+        case 'A128GCM':
+        case 'A256GCM':
+            bitLength = 96;
+            break;
+        case 'A128CBC-HS256':
+        case 'A256CBC-HS512':
+            bitLength = 128;
+            break;
+        default:
+            throw new UnsupportedOperationError();
+    }
+    return crypto.getRandomValues(new Uint8Array(bitLength >> 3));
+}
+async function oaepWrap(cek, key) {
+    if (key.usages.includes('encrypt') === false) {
+        throw new UnsupportedOperationError();
+    }
+    return new Uint8Array(await crypto.subtle.encrypt('RSA-OAEP', key, cek));
+}
+async function gcm(plaintext, cek, iv, aad) {
+    const key = await crypto.subtle.importKey('raw', cek, 'AES-GCM', false, ['encrypt']);
+    const encrypted = new Uint8Array(await crypto.subtle.encrypt({
+        additionalData: aad,
+        iv,
+        name: 'AES-GCM',
+        tagLength: 128,
+    }, key, plaintext));
+    const tag = encrypted.slice(-16);
+    const ciphertext = encrypted.slice(0, -16);
+    return { ciphertext, tag };
+}
+async function cbc(enc, plaintext, cek, iv, aad) {
+    const keySize = parseInt(enc.slice(1, 4), 10);
+    const [encKey, macKey] = await Promise.all([
+        crypto.subtle.importKey('raw', cek.subarray(keySize >> 3), 'AES-CBC', false, ['encrypt']),
+        crypto.subtle.importKey('raw', cek.subarray(0, keySize >> 3), {
+            hash: `SHA-${keySize << 1}`,
+            name: 'HMAC',
+        }, false, ['sign']),
+    ]);
+    const ciphertext = new Uint8Array(await crypto.subtle.encrypt({
+        iv,
+        name: 'AES-CBC',
+    }, encKey, plaintext));
+    const macData = concat(aad, iv, ciphertext, uint64be(aad.length << 3));
+    const tag = new Uint8Array((await crypto.subtle.sign('HMAC', macKey, macData)).slice(0, keySize >> 3));
+    return { ciphertext, tag };
+}
+function concat(...buffers) {
+    const size = buffers.reduce((acc, { length }) => acc + length, 0);
+    const res = new Uint8Array(size);
+    let i = 0;
+    buffers.forEach((buffer) => {
+        res.set(buffer, i);
+        i += buffer.length;
+    });
+    return res;
+}
+function writeUInt32BE(buffer, value, offset) {
+    if (value < 0 || value >= MAX_INT32) {
+        throw new RangeError(`value must be >= 0 and <= ${MAX_INT32 - 1}. Received ${value}`);
+    }
+    buffer.set([value >>> 24, value >>> 16, value >>> 8, value & 0xff], offset);
+}
+const MAX_INT32 = 2 ** 32;
+function uint64be(value) {
+    const high = Math.floor(value / MAX_INT32);
+    const low = value % MAX_INT32;
+    const buffer = new Uint8Array(8);
+    writeUInt32BE(buffer, high, 0);
+    writeUInt32BE(buffer, low, 4);
+    return buffer;
+}
+async function encrypt(enc, plaintext, cek, iv, aad) {
+    switch (enc) {
+        case 'A128CBC-HS256':
+        case 'A256CBC-HS512':
+            return cbc(enc, plaintext, cek, iv, aad);
+        case 'A128GCM':
+        case 'A256GCM':
+            return gcm(plaintext, cek, iv, aad);
+        default:
+            throw new UnsupportedOperationError();
+    }
+}
+function uint32be(value) {
+    const res = new Uint8Array(4);
+    writeUInt32BE(res, value);
+    return res;
+}
+function lengthAndInput(input) {
+    return concat(uint32be(input.length), input);
+}
+function deriveBitsLength(algorithm) {
+    switch (algorithm.name) {
+        case 'ECDH': {
+            switch (algorithm.namedCurve) {
+                case 'P-256':
+                    return 256;
+            }
+            throw new UnsupportedOperationError();
+        }
+        default:
+            throw new UnsupportedOperationError();
+    }
+}
+async function ecdhEs(publicKey, privateKey, enc) {
+    const Z = new Uint8Array(await crypto.subtle.deriveBits({ name: publicKey.algorithm.name, public: publicKey }, privateKey, deriveBitsLength(publicKey.algorithm)));
+    const keydatalen = cekBitLength(enc);
+    const AlgorithmID = lengthAndInput(buf(enc));
+    const PartyUInfo = lengthAndInput(new Uint8Array());
+    const PartyVInfo = lengthAndInput(new Uint8Array());
+    const SuppPubInfo = uint32be(keydatalen);
+    const SuppPrivInfo = new Uint8Array();
+    const OtherInfo = concat(AlgorithmID, PartyUInfo, PartyVInfo, SuppPubInfo, SuppPrivInfo);
+    const iterations = Math.ceil(keydatalen / 256);
+    const res = new Uint8Array(iterations * 32);
+    for (let counter = 0; counter < iterations; counter++) {
+        const input = new Uint8Array(4 + Z.byteLength + OtherInfo.byteLength);
+        input.set(uint32be(counter + 1));
+        input.set(Z, 4);
+        input.set(OtherInfo, 4 + Z.byteLength);
+        res.set(new Uint8Array(await crypto.subtle.digest('SHA-256', input)), counter * 32);
+    }
+    return res.slice(0, keydatalen >> 3);
+}
+async function jwe(header, plaintext, key) {
+    let cek;
+    let encryptedKey;
+    switch (header.alg) {
+        case 'ECDH-ES': {
+            const epk = (await crypto.subtle.generateKey(key.algorithm, false, ['deriveBits']));
+            const { kty, crv, x, y } = await crypto.subtle.exportKey('jwk', epk.publicKey);
+            header.epk = { kty, crv, x, y };
+            cek = await ecdhEs(key, epk.privateKey, header.enc);
+            encryptedKey = new Uint8Array();
+            break;
+        }
+        case 'RSA-OAEP':
+        case 'RSA-OAEP-256': {
+            cek = randomCek(header.enc);
+            encryptedKey = await oaepWrap(cek, key);
+            break;
+        }
+        default:
+            throw new UnsupportedOperationError();
+    }
+    const iv = randomIv(header.enc);
+    const protectedHeader = buf(JSON.stringify(header));
+    const aad = buf(b64u(protectedHeader));
+    const { ciphertext, tag } = await encrypt(header.enc, plaintext, cek, iv, aad);
+    return [protectedHeader, encryptedKey, iv, ciphertext, tag].map((part) => b64u(part)).join('.');
+}
+async function importJwk(jwk) {
+    const { alg, ext, key_ops, use, ...key } = jwk;
+    let algorithm;
+    switch (alg) {
+        case 'PS256':
+            algorithm = { name: 'RSA-PSS', hash: 'SHA-256' };
+            break;
+        case 'RS256':
+            algorithm = { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' };
+            break;
+        case 'ES256':
+            algorithm = { name: 'ECDSA', namedCurve: 'P-256' };
+            break;
+        default:
+            throw new UnsupportedOperationError();
+    }
+    return crypto.subtle.importKey('jwk', key, algorithm, true, ['verify']);
+}
+export async function deviceAuthorizationRequest(as, client, parameters, options) {
+    assertIssuer(as);
+    assertClient(client);
+    if (!(parameters instanceof URLSearchParams)) {
+        throw new TypeError('"parameters" must be an instance of URLSearchParams');
+    }
+    if (typeof as.device_authorization_endpoint !== 'string') {
+        throw new TypeError('"issuer.device_authorization_endpoint" must be a string');
+    }
+    const url = new URL(as.device_authorization_endpoint);
+    const body = new URLSearchParams(parameters);
+    body.set('client_id', client.client_id);
+    const headers = prepareHeaders(options);
+    headers.set('accept', 'application/json');
+    return authenticatedRequest(as, client, 'POST', url, body, headers, options);
+}
+export async function processDeviceAuthorizationResponse(as, client, response) {
+    assertIssuer(as);
+    assertClient(client);
+    if (!(response instanceof Response)) {
+        throw new TypeError('"response" must be an instance of Response');
+    }
+    if (response.status !== 200) {
+        let err;
+        if ((err = await handleOAuthBodyError(response))) {
+            return err;
+        }
+        throw new OPE('"response" is not a conform Device Authorization Endpoint response');
+    }
+    let json;
+    try {
+        json = await preserveBodyStream(response).json();
+    }
+    catch {
+        throw new OPE('failed to parsed "response" body as JSON');
+    }
+    if (!isTopLevelObject(json)) {
+        throw new OPE('"response" body must be a top level object');
+    }
+    if (typeof json.device_code !== 'string' || json.device_code.length === 0) {
+        throw new OPE('"response" body "device_code" property must be a non-empty string');
+    }
+    if (typeof json.user_code !== 'string' || json.user_code.length === 0) {
+        throw new OPE('"response" body "user_code" property must be a non-empty string');
+    }
+    if (typeof json.verification_uri !== 'string' || json.verification_uri.length === 0) {
+        throw new OPE('"response" body "verification_uri" property must be a non-empty string');
+    }
+    if (typeof json.expires_in !== 'number' || json.expires_in <= 0) {
+        throw new OPE('"response" body "expires_in" property must be a positive number');
+    }
+    if (json.verification_uri_complete !== undefined &&
+        (typeof json.verification_uri_complete !== 'string' ||
+            json.verification_uri_complete.length === 0)) {
+        throw new OPE('"response" body "verification_uri_complete" property must be a non-empty string');
+    }
+    if (json.interval !== undefined && (typeof json.interval !== 'number' || json.interval <= 0)) {
+        throw new OPE('"response" body "interval" property must be a positive number');
+    }
+    return json;
+}
+export async function deviceCodeGrantRequest(as, client, deviceCode, options) {
+    assertIssuer(as);
+    assertClient(client);
+    if (typeof deviceCode !== 'string' || deviceCode.length === 0) {
+        throw new TypeError('"deviceCode" must be a non-empty string');
+    }
+    const parameters = new URLSearchParams(options?.additionalParameters);
+    parameters.set('device_code', deviceCode);
+    return tokenEndpointRequest(as, client, 'urn:ietf:params:oauth:grant-type:device_code', parameters, options);
+}
+export async function processDeviceCodeResponse(as, client, response, options) {
+    return processGenericAccessTokenResponse(as, client, response, options);
+}
