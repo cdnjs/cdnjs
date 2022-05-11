@@ -1,0 +1,1 @@
+var hasOwn=Object.prototype.hasOwnProperty,toString=Object.prototype.toString;module.exports=function(t,r,o){if("[object Function]"!==toString.call(r))throw new TypeError("iterator must be a function");var e=t.length;if(e===+e)for(var n=0;n<e;n++)r.call(o,t[n],n,t);else for(var a in t)hasOwn.call(t,a)&&r.call(o,t[a],a,t)};
