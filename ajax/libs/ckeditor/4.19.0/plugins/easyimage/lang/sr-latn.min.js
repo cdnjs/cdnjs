@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("easyimage","sr-latn",{commands:{fullImage:"Slika u punoj veličini",sideImage:"Slika sa strane",altText:"Izmena alternativnog teksta",upload:"Postavljanje fotografije"},uploadFailed:"Slika se ne može postaviti zbog greške u mreži"});
