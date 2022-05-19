@@ -1,0 +1,325 @@
+// Snazzy Info Window
+@import '_settings';
+
+
+
+//////////////////////////////
+// 0. Variables
+//////////////////////////////
+
+// Snazzy Info Window settings
+$si-pre: si;
+
+// Default marker
+$si-default-marker-width: 22px;
+$si-default-marker-height: 40px;
+$si-default-marker-anchor-x: 11px;
+$si-default-marker-anchor-y: 40px;
+$si-default-marker-margin: 0;
+
+// Math variable
+$si-root-2: 1.41421356237;
+$si-inverse-root-2: 0.7071067811865474;
+
+// Pointer settings
+$si-rotation: -45deg;
+$si-rotated-shadow-h: $si-inverse-root-2 * ($si-shadow-h - $si-shadow-v);     // Only applies to a -45deg rotation
+$si-rotated-shadow-v: $si-inverse-root-2 * ($si-shadow-h + $si-shadow-v);     // Only applies to a -45deg rotation
+
+
+
+//////////////////////////////
+// 1. Wrapper Styles
+//////////////////////////////
+
+// Infowindow wrapper
+.#{$si-pre}-float-wrapper {
+    position: absolute;
+    width: 100%;
+
+    &,
+    * {
+        box-sizing: border-box;
+    }
+}
+
+[class*='#{$si-pre}-wrapper'] {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    font-size: $si-font-size;
+    cursor: default;
+}
+
+// Top-positioned infowindow
+.#{$si-pre}-wrapper-top {
+    flex-direction: column;
+    margin-top: -$si-default-marker-anchor-y - $si-default-marker-margin;
+    margin-left: $si-default-marker-width / 2 - $si-default-marker-anchor-x;
+    transform: translate(-50%, -100%);
+}
+
+// Bottom-positioned infowindow
+.#{$si-pre}-wrapper-bottom {
+    flex-direction: column-reverse;
+    margin-top: $si-default-marker-height - $si-default-marker-anchor-y + $si-default-marker-margin;
+    margin-left: $si-default-marker-width / 2 - $si-default-marker-anchor-x;
+    transform: translate(-50%, 0);
+}
+
+// Left-positioned infowindow
+.#{$si-pre}-wrapper-left {
+    margin-top: $si-default-marker-height / 2 - $si-default-marker-anchor-y;
+    margin-left: -$si-default-marker-anchor-x - $si-default-marker-margin;
+    transform: translate(-100%, -50%);
+}
+
+// Right-positioned infowindow
+.#{$si-pre}-wrapper-right {
+    flex-direction: row-reverse;
+    margin-top: $si-default-marker-height / 2 - $si-default-marker-anchor-y;
+    margin-left: $si-default-marker-width - $si-default-marker-anchor-x + $si-default-marker-margin;
+    transform: translate(0, -50%);
+}
+
+
+
+//////////////////////////////
+// 2. Infowindow Shadow
+//////////////////////////////
+
+// Shadow wrapper
+[class*='#{$si-pre}-shadow-wrapper'] {
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: $si-shadow-opacity;
+    z-index: 1;
+}
+
+// Shadow position
+.#{$si-pre}-shadow-wrapper-top,
+.#{$si-pre}-shadow-wrapper-bottom {
+    flex-direction: column;
+}
+
+.#{$si-pre}-shadow-pointer-bottom,
+.#{$si-pre}-shadow-pointer-right {
+    order: -1;
+}
+
+// Box shadow
+.#{$si-pre}-shadow-frame {
+    box-shadow: $si-shadow-h $si-shadow-v $si-shadow-blur $si-shadow-spread $si-shadow-color;
+}
+
+// Pointer shadow
+[class*='#{$si-pre}-shadow-pointer'] {
+    position: relative;
+    width: $si-pointer-length;
+    height: $si-pointer-length;
+    margin: auto;
+}
+
+[class*='#{$si-pre}-shadow-inner-pointer'] {
+    position: absolute;
+    width: 141%;
+    height: 141%;
+    box-shadow: $si-rotated-shadow-h $si-rotated-shadow-v $si-shadow-blur $si-shadow-spread $si-shadow-color;
+}
+
+
+.#{$si-pre}-shadow-inner-pointer-top {
+    left: 50%;
+    transform: translate(-50%, -50%) rotate($si-rotation);
+}
+
+.#{$si-pre}-shadow-inner-pointer-bottom {
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%) rotate($si-rotation);
+}
+
+.#{$si-pre}-shadow-inner-pointer-left {
+    top: 50%;
+    transform: translate(-50%, -50%) rotate($si-rotation);
+}
+
+.#{$si-pre}-shadow-inner-pointer-right {
+    top: 50%;
+    right: 0;
+    transform: translate(50%, -50%) rotate($si-rotation);
+}
+
+
+
+//////////////////////////////
+// 3. Content Styles
+//////////////////////////////
+
+// Content styles
+.#{$si-pre}-frame {
+    position: relative;
+    flex: 1 1 auto;
+    border-radius: $si-border-radius;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.#{$si-pre}-content-wrapper {
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    padding: $si-content-padding;
+    background-color: $si-content-bg;
+
+    .#{$si-pre}-has-border & {
+        border: $si-border-width solid $si-border-color;
+    }
+}
+
+.#{$si-pre}-content {
+    overflow: auto;
+}
+
+
+
+//////////////////////////////
+// 4. Close Button
+//////////////////////////////
+
+.#{$si-pre}-close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 0;
+    outline: none;
+    background-color: transparent;
+    color: inherit;
+    font-family: Arial, Baskerville, monospace;
+    font-size: $si-close-font-size;
+    cursor: pointer;
+    opacity: $si-close-opacity;
+    appearance: none;
+
+    &:hover,
+    &:focus {
+        opacity: $si-close-hover-opacity;
+    }
+}
+
+
+
+//////////////////////////////
+// 5. Pointer Styles
+//////////////////////////////
+
+[class*='#{$si-pre}-pointer-border'] {
+    position: absolute;
+    border: $si-pointer-length solid transparent;
+    z-index: 3;
+}
+
+$si-triangle-difference: min(round($si-border-width * ($si-root-2 - 1)), $si-pointer-length);
+
+[class*='#{$si-pre}-pointer-bg'] {
+    position: relative;
+    border: $si-pointer-length solid transparent;
+    z-index: 4;
+
+    .#{$si-pre}-has-border & {
+        border-width: $si-pointer-length - $si-triangle-difference;
+    }
+}
+
+.#{$si-pre}-pointer-border-top,
+.#{$si-pre}-pointer-border-bottom {
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.#{$si-pre}-pointer-border-left,
+.#{$si-pre}-pointer-border-right {
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+// Top pointer poisitioning
+.#{$si-pre}-pointer-top {
+    border-bottom: 0;
+}
+
+.#{$si-pre}-pointer-border-top {
+    bottom: 0;
+    border-top-color: $si-border-color;
+}
+
+.#{$si-pre}-pointer-bg-top {
+    border-top-color: $si-content-bg;
+
+    .#{$si-pre}-has-border & {
+        top: -$si-border-width;
+        margin-bottom: $si-triangle-difference;
+    }
+}
+
+
+// Bottom pointer positioning
+.#{$si-pre}-pointer-bottom {
+    border-top: 0;
+}
+
+.#{$si-pre}-pointer-border-bottom {
+    top: 0;
+    border-bottom-color: $si-border-color;
+}
+
+.#{$si-pre}-pointer-bg-bottom {
+    border-bottom-color: $si-content-bg;
+
+    .#{$si-pre}-has-border & {
+        bottom: -$si-border-width;
+        margin-top: $si-triangle-difference;
+    }
+}
+
+// Left pointer positioning
+.#{$si-pre}-pointer-left {
+    border-right: 0;
+}
+
+.#{$si-pre}-pointer-border-left {
+    right: 0;
+    border-left-color: $si-border-color;
+}
+
+.#{$si-pre}-pointer-bg-left {
+    border-left-color: $si-content-bg;
+
+    .#{$si-pre}-has-border & {
+        left: -$si-border-width;
+        margin-right: $si-triangle-difference;
+    }
+}
+
+// Right pointer positioning
+.#{$si-pre}-pointer-right {
+    border-left: 0;
+}
+
+.#{$si-pre}-pointer-border-right {
+    left: 0;
+    border-right-color: $si-border-color;
+}
+
+.#{$si-pre}-pointer-bg-right {
+    border-right-color: $si-content-bg;
+
+    .#{$si-pre}-has-border & {
+        right: -$si-border-width;
+        margin-left: $si-triangle-difference;
+    }
+}
