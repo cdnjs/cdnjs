@@ -1,0 +1,554 @@
+/*!
+ * Author : Matteo Bruni
+ * MIT license: https://opensource.org/licenses/MIT
+ * Demo / Generator : https://particles.js.org/
+ * GitHub : https://www.github.com/matteobruni/tsparticles
+ * How to use? : Check the GitHub README
+ * v2.0.0-beta.4
+ */
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory(require("tsparticles-interaction-external-attract"), require("tsparticles-interaction-external-bounce"), require("tsparticles-interaction-external-bubble"), require("tsparticles-interaction-external-connect"), require("tsparticles-interaction-external-grab"), require("tsparticles-interaction-external-pause"), require("tsparticles-interaction-external-push"), require("tsparticles-interaction-external-remove"), require("tsparticles-interaction-external-repulse"), require("tsparticles-interaction-particles-attract"), require("tsparticles-interaction-particles-collisions"), require("tsparticles-interaction-particles-links"), require("tsparticles-shape-circle"), require("tsparticles-shape-image"), require("tsparticles-shape-line"), require("tsparticles-shape-polygon"), require("tsparticles-shape-square"), require("tsparticles-shape-star"), require("tsparticles-shape-text"), require("tsparticles-updater-life"), require("tsparticles-updater-opacity"), require("tsparticles-updater-size"), require("tsparticles-updater-angle"), require("tsparticles-updater-color"), require("tsparticles-engine"), require("tsparticles-updater-out-modes"));
+	else if(typeof define === 'function' && define.amd)
+		define(["tsparticles-interaction-external-attract", "tsparticles-interaction-external-bounce", "tsparticles-interaction-external-bubble", "tsparticles-interaction-external-connect", "tsparticles-interaction-external-grab", "tsparticles-interaction-external-pause", "tsparticles-interaction-external-push", "tsparticles-interaction-external-remove", "tsparticles-interaction-external-repulse", "tsparticles-interaction-particles-attract", "tsparticles-interaction-particles-collisions", "tsparticles-interaction-particles-links", "tsparticles-shape-circle", "tsparticles-shape-image", "tsparticles-shape-line", "tsparticles-shape-polygon", "tsparticles-shape-square", "tsparticles-shape-star", "tsparticles-shape-text", "tsparticles-updater-life", "tsparticles-updater-opacity", "tsparticles-updater-size", "tsparticles-updater-angle", "tsparticles-updater-color", "tsparticles-engine", "tsparticles-updater-out-modes"], factory);
+	else {
+		var a = typeof exports === 'object' ? factory(require("tsparticles-interaction-external-attract"), require("tsparticles-interaction-external-bounce"), require("tsparticles-interaction-external-bubble"), require("tsparticles-interaction-external-connect"), require("tsparticles-interaction-external-grab"), require("tsparticles-interaction-external-pause"), require("tsparticles-interaction-external-push"), require("tsparticles-interaction-external-remove"), require("tsparticles-interaction-external-repulse"), require("tsparticles-interaction-particles-attract"), require("tsparticles-interaction-particles-collisions"), require("tsparticles-interaction-particles-links"), require("tsparticles-shape-circle"), require("tsparticles-shape-image"), require("tsparticles-shape-line"), require("tsparticles-shape-polygon"), require("tsparticles-shape-square"), require("tsparticles-shape-star"), require("tsparticles-shape-text"), require("tsparticles-updater-life"), require("tsparticles-updater-opacity"), require("tsparticles-updater-size"), require("tsparticles-updater-angle"), require("tsparticles-updater-color"), require("tsparticles-engine"), require("tsparticles-updater-out-modes")) : factory(root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"]);
+		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
+	}
+})(this, function(__WEBPACK_EXTERNAL_MODULE__174__, __WEBPACK_EXTERNAL_MODULE__544__, __WEBPACK_EXTERNAL_MODULE__923__, __WEBPACK_EXTERNAL_MODULE__364__, __WEBPACK_EXTERNAL_MODULE__602__, __WEBPACK_EXTERNAL_MODULE__999__, __WEBPACK_EXTERNAL_MODULE__639__, __WEBPACK_EXTERNAL_MODULE__394__, __WEBPACK_EXTERNAL_MODULE__813__, __WEBPACK_EXTERNAL_MODULE__966__, __WEBPACK_EXTERNAL_MODULE__260__, __WEBPACK_EXTERNAL_MODULE__955__, __WEBPACK_EXTERNAL_MODULE__941__, __WEBPACK_EXTERNAL_MODULE__662__, __WEBPACK_EXTERNAL_MODULE__45__, __WEBPACK_EXTERNAL_MODULE__722__, __WEBPACK_EXTERNAL_MODULE__295__, __WEBPACK_EXTERNAL_MODULE__110__, __WEBPACK_EXTERNAL_MODULE__922__, __WEBPACK_EXTERNAL_MODULE__489__, __WEBPACK_EXTERNAL_MODULE__838__, __WEBPACK_EXTERNAL_MODULE__328__, __WEBPACK_EXTERNAL_MODULE__1__, __WEBPACK_EXTERNAL_MODULE__841__, __WEBPACK_EXTERNAL_MODULE__818__, __WEBPACK_EXTERNAL_MODULE__405__) {
+return /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ 818:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__818__;
+
+/***/ }),
+
+/***/ 174:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__174__;
+
+/***/ }),
+
+/***/ 544:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__544__;
+
+/***/ }),
+
+/***/ 923:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__923__;
+
+/***/ }),
+
+/***/ 364:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__364__;
+
+/***/ }),
+
+/***/ 602:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__602__;
+
+/***/ }),
+
+/***/ 999:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__999__;
+
+/***/ }),
+
+/***/ 639:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__639__;
+
+/***/ }),
+
+/***/ 394:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__394__;
+
+/***/ }),
+
+/***/ 813:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__813__;
+
+/***/ }),
+
+/***/ 966:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__966__;
+
+/***/ }),
+
+/***/ 260:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__260__;
+
+/***/ }),
+
+/***/ 955:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__955__;
+
+/***/ }),
+
+/***/ 941:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__941__;
+
+/***/ }),
+
+/***/ 662:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__662__;
+
+/***/ }),
+
+/***/ 45:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__45__;
+
+/***/ }),
+
+/***/ 722:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__722__;
+
+/***/ }),
+
+/***/ 295:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__295__;
+
+/***/ }),
+
+/***/ 110:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__110__;
+
+/***/ }),
+
+/***/ 922:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__922__;
+
+/***/ }),
+
+/***/ 1:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__1__;
+
+/***/ }),
+
+/***/ 841:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__841__;
+
+/***/ }),
+
+/***/ 489:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__489__;
+
+/***/ }),
+
+/***/ 838:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__838__;
+
+/***/ }),
+
+/***/ 405:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__405__;
+
+/***/ }),
+
+/***/ 328:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__328__;
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "loadSlim": () => (/* binding */ loadSlim)
+});
+
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-interaction-external-attract","commonjs2":"tsparticles-interaction-external-attract","amd":"tsparticles-interaction-external-attract","root":"window"}
+var external_commonjs_tsparticles_interaction_external_attract_commonjs2_tsparticles_interaction_external_attract_amd_tsparticles_interaction_external_attract_root_window_ = __webpack_require__(174);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-interaction-external-bounce","commonjs2":"tsparticles-interaction-external-bounce","amd":"tsparticles-interaction-external-bounce","root":"window"}
+var external_commonjs_tsparticles_interaction_external_bounce_commonjs2_tsparticles_interaction_external_bounce_amd_tsparticles_interaction_external_bounce_root_window_ = __webpack_require__(544);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-interaction-external-bubble","commonjs2":"tsparticles-interaction-external-bubble","amd":"tsparticles-interaction-external-bubble","root":"window"}
+var external_commonjs_tsparticles_interaction_external_bubble_commonjs2_tsparticles_interaction_external_bubble_amd_tsparticles_interaction_external_bubble_root_window_ = __webpack_require__(923);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-interaction-external-connect","commonjs2":"tsparticles-interaction-external-connect","amd":"tsparticles-interaction-external-connect","root":"window"}
+var external_commonjs_tsparticles_interaction_external_connect_commonjs2_tsparticles_interaction_external_connect_amd_tsparticles_interaction_external_connect_root_window_ = __webpack_require__(364);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-interaction-external-grab","commonjs2":"tsparticles-interaction-external-grab","amd":"tsparticles-interaction-external-grab","root":"window"}
+var external_commonjs_tsparticles_interaction_external_grab_commonjs2_tsparticles_interaction_external_grab_amd_tsparticles_interaction_external_grab_root_window_ = __webpack_require__(602);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-interaction-external-pause","commonjs2":"tsparticles-interaction-external-pause","amd":"tsparticles-interaction-external-pause","root":"window"}
+var external_commonjs_tsparticles_interaction_external_pause_commonjs2_tsparticles_interaction_external_pause_amd_tsparticles_interaction_external_pause_root_window_ = __webpack_require__(999);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-interaction-external-push","commonjs2":"tsparticles-interaction-external-push","amd":"tsparticles-interaction-external-push","root":"window"}
+var external_commonjs_tsparticles_interaction_external_push_commonjs2_tsparticles_interaction_external_push_amd_tsparticles_interaction_external_push_root_window_ = __webpack_require__(639);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-interaction-external-remove","commonjs2":"tsparticles-interaction-external-remove","amd":"tsparticles-interaction-external-remove","root":"window"}
+var external_commonjs_tsparticles_interaction_external_remove_commonjs2_tsparticles_interaction_external_remove_amd_tsparticles_interaction_external_remove_root_window_ = __webpack_require__(394);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-interaction-external-repulse","commonjs2":"tsparticles-interaction-external-repulse","amd":"tsparticles-interaction-external-repulse","root":"window"}
+var external_commonjs_tsparticles_interaction_external_repulse_commonjs2_tsparticles_interaction_external_repulse_amd_tsparticles_interaction_external_repulse_root_window_ = __webpack_require__(813);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-interaction-particles-attract","commonjs2":"tsparticles-interaction-particles-attract","amd":"tsparticles-interaction-particles-attract","root":"window"}
+var external_commonjs_tsparticles_interaction_particles_attract_commonjs2_tsparticles_interaction_particles_attract_amd_tsparticles_interaction_particles_attract_root_window_ = __webpack_require__(966);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-interaction-particles-collisions","commonjs2":"tsparticles-interaction-particles-collisions","amd":"tsparticles-interaction-particles-collisions","root":"window"}
+var external_commonjs_tsparticles_interaction_particles_collisions_commonjs2_tsparticles_interaction_particles_collisions_amd_tsparticles_interaction_particles_collisions_root_window_ = __webpack_require__(260);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-interaction-particles-links","commonjs2":"tsparticles-interaction-particles-links","amd":"tsparticles-interaction-particles-links","root":"window"}
+var external_commonjs_tsparticles_interaction_particles_links_commonjs2_tsparticles_interaction_particles_links_amd_tsparticles_interaction_particles_links_root_window_ = __webpack_require__(955);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-shape-circle","commonjs2":"tsparticles-shape-circle","amd":"tsparticles-shape-circle","root":"window"}
+var external_commonjs_tsparticles_shape_circle_commonjs2_tsparticles_shape_circle_amd_tsparticles_shape_circle_root_window_ = __webpack_require__(941);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-shape-image","commonjs2":"tsparticles-shape-image","amd":"tsparticles-shape-image","root":"window"}
+var external_commonjs_tsparticles_shape_image_commonjs2_tsparticles_shape_image_amd_tsparticles_shape_image_root_window_ = __webpack_require__(662);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-shape-line","commonjs2":"tsparticles-shape-line","amd":"tsparticles-shape-line","root":"window"}
+var external_commonjs_tsparticles_shape_line_commonjs2_tsparticles_shape_line_amd_tsparticles_shape_line_root_window_ = __webpack_require__(45);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-shape-polygon","commonjs2":"tsparticles-shape-polygon","amd":"tsparticles-shape-polygon","root":"window"}
+var external_commonjs_tsparticles_shape_polygon_commonjs2_tsparticles_shape_polygon_amd_tsparticles_shape_polygon_root_window_ = __webpack_require__(722);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-shape-square","commonjs2":"tsparticles-shape-square","amd":"tsparticles-shape-square","root":"window"}
+var external_commonjs_tsparticles_shape_square_commonjs2_tsparticles_shape_square_amd_tsparticles_shape_square_root_window_ = __webpack_require__(295);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-shape-star","commonjs2":"tsparticles-shape-star","amd":"tsparticles-shape-star","root":"window"}
+var external_commonjs_tsparticles_shape_star_commonjs2_tsparticles_shape_star_amd_tsparticles_shape_star_root_window_ = __webpack_require__(110);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-shape-text","commonjs2":"tsparticles-shape-text","amd":"tsparticles-shape-text","root":"window"}
+var external_commonjs_tsparticles_shape_text_commonjs2_tsparticles_shape_text_amd_tsparticles_shape_text_root_window_ = __webpack_require__(922);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-updater-life","commonjs2":"tsparticles-updater-life","amd":"tsparticles-updater-life","root":"window"}
+var external_commonjs_tsparticles_updater_life_commonjs2_tsparticles_updater_life_amd_tsparticles_updater_life_root_window_ = __webpack_require__(489);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-updater-opacity","commonjs2":"tsparticles-updater-opacity","amd":"tsparticles-updater-opacity","root":"window"}
+var external_commonjs_tsparticles_updater_opacity_commonjs2_tsparticles_updater_opacity_amd_tsparticles_updater_opacity_root_window_ = __webpack_require__(838);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-updater-size","commonjs2":"tsparticles-updater-size","amd":"tsparticles-updater-size","root":"window"}
+var external_commonjs_tsparticles_updater_size_commonjs2_tsparticles_updater_size_amd_tsparticles_updater_size_root_window_ = __webpack_require__(328);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-updater-angle","commonjs2":"tsparticles-updater-angle","amd":"tsparticles-updater-angle","root":"window"}
+var external_commonjs_tsparticles_updater_angle_commonjs2_tsparticles_updater_angle_amd_tsparticles_updater_angle_root_window_ = __webpack_require__(1);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-updater-color","commonjs2":"tsparticles-updater-color","amd":"tsparticles-updater-color","root":"window"}
+var external_commonjs_tsparticles_updater_color_commonjs2_tsparticles_updater_color_amd_tsparticles_updater_color_root_window_ = __webpack_require__(841);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-engine","commonjs2":"tsparticles-engine","amd":"tsparticles-engine","root":"window"}
+var external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_ = __webpack_require__(818);
+;// CONCATENATED MODULE: ../../updaters/strokeColor/dist/StrokeColorUpdater.js
+
+
+function updateColorValue(delta, value, valueAnimation, max, decrease) {
+  var _a;
+
+  const colorValue = value;
+
+  if (!colorValue || !colorValue.enable) {
+    return;
+  }
+
+  const offset = (0,external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.randomInRange)(valueAnimation.offset);
+  const velocity = ((_a = value.velocity) !== null && _a !== void 0 ? _a : 0) * delta.factor + offset * 3.6;
+
+  if (!decrease || colorValue.status === external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.AnimationStatus.increasing) {
+    colorValue.value += velocity;
+
+    if (decrease && colorValue.value > max) {
+      colorValue.status = external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.AnimationStatus.decreasing;
+      colorValue.value -= colorValue.value % max;
+    }
+  } else {
+    colorValue.value -= velocity;
+
+    if (colorValue.value < 0) {
+      colorValue.status = external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.AnimationStatus.increasing;
+      colorValue.value += colorValue.value;
+    }
+  }
+
+  if (colorValue.value > max) {
+    colorValue.value %= max;
+  }
+}
+
+function updateStrokeColor(particle, delta) {
+  var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
+
+  if (!((_a = particle.stroke) === null || _a === void 0 ? void 0 : _a.color)) {
+    return;
+  }
+
+  const animationOptions = particle.stroke.color.animation;
+  const h = (_c = (_b = particle.strokeColor) === null || _b === void 0 ? void 0 : _b.h) !== null && _c !== void 0 ? _c : (_d = particle.color) === null || _d === void 0 ? void 0 : _d.h;
+
+  if (h) {
+    updateColorValue(delta, h, animationOptions.h, 360, false);
+  }
+
+  const s = (_f = (_e = particle.strokeColor) === null || _e === void 0 ? void 0 : _e.s) !== null && _f !== void 0 ? _f : (_g = particle.color) === null || _g === void 0 ? void 0 : _g.s;
+
+  if (s) {
+    updateColorValue(delta, s, animationOptions.s, 100, true);
+  }
+
+  const l = (_j = (_h = particle.strokeColor) === null || _h === void 0 ? void 0 : _h.l) !== null && _j !== void 0 ? _j : (_k = particle.color) === null || _k === void 0 ? void 0 : _k.l;
+
+  if (l) {
+    updateColorValue(delta, l, animationOptions.l, 100, true);
+  }
+}
+
+class StrokeColorUpdater {
+  constructor(container) {
+    this.container = container;
+  }
+
+  init(particle) {
+    var _a, _b;
+
+    const container = this.container;
+    particle.stroke = particle.options.stroke instanceof Array ? (0,external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.itemFromArray)(particle.options.stroke, particle.id, particle.options.reduceDuplicates) : particle.options.stroke;
+    particle.strokeWidth = particle.stroke.width * container.retina.pixelRatio;
+    const strokeHslColor = (_a = (0,external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.colorToHsl)(particle.stroke.color)) !== null && _a !== void 0 ? _a : particle.getFillColor();
+
+    if (strokeHslColor) {
+      particle.strokeColor = (0,external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.getHslAnimationFromHsl)(strokeHslColor, (_b = particle.stroke.color) === null || _b === void 0 ? void 0 : _b.animation, container.retina.reduceFactor);
+    }
+  }
+
+  isEnabled(particle) {
+    var _a, _b, _c, _d;
+
+    const color = (_a = particle.stroke) === null || _a === void 0 ? void 0 : _a.color;
+    return !particle.destroyed && !particle.spawning && !!color && (((_b = particle.strokeColor) === null || _b === void 0 ? void 0 : _b.h.value) !== undefined && color.animation.h.enable || ((_c = particle.strokeColor) === null || _c === void 0 ? void 0 : _c.s.value) !== undefined && color.animation.s.enable || ((_d = particle.strokeColor) === null || _d === void 0 ? void 0 : _d.l.value) !== undefined && color.animation.l.enable);
+  }
+
+  update(particle, delta) {
+    if (!this.isEnabled(particle)) {
+      return;
+    }
+
+    updateStrokeColor(particle, delta);
+  }
+
+}
+;// CONCATENATED MODULE: ../../updaters/strokeColor/dist/index.js
+var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function (resolve) {
+      resolve(value);
+    });
+  }
+
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+
+
+function loadStrokeColorUpdater(tsParticles) {
+  return __awaiter(this, void 0, void 0, function* () {
+    yield tsParticles.addParticleUpdater("strokeColor", container => new StrokeColorUpdater(container));
+  });
+}
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-updater-out-modes","commonjs2":"tsparticles-updater-out-modes","amd":"tsparticles-updater-out-modes","root":"window"}
+var external_commonjs_tsparticles_updater_out_modes_commonjs2_tsparticles_updater_out_modes_amd_tsparticles_updater_out_modes_root_window_ = __webpack_require__(405);
+;// CONCATENATED MODULE: ./dist/index.js
+var dist_awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function (resolve) {
+      resolve(value);
+    });
+  }
+
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function loadSlim(tsParticles) {
+  return dist_awaiter(this, void 0, void 0, function* () {
+    yield (0,external_commonjs_tsparticles_interaction_external_attract_commonjs2_tsparticles_interaction_external_attract_amd_tsparticles_interaction_external_attract_root_window_.loadExternalAttractInteraction)(tsParticles);
+    yield (0,external_commonjs_tsparticles_interaction_external_bounce_commonjs2_tsparticles_interaction_external_bounce_amd_tsparticles_interaction_external_bounce_root_window_.loadExternalBounceInteraction)(tsParticles);
+    yield (0,external_commonjs_tsparticles_interaction_external_bubble_commonjs2_tsparticles_interaction_external_bubble_amd_tsparticles_interaction_external_bubble_root_window_.loadExternalBubbleInteraction)(tsParticles);
+    yield (0,external_commonjs_tsparticles_interaction_external_connect_commonjs2_tsparticles_interaction_external_connect_amd_tsparticles_interaction_external_connect_root_window_.loadExternalConnectInteraction)(tsParticles);
+    yield (0,external_commonjs_tsparticles_interaction_external_grab_commonjs2_tsparticles_interaction_external_grab_amd_tsparticles_interaction_external_grab_root_window_.loadExternalGrabInteraction)(tsParticles);
+    yield (0,external_commonjs_tsparticles_interaction_external_pause_commonjs2_tsparticles_interaction_external_pause_amd_tsparticles_interaction_external_pause_root_window_.loadExternalPauseInteraction)(tsParticles);
+    yield (0,external_commonjs_tsparticles_interaction_external_push_commonjs2_tsparticles_interaction_external_push_amd_tsparticles_interaction_external_push_root_window_.loadExternalPushInteraction)(tsParticles);
+    yield (0,external_commonjs_tsparticles_interaction_external_remove_commonjs2_tsparticles_interaction_external_remove_amd_tsparticles_interaction_external_remove_root_window_.loadExternalRemoveInteraction)(tsParticles);
+    yield (0,external_commonjs_tsparticles_interaction_external_repulse_commonjs2_tsparticles_interaction_external_repulse_amd_tsparticles_interaction_external_repulse_root_window_.loadExternalRepulseInteraction)(tsParticles);
+    yield (0,external_commonjs_tsparticles_interaction_particles_attract_commonjs2_tsparticles_interaction_particles_attract_amd_tsparticles_interaction_particles_attract_root_window_.loadParticlesAttractInteraction)(tsParticles);
+    yield (0,external_commonjs_tsparticles_interaction_particles_collisions_commonjs2_tsparticles_interaction_particles_collisions_amd_tsparticles_interaction_particles_collisions_root_window_.loadParticlesCollisionsInteraction)(tsParticles);
+    yield (0,external_commonjs_tsparticles_interaction_particles_links_commonjs2_tsparticles_interaction_particles_links_amd_tsparticles_interaction_particles_links_root_window_.loadParticlesLinksInteraction)(tsParticles);
+    yield (0,external_commonjs_tsparticles_shape_circle_commonjs2_tsparticles_shape_circle_amd_tsparticles_shape_circle_root_window_.loadCircleShape)(tsParticles);
+    yield (0,external_commonjs_tsparticles_shape_image_commonjs2_tsparticles_shape_image_amd_tsparticles_shape_image_root_window_.loadImageShape)(tsParticles);
+    yield (0,external_commonjs_tsparticles_shape_line_commonjs2_tsparticles_shape_line_amd_tsparticles_shape_line_root_window_.loadLineShape)(tsParticles);
+    yield (0,external_commonjs_tsparticles_shape_polygon_commonjs2_tsparticles_shape_polygon_amd_tsparticles_shape_polygon_root_window_.loadPolygonShape)(tsParticles);
+    yield (0,external_commonjs_tsparticles_shape_square_commonjs2_tsparticles_shape_square_amd_tsparticles_shape_square_root_window_.loadSquareShape)(tsParticles);
+    yield (0,external_commonjs_tsparticles_shape_star_commonjs2_tsparticles_shape_star_amd_tsparticles_shape_star_root_window_.loadStarShape)(tsParticles);
+    yield (0,external_commonjs_tsparticles_shape_text_commonjs2_tsparticles_shape_text_amd_tsparticles_shape_text_root_window_.loadTextShape)(tsParticles);
+    (0,external_commonjs_tsparticles_updater_life_commonjs2_tsparticles_updater_life_amd_tsparticles_updater_life_root_window_.loadLifeUpdater)(tsParticles);
+    (0,external_commonjs_tsparticles_updater_opacity_commonjs2_tsparticles_updater_opacity_amd_tsparticles_updater_opacity_root_window_.loadOpacityUpdater)(tsParticles);
+    (0,external_commonjs_tsparticles_updater_size_commonjs2_tsparticles_updater_size_amd_tsparticles_updater_size_root_window_.loadSizeUpdater)(tsParticles);
+    (0,external_commonjs_tsparticles_updater_angle_commonjs2_tsparticles_updater_angle_amd_tsparticles_updater_angle_root_window_.loadAngleUpdater)(tsParticles);
+    (0,external_commonjs_tsparticles_updater_color_commonjs2_tsparticles_updater_color_amd_tsparticles_updater_color_root_window_.loadColorUpdater)(tsParticles);
+    loadStrokeColorUpdater(tsParticles);
+    (0,external_commonjs_tsparticles_updater_out_modes_commonjs2_tsparticles_updater_out_modes_amd_tsparticles_updater_out_modes_root_window_.loadOutModesUpdater)(tsParticles);
+  });
+}
+})();
+
+/******/ 	return __webpack_exports__;
+/******/ })()
+;
+});
