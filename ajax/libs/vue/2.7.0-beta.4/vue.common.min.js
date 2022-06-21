@@ -1,0 +1,1 @@
+"production"===process.env.NODE_ENV?module.exports=require("./vue.common.prod.js"):module.exports=require("./vue.common.dev.js");
