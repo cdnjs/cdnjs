@@ -1,0 +1,537 @@
+/*!
+ * Author : Matteo Bruni
+ * MIT license: https://opensource.org/licenses/MIT
+ * Demo / Generator : https://particles.js.org/
+ * GitHub : https://www.github.com/matteobruni/tsparticles
+ * How to use? : Check the GitHub README
+ * v2.1.1
+ */
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory(require("tsparticles-updater-angle"), require("tsparticles-move-base"), require("tsparticles-shape-circle"), require("tsparticles-updater-color"), require("tsparticles-plugin-emitters"), require("tsparticles-updater-life"), require("tsparticles-shape-line"), require("tsparticles-updater-opacity"), require("tsparticles-updater-out-modes"), require("tsparticles-updater-size"), require("tsparticles-engine"));
+	else if(typeof define === 'function' && define.amd)
+		define(["tsparticles-updater-angle", "tsparticles-move-base", "tsparticles-shape-circle", "tsparticles-updater-color", "tsparticles-plugin-emitters", "tsparticles-updater-life", "tsparticles-shape-line", "tsparticles-updater-opacity", "tsparticles-updater-out-modes", "tsparticles-updater-size", "tsparticles-engine"], factory);
+	else {
+		var a = typeof exports === 'object' ? factory(require("tsparticles-updater-angle"), require("tsparticles-move-base"), require("tsparticles-shape-circle"), require("tsparticles-updater-color"), require("tsparticles-plugin-emitters"), require("tsparticles-updater-life"), require("tsparticles-shape-line"), require("tsparticles-updater-opacity"), require("tsparticles-updater-out-modes"), require("tsparticles-updater-size"), require("tsparticles-engine")) : factory(root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"]);
+		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
+	}
+})(this, function(__WEBPACK_EXTERNAL_MODULE__1__, __WEBPACK_EXTERNAL_MODULE__919__, __WEBPACK_EXTERNAL_MODULE__941__, __WEBPACK_EXTERNAL_MODULE__841__, __WEBPACK_EXTERNAL_MODULE__949__, __WEBPACK_EXTERNAL_MODULE__489__, __WEBPACK_EXTERNAL_MODULE__45__, __WEBPACK_EXTERNAL_MODULE__838__, __WEBPACK_EXTERNAL_MODULE__364__, __WEBPACK_EXTERNAL_MODULE__328__, __WEBPACK_EXTERNAL_MODULE__818__) {
+return /******/ (function() { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ 818:
+/***/ (function(module) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__818__;
+
+/***/ }),
+
+/***/ 919:
+/***/ (function(module) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__919__;
+
+/***/ }),
+
+/***/ 949:
+/***/ (function(module) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__949__;
+
+/***/ }),
+
+/***/ 941:
+/***/ (function(module) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__941__;
+
+/***/ }),
+
+/***/ 45:
+/***/ (function(module) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__45__;
+
+/***/ }),
+
+/***/ 1:
+/***/ (function(module) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__1__;
+
+/***/ }),
+
+/***/ 841:
+/***/ (function(module) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__841__;
+
+/***/ }),
+
+/***/ 489:
+/***/ (function(module) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__489__;
+
+/***/ }),
+
+/***/ 838:
+/***/ (function(module) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__838__;
+
+/***/ }),
+
+/***/ 364:
+/***/ (function(module) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__364__;
+
+/***/ }),
+
+/***/ 328:
+/***/ (function(module) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__328__;
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	!function() {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = function(exports, definition) {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	!function() {
+/******/ 		__webpack_require__.o = function(obj, prop) { return Object.prototype.hasOwnProperty.call(obj, prop); }
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	!function() {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = function(exports) {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	}();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+!function() {
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "loadFireworksPreset": function() { return /* binding */ loadFireworksPreset; }
+});
+
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-updater-angle","commonjs2":"tsparticles-updater-angle","amd":"tsparticles-updater-angle","root":"window"}
+var external_commonjs_tsparticles_updater_angle_commonjs2_tsparticles_updater_angle_amd_tsparticles_updater_angle_root_window_ = __webpack_require__(1);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-move-base","commonjs2":"tsparticles-move-base","amd":"tsparticles-move-base","root":"window"}
+var external_commonjs_tsparticles_move_base_commonjs2_tsparticles_move_base_amd_tsparticles_move_base_root_window_ = __webpack_require__(919);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-shape-circle","commonjs2":"tsparticles-shape-circle","amd":"tsparticles-shape-circle","root":"window"}
+var external_commonjs_tsparticles_shape_circle_commonjs2_tsparticles_shape_circle_amd_tsparticles_shape_circle_root_window_ = __webpack_require__(941);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-updater-color","commonjs2":"tsparticles-updater-color","amd":"tsparticles-updater-color","root":"window"}
+var external_commonjs_tsparticles_updater_color_commonjs2_tsparticles_updater_color_amd_tsparticles_updater_color_root_window_ = __webpack_require__(841);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-plugin-emitters","commonjs2":"tsparticles-plugin-emitters","amd":"tsparticles-plugin-emitters","root":"window"}
+var external_commonjs_tsparticles_plugin_emitters_commonjs2_tsparticles_plugin_emitters_amd_tsparticles_plugin_emitters_root_window_ = __webpack_require__(949);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-updater-life","commonjs2":"tsparticles-updater-life","amd":"tsparticles-updater-life","root":"window"}
+var external_commonjs_tsparticles_updater_life_commonjs2_tsparticles_updater_life_amd_tsparticles_updater_life_root_window_ = __webpack_require__(489);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-shape-line","commonjs2":"tsparticles-shape-line","amd":"tsparticles-shape-line","root":"window"}
+var external_commonjs_tsparticles_shape_line_commonjs2_tsparticles_shape_line_amd_tsparticles_shape_line_root_window_ = __webpack_require__(45);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-updater-opacity","commonjs2":"tsparticles-updater-opacity","amd":"tsparticles-updater-opacity","root":"window"}
+var external_commonjs_tsparticles_updater_opacity_commonjs2_tsparticles_updater_opacity_amd_tsparticles_updater_opacity_root_window_ = __webpack_require__(838);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-updater-out-modes","commonjs2":"tsparticles-updater-out-modes","amd":"tsparticles-updater-out-modes","root":"window"}
+var external_commonjs_tsparticles_updater_out_modes_commonjs2_tsparticles_updater_out_modes_amd_tsparticles_updater_out_modes_root_window_ = __webpack_require__(364);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-updater-size","commonjs2":"tsparticles-updater-size","amd":"tsparticles-updater-size","root":"window"}
+var external_commonjs_tsparticles_updater_size_commonjs2_tsparticles_updater_size_amd_tsparticles_updater_size_root_window_ = __webpack_require__(328);
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-engine","commonjs2":"tsparticles-engine","amd":"tsparticles-engine","root":"window"}
+var external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_ = __webpack_require__(818);
+;// CONCATENATED MODULE: ../../updaters/strokeColor/dist/esm/StrokeColorUpdater.js
+
+
+function updateColorValue(delta, value, valueAnimation, max, decrease) {
+  var _a, _b;
+
+  const colorValue = value;
+
+  if (!colorValue || !colorValue.enable) {
+    return;
+  }
+
+  const offset = (0,external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.randomInRange)(valueAnimation.offset),
+        velocity = ((_a = value.velocity) !== null && _a !== void 0 ? _a : 0) * delta.factor + offset * 3.6,
+        decay = (_b = value.decay) !== null && _b !== void 0 ? _b : 1;
+
+  if (!decrease || colorValue.status === 0) {
+    colorValue.value += velocity;
+
+    if (decrease && colorValue.value > max) {
+      colorValue.status = 1;
+      colorValue.value -= colorValue.value % max;
+    }
+  } else {
+    colorValue.value -= velocity;
+
+    if (colorValue.value < 0) {
+      colorValue.status = 0;
+      colorValue.value += colorValue.value;
+    }
+  }
+
+  if (colorValue.velocity && decay !== 1) {
+    colorValue.velocity *= decay;
+  }
+
+  if (colorValue.value > max) {
+    colorValue.value %= max;
+  }
+}
+
+function updateStrokeColor(particle, delta) {
+  var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
+
+  if (!((_a = particle.stroke) === null || _a === void 0 ? void 0 : _a.color)) {
+    return;
+  }
+
+  const animationOptions = particle.stroke.color.animation,
+        h = (_c = (_b = particle.strokeColor) === null || _b === void 0 ? void 0 : _b.h) !== null && _c !== void 0 ? _c : (_d = particle.color) === null || _d === void 0 ? void 0 : _d.h;
+
+  if (h) {
+    updateColorValue(delta, h, animationOptions.h, 360, false);
+  }
+
+  const s = (_f = (_e = particle.strokeColor) === null || _e === void 0 ? void 0 : _e.s) !== null && _f !== void 0 ? _f : (_g = particle.color) === null || _g === void 0 ? void 0 : _g.s;
+
+  if (s) {
+    updateColorValue(delta, s, animationOptions.s, 100, true);
+  }
+
+  const l = (_j = (_h = particle.strokeColor) === null || _h === void 0 ? void 0 : _h.l) !== null && _j !== void 0 ? _j : (_k = particle.color) === null || _k === void 0 ? void 0 : _k.l;
+
+  if (l) {
+    updateColorValue(delta, l, animationOptions.l, 100, true);
+  }
+}
+
+class StrokeColorUpdater {
+  constructor(container) {
+    this.container = container;
+  }
+
+  init(particle) {
+    var _a, _b;
+
+    const container = this.container;
+    particle.stroke = particle.options.stroke instanceof Array ? (0,external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.itemFromArray)(particle.options.stroke, particle.id, particle.options.reduceDuplicates) : particle.options.stroke;
+    particle.strokeWidth = particle.stroke.width * container.retina.pixelRatio;
+    const strokeHslColor = (_a = (0,external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.rangeColorToHsl)(particle.stroke.color)) !== null && _a !== void 0 ? _a : particle.getFillColor();
+
+    if (strokeHslColor) {
+      particle.strokeColor = (0,external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.getHslAnimationFromHsl)(strokeHslColor, (_b = particle.stroke.color) === null || _b === void 0 ? void 0 : _b.animation, container.retina.reduceFactor);
+    }
+  }
+
+  isEnabled(particle) {
+    var _a, _b, _c, _d;
+
+    const color = (_a = particle.stroke) === null || _a === void 0 ? void 0 : _a.color;
+    return !particle.destroyed && !particle.spawning && !!color && (((_b = particle.strokeColor) === null || _b === void 0 ? void 0 : _b.h.value) !== undefined && color.animation.h.enable || ((_c = particle.strokeColor) === null || _c === void 0 ? void 0 : _c.s.value) !== undefined && color.animation.s.enable || ((_d = particle.strokeColor) === null || _d === void 0 ? void 0 : _d.l.value) !== undefined && color.animation.l.enable);
+  }
+
+  update(particle, delta) {
+    if (!this.isEnabled(particle)) {
+      return;
+    }
+
+    updateStrokeColor(particle, delta);
+  }
+
+}
+;// CONCATENATED MODULE: ../../updaters/strokeColor/dist/esm/index.js
+
+async function loadStrokeColorUpdater(engine) {
+  await engine.addParticleUpdater("strokeColor", container => new StrokeColorUpdater(container));
+}
+;// CONCATENATED MODULE: ./dist/browser/options.js
+
+
+const fixRange = (value, min, max) => {
+  const diffSMax = value.max > max ? value.max - max : 0;
+  let res = (0,external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.setRangeValue)(value);
+
+  if (diffSMax) {
+    res = (0,external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.setRangeValue)(value.min - diffSMax, max);
+  }
+
+  const diffSMin = value.min < min ? value.min : 0;
+
+  if (diffSMin) {
+    res = (0,external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.setRangeValue)(0, value.max + diffSMin);
+  }
+
+  return res;
+};
+
+const fireworksOptions = ["#ff595e", "#ffca3a", "#8ac926", "#1982c4", "#6a4c93"].map(color => {
+  const rgb = (0,external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.stringToRgb)(color);
+
+  if (!rgb) {
+    return undefined;
+  }
+
+  const hsl = (0,external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.rgbToHsl)(rgb),
+        sRange = fixRange({
+    min: hsl.s - 20,
+    max: hsl.s + 20
+  }, 0, 100),
+        lRange = fixRange({
+    min: hsl.l - 20,
+    max: hsl.l + 20
+  }, 0, 100);
+  return {
+    color: {
+      value: {
+        h: hsl.h,
+        s: sRange,
+        l: lRange
+      }
+    },
+    stroke: {
+      width: 0
+    },
+    number: {
+      value: 0
+    },
+    collisions: {
+      enable: false
+    },
+    opacity: {
+      value: {
+        min: 0.1,
+        max: 1
+      },
+      animation: {
+        enable: true,
+        speed: 0.7,
+        sync: false,
+        startValue: "max"
+        /* StartValueType.max */
+        ,
+        destroy: "min"
+        /* DestroyType.min */
+
+      }
+    },
+    shape: {
+      type: "circle"
+    },
+    size: {
+      value: 2,
+      animation: {
+        enable: false
+      }
+    },
+    life: {
+      count: 1,
+      duration: {
+        value: {
+          min: 1,
+          max: 2
+        }
+      }
+    },
+    move: {
+      enable: true,
+      gravity: {
+        enable: false
+      },
+      speed: 2,
+      direction: "none",
+      random: true,
+      straight: false,
+      outModes: "destroy"
+      /* OutMode.destroy */
+
+    }
+  };
+}).filter(t => t !== undefined);
+const options = {
+  detectRetina: true,
+  background: {
+    color: "#000"
+  },
+  fpsLimit: 120,
+  emitters: {
+    direction: "top"
+    /* MoveDirection.top */
+    ,
+    life: {
+      count: 0,
+      duration: 0.1,
+      delay: 0.1
+    },
+    rate: {
+      delay: 0.25,
+      quantity: 1
+    },
+    size: {
+      width: 100,
+      height: 0
+    },
+    position: {
+      y: 100,
+      x: 50
+    }
+  },
+  particles: {
+    number: {
+      value: 0
+    },
+    destroy: {
+      mode: "split"
+      /* DestroyMode.split */
+      ,
+      split: {
+        count: 1,
+        factor: {
+          value: 0.333333
+        },
+        rate: {
+          value: 200
+        },
+        particles: fireworksOptions
+      }
+    },
+    life: {
+      count: 1
+    },
+    shape: {
+      type: "line"
+    },
+    size: {
+      value: {
+        min: 0.1,
+        max: 50
+      },
+      animation: {
+        enable: true,
+        sync: true,
+        speed: 90,
+        startValue: "max"
+        /* StartValueType.max */
+        ,
+        destroy: "min"
+        /* DestroyType.min */
+
+      }
+    },
+    stroke: {
+      color: {
+        value: "#ffffff"
+      },
+      width: 1
+    },
+    rotate: {
+      path: true
+    },
+    move: {
+      enable: true,
+      gravity: {
+        acceleration: 15,
+        enable: true,
+        inverse: true,
+        maxSpeed: 100
+      },
+      speed: {
+        min: 10,
+        max: 20
+      },
+      outModes: {
+        default: "destroy"
+        /* OutMode.destroy */
+        ,
+        top: "none"
+        /* OutMode.none */
+
+      },
+      trail: {
+        fillColor: "#000",
+        enable: true,
+        length: 10
+      }
+    }
+  }
+};
+;// CONCATENATED MODULE: ./dist/browser/index.js
+
+
+
+
+
+
+
+
+
+
+
+
+async function loadFireworksPreset(engine) {
+  await (0,external_commonjs_tsparticles_move_base_commonjs2_tsparticles_move_base_amd_tsparticles_move_base_root_window_.loadBaseMover)(engine);
+  await (0,external_commonjs_tsparticles_plugin_emitters_commonjs2_tsparticles_plugin_emitters_amd_tsparticles_plugin_emitters_root_window_.loadEmittersPlugin)(engine);
+  await (0,external_commonjs_tsparticles_shape_circle_commonjs2_tsparticles_shape_circle_amd_tsparticles_shape_circle_root_window_.loadCircleShape)(engine);
+  await (0,external_commonjs_tsparticles_shape_line_commonjs2_tsparticles_shape_line_amd_tsparticles_shape_line_root_window_.loadLineShape)(engine);
+  await (0,external_commonjs_tsparticles_updater_angle_commonjs2_tsparticles_updater_angle_amd_tsparticles_updater_angle_root_window_.loadAngleUpdater)(engine);
+  await (0,external_commonjs_tsparticles_updater_color_commonjs2_tsparticles_updater_color_amd_tsparticles_updater_color_root_window_.loadColorUpdater)(engine);
+  await (0,external_commonjs_tsparticles_updater_life_commonjs2_tsparticles_updater_life_amd_tsparticles_updater_life_root_window_.loadLifeUpdater)(engine);
+  await (0,external_commonjs_tsparticles_updater_opacity_commonjs2_tsparticles_updater_opacity_amd_tsparticles_updater_opacity_root_window_.loadOpacityUpdater)(engine);
+  await (0,external_commonjs_tsparticles_updater_out_modes_commonjs2_tsparticles_updater_out_modes_amd_tsparticles_updater_out_modes_root_window_.loadOutModesUpdater)(engine);
+  await (0,external_commonjs_tsparticles_updater_size_commonjs2_tsparticles_updater_size_amd_tsparticles_updater_size_root_window_.loadSizeUpdater)(engine);
+  await loadStrokeColorUpdater(engine);
+  await engine.addPreset("fireworks", options);
+}
+}();
+/******/ 	return __webpack_exports__;
+/******/ })()
+;
+});
