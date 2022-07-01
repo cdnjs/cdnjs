@@ -1,0 +1,137 @@
+
+/*~
+  name: Progress Circle
+  category: Progress Circle
+  elements: ons-progress-circular
+  markup: |
+    <svg class="progress-circular progress-circular--indeterminate">
+      <circle class="progress-circular__background"/>
+      <circle class="progress-circular__primary progress-circular--indeterminate__primary"/>
+      <circle class="progress-circular__secondary progress-circular--indeterminate__secondary"/>
+    </svg>
+
+    <svg class="progress-circular">
+      <circle class="progress-circular__background"/>
+      <circle class="progress-circular__secondary" style="stroke-dasharray: 140%, 251.32%"/>
+      <circle class="progress-circular__primary" style="stroke-dasharray: 100%, 251.32%"/>
+    </svg>
+
+    <svg class="progress-circular">
+      <circle class="progress-circular__background"/>
+      <circle class="progress-circular__primary" style="stroke-dasharray: 80%, 251.32%"/>
+    </svg>
+*/
+
+.progress-circular {
+  height: 32px;
+  position: relative;
+  width: 32px;
+  transform: rotate(270deg);
+  animation: none;
+}
+
+.progress-circular__background,
+.progress-circular__primary,
+.progress-circular__secondary {
+  /* clean-css ignore:start */
+  cx: 50%;
+  cy: 50%;
+  r: 40%;
+  /* clean-css ignore:end */
+  animation: none;
+  fill: none;
+  stroke-width: 5%;
+  stroke-miterlimit: 10;
+}
+
+.progress-circular__background {
+  stroke: var(--progress-circle-background-color);
+}
+
+.progress-circular__primary {
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  stroke: var(--progress-circle-primary-color);
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progress-circular__secondary {
+  stroke: var(--progress-circle-secondary-color);
+}
+
+.progress-circular--indeterminate {
+  animation: progress__rotate 2s linear infinite;
+  transform: none;
+}
+
+.progress-circular--indeterminate__primary {
+  animation: progress__dash 1.5s ease-in-out infinite;
+}
+
+.progress-circular--indeterminate__secondary {
+  display: none;
+}
+
+@keyframes progress__rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes progress__dash {
+  0% {
+    stroke-dasharray: 10%, 241.32%;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 201%, 50.322%;
+    stroke-dashoffset: -100%;
+  }
+
+  100% {
+    stroke-dasharray: 10%, 241.32%;
+    stroke-dashoffset: -251.32%;
+  }
+}
+
+/*~
+  name: Material Progress Circle
+  category: Progress Circle
+  elements: ons-progress-circular
+  markup: |
+    <svg class="progress-circular progress-circular--material progress-circular--indeterminate">
+      <circle class="progress-circular__background progress-circular--material__background"/>
+      <circle class="progress-circular__primary progress-circular--material__primary progress-circular--indeterminate__primary"/>
+      <circle class="progress-circular__secondary progress-circular--material__secondary progress-circular--indeterminate__secondary"/>
+    </svg>
+
+    <svg class="progress-circular progress-circular--material">
+      <circle class="progress-circular__background progress-circular--material__background"/>
+      <circle class="progress-circular__secondary progress-circular--material__secondary" style="stroke-dasharray: 140%, 251.32%"/>
+      <circle class="progress-circular__primary progress-circular--material__primary" style="stroke-dasharray: 100%, 251.32%"/>
+    </svg>
+
+    <svg class="progress-circular progress-circular--material">
+      <circle class="progress-circular__background progress-circular--material__background"/>
+      <circle class="progress-circular__primary progress-circular--material__primary" style="stroke-dasharray: 80%, 251.32%"/>
+    </svg>
+*/
+
+.progress-circular--material__background,
+.progress-circular--material__primary,
+.progress-circular--material__secondary {
+  stroke-width: 9%;
+}
+
+.progress-circular--material__background {
+  stroke: var(--material-progress-circle-background-color);
+}
+
+.progress-circular--material__primary {
+  stroke: var(--material-progress-circle-primary-color);
+}
+
+.progress-circular--material__secondary {
+  stroke: var(--material-progress-circle-secondary-color);
+}

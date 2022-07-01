@@ -1,0 +1,234 @@
+:root {
+  --segment-active-color: var(--segment-active-text-color);
+  --segment-border-top: 1px solid var(--segment-color);
+  --segment-border-bottom: 1px solid var(--segment-color);
+  --segment-border: 0 solid var(--segment-color);
+  --segment-border-radius: 4px;
+}
+
+/*~
+  name: Segment
+  category: Segment
+  markup: |
+    <div class="segment" style="width: 280px; margin: 0 auto;">
+      <div class="segment__item">
+        <input type="radio" class="segment__input" name="segment-a" checked>
+        <div class="segment__button">One</div>
+      </div>
+      <div class="segment__item">
+        <input type="radio" class="segment__input" name="segment-a">
+        <div class="segment__button">Two</div>
+      </div>
+      <div class="segment__item">
+        <input type="radio" class="segment__input" name="segment-a">
+        <div class="segment__button">Three</div>
+      </div>
+    </div>
+*/
+
+.segment {
+
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+
+  display: inline-flex;
+  align-items: stretch;
+  align-content: stretch;
+  flex-wrap: nowrap;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.segment__item {
+
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+
+  border-radius: 0;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+
+  /* mixin: hide-input-parent */
+  position: relative;
+
+  overflow: hidden;
+  box-sizing: border-box;
+  display: block;
+  background-color: transparent;
+  border: none;
+}
+
+.segment__input {
+
+  /* mixin: hide-input */
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  z-index: 1;
+  vertical-align: top;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  appearance: none;
+}
+
+.segment__button {
+
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  border-radius: 0;
+  background-color: transparent;
+  color: var(--segment-color);
+  border: 1px solid var(--segment-color);
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+  border-left-width: 0;
+  font-weight: var(--font-weight);
+  padding: 0;
+  font-size: 13px;
+  height: 29px;
+  line-height: 29px;
+  width: 100%;
+  transition: background-color 0.2s linear, color 0.2s linear;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.segment__item:disabled {
+  /* mixin: disabled */
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+.segment__button:hover {
+  transition: none;
+}
+
+.segment__button:focus {
+  outline: 0;
+}
+
+:active + .segment__button {
+  background-color: var(--segment-active-background-color);
+  border: var(--segment-border);
+  border-top: var(--segment-border-top);
+  border-bottom: var(--segment-border-bottom);
+  border-right: 1px solid var(--segment-color);
+  font-size: 13px;
+  width: 100%;
+  transition: none;
+}
+
+/* Hack to replicate blend from the deprecated color-mod function. */
+:active + .segment__button:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  --blend-background-color__base: var(--segment-color);
+  --blend-background-color__color: var(--segment-active-background-color-default-blend-color);
+  /* stylelint-disable-next-line no-unknown-animations */
+  animation: blend-background-color 1s var(--segment-active-background-color-default-blend-time) linear forwards paused;
+}
+
+:checked + .segment__button {
+  background-color: var(--segment-color);
+  color: var(--segment-active-color);
+  transition: none;
+}
+
+.segment__item:first-child > .segment__button {
+  border-left-width: 1px;
+  border-radius: var(--segment-border-radius) 0 0 var(--segment-border-radius);
+}
+
+.segment__item:last-child > .segment__button {
+  border-right-width: 1px;
+  border-radius: 0 var(--segment-border-radius) var(--segment-border-radius) 0;
+}
+
+/*~
+  name: Material Segment
+  category: Segment
+  markup: |
+    <div class="segment segment--material" style="width: 280px; margin: 0 auto;">
+      <div class="segment__item segment--material__item">
+        <input type="radio" class="segment__input segment--material__input" name="segment-b" checked>
+        <div class="segment__button segment--material__button">One</div>
+      </div>
+      <div class="segment__item segment--material__item">
+        <input type="radio" class="segment__input segment--material__input" name="segment-b">
+        <div class="segment__button segment--material__button">Two</div>
+      </div>
+      <div class="segment__item segment--material__item">
+        <input type="radio" class="segment__input segment--material__input" name="segment-b">
+        <div class="segment__button segment--material__button">Three</div>
+      </div>
+    </div>
+*/
+
+.segment--material {
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.12), 0 2px 2px 0 rgba(0, 0, 0, 0.24);
+}
+
+.segment--material__button {
+
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: var(--material-font-weight);
+
+  font-size: 14px;
+  height: 32px;
+  line-height: 32px;
+  border-width: 0;
+  color: var(--material-segment-text-color);
+  border-radius: 0;
+  background-color: var(--material-segment-background-color);
+}
+
+:active + .segment--material__button {
+  background-color: var(--material-segment-background-color);
+  border-radius: 0;
+  border-width: 0;
+  font-size: 14px;
+  transition: none;
+  color: var(--material-segment-text-color);
+}
+
+:checked + .segment--material__button {
+  background-color: var(--material-segment-active-background-color);
+  color: var(--material-segment-active-text-color);
+  border-radius: 0;
+  border-width: 0;
+}
+
+.segment--material__item:first-child > .segment--material__button,
+.segment--material__item:last-child > .segment--material__button {
+  border-radius: 0;
+  border-width: 0;
+}

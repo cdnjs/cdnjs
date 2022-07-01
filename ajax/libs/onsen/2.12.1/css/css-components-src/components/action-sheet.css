@@ -1,0 +1,263 @@
+
+:root {
+  --action-sheet-mask-color: rgba(0, 0, 0, 0.1);
+
+  --material-action-sheet-mask-color: rgba(0, 0, 0, 0.2);
+}
+
+/*~
+  name: Action Sheet
+  category: Action Sheet
+  markup: |
+    <div class="action-sheet-mask"></div>
+    <div class="action-sheet">
+      <div class="action-sheet-title">Title</div>
+      <button class="action-sheet-button">Label</button>
+      <button class="action-sheet-button">Cancel</button>
+    </div>
+*/
+
+/*~
+  name: Action Sheet with Delete Label
+  category: Action Sheet
+  markup: |
+    <div class="action-sheet-mask"></div>
+    <div class="action-sheet">
+      <button class="action-sheet-button">Label</button>
+      <button class="action-sheet-button action-sheet-button--destructive">Delete Label</button>
+      <button class="action-sheet-button">Cancel</button>
+    </div>
+*/
+
+.action-sheet {
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+
+  cursor: default;
+  position: absolute;
+  left: 10px; /* iOS 9, 10, 11 */
+  right: 10px; /* iOS 9, 10, 11 */
+  bottom: 10px; /* iOS 9, 10, 11 */
+  z-index: 2;
+}
+
+.action-sheet-button {
+  box-sizing: border-box;
+  height: 56px;
+  font-size: 20px;
+  text-align: center;
+  color: var(--action-sheet-button-color);
+  background-color: var(--action-sheet-button-background-color);
+  border-radius: 0;
+  line-height: 56px;
+  border: none;
+  appearance: none;
+  display: block;
+  width: 100%;
+
+  /* mixin: ellipsis */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-image: linear-gradient(0deg, var(--action-sheet-button-separator-color), var(--action-sheet-button-separator-color) 100%);
+}
+
+/* @media (--retina-query) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .action-sheet-button {
+    background-image: linear-gradient(0deg, var(--action-sheet-button-separator-color), var(--action-sheet-button-separator-color) 50%, transparent 50%);
+  }
+}
+
+.action-sheet-button:first-child {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.action-sheet-button:active {
+  background-color: var(--action-sheet-button-active-background-color);
+  background-image: none;
+}
+
+.action-sheet-button:focus {
+  outline: none;
+}
+
+.action-sheet-button:nth-last-of-type(2) {
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+  background-image: none;
+}
+
+.action-sheet-button:last-of-type {
+  border-radius: 12px;
+  margin: 8px 0 0 0; /* iOS 9, 10, 11 */
+  background-color: var(--action-sheet-cancel-button-background-color);
+  background-image: none;
+  font-weight: 600;
+}
+
+.action-sheet-button:last-of-type:active {
+  background-color: var(--action-sheet-button-active-background-color);
+}
+
+.action-sheet-button--destructive {
+  color: var(--action-sheet-button-destructive-color);
+}
+
+.action-sheet-title {
+  box-sizing: border-box;
+  height: 56px;
+  font-size: 13px;
+  color: var(--action-sheet-title-color);
+  text-align: center;
+  background-color: var(--action-sheet-button-background-color);
+  line-height: 56px;
+
+  /* mixin: ellipsis */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-image: linear-gradient(0deg, var(--action-sheet-button-separator-color), var(--action-sheet-button-separator-color) 100%);
+}
+
+/* @media (--retina-query) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .action-sheet-title {
+    background-image: linear-gradient(0deg, var(--action-sheet-button-separator-color), var(--action-sheet-button-separator-color) 50%, transparent 50%);
+  }
+}
+
+.action-sheet-title:first-child {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.action-sheet-icon {
+  display: none;
+}
+
+.action-sheet-mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--action-sheet-mask-color);
+  z-index: 1;
+}
+
+/*~
+  name: Material Action Sheet
+  category: Action Sheet
+  markup: |
+    <div class="action-sheet-mask action-sheet-mask--material"></div>
+    <div class="action-sheet action-sheet--material">
+      <button class="action-sheet-button action-sheet-button--material"><i class="ion-ios-square action-sheet-icon--material"></i>Label</button>
+      <button class="action-sheet-button action-sheet-button--material"><i class="ion-ios-square action-sheet-icon--material"></i>Label</button>
+      <button class="action-sheet-button action-sheet-button--material"><i class="ion-ios-close action-sheet-icon--material"></i>Cancel</button>
+    </div>
+*/
+
+/*~
+  name: Material Action Sheet with Title
+  category: Action Sheet
+  markup: |
+    <div class="action-sheet-mask action-sheet-mask--material"></div>
+    <div class="action-sheet action-sheet--material">
+      <div class="action-sheet-title action-sheet-title--material">Title</div>
+      <button class="action-sheet-button action-sheet-button--material"><i class="ion-ios-square action-sheet-icon--material"></i>Label</button>
+      <button class="action-sheet-button action-sheet-button--material"><i class="ion-ios-close action-sheet-icon--material"></i>Cancel</button>
+    </div>
+*/
+
+.action-sheet--material {
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  /* mixin: material-shadow-5 */
+  box-shadow:
+    0 16px 24px 2px rgba(0, 0, 0, 0.14),
+    0 6px 30px 5px rgba(0, 0, 0, 0.12),
+    0 8px 10px -5px rgba(0, 0, 0, 0.4);
+}
+
+.action-sheet-title--material {
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+
+  border-radius: 0;
+  background-image: none;
+  text-align: left;
+  height: 56px;
+  line-height: 56px;
+  font-size: 16px;
+  padding: 0 0 0 16px;
+  color: var(--material-action-sheet-text-color);
+  background-color: white;
+  font-weight: var(--material-font-weight);
+}
+
+.action-sheet-title--material:first-child {
+  border-radius: 0;
+}
+
+.action-sheet-button--material {
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+
+  border-radius: 0;
+  background-image: none;
+  height: 52px;
+  line-height: 52px;
+  text-align: left;
+  font-size: 16px;
+  padding: 0 0 0 16px;
+  color: var(--material-action-sheet-text-color);
+  font-weight: var(--material-font-weight);
+  background-color: white;
+}
+
+.action-sheet-button--material:first-child {
+  border-radius: 0;
+}
+
+.action-sheet-button--material:nth-last-of-type(2) {
+  border-radius: 0;
+}
+
+.action-sheet-button--material:last-of-type {
+  margin: 0;
+  border-radius: 0;
+  font-weight: 400;
+  background-color: white;
+}
+
+.action-sheet-icon--material {
+  display: inline-block;
+  float: left;
+  height: 52px;
+  line-height: 52px;
+  margin-right: 32px;
+  font-size: 26px;
+  width: 0.8em;
+  text-align: center;
+}
+
+.action-sheet-mask--material {
+  background-color: var(--material-action-sheet-mask-color);
+}
