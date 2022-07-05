@@ -1,0 +1,107 @@
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault").default;
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard").default;
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.WriteBar = void 0;
+
+var _jsxRuntime = require("../../lib/jsxRuntime");
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
+
+var React = _interopRequireWildcard(require("react"));
+
+var _usePlatform = require("../../hooks/usePlatform");
+
+var _useExternRef = require("../../hooks/useExternRef");
+
+var _utils = require("../../lib/utils");
+
+var _getClassName = require("../../helpers/getClassName");
+
+var _excluded = ["className", "style", "before", "inlineAfter", "after", "value", "onChange", "getRootRef", "getRef", "onHeightChange"];
+
+/**
+ * @see https://vkcom.github.io/VKUI/#/WriteBar
+ */
+var WriteBar = function WriteBar(props) {
+  var platform = (0, _usePlatform.usePlatform)();
+  var className = props.className,
+      style = props.style,
+      before = props.before,
+      inlineAfter = props.inlineAfter,
+      after = props.after,
+      value = props.value,
+      onChange = props.onChange,
+      getRootRef = props.getRootRef,
+      getRef = props.getRef,
+      onHeightChange = props.onHeightChange,
+      restProps = (0, _objectWithoutProperties2.default)(props, _excluded);
+  var isControlledOutside = value != null;
+  var textareaRef = (0, _useExternRef.useExternRef)(getRef);
+  var currentScrollHeight = React.useRef();
+  var resize = React.useCallback(function () {
+    var textareaEl = textareaRef.current;
+
+    if (!textareaEl) {
+      return;
+    }
+
+    if (textareaEl.offsetParent) {
+      textareaEl.style.height = "";
+      textareaEl.style.height = "".concat(textareaEl.scrollHeight, "px");
+
+      if (textareaEl.scrollHeight !== currentScrollHeight.current && onHeightChange) {
+        onHeightChange();
+        currentScrollHeight.current = textareaEl.scrollHeight;
+      }
+    }
+  }, [onHeightChange, textareaRef]);
+
+  var onTextareaChange = function onTextareaChange(event) {
+    if ((0, _utils.isFunction)(onChange)) {
+      onChange(event);
+    }
+
+    if (!isControlledOutside) {
+      resize();
+    }
+  };
+
+  React.useEffect(function () {
+    resize();
+  }, [resize, value]);
+  return (0, _jsxRuntime.createScopedElement)("div", {
+    ref: getRootRef,
+    vkuiClass: (0, _getClassName.getClassName)("WriteBar", platform),
+    className: className,
+    style: style
+  }, (0, _jsxRuntime.createScopedElement)("form", {
+    vkuiClass: "WriteBar__form",
+    onSubmit: function onSubmit(e) {
+      return e.preventDefault();
+    }
+  }, (0, _utils.hasReactNode)(before) && (0, _jsxRuntime.createScopedElement)("div", {
+    vkuiClass: "WriteBar__before"
+  }, before), (0, _jsxRuntime.createScopedElement)("div", {
+    vkuiClass: "WriteBar__formIn"
+  }, (0, _jsxRuntime.createScopedElement)("textarea", (0, _extends2.default)({}, restProps, {
+    vkuiClass: "WriteBar__textarea",
+    onChange: onTextareaChange,
+    ref: textareaRef,
+    value: value
+  })), (0, _utils.hasReactNode)(inlineAfter) && (0, _jsxRuntime.createScopedElement)("div", {
+    vkuiClass: "WriteBar__inlineAfter"
+  }, inlineAfter)), (0, _utils.hasReactNode)(after) && (0, _jsxRuntime.createScopedElement)("div", {
+    vkuiClass: "WriteBar__after"
+  }, after)));
+};
+
+exports.WriteBar = WriteBar;
+//# sourceMappingURL=WriteBar.js.map
