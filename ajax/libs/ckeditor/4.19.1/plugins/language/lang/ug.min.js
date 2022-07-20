@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("language","ug",{button:"تىل تەڭشەك",remove:"تىلنى چىقىرىۋەت"});

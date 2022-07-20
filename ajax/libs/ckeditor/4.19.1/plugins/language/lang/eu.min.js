@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("language","eu",{button:"Ezarri hizkuntza",remove:"Kendu hizkuntza"});

@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("placeholder","sq",{title:"Karakteristikat e Mbajtësit të Vendit",toolbar:"Krijo Mabjtës Vendi",name:"Emri i Hapësirës",invalidName:"Hapësira nuk mund të jetë e zbrazët dhe nuk mund të përmbajë asnjë nga karakteret: [, ], <, >",pathName:"hapësira"});
