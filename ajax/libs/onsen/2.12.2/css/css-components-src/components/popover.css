@@ -1,0 +1,219 @@
+
+:root {
+  --popover-arrow-size: 18px;
+  --popover-arrow-radius: 4px;
+  --popover-radius: 8px;
+  --popover-margin: 6px;
+  --material-popover-radius: 2px;
+  --material-popover-margin: 4px;
+}
+
+/*~
+  name: Popover
+  category: Popover
+  elements: ons-popover
+  markup: |
+    <div class="popover-mask"></div>
+    <div class="popover popover--bottom" style="bottom: 20px; left: 65px;">
+      <div class="popover__arrow popover--bottom__arrow" style="left: 110px;"></div>
+      <div class="popover__content popover--bottom__content">
+        <div style="text-align:center;opacity:0.8;margin-top:40px">Content</div>
+      </div>
+    </div>
+*/
+
+/*~
+  name: Popover(top)
+  category: Popover
+  elements: ons-popover
+  markup: |
+    <div class="popover-mask"></div>
+    <div class="popover popover--top" style="top: 20px; left: 50px;">
+      <div class="popover__arrow popover--top__arrow" style="margin-left: 110px;"></div>
+      <div class="popover__content popover--top__content">
+        <div style="text-align: center; opacity: 0.8; margin-top: 40px">Content</div>
+      </div>
+    </div>
+*/
+
+/*~
+  name: Popover(left)
+  category: Popover
+  elements: ons-popover
+  markup: |
+    <div class="popover-mask"></div>
+    <div class="popover popover--right" style="top: 20px; right: 20px;">
+      <div class="popover__arrow popover--right__arrow" style="bottom: 50px;"></div>
+      <div class="popover__content popover--right__content">
+        <div style="text-align: center; opacity: 0.8; margin-top: 40px">Content</div>
+      </div>
+    </div>
+*/
+
+/*~
+  name: Popover(right)
+  category: Popover
+  elements: ons-popover
+  markup: |
+    <div class="popover-mask"></div>
+    <div class="popover popover--left" style="top: 20px;left: 20px;">
+      <div class="popover__arrow popover--left__arrow" style="top: 50px;"></div>
+      <div class="popover__content popover--left__content">
+        <div style="text-align: center; opacity: 0.8; margin-top: 40px">Content</div>
+      </div>
+    </div>
+*/
+
+.popover {
+  position: absolute;
+  z-index: 20001;
+}
+
+.popover--bottom {
+  bottom: 0;
+}
+
+.popover--top {
+  top: 0;
+}
+
+.popover--left {
+  left: 0;
+}
+
+.popover--right {
+  right: 0;
+}
+
+.popover-mask {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  z-index: 19999;
+}
+
+.popover__content {
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+
+  /* mixin: reset-base */
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+
+  /* mixin: reset-cursor */
+  cursor: default;
+  user-select: none;
+
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+
+  display: block;
+  width: 220px;
+  overflow: auto;
+  min-height: 100px;
+  max-height: 100%;
+  background-color: var(--popover-background-color);
+  border-radius: var(--popover-radius);
+  color: var(--popover-text-color);
+  pointer-events: auto;
+}
+
+.popover--top__content {
+
+}
+
+.popover--bottom__content {
+
+}
+
+.popover--left__content {
+
+}
+
+.popover--right__content {
+
+}
+
+.popover__arrow {
+  position: absolute;
+  width: var(--popover-arrow-size);
+  height: var(--popover-arrow-size);
+  transform-origin: 50% 50% 0;
+  background-color: transparent;
+  background-image: linear-gradient(45deg, var(--popover-background-color), var(--popover-background-color) 50%, transparent 50%);
+  border-radius: 0 0 0 var(--popover-arrow-radius);
+  margin: 0;
+  z-index: 20001;
+}
+
+/* NOTE: If you changed this properties, you should check if ons-popover is broken. */
+.popover--bottom__arrow {
+  transform: translateY(6px) translateX(calc(var(--popover-arrow-size) / -2)) rotate(-45deg);
+  bottom: 0;
+  margin-right: -18px;
+}
+
+.popover--top__arrow {
+  transform: translateY(-6px) translateX(calc(var(--popover-arrow-size) / -2)) rotate(135deg);
+  top: 0;
+  margin-right: -18px;
+}
+
+.popover--left__arrow {
+  transform: translateX(-6px) translateY(calc(var(--popover-arrow-size) / -2)) rotate(45deg);
+  left: 0;
+  margin-bottom: -18px;
+}
+
+.popover--right__arrow {
+  transform: translateX(6px) translateY(calc(var(--popover-arrow-size) / -2)) rotate(225deg);
+  right: 0;
+  margin-bottom: -18px;
+}
+
+/*~
+  name: Material Popover
+  category: Popover
+  elements: ons-popover
+  markup: |
+    <div class="popover-mask popover-mask--material"></div>
+    <div class="popover popover--material popover--left" style="top: 50px; left: 65px;">
+      <div class="popover__arrow popover--material__arrow popover--left__arrow"></div>
+      <div class="popover__content popover--material__content popover--left__content">
+        <div style="text-align: center; opacity: 0.8; margin-top: 40px">Content</div>
+      </div>
+    </div>
+*/
+
+.popover--material {
+}
+
+.popover-mask--material {
+  background-color: transparent;
+}
+
+.popover--material__content {
+  background-color: var(--material-popover-background-color);
+  border-radius: var(--material-popover-radius);
+  color: var(--material-popover-text-color);
+
+  /* mixin: material-shadow-1 */
+  box-shadow:
+    0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+
+.popover--material__arrow {
+  display: none;
+}
