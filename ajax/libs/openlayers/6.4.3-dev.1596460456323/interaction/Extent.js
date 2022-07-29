@@ -1,0 +1,496 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+/**
+ * @module ol/interaction/Extent
+ */
+import Event from '../events/Event.js';
+import Feature from '../Feature.js';
+import GeometryType from '../geom/GeometryType.js';
+import MapBrowserEventType from '../MapBrowserEventType.js';
+import Point from '../geom/Point.js';
+import PointerInteraction from './Pointer.js';
+import VectorLayer from '../layer/Vector.js';
+import VectorSource from '../source/Vector.js';
+import { always } from '../events/condition.js';
+import { boundingExtent, getArea } from '../extent.js';
+import { closestOnSegment, distance as coordinateDistance, squaredDistance as squaredCoordinateDistance, squaredDistanceToSegment, } from '../coordinate.js';
+import { createEditingStyle } from '../style/Style.js';
+import { fromExtent as polygonFromExtent } from '../geom/Polygon.js';
+import { toUserExtent } from '../proj.js';
+/**
+ * @typedef {Object} Options
+ * @property {import("../events/condition.js").Condition} [condition] A function that
+ * takes an {@link module:ol/MapBrowserEvent~MapBrowserEvent} and returns a
+ * boolean to indicate whether that event should be handled.
+ * Default is {@link module:ol/events/condition~always}.
+ * @property {import("../extent.js").Extent} [extent] Initial extent. Defaults to no
+ * initial extent.
+ * @property {import("../style/Style.js").StyleLike} [boxStyle]
+ * Style for the drawn extent box. Defaults to
+ * {@link module:ol/style/Style~createEditing()['Polygon']}
+ * @property {number} [pixelTolerance=10] Pixel tolerance for considering the
+ * pointer close enough to a segment or vertex for editing.
+ * @property {import("../style/Style.js").StyleLike} [pointerStyle]
+ * Style for the cursor used to draw the extent. Defaults to
+ * {@link module:ol/style/Style~createEditing()['Point']}
+ * @property {boolean} [wrapX=false] Wrap the drawn extent across multiple maps
+ * in the X direction? Only affects visuals, not functionality.
+ */
+/**
+ * @enum {string}
+ */
+var ExtentEventType = {
+    /**
+     * Triggered after the extent is changed
+     * @event ExtentEvent#extentchanged
+     * @api
+     */
+    EXTENTCHANGED: 'extentchanged',
+};
+/**
+ * @classdesc
+ * Events emitted by {@link module:ol/interaction/Extent~Extent} instances are
+ * instances of this type.
+ */
+var ExtentEvent = /** @class */ (function (_super) {
+    __extends(ExtentEvent, _super);
+    /**
+     * @param {import("../extent.js").Extent} extent the new extent
+     */
+    function ExtentEvent(extent) {
+        var _this = _super.call(this, ExtentEventType.EXTENTCHANGED) || this;
+        /**
+         * The current extent.
+         * @type {import("../extent.js").Extent}
+         * @api
+         */
+        _this.extent = extent;
+        return _this;
+    }
+    return ExtentEvent;
+}(Event));
+/**
+ * @classdesc
+ * Allows the user to draw a vector box by clicking and dragging on the map.
+ * Once drawn, the vector box can be modified by dragging its vertices or edges.
+ * This interaction is only supported for mouse devices.
+ *
+ * @fires ExtentEvent
+ * @api
+ */
+var Extent = /** @class */ (function (_super) {
+    __extends(Extent, _super);
+    /**
+     * @param {Options=} opt_options Options.
+     */
+    function Extent(opt_options) {
+        var _this = this;
+        var options = opt_options || {};
+        _this = _super.call(this, /** @type {import("./Pointer.js").Options} */ (options)) || this;
+        /**
+         * Condition
+         * @type {import("../events/condition.js").Condition}
+         * @private
+         */
+        _this.condition_ = options.condition ? options.condition : always;
+        /**
+         * Extent of the drawn box
+         * @type {import("../extent.js").Extent}
+         * @private
+         */
+        _this.extent_ = null;
+        /**
+         * Handler for pointer move events
+         * @type {function (import("../coordinate.js").Coordinate): import("../extent.js").Extent|null}
+         * @private
+         */
+        _this.pointerHandler_ = null;
+        /**
+         * Pixel threshold to snap to extent
+         * @type {number}
+         * @private
+         */
+        _this.pixelTolerance_ =
+            options.pixelTolerance !== undefined ? options.pixelTolerance : 10;
+        /**
+         * Is the pointer snapped to an extent vertex
+         * @type {boolean}
+         * @private
+         */
+        _this.snappedToVertex_ = false;
+        /**
+         * Feature for displaying the visible extent
+         * @type {Feature}
+         * @private
+         */
+        _this.extentFeature_ = null;
+        /**
+         * Feature for displaying the visible pointer
+         * @type {Feature<Point>}
+         * @private
+         */
+        _this.vertexFeature_ = null;
+        if (!opt_options) {
+            opt_options = {};
+        }
+        /**
+         * Layer for the extentFeature
+         * @type {VectorLayer}
+         * @private
+         */
+        _this.extentOverlay_ = new VectorLayer({
+            source: new VectorSource({
+                useSpatialIndex: false,
+                wrapX: !!opt_options.wrapX,
+            }),
+            style: opt_options.boxStyle
+                ? opt_options.boxStyle
+                : getDefaultExtentStyleFunction(),
+            updateWhileAnimating: true,
+            updateWhileInteracting: true,
+        });
+        /**
+         * Layer for the vertexFeature
+         * @type {VectorLayer}
+         * @private
+         */
+        _this.vertexOverlay_ = new VectorLayer({
+            source: new VectorSource({
+                useSpatialIndex: false,
+                wrapX: !!opt_options.wrapX,
+            }),
+            style: opt_options.pointerStyle
+                ? opt_options.pointerStyle
+                : getDefaultPointerStyleFunction(),
+            updateWhileAnimating: true,
+            updateWhileInteracting: true,
+        });
+        if (opt_options.extent) {
+            _this.setExtent(opt_options.extent);
+        }
+        return _this;
+    }
+    /**
+     * @param {import("../pixel.js").Pixel} pixel cursor location
+     * @param {import("../PluggableMap.js").default} map map
+     * @returns {import("../coordinate.js").Coordinate|null} snapped vertex on extent
+     * @private
+     */
+    Extent.prototype.snapToVertex_ = function (pixel, map) {
+        var pixelCoordinate = map.getCoordinateFromPixelInternal(pixel);
+        var sortByDistance = function (a, b) {
+            return (squaredDistanceToSegment(pixelCoordinate, a) -
+                squaredDistanceToSegment(pixelCoordinate, b));
+        };
+        var extent = this.getExtentInternal();
+        if (extent) {
+            //convert extents to line segments and find the segment closest to pixelCoordinate
+            var segments = getSegments(extent);
+            segments.sort(sortByDistance);
+            var closestSegment = segments[0];
+            var vertex = closestOnSegment(pixelCoordinate, closestSegment);
+            var vertexPixel = map.getPixelFromCoordinateInternal(vertex);
+            //if the distance is within tolerance, snap to the segment
+            if (coordinateDistance(pixel, vertexPixel) <= this.pixelTolerance_) {
+                //test if we should further snap to a vertex
+                var pixel1 = map.getPixelFromCoordinateInternal(closestSegment[0]);
+                var pixel2 = map.getPixelFromCoordinateInternal(closestSegment[1]);
+                var squaredDist1 = squaredCoordinateDistance(vertexPixel, pixel1);
+                var squaredDist2 = squaredCoordinateDistance(vertexPixel, pixel2);
+                var dist = Math.sqrt(Math.min(squaredDist1, squaredDist2));
+                this.snappedToVertex_ = dist <= this.pixelTolerance_;
+                if (this.snappedToVertex_) {
+                    vertex =
+                        squaredDist1 > squaredDist2 ? closestSegment[1] : closestSegment[0];
+                }
+                return vertex;
+            }
+        }
+        return null;
+    };
+    /**
+     * @param {import("../MapBrowserEvent.js").default} mapBrowserEvent pointer move event
+     * @private
+     */
+    Extent.prototype.handlePointerMove_ = function (mapBrowserEvent) {
+        var pixel = mapBrowserEvent.pixel;
+        var map = mapBrowserEvent.map;
+        var vertex = this.snapToVertex_(pixel, map);
+        if (!vertex) {
+            vertex = map.getCoordinateFromPixelInternal(pixel);
+        }
+        this.createOrUpdatePointerFeature_(vertex);
+    };
+    /**
+     * @param {import("../extent.js").Extent} extent extent
+     * @returns {Feature} extent as featrue
+     * @private
+     */
+    Extent.prototype.createOrUpdateExtentFeature_ = function (extent) {
+        var extentFeature = this.extentFeature_;
+        if (!extentFeature) {
+            if (!extent) {
+                extentFeature = new Feature({});
+            }
+            else {
+                extentFeature = new Feature(polygonFromExtent(extent));
+            }
+            this.extentFeature_ = extentFeature;
+            this.extentOverlay_.getSource().addFeature(extentFeature);
+        }
+        else {
+            if (!extent) {
+                extentFeature.setGeometry(undefined);
+            }
+            else {
+                extentFeature.setGeometry(polygonFromExtent(extent));
+            }
+        }
+        return extentFeature;
+    };
+    /**
+     * @param {import("../coordinate.js").Coordinate} vertex location of feature
+     * @returns {Feature} vertex as feature
+     * @private
+     */
+    Extent.prototype.createOrUpdatePointerFeature_ = function (vertex) {
+        var vertexFeature = this.vertexFeature_;
+        if (!vertexFeature) {
+            vertexFeature = new Feature(new Point(vertex));
+            this.vertexFeature_ = vertexFeature;
+            this.vertexOverlay_.getSource().addFeature(vertexFeature);
+        }
+        else {
+            var geometry = vertexFeature.getGeometry();
+            geometry.setCoordinates(vertex);
+        }
+        return vertexFeature;
+    };
+    /**
+     * @param {import("../MapBrowserEvent.js").default} mapBrowserEvent Map browser event.
+     * @return {boolean} `false` to stop event propagation.
+     */
+    Extent.prototype.handleEvent = function (mapBrowserEvent) {
+        if (!mapBrowserEvent.originalEvent || !this.condition_(mapBrowserEvent)) {
+            return true;
+        }
+        //display pointer (if not dragging)
+        if (mapBrowserEvent.type == MapBrowserEventType.POINTERMOVE &&
+            !this.handlingDownUpSequence) {
+            this.handlePointerMove_(mapBrowserEvent);
+        }
+        //call pointer to determine up/down/drag
+        _super.prototype.handleEvent.call(this, mapBrowserEvent);
+        //return false to stop propagation
+        return false;
+    };
+    /**
+     * Handle pointer down events.
+     * @param {import("../MapBrowserEvent.js").default} mapBrowserEvent Event.
+     * @return {boolean} If the event was consumed.
+     */
+    Extent.prototype.handleDownEvent = function (mapBrowserEvent) {
+        var pixel = mapBrowserEvent.pixel;
+        var map = mapBrowserEvent.map;
+        var extent = this.getExtentInternal();
+        var vertex = this.snapToVertex_(pixel, map);
+        //find the extent corner opposite the passed corner
+        var getOpposingPoint = function (point) {
+            var x_ = null;
+            var y_ = null;
+            if (point[0] == extent[0]) {
+                x_ = extent[2];
+            }
+            else if (point[0] == extent[2]) {
+                x_ = extent[0];
+            }
+            if (point[1] == extent[1]) {
+                y_ = extent[3];
+            }
+            else if (point[1] == extent[3]) {
+                y_ = extent[1];
+            }
+            if (x_ !== null && y_ !== null) {
+                return [x_, y_];
+            }
+            return null;
+        };
+        if (vertex && extent) {
+            var x = vertex[0] == extent[0] || vertex[0] == extent[2] ? vertex[0] : null;
+            var y = vertex[1] == extent[1] || vertex[1] == extent[3] ? vertex[1] : null;
+            //snap to point
+            if (x !== null && y !== null) {
+                this.pointerHandler_ = getPointHandler(getOpposingPoint(vertex));
+                //snap to edge
+            }
+            else if (x !== null) {
+                this.pointerHandler_ = getEdgeHandler(getOpposingPoint([x, extent[1]]), getOpposingPoint([x, extent[3]]));
+            }
+            else if (y !== null) {
+                this.pointerHandler_ = getEdgeHandler(getOpposingPoint([extent[0], y]), getOpposingPoint([extent[2], y]));
+            }
+            //no snap - new bbox
+        }
+        else {
+            vertex = map.getCoordinateFromPixelInternal(pixel);
+            this.setExtent([vertex[0], vertex[1], vertex[0], vertex[1]]);
+            this.pointerHandler_ = getPointHandler(vertex);
+        }
+        return true; //event handled; start downup sequence
+    };
+    /**
+     * Handle pointer drag events.
+     * @param {import("../MapBrowserEvent.js").default} mapBrowserEvent Event.
+     */
+    Extent.prototype.handleDragEvent = function (mapBrowserEvent) {
+        if (this.pointerHandler_) {
+            var pixelCoordinate = mapBrowserEvent.coordinate;
+            this.setExtent(this.pointerHandler_(pixelCoordinate));
+            this.createOrUpdatePointerFeature_(pixelCoordinate);
+        }
+    };
+    /**
+     * Handle pointer up events.
+     * @param {import("../MapBrowserEvent.js").default} mapBrowserEvent Event.
+     * @return {boolean} If the event was consumed.
+     */
+    Extent.prototype.handleUpEvent = function (mapBrowserEvent) {
+        this.pointerHandler_ = null;
+        //If bbox is zero area, set to null;
+        var extent = this.getExtentInternal();
+        if (!extent || getArea(extent) === 0) {
+            this.setExtent(null);
+        }
+        return false; //Stop handling downup sequence
+    };
+    /**
+     * Remove the interaction from its current map and attach it to the new map.
+     * Subclasses may set up event handlers to get notified about changes to
+     * the map here.
+     * @param {import("../PluggableMap.js").default} map Map.
+     */
+    Extent.prototype.setMap = function (map) {
+        this.extentOverlay_.setMap(map);
+        this.vertexOverlay_.setMap(map);
+        _super.prototype.setMap.call(this, map);
+    };
+    /**
+     * Returns the current drawn extent in the view projection (or user projection if set)
+     *
+     * @return {import("../extent.js").Extent} Drawn extent in the view projection.
+     * @api
+     */
+    Extent.prototype.getExtent = function () {
+        return toUserExtent(this.getExtentInternal(), this.getMap().getView().getProjection());
+    };
+    /**
+     * Returns the current drawn extent in the view projection
+     *
+     * @return {import("../extent.js").Extent} Drawn extent in the view projection.
+     * @api
+     */
+    Extent.prototype.getExtentInternal = function () {
+        return this.extent_;
+    };
+    /**
+     * Manually sets the drawn extent, using the view projection.
+     *
+     * @param {import("../extent.js").Extent} extent Extent
+     * @api
+     */
+    Extent.prototype.setExtent = function (extent) {
+        //Null extent means no bbox
+        this.extent_ = extent ? extent : null;
+        this.createOrUpdateExtentFeature_(extent);
+        this.dispatchEvent(new ExtentEvent(this.extent_));
+    };
+    return Extent;
+}(PointerInteraction));
+/**
+ * Returns the default style for the drawn bbox
+ *
+ * @return {import("../style/Style.js").StyleFunction} Default Extent style
+ */
+function getDefaultExtentStyleFunction() {
+    var style = createEditingStyle();
+    return function (feature, resolution) {
+        return style[GeometryType.POLYGON];
+    };
+}
+/**
+ * Returns the default style for the pointer
+ *
+ * @return {import("../style/Style.js").StyleFunction} Default pointer style
+ */
+function getDefaultPointerStyleFunction() {
+    var style = createEditingStyle();
+    return function (feature, resolution) {
+        return style[GeometryType.POINT];
+    };
+}
+/**
+ * @param {import("../coordinate.js").Coordinate} fixedPoint corner that will be unchanged in the new extent
+ * @returns {function (import("../coordinate.js").Coordinate): import("../extent.js").Extent} event handler
+ */
+function getPointHandler(fixedPoint) {
+    return function (point) {
+        return boundingExtent([fixedPoint, point]);
+    };
+}
+/**
+ * @param {import("../coordinate.js").Coordinate} fixedP1 first corner that will be unchanged in the new extent
+ * @param {import("../coordinate.js").Coordinate} fixedP2 second corner that will be unchanged in the new extent
+ * @returns {function (import("../coordinate.js").Coordinate): import("../extent.js").Extent|null} event handler
+ */
+function getEdgeHandler(fixedP1, fixedP2) {
+    if (fixedP1[0] == fixedP2[0]) {
+        return function (point) {
+            return boundingExtent([fixedP1, [point[0], fixedP2[1]]]);
+        };
+    }
+    else if (fixedP1[1] == fixedP2[1]) {
+        return function (point) {
+            return boundingExtent([fixedP1, [fixedP2[0], point[1]]]);
+        };
+    }
+    else {
+        return null;
+    }
+}
+/**
+ * @param {import("../extent.js").Extent} extent extent
+ * @returns {Array<Array<import("../coordinate.js").Coordinate>>} extent line segments
+ */
+function getSegments(extent) {
+    return [
+        [
+            [extent[0], extent[1]],
+            [extent[0], extent[3]],
+        ],
+        [
+            [extent[0], extent[3]],
+            [extent[2], extent[3]],
+        ],
+        [
+            [extent[2], extent[3]],
+            [extent[2], extent[1]],
+        ],
+        [
+            [extent[2], extent[1]],
+            [extent[0], extent[1]],
+        ],
+    ];
+}
+export default Extent;
+//# sourceMappingURL=Extent.js.map
