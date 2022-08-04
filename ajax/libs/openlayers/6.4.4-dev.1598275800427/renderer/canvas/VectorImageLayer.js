@@ -1,0 +1,174 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+/**
+ * @module ol/renderer/canvas/VectorImageLayer
+ */
+import CanvasImageLayerRenderer from './ImageLayer.js';
+import CanvasVectorLayerRenderer from './VectorLayer.js';
+import EventType from '../../events/EventType.js';
+import ImageCanvas from '../../ImageCanvas.js';
+import ImageState from '../../ImageState.js';
+import ViewHint from '../../ViewHint.js';
+import { apply, compose, create } from '../../transform.js';
+import { assign } from '../../obj.js';
+import { getHeight, getWidth, isEmpty, scaleFromCenter } from '../../extent.js';
+import { renderDeclutterItems } from '../../render.js';
+/**
+ * @classdesc
+ * Canvas renderer for image layers.
+ * @api
+ */
+var CanvasVectorImageLayerRenderer = /** @class */ (function (_super) {
+    __extends(CanvasVectorImageLayerRenderer, _super);
+    /**
+     * @param {import("../../layer/VectorImage.js").default} layer Vector image layer.
+     */
+    function CanvasVectorImageLayerRenderer(layer) {
+        var _this = _super.call(this, layer) || this;
+        /**
+         * @private
+         * @type {import("./VectorLayer.js").default}
+         */
+        _this.vectorRenderer_ = new CanvasVectorLayerRenderer(layer);
+        /**
+         * @private
+         * @type {number}
+         */
+        _this.layerImageRatio_ = layer.getImageRatio();
+        /**
+         * @private
+         * @type {import("../../transform.js").Transform}
+         */
+        _this.coordinateToVectorPixelTransform_ = create();
+        /**
+         * @private
+         * @type {import("../../transform.js").Transform}
+         */
+        _this.renderedPixelToCoordinateTransform_ = null;
+        return _this;
+    }
+    /**
+     * Clean up.
+     */
+    CanvasVectorImageLayerRenderer.prototype.disposeInternal = function () {
+        this.vectorRenderer_.dispose();
+        _super.prototype.disposeInternal.call(this);
+    };
+    /**
+     * Asynchronous layer level hit detection.
+     * @param {import("../../pixel.js").Pixel} pixel Pixel.
+     * @return {Promise<Array<import("../../Feature").default>>} Promise that resolves with an array of features.
+     */
+    CanvasVectorImageLayerRenderer.prototype.getFeatures = function (pixel) {
+        if (this.vectorRenderer_) {
+            var vectorPixel = apply(this.coordinateToVectorPixelTransform_, apply(this.renderedPixelToCoordinateTransform_, pixel.slice()));
+            return this.vectorRenderer_.getFeatures(vectorPixel);
+        }
+        else {
+            var promise = new Promise(function (resolve, reject) {
+                resolve([]);
+            });
+            return promise;
+        }
+    };
+    /**
+     * Perform action necessary to get the layer rendered after new fonts have loaded
+     */
+    CanvasVectorImageLayerRenderer.prototype.handleFontsChanged = function () {
+        this.vectorRenderer_.handleFontsChanged();
+    };
+    /**
+     * Determine whether render should be called.
+     * @param {import("../../PluggableMap.js").FrameState} frameState Frame state.
+     * @return {boolean} Layer is ready to be rendered.
+     */
+    CanvasVectorImageLayerRenderer.prototype.prepareFrame = function (frameState) {
+        var pixelRatio = frameState.pixelRatio;
+        var viewState = frameState.viewState;
+        var viewResolution = viewState.resolution;
+        var hints = frameState.viewHints;
+        var vectorRenderer = this.vectorRenderer_;
+        var renderedExtent = frameState.extent;
+        if (this.layerImageRatio_ !== 1) {
+            renderedExtent = renderedExtent.slice(0);
+            scaleFromCenter(renderedExtent, this.layerImageRatio_);
+        }
+        var width = getWidth(renderedExtent) / viewResolution;
+        var height = getHeight(renderedExtent) / viewResolution;
+        if (!hints[ViewHint.ANIMATING] &&
+            !hints[ViewHint.INTERACTING] &&
+            !isEmpty(renderedExtent)) {
+            vectorRenderer.useContainer(null, null, 1);
+            var context = vectorRenderer.context;
+            var imageFrameState_1 = /** @type {import("../../PluggableMap.js").FrameState} */ (assign({}, frameState, {
+                declutterItems: [],
+                extent: renderedExtent,
+                size: [width, height],
+                viewState: /** @type {import("../../View.js").State} */ (assign({}, frameState.viewState, {
+                    rotation: 0,
+                })),
+            }));
+            var image_1 = new ImageCanvas(renderedExtent, viewResolution, pixelRatio, context.canvas, function (callback) {
+                if (vectorRenderer.prepareFrame(imageFrameState_1) &&
+                    vectorRenderer.replayGroupChanged) {
+                    vectorRenderer.clipping = false;
+                    vectorRenderer.renderFrame(imageFrameState_1, null);
+                    renderDeclutterItems(imageFrameState_1, null);
+                    callback();
+                }
+            });
+            image_1.addEventListener(EventType.CHANGE, function () {
+                if (image_1.getState() === ImageState.LOADED) {
+                    this.image_ = image_1;
+                    var imageResolution = image_1.getResolution();
+                    var imagePixelRatio = image_1.getPixelRatio();
+                    var renderedResolution = (imageResolution * pixelRatio) / imagePixelRatio;
+                    this.renderedResolution = renderedResolution;
+                    this.coordinateToVectorPixelTransform_ = compose(this.coordinateToVectorPixelTransform_, width / 2, height / 2, 1 / renderedResolution, -1 / renderedResolution, 0, -viewState.center[0], -viewState.center[1]);
+                }
+            }.bind(this));
+            image_1.load();
+        }
+        if (this.image_) {
+            this.renderedPixelToCoordinateTransform_ = frameState.pixelToCoordinateTransform.slice();
+        }
+        return !!this.image_;
+    };
+    /**
+     */
+    CanvasVectorImageLayerRenderer.prototype.preRender = function () { };
+    /**
+     */
+    CanvasVectorImageLayerRenderer.prototype.postRender = function () { };
+    /**
+     * @param {import("../../coordinate.js").Coordinate} coordinate Coordinate.
+     * @param {import("../../PluggableMap.js").FrameState} frameState Frame state.
+     * @param {number} hitTolerance Hit tolerance in pixels.
+     * @param {function(import("../../Feature.js").FeatureLike, import("../../layer/Layer.js").default): T} callback Feature callback.
+     * @param {Array<import("../../Feature.js").FeatureLike>} declutteredFeatures Decluttered features.
+     * @return {T|void} Callback result.
+     * @template T
+     */
+    CanvasVectorImageLayerRenderer.prototype.forEachFeatureAtCoordinate = function (coordinate, frameState, hitTolerance, callback, declutteredFeatures) {
+        if (this.vectorRenderer_) {
+            return this.vectorRenderer_.forEachFeatureAtCoordinate(coordinate, frameState, hitTolerance, callback, declutteredFeatures);
+        }
+        else {
+            return _super.prototype.forEachFeatureAtCoordinate.call(this, coordinate, frameState, hitTolerance, callback, declutteredFeatures);
+        }
+    };
+    return CanvasVectorImageLayerRenderer;
+}(CanvasImageLayerRenderer));
+export default CanvasVectorImageLayerRenderer;
+//# sourceMappingURL=VectorImageLayer.js.map
