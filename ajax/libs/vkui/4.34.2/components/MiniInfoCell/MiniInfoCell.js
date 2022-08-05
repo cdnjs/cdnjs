@@ -1,0 +1,41 @@
+import _extends from "@babel/runtime/helpers/extends";
+import _objectWithoutProperties from "@babel/runtime/helpers/objectWithoutProperties";
+var _excluded = ["before", "after", "mode", "textWrap", "textLevel", "children"];
+import { createScopedElement } from "../../lib/jsxRuntime";
+import { classNames } from "../../lib/classNames";
+import { Text } from "../Typography/Text/Text";
+import { Tappable } from "../Tappable/Tappable";
+import { hasReactNode } from "../../lib/utils";
+
+/**
+ * @see https://vkcom.github.io/VKUI/#/MiniInfoCell
+ */
+export var MiniInfoCell = function MiniInfoCell(_ref) {
+  var before = _ref.before,
+      after = _ref.after,
+      _ref$mode = _ref.mode,
+      mode = _ref$mode === void 0 ? "base" : _ref$mode,
+      _ref$textWrap = _ref.textWrap,
+      textWrap = _ref$textWrap === void 0 ? "nowrap" : _ref$textWrap,
+      _ref$textLevel = _ref.textLevel,
+      textLevel = _ref$textLevel === void 0 ? "secondary" : _ref$textLevel,
+      children = _ref.children,
+      restProps = _objectWithoutProperties(_ref, _excluded);
+
+  var isClickable = !!restProps.onClick;
+  return createScopedElement(Tappable, _extends({
+    Component: "div",
+    disabled: !isClickable,
+    role: isClickable ? "button" : undefined
+  }, restProps, {
+    vkuiClass: classNames("MiniInfoCell", mode !== "base" && "MiniInfoCell--md-".concat(mode), textWrap !== "nowrap" && "MiniInfoCell--wr-".concat(textWrap), "MiniInfoCell--lvl-".concat(textLevel))
+  }), createScopedElement("span", {
+    vkuiClass: "MiniInfoCell__icon"
+  }, before), createScopedElement(Text, {
+    vkuiClass: "MiniInfoCell__content",
+    weight: mode === "more" ? "2" : undefined
+  }, children), hasReactNode(after) && createScopedElement("span", {
+    vkuiClass: "MiniInfoCell__after"
+  }, after));
+};
+//# sourceMappingURL=MiniInfoCell.js.map
