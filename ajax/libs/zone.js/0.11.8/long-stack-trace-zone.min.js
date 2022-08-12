@@ -1,0 +1,14 @@
+"use strict";
+/**
+ * @license Angular v14.2.0-next.0
+ * (c) 2010-2022 Google LLC. https://angular.io/
+ * License: MIT
+ */!function(t){"function"==typeof define&&define.amd?define(t):t()}((function(){
+/**
+     * @license
+     * Copyright Google LLC All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+var t={},a="__creationTrace__",n="STACKTRACE TRACKING",r="__SEP_TAG__",e=r+"@[native]",c=function c(){this.error=_(),this.timestamp=new Date};function i(){return new Error(n)}function o(){try{throw i()}catch(t){return t}}var s=i(),f=o(),_=s.stack?i:f.stack?o:i;function u(t){return t.stack?t.stack.split("\n"):[]}function k(a,n){for(var r=u(n),e=0;e<r.length;e++)t.hasOwnProperty(r[e])||a.push(r[e])}function h(t,a){var n=[a?a.trim():""];if(t)for(var c=(new Date).getTime(),i=0;i<t.length;i++){var o=t[i],s=o.timestamp,f="____________________Elapsed ".concat(c-s.getTime()," ms; At: ").concat(s);f=f.replace(/[^\w\d]/g,"_"),n.push(e.replace(r,f)),k(n,o.error),c=s.getTime()}return n.join("\n")}function l(){return Error.stackTraceLimit>0}function T(t,a){a>0&&(t.push(u((new c).error)),T(t,a-1))}Zone.longStackTraceZoneSpec={name:"long-stack-trace",longStackTraceLimit:10,getLongStackTrace:function(t){if(t){var a=t[Zone.__symbol__("currentTaskTrace")];return a?h(a,t.stack):t.stack}},onScheduleTask:function(t,n,r,e){if(l()){var i=Zone.currentTask,o=i&&i.data&&i.data[a]||[];(o=[new c].concat(o)).length>this.longStackTraceLimit&&(o.length=this.longStackTraceLimit),e.data||(e.data={}),"eventTask"===e.type&&(e.data=Object.assign({},e.data)),e.data[a]=o}return t.scheduleTask(r,e)},onHandleError:function(t,n,r,e){if(l()){var c=Zone.currentTask||e.task;if(e instanceof Error&&c){var i=h(c.data&&c.data[a],e.stack);try{e.stack=e.longStack=i}catch(t){}}}return t.handleError(r,e)}},function d(){if(l()){var a=[];T(a,2);for(var c=a[0],i=a[1],o=0;o<c.length;o++)if(-1==(f=c[o]).indexOf(n)){var s=f.match(/^\s*at\s+/);if(s){e=s[0]+r+" (http://localhost)";break}}for(o=0;o<c.length;o++){var f;if((f=c[o])!==i[o])break;t[f]=!0}}}()}));
