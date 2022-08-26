@@ -1,0 +1,277 @@
+/*!
+ * Author : Matteo Bruni
+ * MIT license: https://opensource.org/licenses/MIT
+ * Demo / Generator : https://particles.js.org/
+ * GitHub : https://www.github.com/matteobruni/tsparticles
+ * How to use? : Check the GitHub README
+ * v2.2.4
+ */
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory(require("tsparticles-engine"));
+	else if(typeof define === 'function' && define.amd)
+		define(["tsparticles-engine"], factory);
+	else {
+		var a = typeof exports === 'object' ? factory(require("tsparticles-engine")) : factory(root["window"]);
+		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
+	}
+})(this, (__WEBPACK_EXTERNAL_MODULE__818__) => {
+return /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ 818:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__818__;
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "Bounce": () => (/* reexport */ Bounce),
+  "loadExternalBounceInteraction": () => (/* binding */ loadExternalBounceInteraction)
+});
+
+// EXTERNAL MODULE: external {"commonjs":"tsparticles-engine","commonjs2":"tsparticles-engine","amd":"tsparticles-engine","root":"window"}
+var external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_ = __webpack_require__(818);
+;// CONCATENATED MODULE: ./dist/browser/Options/Classes/Bounce.js
+class Bounce {
+  constructor() {
+    this.distance = 200;
+  }
+
+  load(data) {
+    if (!data) {
+      return;
+    }
+
+    if (data.distance !== undefined) {
+      this.distance = data.distance;
+    }
+  }
+
+}
+;// CONCATENATED MODULE: ./dist/browser/Bouncer.js
+var __classPrivateFieldSet = undefined && undefined.__classPrivateFieldSet || function (receiver, state, value, kind, f) {
+  if (kind === "m") throw new TypeError("Private method is not writable");
+  if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+  if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+  return kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value), value;
+};
+
+var __classPrivateFieldGet = undefined && undefined.__classPrivateFieldGet || function (receiver, state, kind, f) {
+  if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+  if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+  return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+
+var _Bouncer_container;
+
+
+
+class Bouncer extends external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.ExternalInteractorBase {
+  constructor(container) {
+    super(container);
+
+    _Bouncer_container.set(this, void 0);
+
+    __classPrivateFieldSet(this, _Bouncer_container, container, "f");
+  }
+
+  clear() {// do nothing
+  }
+
+  init() {
+    const container = __classPrivateFieldGet(this, _Bouncer_container, "f"),
+          bounce = container.actualOptions.interactivity.modes.bounce;
+
+    if (!bounce) {
+      return;
+    }
+
+    container.retina.bounceModeDistance = bounce.distance * container.retina.pixelRatio;
+  }
+
+  async interact() {
+    const container = __classPrivateFieldGet(this, _Bouncer_container, "f"),
+          options = container.actualOptions,
+          events = options.interactivity.events,
+          mouseMoveStatus = container.interactivity.status === external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.mouseMoveEvent,
+          hoverEnabled = events.onHover.enable,
+          hoverMode = events.onHover.mode,
+          divs = events.onDiv;
+
+    if (mouseMoveStatus && hoverEnabled && (0,external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.isInArray)("bounce"
+    /* HoverMode.bounce */
+    , hoverMode)) {
+      this.processMouseBounce();
+    } else {
+      (0,external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.divModeExecute)("bounce"
+      /* DivMode.bounce */
+      , divs, (selector, div) => this.singleSelectorBounce(selector, div));
+    }
+  }
+
+  isEnabled(particle) {
+    var _a;
+
+    const container = __classPrivateFieldGet(this, _Bouncer_container, "f"),
+          options = container.actualOptions,
+          mouse = container.interactivity.mouse,
+          events = ((_a = particle === null || particle === void 0 ? void 0 : particle.interactivity) !== null && _a !== void 0 ? _a : options.interactivity).events,
+          divs = events.onDiv;
+
+    return mouse.position && events.onHover.enable && (0,external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.isInArray)("bounce"
+    /* HoverMode.bounce */
+    , events.onHover.mode) || (0,external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.isDivModeEnabled)("bounce"
+    /* DivMode.bounce */
+    , divs);
+  }
+
+  loadModeOptions(options, ...sources) {
+    if (!options.bounce) {
+      options.bounce = new Bounce();
+    }
+
+    for (const source of sources) {
+      options.bounce.load(source === null || source === void 0 ? void 0 : source.bounce);
+    }
+  }
+
+  reset() {// do nothing
+  }
+
+  processBounce(position, radius, area) {
+    const query = __classPrivateFieldGet(this, _Bouncer_container, "f").particles.quadTree.query(area, p => this.isEnabled(p));
+
+    for (const particle of query) {
+      if (area instanceof external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.Circle) {
+        (0,external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.circleBounce)((0,external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.circleBounceDataFromParticle)(particle), {
+          position,
+          radius,
+          mass: radius ** 2 * Math.PI / 2,
+          velocity: external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.Vector.origin,
+          factor: external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.Vector.origin
+        });
+      } else if (area instanceof external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.Rectangle) {
+        (0,external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.rectBounce)(particle, (0,external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.calculateBounds)(position, radius));
+      }
+    }
+  }
+
+  processMouseBounce() {
+    const container = __classPrivateFieldGet(this, _Bouncer_container, "f"),
+          pxRatio = container.retina.pixelRatio,
+          tolerance = 10 * pxRatio,
+          mousePos = container.interactivity.mouse.position,
+          radius = container.retina.bounceModeDistance;
+
+    if (!radius || radius < 0 || !mousePos) {
+      return;
+    }
+
+    this.processBounce(mousePos, radius, new external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.Circle(mousePos.x, mousePos.y, radius + tolerance));
+  }
+
+  singleSelectorBounce(selector, div) {
+    const container = __classPrivateFieldGet(this, _Bouncer_container, "f"),
+          query = document.querySelectorAll(selector);
+
+    if (!query.length) {
+      return;
+    }
+
+    query.forEach(item => {
+      const elem = item,
+            pxRatio = container.retina.pixelRatio,
+            pos = {
+        x: (elem.offsetLeft + elem.offsetWidth / 2) * pxRatio,
+        y: (elem.offsetTop + elem.offsetHeight / 2) * pxRatio
+      },
+            radius = elem.offsetWidth / 2 * pxRatio,
+            tolerance = 10 * pxRatio,
+            area = div.type === "circle"
+      /* DivType.circle */
+      ? new external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.Circle(pos.x, pos.y, radius + tolerance) : new external_commonjs_tsparticles_engine_commonjs2_tsparticles_engine_amd_tsparticles_engine_root_window_.Rectangle(elem.offsetLeft * pxRatio - tolerance, elem.offsetTop * pxRatio - tolerance, elem.offsetWidth * pxRatio + tolerance * 2, elem.offsetHeight * pxRatio + tolerance * 2);
+      this.processBounce(pos, radius, area);
+    });
+  }
+
+}
+_Bouncer_container = new WeakMap();
+;// CONCATENATED MODULE: ./dist/browser/index.js
+
+async function loadExternalBounceInteraction(engine) {
+  await engine.addInteractor("externalBounce", container => new Bouncer(container));
+}
+
+
+})();
+
+/******/ 	return __webpack_exports__;
+/******/ })()
+;
+});
