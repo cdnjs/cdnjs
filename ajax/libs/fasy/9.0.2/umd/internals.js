@@ -1,0 +1,5 @@
+/*! Fasy: internals.js
+    v9.0.2 (c) 2022 Kyle Simpson
+    MIT License: http://getify.mit-license.org
+*/
+!function UMD(e,n,t,o){"function"==typeof define&&define.amd?(t=Object.values(t),define(e,t,o)):"undefined"!=typeof module&&module.exports?(t=Object.keys(t).map((e=>require(e))),module.exports=o(...t)):(t=Object.values(t).map((e=>n[e])),n[e]=o(...t))}("FAInternals","undefined"!=typeof globalThis?globalThis:"undefined"!=typeof global?global:"undefined"!=typeof window?window:"undefined"!=typeof self?self:new Function("return this")(),{},(function DEF(){"use strict";let e={runner:function runner(e){return async function getArgs(...n){var t=e(...n);return t&&"function"==typeof t.next&&"function"==typeof t[Symbol.iterator]?Promise.resolve().then((function handleNext(e){return function handleResult(e){return e.done?e.value:Promise.resolve(e.value).then(handleNext,(function handleErr(e){return Promise.resolve(t.throw(e)).then(handleResult)}))}(t.next(e))})):t}}};return e}));
