@@ -1,0 +1,62 @@
+// List group
+
+.list-group-item-action {
+  transition: 0.5s;
+
+  // Hover state
+  &:hover {
+    transition: 0.5s;
+  }
+}
+
+.list-group-light {
+  .list-group-item {
+    padding: $list-group-light-item-py 0;
+    border: $list-group-light-item-border;
+  }
+  > .list-group-item {
+    border-width: 0 0 $list-group-light-item-border-width;
+    &:last-of-type {
+      border: none;
+    }
+  }
+  .active {
+    border: none;
+    border-radius: $list-group-light-active-border-radius;
+    background-color: $list-group-light-active-bgc;
+    color: $list-group-light-active-color;
+  }
+  .list-group-item-action {
+    &:hover {
+      border-radius: $list-group-light-active-border-radius;
+    }
+    &:focus {
+      border-radius: $list-group-light-active-border-radius;
+    }
+  }
+}
+
+.list-group-small {
+  .list-group-item {
+    padding: $list-group-small-item-py 0;
+  }
+}
+
+.list-group-item {
+  &.active {
+    background-color: $list-group-item-active-bgc;
+    color: $list-group-item-active-color;
+    border-color: $list-group-item-active-border-color;
+  }
+}
+
+@each $color, $value in $alerts {
+  .list-group-item-#{$color} {
+    background-color: map-get($value, background-color);
+    color: map-get($value, text-color);
+
+    i {
+      color: map-get($value, icon-color);
+    }
+  }
+}

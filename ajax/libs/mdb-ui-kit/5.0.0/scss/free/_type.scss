@@ -1,0 +1,25 @@
+// Type
+.note {
+  padding: $note-padding;
+  border-left: $note-border-width solid;
+  border-radius: $note-border-radius;
+  strong {
+    font-weight: $note-strong-font-weight;
+  }
+  p {
+    font-weight: $note-paragraph-font-weight;
+  }
+}
+
+@each $color, $value in $note {
+  .note-#{$color} {
+    background-color: map-get($value, background-color);
+    border-color: map-get($value, border-color);
+  }
+}
+
+.w-responsive {
+  @media (min-width: 1199px) {
+    width: 75%;
+  }
+}
