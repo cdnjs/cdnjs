@@ -1,0 +1,21 @@
+import React from 'react';
+import StyleSheet from '../sheet';
+import { Stringifier } from '../types';
+declare type Props = {
+    children?: React.ReactChild;
+    disableCSSOMInjection?: boolean;
+    disableVendorPrefixes?: boolean;
+    sheet?: StyleSheet;
+    stylisPlugins?: stylis.Middleware[];
+    target?: HTMLElement;
+};
+export declare const StyleSheetContext: React.Context<void | StyleSheet>;
+export declare const StyleSheetConsumer: React.Consumer<void | StyleSheet>;
+export declare const StylisContext: React.Context<void | Stringifier>;
+export declare const StylisConsumer: React.Consumer<void | Stringifier>;
+export declare const mainSheet: StyleSheet;
+export declare const mainStylis: Stringifier;
+export declare function useStyleSheet(): StyleSheet;
+export declare function useStylis(): Stringifier;
+export default function StyleSheetManager(props: Props): JSX.Element;
+export {};
