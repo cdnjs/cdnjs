@@ -1,0 +1,12 @@
+$values: ('start' 'end' 'flex-start' 'flex-end' 'center' 'normal' 'space-between' 'space-around' 'space-evenly' 'stretch' 'baseline')
+
+@each $modifier in 'align' 'justify'
+  @if $modifier == 'justify'
+    .justify-left
+      justify-content: left !important
+    .justify-right
+      justify-content: right !important
+
+  @each $value in $values
+    .#{$modifier}-#{$value}
+      #{$modifier}-content: #{$value} !important

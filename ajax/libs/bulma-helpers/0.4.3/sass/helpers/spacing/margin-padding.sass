@@ -1,0 +1,51 @@
+// spacing helpers settings
+$range-start: $spacing-range-start
+$range-end: $spacing-range-end
+$interval: $spacing-interval
+$sides: (top, bottom, left, right)
+$additional-units: $additional-spacing-units
+
+$current: $range-start
+@while $current < $range-end
+  .has-margin-#{$current}
+    margin: #{$current}#{$default-unit} !important
+
+  .has-padding-#{$current}
+    padding: #{$current}#{$default-unit} !important
+
+  @each $unit in $additional-units
+    .has-margin-#{$current}-#{$unit}
+      margin: #{$current + $unit} !important
+
+    .has-padding-#{$current}-#{$unit}
+      padding: #{$current + $unit}  !important
+
+  @each $side in $sides
+    .has-margin-#{$side}-#{$current}
+      margin-#{$side}: #{$current}#{$default-unit} !important
+    
+    .has-padding-#{$side}-#{$current}
+      padding-#{$side}: #{$current}#{$default-unit} !important
+
+    @each $unit in $additional-units
+      .has-margin-#{$side}-#{$current}-#{$unit}
+        margin-#{$side}: #{$current + $unit} !important
+
+      .has-padding-#{$side}-#{$current}-#{$unit}
+        padding-#{side}: #{$current + $unit}  !important
+  
+  $current: $current + $interval
+
+@each $side in $sides
+  .is-#{$side}-marginless
+    margin-#{$side}: 0 !important
+  
+  .is-#{$side}-paddingless
+    padding-#{$side}: 0 !important
+
+.has-margin-auto
+  margin: auto !important
+  
+@each $side in $sides
+  .has-margin-#{$side}-auto
+    margin-#{$side}: auto !important
