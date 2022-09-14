@@ -1,0 +1,108 @@
+.react-date-picker {
+  display: inline-flex;
+  position: relative;
+
+  &,
+  & *,
+  & *:before,
+  & *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  &--disabled {
+    background-color: rgb(240, 240, 240);
+    color: rgb(109, 109, 109);
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 0;
+    border: thin solid gray;
+  }
+
+  &__inputGroup {
+    @digit-width: 0.54em;
+    @dot-width: 0.217em;
+    // own padding + inputs padding + digits width + dots width
+    min-width: calc(~'(4px * 3) + ' @digit-width * 8 ~' + ' @dot-width * 2);
+    flex-grow: 1;
+    padding: 0 2px;
+    box-sizing: content-box;
+
+    &__divider {
+      padding: 1px 0;
+      white-space: pre;
+    }
+
+    &__input {
+      min-width: @digit-width;
+      height: 100%;
+      position: relative;
+      padding: 0 1px;
+      border: 0;
+      background: none;
+      font: inherit;
+      box-sizing: content-box;
+      -moz-appearance: textfield;
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      &:invalid {
+        background: fade(red, 10%);
+      }
+
+      &--hasLeadingZero {
+        margin-left: -@digit-width;
+        padding-left: calc(~'1px + ' @digit-width);
+      }
+    }
+  }
+
+  &__button {
+    border: 0;
+    background: transparent;
+    padding: 4px 6px;
+
+    &:enabled {
+      cursor: pointer;
+
+      &:hover,
+      &:focus {
+        .react-date-picker__button__icon {
+          stroke: rgb(0, 120, 215);
+        }
+      }
+    }
+
+    &:disabled {
+      .react-date-picker__button__icon {
+        stroke: rgb(109, 109, 109);
+      }
+    }
+
+    svg {
+      display: inherit;
+    }
+  }
+
+  &__calendar {
+    width: 350px;
+    max-width: 100vw;
+    z-index: 1;
+
+    &--closed {
+      display: none;
+    }
+
+    .react-calendar {
+      border-width: thin;
+    }
+  }
+}
