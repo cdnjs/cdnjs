@@ -1,0 +1,444 @@
+
+:root {
+  --button-text-color: white;
+  --button-quiet-color: var(--highlight-color);
+  --button-cta-color: white;
+  --button-large-padding: 4px 12px;
+  --button-padding: 4px 10px;
+  --button-line-height: 32px;
+  --button-large-line-height: 36px;
+  --button-active-opacity: 0.2;
+  --button-border-radius: 3px;
+}
+
+/*~
+  name: Button
+  category: Button
+  elements: ons-button
+  markup: |
+    <button class="button">Button</button>
+    <button class="button" disabled>Button</button>
+*/
+
+.button {
+  position: relative;
+  display: inline-block;
+
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+
+  /* mixin: reset-base */
+  margin: 0;
+
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+
+  /* mixin: reset-cursor */
+  cursor: default;
+  user-select: none;
+
+  /* mixin: ellipsis */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+  height: auto;
+  text-decoration: none;
+  padding: var(--button-padding);
+  font-size: var(--font-size);
+  line-height: var(--button-line-height);
+  letter-spacing: 0;
+  color: var(--button-text-color);
+  vertical-align: middle;
+  background-color: var(--button-background-color);
+  border: 0 solid currentColor;
+  border-radius: var(--button-border-radius);
+  transition: none;
+}
+
+.button::-moz-focus-inner {
+  outline: 0;
+}
+
+.button:hover {
+  transition: none;
+}
+
+.button:active {
+  background-color: var(--button-background-color);
+  transition: none;
+  opacity: var(--button-active-opacity);
+}
+
+.button:focus {
+  outline: 0;
+}
+
+.button:disabled, .button[disabled] {
+  /* mixin: disabled */
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+/*~
+  name: Outline Button
+  category: Button
+  elements: ons-button
+  markup: |
+    <button class="button button--outline">Button</button>
+    <button class="button button--outline" disabled>Button</button>
+*/
+
+.button--outline {
+  background-color: transparent;
+  border: 1px solid var(--button-background-color);
+  color: var(--button-background-color);
+}
+
+.button--outline:active {
+  border: 1px solid var(--button-background-color);
+  color: var(--button-background-color);
+  opacity: 1;
+
+  /* Hack to replicate tint from the deprecated color-mod function. */
+  --blend-background-color__base: var(--button-background-color);
+  --blend-background-color__color: white;
+  /* stylelint-disable-next-line no-unknown-animations */
+  animation: blend-background-color 1s -0.7s linear forwards paused;
+}
+
+.button--outline:hover {
+  border: 1px solid var(--button-background-color);
+  transition: 0;
+}
+
+/*~
+  name: Light Button
+  category: Button
+  elements: ons-button
+  markup: |
+    <button class="button button--light">Button</button>
+    <button class="button button--light" disabled>Button</button>
+*/
+
+.button--light {
+  background-color: transparent;
+  border: 1px solid;
+
+  /* Hack to replicate color-mod(var(--button-light-color) a(40%)) */
+  --blend-color__base: transparent;
+  --blend-color__color: var(--button-light-color);
+
+  /* Hack to replicate color-mod(var(--button-light-color) a(20%)) */
+  --blend-border-color__base: transparent;
+  --blend-border-color__color: var(--button-light-color);
+
+  /* stylelint-disable no-unknown-animations */
+  animation: blend-color 1s -0.4s linear forwards paused,
+    blend-border-color 1s -0.2s linear forwards paused;
+  /* stylelint-enable no-unknown-animations */
+}
+
+.button--light:active {
+  border: 1px solid;
+
+  /* Hack to replicate color-mod(var(--button-light-color) a(5%)) */
+  --blend-background-color__base: transparent;
+  --blend-background-color__color: var(--button-light-color);
+
+  /* Hack to replicate color-mod(var(--button-light-color) a(40%)) */
+  --blend-color__base: transparent;
+  --blend-color__color: var(--button-light-color);
+
+  /* Hack to replicate color-mod(var(--button-light-color) a(20%)) */
+  --blend-border-color__base: transparent;
+  --blend-border-color__color: var(--button-light-color);
+
+  /* stylelint-disable no-unknown-animations */
+  animation: blend-background-color 1s -0.05s linear forwards paused,
+    blend-color 1s -0.4s linear forwards paused,
+    blend-border-color 1s -0.2s linear forwards paused;
+  /* stylelint-enable no-unknown-animations */
+
+  opacity: 1;
+}
+
+/*~
+  name: Quiet Button
+  category: Button
+  elements: ons-button
+  markup: |
+    <button class="button button--quiet">Button</button>
+    <button class="button button--quiet" disabled>Button</button>
+*/
+
+.button--quiet {
+  /* mixin: button--quiet */
+  box-shadow: none;
+
+  background: transparent;
+  color: var(--button-quiet-color);
+  border: none;
+}
+
+.button--quiet:disabled,
+.button--quiet[disabled] {
+  border: none;
+}
+
+.button--quiet:active {
+  background-color: transparent;
+  border: none;
+  transition: none;
+  opacity: var(--button-active-opacity);
+  color: var(--button-quiet-color);
+}
+
+/*~
+  name: Call To Action Button
+  category: Button
+  elements: ons-button
+  markup: |
+    <button class="button button--cta">Button</button>
+    <button class="button button--cta" disabled>Button</button>
+*/
+
+.button--cta {
+  border: none;
+  background-color: var(--button-cta-background-color);
+  color: var(--button-cta-color);
+}
+
+.button--cta:active {
+  color: var(--button-cta-color);
+  background-color: var(--button-cta-background-color);
+  transition: none;
+  opacity: var(--button-active-opacity);
+}
+
+/*
+  name: Large Button
+  category: Button
+  elements: ons-button
+  markup: |
+    <button class="button button--large" style="width: 95%; margin: 0 auto;">Button</button>
+*/
+
+.button--large {
+  font-size: var(--font-size);
+  font-weight: var(--font-weight--large);
+  line-height: var(--button-large-line-height);
+  padding: var(--button-large-padding);
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.button--large:active {
+  transition: none;
+}
+
+/*~
+  name: Large Quiet Button
+  category: Button
+  elements: ons-button
+  markup: |
+    <button class="button button--large--quiet" style="width: 95%; margin: 0 auto;">Button</button>
+*/
+
+.button--large--quiet { /* stylelint-disable-line */
+  font-size: var(--font-size);
+  font-weight: var(--font-weight--large);
+  line-height: var(--button-large-line-height);
+  padding: var(--button-large-padding);
+  display: block;
+  width: 100%;
+
+  /* mixin: button--quiet */
+  background: transparent;
+  border: 1px solid transparent;
+  box-shadow: none;
+
+  color: var(--button-quiet-color);
+  text-align: center;
+}
+
+.button--large--quiet:active { /* stylelint-disable-line */
+  transition: none;
+  opacity: var(--button-active-opacity);
+  color: var(--button-quiet-color);
+
+  /* mixin: button--quiet */
+  background: transparent;
+  border: 1px solid transparent;
+  box-shadow: none;
+}
+
+.button--large--quiet:focus { /* stylelint-disable-line */
+  outline: 0;
+}
+
+/*~
+  name: Large Call To Action Button
+  category: Button
+  elements: ons-button
+  markup: |
+    <button class="button button--large--cta" style="width: 95%; margin: 0 auto;">Button</button>
+*/
+
+.button--large--cta { /* stylelint-disable-line */
+  border: none;
+  background-color: var(--button-cta-background-color);
+  color: var(--button-cta-color);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight--large);
+  line-height: var(--button-large-line-height);
+  padding: var(--button-large-padding);
+  width: 100%;
+  text-align: center;
+  display: block;
+}
+
+.button--large--cta:active { /* stylelint-disable-line */
+  color: var(--button-cta-color);
+  background-color: var(--button-cta-background-color);
+  transition: none;
+  opacity: var(--button-active-opacity);
+}
+
+/*~
+  name: Material Button
+  category: Button
+  elements: ons-button
+  markup: |
+    <button class="button button--material">BUTTON</button>
+    <button class="button button--material" disabled>DISABLED</button>
+*/
+
+.button--material {
+  /* mixin: button--material */
+  /* mixin: material-shadow-1 */
+  box-shadow:
+    0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+
+  min-height: 36px;
+  line-height: 36px;
+  padding: 0 16px;
+  text-align: center;
+  font-size: 14px;
+  transform: translate3d(0, 0, 0);
+  text-transform: uppercase;
+  background-color: var(--material-button-background-color);
+  color: var(--material-button-text-color);
+  font-weight: var(--font-weight--large);
+
+  opacity: 1;
+  transition: all 0.25s linear;
+}
+
+.button--material:hover {
+  transition: all 0.25s linear;
+}
+
+.button--material:active {
+  /* mixin: material-shadow-3 */
+  box-shadow:
+    0 6px 10px 0 rgba(0, 0, 0, 0.14),
+    0 1px 18px 0 rgba(0, 0, 0, 0.12),
+    0 3px 5px -1px rgba(0, 0, 0, 0.4);
+
+  background-color: var(--material-button-background-color);
+  opacity: 0.9;
+  transition: all 0.25s linear;
+}
+
+.button--material:disabled,
+.button--material[disabled] {
+  transition: none;
+
+  /* mixin: material-shadow-0 */
+  box-shadow: none;
+
+  background-color: var(--material-button-disabled-background-color);
+  color: var(--material-button-disabled-color);
+  opacity: 1;
+}
+
+/*~
+  name: Material Flat Button
+  category: Button
+  elements: ons-button
+  markup: |
+    <button class="button button--material--flat">BUTTON</button>
+    <button class="button button--material--flat" disabled>DISABLED</button>
+*/
+
+.button--material--flat { /* stylelint-disable-line */
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+
+  min-height: 36px;
+  line-height: 36px;
+  padding: 0 16px;
+  text-align: center;
+  font-size: 14px;
+  transform: translate3d(0, 0, 0);
+  text-transform: uppercase;
+  font-weight: var(--font-weight--large);
+
+  /* mixin: material-shadow-0 */
+  box-shadow: none;
+
+  background-color: transparent;
+  color: var(--material-button-background-color);
+  transition: all 0.25s linear;
+}
+
+.button--material--flat:hover { /* stylelint-disable-line */
+  transition: all 0.25s linear;
+}
+
+.button--material--flat:focus { /* stylelint-disable-line */
+  /* mixin: material-shadow-0 */
+  box-shadow: none;
+
+  background-color: transparent;
+  color: var(--material-button-background-color);
+  outline: 0;
+  opacity: 1;
+  border: none;
+}
+
+.button--material--flat:active { /* stylelint-disable-line */
+  /* mixin: material-shadow-0 */
+  box-shadow: none;
+
+  outline: 0;
+  opacity: 1;
+  border: none;
+  background-color: var(--material-flat-button-active-background-color);
+  color: var(--material-button-background-color);
+  transition: all 0.25s linear;
+}
+
+.button--material--flat:disabled, .button--material--flat[disabled] {/* stylelint-disable-line */
+  transition: none;
+  opacity: 1;
+
+  /* mixin: material-shadow-0 */
+  box-shadow: none;
+
+  background-color: transparent;
+  color: var(--material-button-disabled-color);
+}
