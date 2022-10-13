@@ -1,0 +1,329 @@
+:root {
+  --checkbox-size: 22px;
+  --checkbox-border: 1px solid #c7c7cd;
+  --checkbox-checked-background-color: var(--highlight-color); /* background color active */
+  --background-color--before--checkbox: var(--checkbox-checked-background-color);
+  --checkmark-border: 2px solid #fff;
+  --material-checkbox-size: 18px;
+  --material-checkbox-focus-ring-size: 40px;
+  --material-checkbox-focus-ring-shadow-size: calc((var(--material-checkbox-focus-ring-size) - var(--material-checkbox-size)) / 2);
+}
+
+/*~
+  name: Checkbox
+  category: Checkbox
+  elements: ons-input
+  markup: |
+    <label class="checkbox">
+      <input type="checkbox" class="checkbox__input">
+      <div class="checkbox__checkmark"></div>
+      OFF
+    </label>
+
+    <label class="checkbox">
+      <input type="checkbox" class="checkbox__input" checked="checked">
+      <div class="checkbox__checkmark"></div>
+      ON
+    </label>
+
+    <label class="checkbox">
+      <input type="checkbox" class="checkbox__input" disabled>
+      <div class="checkbox__checkmark"></div>
+      Disabled
+    </label>
+*/
+
+.checkbox {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+
+  /* mixin: reset-cursor */
+  cursor: default;
+  user-select: none;
+
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+
+  line-height: var(--checkbox-size);
+}
+
+.checkbox__checkmark {
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+  background-clip: padding-box;
+
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+
+  /* mixin: reset-cursor */
+  cursor: default;
+  user-select: none;
+
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+
+  height: var(--checkbox-size);
+  width: var(--checkbox-size);
+  pointer-events: none;
+}
+
+.checkbox__input,
+.checkbox__input:checked {
+  /* mixin: hide-input */
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  z-index: 1;
+  vertical-align: top;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  appearance: none;
+}
+
+.checkbox__checkmark:before {
+  /* mixin: checkbox--before */
+  content: '';
+  position: absolute;
+
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+
+  width: var(--checkbox-size);
+  height: var(--checkbox-size);
+  background: transparent;
+  border: var(--checkbox-border);
+  border-radius: var(--checkbox-size);
+  left: 0;
+}
+
+/* checkmark's line */
+.checkbox__checkmark:after {
+  /* mixin: checkbox--before */
+  content: '';
+  position: absolute;
+
+  top: 7px;
+  left: 5px;
+  width: 11px;
+  height: 5px;
+  background: transparent;
+  border: var(--checkmark-border);
+  border-width: 1px;
+  border-top: none;
+  border-right: none;
+  border-radius: 0;
+  transform: rotate(-45deg);
+  opacity: 0;
+}
+
+:checked + .checkbox__checkmark:before {
+  background: var(--background-color--before--checkbox);
+  border: none;
+}
+
+:checked + .checkbox__checkmark:after {
+  opacity: 1;
+}
+
+:disabled + .checkbox__checkmark {
+  /* mixin: disabled */
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+:disabled:active + .checkbox__checkmark:before { /* FIXME */
+  background: transparent;
+}
+
+/*~
+  name: No border Checkbox
+  category: Checkbox
+  elements: ons-input
+  markup: |
+    <label class="checkbox checkbox--noborder">
+      <input type="checkbox" class="checkbox__input checkbox--noborder__input">
+      <div class="checkbox__checkmark checkbox--noborder__checkmark"></div>
+      OFF
+    </label>
+
+    <label class="checkbox checkbox--noborder">
+      <input type="checkbox" class="checkbox__input checkbox--noborder__input" checked="checked">
+      <div class="checkbox__checkmark checkbox--noborder__checkmark"></div>
+      ON
+    </label>
+
+    <label class="checkbox checkbox--noborder">
+      <input type="checkbox" class="checkbox__input checkbox--noborder__input" disabled checked="checked">
+      <div class="checkbox__checkmark checkbox--noborder__checkmark"></div>
+      Disabled
+    </label>
+ */
+
+.checkbox--noborder__checkmark {
+  background: transparent;
+  border: none;
+}
+
+.checkbox--noborder__checkmark:before {
+  border: none;
+}
+
+/* checkmark's line */
+.checkbox--noborder__checkmark:after {
+  /* mixin: checkmark */
+  left: 4px;
+  height: 4px;
+  border: 2px solid var(--highlight-color);
+}
+
+:checked + .checkbox--noborder__checkmark:before {
+  background: transparent;
+}
+
+:focus + .checkbox--noborder__checkmark:before {
+  border: none;
+}
+
+:disabled:active + .checkbox--noborder__checkmark:before {
+  border: none;
+}
+
+/*~
+  name: Material Checkbox
+  category: Checkbox
+  elements: ons-input
+  markup: |
+    <label class="checkbox checkbox--material">
+      <input type="checkbox" class="checkbox__input checkbox--material__input">
+      <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+      OFF
+    </label>
+    <label class="checkbox checkbox--material">
+      <input type="checkbox" class="checkbox__input checkbox--material__input" checked="checked">
+      <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+      ON
+    </label>
+    <label class="checkbox checkbox--material">
+      <input type="checkbox" class="checkbox__input checkbox--material__input" checked="checked" disabled>
+      <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+      ON
+    </label>
+    <label class="checkbox checkbox--material">
+      <input type="checkbox" class="checkbox__input checkbox--material__input" disabled>
+      <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+      Disabled
+    </label>
+*/
+
+.checkbox--material {
+  line-height: var(--material-checkbox-size);
+
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: var(--material-font-weight);
+
+  overflow: visible;
+}
+
+.checkbox--material__checkmark {
+  width: var(--material-checkbox-size);
+  height: var(--material-checkbox-size);
+}
+
+.checkbox--material__checkmark:before {
+  border-radius: 2px;
+  height: var(--material-checkbox-size);
+  width: var(--material-checkbox-size);
+  border: 2px solid var(--material-checkbox-inactive-color);
+  transition: background-color 0.1s linear 0.2s, border-color 0.1s linear 0.2s;
+  background-color: transparent;
+}
+
+:checked + .checkbox--material__checkmark:before {
+  border: 2px solid var(--material-checkbox-active-color);
+  background-color: var(--material-checkbox-active-color);
+  transition: background-color 0.1s linear, border-color 0.1s linear;
+}
+
+.checkbox--material__checkmark:after {
+  border-color: var(--material-checkbox-checkmark-color);
+  transition: transform 0.2s ease 0;
+  width: 10px;
+  height: 5px;
+  top: 4px;
+  left: 3px;
+  transform: scale(0) rotate(-45deg);
+  border-width: 2px;
+}
+
+:checked + .checkbox--material__checkmark:after {
+  transition: transform 0.2s ease 0.2s;
+  width: 10px;
+  height: 5px;
+  top: 4px;
+  left: 3px;
+  transform: scale(1) rotate(-45deg);
+  border-width: 2px;
+}
+
+/* active ring effect */
+.checkbox--material__input:before {
+  content: '';
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--material-checkbox-size);
+  height: var(--material-checkbox-size);
+  box-shadow: 0 0 0 var(--material-checkbox-focus-ring-shadow-size) var(--material-checkbox-inactive-color);
+  box-sizing: border-box;
+  border-radius: 50%;
+  background-color: var(--material-checkbox-inactive-color);
+  pointer-events: none;
+  display: block;
+  transform: scale3d(0.2, 0.2, 0.2);
+  transition: opacity 0.25s ease-out, transform 0.1s ease-out;
+}
+
+.checkbox--material__input:checked:before {
+  box-shadow: 0 0 0 var(--material-checkbox-focus-ring-shadow-size) var(--material-checkbox-active-color);
+  background-color: var(--material-checkbox-active-color);
+}
+
+.checkbox--material__input:active:before {
+  opacity: .15;
+  transform: scale3d(1, 1, 1);
+}
+
+:disabled + .checkbox--material__checkmark {
+  opacity: 1;
+}
+
+:disabled + .checkbox--material__checkmark:before {
+  border-color: #afafaf;
+}
+
+:disabled:checked + .checkbox--material__checkmark:before {
+  background-color: #afafaf;
+}
+
+:disabled:checked + .checkbox--material__checkmark:after {
+  border-color: #ffffff;
+}
