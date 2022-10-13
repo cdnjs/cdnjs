@@ -1,0 +1,177 @@
+
+:root {
+  --toolbar-button-background-color: rgba(0, 0, 0, 0);
+  --toolbar-button-border-color: var(--toolbar-button-color);
+  --toolbar-button-border-radius: 2px;
+  --toolbar-button-padding: 4px 10px;
+  --toolbar-button-active-background-color: var(--toolbar-button-background-color);
+  --toolbar-button-border: 1px solid var(--toolbar-button-border-color);
+}
+
+/*~
+  name: Toolbar Button
+  category: Toolbar Button
+  elements: ons-toolbar-button
+  markup: |
+    <!-- Prerequisite=This example use font-awesome(http://fortawesome.github.io/Font-Awesome/) to display icons. -->
+    <button class="toolbar-button">
+      <i class="fa fa-bell" style="font-size:17px"></i>
+    </button>
+
+    <button class="toolbar-button">
+      Label
+    </button>
+
+    <button class="toolbar-button toolbar-button--outline">
+      <i class="fa fa-bell" style="font-size:17px"></i> Label
+    </button>
+*/
+
+.toolbar-button {
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  padding: var(--toolbar-button-padding);
+  letter-spacing: 0;
+  color: var(--toolbar-button-color);
+  background-color: var(--toolbar-button-background-color);
+  border-radius: var(--toolbar-button-border-radius);
+  border: 1px solid transparent;
+  font-weight: var(--font-weight);
+  font-size: var(--font-size);
+  transition: none;
+}
+
+.toolbar-button:active {
+  background-color: var(--toolbar-button-active-background-color);
+  transition: none;
+  opacity: 0.2;
+}
+
+.toolbar-button:disabled,
+.toolbar-button[disabled] {
+  /* mixin: disabled */
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+.toolbar-button:focus {
+  outline: 0;
+  transition: none;
+}
+
+.toolbar-button:hover {
+  transition: none;
+}
+
+.toolbar-button--outline {
+  border: var(--toolbar-button-border);
+  margin: auto 8px;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+/*~
+  name: Material Toolbar Button
+  category: Toolbar Button
+  elements: ons-toolbar-button
+  markup: |
+    <!-- Prerequisite=This example use Material Design Iconic Font(http://zavoloklom.github.io/material-design-iconic-font/) to display icons. -->
+    <span class="toolbar-button toolbar-button--material">
+      <i class="zmdi zmdi-menu"></i>
+    </span>
+    <span class="toolbar-button toolbar-button--material">
+      Label
+    </span>
+    <span class="toolbar-button toolbar-button--material">
+      <i class="zmdi zmdi-favorite"></i>
+    </span>
+*/
+
+.toolbar-button--material {
+  font-size: 22px;
+  color: var(--material-toolbar-button-color);
+  display: inline-block;
+  padding: 0 12px;
+  height: 100%;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  vertical-align: initial;
+  transition: background-color 0.25s linear;
+}
+
+.toolbar-button--material:first-of-type {
+  margin-left: 4px;
+}
+
+.toolbar-button--material:last-of-type {
+  margin-right: 4px;
+}
+
+.toolbar-button--material:active {
+  opacity: 1;
+  transition: background-color 0.25s linear;
+}
+
+.back-button {
+  height: 44px;
+  line-height: 44px;
+  padding-left: 8px;
+  color: var(--toolbar-button-color);
+  background-color: var(--toolbar-button-background-color);
+  display: inline-block;
+}
+
+.back-button:active {
+  opacity: 0.2;
+}
+
+.back-button__label {
+  display: inline-block;
+  height: 100%;
+  vertical-align: top;
+  line-height: var(--toolbar-height);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight--large);
+}
+
+.back-button__icon {
+  margin-right: 6px;
+  display: inline-flex;
+  fill: var(--toolbar-button-color);
+  align-items: center;
+  height: 100%;
+}
+
+.back-button--material {
+  font-size: 22px;
+  color: var(--material-toolbar-button-color);
+  display: inline-block;
+  padding: 0 12px;
+  height: 100%;
+  margin: 0 0 0 4px;
+  border: none;
+  border-radius: 0;
+  vertical-align: initial;
+  line-height: 56px;
+}
+
+.back-button--material__label {
+  display: none;
+  font-size: 20px;
+}
+
+.back-button--material__icon {
+  display: inline-flex;
+  fill: var(--material-toolbar-button-color);
+  align-items: center;
+  height: 100%;
+}
+
+.back-button--material:active {
+  opacity: 1;
+}
