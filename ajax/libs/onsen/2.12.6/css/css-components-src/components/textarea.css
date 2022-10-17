@@ -1,0 +1,70 @@
+:root {
+  --textarea-color: var(--input-text-color);
+  --textarea-border: 1px solid var(--input-border-color);
+  --textarea-padding: 5px 5px 5px 5px;
+  --textarea-box-shadow: none;
+  --textarea-border-radius: 4px;
+}
+
+/*~
+  name: Textarea
+  category: Textarea
+  markup: |
+    <textarea class="textarea" rows="3" placeholder="Textarea"></textarea>
+*/
+
+.textarea {
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+
+  /* mixin: reset-base */
+  margin: 0;
+  font: inherit;
+  background: transparent;
+  line-height: normal;
+
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  vertical-align: top;
+  resize: none;
+  outline: none;
+  padding: var(--textarea-padding);
+  font-size: var(--text-input-font-size);
+  font-weight: var(--font-weight);
+  border-radius: var(--textarea-border-radius);
+  border: var(--textarea-border);
+  background-color: var(--input-bg-color);
+  color: var(--textarea-color);
+  letter-spacing: 0;
+  box-shadow: var(--textarea-box-shadow);
+  appearance: none;
+  width: auto;
+}
+
+.textarea:disabled {
+  /* mixin: disabled */
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+.textarea::placeholder {
+  color: var(--input-placeholder-color);
+}
+
+/*~
+  name: Textarea Transparent
+  category: Textarea
+  markup: |
+    <textarea class="textarea textarea--transparent" rows="3" placeholder="Textarea"></textarea>
+*/
+
+.textarea--transparent {
+  padding-left: 0;
+  padding-right: 0;
+  border: none;
+  background-color: transparent;
+}
