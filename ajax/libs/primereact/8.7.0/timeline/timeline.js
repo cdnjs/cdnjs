@@ -1,0 +1,128 @@
+this.primereact = this.primereact || {};
+this.primereact.timeline = (function (exports, React, utils) {
+  'use strict';
+
+  function _interopNamespace(e) {
+    if (e && e.__esModule) return e;
+    var n = Object.create(null);
+    if (e) {
+      Object.keys(e).forEach(function (k) {
+        if (k !== 'default') {
+          var d = Object.getOwnPropertyDescriptor(e, k);
+          Object.defineProperty(n, k, d.get ? d : {
+            enumerable: true,
+            get: function () { return e[k]; }
+          });
+        }
+      });
+    }
+    n["default"] = e;
+    return Object.freeze(n);
+  }
+
+  var React__namespace = /*#__PURE__*/_interopNamespace(React);
+
+  function _extends() {
+    _extends = Object.assign ? Object.assign.bind() : function (target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+
+      return target;
+    };
+    return _extends.apply(this, arguments);
+  }
+
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+
+    return obj;
+  }
+
+  var Timeline = /*#__PURE__*/React__namespace.memo( /*#__PURE__*/React__namespace.forwardRef(function (props, ref) {
+    var _classNames;
+
+    var elementRef = React__namespace.useRef(null);
+
+    var getKey = function getKey(item, index) {
+      return props.dataKey ? utils.ObjectUtils.resolveFieldData(item, props.dataKey) : "pr_id__".concat(index);
+    };
+
+    var createEvents = function createEvents() {
+      return props.value && props.value.map(function (item, index) {
+        var opposite = utils.ObjectUtils.getJSXElement(props.opposite, item, index);
+        var marker = utils.ObjectUtils.getJSXElement(props.marker, item, index) || /*#__PURE__*/React__namespace.createElement("div", {
+          className: "p-timeline-event-marker"
+        });
+        var connector = index !== props.value.length - 1 && /*#__PURE__*/React__namespace.createElement("div", {
+          className: "p-timeline-event-connector"
+        });
+        var content = utils.ObjectUtils.getJSXElement(props.content, item, index);
+        return /*#__PURE__*/React__namespace.createElement("div", {
+          key: getKey(item, index),
+          className: "p-timeline-event"
+        }, /*#__PURE__*/React__namespace.createElement("div", {
+          className: "p-timeline-event-opposite"
+        }, opposite), /*#__PURE__*/React__namespace.createElement("div", {
+          className: "p-timeline-event-separator"
+        }, marker, connector), /*#__PURE__*/React__namespace.createElement("div", {
+          className: "p-timeline-event-content"
+        }, content));
+      });
+    };
+
+    React__namespace.useImperativeHandle(ref, function () {
+      return {
+        props: props,
+        getElement: function getElement() {
+          return elementRef.current;
+        }
+      };
+    });
+    var otherProps = utils.ObjectUtils.findDiffKeys(props, Timeline.defaultProps);
+    var className = utils.classNames('p-timeline p-component', (_classNames = {}, _defineProperty(_classNames, "p-timeline-".concat(props.align), true), _defineProperty(_classNames, "p-timeline-".concat(props.layout), true), _classNames), props.className);
+    var events = createEvents();
+    return /*#__PURE__*/React__namespace.createElement("div", _extends({
+      id: props.id,
+      ref: elementRef,
+      className: className,
+      style: props.style
+    }, otherProps), events);
+  }));
+  Timeline.displayName = 'Timeline';
+  Timeline.defaultProps = {
+    __TYPE: 'Timeline',
+    id: null,
+    value: null,
+    align: 'left',
+    layout: 'vertical',
+    dataKey: null,
+    className: null,
+    style: null,
+    opposite: null,
+    marker: null,
+    content: null
+  };
+
+  exports.Timeline = Timeline;
+
+  Object.defineProperty(exports, '__esModule', { value: true });
+
+  return exports;
+
+})({}, React, primereact.utils);
