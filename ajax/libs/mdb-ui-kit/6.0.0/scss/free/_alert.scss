@@ -1,0 +1,39 @@
+// Alert
+
+.alert {
+  border: 0;
+}
+
+.alert-absolute {
+  position: absolute;
+}
+
+.alert-fixed {
+  --#{$prefix}alert-fixed-z-index: #{$alert-zindex};
+
+  position: fixed;
+  z-index: var(--#{$prefix}alert-fixed-z-index);
+}
+
+.parent-alert-relative {
+  position: relative;
+}
+
+@each $color, $value in $alerts {
+  .alert-#{$color} {
+    background-color: map-get($value, background-color);
+    color: map-get($value, text-color);
+
+    i {
+      color: map-get($value, icon-color);
+    }
+
+    .alert-link {
+      color: map-get($value, text-color);
+
+      &:hover {
+        color: shift-color(map-get($value, text-color), 20%);
+      }
+    }
+  }
+}

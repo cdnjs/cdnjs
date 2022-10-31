@@ -1,0 +1,87 @@
+//
+// Image styles
+//
+
+.bg-fixed {
+  background-attachment: fixed;
+}
+
+.bg-image {
+  position: relative;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-attachment: fixed;
+}
+
+.hover-overlay {
+  .mask {
+    --#{$prefix}image-hover-transition: #{$image-hover-overlay-transition};
+
+    opacity: 0;
+    transition: var(--#{$prefix}image-hover-transition);
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.hover-zoom {
+  --#{$prefix}image-hover-zoom-transition: #{$image-hover-zoom-transition};
+  --#{$prefix}image-hover-zoom-transform: #{$image-hover-zoom-transform};
+
+  img,
+  video {
+    transition: var(--#{$prefix}image-hover-zoom-transition);
+  }
+  &:hover {
+    img,
+    video {
+      transform: var(--#{$prefix}image-hover-zoom-transform);
+    }
+  }
+}
+
+.hover-shadow,
+.card.hover-shadow,
+.hover-shadow-soft,
+.card.hover-shadow-soft {
+  --#{$prefix}image-hover-shadow-transition: #{$image-hover-shadow-transition};
+
+  transition: var(--#{$prefix}image-hover-shadow-transition);
+  &:hover {
+    transition: var(--#{$prefix}image-hover-shadow-transition);
+  }
+}
+
+.hover-shadow,
+.card.hover-shadow {
+  --#{$prefix}image-hover-shadow-box-shadow: #{$image-hover-shadow-box-shadow};
+
+  box-shadow: none;
+  &:hover {
+    box-shadow: var(--#{$prefix}image-hover-shadow-box-shadow);
+  }
+}
+
+.hover-shadow-soft,
+.card.hover-shadow-soft {
+  --#{$prefix}image-hover-shadow-box-shadow-soft: #{$image-hover-shadow-box-shadow-soft};
+
+  box-shadow: none;
+  &:hover {
+    box-shadow: var(--#{$prefix}image-hover-shadow-box-shadow-soft);
+  }
+}
