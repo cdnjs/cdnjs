@@ -1,0 +1,477 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+/**
+ * @module ol/source/GeoTIFF
+ */
+import DataTile from './DataTile.js';
+import State from './State.js';
+import TileGrid from '../tilegrid/TileGrid.js';
+import { Pool, fromUrl as tiffFromUrl, fromUrls as tiffFromUrls } from 'geotiff';
+import { create as createDecoderWorker } from '../worker/geotiff-decoder.js';
+import { getIntersection } from '../extent.js';
+import { get as getProjection } from '../proj.js';
+import { toSize } from '../size.js';
+/**
+ * @typedef {Object} SourceInfo
+ * @property {string} url URL for the source GeoTIFF.
+ * @property {Array<string>} [overviews] List of any overview URLs.
+ * @property {number} [min=0] The minimum source data value.  Rendered values are scaled from 0 to 1 based on
+ * the configured min and max.
+ * @property {number} [max] The maximum source data value.  Rendered values are scaled from 0 to 1 based on
+ * the configured min and max.
+ * @property {number} [nodata] Values to discard. When provided, an additional band (alpha) will be added
+ * to the data.
+ * @property {Array<number>} [bands] Indices of the bands to be read from. If not provided, all bands will
+ * be read. If, for example, a GeoTIFF has red, green, blue and near-infrared bands and you only need the
+ * infrared band, configure `bands: [3]`.
+ */
+var workerPool;
+function getWorkerPool() {
+    if (!workerPool) {
+        workerPool = new Pool(undefined, createDecoderWorker());
+    }
+    return workerPool;
+}
+/**
+ * @param {import("geotiff/src/geotiff.js").GeoTIFF|import("geotiff/src/geotiff.js").MultiGeoTIFF} tiff A GeoTIFF.
+ * @return {Promise<Array<import("geotiff/src/geotiffimage.js").GeoTIFFImage>>} Resolves to a list of images.
+ */
+function getImagesForTIFF(tiff) {
+    return tiff.getImageCount().then(function (count) {
+        var requests = new Array(count);
+        for (var i = 0; i < count; ++i) {
+            requests[i] = tiff.getImage(i);
+        }
+        return Promise.all(requests);
+    });
+}
+/**
+ * @param {SourceInfo} source The GeoTIFF source.
+ * @return {Promise<Array<import("geotiff/src/geotiffimage.js").GeoTIFFImage>>} Resolves to a list of images.
+ */
+function getImagesForSource(source) {
+    var request;
+    if (source.overviews) {
+        request = tiffFromUrls(source.url, source.overviews);
+    }
+    else {
+        request = tiffFromUrl(source.url);
+    }
+    return request.then(getImagesForTIFF);
+}
+/**
+ * @param {number|Array<number>|Array<Array<number>>} expected Expected value.
+ * @param {number|Array<number>|Array<Array<number>>} got Actual value.
+ * @param {number} tolerance Accepted tolerance in fraction of expected between expected and got.
+ * @param {string} message The error message.
+ */
+function assertEqual(expected, got, tolerance, message) {
+    if (Array.isArray(expected)) {
+        var length_1 = expected.length;
+        if (!Array.isArray(got) || length_1 != got.length) {
+            throw new Error(message);
+        }
+        for (var i = 0; i < length_1; ++i) {
+            assertEqual(expected[i], got[i], tolerance, message);
+        }
+        return;
+    }
+    got = /** @type {number} */ (got);
+    if (Math.abs(expected - got) > tolerance * expected) {
+        throw new Error(message);
+    }
+}
+/**
+ * @param {Array} array The data array.
+ * @return {number} The minimum value.
+ */
+function getMinForDataType(array) {
+    if (array instanceof Int8Array) {
+        return -128;
+    }
+    if (array instanceof Int16Array) {
+        return -32768;
+    }
+    if (array instanceof Int32Array) {
+        return -2147483648;
+    }
+    if (array instanceof Float32Array) {
+        return 1.2e-38;
+    }
+    return 0;
+}
+/**
+ * @param {Array} array The data array.
+ * @return {number} The maximum value.
+ */
+function getMaxForDataType(array) {
+    if (array instanceof Int8Array) {
+        return 127;
+    }
+    if (array instanceof Uint8Array) {
+        return 255;
+    }
+    if (array instanceof Uint8ClampedArray) {
+        return 255;
+    }
+    if (array instanceof Int16Array) {
+        return 32767;
+    }
+    if (array instanceof Uint16Array) {
+        return 65535;
+    }
+    if (array instanceof Int32Array) {
+        return 2147483647;
+    }
+    if (array instanceof Uint32Array) {
+        return 4294967295;
+    }
+    if (array instanceof Float32Array) {
+        return 3.4e38;
+    }
+    return 255;
+}
+/**
+ * @typedef {Object} Options
+ * @property {Array<SourceInfo>} sources List of information about GeoTIFF sources.
+ * Multiple sources can be combined when their resolution sets are equal after applying a scale.
+ * The list of sources defines a mapping between input bands as they are read from each GeoTIFF and
+ * the output bands that are provided by data tiles. To control which bands to read from each GeoTIFF,
+ * use the {@link import("./GeoTIFF.js").SourceInfo bands} property. If, for example, you specify two
+ * sources, one with 3 bands and {@link import("./GeoTIFF.js").SourceInfo nodata} configured, and
+ * another with 1 band, the resulting data tiles will have 5 bands: 3 from the first source, 1 alpha
+ * band from the first source, and 1 band from the second source.
+ * @property {boolean} [opaque=false] Whether the layer is opaque.
+ * @property {number} [transition=250] Duration of the opacity transition for rendering.
+ * To disable the opacity transition, pass `transition: 0`.
+ */
+/**
+ * @classdesc
+ * A source for working with GeoTIFF data.
+ * @api
+ */
+var GeoTIFFSource = /** @class */ (function (_super) {
+    __extends(GeoTIFFSource, _super);
+    /**
+     * @param {Options} options Data tile options.
+     */
+    function GeoTIFFSource(options) {
+        var _this = _super.call(this, {
+            state: State.LOADING,
+            tileGrid: null,
+            projection: null,
+            opaque: options.opaque,
+            transition: options.transition,
+        }) || this;
+        /**
+         * @type {Array<SourceInfo>}
+         * @private
+         */
+        _this.sourceInfo_ = options.sources;
+        var numSources = _this.sourceInfo_.length;
+        /**
+         * @type {Array<Array<import("geotiff/src/geotiffimage.js").GeoTIFFImage>>}
+         * @private
+         */
+        _this.sourceImagery_ = new Array(numSources);
+        /**
+         * @type {Array<number>}
+         * @private
+         */
+        _this.resolutionFactors_ = new Array(numSources);
+        /**
+         * @type {Array<number>}
+         * @private
+         */
+        _this.samplesPerPixel_;
+        /**
+         * @type {Array<Array<number>>}
+         * @private
+         */
+        _this.nodataValues_;
+        /**
+         * @type {boolean}
+         * @private
+         */
+        _this.addAlpha_ = false;
+        /**
+         * @type {Error}
+         * @private
+         */
+        _this.error_ = null;
+        _this.setKey(_this.sourceInfo_.map(function (source) { return source.url; }).join(','));
+        var self = _this;
+        var requests = new Array(numSources);
+        for (var i = 0; i < numSources; ++i) {
+            requests[i] = getImagesForSource(_this.sourceInfo_[i]);
+        }
+        Promise.all(requests)
+            .then(function (sources) {
+            self.configure_(sources);
+        })
+            .catch(function (error) {
+            self.error_ = error;
+            self.setState(State.ERROR);
+        });
+        return _this;
+    }
+    /**
+     * @return {Error} A source loading error. When the source state is `error`, use this function
+     * to get more information about the error. To debug a faulty configuration, you may want to use
+     * a listener like
+     * ```js
+     * geotiffSource.on('change', () => {
+     *   if (geotiffSource.getState() === 'error') {
+     *     console.error(geotiffSource.getError());
+     *   }
+     * });
+     * ```
+     */
+    GeoTIFFSource.prototype.getError = function () {
+        return this.error_;
+    };
+    /**
+     * Configure the tile grid based on images within the source GeoTIFFs.  Each GeoTIFF
+     * must have the same internal tiled structure.
+     * @param {Array<Array<import("geotiff/src/geotiffimage.js").GeoTIFFImage>>} sources Each source is a list of images
+     * from a single GeoTIFF.
+     * @private
+     */
+    GeoTIFFSource.prototype.configure_ = function (sources) {
+        var extent;
+        var origin;
+        var tileSizes;
+        var resolutions;
+        var samplesPerPixel = new Array(sources.length);
+        var nodataValues = new Array(sources.length);
+        var minZoom = 0;
+        var sourceCount = sources.length;
+        var _loop_1 = function (sourceIndex) {
+            var images = sources[sourceIndex];
+            var imageCount = images.length;
+            var sourceExtent = void 0;
+            var sourceOrigin = void 0;
+            var sourceTileSizes = new Array(imageCount);
+            var sourceResolutions = new Array(imageCount);
+            nodataValues[sourceIndex] = new Array(imageCount);
+            for (var imageIndex = 0; imageIndex < imageCount; ++imageIndex) {
+                var image = images[imageIndex];
+                var nodataValue = image.getGDALNoData();
+                nodataValues[sourceIndex][imageIndex] =
+                    nodataValue === null ? NaN : nodataValue;
+                var wantedSamples = this_1.sourceInfo_[sourceIndex].bands;
+                samplesPerPixel[sourceIndex] = wantedSamples
+                    ? wantedSamples.length
+                    : image.getSamplesPerPixel();
+                var level = imageCount - (imageIndex + 1);
+                if (!sourceExtent) {
+                    sourceExtent = image.getBoundingBox();
+                }
+                if (!sourceOrigin) {
+                    sourceOrigin = image.getOrigin().slice(0, 2);
+                }
+                sourceResolutions[level] = image.getResolution(images[0])[0];
+                sourceTileSizes[level] = [image.getTileWidth(), image.getTileHeight()];
+            }
+            if (!extent) {
+                extent = sourceExtent;
+            }
+            else {
+                getIntersection(extent, sourceExtent, extent);
+            }
+            if (!origin) {
+                origin = sourceOrigin;
+            }
+            else {
+                var message = "Origin mismatch for source " + sourceIndex + ", got [" + sourceOrigin + "] but expected [" + origin + "]";
+                assertEqual(origin, sourceOrigin, 0, message);
+            }
+            if (!resolutions) {
+                resolutions = sourceResolutions;
+                this_1.resolutionFactors_[sourceIndex] = 1;
+            }
+            else {
+                if (resolutions.length - minZoom > sourceResolutions.length) {
+                    minZoom = resolutions.length - sourceResolutions.length;
+                }
+                var resolutionFactor_1 = resolutions[resolutions.length - 1] /
+                    sourceResolutions[sourceResolutions.length - 1];
+                this_1.resolutionFactors_[sourceIndex] = resolutionFactor_1;
+                var scaledSourceResolutions = sourceResolutions.map(function (resolution) { return (resolution *= resolutionFactor_1); });
+                var message = "Resolution mismatch for source " + sourceIndex + ", got [" + scaledSourceResolutions + "] but expected [" + resolutions + "]";
+                assertEqual(resolutions.slice(minZoom, resolutions.length), scaledSourceResolutions, 0.005, message);
+            }
+            if (!tileSizes) {
+                tileSizes = sourceTileSizes;
+            }
+            else {
+                assertEqual(tileSizes.slice(minZoom, tileSizes.length), sourceTileSizes, 0, "Tile size mismatch for source " + sourceIndex);
+            }
+            this_1.sourceImagery_[sourceIndex] = images.reverse();
+        };
+        var this_1 = this;
+        for (var sourceIndex = 0; sourceIndex < sourceCount; ++sourceIndex) {
+            _loop_1(sourceIndex);
+        }
+        for (var i = 0, ii = this.sourceImagery_.length; i < ii; ++i) {
+            var sourceImagery = this.sourceImagery_[i];
+            while (sourceImagery.length < resolutions.length) {
+                sourceImagery.unshift(undefined);
+            }
+        }
+        if (!this.getProjection()) {
+            var firstImage = sources[0][0];
+            if (firstImage.geoKeys) {
+                var code = firstImage.geoKeys.ProjectedCSTypeGeoKey ||
+                    firstImage.geoKeys.GeographicTypeGeoKey;
+                if (code) {
+                    this.projection = getProjection("EPSG:" + code);
+                }
+            }
+        }
+        this.samplesPerPixel_ = samplesPerPixel;
+        this.nodataValues_ = nodataValues;
+        // decide if we need to add an alpha band to handle nodata
+        outer: for (var sourceIndex = 0; sourceIndex < sourceCount; ++sourceIndex) {
+            // option 1: source is configured with a nodata value
+            if (this.sourceInfo_[sourceIndex].nodata !== undefined) {
+                this.addAlpha_ = true;
+                break;
+            }
+            var values = nodataValues[sourceIndex];
+            // option 2: check image metadata for limited bands
+            var bands = this.sourceInfo_[sourceIndex].bands;
+            if (bands) {
+                for (var i = 0; i < bands.length; ++i) {
+                    if (!isNaN(values[bands[i]])) {
+                        this.addAlpha_ = true;
+                        break outer;
+                    }
+                }
+                continue;
+            }
+            // option 3: check image metadata for all bands
+            for (var imageIndex = 0; imageIndex < values.length; ++imageIndex) {
+                if (!isNaN(values[imageIndex])) {
+                    this.addAlpha_ = true;
+                    break outer;
+                }
+            }
+        }
+        var additionalBands = this.addAlpha_ ? 1 : 0;
+        this.bandCount =
+            samplesPerPixel.reduce(function (accumulator, value) {
+                accumulator += value;
+                return accumulator;
+            }, 0) + additionalBands;
+        var tileGrid = new TileGrid({
+            extent: extent,
+            minZoom: minZoom,
+            origin: origin,
+            resolutions: resolutions,
+            tileSizes: tileSizes,
+        });
+        this.tileGrid = tileGrid;
+        this.setLoader(this.loadTile_.bind(this));
+        this.setState(State.READY);
+    };
+    GeoTIFFSource.prototype.loadTile_ = function (z, x, y) {
+        var size = toSize(this.tileGrid.getTileSize(z));
+        var sourceCount = this.sourceImagery_.length;
+        var requests = new Array(sourceCount);
+        var addAlpha = this.addAlpha_;
+        var bandCount = this.bandCount;
+        var samplesPerPixel = this.samplesPerPixel_;
+        var sourceInfo = this.sourceInfo_;
+        for (var sourceIndex = 0; sourceIndex < sourceCount; ++sourceIndex) {
+            var source = sourceInfo[sourceIndex];
+            var resolutionFactor = this.resolutionFactors_[sourceIndex];
+            var pixelBounds = [
+                Math.round(x * (size[0] * resolutionFactor)),
+                Math.round(y * (size[1] * resolutionFactor)),
+                Math.round((x + 1) * (size[0] * resolutionFactor)),
+                Math.round((y + 1) * (size[1] * resolutionFactor)),
+            ];
+            var image = this.sourceImagery_[sourceIndex][z];
+            requests[sourceIndex] = image.readRasters({
+                window: pixelBounds,
+                width: size[0],
+                height: size[1],
+                samples: source.bands,
+                fillValue: source.nodata,
+                pool: getWorkerPool(),
+            });
+        }
+        var pixelCount = size[0] * size[1];
+        var dataLength = pixelCount * bandCount;
+        var nodataValues = this.nodataValues_;
+        return Promise.all(requests).then(function (sourceSamples) {
+            var data = new Uint8ClampedArray(dataLength);
+            var dataIndex = 0;
+            for (var pixelIndex = 0; pixelIndex < pixelCount; ++pixelIndex) {
+                var transparent = addAlpha;
+                for (var sourceIndex = 0; sourceIndex < sourceCount; ++sourceIndex) {
+                    var source = sourceInfo[sourceIndex];
+                    var min = source.min;
+                    if (min === undefined) {
+                        min = getMinForDataType(sourceSamples[sourceIndex][0]);
+                    }
+                    var max = source.max;
+                    if (max === undefined) {
+                        max = getMaxForDataType(sourceSamples[sourceIndex][0]);
+                    }
+                    var gain = 255 / (max - min);
+                    var bias = -min * gain;
+                    for (var sampleIndex = 0; sampleIndex < samplesPerPixel[sourceIndex]; ++sampleIndex) {
+                        var sourceValue = sourceSamples[sourceIndex][sampleIndex][pixelIndex];
+                        var value = gain * sourceValue + bias;
+                        if (!addAlpha) {
+                            data[dataIndex] = value;
+                        }
+                        else {
+                            var nodata = source.nodata;
+                            if (nodata === undefined) {
+                                var bandIndex = void 0;
+                                if (source.bands) {
+                                    bandIndex = source.bands[sampleIndex];
+                                }
+                                else {
+                                    bandIndex = sampleIndex;
+                                }
+                                nodata = nodataValues[sourceIndex][bandIndex];
+                            }
+                            if (sourceValue !== nodata) {
+                                transparent = false;
+                                data[dataIndex] = value;
+                            }
+                        }
+                        dataIndex++;
+                    }
+                }
+                if (addAlpha) {
+                    if (!transparent) {
+                        data[dataIndex] = 255;
+                    }
+                    dataIndex++;
+                }
+            }
+            return data;
+        });
+    };
+    return GeoTIFFSource;
+}(DataTile));
+export default GeoTIFFSource;
+//# sourceMappingURL=GeoTIFF.js.map
