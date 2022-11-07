@@ -1,0 +1,94 @@
+.nav-tabs {
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &.icon-top {
+    .nav-link {
+      flex-direction: column;
+    }
+  }
+
+  &.icon-right {
+    .nav-link {
+      flex-direction: row-reverse;
+    }
+  }
+
+  &.icon-bottom {
+    .nav-link {
+      flex-direction: column-reverse;
+    }
+  }
+
+  &.icon-left {
+    .nav-link {
+      flex-direction: row;
+    }
+  }
+
+  .nav-item {
+    position: relative;
+
+    .nav-link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $gray-900;
+      border: 0;
+      outline: none; // stylelint-disable declaration-property-value-disallowed-list
+      box-shadow: none;
+
+      &.active {
+        color: $primary;
+      }
+
+      &:hover,
+      &:focus {
+        --mdc-ripple-hover-opacity: 0;
+        --mdc-ripple-focus-opacity: 0;
+        --mdc-ripple-press-opacity: .2;
+        --mdc-ripple-color: #{$primary};
+
+        background-color: rgba($primary, .15);
+      }
+    }
+  }
+
+  .nav-link.active {
+    + .active-indicator {
+      opacity: 1;
+    }
+  }
+
+  .active-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: block;
+    height: 2px;
+    background: $primary;
+    @include transition(left .2s ease);
+  }
+}
+
+@each $color, $value in $theme-colors {
+  .nav-tabs.primary-#{$color} .nav-link.active,
+  .nav-tabs.base-#{$color} .nav-link:not(.active) {
+    color: $value !important; /* stylelint-disable-line declaration-no-important */
+
+    &:hover,
+    &:focus {
+      --mdc-ripple-color: #{$value};
+      background-color: rgba($value, .15);
+    }
+  }
+
+  .nav-tabs.primary-#{$color} {
+    .active-indicator {
+      background: $value;
+    }
+  }
+}
