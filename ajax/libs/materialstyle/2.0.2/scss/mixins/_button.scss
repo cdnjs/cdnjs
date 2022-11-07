@@ -1,0 +1,67 @@
+@mixin button-variant(
+  $background, $border,
+  $hover-background: darken($background, 5%), $hover-border: darken($border, 5%),
+  $active-background: darken($background, 8%), $active-border: darken($border, 8%)
+) {
+  color: color-yiq($background);
+  @include gradient-bg($background);
+
+  &:active,
+  &.active,
+  &:hover,
+  &:focus,
+  &.focus,
+  .show > &.dropdown-toggle {
+    color: color-yiq($hover-background);
+    @include gradient-bg($hover-background);
+  }
+
+  .m-ripple {
+    background: lighten($background, 20%);
+  }
+}
+
+@mixin button-outline-variant($color, $color-hover: $color, $active-background: lighten($color, 45%), $active-border: $color) {
+  color: $color;
+
+  &:active,
+  &.active,
+  &:hover,
+  &:focus,
+  &.focus,
+  .show > &.dropdown-toggle {
+    color: color-yiq($active-background, darken($color, 10%));
+    background-color: $active-background;
+    border-color: color-yiq($active-background, darken($color, 10%));
+  }
+
+  .m-ripple {
+    background: lighten($color, 20%);
+  }
+}
+
+@mixin button-text-variant($color) {
+  $active-background: rgba($color, .15);
+  color: $color;
+
+  &:active,
+  &.active,
+  &:hover,
+  &:focus,
+  &.focus,
+  .show > &.dropdown-toggle {
+    color: $color;
+    background-color: $active-background;
+  }
+
+  .m-ripple {
+    background: lighten($color, 20%);
+  }
+}
+
+@mixin button-size($padding-y, $padding-x, $font-size, $line-height, $border-radius) {
+  padding: $padding-y $padding-x;
+  @include font-size($font-size);
+  line-height: $line-height;
+  @include border-radius($border-radius, 0);
+}

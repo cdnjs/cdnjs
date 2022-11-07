@@ -1,0 +1,39 @@
+.snackbar {
+  position: fixed;
+  bottom: -20px;
+  left: 50%;
+  z-index: 1060;
+  min-width: 250px;
+  padding: 16px;
+  font: 500 16px Roboto, sans-serif;
+  color: map-get($theme-colors, "white");
+  text-align: left;
+  background-color: map-get($theme-colors, "dark");
+  border-radius: 2px;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+  opacity: 0;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1), cubic-bezier(.4, 0, .2, 1);
+  transition-duration: .3s, .3s;
+  transition-property: opacity, bottom;
+  transform: translate(-50%, 0);
+}
+
+.snackbar.show {
+  bottom: 20px;
+  opacity: 1;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1), cubic-bezier(.4, 0, .2, 1);
+  transition-duration: .2s, .3s;
+  transition-property: opacity, bottom;
+}
+
+.snackbar.snackbar-left {
+  right: auto;
+  left: 20px;
+  transform: translate(0, 0);
+}
+
+.snackbar.snackbar-right {
+  right: 20px;
+  left: auto;
+  transform: translate(0, 0);
+}

@@ -1,0 +1,92 @@
+@import "node_modules/bootstrap/scss/progress";
+
+@keyframes m-progress {
+  0% {
+    right: 100%;
+    left: -35%;
+  }
+  60% {
+    right: -90%;
+    left: 100%;
+  }
+  100% {
+    right: -90%;
+    left: 100%;
+  }
+}
+
+@keyframes m-progress-short {
+  0% {
+    right: 100%;
+    left: -200%;
+  }
+  60% {
+    right: -8%;
+    left: 107%;
+  }
+  100% {
+    right: -8%;
+    left: 107%;
+  }
+}
+
+.progress {
+  position: relative;
+  height: 5px;
+  border-radius: 0;
+
+  .progress-bar-striped {
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, .4) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .4) 50%, rgba(255, 255, 255, .4) 75%, transparent 75%, transparent);
+  }
+
+  .m-progress {
+    &::before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      content: "";
+      background-color: inherit;
+      animation: m-progress 2.1s cubic-bezier(.65, .815, .735, .395) infinite;
+      will-change: left, right;
+    }
+    &::after {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      content: "";
+      background-color: inherit;
+      animation: m-progress-short 2.1s cubic-bezier(.165, .84, .44, 1) infinite;
+      animation-delay: 1.15s;
+      will-change: left, right;
+    }
+  }
+}
+
+@keyframes m-rainbow {
+  from {
+    left: 50%;
+    z-index: 100;
+    width: 0;
+  }
+  50% {
+    left: 0;
+    z-index: 10;
+    width: 100%;
+  }
+  to {
+    left: 0;
+    width: 100%;
+  }
+}
+
+.m-bar {
+  position: absolute;
+  left: 50%;
+  display: inline;
+  width: 0;
+  height: 100%;
+  text-align: center;
+  content: "";
+}

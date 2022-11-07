@@ -1,0 +1,109 @@
+@each $color, $value in $theme-colors {
+  .nav-tabs.accent-#{$color} .nav-link.active,
+  .nav-tabs.primary-#{$color} .nav-link:not(.active) {
+    color: $value !important; /* stylelint-disable-line declaration-no-important */
+  }
+
+  .nav-tabs.accent-#{$color} {
+    .active-indicator,
+    .m-ripple {
+      background: $value;
+    }
+  }
+}
+
+.nav-tabs {
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  visibility: hidden;
+
+  &.icon-top {
+    .nav-link {
+      flex-direction: column;
+    }
+  }
+
+  &.icon-right {
+    .nav-link {
+      flex-direction: row-reverse;
+    }
+  }
+
+  &.icon-bottom {
+    .nav-link {
+      flex-direction: column-reverse;
+    }
+  }
+
+  &.icon-left {
+    .nav-link {
+      flex-direction: row;
+    }
+  }
+
+  .nav-item {
+    position: relative;
+    margin: 0;
+
+    .nav-link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-family: Roboto, sans-serif;
+      font-size: .875rem;
+      font-weight: 500;
+      line-height: 2.25rem;
+      color: map-get($material-colors, "grey-900");
+      text-transform: uppercase;
+      letter-spacing: .08929em;
+      border: 0;
+      outline: none;
+      box-shadow: none;
+
+      &.active {
+        color: theme-color("primary");
+        background: transparent;
+        border: 0;
+      }
+
+      &.focus,
+      &:focus {
+        background-color: map-get($material-colors, "grey-100");
+      }
+
+      .material-icons {
+        margin: 5px;
+      }
+    }
+    &:hover {
+      background-color: map-get($material-colors, "grey-200");
+      border: 0;
+      border-radius: 2px;
+    }
+  }
+
+  .nav-link.active {
+    + .active-indicator {
+      opacity: 1;
+    }
+  }
+
+  .active-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    display: block;
+    height: 2px;
+    background: theme-color("primary");
+    transition: left .2s ease;
+  }
+
+  .m-ripple {
+    background: theme-color("primary");
+  }
+}

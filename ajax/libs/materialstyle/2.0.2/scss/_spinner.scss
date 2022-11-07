@@ -1,0 +1,76 @@
+@import "node_modules/bootstrap/scss/spinners";
+
+@each $color, $value in $theme-colors {
+  .m-spinner.spinner-#{$color} {
+    .animate-loader .path {
+      animation: dash 1.5s ease-in-out infinite;
+      stroke: $value;
+    }
+  }
+}
+
+@keyframes rotate {
+  100%{
+    transform: rotate(360deg);
+  }
+}
+@keyframes dash {
+  0%{
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50%{
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35;
+  }
+  100%{
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124;
+  }
+}
+@keyframes color {
+  100%,
+  0% {
+    stroke: theme-color("red");
+  }
+  40% {
+    stroke: theme-color("yellow");
+  }
+  66% {
+    stroke: theme-color("green");
+  }
+  80%,
+  90% {
+    stroke: theme-color("blue");
+  }
+}
+
+.m-spinner .animate-loader {
+  position: relative;
+  width: 50px;
+  border-radius: 50%;
+
+  &::before {
+    display: block;
+    padding-top: 100%;
+    content: "";
+  }
+  .circular {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    transform-origin: center center;
+    animation: rotate 2s linear infinite;
+  }
+  .path {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+    animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+  }
+}
