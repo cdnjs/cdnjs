@@ -1,0 +1,130 @@
+export default RBush;
+export type Entry = {
+    /**
+     * MinX.
+     */
+    minX: number;
+    /**
+     * MinY.
+     */
+    minY: number;
+    /**
+     * MaxX.
+     */
+    maxX: number;
+    /**
+     * MaxY.
+     */
+    maxY: number;
+    /**
+     * Value.
+     */
+    value?: any;
+};
+/**
+ * @typedef {Object} Entry
+ * @property {number} minX MinX.
+ * @property {number} minY MinY.
+ * @property {number} maxX MaxX.
+ * @property {number} maxY MaxY.
+ * @property {Object} [value] Value.
+ */
+/**
+ * @classdesc
+ * Wrapper around the RBush by Vladimir Agafonkin.
+ * See https://github.com/mourner/rbush.
+ *
+ * @template T
+ */
+declare class RBush<T> {
+    /**
+     * @param {number} [opt_maxEntries] Max entries.
+     */
+    constructor(opt_maxEntries?: number | undefined);
+    /**
+     * @private
+     */
+    private rbush_;
+    /**
+     * A mapping between the objects added to this rbush wrapper
+     * and the objects that are actually added to the internal rbush.
+     * @private
+     * @type {Object<string, Entry>}
+     */
+    private items_;
+    /**
+     * Insert a value into the RBush.
+     * @param {import("../extent.js").Extent} extent Extent.
+     * @param {T} value Value.
+     */
+    insert(extent: number[], value: T): void;
+    /**
+     * Bulk-insert values into the RBush.
+     * @param {Array<import("../extent.js").Extent>} extents Extents.
+     * @param {Array<T>} values Values.
+     */
+    load(extents: number[][], values: T[]): void;
+    /**
+     * Remove a value from the RBush.
+     * @param {T} value Value.
+     * @return {boolean} Removed.
+     */
+    remove(value: T): boolean;
+    /**
+     * Update the extent of a value in the RBush.
+     * @param {import("../extent.js").Extent} extent Extent.
+     * @param {T} value Value.
+     */
+    update(extent: number[], value: T): void;
+    /**
+     * Return all values in the RBush.
+     * @return {Array<T>} All.
+     */
+    getAll(): T[];
+    /**
+     * Return all values in the given extent.
+     * @param {import("../extent.js").Extent} extent Extent.
+     * @return {Array<T>} All in extent.
+     */
+    getInExtent(extent: number[]): T[];
+    /**
+     * Calls a callback function with each value in the tree.
+     * If the callback returns a truthy value, this value is returned without
+     * checking the rest of the tree.
+     * @param {function(T): *} callback Callback.
+     * @return {*} Callback return value.
+     */
+    forEach(callback: (arg0: T) => any): any;
+    /**
+     * Calls a callback function with each value in the provided extent.
+     * @param {import("../extent.js").Extent} extent Extent.
+     * @param {function(T): *} callback Callback.
+     * @return {*} Callback return value.
+     */
+    forEachInExtent(extent: number[], callback: (arg0: T) => any): any;
+    /**
+     * @param {Array<T>} values Values.
+     * @param {function(T): *} callback Callback.
+     * @private
+     * @return {*} Callback return value.
+     */
+    private forEach_;
+    /**
+     * @return {boolean} Is empty.
+     */
+    isEmpty(): boolean;
+    /**
+     * Remove all values from the RBush.
+     */
+    clear(): void;
+    /**
+     * @param {import("../extent.js").Extent} [opt_extent] Extent.
+     * @return {import("../extent.js").Extent} Extent.
+     */
+    getExtent(opt_extent?: number[] | undefined): number[];
+    /**
+     * @param {RBush} rbush R-Tree.
+     */
+    concat(rbush: RBush<any>): void;
+}
+//# sourceMappingURL=RBush.d.ts.map
