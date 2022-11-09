@@ -1,0 +1,1 @@
+jQuery.fn.DataTable.ext.type.search.phoneNumber=function(e){return e?"string"==typeof e?e+e.replace(/[ \-]/g,""):e:""};

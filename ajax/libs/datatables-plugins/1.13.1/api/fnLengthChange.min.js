@@ -1,0 +1,1 @@
+jQuery.fn.dataTableExt.oApi.fnLengthChange=function(a,i){a._iDisplayLength=i,a.oApi._fnCalculateEnd(a),a._iDisplayEnd==a.aiDisplay.length&&(a._iDisplayStart=a._iDisplayEnd-a._iDisplayLength,a._iDisplayStart<0&&(a._iDisplayStart=0)),-1==a._iDisplayLength&&(a._iDisplayStart=0),a.oApi._fnDraw(a),a.aanFeatures.l&&$("select",a.aanFeatures.l).val(i)};

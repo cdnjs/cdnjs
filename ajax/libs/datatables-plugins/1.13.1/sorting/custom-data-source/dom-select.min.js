@@ -1,0 +1,1 @@
+$.fn.dataTable.ext.order["dom-select"]=function(e,n){return this.api().column(n,{order:"index"}).nodes().map(function(e,n){return $("select",e).val()})};
