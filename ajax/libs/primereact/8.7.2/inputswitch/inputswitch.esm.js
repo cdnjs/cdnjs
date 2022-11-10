@@ -1,0 +1,204 @@
+import * as React from 'react';
+import { Tooltip } from 'primereact/tooltip';
+import { ObjectUtils, DomHandler, classNames } from 'primereact/utils';
+
+function _extends() {
+  _extends = Object.assign ? Object.assign.bind() : function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+  return _extends.apply(this, arguments);
+}
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+function _iterableToArrayLimit(arr, i) {
+  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
+
+  if (_i == null) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+
+  var _s, _e;
+
+  try {
+    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
+
+var InputSwitch = /*#__PURE__*/React.memo( /*#__PURE__*/React.forwardRef(function (props, ref) {
+  var _React$useState = React.useState(false),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      focusedState = _React$useState2[0],
+      setFocusedState = _React$useState2[1];
+
+  var elementRef = React.useRef(null);
+  var inputRef = React.useRef(props.inputRef);
+  var checked = props.checked === props.trueValue;
+
+  var onClick = function onClick(event) {
+    if (props.disabled) {
+      return;
+    }
+
+    toggle(event);
+    DomHandler.focus(inputRef.current);
+    event.preventDefault();
+  };
+
+  var toggle = function toggle(event) {
+    if (props.onChange) {
+      var value = checked ? props.falseValue : props.trueValue;
+      props.onChange({
+        originalEvent: event,
+        value: value,
+        stopPropagation: function stopPropagation() {},
+        preventDefault: function preventDefault() {},
+        target: {
+          name: props.name,
+          id: props.id,
+          value: value
+        }
+      });
+    }
+  };
+
+  var onFocus = function onFocus(event) {
+    setFocusedState(true);
+    props.onFocus && props.onFocus(event);
+  };
+
+  var onBlur = function onBlur(event) {
+    setFocusedState(false);
+    props.onBlur && props.onBlur(event);
+  };
+
+  React.useImperativeHandle(ref, function () {
+    return {
+      props: props,
+      getElement: function getElement() {
+        return elementRef.current;
+      },
+      getInput: function getInput() {
+        return elementRef.current;
+      }
+    };
+  });
+  React.useEffect(function () {
+    ObjectUtils.combinedRefs(inputRef, props.inputRef);
+  }, [inputRef, props.inputRef]);
+  var hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+  var otherProps = ObjectUtils.findDiffKeys(props, InputSwitch.defaultProps);
+  var ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
+  var className = classNames('p-inputswitch p-component', {
+    'p-inputswitch-checked': checked,
+    'p-disabled': props.disabled,
+    'p-focus': focusedState
+  }, props.className);
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", _extends({
+    ref: elementRef,
+    id: props.id,
+    className: className,
+    style: props.style
+  }, otherProps, {
+    onClick: onClick,
+    role: "checkbox",
+    "aria-checked": checked
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "p-hidden-accessible"
+  }, /*#__PURE__*/React.createElement("input", _extends({
+    ref: inputRef,
+    type: "checkbox",
+    id: props.inputId,
+    name: props.name,
+    checked: checked,
+    onChange: toggle,
+    onFocus: onFocus,
+    onBlur: onBlur,
+    disabled: props.disabled,
+    role: "switch",
+    tabIndex: props.tabIndex,
+    "aria-checked": checked
+  }, ariaProps))), /*#__PURE__*/React.createElement("span", {
+    className: "p-inputswitch-slider"
+  })), hasTooltip && /*#__PURE__*/React.createElement(Tooltip, _extends({
+    target: elementRef,
+    content: props.tooltip
+  }, props.tooltipOptions)));
+}));
+InputSwitch.displayName = 'InputSwitch';
+InputSwitch.defaultProps = {
+  __TYPE: 'InputSwitch',
+  checked: false,
+  className: null,
+  disabled: false,
+  falseValue: false,
+  id: null,
+  inputId: null,
+  inputRef: null,
+  name: null,
+  onBlur: null,
+  onChange: null,
+  onFocus: null,
+  style: null,
+  tabIndex: null,
+  tooltip: null,
+  tooltipOptions: null,
+  trueValue: true
+};
+
+export { InputSwitch };
