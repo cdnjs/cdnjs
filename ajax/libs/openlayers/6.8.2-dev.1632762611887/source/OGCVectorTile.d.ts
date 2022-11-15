@@ -1,0 +1,122 @@
+export default OGCVectorTile;
+export type Options = {
+    /**
+     * URL to the OGC Vector Tileset endpoint.
+     */
+    url: string;
+    /**
+     * A lookup of values to use in the tile URL template.  The `{tileMatrix}`
+     * (zoom level), `{tileRow}`, and `{tileCol}` variables in the URL will always be provided by the source.
+     */
+    context?: any;
+    /**
+     * Feature parser for tiles.
+     */
+    format: import("../format/Feature.js").default;
+    /**
+     * The content type for the tiles (e.g. "application/vnd.mapbox-vector-tile").  If not provided,
+     * the source will try to find a link with rel="item" that uses a vector type supported by the configured format.
+     */
+    mediaType?: string;
+    /**
+     * Attributions.
+     */
+    attributions?: string | string[] | ((arg0: import("../PluggableMap.js").FrameState) => string | string[]);
+    /**
+     * Attributions are collapsible.
+     */
+    attributionsCollapsible?: boolean;
+    /**
+     * Initial tile cache size. Will auto-grow to hold at least twice the number of tiles in the viewport.
+     */
+    cacheSize?: number;
+    /**
+     * This source may have overlapping geometries. Setting this
+     * to `false` (e.g. for sources with polygons that represent administrative
+     * boundaries or TopoJSON sources) allows the renderer to optimise fill and
+     * stroke operations.
+     */
+    overlaps?: boolean;
+    /**
+     * Projection of the tile grid.
+     */
+    projection?: string | import("../proj/Projection.js").default | undefined;
+    /**
+     * Class used to instantiate image tiles.
+     * Default is {@link module:ol/VectorTile}.
+     */
+    tileClass?: typeof import("../VectorTile.js").default;
+    /**
+     * A duration for tile opacity
+     * transitions in milliseconds. A duration of 0 disables the opacity transition.
+     */
+    transition?: number;
+    /**
+     * Whether to wrap the world horizontally.
+     * When set to `false`, only one world
+     * will be rendered. When set to `true`, tiles will be wrapped horizontally to
+     * render multiple worlds.
+     */
+    wrapX?: boolean;
+    /**
+     * Choose whether to use tiles with a higher or lower zoom level when between integer
+     * zoom levels. See {@link module:ol/tilegrid/TileGrid~TileGrid#getZForResolution}.
+     */
+    zDirection?: number | ((arg0: number, arg1: number, arg2: number) => number);
+};
+/**
+ * @typedef {Object} Options
+ * @property {string} url URL to the OGC Vector Tileset endpoint.
+ * @property {Object} [context] A lookup of values to use in the tile URL template.  The `{tileMatrix}`
+ * (zoom level), `{tileRow}`, and `{tileCol}` variables in the URL will always be provided by the source.
+ * @property {import("../format/Feature.js").default} format Feature parser for tiles.
+ * @property {string} [mediaType] The content type for the tiles (e.g. "application/vnd.mapbox-vector-tile").  If not provided,
+ * the source will try to find a link with rel="item" that uses a vector type supported by the configured format.
+ * @property {import("./Source.js").AttributionLike} [attributions] Attributions.
+ * @property {boolean} [attributionsCollapsible=true] Attributions are collapsible.
+ * @property {number} [cacheSize] Initial tile cache size. Will auto-grow to hold at least twice the number of tiles in the viewport.
+ * @property {boolean} [overlaps=true] This source may have overlapping geometries. Setting this
+ * to `false` (e.g. for sources with polygons that represent administrative
+ * boundaries or TopoJSON sources) allows the renderer to optimise fill and
+ * stroke operations.
+ * @property {import("../proj.js").ProjectionLike} [projection='EPSG:3857'] Projection of the tile grid.
+ * @property {typeof import("../VectorTile.js").default} [tileClass] Class used to instantiate image tiles.
+ * Default is {@link module:ol/VectorTile}.
+ * @property {number} [transition] A duration for tile opacity
+ * transitions in milliseconds. A duration of 0 disables the opacity transition.
+ * @property {boolean} [wrapX=true] Whether to wrap the world horizontally.
+ * When set to `false`, only one world
+ * will be rendered. When set to `true`, tiles will be wrapped horizontally to
+ * render multiple worlds.
+ * @property {number|import("../array.js").NearestDirectionFunction} [zDirection=1]
+ * Choose whether to use tiles with a higher or lower zoom level when between integer
+ * zoom levels. See {@link module:ol/tilegrid/TileGrid~TileGrid#getZForResolution}.
+ */
+/**
+ * @classdesc
+ * Layer source for map tiles from an [OGC API - Tiles](https://ogcapi.ogc.org/tiles/) service that provides "vector" type tiles.
+ * The service must conform to at least the core (http://www.opengis.net/spec/ogcapi-tiles-1/1.0/conf/core)
+ * and tileset (http://www.opengis.net/spec/ogcapi-tiles-1/1.0/conf/tileset) conformance classes.
+ *
+ * Vector tile sets may come in a variety of formats (e.g. GeoJSON, MVT).  The `format` option is used to determine
+ * which of the advertised media types is used.  If you need to force the use of a particular media type, you can
+ * provide the `mediaType` option.
+ */
+declare class OGCVectorTile extends VectorTile {
+    /**
+     * @param {Options} options OGC vector tile options.
+     */
+    constructor(options: Options);
+    /**
+     * @param {import("./ogcTileUtil.js").TileSetInfo} tileSetInfo Tile set info.
+     * @private
+     */
+    private handleTileSetInfo_;
+    /**
+     * @private
+     * @param {Error} error The error.
+     */
+    private handleError_;
+}
+import VectorTile_1 from "./VectorTile.js";
+//# sourceMappingURL=OGCVectorTile.d.ts.map
