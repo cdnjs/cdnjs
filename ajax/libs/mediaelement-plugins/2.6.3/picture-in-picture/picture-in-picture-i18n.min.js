@@ -1,0 +1,1 @@
+"use strict";void 0!==mejs.i18n.es&&(mejs.i18n.es["mejs.picture-in-pictureText"]="Picture in picture"),void 0!==mejs.i18n.de&&(mejs.i18n.de["mejs.picture-in-pictureText"]="Bild in Bild"),void 0!==mejs.i18n.fr&&(mejs.i18n.fr["mejs.picture-in-pictureText"]="Image dans l’image"),void 0!==mejs.i18n.es&&(mejs.i18n.es["mejs.picture-in-pictureText"]="Imagen dentro de imagen");
