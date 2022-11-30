@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("easyimage","fa",{commands:{fullImage:"تصویر کامل",sideImage:"تصویر جانبی",altText:"تغییر متن جایگزین تصویر",upload:"آپلود تصویر"},uploadFailed:"به علت خطای شبکه، تصویر شما نمی‌تواند آپلود شود."});

@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("easyimage","hu",{commands:{fullImage:"Teljes méretű kép",sideImage:"Oldalsó kép",altText:"Alternatív szöveg változtatása",upload:"Fotó feltöltése"},uploadFailed:"A képet nem lehet feltölteni hálózati hiba miatt."});
