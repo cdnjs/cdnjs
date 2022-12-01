@@ -1,0 +1,1 @@
+define("vs/base/common/worker/simpleWorker.nls.de",{"vs/base/common/platform":["_"]});
