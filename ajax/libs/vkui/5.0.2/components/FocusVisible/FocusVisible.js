@@ -1,0 +1,17 @@
+import * as React from "react";
+import { classNamesString } from "../../lib/classNames";
+/**
+ * @see https://vkcom.github.io/VKUI/#/FocusVisible
+ */
+export var FocusVisible = function FocusVisible(_ref) {
+  var mode = _ref.mode;
+  return /*#__PURE__*/React.createElement("span", {
+    "aria-hidden": "true",
+    className: classNamesString("vkuiFocusVisible", styles["FocusVisible--mode-".concat(mode)])
+  });
+};
+var styles = {
+  "FocusVisible--mode-outside": "vkuiFocusVisible--mode-outside",
+  "FocusVisible--mode-inside": "vkuiFocusVisible--mode-inside"
+};
+//# sourceMappingURL=FocusVisible.js.map
