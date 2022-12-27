@@ -1,0 +1,104 @@
+
+:root {
+}
+
+/*~
+  name: Toast
+  category: Toast
+  markup: |
+    <div class="toast">
+      <div class="toast__message">Message Message Message Message Message Message</div>
+      <button class="toast__button">ACTION</button>
+    </div>
+*/
+
+.toast {
+
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+
+  position: absolute;
+  z-index: 2;
+  left: 8px;
+  right: 8px;
+  bottom: 0;
+  margin: 8px 0;
+  border-radius: 8px;
+  background-color: var(--toast-background-color);
+  display: flex;
+  min-height: 48px;
+  line-height: 1.5;
+  box-sizing: border-box;
+  padding: 16px 16px;
+}
+
+.toast__message {
+  font-size: 14px;
+  color: var(--toast-text-color);
+  flex-grow: 1;
+  text-align: left;
+  margin: 0 16px 0 0;
+  white-space: normal;
+}
+
+.toast__button {
+  font-size: 14px;
+  color: var(--toast-button-text-color);
+  flex-grow: 0;
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  cursor: default;
+  text-transform: uppercase;
+}
+
+.toast__button:focus {
+  outline: none;
+}
+
+.toast__button:active {
+  opacity: 0.4;
+}
+
+/*~
+  name: Material Toast
+  category: Toast
+  markup: |
+    <div class="toast toast--material">
+      <div class="toast__message toast--material__message">Message Message Message Message Message Message</div>
+      <button class="toast__button toast--material__button">ACTION</button>
+    </div>
+*/
+
+.toast--material {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  background-color: var(--material-toast-background-color);
+  border-radius: 0;
+  padding: 16px 24px;
+}
+
+.toast--material__message {
+
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: var(--material-font-weight);
+
+  margin: 0 24px 0 0;
+}
+
+.toast--material__button {
+
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: var(--material-font-weight);
+
+  color: var(--material-toast-button-text-color);
+}
