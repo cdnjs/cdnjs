@@ -1,0 +1,589 @@
+
+:root {
+  --tabbar-button-color: var(--tabbar-text-color); /* Text color */
+  --tabbar-active-color: var(--tabbar-highlight-text-color); /* Text color active */
+  --material-tabbar-current-color: var(--material-tabbar-highlight-text-color);
+  --tabbar-active-border-top: none;
+  --tabbar-focus-border-top: none;
+  --tabbar-height: 49px;
+  --tabbar-button-line-height: 49px;
+  --tabbar-button-border: none;
+  --tabbar-active-box-shadow: none;
+  --tabbar-button-focus-box-shadow: none;
+  --tabbar-border-top: 1px solid var(--tabbar-border-color);
+}
+
+/*~
+  name: Icon Tabbar
+  category: Tabbar
+  elements: ons-tabbar ons-tab
+  markup: |
+    <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
+    <div class="tabbar">
+      <label class="tabbar__item">
+        <input type="radio" name="tabbar-a" checked="checked">
+        <button class="tabbar__button">
+          <i class="tabbar__icon ion-ios-square"></i>
+          <div class="tabbar__label">One</div>
+        </button>
+      </label>
+
+      <label class="tabbar__item">
+        <input type="radio" name="tabbar-a">
+        <button class="tabbar__button">
+          <i class="tabbar__icon ion-ios-radio-button-on"></i>
+          <div class="tabbar__label">Two</div>
+        </button>
+      </label>
+
+      <label class="tabbar__item">
+        <input type="radio" name="tabbar-a">
+        <button class="tabbar__button">
+          <i class="tabbar__icon ion-ios-star"></i>
+          <div class="tabbar__label">Three</div>
+        </button>
+      </label>
+    </div>
+*/
+
+/*~
+  name: Tabbar
+  category: Tabbar
+  elements: ons-tabbar ons-tab
+  markup: |
+    <div class="tabbar">
+      <label class="tabbar__item">
+        <input type="radio" name="tabbar-c" checked="checked">
+        <button class="tabbar__button">
+          <div class="tabbar__label">One</div>
+        </button>
+      </label>
+
+      <label class="tabbar__item">
+        <input type="radio" name="tabbar-c">
+        <button class="tabbar__button">
+          <div class="tabbar__label">Two</div>
+        </button>
+      </label>
+
+      <label class="tabbar__item">
+        <input type="radio" name="tabbar-c">
+        <button class="tabbar__button">
+          <div class="tabbar__label">Three</div>
+        </button>
+      </label>
+    </div>
+*/
+
+.tabbar {
+
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
+  height: var(--tabbar-height);
+  background-color: var(--tabbar-background-color);
+  border-top: var(--tabbar-border-top);
+  width: 100%;
+}
+
+/* @media (--retina-query) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .tabbar {
+    border-top: none;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-image: linear-gradient(180deg, var(--tabbar-border-color), var(--tabbar-border-color) 50%, transparent 50%);
+  }
+}
+
+.tabbar__item {
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+
+  /* mixin: hide-input-parent */
+  position: relative;
+
+  flex-grow: 1;
+  flex-basis: 0;
+  width: auto;
+  border-radius: 0;
+}
+
+.tabbar__item > input {
+  /* mixin: hide-input */
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  z-index: 1;
+  vertical-align: top;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  appearance: none;
+}
+
+.tabbar__button {
+  /* mixin: reset-font */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+
+  /* mixin: reset-base */
+  margin: 0;
+  font: inherit;
+  background: transparent;
+  border: none;
+
+  /* mixin: reset-cursor */
+  cursor: default;
+  user-select: none;
+
+  /* mixin: ellipsis */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  padding: 0;
+  height: var(--tabbar-button-line-height);
+  letter-spacing: 0;
+  color: var(--tabbar-button-color);
+  vertical-align: top;
+  background-color: transparent;
+  border-top: var(--tabbar-button-border);
+  width: 100%;
+  font-weight: var(--font-weight);
+  line-height: var(--tabbar-button-line-height);
+}
+
+/* @media (--retina-query) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .tabbar__button {
+    border-top: none;
+  }
+}
+
+.tabbar__icon {
+  font-size: 24px;
+  padding: 0;
+  margin: 0;
+  line-height: 26px;
+  display: block !important; /* stylelint-disable-line declaration-no-important */
+  height: 28px;
+}
+
+.tabbar__label {
+
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+
+  display: inline-block;
+}
+
+.tabbar__badge.notification {
+  vertical-align: text-bottom;
+  top: -1px;
+  margin-left: 5px;
+  z-index: 10;
+  font-size: 12px;
+  height: 16px;
+  min-width: 16px;
+  line-height: 16px;
+  border-radius: 8px;
+}
+
+.tabbar__icon ~ .tabbar__badge.notification {
+  position: absolute;
+  top: 5px;
+  margin-left: 0;
+}
+
+.tabbar__icon + .tabbar__label {
+  display: block;
+  font-size: 10px;
+  line-height: 1;
+  margin: 0;
+  font-weight: var(--font-weight);
+}
+
+.tabbar__label:first-child {
+  font-size: 16px;
+  line-height: var(--tabbar-button-line-height);
+  margin: 0;
+  padding: 0;
+}
+
+:checked + .tabbar__button {
+  color: var(--tabbar-active-color);
+  background-color: transparent;
+  box-shadow: var(--tabbar-active-box-shadow);
+  border-top: var(--tabbar-active-border-top);
+}
+
+.tabbar__button:disabled {
+  /* mixin: disabled */
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+.tabbar__button:focus {
+  z-index: 1;
+  border-top: var(--tabbar-focus-border-top);
+  box-shadow: var(--tabbar-button-focus-box-shadow);
+  outline: 0;
+}
+
+.tabbar__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: var(--tabbar-height);
+  z-index: 0;
+}
+
+.tabbar--autogrow .tabbar__item {
+  flex-basis: auto;
+}
+
+/*~
+  name: Icon Only Tabbar
+  category: Tabbar
+  elements: ons-tabbar ons-tab
+  markup: |
+    <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
+    <div class="tabbar">
+      <label class="tabbar__item">
+        <input type="radio" name="tabbar-b" checked="checked">
+        <button class="tabbar__button">
+          <i class="tabbar__icon ion-ios-square"></i>
+        </button>
+      </label>
+
+      <label class="tabbar__item">
+        <input type="radio" name="tabbar-b">
+        <button class="tabbar__button">
+          <i class="tabbar__icon ion-ios-radio-button-on"></i>
+        </button>
+      </label>
+
+      <label class="tabbar__item">
+        <input type="radio" name="tabbar-b">
+        <button class="tabbar__button">
+          <i class="tabbar__icon ion-ios-star"></i>
+        </button>
+      </label>
+
+    </div>
+*/
+
+/*~
+  name: Top Tabbar
+  category: Tabbar
+  elements: ons-tabbar ons-tab
+  markup: |
+    <div class="tabbar tabbar--top">
+      <label class="tabbar__item">
+        <input type="radio" name="top-tabbar-a" checked="checked">
+        <button class="tabbar__button">
+          <i class="tabbar__icon ion-ios-square"></i>
+        </button>
+      </label>
+
+      <label class="tabbar__item">
+        <input type="radio" name="top-tabbar-a">
+        <button class="tabbar__button">
+          <i class="tabbar__icon ion-ios-radio-button-on"></i>
+        </button>
+      </label>
+
+      <label class="tabbar__item">
+        <input type="radio" name="top-tabbar-a">
+        <button class="tabbar__button">
+          <i class="tabbar__icon ion-ios-star"></i>
+        </button>
+      </label>
+    </div>
+*/
+
+.tabbar--top {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: auto;
+  border-top: none;
+  border-bottom: var(--tabbar-border-top);
+}
+
+/* @media (--retina-query) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .tabbar--top {
+    border-bottom: none;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-image: linear-gradient(0deg, var(--tabbar-border-color), var(--tabbar-border-color) 50%, transparent 50%);
+  }
+}
+
+.tabbar--top__content {
+  top: var(--tabbar-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+}
+
+/*~
+  name: Bordered Top Tabbar
+  category: Tabbar
+  elements: ons-tabbar ons-tab
+  markup: |
+    <div class="tabbar tabbar--top tabbar--top-border">
+      <label class="tabbar__item tabbar--top-border__item">
+        <input type="radio" name="top-tabbar-b" checked="checked">
+        <button class="tabbar__button tabbar--top-border__button">
+          Home
+        </button>
+      </label>
+
+      <label class="tabbar__item tabbar--top-border__item">
+        <input type="radio" name="top-tabbar-b">
+        <button class="tabbar__button tabbar--top-border__button">
+          Comments
+        </button>
+      </label>
+
+      <label class="tabbar__item tabbar--top-border__item">
+        <input type="radio" name="top-tabbar-b">
+        <button class="tabbar__button tabbar--top-border__button">
+          Activity
+        </button>
+      </label>
+    </div>
+*/
+
+/*~
+  name: Material Tabbar
+  category: Tabbar
+  elements: ons-tabbar ons-tab
+  markup: |
+    <div class="tabbar tabbar--top tabbar--material">
+      <label class="tabbar__item tabbar--material__item">
+        <input type="radio" name="tabbar-material-a" checked="checked">
+        <button class="tabbar__button tabbar--material__button">
+          Music
+        </button>
+      </label>
+
+      <label class="tabbar__item tabbar--material__item">
+        <input type="radio" name="tabbar-material-a">
+        <button class="tabbar__button tabbar--material__button">
+          Movies
+        </button>
+      </label>
+
+      <label class="tabbar__item tabbar--material__item">
+        <input type="radio" name="tabbar-material-a">
+        <button class="tabbar__button tabbar--material__button">
+          Books
+        </button>
+      </label>
+
+      <label class="tabbar__item tabbar--material__item">
+        <input type="radio" name="tabbar-material-a">
+        <button class="tabbar__button tabbar--material__button">
+          Games
+        </button>
+      </label>
+
+    </div>
+*/
+
+.tabbar--top-border__button {
+  background-color: transparent;
+  border-bottom: 4px solid transparent;
+}
+
+:checked + .tabbar--top-border__button {
+  background-color: transparent;
+  border-bottom: 4px solid var(--tabbar-active-color);
+}
+
+.tabbar__border {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 4px;
+  background-color: var(--tabbar-active-color);
+}
+
+.tabbar--material {
+  background: none;
+  background-color: var(--material-tabbar-background-color);
+  border-bottom-width: 0;
+  box-shadow:
+    0 4px 2px -2px rgba(0, 0, 0, 0.14),
+    0 3px 5px -2px rgba(0, 0, 0, 0.12),
+    0 5px 1px -4px rgba(0, 0, 0, 0.2);
+}
+
+.tabbar--material__button {
+  background-color: transparent;
+  color: var(--material-tabbar-text-color);
+  text-transform: uppercase;
+  font-size: 14px;
+
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: var(--material-font-weight);
+}
+
+.tabbar--material__button:after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  position: absolute;
+  margin-top: -2px;
+  background-color: var(--material-tabbar-current-color);
+}
+
+:checked + .tabbar--material__button:after {
+  width: 100%;
+  transition: width 0.2s ease-in-out;
+}
+
+:checked + .tabbar--material__button {
+  background-color: transparent;
+  color: var(--material-tabbar-current-color);
+}
+
+.tabbar--material__item:not([ripple]):active {
+  background-color: var(--material-tabbar-highlight-color);
+}
+
+.tabbar--material__border {
+  height: 2px;
+  background-color: var(--material-tabbar-current-color);
+}
+
+/*~
+  name: Material Tabbar (Icon only)
+  category: Tabbar
+  elements: ons-tabbar ons-tab
+  markup: |
+    <div class="tabbar tabbar--top tabbar--material">
+      <label class="tabbar__item tabbar--material__item">
+        <input type="radio" name="tabbar-material-b" checked="checked">
+        <button class="tabbar__button tabbar--material__button">
+          <i class="tabbar__icon tabbar--material__icon zmdi zmdi-phone"></i>
+        </button>
+      </label>
+
+      <label class="tabbar__item tabbar--material__item">
+        <input type="radio" name="tabbar-material-b">
+        <button class="tabbar__button tabbar--material__button">
+          <i class="tabbar__icon tabbar--material__icon zmdi zmdi-favorite"></i>
+        </button>
+      </label>
+
+      <label class="tabbar__item tabbar--material__item">
+        <input type="radio" name="tabbar-material-b">
+        <button class="tabbar__button tabbar--material__button">
+          <i class="tabbar__icon tabbar--material__icon zmdi zmdi-pin-account"></i>
+        </button>
+      </label>
+    </div>
+*/
+
+.tabbar--material__icon {
+  font-size: 22px !important; /* stylelint-disable-line declaration-no-important */
+  line-height: 36px;
+}
+
+/*~
+  name: Material Tabbar (Icon and Label)
+  category: Tabbar
+  elements: ons-tabbar ons-tab
+  markup: |
+    <div class="tabbar tabbar--top tabbar--material">
+      <label class="tabbar__item tabbar--material__item">
+        <input type="radio" name="tabbar-material-c" checked="checked">
+        <button class="tabbar__button tabbar--material__button">
+          <i class="tabbar__icon tabbar--material__icon zmdi zmdi-phone"></i>
+          <div class="tabbar__label tabbar--material__label">Call</div>
+        </button>
+      </label>
+
+      <label class="tabbar__item tabbar--material__item">
+        <input type="radio" name="tabbar-material-c">
+        <button class="tabbar__button tabbar--material__button">
+          <i class="tabbar__icon tabbar--material__icon zmdi zmdi-favorite"></i>
+          <div class="tabbar__label tabbar--material__label">Favorites</div>
+        </button>
+      </label>
+
+      <label class="tabbar__item tabbar--material__item">
+        <input type="radio" name="tabbar-material-c">
+        <button class="tabbar__button tabbar--material__button">
+          <i class="tabbar__icon tabbar--material__icon zmdi zmdi-delete"></i>
+          <div class="tabbar__label tabbar--material__label">Delete</div>
+        </button>
+      </label>
+    </div>
+*/
+
+.tabbar--material__label {
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: var(--material-font-weight);
+}
+
+.tabbar--material__label:first-child {
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+
+  letter-spacing: 0.015em;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.tabbar--material__icon + .tabbar--material__label {
+  font-size: 10px;
+}

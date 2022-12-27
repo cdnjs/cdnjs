@@ -1,0 +1,1157 @@
+:root {
+  --list-item-color: var(--text-color);
+  --list-item-active-background-color: var(--list-tap-active-background-color);
+  --list-item-separator-color: var(--border-color);
+  --list-border: 1px solid var(--list-item-separator-color);
+  --list-item-min-height: 44px;
+  --list-item-margin: 0 0 -1px 0;
+  --list-item-padding-side: 14px;
+  --list-item-padding: 0 0 0 var(--list-item-padding-side);
+  --list-border-top: 1px solid var(--list-item-separator-color);
+  --list-border-bottom: 1px solid var(--list-item-separator-color);
+  --list-header-color: var(--text-color);
+  --list-header-font-size: 12px;
+  --list-header-padding: 0 0 0 15px;
+  --list-header-min-height: 24px;
+  --list-header-font-weight: var(--font-weight--large);
+  --inset-list-border: 1px solid var(--list-item-separator-color);
+  --list-title-color: #6d6d72;
+  --list-title-font-size: 13px;
+  --list-title-font-weight: 500;
+  --list-title-line-height: 24px;
+  --list-title-padding: 0 0 0 16px;
+  --material-list-item-side-padding: 16px;
+  --material-list-item-min-height: 48px;
+  --material-list-item-padding: 0 0 0 var(--material-list-item-side-padding);
+  --material-list-title-color: #757575;
+  --material-list-title-font-size: 14px;
+  --material-list-title-font-weight: 500;
+  --material-list-title-line-height: 24px;
+  --material-list-title-padding: 12px 0 12px var(--material-list-item-side-padding);
+}
+
+/*~
+  name: List
+  category: List
+  elements: ons-list ons-list-item
+  markup: |
+    <ul class="list">
+      <li class="list-item">
+        <div class="list-item__center">Dog</div>
+      </li>
+      <li class="list-item">
+        <div class="list-item__center">Cat</div>
+      </li>
+      <li class="list-item">
+        <div class="list-item__center">Hamster</div>
+      </li>
+    </ul>
+*/
+
+.list {
+  /* mixin: reset-base */
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  line-height: normal;
+
+  /* mixin: reset-cursor */
+  cursor: default;
+  user-select: none;
+
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+
+  list-style-type: none;
+  text-align: left;
+  display: block;
+  -webkit-overflow-scrolling: touch;
+  overflow: hidden;
+  background-image:
+    linear-gradient(var(--list-item-separator-color), var(--list-item-separator-color)),
+    linear-gradient(var(--list-item-separator-color), var(--list-item-separator-color));
+  background-size: 100% 1px, 100% 1px;
+  background-repeat: no-repeat;
+  background-position: bottom, top;
+  border: none;
+  background-color: var(--list-background-color);
+}
+
+/* @media (--retina-query) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .list {
+    background-image:
+      linear-gradient(0deg, var(--list-item-separator-color), var(--list-item-separator-color) 50%, transparent 50%),
+      linear-gradient(180deg, var(--list-item-separator-color), var(--list-item-separator-color) 50%, transparent 50%);
+  }
+}
+
+.list-item {
+  position: relative;
+  width: 100%;
+  list-style: none;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: var(--list-item-padding);
+  margin: var(--list-item-margin);
+  color: var(--list-item-color);
+  transition: background-color 0.2s linear;
+}
+
+/*~
+  name: Expandable List
+  category: List
+  elements: ons-list ons-list-item
+  markup: |
+    <ul class="list">
+      <li class="list-item list-item--expandable list-item--expanded">
+        <div class="list-item__top">
+          <div class="list-item__center">Item</div>
+          <div class="list-item__right">
+            <span class="list-item__expand-chevron"></span>
+          </div>
+        </div>
+        <div class="list-item__expandable-content">Expanded content</div>
+      </li>
+    </ul>
+*/
+
+.list-item__top {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  order: 0;
+  width: 100%;
+}
+
+.list-item--expandable {
+  display: flex;
+  flex-direction: column;
+
+  /* mixin: retina-list-item-border */
+  border-bottom: none;
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-image: linear-gradient(0deg, var(--list-item-separator-color), var(--list-item-separator-color) 100%);
+
+  background-position-x: var(--list-item-padding-side);
+}
+
+/* @media (--retina-query) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .list-item--expandable {
+    background-image: linear-gradient(0deg, var(--list-item-separator-color), var(--list-item-separator-color) 50%, transparent 50%);
+  }
+}
+
+.list-item__expandable-content {
+  display: none;
+  width: 100%;
+  padding: 12px 14px 12px 0;
+  box-sizing: border-box;
+  order: 1;
+  overflow: hidden;
+}
+
+.list-item--expandable.list-item--expanded > .list-item__expandable-content {
+  display: block;
+  height: auto;
+}
+
+.list-item__left {
+  box-sizing: border-box;
+  display: flex;
+  padding: 12px 14px 12px 0;
+  order: 0;
+  align-items: center;
+  align-self: stretch;
+  line-height: 1.2em;
+  min-height: var(--list-item-min-height);
+}
+
+.list-item__left:empty {
+  width: 0;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.list-item__center {
+  box-sizing: border-box;
+  display: flex;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  flex-direction: row;
+  order: 1;
+  margin-right: auto;
+  align-items: center;
+  align-self: stretch;
+  margin-left: 0;
+
+  /* mixin: retina-list-item-border */
+  border-bottom: none;
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-image: linear-gradient(0deg, var(--list-item-separator-color), var(--list-item-separator-color) 100%);
+
+  padding: 12px 6px 12px 0;
+  line-height: 1.2em;
+  min-height: var(--list-item-min-height);
+}
+
+/* @media (--retina-query) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .list-item__center {
+    background-image: linear-gradient(0deg, var(--list-item-separator-color), var(--list-item-separator-color) 50%, transparent 50%);
+  }
+}
+
+.list-item__right {
+  box-sizing: border-box;
+  display: flex;
+  margin-left: auto;
+  padding: 12px 12px 12px 0;
+  order: 2;
+  align-items: center;
+  align-self: stretch;
+
+  /* mixin: retina-list-item-border */
+  border-bottom: none;
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-image: linear-gradient(0deg, var(--list-item-separator-color), var(--list-item-separator-color) 100%);
+
+  line-height: 1.2em;
+  min-height: var(--list-item-min-height);
+}
+
+/* @media (--retina-query) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .list-item__right {
+    background-image: linear-gradient(0deg, var(--list-item-separator-color), var(--list-item-separator-color) 50%, transparent 50%);
+  }
+}
+
+.list-header {
+  margin: 0;
+  list-style: none;
+  text-align: left;
+  display: block;
+  box-sizing: border-box;
+  padding: var(--list-header-padding);
+  font-size: var(--list-header-font-size);
+  font-weight: var(--list-header-font-weight);
+  color: var(--list-header-color);
+  min-height: var(--list-header-min-height);
+  line-height: calc(1px + var(--list-header-min-height));
+  text-transform: uppercase;
+  position: relative;
+  background-color: var(--list-header-background-color);
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-image: linear-gradient(0deg, var(--list-item-separator-color), var(--list-item-separator-color) 100%);
+}
+
+/* @media (--retina-query) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .list-header {
+    background-image: linear-gradient(180deg, var(--list-item-separator-color), var(--list-item-separator-color) 50%, transparent 50%);
+  }
+}
+
+/*~
+  name: Noborder List
+  category: List
+  elements: ons-list ons-list-item
+  markup: |
+    <ul class="list list--noborder">
+      <li class="list-item">
+        <div class="list-item__center">Item</div>
+      </li>
+      <li class="list-item">
+        <div class="list-item__center">Item</div>
+      </li>
+    </ul>
+ */
+
+.list--noborder {
+  border-top: none;
+  border-bottom: none;
+  background-image: none;
+}
+
+/*~
+  name: Category List Header
+  category: List
+  elements: ons-list ons-list-header ons-list-item
+  markup: |
+    <ul class="list">
+      <li class="list-header">
+        Header
+      </li>
+      <li class="list-item">
+        <div class="list-item__center">Item</div>
+      </li>
+      <li class="list-item">
+        <div class="list-item__center">Item</div>
+      </li>
+      <li class="list-item">
+        <div class="list-item__center">Item</div>
+      </li>
+    </ul>
+ */
+
+/*~
+  name: Tappable List
+  category: List
+  elements: ons-list ons-list-item
+  markup: |
+    <ul class="list">
+      <li class="list-item list-item--tappable">
+        <div class="list-item__center">Tappable Item</div>
+      </li>
+      <li class="list-item list-item--tappable">
+        <div class="list-item__center">Tappable Item</div>
+      </li>
+      <li class="list-item list-item--tappable">
+        <div class="list-item__center">Tappable Item</div>
+      </li>
+    </ul>
+ */
+
+.list-item--tappable:active {
+  transition: none;
+  background-color: var(--list-item-active-background-color);
+}
+
+/*~
+  name: Switch in List Item
+  category: List
+  elements: ons-list ons-list-item ons-switch
+  markup: |
+    <ul class="list">
+      <li class="list-item">
+        <div class="list-item__center">
+          Label
+        </div>
+        <div class="list-item__right">
+          <label class="switch">
+            <input type="checkbox" class="switch__input" checked>
+            <div class="switch__toggle">
+              <div class="switch__handle"></div>
+            </div>
+          </label>
+        </div>
+      </li>
+      <li class="list-item">
+        <div class="list-item__center">
+          Label
+        </div>
+        <div class="list-item__right">
+          <label class="switch">
+            <input type="checkbox" class="switch__input">
+            <div class="switch__toggle">
+              <div class="switch__handle"></div>
+            </div>
+          </label>
+        </div>
+      </li>
+    </ul>
+*/
+
+/*~
+  name: Inset List
+  category: List
+  elements: ons-list ons-list-item
+  markup: |
+    <ul class="list list--inset">
+      <li class="list-item list--inset__item list-item--chevron list-item--tappable">
+        <div class="list-item__center">List Item with Chevron</div>
+      </li>
+      <li class="list-item list--inset__item list-item--chevron list-item--tappable">
+        <div class="list-item__center">List Item with Chevron</div>
+      </li>
+    </ul>
+ */
+
+.list--inset {
+  margin: 0 8px;
+  border: var(--inset-list-border);
+  border-radius: 4px;
+  background-image: none;
+}
+
+/*~
+  name: Radio Button in List Item
+  category: List
+  elements: ons-list ons-list-item ons-input
+  markup: |
+    <ul class="list">
+      <li class="list-item list-item--tappable">
+        <div class="list-item__left">
+          <label class="radio-button">
+            <input type="radio" id="r1" class="radio-button__input" name="r" checked="checked">
+            <div class="radio-button__checkmark"></div>
+          </label>
+        </div>
+        <label for="r1" class="list-item__center">
+          Radio Button
+        </label>
+      </li>
+      <li class="list-item list-item--tappable">
+        <div class="list-item__left">
+          <label class="radio-button">
+            <input type="radio" id="r2" class="radio-button__input" name="r">
+            <div class="radio-button__checkmark"></div>
+          </label>
+        </div>
+        <label for="r2" class="list-item__center">
+          Radio Button
+        </label>
+      </li>
+    </ul>
+*/
+
+/*~
+  name: Checkbox in List Item
+  category: List
+  elements: ons-list ons-list-item ons-input
+  markup: |
+    <ul class="list">
+      <li class="list-item list-item--tappable">
+        <div class="list-item__left">
+          <label class="checkbox">
+            <input type="checkbox" id="checkbox1" class="checkbox__input" name="c" checked="checked">
+            <div class="checkbox__checkmark"></div>
+          </label>
+        </div>
+        <label for="checkbox1" class="list-item__center">
+          Checkbox
+        </label>
+      </li>
+      <li class="list-item list-item--tappable">
+        <div class="list-item__left">
+          <label class="checkbox">
+            <input type="checkbox" id="checkbox2" class="checkbox__input" name="c">
+            <div class="checkbox__checkmark"></div>
+          </label>
+        </div>
+        <label for="checkbox2" class="list-item__center">
+          Checkbox
+        </label>
+      </li>
+    </ul>
+*/
+
+/*~
+  name: No border Checkbox in List Item
+  category: List
+  elements: ons-list ons-list-item ons-input
+  markup: |
+    <ul class="list">
+      <li class="list-item list-item--tappable">
+        <div class="list-item__left">
+          <label class="checkbox checkbox--noborder">
+            <input id="s1" type="checkbox" class="checkbox__input checkbox--noborder__input">
+            <div class="checkbox__checkmark checkbox--noborder checkbox--noborder__checkmark"></div>
+          </label>
+        </div>
+        <label for="s1" class="list-item__center">
+          Checkbox
+        </label>
+      </li>
+      <li class="list-item list-item--tappable">
+        <div class="list-item__left">
+          <label class="checkbox checkbox--noborder">
+            <input id="s2" type="checkbox" class="checkbox__input checkbox--noborder__input" checked>
+            <div class="checkbox__checkmark checkbox--noborder checkbox--noborder__checkmark"></div>
+          </label>
+        </div>
+        <label for="s2" class="list-item__center">
+          Checkbox
+        </label>
+      </li>
+    </ul>
+*/
+
+/*~
+  name: Text Input in List Item
+  category: List
+  elements: ons-list ons-list-item ons-input
+  markup: |
+    <ul class="list">
+      <li class="list-item">
+        <div class="list-item__center">
+          <input type="text" class="text-input" placeholder="Name">
+        </div>
+      </li>
+      <li class="list-item">
+        <div class="list-item__center">
+          <input type="text" class="text-input" placeholder="Email">
+        </div>
+      </li>
+    </ul>
+*/
+
+/*~
+  name: Textarea in List Item
+  category: List
+  elements: ons-list ons-list-item
+  markup: |
+    <ul class="list">
+      <li class="list-item">
+        <div class="list-item__center">
+          <textarea class="textarea textarea--transparent" placeholder="Text message"></textarea>
+        </div>
+      </li>
+    </ul>
+*/
+
+/*~
+  name: Right Label in List Item
+  category: List
+  elements: ons-list ons-list-item
+  markup: |
+    <ul class="list">
+      <li class="list-item">
+        <div class="list-item__center">
+          Title
+        </div>
+        <div class="list-item__right">
+          <div class="list-item__label">Label</div>
+        </div>
+      </li>
+    </ul>
+*/
+
+.list-item__label {
+  font-size: var(--font-size--mini);
+  padding: 0 4px;
+  opacity: 0.6;
+}
+
+/*~
+  name: List Item with Subtitle
+  category: List
+  elements: ons-list ons-list-item
+  markup: |
+    <ul class="list">
+      <li class="list-item">
+        <div class="list-item__center">
+          <div class="list-item__title">
+            Title
+          </div>
+          <div class="list-item__subtitle">
+            Subtitle
+          </div>
+        </div>
+      </li>
+    </ul>
+*/
+
+.list-item__title {
+  flex-basis: 100%;
+  align-self: flex-end;
+  order: 0;
+}
+
+.list-item__subtitle {
+  opacity: 0.75;
+  font-size: var(--font-size--mini);
+  order: 1;
+  flex-basis: 100%;
+  align-self: flex-start;
+}
+
+/*~
+  name: List Item with Thumbnail
+  category: List
+  elements: ons-list ons-list-item
+  markup: |
+    <ul class="list">
+      <li class="list-item">
+        <div class="list-item__left">
+          <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40" alt="Cute kitten">
+        </div>
+
+        <div class="list-item__center">
+          <div class="list-item__title">Lily</div>
+          <div class="list-item__subtitle">Very friendly cat</div>
+        </div>
+      </li>
+
+      <li class="list-item">
+        <div class="list-item__left">
+          <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40" alt="Cute kitten">
+        </div>
+
+        <div class="list-item__center">
+          <div class="list-item__title">Molly</div>
+          <div class="list-item__subtitle">Loves tuna!</div>
+        </div>
+      </li>
+    </ul>
+*/
+
+.list-item__thumbnail {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  display: block;
+  margin: 0;
+}
+
+/*~
+  name: List Item with Icon
+  category: List
+  elements: ons-list ons-list-item
+  markup: |
+    <ul class="list">
+      <li class="list-item">
+        <div class="list-item__left">
+          <img class="list-item__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
+        </div>
+
+        <div class="list-item__center">
+          <div class="list-item__title">Alice</div>
+          <div class="list-item__subtitle">Description</div>
+        </div>
+
+        <div class="list-item__right">
+          <i class="ion-ios-information list-item__icon"></i>
+        </div>
+      </li>
+
+      <li class="list-item">
+        <div class="list-item__left">
+          <img class="list-item__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
+        </div>
+
+        <div class="list-item__center">
+          <div class="list-item__title">Bob</div>
+          <div class="list-item__subtitle">Description</div>
+        </div>
+
+        <div class="list-item__right">
+          <i class="ion-ios-information list-item__icon"></i>
+        </div>
+      </li>
+    </ul>
+*/
+
+.list-item__icon {
+  font-size: 22px;
+  padding: 0 6px;
+}
+
+/*~
+  name: Material List
+  category: List
+  elements: ons-list ons-list-item
+  markup: |
+    <ul class="list list--material">
+      <li class="list-item list-item--material">
+        <div class="list-item__center list-item--material__center">
+          <div class="list-item__title list-item--material__title">Orange</div>
+          <div class="list-item__subtitle list-item--material__subtitle">Sweet fruit that grows on trees.</div>
+        </div>
+      </li>
+      <li class="list-item list-item--material">
+        <div class="list-item__center list-item--material__center">
+          <div class="list-item__title list-item--material__title">Pear</div>
+          <div class="list-item__subtitle list-item--material__subtitle">Funny-shaped fruit.</div>
+        </div>
+      </li>
+    </ul>
+*/
+
+.list--material {
+
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: var(--material-font-weight);
+
+  background-image: none;
+  background-color: var(--material-list-background-color);
+}
+
+.list-item--material {
+  border: 0;
+  padding: var(--material-list-item-padding);
+  line-height: normal;
+}
+
+.list-item--material__subtitle {
+  margin-top: 4px;
+}
+
+.list-item--material:first-child {
+  box-shadow: none;
+}
+
+.list-item--material__left {
+  padding: 14px 0;
+  min-width: 56px;
+  line-height: 1;
+  min-height: var(--material-list-item-min-height);
+}
+
+.list-item--material__left:empty,
+.list-item--material__center {
+  padding: 14px 6px 14px 0;
+  border-color: var(--material-list-item-separator-color);
+
+  /* mixin: retina-material-list-item-border */
+  border-bottom: none;
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-image: linear-gradient(0deg, var(--material-list-item-separator-color), var(--material-list-item-separator-color) 100%);
+
+  min-height: var(--material-list-item-min-height);
+}
+
+/* @media (--retina-query) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .list-item--material__left:empty,
+  .list-item--material__center {
+    background-image: linear-gradient(0deg, var(--material-list-item-separator-color), var(--material-list-item-separator-color) 50%, transparent 50%);
+  }
+}
+
+.list-item--material__right {
+  padding: 14px 16px 14px 0;
+  line-height: 1;
+  border-color: var(--material-list-item-separator-color);
+
+  /* mixin: retina-material-list-item-border */
+  border-bottom: none;
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-image: linear-gradient(0deg, var(--material-list-item-separator-color), var(--material-list-item-separator-color) 100%);
+
+  min-height: var(--material-list-item-min-height);
+}
+
+/* @media (--retina-query) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .list-item--material__right {
+    background-image: linear-gradient(0deg, var(--material-list-item-separator-color), var(--material-list-item-separator-color) 50%, transparent 50%);
+  }
+}
+
+.list-item--material.list-item--expandable {
+  /* mixin: retina-material-list-item-border */
+  border-bottom: none;
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-image: linear-gradient(0deg, var(--material-list-item-separator-color), var(--material-list-item-separator-color) 100%);
+  background-position-x: var(--material-list-item-side-padding);
+}
+
+/* @media (--retina-query) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .list-item--material.list-item--expandable {
+    background-image: linear-gradient(0deg, var(--material-list-item-separator-color), var(--material-list-item-separator-color) 50%, transparent 50%);
+  }
+}
+
+.list-item--material.list-item--longdivider,
+.list-item--material.list-item--expandable.list-item--longdivider
+ {
+  /* mixin: retina-material-list-item-border */
+  border-bottom: none;
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-image: linear-gradient(0deg, var(--material-list-item-separator-color), var(--material-list-item-separator-color) 100%);
+}
+
+/* @media (--retina-query) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .list-item--material.list-item--longdivider,
+  .list-item--material.list-item--expandable.list-item--longdivider
+ {
+    background-image: linear-gradient(0deg, var(--material-list-item-separator-color), var(--material-list-item-separator-color) 50%, transparent 50%);
+  }
+}
+
+/*~
+  name: Material List with Header
+  category: List
+  elements: ons-list ons-list-item
+  markup: |
+    <ul class="list list--material">
+      <li class="list-header list-header--material">
+        Fruits
+      </li>
+      <li class="list-item list-item--material">
+        <div class="list-item__center list-item--material__center">
+          <div class="list-item__title list-item--material__title">Orange</div>
+          <div class="list-item__subtitle list-item--material__subtitle">Sweet fruit that grows on trees.</div>
+        </div>
+      </li>
+    </ul>
+*/
+
+.list-header--material {
+  background: var(--list-background-color);
+  border: none;
+  font-size: 14px;
+  text-transform: none;
+  margin: -1px 0 0 0;
+  color: var(--material-list-header-text-color);
+  font-weight: 500;
+  padding: 8px 16px;
+}
+
+.list-header--material:not(:first-of-type) {
+  border-top: none;
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-image: linear-gradient(180deg, var(--material-list-item-separator-color), var(--material-list-item-separator-color) 100%);
+  padding-top: 16px;
+}
+
+/* @media (--retina-query) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .list-header--material:not(:first-of-type) {
+    background-image: linear-gradient(180deg, var(--material-list-item-separator-color), var(--material-list-item-separator-color) 50%, transparent 50%);
+  }
+}
+
+/*~
+  name: Material List with Checkboxes
+  category: List
+  elements: ons-list ons-list-item ons-input
+  markup: |
+    <ul class="list list--material">
+      <li class="list-item list-item--material">
+        <div class="list-item__left list-item--material__left">
+          <label class="checkbox checkbox--material">
+            <input type="checkbox" id="checkbox3" class="checkbox__input checkbox--material__input">
+            <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+          </label>
+        </div>
+
+        <label for="checkbox3" class="list-item__center list-item--material__center">
+          <div class="list-item__title list-item--material__title">Notifications</div>
+          <div class="list-item__subtitle list-item--material__subtitle">Allow notifications</div>
+        </label>
+      </li>
+
+      <li class="list-item list-item--material">
+        <div class="list-item__left list-item--material__left">
+          <label class="checkbox checkbox--material">
+            <input type="checkbox" id="checkbox4" class="checkbox__input checkbox--material__input" checked="checked">
+            <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+          </label>
+        </div>
+
+        <label for="checkbox4" class="list-item__center list-item--material__center">
+          <div class="list-item__title list-item--material__title">Sound</div>
+          <div class="list-item__subtitle list-item--material__subtitle">Hangouts message</div>
+        </label>
+      </li>
+
+    </ul>
+*/
+
+/*~
+  name: Material List with Thumbnails
+  category: List
+  markup: |
+    <ul class="list list--material">
+      <li class="list-item list-item--material">
+        <div class="list-item__left list-item--material__left">
+          <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/42/41" alt="Cute kitten">
+        </div>
+
+        <div class="list-item__center list-item--material__center">
+          <div class="list-item__title list-item--material__title">Lily</div>
+          <div class="list-item__subtitle list-item--material__subtitle">Very friendly cat</div>
+        </div>
+      </li>
+
+      <li class="list-item list-item--material">
+        <div class="list-item__left list-item--material__left">
+          <img class="list-item__thumbnail list-item--material__thumbnail" src="https://placekitten.com/g/40/40" alt="Cute kitten">
+        </div>
+
+        <div class="list-item__center list-item--material__center">
+          <div class="list-item__title list-item--material__title">Molly</div>
+          <div class="list-item__subtitle list-item--material__subtitle">Loves tuna!</div>
+        </div>
+      </li>
+
+    </ul>
+*/
+
+.list-item--material__thumbnail {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+}
+
+/*~
+  name: Material List with Icons
+  category: List
+  markup: |
+    <ul class="list list--material">
+      <li class="list-item list-item--material">
+        <div class="list-item__left list-item--material__left">
+          <img class="list-item__thumbnail list-item--material__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
+        </div>
+
+        <div class="list-item__center list-item--material__center">
+          <div class="list-item__title list-item--material__title">Alice</div>
+          <div class="list-item__subtitle list-item--material__subtitle">Description</div>
+        </div>
+
+        <div class="list-item__right list-item--material__right">
+          <i style="color:#ccc" class="list-item__icon list-item--material__icon zmdi zmdi-comment"></i>
+        </div>
+      </li>
+
+      <li class="list-item list-item--material">
+        <div class="list-item__left list-item--material__left">
+          <img class="list-item__thumbnail list-item--material__thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wwJCB8v/9zErgAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAvSURBVFjD7c0BDQAACAMgtX+KJzWGm4MCdJK6MHVELBaLxWKxWCwWi8VisVj8MV7qBgI2A8rYpgAAAABJRU5ErkJggg==">
+        </div>
+
+        <div class="list-item__center list-item--material__center">
+          <div class="list-item__title list-item--material__title">Bob</div>
+          <div class="list-item__subtitle list-item--material__subtitle">Description</div>
+        </div>
+
+        <div class="list-item__right list-item--material__right">
+          <i style="color:#ccc" class="list-item__icon list-item--material__icon zmdi zmdi-comment"></i>
+        </div>
+      </li>
+    </ul>
+*/
+
+.list-item--material__icon {
+  font-size: 20px;
+  padding: 0 4px;
+}
+
+/*~
+  name: List Item with Chevron
+  category: List
+  elements: ons-list ons-list-item
+  markup: |
+    <ul class="list">
+      <li class="list-item list-item--chevron">
+        <div class="list-item__center">Item A</div>
+      </li>
+      <li class="list-item list-item--chevron">
+        <div class="list-item__center">Item B</div>
+        <div class="list-item__right list-item--chevron__right">
+          <div class="list-item__label">Label</div>
+        </div>
+      </li>
+    </ul>
+ */
+
+.list-item--chevron:before,
+.list-item__expand-chevron {
+  border-right: 2px solid var(--list-item-chevron-color);
+  border-bottom: 2px solid var(--list-item-chevron-color);
+  width: 7px;
+  height: 7px;
+  background-color: transparent;
+  z-index: 5;
+}
+
+.list-item--chevron:before {
+  position: absolute;
+  content: '';
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+.list-item__expand-chevron {
+  transform: rotate(45deg);
+  margin: 1px; /* this improves alignment with normal chevrons */
+}
+
+.list-item--expandable.list-item--expanded .list-item__expand-chevron {
+  transform: rotate(225deg);
+}
+
+.list-item--chevron__right {
+  padding-right: 30px;
+}
+
+/*~
+  name: Nodivider List Item with Chevron
+  category: List
+  elements: ons-list ons-list-item
+  markup: |
+    <ul class="list">
+      <li class="list-item list-item--nodivider list-item--chevron">
+        <div class="list-item__center list-item--nodivider__center">Item A</div>
+      </li>
+      <li class="list-item list-item--nodivider list-item--chevron">
+        <div class="list-item__center list-item--nodivider__center">Item B</div>
+        <div class="list-item__right list-item--nodivider__right list-item--chevron__right">
+          <div class="list-item__label">Label</div>
+        </div>
+      </li>
+    </ul>
+ */
+
+/*~
+  name: List item without divider
+  category: List
+  markup: |
+    <ul class="list">
+      <li class="list-item list-item--nodivider">
+        <div class="list-item__center list-item--nodivider__center">Item</div>
+      </li>
+      <li class="list-item list-item--nodivider">
+        <div class="list-item__center list-item--nodivider__center">Item</div>
+      </li>
+    </ul>
+ */
+
+.list-item--nodivider__center,
+.list-item--nodivider__right,
+.list-item--nodivider.list-item--expandable,
+.list-item--expandable .list-item__center,
+.list-item--expandable .list-item__right {
+  border: none;
+  background-image: none;
+}
+
+/*~
+  name: List item with long divider
+  category: List
+  markup: |
+    <ul class="list">
+      <li class="list-item list-item--longdivider">
+        <div class="list-item__center list-item--longdivider__center">Item</div>
+      </li>
+      <li class="list-item list-item--longdivider">
+        <div class="list-item__center list-item--longdivider__center">Item</div>
+      </li>
+    </ul>
+ */
+
+.list-item--longdivider {
+  /* mixin: retina-list-item-border */
+  border-bottom: none;
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-image: linear-gradient(0deg, var(--list-item-separator-color), var(--list-item-separator-color) 100%);
+}
+
+/* @media (--retina-query) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .list-item--longdivider {
+    background-image: linear-gradient(0deg, var(--list-item-separator-color), var(--list-item-separator-color) 50%, transparent 50%);
+  }
+}
+
+.list-item--longdivider:last-of-type {
+  border: none;
+  background-image: none;
+}
+
+.list-item--longdivider__center {
+  border: none;
+  background-image: none;
+}
+
+.list-item--longdivider__right {
+  border: none;
+  background-image: none;
+}
+
+/*~
+  name: List title
+  category: List
+  markup: |
+    <div class="list-title">List Title</div>
+    <ul class="list">
+      <li class="list-item">
+        <div class="list-item__center">Item</div>
+      </li>
+      <li class="list-item">
+        <div class="list-item__center">Item</div>
+      </li>
+    </ul>
+ */
+
+.list-title {
+  /* mixin: reset-base */
+  background: transparent;
+  border: none;
+
+  /* mixin: reset-cursor */
+  cursor: default;
+  user-select: none;
+
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  display: block;
+  color: var(--list-title-color);
+  text-align: left;
+  box-sizing: border-box;
+  padding: var(--list-title-padding);
+  margin: 0;
+  font-size: var(--list-title-font-size);
+  font-weight: var(--list-title-font-weight);
+  line-height: var(--list-title-line-height);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/*~
+  name: Material List Title
+  category: List
+  markup: |
+    <h3 class="list-title list-title--material">LIST TITLE</h3>
+    <ul class="list list--material">
+      <li class="list-item list-item--material">
+        <div class="list-item__center list-item--material__center">Item</div>
+      </li>
+      <li class="list-item list-item--material">
+        <div class="list-item__center list-item--material__center">Item</div>
+      </li>
+    </ul>
+ */
+
+.list-title--material {
+
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+
+  color: var(--material-list-title-color);
+  font-size: var(--material-list-title-font-size);
+  margin: 0;
+  padding: var(--material-list-title-padding);
+  font-weight: var(--material-list-title-font-weight);
+  line-height: var(--material-list-title-line-height);
+}

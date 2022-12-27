@@ -1,0 +1,272 @@
+:root {
+  --switch-checked-background-color: var(--switch-highlight-color); /* background color active */
+  --switch-thumb-background-color: white;
+  --switch-thumb-border-color: var(--border-color);
+  --switch-thumb-border-color-active: var(--switch-highlight-color);
+  --switch-height: 32px;
+  --switch-width: 51px;
+}
+
+/*~
+  name: Switch
+  category: Switch
+  elements: ons-switch
+  markup: |
+    <label class="switch">
+      <input type="checkbox" class="switch__input">
+      <div class="switch__toggle">
+        <div class="switch__handle"></div>
+      </div>
+    </label>
+    <label class="switch">
+      <input type="checkbox" class="switch__input" checked>
+      <div class="switch__toggle">
+        <div class="switch__handle"></div>
+      </div>
+    </label>
+    <label class="switch">
+      <input type="checkbox" class="switch__input" disabled>
+      <div class="switch__toggle">
+        <div class="switch__handle"></div>
+      </div>
+    </label>
+*/
+
+.switch {
+  display: inline-block;
+  vertical-align: top;
+
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+  background-clip: padding-box;
+
+  /* mixin: hide-input-parent */
+  position: relative;
+
+  min-width: 51px;
+  font-size: var(--font-size);
+  padding: 0 20px;
+  border: none;
+  overflow: visible;
+  width: var(--switch-width);
+  height: var(--switch-height);
+  z-index: 0;
+  text-align: left;
+}
+
+.switch__input {
+
+  /* mixin: hide-input */
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  vertical-align: top;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  appearance: none;
+
+  z-index: 0;
+}
+
+/* switch toggle background */
+.switch__toggle {
+  background-color: var(--switch-background-color);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 30px;
+  transition-property: all;
+  transition-duration: 0.35s;
+  transition-timing-function: ease-out;
+  box-shadow: inset 0 0 0 2px var(--switch-border-color);
+}
+
+/* switch toggle circle */
+.switch__handle {
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+  background-clip: padding-box;
+
+  position: absolute;
+  content: '';
+  border-radius: 28px;
+  height: 28px;
+  width: 28px;
+  background-color: var(--switch-thumb-background-color);
+  left: 1px;
+  top: 2px;
+  transition-property: all;
+  transition-duration: 0.35s;
+  transition-timing-function: cubic-bezier(.59, .01, .5, .99);
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.25), 0 3px 2px rgba(0, 0, 0, 0.25);
+}
+
+.switch--active__handle {
+  transition: none;
+}
+
+:checked + .switch__toggle {
+  box-shadow: inset 0 0 0 2px var(--switch-checked-background-color);
+  background-color: var(--switch-checked-background-color);
+}
+
+:checked + .switch__toggle > .switch__handle {
+  left: 21px;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.25);
+}
+
+:disabled + .switch__toggle {
+  /* mixin: disabled */
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+.switch__touch {
+  position: absolute;
+  top: -5px;
+  bottom: -5px;
+  left: -10px;
+  right: -10px;
+}
+
+/*~
+  name: Material Switch
+  category: Switch
+  elements: ons-switch
+  markup: |
+    <label class="switch switch--material">
+      <input type="checkbox" class="switch__input switch--material__input">
+      <div class="switch__toggle switch--material__toggle">
+        <div class="switch__handle switch--material__handle">
+        </div>
+      </div>
+    </label>
+    <label class="switch switch--material">
+      <input type="checkbox" class="switch__input switch--material__input" checked>
+      <div class="switch__toggle switch--material__toggle">
+        <div class="switch__handle switch--material__handle">
+        </div>
+      </div>
+    </label>
+    <label class="switch switch--material">
+      <input type="checkbox" class="switch__input switch--material__input" disabled>
+      <div class="switch__toggle switch--material__toggle">
+        <div class="switch__handle switch--material__handle">
+        </div>
+      </div>
+    </label>
+*/
+
+.switch--material {
+  width: 36px;
+  height: 24px;
+  padding: 0 10px;
+  min-width: 36px;
+}
+
+.switch--material__toggle {
+  background-color: var(--material-switch-inactive-background-color);
+  margin-top: 5px;
+  height: 14px;
+  box-shadow: none;
+}
+
+.switch--material__input {
+
+  /* mixin: hide-input */
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  vertical-align: top;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  appearance: none;
+
+  z-index: 0;
+}
+
+.switch--material__handle {
+  background-color: var(--material-switch-inactive-thumb-color);
+  left: 0;
+  margin-top: -5px;
+  width: 20px;
+  height: 20px;
+
+  /* mixin: material-shadow-2 */
+  box-shadow:
+    0 4px 5px 0 rgba(0, 0, 0, 0.14),
+    0 1px 10px 0 rgba(0, 0, 0, 0.12),
+    0 2px 4px -1px rgba(0, 0, 0, 0.4);
+}
+
+:checked + .switch--material__toggle {
+  background-color: var(--material-switch-active-background-color);
+  box-shadow: none;
+}
+
+:checked + .switch--material__toggle > .switch--material__handle {
+  left: 16px;
+  background-color: var(--material-switch-active-thumb-color);
+
+  /* mixin: material-shadow-1 */
+  box-shadow:
+    0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+
+.switch--material__handle:before {
+  background: transparent;
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  z-index: 0;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.12);
+  transition: box-shadow 0.1s linear;
+}
+
+.switch--material__toggle > .switch--active__handle:before {
+  box-shadow: 0 0 0 14px rgba(0, 0, 0, 0.12);
+}
+
+:checked + .switch--material__toggle > .switch--active__handle:before {
+  /* Hack to replicate color-mod(var(--material-switch-active-thumb-color) alpha(20%)) */
+  animation: blend-box-shadow 1s -0.2s linear forwards paused;
+}
+
+@keyframes blend-box-shadow {
+  0% {
+    box-shadow: 0 0 0 14px transparent;
+  }
+
+  100% {
+    box-shadow: 0 0 0 14px var(--material-switch-active-thumb-color);
+  }
+}
+
+.switch--material__touch {
+  position: absolute;
+  top: -10px;
+  bottom: -10px;
+  left: -15px;
+  right: -15px;
+}

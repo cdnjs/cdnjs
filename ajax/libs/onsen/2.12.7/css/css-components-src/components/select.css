@@ -1,0 +1,225 @@
+
+:root {
+  --select-input-font-size: var(--font-size);
+  --select-input-height: 32px;
+
+  --material-select-input-font-size: 15px;
+
+  /* original image: '../img/select-arrow.svg' */
+  --select-arrow-icon: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMTBweCIgaGVpZ2h0PSI1cHgiIHZpZXdCb3g9IjAgMCAxMCA1IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPgogICAgPCEtLSBHZW5lcmF0b3I6IFNrZXRjaCA0My4yICgzOTA2OSkgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+CiAgICA8dGl0bGU+c2VsZWN0LWFsbG93PC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGRlZnM+PC9kZWZzPgogICAgPGcgaWQ9InNlbGVjdCIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgaWQ9Imlvcy1zZWxlY3QiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xOTguMDAwMDAwLCAtMTE0LjAwMDAwMCkiIGZpbGw9IiM3NTc1NzUiPgogICAgICAgICAgICA8ZyBpZD0ibWVudS1iYXItKy1vcGVuLW1lbnUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEyMy4wMDAwMDAsIDEwMC4wMDAwMDApIj4KICAgICAgICAgICAgICAgIDxnIGlkPSJtZW51LWJhciI+CiAgICAgICAgICAgICAgICAgICAgPHBvbHlnb24gaWQ9InNlbGVjdC1hbGxvdyIgcG9pbnRzPSI3NSAxNCA4MCAxOSA4NSAxNCI+PC9wb2x5Z29uPgogICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICA8L2c+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4=');
+}
+
+/*~
+  name: Select Input
+  category: Select Input
+  markup: |
+    <select class="select-input">
+      <option>Option 1</option>
+      <option>Option 2</option>
+      <option>Option 3</option>
+    </select>
+
+    &nbsp;
+
+    <select class="select-input" disabled>
+      <option>Option 1</option>
+      <option>Option 2</option>
+      <option>Option 3</option>
+    </select>
+*/
+
+.select-input {
+
+  /* mixin: input */
+
+  /* mixin: reset-input */
+
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+
+  margin: 0;
+  font: inherit;
+  background: transparent;
+  vertical-align: top;
+  outline: none;
+
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+
+  position: relative;
+  font-size: var(--select-input-font-size);
+  height: var(--select-input-height);
+  line-height: var(--select-input-height);
+  border-color: var(--select-input-border-color);
+  color: var(--select-input-color);
+  appearance: none;
+  display: inline-block;
+  border-radius: 0;
+  border: none;
+  padding: 0 20px 0 0;
+  background-color: transparent;
+  background-image: var(--select-arrow-icon);
+  background-repeat: no-repeat;
+  background-position: right center;
+  border-bottom: none;
+}
+
+.select-input::-ms-clear {
+  display: none;
+}
+
+.select-input::placeholder {
+  color: var(--input-placeholder-color);
+}
+
+.select-input:disabled {
+  /* mixin: disabled */
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+
+  /* mixin: transparent */
+  border: none;
+  background-color: transparent;
+}
+
+.select-input:disabled::placeholder {
+
+  /* mixin: input-placeholder */
+  /* mixin: transparent */
+  border: none;
+  background-color: transparent;
+
+  color: var(--input-placeholder-color);
+}
+
+.select-input:invalid {
+  /* mixin: transparent */
+  border: none;
+  background-color: transparent;
+
+  color: var(--input-invalid-text-color);
+}
+
+.select-input[multiple] {
+  height: calc(var(--select-input-height) * 2);
+}
+
+/*~
+  name: Material Select Input
+  category: Select Input
+  markup: |
+    <select class="select-input select-input--material">
+      <option>Option 1</option>
+      <option>Option 2</option>
+      <option>Option 3</option>
+    </select>
+
+    &nbsp;
+
+    <select class="select-input select-input--material" disabled>
+      <option>Option 1</option>
+      <option>Option 2</option>
+      <option>Option 3</option>
+    </select>
+*/
+
+.select-input--material {
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: var(--material-font-weight);
+
+  color: var(--material-select-input-color);
+  font-size: var(--material-select-input-font-size);
+  background-image: var(--select-arrow-icon), linear-gradient(to top, var(--material-select-border-color) 50%, var(--material-select-border-color) 50%);
+  background-size: auto, 100% 1px;
+  background-repeat: no-repeat;
+  background-position: right center, left bottom;
+  border: none;
+  transform: translate3d(0, 0, 0); /* prevent ios flicker */
+}
+
+.select-input--material__label {
+
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: var(--material-font-weight);
+
+  color: var(--material-select-input-inactive-color);
+  position: absolute;
+  left: 0;
+  top: 2px;
+  font-size: 16px;
+  pointer-events: none;
+}
+
+.select-input--material__label--active {
+  color: var(--material-select-input-active-color);
+  transform: translate(0, -75%) scale(0.75);
+  transform-origin: left top;
+  transition: transform 0.1s ease-in, color 0.1s ease-in;
+}
+
+.select-input--material::placeholder {
+  color: var(--material-select-input-inactive-color);
+  line-height: 20px;
+}
+
+@keyframes material-select-input-animate {
+  0% {
+    background-size: 0% 2px, 100% 2px;
+  }
+
+  100% {
+    background-size: 100% 2px, 100% 2px;
+  }
+}
+
+/*~
+  name: Underbar Select Input
+  category: Select Input
+  markup: |
+    <select class="select-input select-input--underbar">
+      <option>Option 1</option>
+      <option>Option 2</option>
+      <option>Option 3</option>
+    </select>
+
+    &nbsp;
+
+    <select class="select-input select-input--underbar" disabled>
+      <option>Option 1</option>
+      <option>Option 2</option>
+      <option>Option 3</option>
+    </select>
+*/
+
+.select-input--underbar {
+  border: none;
+  border-bottom: 1px solid var(--select-input-border-color);
+}
+
+.select-input--underbar:disabled {
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid var(--select-input-border-color);
+}
+
+.select-input--underbar:disabled::placeholder {
+  /* mixin: input-placeholder */
+  color: var(--input-placeholder-color);
+
+  border: none;
+  background-color: transparent;
+}
+
+.select-input--underbar:invalid {
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid var(--input-invalid-border-color);
+}

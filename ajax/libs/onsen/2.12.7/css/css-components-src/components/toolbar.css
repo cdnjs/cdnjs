@@ -1,0 +1,461 @@
+
+:root {
+  --toolbar-separator-color: var(--toolbar-border-color);
+
+  --toolbar-height: 44px;
+  --toolbar-box-shadow: none;
+  --toolbar-padding: 0;
+  --toolbar-separator: 1px solid var(--toolbar-separator-color);
+  --toolbar-material-height: 56px;
+}
+
+/*~
+  name: Toolbar
+  category: Toolbar
+  elements: ons-toolbar
+  markup: |
+    <div class="toolbar">
+      <div class="toolbar__center">Navigation Bar</div>
+    </div>
+*/
+
+.toolbar {
+  /* mixin: toolbar */
+  /* mixin: reset-font */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* mixin: reset-container */
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+  /* mixin: reset-overflow */
+  overflow: hidden;
+  word-spacing: 0;
+  /* mixin: reset-base */
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  border: none;
+  line-height: normal;
+  /* mixin: reset-cursor */
+  cursor: default;
+  user-select: none;
+  z-index: 2;
+
+  display: flex;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  height: var(--toolbar-height);
+  padding-left: var(--toolbar-padding);
+  padding-right: var(--toolbar-padding);
+  background: var(--toolbar-background-color);
+  color: var(--toolbar-text-color);
+  box-shadow: var(--toolbar-box-shadow);
+  font-weight: var(--font-weight);
+  width: 100%;
+  white-space: nowrap;
+  border-bottom: none;
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-image: linear-gradient(0deg, var(--toolbar-separator-color), var(--toolbar-separator-color) 100%);
+}
+
+/* @media (--retina-query) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .toolbar {
+    background-image: linear-gradient(0deg, var(--toolbar-separator-color), var(--toolbar-separator-color) 50%, transparent 50%);
+  }
+}
+
+.toolbar__bg {
+  background: var(--toolbar-background-color);
+}
+
+.toolbar__item {
+
+  /* mixin: toolbar__item */
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+  /* mixin: reset-base */
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+
+  height: var(--toolbar-height);
+  overflow: visible;
+  display: block;
+  vertical-align: middle;
+}
+
+.toolbar__left {
+
+  /* mixin: toolbar__item */
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+  /* mixin: reset-base */
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+
+  max-width: 50%;
+  width: 27%;
+  text-align: left;
+  line-height: var(--toolbar-height);
+}
+
+.toolbar__right {
+
+  /* mixin: toolbar__item */
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+  /* mixin: reset-base */
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+
+  max-width: 50%;
+  width: 27%;
+  text-align: right;
+  line-height: var(--toolbar-height);
+}
+
+.toolbar__center {
+
+  /* mixin: toolbar__item */
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+  /* mixin: reset-base */
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  background: transparent;
+  border: none;
+
+  width: 46%;
+  text-align: center;
+  line-height: var(--toolbar-height);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight--large);
+  color: var(--toolbar-text-color);
+}
+
+.toolbar__title {
+  line-height: var(--toolbar-height);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight--large);
+  color: var(--toolbar-text-color);
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+}
+
+.toolbar__center:first-child:last-child {
+  width: 100%;
+}
+
+/*~
+  name: Toolbar Item
+  category: Toolbar
+  elements: ons-toolbar ons-toolbar-button
+  markup: |
+    <div class="toolbar">
+      <div class="toolbar__left">
+        <span class="toolbar-button">
+          <i class="ion-ios-menu" style="font-size:32px; vertical-align:-6px;"></i>
+        </span>
+      </div>
+
+      <div class="toolbar__center">
+        Navigation Bar
+      </div>
+
+      <div class="toolbar__right">
+        <span class="toolbar-button">Label</span>
+      </div>
+    </div>
+*/
+
+/*~
+  name: Toolbar with Outline Button
+  category: Toolbar
+  elements: ons-toolbar ons-toolbar-button
+  markup: |
+    <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
+    <div class="toolbar">
+      <div class="toolbar__left">
+        <span class="toolbar-button toolbar-button--outline">
+          <i class="ion-ios-menu" style="font-size:32px; vertical-align:-6px;"></i>
+        </span>
+      </div>
+
+      <div class="toolbar__center">
+        Title
+      </div>
+
+      <div class="toolbar__right">
+        <span class="toolbar-button toolbar-button--outline">Button</span>
+      </div>
+    </div>
+*/
+
+/*~
+  name: Bottom Bar
+  category: Toolbar
+  elements: ons-bottom-toolbar
+  markup: |
+    <div class="bottom-bar">
+      <div class="bottom-bar__line-height" style="text-align:center">Bottom Toolbar</div>
+    </div>
+*/
+
+.bottom-bar {
+  /* mixin: toolbar */
+  /* mixin: reset-font */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* mixin: reset-container */
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+  /* mixin: reset-overflow */
+  white-space: nowrap;
+  overflow: hidden;
+  word-spacing: 0;
+  /* mixin: reset-base */
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  border: none;
+  line-height: normal;
+  /* mixin: reset-cursor */
+  cursor: default;
+  user-select: none;
+  z-index: 2;
+
+  display: block;
+  height: var(--toolbar-height);
+  padding-left: var(--toolbar-padding);
+  padding-right: var(--toolbar-padding);
+  background: var(--toolbar-background-color);
+  color: var(--toolbar-text-color);
+  box-shadow: var(--toolbar-box-shadow);
+  font-weight: var(--font-weight);
+  border-bottom: none;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  border-top: none;
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-image: linear-gradient(180deg, var(--toolbar-separator-color), var(--toolbar-separator-color) 100%);
+}
+
+/* @media (--retina-query) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .bottom-bar {
+    background-image: linear-gradient(180deg, var(--toolbar-separator-color), var(--toolbar-separator-color) 50%, transparent 50%);
+  }
+}
+
+.bottom-bar__line-height {
+  line-height: var(--toolbar-height);
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+.bottom-bar--aligned {
+  display: flex;
+  flex-wrap: nowrap;
+  line-height: var(--toolbar-height);
+}
+
+.bottom-bar--transparent {
+  background-color: transparent;
+  background-image: none;
+  border: none;
+}
+
+/*~
+  name: Toolbar with Segment
+  category: Toolbar
+  elements: ons-toolbar
+  markup: |
+    <div class="toolbar">
+      <div class="toolbar__center">
+        <div class="segment" style="width:200px;margin:7px 50px;">
+          <div class="segment__item">
+            <input type="radio" class="segment__input" name="navi-segment-a" checked>
+            <div class="segment__button">One</div>
+          </div>
+
+          <div class="segment__item">
+            <input type="radio" class="segment__input" name="navi-segment-a">
+            <div class="segment__button">Two</div>
+          </div>
+        </div>
+      </div>
+    </div>
+*/
+
+/*~
+  name: Material Toolbar
+  category: Toolbar
+  elements: ons-toolbar
+  markup: |
+    <div class="toolbar toolbar--material">
+      <div class="toolbar__center toolbar--material__center">
+        Title
+      </div>
+    </div>
+*/
+
+.toolbar--material {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  height: var(--toolbar-material-height);
+  border-bottom: 0;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+  padding: 0;
+  background-color: var(--material-toolbar-background-color);
+  background-size: 0;
+}
+
+/*~
+  name: No Shadow Toolbar
+  category: Toolbar
+  elements: ons-toolbar
+  markup: |
+    <div class="toolbar toolbar--noshadow">
+      <div class="toolbar__left">
+        <span class="toolbar-button">
+          <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
+        </span>
+      </div>
+      <div class="toolbar__center">
+        Navigation Bar
+      </div>
+      <div class="toolbar__right">
+        <span class="toolbar-button">Label</span>
+      </div>
+    </div>
+*/
+
+.toolbar--noshadow {
+  box-shadow: none;
+  background-image: none;
+  border-bottom: none;
+}
+
+.toolbar--material__left, .toolbar--material__right {
+
+  /* mixin: toolbar--material-font */
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--material-toolbar-text-color);
+
+  height: var(--toolbar-material-height);
+  min-width: 72px;
+  width: auto;
+  line-height: var(--toolbar-material-height);
+}
+
+.toolbar--material__center {
+
+  /* mixin: toolbar--material-font */
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--material-toolbar-text-color);
+
+  height: var(--toolbar-material-height);
+  width: auto;
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+  line-height: var(--toolbar-material-height);
+}
+
+.toolbar--material__center:first-child {
+  margin-left: 16px;
+}
+
+.toolbar--material__center:last-child {
+  margin-right: 16px;
+}
+
+.toolbar--material__left:empty, .toolbar--material__right:empty {
+  min-width: 16px;
+}
+
+/*~
+  name: Material Toolbar with Icons
+  category: Toolbar
+  elements: ons-toolbar
+  markup: |
+    <div class="toolbar toolbar--material">
+      <div class="toolbar__left toolbar--material__left">
+        <span class="toolbar-button toolbar-button--material">
+          <i class="zmdi zmdi-menu"></i>
+        </span>
+      </div>
+      <div class="toolbar__center toolbar--material__center">
+        Title
+      </div>
+      <div class="toolbar__right toolbar--material__right">
+        <span class="toolbar-button toolbar-button--material">
+          <i class="zmdi zmdi-search"></i>
+        </span>
+        <span class="toolbar-button toolbar-button--material">
+          <i class="zmdi zmdi-favorite"></i>
+        </span>
+        <span class="toolbar-button toolbar-button--material">
+          <i class="zmdi zmdi-more-vert"></i>
+        </span>
+      </div>
+    </div>
+*/
+
+/*~
+  name: Transparent Toolbar
+  category: Toolbar
+  elements: ons-toolbar
+  markup: |
+    <div class="toolbar toolbar--transparent">
+      <div class="toolbar__left">
+        <span class="toolbar-button">
+          <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
+        </span>
+      </div>
+      <div class="toolbar__center">
+        Navigation Bar
+      </div>
+      <div class="toolbar__right">
+        <span class="toolbar-button">Label</span>
+      </div>
+    </div>
+*/
+
+.toolbar--transparent {
+  background-color: transparent;
+  box-shadow: none;
+  background-image: none;
+  border-bottom: none;
+}

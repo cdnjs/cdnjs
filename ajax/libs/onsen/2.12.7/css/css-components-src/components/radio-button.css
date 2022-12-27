@@ -1,0 +1,276 @@
+:root {
+  --radio-button-background-active: rgba(0, 0, 0, 0);
+  --radio-button-indicator-color: var(--highlight-color);
+  --radio-button-background: transparent;
+  --radio-button-border: 3px solid var(--radio-button-indicator-color);
+  --radio-button-size: 24px;
+  --material-radio-button-size: 20px;
+  --material-radio-button-shadow-size: calc((48px - var(--material-radio-button-size)) / 2);
+}
+
+/*~
+  name: Radio Button
+  category: Radio Button
+  elements: ons-input
+  markup: |
+    <label class="radio-button">
+      <input type="radio" class="radio-button__input" name="r" checked="checked">
+      <div class="radio-button__checkmark"></div>
+      Label
+    </label>
+
+    <label class="radio-button">
+      <input type="radio" class="radio-button__input" name="r">
+      <div class="radio-button__checkmark"></div>
+      Label
+    </label>
+
+    <label class="radio-button">
+      <input type="radio" class="radio-button__input" name="r">
+      <div class="radio-button__checkmark"></div>
+      Label
+    </label>
+*/
+
+.radio-button__input {
+
+  /* mixin: hide-input */
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  z-index: 1;
+  vertical-align: top;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  appearance: none;
+}
+
+.radio-button__input:active,
+.radio-button__input:focus {
+  outline: 0;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.radio-button {
+  display: inline-block;
+  vertical-align: top;
+
+  /* mixin: reset-cursor */
+  cursor: default;
+  user-select: none;
+
+  /* mixin: hide-input-parent */
+  position: relative;
+
+  line-height: var(--radio-button-size);
+  text-align: left;
+}
+
+.radio-button__checkmark:before {
+  content: '';
+  position: absolute;
+
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+
+  width: var(--checkbox-size);
+  height: var(--checkbox-size);
+  background: transparent;
+  border: none;
+  border-radius: var(--checkbox-size);
+  left: 0;
+}
+
+.radio-button__checkmark {
+
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+
+  display: inline-block;
+  vertical-align: top;
+
+  /* mixin: reset-cursor */
+  cursor: default;
+  user-select: none;
+
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+
+  /* mixin: hide-input-parent */
+  position: relative;
+
+  width: var(--radio-button-size);
+  height: var(--radio-button-size);
+  background: var(--radio-button-background);
+  pointer-events: none;
+}
+
+.radio-button__checkmark:after {
+
+  /* mixin: checkmark */
+  content: '';
+  position: absolute;
+  top: 7px;
+  left: 4px;
+  opacity: 0;
+  width: 11px;
+  height: 4px;
+  background: transparent;
+  border: 2px solid var(--highlight-color);
+  border-top: none;
+  border-right: none;
+  border-radius: 0;
+  transform: rotate(-45deg);
+}
+
+:checked + .radio-button__checkmark {
+  background: var(--radio-button-background-active);
+}
+
+:checked + .radio-button__checkmark:after {
+  opacity: 1;
+}
+
+:checked + .radio-button__checkmark:before {
+  background: transparent;
+  border: none;
+}
+
+:disabled + .radio-button__checkmark {
+  /* mixin: disabled */
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+/*~
+  name: Material Radio Button
+  category: Radio Button
+  elements: ons-input
+  markup: |
+    <label class="radio-button radio-button--material">
+      <input type="radio" class="radio-button__input radio-button--material__input" name="r" checked="checked">
+      <div class="radio-button__checkmark radio-button--material__checkmark"></div>
+      Label
+    </label>
+    <label class="radio-button radio-button--material">
+      <input type="radio" class="radio-button__input radio-button--material__input" name="r">
+      <div class="radio-button__checkmark radio-button--material__checkmark"></div>
+      Label
+    </label>
+    <label class="radio-button radio-button--material">
+      <input type="radio" class="radio-button__input radio-button--material__input" name="s" disabled checked>
+      <div class="radio-button__checkmark radio-button--material__checkmark"></div>
+      Label
+    </label>
+    <label class="radio-button radio-button--material">
+      <input type="radio" class="radio-button__input radio-button--material__input" name="s" disabled>
+      <div class="radio-button__checkmark radio-button--material__checkmark"></div>
+      Label
+    </label>
+*/
+
+.radio-button--material {
+  line-height: calc(var(--material-radio-button-size) + 2px);
+
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: var(--material-font-weight);
+}
+
+.radio-button--material__input:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: var(--material-radio-button-size);
+  height: var(--material-radio-button-size);
+  box-shadow: 0 0 0 var(--material-radio-button-shadow-size) var(--material-radio-button-inactive-color);
+  border: none;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background-color: var(--material-radio-button-inactive-color);
+  pointer-events: none;
+  display: block;
+  transform: scale3d(0.2, 0.2, 0.2);
+  transition: opacity 0.25s ease-out, transform 0.1s ease-out;
+}
+
+.radio-button--material__input:checked:before {
+  box-shadow: 0 0 0 var(--material-radio-button-shadow-size) var(--material-radio-button-active-color);
+  background-color: var(--material-radio-button-active-color);
+}
+
+.radio-button--material__input:active:before {
+  opacity: .15;
+  transform: scale3d(1, 1, 1);
+}
+
+.radio-button--material__checkmark {
+  width: var(--material-radio-button-size);
+  height: var(--material-radio-button-size);
+  overflow: visible;
+}
+
+.radio-button--material__checkmark:before {
+  background: transparent;
+  border: 2px solid var(--material-radio-button-inactive-color);
+  box-sizing: border-box;
+  border-radius: 50%;
+  width: var(--material-radio-button-size);
+  height: var(--material-radio-button-size);
+  transition: border 0.2s ease;
+}
+
+.radio-button--material__checkmark:after {
+  transition: background 0.2s ease, transform 0.2s ease;
+  top: calc(var(--material-radio-button-size) / 4);
+  left: calc(var(--material-radio-button-size) / 4);
+  width: calc(var(--material-radio-button-size) / 2);
+  height: calc(var(--material-radio-button-size) / 2);
+  border: none;
+  border-radius: 50%;
+  transform: scale(0);
+}
+
+:checked + .radio-button--material__checkmark:before {
+  background: transparent;
+  border: 2px solid var(--material-radio-button-active-color);
+}
+
+.radio-button--material__input + .radio-button__checkmark:after {
+  background: var(--material-radio-button-inactive-color);
+  opacity: 1;
+  transform: scale(0);
+}
+
+:checked + .radio-button--material__checkmark:after {
+  opacity: 1;
+  background: var(--material-radio-button-active-color);
+  transform: scale(1);
+}
+
+:disabled + .radio-button--material__checkmark {
+  opacity: 1;
+}
+
+:disabled + .radio-button--material__checkmark:after {
+  background-color: var(--material-radio-button-disabled-color);
+  border-color: var(--material-radio-button-disabled-color);
+}
+
+:disabled + .radio-button--material__checkmark:before {
+  border-color: var(--material-radio-button-disabled-color);
+}

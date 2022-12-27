@@ -1,0 +1,87 @@
+:root {
+  --notification-border-radius: 19px;
+  --notification-width: auto;
+  --notification-height: 19px;
+  --notification-min-width: 19px;
+  --notification-padding: 0 4px;
+  --notification-font-weight: var(--font-weight);
+  --notification-font-size: 16px;
+
+  --material-notification-font-size: 16px;
+  --material-notification-font-weight: 500;
+}
+
+/*~
+  name: Notification
+  category: Notification
+  markup: |
+    <span class="notification">1</span>
+    <span class="notification">10</span>
+    <span class="notification">999</span>
+*/
+
+.notification {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  font: inherit;
+  border: none;
+
+  /* mixin: reset-box-model */
+  box-sizing: border-box;
+
+  /* mixin: reset-base */
+  background: transparent;
+
+  /* mixin: reset-font */
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* mixin: reset-cursor */
+  cursor: default;
+  user-select: none;
+
+  /* mixin: ellipsis */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+  text-decoration: none;
+  margin: 0;
+  padding: var(--notification-padding);
+  width: var(--notification-width);
+  height: var(--notification-height);
+  border-radius: var(--notification-border-radius);
+  background-color: var(--notification-background-color);
+  color: var(--notification-color);
+  text-align: center;
+  font-size: var(--notification-font-size);
+  min-width: var(--notification-min-width);
+  line-height: var(--notification-height);
+  font-weight: var(--notification-font-weight);
+}
+
+.notification:empty {
+  display: none;
+}
+
+/*~
+  name: Material Notification
+  category: Notification
+  markup: |
+    <span class="notification notification--material">1</span>
+    <span class="notification notification--material">10</span>
+    <span class="notification notification--material">999</span>
+*/
+
+.notification--material {
+  /* mixin: material-font */
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+
+  background-color: var(--material-notification-background-color);
+  font-size: var(--material-notification-font-size);
+  font-weight: var(--material-notification-font-weight);
+  color: var(--material-notification-color);
+}
