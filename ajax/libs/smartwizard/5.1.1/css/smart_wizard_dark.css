@@ -1,0 +1,243 @@
+/*!
+ * jQuery SmartWizard v5
+ * jQuery Wizard Plugin
+ * http://www.techlaboratory.net/smartwizard
+ *
+ * Created by Dipu Raj
+ * http://dipu.me
+ *
+ * Licensed under the terms of MIT License
+ * https://github.com/techlab/jquery-smartwizard/blob/master/LICENSE
+ */
+/* SmartWizard Base Styles */
+.sw {
+    position: relative;
+}
+
+.sw *,
+.sw *::before,
+.sw *::after {
+    box-sizing: border-box;
+}
+
+.sw > .tab-content {
+    position: relative;
+    overflow: hidden;
+}
+
+.sw .toolbar {
+    padding: .8rem;
+}
+
+.sw .toolbar > .btn {
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    text-transform: none;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-left: .2rem;
+    margin-right: .2rem;
+    cursor: pointer;
+}
+
+.sw .toolbar > .btn.disabled, .sw .toolbar > .btn:disabled {
+    opacity: .65;
+}
+
+.sw > .nav {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+@media screen and (max-width: 640px) {
+    .sw > .nav {
+        flex-direction: column !important;
+        flex: 1 auto;
+    }
+}
+
+.sw > .nav .nav-link {
+    display: block;
+    padding: .5rem 1rem;
+    text-decoration: none;
+}
+
+.sw > .nav .nav-link:hover, .sw > .nav .nav-link:active, .sw > .nav .nav-link:focus {
+    text-decoration: none;
+}
+
+.sw > .nav .nav-link::-moz-focus-inner {
+    border: 0 !important;
+}
+
+.sw > .nav .nav-link.disabled {
+    color: #ccc !important;
+    pointer-events: none;
+    cursor: default;
+}
+
+.sw > .nav .nav-link.hidden {
+    display: none !important;
+}
+
+.sw.sw-justified > .nav > li, .sw.sw-justified > .nav .nav-link {
+    flex-basis: 0;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.sw.sw-dark {
+    color: rgba(255, 255, 255, 0.95);
+    background: #000;
+}
+
+.sw.sw-loading {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.sw.sw-loading::after {
+    content: "";
+    display: block;
+    position: absolute;
+    opacity: 1;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.7);
+    z-index: 2;
+    transition: all .2s ease;
+}
+
+.sw.sw-loading::before {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    width: 2rem;
+    height: 2rem;
+    border: 10px solid #f3f3f3;
+    border-top: 10px solid #3498db;
+    border-radius: 50%;
+    z-index: 10;
+    -webkit-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* SmartWizard Theme: Dark */
+.sw-theme-dark {
+    border: 1px solid #eeeeee;
+    box-shadow: 0 1px 10px rgba(130, 130, 134, 0.1);
+    color: rgba(255, 255, 255, 0.95);
+    background: #181c20;
+}
+
+.sw-theme-dark > .tab-content > .tab-pane {
+    padding: 10px;
+}
+
+.sw-theme-dark .toolbar > .btn {
+    color: #fff;
+    background-color: #17a2b8;
+    border: 1px solid #17a2b8;
+    padding: .375rem .75rem;
+    border-radius: .25rem;
+    font-weight: 400;
+}
+
+.sw-theme-dark > .nav {
+    background: #0D0F12;
+}
+
+.sw-theme-dark > .nav .nav-link {
+    position: relative;
+    height: 100%;
+    min-height: 100%;
+}
+
+.sw-theme-dark > .nav .nav-link::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    left: 0px;
+    bottom: -1px;
+    background: #999999;
+    transition: all 250ms ease 0s;
+    transform: scale(0);
+}
+
+.sw-theme-dark > .nav .nav-link.inactive {
+    color: #999999;
+    cursor: not-allowed;
+}
+
+.sw-theme-dark > .nav .nav-link.active {
+    color: #17a2b8 !important;
+    cursor: pointer;
+}
+
+.sw-theme-dark > .nav .nav-link.active::after {
+    background: #17a2b8 !important;
+    transform: scale(1);
+}
+
+.sw-theme-dark > .nav .nav-link.done {
+    color: #5cb85c !important;
+    cursor: pointer;
+}
+
+.sw-theme-dark > .nav .nav-link.done::after {
+    background: #5cb85c;
+    transform: scale(1);
+}
+
+.sw-theme-dark > .nav .nav-link.disabled {
+    color: #f9f9f9 !important;
+    cursor: not-allowed;
+}
+
+.sw-theme-dark > .nav .nav-link.disabled::after {
+    background: #f9f9f9;
+}
+
+.sw-theme-dark > .nav .nav-link.danger {
+    color: #d9534f !important;
+    cursor: pointer;
+}
+
+.sw-theme-dark > .nav .nav-link.danger::after {
+    background: #d9534f;
+}
