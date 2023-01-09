@@ -1,0 +1,14 @@
+import { createScopedElement } from "../../lib/jsxRuntime";
+import { classNames } from "../../lib/classNames";
+import "./FocusVisible.css";
+/**
+ * @see https://vkcom.github.io/VKUI/#/FocusVisible
+ */
+export var FocusVisible = function FocusVisible(_ref) {
+  var mode = _ref.mode;
+  return createScopedElement("span", {
+    "aria-hidden": "true",
+    vkuiClass: classNames("FocusVisible", "FocusVisible--".concat(mode))
+  });
+};
+//# sourceMappingURL=FocusVisible.js.map
