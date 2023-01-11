@@ -1,0 +1,2 @@
+const e=function(e,r){return void 0===r&&(r=document),r.querySelector(e)},r=function(e,r){return void 0===r&&(r=document),Array.from(r.querySelectorAll(e))},n=e=>{requestAnimationFrame(()=>{requestAnimationFrame(()=>{e()})})},o=e=>window.CSS&&window.CSS.escape?CSS.escape(e):e,t=e=>1e3*Number(e.slice(0,-1).replace(",","."));export{o as escapeCssIdentifier,n as nextTick,e as query,r as queryAll,t as toMs};
+//# sourceMappingURL=utils.module.js.map
