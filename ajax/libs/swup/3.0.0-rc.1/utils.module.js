@@ -1,0 +1,2 @@
+var e=function(e,n){return void 0===n&&(n=document),n.querySelector(e)},n=function(e,n){return void 0===n&&(n=document),Array.from(n.querySelectorAll(e))},r=function(e){requestAnimationFrame(function(){requestAnimationFrame(function(){e()})})},t=function(e){return window.CSS&&window.CSS.escape?CSS.escape(e):e},o=function(e){return 1e3*Number(e.slice(0,-1).replace(",","."))};export{t as escapeCssIdentifier,r as nextTick,e as query,n as queryAll,o as toMs};
+//# sourceMappingURL=utils.module.js.map
