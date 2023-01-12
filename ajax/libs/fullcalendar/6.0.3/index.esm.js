@@ -1,0 +1,9 @@
+import { globalPlugins } from '@fullcalendar/core';
+export * from '@fullcalendar/core';
+import interactionPlugin__default from '@fullcalendar/interaction';
+export * from '@fullcalendar/interaction';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
+
+globalPlugins.push(interactionPlugin__default, dayGridPlugin, timeGridPlugin, listPlugin);
