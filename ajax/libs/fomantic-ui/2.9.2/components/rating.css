@@ -1,0 +1,414 @@
+/*!
+ * # Fomantic-UI 2.9.2 - Rating
+ * https://github.com/fomantic/Fomantic-UI/
+ *
+ *
+ * Released under the MIT license
+ * https://opensource.org/licenses/MIT
+ *
+ */
+
+
+/*******************************
+           Rating
+*******************************/
+
+.ui.rating {
+  display: inline-flex;
+  white-space: nowrap;
+  vertical-align: baseline;
+}
+.ui.rating:last-child {
+  margin-right: 0;
+}
+
+/* Icon */
+.ui.rating .icon {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  font-weight: normal;
+  font-style: normal;
+  flex: 1 0 auto;
+  cursor: pointer;
+  width: 1.25em;
+  height: auto;
+  transition: opacity 0.1s ease, background 0.1s ease, text-shadow 0.1s ease, color 0.1s ease;
+  line-height: 1;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+
+/*******************************
+             Types
+*******************************/
+
+
+/* -------------------
+      Standard
+-------------------- */
+
+/* Inactive Icon */
+.ui.rating .icon {
+  background: transparent;
+  color: rgba(0, 0, 0, 0.15);
+}
+
+/* Active Icon */
+.ui.rating .active.icon {
+  background: transparent;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+/* Partially Active Icon */
+.ui.rating .icon.partial.active {
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.85) 0% var(--full), rgba(0, 0, 0, 0.15) var(--full) 100%);
+}
+
+/* central override for colors */
+.ui.ui.ui.rating .icon.partial.active {
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+}
+
+/* Selected Icon */
+.ui.rating .icon.selected,
+.ui.rating .icon.selected.active,
+.ui.rating .icon.selected.partial.active {
+  background: transparent;
+  color: rgba(0, 0, 0, 0.87);
+  background-clip: unset;
+}
+
+/* --------------
+     Colors
+-------------- */
+.ui.primary.rating .active.icon {
+  color: #54c8ff;
+  text-shadow: 0 -1px 0 #2185d0, -1px 0 0 #2185d0, 0 1px 0 #2185d0, 1px 0 0 #2185d0;
+}
+.ui.primary.rating .icon.selected,
+.ui.primary.rating .icon.selected.active,
+.ui.primary.rating .icon.selected.partial.active {
+  background: inherit;
+  color: #21b8ff;
+  text-shadow: 0 -1px 0 #1678c2, -1px 0 0 #1678c2, 0 1px 0 #1678c2, 1px 0 0 #1678c2;
+  -webkit-text-stroke: unset;
+  background-clip: unset;
+}
+.ui.primary.rating .icon.partial.active {
+  background: linear-gradient(to right, #54c8ff 0% var(--full), rgba(0, 0, 0, 0.15) var(--full) 100%);
+  -webkit-text-stroke: #2185d0 0.78px;
+}
+.ui.secondary.rating .active.icon {
+  color: #545454;
+  text-shadow: 0 -1px 0 #1b1c1d, -1px 0 0 #1b1c1d, 0 1px 0 #1b1c1d, 1px 0 0 #1b1c1d;
+}
+.ui.secondary.rating .icon.selected,
+.ui.secondary.rating .icon.selected.active,
+.ui.secondary.rating .icon.selected.partial.active {
+  background: inherit;
+  color: #6e6e6e;
+  text-shadow: 0 -1px 0 #27292a, -1px 0 0 #27292a, 0 1px 0 #27292a, 1px 0 0 #27292a;
+  -webkit-text-stroke: unset;
+  background-clip: unset;
+}
+.ui.secondary.rating .icon.partial.active {
+  background: linear-gradient(to right, #545454 0% var(--full), rgba(0, 0, 0, 0.15) var(--full) 100%);
+  -webkit-text-stroke: #1b1c1d 0.78px;
+}
+.ui.red.rating .active.icon {
+  color: #ff695e;
+  text-shadow: 0 -1px 0 #db2828, -1px 0 0 #db2828, 0 1px 0 #db2828, 1px 0 0 #db2828;
+}
+.ui.red.rating .icon.selected,
+.ui.red.rating .icon.selected.active,
+.ui.red.rating .icon.selected.partial.active {
+  background: inherit;
+  color: #ff392b;
+  text-shadow: 0 -1px 0 #d01919, -1px 0 0 #d01919, 0 1px 0 #d01919, 1px 0 0 #d01919;
+  -webkit-text-stroke: unset;
+  background-clip: unset;
+}
+.ui.red.rating .icon.partial.active {
+  background: linear-gradient(to right, #ff695e 0% var(--full), rgba(0, 0, 0, 0.15) var(--full) 100%);
+  -webkit-text-stroke: #db2828 0.78px;
+}
+.ui.orange.rating .active.icon {
+  color: #ff851b;
+  text-shadow: 0 -1px 0 #f2711c, -1px 0 0 #f2711c, 0 1px 0 #f2711c, 1px 0 0 #f2711c;
+}
+.ui.orange.rating .icon.selected,
+.ui.orange.rating .icon.selected.active,
+.ui.orange.rating .icon.selected.partial.active {
+  background: inherit;
+  color: #e76b00;
+  text-shadow: 0 -1px 0 #f26202, -1px 0 0 #f26202, 0 1px 0 #f26202, 1px 0 0 #f26202;
+  -webkit-text-stroke: unset;
+  background-clip: unset;
+}
+.ui.orange.rating .icon.partial.active {
+  background: linear-gradient(to right, #ff851b 0% var(--full), rgba(0, 0, 0, 0.15) var(--full) 100%);
+  -webkit-text-stroke: #f2711c 0.78px;
+}
+.ui.yellow.rating .active.icon {
+  color: #ffe21f;
+  text-shadow: 0 -1px 0 #fbbd08, -1px 0 0 #fbbd08, 0 1px 0 #fbbd08, 1px 0 0 #fbbd08;
+}
+.ui.yellow.rating .icon.selected,
+.ui.yellow.rating .icon.selected.active,
+.ui.yellow.rating .icon.selected.partial.active {
+  background: inherit;
+  color: #ebcd00;
+  text-shadow: 0 -1px 0 #eaae00, -1px 0 0 #eaae00, 0 1px 0 #eaae00, 1px 0 0 #eaae00;
+  -webkit-text-stroke: unset;
+  background-clip: unset;
+}
+.ui.yellow.rating .icon.partial.active {
+  background: linear-gradient(to right, #ffe21f 0% var(--full), rgba(0, 0, 0, 0.15) var(--full) 100%);
+  -webkit-text-stroke: #fbbd08 0.78px;
+}
+.ui.olive.rating .active.icon {
+  color: #d9e778;
+  text-shadow: 0 -1px 0 #b5cc18, -1px 0 0 #b5cc18, 0 1px 0 #b5cc18, 1px 0 0 #b5cc18;
+}
+.ui.olive.rating .icon.selected,
+.ui.olive.rating .icon.selected.active,
+.ui.olive.rating .icon.selected.partial.active {
+  background: inherit;
+  color: #d2e745;
+  text-shadow: 0 -1px 0 #a7bd0d, -1px 0 0 #a7bd0d, 0 1px 0 #a7bd0d, 1px 0 0 #a7bd0d;
+  -webkit-text-stroke: unset;
+  background-clip: unset;
+}
+.ui.olive.rating .icon.partial.active {
+  background: linear-gradient(to right, #d9e778 0% var(--full), rgba(0, 0, 0, 0.15) var(--full) 100%);
+  -webkit-text-stroke: #b5cc18 0.78px;
+}
+.ui.green.rating .active.icon {
+  color: #2ecc40;
+  text-shadow: 0 -1px 0 #21ba45, -1px 0 0 #21ba45, 0 1px 0 #21ba45, 1px 0 0 #21ba45;
+}
+.ui.green.rating .icon.selected,
+.ui.green.rating .icon.selected.active,
+.ui.green.rating .icon.selected.partial.active {
+  background: inherit;
+  color: #1ea92e;
+  text-shadow: 0 -1px 0 #16ab39, -1px 0 0 #16ab39, 0 1px 0 #16ab39, 1px 0 0 #16ab39;
+  -webkit-text-stroke: unset;
+  background-clip: unset;
+}
+.ui.green.rating .icon.partial.active {
+  background: linear-gradient(to right, #2ecc40 0% var(--full), rgba(0, 0, 0, 0.15) var(--full) 100%);
+  -webkit-text-stroke: #21ba45 0.78px;
+}
+.ui.teal.rating .active.icon {
+  color: #6dffff;
+  text-shadow: 0 -1px 0 #00b5ad, -1px 0 0 #00b5ad, 0 1px 0 #00b5ad, 1px 0 0 #00b5ad;
+}
+.ui.teal.rating .icon.selected,
+.ui.teal.rating .icon.selected.active,
+.ui.teal.rating .icon.selected.partial.active {
+  background: inherit;
+  color: #3affff;
+  text-shadow: 0 -1px 0 #009c95, -1px 0 0 #009c95, 0 1px 0 #009c95, 1px 0 0 #009c95;
+  -webkit-text-stroke: unset;
+  background-clip: unset;
+}
+.ui.teal.rating .icon.partial.active {
+  background: linear-gradient(to right, #6dffff 0% var(--full), rgba(0, 0, 0, 0.15) var(--full) 100%);
+  -webkit-text-stroke: #00b5ad 0.78px;
+}
+.ui.blue.rating .active.icon {
+  color: #54c8ff;
+  text-shadow: 0 -1px 0 #2185d0, -1px 0 0 #2185d0, 0 1px 0 #2185d0, 1px 0 0 #2185d0;
+}
+.ui.blue.rating .icon.selected,
+.ui.blue.rating .icon.selected.active,
+.ui.blue.rating .icon.selected.partial.active {
+  background: inherit;
+  color: #21b8ff;
+  text-shadow: 0 -1px 0 #1678c2, -1px 0 0 #1678c2, 0 1px 0 #1678c2, 1px 0 0 #1678c2;
+  -webkit-text-stroke: unset;
+  background-clip: unset;
+}
+.ui.blue.rating .icon.partial.active {
+  background: linear-gradient(to right, #54c8ff 0% var(--full), rgba(0, 0, 0, 0.15) var(--full) 100%);
+  -webkit-text-stroke: #2185d0 0.78px;
+}
+.ui.violet.rating .active.icon {
+  color: #a291fb;
+  text-shadow: 0 -1px 0 #6435c9, -1px 0 0 #6435c9, 0 1px 0 #6435c9, 1px 0 0 #6435c9;
+}
+.ui.violet.rating .icon.selected,
+.ui.violet.rating .icon.selected.active,
+.ui.violet.rating .icon.selected.partial.active {
+  background: inherit;
+  color: #745aff;
+  text-shadow: 0 -1px 0 #5829bb, -1px 0 0 #5829bb, 0 1px 0 #5829bb, 1px 0 0 #5829bb;
+  -webkit-text-stroke: unset;
+  background-clip: unset;
+}
+.ui.violet.rating .icon.partial.active {
+  background: linear-gradient(to right, #a291fb 0% var(--full), rgba(0, 0, 0, 0.15) var(--full) 100%);
+  -webkit-text-stroke: #6435c9 0.78px;
+}
+.ui.purple.rating .active.icon {
+  color: #dc73ff;
+  text-shadow: 0 -1px 0 #a333c8, -1px 0 0 #a333c8, 0 1px 0 #a333c8, 1px 0 0 #a333c8;
+}
+.ui.purple.rating .icon.selected,
+.ui.purple.rating .icon.selected.active,
+.ui.purple.rating .icon.selected.partial.active {
+  background: inherit;
+  color: #cf40ff;
+  text-shadow: 0 -1px 0 #9627ba, -1px 0 0 #9627ba, 0 1px 0 #9627ba, 1px 0 0 #9627ba;
+  -webkit-text-stroke: unset;
+  background-clip: unset;
+}
+.ui.purple.rating .icon.partial.active {
+  background: linear-gradient(to right, #dc73ff 0% var(--full), rgba(0, 0, 0, 0.15) var(--full) 100%);
+  -webkit-text-stroke: #a333c8 0.78px;
+}
+.ui.pink.rating .active.icon {
+  color: #ff8edf;
+  text-shadow: 0 -1px 0 #e03997, -1px 0 0 #e03997, 0 1px 0 #e03997, 1px 0 0 #e03997;
+}
+.ui.pink.rating .icon.selected,
+.ui.pink.rating .icon.selected.active,
+.ui.pink.rating .icon.selected.partial.active {
+  background: inherit;
+  color: #ff5bd1;
+  text-shadow: 0 -1px 0 #e61a8d, -1px 0 0 #e61a8d, 0 1px 0 #e61a8d, 1px 0 0 #e61a8d;
+  -webkit-text-stroke: unset;
+  background-clip: unset;
+}
+.ui.pink.rating .icon.partial.active {
+  background: linear-gradient(to right, #ff8edf 0% var(--full), rgba(0, 0, 0, 0.15) var(--full) 100%);
+  -webkit-text-stroke: #e03997 0.78px;
+}
+.ui.brown.rating .active.icon {
+  color: #d67c1c;
+  text-shadow: 0 -1px 0 #a5673f, -1px 0 0 #a5673f, 0 1px 0 #a5673f, 1px 0 0 #a5673f;
+}
+.ui.brown.rating .icon.selected,
+.ui.brown.rating .icon.selected.active,
+.ui.brown.rating .icon.selected.partial.active {
+  background: inherit;
+  color: #b0620f;
+  text-shadow: 0 -1px 0 #975b33, -1px 0 0 #975b33, 0 1px 0 #975b33, 1px 0 0 #975b33;
+  -webkit-text-stroke: unset;
+  background-clip: unset;
+}
+.ui.brown.rating .icon.partial.active {
+  background: linear-gradient(to right, #d67c1c 0% var(--full), rgba(0, 0, 0, 0.15) var(--full) 100%);
+  -webkit-text-stroke: #a5673f 0.78px;
+}
+.ui.grey.rating .active.icon {
+  color: #dcddde;
+  text-shadow: 0 -1px 0 #767676, -1px 0 0 #767676, 0 1px 0 #767676, 1px 0 0 #767676;
+}
+.ui.grey.rating .icon.selected,
+.ui.grey.rating .icon.selected.active,
+.ui.grey.rating .icon.selected.partial.active {
+  background: inherit;
+  color: #c2c4c5;
+  text-shadow: 0 -1px 0 #838383, -1px 0 0 #838383, 0 1px 0 #838383, 1px 0 0 #838383;
+  -webkit-text-stroke: unset;
+  background-clip: unset;
+}
+.ui.grey.rating .icon.partial.active {
+  background: linear-gradient(to right, #dcddde 0% var(--full), rgba(0, 0, 0, 0.15) var(--full) 100%);
+  -webkit-text-stroke: #767676 0.78px;
+}
+.ui.black.rating .active.icon {
+  color: #545454;
+  text-shadow: 0 -1px 0 #1b1c1d, -1px 0 0 #1b1c1d, 0 1px 0 #1b1c1d, 1px 0 0 #1b1c1d;
+}
+.ui.black.rating .icon.selected,
+.ui.black.rating .icon.selected.active,
+.ui.black.rating .icon.selected.partial.active {
+  background: inherit;
+  color: #000000;
+  text-shadow: 0 -1px 0 #27292a, -1px 0 0 #27292a, 0 1px 0 #27292a, 1px 0 0 #27292a;
+  -webkit-text-stroke: unset;
+  background-clip: unset;
+}
+.ui.black.rating .icon.partial.active {
+  background: linear-gradient(to right, #545454 0% var(--full), rgba(0, 0, 0, 0.15) var(--full) 100%);
+  -webkit-text-stroke: #1b1c1d 0.78px;
+}
+
+
+/*******************************
+             States
+*******************************/
+
+
+/* -------------------
+           Disabled
+    -------------------- */
+
+/* disabled rating */
+.ui.disabled.rating .icon {
+  cursor: default;
+  pointer-events: none;
+}
+
+/* -------------------
+   User Interactive
+-------------------- */
+
+/* Selected Rating */
+.ui.rating.selected .active.icon {
+  opacity: 1;
+}
+.ui.rating.selected .icon.selected,
+.ui.rating .icon.selected {
+  opacity: 1;
+}
+
+
+/*******************************
+          Variations
+*******************************/
+
+.ui.rating {
+  font-size: 1rem;
+}
+.ui.mini.rating {
+  font-size: 0.78571429rem;
+}
+.ui.tiny.rating {
+  font-size: 0.85714286rem;
+}
+.ui.small.rating {
+  font-size: 0.92857143rem;
+}
+.ui.large.rating {
+  font-size: 1.14285714rem;
+}
+.ui.big.rating {
+  font-size: 1.28571429rem;
+}
+.ui.huge.rating {
+  font-size: 1.42857143rem;
+}
+.ui.massive.rating {
+  font-size: 2rem;
+}
+
+
+/*******************************
+         Theme Overrides
+*******************************/
+
+
+
+/*******************************
+         Site Overrides
+*******************************/
+

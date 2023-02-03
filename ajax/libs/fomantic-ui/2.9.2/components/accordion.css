@@ -1,0 +1,369 @@
+/*!
+ * # Fomantic-UI 2.9.2 - Accordion
+ * https://github.com/fomantic/Fomantic-UI/
+ *
+ *
+ * Released under the MIT license
+ * https://opensource.org/licenses/MIT
+ *
+ */
+
+
+/*******************************
+            Accordion
+*******************************/
+
+.ui.accordion,
+.ui.accordion .accordion {
+  max-width: 100%;
+}
+.ui.accordion .accordion {
+  margin: 1em 0 0;
+  padding: 0;
+}
+
+/* Title */
+.ui.accordion.menu .item > .title,
+.ui.accordion > .title,
+.ui.accordion .accordion > .title {
+  cursor: pointer;
+  padding: 0.5em 0;
+  font-family: "Lato", system-ui, -apple-system, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 1em;
+  color: rgba(0, 0, 0, 0.87);
+  list-style: none;
+  line-height: 1;
+}
+
+/* Default Styling */
+.ui.accordion:not(.styled) .title ~ .content,
+.ui.accordion:not(.styled) .accordion .title ~ .content {
+  margin: "";
+  padding: 0.5em 0 1em;
+}
+.ui.accordion:not(.styled) .title ~ .content:last-child {
+  padding-bottom: 0;
+}
+
+/* Arrow */
+.ui.accordion .ui.header > .dropdown.icon,
+.ui.accordion .title > .dropdown.icon,
+.ui.accordion .accordion .title > .dropdown.icon {
+  display: inline-block;
+  float: none;
+  opacity: 1;
+  width: 1.25em;
+  height: 1em;
+  margin: 0 0.25rem 0 0;
+  padding: 0;
+  font-size: 1em;
+  transition: transform 0.1s ease, opacity 0.1s ease;
+  vertical-align: baseline;
+  transform: none;
+}
+.ui.accordion .ui.header > .dropdown.icon.right,
+.ui.accordion .title > .dropdown.icon.right,
+.ui.accordion .accordion .title > .dropdown.icon.right {
+  float: right;
+  transform: rotate(180deg);
+}
+
+/* --------------
+    Coupling
+--------------- */
+
+/* Menu */
+.ui.accordion.menu .item .title {
+  display: block;
+  padding: 0;
+}
+.ui.accordion.menu .item .title > .dropdown.icon {
+  float: right;
+  margin: 0 0.25rem 0 0;
+  transform: rotate(180deg);
+}
+
+/* Header */
+.ui.accordion .ui.header > .dropdown.icon {
+  font-size: 1em;
+  margin: 0 0.25rem 0 0;
+}
+
+
+/*******************************
+            States
+*******************************/
+
+.ui.accordion[open] > .title > .dropdown.icon,
+.ui.accordion .accordion[open] > .title > .dropdown.icon,
+.ui.accordion .active.title > .dropdown.icon,
+.ui.accordion .accordion .active.title > .dropdown.icon {
+  transform: rotate(90deg);
+}
+.ui.accordion.menu .item .active.title > .dropdown.icon {
+  transform: rotate(90deg);
+}
+
+
+/*******************************
+            Types
+*******************************/
+
+
+/* --------------
+         Styled
+    --------------- */
+.ui.styled.accordion {
+  width: 600px;
+}
+.ui.styled.accordion,
+.ui.styled.accordion .accordion {
+  border-radius: 0.28571429rem;
+  background: #fff;
+  box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15), 0 0 0 1px rgba(34, 36, 38, 0.15);
+}
+.ui.styled.accordion > .title,
+.ui.styled.accordion .accordion > .title {
+  margin: 0;
+  padding: 0.75em 1em;
+  color: rgba(0, 0, 0, 0.4);
+  font-weight: bold;
+  border-top: 1px solid rgba(34, 36, 38, 0.15);
+  transition: background 0.1s ease, color 0.1s ease;
+}
+.ui.styled.accordion > .title:first-child,
+.ui.styled.accordion .accordion > .title:first-child {
+  border-top: none;
+}
+
+/* Content */
+.ui.styled.accordion > .content {
+  margin: 0;
+  padding: 0.5em 1em 1.5em;
+}
+.ui.styled.accordion .accordion > .content {
+  margin: 0;
+  padding: 0.5em 1em 1.5em;
+}
+
+/* Hover */
+.ui.styled.accordion > .title:hover {
+  background: transparent;
+  color: rgba(0, 0, 0, 0.87);
+}
+.ui.styled.accordion .accordion > .title:hover {
+  background: transparent;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+/* Active */
+.ui.styled.accordion[open] > .title,
+.ui.styled.accordion .active.title {
+  background: transparent;
+  color: rgba(0, 0, 0, 0.95);
+}
+.ui.styled.accordion .accordion[open] > .title,
+.ui.styled.accordion .accordion .active.title {
+  background: transparent;
+  color: rgba(0, 0, 0, 0.95);
+}
+
+/* --------------
+         Compact
+    --------------- */
+
+/* Default Styling */
+.ui.compact.accordion:not(.styled) > .title,
+.ui.compact.accordion:not(.styled) .accordion > .title {
+  padding: 0.25em 0;
+}
+.ui.compact.accordion:not(.styled) .title ~ .content,
+.ui.compact.accordion:not(.styled) .accordion .title ~ .content {
+  padding: 0.25em 0 0.5em;
+}
+
+/* Styled */
+.ui.compact.styled.accordion > .title,
+.ui.compact.styled.accordion .accordion > .title {
+  padding: 0.375em 0.5em;
+}
+.ui.compact.styled.accordion .title ~ .content,
+.ui.compact.styled.accordion .accordion .title ~ .content {
+  padding: 0.25em 0.5em 0.75em;
+}
+
+/* --------------
+    Very Compact
+  --------------- */
+.ui[class*="very compact"].accordion:not(.styled) > .title,
+.ui[class*="very compact"].accordion:not(.styled) .accordion > .title {
+  padding: 0.125em 0;
+}
+.ui[class*="very compact"].accordion:not(.styled) .title ~ .content,
+.ui[class*="very compact"].accordion:not(.styled) .accordion .title ~ .content {
+  padding: 0.125em 0 0.25em;
+}
+.ui[class*="very compact"].styled.accordion > .title,
+.ui[class*="very compact"].styled.accordion .accordion > .title {
+  padding: 0.1875em 0.25em;
+}
+.ui[class*="very compact"].styled.accordion .title ~ .content,
+.ui[class*="very compact"].styled.accordion .accordion .title ~ .content {
+  padding: 0.125em 0.25em 0.375em;
+}
+
+
+/*******************************
+            States
+*******************************/
+
+
+/* --------------
+   Not Active
+--------------- */
+.ui.accordion:not(details) .title ~ .content:not(.active),
+.ui.accordion .accordion:not(details) .title ~ .content:not(.active) {
+  display: none;
+}
+
+
+/*******************************
+           Variations
+*******************************/
+
+
+/* --------------
+         Fluid
+    --------------- */
+.ui.fluid.accordion,
+.ui.fluid.accordion .accordion {
+  width: 100%;
+}
+
+/* --------------
+         Inverted
+    --------------- */
+.ui.inverted.accordion.menu .item > .title,
+.ui.inverted.accordion > .title,
+.ui.inverted.accordion .accordion > .title {
+  color: rgba(255, 255, 255, 0.9);
+}
+.ui.inverted.styled.accordion,
+.ui.inverted.styled.accordion .accordion {
+  background: #1b1c1d;
+  box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+.ui.inverted.styled.accordion > .title,
+.ui.inverted.styled.accordion .accordion > .title {
+  color: rgba(255, 255, 255, 0.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Hover */
+.ui.inverted.styled.accordion > .title:hover {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.9);
+}
+.ui.inverted.styled.accordion .accordion > .title:hover {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Active */
+.ui.inverted.styled.accordion[open] > .title,
+.ui.inverted.styled.accordion .active.title {
+  background: transparent;
+  color: #ffffff;
+}
+.ui.inverted.styled.accordion .accordion[open] > .title,
+.ui.inverted.styled.accordion .accordion .active.title {
+  background: transparent;
+  color: #ffffff;
+}
+.ui.basic.styled.accordion,
+.ui.basic.styled.accordion .accordion {
+  background: transparent;
+  box-shadow: none;
+}
+.ui.basic.styled.accordion > .title,
+.ui.basic.styled.accordion .accordion > .title {
+  border: none;
+  color: rgba(0, 0, 0, 0.6);
+}
+.ui.basic.styled.accordion > .title:hover,
+.ui.basic.styled.accordion .accordion > .title:hover {
+  background: transparent;
+  color: rgba(0, 0, 0, 0.87);
+}
+.ui.basic.styled.accordion[open] > .title,
+.ui.basic.styled.accordion .active.title,
+.ui.basic.styled.accordion .accordion[open] > .title,
+.ui.basic.styled.accordion .accordion .active.title {
+  background: transparent;
+  color: rgba(0, 0, 0, 0.95);
+}
+.ui.inverted.basic.styled.accordion > .title,
+.ui.inverted.basic.styled.accordion .accordion > .title {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+}
+.ui.inverted.basic.styled.accordion > .title:hover,
+.ui.inverted.basic.styled.accordion .accordion > .title:hover {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.9);
+}
+.ui.inverted.basic.styled.accordion[open] > .title,
+.ui.inverted.basic.styled.accordion .active.title,
+.ui.inverted.basic.styled.accordion .accordion[open] > .title,
+.ui.inverted.basic.styled.accordion .accordion .active.title {
+  background: transparent;
+  color: #ffffff;
+}
+.ui.tree.accordion:not(.styled) .title ~ .content,
+.ui.tree.accordion:not(.styled) .accordion .title ~ .content {
+  padding: 0;
+}
+.ui.tree.accordion > .content,
+.ui.tree.accordion .accordion > .content {
+  margin-left: 1.7em;
+}
+.ui.tree.accordion .accordion {
+  margin-top: 0;
+}
+
+
+/*******************************
+         Theme Overrides
+*******************************/
+
+@font-face {
+  font-family: Accordion;
+  src: url("data:application/font-woff;base64,d09GRk9UVE8AAAREAAsAAAAABkAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABDRkYgAAAC7AAAAQoAAAE/j/fxwUZGVE0AAAQUAAAAHAAAAByNqvxQR0RFRgAAA/gAAAAcAAAAIAAnABhPUy8yAAABYAAAAEIAAABgTadW5mNtYXAAAAKMAAAAUQAAAWAFZuKDaGVhZAAAAQgAAAAyAAAANg8zT8toaGVhAAABPAAAABoAAAAkApkA5mhtdHgAAAQwAAAAEwAAABYBtwASbWF4cAAAAVgAAAAGAAAABgAGUABuYW1lAAABpAAAAOYAAAGq/HAhWXBvc3QAAALgAAAADAAAACAAAwAAeJxjYGRgYADi8KWRsvH8Nl8ZuJkYQOD838XvQPT9hGxNIOXJsJ0xD0hzMIClARzsCcoAAHicY2BkYGB88P8BkGQAg+0wBhywAgBgjgOAAAAAAFAAAAYAAHicY2BmOM84gYGVgYHRhzGNgYHBHUp/ZZBkaGFABYwCSJyANNcUBgcGhg+3GB/8fwCUfMCgAFIDV6AAhIwARVcMJwAAeJx1jrFOwzAURU/SNKgFIVgQ6uSRKWolZjaQOnQBqQNb2lpRpMqW3HTowhew8U9I/BU37WOjtmyfd/3utYEbvsn4G7lxRsmtcc4FD8YD6U/GhfjNeMglybjU/DQeM+FHrqwY2QsnzrgSnTjnmnvjgfSpcSF+Nh5yx7txKf3DeMwjX31soqajJdCoqLs26HzFq9yz1WVS6Zv9tk5nmv8Vl0pI7CRHXThmVPofS592bQxuVk3PGF+Ohk6WRhHhGNO3eTbSVhy0z1mra6HV91YyxdC5xgevFL9xq4Obr+MixlDxC/HTOrsAAHicY2BgYGaAYBkGRgYQiALyGMF8FgY7IM3FwMHABISMDAofbv3/+/8/WJXCh5tgNuP/x2A+RC8bUC0DUB8rWIgNiJkY8AJm/NJDHgAALqoOxgAAAHicY2BmwAsAAH0ABHicPY7BSsNAEIZnkk2zlhg1JKAYxOrJi6RepMdC8SKefAJP4kVBzCtkNw7ZjeK1j9C38Rn6CO5CDrppigwMM8P/f/8gMAaIGL4+vD09PwJ6gLCwp2AnaM88e+7bQ0aRTxE7GcPRffJL9D9EIX2bW+sFOXzu5QD7OSwPcuA5Xiew05N8CIDDLiSQuTqGSVmU0/KqKG+Kxaxv8+llMURvHwBAgRJrfEeCEaLns9HdRxzHP/FqaV4yaptWK25SkwZKu4Va0rUSWjYVVbz7CqmqhZBSiNodqGqk5l2vFqrW1PJ4tWbGqZxVKa31htA6gmN2aTBwBobzuYsU1YYkGheyZVBqLjKKxn8cSmvuAAB4nGNgZGBg4AFiAQYJBiYgzQLEIJoRggEFbQBAAAAAAQAAAADeTO04AAAAAM/9o+4AAAAA32BrKXicY2BAAEYQsZ1BiIEBAAPpAMsA") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Dropdown Icon */
+.ui.accordion .ui.header > .dropdown.icon,
+.ui.accordion .title > .dropdown.icon,
+.ui.accordion .accordion .title > .dropdown.icon {
+  font-family: Accordion;
+  line-height: 1;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  font-weight: normal;
+  font-style: normal;
+  text-align: center;
+}
+.ui.accordion .ui.header > .dropdown.icon::before,
+.ui.accordion .title > .dropdown.icon::before,
+.ui.accordion .accordion .title > .dropdown.icon::before {
+  content: "\f0da" 
+/* rtl: "\f0d9" */;
+}
+
+
+/*******************************
+        User Overrides
+*******************************/
+
