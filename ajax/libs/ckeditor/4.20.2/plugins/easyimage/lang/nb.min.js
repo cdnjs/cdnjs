@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("easyimage","nb",{commands:{fullImage:"Bilde i full bredde",sideImage:"Sidebilde",altText:"Endre alternativ tekst for bilde",upload:"Last opp bilde"},uploadFailed:"Bildet ditt kunne ikke lastes opp på grunn av en nettverksfeil."});

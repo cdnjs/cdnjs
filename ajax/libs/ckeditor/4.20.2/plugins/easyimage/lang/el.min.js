@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("easyimage","el",{commands:{fullImage:"Εικόνα Πλήρους Μεγέθους",sideImage:"Πλευρική Εικόνα",altText:"Αλλαγή εναλλακτικού κειμένου εικόνας",upload:"Αποστολή εικόνας"},uploadFailed:"Η εικόνα σας δεν απεστάλει λόγω σφάλματος δικτύου."});

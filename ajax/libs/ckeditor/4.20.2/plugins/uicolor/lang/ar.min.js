@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("uicolor","ar",{title:"منتقي الألوان",options:"خيارات الالوان",highlight:"تحديد",selected:"اللون المختار",predefined:"مجموعات ألوان معرفة مسبقا",config:"قص السطر إلى الملف config.js"});

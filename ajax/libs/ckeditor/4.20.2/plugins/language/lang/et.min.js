@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("language","et",{button:"Määra keel",remove:"Eemalda keel"});
