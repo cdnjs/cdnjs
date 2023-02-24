@@ -1,0 +1,8 @@
+/*!-----------------------------------------------------------
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Version: 0.36.0-dev.20230224(f2d1d1d4a1d685a9bcf4bb5d6929080866f20c39)
+ * Released under the MIT license
+ * https://github.com/microsoft/vscode/blob/main/LICENSE.txt
+ *-----------------------------------------------------------*/define("vs/base/common/worker/simpleWorker.nls.zh-tw",{"vs/base/common/platform":["_"]});
+
+//# sourceMappingURL=../../../../../min-maps/vs/base/common/worker/simpleWorker.nls.zh-tw.js.map
