@@ -1,0 +1,12 @@
+/* ===========================================================
+ * trumbowyg.cleanpaste.js v1.0
+ * Font Clean paste plugin for Trumbowyg
+ * http://alex-d.github.com/Trumbowyg
+ * ===========================================================
+ * Authors : Eric Radin
+ *           Todd Graham (slackwalker)
+ *
+ * This plugin will perform a "cleaning" on any paste, in particular
+ * it will clean pasted content of microsoft word document tags and classes.
+ */
+!function(e){"use strict";e.extend(!0,e.trumbowyg,{plugins:{cleanPaste:{init:function(t){t.pasteHandlers.push((function(r){setTimeout((function(){try{t.saveRange();var a=(r.originalEvent||r).clipboardData.getData("Text"),n=t.doc.getSelection().focusNode,c=t.doc.createRange(),g=((l=(l=(l=(l=(l=(l=(l=(l=(l=a.trim()).replace(/<[^> ]*/g,(function(e){return e.toLowerCase()})).replace(/<[^>]*>/g,(function(e){return e.replace(/ [^=]+=/g,(function(e){return e.toLowerCase()}))})).replace(/<[^>]*>/g,(function(e){return e.replace(/( [^=]+=)([^"][^ >]*)/g,'$1"$2"')}))).replace(/<b(\s+|>)/g,"<strong$1")).replace(/<\/b(\s+|>)/g,"</strong$1")).replace(/<i(\s+|>)/g,"<em$1")).replace(/<\/i(\s+|>)/g,"</em$1")).replace(/<!(?:--[\s\S]*?--\s*)?>\s*/g,"")).replace(/&nbsp;/gi," ")).replace(/ <\//gi,"</")).replace(/\s+/g," "),(l=(l=(l=(l=(l=l.replace(/^\s*|\s*$/g,"")).replace(/<[^>]*>/g,(function(e){return e.replace(/ ([^=]+)="[^"]*"/g,(function(e,t){return-1!==["alt","href","src","title"].indexOf(t)?e:""}))}))).replace(/<\?xml[^>]*>/g,"")).replace(/<[^ >]+:[^>]*>/g,"")).replace(/<\/[^ >]+:[^>]*>/g,"")).replace(/<(div|span|style|meta|link).*?>/gi,"")),o=e(g)[0]||t.doc.createTextNode(g);""===t.$ed.html()?t.$ed[0].appendChild(o):(c.setStartAfter(n),c.setEndAfter(n),t.doc.getSelection().removeAllRanges(),t.doc.getSelection().addRange(c),t.range.insertNode(o)),(c=t.doc.createRange()).setStartAfter(o),c.setEndAfter(o),t.doc.getSelection().removeAllRanges(),t.doc.getSelection().addRange(c),r.stopPropagation(),r.preventDefault(),t.saveRange(),t.syncCode(),t.$c.trigger("tbwchange")}catch(e){}var l}),0)}))}}}})}(jQuery);
