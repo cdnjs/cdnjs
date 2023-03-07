@@ -1,0 +1,43 @@
+import { p as parser, f as flowDb } from "./flowDb-5a8bd2d9.js";
+import { f as flowRendererV2, a as flowStyles } from "./styles-65aefd11.js";
+import { f as setConfig } from "./config-b494b248.js";
+import "d3";
+import "./utils-29e2c981.js";
+import "@braintree/sanitize-url";
+import "./setupGraphViewbox-8fe6c61e.js";
+import "./commonDb-25b8ddf3.js";
+import "lodash-es/memoize.js";
+import "./mermaidAPI-e76a50c5.js";
+import "stylis";
+import "./errorRenderer-992f6a03.js";
+import "dompurify";
+import "lodash-es/isEmpty.js";
+import "dagre-d3-es/src/graphlib/index.js";
+import "./index-e9a13be2.js";
+import "dagre-d3-es/src/dagre/index.js";
+import "dagre-d3-es/src/graphlib/json.js";
+import "./edges-43d9721f.js";
+import "./svgDraw-48fd3cf0.js";
+import "dagre-d3-es/src/dagre-js/label/add-html-label.js";
+import "dayjs";
+import "khroma";
+const diagram = {
+  parser,
+  db: flowDb,
+  renderer: flowRendererV2,
+  styles: flowStyles,
+  init: (cnf) => {
+    if (!cnf.flowchart) {
+      cnf.flowchart = {};
+    }
+    cnf.flowchart.arrowMarkerAbsolute = cnf.arrowMarkerAbsolute;
+    setConfig({ flowchart: { arrowMarkerAbsolute: cnf.arrowMarkerAbsolute } });
+    flowRendererV2.setConf(cnf.flowchart);
+    flowDb.clear();
+    flowDb.setGen("gen-2");
+  }
+};
+export {
+  diagram
+};
+//# sourceMappingURL=flowDiagram-v2-038b2271.js.map

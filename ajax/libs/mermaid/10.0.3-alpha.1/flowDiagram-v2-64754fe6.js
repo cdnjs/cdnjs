@@ -1,0 +1,29 @@
+import { p as e, f as o } from "./add-html-label-f8ade14b.js";
+import { f as t, a } from "./styles-d4fcceab.js";
+import { h as i } from "./config-f375a171.js";
+import "./utils-b2e69cd8.js";
+import "./setupGraphViewbox-dac9799b.js";
+import "./commonDb-c3b2438a.js";
+import "./mermaidAPI-fece337c.js";
+import "./errorRenderer-42e96268.js";
+import "./isPlainObject-968165b1.js";
+import "./array-2ff2c7a6.js";
+import "./constant-2fe7eae5.js";
+import "./layout-e273a7f9.js";
+import "./index-68383e12.js";
+import "./edges-e5ddee0c.js";
+import "./svgDraw-11c62cf9.js";
+import "./selectAll-04dc00f3.js";
+const y = {
+  parser: e,
+  db: o,
+  renderer: t,
+  styles: a,
+  init: (r) => {
+    r.flowchart || (r.flowchart = {}), r.flowchart.arrowMarkerAbsolute = r.arrowMarkerAbsolute, i({ flowchart: { arrowMarkerAbsolute: r.arrowMarkerAbsolute } }), t.setConf(r.flowchart), o.clear(), o.setGen("gen-2");
+  }
+};
+export {
+  y as diagram
+};
+//# sourceMappingURL=flowDiagram-v2-64754fe6.js.map
