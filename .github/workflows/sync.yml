@@ -19,8 +19,10 @@ jobs:
            --sparse \
            https://${{ secrets.ROBOCDNJS_TOKEN }}@github.com/cdnjs/cdnjs.git
      - name: sync
+       env:
+         MAX_UPDATES_PER_RUN: 1
        run: |
-         wget https://github.com/cdnjs/tools/releases/download/c89986b3269ef88a4c916983cbac5dd7d391980b9/git-sync
+         wget https://github.com/cdnjs/tools/releases/download/c22a38683907e1654befa26a8fc038d06f4d04d43/git-sync
          chmod +x ./git-sync
          cd cdnjs
          git config user.name robocdnjs
