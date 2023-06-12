@@ -20,16 +20,11 @@ jobs:
            https://${{ secrets.ROBOCDNJS_TOKEN }}@github.com/cdnjs/cdnjs.git
      - name: sync
        env:
-         MAX_UPDATES_PER_RUN: 50
+         PUSH_FREQ: 3
        run: |
-         wget https://github.com/cdnjs/tools/releases/download/c22a38683907e1654befa26a8fc038d06f4d04d43/git-sync
+         wget https://github.com/cdnjs/tools/releases/download/ccdcd747fe302d8ee86c191a2c2762a6a938188b9/git-sync
          chmod +x ./git-sync
          cd cdnjs
          git config user.name robocdnjs
          git config user.email cdnjs-github@cloudflare.com
          ../git-sync ./last-sync cdnjs-outgoing-prod
-         
-     - name: push
-       run: |
-         cd cdnjs
-         git push https://robocdnjs:${{ secrets.ROBOCDNJS_TOKEN }}@github.com/cdnjs/cdnjs.git
