@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '0 * * * *'
   workflow_dispatch:
+    inputs:
+      push_freq:
+        description: 'Push frequency'
+        type: number
+        required: true
 
 jobs:
   sync:
@@ -20,7 +25,7 @@ jobs:
            https://${{ secrets.ROBOCDNJS_TOKEN }}@github.com/cdnjs/cdnjs.git
      - name: sync
        env:
-         PUSH_FREQ: 3
+         PUSH_FREQ: ${{ inputs.push_freq || 5 }}
        run: |
          wget https://github.com/cdnjs/tools/releases/download/ccdcd747fe302d8ee86c191a2c2762a6a938188b9/git-sync
          chmod +x ./git-sync
