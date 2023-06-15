@@ -1,0 +1,1070 @@
+/*!
+ * file : layx.css
+ * gitee : https://gitee.com/monksoul/LayX
+ * github : https://github.com/MonkSoul/Layx/
+ * author : 百小僧/MonkSoul
+ * version : v2.5.4
+ * create time : 2018.05.11
+ * update time : 2018.11.03
+ */
+
+*[class^="layx-"] {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+
+.layx-flexbox {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    display: -webkit-flex;
+}
+
+.layx-flex-vertical {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-align-items: center;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-justify-content: flex-start;
+}
+
+.layx-flex-center {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-justify-content: center;
+}
+
+.layx-flexauto {
+    flex: 1;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+}
+
+.layx-shade,
+#layx-window-move {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+}
+
+body.ilayx-body {
+    overflow: hidden !important;
+}
+
+.layx-window {
+    position: fixed;
+    overflow: visible !important;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    color: #000;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    visibility: visible;
+    border: none;
+}
+
+.layx-window.layx-flicker {
+    animation-name: layx-flicker;
+    -webkit-animation-name: layx-flicker;
+    -moz-animation-name: layx-flicker;
+    animation-duration: 0.12s;
+    -webkit-animation-duration: 0.12s;
+    -moz-animation-duration: 0.12s;
+    animation-iteration-count: 8;
+    -webkit-animation-iteration-count: 8;
+    -moz-animation-iteration-count: 8;
+}
+
+.layx-window.layx-max-statu, .layx-window.layx-max-statu .layx-control-bar, .layx-window.layx-max-statu .layx-main, .layx-window.layx-max-statu .layx-statu-bar {
+    border-radius: 0px !important;
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+}
+
+.layx-window.layx-min-statu {
+    min-height: 0 !important;
+    overflow: hidden !important;
+    min-width: 0 !important;
+}
+
+.layx-window.layx-min-statu .layx-title {
+    overflow: hidden !important;
+}
+
+.layx-window.layx-min-statu .layx-inlay-menus .layx-stick-menu,
+.layx-window.layx-min-statu .layx-inlay-menus .layx-debug-menu {
+    display: none;
+}
+
+.layx-window.layx-bubble-type {
+    overflow: visible !important;
+    position: absolute !important;
+}
+
+.layx-window.layx-hide-statu {
+    display: none !important;
+}
+
+.layx-control-bar {
+    min-height: 30px;
+    overflow: hidden;
+    width: 100%;
+    padding-left: 5px;
+}
+
+.layx-iconfont {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+    font-size: 14px;
+    line-height: normal;
+    display: block;
+    line-height: normal;
+}
+
+.layx-icon {
+    text-align: center;
+}
+
+.layx-icon * {
+    pointer-events: none;
+}
+
+.layx-left-bar {
+    margin-right: 5px;
+}
+
+.layx-window-icon {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.layx-window-icon .layx-iconfont {
+    font-size: 16px;
+}
+
+.layx-title,
+.layx-group-tab {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-right: 5px;
+    min-width: 0;
+    -ms-touch-action: none;
+    touch-action: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.layx-title {
+    -webkit-app-region: drag;
+}
+
+.layx-group-tab {
+    -webkit-app-region: no-drag;
+}
+
+.layx-title .layx-label,
+.layx-group-title .layx-label {
+    line-height: normal;
+    font-size: 14px;
+    max-width: 100%;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    pointer-events: none;
+    visibility: visible;
+    position: relative;
+    top: -1px;
+    top: 0px\0;
+}
+
+.layx-group-tab .layx-label {
+    line-height: 28px;
+}
+
+.layx-group-tab.layx-type-group {
+    overflow: visible;
+    margin-right: 0;
+    border-bottom: 1px solid #dddddd;
+}
+
+.layx-control-bar.layx-type-group {
+    overflow: visible;
+    border-bottom: 1px solid #dddddd;
+}
+
+.layx-group-title {
+    height: 27px;
+    line-height: 25px;
+    max-width: 150px;
+    width: 150px;
+    padding: 0 8px;
+    background-color: #f5f5f5;
+    border: 1px solid #dddddd;
+    border-width: 1px 1px 0 0;
+    position: relative;
+    color: #666;
+    white-space: nowrap;
+    min-width: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.layx-title.layx-type-group .layx-group-title {
+    height: 30px;
+    line-height: 34px;
+}
+
+.layx-title.layx-type-group {
+    overflow: visible;
+}
+
+.layx-title.layx-type-group .layx-group-title:first-child {
+    border-left: 1px solid #dddddd;
+}
+
+.layx-group-title[data-enable="1"] {
+    background-color: #fff;
+    color: #000;
+}
+
+.layx-group-title[data-enable="1"]::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    content: '';
+    border-bottom: 1px solid #fff;
+}
+
+.layx-inlay-menus {
+    height: 100%;
+    height: 30px;
+    line-height: 30px;
+    position: relative;
+    max-height: 30px;
+    z-index: 2;
+}
+
+.layx-inlay-menus .layx-icon {
+    width: 45px;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.layx-inlay-menus .layx-icon:hover {
+    background-color: #e5e5e5;
+}
+
+.layx-inlay-menus .layx-icon.layx-destroy-menu:hover {
+    background-color: #e81123 !important;
+    color: #fff !important;
+}
+
+.layx-inlay-menus .layx-icon.layx-stick-menu[data-enable='1'] {
+    color: #f00;
+}
+
+.layx-main {
+    overflow: auto;
+    position: relative;
+    clear: both;
+    -webkit-overflow-scrolling: touch;
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-app-region: no-drag;
+}
+
+.layx-readonly {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 199205270356;
+}
+
+.layx-group-main {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 0;
+    visibility: hidden;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    -webkit-transform: translate3d(0, 0, 0);
+}
+
+.layx-group-main[data-enable="1"] {
+    z-index: 1;
+    visibility: visible;
+}
+
+.layx-mouse-preventDefault {
+    position: absolute;
+    z-index: 3;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    background-color: transparent;
+}
+
+.layx-content-shade {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.layx-html {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    -webkit-overflow-scrolling: touch;
+    -webkit-transform: translate3d(0, 0, 0);
+    overflow: auto;
+}
+
+.layx-dialog-icon {
+    margin-right: 10px;
+    position: relative;
+    top: -5px;
+}
+
+.layx-dialog-icon .layx-iconfont {
+    font-size: 40px !important;
+}
+
+.layx-dialog-msg .layx-dialog-icon .layx-iconfont, .layx-dialog-tip .layx-dialog-icon .layx-iconfont {
+    font-size: 25px !important;
+}
+
+.layx-dialog-msg .layx-dialog-icon, .layx-dialog-tip .layx-dialog-icon {
+    top: 0;
+}
+
+.layx-dialog-icon-success {
+    color: #01AAED;
+}
+
+.layx-dialog-icon-warn {
+    color: #FFB800;
+}
+
+.layx-dialog-icon-error {
+    color: #f00;
+}
+
+.layx-dialog-icon-help {
+    color: #009688;
+}
+
+.layx-dialog-msg,
+.layx-dialog-tip,
+.layx-dialog-load {
+    color: #000;
+    padding: 10px;
+}
+
+.layx-dialog-alert,
+.layx-dialog-confirm,
+.layx-dialog-prompt {
+    padding: 10px;
+    color: #039;
+}
+
+.layx-dialog-prompt {
+    width: 100%;
+}
+
+.layx-dialog-msg, .layx-dialog-tip {
+    height: 100%;
+}
+
+.layx-dialog-content {
+    font-size: 14px;
+}
+
+.layx-textarea {
+    display: block;
+    border: 1px solid #dddddd;
+    width: 100%;
+    resize: none;
+    height: 60px;
+    margin-top: 8px;
+    padding: 8px;
+    font-size: 15px;
+    color: #000;
+    line-height: 1.5;
+}
+
+.layx-textarea:focus {
+    border: 1px solid #3baced;
+}
+
+.layx-buttons {
+    padding: 8px 10px;
+    text-align: right;
+}
+
+.layx-button-item {
+    padding: 0 16px;
+    height: 24px;
+    line-height: normal;
+    color: #000;
+    font-size: 14px;
+    border: 1px solid #adadad;
+    outline: none;
+    margin-left: 8px;
+    display: inline-block;
+    background-color: #e1e1e1;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.layx-buttons .layx-button-item:hover {
+    background-color: #e5f1fb;
+    border: 1px solid #0078d7;
+}
+
+.layx-buttons .layx-button-item[disabled] {
+    color: #999;
+    cursor: not-allowed;
+}
+
+.layx-buttons .layx-button-item[disabled]:hover {
+    background-color: #e1e1e1;
+    border: 1px solid #adadad;
+}
+
+.layx-iframe {
+    width: 1px;
+    min-width: 100%;
+    *width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.layx-statu-bar {
+    border-top: 1px solid #dddddd;
+    min-height: 25px;
+    background-color: #eeeef2;
+}
+
+.layx-resizes[data-enable='0'] {
+    visibility: hidden;
+}
+
+.layx-resizes > div {
+    position: absolute;
+    z-index: 3;
+    -ms-touch-action: none;
+    touch-action: none;
+}
+
+.layx-resize-top,
+.layx-resize-bottom {
+    height: 3px;
+    left: 3px;
+    right: 3px;
+}
+
+.layx-resize-top {
+    top: 0;
+    cursor: n-resize;
+}
+
+.layx-resize-bottom {
+    bottom: 0;
+    cursor: s-resize;
+}
+
+.layx-resize-left,
+.layx-resize-right {
+    width: 3px;
+    top: 3px;
+    bottom: 3px;
+}
+
+.layx-resize-left {
+    left: 0;
+    cursor: w-resize;
+}
+
+.layx-resize-right {
+    right: 0;
+    cursor: e-resize;
+}
+
+.layx-resize-left-top,
+.layx-resize-right-top,
+.layx-resize-left-bottom,
+.layx-resize-right-bottom {
+    width: 3px;
+    height: 3px;
+}
+
+.layx-resize-left-top {
+    left: 0;
+    top: 0;
+    cursor: nw-resize;
+}
+
+.layx-resize-right-top {
+    right: 0;
+    top: 0;
+    cursor: ne-resize;
+}
+
+.layx-resize-left-bottom {
+    left: 0;
+    bottom: 0;
+    cursor: sw-resize;
+}
+
+.layx-resize-right-bottom {
+    right: 0;
+    bottom: 0;
+    cursor: se-resize;
+}
+
+.layx-resize-top.layx-reisize-touch,
+.layx-resize-bottom.layx-reisize-touch {
+    height: 16px;
+    left: 16px;
+    right: 16px;
+}
+
+.layx-resize-left.layx-reisize-touch,
+.layx-resize-right.layx-reisize-touch {
+    width: 16px;
+    top: 16px;
+    bottom: 16px;
+}
+
+.layx-resize-left-top.layx-reisize-touch,
+.layx-resize-right-top.layx-reisize-touch,
+.layx-resize-left-bottom.layx-reisize-touch,
+.layx-resize-right-bottom.layx-reisize-touch {
+    width: 16px;
+    height: 16px;
+}
+
+.layx-resize-top.layx-reisize-touch {
+    top: -8px;
+}
+
+.layx-resize-bottom.layx-reisize-touch {
+    bottom: -8px;
+}
+
+.layx-resize-left.layx-reisize-touch {
+    left: -8px;
+}
+
+.layx-resize-right.layx-reisize-touch {
+    right: -8px;
+}
+
+.layx-resize-left-top.layx-reisize-touch {
+    left: -8px;
+    top: -8px;
+}
+
+.layx-resize-right-top.layx-reisize-touch {
+    right: -8px;
+    top: -8px;
+}
+
+.layx-resize-left-bottom.layx-reisize-touch {
+    left: -8px;
+    bottom: -8px;
+}
+
+.layx-resize-right-bottom.layx-reisize-touch {
+    right: -8px;
+    bottom: -8px;
+}
+
+.layx-resize-left[data-enable='0'],
+.layx-resize-top[data-enable='0'],
+.layx-resize-right[data-enable='0'],
+.layx-resize-bottom[data-enable='0'],
+.layx-resize-left-top[data-enable='0'],
+.layx-resize-left-bottom[data-enable='0'],
+.layx-resize-right-top[data-enable='0'],
+.layx-resize-right-bottom[data-enable='0'] {
+    visibility: hidden;
+}
+
+.layx-auto-destroy-tip {
+    position: absolute;
+    bottom: 3px;
+    right: 3px;
+    height: 25px;
+    line-height: 25px;
+    z-index: 5;
+    color: #444;
+    background-color: #f1f1f1;
+    padding: 0 8px;
+    font-size: 13px;
+}
+
+.layx-code {
+    border: 1px solid #dedede;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    -webkit-overflow-scrolling: touch;
+    -webkit-transform: translate3d(0, 0, 0);
+    background: #f5f5f5;
+    overflow: auto;
+}
+
+.layx-bubble,
+.layx-bubble-inlay {
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+
+.layx-bubble-bottom {
+    top: -11px;
+    left: 2px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 11px solid transparent;
+}
+
+.layx-bubble-inlay-bottom {
+    top: 2px;
+    left: -9px;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 9px solid transparent;
+}
+
+.layx-bubble-top {
+    bottom: -11px;
+    left: 2px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 11px solid transparent;
+}
+
+.layx-bubble-inlay-top {
+    bottom: 2px;
+    left: -9px;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-top: 9px solid transparent;
+}
+
+.layx-bubble-right {
+    top: 2px;
+    left: -11px;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 11px solid transparent;
+}
+
+.layx-bubble-inlay-right {
+    top: -9px;
+    left: 2px;
+    border-top: 9px solid transparent;
+    border-bottom: 9px solid transparent;
+    border-right: 9px solid transparent;
+}
+
+.layx-bubble-left {
+    top: 2px;
+    right: -11px;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 11px solid transparent;
+}
+
+.layx-bubble-inlay-left {
+    top: -9px;
+    right: 2px;
+    border-top: 9px solid transparent;
+    border-bottom: 9px solid transparent;
+    border-left: 9px solid transparent;
+}
+
+.layx-pre {
+    height: auto;
+    width: 100%;
+    font-size: 14px;
+    font-family: Arial;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    display: block;
+    font-family: Arial;
+}
+
+.layx-dot {
+    display: inline-block;
+    width: 25px;
+}
+
+.layx-load-animate {
+    width: 32px;
+    height: 32px;
+    position: relative;
+    margin-right: 10px;
+}
+
+.layx-load-inner, .layx-load-inner2 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 40px;
+    -webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
+    overflow: hidden;
+    left: 0;
+    top: 0;
+}
+
+.layx-load-inner {
+    opacity: 1;
+    background-color: #89abdd;
+    -webkit-animation: layx-second-half-hide 1.6s steps(1, end) infinite;
+    animation: layx-second-half-hide 1.6s steps(1, end) infinite;
+    -moz-animation: layx-second-half-hide 1.6s steps(1, end) infinite;
+}
+
+.layx-load-inner2 {
+    opacity: 0;
+    background-color: #4b86db;
+    -webkit-animation: layx-second-half-show 1.6s steps(1, end) infinite;
+    animation: layx-second-half-show 1.6s steps(1, end) infinite;
+    -moz-animation: layx-second-half-show 1.6s steps(1, end) infinite;
+}
+
+.layx-load-spiner, .layx-load-filler, .layx-load-masker {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+}
+
+.layx-load-spiner {
+    border-radius: 40px 0 0 40px;
+    -webkit-border-radius: 40px 0 0 40px;
+    -moz-border-radius: 40px 0 0 40px;
+    background-color: #4b86db;
+    -webkit-transform-origin: right center;
+    -ms-transform-origin: right center;
+    transform-origin: right center;
+    -moz-transform-origin: right center;
+    -webkit-animation: layx-spin 800ms infinite linear;
+    animation: layx-spin 800ms infinite linear;
+    -moz-animation: layx-spin 800ms infinite linear;
+    left: 0;
+    top: 0;
+}
+
+.layx-load-filler {
+    border-radius: 0 40px 40px 0;
+    -webkit-border-radius: 0 40px 40px 0;
+    -moz-border-radius: 0 40px 40px 0;
+    background-color: #4b86db;
+    -webkit-animation: layx-second-half-hide 800ms steps(1, end) infinite;
+    animation: layx-second-half-hide 800ms steps(1, end) infinite;
+    -moz-animation: layx-second-half-hide 800ms steps(1, end) infinite;
+    left: 50%;
+    top: 0;
+    opacity: 1;
+}
+
+.layx-load-masker {
+    border-radius: 40px 0 0 40px;
+    -moz-border-radius: 40px 0 0 40px;
+    -webkit-border-radius: 40px 0 0 40px;
+    background-color: #89abdd;
+    -webkit-animation: layx-second-half-show 800ms steps(1, end) infinite;
+    animation: layx-second-half-show 800ms steps(1, end) infinite;
+    -moz-animation: layx-second-half-show 800ms steps(1, end) infinite;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.layx-load-inner2 .layx-load-spiner, .layx-load-inner2 .layx-load-filler {
+    background-color: #89abdd;
+}
+
+.layx-load-inner2 .layx-load-masker {
+    background-color: #4b86db;
+}
+/*default 皮肤*/
+.layx-window.layx-skin-default {
+    border: 1px solid #3baced;
+}
+
+.layx-window.layx-skin-default .layx-control-bar {
+    background-color: #fff;
+}
+
+.layx-window.layx-skin-default .layx-inlay-menus .layx-icon:hover {
+}
+
+.layx-window.layx-skin-default .layx-button-item {
+}
+
+.layx-window.layx-skin-default .layx-button-item:hover {
+}
+/*cloud 皮肤*/
+.layx-window.layx-skin-cloud {
+}
+
+.layx-window.layx-skin-cloud .layx-control-bar {
+    background-color: #ecf0f1;
+}
+
+.layx-window.layx-skin-cloud .layx-inlay-menus .layx-icon:hover {
+    background-color: #bdc3c7;
+}
+
+.layx-window.layx-skin-cloud .layx-button-item {
+    background-color: #ecf0f1;
+    border: 1px solid #ccc;
+}
+
+.layx-window.layx-skin-cloud .layx-button-item:hover {
+    background-color: #bdc3c7;
+    color: #fff;
+    border: 1px solid #ecf0f1;
+}
+
+/*turquoise 皮肤*/
+.layx-window.layx-skin-turquoise {
+}
+
+.layx-window.layx-skin-turquoise .layx-control-bar {
+    background-color: #1abc9c;
+    color: #fff;
+}
+
+.layx-window.layx-skin-turquoise .layx-inlay-menus .layx-icon:hover {
+    background-color: #16a085;
+}
+
+.layx-window.layx-skin-turquoise .layx-button-item {
+    background-color: #1abc9c;
+    color: #fff;
+    border: 1px solid#1abc9c;
+}
+
+.layx-window.layx-skin-turquoise .layx-button-item:hover {
+    background-color: #16a085;
+    border: 1px solid #1abc9c;
+}
+/*river 皮肤*/
+.layx-window.layx-skin-river {
+}
+
+.layx-window.layx-skin-river .layx-control-bar {
+    background-color: #3498db;
+    color: #fff;
+}
+
+.layx-window.layx-skin-river .layx-inlay-menus .layx-icon:hover {
+    background-color: #2980b9;
+}
+
+.layx-window.layx-skin-river .layx-button-item {
+    background-color: #3498db;
+    color: #fff;
+    border: 1px solid #3498db;
+}
+
+.layx-window.layx-skin-river .layx-button-item:hover {
+    background-color: #2980b9;
+    border: 1px solid #3498db;
+}
+
+/*asphalt 皮肤*/
+.layx-window.layx-asphalt-river {
+}
+
+.layx-window.layx-skin-asphalt .layx-control-bar {
+    background-color: #34495e;
+    color: #fff;
+}
+
+.layx-window.layx-skin-asphalt .layx-inlay-menus .layx-icon:hover {
+    background-color: #2c3e50;
+}
+
+.layx-window.layx-skin-asphalt .layx-button-item {
+    background-color: #34495e;
+    color: #fff;
+    border: 1px solid #34495e;
+}
+
+.layx-window.layx-skin-asphalt .layx-button-item:hover {
+    background-color: #2c3e50;
+    border: 1px solid #34495e;
+}
+
+@keyframes layx-flicker {
+    from {
+        -webkit-box-shadow: 1px 1px 24px rgba(0, 0, 0, .3);
+        box-shadow: 1px 1px 24px rgba(0, 0, 0, .3);
+        -moz-box-shadow: 1px 1px 24px rgba(0, 0, 0, .3);
+    }
+
+    to {
+        -webkit-box-shadow: 1px 1px 12px rgba(0, 0, 0, .3);
+        box-shadow: 1px 1px 12px rgba(0, 0, 0, .3);
+        -moz-box-shadow: 1px 1px 12px rgba(0, 0, 0, .3);
+    }
+}
+
+@-webkit-keyframes layx-flicker {
+    from {
+        -webkit-box-shadow: 1px 1px 24px rgba(0, 0, 0, .3);
+        box-shadow: 1px 1px 24px rgba(0, 0, 0, .3);
+        -moz-box-shadow: 1px 1px 24px rgba(0, 0, 0, .3);
+    }
+
+    to {
+        -webkit-box-shadow: 1px 1px 12px rgba(0, 0, 0, .3);
+        box-shadow: 1px 1px 12px rgba(0, 0, 0, .3);
+        -moz-box-shadow: 1px 1px 12px rgba(0, 0, 0, .3);
+    }
+}
+
+@-webkit-keyframes layx-spin {
+    0% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+    }
+}
+
+@keyframes layx-spin {
+    0% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+    }
+}
+
+@-webkit-keyframes layx-second-half-hide {
+    0% {
+        opacity: 1;
+    }
+
+    50%, 100% {
+        opacity: 0;
+    }
+}
+
+@keyframes layx-second-half-hide {
+    0% {
+        opacity: 1;
+    }
+
+    50%, 100% {
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes layx-second-half-show {
+    0% {
+        opacity: 0;
+    }
+
+    50%, 100% {
+        opacity: 1;
+    }
+}
+
+@keyframes layx-second-half-show {
+    0% {
+        opacity: 0;
+    }
+
+    50%, 100% {
+        opacity: 1;
+    }
+}
