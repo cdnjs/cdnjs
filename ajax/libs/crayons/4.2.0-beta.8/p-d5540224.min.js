@@ -1,0 +1,1 @@
+function e({date:e,locale:o,options:t}={date:new Date,locale:[],options:{}}){const n=new Date(e);if(!isNaN(n.getMilliseconds()))return new Intl.DateTimeFormat(o||[],{weekday:t.weekday,year:t.year,month:t.month,day:t.day,hour:t.hour,minute:t.minute,second:t.second,timeZoneName:t.timeZoneName,timeZone:t.timeZone,hour12:t.hour12}).format(n)}export{e as f};
