@@ -1,0 +1,46 @@
+import _define_property from "@swc/helpers/src/_define_property.mjs";
+import _object_spread from "@swc/helpers/src/_object_spread.mjs";
+import _object_spread_props from "@swc/helpers/src/_object_spread_props.mjs";
+import _object_without_properties from "@swc/helpers/src/_object_without_properties.mjs";
+import * as React from "react";
+import { classNames } from "@vkontakte/vkjs";
+import { useAdaptivity } from "../../hooks/useAdaptivity";
+import { useFocusVisible } from "../../hooks/useFocusVisible";
+import { usePlatform } from "../../hooks/usePlatform";
+import { SizeType } from "../../lib/adaptivity";
+import { callMultiple } from "../../lib/callMultiple";
+import { Platform } from "../../lib/platform";
+import { FocusVisible } from "../FocusVisible/FocusVisible";
+import { VisuallyHiddenInput } from "../VisuallyHiddenInput/VisuallyHiddenInput";
+var sizeYClassNames = _define_property({
+    none: "vkuiSwitch--sizeY-none"
+}, SizeType.COMPACT, "vkuiSwitch--sizeY-compact");
+/**
+ * @see https://vkcom.github.io/VKUI/#/Switch
+ */ export var Switch = function(_param) {
+    var style = _param.style, className = _param.className, getRootRef = _param.getRootRef, restProps = _object_without_properties(_param, [
+        "style",
+        "className",
+        "getRootRef"
+    ]);
+    var platform = usePlatform();
+    var _useAdaptivity = useAdaptivity(), _useAdaptivity_sizeY = _useAdaptivity.sizeY, sizeY = _useAdaptivity_sizeY === void 0 ? "none" : _useAdaptivity_sizeY;
+    var _useFocusVisible = useFocusVisible(), onBlur = _useFocusVisible.onBlur, onFocus = _useFocusVisible.onFocus;
+    return /*#__PURE__*/ React.createElement("label", {
+        className: classNames("vkuiSwitch", platform === Platform.IOS && "vkuiSwitch--ios", sizeY !== SizeType.REGULAR && sizeYClassNames[sizeY], restProps.disabled && "vkuiSwitch--disabled", className),
+        style: style,
+        ref: getRootRef
+    }, /*#__PURE__*/ React.createElement(VisuallyHiddenInput, _object_spread_props(_object_spread({}, restProps), {
+        type: "checkbox",
+        className: "vkuiSwitch__self",
+        onBlur: callMultiple(onBlur, restProps.onBlur),
+        onFocus: callMultiple(onFocus, restProps.onFocus)
+    })), /*#__PURE__*/ React.createElement("span", {
+        "aria-hidden": true,
+        className: "vkuiSwitch__pseudo"
+    }), /*#__PURE__*/ React.createElement(FocusVisible, {
+        mode: "outside"
+    }));
+};
+
+//# sourceMappingURL=Switch.js.map
