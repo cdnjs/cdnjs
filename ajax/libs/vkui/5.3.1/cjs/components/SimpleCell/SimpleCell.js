@@ -1,0 +1,91 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "SimpleCell", {
+    enumerable: true,
+    get: function() {
+        return SimpleCell;
+    }
+});
+var _defineProperty = require("@swc/helpers/lib/_define_property.js").default;
+var _interopRequireWildcard = require("@swc/helpers/lib/_interop_require_wildcard.js").default;
+var _objectSpread = require("@swc/helpers/lib/_object_spread.js").default;
+var _objectSpreadProps = require("@swc/helpers/lib/_object_spread_props.js").default;
+var _objectWithoutProperties = require("@swc/helpers/lib/_object_without_properties.js").default;
+var _react = /*#__PURE__*/ _interopRequireWildcard(require("react"));
+var _icons = require("@vkontakte/icons");
+var _vkjs = require("@vkontakte/vkjs");
+var _useAdaptivity = require("../../hooks/useAdaptivity");
+var _usePlatform = require("../../hooks/usePlatform");
+var _adaptivity = require("../../lib/adaptivity");
+var _platform = require("../../lib/platform");
+var _tappable = require("../Tappable/Tappable");
+var _headline = require("../Typography/Headline/Headline");
+var _subhead = require("../Typography/Subhead/Subhead");
+var platformClassNames = {
+    ios: (0, _vkjs.classNames)("vkuiSimpleCell--ios", "vkuiInternalSimpleCell--ios"),
+    android: "vkuiSimpleCell--android",
+    vkcom: "vkuiSimpleCell--vkcom"
+};
+var _obj;
+var sizeYClassNames = (_obj = {
+    none: (0, _vkjs.classNames)("vkuiSimpleCell--sizeY-none", "vkuiInternalSimpleCell--sizeY-none")
+}, _defineProperty(_obj, _adaptivity.SizeType.COMPACT, (0, _vkjs.classNames)("vkuiSimpleCell--sizeY-compact", "vkuiInternalSimpleCell--sizeY-compact")), _defineProperty(_obj, _adaptivity.SizeType.REGULAR, "vkuiSimpleCell--sizeY-regular"), _obj);
+var SimpleCell = function(_param) {
+    var badgeBeforeTitle = _param.badgeBeforeTitle, badgeAfterTitle = _param.badgeAfterTitle, badgeBeforeSubtitle = _param.badgeBeforeSubtitle, badgeAfterSubtitle = _param.badgeAfterSubtitle, before = _param.before, indicator = _param.indicator, children = _param.children, after = _param.after, expandable = _param.expandable, multiline = _param.multiline, subhead = _param.subhead, subtitle = _param.subtitle, extraSubtitle = _param.extraSubtitle, className = _param.className, restProps = _objectWithoutProperties(_param, [
+        "badgeBeforeTitle",
+        "badgeAfterTitle",
+        "badgeBeforeSubtitle",
+        "badgeAfterSubtitle",
+        "before",
+        "indicator",
+        "children",
+        "after",
+        "expandable",
+        "multiline",
+        "subhead",
+        "subtitle",
+        "extraSubtitle",
+        "className"
+    ]);
+    var platform = (0, _usePlatform.usePlatform)();
+    var hasAfter = (0, _vkjs.hasReactNode)(after) || expandable && platform === _platform.Platform.IOS;
+    var _useAdaptivity1 = (0, _useAdaptivity.useAdaptivity)(), _useAdaptivity_sizeY = _useAdaptivity1.sizeY, sizeY = _useAdaptivity_sizeY === void 0 ? "none" : _useAdaptivity_sizeY;
+    return /*#__PURE__*/ _react.createElement(_tappable.Tappable, _objectSpreadProps(_objectSpread({}, restProps), {
+        className: (0, _vkjs.classNames)("vkuiSimpleCell", "vkuiInternalSimpleCell", platformClassNames.hasOwnProperty(platform) ? platformClassNames[platform] : platformClassNames.android, sizeYClassNames[sizeY], multiline && "vkuiSimpleCell--mult", className)
+    }), before, /*#__PURE__*/ _react.createElement("div", {
+        className: "vkuiSimpleCell__main"
+    }, subhead && /*#__PURE__*/ _react.createElement(_subhead.Subhead, {
+        Component: "span",
+        className: (0, _vkjs.classNames)("vkuiSimpleCell__text", "vkuiSimpleCell__subhead")
+    }, subhead), /*#__PURE__*/ _react.createElement("div", {
+        className: "vkuiSimpleCell__content"
+    }, badgeBeforeTitle && /*#__PURE__*/ _react.createElement("span", {
+        className: "vkuiSimpleCell__badge"
+    }, badgeBeforeTitle), /*#__PURE__*/ _react.createElement(_headline.Headline, {
+        Component: "span",
+        className: "vkuiSimpleCell__children",
+        weight: "3"
+    }, children), (0, _vkjs.hasReactNode)(badgeAfterTitle) && /*#__PURE__*/ _react.createElement("span", {
+        className: "vkuiSimpleCell__badge"
+    }, badgeAfterTitle)), subtitle && /*#__PURE__*/ _react.createElement("div", {
+        className: "vkuiSimpleCell__content"
+    }, badgeBeforeSubtitle && /*#__PURE__*/ _react.createElement("span", {
+        className: "vkuiSimpleCell__badge"
+    }, badgeBeforeSubtitle), /*#__PURE__*/ _react.createElement("span", {
+        className: (0, _vkjs.classNames)("vkuiSimpleCell__typography", "vkuiSimpleCell__text", "vkuiSimpleCell__subtitle")
+    }, subtitle), badgeAfterSubtitle && /*#__PURE__*/ _react.createElement("span", {
+        className: "vkuiSimpleCell__badge"
+    }, badgeAfterSubtitle)), extraSubtitle && /*#__PURE__*/ _react.createElement("span", {
+        className: (0, _vkjs.classNames)("vkuiSimpleCell__typography", "vkuiSimpleCell__text", "vkuiSimpleCell__extraSubtitle")
+    }, extraSubtitle)), (0, _vkjs.hasReactNode)(indicator) && /*#__PURE__*/ _react.createElement(_headline.Headline, {
+        Component: "span",
+        weight: "3",
+        className: "vkuiSimpleCell__indicator"
+    }, indicator), hasAfter && /*#__PURE__*/ _react.createElement("div", {
+        className: (0, _vkjs.classNames)("vkuiSimpleCell__after", "vkuiInternalSimpleCell__after")
+    }, after, expandable && platform === _platform.Platform.IOS && /*#__PURE__*/ _react.createElement(_icons.Icon24Chevron, null)));
+};
+
+//# sourceMappingURL=SimpleCell.js.map

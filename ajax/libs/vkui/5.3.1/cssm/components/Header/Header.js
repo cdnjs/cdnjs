@@ -1,0 +1,115 @@
+import * as React from 'react';
+import { classNames, hasReactNode, isPrimitiveReactNode } from '@vkontakte/vkjs';
+import { usePlatform } from '../../hooks/usePlatform';
+import { Platform } from '../../lib/platform';
+import { Footnote } from '../Typography/Footnote/Footnote';
+import { Headline } from '../Typography/Headline/Headline';
+import { Subhead } from '../Typography/Subhead/Subhead';
+import { Text } from '../Typography/Text/Text';
+import { Title } from '../Typography/Title/Title';
+import styles from './Header.module.css';
+const HeaderContent = ({ mode , size , ...restProps })=>{
+    const isLarge = size === 'large';
+    const platform = usePlatform();
+    if (platform === Platform.IOS) {
+        switch(mode){
+            case 'primary':
+                return isLarge ? /*#__PURE__*/ React.createElement(Title, {
+                    level: "2",
+                    weight: "2",
+                    ...restProps
+                }) : /*#__PURE__*/ React.createElement(Title, {
+                    weight: "1",
+                    level: "3",
+                    ...restProps
+                });
+            case 'tertiary':
+                return /*#__PURE__*/ React.createElement(Title, {
+                    weight: "1",
+                    level: "3",
+                    ...restProps
+                });
+            case 'secondary':
+                return /*#__PURE__*/ React.createElement(Footnote, {
+                    weight: "2",
+                    caps: true,
+                    ...restProps
+                });
+        }
+    }
+    if (platform === Platform.VKCOM) {
+        switch(mode){
+            case 'primary':
+                return isLarge ? /*#__PURE__*/ React.createElement(Title, {
+                    level: "2",
+                    weight: "1",
+                    ...restProps
+                }) : /*#__PURE__*/ React.createElement(Headline, {
+                    weight: "3",
+                    ...restProps
+                });
+            case 'secondary':
+            case 'tertiary':
+                return /*#__PURE__*/ React.createElement(Footnote, restProps);
+        }
+    }
+    switch(mode){
+        case 'primary':
+            return isLarge ? /*#__PURE__*/ React.createElement(Title, {
+                level: "2",
+                weight: "2",
+                ...restProps
+            }) : /*#__PURE__*/ React.createElement(Headline, {
+                weight: "2",
+                ...restProps
+            });
+        case 'tertiary':
+            return /*#__PURE__*/ React.createElement(Headline, {
+                weight: "2",
+                ...restProps
+            });
+        case 'secondary':
+            return /*#__PURE__*/ React.createElement(Footnote, {
+                weight: "1",
+                caps: true,
+                ...restProps
+            });
+    }
+    return null;
+};
+/**
+ * @see https://vkcom.github.io/VKUI/#/Header
+ */ export const Header = ({ mode ='primary' , size ='regular' , children , subtitle , indicator , aside , getRootRef , multiline , className , ...restProps })=>{
+    const platform = usePlatform();
+    const AsideTypography = platform === Platform.VKCOM ? Subhead : Text;
+    const SubtitleTypography = mode === 'secondary' ? Subhead : Footnote;
+    return /*#__PURE__*/ React.createElement("header", {
+        ...restProps,
+        ref: getRootRef,
+        className: classNames(styles['Header'], platform === Platform.VKCOM && styles['Header--vkcom'], platform === Platform.ANDROID && styles['Header--android'], platform === Platform.IOS && styles['Header--ios'], {
+            primary: styles['Header--mode-primary'],
+            secondary: styles['Header--mode-secondary'],
+            tertiary: styles['Header--mode-tertiary']
+        }[mode], isPrimitiveReactNode(indicator) && styles['Header--pi'], className)
+    }, /*#__PURE__*/ React.createElement("div", {
+        className: styles['Header__main']
+    }, /*#__PURE__*/ React.createElement(HeaderContent, {
+        className: styles['Header__content'],
+        Component: "span",
+        mode: mode,
+        size: size
+    }, /*#__PURE__*/ React.createElement("span", {
+        className: classNames(styles['Header__content-in'], multiline && styles['Header__content-in--multiline'])
+    }, children), hasReactNode(indicator) && /*#__PURE__*/ React.createElement(Footnote, {
+        className: styles['Header__indicator'],
+        weight: mode === 'primary' || mode === 'secondary' ? '1' : undefined
+    }, indicator)), hasReactNode(subtitle) && /*#__PURE__*/ React.createElement(SubtitleTypography, {
+        className: styles['Header__subtitle'],
+        Component: "span"
+    }, subtitle)), hasReactNode(aside) && /*#__PURE__*/ React.createElement(AsideTypography, {
+        className: styles['Header__aside'],
+        Component: "span"
+    }, aside));
+};
+
+//# sourceMappingURL=Header.js.map
