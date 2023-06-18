@@ -1,0 +1,108 @@
+import { type WaveSurferOptions } from '../index.js';
+import { type EnvelopePluginOptions } from './envelope.js';
+import EventEmitter from '../event-emitter.js';
+type TrackId = string | number;
+export type TrackOptions = {
+    id: TrackId;
+    url?: string;
+    peaks?: WaveSurferOptions['peaks'];
+    draggable?: boolean;
+    startPosition: number;
+    startCue?: number;
+    endCue?: number;
+    fadeInEnd?: number;
+    fadeOutStart?: number;
+    volume?: number;
+    markers?: Array<{
+        time: number;
+        label?: string;
+        color?: string;
+    }>;
+    regions?: Array<{
+        startTime: number;
+        endTime: number;
+        label?: string;
+        color?: string;
+    }>;
+    options?: WaveSurferOptions;
+};
+export type MultitrackOptions = {
+    container: HTMLElement;
+    minPxPerSec?: number;
+    cursorColor?: string;
+    cursorWidth?: number;
+    trackBackground?: string;
+    trackBorderColor?: string;
+    rightButtonDrag?: boolean;
+    envelopeOptions?: EnvelopePluginOptions;
+};
+export type MultitrackEvents = {
+    canplay: void;
+    'start-position-change': {
+        id: TrackId;
+        startPosition: number;
+    };
+    'start-cue-change': {
+        id: TrackId;
+        startCue: number;
+    };
+    'end-cue-change': {
+        id: TrackId;
+        endCue: number;
+    };
+    'fade-in-change': {
+        id: TrackId;
+        fadeInEnd: number;
+    };
+    'fade-out-change': {
+        id: TrackId;
+        fadeOutStart: number;
+    };
+    'volume-change': {
+        id: TrackId;
+        volume: number;
+    };
+    drop: {
+        id: TrackId;
+    };
+};
+type MultitrackTracks = Array<TrackOptions>;
+declare class MultiTrack extends EventEmitter<MultitrackEvents> {
+    private tracks;
+    private options;
+    private audios;
+    private wavesurfers;
+    private durations;
+    private currentTime;
+    private maxDuration;
+    private rendering;
+    private isDragging;
+    private frameRequest;
+    private timer;
+    private subscriptions;
+    private timeline;
+    static create(tracks: MultitrackTracks, options: MultitrackOptions): MultiTrack;
+    constructor(tracks: MultitrackTracks, options: MultitrackOptions);
+    private initDurations;
+    private initAudio;
+    private initAllAudios;
+    private initWavesurfer;
+    private initAllWavesurfers;
+    private initTimeline;
+    private updatePosition;
+    private setIsDragging;
+    private onDrag;
+    private onMove;
+    private findCurrentTracks;
+    private startSync;
+    play(): void;
+    pause(): void;
+    isPlaying(): boolean;
+    getCurrentTime(): number;
+    seekTo(time: number): void;
+    zoom(pxPerSec: number): void;
+    addTrack(track: TrackOptions): void;
+    destroy(): void;
+    setSinkId(sinkId: string): Promise<void[]>;
+}
+export default MultiTrack;
