@@ -1,0 +1,35 @@
+.snackbar {
+  position: fixed;
+  bottom: $snackbar-bottom;
+  left: $snackbar-left;
+  z-index: $zindex-snackbar;
+  min-width: $snackbar-min-width;
+  padding: $snackbar-padding;
+  font: 500 16px Roboto, sans-serif;
+  color: $snackbar-color;
+  background-color: $snackbar-bg;
+  @include border-radius($snackbar-border-radius);
+  opacity: 0;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1), cubic-bezier(.4, 0, .2, 1);
+  transition-duration: .3s, .3s;
+  transition-property: opacity, bottom;
+  transform: translate(-50%, 0);
+}
+
+.snackbar.show {
+  bottom: $snackbar-show-bottom;
+  opacity: 1;
+  transition-duration: .2s, .3s;
+}
+
+.snackbar.snackbar-start {
+  right: auto;
+  left: $snackbar-left-left;
+  transform: translate(0, 0);
+}
+
+.snackbar.snackbar-end {
+  right: $snackbar-right-right;
+  left: auto;
+  transform: translate(0, 0);
+}
