@@ -16,6 +16,11 @@ jobs:
     runs-on: self-hosted
 
     steps:
+     - name: clean
+       run: |
+         shopt -s dotglob && \
+           rm -rf *
+
      - name: clone
        run: |
          git clone \
@@ -23,6 +28,7 @@ jobs:
            --filter=blob:none \
            --sparse \
            https://${{ secrets.ROBOCDNJS_TOKEN }}@github.com/cdnjs/cdnjs.git
+
      - name: sync
        env:
          PUSH_FREQ: ${{ inputs.push_freq || 5 }}
