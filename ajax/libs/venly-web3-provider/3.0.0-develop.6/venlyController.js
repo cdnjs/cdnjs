@@ -1,0 +1,200 @@
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.VenlyController = void 0;
+const connect_1 = require("@venly/connect");
+const types_1 = require("./types");
+class VenlyController {
+    constructor(options) {
+        this.wallets = [];
+        this.options = options;
+        this.venlyConnect = new connect_1.VenlyConnect(options.clientId, {
+            environment: options.environment,
+            windowMode: options.windowMode,
+            bearerTokenProvider: options.bearerTokenProvider,
+            useOverlayWithPopup: false
+        });
+    }
+    authenticate() {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!this.authResult || !this.authResult.isAuthenticated)
+                this.authResult = yield this.venlyConnect.flows.authenticate({
+                    windowMode: (_a = this.options.authenticationOptions) === null || _a === void 0 ? void 0 : _a.windowMode,
+                    forcePopup: true,
+                    closePopup: (_b = this.options.authenticationOptions) === null || _b === void 0 ? void 0 : _b.closePopup
+                });
+            return this.authResult;
+        });
+    }
+    checkAuthenticated() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.authResult = yield this.venlyConnect.checkAuthenticated();
+        });
+    }
+    logout() {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.authResult = yield this.venlyConnect.logout();
+        });
+    }
+    getAccounts() {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!this.authResult || !this.authResult.isAuthenticated)
+                this.authResult = yield this.startGetAccountFlow(this.options.authenticationOptions);
+            else
+                yield this.refreshWallets();
+            return this.wallets.map((wallet) => wallet.address);
+        });
+    }
+    processTransaction(params, req) {
+        var _a;
+        return __awaiter(this, void 0, void 0, function* () {
+            const signer = this.venlyConnect.createSigner();
+            const transactionData = Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({ walletId: this.getWalletIdFrom(params.from), type: types_1.REQUEST_TYPES[this.options.secretType].transaction }, params.to && { to: params.to }), params.data && { data: params.data }), params.value && { value: BigInt(params.value).toString() }), params.gas && { gas: BigInt(params.gas).toString() }), params.gasPrice && { gasPrice: BigInt(params.gasPrice).toString() }), params.nonce && { nonce: BigInt(params.nonce).toString() });
+            const res = yield signer.executeNativeTransaction(transactionData);
+            if (res.status === 'SUCCESS')
+                return res.result.transactionHash;
+            else
+                throw new Error((_a = res.errors) === null || _a === void 0 ? void 0 : _a.join(', '));
+        });
+    }
+    processSignTransaction(params, req) {
+        var _a;
+        return __awaiter(this, void 0, void 0, function* () {
+            const signer = this.venlyConnect.createSigner();
+            const transactionData = Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({ walletId: this.getWalletIdFrom(params.from), type: types_1.REQUEST_TYPES[this.options.secretType].signature }, params.to && { to: params.to }), params.data && { data: params.data }), params.value && { value: BigInt(params.value).toString() }), params.gas && { gas: BigInt(params.gas).toString() }), params.gasPrice && { gasPrice: BigInt(params.gasPrice).toString() }), params.nonce && { nonce: BigInt(params.nonce).toString() });
+            const res = yield signer.sign(transactionData);
+            if (res.status === 'SUCCESS')
+                return res.result.signedTransaction;
+            else
+                throw new Error((_a = res.errors) === null || _a === void 0 ? void 0 : _a.join(', '));
+        });
+    }
+    processEthSignMessage(params, req) {
+        var _a;
+        return __awaiter(this, void 0, void 0, function* () {
+            const signer = this.venlyConnect.createSigner();
+            const res = yield signer.signMessage({
+                walletId: this.getWalletIdFrom(params.from),
+                secretType: this.options.secretType,
+                data: params.data
+            });
+            if (res.status === 'SUCCESS')
+                return res.result.signature;
+            else
+                throw new Error((_a = res.errors) === null || _a === void 0 ? void 0 : _a.join(', '));
+        });
+    }
+    processTypedMessage(params, req, version) {
+        var _a;
+        return __awaiter(this, void 0, void 0, function* () {
+            const signer = this.venlyConnect.createSigner();
+            const res = yield signer.signEip712({
+                walletId: this.getWalletIdFrom(params.from),
+                secretType: this.options.secretType,
+                data: JSON.parse(params.data)
+            });
+            if (res.status === 'SUCCESS')
+                return res.result.signature;
+            else
+                throw new Error((_a = res.errors) === null || _a === void 0 ? void 0 : _a.join(', '));
+        });
+    }
+    processPersonalMessage(params, req) {
+        var _a;
+        return __awaiter(this, void 0, void 0, function* () {
+            const signer = this.venlyConnect.createSigner();
+            const res = yield signer.signMessage({
+                walletId: this.getWalletIdFrom(params.from),
+                secretType: this.options.secretType,
+                data: params.data
+            });
+            if (res.status === 'SUCCESS')
+                return res.result.signature;
+            else
+                throw new Error((_a = res.errors) === null || _a === void 0 ? void 0 : _a.join(', '));
+        });
+    }
+    getTransactionByHash(hash) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const res = yield this.venlyConnect.api.getTransactionStatus(hash, this.options.secretType);
+            res.value = BigInt(res.rawValue).toString();
+            if (!res.data)
+                res.data = '0x';
+            const { rawValue } = res, transaction = __rest(res, ["rawValue"]);
+            return transaction;
+        });
+    }
+    getPendingTransactions() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const res = yield this.venlyConnect.api.getPendingTransactions();
+            return res.map((tx) => {
+                const _a = tx.transactionRequest, { rawValue, type } = _a, transaction = __rest(_a, ["rawValue", "type"]);
+                transaction.value = BigInt(transaction.value).toString();
+                return transaction;
+            });
+        });
+    }
+    refreshWallets() {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!this.lastWalletsFetch || (Date.now() - this.lastWalletsFetch) > 5000) {
+                let wallets = yield this.venlyConnect.api.getWallets({ secretType: this.options.secretType, includeBalance: false });
+                if (!wallets || wallets.length < 1) {
+                    let account = yield this.venlyConnect.flows.getAccount(this.options.secretType, this.options.authenticationOptions);
+                    wallets = account.wallets;
+                }
+                this.wallets = wallets;
+            }
+            this.lastWalletsFetch = Date.now();
+            return this.wallets;
+        });
+    }
+    startGetAccountFlow(authenticationOptions) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (authenticationOptions) {
+                this.options.authenticationOptions = authenticationOptions;
+            }
+            return this.venlyConnect.flows.getAccount(this.options.secretType, this.options.authenticationOptions)
+                .then((account) => __awaiter(this, void 0, void 0, function* () {
+                return yield new Promise((resolve, reject) => {
+                    if (!account.isAuthenticated)
+                        reject('not-authenticated');
+                    else if (account.wallets && account.wallets.length <= 0)
+                        reject('no-wallet-linked');
+                    else {
+                        this.wallets = account.wallets;
+                        this.lastWalletsFetch = Date.now();
+                        resolve(account);
+                    }
+                });
+            }));
+        });
+    }
+    getWalletIdFrom(address) {
+        let foundWallet = this.wallets.find((wallet) => {
+            var _a;
+            return ((_a = wallet.address) === null || _a === void 0 ? void 0 : _a.toLowerCase()) === (address === null || address === void 0 ? void 0 : address.toLowerCase());
+        });
+        return (foundWallet === null || foundWallet === void 0 ? void 0 : foundWallet.id) || '';
+    }
+}
+exports.VenlyController = VenlyController;
