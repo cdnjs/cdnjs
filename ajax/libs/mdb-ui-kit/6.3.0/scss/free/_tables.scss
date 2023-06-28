@@ -1,0 +1,45 @@
+//
+// Basic MDB table
+//
+
+.table {
+  --#{$prefix}table-font-size: #{$table-font-size};
+  --#{$prefix}table-divider-color: #{$table-divider-color};
+
+  font-size: var(--#{$prefix}table-font-size);
+
+  th {
+    font-weight: $font-weight-medium;
+  }
+
+  tbody {
+    font-weight: $font-weight-normal;
+  }
+
+  > :not(:last-child) > :last-child > * {
+    border-bottom-color: $table-group-separator-color;
+  }
+}
+
+@each $color, $value in $table-variants {
+  @include table-variant($color, $value);
+}
+
+.table-hover {
+  > tbody > tr {
+    transition: $table-hover-transition;
+  }
+  > tbody > tr:hover {
+    --#{$prefix}table-accent-bg: transparent;
+    background-color: var(--#{$prefix}table-hover-bg);
+  }
+}
+
+.table-group-divider {
+  border-top: (2 * $table-border-width) solid;
+  border-top-color: inherit;
+}
+
+.table-divider-color {
+  border-top-color: var(--#{$prefix}table-divider-color);
+}
