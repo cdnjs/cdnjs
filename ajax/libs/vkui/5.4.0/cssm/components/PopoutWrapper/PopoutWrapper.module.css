@@ -1,0 +1,96 @@
+.PopoutWrapper {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+}
+
+.PopoutWrapper--opened {
+  pointer-events: initial;
+}
+
+.PopoutWrapper--closing {
+  pointer-events: none;
+}
+
+.PopoutWrapper--fixed {
+  position: fixed;
+}
+
+.PopoutWrapper__overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  animation: vkui-animation-full-fade-in var(--vkui--animation_duration_m) ease;
+}
+
+.PopoutWrapper--closing .PopoutWrapper__overlay {
+  opacity: 0;
+  transition: opacity var(--vkui--animation_duration_m) var(--vkui--animation_easing_default);
+}
+
+.PopoutWrapper--masked .PopoutWrapper__overlay {
+  background: var(--vkui--color_overlay_primary);
+}
+
+.PopoutWrapper--fixed .PopoutWrapper__overlay {
+  position: absolute;
+}
+
+.PopoutWrapper__container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  box-sizing: border-box;
+}
+
+.PopoutWrapper__content {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  pointer-events: none;
+}
+
+.PopoutWrapper__content > * {
+  pointer-events: auto;
+}
+
+.PopoutWrapper--alignY-center .PopoutWrapper__container {
+  align-items: center;
+}
+
+.PopoutWrapper--alignY-bottom .PopoutWrapper__container {
+  align-items: flex-end;
+}
+
+.PopoutWrapper--alignY-top .PopoutWrapper__container {
+  align-items: flex-start;
+}
+
+.PopoutWrapper--alignX-center .PopoutWrapper__container {
+  justify-content: center;
+}
+
+.PopoutWrapper--alignX-left .PopoutWrapper__container {
+  justify-content: flex-start;
+}
+
+.PopoutWrapper--alignX-right .PopoutWrapper__container {
+  justify-content: flex-end;
+}
+
+@keyframes vkui-animation-full-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

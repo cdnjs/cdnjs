@@ -1,0 +1,11 @@
+import _object_spread from "@swc/helpers/src/_object_spread.mjs";
+import * as React from "react";
+import { ActionSheetItem } from "../ActionSheetItem/ActionSheetItem";
+export var ActionSheetDefaultIosCloseItem = function(props) {
+    return /*#__PURE__*/ React.createElement(ActionSheetItem, _object_spread({
+        autoClose: true,
+        mode: "cancel"
+    }, props), "Отменить");
+};
+
+//# sourceMappingURL=ActionSheetDefaultIosCloseItem.js.map

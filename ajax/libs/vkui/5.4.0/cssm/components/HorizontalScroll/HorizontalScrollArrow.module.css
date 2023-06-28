@@ -1,0 +1,67 @@
+.HorizontalScrollArrow {
+  position: absolute;
+  cursor: pointer;
+  -webkit-user-select: auto;
+     -moz-user-select: auto;
+      -ms-user-select: auto;
+          user-select: auto;
+  top: 0;
+  height: 100%;
+  padding: 0;
+  opacity: 0;
+  border: none;
+  background-color: transparent;
+  transition: opacity 0.15s;
+  transition-timing-function: var(--vkui--animation_easing_platform);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.HorizontalScrollArrow__icon {
+  position: relative;
+  background-color: var(--vkui--color_background_modal);
+  color: var(--vkui--color_icon_secondary);
+  box-shadow: var(--vkui--elevation3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.HorizontalScrollArrow--size-m .HorizontalScrollArrow__icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 14px;
+}
+
+.HorizontalScrollArrow--size-l .HorizontalScrollArrow__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 24px;
+}
+
+.HorizontalScrollArrow--direction-left {
+  padding-left: var(--vkui--size_base_padding_horizontal--regular, 16px);
+  left: 0;
+}
+
+.HorizontalScrollArrow--direction-right {
+  padding-right: var(--vkui--size_base_padding_horizontal--regular, 16px);
+  right: 0;
+}
+
+/**
+ * CMP: BaseGallery, HorizontalScroll
+ */
+
+:global(.vkuiInternalBaseGallery):hover .HorizontalScrollArrow,
+:global(.vkuiInternalHorizontalScroll):hover .HorizontalScrollArrow {
+  opacity: var(--vkui--opacity_disable_accessibility);
+}
+
+:global(.vkuiInternalBaseGallery):hover .HorizontalScrollArrow:hover,
+:global(.vkuiInternalHorizontalScroll):hover .HorizontalScrollArrow:hover,
+:global(.vkuiInternalHorizontalScroll--withConstArrows) .HorizontalScrollArrow,
+:global(.vkuiInternalHorizontalScroll--withConstArrows):hover .HorizontalScrollArrow {
+  opacity: 1;
+}
