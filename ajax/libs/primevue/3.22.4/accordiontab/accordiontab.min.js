@@ -1,0 +1,1 @@
+this.primevue=this.primevue||{},this.primevue.accordiontab=function(e){"use strict";var n={name:"AccordionTab",props:{header:null,headerStyle:null,headerClass:null,headerProps:null,headerActionProps:null,contentStyle:null,contentClass:null,contentProps:null,disabled:Boolean}};return n.render=function(n,l,r,t,o,u){return e.renderSlot(n.$slots,"default")},n}(Vue);
