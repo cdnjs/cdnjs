@@ -1,0 +1,1 @@
+!function(e){"use strict";e.i18n.languages.sl=e.extend({},e.i18n.languages.default,{convertGrammar:function(e,n){switch(n){case"mestnik":e="o "+e;break;case"orodnik":e="z "+e}return e}})}(jQuery);
