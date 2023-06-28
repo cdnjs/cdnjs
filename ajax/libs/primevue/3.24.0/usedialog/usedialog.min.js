@@ -1,0 +1,1 @@
+this.primevue=this.primevue||{},this.primevue.usedialog=function(e,i){"use strict";const r=Symbol();return e.PrimeVueDialogSymbol=r,e.useDialog=function(){const e=i.inject(r);if(!e)throw new Error("No PrimeVue Dialog provided!");return e},Object.defineProperty(e,"__esModule",{value:!0}),e}({},Vue);
