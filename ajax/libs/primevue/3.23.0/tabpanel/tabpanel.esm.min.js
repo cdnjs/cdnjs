@@ -1,0 +1,1 @@
+import{renderSlot as e}from"vue";var l={name:"TabPanel",props:{header:null,headerStyle:null,headerClass:null,headerProps:null,headerActionProps:null,contentStyle:null,contentClass:null,contentProps:null,disabled:Boolean}};l.render=function(l,n,r,a,t,o){return e(l.$slots,"default")};export{l as default};
