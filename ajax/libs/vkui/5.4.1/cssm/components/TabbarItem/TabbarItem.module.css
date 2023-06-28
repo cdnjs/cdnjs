@@ -1,0 +1,118 @@
+.TabbarItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--vkui--color_text_tertiary);
+  text-decoration: none;
+  border: none;
+  outline: none;
+  padding: 0;
+  background: transparent;
+  height: var(--vkui_internal--tabbar_height);
+  position: relative;
+}
+
+:global(.vkuiInternalTabbar) .TabbarItem {
+  flex-shrink: 0;
+  max-width: 100%;
+  min-width: 0;
+  flex-grow: 1;
+  flex-basis: 0;
+}
+
+.TabbarItem--selected {
+  color: var(--vkui--color_text_accent_themed);
+}
+
+.TabbarItem__tappable {
+  position: absolute;
+}
+
+.TabbarItem__in {
+  display: flex;
+  padding: 0 2px;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+:global(.vkuiInternalTabbar--layout-vertical) .TabbarItem--text .TabbarItem__in {
+  position: relative;
+  top: 2px;
+}
+
+:global(.vkuiInternalTabbar--layout-vertical) .TabbarItem__in {
+  flex-direction: column;
+}
+
+:global(.vkuiInternalTabbar--layout-horizontal) .TabbarItem__in {
+  flex-direction: row;
+}
+
+.TabbarItem__icon {
+  color: var(--vkui--color_icon_secondary);
+  position: relative;
+}
+
+.TabbarItem--selected .TabbarItem__icon {
+  color: var(--vkui--color_icon_accent_themed);
+}
+
+.TabbarItem__text {
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+:global(.vkuiInternalTabbar--layout-vertical) .TabbarItem__text {
+  font-size: 10px;
+  line-height: 12px;
+  margin-top: 2px;
+}
+
+:global(.vkuiInternalTabbar--layout-horizontal) .TabbarItem__text {
+  margin-left: 8px;
+}
+
+/**
+ * Android
+ */
+
+.TabbarItem--android .TabbarItem__tappable {
+  width: calc(100% + 16px);
+  padding-bottom: calc(100% + 16px);
+  border-radius: 50%;
+}
+
+.TabbarItem--android:first-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.TabbarItem--android:last-child {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/**
+ * iOS
+ */
+
+.TabbarItem--ios .TabbarItem__tappable {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.TabbarItem--ios .TabbarItem__in {
+  transition: transform 0.07s var(--vkui--animation_easing_platform);
+}
+
+.TabbarItem--ios .TabbarItem__tappable--active + .TabbarItem__in {
+  transform: scale(0.96);
+}
