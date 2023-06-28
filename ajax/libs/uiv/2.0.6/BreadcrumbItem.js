@@ -1,0 +1,44 @@
+import { openBlock as t, createElementBlock as o, normalizeClass as n, renderSlot as a, createBlock as r, resolveDynamicComponent as d, withCtx as f } from "vue";
+const p = {
+  // <a> props
+  href: { type: String, default: void 0 },
+  target: { type: String, default: void 0 },
+  // <router-link> props
+  to: { type: null, default: void 0 },
+  replace: { type: Boolean, default: !1 },
+  append: { type: Boolean, default: !1 },
+  exact: { type: Boolean, default: !1 }
+}, s = ["href", "target"], c = {
+  __name: "BreadcrumbItem",
+  props: {
+    ...p,
+    active: { type: Boolean, default: !1 }
+  },
+  setup(l) {
+    return (e, u) => (t(), o("li", {
+      class: n({ active: l.active })
+    }, [
+      l.active ? a(e.$slots, "default", { key: 0 }) : e.to ? (t(), r(d("RouterLink"), {
+        key: 1,
+        to: e.to,
+        replace: e.replace,
+        append: e.append,
+        exact: e.exact
+      }, {
+        default: f(() => [
+          a(e.$slots, "default")
+        ]),
+        _: 3
+      }, 8, ["to", "replace", "append", "exact"])) : (t(), o("a", {
+        key: 2,
+        href: e.href,
+        target: e.target
+      }, [
+        a(e.$slots, "default")
+      ], 8, s))
+    ], 2));
+  }
+};
+export {
+  c as default
+};
