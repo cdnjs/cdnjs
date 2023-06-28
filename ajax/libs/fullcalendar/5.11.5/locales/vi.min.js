@@ -1,0 +1,1 @@
+FullCalendar.globalLocales.push({code:"vi",week:{dow:1,doy:4},buttonText:{prev:"Trước",next:"Tiếp",today:"Hôm nay",month:"Tháng",week:"Tuần",day:"Ngày",list:"Lịch biểu"},weekText:"Tu",allDayText:"Cả ngày",moreLinkText:function(e){return"+ thêm "+e},noEventsText:"Không có sự kiện để hiển thị"});

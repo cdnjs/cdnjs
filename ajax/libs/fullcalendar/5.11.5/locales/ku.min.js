@@ -1,0 +1,1 @@
+FullCalendar.globalLocales.push({code:"ku",week:{dow:6,doy:12},direction:"rtl",buttonText:{prev:"پێشتر",next:"دواتر",today:"ئەمڕو",month:"مانگ",week:"هەفتە",day:"ڕۆژ",list:"بەرنامە"},weekText:"هەفتە",allDayText:"هەموو ڕۆژەکە",moreLinkText:"زیاتر",noEventsText:"هیچ ڕووداوێك نیە"});

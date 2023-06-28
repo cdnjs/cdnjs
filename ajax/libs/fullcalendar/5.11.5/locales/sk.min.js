@@ -1,0 +1,1 @@
+FullCalendar.globalLocales.push({code:"sk",week:{dow:1,doy:4},buttonText:{prev:"Predchádzajúci",next:"Nasledujúci",today:"Dnes",month:"Mesiac",week:"Týždeň",day:"Deň",list:"Rozvrh"},weekText:"Ty",allDayText:"Celý deň",moreLinkText:function(e){return"+ďalšie: "+e},noEventsText:"Žiadne akcie na zobrazenie"});
