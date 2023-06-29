@@ -1,0 +1,683 @@
+/*
+ * jQuery OrgChart Plugin
+ * https://github.com/dabeng/OrgChart
+ *
+ * Copyright 2016, dabeng
+ * https://github.com/dabeng
+ *
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/MIT
+ */
+
+ /* chart styles */
+.orgchart {
+  box-sizing: border-box;
+  display: inline-block;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: linear-gradient(to top, rgba(200, 0, 0, 0.15) 5%, rgba(0, 0, 0, 0) 5%),
+  linear-gradient(to right, rgba(200, 0, 0, 0.15) 5%, rgba(0, 0, 0, 0) 5%),
+  linear-gradient(to bottom, rgba(200, 0, 0, 0.15) 5%, rgba(0, 0, 0, 0) 5%),
+  linear-gradient(to left, rgba(200, 0, 0, 0.15) 5%, rgba(0, 0, 0, 0) 5%);
+  background-size: 10px 10px; /* background square size */
+  padding: 20px 20px 0 20px;
+  /* border: 0.5px solid rgba(200, 0, 0, 0.15); */
+}
+
+.orgchart .hidden, .orgchart~.hidden {
+  display: none!important;
+}
+
+.orgchart.b2t {
+  transform: rotate(180deg);
+}
+
+.orgchart.l2r {
+  position: absolute;
+  transform: rotate(-90deg) rotateY(180deg);
+  transform-origin: left top;
+  text-align: center;
+}
+
+.orgchart.r2l {
+  position: absolute;
+  transform: rotate(90deg);
+  transform-origin: left top;
+  text-align: center;
+}
+
+.orgchart ~ .mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  text-align: center;
+  background-color: rgba(0,0,0,0.3);
+}
+
+.orgchart ~ .mask .spinner {
+  position: absolute;
+  top: calc(50% - 50px);
+  left: calc(50% - 50px);
+}
+
+.orgchart > .spinner::before,
+.orgchart ~ .mask .spinner::before {
+  width: 100px;
+  height: 100px;
+  border-width: 10px;
+  border-radius: 50px;
+  border-top-color: rgba(68, 157, 68, 0.8);
+  border-bottom-color: rgba(68, 157, 68, 0.8);
+  border-left-color: rgba(68, 157, 68, 0.8);
+}
+
+.orgchart .nodes {
+  display: flex;
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.orgchart .hierarchy {
+  position: relative;
+}
+
+/* styles of link lines */
+.orgchart .hierarchy::before {
+  content: "";
+  position: absolute;
+  top: -11px; /* -(background square size + half width of line) */
+  left: 0;
+  width: 100%;
+  border-top: 2px solid rgba(217, 83, 79, 0.8);
+  box-sizing: border-box;
+}
+
+.orgchart .hierarchy:first-child::before,
+.orgchart .hierarchy.isSiblingsCollapsed.left-sibs::before {
+  left: calc(50% - 1px);
+  width: calc(50% + 1px);
+}
+
+.orgchart .hierarchy:last-child::before,
+.orgchart .hierarchy.isSiblingsCollapsed.right-sibs::before {
+  width: calc(50% + 1px);
+}
+
+.orgchart .hierarchy:not(.hidden):only-child::before {
+  width: 2px;
+}
+
+.orgchart > .nodes > .hierarchy::before,
+.orgchart .isSiblingsCollapsed:not(.left-sibs):not(.right-sibs)::before,
+.orgchart .isSiblingsCollapsed.left-sibs.right-sibs::before,
+.orgchart .isSiblingsCollapsed.right-sibs:first-child:before,
+.orgchart .isSiblingsCollapsed.left-sibs:last-child:before,
+.orgchart .isCollapsedSibling::before,
+.orgchart .isCollapsedSibling .hierarchy::before,
+.orgchart .isChildrenCollapsed > .node:not(:only-child)::after,
+.orgchart .isCollapsedDescendant::before,
+.orgchart .isCollapsedDescendant > .node::before,
+.orgchart .isCollapsedDescendant > .node::after,
+.orgchart .isAncestorsCollapsed:only-child::before,
+.orgchart .isAncestorsCollapsed > .node::before {
+  content: none;
+}
+
+/* excluding leaf node */
+.orgchart .node:not(:only-child)::after {
+  content: "";
+  position: absolute;
+  bottom: -12px; /* -(background square size + node's border width) */
+  left: calc(50% - 1px);
+  width: 2px;
+  height: 10px; /* background square size */
+  background-color: rgba(217, 83, 79, 0.8);
+}
+
+.orgchart ul li .node.allowedDrop {
+  border-color: rgba(68, 157, 68, 0.9);
+}
+.orgchart ul li .node.currentDropTarget {
+  background-color: rgba(68, 157, 68, 0.9);
+}
+.orgchart ul li .node.selected {
+  background-color: rgba(238, 217, 54, 0.5);
+}
+.orgchart ul li .node:hover {
+  background-color: rgba(238, 217, 54, 0.5);
+}
+/* excluding root node */
+.orgchart > ul > li > ul li > .node::before {
+  content: "";
+  position: absolute;
+  top: var(--top, -12px); /* -(fallback value = background square size + border width of node) */ 
+  left: calc(50% - 1px);
+  width: 2px;
+  height: var(--height, 10px); /* fallback value = background square size */
+  background-color: rgba(217, 83, 79, 0.8);
+}
+
+.orgchart > ul > li > ul li.isSiblingsCollapsed > .node::before {
+  top: var(--top-cross-point, -12px);
+  height: var(--height-cross-point, 10px);
+}
+
+/* node styling */
+.orgchart .node {
+  box-sizing: border-box;
+  display: inline-block;
+  position: relative;
+  margin: 0 0 20px 0;
+  padding: 3px;
+  border: 2px dashed transparent;
+  text-align: center;
+}
+
+.orgchart.l2r .node, .orgchart.r2l .node {
+  width: 50px;
+  height: 140px;
+}
+
+.orgchart .node:hover {
+  background-color: rgba(238, 217, 54, 0.5);
+  transition: .5s;
+  cursor: default;
+  z-index: 20;
+}
+
+.orgchart .node.focused {
+  background-color: rgba(238, 217, 54, 0.5);
+}
+
+.orgchart .ghost-node {
+  position: fixed;
+  left: -10000px;
+  top: -10000px;
+}
+
+.orgchart .ghost-node rect {
+  fill: #ffffff;
+  stroke: #bf0000;
+}
+
+.orgchart .node.allowedDrop {
+  border-color: rgba(68, 157, 68, 0.9);
+}
+
+.orgchart .node > .spinner {
+  position: absolute;
+  top: calc(50% - 1rem);
+  left: calc(50% - 1rem);
+}
+
+.orgchart .node > .spinner::before {
+  width: 2rem;
+  height: 2rem;
+  border-width: 0.2rem;
+  border-radius: 1rem;
+  border-top-color: rgba(68, 157, 68, 0.8);
+  border-bottom-color: rgba(68, 157, 68, 0.8);
+  border-left-color: rgba(68, 157, 68, 0.8);
+}
+
+.orgchart .node .title {
+  box-sizing: border-box;
+  width: 130px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  height: 20px;
+  line-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background-color: rgba(217, 83, 79, 0.8);
+  color: #fff;
+  border-radius: 4px 4px 0 0; 
+}
+
+.orgchart.b2t .node .title {
+  transform: rotate(-180deg);
+  transform-origin: center bottom;
+}
+
+.orgchart.l2r .node .title {
+  transform: rotate(-90deg) translate(-45px, -45px) rotateY(180deg);
+  transform-origin: bottom center;
+}
+
+.orgchart.r2l .node .title {
+  transform: rotate(-90deg) translate(-45px, -45px);
+  transform-origin: bottom center;
+}
+
+.orgchart .node .title .parentNodeSymbol {
+  float: left;
+}
+
+.orgchart .node .title .parentNodeSymbol::before {
+  color: #fff;
+}
+
+.orgchart .node .title .parentNodeSymbol::after {
+  background-color: #fff;
+}
+
+.orgchart .node .content {
+  box-sizing: border-box;
+  height: 20px;
+  line-height: 20px;
+  font-size: 10px;
+  border: 1px solid rgba(217, 83, 79, 0.8);
+  border-width: 0 1px 1px 1px;
+  border-radius: 0 0 0.25rem 0.25rem;
+  text-align: center;
+  background-color: #fff;
+  color: #333;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.orgchart.b2t .node .content {
+  transform: rotate(180deg);
+  transform-origin: center top;
+}
+
+.orgchart.l2r .node .content {
+  transform: rotate(-90deg) translate(-45px, -45px) rotateY(180deg);
+  transform-origin: top center;
+  width: 130px;
+}
+
+.orgchart.r2l .node .content {
+  transform: rotate(-90deg) translate(-45px, -45px);
+  transform-origin: top center;
+  width: 130px;
+}
+
+.orgchart .node .edge {
+  position: absolute;
+  cursor: default;
+  transition: .2s;
+}
+
+.orgchart .node .edge::before {
+  border-color: rgba(68, 157, 68, 0.5);
+}
+
+.orgchart.noncollapsable .node .edge {
+  display: none;
+}
+
+.orgchart .node .edge:hover {
+  cursor: pointer;
+}
+
+.orgchart .edge:hover::before {
+  border-color: #449d44;
+}
+
+.orgchart .node .verticalEdge {
+  width: calc(100% - 6px); /* node top half's width */
+  height: 10px; /* background square's size */
+  left: 3px; /* node's padding value */
+}
+
+.orgchart .node .verticalEdge::before {
+  position: absolute;
+  left: calc(50% - 5px); /* 50% width of node - half width of up arrow icon) */
+}
+
+.orgchart .node .topEdge {
+  top: -2px;
+}
+
+.orgchart .node .topEdge.oci-chevron-up::before {
+  top: 2px;
+}
+
+.orgchart .node .topEdge.oci-chevron-down::before {
+  bottom: 3px;
+}
+
+.orgchart .node .bottomEdge {
+  bottom: -2px; /* -(node's border-width) */
+}
+
+.orgchart .node .bottomEdge.oci-chevron-up::before {
+  bottom: -3px;
+}
+
+.orgchart .node .bottomEdge.oci-chevron-down::before {
+  bottom: 1px;
+}
+
+.orgchart .node .horizontalEdge {
+  width: 10px;
+  height: calc(100% - 6px);
+  top: 3px; /* node's padding */
+}
+
+.orgchart .node .rightEdge {
+  right: -2px;
+}
+
+.orgchart .node .leftEdge {
+  left: -2px;
+}
+
+.orgchart .node .horizontalEdge::before {
+  position: absolute;
+  top: calc(50% - 5px);
+}
+
+.orgchart .node .leftEdge.oci-chevron-right::before {
+  left: -3px;
+}
+
+.orgchart .node .leftEdge.oci-chevron-left::before {
+  left: 1px;
+}
+
+.orgchart .node .rightEdge.oci-chevron-left::before {
+  right: -3px;
+}
+
+.orgchart .node .rightEdge.oci-chevron-right::before {
+  right: 1px;
+}
+
+.orgchart .node .toggleBtn {
+  position: absolute;
+  left: -2px; /* -(border width of node) */
+  bottom: -2px;
+  width: 16px;
+  height: 16px;
+}
+
+.orgchart .node .toggleBtn::before {
+  background-color: rgba(68, 157, 68, 0.6);
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.orgchart .node .toggleBtn:hover::before {
+  background-color: #449d44;
+}
+
+.oc-export-btn {
+  margin-left: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.orgchart .node {
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.orgchart .slide-down {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.orgchart.l2r .node.slide-down, .orgchart.r2l .node.slide-down {
+  transform: translateY(130px);
+}
+
+.orgchart .slide-up {
+  opacity: 0;
+  transform: translateY(-40px);
+}
+
+.orgchart.l2r .node.slide-up, .orgchart.r2l .node.slide-up {
+  transform: translateY(-130px);
+}
+
+.orgchart .slide-right {
+  opacity: 0;
+  transform: translateX(130px);
+}
+
+.orgchart.l2r .node.slide-right, .orgchart.r2l .node.slide-right {
+  transform: translateX(40px);
+}
+
+.orgchart .slide-left {
+  opacity: 0;
+  transform: translateX(-130px);
+}
+
+.orgchart.l2r .node.slide-left, .orgchart.r2l .node.slide-left {
+  transform: translateX(-40px);
+}
+
+/* styles for vertical nodes */
+
+.orgchart .nodes.vertical {
+  display: block;
+  padding-left: 10px; /* width of background square*/
+}
+
+.orgchart .nodes.vertical .nodes {
+  list-style: none;
+  display: block;
+  margin: 0;
+  padding-left: 10px; /* width of background square*/
+  text-align: left;
+}
+
+.orgchart .nodes.vertical .node {
+  margin-bottom: 0;
+}
+
+.orgchart .nodes.vertical .node::before,
+.orgchart .nodes.vertical .node::after {
+  content: none;
+}
+
+.orgchart .nodes.vertical .hierarchy {
+  position: relative;
+  text-align: left;
+}
+
+.orgchart .nodes.vertical .hierarchy::before,
+.orgchart .nodes.vertical .hierarchy::after {
+  box-sizing: border-box;
+  content: '';
+  position: absolute;
+  left: -6px; /* -(background square size + half width of line */
+  border-color: rgba(217, 83, 79, 0.8);
+  border-style: solid;
+  border-width: 0 0 2px 2px;
+}
+
+.orgchart .nodes.vertical .hierarchy::before {
+  top: 0px;
+  height: 26px; /* node top half's height(25px) + half width of line */
+  width: 11px; /* background square size + half width of line */
+}
+
+.orgchart .nodes.vertical .hierarchy::after {
+  bottom: 0;
+  height: calc(100% - 24px); /* height of hierarchy - (node top half's height(25px) - half width of line) */
+}
+
+.orgchart .nodes.vertical .hierarchy:last-child::after {
+  border-width: 2px 0 0 0;
+}
+
+.orgchart .nodes.vertical > .hierarchy:first-child::before {
+  box-sizing: border-box;
+  top: -11px; /* -(background square size + half width of line) */
+  height: 35px; /* node top half's height + node padding + node border width + background square size */
+  width: calc(50% + 2px);
+  border-width: 2px 0 0 2px;
+}
+
+.orgchart .nodes.vertical > .hierarchy:first-child::after {
+  box-sizing: border-box;
+  top: 24px; /* node bottom half's height(25px) - half border width of line */
+  width: 11px; /* backgroud square size + half border width of line */
+  border-width: 2px 0 0 2px;
+}
+
+.orgchart .nodes.vertical > .hierarchy:first-child:last-child::after {
+  border-width: 2px 0 0 0;
+}
+
+/* custom icons for orgchart */
+.oci {
+  display: inline-block;
+  position: relative;
+  font-style: normal;
+  font-family: Arial;
+}
+
+.oci-menu::before {
+  content: "≡";
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  text-align: center;
+  line-height: 1rem;
+  color: #000;
+  font-size: 1rem;
+}
+
+.oci-chevron-up::before {
+  content: "";
+  box-sizing: border-box;
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  border: 3px solid #000;
+  transform: rotate(45deg);
+  border-right: unset;
+  border-bottom: unset;
+}
+
+.oci-chevron-down::before {
+  content: "";
+  box-sizing: border-box;
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  border: 3px solid #000;
+  transform: rotate(45deg);
+  border-top: unset;
+  border-left: unset;
+}
+
+.oci-chevron-left::before {
+  content: "";
+  box-sizing: border-box;
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  border: 3px solid #000;
+  transform: rotate(45deg);
+  border-top: unset;
+  border-right: unset;
+}
+
+.oci-chevron-right::before {
+  content: "";
+  box-sizing: border-box;
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  border: 3px solid #000;
+  transform: rotate(45deg);
+  border-left: unset;
+  border-bottom: unset;
+}
+
+.oci-plus-square::before {
+  content: "﹢";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  line-height: 16px;
+  background-color: #000;
+  color: #fff;
+  font-weight: bold;
+}
+
+.oci-minus-square::before {
+  content: "﹣";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  line-height: 16px;
+  background-color: #000;
+  color: #fff;
+  font-weight: bold;
+}
+
+.oci-arrow-square-up::before {
+  content: "⬆";
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  text-align: center;
+  line-height: 1rem;
+  background-color: #000;
+  color: #fff;
+  font-weight: bold;
+}
+
+.oci-arrow-square-down::before {
+  content: "⬇";
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  text-align: center;
+  line-height: 1rem;
+  background-color: #000;
+  color: #fff;
+  font-weight: bold;
+}
+
+.oci-info-circle::before {
+  content: "i";
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 0.5rem;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  font-weight: bold;
+}
+
+.oci-spinner::before {
+  content: "";
+  vertical-align: text-bottom;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 1rem;
+  height: 1rem;
+  border: 0.1rem solid #000;
+  border-right-color: transparent;
+  border-radius: 0.625rem;
+  animation: oci-infinite-spinning .75s linear infinite;
+}
+
+@keyframes oci-infinite-spinning {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
