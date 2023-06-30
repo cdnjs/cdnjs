@@ -1,0 +1,40 @@
+import { p as parser, f as flowDb } from "./flowDb-6024e0a1.js";
+import { f as flowRendererV2, a as flowStyles } from "./styles-d03a35b3.js";
+import { q as setConfig } from "./mermaid-3856e1a1.js";
+import "d3";
+import "dagre-d3-es/src/graphlib/index.js";
+import "./index-460bb773.js";
+import "dagre-d3-es/src/dagre/index.js";
+import "dagre-d3-es/src/graphlib/json.js";
+import "./edges-2a34cbb0.js";
+import "./createText-c2a61ed7.js";
+import "mdast-util-from-markdown";
+import "ts-dedent";
+import "./svgDraw-46c1e5cf.js";
+import "dagre-d3-es/src/dagre-js/label/add-html-label.js";
+import "khroma";
+import "dayjs/esm/index.js";
+import "@braintree/sanitize-url";
+import "dompurify";
+import "lodash-es/memoize.js";
+import "stylis";
+import "lodash-es/isEmpty.js";
+const diagram = {
+  parser,
+  db: flowDb,
+  renderer: flowRendererV2,
+  styles: flowStyles,
+  init: (cnf) => {
+    if (!cnf.flowchart) {
+      cnf.flowchart = {};
+    }
+    cnf.flowchart.arrowMarkerAbsolute = cnf.arrowMarkerAbsolute;
+    setConfig({ flowchart: { arrowMarkerAbsolute: cnf.arrowMarkerAbsolute } });
+    flowRendererV2.setConf(cnf.flowchart);
+    flowDb.clear();
+    flowDb.setGen("gen-2");
+  }
+};
+export {
+  diagram
+};
