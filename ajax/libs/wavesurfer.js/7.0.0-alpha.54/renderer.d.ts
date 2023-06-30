@@ -1,0 +1,56 @@
+import EventEmitter from './event-emitter.js';
+export type RendererStyleOptions = {
+    height: number;
+    waveColor: string;
+    progressColor: string;
+    cursorColor?: string;
+    cursorWidth: number;
+    minPxPerSec: number;
+    fillParent: boolean;
+    barWidth?: number;
+    barGap?: number;
+    barRadius?: number;
+    barHeight?: number;
+    hideScrollbar?: boolean;
+    autoCenter?: boolean;
+    autoScroll?: boolean;
+};
+type RendererEvents = {
+    click: [relativeX: number];
+    drag: [relativeX: number];
+    scroll: [relativeStart: number, relativeEnd: number];
+    render: [];
+};
+type ChannelData = Float32Array[] | Array<number[]>;
+declare class Renderer extends EventEmitter<RendererEvents> {
+    private static MAX_CANVAS_WIDTH;
+    private options;
+    private container;
+    private scrollContainer;
+    private wrapper;
+    private canvasWrapper;
+    private progressWrapper;
+    private cursor;
+    private timeout;
+    private isScrolling;
+    private channelData;
+    private duration;
+    private resizeObserver;
+    private isDragging;
+    constructor(container: HTMLElement | string | null, options: RendererStyleOptions);
+    private initEvents;
+    private initDrag;
+    private initHtml;
+    setOptions(options: RendererStyleOptions): void;
+    getWrapper(): HTMLElement;
+    getScroll(): number;
+    destroy(): void;
+    private delay;
+    private renderPeaks;
+    render(channelData: ChannelData, duration: number): void;
+    reRender(): void;
+    zoom(minPxPerSec: number): void;
+    private scrollIntoView;
+    renderProgress(progress: number, isPlaying?: boolean): void;
+}
+export default Renderer;
