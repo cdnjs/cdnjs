@@ -1,0 +1,258 @@
+import * as React from 'react';
+import { useUpdateEffect, useMountEffect } from 'primereact/hooks';
+import { CheckIcon } from 'primereact/icons/check';
+import { Tooltip } from 'primereact/tooltip';
+import { ObjectUtils, DomHandler, classNames, IconUtils } from 'primereact/utils';
+
+function _extends() {
+  _extends = Object.assign ? Object.assign.bind() : function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  return _extends.apply(this, arguments);
+}
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+function _iterableToArrayLimit(arr, i) {
+  var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"];
+  if (null != _i) {
+    var _s,
+      _e,
+      _x,
+      _r,
+      _arr = [],
+      _n = !0,
+      _d = !1;
+    try {
+      if (_x = (_i = _i.call(arr)).next, 0 === i) {
+        if (Object(_i) !== _i) return;
+        _n = !1;
+      } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0);
+    } catch (err) {
+      _d = !0, _e = err;
+    } finally {
+      try {
+        if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return;
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+    return _arr;
+  }
+}
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+  return arr2;
+}
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
+
+var CheckboxBase = {
+  defaultProps: {
+    __TYPE: 'Checkbox',
+    autoFocus: false,
+    checked: false,
+    className: null,
+    disabled: false,
+    falseValue: false,
+    icon: null,
+    id: null,
+    inputId: null,
+    inputRef: null,
+    name: null,
+    onChange: null,
+    onClick: null,
+    onContextMenu: null,
+    onMouseDown: null,
+    readOnly: false,
+    required: false,
+    style: null,
+    tabIndex: null,
+    tooltip: null,
+    tooltipOptions: null,
+    trueValue: true,
+    value: null,
+    children: undefined
+  },
+  getProps: function getProps(props) {
+    return ObjectUtils.getMergedProps(props, CheckboxBase.defaultProps);
+  },
+  getOtherProps: function getOtherProps(props) {
+    return ObjectUtils.getDiffProps(props, CheckboxBase.defaultProps);
+  }
+};
+
+var Checkbox = /*#__PURE__*/React.memo( /*#__PURE__*/React.forwardRef(function (inProps, ref) {
+  var props = CheckboxBase.getProps(inProps);
+  var _React$useState = React.useState(false),
+    _React$useState2 = _slicedToArray(_React$useState, 2),
+    focusedState = _React$useState2[0],
+    setFocusedState = _React$useState2[1];
+  var elementRef = React.useRef(null);
+  var inputRef = React.useRef(props.inputRef);
+  var onClick = function onClick(event) {
+    if (props.disabled || props.readOnly) {
+      return;
+    }
+    if (props.onChange || props.onClick) {
+      var _checked = isChecked();
+      var checkboxClicked = event.target instanceof HTMLDivElement || event.target instanceof HTMLSpanElement || event.target instanceof Object;
+      var isInputToggled = event.target === inputRef.current;
+      var isCheckboxToggled = checkboxClicked && event.target.checked !== _checked;
+      if (isInputToggled || isCheckboxToggled) {
+        var value = _checked ? props.falseValue : props.trueValue;
+        var eventData = {
+          originalEvent: event,
+          value: props.value,
+          checked: value,
+          stopPropagation: function stopPropagation() {
+            event.stopPropagation();
+          },
+          preventDefault: function preventDefault() {
+            event.preventDefault();
+          },
+          target: {
+            type: 'checkbox',
+            name: props.name,
+            id: props.id,
+            value: props.value,
+            checked: value
+          }
+        };
+        props.onClick && props.onClick(eventData);
+
+        // do not continue if the user defined click wants to prevent
+        if (event.defaultPrevented) {
+          return;
+        }
+        props.onChange && props.onChange(eventData);
+      }
+      DomHandler.focus(inputRef.current);
+      event.preventDefault();
+    }
+  };
+  var onFocus = function onFocus() {
+    setFocusedState(true);
+  };
+  var onBlur = function onBlur() {
+    setFocusedState(false);
+  };
+  var onKeyDown = function onKeyDown(event) {
+    if (event.code === 'Space' || event.key === ' ') {
+      // event.key is for Android support
+      onClick(event);
+    }
+  };
+  var isChecked = function isChecked() {
+    return props.checked === props.trueValue;
+  };
+  React.useImperativeHandle(ref, function () {
+    return {
+      props: props,
+      focus: function focus() {
+        return DomHandler.focus(inputRef.current);
+      },
+      getElement: function getElement() {
+        return elementRef.current;
+      },
+      getInput: function getInput() {
+        return inputRef.current;
+      }
+    };
+  });
+  React.useEffect(function () {
+    ObjectUtils.combinedRefs(inputRef, props.inputRef);
+  }, [inputRef, props.inputRef]);
+  useUpdateEffect(function () {
+    inputRef.current.checked = isChecked();
+  }, [props.checked, props.trueValue]);
+  useMountEffect(function () {
+    if (props.autoFocus) {
+      DomHandler.focus(inputRef.current, props.autoFocus);
+    }
+  });
+  var checked = isChecked();
+  var hasTooltip = ObjectUtils.isNotEmpty(props.tooltip);
+  var otherProps = CheckboxBase.getOtherProps(props);
+  var ariaProps = ObjectUtils.reduceKeys(otherProps, DomHandler.ARIA_PROPS);
+  var className = classNames('p-checkbox p-component', {
+    'p-checkbox-checked': checked,
+    'p-checkbox-disabled': props.disabled,
+    'p-checkbox-focused': focusedState
+  }, props.className);
+  var boxClass = classNames('p-checkbox-box', {
+    'p-highlight': checked,
+    'p-disabled': props.disabled,
+    'p-focus': focusedState
+  });
+  var iconClassName = 'p-checkbox-icon p-c';
+  var icon = checked ? props.icon || /*#__PURE__*/React.createElement(CheckIcon, {
+    className: iconClassName
+  }) : null;
+  var checkboxIcon = IconUtils.getJSXIcon(icon, {
+    className: iconClassName
+  }, {
+    props: props,
+    checked: checked
+  });
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", _extends({
+    ref: elementRef,
+    id: props.id,
+    className: className,
+    style: props.style
+  }, otherProps, {
+    onClick: onClick,
+    onContextMenu: props.onContextMenu,
+    onMouseDown: props.onMouseDown
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "p-hidden-accessible"
+  }, /*#__PURE__*/React.createElement("input", _extends({
+    ref: inputRef,
+    type: "checkbox",
+    id: props.inputId,
+    name: props.name,
+    tabIndex: props.tabIndex,
+    defaultChecked: checked,
+    onFocus: onFocus,
+    onBlur: onBlur,
+    onKeyDown: onKeyDown,
+    disabled: props.disabled,
+    readOnly: props.readOnly,
+    required: props.required
+  }, ariaProps))), /*#__PURE__*/React.createElement("div", {
+    className: boxClass
+  }, checkboxIcon)), hasTooltip && /*#__PURE__*/React.createElement(Tooltip, _extends({
+    target: elementRef,
+    content: props.tooltip
+  }, props.tooltipOptions)));
+}));
+Checkbox.displayName = 'Checkbox';
+
+export { Checkbox };
