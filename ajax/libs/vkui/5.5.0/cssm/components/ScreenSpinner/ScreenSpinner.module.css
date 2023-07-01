@@ -1,0 +1,66 @@
+.ScreenSpinner {
+  animation: vkui-screen-spinner-intro 0.3s ease;
+}
+
+.ScreenSpinner--state-cancelable {
+  cursor: pointer;
+}
+
+.ScreenSpinner__spinner {
+  opacity: 1;
+}
+
+.ScreenSpinner--hideSpinner .ScreenSpinner__spinner {
+  opacity: 0;
+  transition: opacity 0.1s ease;
+}
+
+.ScreenSpinner__container {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  background: var(--vkui--color_background_modal);
+  box-shadow: var(--vkui--elevation4);
+  border-radius: var(--vkui--size_border_radius--regular);
+  color: var(--vkui--color_icon_medium);
+}
+
+.ScreenSpinner__icon {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ScreenSpinner__icon :global(.vkuiIcon) {
+  animation: vkui-screen-spinner-intro 0.2s ease;
+}
+
+.ScreenSpinner--state-done .ScreenSpinner__icon :global(.vkuiIcon) path {
+  stroke-dasharray: 50;
+  stroke-dashoffset: 50;
+  animation: vkui-screen-spinner-iconDone 0.6s 0.3s var(--vkui--animation_easing_platform) forwards;
+}
+
+@keyframes vkui-screen-spinner-iconDone {
+  from {
+    stroke-dashoffset: 50;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes vkui-screen-spinner-intro {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
