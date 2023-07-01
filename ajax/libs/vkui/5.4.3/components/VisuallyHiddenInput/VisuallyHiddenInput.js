@@ -1,0 +1,27 @@
+import _object_spread from "@swc/helpers/src/_object_spread.mjs";
+import _object_spread_props from "@swc/helpers/src/_object_spread_props.mjs";
+import _object_without_properties from "@swc/helpers/src/_object_without_properties.mjs";
+import * as React from "react";
+import { classNames } from "@vkontakte/vkjs";
+import { warnOnce } from "../../lib/warnOnce";
+var warn = warnOnce("VisuallyHiddenInput");
+/**
+ * @deprecated v5.4.0
+ *
+ * Компонент устарел и будет удален в v6. Используйте
+ * `<VisuallyHidden Component="input" />`
+ */ export var VisuallyHiddenInput = function(_param) {
+    var getRef = _param.getRef, className = _param.className, restProps = _object_without_properties(_param, [
+        "getRef",
+        "className"
+    ]);
+    if (process.env.NODE_ENV === "development") {
+        warn("Компонент устарел и будет удален в v6. Используйте https://vkcom.github.io/VKUI/#/VisuallyHidden");
+    }
+    return /*#__PURE__*/ React.createElement("input", _object_spread_props(_object_spread({}, restProps), {
+        className: classNames("vkuiVisuallyHiddenInput", className),
+        ref: getRef
+    }));
+};
+
+//# sourceMappingURL=VisuallyHiddenInput.js.map

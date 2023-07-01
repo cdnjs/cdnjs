@@ -1,0 +1,59 @@
+.HorizontalScroll {
+  position: relative;
+
+  /**
+   * ⚠️ WARNING ⚠️
+   * `overflow-y` мы не трогаем, т.к. из-за `hidden` могут обрезаться тени у потомков.
+   */
+  overflow-x: hidden;
+}
+
+.HorizontalScroll__in {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+
+  /**
+   * Для удаление скролла в Firefox.
+   * В версии ниже 64 будет виден скролл, но это не ломает функциональность.
+   */
+  scrollbar-width: none;
+}
+
+.HorizontalScroll__in::-webkit-scrollbar {
+  display: none;
+}
+
+.HorizontalScroll__in-wrapper {
+  transition: transform 0.2s;
+}
+
+.HorizontalScroll__arrowLeft:hover ~ .HorizontalScroll__in .HorizontalScroll__in-wrapper {
+  transform: translateX(8px);
+}
+
+.HorizontalScroll__arrowRight:hover ~ .HorizontalScroll__in .HorizontalScroll__in-wrapper {
+  transform: translateX(-8px);
+}
+
+/**
+ * CMP:
+ * Tabs
+ */
+
+:global(.vkuiInternalTabs) .HorizontalScroll {
+  min-width: 100%;
+}
+
+:global(.vkuiInternalTabs) .HorizontalScroll__in-wrapper {
+  display: flex;
+  align-items: stretch;
+}
+
+:global(.vkuiInternalTabs--withGaps) .HorizontalScroll__in-wrapper::after,
+:global(.vkuiInternalTabs--withGaps) .HorizontalScroll__in-wrapper::before {
+  display: block;
+  width: var(--vkui--size_base_padding_horizontal--regular);
+  flex-shrink: 0;
+  height: 1px;
+  content: '';
+}
