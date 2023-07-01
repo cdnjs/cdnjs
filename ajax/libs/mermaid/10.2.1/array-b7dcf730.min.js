@@ -1,0 +1,1 @@
+function array(r){return"object"==typeof r&&"length"in r?r:Array.from(r)}export{array as a};
