@@ -1,0 +1,1 @@
+!function(a){"use strict";a.i18n.languages.hu=a.extend({},a.i18n.languages.default,{convertGrammar:function(a,e){switch(e){case"rol":a+="ról";break;case"ba":a+="ba";break;case"k":a+="k"}return a}})}(jQuery);

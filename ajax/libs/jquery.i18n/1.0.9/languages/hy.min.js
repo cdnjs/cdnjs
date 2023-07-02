@@ -1,0 +1,1 @@
+!function(e){"use strict";e.i18n.languages.hy=e.extend({},e.i18n.languages.default,{convertGrammar:function(e,i){return"genitive"===i&&("ա"===e.slice(-1)?e=e.slice(0,-1)+"այի":"ո"===e.slice(-1)?e=e.slice(0,-1)+"ոյի":"գիրք"===e.slice(-4)?e=e.slice(0,-4)+"գրքի":e+="ի"),e}})}(jQuery);
