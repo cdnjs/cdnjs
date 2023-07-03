@@ -1,0 +1,2 @@
+"use strict";(window.webpackChunk_auiPrototyping=window.webpackChunk_auiPrototyping||[]).push([[85],{926:(t,o,a)=>{a.r(o),a.d(o,{default:()=>d});const d='\nhtml[data-color-mode="light"][data-theme~="light:light"],\nhtml[data-color-mode="dark"][data-theme~="dark:light"] {\n  color-scheme: light;\n  --ds-border-input: #8590A2;\n}\n'}}]);
+//# sourceMappingURL=@atlaskit-internal_atlassian-light-new-input-border.js.map
