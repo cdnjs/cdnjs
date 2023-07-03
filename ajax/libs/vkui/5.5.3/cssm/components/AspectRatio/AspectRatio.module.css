@@ -1,0 +1,29 @@
+.AspectRatio {
+  --vkui_internal--aspect_ratio: 1;
+
+  position: relative;
+  max-width: 100%;
+}
+
+.AspectRatio::before {
+  content: '';
+  height: 0;
+  display: block;
+  padding-bottom: calc((1 / var(--vkui_internal--aspect_ratio, 1)) * 100%);
+}
+
+.AspectRatio > * {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.AspectRatio--mode-stretch > * {
+  width: 100%;
+  height: 100%;
+}
+
+.AspectRatio--mode-stretch > img,
+.AspectRatio--mode-stretch > video {
+  object-fit: cover;
+}
