@@ -1,0 +1,195 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "Alert", {
+    enumerable: true,
+    get: function() {
+        return Alert;
+    }
+});
+var _interop_require_wildcard = require("@swc/helpers/_/_interop_require_wildcard");
+var _object_spread = require("@swc/helpers/_/_object_spread");
+var _object_spread_props = require("@swc/helpers/_/_object_spread_props");
+var _object_without_properties = require("@swc/helpers/_/_object_without_properties");
+var _sliced_to_array = require("@swc/helpers/_/_sliced_to_array");
+var _react = /*#__PURE__*/ _interop_require_wildcard._(require("react"));
+var _vkjs = require("@vkontakte/vkjs");
+var _useAdaptivityWithJSMediaQueries = require("../../hooks/useAdaptivityWithJSMediaQueries");
+var _usePlatform = require("../../hooks/usePlatform");
+var _useWaitTransitionFinish = require("../../hooks/useWaitTransitionFinish");
+var _platform = require("../../lib/platform");
+var _utils = require("../../lib/utils");
+var _ScrollContext = require("../AppRoot/ScrollContext");
+var _Button = require("../Button/Button");
+var _FocusTrap = require("../FocusTrap/FocusTrap");
+var _ModalDismissButton = require("../ModalDismissButton/ModalDismissButton");
+var _PopoutWrapper = require("../PopoutWrapper/PopoutWrapper");
+var _Tappable = require("../Tappable/Tappable");
+var _Caption = require("../Typography/Caption/Caption");
+var _Footnote = require("../Typography/Footnote/Footnote");
+var _Text = require("../Typography/Text/Text");
+var _Title = require("../Typography/Title/Title");
+var AlertHeader = function(props) {
+    var platform = (0, _usePlatform.usePlatform)();
+    switch(platform){
+        case _platform.Platform.IOS:
+            return /*#__PURE__*/ _react.createElement(_Title.Title, _object_spread._({
+                className: "vkuiAlert__header",
+                weight: "1",
+                level: "3"
+            }, props));
+        default:
+            return /*#__PURE__*/ _react.createElement(_Title.Title, _object_spread._({
+                className: "vkuiAlert__header",
+                weight: "2",
+                level: "2"
+            }, props));
+    }
+};
+var AlertText = function(props) {
+    var platform = (0, _usePlatform.usePlatform)();
+    switch(platform){
+        case _platform.Platform.VKCOM:
+            return /*#__PURE__*/ _react.createElement(_Footnote.Footnote, _object_spread._({
+                className: "vkuiAlert__text"
+            }, props));
+        case _platform.Platform.IOS:
+            return /*#__PURE__*/ _react.createElement(_Caption.Caption, _object_spread._({
+                className: "vkuiAlert__text"
+            }, props));
+        default:
+            return /*#__PURE__*/ _react.createElement(_Text.Text, _object_spread._({
+                Component: "span",
+                className: "vkuiAlert__text",
+                weight: "3"
+            }, props));
+    }
+};
+var AlertAction = function(_param) {
+    var action = _param.action, onItemClick = _param.onItemClick, restProps = _object_without_properties._(_param, [
+        "action",
+        "onItemClick"
+    ]);
+    var platform = (0, _usePlatform.usePlatform)();
+    var handleItemClick = _react.useCallback(function() {
+        return onItemClick(action);
+    }, [
+        onItemClick,
+        action
+    ]);
+    if (platform === _platform.Platform.IOS) {
+        var title = action.title, actionProp = action.action, autoClose = action.autoClose, mode = action.mode, restActionProps = _object_without_properties._(action, [
+            "title",
+            "action",
+            "autoClose",
+            "mode"
+        ]);
+        return /*#__PURE__*/ _react.createElement(_Tappable.Tappable, _object_spread._({
+            Component: restActionProps.href ? "a" : "button",
+            className: (0, _vkjs.classNames)("vkuiAlert__action", mode === "destructive" && "vkuiAlert__action--mode-destructive", mode === "cancel" && "vkuiAlert__action--mode-cancel"),
+            onClick: handleItemClick
+        }, restActionProps, restProps), title);
+    }
+    var mode1 = "tertiary";
+    if (platform === _platform.Platform.VKCOM) {
+        mode1 = action.mode === "cancel" ? "secondary" : "primary";
+    }
+    return /*#__PURE__*/ _react.createElement(_Button.Button, {
+        className: (0, _vkjs.classNames)("vkuiAlert__button", action.mode === "cancel" && "vkuiAlert__button--mode-cancel"),
+        mode: mode1,
+        size: "m",
+        onClick: handleItemClick,
+        Component: action.Component,
+        href: action.href,
+        target: action.target
+    }, action.title);
+};
+var Alert = function(_param) {
+    var _param_actions = _param.actions, actions = _param_actions === void 0 ? [] : _param_actions, _param_actionsLayout = _param.actionsLayout, actionsLayout = _param_actionsLayout === void 0 ? "horizontal" : _param_actionsLayout, children = _param.children, className = _param.className, style = _param.style, text = _param.text, header = _param.header, onClose = _param.onClose, _param_dismissLabel = _param.dismissLabel, dismissLabel = _param_dismissLabel === void 0 ? "Закрыть предупреждение" : _param_dismissLabel, restProps = _object_without_properties._(_param, [
+        "actions",
+        "actionsLayout",
+        "children",
+        "className",
+        "style",
+        "text",
+        "header",
+        "onClose",
+        "dismissLabel"
+    ]);
+    var platform = (0, _usePlatform.usePlatform)();
+    var isDesktop = (0, _useAdaptivityWithJSMediaQueries.useAdaptivityWithJSMediaQueries)().isDesktop;
+    var waitTransitionFinish = (0, _useWaitTransitionFinish.useWaitTransitionFinish)().waitTransitionFinish;
+    var _React_useState = _sliced_to_array._(_react.useState(false), 2), closing = _React_useState[0], setClosing = _React_useState[1];
+    var elementRef = _react.useRef(null);
+    var resolvedActionsLayout = platform === _platform.Platform.VKCOM ? "horizontal" : actionsLayout;
+    var timeout = platform === _platform.Platform.IOS ? 300 : 200;
+    var close = _react.useCallback(function() {
+        setClosing(true);
+        waitTransitionFinish(elementRef.current, function(e) {
+            if (!e || e.propertyName === "opacity") {
+                onClose();
+            }
+        }, timeout);
+    }, [
+        elementRef,
+        waitTransitionFinish,
+        onClose,
+        timeout
+    ]);
+    var onItemClick = _react.useCallback(function(item) {
+        var action = item.action, autoClose = item.autoClose;
+        if (autoClose) {
+            setClosing(true);
+            waitTransitionFinish(elementRef.current, function(e) {
+                if (!e || e.propertyName === "opacity") {
+                    onClose();
+                    action && action();
+                }
+            }, timeout);
+        } else {
+            action && action();
+        }
+    }, [
+        elementRef,
+        waitTransitionFinish,
+        onClose,
+        timeout
+    ]);
+    (0, _ScrollContext.useScrollLock)();
+    return /*#__PURE__*/ _react.createElement(_PopoutWrapper.PopoutWrapper, {
+        className: className,
+        closing: closing,
+        style: style,
+        onClick: close
+    }, /*#__PURE__*/ _react.createElement(_FocusTrap.FocusTrap, _object_spread_props._(_object_spread._({}, restProps), {
+        getRootRef: elementRef,
+        onClick: _utils.stopPropagation,
+        onClose: close,
+        timeout: timeout,
+        className: (0, _vkjs.classNames)("vkuiAlert", platform === _platform.Platform.IOS && "vkuiAlert--ios", platform === _platform.Platform.VKCOM && "vkuiAlert--vkcom", resolvedActionsLayout === "vertical" ? "vkuiAlert--v" : "vkuiAlert--h", closing && "vkuiAlert--closing", isDesktop && "vkuiAlert--desktop"),
+        role: "alertdialog",
+        "aria-modal": true,
+        "aria-labelledby": "vkui--alert--title",
+        "aria-describedby": "vkui--alert--desc"
+    }), /*#__PURE__*/ _react.createElement("div", {
+        className: "vkuiAlert__content"
+    }, (0, _vkjs.hasReactNode)(header) && /*#__PURE__*/ _react.createElement(AlertHeader, {
+        id: "vkui--alert--title"
+    }, header), (0, _vkjs.hasReactNode)(text) && /*#__PURE__*/ _react.createElement(AlertText, {
+        id: "vkui--alert--desc"
+    }, text), children), /*#__PURE__*/ _react.createElement("div", {
+        className: "vkuiAlert__actions"
+    }, actions.map(function(action, i) {
+        return /*#__PURE__*/ _react.createElement(AlertAction, {
+            key: i,
+            action: action,
+            onItemClick: onItemClick
+        });
+    })), isDesktop && /*#__PURE__*/ _react.createElement(_ModalDismissButton.ModalDismissButton, {
+        onClick: close,
+        "aria-label": dismissLabel
+    })));
+};
+
+//# sourceMappingURL=Alert.js.map
