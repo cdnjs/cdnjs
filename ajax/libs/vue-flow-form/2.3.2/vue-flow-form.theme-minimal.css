@@ -1,0 +1,349 @@
+/*!
+    Copyright (c) 2020 - present, DITDOT Ltd. - MIT Licence
+    https://github.com/ditdot-dev/vue-flow-form
+    https://www.ditdot.hr/en
+*/
+
+/*
+  basic theme color and font styles
+*/
+
+:root {
+  --vff-bg-color: #fff;
+  --vff-main-text-color: #181818;
+  --vff-secondary-text-color: #999;
+  --vff-tertiary-text-color: #f1f1f1;
+  --vff-main-accent-color: #0DBC79;
+  --vff-secondary-accent-color: #BBEBD5;
+}
+
+.vff,
+.vff textarea,
+.vff input,
+.vff select,
+.vff select option,
+.vff kbd,
+.vff-header,
+.vff-footer {
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  /* override if needed when using not-standalone option */
+  margin: 0;
+  background-color: var(--vff-bg-color);
+}
+
+.vff {
+  color: var(--vff-main-text-color);
+}
+
+.vff.vff-not-standalone {
+  background-color: var(--vff-bg-color);
+  color: var(--vff-main-text-color);
+}
+
+header.vff-header {
+  background-color: var(--vff-secondary-accent-color);
+}
+
+header.vff-header svg.f-logo {
+  fill: rgba(0,0,0,0.9);
+}
+
+.vff input[type="text"],
+.vff input[type="number"],
+.vff input[type="tel"],
+.vff input[type="email"],
+.vff input[type="url"],
+.vff input[type="password"],
+.vff input[type="date"],
+.vff textarea,
+.vff span.faux-form {
+  border-bottom-color: var(--vff-secondary-text-color);
+}
+
+.vff textarea,
+.vff input,
+.vff select option {
+  color: var(--vff-main-text-color);
+}
+
+.vff a,
+.vff a:active {
+  color: var(--vff-main-text-color);
+}
+
+/* placeholder */
+.vff ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: var(--vff-secondary-text-color);
+  opacity: 1;
+  font-weight: 300;
+}
+
+.vff ::-moz-placeholder { /* Firefox 19+ */
+  color: var(--vff-secondary-text-color);
+  opacity: 1;
+  font-weight: 300;
+}
+
+.vff :-ms-input-placeholder { /* IE 10+ */
+  color: var(--vff-secondary-text-color)!important;
+  opacity: 1!important;
+  font-weight: 300!important;
+}
+
+.vff :-moz-placeholder { /* Firefox 18- */
+  color: #999;
+  opacity: 1;
+  font-weight: 300;
+}
+
+/* faux input type date placeholder for iOS */
+.vff.vff-is-ios .field-date:not(.f-has-value) .f-answer > span::before {
+  color: var(--vff-secondary-text-color);
+  font-weight: 300;
+  font-size: .72em;
+}
+
+/* field-multiplechoice */
+.vff ul.f-radios li {
+  border: 1px solid var(--vff-secondary-text-color);
+}
+
+.vff ul.f-radios li.f-selected,
+.vff ul.f-radios li:active {
+  border-color: var(--vff-main-text-color);
+  background-color: var(--vff-tertiary-text-color);
+}
+
+.vff ul.f-radios li.f-other.f-selected input {
+  color: inherit;
+}
+
+.vff .f-key{
+  color: var(--vff-secondary-text-color);
+}
+
+/* field-dropdown */
+.vff span.f-empty {
+  color: var(--vff-secondary-text-color);
+}
+
+.vff span.f-answered {
+  color: var(--vff-main-text-color);
+}
+
+.vff .f-arrow-down svg {
+  fill: var(--vff-main-text-color);
+}
+
+/* field matrix */
+.vff .f-matrix-table {
+  border-collapse: separate;
+  border-spacing: 0 .6em;
+}
+
+.vff .f-matrix-table thead th {
+  padding-bottom: 0;
+}
+
+.vff .f-matrix-table td {
+  border: 1px solid var(--vff-secondary-text-color);
+  border-right:hidden;
+  border-left: hidden;
+}
+
+.vff .f-matrix-table td:first-child {
+  border-left: 1px solid var(--vff-secondary-text-color);
+}
+
+.vff .f-matrix-table td:last-child {
+  border-right: 1px solid var(--vff-secondary-text-color);
+}
+
+.vff .f-matrix-table thead td:first-child {
+  border: none;
+}
+
+.vff .f-field-svg {
+  color: var(--vff-secondary-text-color);
+  border-width: 2px;
+}
+
+.vff .f-field-control:checked ~ .f-field-mask .f-field-svg {
+  color: var(--vff-main-text-color);
+}
+
+/*matrix scrollbar*/
+.vff .f-matrix-wrap::-webkit-scrollbar {
+  height: 10px;
+}
+
+.vff .f-matrix-wrap::-webkit-scrollbar-track {
+  background-color: var(--vff-tertiary-text-color);
+}
+
+.vff .f-matrix-wrap::-webkit-scrollbar-thumb {
+  background-color: var(--vff-secondary-text-color);
+}
+
+/* buttons */
+.vff .o-btn-action {
+  color: var(--vff-bg-color);
+  background-color: var(--vff-main-text-color);
+}
+
+.vff .o-btn-action:hover,
+.vff .o-btn-action:focus {
+  background-color: var(--vff-main-text-color);
+  opacity: .9;
+} 
+
+/* footer */
+.vff-footer .footer-inner-wrap {
+  background-color: rgba(255,255,255,0.75);
+}
+
+@media screen and (max-width: 479px) {
+  .vff-footer .footer-inner-wrap{
+    background-color: rgba(240,240,240,0.75);
+  }
+}
+
+.vff-footer .f-prev svg,
+.vff-footer .f-next svg {
+  fill: var(--vff-main-text-color);
+}
+
+.vff-footer .f-progress {
+  color: var(--vff-secondary-text-color);
+}
+
+.vff-footer .f-progress-bar {
+  background-color: var(--vff-secondary-text-color);
+  filter: brightness(1.2);
+}
+
+.vff-footer .f-progress-bar-inner {
+  background-color: var(--vff-main-text-color);
+}
+
+.vff-footer .f-prev:hover,
+.vff-footer .f-next:hover,
+.vff-footer .f-prev:focus,
+.vff-footer .f-next:focus {
+  background-color: rgba(0,0,0,0.07);
+}
+
+/* alerts */
+.vff .text-alert,
+.vff .f-invalid {
+  color: #F5554A;
+}
+
+.vff .text-success {
+  color: #4CAF50;
+}
+
+/* text-muted */
+.vff span.f-tagline,
+.vff span.f-sub,
+.vff p.f-description,
+.vff .text-muted {
+  color: var(--vff-secondary-text-color);
+}
+
+/*
+  dark mode styles
+*/
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --vff-bg-color: #313640;
+    --vff-main-text-color: #fff;
+    --vff-secondary-text-color: #AEB6BF;
+    --vff-tertiary-text-color: #41464F;
+    --vff-main-accent-color: #41B883;
+    --vff-secondary-accent-color: #A0DBC1;
+  }
+
+  header.vff-header {
+    background-color: #313640;
+  }
+
+  header.vff-header svg.f-logo {
+    fill: var(--vff-main-accent-color);
+  }
+
+  .vff textarea,
+  .vff input,
+  .vff select option {
+    color: var(--vff-main-accent-color);
+  }
+
+  .vff input[type=date]::-webkit-calendar-picker-indicator {
+    filter: invert(100%);
+  }
+
+  .vff span.f-answered {
+    color: var(--vff-main-accent-color);
+  }
+
+  .vff .f-arrow-down svg {
+    fill: var(--vff-main-accent-color);
+  }
+  
+  .vff .text-success {
+    color: var(--vff-main-accent-color);
+  }
+
+  /* footer */
+  .vff-footer .footer-inner-wrap {
+    background-color: rgba(49,54,64,0.75);
+  }
+
+  .vff-footer .f-prev svg,
+  .vff-footer .f-next svg {
+    fill: var(--vff-main-accent-color);
+  }
+
+  .vff-footer .f-prev.f-disabled svg,
+  .vff-footer .f-next.f-disabled svg {
+    fill: var(--vff-main-text-color);
+  }
+
+  .vff-footer .f-prev:hover,
+  .vff-footer .f-next:hover {
+    background-color: rgba(0,0,0,0.2);
+  }
+
+  .vff-footer .f-progress-bar {
+    background-color: var(--vff-secondary-text-color);
+    filter: brightness(1);
+  }
+
+  .vff-footer .f-progress-bar-inner {
+    background-color: var(--vff-main-accent-color);
+  }
+
+  /* field-multiplechoice */
+  .vff ul.f-radios li.f-selected{
+    color: var(--vff-main-accent-color);
+  }
+
+  .vff ul.f-radios li {
+    font-weight: 900;
+    color: var(--vff-secondary-text-color);
+  }
+
+  .vff .f-key {
+    font-weight: 400;
+    color: var(--vff-main-accent-color);
+  }
+
+  /* field matrix */
+  .vff .f-matrix-wrap::-webkit-scrollbar-thumb {
+    background-color: var(--vff-main-accent-color);
+  }
+}
