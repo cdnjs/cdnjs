@@ -1,0 +1,556 @@
+let R = {};
+function Z(e = {}) {
+  R = {
+    animate: !0,
+    allowClose: !0,
+    opacity: 0.7,
+    smoothScroll: !1,
+    showProgress: !1,
+    stagePadding: 10,
+    stageRadius: 5,
+    popoverOffset: 10,
+    showButtons: ["next", "previous", "close"],
+    disableButtons: [],
+    backdropColor: "#000",
+    ...e
+  };
+}
+function l(e) {
+  return e ? R[e] : R;
+}
+function H(e, o, t, n) {
+  return (e /= n / 2) < 1 ? t / 2 * e * e + o : -t / 2 * (--e * (e - 2) - 1) + o;
+}
+function q(e) {
+  if (!e || J(e))
+    return;
+  const o = l("smoothScroll");
+  e.scrollIntoView({
+    // Removing the smooth scrolling for elements which exist inside the scrollable parent
+    // This was causing the highlight to not properly render
+    behavior: !o || G(e) ? "auto" : "smooth",
+    inline: "center",
+    block: "center"
+  });
+}
+function G(e) {
+  if (!e || !e.parentElement)
+    return;
+  const o = e.parentElement;
+  return o.scrollHeight > o.clientHeight;
+}
+function J(e) {
+  const o = e.getBoundingClientRect();
+  return o.top >= 0 && o.left >= 0 && o.bottom <= (window.innerHeight || document.documentElement.clientHeight) && o.right <= (window.innerWidth || document.documentElement.clientWidth);
+}
+let B = {};
+function b(e, o) {
+  B[e] = o;
+}
+function p(e) {
+  return e ? B[e] : B;
+}
+function U() {
+  B = {};
+}
+let T = {};
+function E(e, o) {
+  T[e] = o;
+}
+function $(e) {
+  var o;
+  (o = T[e]) == null || o.call(T);
+}
+function ee() {
+  T = {};
+}
+function te(e, o, t, n) {
+  let d = p("__activeStagePosition");
+  const r = d || t.getBoundingClientRect(), h = n.getBoundingClientRect(), v = H(e, r.x, h.x - r.x, o), i = H(e, r.y, h.y - r.y, o), s = H(e, r.width, h.width - r.width, o), a = H(e, r.height, h.height - r.height, o);
+  d = {
+    x: v,
+    y: i,
+    width: s,
+    height: a
+  }, X(d), b("__activeStagePosition", d);
+}
+function V(e) {
+  if (!e)
+    return;
+  const o = e.getBoundingClientRect(), t = {
+    x: o.x,
+    y: o.y,
+    width: o.width,
+    height: o.height
+  };
+  b("__activeStagePosition", t), X(t);
+}
+function oe() {
+  const e = p("__activeStagePosition"), o = p("__stageSvg");
+  if (!e)
+    return;
+  if (!o) {
+    console.warn("No stage svg found.");
+    return;
+  }
+  const t = window.innerWidth, n = window.innerHeight;
+  o.setAttribute("viewBox", `0 0 ${t} ${n}`);
+}
+function ne(e) {
+  const o = ie(e);
+  document.body.appendChild(o), K(o, (t) => {
+    t.target.tagName === "path" && $("overlayClick");
+  }), b("__stageSvg", o);
+}
+function X(e) {
+  const o = p("__stageSvg");
+  if (!o) {
+    ne(e);
+    return;
+  }
+  const t = o.firstElementChild;
+  if ((t == null ? void 0 : t.tagName) !== "path")
+    throw new Error("no path element found in stage svg");
+  t.setAttribute("d", Y(e));
+}
+function ie(e) {
+  const o = window.innerWidth, t = window.innerHeight, n = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  n.classList.add("driver-stage", "driver-stage-animated"), n.setAttribute("viewBox", `0 0 ${o} ${t}`), n.setAttribute("xmlSpace", "preserve"), n.setAttribute("xmlnsXlink", "http://www.w3.org/1999/xlink"), n.setAttribute("version", "1.1"), n.setAttribute("preserveAspectRatio", "xMinYMin slice"), n.style.fillRule = "evenodd", n.style.clipRule = "evenodd", n.style.strokeLinejoin = "round", n.style.strokeMiterlimit = "2", n.style.zIndex = "10000", n.style.position = "fixed", n.style.top = "0", n.style.left = "0", n.style.width = "100%", n.style.height = "100%";
+  const d = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  return d.setAttribute("d", Y(e)), d.style.fill = l("backdropColor") || "rgb(0,0,0)", d.style.opacity = `${l("opacity")}`, d.style.pointerEvents = "auto", d.style.cursor = "auto", n.appendChild(d), n;
+}
+function Y(e) {
+  const o = window.innerWidth, t = window.innerHeight, n = l("stagePadding") || 0, d = l("stageRadius") || 0, r = e.width + n * 2, h = e.height + n * 2, v = Math.min(d, r / 2, h / 2), i = Math.floor(Math.max(v, 0)), s = e.x - n + i, a = e.y - n, c = r - i * 2, g = h - i * 2;
+  return `M${o},0L0,0L0,${t}L${o},${t}L${o},0Z
+    M${s},${a} h${c} a${i},${i} 0 0 1 ${i},${i} v${g} a${i},${i} 0 0 1 -${i},${i} h-${c} a${i},${i} 0 0 1 -${i},-${i} v-${g} a${i},${i} 0 0 1 ${i},-${i} z`;
+}
+function re() {
+  const e = p("__stageSvg");
+  e && e.remove();
+}
+function se() {
+  const e = document.getElementById("driver-dummy-element");
+  if (e)
+    return e;
+  let o = document.createElement("div");
+  return o.id = "driver-dummy-element", o.style.width = "0", o.style.height = "0", o.style.pointerEvents = "none", o.style.opacity = "0", o.style.position = "fixed", o.style.top = "50%", o.style.left = "50%", document.body.appendChild(o), o;
+}
+function z(e) {
+  const { element: o } = e;
+  let t = typeof o == "string" ? document.querySelector(o) : o;
+  t || (t = se()), ce(t, e);
+}
+function ae() {
+  const e = p("activeElement"), o = p("activeStep");
+  e && (V(e), oe(), Q(e, o));
+}
+function ce(e, o) {
+  const n = Date.now(), d = p("activeStep"), r = p("activeElement") || e, h = !r || r === e, v = e.id === "driver-dummy-element", i = r.id === "driver-dummy-element", s = l("animate"), a = l("onHighlightStarted"), c = l("onHighlighted"), g = (d == null ? void 0 : d.onDeselected) || l("onDeselected"), m = l(), w = p();
+  !h && g && g(i ? void 0 : r, d, {
+    config: m,
+    state: w
+  }), a && a(v ? void 0 : e, o, {
+    config: m,
+    state: w
+  });
+  const u = !h && s;
+  let f = !1;
+  he();
+  const L = () => {
+    if (p("__transitionCallback") !== L)
+      return;
+    const S = Date.now() - n, y = 400 - S <= 400 / 2;
+    o.popover && y && !f && u && (D(e, o), f = !0), l("animate") && S < 400 ? te(S, 400, r, e) : (V(e), c && c(v ? void 0 : e, o, {
+      config: l(),
+      state: p()
+    }), b("__transitionCallback", void 0), b("previousStep", d), b("previousElement", r), b("activeStep", o), b("activeElement", e)), window.requestAnimationFrame(L);
+  };
+  b("__transitionCallback", L), window.requestAnimationFrame(L), q(e), !u && o.popover && D(e, o), r.classList.remove("driver-active-element"), e.classList.add("driver-active-element");
+}
+function le() {
+  var e;
+  (e = document.getElementById("driver-dummy-element")) == null || e.remove(), document.querySelectorAll(".driver-active-element").forEach((o) => {
+    o.classList.remove("driver-active-element");
+  });
+}
+function k() {
+  const e = p("__resizeTimeout");
+  e && window.cancelAnimationFrame(e), b("__resizeTimeout", window.requestAnimationFrame(ae));
+}
+function de(e) {
+  l("allowKeyboardControl");
+  e.key === "Escape" ? $("escapePress") : e.key === "ArrowRight" ? $("arrowRightPress") : e.key === "ArrowLeft" && $("arrowLeftPress");
+}
+function K(e, o, t) {
+  const n = (r, h) => {
+    const v = r.target;
+    e.contains(v) && ((!t || t(v)) && r.preventDefault(), r.stopPropagation(), r.stopImmediatePropagation(), h == null || h(r));
+  };
+  document.addEventListener("pointerdown", n, !0), document.addEventListener("mousedown", n, !0), document.addEventListener("pointerup", n, !0), document.addEventListener("mouseup", n, !0), document.addEventListener(
+    "click",
+    (r) => {
+      n(r, o);
+    },
+    !0
+  );
+}
+function pe() {
+  window.addEventListener("keyup", de, !1), window.addEventListener("resize", k), window.addEventListener("scroll", k);
+}
+function ue() {
+  window.removeEventListener("resize", k), window.removeEventListener("scroll", k);
+}
+function he() {
+  const e = p("popover");
+  e && (e.wrapper.style.display = "none");
+}
+function D(e, o) {
+  var S, P;
+  let t = p("popover");
+  t && document.body.removeChild(t.wrapper), t = fe(), document.body.appendChild(t.wrapper);
+  const {
+    title: n,
+    description: d,
+    showButtons: r,
+    disableButtons: h,
+    showProgress: v,
+    nextBtnText: i = l("nextBtnText") || "Next &rarr;",
+    prevBtnText: s = l("prevBtnText") || "&larr; Previous",
+    progressText: a = l("progressText") || "{current} of {total}"
+  } = o.popover || {};
+  t.nextButton.innerHTML = i, t.previousButton.innerHTML = s, t.progress.innerHTML = a, n ? (t.title.innerText = n, t.title.style.display = "block") : t.title.style.display = "none", d ? (t.description.innerHTML = d, t.description.style.display = "block") : t.description.style.display = "none";
+  const c = r || l("showButtons"), g = v || l("showProgress") || !1, m = (c == null ? void 0 : c.includes("next")) || (c == null ? void 0 : c.includes("previous")) || g;
+  t.closeButton.style.display = c.includes("close") ? "block" : "none", m ? (t.footer.style.display = "flex", t.progress.style.display = g ? "block" : "none", t.nextButton.style.display = c.includes("next") ? "block" : "none", t.previousButton.style.display = c.includes("previous") ? "block" : "none") : t.footer.style.display = "none";
+  const w = h || l("disableButtons") || [];
+  w != null && w.includes("next") && t.nextButton.classList.add("driver-popover-btn-disabled"), w != null && w.includes("previous") && t.previousButton.classList.add("driver-popover-btn-disabled"), w != null && w.includes("close") && t.closeButton.classList.add("driver-popover-btn-disabled");
+  const u = t.wrapper;
+  u.style.display = "block", u.style.left = "", u.style.top = "", u.style.bottom = "", u.style.right = "";
+  const f = t.arrow;
+  f.className = "driver-popover-arrow";
+  const L = ((S = o.popover) == null ? void 0 : S.popoverClass) || l("popoverClass") || "";
+  u.className = `driver-popover ${L}`.trim(), K(
+    t.wrapper,
+    (y) => {
+      var _, N, I;
+      const x = y.target, A = ((_ = o.popover) == null ? void 0 : _.onNextClick) || l("onNextClick"), M = ((N = o.popover) == null ? void 0 : N.onPrevClick) || l("onPrevClick"), W = ((I = o.popover) == null ? void 0 : I.onCloseClick) || l("onCloseClick");
+      if (x.classList.contains("driver-popover-next-btn"))
+        return A ? A(e, o, {
+          config: l(),
+          state: p()
+        }) : $("nextClick");
+      if (x.classList.contains("driver-popover-prev-btn"))
+        return M ? M(e, o, {
+          config: l(),
+          state: p()
+        }) : $("prevClick");
+      if (x.classList.contains("driver-popover-close-btn"))
+        return W ? W(e, o, {
+          config: l(),
+          state: p()
+        }) : $("closeClick");
+    },
+    (y) => !(t != null && t.description.contains(y)) && !(t != null && t.title.contains(y))
+  ), b("popover", t), Q(e, o), q(u);
+  const C = ((P = o.popover) == null ? void 0 : P.onPopoverRendered) || l("onPopoverRendered");
+  C && C(t);
+}
+function j() {
+  const e = p("popover");
+  if (!(e != null && e.wrapper))
+    return;
+  const o = e.wrapper.getBoundingClientRect(), t = l("stagePadding") || 0, n = l("popoverOffset") || 0;
+  return {
+    width: o.width + t + n,
+    height: o.height + t + n,
+    realWidth: o.width,
+    realHeight: o.height
+  };
+}
+function F(e, o) {
+  const { elementDimensions: t, popoverDimensions: n, popoverPadding: d, popoverArrowDimensions: r } = o;
+  return e === "start" ? Math.max(
+    Math.min(
+      t.top - d,
+      window.innerHeight - n.realHeight - r.width
+    ),
+    r.width
+  ) : e === "end" ? Math.max(
+    Math.min(
+      t.top - (n == null ? void 0 : n.realHeight) + t.height + d,
+      window.innerHeight - (n == null ? void 0 : n.realHeight) - r.width
+    ),
+    r.width
+  ) : e === "center" ? Math.max(
+    Math.min(
+      t.top + t.height / 2 - (n == null ? void 0 : n.realHeight) / 2,
+      window.innerHeight - (n == null ? void 0 : n.realHeight) - r.width
+    ),
+    r.width
+  ) : 0;
+}
+function O(e, o) {
+  const { elementDimensions: t, popoverDimensions: n, popoverPadding: d, popoverArrowDimensions: r } = o;
+  return e === "start" ? Math.max(
+    Math.min(
+      t.left - d,
+      window.innerWidth - n.realWidth - r.width
+    ),
+    r.width
+  ) : e === "end" ? Math.max(
+    Math.min(
+      t.left - (n == null ? void 0 : n.realWidth) + t.width + d,
+      window.innerWidth - (n == null ? void 0 : n.realWidth) - r.width
+    ),
+    r.width
+  ) : e === "center" ? Math.max(
+    Math.min(
+      t.left + t.width / 2 - (n == null ? void 0 : n.realWidth) / 2,
+      window.innerWidth - (n == null ? void 0 : n.realWidth) - r.width
+    ),
+    r.width
+  ) : 0;
+}
+function Q(e, o) {
+  const t = p("popover");
+  if (!t)
+    return;
+  const { align: n = "start", side: d = "left" } = (o == null ? void 0 : o.popover) || {}, r = n, h = e.id === "driver-dummy-element" ? "over" : d, v = l("stagePadding") || 0, i = j(), s = t.arrow.getBoundingClientRect(), a = e.getBoundingClientRect(), c = a.top - i.height;
+  let g = c >= 0;
+  const m = window.innerHeight - (a.bottom + i.height);
+  let w = m >= 0;
+  const u = a.left - i.width;
+  let f = u >= 0;
+  const L = window.innerWidth - (a.right + i.width);
+  let C = L >= 0;
+  const S = !g && !w && !f && !C;
+  let P = h;
+  if (h === "top" && g ? C = f = w = !1 : h === "bottom" && w ? C = f = g = !1 : h === "left" && f ? C = g = w = !1 : h === "right" && C && (f = g = w = !1), h === "over") {
+    const y = window.innerWidth / 2 - i.realWidth / 2, x = window.innerHeight / 2 - i.realHeight / 2;
+    t.wrapper.style.left = `${y}px`, t.wrapper.style.right = "auto", t.wrapper.style.top = `${x}px`, t.wrapper.style.bottom = "auto";
+  } else if (S) {
+    const y = window.innerWidth / 2 - (i == null ? void 0 : i.realWidth) / 2, x = 10;
+    t.wrapper.style.left = `${y}px`, t.wrapper.style.right = "auto", t.wrapper.style.bottom = `${x}px`, t.wrapper.style.top = "auto";
+  } else if (f) {
+    const y = Math.min(
+      u,
+      window.innerWidth - (i == null ? void 0 : i.realWidth) - s.width
+    ), x = F(r, {
+      elementDimensions: a,
+      popoverDimensions: i,
+      popoverPadding: v,
+      popoverArrowDimensions: s
+    });
+    t.wrapper.style.left = `${y}px`, t.wrapper.style.top = `${x}px`, t.wrapper.style.bottom = "auto", t.wrapper.style.right = "auto", P = "left";
+  } else if (C) {
+    const y = Math.min(
+      L,
+      window.innerWidth - (i == null ? void 0 : i.realWidth) - s.width
+    ), x = F(r, {
+      elementDimensions: a,
+      popoverDimensions: i,
+      popoverPadding: v,
+      popoverArrowDimensions: s
+    });
+    t.wrapper.style.right = `${y}px`, t.wrapper.style.top = `${x}px`, t.wrapper.style.bottom = "auto", t.wrapper.style.left = "auto", P = "right";
+  } else if (g) {
+    const y = Math.min(
+      c,
+      window.innerHeight - i.realHeight - s.width
+    );
+    let x = O(r, {
+      elementDimensions: a,
+      popoverDimensions: i,
+      popoverPadding: v,
+      popoverArrowDimensions: s
+    });
+    t.wrapper.style.top = `${y}px`, t.wrapper.style.left = `${x}px`, t.wrapper.style.bottom = "auto", t.wrapper.style.right = "auto", P = "top";
+  } else if (w) {
+    const y = Math.min(
+      m,
+      window.innerHeight - (i == null ? void 0 : i.realHeight) - s.width
+    );
+    let x = O(r, {
+      elementDimensions: a,
+      popoverDimensions: i,
+      popoverPadding: v,
+      popoverArrowDimensions: s
+    });
+    t.wrapper.style.left = `${x}px`, t.wrapper.style.bottom = `${y}px`, t.wrapper.style.top = "auto", t.wrapper.style.right = "auto", P = "bottom";
+  }
+  S ? t.arrow.classList.add("driver-popover-arrow-none") : ve(r, P, e);
+}
+function ve(e, o, t) {
+  const n = p("popover");
+  if (!n)
+    return;
+  const d = t.getBoundingClientRect(), r = j(), h = n.arrow, v = r.width, i = window.innerWidth, s = d.width, a = d.left, c = r.height, g = window.innerHeight, m = d.top, w = d.height;
+  h.className = "driver-popover-arrow";
+  let u = o, f = e;
+  o === "top" ? (a + s <= 0 ? (u = "right", f = "end") : a + s - v <= 0 && (u = "top", f = "start"), a >= i ? (u = "left", f = "end") : a + v >= i && (u = "top", f = "end")) : o === "bottom" ? (a + s <= 0 ? (u = "right", f = "start") : a + s - v <= 0 && (u = "bottom", f = "start"), a >= i ? (u = "left", f = "start") : a + v >= i && (u = "bottom", f = "end")) : o === "left" ? (m + w <= 0 ? (u = "bottom", f = "end") : m + w - c <= 0 && (u = "left", f = "start"), m >= g ? (u = "top", f = "end") : m + c >= g && (u = "left", f = "end")) : o === "right" && (m + w <= 0 ? (u = "bottom", f = "start") : m + w - c <= 0 && (u = "right", f = "start"), m >= g ? (u = "top", f = "start") : m + c >= g && (u = "right", f = "end")), u ? (h.classList.add(`driver-popover-arrow-side-${u}`), h.classList.add(`driver-popover-arrow-align-${f}`)) : h.classList.add("driver-popover-arrow-none");
+}
+function fe() {
+  const e = document.createElement("div");
+  e.classList.add("driver-popover");
+  const o = document.createElement("div");
+  o.classList.add("driver-popover-arrow");
+  const t = document.createElement("div");
+  t.classList.add("driver-popover-title"), t.style.display = "none", t.innerText = "Popover Title";
+  const n = document.createElement("div");
+  n.classList.add("driver-popover-description"), n.style.display = "none", n.innerText = "Popover description is here";
+  const d = document.createElement("button");
+  d.classList.add("driver-popover-close-btn"), d.innerHTML = "&times;";
+  const r = document.createElement("div");
+  r.classList.add("driver-popover-footer");
+  const h = document.createElement("span");
+  h.classList.add("driver-popover-progress-text"), h.innerText = "";
+  const v = document.createElement("span");
+  v.classList.add("driver-popover-navigation-btns");
+  const i = document.createElement("button");
+  i.classList.add("driver-popover-prev-btn"), i.innerHTML = "&larr; Previous";
+  const s = document.createElement("button");
+  return s.classList.add("driver-popover-next-btn"), s.innerHTML = "Next &rarr;", v.appendChild(i), v.appendChild(s), r.appendChild(h), r.appendChild(v), e.appendChild(d), e.appendChild(o), e.appendChild(t), e.appendChild(n), e.appendChild(r), {
+    wrapper: e,
+    arrow: o,
+    title: t,
+    description: n,
+    footer: r,
+    previousButton: i,
+    nextButton: s,
+    closeButton: d,
+    footerButtons: v,
+    progress: h
+  };
+}
+function ge() {
+  var o;
+  const e = p("popover");
+  e && ((o = e.wrapper.parentElement) == null || o.removeChild(e.wrapper));
+}
+function we(e = {}) {
+  Z(e);
+  function o() {
+    l("allowClose") && i();
+  }
+  function t() {
+    const s = p("activeIndex"), a = l("steps") || [];
+    if (typeof s > "u")
+      return;
+    const c = s + 1;
+    a[c] ? v(c) : i();
+  }
+  function n() {
+    const s = p("activeIndex"), a = l("steps") || [];
+    if (typeof s > "u")
+      return;
+    const c = s - 1;
+    a[c] ? v(c) : i();
+  }
+  function d() {
+    const s = l("steps") || [], a = p("activeIndex");
+    if (typeof a > "u")
+      return;
+    const c = a - 1;
+    s[c] && v(c);
+  }
+  function r() {
+    var m;
+    const s = p("activeIndex"), a = p("activeStep"), c = p("activeElement");
+    if (typeof s > "u" || typeof a > "u")
+      return;
+    const g = ((m = a.popover) == null ? void 0 : m.onNextClick) || l("onNextClick");
+    if (g)
+      return g(c, a, {
+        config: l(),
+        state: p()
+      });
+    t();
+  }
+  function h() {
+    p("isInitialized") || (b("isInitialized", !0), document.body.classList.add("driver-active", l("animate") ? "driver-fade" : "driver-simple"), pe(), E("overlayClick", o), E("escapePress", o), E("arrowLeftPress", d), E("arrowRightPress", r));
+  }
+  function v(s = 0) {
+    var S, P, y, x;
+    const a = l("steps");
+    if (!a) {
+      console.error("No steps to drive through"), i();
+      return;
+    }
+    a[s] || (console.warn(`Step not found at index: ${s}`), i()), b("activeIndex", s);
+    const c = a[s], g = a[s + 1], m = a[s - 1], w = ((S = c.popover) == null ? void 0 : S.doneBtnText) || l("doneBtnText") || "Done", u = l("allowClose"), f = typeof ((P = c.popover) == null ? void 0 : P.showProgress) < "u" ? (y = c.popover) == null ? void 0 : y.showProgress : l("showProgress"), C = (((x = c.popover) == null ? void 0 : x.progressText) || l("progressText") || "{{current}} of {{total}}").replace("{{current}}", `${s + 1}`).replace("{{total}}", `${a.length}`);
+    console.log(f), z({
+      ...c,
+      popover: {
+        showButtons: ["next", "previous", ...u ? ["close"] : []],
+        nextBtnText: g ? void 0 : w,
+        disableButtons: [...m ? [] : ["previous"]],
+        showProgress: f,
+        progressText: C,
+        onNextClick: () => {
+          g ? v(s + 1) : i();
+        },
+        onPrevClick: () => {
+          v(s - 1);
+        },
+        onCloseClick: () => {
+          i();
+        },
+        ...(c == null ? void 0 : c.popover) || {}
+      }
+    });
+  }
+  function i(s = !0) {
+    const a = p("activeElement"), c = p("activeStep"), g = l("onDestroyStarted");
+    if (s && g) {
+      g(a, c, {
+        config: l(),
+        state: p()
+      });
+      return;
+    }
+    const m = (c == null ? void 0 : c.onDeselected) || l("onDeselected"), w = l("onDestroyed");
+    if (document.body.classList.remove("driver-active", "driver-fade", "driver-simple"), ue(), ge(), le(), re(), ee(), U(), a && c) {
+      const u = a.id === "driver-dummy-element";
+      m && m(u ? void 0 : a, c, {
+        config: l(),
+        state: p()
+      }), w && w(u ? void 0 : a, c, {
+        config: l(),
+        state: p()
+      });
+    }
+  }
+  return {
+    isActive: () => p("isInitialized") || !1,
+    refresh: k,
+    drive: (s = 0) => {
+      h(), v(s);
+    },
+    moveNext: t,
+    movePrevious: n,
+    hasNextStep: () => {
+      const s = l("steps") || [], a = p("activeIndex");
+      return a !== void 0 && s[a + 1];
+    },
+    hasPreviousStep: () => {
+      const s = l("steps") || [], a = p("activeIndex");
+      return a !== void 0 && s[a - 1];
+    },
+    highlight: (s) => {
+      h(), z({
+        ...s,
+        popover: s.popover ? {
+          showButtons: [],
+          showProgress: !1,
+          progressText: "",
+          ...s.popover
+        } : void 0
+      });
+    },
+    destroy: () => {
+      i(!1);
+    }
+  };
+}
+export {
+  we as driver
+};
