@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("imagebase","zh-cn",{captionPlaceholder:"输入图片标题"});
