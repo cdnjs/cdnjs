@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("imagebase","lt",{captionPlaceholder:"Įveskite vaizdo pavadinimą"});

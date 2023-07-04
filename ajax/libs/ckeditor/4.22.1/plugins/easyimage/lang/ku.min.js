@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("easyimage","ku",{commands:{fullImage:"پڕ بە پڕی وێنەکە",sideImage:"لای وێنەکە",altText:"گۆڕینی جێگرەوەی تێکستی وێنەکە",upload:"بارکردنی وێنە"},uploadFailed:"وێنەکەت ناتوانرێت بارکرێت بەهۆی هەڵەی پەیوەندیکردن بەتۆڕی نێت. "});
