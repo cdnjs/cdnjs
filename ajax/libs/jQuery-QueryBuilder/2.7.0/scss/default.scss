@@ -1,0 +1,184 @@
+/*!
+ * jQuery QueryBuilder 2.7.0
+ * Copyright 2014-2023 Damien "Mistic" Sorel (http://www.strangeplanet.fr)
+ * Licensed under MIT (https://opensource.org/licenses/MIT)
+ */
+$theme-name: default !default;
+
+// common
+$item-vertical-spacing: 4px !default;
+$item-border-radius: 5px !default;
+
+// groups
+$group-background-color: rgba(250, 240, 210, .5) !default;
+$group-border-color: #DCC896 !default;
+$group-border: 1px solid $group-border-color !default;
+$group-padding: 10px !default;
+
+// rules
+$rule-background-color: rgba(255, 255, 255, .9) !default;
+$rule-border-color: #EEE !default;
+$rule-border: 1px solid $rule-border-color !default;
+$rule-padding: 5px !default;
+// scss-lint:disable ColorVariable
+$rule-value-separator: 1px solid #DDD !default;
+
+// errors
+$error-icon-color: #F00 !default;
+$error-border-color: #F99 !default;
+$error-background-color: #FDD !default;
+
+// ticks
+$ticks-width: 2px !default;
+$ticks-color: #CCC !default;
+$ticks-position: 5px, 10px !default;
+
+
+// ABSTRACTS
+%base-container {
+  position: relative;
+  margin: $item-vertical-spacing 0;
+  border-radius: $item-border-radius;
+  padding: $rule-padding;
+  border: $rule-border;
+  background: $rule-background-color;
+}
+
+%rule-component {
+  display: inline-block;
+  margin: 0 5px 0 0;
+  vertical-align: middle;
+}
+
+.query-builder {
+
+  // GROUPS
+  .rules-group-container {
+    @extend %base-container;
+
+    padding: $group-padding;
+    padding-bottom: #{$group-padding - $item-vertical-spacing};
+    border: $group-border;
+    background: $group-background-color;
+  }
+
+  .rules-group-header {
+    margin-bottom: $group-padding;
+
+    .group-conditions {
+      .btn.readonly:not(.active),
+      input[name$='_cond'] {
+        border: 0;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+        white-space: nowrap;
+      }
+
+      .btn.readonly {
+        border-radius: 3px;
+      }
+    }
+  }
+
+  .rules-list {
+    list-style: none;
+    padding: 0 0 0 #{nth($ticks-position, 1) + nth($ticks-position, 2)};
+    margin: 0;
+  }
+
+  // RULES
+  .rule-container {
+    @extend %base-container;
+
+    .rule-filter-container,
+    .rule-operator-container,
+    .rule-value-container {
+      @extend %rule-component;
+    }
+  }
+
+  .rule-value-container {
+    border-left: $rule-value-separator;
+    padding-left: 5px;
+
+    label {
+      margin-bottom: 0;
+      font-weight: normal;
+
+      &.block {
+        display: block;
+      }
+    }
+
+    select,
+    input[type='text'],
+    input[type='number'] {
+      padding: 1px;
+    }
+  }
+
+  // ERRORS
+  .error-container {
+    @extend %rule-component;
+    display: none;
+    cursor: help;
+    color: $error-icon-color;
+  }
+
+  .has-error {
+    background-color: $error-background-color;
+    border-color: $error-border-color;
+
+    .error-container {
+      display: inline-block !important;
+    }
+  }
+
+  // TICKS
+  .rules-list>* {
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      left: #{-1 * nth($ticks-position, 2)};
+      width: nth($ticks-position, 2);
+      height: calc(50% + #{$item-vertical-spacing});
+      border-color: $ticks-color;
+      border-style: solid;
+    }
+
+    &::before {
+      top: #{-2 * $ticks-width};
+      border-width: 0 0 $ticks-width $ticks-width;
+    }
+
+    &::after {
+      top: 50%;
+      border-width: 0 0 0 $ticks-width;
+    }
+
+    &:first-child::before {
+      top: #{-$group-padding - $ticks-width};
+      height: calc(50% + #{$group-padding + $item-vertical-spacing});
+    }
+
+    &:last-child::before {
+      border-radius: 0 0 0 #{2 * $ticks-width};
+    }
+
+    &:last-child::after {
+      display: none;
+    }
+  }
+}
+
+@import "plugins/bt-checkbox";
+@import "plugins/bt-tooltip-errors";
+@import "plugins/filter-description";
+@import "plugins/invert";
+@import "plugins/sortable";

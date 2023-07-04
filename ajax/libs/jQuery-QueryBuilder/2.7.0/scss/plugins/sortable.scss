@@ -1,0 +1,28 @@
+$placeholder-border-color: #BBB;
+$placeholder-border: 1px dashed $placeholder-border-color;
+
+.query-builder {
+  .drag-handle {
+    @extend %rule-component;
+    cursor: move;
+    vertical-align: middle;
+    margin-left: 5px;
+  }
+
+  .dragging {
+    position: fixed;
+    opacity: .5;
+    z-index: 100;
+
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+
+  .rule-placeholder {
+    @extend %base-container;
+    border: $placeholder-border;
+    opacity: .7;
+  }
+}
