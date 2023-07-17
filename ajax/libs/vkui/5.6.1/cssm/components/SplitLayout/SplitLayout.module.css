@@ -1,0 +1,29 @@
+.SplitLayout {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.SplitLayout__inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+/* Hack with using PanelHeaderSimple */
+
+/* Better to implement simple header-like here */
+
+.SplitLayout__inner--header {
+  position: relative;
+  z-index: var(--vkui_internal--z_index_split_layout_panel_header);
+  margin-top: calc(
+    -1 * (var(--vkui--size_panel_header_height--regular) + var(--vkui_internal--safe_area_inset_top))
+  );
+}
+
+.SplitLayout--ios .SplitLayout__inner--header {
+  margin-top: calc(
+    -1 * (var(--vkui--size_panel_header_height--regular) + var(--vkui_internal--safe_area_inset_top))
+  );
+}
