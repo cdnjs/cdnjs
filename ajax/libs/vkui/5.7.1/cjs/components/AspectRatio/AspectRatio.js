@@ -1,0 +1,34 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "AspectRatio", {
+    enumerable: true,
+    get: function() {
+        return AspectRatio;
+    }
+});
+var _define_property = require("@swc/helpers/_/_define_property");
+var _interop_require_wildcard = require("@swc/helpers/_/_interop_require_wildcard");
+var _object_spread = require("@swc/helpers/_/_object_spread");
+var _object_without_properties = require("@swc/helpers/_/_object_without_properties");
+var _react = /*#__PURE__*/ _interop_require_wildcard._(require("react"));
+var _vkjs = require("@vkontakte/vkjs");
+function AspectRatio(_param) {
+    var ratio = _param.ratio, children = _param.children, _param_mode = _param.mode, mode = _param_mode === void 0 ? "stretch" : _param_mode, className = _param.className, getRootRef = _param.getRootRef, styleProp = _param.style, props = _object_without_properties._(_param, [
+        "ratio",
+        "children",
+        "mode",
+        "className",
+        "getRootRef",
+        "style"
+    ]);
+    var style = _define_property._({}, "--vkui_internal--aspect_ratio", String(ratio));
+    return /*#__PURE__*/ _react.createElement("div", _object_spread._({
+        className: (0, _vkjs.classNames)("vkuiAspectRatio", mode === "stretch" && "vkuiAspectRatio--mode-stretch", className),
+        style: _object_spread._({}, styleProp, style),
+        ref: getRootRef
+    }, props), children);
+}
+
+//# sourceMappingURL=AspectRatio.js.map
