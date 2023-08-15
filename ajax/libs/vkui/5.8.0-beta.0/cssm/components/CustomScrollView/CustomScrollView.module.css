@@ -1,0 +1,86 @@
+.CustomScrollView {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.CustomScrollView__box {
+  max-height: inherit;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-right: 100px;
+  position: relative;
+
+  /**
+   * Для удаление скролла в Firefox.
+   * В версии ниже 64 будет виден скролл, но это не ломает функциональность.
+   */
+  scrollbar-width: none;
+}
+
+.CustomScrollView__box::-webkit-scrollbar {
+  display: none;
+}
+
+.CustomScrollView__barY:active + .CustomScrollView__box {
+  pointer-events: none;
+}
+
+.CustomScrollView__barY {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 10px;
+}
+
+.CustomScrollView__trackerY {
+  width: 10px;
+  box-sizing: border-box;
+  padding: 4px 4px 4px 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.CustomScrollView__trackerY--hidden {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+.CustomScrollView__trackerY::before {
+  content: '';
+  opacity: 0.48;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--vkui--color_icon_medium);
+  border-radius: 12px;
+  transition: transform 200ms, opacity 200ms;
+}
+
+.CustomScrollView__trackerY:hover::before,
+.CustomScrollView__trackerY:active::before {
+  opacity: 0.8;
+  transform: scaleX(1.3333);
+}
+
+/**
+ * CMP:
+ * CustomSelectDropdown
+ */
+
+:global(.vkuiInternalCustomSelectDropdown) .CustomScrollView__box {
+  padding-right: 8px;
+}
+
+:global(.vkuiInternalCustomSelectDropdown--wide) .CustomScrollView__box {
+  padding-right: 0;
+}
