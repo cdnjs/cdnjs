@@ -1,0 +1,4 @@
+var ColumnGroup = function ColumnGroup() {};
+ColumnGroup.displayName = 'ColumnGroup';
+
+export { ColumnGroup };
