@@ -1,0 +1,1 @@
+//# sourceMappingURL=IRectangle.js.map
