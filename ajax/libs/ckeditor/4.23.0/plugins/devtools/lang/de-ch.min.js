@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("devtools","de-ch",{title:"Elementinformation",dialogName:"Dialogfenstername",tabName:"Reitername",elementId:"Elementkennung",elementType:"Elementtyp"});

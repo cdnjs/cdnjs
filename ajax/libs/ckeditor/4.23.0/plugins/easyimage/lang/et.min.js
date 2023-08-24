@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("easyimage","et",{commands:{fullImage:"Täissuuruses pilt",sideImage:"Pilt külje peal",altText:"Pildi asendusteksti muutmine",upload:"Laadi pilt üles"},uploadFailed:"Pilti ei õnnestunud võrgu vea tõttu üles laadida."});

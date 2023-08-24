@@ -1,0 +1,1 @@
+﻿CKEDITOR.plugins.setLang("copyformatting","ku",{label:"لەبەرگرتنەوەی شێواز",notification:{copied:"شێواز لەبەرگیرایەوە",applied:"شێواز بەکارهێنرا",canceled:"شێواز لابرا",failed:"شێوازکردن سەرکەوتوو نەبوو. تۆ ناتوانیت ستایلەکان بەکاربێنی بەبێ لەبەرگرتنەوەیان لە سەرەتا."}});

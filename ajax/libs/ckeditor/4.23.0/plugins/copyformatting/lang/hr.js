@@ -1,0 +1,1 @@
+﻿CKEDITOR.plugins.setLang("copyformatting","hr",{label:"Kopiraj formatiranje",notification:{copied:"Formatiranje kopirano",applied:"Formatiranje primjenjeno",canceled:"Formatiranje poništeno",failed:"Formatiranje nije uspjelo. Nije moguće primjeniti stilove bez da ih prvo kopirate."}});

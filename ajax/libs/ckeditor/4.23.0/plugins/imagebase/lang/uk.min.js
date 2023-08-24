@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("imagebase","uk",{captionPlaceholder:"Введіть підпис зображення"});
