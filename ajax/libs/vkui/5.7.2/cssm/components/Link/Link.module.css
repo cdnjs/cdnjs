@@ -1,0 +1,45 @@
+.Link {
+  color: var(--vkui_internal--link-color, var(--vkui--color_text_link));
+  text-decoration: none;
+  border: 0;
+  background: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  font-size: inherit;
+  font-family: inherit;
+  line-height: inherit;
+  display: inline;
+  border-radius: 0;
+}
+
+/* See https://www.ctrl.blog/entry/css-media-hover-samsung.html */
+
+@media (hover: hover) and (pointer: fine) {
+  .Link:hover {
+    text-decoration: underline;
+  }
+}
+
+.Link--focus-visible {
+  /**
+   * На момент v4.33.0, реализация <FocusVisible /> не подошла, т.к. текст может быть многострочным.
+   * Поэтому используем свой класс и применяем `outline`.
+   *
+   * `!important` – чтобы перебить глобальное обнуление `outline` на `:focus`.
+   */
+  /* stylelint-disable-next-line declaration-no-important */
+  outline: 2px solid var(--vkui--color_stroke_accent) !important;
+}
+
+.Link--has-visited:visited {
+  color: var(--vkui--color_text_link_visited);
+}
+
+/* stylelint-disable-next-line @project-tools/stylelint-atomic */
+
+.Link :global(.vkuiIcon) {
+  margin-left: 4px;
+  display: inline-block;
+  vertical-align: middle;
+}

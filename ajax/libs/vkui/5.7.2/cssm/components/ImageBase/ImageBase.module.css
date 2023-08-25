@@ -1,0 +1,142 @@
+.ImageBase {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  color: var(--vkui--color_icon_secondary);
+  background-color: var(--vkui--color_background_secondary);
+  background-size: cover;
+  isolation: isolate;
+}
+
+.ImageBase__border {
+  pointer-events: none;
+  position: absolute;
+  z-index: var(--vkui_internal--z_index_image_base_border);
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  transform-origin: left top;
+  border: var(--vkui_internal--thin_border) solid var(--vkui--color_image_border_alpha);
+  border-radius: inherit;
+}
+
+.ImageBase__img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: inherit;
+  object-fit: cover;
+  visibility: hidden;
+}
+
+.ImageBase--loaded .ImageBase__img {
+  visibility: visible;
+}
+
+.ImageBase__fallback {
+  position: absolute;
+
+  /* Расчитываем на ценитрирование через родительский `display: flex` */
+  top: auto;
+  left: auto;
+}
+
+/**
+ * CMP:
+ * CellButton
+ */
+
+:global(.vkuiInternalCellButton) > .ImageBase :global(.vkuiIcon) {
+  color: var(--vkui--color_icon_accent);
+}
+
+:global(.vkuiInternalCellButton--mode-danger) > .ImageBase :global(.vkuiIcon) {
+  color: var(--vkui--color_icon_negative);
+}
+
+/**
+ * CMP:
+ * PanelHeader
+ */
+
+:global(.vkuiInternalPanelHeader__before) .ImageBase {
+  margin-left: 8px;
+}
+
+:global(.vkuiInternalPanelHeader__after) .ImageBase {
+  margin-right: 8px;
+}
+
+/**
+ * CMP:
+ * SimpleCell
+ */
+
+:global(.vkuiInternalSimpleCell) > .ImageBase {
+  margin-right: 12px;
+}
+
+:global(.vkuiInternalSimpleCell) > .ImageBase--size-28,
+:global(.vkuiInternalSimpleCell) > .ImageBase--size-32 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+:global(.vkuiInternalSimpleCell) > .ImageBase--size-40 {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+:global(.vkuiInternalSimpleCell) > .ImageBase--size-48,
+:global(.vkuiInternalSimpleCell) > .ImageBase--size-72 {
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+:global(.vkuiInternalSimpleCell--ios) > .ImageBase--size-28,
+:global(.vkuiInternalSimpleCell--ios) > .ImageBase--size-32 {
+  margin-left: 4px;
+}
+
+:global(.vkuiInternalSimpleCell--sizeY-compact) > .ImageBase--size-28,
+:global(.vkuiInternalSimpleCell--sizeY-compact) > .ImageBase--size-32 {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+:global(.vkuiInternalSimpleCell--sizeY-compact) > .ImageBase--size-40 {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+:global(.vkuiInternalSimpleCell--sizeY-compact) > .ImageBase--size-48 {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  :global(.vkuiInternalSimpleCell--sizeY-none) > .ImageBase--size-28,
+  :global(.vkuiInternalSimpleCell--sizeY-none) > .ImageBase--size-32 {
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+
+  :global(.vkuiInternalSimpleCell--sizeY-none) > .ImageBase--size-40 {
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+
+  :global(.vkuiInternalSimpleCell--sizeY-none) > .ImageBase--size-48 {
+    margin-top: 4px;
+    margin-bottom: 4px;
+  }
+}

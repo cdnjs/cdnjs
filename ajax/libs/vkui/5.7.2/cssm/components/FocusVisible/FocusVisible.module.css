@@ -1,0 +1,104 @@
+.FocusVisible {
+  visibility: hidden;
+  position: absolute;
+  border-radius: inherit;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  pointer-events: none;
+  overflow: hidden;
+  top: var(--vkui_internal--focus_visible_distance, 0);
+  left: var(--vkui_internal--focus_visible_distance, 0);
+  right: var(--vkui_internal--focus_visible_distance, 0);
+  bottom: var(--vkui_internal--focus_visible_distance, 0);
+}
+
+.FocusVisible--visible {
+  visibility: visible;
+}
+
+/* Необходимо перебить селектор `.Tappable > *` */
+
+.FocusVisible.FocusVisible {
+  position: absolute;
+}
+
+.FocusVisible {
+  --vkui_internal--focus_visible_thin: 2px;
+}
+
+.FocusVisible--thin {
+  --vkui_internal--focus_visible_thin: var(--vkui_internal--thin_border);
+}
+
+.FocusVisible--mode-inside,
+.FocusVisible--mode-outline {
+  border-color: var(--vkui--color_stroke_accent);
+  border-width: var(--vkui_internal--focus_visible_thin);
+  border-style: solid;
+  box-sizing: border-box;
+}
+
+.FocusVisible--mode-outline {
+  --vkui_internal--focus_visible_distance: 0;
+}
+
+.FocusVisible--mode-inside {
+  --vkui_internal--focus_visible_distance: 2px;
+}
+
+.FocusVisible--mode-outside {
+  box-shadow: 0 0 0 var(--vkui_internal--focus_visible_thin) var(--vkui--color_stroke_accent);
+
+  --vkui_internal--focus_visible_distance: -2px;
+}
+
+/**
+ * [a11y]
+ * add animation for browsers that support prefers-reduced-motion
+ * so that users with vestibular motion disorders have no problem
+ * navigating accessible vkui apps via keyboard
+ */
+
+@media (prefers-reduced-motion: no-preference) {
+  .FocusVisible--visible.FocusVisible--mode-inside {
+    animation: animation-focus-visible 0.15s ease-in-out forwards;
+    animation-delay: 0.01ms;
+    will-change: top, left, bottom, right;
+
+    --vkui_internal--focus_visible_distance: 4px;
+  }
+
+  .FocusVisible--visible.FocusVisible--mode-outside {
+    animation-name: animation-focus-visible-outside;
+
+    --vkui_internal--focus_visible_distance: 0;
+  }
+}
+
+@keyframes animation-focus-visible {
+  0% {
+  }
+
+  100% {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    will-change: auto;
+  }
+}
+
+@keyframes animation-focus-visible-outside {
+  0% {
+  }
+
+  100% {
+    top: -2px;
+    left: -2px;
+    bottom: -2px;
+    right: -2px;
+    will-change: auto;
+  }
+}

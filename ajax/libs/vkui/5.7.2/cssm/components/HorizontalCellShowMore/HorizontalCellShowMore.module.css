@@ -1,0 +1,47 @@
+.HorizontalCellShowMore {
+  display: flex;
+}
+
+.HorizontalCellShowMore--compensate-last-cell-indent {
+  /* Компенсация бокового отступа, заданного в последнем HorizontalCell:last-child::after */
+  margin-left: calc(-1 * var(--vkui_internal--side_cell_gap));
+}
+
+.HorizontalCellShowMore:last-child::after {
+  content: '';
+  min-width: var(--vkui_internal--side_cell_gap);
+}
+
+.HorizontalCellShowMore__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4px var(--vkui--spacing_size_s);
+}
+
+.HorizontalCellShowMore--size-s .HorizontalCellShowMore__body {
+  min-width: 64px;
+  padding: var(--vkui--spacing_size_xs);
+}
+
+.HorizontalCellShowMore--size-m .HorizontalCellShowMore__body,
+.HorizontalCellShowMore--size-l .HorizontalCellShowMore__body {
+  width: 128px;
+  margin-bottom: auto;
+}
+
+/* Перебиваем селектор в Tappable--sizeX-(compact|none) */
+
+.HorizontalCellShowMore .HorizontalCellShowMore__body {
+  border-radius: var(--vkui--size_border_radius--regular);
+}
+
+.HorizontalCellShowMore__icon {
+  color: var(--vkui--color_icon_accent);
+}
+
+.HorizontalCellShowMore__text {
+  padding-top: 8px;
+  color: var(--vkui--color_text_accent);
+}
