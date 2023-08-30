@@ -1,0 +1,1 @@
+var JsonWebTokenError=require("./JsonWebTokenError"),NotBeforeError=function(r,o){JsonWebTokenError.call(this,r),this.name="NotBeforeError",this.date=o};NotBeforeError.prototype=Object.create(JsonWebTokenError.prototype),NotBeforeError.prototype.constructor=NotBeforeError,module.exports=NotBeforeError;

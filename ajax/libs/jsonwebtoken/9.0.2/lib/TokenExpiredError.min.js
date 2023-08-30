@@ -1,0 +1,1 @@
+var JsonWebTokenError=require("./JsonWebTokenError"),TokenExpiredError=function(r,o){JsonWebTokenError.call(this,r),this.name="TokenExpiredError",this.expiredAt=o};TokenExpiredError.prototype=Object.create(JsonWebTokenError.prototype),TokenExpiredError.prototype.constructor=TokenExpiredError,module.exports=TokenExpiredError;
