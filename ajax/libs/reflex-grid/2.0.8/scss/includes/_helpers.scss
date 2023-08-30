@@ -1,0 +1,286 @@
+
+// --------------------------------------------------
+// grid modifiers
+// --------------------------------------------------
+
+// --------------------------------------------------
+// flex-wrap
+// --------------------------------------------------
+
+.#{$reflex-prefix}wrap {
+    @include flex-wrap(wrap);
+}
+
+.#{$reflex-prefix}no-wrap {
+    @include flex-wrap(nowrap);
+
+    // This is mostly needed to stop the grid contents overflowing in the
+    // ie10 implementation of flexbox but it can't hurt in other browsers
+    // as it is the desired behaviour of non wrapping flex items
+    [class*="#{$reflex-prefix}col-"] {
+        @include flex-shrink(1);
+    }
+}
+
+.#{$reflex-prefix}wrap-reverse {
+    @include flex-wrap(wrap-reverse);
+}
+
+// --------------------------------------------------
+// flex-direction
+// --------------------------------------------------
+
+.#{$reflex-prefix}direction-row {
+    @include flex-direction(row);
+}
+
+.#{$reflex-prefix}direction-row-reverse {
+    @include flex-direction(row-reverse);
+}
+
+.#{$reflex-prefix}direction-column {
+    @include flex-direction(column);
+}
+
+.#{$reflex-prefix}direction-column-reverse {
+    @include flex-direction(column-reverse);
+}
+
+// --------------------------------------------------
+// align items (cross axis)
+// --------------------------------------------------
+
+.#{$reflex-prefix}align-start {
+    @include align-items(flex-start);
+}
+
+.#{$reflex-prefix}align-end {
+    @include align-items(flex-end);
+
+    @if $legacy-support == true {
+        // fallback to legacy vertical-align
+        [class*="#{$reflex-prefix}col-"] {
+            vertical-align: bottom;
+        }
+    }
+}
+
+.#{$reflex-prefix}align-center {
+    @include align-items(center);
+
+    @if $legacy-support == true {
+        // fallback to legacy vertical-align
+        [class*="#{$reflex-prefix}col-"] {
+            vertical-align: middle;
+        }
+    }
+}
+
+.#{$reflex-prefix}align-baseline {
+    @include align-items(baseline);
+}
+
+// --------------------------------------------------
+// align content (cross axis)
+// --------------------------------------------------
+
+.#{$reflex-prefix}align-content-start {
+    @include align-content(flex-start);
+}
+
+.#{$reflex-prefix}align-content-end {
+    @include align-content(flex-end);
+
+    // fallback to legacy vertical-align
+    [class*="#{$reflex-prefix}col-"] {
+        vertical-align: bottom;
+    }
+}
+
+.#{$reflex-prefix}align-content-center {
+    @include align-content(center);
+}
+
+.#{$reflex-prefix}align-content-space-between {
+    @include align-content(space-between);
+}
+
+.#{$reflex-prefix}align-content-space-around {
+    @include align-content(space-around);
+}
+
+// --------------------------------------------------
+// align-self
+// --------------------------------------------------
+
+.#{$reflex-prefix}align-self-stretch {
+    @include align-self(stretch);
+}
+
+.#{$reflex-prefix}align-self-start {
+    @include align-self(flex-start);
+}
+
+.#{$reflex-prefix}align-self-end {
+    @include align-self(flex-end);
+    vertical-align: bottom;
+}
+
+.#{$reflex-prefix}align-self-center {
+    @include align-self(center);
+    vertical-align: middle;
+}
+
+.#{$reflex-prefix}align-self-baseline {
+    @include align-self(baseline);
+    vertical-align: baseline;
+}
+
+// --------------------------------------------------
+// justify-content (main axis)
+// --------------------------------------------------
+
+.#{$reflex-prefix}justify-start {
+    @include justify-content-start();
+
+    @if $legacy-support == true {
+        &.grid {
+            text-align: left;
+        }
+    }
+}
+
+.#{$reflex-prefix}justify-end {
+    @include justify-content-end();
+
+    @if $legacy-support == true {
+        &.grid {
+            text-align: right;
+            -moz-text-align-last: right;
+            text-align-last: right;
+
+            [class*="#{$reflex-prefix}col-"] {
+                @include reset-text-align();
+            }
+        }
+    }
+}
+
+.#{$reflex-prefix}justify-center {
+    @include justify-content-center();
+
+    @if $legacy-support == true {
+        &.grid {
+            text-align: center;
+            -moz-text-align-last: center;
+            text-align-last: center;
+
+            [class*="#{$reflex-prefix}col-"] {
+                @include reset-text-align();
+            }
+        }
+    }
+}
+
+.#{$reflex-prefix}justify-space-between {
+    @include justify-content-space-between();
+
+    @if $legacy-support == true {
+        &.grid {
+            text-align: justify;
+            -moz-text-align-last: justify;
+            text-align-last: justify;
+
+            [class*="#{$reflex-prefix}col-"] {
+                @include reset-text-align();
+            }
+        }
+    }
+}
+
+.#{$reflex-prefix}justify-space-around {
+    @include justify-content-space-around();
+
+    @if $legacy-support == true {
+        &.grid {
+            text-align: justify;
+            -moz-text-align-last: justify;
+            text-align-last: justify;
+
+            [class*="#{$reflex-prefix}col-"] {
+                @include reset-text-align();
+            }
+        }
+    }
+}
+
+// --------------------------------------------------
+// cosmetic grid modifiers
+// --------------------------------------------------
+
+// Removes internal padding from all columns in a grid
+.#{$reflex-prefix}grid-bleed {
+    [class*="#{$reflex-prefix}col-"] {
+        padding: 0;
+    }
+}
+
+// --------------------------------------------------
+// col modifiers
+// --------------------------------------------------
+
+// Makes a column element into a flexbox column
+.#{$reflex-prefix}col-grid {
+    @include display-flex();
+    @include flex-direction(column);
+
+    &.#{$reflex-prefix}direction-row {
+        @include flex-direction(row);
+    }
+}
+
+// Removes internal padding from all columns in a grid
+.#{$reflex-prefix}col-bleed {
+    padding: 0;
+}
+
+// Removes horizontal padding from all columns in a grid
+.#{$reflex-prefix}col-bleed-x {
+    padding: $reflex-grid-spacing 0;
+}
+
+// Removes vertical padding from all columns in a grid
+.#{$reflex-prefix}col-bleed-y {
+    padding: 0 $reflex-grid-spacing;
+}
+
+// --------------------------------------------------
+// col-grid contents
+// --------------------------------------------------
+
+.#{$reflex-prefix}flex-img {
+    display: block;
+    @include flex(0, 0, auto);
+    max-width: 100%;
+    height: auto;
+    width: 100%;
+    @if $legacy-support == true {
+        *width: auto;
+    }
+}
+
+.#{$reflex-prefix}flex-footer {
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: 0;
+
+    > :last-child {
+        margin-bottom: 0;
+    }
+}
+
+// --------------------------------------------------
+// Responsive visibility modifiers
+// --------------------------------------------------
+
+@include responsive-visibility-helpers();
