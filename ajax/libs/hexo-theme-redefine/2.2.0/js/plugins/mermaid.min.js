@@ -1,0 +1,1 @@
+Global.initMermaid=()=>{mermaid.init()};
