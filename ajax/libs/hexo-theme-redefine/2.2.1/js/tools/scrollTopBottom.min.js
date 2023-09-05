@@ -1,0 +1,1 @@
+Global.initBackToTop=()=>{const o=document.querySelector(".tool-scroll-to-top"),t=document.querySelector(".tool-scroll-to-bottom"),e=()=>{document.body.scrollIntoView({behavior:"smooth"})},c=()=>{document.querySelector("footer.footer").scrollIntoView({behavior:"smooth"})};o.addEventListener("click",e),t.addEventListener("click",c)};
