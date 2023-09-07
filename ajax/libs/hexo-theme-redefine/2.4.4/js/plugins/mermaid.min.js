@@ -1,0 +1,1 @@
+if(!0===Global.theme_config.plugins.mermaid.enable)try{swup.hooks.on("page:view",()=>{mermaid.init()})}catch(e){}
