@@ -1,0 +1,788 @@
+/*!
+ * # Fomantic-UI 2.9.3 - Feed
+ * https://github.com/fomantic/Fomantic-UI/
+ *
+ *
+ * Released under the MIT license
+ * https://opensource.org/licenses/MIT
+ *
+ */
+
+
+/*******************************
+         Activity Feed
+*******************************/
+
+.ui.feed {
+  margin: 1em 0;
+}
+.ui.feed:first-child {
+  margin-top: 0;
+}
+.ui.feed:last-child {
+  margin-bottom: 0;
+}
+
+
+/*******************************
+            Content
+*******************************/
+
+
+/* Event */
+.ui.feed > .event {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 0.21428571rem 0;
+  margin: 0;
+  background: none;
+}
+.ui.feed > .event:not(:first-child) {
+  border-top: none;
+}
+.ui.feed:not(.connected) > .event:first-child {
+  padding-top: 0;
+}
+.ui.feed > .event:last-child {
+  padding-bottom: 0;
+}
+
+/* Event Label */
+.ui.feed > .event > .label {
+  display: block;
+  flex: 0 0 auto;
+  width: 2.5em;
+  height: auto;
+  align-self: stretch;
+  text-align: left;
+}
+.ui.feed > .event > .label .icon {
+  opacity: 1;
+  font-size: 1.5em;
+  width: 100%;
+  padding: 0.25em;
+  background: none;
+  border: none;
+  border-radius: 0;
+  color: rgba(0, 0, 0, 0.6);
+}
+.ui.feed > .event > .label img {
+  width: 100%;
+  height: auto;
+  border-radius: 500rem;
+}
+.ui.feed > .event > .label > .text {
+  display: block;
+  text-align: center;
+  margin-top: 0.5em;
+}
+.ui.feed > .event > .label > .text.ui {
+  margin-top: 0.65em;
+}
+.ui.feed > .event > .label > .text.multiline {
+  margin-top: 0;
+}
+.ui.feed > .event > .label > .text.multiline.ui {
+  margin-top: 0.3em;
+}
+.ui.feed > .event > .label > .ui.label {
+  margin-top: 0.4em;
+  position: relative;
+  z-index: 1;
+}
+.ui.feed > .event > .label + .content {
+  margin: 0.5em 0 0.35714286em 1.14285714em;
+}
+
+/* --------------
+     Content
+--------------- */
+
+/* Content */
+.ui.feed > .event > .content {
+  display: block;
+  flex: 1 1 auto;
+  align-self: stretch;
+  text-align: left;
+  word-wrap: break-word;
+}
+.ui.feed > .event:last-child > .content {
+  padding-bottom: 0;
+}
+
+/* Link */
+.ui.feed > .event > .content a {
+  cursor: pointer;
+}
+
+/* --------------
+          Date
+    --------------- */
+.ui.feed > .event > .content .date {
+  margin: -0.5rem 0 0;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.4);
+  font-weight: normal;
+  font-size: 1em;
+  font-style: normal;
+}
+
+/* --------------
+         Summary
+    --------------- */
+.ui.feed > .event > .content .summary {
+  margin: 0;
+  font-size: 1em;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+/* Summary Image */
+.ui.feed > .event > .content .summary img {
+  display: inline-block;
+  width: auto;
+  height: 10em;
+  margin: -0.25em 0.25em 0 0;
+  border-radius: 0.25em;
+  vertical-align: middle;
+}
+
+/* --------------
+           Inline Date
+        --------------- */
+
+/* Date inside Summary */
+.ui.feed > .event > .content .summary > .date {
+  display: inline-block;
+  font-weight: normal;
+  font-size: 0.85714286em;
+  font-style: normal;
+  margin: 0 0 0 0.5em;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.4);
+}
+.ui.feed > .event > .content .summary > .date:not(.floated) {
+  float: none;
+}
+
+/* --------------
+          User
+    --------------- */
+.ui.feed > .event > .content .user {
+  display: inline-block;
+  font-weight: bold;
+  margin-right: 0;
+  vertical-align: baseline;
+}
+.ui.feed > .event > .content .user img {
+  margin: -0.25em 0.25em 0 0;
+  width: auto;
+  height: 10em;
+  vertical-align: middle;
+}
+
+/* --------------
+      Extra Summary
+    --------------- */
+.ui.feed > .event > .content .extra {
+  margin: 0.5em 0 0;
+  background: none;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+/* Images */
+.ui.feed > .event > .content .extra.images img {
+  display: inline-block;
+  margin: 0 0.25em 0 0;
+  width: 6em;
+}
+
+/* Text */
+.ui.feed > .event > .content .extra.text {
+  padding: 0;
+  border-left: none;
+  font-size: 1em;
+  max-width: 500px;
+  line-height: 1.4285em;
+}
+
+/* --------------
+          Meta
+    --------------- */
+.ui.feed > .event > .content .meta {
+  display: inline-block;
+  font-size: 0.85714286em;
+  margin: 0.5em 0 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.6);
+}
+.ui.feed > .event > .content .meta > * {
+  position: relative;
+  margin-left: 0.75em;
+}
+.ui.feed > .event > .content .meta > *::after {
+  content: "";
+  color: rgba(0, 0, 0, 0.2);
+  top: 0;
+  left: -1em;
+  opacity: 1;
+  position: absolute;
+  vertical-align: top;
+}
+.ui.feed > .event > .content .meta .like {
+  color: "";
+  transition: 0.2s color ease;
+}
+.ui.feed > .event > .content .meta .like:hover i.icon {
+  color: #ff2733;
+}
+.ui.feed > .event > .content .meta .active.like i.icon {
+  color: #ef404a;
+}
+
+/* First element */
+.ui.feed > .event > .content .meta > :first-child {
+  margin-left: 0;
+}
+.ui.feed > .event > .content .meta > :first-child::after {
+  display: none;
+}
+
+/* Action */
+.ui.feed > .event > .content .meta a,
+.ui.feed > .event > .content .meta > i.icon {
+  cursor: pointer;
+  opacity: 1;
+  color: rgba(0, 0, 0, 0.5);
+  transition: color 0.1s ease;
+}
+.ui.feed > .event > .content .meta a:hover,
+.ui.feed > .event > .content .meta a:hover i.icon,
+.ui.feed > .event > .content .meta > i.icon:hover {
+  color: rgba(0, 0, 0, 0.95);
+}
+
+
+/*******************************
+            Variations
+*******************************/
+
+
+/* rtl:rename */
+.ui.feed .right.floated {
+  float: right;
+}
+.ui.connected.feed > .event {
+  position: relative;
+}
+.ui.connected.feed > .event:not(:last-child)::before {
+  border-left: 2px solid rgba(34, 36, 38, 0.15);
+  content: "";
+  left: 1.2em;
+  position: absolute;
+  top: 2.1em;
+  height: calc(100% - 1.5em);
+}
+.ui.connected.feed > .event > .label {
+  position: relative;
+}
+.ui.inverted.connected.feed > .event::before {
+  border-left-color: rgba(255, 255, 255, 0.1);
+}
+.ui.divided.feed > .event:not(:first-child) {
+  border-top: 1px solid rgba(34, 36, 38, 0.15);
+}
+.ui.inverted.divided.feed > .event {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+.ui.ui.feed > .event > .label[data-text]::before {
+  content: attr(data-text);
+}
+.ui.feed > .event > .label[data-text]::before,
+.ui.ordered.feed > .event > .label::before {
+  text-align: center;
+  line-height: 1;
+  height: 2.5em;
+  background: #bbbbbb;
+  color: #fff;
+  border-radius: 50%;
+  padding-top: 0.6em;
+  position: relative;
+  display: block;
+  margin-bottom: 0.3em;
+  border: 2px solid transparent;
+}
+.ui.ordered.feed {
+  counter-reset: ordered;
+}
+.ui.ordered.feed > .event > .label::before {
+  counter-increment: ordered;
+  content: counter(ordered);
+}
+.ui.ordered.basic.feed > .event > .label::before,
+.ui.ordered.feed > .event > .basic.label::before {
+  border-color: #bbbbbb;
+  color: inherit;
+  background: transparent;
+}
+.ui.ordered.connected.feed > .event::before {
+  top: 2.7em;
+  height: calc(100% - 2.5em);
+}
+
+/* workaround until all browsers support :has() */
+.ui.connected.labeled.feed > .event::before,
+.ui.connected.feed > .labeled.event::before {
+  top: 4.85em;
+  height: calc(100% - 4.6499999999999995em);
+}
+@supports selector(:has(.f)) {
+  .ui.connected.feed > .event:has(> .label[data-text] > *)::before,
+  .ui.ordered.connected.feed > .event:has(> .label > *)::before {
+    top: 4.85em;
+    height: calc(100% - 4.6499999999999995em);
+  }
+}
+.ui.feed {
+  font-size: 1rem;
+}
+.ui.mini.feed {
+  font-size: 0.78571429rem;
+}
+.ui.tiny.feed {
+  font-size: 0.85714286rem;
+}
+.ui.small.feed {
+  font-size: 0.92857143rem;
+}
+.ui.large.feed {
+  font-size: 1.14285714rem;
+}
+.ui.big.feed {
+  font-size: 1.28571429rem;
+}
+.ui.huge.feed {
+  font-size: 1.42857143rem;
+}
+.ui.massive.feed {
+  font-size: 1.71428571rem;
+}
+
+/* ------------------
+          Inverted
+    ------------------- */
+.ui.inverted.feed > .event {
+  background: #1b1c1d;
+}
+.ui.inverted.feed > .event > .label i.icon {
+  color: rgba(255, 255, 255, 0.7);
+}
+.ui.inverted.feed > .event > .label .text:not(.ui) {
+  color: #fff;
+}
+.ui.inverted.feed > .event > .content .date,
+.ui.inverted.feed > .event > .content .meta .like {
+  color: rgba(255, 255, 255, 0.7);
+}
+.ui.inverted.feed > .event > .content .summary,
+.ui.inverted.feed > .event > .content .extra.text {
+  color: rgba(255, 255, 255, 0.9);
+}
+.ui.inverted.feed > .event > .content .meta .like:hover {
+  color: #ffffff;
+}
+.ui.inverted.feed > .event > .content .meta .active.like i.icon {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* --------------
+     Colors
+--------------- */
+.ui.ui.feed > .event > .primary.label::before,
+.ui.primary.feed > .event > .label::before {
+  background: #2185d0;
+}
+.ui.primary.connected.feed > .event::before,
+.ui.connected.feed > .primary.event::before {
+  border-color: #2185d0;
+}
+.ui.inverted.primary.connected.feed > .event::before,
+.ui.connected.feed > .inverted.primary.event::before {
+  border-color: #54c8ff;
+}
+.ui.ui.feed > .event > .primary.basic.label::before,
+.ui.primary.basic.feed > .event > .label::before {
+  color: #2185d0;
+}
+.ui.feed > .event > .inverted.primary.label::before,
+.ui.inverted.primary.feed > .event > .label::before {
+  background: #54c8ff;
+}
+.ui.feed > .event > .inverted.primary.basic.label::before,
+.ui.inverted.primary.basic.feed > .event > .label::before {
+  color: #54c8ff;
+}
+.ui.ui.feed > .event > .secondary.label::before,
+.ui.secondary.feed > .event > .label::before {
+  background: #1b1c1d;
+}
+.ui.secondary.connected.feed > .event::before,
+.ui.connected.feed > .secondary.event::before {
+  border-color: #1b1c1d;
+}
+.ui.inverted.secondary.connected.feed > .event::before,
+.ui.connected.feed > .inverted.secondary.event::before {
+  border-color: #545454;
+}
+.ui.ui.feed > .event > .secondary.basic.label::before,
+.ui.secondary.basic.feed > .event > .label::before {
+  color: #1b1c1d;
+}
+.ui.feed > .event > .inverted.secondary.label::before,
+.ui.inverted.secondary.feed > .event > .label::before {
+  background: #545454;
+}
+.ui.feed > .event > .inverted.secondary.basic.label::before,
+.ui.inverted.secondary.basic.feed > .event > .label::before {
+  color: #545454;
+}
+.ui.ui.feed > .event > .red.label::before,
+.ui.red.feed > .event > .label::before {
+  background: #db2828;
+}
+.ui.red.connected.feed > .event::before,
+.ui.connected.feed > .red.event::before {
+  border-color: #db2828;
+}
+.ui.inverted.red.connected.feed > .event::before,
+.ui.connected.feed > .inverted.red.event::before {
+  border-color: #ff695e;
+}
+.ui.ui.feed > .event > .red.basic.label::before,
+.ui.red.basic.feed > .event > .label::before {
+  color: #db2828;
+}
+.ui.feed > .event > .inverted.red.label::before,
+.ui.inverted.red.feed > .event > .label::before {
+  background: #ff695e;
+}
+.ui.feed > .event > .inverted.red.basic.label::before,
+.ui.inverted.red.basic.feed > .event > .label::before {
+  color: #ff695e;
+}
+.ui.ui.feed > .event > .orange.label::before,
+.ui.orange.feed > .event > .label::before {
+  background: #f2711c;
+}
+.ui.orange.connected.feed > .event::before,
+.ui.connected.feed > .orange.event::before {
+  border-color: #f2711c;
+}
+.ui.inverted.orange.connected.feed > .event::before,
+.ui.connected.feed > .inverted.orange.event::before {
+  border-color: #ff851b;
+}
+.ui.ui.feed > .event > .orange.basic.label::before,
+.ui.orange.basic.feed > .event > .label::before {
+  color: #f2711c;
+}
+.ui.feed > .event > .inverted.orange.label::before,
+.ui.inverted.orange.feed > .event > .label::before {
+  background: #ff851b;
+}
+.ui.feed > .event > .inverted.orange.basic.label::before,
+.ui.inverted.orange.basic.feed > .event > .label::before {
+  color: #ff851b;
+}
+.ui.ui.feed > .event > .yellow.label::before,
+.ui.yellow.feed > .event > .label::before {
+  background: #fbbd08;
+}
+.ui.yellow.connected.feed > .event::before,
+.ui.connected.feed > .yellow.event::before {
+  border-color: #fbbd08;
+}
+.ui.inverted.yellow.connected.feed > .event::before,
+.ui.connected.feed > .inverted.yellow.event::before {
+  border-color: #ffe21f;
+}
+.ui.ui.feed > .event > .yellow.basic.label::before,
+.ui.yellow.basic.feed > .event > .label::before {
+  color: #fbbd08;
+}
+.ui.feed > .event > .inverted.yellow.label::before,
+.ui.inverted.yellow.feed > .event > .label::before {
+  background: #ffe21f;
+}
+.ui.feed > .event > .inverted.yellow.basic.label::before,
+.ui.inverted.yellow.basic.feed > .event > .label::before {
+  color: #ffe21f;
+}
+.ui.ui.feed > .event > .olive.label::before,
+.ui.olive.feed > .event > .label::before {
+  background: #b5cc18;
+}
+.ui.olive.connected.feed > .event::before,
+.ui.connected.feed > .olive.event::before {
+  border-color: #b5cc18;
+}
+.ui.inverted.olive.connected.feed > .event::before,
+.ui.connected.feed > .inverted.olive.event::before {
+  border-color: #d9e778;
+}
+.ui.ui.feed > .event > .olive.basic.label::before,
+.ui.olive.basic.feed > .event > .label::before {
+  color: #b5cc18;
+}
+.ui.feed > .event > .inverted.olive.label::before,
+.ui.inverted.olive.feed > .event > .label::before {
+  background: #d9e778;
+}
+.ui.feed > .event > .inverted.olive.basic.label::before,
+.ui.inverted.olive.basic.feed > .event > .label::before {
+  color: #d9e778;
+}
+.ui.ui.feed > .event > .green.label::before,
+.ui.green.feed > .event > .label::before {
+  background: #21ba45;
+}
+.ui.green.connected.feed > .event::before,
+.ui.connected.feed > .green.event::before {
+  border-color: #21ba45;
+}
+.ui.inverted.green.connected.feed > .event::before,
+.ui.connected.feed > .inverted.green.event::before {
+  border-color: #2ecc40;
+}
+.ui.ui.feed > .event > .green.basic.label::before,
+.ui.green.basic.feed > .event > .label::before {
+  color: #21ba45;
+}
+.ui.feed > .event > .inverted.green.label::before,
+.ui.inverted.green.feed > .event > .label::before {
+  background: #2ecc40;
+}
+.ui.feed > .event > .inverted.green.basic.label::before,
+.ui.inverted.green.basic.feed > .event > .label::before {
+  color: #2ecc40;
+}
+.ui.ui.feed > .event > .teal.label::before,
+.ui.teal.feed > .event > .label::before {
+  background: #00b5ad;
+}
+.ui.teal.connected.feed > .event::before,
+.ui.connected.feed > .teal.event::before {
+  border-color: #00b5ad;
+}
+.ui.inverted.teal.connected.feed > .event::before,
+.ui.connected.feed > .inverted.teal.event::before {
+  border-color: #6dffff;
+}
+.ui.ui.feed > .event > .teal.basic.label::before,
+.ui.teal.basic.feed > .event > .label::before {
+  color: #00b5ad;
+}
+.ui.feed > .event > .inverted.teal.label::before,
+.ui.inverted.teal.feed > .event > .label::before {
+  background: #6dffff;
+}
+.ui.feed > .event > .inverted.teal.basic.label::before,
+.ui.inverted.teal.basic.feed > .event > .label::before {
+  color: #6dffff;
+}
+.ui.ui.feed > .event > .blue.label::before,
+.ui.blue.feed > .event > .label::before {
+  background: #2185d0;
+}
+.ui.blue.connected.feed > .event::before,
+.ui.connected.feed > .blue.event::before {
+  border-color: #2185d0;
+}
+.ui.inverted.blue.connected.feed > .event::before,
+.ui.connected.feed > .inverted.blue.event::before {
+  border-color: #54c8ff;
+}
+.ui.ui.feed > .event > .blue.basic.label::before,
+.ui.blue.basic.feed > .event > .label::before {
+  color: #2185d0;
+}
+.ui.feed > .event > .inverted.blue.label::before,
+.ui.inverted.blue.feed > .event > .label::before {
+  background: #54c8ff;
+}
+.ui.feed > .event > .inverted.blue.basic.label::before,
+.ui.inverted.blue.basic.feed > .event > .label::before {
+  color: #54c8ff;
+}
+.ui.ui.feed > .event > .violet.label::before,
+.ui.violet.feed > .event > .label::before {
+  background: #6435c9;
+}
+.ui.violet.connected.feed > .event::before,
+.ui.connected.feed > .violet.event::before {
+  border-color: #6435c9;
+}
+.ui.inverted.violet.connected.feed > .event::before,
+.ui.connected.feed > .inverted.violet.event::before {
+  border-color: #a291fb;
+}
+.ui.ui.feed > .event > .violet.basic.label::before,
+.ui.violet.basic.feed > .event > .label::before {
+  color: #6435c9;
+}
+.ui.feed > .event > .inverted.violet.label::before,
+.ui.inverted.violet.feed > .event > .label::before {
+  background: #a291fb;
+}
+.ui.feed > .event > .inverted.violet.basic.label::before,
+.ui.inverted.violet.basic.feed > .event > .label::before {
+  color: #a291fb;
+}
+.ui.ui.feed > .event > .purple.label::before,
+.ui.purple.feed > .event > .label::before {
+  background: #a333c8;
+}
+.ui.purple.connected.feed > .event::before,
+.ui.connected.feed > .purple.event::before {
+  border-color: #a333c8;
+}
+.ui.inverted.purple.connected.feed > .event::before,
+.ui.connected.feed > .inverted.purple.event::before {
+  border-color: #dc73ff;
+}
+.ui.ui.feed > .event > .purple.basic.label::before,
+.ui.purple.basic.feed > .event > .label::before {
+  color: #a333c8;
+}
+.ui.feed > .event > .inverted.purple.label::before,
+.ui.inverted.purple.feed > .event > .label::before {
+  background: #dc73ff;
+}
+.ui.feed > .event > .inverted.purple.basic.label::before,
+.ui.inverted.purple.basic.feed > .event > .label::before {
+  color: #dc73ff;
+}
+.ui.ui.feed > .event > .pink.label::before,
+.ui.pink.feed > .event > .label::before {
+  background: #e03997;
+}
+.ui.pink.connected.feed > .event::before,
+.ui.connected.feed > .pink.event::before {
+  border-color: #e03997;
+}
+.ui.inverted.pink.connected.feed > .event::before,
+.ui.connected.feed > .inverted.pink.event::before {
+  border-color: #ff8edf;
+}
+.ui.ui.feed > .event > .pink.basic.label::before,
+.ui.pink.basic.feed > .event > .label::before {
+  color: #e03997;
+}
+.ui.feed > .event > .inverted.pink.label::before,
+.ui.inverted.pink.feed > .event > .label::before {
+  background: #ff8edf;
+}
+.ui.feed > .event > .inverted.pink.basic.label::before,
+.ui.inverted.pink.basic.feed > .event > .label::before {
+  color: #ff8edf;
+}
+.ui.ui.feed > .event > .brown.label::before,
+.ui.brown.feed > .event > .label::before {
+  background: #a5673f;
+}
+.ui.brown.connected.feed > .event::before,
+.ui.connected.feed > .brown.event::before {
+  border-color: #a5673f;
+}
+.ui.inverted.brown.connected.feed > .event::before,
+.ui.connected.feed > .inverted.brown.event::before {
+  border-color: #d67c1c;
+}
+.ui.ui.feed > .event > .brown.basic.label::before,
+.ui.brown.basic.feed > .event > .label::before {
+  color: #a5673f;
+}
+.ui.feed > .event > .inverted.brown.label::before,
+.ui.inverted.brown.feed > .event > .label::before {
+  background: #d67c1c;
+}
+.ui.feed > .event > .inverted.brown.basic.label::before,
+.ui.inverted.brown.basic.feed > .event > .label::before {
+  color: #d67c1c;
+}
+.ui.ui.feed > .event > .grey.label::before,
+.ui.grey.feed > .event > .label::before {
+  background: #767676;
+}
+.ui.grey.connected.feed > .event::before,
+.ui.connected.feed > .grey.event::before {
+  border-color: #767676;
+}
+.ui.inverted.grey.connected.feed > .event::before,
+.ui.connected.feed > .inverted.grey.event::before {
+  border-color: #dcddde;
+}
+.ui.ui.feed > .event > .grey.basic.label::before,
+.ui.grey.basic.feed > .event > .label::before {
+  color: #767676;
+}
+.ui.feed > .event > .inverted.grey.label::before,
+.ui.inverted.grey.feed > .event > .label::before {
+  background: #dcddde;
+}
+.ui.feed > .event > .inverted.grey.basic.label::before,
+.ui.inverted.grey.basic.feed > .event > .label::before {
+  color: #dcddde;
+}
+.ui.ui.feed > .event > .black.label::before,
+.ui.black.feed > .event > .label::before {
+  background: #1b1c1d;
+}
+.ui.black.connected.feed > .event::before,
+.ui.connected.feed > .black.event::before {
+  border-color: #1b1c1d;
+}
+.ui.inverted.black.connected.feed > .event::before,
+.ui.connected.feed > .inverted.black.event::before {
+  border-color: #545454;
+}
+.ui.ui.feed > .event > .black.basic.label::before,
+.ui.black.basic.feed > .event > .label::before {
+  color: #1b1c1d;
+}
+.ui.feed > .event > .inverted.black.label::before,
+.ui.inverted.black.feed > .event > .label::before {
+  background: #545454;
+}
+.ui.feed > .event > .inverted.black.basic.label::before,
+.ui.inverted.black.basic.feed > .event > .label::before {
+  color: #545454;
+}
+.ui.ui.feed > .event > .basic.label::before,
+.ui.ui.ui.basic.feed > .event > .label::before {
+  background: transparent;
+  border-color: currentColor;
+}
+.ui.disabled.feed,
+.ui.feed .disabled.event {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+
+/*******************************
+         Theme Overrides
+*******************************/
+
+
+
+/*******************************
+    User Variable Overrides
+*******************************/
+

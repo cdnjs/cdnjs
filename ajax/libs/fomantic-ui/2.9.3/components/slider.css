@@ -1,0 +1,776 @@
+/*!
+ * # Fomantic-UI 2.9.3 - Slider
+ * https://github.com/fomantic/Fomantic-UI/
+ *
+ *
+ * Released under the MIT license
+ * https://opensource.org/licenses/MIT
+ *
+ */
+.ui.slider:not(.vertical):not(.checkbox) {
+  width: 100%;
+  padding: 1em 0.5em;
+}
+.ui.slider:not(.checkbox) {
+  position: relative;
+}
+.ui.slider:not(.checkbox):focus {
+  outline: 0;
+}
+.ui.slider .inner {
+  position: relative;
+  z-index: 2;
+}
+.ui.slider:not(.vertical) .inner {
+  height: 1.5em;
+}
+.ui.slider .inner:hover {
+  cursor: auto;
+}
+.ui.slider .inner .track {
+  position: absolute;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.ui.slider:not(.vertical) .inner .track {
+  width: 100%;
+  height: 0.4em;
+  top: 0.55em;
+  left: 0;
+}
+.ui.slider .inner .track-fill {
+  position: absolute;
+  border-radius: 4px;
+  background-color: #1b1c1d;
+}
+.ui.slider:not(.vertical) .inner .track-fill {
+  height: 0.4em;
+  top: 0.55em;
+  left: 0;
+}
+.ui.slider .inner .thumb {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 1.5em;
+  width: 1.5em;
+  background: #fff linear-gradient(transparent, rgba(0, 0, 0, 0.05));
+  border-radius: 100%;
+  box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15), 0 0 0 1px rgba(34, 36, 38, 0.15) inset;
+  transition: background 0.3s ease;
+}
+.ui.slider:not(.disabled) .inner .thumb:hover {
+  cursor: pointer;
+  background: #f2f2f2 linear-gradient(transparent, rgba(0, 0, 0, 0.05));
+}
+.ui.slider:not(.disabled):focus .inner .thumb {
+  background: #f2f2f2 linear-gradient(transparent, rgba(0, 0, 0, 0.05));
+}
+
+
+/*******************************
+            States
+*******************************/
+
+
+/* --------------
+         Disabled
+    --------------- */
+.ui.disabled.slider:not(.checkbox) {
+  opacity: 0.5;
+}
+.ui.disabled.slider .inner:hover {
+  cursor: auto;
+}
+.ui.disabled.slider .inner .track-fill {
+  background: #ccc;
+}
+
+/* --------------
+        Reversed
+    --------------- */
+.ui.reversed.slider .inner .track-fill {
+  left: auto;
+  right: 0;
+}
+.ui.reversed.slider:not(.vertical) .inner .thumb {
+  left: auto;
+  right: 0;
+}
+.ui.reversed.vertical.slider .inner .thumb {
+  left: 0.03em;
+}
+.ui.labeled.reversed.slider > .labels .label {
+  transform: translate(-100%, -100%);
+}
+
+
+/*******************************
+           Variations
+*******************************/
+
+
+/* --------------
+        Vertical
+    --------------- */
+.ui.vertical.slider {
+  height: 100%;
+  width: 1.5em;
+  padding: 0.5em 1em;
+}
+.ui.vertical.slider .inner {
+  height: 100%;
+}
+.ui.vertical.slider .inner .track {
+  height: 100%;
+  width: 0.4em;
+  left: 0.55em;
+  top: 0;
+}
+.ui.vertical.slider .inner .track-fill {
+  width: 0.4em;
+  left: 0.55em;
+  top: 0;
+}
+
+/* Vertical Reversed */
+.ui.vertical.reversed.slider .inner .thumb {
+  top: auto;
+  bottom: 0;
+}
+.ui.vertical.reversed.slider .inner .track-fill {
+  top: auto;
+  bottom: 0;
+}
+
+/* --------------
+        Labeled
+    --------------- */
+.ui.labeled.slider > .labels {
+  height: 1.5em;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+}
+.ui.labeled.slider:not(.vertical) > .labels {
+  transform: translateY(-50%);
+}
+.ui.labeled.slider > .labels .label {
+  display: inline-flex;
+  padding: 0.2em 0;
+  position: absolute;
+  transform: translate(-50%, -100%);
+  white-space: nowrap;
+}
+.ui.bottom.aligned.labeled.slider > .labels .label {
+  bottom: 0;
+  transform: translate(-50%, 100%);
+}
+.ui.labeled.ticked.slider > .labels .label::after {
+  content: " ";
+  height: 1.5em;
+  width: 1px;
+  background: #ccc;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+}
+.ui.bottom.aligned.labeled.ticked.slider > .labels .label::after {
+  top: auto;
+  bottom: 100%;
+}
+.ui.labeled.ticked.slider > .labels .halftick.label::after {
+  height: 0.75em;
+}
+
+/* Vertical Labels */
+.ui.labeled.vertical.slider > .labels {
+  width: 1.5em;
+  height: auto;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  transform: translateX(-50%);
+}
+.ui.labeled.vertical.slider > .labels .label {
+  transform: translate(-100%, -50%);
+}
+.ui.labeled.vertical.slider > .labels .label::after {
+  width: 1.5em;
+  height: 1px;
+  left: 100%;
+  top: 50%;
+}
+.ui.labeled.vertical.slider > .labels .halftick.label::after {
+  width: 0.75em;
+  height: 1px;
+}
+
+/* Vertical Reversed Labels */
+.ui.labeled.vertical.reversed.slider > .labels .label {
+  transform: translate(-100%, 50%);
+}
+
+/* --------------
+    Hover
+--------------- */
+.ui.hover.slider .inner .thumb {
+  opacity: 0;
+  transition: opacity 0.2s linear;
+}
+.ui.hover.slider:not(.disabled):hover .inner .thumb,
+.ui.hover.slider:not(.disabled):focus .inner .thumb {
+  opacity: 1;
+}
+
+/* --------------
+        Inverted
+    --------------- */
+.ui.inverted.slider .inner .track-fill {
+  background-color: #545454;
+}
+.ui.inverted.slider .inner .track {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* --------------
+     Colors
+--------------- */
+
+/* Standard */
+.ui.primary.slider .inner .track-fill {
+  background-color: #2185d0;
+}
+.ui.primary.inverted.slider .inner .track-fill {
+  background-color: #54c8ff;
+}
+
+/* Basic */
+.ui.primary.slider.basic .inner .thumb {
+  background-color: #2185d0;
+}
+.ui.primary.slider.basic .inner .thumb:hover,
+.ui.primary.slider.basic:focus .inner .thumb {
+  background-color: #1678c2;
+}
+
+/* Basic Inverted */
+.ui.primary.inverted.slider.basic .inner .thumb {
+  background-color: #54c8ff;
+}
+.ui.primary.inverted.slider.basic .inner .thumb:hover,
+.ui.primary.inverted.slider.basic:focus .inner .thumb {
+  background-color: #21b8ff;
+}
+
+/* Standard */
+.ui.secondary.slider .inner .track-fill {
+  background-color: #1b1c1d;
+}
+.ui.secondary.inverted.slider .inner .track-fill {
+  background-color: #545454;
+}
+
+/* Basic */
+.ui.secondary.slider.basic .inner .thumb {
+  background-color: #1b1c1d;
+}
+.ui.secondary.slider.basic .inner .thumb:hover,
+.ui.secondary.slider.basic:focus .inner .thumb {
+  background-color: #27292a;
+}
+
+/* Basic Inverted */
+.ui.secondary.inverted.slider.basic .inner .thumb {
+  background-color: #545454;
+}
+.ui.secondary.inverted.slider.basic .inner .thumb:hover,
+.ui.secondary.inverted.slider.basic:focus .inner .thumb {
+  background-color: #6e6e6e;
+}
+
+/* Standard */
+.ui.red.slider .inner .track-fill {
+  background-color: #db2828;
+}
+.ui.red.inverted.slider .inner .track-fill {
+  background-color: #ff695e;
+}
+
+/* Basic */
+.ui.red.slider.basic .inner .thumb {
+  background-color: #db2828;
+}
+.ui.red.slider.basic .inner .thumb:hover,
+.ui.red.slider.basic:focus .inner .thumb {
+  background-color: #d01919;
+}
+
+/* Basic Inverted */
+.ui.red.inverted.slider.basic .inner .thumb {
+  background-color: #ff695e;
+}
+.ui.red.inverted.slider.basic .inner .thumb:hover,
+.ui.red.inverted.slider.basic:focus .inner .thumb {
+  background-color: #ff392b;
+}
+
+/* Standard */
+.ui.orange.slider .inner .track-fill {
+  background-color: #f2711c;
+}
+.ui.orange.inverted.slider .inner .track-fill {
+  background-color: #ff851b;
+}
+
+/* Basic */
+.ui.orange.slider.basic .inner .thumb {
+  background-color: #f2711c;
+}
+.ui.orange.slider.basic .inner .thumb:hover,
+.ui.orange.slider.basic:focus .inner .thumb {
+  background-color: #f26202;
+}
+
+/* Basic Inverted */
+.ui.orange.inverted.slider.basic .inner .thumb {
+  background-color: #ff851b;
+}
+.ui.orange.inverted.slider.basic .inner .thumb:hover,
+.ui.orange.inverted.slider.basic:focus .inner .thumb {
+  background-color: #e76b00;
+}
+
+/* Standard */
+.ui.yellow.slider .inner .track-fill {
+  background-color: #fbbd08;
+}
+.ui.yellow.inverted.slider .inner .track-fill {
+  background-color: #ffe21f;
+}
+
+/* Basic */
+.ui.yellow.slider.basic .inner .thumb {
+  background-color: #fbbd08;
+}
+.ui.yellow.slider.basic .inner .thumb:hover,
+.ui.yellow.slider.basic:focus .inner .thumb {
+  background-color: #eaae00;
+}
+
+/* Basic Inverted */
+.ui.yellow.inverted.slider.basic .inner .thumb {
+  background-color: #ffe21f;
+}
+.ui.yellow.inverted.slider.basic .inner .thumb:hover,
+.ui.yellow.inverted.slider.basic:focus .inner .thumb {
+  background-color: #ebcd00;
+}
+
+/* Standard */
+.ui.olive.slider .inner .track-fill {
+  background-color: #b5cc18;
+}
+.ui.olive.inverted.slider .inner .track-fill {
+  background-color: #d9e778;
+}
+
+/* Basic */
+.ui.olive.slider.basic .inner .thumb {
+  background-color: #b5cc18;
+}
+.ui.olive.slider.basic .inner .thumb:hover,
+.ui.olive.slider.basic:focus .inner .thumb {
+  background-color: #a7bd0d;
+}
+
+/* Basic Inverted */
+.ui.olive.inverted.slider.basic .inner .thumb {
+  background-color: #d9e778;
+}
+.ui.olive.inverted.slider.basic .inner .thumb:hover,
+.ui.olive.inverted.slider.basic:focus .inner .thumb {
+  background-color: #d2e745;
+}
+
+/* Standard */
+.ui.green.slider .inner .track-fill {
+  background-color: #21ba45;
+}
+.ui.green.inverted.slider .inner .track-fill {
+  background-color: #2ecc40;
+}
+
+/* Basic */
+.ui.green.slider.basic .inner .thumb {
+  background-color: #21ba45;
+}
+.ui.green.slider.basic .inner .thumb:hover,
+.ui.green.slider.basic:focus .inner .thumb {
+  background-color: #16ab39;
+}
+
+/* Basic Inverted */
+.ui.green.inverted.slider.basic .inner .thumb {
+  background-color: #2ecc40;
+}
+.ui.green.inverted.slider.basic .inner .thumb:hover,
+.ui.green.inverted.slider.basic:focus .inner .thumb {
+  background-color: #1ea92e;
+}
+
+/* Standard */
+.ui.teal.slider .inner .track-fill {
+  background-color: #00b5ad;
+}
+.ui.teal.inverted.slider .inner .track-fill {
+  background-color: #6dffff;
+}
+
+/* Basic */
+.ui.teal.slider.basic .inner .thumb {
+  background-color: #00b5ad;
+}
+.ui.teal.slider.basic .inner .thumb:hover,
+.ui.teal.slider.basic:focus .inner .thumb {
+  background-color: #009c95;
+}
+
+/* Basic Inverted */
+.ui.teal.inverted.slider.basic .inner .thumb {
+  background-color: #6dffff;
+}
+.ui.teal.inverted.slider.basic .inner .thumb:hover,
+.ui.teal.inverted.slider.basic:focus .inner .thumb {
+  background-color: #3affff;
+}
+
+/* Standard */
+.ui.blue.slider .inner .track-fill {
+  background-color: #2185d0;
+}
+.ui.blue.inverted.slider .inner .track-fill {
+  background-color: #54c8ff;
+}
+
+/* Basic */
+.ui.blue.slider.basic .inner .thumb {
+  background-color: #2185d0;
+}
+.ui.blue.slider.basic .inner .thumb:hover,
+.ui.blue.slider.basic:focus .inner .thumb {
+  background-color: #1678c2;
+}
+
+/* Basic Inverted */
+.ui.blue.inverted.slider.basic .inner .thumb {
+  background-color: #54c8ff;
+}
+.ui.blue.inverted.slider.basic .inner .thumb:hover,
+.ui.blue.inverted.slider.basic:focus .inner .thumb {
+  background-color: #21b8ff;
+}
+
+/* Standard */
+.ui.violet.slider .inner .track-fill {
+  background-color: #6435c9;
+}
+.ui.violet.inverted.slider .inner .track-fill {
+  background-color: #a291fb;
+}
+
+/* Basic */
+.ui.violet.slider.basic .inner .thumb {
+  background-color: #6435c9;
+}
+.ui.violet.slider.basic .inner .thumb:hover,
+.ui.violet.slider.basic:focus .inner .thumb {
+  background-color: #5829bb;
+}
+
+/* Basic Inverted */
+.ui.violet.inverted.slider.basic .inner .thumb {
+  background-color: #a291fb;
+}
+.ui.violet.inverted.slider.basic .inner .thumb:hover,
+.ui.violet.inverted.slider.basic:focus .inner .thumb {
+  background-color: #745aff;
+}
+
+/* Standard */
+.ui.purple.slider .inner .track-fill {
+  background-color: #a333c8;
+}
+.ui.purple.inverted.slider .inner .track-fill {
+  background-color: #dc73ff;
+}
+
+/* Basic */
+.ui.purple.slider.basic .inner .thumb {
+  background-color: #a333c8;
+}
+.ui.purple.slider.basic .inner .thumb:hover,
+.ui.purple.slider.basic:focus .inner .thumb {
+  background-color: #9627ba;
+}
+
+/* Basic Inverted */
+.ui.purple.inverted.slider.basic .inner .thumb {
+  background-color: #dc73ff;
+}
+.ui.purple.inverted.slider.basic .inner .thumb:hover,
+.ui.purple.inverted.slider.basic:focus .inner .thumb {
+  background-color: #cf40ff;
+}
+
+/* Standard */
+.ui.pink.slider .inner .track-fill {
+  background-color: #e03997;
+}
+.ui.pink.inverted.slider .inner .track-fill {
+  background-color: #ff8edf;
+}
+
+/* Basic */
+.ui.pink.slider.basic .inner .thumb {
+  background-color: #e03997;
+}
+.ui.pink.slider.basic .inner .thumb:hover,
+.ui.pink.slider.basic:focus .inner .thumb {
+  background-color: #e61a8d;
+}
+
+/* Basic Inverted */
+.ui.pink.inverted.slider.basic .inner .thumb {
+  background-color: #ff8edf;
+}
+.ui.pink.inverted.slider.basic .inner .thumb:hover,
+.ui.pink.inverted.slider.basic:focus .inner .thumb {
+  background-color: #ff5bd1;
+}
+
+/* Standard */
+.ui.brown.slider .inner .track-fill {
+  background-color: #a5673f;
+}
+.ui.brown.inverted.slider .inner .track-fill {
+  background-color: #d67c1c;
+}
+
+/* Basic */
+.ui.brown.slider.basic .inner .thumb {
+  background-color: #a5673f;
+}
+.ui.brown.slider.basic .inner .thumb:hover,
+.ui.brown.slider.basic:focus .inner .thumb {
+  background-color: #975b33;
+}
+
+/* Basic Inverted */
+.ui.brown.inverted.slider.basic .inner .thumb {
+  background-color: #d67c1c;
+}
+.ui.brown.inverted.slider.basic .inner .thumb:hover,
+.ui.brown.inverted.slider.basic:focus .inner .thumb {
+  background-color: #b0620f;
+}
+
+/* Standard */
+.ui.grey.slider .inner .track-fill {
+  background-color: #767676;
+}
+.ui.grey.inverted.slider .inner .track-fill {
+  background-color: #dcddde;
+}
+
+/* Basic */
+.ui.grey.slider.basic .inner .thumb {
+  background-color: #767676;
+}
+.ui.grey.slider.basic .inner .thumb:hover,
+.ui.grey.slider.basic:focus .inner .thumb {
+  background-color: #838383;
+}
+
+/* Basic Inverted */
+.ui.grey.inverted.slider.basic .inner .thumb {
+  background-color: #dcddde;
+}
+.ui.grey.inverted.slider.basic .inner .thumb:hover,
+.ui.grey.inverted.slider.basic:focus .inner .thumb {
+  background-color: #c2c4c5;
+}
+
+/* Standard */
+.ui.black.slider .inner .track-fill {
+  background-color: #1b1c1d;
+}
+.ui.black.inverted.slider .inner .track-fill {
+  background-color: #545454;
+}
+
+/* Basic */
+.ui.black.slider.basic .inner .thumb {
+  background-color: #1b1c1d;
+}
+.ui.black.slider.basic .inner .thumb:hover,
+.ui.black.slider.basic:focus .inner .thumb {
+  background-color: #27292a;
+}
+
+/* Basic Inverted */
+.ui.black.inverted.slider.basic .inner .thumb {
+  background-color: #545454;
+}
+.ui.black.inverted.slider.basic .inner .thumb:hover,
+.ui.black.inverted.slider.basic:focus .inner .thumb {
+  background-color: #000000;
+}
+
+/* --------------
+         Basic
+    --------------- */
+
+/* Standard */
+.ui.slider.basic .inner .thumb {
+  background-color: #1b1c1d;
+}
+.ui.slider.basic .inner .thumb:hover,
+.ui.slider.basic:focus .inner .thumb {
+  background-color: #27292a;
+}
+
+/* --------------
+          Basic Inverted
+        --------------- */
+
+/* Standard */
+.ui.inverted.slider.basic .inner .thumb {
+  background-color: #545454;
+}
+.ui.inverted.slider.basic .inner .thumb:hover,
+.ui.inverted.slider.basic:focus .inner .thumb {
+  background-color: #000000;
+}
+
+/* --------------
+     Sizing
+--------------- */
+.ui.slider.small .inner .thumb {
+  height: 1em;
+  width: 1em;
+}
+.ui.slider.small:not(.vertical) .inner {
+  height: 1em;
+}
+.ui.slider.small:not(.vertical) .inner .track,
+.ui.slider.small:not(.vertical) .inner .track-fill {
+  height: 0.3em;
+  top: 0.35em;
+}
+.ui.small.labeled.slider:not(.vertical) > .labels,
+.ui.small.labeled.slider:not(.vertical) > .labels .label::after {
+  height: 1em;
+}
+.ui.small.labeled.slider:not(.vertical) > .labels .halftick.label::after {
+  height: 0.5em;
+}
+
+/* Small Vertical */
+.ui.slider.small.vertical .inner {
+  width: 1em;
+}
+.ui.slider.small.vertical .inner .track,
+.ui.slider.small.vertical .inner .track-fill {
+  width: 0.3em;
+  left: 0.35em;
+}
+.ui.small.labeled.vertical.slider > .labels,
+.ui.small.labeled.vertical.slider > .labels .label::after {
+  width: 1em;
+}
+.ui.small.labeled.vertical.slider > .labels .halftick.label::after {
+  width: 0.5em;
+}
+.ui.slider.large .inner .thumb {
+  height: 2em;
+  width: 2em;
+}
+.ui.slider.large:not(.vertical) .inner {
+  height: 2em;
+}
+.ui.slider.large:not(.vertical) .inner .track,
+.ui.slider.large:not(.vertical) .inner .track-fill {
+  height: 0.5em;
+  top: 0.75em;
+}
+.ui.large.labeled.slider:not(.vertical) > .labels,
+.ui.large.labeled.slider:not(.vertical) > .labels .label::after {
+  height: 2em;
+}
+.ui.large.labeled.slider:not(.vertical) > .labels .halftick.label::after {
+  height: 1em;
+}
+
+/* Small Vertical */
+.ui.slider.large.vertical .inner {
+  width: 2em;
+}
+.ui.slider.large.vertical .inner .track,
+.ui.slider.large.vertical .inner .track-fill {
+  width: 0.5em;
+  left: 0.75em;
+}
+.ui.large.labeled.vertical.slider > .labels,
+.ui.large.labeled.vertical.slider > .labels .label::after {
+  width: 2em;
+}
+.ui.large.labeled.vertical.slider > .labels .halftick.label::after {
+  width: 1em;
+}
+.ui.slider.big .inner .thumb {
+  height: 2.5em;
+  width: 2.5em;
+}
+.ui.slider.big:not(.vertical) .inner {
+  height: 2.5em;
+}
+.ui.slider.big:not(.vertical) .inner .track,
+.ui.slider.big:not(.vertical) .inner .track-fill {
+  height: 0.6em;
+  top: 0.95em;
+}
+.ui.big.labeled.slider:not(.vertical) > .labels,
+.ui.big.labeled.slider:not(.vertical) > .labels .label::after {
+  height: 2.5em;
+}
+.ui.big.labeled.slider:not(.vertical) > .labels .halftick.label::after {
+  height: 1.25em;
+}
+
+/* Small Vertical */
+.ui.slider.big.vertical .inner {
+  width: 2.5em;
+}
+.ui.slider.big.vertical .inner .track,
+.ui.slider.big.vertical .inner .track-fill {
+  width: 0.6em;
+  left: 0.95em;
+}
+.ui.big.labeled.vertical.slider > .labels,
+.ui.big.labeled.vertical.slider > .labels .label::after {
+  width: 2.5em;
+}
+.ui.big.labeled.vertical.slider > .labels .halftick.label::after {
+  width: 1.25em;
+}
+
+
+/*******************************
+        Slider Overrides
+*******************************/
+

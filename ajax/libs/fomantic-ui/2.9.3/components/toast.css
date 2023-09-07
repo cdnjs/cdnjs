@@ -1,0 +1,751 @@
+/*!
+ * # Fomantic-UI 2.9.3 - Toast
+ * https://github.com/fomantic/Fomantic-UI/
+ *
+ *
+ * Released under the MIT license
+ * https://opensource.org/licenses/MIT
+ *
+ */
+
+
+/*******************************
+        Toast container
+*******************************/
+
+.ui.toast-container {
+  position: fixed;
+  z-index: 9999;
+}
+.ui.toast-container.absolute {
+  position: absolute;
+}
+.ui.toast-container.ui.attached {
+  width: 100%;
+  left: 0;
+}
+.ui.toast-container.ui.attached .vertical.attached {
+  border-radius: 0;
+}
+.ui.toast-container.ui.attached.ui.ui .attached.actions .button {
+  border-radius: 0;
+}
+.ui.toast-container.ui.attached .toast-box {
+  margin: 0;
+  width: 100%;
+  border-radius: 0;
+}
+.ui.toast-container.ui.attached .toast-box > .ui.toast,
+.ui.toast-container.ui.attached .toast-box > .ui.message {
+  margin-left: 0;
+}
+.ui.toast-container.ui.attached .toast-box.floating,
+.ui.toast-container.ui.attached .toast-box.hoverfloating:hover {
+  border: none;
+}
+.ui.toast-container.ui.attached .toast-box > .vertical > .content {
+  flex: 1;
+}
+.ui.toast-container.ui.attached .toast-box > * {
+  width: 100%;
+  border-radius: 0;
+}
+.ui.toast-container.ui.attached .toast-box > * > .vertical:not(.actions) {
+  flex: 1;
+}
+.ui.toast-container.ui.attached .toast-box > .attached.actions {
+  margin-right: 1px;
+}
+.ui.toast-container.ui.attached.top {
+  top: 0;
+}
+.ui.toast-container.ui.attached.bottom {
+  bottom: 0;
+}
+.ui.toast-container.top.right {
+  top: 0.85714286em;
+  right: 0.85714286em;
+  margin-left: 0.85714286em;
+}
+.ui.toast-container.top.left {
+  top: 0.85714286em;
+  left: 0.85714286em;
+  margin-right: 0.85714286em;
+}
+.ui.toast-container.top.center {
+  left: 50%;
+  transform: translate(-50%, 0);
+  top: 0.85714286em;
+}
+.ui.toast-container.bottom.right {
+  bottom: 0.85714286em;
+  right: 0.85714286em;
+  margin-left: 0.85714286em;
+}
+.ui.toast-container.bottom.left {
+  bottom: 0.85714286em;
+  left: 0.85714286em;
+  margin-right: 0.85714286em;
+}
+.ui.toast-container.bottom.center {
+  left: 50%;
+  transform: translate(-50%, 0);
+  bottom: 0.85714286em;
+}
+.ui.toast-container.centered {
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+.ui.toast-container .visible.toast-box,
+.ui.toast-container .animating.toast-box,
+.ui.toast-container .toast-box {
+  display: table !important;
+}
+.ui.toast-container.horizontal {
+  display: flex;
+  flex-direction: row;
+}
+.ui.toast-container.horizontal .toast-box {
+  margin-right: 0.5em;
+}
+.ui.toast-container .toast-box {
+  margin-bottom: 0.5em;
+  border-radius: 0.28571429rem;
+  cursor: default;
+  will-change: transform, opacity;
+}
+.ui.toast-container .toast-box:hover {
+  opacity: 1;
+}
+.ui.toast-container .toast-box:not(.unclickable):hover {
+  cursor: pointer;
+}
+.ui.toast-container .toast-box.floating,
+.ui.toast-container .toast-box.hoverfloating:hover {
+  box-shadow: 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
+  border: 1px solid rgba(34, 36, 38, 0.12);
+}
+.ui.toast-container .toast-box.inverted.floating,
+.ui.toast-container .toast-box.inverted.hoverfloating:hover {
+  box-shadow: 0 2px 4px 0 rgba(225, 225, 225, 0.1), 0 2px 10px 0 rgba(225, 225, 225, 0.5);
+  border: 1px solid rgba(225, 225, 225, 0.5);
+}
+.ui.toast-container .toast-box.compact,
+.ui.toast-container .toast-box > .compact {
+  width: 350px;
+}
+.ui.toast-container .toast-box > .ui.toast,
+.ui.toast-container .toast-box > .ui.message {
+  margin: 0 -1px -0.01em;
+  position: relative;
+}
+.ui.toast-container .toast-box > .attached.progress {
+  z-index: 1;
+}
+.ui.toast-container .toast-box > .attached.progress.bottom {
+  margin: -0.2em -1px -0.01em;
+}
+.ui.toast-container .toast-box > .attached.progress.top {
+  margin: -0.01em -1px -0.2em;
+}
+.ui.toast-container .toast-box > .attached.progress .bar {
+  min-width: 0;
+}
+.ui.toast-container .toast-box > .attached.progress.info .bar.bar.bar {
+  background: #12a1bf;
+}
+.ui.toast-container .toast-box > .attached.progress.warning .bar.bar.bar {
+  background: #cf9b0d;
+}
+.ui.toast-container .toast-box > .attached.progress.success .bar.bar.bar {
+  background: #15792d;
+}
+.ui.toast-container .toast-box > .attached.progress.error .bar.bar.bar {
+  background: #9c1a1a;
+}
+.ui.toast-container .toast-box > .attached.progress.neutral .bar.bar.bar {
+  background: #d9d9d9;
+}
+.ui.toast-container .toast-box > .ui.message > .close.icon {
+  top: 0.3em;
+  right: 0.3em;
+}
+.ui.toast-container .toast-box > .ui.message > .actions:last-child {
+  margin-bottom: -1em;
+}
+.ui.toast-container .toast-box > .ui.message.icon {
+  align-items: inherit;
+}
+.ui.toast-container .toast-box > .ui.message.icon > :not(.icon):not(.actions) {
+  padding-left: 5rem;
+}
+.ui.toast-container .toast-box > .ui.message.icon > i.icon:not(.close) {
+  display: inline-block;
+  position: absolute;
+  width: 4rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.ui.toast-container .toast-box > .ui.message.icon:not(.vertical).actions > i.icon:not(.close) {
+  top: calc(50% - 1.2em);
+  transform: none;
+}
+.ui.toast-container .toast-box > .ui.message.icon:not(.vertical).icon.icon.icon {
+  display: block;
+}
+.ui.toast-container .toast-box .ui.toast > .close.icon {
+  cursor: pointer;
+  margin: 0;
+  opacity: 0.7;
+  transition: opacity 0.1s ease;
+}
+.ui.toast-container .toast-box .ui.toast > .close.icon:hover {
+  opacity: 1;
+}
+.ui.toast-container .toast-box .ui.toast.vertical > .close.icon {
+  margin-top: -0.3em;
+  margin-right: -0.3em;
+}
+.ui.toast-container .toast-box .ui.toast:not(.vertical) > .close.icon {
+  position: absolute;
+  top: 0.3em;
+}
+.ui.toast-container .toast-box .ui.toast:not(.vertical) > .close.icon:not(.left) {
+  right: 0.3em;
+}
+.ui.toast-container .toast-box .ui.toast:not(.vertical) > .close.icon.left {
+  margin-left: -0.3em;
+}
+.ui.toast-container .toast-box .ui.card {
+  margin: 0;
+}
+.ui.toast-container .toast-box .ui.card.attached:not(.vertical).bottom {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.ui.toast-container .toast-box .ui.card.attached:not(.vertical).bottom.horizontal > .image > img {
+  border-top-left-radius: 0;
+}
+.ui.toast-container .toast-box .ui.card.attached:not(.vertical).bottom.horizontal > .image:last-child > img {
+  border-top-right-radius: 0;
+}
+.ui.toast-container .toast-box .ui.card.attached:not(.vertical).top {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.ui.toast-container .toast-box .ui.card.attached:not(.vertical).top.horizontal > .image > img {
+  border-bottom-left-radius: 0;
+}
+.ui.toast-container .toast-box .ui.card.attached:not(.vertical).top.horizontal > .image:last-child > img {
+  border-bottom-right-radius: 0;
+}
+.ui.toast-container .toast-box .ui.card.horizontal.actions > .image > img {
+  border-bottom-left-radius: 0;
+}
+.ui.toast-container .toast-box .ui.card.horizontal.actions > .image:last-child > img {
+  border-bottom-right-radius: 0;
+}
+.ui.toast-container .toast-box .progressing {
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+}
+.ui.toast-container .toast-box .progressing.up {
+  animation-name: progressUp;
+}
+.ui.toast-container .toast-box .progressing.down {
+  animation-name: progressDown;
+}
+.ui.toast-container .toast-box .progressing.wait {
+  animation-name: progressWait;
+}
+.ui.toast-container .toast-box:hover .pausable.progressing {
+  animation-play-state: paused;
+}
+.ui.toast-container .toast-box .ui.toast:not(.vertical) {
+  display: block;
+}
+.ui.toast-container .toast-box :not(.comment):not(.card) .actions {
+  margin: 0.5em -1em -1em -1em;
+}
+.ui.toast-container .toast-box :not(.comment) .actions {
+  padding: 0.5em 0.5em 0.75em 0.5em;
+  text-align: right;
+}
+.ui.toast-container .toast-box :not(.comment) .actions.attached:not(.vertical) {
+  margin-right: 1px;
+}
+.ui.toast-container .toast-box :not(.comment) .actions:not(.basic):not(.attached) {
+  background: rgba(255, 255, 255, 0.25);
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+.ui.toast-container .toast-box :not(.comment) .actions.left {
+  text-align: left;
+}
+.ui.toast-container .toast-box .vertical.actions > .button,
+.ui.toast-container .toast-box > .vertical > .vertical.vertical,
+.ui.toast-container .toast-box > .vertical.vertical.vertical {
+  display: flex;
+}
+.ui.toast-container .toast-box :not(.comment) .vertical.actions {
+  flex-direction: column;
+}
+.ui.toast-container .toast-box :not(.comment) .vertical.actions > .button {
+  justify-content: center;
+}
+.ui.toast-container .toast-box :not(.comment) .vertical.actions.attached > .button {
+  align-items: center;
+}
+.ui.toast-container .toast-box :not(.comment) .vertical.actions:not(.attached) {
+  border-top: 0;
+  margin-top: -0.75em;
+  margin-bottom: -0.75em;
+  margin-left: 1em;
+  justify-content: space-around;
+}
+.ui.toast-container .toast-box :not(.comment) .vertical.actions:not(.attached):not(.basic) {
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
+}
+.ui.toast-container .toast-box :not(.comment) .vertical.actions:not(.attached) > .button:not(:last-child) {
+  margin-bottom: 0.3em;
+}
+.ui.toast-container .toast-box :not(.comment) .vertical.actions:not(.attached).top {
+  justify-content: flex-start;
+}
+.ui.toast-container .toast-box :not(.comment) .vertical.actions:not(.attached).bottom {
+  justify-content: flex-end;
+}
+.ui.vertical.attached:not(.left).card > .image > img {
+  border-top-right-radius: 0;
+}
+.ui.vertical.attached:not(.left).card.horizontal > .image:last-child > img {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.ui.vertical.attached:not(.left).card,
+.ui.vertical.attached:not(.left).toast {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.ui.vertical.attached:not(.left).actions {
+  border-top-right-radius: 0.28571429rem;
+  border-bottom-right-radius: 0.28571429rem;
+}
+.ui.vertical.attached:not(.left).actions .button:first-child,
+.ui.vertical.attached:not(.left).actions .button:last-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.ui.vertical.attached:not(.left).message {
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0.28571429rem;
+}
+.ui.vertical.attached.left.card > .image > img {
+  border-top-left-radius: 0;
+}
+.ui.vertical.attached.left.card.horizontal > .image > img {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.ui.vertical.attached.left.card,
+.ui.vertical.attached.left.toast {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.ui.vertical.attached.left.actions {
+  border-top-left-radius: 0.28571429rem;
+  border-bottom-left-radius: 0.28571429rem;
+}
+.ui.vertical.attached.left.actions .button:first-child,
+.ui.vertical.attached.left.actions .button:last-child {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.ui.vertical.attached.left.message.message.message {
+  border-top-right-radius: 0.28571429rem;
+  border-bottom-right-radius: 0.28571429rem;
+}
+.ui.attached:not(.vertical):not(.top).actions {
+  border-bottom-left-radius: 0.28571429rem;
+  border-bottom-right-radius: 0.28571429rem;
+}
+.ui.attached:not(.vertical):not(.top).actions .button:first-child {
+  border-bottom-left-radius: 0.28571429rem;
+}
+.ui.attached:not(.vertical):not(.top).actions .button:last-child {
+  border-bottom-right-radius: 0.28571429rem;
+}
+.ui.attached:not(.vertical).top.actions {
+  border-top-left-radius: 0.28571429rem;
+  border-top-right-radius: 0.28571429rem;
+}
+.ui.attached:not(.vertical).top.actions .button:first-child {
+  border-top-left-radius: 0.28571429rem;
+}
+.ui.attached:not(.vertical).top.actions .button:last-child {
+  border-top-right-radius: 0.28571429rem;
+}
+
+
+/*******************************
+            Toast
+*******************************/
+
+.ui.toast {
+  display: none;
+  border-radius: 0.28571429rem;
+  padding: 0.78571429em 1em;
+  margin: 0 -1px -0.01em;
+  color: rgba(0, 0, 0, 0.87);
+  background-color: #fff;
+}
+.ui.toast > .content > .header {
+  font-weight: bold;
+  color: inherit;
+  margin: 0;
+}
+.ui.toast.info {
+  background-color: #31ccec;
+  color: rgba(255, 255, 255, 0.9);
+}
+.ui.toast.warning {
+  background-color: #f2c037;
+  color: rgba(255, 255, 255, 0.9);
+}
+.ui.toast.success {
+  background-color: #21ba45;
+  color: rgba(255, 255, 255, 0.9);
+}
+.ui.toast.error {
+  background-color: #db2828;
+  color: rgba(255, 255, 255, 0.9);
+}
+.ui.toast.neutral {
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+}
+.ui.toast > i.icon:not(.close) {
+  font-size: 1.5em;
+}
+.ui.toast:not(.vertical):not(.centered):not(.center) > i.icon:not(.close) {
+  position: absolute;
+}
+.ui.toast:not(.vertical):not(.centered):not(.center) > .ui.image {
+  position: absolute;
+}
+.ui.toast:not(.vertical) > i.icon:not(.close) + .content {
+  padding-left: 3em;
+}
+.ui.toast:not(.vertical) > .close.icon + .content {
+  padding-left: 1.5em;
+}
+.ui.toast:not(.vertical) > .ui.image.avatar + .content {
+  padding-left: 3em;
+  min-height: 2em;
+}
+.ui.toast:not(.vertical) > .ui.image.mini + .content {
+  padding-left: 3.4em;
+  min-height: 35px;
+}
+.ui.toast:not(.vertical) > .ui.image.tiny + .content {
+  padding-left: 7em;
+  min-height: 80px;
+}
+.ui.toast:not(.vertical) > .ui.image.small + .content {
+  padding-left: 12em;
+  min-height: 150px;
+}
+.ui.toast:not(.vertical):not(.centered):not(.center) > .centered.image,
+.ui.toast:not(.vertical):not(.centered):not(.center) > .centered.icon {
+  transform: translateY(-50%);
+  top: 50%;
+}
+.ui.toast:not(.vertical).actions > .centered.image {
+  top: calc(50% - 2em);
+}
+.ui.toast:not(.vertical).actions > .centered.icon {
+  top: calc(50% - 1.2em);
+}
+.ui.toast.vertical > .content {
+  flex-grow: 1;
+}
+.ui.toast.vertical.attached {
+  flex-grow: 1;
+}
+.ui.toast.vertical > .close.icon + .content {
+  padding-left: 1em;
+}
+.ui.toast.vertical > .ui.image + .content,
+.ui.toast.vertical > i.icon:not(.close) + .content {
+  padding-left: 1em;
+}
+.ui.toast.vertical > .ui.image {
+  align-self: flex-start;
+  flex-shrink: 0;
+  
+/* IE11 fix */
+}
+.ui.toast.vertical > .centered.image,
+.ui.toast.vertical > .centered.icon {
+  align-self: center;
+}
+.ui.toast.attached.bottom {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.ui.toast.attached.top {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.ui.toast.ui.ui.ui.image {
+  padding: 0;
+}
+.ui.toast.ui.ui.ui.image > .content {
+  padding-top: 0.78571429em;
+  padding-bottom: 0.78571429em;
+  padding-right: 1em;
+}
+.ui.toast.ui.ui.ui.image > .actions {
+  margin: 0;
+}
+.ui.toast.ui.ui.ui.image > .ui.image {
+  border-top-left-radius: 0.28571429rem;
+  border-bottom-left-radius: 0.28571429rem;
+}
+.ui.toast.ui.ui.ui.image > .ui.image.mini {
+  min-width: calc(0.7857142857142857em + 35px);
+}
+.ui.toast.ui.ui.ui.image > .ui.image.mini + .content {
+  min-height: calc(0.7857142857142857em + 35px);
+  padding-left: 4.4em;
+}
+.ui.hoverfloating.message:hover {
+  box-shadow: 0 0 0 1px inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
+}
+.ui.center.toast-container .toast-box,
+.ui.right.toast-container .toast-box {
+  margin-left: auto;
+}
+.ui.center.toast-container .toast-box {
+  margin-right: auto;
+}
+.ui.ui.toast-container .toast-box .centered.toast,
+.ui.ui.toast-container .toast-box .center.aligned.toast {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.ui.ui.toast-container .toast-box .centered.toast > .content,
+.ui.ui.toast-container .toast-box .center.aligned.toast > .content,
+.ui.ui.toast-container .toast-box .centered.toast > .ui.image,
+.ui.ui.toast-container .toast-box .center.aligned.toast > .ui.image,
+.ui.ui.toast-container .toast-box .centered.toast > i.icon:not(.close),
+.ui.ui.toast-container .toast-box .center.aligned.toast > i.icon:not(.close) {
+  align-self: center;
+}
+.ui.toast-container .toast-box .toast .centered.content,
+.ui.toast-container .toast-box .toast .center.aligned.content {
+  text-align: center;
+}
+.ui.toast-container .toast-box .centered.actions,
+.ui.toast-container .toast-box .center.aligned.actions {
+  text-align: center;
+}
+.ui.toast-container .toast-box .centered.actions:not(.attached) > .button:not(.fluid),
+.ui.toast-container .toast-box .center.aligned.actions:not(.attached) > .button:not(.fluid) {
+  margin-left: 0.25em;
+  margin-right: 0.25em;
+}
+
+/* --------------
+     Colors
+-------------- */
+.ui.primary.toast {
+  background-color: #2185d0;
+  color: rgba(255, 255, 255, 0.9);
+}
+.ui.inverted.primary.toast,
+.ui.toast-container .toast-box > .inverted.primary.attached.progress .bar {
+  background-color: #54c8ff;
+  color: rgba(0, 0, 0, 0.87);
+}
+.ui.secondary.toast {
+  background-color: #1b1c1d;
+  color: rgba(255, 255, 255, 0.9);
+}
+.ui.inverted.secondary.toast,
+.ui.toast-container .toast-box > .inverted.secondary.attached.progress .bar {
+  background-color: #545454;
+  color: rgba(0, 0, 0, 0.87);
+}
+.ui.red.toast {
+  background-color: #db2828;
+  color: rgba(255, 255, 255, 0.9);
+}
+.ui.inverted.red.toast,
+.ui.toast-container .toast-box > .inverted.red.attached.progress .bar {
+  background-color: #ff695e;
+  color: rgba(0, 0, 0, 0.87);
+}
+.ui.orange.toast {
+  background-color: #f2711c;
+  color: rgba(255, 255, 255, 0.9);
+}
+.ui.inverted.orange.toast,
+.ui.toast-container .toast-box > .inverted.orange.attached.progress .bar {
+  background-color: #ff851b;
+  color: rgba(0, 0, 0, 0.87);
+}
+.ui.yellow.toast {
+  background-color: #fbbd08;
+  color: rgba(255, 255, 255, 0.9);
+}
+.ui.inverted.yellow.toast,
+.ui.toast-container .toast-box > .inverted.yellow.attached.progress .bar {
+  background-color: #ffe21f;
+  color: rgba(0, 0, 0, 0.87);
+}
+.ui.olive.toast {
+  background-color: #b5cc18;
+  color: rgba(255, 255, 255, 0.9);
+}
+.ui.inverted.olive.toast,
+.ui.toast-container .toast-box > .inverted.olive.attached.progress .bar {
+  background-color: #d9e778;
+  color: rgba(0, 0, 0, 0.87);
+}
+.ui.green.toast {
+  background-color: #21ba45;
+  color: rgba(255, 255, 255, 0.9);
+}
+.ui.inverted.green.toast,
+.ui.toast-container .toast-box > .inverted.green.attached.progress .bar {
+  background-color: #2ecc40;
+  color: rgba(0, 0, 0, 0.87);
+}
+.ui.teal.toast {
+  background-color: #00b5ad;
+  color: rgba(255, 255, 255, 0.9);
+}
+.ui.inverted.teal.toast,
+.ui.toast-container .toast-box > .inverted.teal.attached.progress .bar {
+  background-color: #6dffff;
+  color: rgba(0, 0, 0, 0.87);
+}
+.ui.blue.toast {
+  background-color: #2185d0;
+  color: rgba(255, 255, 255, 0.9);
+}
+.ui.inverted.blue.toast,
+.ui.toast-container .toast-box > .inverted.blue.attached.progress .bar {
+  background-color: #54c8ff;
+  color: rgba(0, 0, 0, 0.87);
+}
+.ui.violet.toast {
+  background-color: #6435c9;
+  color: rgba(255, 255, 255, 0.9);
+}
+.ui.inverted.violet.toast,
+.ui.toast-container .toast-box > .inverted.violet.attached.progress .bar {
+  background-color: #a291fb;
+  color: rgba(0, 0, 0, 0.87);
+}
+.ui.purple.toast {
+  background-color: #a333c8;
+  color: rgba(255, 255, 255, 0.9);
+}
+.ui.inverted.purple.toast,
+.ui.toast-container .toast-box > .inverted.purple.attached.progress .bar {
+  background-color: #dc73ff;
+  color: rgba(0, 0, 0, 0.87);
+}
+.ui.pink.toast {
+  background-color: #e03997;
+  color: rgba(255, 255, 255, 0.9);
+}
+.ui.inverted.pink.toast,
+.ui.toast-container .toast-box > .inverted.pink.attached.progress .bar {
+  background-color: #ff8edf;
+  color: rgba(0, 0, 0, 0.87);
+}
+.ui.brown.toast {
+  background-color: #a5673f;
+  color: rgba(255, 255, 255, 0.9);
+}
+.ui.inverted.brown.toast,
+.ui.toast-container .toast-box > .inverted.brown.attached.progress .bar {
+  background-color: #d67c1c;
+  color: rgba(0, 0, 0, 0.87);
+}
+.ui.grey.toast {
+  background-color: #767676;
+  color: rgba(255, 255, 255, 0.9);
+}
+.ui.inverted.grey.toast,
+.ui.toast-container .toast-box > .inverted.grey.attached.progress .bar {
+  background-color: #dcddde;
+  color: rgba(0, 0, 0, 0.87);
+}
+.ui.black.toast {
+  background-color: #1b1c1d;
+  color: rgba(255, 255, 255, 0.9);
+}
+.ui.inverted.black.toast,
+.ui.toast-container .toast-box > .inverted.black.attached.progress .bar {
+  background-color: #545454;
+  color: rgba(0, 0, 0, 0.87);
+}
+.ui.inverted.toast {
+  color: rgba(255, 255, 255, 0.9);
+  background-color: #1b1c1d;
+}
+@media only screen and (max-width: 420px) {
+  .ui.toast-container .toast-box.toast-box,
+  .ui.toast-container .toast-box > .compact,
+  .ui.toast-container .toast-box > .vertical > *,
+  .ui.toast-container .toast-box > * {
+    width: auto;
+    max-width: 100%;
+  }
+  .ui.toast-container .toast-box > *:not(.vertical) {
+    min-width: 280px;
+  }
+  .ui.toast-container .toast-box > .ui.card.horizontal,
+  .ui.toast-container .toast-box > .vertical > .ui.horizontal.card {
+    min-width: initial;
+  }
+}
+
+/* ---------------
+   Progress Bar
+ ---------------- */
+@keyframes progressDown {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0;
+  }
+}
+@keyframes progressUp {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+@keyframes progressWait {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+
+/*******************************
+         Theme Overrides
+*******************************/
+
