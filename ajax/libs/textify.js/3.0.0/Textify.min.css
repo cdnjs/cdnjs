@@ -1,0 +1,67 @@
+/* fix safari custom kerning by adding a space after each character */
+* {
+  -webkit-font-feature-settings: "kern" 1;
+  -moz-font-feature-settings: "kern" 1;
+  -ms-font-feature-settings: "kern" 1;
+  -o-font-feature-settings: "kern" 1;
+  font-feature-settings: "kern" 1;
+  font-kerning: none;
+  -webkit-text-rendering: optimizeSpeed;
+  text-rendering: optimizeSpeed;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+/* ----------------------------------------- */
+.textify .word,
+.textify .char {
+  display: inline-block;
+  will-change: transform, opacity; /* for safari */
+}
+
+/* ----------------------------------------- */
+
+.textify .char {
+  position: relative;
+}
+
+/**
+ * Populate the psuedo elements with the character to allow for expanded effects
+ * Set to `display: none` by default; just add `display: block` when you want
+ * to use the psuedo elements
+*/
+.textify .char::before,
+.textify .char::after,
+.textify .word::after,
+.textify .word::before,
+.textify .line::after,
+.textify .line::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  transition: inherit;
+  display: none;
+}
+
+.textify .char::before,
+.textify .char::after {
+  content: attr(data-char);
+}
+
+.textify .word::after,
+.textify .word::before {
+  content: attr(data-word);
+}
+
+.textify .line::after,
+.textify .line::before {
+  content: attr(data-line);
+}
+
+/* ------------------------------------------- */
+
+.textify .line-box,
+.textify .line {
+  overflow: hidden;
+}
