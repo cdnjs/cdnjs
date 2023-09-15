@@ -1,0 +1,65 @@
+.ModalRoot {
+  width: 100%;
+  height: 100%;
+}
+
+.ModalRoot__mask {
+  opacity: 1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.4);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  transition: opacity 167ms ease-out;
+  animation: animation-fade-in 0.32s ease;
+}
+
+.ModalRoot--touched .ModalRoot__mask {
+  transition: none;
+}
+
+.ModalRoot--switching .ModalRoot__mask {
+  /** Во время автоматической анимации смены модалок с фоном взаимодействовать нельзя */
+  pointer-events: none;
+}
+
+.ModalRoot__viewport {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+:not(.ModalRoot--desktop).ModalRoot .ModalRoot__viewport {
+  top: var(--vkui_internal--safe_area_inset_top);
+}
+
+:not(.ModalRoot--desktop).ModalRoot--hasCustomPanelHeaderAfterSlot .ModalRoot__viewport {
+  top: calc(
+    var(--vkui_internal--safe_area_inset_top) + var(--vkui--size_panel_header_height--regular)
+  );
+}
+
+.ModalRoot__modal {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+@keyframes animation-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
