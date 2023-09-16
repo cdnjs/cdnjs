@@ -1,0 +1,486 @@
+@charset "UTF-8";
+/*
+ |  tail.select - The vanilla solution to make your HTML select fields AWESOME!
+ |  @file       ./css/default/tail.select-light.css
+ |  @author     SamBrishes <sam@pytes.net>
+ |  @version    0.5.15 - Beta
+ |
+ |  @website    https://github.com/pytesNET/tail.select
+ |  @license    X11 / MIT License
+ |  @copyright  Copyright © 2014 - 2019 SamBrishes, pytesNET <info@pytes.net>
+ */
+
+/* @start GENERAL */
+.tail-select, .tail-select *, .tail-select *:before, .tail-select *:after{
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+.tail-select, .tail-select *{
+    outline: none;
+    user-select: none;
+    -o-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+.tail-select{
+    width: 250px;
+    margin: 1px;
+    padding: 0;
+    display: inline-block;
+    position: relative;
+    font-size: 14px;
+    line-height: 22px;
+    font-family: inherit;
+}
+.tail-select mark{
+    color: white;
+    background-color: #DC4650;
+}
+.tail-select button{
+    outline: none;
+}
+.tail-select button.tail-all, .tail-select button.tail-none{
+    height: auto;
+    margin: 0 2px;
+    padding: 2px 6px;
+    display: inline-block;
+    font-size: 10px;
+    line-height: 14px;
+    text-shadow: none;
+    letter-spacing: 0;
+    text-transform: none;
+    vertical-align: top;
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent;
+    border-radius: 3px;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    transition: color 142ms linear, border 142ms linear, background 142ms linear;
+    -webkit-transition: color 142ms linear, border 142ms linear, background 142ms linear;
+}
+.tail-select button.tail-all{
+    color: rgba(48, 52, 56, 0.5);
+    border-color: rgba(48, 52, 56, 0.5);
+    background-color: transparent;
+}
+.tail-select button.tail-all:hover{
+    color: #62C462;
+    border-color: #62C462;
+    background-color: transparent;
+}
+.tail-select button.tail-none{
+    color: rgba(48, 52, 56, 0.5);
+    border-color: rgba(48, 52, 56, 0.5);
+    background-color: transparent;
+}
+.tail-select button.tail-none:hover{
+    color: #EE5F5B;
+    border-color: #EE5F5B;
+    background-color: transparent;
+}
+.tail-select.disabled button.tail-all{
+    color: rgba(48, 52, 56, 0.25);
+    border-color: rgba(48, 52, 56, 0.25);
+    background-color: transparent;
+}
+.tail-select.disabled button.tail-none{
+    color: rgba(48, 52, 56, 0.25);
+    border-color: rgba(48, 52, 56, 0.25);
+    background-color: transparent;
+}
+.tail-select input[type="text"]{
+    color: #303438;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 10px 15px;
+    display: inline-block;
+    outline: 0;
+    font-size: 12px;
+    line-height: 20px;
+    vertical-align: middle;
+    background-color: transparent;
+    border-width: 0;
+    border-style: solid;
+    border-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+.tail-select input[type="text"]:hover{
+    color: #303438;
+    border-color: transparent;
+    background-color: transparent;
+}
+.tail-select input[type="text"]:focus{
+    color: #3C82E6;
+    border-color: transparent;
+    background-color: transparent;
+}
+.tail-select.disabled input[type="text"]{
+    color: rgba(48, 52, 56, 0.75);
+    border-color: transparent;
+    background-color: transparent;
+}
+.tail-select-container{
+    margin: 0;
+    padding: 3px;
+    text-align: left;
+    border-radius: 3px;
+}
+.tail-select-container .select-handle{
+    width: auto;
+    color: #303438;
+    cursor: pointer;
+    margin: 1px;
+    padding: 0.2em 0.6em 0.3em;
+    display: inline-block;
+    position: relative;
+    font-size: 11.844px;
+    text-align: left;
+    font-weight: bold;
+    line-height: 16px;
+    text-shadow: none;
+    vertical-align: top;
+    background-color: #d9d9d9;
+    border-width: 0;
+    border-style: solid;
+    border-color: transparent;
+    border-radius: 3px;
+    transition: background 142ms linear;
+    -webkit-transition: background 142ms linear;
+}
+.tail-select-container .select-handle:hover{
+    color: #303438;
+    background-color: #DC4650;
+}
+.tail-select-container.select-label .select-handle{
+    margin: 5px 3px;
+}
+/* @end GENERAL */
+
+/* @start LABEL */
+.tail-select .select-label{
+    cursor: pointer;
+    color: rgba(48, 52, 56, 0.85);
+    width: 100%;
+    margin: 0;
+    padding: 5px 30px 5px 10px;
+    display: block;
+    z-index: 27;
+    position: relative;
+    text-align: left;
+    background-color: white;
+    border-width: 0px;
+    border-style: solid;
+    border-color: #d9d9d9;
+    border-radius: 3px;
+    box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1), 0 0 1px 1px rgba(0, 0, 0, 0.25);
+    -webkit-box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1), 0 0 1px 1px rgba(0, 0, 0, 0.25);
+    transition: background 142ms linear, box-shadow 142ms linear;
+    -webkit-transition: background 142ms linear, box-shadow 142ms linear;
+}
+.tail-select .select-label:after{
+    top: 15px;
+    right: 12px;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    z-index: 25;
+    content: "";
+    opacity: 0.5;
+    display: inline-block;
+    position: absolute;
+    border-top: 5px dashed;
+    border-top: 5px solid\9;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    text-shadow: none;
+    transition: opacity 142ms linear, transform 142ms linear;
+    -webkit-transition: opacity 142ms linear, transform 142ms linear;
+}
+.tail-select .select-label .label-count, .tail-select .select-label .label-inner{
+    width: auto;
+    margin: 0;
+    text-align: left;
+    vertical-align: top;
+}
+.tail-select .select-label .label-count{
+    float: left;
+    color: rgba(48, 52, 56, 0.85);
+    margin: 0 5px 0 0;
+    padding: 0 7px 0 0;
+    display: inline-block;
+    font-size: 11.844px;
+    font-weight: bold;
+    text-shadow: none;
+    white-space: nowrap;
+    vertical-align: top;
+    border-width: 0px 1px 0 0;
+    border-style: solid;
+    border-color: #d9d9d9;
+    border-radius: 0px;
+}
+.tail-select .select-label .label-inner{
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.tail-select:hover .select-label, .tail-select.idle .select-label,
+.tail-select.active .select-label{
+    z-index: 25;
+    box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1), 0 0 1px 1px #3C82E6;
+    -webkit-box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1), 0 0 1px 1px #3C82E6;
+}
+.tail-select:hover .select-label:after, .tail-select.idle .select-label:after,
+.tail-select.active .select-label:after{
+    opacity: 0.85;
+}
+.tail-select:hover .select-label .label-count, .tail-select.idle .select-label .label-count,
+.tail-select.active .select-label .label-count, .tail-select:hover .select-label .label-inner,
+.tail-select.idle .select-label .label-inner, .tail-select.active .select-label .label-inner{
+    opacity: 1;
+}
+.tail-select.active .select-label{
+    z-index: 27;
+}
+.tail-select.active .select-label:after{
+    opacity: 0.85;
+    transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+}
+.tail-select.disabled .select-label{
+    cursor: not-allowed;
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.35);
+    -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.35);
+}
+/* @end LABEL */
+
+/* @start DROPDOWN */
+.tail-select .select-dropdown{
+    top: 100%;
+    left: 0;
+    color: #303438;
+    width: 100%;
+    min-height: 35px;
+    margin: -1px 0 0 0;
+    padding: 0;
+    z-index: 30;
+    display: none;
+    overflow: hidden;
+    position: absolute;
+    background-color: white;
+    border-width: 0px;
+    border-style: solid;
+    border-color: #d9d9d9;
+    border-radius: 0 0 3px 3px;
+    box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1), 0 0 1px 1px rgba(0, 0, 0, 0.25);
+    -webkit-box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1), 0 0 1px 1px rgba(0, 0, 0, 0.25);
+}
+.tail-select .select-dropdown .dropdown-search{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: block;
+    position: relative;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: #d9d9d9;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+}
+.tail-select .select-dropdown .dropdown-inner{
+    width: 100%;
+    margin: 0;
+    padding: 1px 0;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.tail-select .select-dropdown .dropdown-empty{
+    margin: 0;
+    padding: 16px 0;
+    display: block;
+    font-size: 12px;
+    text-align: center;
+    line-height: 18px;
+}
+.tail-select .select-dropdown .dropdown-action{
+    top: 3px;
+    right: 15px;
+    width: auto;
+    margin: 0;
+    padding: 7px 0;
+    z-index: 35;
+    display: inline-block;
+    position: absolute;
+    text-align: center;
+}
+.tail-select .select-dropdown ul, .tail-select .select-dropdown ul li{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: block;
+    position: relative;
+    list-style: none;
+    font-size: 14px;
+    line-height: 20px;
+    vertical-align: top;
+}
+.tail-select .select-dropdown ul li{
+    color: #303438;
+    padding: 5px 10px 5px 35px;
+    font-size: 12px;
+    text-align: left;
+    line-height: 18px;
+    font-weight: normal;
+}
+.tail-select .select-dropdown ul li:first-of-type{
+    margin-top: 7px;
+}
+.tail-select .select-dropdown ul li:last-of-type{
+    margin-bottom: 7px;
+}
+.tail-select .select-dropdown ul li.optgroup-title{
+    color: rgba(48, 52, 56, 0.7);
+    cursor: default;
+    margin: 9px 0 0 0;
+    padding-left: 10px;
+    font-size: 14px;
+    text-shadow: none;
+}
+.tail-select .select-dropdown ul li.optgroup-title button{
+    float: right;
+    margin-top: -2px;
+    opacity: 0;
+}
+.tail-select .select-dropdown ul:hover li button{
+    opacity: 1;
+}
+.tail-select .select-dropdown ul li.dropdown-option{
+    cursor: pointer;
+    color: #303438;
+}
+.tail-select .select-dropdown ul li.dropdown-option:before{
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    margin: 0;
+    padding: 0;
+    z-index: 21;
+    display: inline-block;
+    content: "";
+    opacity: 0;
+    position: absolute;
+    vertical-align: top;
+    background-repeat: no-repeat;
+    background-position: center center;
+    transition: opacity 50ms linear;
+    -webkit-transition: opacity 50ms linear;
+}
+.tail-select .select-dropdown ul li.dropdown-option .option-description{
+    color: rgba(48, 52, 56, 0.85);
+    width: auto;
+    margin: 0;
+    padding: 0;
+    display: block;
+    font-size: 10px;
+    text-align: left;
+    line-height: 14px;
+    vertical-align: top;
+}
+.tail-select .select-dropdown ul li.dropdown-option:hover,
+.tail-select .select-dropdown ul li.dropdown-option.hover{
+    color: #303438;
+}
+.tail-select .select-dropdown ul li.dropdown-option:hover .option-description,
+.tail-select .select-dropdown ul li.dropdown-option.hover .option-description{
+    color: #303438;
+}
+.tail-select.open-top .select-dropdown{
+    top: auto;
+    bottom: 100%;
+    margin: 0 0 -1px 0;
+    border-radius: 3px 3px 0 0;
+}
+.tail-select.hide-selected .select-dropdown ul li.selected,
+.tail-select.hide-disabled .select-dropdown ul li.disabled{
+    display: none;
+}
+/* State & Icons :: Single */
+.tail-select .select-dropdown ul li.dropdown-option:before{
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2212%22%20height%3D%2216%22%20viewBox%3D%220%200%2012%2016%22%3E%3Cpath%20fill%3D%22%23303438%22%20d%3D%22M12%205l-8%208-4-4%201.5-1.5L4%2010l6.5-6.5L12%205z%22/%3E%3C/svg%3E");
+}
+.tail-select .select-dropdown ul li.dropdown-option:hover:before,
+.tail-select .select-dropdown ul li.dropdown-option.hover:before{
+    opacity: 0.5;
+}
+.tail-select .select-dropdown ul li.dropdown-option.selected{
+    color: #3C82E6;
+    background-color: white;
+}
+.tail-select .select-dropdown ul li.dropdown-option.selected:before{
+    opacity: 0.85;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2212%22%20height%3D%2216%22%20viewBox%3D%220%200%2012%2016%22%3E%3Cpath%20fill%3D%22%23303438%22%20d%3D%22M12%205l-8%208-4-4%201.5-1.5L4%2010l6.5-6.5L12%205z%22/%3E%3C/svg%3E");
+}
+.tail-select .select-dropdown ul li.dropdown-option.selected .option-description{
+    color: #3C82E6;
+}
+.tail-select.deselect .select-dropdown ul li.dropdown-option.selected:hover:before,
+.tail-select.deselect .select-dropdown ul li.dropdown-option.selected.hover:before{
+    opacity: 0.85;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2212%22%20height%3D%2216%22%20viewBox%3D%220%200%2012%2016%22%3E%3Cpath%20fill%3D%22%23303438%22%20d%3D%22M7.48%208l3.75%203.75-1.48%201.48L6%209.48l-3.75%203.75-1.48-1.48L4.52%208%20.77%204.25l1.48-1.48L6%206.52l3.75-3.75%201.48%201.48L7.48%208z%22/%3E%3C/svg%3E");
+}
+.tail-select.deselect .select-dropdown ul li.dropdown-option.selected:hover .option-description,
+.tail-select.deselect .select-dropdown ul li.dropdown-option.selected.hover .option-description{
+    color: #3C82E6;
+}
+.tail-select .select-dropdown ul li.dropdown-option{
+    transition: all 0.3s ease-in;
+}
+.tail-select .select-dropdown ul li.dropdown-option:hover,
+.tail-select .select-dropdown ul li.dropdown-option.hover{
+    transition: all 0.4s ease;
+    background-color: #e9edf2;
+}
+.tail-select.disabled .select-dropdown ul li.dropdown-option,
+.tail-select .select-dropdown ul li.dropdown-option.disabled{
+    cursor: not-allowed;
+    color: rgba(48, 52, 56, 0.4);
+    text-shadow: 0px 1px 0px rgba(119, 129, 138, 0.1), 0px -1px 0px rgba(0, 0, 0, 0.1);
+    background-color: #fafafa;
+}
+.tail-select.disabled .select-dropdown ul li.dropdown-option:before,
+.tail-select .select-dropdown ul li.dropdown-option.disabled:before{
+    opacity: 0.85;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2214%22%20height%3D%2216%22%20viewBox%3D%220%200%2014%2016%22%3E%3Cpath%20fill%3D%22%23303438%22%20d%3D%22M7%201C3.14%201%200%204.14%200%208s3.14%207%207%207%207-3.14%207-7-3.14-7-7-7zm0%201.3c1.3%200%202.5.44%203.47%201.17l-8%208A5.755%205.755%200%200%201%201.3%208c0-3.14%202.56-5.7%205.7-5.7zm0%2011.41c-1.3%200-2.5-.44-3.47-1.17l8-8c.73.97%201.17%202.17%201.17%203.47%200%203.14-2.56%205.7-5.7%205.7z%22/%3E%3C/svg%3E");
+}
+.tail-select.disabled .select-dropdown ul li.dropdown-option .option-description,
+.tail-select .select-dropdown ul li.dropdown-option.disabled .option-description{
+    color: rgba(48, 52, 56, 0.4);
+}
+/* State & Icons :: Multiple */
+.tail-select.multiple .select-dropdown ul li.dropdown-option:before{
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2214%22%20height%3D%2216%22%20viewBox%3D%220%200%2014%2016%22%3E%3Cpath%20fill%3D%22%23303438%22%20d%3D%22M13%201H1c-.55%200-1%20.45-1%201v12c0%20.55.45%201%201%201h12c.55%200%201-.45%201-1V2c0-.55-.45-1-1-1zm0%2013H1V2h12v12zM6%209H3V7h3V4h2v3h3v2H8v3H6V9z%22/%3E%3C/svg%3E");
+}
+.tail-select.multiple .select-dropdown ul li.dropdown-option.selected:before{
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2214%22%20height%3D%2216%22%20viewBox%3D%220%200%2014%2016%22%3E%3Cpath%20fill%3D%22%23303438%22%20d%3D%22M13%201H1c-.55%200-1%20.45-1%201v12c0%20.55.45%201%201%201h12c.55%200%201-.45%201-1V2c0-.55-.45-1-1-1zm0%2013H1V2h12v12zM4%208c0-1.66%201.34-3%203-3s3%201.34%203%203-1.34%203-3%203-3-1.34-3-3z%22/%3E%3C/svg%3E");
+}
+.tail-select.multiple .select-dropdown ul li.dropdown-option.selected:hover:before,
+.tail-select.multiple .select-dropdown ul li.dropdown-option.selected.hover:before{
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2214%22%20height%3D%2216%22%20viewBox%3D%220%200%2014%2016%22%3E%3Cpath%20fill%3D%22%23303438%22%20d%3D%22M13%201H1c-.55%200-1%20.45-1%201v12c0%20.55.45%201%201%201h12c.55%200%201-.45%201-1V2c0-.55-.45-1-1-1zm0%2013H1V2h12v12zm-2-5H3V7h8v2z%22/%3E%3C/svg%3E");
+}
+.tail-select.multiple.disabled .select-dropdown ul li.dropdown-option:before,
+.tail-select.multiple .select-dropdown ul li.dropdown-option.disabled:before{
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2214%22%20height%3D%2216%22%20viewBox%3D%220%200%2014%2016%22%3E%3Cpath%20fill%3D%22%23303438%22%20d%3D%22M13%201H1c-.55%200-1%20.45-1%201v12c0%20.55.45%201%201%201h12c.55%200%201-.45%201-1V2c0-.55-.45-1-1-1zm0%2013H1V2h12v12zm-8.5-2H3v-1.5L9.5%204H11v1.5L4.5%2012z%22/%3E%3C/svg%3E");
+}
+/* @end DROPDOWN */
+
+/*# sourceMappingURL=tail.select-light.map */
