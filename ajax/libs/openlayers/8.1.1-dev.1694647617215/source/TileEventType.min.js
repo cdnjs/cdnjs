@@ -1,0 +1,1 @@
+export default{TILELOADSTART:"tileloadstart",TILELOADEND:"tileloadend",TILELOADERROR:"tileloaderror"};
