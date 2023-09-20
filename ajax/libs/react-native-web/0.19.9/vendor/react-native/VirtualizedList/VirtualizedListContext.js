@@ -1,0 +1,64 @@
+import _objectSpread from "@babel/runtime/helpers/objectSpread2";
+/**
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * 
+ * @format
+ */
+
+import * as React from 'react';
+import { useContext, useMemo } from 'react';
+var __DEV__ = process.env.NODE_ENV !== 'production';
+export var VirtualizedListContext = /*#__PURE__*/React.createContext(null);
+if (__DEV__) {
+  VirtualizedListContext.displayName = 'VirtualizedListContext';
+}
+
+/**
+ * Resets the context. Intended for use by portal-like components (e.g. Modal).
+ */
+export function VirtualizedListContextResetter(_ref) {
+  var children = _ref.children;
+  return /*#__PURE__*/React.createElement(VirtualizedListContext.Provider, {
+    value: null
+  }, children);
+}
+
+/**
+ * Sets the context with memoization. Intended to be used by `VirtualizedList`.
+ */
+export function VirtualizedListContextProvider(_ref2) {
+  var children = _ref2.children,
+    value = _ref2.value;
+  // Avoid setting a newly created context object if the values are identical.
+  var context = useMemo(() => ({
+    cellKey: null,
+    getScrollMetrics: value.getScrollMetrics,
+    horizontal: value.horizontal,
+    getOutermostParentListRef: value.getOutermostParentListRef,
+    registerAsNestedChild: value.registerAsNestedChild,
+    unregisterAsNestedChild: value.unregisterAsNestedChild
+  }), [value.getScrollMetrics, value.horizontal, value.getOutermostParentListRef, value.registerAsNestedChild, value.unregisterAsNestedChild]);
+  return /*#__PURE__*/React.createElement(VirtualizedListContext.Provider, {
+    value: context
+  }, children);
+}
+
+/**
+ * Sets the `cellKey`. Intended to be used by `VirtualizedList` for each cell.
+ */
+export function VirtualizedListCellContextProvider(_ref3) {
+  var cellKey = _ref3.cellKey,
+    children = _ref3.children;
+  // Avoid setting a newly created context object if the values are identical.
+  var currContext = useContext(VirtualizedListContext);
+  var context = useMemo(() => currContext == null ? null : _objectSpread(_objectSpread({}, currContext), {}, {
+    cellKey
+  }), [currContext, cellKey]);
+  return /*#__PURE__*/React.createElement(VirtualizedListContext.Provider, {
+    value: context
+  }, children);
+}
