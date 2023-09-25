@@ -1,0 +1,64 @@
+.CardScroll__in {
+  display: flex;
+  align-items: stretch;
+}
+
+.CardScroll__gap {
+  display: block;
+  flex-shrink: 0;
+}
+
+.CardScroll + .CardScroll {
+  margin-top: 16px;
+}
+
+.CardScroll--withSpaces .CardScroll__gap {
+  width: var(--vkui--size_base_padding_horizontal--regular);
+}
+
+/**
+ * CMP:
+ * SplitCol
+ */
+
+:global(.vkuiInternalSplitCol--spaced) .CardScroll--withSpaces .CardScroll {
+  margin-left: -16px;
+  margin-right: -16px;
+}
+
+:global(.vkuiInternalSplitCol--spaced) .CardScroll--withSpaces .CardScroll__gap {
+  width: 16px;
+}
+
+/**
+ * CMP:
+ * Group
+ */
+
+:global(.vkuiInternalGroup--mode-card) .CardScroll--withSpaces {
+  margin-left: -8px;
+  margin-right: -8px;
+}
+
+:global(.vkuiInternalGroup--mode-card) .CardScroll--withSpaces:first-child {
+  padding-top: var(--vkui--size_cardgrid_padding_vertical--regular);
+}
+
+:global(.vkuiInternalGroup--mode-card) .CardScroll--withSpaces:last-child {
+  padding-bottom: var(--vkui--size_cardgrid_padding_vertical--regular);
+}
+
+@media (min-width: 768px) {
+  :global(.vkuiInternalGroup--mode-none) .CardScroll--withSpaces {
+    margin-left: -8px;
+    margin-right: -8px;
+  }
+
+  :global(.vkuiInternalGroup--mode-none) .CardScroll--withSpaces:first-child {
+    padding-top: var(--vkui--size_cardgrid_padding_vertical--regular);
+  }
+
+  :global(.vkuiInternalGroup--mode-none) .CardScroll--withSpaces:last-child {
+    padding-bottom: var(--vkui--size_cardgrid_padding_vertical--regular);
+  }
+}

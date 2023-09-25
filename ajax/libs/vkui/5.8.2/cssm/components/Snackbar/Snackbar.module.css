@@ -1,0 +1,165 @@
+.Snackbar {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  z-index: var(--vkui--z_index_popout);
+  position: fixed;
+  bottom: 0;
+  left: auto;
+  width: 100%;
+  padding-left: var(--vkui_internal--safe_area_inset_left);
+  padding-right: var(--vkui_internal--safe_area_inset_right);
+  padding-bottom: var(--vkui_internal--safe_area_inset_bottom);
+}
+
+/**
+ * CMP:
+ * Epic
+ */
+
+:global(.vkuiInternalEpic--hasTabbar) .Snackbar {
+  padding-bottom: calc(
+    var(--vkui_internal--tabbar_height) + var(--vkui_internal--safe_area_inset_bottom)
+  );
+}
+
+.Snackbar__in,
+.Snackbar__body {
+  transition: transform 320ms var(--vkui--animation_easing_platform);
+}
+
+.Snackbar__in {
+  padding: 8px;
+  animation: animation-snackbar-intro-vertical 340ms var(--vkui--animation_easing_platform);
+}
+
+.Snackbar--closing .Snackbar__in {
+  transform: translate3d(0, 140%, 0);
+}
+
+.Snackbar__body {
+  box-sizing: border-box;
+  padding: 12px;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  background: var(--vkui--color_background_modal);
+  box-shadow: var(--vkui--elevation4);
+  border-radius: var(--vkui--size_border_radius--regular);
+}
+
+.Snackbar--mode-dark .Snackbar__body {
+  background: var(--vkui--color_background_contrast_inverse);
+}
+
+.Snackbar__before {
+  margin-right: 12px;
+}
+
+.Snackbar__after {
+  margin-left: 12px;
+}
+
+.Snackbar__content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.Snackbar--layout-vertical .Snackbar__content {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.Snackbar__content-text {
+  flex: 1;
+  color: var(--vkui--color_text_primary);
+  width: 100%;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.Snackbar__content-subtitle {
+  color: var(--vkui--color_text_subhead);
+  margin-top: 2px;
+}
+
+.Snackbar--mode-dark .Snackbar__content-text {
+  color: var(--vkui--color_text_contrast);
+}
+
+.Snackbar--layout-horizontal .Snackbar__action {
+  margin-left: 12px;
+  position: relative;
+}
+
+.Snackbar--layout-vertical .Snackbar__action {
+  margin-top: 2px;
+  min-height: initial;
+}
+
+.ModalRoot .Snackbar {
+  padding-bottom: var(--vkui_internal--safe_area_inset_bottom);
+}
+
+/* iOS */
+
+.Snackbar--ios .Snackbar__in,
+.Snackbar--ios .Snackbar__body {
+  transition: transform 400ms var(--vkui--animation_easing_platform);
+}
+
+/**
+ * Desktop
+ */
+
+.Snackbar--desktop {
+  max-width: 351px;
+  left: 0;
+  bottom: 0;
+}
+
+.Snackbar--desktop .Snackbar__in {
+  padding: 12px;
+  animation-name: animation-snackbar-intro-horizontal;
+}
+
+.Snackbar--desktop.Snackbar--closing .Snackbar__in {
+  transform: translate3d(-140%, 0, 0);
+}
+
+/**
+ * Touch-interaction
+ */
+
+.Snackbar--touched .Snackbar__body {
+  transition: none;
+}
+
+/**
+ * Animations
+ */
+
+@keyframes animation-snackbar-intro-vertical {
+  from {
+    transform: translate3d(0, 140%, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes animation-snackbar-intro-horizontal {
+  from {
+    transform: translate3d(-140%, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}

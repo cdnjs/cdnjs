@@ -1,0 +1,52 @@
+.CardGrid {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.CardGrid--spaced {
+  padding: var(--vkui--size_base_padding_vertical--regular)
+    var(--vkui--size_base_padding_horizontal--regular);
+}
+
+.CardGrid--sizeX-compact {
+  padding-left: var(--vkui--size_base_padding_horizontal--regular);
+  padding-right: var(--vkui--size_base_padding_horizontal--regular);
+}
+
+@media (max-width: 767.9px) {
+  .CardGrid--sizeX-none {
+    padding-left: var(--vkui--size_base_padding_horizontal--regular);
+    padding-right: var(--vkui--size_base_padding_horizontal--regular);
+  }
+}
+
+.CardGrid + .CardGrid {
+  margin-top: calc(var(--vkui--size_cardgrid_padding_vertical--regular) * 2);
+}
+
+/**
+ * CMP:
+ * Group
+ */
+
+:global(.vkuiInternalGroup--mode-card) .CardGrid {
+  padding-left: var(--vkui--size_base_padding_horizontal--regular);
+  padding-right: var(--vkui--size_base_padding_horizontal--regular);
+}
+
+@media (min-width: 768px) {
+  :global(.vkuiInternalGroup--mode-none) .CardGrid {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+
+:global(.vkuiInternalGroup) .CardGrid:first-child {
+  margin-top: var(--vkui--size_cardgrid_padding_vertical--regular);
+}
+
+:global(.vkuiInternalGroup) .CardGrid:last-child {
+  margin-bottom: var(--vkui--size_cardgrid_padding_vertical--regular);
+}
