@@ -1,0 +1,51 @@
+.ripple-surface {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.ripple-surface-unbound {
+  overflow: visible;
+}
+
+.ripple-wave {
+  --#{$prefix}ripple-wave-cubicBezier: #{$ripple-wave-cubicBezier};
+  --#{$prefix}ripple-wave-border-radius: #{$ripple-wave-border-radius};
+  --#{$prefix}ripple-wave-opacity: #{$ripple-wave-opacity};
+  --#{$prefix}ripple-wave-transform: #{$ripple-wave-transform};
+  --#{$prefix}ripple-wave-z-index: #{$ripple-wave-z-index};
+  --#{$prefix}ripple-wave-active-transform: #{$ripple-wave-active-transform};
+
+  @include ripple-variant(black);
+  border-radius: var(--#{$prefix}ripple-wave-border-radius);
+  opacity: var(--#{$prefix}ripple-wave-opacity);
+  pointer-events: none;
+  position: absolute;
+  touch-action: none;
+  transform: var(--#{$prefix}ripple-wave-transform);
+  transition-property: transform, opacity;
+  transition-timing-function: var(--#{$prefix}ripple-wave-cubicBezier),
+    var(--#{$prefix}ripple-wave-cubicBezier);
+  z-index: var(--#{$prefix}ripple-wave-z-index);
+  &.active {
+    transform: var(--#{$prefix}ripple-wave-active-transform);
+    opacity: 0;
+  }
+}
+
+.btn .ripple-wave {
+  @include ripple-variant(white);
+}
+
+.input-wrapper .ripple-wave {
+  @include ripple-variant(white);
+}
+
+@each $color, $value in $ripple {
+  .ripple-surface-#{$color} {
+    .ripple-wave {
+      @include ripple-variant($value);
+    }
+  }
+}

@@ -1,0 +1,52 @@
+//
+// Toast styles
+//
+
+.toast {
+  // scss-docs-start toast-css-vars
+  --#{$prefix}toast-border-bottom-width: #{$toast-border-bottom-width};
+  --#{$prefix}toast-btn-close-width: #{$toast-btn-close-width};
+  --#{$prefix}toast-btn-close-mr: #{$toast-btn-close-mr};
+  --#{$prefix}toast-btn-close-ml: #{$toast-btn-close-ml};
+  // scss-docs-end toast-css-vars
+
+  border: 0;
+
+  .btn-close {
+    width: var(--#{$prefix}toast-btn-close-width);
+  }
+}
+
+.toast-header {
+  border-bottom-width: var(--#{$prefix}toast-border-bottom-width);
+
+  .btn-close {
+    margin-right: var(--#{$prefix}toast-btn-close-mr);
+    margin-left: var(--#{$prefix}toast-btn-close-ml);
+  }
+}
+
+.parent-toast-relative {
+  position: relative;
+}
+
+.toast-absolute {
+  position: absolute;
+}
+
+.toast-fixed {
+  position: fixed;
+  z-index: var(--#{$prefix}toast-zindex);
+}
+
+@each $color, $value in $toasts {
+  .toast-#{$color} {
+    background-color: map-get($value, background-color);
+    color: map-get($value, text-color);
+    border-color: map-get($value, border-color);
+
+    i {
+      color: map-get($value, icon-color);
+    }
+  }
+}
