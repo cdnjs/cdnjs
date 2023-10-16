@@ -1,0 +1,169 @@
+//
+// Rotating border
+//
+
+.spinner-grow,
+.spinner-border,
+.spinner-material {
+  display: inline-block;
+  width: var(--#{$prefix}spinner-width);
+  height: var(--#{$prefix}spinner-height);
+  vertical-align: var(--#{$prefix}spinner-vertical-align);
+  // stylelint-disable-next-line property-disallowed-list
+  border-radius: 50%;
+  animation: var(--#{$prefix}spinner-animation-speed) linear infinite var(--#{$prefix}spinner-animation-name);
+}
+
+// scss-docs-start spinner-border-keyframes
+@keyframes spinner-border {
+  to { transform: rotate(360deg) #{"/* rtl:ignore */"}; }
+}
+// scss-docs-end spinner-border-keyframes
+
+.spinner-border {
+  // scss-docs-start spinner-border-css-vars
+  --#{$prefix}spinner-width: #{$spinner-width};
+  --#{$prefix}spinner-height: #{$spinner-height};
+  --#{$prefix}spinner-vertical-align: #{$spinner-vertical-align};
+  --#{$prefix}spinner-border-width: #{$spinner-border-width};
+  --#{$prefix}spinner-animation-speed: #{$spinner-animation-speed};
+  --#{$prefix}spinner-animation-name: spinner-border;
+  // scss-docs-end spinner-border-css-vars
+
+  border: var(--#{$prefix}spinner-border-width) solid currentcolor;
+  border-right-color: transparent;
+}
+
+.spinner-border-sm {
+  // scss-docs-start spinner-border-sm-css-vars
+  --#{$prefix}spinner-width: #{$spinner-width-sm};
+  --#{$prefix}spinner-height: #{$spinner-height-sm};
+  --#{$prefix}spinner-border-width: #{$spinner-border-width-sm};
+  // scss-docs-end spinner-border-sm-css-vars
+}
+
+//
+// Growing circle
+//
+
+// scss-docs-start spinner-grow-keyframes
+@keyframes spinner-grow {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: none;
+  }
+}
+// scss-docs-end spinner-grow-keyframes
+
+.spinner-grow {
+  // scss-docs-start spinner-grow-css-vars
+  --#{$prefix}spinner-width: #{$spinner-width};
+  --#{$prefix}spinner-height: #{$spinner-height};
+  --#{$prefix}spinner-vertical-align: #{$spinner-vertical-align};
+  --#{$prefix}spinner-animation-speed: #{$spinner-animation-speed};
+  --#{$prefix}spinner-animation-name: spinner-grow;
+  // scss-docs-end spinner-grow-css-vars
+
+  background-color: currentcolor;
+  opacity: 0;
+}
+
+.spinner-grow-sm {
+  --#{$prefix}spinner-width: #{$spinner-width-sm};
+  --#{$prefix}spinner-height: #{$spinner-height-sm};
+}
+
+//
+// Material design spinner
+//
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124;
+  }
+}
+
+@keyframes color {
+  100%,
+  0% {
+    stroke: var(--#{$prefix}spinner-color-1);
+  }
+  40% {
+    stroke: var(--#{$prefix}spinner-color-2);
+  }
+  66% {
+    stroke: var(--#{$prefix}spinner-color-3);
+  }
+  80%,
+  90% {
+    stroke: var(--#{$prefix}spinner-color-4);
+  }
+}
+
+.spinner-material {
+  --#{$prefix}spinner-width: #{$spinner-width};
+  --#{$prefix}spinner-height: #{$spinner-height};
+  --#{$prefix}spinner-vertical-align: #{$spinner-vertical-align};
+  --#{$prefix}spinner-border-width: #{$spinner-border-width};
+  --#{$prefix}spinner-animation-speed: #{$spinner-material-animation-speed};
+  --#{$prefix}spinner-dash-animation-speed: #{$spinner-material-dash-animation-speed};
+  --#{$prefix}spinner-color-animation-speed: #{$spinner-material-color-animation-speed};
+  --#{$prefix}spinner-animation-name: spinner-border;
+  --#{$prefix}spinner-color-1: var(--#{$prefix}danger);
+  --#{$prefix}spinner-color-2: var(--#{$prefix}warning);
+  --#{$prefix}spinner-color-3: var(--#{$prefix}success);
+  --#{$prefix}spinner-color-4: var(--#{$prefix}primary);
+
+  position: relative;
+
+  svg {
+    position: absolute;
+    transform-origin: center center;
+    animation: var(--#{$prefix}spinner-animation-speed) linear infinite var(--#{$prefix}spinner-animation-name);
+  }
+  circle {
+    stroke: currentcolor;
+    stroke-linecap: round;
+    stroke-width: var(--#{$prefix}spinner-border-width);
+    animation: dash var(--#{$prefix}spinner-dash-animation-speed) ease-in-out infinite;
+  }
+
+  &.spinner-rainbow {
+    circle {
+      animation: dash var(--#{$prefix}spinner-dash-animation-speed) ease-in-out infinite, color var(--#{$prefix}spinner-color-animation-speed) ease-in-out infinite;
+    }
+  }
+}
+
+.spinner-material-sm {
+  --#{$prefix}spinner-width: #{$spinner-width-sm};
+  --#{$prefix}spinner-height: #{$spinner-height-sm};
+  --#{$prefix}spinner-border-width: #{$spinner-material-border-width-sm};
+}
+
+@if $enable-reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    .spinner-border,
+    .spinner-grow {
+      --#{$prefix}spinner-animation-speed: #{$spinner-animation-speed * 2};
+    }
+
+    .spinner-material {
+      --#{$prefix}spinner-animation-speed: #{$spinner-material-animation-speed * 2};
+      --#{$prefix}spinner-dash-animation-speed: #{$spinner-material-dash-animation-speed * 2};
+      --#{$prefix}spinner-color-animation-speed: #{$spinner-material-color-animation-speed * 2};
+    }
+  }
+}

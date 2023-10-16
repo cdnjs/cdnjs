@@ -1,0 +1,12 @@
+@each $color, $value in $theme-colors {
+  .link-#{$color} {
+    color: var(--#{$prefix}#{$color}) if($enable-important-utilities, !important, null);
+    text-decoration-color: var(--#{$prefix}#{$color}) if($enable-important-utilities, !important, null);
+
+    &:hover,
+    &:focus {
+      color: var(--#{$prefix}#{$color}-hover) if($enable-important-utilities, !important, null);
+      text-decoration-color: var(--#{$prefix}#{$color}-hover) if($enable-important-utilities, !important, null);
+    }
+  }
+}

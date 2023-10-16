@@ -1,0 +1,282 @@
+// stylelint-disable function-disallowed-list
+
+%offcanvas-css-vars {
+  // scss-docs-start offcanvas-css-vars
+  --#{$prefix}offcanvas-zindex: #{$zindex-offcanvas};
+  --#{$prefix}offcanvas-width: #{$offcanvas-horizontal-width};
+  --#{$prefix}offcanvas-height: #{$offcanvas-vertical-height};
+  --#{$prefix}offcanvas-padding-x: #{$offcanvas-padding-x};
+  --#{$prefix}offcanvas-padding-y: #{$offcanvas-padding-y};
+  --#{$prefix}offcanvas-color: #{$offcanvas-color};
+  --#{$prefix}offcanvas-bg: #{$offcanvas-bg-color};
+  --#{$prefix}offcanvas-border-width: #{$offcanvas-border-width};
+  --#{$prefix}offcanvas-border-color: #{$offcanvas-border-color};
+  --#{$prefix}offcanvas-box-shadow: #{$offcanvas-box-shadow};
+  --#{$prefix}offcanvas-transition: #{transform $offcanvas-transition-duration ease-in-out};
+  --#{$prefix}offcanvas-title-padding-y: #{$navbar-brand-padding-y};
+  --#{$prefix}offcanvas-title-margin-end: #{$navbar-brand-margin-end};
+  --#{$prefix}offcanvas-title-font-size: #{$navbar-brand-font-size};
+  --#{$prefix}offcanvas-nav-link-color: #{$offcanvas-nav-link-color};
+  --#{$prefix}offcanvas-nav-link-hover-color: #{$offcanvas-nav-link-hover-color};
+  --#{$prefix}offcanvas-nav-link-hover-bg: #{$offcanvas-nav-link-hover-bg};
+  --#{$prefix}offcanvas-nav-link-active-color: #{$offcanvas-nav-link-active-color};
+  --#{$prefix}offcanvas-nav-link-disabled-color: #{$offcanvas-nav-link-disabled-color};
+  --#{$prefix}dropdown-divider-bg: #{$dropdown-divider-bg};
+  // scss-docs-end offcanvas-css-vars
+}
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  $next: breakpoint-next($breakpoint, $grid-breakpoints);
+  $infix: breakpoint-infix($next, $grid-breakpoints);
+
+  .offcanvas#{$infix} {
+    @extend %offcanvas-css-vars;
+  }
+}
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  $next: breakpoint-next($breakpoint, $grid-breakpoints);
+  $infix: breakpoint-infix($next, $grid-breakpoints);
+
+  .offcanvas#{$infix} {
+    @include media-breakpoint-down($next) {
+      position: fixed;
+      bottom: 0;
+      z-index: var(--#{$prefix}offcanvas-zindex);
+      display: flex;
+      flex-direction: column;
+      max-width: 100%;
+      color: var(--#{$prefix}offcanvas-color);
+      visibility: hidden;
+      background-color: var(--#{$prefix}offcanvas-bg);
+      background-clip: padding-box;
+      outline: 0;
+      @include box-shadow(var(--#{$prefix}offcanvas-box-shadow));
+      @include transition(var(--#{$prefix}offcanvas-transition));
+
+      &.offcanvas-start {
+        top: 0;
+        left: 0;
+        width: var(--#{$prefix}offcanvas-width);
+        border-right: var(--#{$prefix}offcanvas-border-width) solid var(--#{$prefix}offcanvas-border-color);
+        transform: translateX(-100%);
+      }
+
+      &.offcanvas-end {
+        top: 0;
+        right: 0;
+        width: var(--#{$prefix}offcanvas-width);
+        border-left: var(--#{$prefix}offcanvas-border-width) solid var(--#{$prefix}offcanvas-border-color);
+        transform: translateX(100%);
+      }
+
+      &.offcanvas-top {
+        top: 0;
+        right: 0;
+        left: 0;
+        height: var(--#{$prefix}offcanvas-height);
+        max-height: 100%;
+        border-bottom: var(--#{$prefix}offcanvas-border-width) solid var(--#{$prefix}offcanvas-border-color);
+        transform: translateY(-100%);
+      }
+
+      &.offcanvas-bottom {
+        right: 0;
+        left: 0;
+        height: var(--#{$prefix}offcanvas-height);
+        max-height: 100%;
+        border-top: var(--#{$prefix}offcanvas-border-width) solid var(--#{$prefix}offcanvas-border-color);
+        transform: translateY(100%);
+      }
+
+      &.showing,
+      &.show:not(.hiding) {
+        transform: none;
+      }
+
+      &.showing,
+      &.hiding,
+      &.show {
+        visibility: visible;
+      }
+    }
+
+    @if not ($infix == "") {
+      @include media-breakpoint-up($next) {
+        --#{$prefix}offcanvas-height: auto;
+        --#{$prefix}offcanvas-border-width: 0;
+        background-color: transparent !important; // stylelint-disable-line declaration-no-important
+
+        .offcanvas-header {
+          display: none;
+        }
+
+        .offcanvas-body {
+          display: flex;
+          flex-grow: 0;
+          padding: 0;
+          overflow-y: visible;
+        }
+
+        &.offcanvas-fixed {
+          .offcanvas-header {
+            display: flex;
+
+            .btn-close {
+              display: none;
+            }
+          }
+
+          ~ .offcanvas-backdrop {
+            display: none;
+          }
+
+          .offcanvas-body {
+            display: block;
+            flex-grow: 1;
+            padding: var(--#{$prefix}offcanvas-padding-y) var(--#{$prefix}offcanvas-padding-x);
+            overflow-y: auto;
+          }
+
+          &.offcanvas-start {
+            top: 0;
+            left: 0;
+            width: var(--#{$prefix}offcanvas-width);
+            border-right: var(--#{$prefix}offcanvas-border-width) solid var(--#{$prefix}offcanvas-border-color);
+          }
+
+          &.offcanvas-end {
+            top: 0;
+            right: 0;
+            width: var(--#{$prefix}offcanvas-width);
+            border-left: var(--#{$prefix}offcanvas-border-width) solid var(--#{$prefix}offcanvas-border-color);
+          }
+
+          &.offcanvas-top {
+            top: 0;
+            right: 0;
+            left: 0;
+            height: var(--#{$prefix}offcanvas-height);
+            max-height: 100%;
+            border-bottom: var(--#{$prefix}offcanvas-border-width) solid var(--#{$prefix}offcanvas-border-color);
+          }
+
+          &.offcanvas-bottom {
+            right: 0;
+            left: 0;
+            height: var(--#{$prefix}offcanvas-height);
+            max-height: 100%;
+            border-top: var(--#{$prefix}offcanvas-border-width) solid var(--#{$prefix}offcanvas-border-color);
+          }
+
+          &.offcanvas-start ~ .offcanvas-pushed-content {
+            margin-left: var(--#{$prefix}offcanvas-width);
+            background-color: var(--#{$prefix}body-bg);
+            @include transition(margin-left $offcanvas-transition-duration ease-in-out);
+          }
+
+          &.offcanvas-end ~ .offcanvas-pushed-content {
+            margin-right: var(--#{$prefix}offcanvas-width);
+            background-color: var(--#{$prefix}body-bg);
+            @include transition(margin-right $offcanvas-transition-duration ease-in-out);
+          }
+        }
+      }
+    }
+  }
+}
+
+.offcanvas-backdrop {
+  @include overlay-backdrop($zindex-offcanvas-backdrop, $offcanvas-backdrop-bg, $offcanvas-backdrop-opacity);
+}
+
+.offcanvas-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--#{$prefix}offcanvas-padding-y) var(--#{$prefix}offcanvas-padding-x);
+
+  .btn-close {
+    margin-right: calc(-.5 * var(--#{$prefix}offcanvas-padding-x));
+  }
+}
+
+.offcanvas-title {
+  padding-top: var(--#{$prefix}offcanvas-title-padding-y);
+  padding-bottom: var(--#{$prefix}offcanvas-title-padding-y);
+  margin-right: var(--#{$prefix}offcanvas-title-margin-end);
+  @include font-size(var(--#{$prefix}offcanvas-title-font-size));
+  text-decoration: if($link-decoration == none, null, none);
+  white-space: nowrap;
+
+  &:hover,
+  &:focus {
+    text-decoration: if($link-hover-decoration == underline, none, null);
+  }
+}
+
+.offcanvas-body {
+  flex-grow: 1;
+  padding: var(--#{$prefix}offcanvas-padding-y) var(--#{$prefix}offcanvas-padding-x);
+  overflow-y: auto;
+
+  .nav-item [data-bs-toggle="collapse"] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &::after {
+      line-height: 0;
+      @include transition(transform 200ms 0ms cubic-bezier(.4, 0, .2, 1));
+    }
+
+    &[aria-expanded="true"] {
+      &::after {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .nav-link {
+    color: var(--#{$prefix}offcanvas-nav-link-color);
+
+    &:hover,
+    &:focus {
+      color: var(--#{$prefix}offcanvas-nav-link-hover-color);
+      background-color: var(--#{$prefix}offcanvas-nav-link-hover-bg);
+    }
+
+    &.disabled {
+      color: var(--#{$prefix}offcanvas-nav-link-disabled-color);
+    }
+  }
+
+  .show > .nav-link,
+  .nav-link.active {
+    color: var(--#{$prefix}offcanvas-nav-link-active-color);
+  }
+
+  [data-bs-toggle="collapse"] {
+    &::after {
+      content: escape-svg($offcanvas-light-collapse-icon);
+    }
+  }
+}
+
+.offcanvas-fixed {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  @include transition(var(--#{$prefix}offcanvas-transition));
+}
+
+@if $enable-dark-mode {
+  @include color-mode(dark) {
+    .offcanvas-body [data-bs-toggle="collapse"] {
+      &::after {
+        content: escape-svg($offcanvas-dark-collapse-icon);
+      }
+    }
+  }
+}
