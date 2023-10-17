@@ -1,0 +1,60 @@
+.FixedLayout {
+  position: fixed;
+  box-sizing: border-box;
+  /**
+   * ⚠️ WARNING ⚠️
+   * `left: auto` решает следующие задачи:
+   * 1. При фиксированной ширине компонента позиционирует компонент по центру.
+   * 2. При использовании `SplitLayout` позиционирует компонент с права от `<SplitCol fixed />`.
+   *
+   * Подробности можно почитать здесь https://github.com/VKCOM/VKUI/pull/2472
+   *
+   * Единственное, есть проблема при срабатывании insets в landscape ориентации экрана (https://github.com/VKCOM/VKUI/issues/2422).
+   */
+  left: auto;
+  z-index: var(--vkui_internal--z_index_fixed_layout);
+  padding-left: var(--vkui_internal--safe_area_inset_left);
+  padding-right: var(--vkui_internal--safe_area_inset_right);
+}
+
+.FixedLayout--filled {
+  background: var(--vkui--color_background_content);
+}
+
+.FixedLayout--vertical-top {
+  width: 100%;
+  top: 0;
+}
+
+.FixedLayout--vertical-bottom {
+  width: 100%;
+  bottom: 0;
+  padding-bottom: var(--vkui_internal--safe_area_inset_bottom);
+}
+
+/**
+ * CMP:
+ * Epic
+ */
+
+:global(.vkuiInternalEpic--hasTabbar) .FixedLayout--vertical-bottom {
+  padding-bottom: calc(
+    var(--vkui_internal--tabbar_height) + var(--vkui_internal--safe_area_inset_bottom)
+  );
+}
+
+/**
+ * CMP:
+ * PanelHeader
+ */
+
+/* stylelint-disable-next-line selector-max-universal */
+
+:global(.vkuiInternalPanelHeader) ~ .FixedLayout--vertical-top,
+:global(.vkuiInternalPanelHeader)
+  ~ *
+  .FixedLayout--vertical-top:not(:global(.vkuiInternalPanelHeader__fixed)) {
+  top: calc(
+    var(--vkui--size_panel_header_height--regular) + var(--vkui_internal--safe_area_inset_top)
+  );
+}

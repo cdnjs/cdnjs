@@ -1,0 +1,91 @@
+.Chip {
+  display: inline-block;
+  border: var(--vkui--size_border--regular) solid var(--vkui--color_image_border_alpha);
+  background: var(--vkui--color_background_content);
+  border-radius: 6px;
+  height: 32px;
+  box-sizing: border-box;
+}
+
+.Chip__in {
+  position: relative;
+  display: flex;
+  height: 100%;
+  padding: 0 8px;
+  align-items: center;
+}
+
+.Chip--removable .Chip__in {
+  padding-right: 0;
+}
+
+.Chip__content {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--vkui--color_text_primary);
+  display: inline-block;
+
+  /* Typography/Paragraph */
+  font-size: var(--vkui--font_paragraph--font_size--regular);
+  line-height: var(--vkui--font_paragraph--line_height--regular);
+  font-weight: var(--vkui--font_paragraph--font_weight--regular);
+  font-family: var(--vkui--font_paragraph--font_family--regular);
+}
+
+.Chip--sizeY-compact .Chip__content {
+  /* Typography/Footnote */
+  font-size: var(--vkui--font_footnote--font_size--regular);
+  line-height: var(--vkui--font_footnote--line_height--regular);
+  font-weight: var(--vkui--font_footnote--font_weight--regular);
+  font-family: var(--vkui--font_footnote--font_family--regular);
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .Chip--sizeY-none .Chip__content {
+    /* Typography/Footnote */
+    font-size: var(--vkui--font_footnote--font_size--regular);
+    line-height: var(--vkui--font_footnote--line_height--regular);
+    font-weight: var(--vkui--font_footnote--font_weight--regular);
+    font-family: var(--vkui--font_footnote--font_family--regular);
+  }
+}
+
+.Chip__remove {
+  position: relative;
+  flex-grow: 0;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 6px;
+  margin: -1px;
+  transform: translateX(-1px);
+  color: var(--vkui--color_icon_secondary);
+  border: 0;
+  border-radius: 2px;
+  background: transparent;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.Chip__before {
+  margin-right: 6px;
+}
+
+.Chip__after {
+  margin-left: 6px;
+}
+
+.Chip--sizeY-compact {
+  height: 28px;
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .Chip--sizeY-none {
+    height: 28px;
+  }
+}

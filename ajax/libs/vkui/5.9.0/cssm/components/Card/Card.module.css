@@ -1,0 +1,131 @@
+.Card {
+  position: relative;
+  background: var(--vkui--color_background_secondary);
+  border-radius: var(--vkui--size_card_border_radius--regular);
+}
+
+.Card--mode-shadow {
+  box-shadow: var(
+    --vkui--elevation3,
+    0 2px 24px 0 rgba(0, 0, 0, 0.08),
+    0 0 2px 0 rgba(0, 0, 0, 0.08)
+  );
+  background: var(--vkui--color_background_modal);
+}
+
+.Card--mode-outline {
+  background: var(--vkui--color_background_modal);
+}
+
+.Card--withBorder::after {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  content: '';
+  display: block;
+  border: var(--vkui--size_border--regular) solid var(--vkui--color_image_border_alpha);
+  pointer-events: none;
+  box-sizing: border-box;
+  border-radius: inherit;
+}
+
+/**
+ * CMP:
+ * CardScroll
+ */
+
+:global(.vkuiInternalCardScroll) .Card {
+  margin-right: var(--vkui--size_cardgrid_padding--regular);
+  flex-shrink: 0;
+}
+
+:global(.vkuiInternalCardScroll) .Card:last-of-type {
+  margin-right: 0;
+}
+
+:global(.vkuiInternalCardScroll--size-s) .Card {
+  width: 40%;
+}
+
+:global(.vkuiInternalCardScroll--size-m) .Card {
+  width: 62%;
+}
+
+:global(.vkuiInternalCardScroll--size-l) .Card {
+  width: calc(100% - var(--vkui--size_base_padding_horizontal--regular) * 2);
+  margin-right: var(--vkui--size_base_padding_horizontal--regular);
+}
+
+/**
+ * CMP:
+ * Group
+ * SplitCol
+ */
+
+:global(.vkuiInternalGroup--mode-card) :global(.vkuiInternalCardScroll--size-l) .Card,
+:global(.vkuiInternalSplitCol--spaced) :global(.vkuiInternalCardScroll--size-l) .Card {
+  width: calc(100% - 32px);
+  margin-right: 16px;
+}
+
+:global(.vkuiInternalGroup--mode-card) :global(.vkuiInternalCardScroll--size-l) .Card:last-of-type,
+:global(.vkuiInternalSplitCol--spaced) :global(.vkuiInternalCardScroll--size-l) .Card:last-of-type {
+  margin-right: 0;
+}
+
+@media (min-width: 768px) {
+  :global(.vkuiInternalGroup--mode-none)
+    :global(.vkuiInternalCardScroll--size-l)
+    .Card:last-of-type {
+    margin-right: 0;
+  }
+
+  :global(.vkuiInternalGroup--mode-none) :global(.vkuiInternalCardScroll--size-l) .Card {
+    width: calc(100% - 32px);
+    margin-right: 16px;
+  }
+}
+
+/**
+ * CMP:
+ * CardGrid
+ */
+
+:global(.vkuiInternalCardGrid) .Card {
+  margin-right: var(--vkui--size_cardgrid_padding--regular);
+}
+
+:global(.vkuiInternalCardGrid--size-l) .Card {
+  width: 100%;
+  margin-right: 0;
+}
+
+:global(.vkuiInternalCardGrid--size-l) .Card:not(:first-child) {
+  margin-top: var(--vkui--size_cardgrid_padding--regular);
+}
+
+:global(.vkuiInternalCardGrid--size-m) .Card {
+  width: calc(50% - (var(--vkui--size_cardgrid_padding--regular) / 2));
+}
+
+:global(.vkuiInternalCardGrid--size-m) .Card:nth-child(n + 3) {
+  margin-top: var(--vkui--size_cardgrid_padding--regular);
+}
+
+:global(.vkuiInternalCardGrid--size-m) .Card:nth-child(2n) {
+  margin-right: 0;
+}
+
+:global(.vkuiInternalCardGrid--size-s) .Card {
+  width: calc((100% - 2 * var(--vkui--size_cardgrid_padding--regular)) / 3);
+}
+
+:global(.vkuiInternalCardGrid--size-s) .Card:nth-child(n + 4) {
+  margin-top: var(--vkui--size_cardgrid_padding--regular);
+}
+
+:global(.vkuiInternalCardGrid--size-s) .Card:nth-child(3n) {
+  margin-right: 0;
+}
