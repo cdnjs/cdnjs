@@ -1,0 +1,1 @@
+this.primereact=this.primereact||{},this.primereact.terminalservice=function(e,r){"use strict";var t=primereact.utils.EventBus();return e.TerminalService=t,Object.defineProperty(e,"__esModule",{value:!0}),e}({});
