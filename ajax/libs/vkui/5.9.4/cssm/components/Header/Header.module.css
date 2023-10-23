@@ -1,0 +1,179 @@
+.Header {
+  display: flex;
+  align-items: flex-start;
+  padding: 0;
+  padding-left: var(--vkui--size_base_padding_horizontal--regular);
+  padding-right: var(--vkui--size_base_padding_horizontal--regular);
+  -webkit-user-select: text;
+     -moz-user-select: text;
+      -ms-user-select: text;
+          user-select: text;
+  font-family: var(--vkui--font_family_base);
+}
+
+.Header__main {
+  flex: 1 0 0;
+  min-width: 0;
+  color: var(--vkui--color_text_primary);
+}
+
+.Header__content {
+  display: flex;
+  align-items: center;
+}
+
+.Header__content-in,
+.Header__subtitle {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.Header__content--multiline {
+  white-space: initial;
+  word-break: break-word;
+}
+
+.Header__subtitle {
+  display: block;
+  color: var(--vkui--color_text_secondary);
+}
+
+.Header--mode-secondary:not(.Header--pi):not(.Header--with-subtitle) .Header__main,
+.Header--mode-tertiary .Header__main {
+  color: var(--vkui--color_text_secondary);
+}
+
+.Header__indicator {
+  color: var(--vkui--color_text_secondary);
+  margin-left: 6px;
+  flex-shrink: 0;
+}
+
+.Header--mode-primary .Header__indicator {
+  color: var(--vkui--color_text_subhead);
+}
+
+.Header:not(.Header--pi) .Header__indicator {
+  align-self: center;
+}
+
+.Header--mode-secondary .Header__indicator {
+  margin-left: 8px;
+}
+
+.Header__aside {
+  display: flex;
+  white-space: nowrap;
+}
+
+/* stylelint-disable @project-tools/stylelint-atomic, selector-max-universal */
+
+.Header__aside.Header__aside > * {
+  margin-top: 13px;
+  margin-left: 12px;
+  margin-bottom: 7px;
+}
+
+.Header__aside > :global(.vkuiIcon) {
+  position: relative;
+  color: var(--vkui--color_icon_secondary);
+}
+
+.Header__aside > :global(.vkuiIcon--24) {
+  margin-top: 11px;
+  margin-bottom: 5px;
+}
+
+.Header__aside > :global(.vkuiIcon--16) {
+  margin-top: 15px;
+  margin-bottom: 9px;
+}
+
+/* stylelint-enable @project-tools/stylelint-atomic */
+
+.Header--mode-primary {
+  padding-top: 3px;
+  padding-bottom: 1px;
+}
+
+.Header__content {
+  margin-top: 12px;
+}
+
+.Header__content:last-child {
+  margin-bottom: 8px;
+}
+
+.Header--mode-tertiary .Header__content {
+  margin-top: 15px;
+}
+
+.Header--mode-tertiary .Header__content:last-child {
+  margin-bottom: 9px;
+}
+
+.Header__subtitle {
+  margin-bottom: 7px;
+}
+
+/* Компенсируем 1 пиксель из-за паддинга в .Header--mode-primary */
+
+.Header--mode-primary .Header__subtitle {
+  margin-bottom: 6px;
+}
+
+.Header--large .Header__content {
+  margin-top: 10px;
+  margin-bottom: 6px;
+}
+
+/**
+ * CMP:
+ * Group
+ *
+ * TODO: Переделать отрицательные отступы https://github.com/VKCOM/VKUI/issues/3508
+ */
+
+:global(.vkuiInternalGroup--mode-plain):not(:first-of-type) > .Header:first-child,
+:global(.vkuiInternalGroup--mode-plain):not(:first-of-type)
+  > :global(.vkuiInternalTappable):first-child
+  > .Header {
+  margin-top: -16px;
+}
+
+@media (max-width: 767.9px) {
+  :global(.vkuiInternalGroup--sizeX-none.vkuiInternalGroup--mode-none):not(:first-of-type)
+    > .Header:first-child,
+  :global(.vkuiInternalGroup--sizeX-none.vkuiInternalGroup--mode-none):not(:first-of-type)
+    > :global(.vkuiInternalTappable):first-child
+    > .Header {
+    margin-top: -16px;
+  }
+}
+
+:global(.vkuiInternalGroup--mode-card) > .Header:not(.Header--mode-tertiary):first-child,
+:global(.vkuiInternalGroup--mode-card)
+  > :global(.vkuiInternalTappable):first-child
+  > .Header:not(.Header--mode-tertiary) {
+  margin-top: -4px;
+}
+
+@media (min-width: 768px) {
+  :global(.vkuiInternalGroup--sizeX-none.vkuiInternalGroup--mode-none)
+    > .Header:not(.Header--mode-tertiary):first-child,
+  :global(.vkuiInternalGroup--sizeX-none.vkuiInternalGroup--mode-none)
+    > :global(.vkuiInternalTappable):first-child
+    > .Header:not(.Header--mode-tertiary) {
+    margin-top: -4px;
+  }
+}
+
+/**
+ * Impact:
+ * Link
+ */
+
+.Header__aside {
+  --vkui_internal--link-color: var(--vkui--color_text_accent);
+}
