@@ -1,0 +1,55 @@
+.CellButton {
+  box-sizing: border-box;
+  text-decoration: none;
+  margin: 0;
+  border: 0;
+  cursor: pointer;
+  width: 100%;
+  background: transparent;
+  text-align: left;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/**
+ * CMP:
+ * FormItem
+ */
+
+:global(.vkuiInternalFormItem) .CellButton {
+  width: 100%;
+  box-sizing: content-box;
+  margin: 0 calc(-1 * var(--vkui--size_base_padding_horizontal--regular));
+}
+
+.CellButton[disabled] {
+  opacity: 0.4;
+}
+
+.CellButton--centered {
+  justify-content: center;
+  text-align: center;
+}
+
+/* stylelint-disable-next-line @project-tools/stylelint-atomic, selector-max-universal -- отключаем растягивание элементов внутри */
+
+.CellButton--centered > * {
+  flex-grow: initial;
+  max-width: initial;
+}
+
+.CellButton--centered :global(.vkuiIcon) {
+  padding-right: 8px;
+}
+
+.CellButton {
+  --vkui_internal--icon_color: var(--vkui--color_icon_accent);
+
+  color: var(--vkui--color_text_accent);
+}
+
+.CellButton--mode-danger {
+  --vkui_internal--icon_color: var(--vkui--color_text_negative);
+
+  color: var(--vkui--color_text_negative);
+}

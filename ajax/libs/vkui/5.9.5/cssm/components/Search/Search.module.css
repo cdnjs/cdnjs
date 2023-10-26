@@ -1,0 +1,212 @@
+.Search {
+  display: flex;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+
+  --vkui_internal--search_height: var(--vkui--size_search_height--regular);
+}
+
+.Search--withPadding {
+  padding: 8px var(--vkui--size_base_padding_horizontal--regular);
+}
+
+/*
+  sizeY-compact
+ */
+
+.Search--sizeY-compact {
+  --vkui_internal--search_height: var(--vkui--size_search_height--compact);
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .Search--sizeY-none {
+    --vkui_internal--search_height: var(--vkui--size_search_height--compact);
+  }
+}
+
+.Search__field {
+  flex: 2;
+  position: relative;
+  display: flex;
+  height: var(--vkui_internal--search_height);
+  background-color: var(--vkui--color_search_field_background);
+  border-radius: var(--vkui--size_border_radius--regular);
+  /**
+   * Костыль для PanelHeader. Необходимо для растягивания на всю ширину.
+  */
+  width: 10000px;
+}
+
+.Search__field:hover {
+  background-color: var(--vkui--color_search_field_background--hover);
+}
+
+.Search__field:active {
+  background-color: var(--vkui--color_search_field_background--active);
+}
+
+.Search__control {
+  padding-left: 12px;
+  color: var(--vkui--color_icon_medium);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: calc(100% - 1px);
+  height: 100%;
+  border-radius: inherit;
+}
+
+.Search__input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  -webkit-appearance: none; /* не используем textfield из-за бага в iOS 15.1 http://www.openradar.me/FB9744107 */
+  border: 0;
+  margin: 0;
+  padding: 0;
+  padding-left: 36px;
+  box-sizing: border-box;
+  border-radius: inherit;
+  max-width: 100%;
+  flex-grow: 1;
+  min-width: 0;
+  width: -webkit-fill-available;
+  width: -moz-available;
+  width: stretch; /* автопрефиксер добавит фолбеки https://caniuse.com/mdn-css_properties_width_stretch */
+  background-color: transparent;
+  color: var(--vkui--color_text_primary);
+}
+
+.Search__input::-webkit-search-decoration,
+.Search__input::-webkit-search-cancel-button,
+.Search__input::-webkit-search-results-button,
+.Search__input::-webkit-search-results-decoration {
+  display: none;
+}
+
+.Search__input:focus {
+  outline: none;
+}
+
+.Search--has-after .Search__input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.Search--has-value .Search__input,
+.Search--has-icon .Search__input {
+  margin-right: calc(var(--vkui_internal--search_height) + 4px);
+}
+
+.Search--has-icon.Search--has-value .Search__input {
+  margin-right: calc((var(--vkui_internal--search_height) + 4px) * 2);
+}
+
+.Search--disabled {
+  opacity: var(--vkui--opacity_disable_accessibility);
+  pointer-events: none;
+  cursor: default;
+}
+
+.Search__input:disabled {
+  opacity: var(--vkui--opacity_disable_accessibility);
+}
+
+.Search__input::-webkit-input-placeholder {
+  color: var(--vkui--color_text_secondary);
+  /* Для Firefox */
+  opacity: 1;
+}
+
+.Search__input::-moz-placeholder {
+  color: var(--vkui--color_text_secondary);
+  /* Для Firefox */
+  opacity: 1;
+}
+
+.Search__input::-ms-input-placeholder {
+  color: var(--vkui--color_text_secondary);
+  /* Для Firefox */
+  opacity: 1;
+}
+
+.Search__input::placeholder {
+  color: var(--vkui--color_text_secondary);
+  /* Для Firefox */
+  opacity: 1;
+}
+
+.Search__input:disabled::-webkit-input-placeholder {
+  color: var(--vkui--color_text_secondary);
+}
+
+.Search__input:disabled::-moz-placeholder {
+  color: var(--vkui--color_text_secondary);
+}
+
+.Search__input:disabled::-ms-input-placeholder {
+  color: var(--vkui--color_text_secondary);
+}
+
+.Search__input:disabled::placeholder {
+  color: var(--vkui--color_text_secondary);
+}
+
+.Search__icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--vkui--color_icon_secondary);
+}
+
+.Search__icon {
+  width: calc(var(--vkui_internal--search_height) + 4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  border-radius: var(--vkui--size_border_radius--regular);
+}
+
+/* stylelint-disable-next-line @project-tools/stylelint-atomic */
+
+.Search__icon :global(.vkuiIcon) {
+  padding: 0;
+}
+
+.Search__after {
+  flex: 0;
+  transform: translate(50%);
+  transform-origin: left;
+  min-width: initial;
+  max-width: -webkit-min-content;
+  max-width: -moz-min-content;
+  max-width: min-content;
+  pointer-events: none;
+  transition: flex 0.3s var(--vkui--animation_easing_platform),
+    transform 0.3s var(--vkui--animation_easing_platform);
+  overflow: hidden;
+  margin-left: 4px;
+  margin-right: calc(4px - var(--vkui--size_base_padding_horizontal--regular));
+}
+
+.Search--focused .Search__after,
+.Search--has-value .Search__after {
+  flex: 1;
+  transform: translate(0);
+  pointer-events: initial;
+}
+
+.Search__afterText {
+  display: block;
+  white-space: nowrap;
+  text-overflow: clip;
+  overflow: hidden;
+}
+
+.Group--mode-plain .Search {
+  padding-top: 4px;
+}
