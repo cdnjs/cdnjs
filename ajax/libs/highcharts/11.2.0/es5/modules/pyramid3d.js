@@ -1,0 +1,9 @@
+/**
+ * Highcharts JS v11.2.0 (2023-10-30)
+ *
+ * Highcharts 3D funnel module
+ *
+ * (c) 2010-2021 Kacper Madej
+ *
+ * License: www.highcharts.com/license
+ */!function(e){"object"==typeof module&&module.exports?(e.default=e,module.exports=e):"function"==typeof define&&define.amd?define("highcharts/modules/pyramid3d",["highcharts","highcharts/highcharts-3d","highcharts/modules/cylinder","highcharts/modules/funnel3d"],function(t){return e(t),e.Highcharts=t,e}):e("undefined"!=typeof Highcharts?Highcharts:void 0)}(function(e){"use strict";var t=e?e._modules:{};function r(e,t,r,i){e.hasOwnProperty(t)||(e[t]=i.apply(null,r),"function"==typeof CustomEvent&&window.dispatchEvent(new CustomEvent("HighchartsModuleLoaded",{detail:{path:t,module:e[t]}})))}r(t,"Series/Pyramid3D/Pyramid3DSeriesDefaults.js",[],function(){return{reversed:!0,neckHeight:0,neckWidth:0,dataLabels:{verticalAlign:"top"}}}),r(t,"Series/Pyramid3D/Pyramid3DSeries.js",[t["Series/Pyramid3D/Pyramid3DSeriesDefaults.js"],t["Core/Series/SeriesRegistry.js"],t["Core/Utilities.js"]],function(e,t,r){var i,n=this&&this.__extends||(i=function(e,t){return(i=Object.setPrototypeOf||({__proto__:[]})instanceof Array&&function(e,t){e.__proto__=t}||function(e,t){for(var r in t)Object.prototype.hasOwnProperty.call(t,r)&&(e[r]=t[r])})(e,t)},function(e,t){if("function"!=typeof t&&null!==t)throw TypeError("Class extends value "+String(t)+" is not a constructor or null");function r(){this.constructor=e}i(e,t),e.prototype=null===t?Object.create(t):(r.prototype=t.prototype,new r)}),o=t.seriesTypes.funnel3d,s=r.merge,u=function(t){function r(){var e=null!==t&&t.apply(this,arguments)||this;return e.data=void 0,e.options=void 0,e.points=void 0,e}return n(r,t),r.defaultOptions=s(o.defaultOptions,e),r}(o);return t.registerSeriesType("pyramid3d",u),u}),r(t,"masters/modules/pyramid3d.src.js",[],function(){})});//# sourceMappingURL=pyramid3d.js.map

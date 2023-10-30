@@ -1,0 +1,9 @@
+/**
+ * Highstock JS v11.2.0 (2023-10-30)
+ *
+ * Indicator series type for Highcharts Stock
+ *
+ * (c) 2010-2021 Sebastian Bochan
+ *
+ * License: www.highcharts.com/license
+ */!function(t){"object"==typeof module&&module.exports?(t.default=t,module.exports=t):"function"==typeof define&&define.amd?define("highcharts/indicators/atr",["highcharts","highcharts/modules/stock"],function(e){return t(e),t.Highcharts=e,t}):t("undefined"!=typeof Highcharts?Highcharts:void 0)}(function(t){"use strict";var e=t?t._modules:{};function s(t,e,s,i){t.hasOwnProperty(e)||(t[e]=i.apply(null,s),"function"==typeof CustomEvent&&window.dispatchEvent(new CustomEvent("HighchartsModuleLoaded",{detail:{path:e,module:t[e]}})))}s(e,"Stock/Indicators/ATR/ATRIndicator.js",[e["Core/Series/SeriesRegistry.js"],e["Core/Utilities.js"]],function(t,e){let{sma:s}=t.seriesTypes,{isArray:i,merge:o}=e;function n(t,e){let s=t[1]-t[2],i=void 0===e?0:Math.abs(t[1]-e[3]),o=void 0===e?0:Math.abs(t[2]-e[3]);return Math.max(s,i,o)}class a extends s{constructor(){super(...arguments),this.data=void 0,this.points=void 0,this.options=void 0}getValues(t,e){let s=e.period,o=t.xData,a=t.yData,r=a?a.length:0,u=o[0],d=a[0],h=[[u,d]],c=[],p=[],l=[],f,g,m=0,v=1,y=0;if(!(o.length<=s)&&i(a[0])&&4===a[0].length){for(g=1;g<=r;g++)(function(t,e,s,i){let o=e[i],n=s[i];t.push([o,n])})(h,o,a,g),s<v?(m=(f=function(t,e,s,i,o,a){let r=e[i-1],u=n(s[i-1],s[i-2]);return[r,(a*(o-1)+u)/o]}(0,o,a,g,s,m))[1],c.push(f),p.push(f[0]),l.push(f[1])):(s===v?(m=y/(g-1),c.push([o[g-1],m]),p.push(o[g-1]),l.push(m)):y+=n(a[g-1],a[g-2]),v++);return{values:c,xData:p,yData:l}}}}return a.defaultOptions=o(s.defaultOptions,{params:{index:void 0}}),t.registerSeriesType("atr",a),a}),s(e,"masters/indicators/atr.src.js",[],function(){})});//# sourceMappingURL=atr.js.map

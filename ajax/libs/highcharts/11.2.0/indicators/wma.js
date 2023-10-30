@@ -1,0 +1,9 @@
+/**
+ * Highstock JS v11.2.0 (2023-10-30)
+ *
+ * Indicator series type for Highcharts Stock
+ *
+ * (c) 2010-2021 Kacper Madej
+ *
+ * License: www.highcharts.com/license
+ */!function(t){"object"==typeof module&&module.exports?(t.default=t,module.exports=t):"function"==typeof define&&define.amd?define("highcharts/indicators/wma",["highcharts","highcharts/modules/stock"],function(e){return t(e),t.Highcharts=e,t}):t("undefined"!=typeof Highcharts?Highcharts:void 0)}(function(t){"use strict";var e=t?t._modules:{};function s(t,e,s,i){t.hasOwnProperty(e)||(t[e]=i.apply(null,s),"function"==typeof CustomEvent&&window.dispatchEvent(new CustomEvent("HighchartsModuleLoaded",{detail:{path:e,module:t[e]}})))}s(e,"Stock/Indicators/WMA/WMAIndicator.js",[e["Core/Series/SeriesRegistry.js"],e["Core/Utilities.js"]],function(t,e){let{sma:s}=t.seriesTypes,{isArray:i,merge:n}=e;function o(t,e,s,i,n){let o=e[i],r=n<0?s[i]:s[i][n];t.push([o,r])}function r(t,e,s,i){let n=t.length,o=t.reduce(function(t,e,s){return[null,t[1]+e[1]*(s+1)]})[1]/((n+1)/2*n),r=e[i-1];return t.shift(),[r,o]}class u extends s{constructor(){super(...arguments),this.data=void 0,this.options=void 0,this.points=void 0}getValues(t,e){let s=e.period,n=t.xData,u=t.yData,a=u?u.length:0,d=n[0],h=[],c=[],l=[],p=1,f=-1,m,g,y=u[0];if(n.length<s)return;i(u[0])&&(f=e.index,y=u[0][f]);let v=[[d,y]];for(;p!==s;)o(v,n,u,p,f),p++;for(m=p;m<a;m++)h.push(g=r(v,n,u,m)),c.push(g[0]),l.push(g[1]),o(v,n,u,m,f);return h.push(g=r(v,n,u,m)),c.push(g[0]),l.push(g[1]),{values:h,xData:c,yData:l}}}return u.defaultOptions=n(s.defaultOptions,{params:{index:3,period:9}}),t.registerSeriesType("wma",u),u}),s(e,"masters/indicators/wma.src.js",[],function(){})});//# sourceMappingURL=wma.js.map

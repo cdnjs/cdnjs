@@ -1,0 +1,9 @@
+/**
+ * Highstock JS v11.2.0 (2023-10-30)
+ *
+ * Indicator series type for Highcharts Stock
+ *
+ * (c) 2010-2021 Karol Kolodziej
+ *
+ * License: www.highcharts.com/license
+ */!function(e){"object"==typeof module&&module.exports?(e.default=e,module.exports=e):"function"==typeof define&&define.amd?define("highcharts/indicators/obv",["highcharts","highcharts/modules/stock"],function(t){return e(t),e.Highcharts=t,e}):e("undefined"!=typeof Highcharts?Highcharts:void 0)}(function(e){"use strict";var t=e?e._modules:{};function o(e,t,o,s){e.hasOwnProperty(t)||(e[t]=s.apply(null,o),"function"==typeof CustomEvent&&window.dispatchEvent(new CustomEvent("HighchartsModuleLoaded",{detail:{path:t,module:e[t]}})))}o(t,"Stock/Indicators/OBV/OBVIndicator.js",[t["Core/Series/SeriesRegistry.js"],t["Core/Utilities.js"]],function(e,t){let{sma:o}=e.seriesTypes,{isNumber:s,error:i,extend:r,merge:n}=t;class a extends o{constructor(){super(...arguments),this.data=void 0,this.points=void 0,this.options=void 0}getValues(e,t){let o=e.chart.get(t.volumeSeriesID),r=e.xData,n=e.yData,a=[],u=[],d=[],h=!s(n[0]),c=[],l=1,p=0,f=0,m=0,v=0,y;if(o)for(y=o.yData,c=[r[0],p],m=h?n[0][3]:n[0],a.push(c),u.push(r[0]),d.push(c[1]);l<n.length;l++)f=(v=h?n[l][3]:n[l])>m?p+y[l]:v===m?p:p-y[l],c=[r[l],f],p=f,m=v,a.push(c),u.push(r[l]),d.push(c[1]);else{i("Series "+t.volumeSeriesID+" not found! Check `volumeSeriesID`.",!0,e.chart);return}return{values:a,xData:u,yData:d}}}return a.defaultOptions=n(o.defaultOptions,{marker:{enabled:!1},params:{index:void 0,period:void 0,volumeSeriesID:"volume"},tooltip:{valueDecimals:0}}),r(a.prototype,{nameComponents:void 0}),e.registerSeriesType("obv",a),a}),o(t,"masters/indicators/obv.src.js",[],function(){})});//# sourceMappingURL=obv.js.map

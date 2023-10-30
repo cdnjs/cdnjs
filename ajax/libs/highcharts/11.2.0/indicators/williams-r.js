@@ -1,0 +1,9 @@
+/**
+ * Highstock JS v11.2.0 (2023-10-30)
+ *
+ * Indicator series type for Highcharts Stock
+ *
+ * (c) 2010-2021 Wojciech Chmiel
+ *
+ * License: www.highcharts.com/license
+ */!function(t){"object"==typeof module&&module.exports?(t.default=t,module.exports=t):"function"==typeof define&&define.amd?define("highcharts/indicators/williams-r",["highcharts","highcharts/modules/stock"],function(e){return t(e),t.Highcharts=e,t}):t("undefined"!=typeof Highcharts?Highcharts:void 0)}(function(t){"use strict";var e=t?t._modules:{};function i(t,e,i,s){t.hasOwnProperty(e)||(t[e]=s.apply(null,i),"function"==typeof CustomEvent&&window.dispatchEvent(new CustomEvent("HighchartsModuleLoaded",{detail:{path:e,module:t[e]}})))}i(e,"Stock/Indicators/ArrayUtilities.js",[],function(){return{getArrayExtremes:function(t,e,i){return t.reduce((t,s)=>[Math.min(t[0],s[e]),Math.max(t[1],s[i])],[Number.MAX_VALUE,-Number.MAX_VALUE])}}}),i(e,"Stock/Indicators/WilliamsR/WilliamsRIndicator.js",[e["Stock/Indicators/ArrayUtilities.js"],e["Core/Series/SeriesRegistry.js"],e["Core/Utilities.js"]],function(t,e,i){let{sma:s}=e.seriesTypes,{extend:r,isArray:o,merge:a}=i;class n extends s{constructor(){super(...arguments),this.data=void 0,this.options=void 0,this.points=void 0}getValues(e,i){let s,r,a,n,u,l;let d=i.period,c=e.xData,h=e.yData,p=h?h.length:0,m=[],f=[],y=[];if(!(c.length<d)&&o(h[0])&&4===h[0].length){for(l=d-1;l<p;l++)s=h.slice(l-d+1,l+1),u=(r=t.getArrayExtremes(s,2,1))[0],a=-(((n=r[1])-h[l][3])/(n-u)*100),c[l]&&(m.push([c[l],a]),f.push(c[l]),y.push(a));return{values:m,xData:f,yData:y}}}}return n.defaultOptions=a(s.defaultOptions,{params:{index:void 0,period:14}}),r(n.prototype,{nameBase:"Williams %R"}),e.registerSeriesType("williamsr",n),n}),i(e,"masters/indicators/williams-r.src.js",[],function(){})});//# sourceMappingURL=williams-r.js.map

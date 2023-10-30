@@ -1,0 +1,9 @@
+/**
+ * Highstock JS v11.2.0 (2023-10-30)
+ *
+ * Indicator series type for Highcharts Stock
+ *
+ * (c) 2010-2021 Rafał Sebestjański
+ *
+ * License: www.highcharts.com/license
+ */!function(e){"object"==typeof module&&module.exports?(e.default=e,module.exports=e):"function"==typeof define&&define.amd?define("highcharts/indicators/dema",["highcharts","highcharts/modules/stock"],function(t){return e(t),e.Highcharts=t,e}):e("undefined"!=typeof Highcharts?Highcharts:void 0)}(function(e){"use strict";var t=e?e._modules:{};function i(e,t,i,s){e.hasOwnProperty(t)||(e[t]=s.apply(null,i),"function"==typeof CustomEvent&&window.dispatchEvent(new CustomEvent("HighchartsModuleLoaded",{detail:{path:t,module:e[t]}})))}i(t,"Stock/Indicators/DEMA/DEMAIndicator.js",[t["Core/Series/SeriesRegistry.js"],t["Core/Utilities.js"]],function(e,t){let{ema:i}=e.seriesTypes,{correctFloat:s,isArray:o,merge:n}=t;class r extends i{constructor(){super(...arguments),this.EMApercent=void 0,this.data=void 0,this.options=void 0,this.points=void 0}getEMA(e,t,i,s,o,n){return super.calculateEma(n||[],e,void 0===o?1:o,this.EMApercent,t,void 0===s?-1:s,i)}getValues(e,t){let i=t.period,n=[],r=2*i,a=e.xData,d=e.yData,u=d?d.length:0,c=[],h=[],p=[],l=0,f=0,m,g,v,E,y=-1,M,A=0;if(this.EMApercent=2/(i+1),!(u<2*i-1)){for(o(d[0])&&(y=t.index?t.index:0),A=(l=super.accumulatePeriodPoints(i,y,d))/i,l=0,E=i;E<u+2;E++)E<u+1&&(f=this.getEMA(d,g,A,y,E)[1],n.push(f)),g=f,E<r?l+=f:(E===r&&(A=l/i),f=n[E-i-1],m=this.getEMA([f],v,A)[1],M=[a[E-2],s(2*f-m)],c.push(M),h.push(M[0]),p.push(M[1]),v=m);return{values:c,xData:h,yData:p}}}}return r.defaultOptions=n(i.defaultOptions),e.registerSeriesType("dema",r),r}),i(t,"masters/indicators/dema.src.js",[],function(){})});//# sourceMappingURL=dema.js.map

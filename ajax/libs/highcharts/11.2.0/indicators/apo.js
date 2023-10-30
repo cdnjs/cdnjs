@@ -1,0 +1,9 @@
+/**
+ * Highstock JS v11.2.0 (2023-10-30)
+ *
+ * Indicator series type for Highcharts Stock
+ *
+ * (c) 2010-2021 Wojciech Chmiel
+ *
+ * License: www.highcharts.com/license
+ */!function(e){"object"==typeof module&&module.exports?(e.default=e,module.exports=e):"function"==typeof define&&define.amd?define("highcharts/indicators/apo",["highcharts","highcharts/modules/stock"],function(t){return e(t),e.Highcharts=t,e}):e("undefined"!=typeof Highcharts?Highcharts:void 0)}(function(e){"use strict";var t=e?e._modules:{};function s(e,t,s,o){e.hasOwnProperty(t)||(e[t]=o.apply(null,s),"function"==typeof CustomEvent&&window.dispatchEvent(new CustomEvent("HighchartsModuleLoaded",{detail:{path:t,module:e[t]}})))}s(t,"Stock/Indicators/APO/APOIndicator.js",[t["Core/Series/SeriesRegistry.js"],t["Core/Utilities.js"]],function(e,t){let{ema:s}=e.seriesTypes,{extend:o,merge:i,error:r}=t;class a extends s{constructor(){super(...arguments),this.data=void 0,this.options=void 0,this.points=void 0}getValues(e,t){let s,o;let i=t.periods,a=t.index,n=[],d=[],u=[];if(2!==i.length||i[1]<=i[0]){r('Error: "APO requires two periods. Notice, first period should be lower than the second one."');return}let p=super.getValues.call(this,e,{index:a,period:i[0]}),h=super.getValues.call(this,e,{index:a,period:i[1]});if(!p||!h)return;let l=i[1]-i[0];for(o=0;o<h.yData.length;o++)s=p.yData[o+l]-h.yData[o],n.push([h.xData[o],s]),d.push(h.xData[o]),u.push(s);return{values:n,xData:d,yData:u}}}return a.defaultOptions=i(s.defaultOptions,{params:{period:void 0,periods:[10,20]}}),o(a.prototype,{nameBase:"APO",nameComponents:["periods"]}),e.registerSeriesType("apo",a),a}),s(t,"masters/indicators/apo.src.js",[],function(){})});//# sourceMappingURL=apo.js.map

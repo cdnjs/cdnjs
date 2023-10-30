@@ -1,0 +1,9 @@
+/**
+ * Highstock JS v11.2.0 (2023-10-30)
+ *
+ * Indicator series type for Highcharts Stock
+ *
+ * (c) 2010-2021 Pawel Lysy
+ *
+ * License: www.highcharts.com/license
+ */!function(t){"object"==typeof module&&module.exports?(t.default=t,module.exports=t):"function"==typeof define&&define.amd?define("highcharts/indicators/cmo",["highcharts","highcharts/modules/stock"],function(e){return t(e),t.Highcharts=e,t}):t("undefined"!=typeof Highcharts?Highcharts:void 0)}(function(t){"use strict";var e=t?t._modules:{};function s(t,e,s,i){t.hasOwnProperty(e)||(t[e]=i.apply(null,s),"function"==typeof CustomEvent&&window.dispatchEvent(new CustomEvent("HighchartsModuleLoaded",{detail:{path:e,module:t[e]}})))}s(e,"Stock/Indicators/CMO/CMOIndicator.js",[e["Core/Series/SeriesRegistry.js"],e["Core/Utilities.js"]],function(t,e){let{sma:s}=t.seriesTypes,{isNumber:i,merge:o}=e;class n extends s{constructor(){super(...arguments),this.data=void 0,this.options=void 0,this.points=void 0}getValues(t,e){let s=e.period,o=t.xData,n=t.yData,r=n?n.length:0,a=[],u=[],d=[],h,c=e.index,p;if(o.length<s)return;i(n[0])?p=n:(c=Math.min(c,n[0].length-1),p=n.map(t=>t[c]));let l=0,f=0,m=0,g;for(let t=s;t>0;t--)p[t]>p[t-1]?f+=p[t]-p[t-1]:p[t]<p[t-1]&&(m+=p[t-1]-p[t]);for(g=f+m>0?100*(f-m)/(f+m):0,u.push(o[s]),d.push(g),a.push([o[s],g]),h=s+1;h<r;h++)l=Math.abs(p[h-s-1]-p[h-s]),p[h]>p[h-1]?f+=p[h]-p[h-1]:p[h]<p[h-1]&&(m+=p[h-1]-p[h]),p[h-s]>p[h-s-1]?f-=l:m-=l,g=f+m>0?100*(f-m)/(f+m):0,u.push(o[h]),d.push(g),a.push([o[h],g]);return{values:a,xData:u,yData:d}}}return n.defaultOptions=o(s.defaultOptions,{params:{period:20,index:3}}),t.registerSeriesType("cmo",n),n}),s(e,"masters/indicators/cmo.src.js",[],function(){})});//# sourceMappingURL=cmo.js.map
