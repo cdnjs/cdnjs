@@ -1,0 +1,92 @@
+import * as React from 'react';
+declare class JqxTabs extends React.PureComponent<ITabsProps, IState> {
+    protected static getDerivedStateFromProps(props: ITabsProps, state: IState): null | IState;
+    private _jqx;
+    private _id;
+    private _componentSelector;
+    constructor(props: ITabsProps);
+    componentDidMount(): void;
+    componentDidUpdate(): void;
+    render(): React.ReactNode;
+    setOptions(options: ITabsProps): void;
+    getOptions(option: string): any;
+    addAt(index: number, title: string, content: string): void;
+    addFirst(htmlElement1: any, htmlElement2: any): void;
+    addLast(htmlElement1: any, htmlElement2?: any): void;
+    collapse(): void;
+    disable(): void;
+    disableAt(index: number): void;
+    destroy(): void;
+    ensureVisible(index: number): void;
+    enableAt(index: number): void;
+    expand(): void;
+    enable(): void;
+    focus(): void;
+    getTitleAt(index: number): string;
+    getContentAt(index: number): any;
+    getDisabledTabsCount(): any;
+    hideCloseButtonAt(index: number): void;
+    hideAllCloseButtons(): void;
+    length(): number;
+    removeAt(index: number): void;
+    removeFirst(): void;
+    removeLast(): void;
+    select(index: number): void;
+    setContentAt(index: number, htmlElement: string): void;
+    setTitleAt(index: number, htmlElement: string): void;
+    showCloseButtonAt(index: number): void;
+    showAllCloseButtons(): void;
+    val(value?: any): any;
+    private _manageProps;
+    private _wireEvents;
+}
+export default JqxTabs;
+export declare const jqx: any;
+export declare const JQXLite: any;
+interface IState {
+    lastProps: object;
+}
+interface ITabsOptions {
+    animationType?: 'none' | 'fade';
+    autoHeight?: boolean;
+    closeButtonSize?: number;
+    collapsible?: boolean;
+    contentTransitionDuration?: number;
+    disabled?: boolean;
+    enabledHover?: boolean;
+    enableScrollAnimation?: boolean;
+    enableDropAnimation?: boolean;
+    height?: string | number;
+    initTabContent?: (tab?: number) => void;
+    keyboardNavigation?: boolean;
+    next?: any;
+    previous?: any;
+    position?: 'top' | 'bottom';
+    reorder?: boolean;
+    rtl?: boolean;
+    scrollAnimationDuration?: number;
+    selectedItem?: number;
+    selectionTracker?: boolean;
+    scrollable?: boolean;
+    scrollPosition?: 'left' | 'right' | 'both';
+    scrollStep?: number;
+    showCloseButtons?: boolean;
+    toggleMode?: 'click' | 'dblclick' | 'mouseenter' | 'none';
+    theme?: string;
+    width?: string | number;
+}
+export interface ITabsProps extends ITabsOptions {
+    className?: string;
+    style?: React.CSSProperties;
+    onAdd?: (e?: Event) => void;
+    onCollapsed?: (e?: Event) => void;
+    onDragStart?: (e?: Event) => void;
+    onDragEnd?: (e?: Event) => void;
+    onExpanded?: (e?: Event) => void;
+    onRemoved?: (e?: Event) => void;
+    onSelecting?: (e?: Event) => void;
+    onSelected?: (e?: Event) => void;
+    onTabclick?: (e?: Event) => void;
+    onUnselecting?: (e?: Event) => void;
+    onUnselected?: (e?: Event) => void;
+}
