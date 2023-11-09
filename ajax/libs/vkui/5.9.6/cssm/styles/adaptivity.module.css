@@ -1,0 +1,96 @@
+/*
+Утилитарные классы, реализующие адаптив через CSS путём показа/скрытия элемента.
+
+Глоссарий по модификаторам:
+
+- `forced` – означает, что мы зашили конкретное представление в `AdaptiveProvider` (ex, `<AdaptiveProvider sizeX="regular">`).
+- `mq` – означает, что для смены представления используется CSS Media Query.
+
+---
+
+Note: В начале классов разделить (`-`), чтобы красиво добавлялся префикс библиотеки после сборки.
+
+*/
+
+.-sizeX--compact-forced,
+.-sizeX--regular-forced {
+  /* Пустой класс для CSS Modules (см. CONTRIBUTING.md)  */
+}
+
+@media (min-width: 768px) {
+  .-sizeX--compact-mq {
+    /* stylelint-disable-next-line declaration-no-important */
+    display: none !important;
+  }
+}
+
+@media (max-width: 767.9px) {
+  .-sizeX--regular-mq {
+    /* stylelint-disable-next-line declaration-no-important */
+    display: none !important;
+  }
+}
+
+/* ================================================================================================================== */
+
+.-sizeY--compact-forced,
+.-sizeY--regular-forced {
+  /* Пустой класс для CSS Modules (см. CONTRIBUTING.md)  */
+}
+
+@media (pointer: coarse) and (min-height: 415px),(pointer: none) and (min-height: 415px),(max-width: 767.9px) and (min-height: 415px) {
+  .-sizeY--compact-mq {
+    /* stylelint-disable-next-line declaration-no-important */
+    display: none !important;
+  }
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .-sizeY--regular-mq {
+    /* stylelint-disable-next-line declaration-no-important */
+    display: none !important;
+  }
+}
+
+/* ================================================================================================================== */
+
+.-viewWidth--tabletPlus-forced,
+.-viewWidth--tabletMinus-forced {
+  /* Пустой класс для CSS Modules (см. CONTRIBUTING.md)  */
+}
+
+@media (min-width: 1024px) {
+  .-viewWidth--tabletMinus-mq {
+    /* stylelint-disable-next-line declaration-no-important */
+    display: none !important;
+  }
+}
+
+@media (max-width: 1023.9px) {
+  .-viewWidth--tabletPlus-mq {
+    /* stylelint-disable-next-line declaration-no-important */
+    display: none !important;
+  }
+}
+
+/* ================================================================================================================== */
+
+.-deviceType--mobile-forced,
+.-deviceType--desktop-forced {
+  /* stylelint-disable-next-line declaration-no-important */
+  display: none !important;
+}
+
+@media (min-width: 768px) and (pointer: fine),(min-width: 768px) and (min-height: 720px) {
+  .-deviceType--mobile-mq {
+    /* stylelint-disable-next-line declaration-no-important */
+    display: none !important;
+  }
+}
+
+@media (max-width: 767.9px),(pointer: none) and (max-height: 719.9px),(pointer: coarse) and (max-height: 719.9px) {
+  .-deviceType--desktop-mq {
+    /* stylelint-disable-next-line declaration-no-important */
+    display: none !important;
+  }
+}
