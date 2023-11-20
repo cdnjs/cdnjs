@@ -1,0 +1,27 @@
+// Type
+.note {
+  --#{$prefix}note-padding: #{$note-padding};
+  --#{$prefix}note-border-width: #{$note-border-width};
+  --#{$prefix}note-border-radius: #{$note-border-radius};
+  --#{$prefix}note-strong-font-weight: #{$note-strong-font-weight};
+
+  padding: var(--#{$prefix}note-padding);
+  border-left: var(--#{$prefix}note-border-width) solid;
+  border-radius: var(--#{$prefix}note-border-radius);
+  strong {
+    font-weight: var(--#{$prefix}note-strong-font-weight);
+  }
+}
+
+@each $color, $value in $theme-colors {
+  .note-#{$color} {
+    background-color: var(--#{$prefix}#{$color}-bg-subtle);
+    color: var(--#{$prefix}#{$color}-text-emphasis);
+  }
+}
+
+.w-responsive {
+  @media (min-width: 1199px) {
+    width: 75%;
+  }
+}
