@@ -1,0 +1,149 @@
+.CustomSelectInput {
+  position: relative;
+}
+
+.CustomSelectInput__el {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: var(--vkui_internal--z_index_form_field_element);
+  width: 100%;
+  height: var(--vkui--size_field_height--regular);
+  line-height: var(--vkui--size_field_height--regular);
+  margin: 0;
+  border: 0;
+  border-radius: inherit;
+  box-sizing: border-box;
+  box-shadow: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  color: var(--vkui--color_text_primary);
+  padding: 0 12px;
+  background: transparent;
+}
+
+.CustomSelectInput__el--cursor-pointer {
+  cursor: pointer;
+}
+
+.CustomSelectInput--sizeY-compact .CustomSelectInput__el {
+  height: var(--vkui--size_field_height--compact);
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .CustomSelectInput--sizeY-none .CustomSelectInput__el {
+    height: var(--vkui--size_field_height--compact);
+  }
+}
+
+.CustomSelectInput--hasBefore .CustomSelectInput__el {
+  padding-left: 0;
+}
+
+.CustomSelectInput--hasAfter .CustomSelectInput__el {
+  padding-right: 0;
+}
+
+.CustomSelectInput__el:disabled {
+  opacity: var(--vkui--opacity_disable_accessibility);
+}
+
+.CustomSelectInput__container {
+  z-index: var(--vkui_internal--z_index_form_field_element);
+  width: 100%;
+  max-height: 100%;
+  padding-right: 0;
+  padding-left: 12px;
+  color: var(--vkui--color_text_primary);
+  box-sizing: border-box;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.CustomSelectInput--hasBefore .CustomSelectInput__container {
+  padding-left: 0;
+}
+
+.CustomSelectInput--multiline .CustomSelectInput__container {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.CustomSelectInput--sizeY-compact.CustomSelectInput--multiline .CustomSelectInput__container {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .CustomSelectInput--sizeY-none.CustomSelectInput--multiline .CustomSelectInput__container {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+}
+
+.CustomSelectInput__input-group {
+  position: relative;
+  display: flex;
+  align-self: stretch;
+  align-items: center;
+  flex: 1;
+  overflow: hidden;
+}
+
+.CustomSelectInput--hasBefore .CustomSelectInput__input-group {
+  border-radius: 0;
+}
+
+.CustomSelectInput__title {
+  display: block;
+}
+
+.CustomSelectInput:not(.CustomSelectInput--multiline) .CustomSelectInput__title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.CustomSelectInput--empty .CustomSelectInput__title {
+  color: var(--vkui--color_text_secondary);
+}
+
+/* Для доступности placeholder в инпуте задан, но визуально не виден, потому что
+ * для комфортного управления видом плейсходера мы рендерим его отдельно, так же как и лэйбл
+ */
+
+.CustomSelectInput__el::-webkit-input-placeholder {
+  opacity: 0;
+}
+
+.CustomSelectInput__el::-moz-placeholder {
+  opacity: 0;
+}
+
+.CustomSelectInput__el::-ms-input-placeholder {
+  opacity: 0;
+}
+
+.CustomSelectInput__el::placeholder {
+  opacity: 0;
+}
+
+.CustomSelectInput--align-right .CustomSelectInput__title,
+.CustomSelectInput--align-right .CustomSelectInput__el {
+  text-align: right;
+}
+
+.CustomSelectInput--align-center .CustomSelectInput__title,
+.CustomSelectInput--align-center .CustomSelectInput__el {
+  text-align: center;
+}
+
+/**
+ * CMP:
+ * CalendarHeader
+ */
+
+:global(.vkuiInternalCalendarHeader__picker) .CustomSelectInput__container {
+  padding-right: 4px;
+}

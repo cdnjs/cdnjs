@@ -1,0 +1,62 @@
+.Tabs__in {
+  display: flex;
+  align-items: stretch;
+}
+
+.Tabs--withGaps {
+  justify-content: flex-start;
+}
+
+/**
+ * CMP:
+ * PanelHeader
+ */
+
+:global(.vkuiInternalPanelHeader) .Tabs {
+  overflow: hidden;
+  font-family: var(--vkui--font_family_base);
+}
+
+:global(.vkuiInternalPanelHeader) .Tabs::after {
+  display: block;
+  width: 1000px;
+  content: '';
+}
+
+/**
+ * CMP:
+ * Group
+ */
+
+:global(.vkuiInternalGroup--mode-plain) > .Tabs--mode-default:first-child {
+  margin-top: -8px;
+}
+
+:global(.vkuiInternalGroup--mode-card) > .Tabs--mode-default:first-child {
+  margin-top: -4px;
+}
+
+/*
+ * CMP:
+ * FixedLayout
+ */
+
+/* Нужно для закрашивания прозрачной области нижнего инсета на iphone x */
+
+:global(.vkuiInternalFixedLayout--ios):global(.vkuiInternalFixedLayout--vertical-bottom)
+  .Tabs::after {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  content: '';
+  background: var(--vkui--color_background_content);
+}
+
+:global(.vkuiInternalFixedLayout--ios):global(.vkuiInternalFixedLayout--vertical-bottom) .Tabs__in,
+:global(.vkuiInternalFixedLayout--ios):global(.vkuiInternalFixedLayout--vertical-bottom)
+  .Separator {
+  position: relative;
+  z-index: var(--vkui_internal--z_index_tabs);
+}
