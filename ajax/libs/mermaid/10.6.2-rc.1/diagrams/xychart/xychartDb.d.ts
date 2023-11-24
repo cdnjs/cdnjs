@@ -1,0 +1,40 @@
+import type { DrawableElem, XYChartConfig, XYChartThemeConfig } from './chartBuilder/interfaces.js';
+import type { Group } from '../../diagram-api/types.js';
+interface NormalTextType {
+    type: 'text';
+    text: string;
+}
+declare function setTmpSVGG(SVGG: Group): void;
+declare function setOrientation(orientation: string): void;
+declare function setXAxisTitle(title: NormalTextType): void;
+declare function setXAxisRangeData(min: number, max: number): void;
+declare function setXAxisBand(categories: NormalTextType[]): void;
+declare function setYAxisTitle(title: NormalTextType): void;
+declare function setYAxisRangeData(min: number, max: number): void;
+declare function setLineData(title: NormalTextType, data: number[]): void;
+declare function setBarData(title: NormalTextType, data: number[]): void;
+declare function getDrawableElem(): DrawableElem[];
+declare function getChartThemeConfig(): XYChartThemeConfig;
+declare function getChartConfig(): XYChartConfig;
+declare const _default: {
+    getDrawableElem: typeof getDrawableElem;
+    clear: () => void;
+    setAccTitle: (txt: string) => void;
+    getAccTitle: () => string;
+    setDiagramTitle: (txt: string) => void;
+    getDiagramTitle: () => string;
+    getAccDescription: () => string;
+    setAccDescription: (txt: string) => void;
+    setOrientation: typeof setOrientation;
+    setXAxisTitle: typeof setXAxisTitle;
+    setXAxisRangeData: typeof setXAxisRangeData;
+    setXAxisBand: typeof setXAxisBand;
+    setYAxisTitle: typeof setYAxisTitle;
+    setYAxisRangeData: typeof setYAxisRangeData;
+    setLineData: typeof setLineData;
+    setBarData: typeof setBarData;
+    setTmpSVGG: typeof setTmpSVGG;
+    getChartThemeConfig: typeof getChartThemeConfig;
+    getChartConfig: typeof getChartConfig;
+};
+export default _default;
