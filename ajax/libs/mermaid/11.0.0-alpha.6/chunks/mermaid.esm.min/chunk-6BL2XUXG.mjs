@@ -1,0 +1,1 @@
+import{Va as s,a as n,m as e}from"./chunk-ONLVDUB4.mjs";var d=n(t=>{let{securityLevel:m}=s(),o=e("body");if(m==="sandbox"){let c=e(`#i${t}`).node()?.contentDocument??document;o=e(c.body)}return o.select(`#${t}`)},"selectSvgElement");export{d as a};
