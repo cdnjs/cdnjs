@@ -1,0 +1,309 @@
+class jos {
+  default_once = !1;
+  default_animation = "fade";
+  default_animationinverse = void 0;
+  default_timingFunction = "ease-in-out";
+  default_threshold = 0;
+  default_duration = 0.4;
+  default_delay = 0;
+  default_intersectionRatio = 0;
+  default_rootMargin = "-10% 0% -40% 0%";
+  default_startVisible = void 0;
+  default_scrolldirection = void 0;
+  default_passive = !0;
+  debug = !1;
+  disable = !1;
+  static version = "0.8.1";
+  static author = "Jesvi Jonathan";
+  static github = "https://github.com/jesvijonathan/JOS-Animation-Library";
+  options = {};
+  jos_stylesheet = void 0;
+  boxes = void 0;
+  observers = [];
+  constructor() {}
+  version() {
+    console.log(
+      `JOS: Javascript On Scroll Animation Library\n    - Version: ${jos.version}\n    - Author: ${jos.author}\n    - Github: ${jos.github}\n`
+    );
+  }
+  debugger(type = 0) {
+    0 == type && this.debugMode && this.version(),
+      console.log("JOS Initialized:\n\n");
+  }
+  callbackRouter_anchor = (entries, observer) => {
+    let entry = entries[0],
+      parentTarget = entry.target;
+    document
+      .querySelectorAll("[data-jos_anchor='#" + parentTarget.id + "']")
+      .forEach((target) => {
+        let target_jos_animation = target.dataset.jos_animation,
+          target_jos_animationinverse = target.dataset.jos_animationinverse;
+        if (entry.isIntersecting) {
+          if (null != target.dataset.jos_counter) {
+            let counter_value = parseInt(target.dataset.jos_counter);
+            counter_value++, (target.dataset.jos_counter = counter_value);
+          }
+          target_jos_animation &&
+            (target.classList.remove("jos-" + target_jos_animation),
+            null != target.dataset.jos_invoke &&
+              window[target.dataset.jos_invoke](target),
+            (null == target.dataset.jos_once &&
+              "false" == target.dataset.jos_once) ||
+              (("true" == target.dataset.jos_once ||
+                target.dataset.jos_counter >= target.dataset.jos_once) &&
+                observer.unobserve(target)),
+            null != target_jos_animationinverse &&
+              target.classList.add("jos-" + target_jos_animationinverse));
+        } else
+          (void 0 !== target.dataset.jos_scrolldirection &&
+            "down" !== target.dataset.jos_scrolldirection &&
+            "none" !== target.dataset.jos_scrolldirection) ||
+            (target.classList.add("jos-" + target_jos_animation),
+            void 0 !== target.dataset.jos_invoke_out &&
+              window[target.dataset.jos_invoke_out](target));
+      });
+  };
+  callbackRouter = (entries, observer, type = 1) => {
+    if (1 == this.disable) return;
+    let entry = entries[0],
+      target = entry.target,
+      target_jos_animation = target.dataset.jos_animation,
+      target_jos_animationinverse = target.dataset.jos_animationinverse,
+      scroll_dir = 1;
+    if (
+      ((scroll_dir = entry.boundingClientRect.top < 0 ? 0 : 1),
+      entry.isIntersecting)
+    ) {
+      if (null != target.dataset.jos_counter) {
+        let counter_value = parseInt(target.dataset.jos_counter);
+        counter_value++, (target.dataset.jos_counter = counter_value);
+      }
+      target_jos_animation &&
+        (target.classList.remove("jos-" + target_jos_animation),
+        null != target.dataset.jos_invoke &&
+          window[target.dataset.jos_invoke](target),
+        (null == target.dataset.jos_once &&
+          "false" == target.dataset.jos_once) ||
+          (("true" == target.dataset.jos_once ||
+            target.dataset.jos_counter >= target.dataset.jos_once) &&
+            observer.unobserve(target))),
+        null != target_jos_animationinverse &&
+          target.classList.add("jos-" + target_jos_animationinverse);
+    } else
+      (void 0 === target.dataset.jos_scrolldirection ||
+        (1 === scroll_dir && "down" === target.dataset.jos_scrolldirection) ||
+        (0 === scroll_dir && "up" === target.dataset.jos_scrolldirection) ||
+        "none" === target.dataset.jos_scrolldirection) &&
+        (target.classList.add("jos-" + target_jos_animation),
+        null != target_jos_animationinverse &&
+          target.classList.remove("jos-" + target_jos_animationinverse),
+        void 0 !== target.dataset.jos_invoke_out &&
+          window[target.dataset.jos_invoke_out](target));
+  };
+  animationInit() {
+    let doit = [];
+    this.boxes.forEach((box) => {
+      let object_default_once = box.dataset.jos_once,
+        object_default_animation =
+          box.dataset.jos_animation || this.default_animation,
+        object_default_animationinverse = box.dataset.jos_animationinverse,
+        object_default_timingFunction = box.dataset.jos_timingFunction,
+        object_default_duration = box.dataset.jos_duration,
+        object_default_delay = box.dataset.jos_delay;
+      box.classList.contains("jos_disabled") &&
+        (box.classList.remove("jos_disabled"), box.classList.add("jos")),
+        object_default_once &&
+        ("true" == object_default_once || /^\d+$/.test(object_default_once))
+          ? box.setAttribute("data-jos_once", object_default_once)
+          : box.setAttribute(
+              "data-jos_once",
+              this.default_once ? "1" : "false"
+            ),
+        box.setAttribute("data-jos_animation", object_default_animation),
+        object_default_animationinverse &&
+          box.setAttribute(
+            "data-jos_animationinverse",
+            object_default_animationinverse
+          ),
+        object_default_timingFunction &&
+          box.setAttribute(
+            "data-jos_timingFunction",
+            object_default_timingFunction
+          ),
+        object_default_duration &&
+          box.setAttribute("data-jos_duration", object_default_duration),
+        object_default_delay &&
+          box.setAttribute("data-jos_delay", object_default_delay),
+        box.setAttribute("data-jos_counter", "0"),
+        box.classList.add("jos-" + object_default_animation),
+        (box.dataset.jos_startvisible || this.default_startVisible) &&
+          doit.push(box),
+        this.default_scrolldirection &&
+          box.setAttribute(
+            "data-jos_scrolldirection",
+            this.default_scrolldirection
+          );
+      let box_observer = {
+        rootMargin: [
+          box.dataset.jos_rootmargin_top ||
+            this.default_rootMargin.split(" ")[0],
+          box.dataset.jos_rootmargin_left ||
+            this.default_rootMargin.split(" ")[3],
+          box.dataset.jos_rootmargin_bottom ||
+            this.default_rootMargin.split(" ")[2],
+          box.dataset.jos_rootmargin_left ||
+            this.default_rootMargin.split(" ")[1],
+        ].join(" "),
+        threshold: this.default_threshold,
+        passive: this.default_passive,
+      };
+      if (box.dataset.jos_anchor) {
+        const observer = new IntersectionObserver(
+          this.callbackRouter_anchor,
+          box_observer
+        );
+        this.observers.push(observer),
+          observer.observe(
+            document.getElementById(box.dataset.jos_anchor.substring(1))
+          );
+      } else {
+        const observer = new IntersectionObserver(
+          this.callbackRouter,
+          box_observer
+        );
+        this.observers.push(observer), observer.observe(box);
+      }
+    }),
+      setTimeout(() => {
+        doit.forEach((box) => {
+          let box_time = box.dataset.jos_startvisible;
+          setTimeout(() => {
+            "true" == box_time && (box_time = 0),
+              box.classList.remove("jos-" + box.dataset.jos_animation);
+          }, box_time || this.default_startVisible);
+        });
+      }, 100);
+  }
+  animationUnset(state = 0) {
+    -1 != state &&
+      this.boxes?.forEach((box) => {
+        box.classList.remove("jos"),
+          box.classList.add("jos_disabled"),
+          0 == state
+            ? box.classList.add("jos-" + box.dataset.jos_animation)
+            : box.classList.remove("jos-" + box.dataset.jos_animation);
+      }),
+      this.observers?.forEach((observer) => observer.disconnect());
+  }
+  getstylesheet() {
+    return (
+      this.jos_stylesheet ||
+        (this.jos_stylesheet = document.getElementById("jos-stylesheet").sheet),
+      this.jos_stylesheet.insertRule(
+        ".jos {transition: " +
+          this.default_duration +
+          "s " +
+          this.default_timingFunction +
+          " " +
+          this.default_delay +
+          "s !important;}"
+      ),
+      this.jos_stylesheet
+    );
+  }
+  getBoxes() {
+    return (
+      (this.boxes = void 0),
+      this.boxes || (this.boxes = document.querySelectorAll(".jos")),
+      this.boxes
+    );
+  }
+  getdefault(options = {}) {
+    let {
+      once: once,
+      animation: animation,
+      animationinverse: animationinverse,
+      timingFunction: timingFunction,
+      threshold: threshold,
+      startVisible: startVisible,
+      scrollDirection: scrollDirection,
+      intersectionRatio: intersectionRatio,
+      duration: duration,
+      delay: delay,
+      debugMode: debugMode,
+      disable: disable,
+      rootMargin: rootMargin,
+      rootMarginTop: rootMarginTop,
+      rootMarginBottom: rootMarginBottom,
+    } = options;
+    (this.default_once = once || this.default_once),
+      (this.default_animation = animation || this.default_animation),
+      (this.default_animationinverse =
+        animationinverse || this.default_animation),
+      (this.default_timingFunction =
+        timingFunction || this.default_timingFunction),
+      (this.default_threshold = threshold || this.default_threshold),
+      (this.default_startVisible = startVisible || this.default_startVisible),
+      (this.default_scrolldirection =
+        scrollDirection || this.default_scrolldirection),
+      (this.default_intersectionRatio =
+        intersectionRatio || this.default_threshold),
+      (this.default_duration = duration || this.default_duration),
+      (this.default_delay = delay || this.default_delay),
+      (this.debugMode = debugMode || this.debugMode),
+      (this.disable = disable || this.disable),
+      (this.default_rootMargin =
+        rootMargin ||
+        `${rootMarginTop || "-10%"} 0% ${rootMarginBottom || "-40%"} 0%`);
+  }
+  init(options = this.options) {
+    (this.options = options),
+      this.getdefault(options),
+      this.getstylesheet(),
+      this.getBoxes(),
+      this.debugMode &&
+        console.warn(
+          "JOS | This version of JOS package does not support debug mode, Please use jos.debug.js for debugging."
+        ),
+      this.disable ? this.stop() : this.start();
+  }
+  start(state = 0) {
+    return (
+      -1 != state && (this.stop(), this.animationInit()),
+      (this.disable = !1),
+      "Started"
+    );
+  }
+  stop(state = 0) {
+    return (
+      1 == state ? (state = 0) : 0 == state && (state = 1),
+      (this.disable = !0),
+      -1 != state && this.animationUnset(state),
+      "Stopped"
+    );
+  }
+  refresh() {
+    return (
+      this.animationUnset(-1),
+      (this.boxes = void 0),
+      this.getBoxes(),
+      this.animationInit(),
+      this.debugger(1),
+      "Refreshed"
+    );
+  }
+  destroy(state = 0) {
+    this.animationUnset(-1),
+      (this.boxes = void 0),
+      (this.observers = []),
+      1 == state && (this.jos_stylesheet.disabled = !0),
+      (this.jos_stylesheet = void 0);
+    for (let prop in this)
+      this.hasOwnProperty(prop) &&
+        "function" != typeof this[prop] &&
+        (this[prop] = void 0);
+    return Object.setPrototypeOf(this, null), "JOS Instance Nuked";
+  }
+}
+const JOS = new jos();
+// By Jesvi Jonathan 
