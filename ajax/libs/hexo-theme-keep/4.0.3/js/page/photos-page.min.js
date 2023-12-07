@@ -1,0 +1,1 @@
+function photosPageHandle(){{const e=document.querySelector(".photo-album-box"),o=e.querySelectorAll("img"),n=(e.style.columnCount="3",new Array(3).fill(0));return void o.forEach(e=>{var o=n.indexOf(Math.min(...n));e.style.column=o+1,n[o]+=e.height})}}!0===KEEP.theme_config?.pjax?.enable&&KEEP.utils?photosPageHandle():window.addEventListener("DOMContentLoaded",photosPageHandle);
