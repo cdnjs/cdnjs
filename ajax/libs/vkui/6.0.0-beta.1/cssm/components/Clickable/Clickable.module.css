@@ -1,0 +1,35 @@
+.Clickable__host {
+  isolation: isolate;
+  position: relative;
+}
+
+.Clickable__realClickable {
+  cursor: pointer;
+}
+
+.Clickable__host:focus,
+.Clickable__host:focus-visible {
+  outline: none;
+}
+
+.Clickable__host[disabled],
+.Clickable__host[aria-disabled='true'] {
+  cursor: not-allowed;
+}
+
+/*
+Просто поменять местами элементы внутри Tappable нельзя:
+
+- некоторые элементы завязаны на :last-child и :first-child
+- необходимо чтобы все элементы были позиционированные
+
+https://developer.mozilla.org/ru/docs/Web/CSS/CSS_Positioning/Understanding_z_index/Stacking_without_z-index
+https://github.com/VKCOM/VKUI/pull/3641
+*/
+
+/* stylelint-disable-next-line @project-tools/stylelint-atomic, selector-max-universal */
+
+.Clickable__host > * {
+  position: relative;
+  z-index: var(--vkui_internal--z_index_tappable_element);
+}

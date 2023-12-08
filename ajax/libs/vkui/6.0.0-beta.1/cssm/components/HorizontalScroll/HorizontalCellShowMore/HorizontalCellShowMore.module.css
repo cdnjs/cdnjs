@@ -1,0 +1,51 @@
+.HorizontalCellShowMore {
+  display: flex;
+}
+
+.HorizontalCellShowMore--compensate-last-cell-indent {
+  /* Компенсация бокового отступа, заданного в последнем HorizontalCell:last-child::after */
+  -webkit-margin-start: calc(-1 * var(--vkui_internal--side_cell_gap));
+          margin-inline-start: calc(-1 * var(--vkui_internal--side_cell_gap));
+}
+
+.HorizontalCellShowMore:last-child::after {
+  content: '';
+  min-inline-size: var(--vkui_internal--side_cell_gap);
+}
+
+.HorizontalCellShowMore__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-block: 4px;
+  padding-inline: var(--vkui--spacing_size_s);
+}
+
+.HorizontalCellShowMore--size-s .HorizontalCellShowMore__body {
+  min-inline-size: 64px;
+  padding: var(--vkui--spacing_size_xs);
+}
+
+.HorizontalCellShowMore--size-m .HorizontalCellShowMore__body,
+.HorizontalCellShowMore--size-l .HorizontalCellShowMore__body {
+  inline-size: 128px;
+  -webkit-margin-after: auto;
+          margin-block-end: auto;
+}
+
+/* Перебиваем селектор в Tappable--sizeX-(compact|none) */
+
+.HorizontalCellShowMore .HorizontalCellShowMore__body {
+  border-radius: var(--vkui--size_border_radius--regular);
+}
+
+.HorizontalCellShowMore__icon {
+  color: var(--vkui--color_icon_accent);
+}
+
+.HorizontalCellShowMore__text {
+  -webkit-padding-before: 8px;
+          padding-block-start: 8px;
+  color: var(--vkui--color_text_accent);
+}
