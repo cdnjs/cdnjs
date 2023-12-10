@@ -1,0 +1,1 @@
+const initScrollTopBottom=()=>{const o=document.querySelector(".tool-scroll-to-top"),t=document.querySelector(".tool-scroll-to-bottom"),l=()=>{window.scrollTo({top:0,behavior:"smooth"})},e=()=>{var o=document.body.scrollHeight;window.scrollTo({top:o,behavior:"smooth"})};o.addEventListener("click",l),t.addEventListener("click",e)};export default initScrollTopBottom;
