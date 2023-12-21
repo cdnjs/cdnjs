@@ -1,0 +1,100 @@
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+:root {
+  /* sizes */
+  --vkui_internal--tabbar_height: 48px;
+  --vkui_internal--grid_avatar_image_offset: 2px;
+  --vkui_internal--slider_thumb_size: 28px;
+  --vkui_internal--side_cell_gap: calc(
+    var(--vkui--size_base_padding_horizontal--regular) - var(--vkui--spacing_size_s)
+  );
+  --vkui_internal--panel_header_height: var(--vkui--size_panel_header_height--regular);
+
+  /**
+   * [a11y][focus visible]
+   */
+  --vkui_internal--outline_width: 2px;
+  --vkui_internal--outline: var(--vkui_internal--outline_width, 2px) solid
+    var(--vkui--color_stroke_accent);
+  /**
+   * [a11y][windows high contrast mode]
+   * 
+   * windows compatible outline reset
+   * @see https://benmyers.dev/blog/whcm-outlines/
+   */
+  --vkui_internal--outline-reset: var(--vkui_internal--outline_width) solid transparent;
+
+  /**
+   * "Safe Zone" добавляет невидимую интерактивную область, по которой пользователь будет вводить мышкой и тем самым
+   * компонент будет оставаться активным.
+   *
+   * > ⚠️ Используется для динамического изменения в JS файлах.
+   */
+  --vkui_internal--popover_safe_zone_padding: 8px;
+
+  /* colors */
+  /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+  --vkui_internal--white: #fff;
+
+  /* insets */
+  --vkui_internal--safe_area_inset_top: 0px;
+  --vkui_internal--safe_area_inset_right: 0px;
+  --vkui_internal--safe_area_inset_bottom: 0px;
+  --vkui_internal--safe_area_inset_left: 0px;
+
+  /* animations */
+  --vkui_internal--duration: 0.7s;
+
+  /* z_index */
+  --vkui_internal--z_index_cell_dragging: 100;
+  --vkui_internal--z_index_tabs: 2;
+  --vkui_internal--z_index_fixed_layout: 3;
+  --vkui_internal--z_index_panel_header_context: 4;
+  --vkui_internal--z_index_panel_header_fade: 5;
+  --vkui_internal--z_index_pull_to_refresh: 9;
+  --vkui_internal--z_index_panel_header: 10;
+  --vkui_internal--z_index_split_layout_panel_header: 11;
+
+  /* z_index Tappable isolate */
+  --vkui_internal--z_index_tappable_state: 0;
+  --vkui_internal--z_index_tappable_element: 1;
+
+  /* z_index Banner isolate */
+  --vkui_internal--z_index_banner_background: 0;
+  --vkui_internal--z_index_banner_content: 1;
+  --vkui_internal--z_index_banner_hover: 2;
+
+  /* z_index FormField isolate */
+  --vkui_internal--z_index_form_field_element: 1;
+  --vkui_internal--z_index_form_field_border: 2;
+  --vkui_internal--z_index_form_field_status: 3;
+  --vkui_internal--z_index_form_field_border_hover: 4;
+  --vkui_internal--z_index_form_field_focus: 5;
+  --vkui_internal--z_index_form_field_side: 6;
+
+  /* z_index ImageBase isolate */
+  --vkui_internal--z_index_image_base_img: -1;
+  --vkui_internal--z_index_image_base_overlay: 0;
+  --vkui_internal--z_index_image_base_border: 1;
+  --vkui_internal--z_index_image_base_badge: 2;
+
+  /* z_index HorizontalScroll isolate */
+  --vkui_internal--z_index_horizontal_scroll_arrow: 1;
+}
+@supports (padding-top: constant(safe-area-inset-top)) {
+  /* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+  :root {
+    --vkui_internal--safe_area_inset_top: constant(safe-area-inset-top);
+    --vkui_internal--safe_area_inset_right: constant(safe-area-inset-right);
+    --vkui_internal--safe_area_inset_bottom: constant(safe-area-inset-bottom);
+    --vkui_internal--safe_area_inset_left: constant(safe-area-inset-left);
+  }
+}
+@supports (padding-top: env(safe-area-inset-top)) {
+  /* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+  :root {
+    --vkui_internal--safe_area_inset_top: env(safe-area-inset-top);
+    --vkui_internal--safe_area_inset_right: env(safe-area-inset-right);
+    --vkui_internal--safe_area_inset_bottom: env(safe-area-inset-bottom);
+    --vkui_internal--safe_area_inset_left: env(safe-area-inset-left);
+  }
+}

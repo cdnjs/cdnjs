@@ -1,0 +1,123 @@
+.ActionSheet {
+  inline-size: 100%;
+  max-inline-size: var(--vkui--size_popup_small--regular);
+  padding: 10px;
+  box-sizing: border-box;
+  animation: animation-actionsheet-intro 0.2s var(--vkui--animation_easing_platform);
+}
+
+.ActionSheet__content-wrapper {
+  padding-block: 8px;
+  padding-inline: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: var(--vkui--elevation3);
+  background: var(--vkui--color_background_modal);
+}
+
+.ActionSheet__header {
+  color: var(--vkui--color_text_subhead);
+  padding-block: 16px;
+  padding-inline: 20px;
+}
+
+.ActionSheet--closing {
+  transform: translateY(calc(100% + 20px));
+  transition: transform 0.2s var(--vkui--animation_easing_platform);
+}
+
+.ActionSheet__title + .ActionSheet__text {
+  -webkit-margin-before: 8px;
+          margin-block-start: 8px;
+}
+
+/**
+ * iOS
+ */
+
+.ActionSheet--ios {
+  padding: 8px;
+  animation: animation-actionsheet-intro 0.3s var(--vkui--animation_easing_platform);
+  background: transparent;
+}
+
+.ActionSheet--ios .ActionSheet__content-wrapper {
+  border-radius: 14px;
+  padding: 0;
+}
+
+.ActionSheet__close-item-wrapper--ios {
+  margin-block: 8px var(--vkui_internal--safe_area_inset_bottom);
+  overflow: hidden;
+  border-radius: 14px;
+  box-shadow: var(--vkui--elevation3);
+  background: var(--vkui--color_background_modal);
+}
+
+.ActionSheet--ios.ActionSheet--closing {
+  transform: translateY(100%);
+  transition: transform 0.3s var(--vkui--animation_easing_platform);
+}
+
+.ActionSheet--ios .ActionSheet__header {
+  position: relative;
+  text-align: center;
+}
+
+.ActionSheet--ios .ActionSheet__title {
+  position: relative;
+}
+
+.ActionSheet--ios .ActionSheet__text {
+  position: relative;
+}
+
+.ActionSheet--ios .ActionSheet__header::before {
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  background-color: var(--vkui--color_background_modal);
+  content: '';
+}
+
+/**
+ * Compact
+ */
+
+.ActionSheet--sizeY-compact .ActionSheet__header {
+  padding-block: 12px;
+  padding-inline: 20px;
+}
+
+/**
+ * Desktop version
+ */
+
+.ActionSheet--menu {
+  inline-size: auto;
+  block-size: auto;
+  animation: none;
+  padding: 0;
+  max-inline-size: 100%;
+}
+
+.ActionSheet--menu.ActionSheet--ios .ActionSheet__content-wrapper {
+  border-radius: 14px;
+  padding: 0;
+}
+
+/**
+* Animations
+*/
+
+@keyframes animation-actionsheet-intro {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,35 @@
+.SplitLayout {
+  inline-size: 100%;
+  block-size: 100%;
+  position: relative;
+}
+
+.SplitLayout__inner {
+  inline-size: 100%;
+  block-size: 100%;
+  display: flex;
+}
+
+/* Hack with using PanelHeaderSimple */
+
+/* Better to implement simple header-like here */
+
+.SplitLayout__inner--header {
+  position: relative;
+  z-index: var(--vkui_internal--z_index_split_layout_panel_header);
+  -webkit-margin-before: calc(
+    -1 * (var(--vkui_internal--panel_header_height) + var(--vkui_internal--safe_area_inset_top))
+  );
+          margin-block-start: calc(
+    -1 * (var(--vkui_internal--panel_header_height) + var(--vkui_internal--safe_area_inset_top))
+  );
+}
+
+.SplitLayout--ios .SplitLayout__inner--header {
+  -webkit-margin-before: calc(
+    -1 * (var(--vkui_internal--panel_header_height) + var(--vkui_internal--safe_area_inset_top))
+  );
+          margin-block-start: calc(
+    -1 * (var(--vkui_internal--panel_header_height) + var(--vkui_internal--safe_area_inset_top))
+  );
+}
