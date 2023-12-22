@@ -1,0 +1,1056 @@
+/*!
+ * Likely 3.2.0-dev by Nikolay Rys (linkedin.com/in/nikolay-rys), Ilya Birman (ilyabirman.net), and contributors.
+ * Special thanks to Viktor Karpov (twitter.com/vitkarpov), Ivan Akulov (iamakulov.com), Evgeny Steblinsky (volter9.github.io), and Artem Sapegin (sapegin.me).
+ */
+/*!**************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/stylus-loader/dist/cjs.js!./source/index.styl ***!
+  \**************************************************************************************************************/
+/* Style options */
+.likely {
+  opacity: 0;
+  transition: opacity 0.1s ease-in;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 0 !important;
+  text-indent: 0 !important;
+}
+.likely * {
+  visibility: hidden;
+  display: inline-block;
+}
+.likely_visible,
+.likely_ready {
+  opacity: 1;
+}
+.likely_visible *,
+.likely_ready * {
+  visibility: inherit;
+}
+.likely__button {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  color: inherit;
+}
+.likely__counter {
+  display: none;
+  position: relative;
+  text-align: center;
+  background-size: 1px 1px;
+  background-repeat: repeat-y;
+  background-image: linear-gradient(to right, rgba(0,0,0,0.2) 0, rgba(0,0,0,0) 0.5px, rgba(0,0,0,0) 100%);
+}
+.likely__widget,
+.likely__widget:visited {
+  all: initial;
+/* Restore styles after reset */
+  display: inline-block;
+  position: relative;
+  white-space: nowrap;
+  color: #000;
+  background: rgba(231,231,231,0.8);
+  transition: background 0.33s ease-out, color 0.33s ease-out, fill 0.33s ease-out;
+/*** End of restore styles ***/
+}
+.likely__widget:hover,
+.likely__widget:visited:hover,
+.likely__widget:active,
+.likely__widget:visited:active,
+.likely__widget:focus,
+.likely__widget:visited:focus {
+  transition: none;
+  cursor: pointer;
+}
+@media (hover: none) {
+  .likely__widget:hover,
+  .likely__widget:visited:hover,
+  .likely__widget:active,
+  .likely__widget:visited:active,
+  .likely__widget:focus,
+  .likely__widget:visited:focus {
+    transition: background 0.33s ease-out, color 0.33s ease-out, fill 0.33s ease-out;
+    cursor: unset;
+  }
+}
+.likely__icon {
+  position: relative;
+  text-align: left;
+}
+.likely svg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.likely__button,
+.likely__counter {
+  font-weight: normal;
+  font-family: Helvetica Neue, Arial, sans-serif;
+  text-decoration: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  outline: 0;
+  line-height: inherit;
+  cursor: inherit;
+}
+.likely__button:empty {
+  display: none;
+}
+.likely_ready .likely__counter {
+  display: inline-block;
+}
+.likely_ready .likely__counter_empty {
+  display: none;
+}
+.likely__widget,
+.likely__widget:visited,
+.likely__icon,
+.likely__button,
+.likely__counter {
+  vertical-align: top;
+}
+/* Mixins */
+.likely-light .likely__widget,
+.likely-dark-theme .likely__widget,
+.likely-light .likely__widget:visited,
+.likely-dark-theme .likely__widget:visited {
+  color: #fff;
+  fill: #fff;
+  background: rgba(236,236,236,0.16);
+  text-shadow: rgba(0,0,0,0.2) 0 0 0.33em;
+}
+.likely-light .likely__counter,
+.likely-dark-theme .likely__counter {
+  background-image: linear-gradient(to right, rgba(255,255,255,0.4) 0, rgba(255,255,255,0) 0.5px, rgba(255,255,255,0) 100%);
+}
+@media (prefers-color-scheme: dark) {
+  .likely-color-theme-based .likely__widget,
+  .likely-color-theme-based .likely__widget:visited {
+    color: #fff;
+    fill: #fff;
+    background: rgba(236,236,236,0.16);
+    text-shadow: rgba(0,0,0,0.2) 0 0 0.33em;
+  }
+  .likely-color-theme-based .likely__counter {
+    background-image: linear-gradient(to right, rgba(255,255,255,0.4) 0, rgba(255,255,255,0) 0.5px, rgba(255,255,255,0) 100%);
+  }
+}
+.likely__widget_facebook,
+.likely__widget_facebook:visited {
+  fill: #1877f2;
+}
+.likely__widget_facebook:hover,
+.likely__widget_facebook:visited:hover,
+.likely__widget_facebook:active,
+.likely__widget_facebook:visited:active,
+.likely__widget_facebook:focus,
+.likely__widget_facebook:visited:focus {
+  all: initial;
+/* Restore styles after reset */
+  fill: #1877f2;
+  transition: none;
+  cursor: pointer;
+/*** End of restore styles ***/
+  background: rgba(197,221,251,0.8);
+}
+@media (hover: none) {
+  .likely__widget_facebook:hover,
+  .likely__widget_facebook:visited:hover,
+  .likely__widget_facebook:active,
+  .likely__widget_facebook:visited:active,
+  .likely__widget_facebook:focus,
+  .likely__widget_facebook:visited:focus {
+    transition: widget-transition;
+    cursor: unset;
+    background: rgba(231,231,231,0.8);
+  }
+}
+.likely-light .likely__widget_facebook:hover,
+.likely-dark-theme .likely__widget_facebook:hover,
+.likely-light .likely__widget_facebook:visited:hover,
+.likely-dark-theme .likely__widget_facebook:visited:hover,
+.likely-light .likely__widget_facebook:active,
+.likely-dark-theme .likely__widget_facebook:active,
+.likely-light .likely__widget_facebook:visited:active,
+.likely-dark-theme .likely__widget_facebook:visited:active,
+.likely-light .likely__widget_facebook:focus,
+.likely-dark-theme .likely__widget_facebook:focus,
+.likely-light .likely__widget_facebook:visited:focus,
+.likely-dark-theme .likely__widget_facebook:visited:focus {
+  text-shadow: #1877f2 0 0 0.25em;
+  background: rgba(24,119,242,0.7);
+}
+@media (hover: none) {
+  .likely-light .likely__widget_facebook:hover,
+  .likely-dark-theme .likely__widget_facebook:hover,
+  .likely-light .likely__widget_facebook:visited:hover,
+  .likely-dark-theme .likely__widget_facebook:visited:hover,
+  .likely-light .likely__widget_facebook:active,
+  .likely-dark-theme .likely__widget_facebook:active,
+  .likely-light .likely__widget_facebook:visited:active,
+  .likely-dark-theme .likely__widget_facebook:visited:active,
+  .likely-light .likely__widget_facebook:focus,
+  .likely-dark-theme .likely__widget_facebook:focus,
+  .likely-light .likely__widget_facebook:visited:focus,
+  .likely-dark-theme .likely__widget_facebook:visited:focus {
+    text-shadow: rgba(0,0,0,0.2) 0 0 0.33em;
+    background: rgba(236,236,236,0.16);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .likely-color-theme-based .likely__widget_facebook:hover,
+  .likely-color-theme-based .likely__widget_facebook:visited:hover,
+  .likely-color-theme-based .likely__widget_facebook:active,
+  .likely-color-theme-based .likely__widget_facebook:visited:active,
+  .likely-color-theme-based .likely__widget_facebook:focus,
+  .likely-color-theme-based .likely__widget_facebook:visited:focus {
+    text-shadow: #1877f2 0 0 0.25em;
+    background: rgba(24,119,242,0.7);
+  }
+}
+@media (prefers-color-scheme: dark) and (hover: none) {
+  .likely-color-theme-based .likely__widget_facebook:hover,
+  .likely-color-theme-based .likely__widget_facebook:visited:hover,
+  .likely-color-theme-based .likely__widget_facebook:active,
+  .likely-color-theme-based .likely__widget_facebook:visited:active,
+  .likely-color-theme-based .likely__widget_facebook:focus,
+  .likely-color-theme-based .likely__widget_facebook:visited:focus {
+    text-shadow: rgba(0,0,0,0.2) 0 0 0.33em;
+    background: rgba(236,236,236,0.16);
+  }
+}
+.likely__widget_linkedin,
+.likely__widget_linkedin:visited {
+  fill: #0a66c2;
+}
+.likely__widget_linkedin:hover,
+.likely__widget_linkedin:visited:hover,
+.likely__widget_linkedin:active,
+.likely__widget_linkedin:visited:active,
+.likely__widget_linkedin:focus,
+.likely__widget_linkedin:visited:focus {
+  all: initial;
+/* Restore styles after reset */
+  fill: #0a66c2;
+  transition: none;
+  cursor: pointer;
+/*** End of restore styles ***/
+  background: rgba(193,216,239,0.8);
+}
+@media (hover: none) {
+  .likely__widget_linkedin:hover,
+  .likely__widget_linkedin:visited:hover,
+  .likely__widget_linkedin:active,
+  .likely__widget_linkedin:visited:active,
+  .likely__widget_linkedin:focus,
+  .likely__widget_linkedin:visited:focus {
+    transition: widget-transition;
+    cursor: unset;
+    background: rgba(231,231,231,0.8);
+  }
+}
+.likely-light .likely__widget_linkedin:hover,
+.likely-dark-theme .likely__widget_linkedin:hover,
+.likely-light .likely__widget_linkedin:visited:hover,
+.likely-dark-theme .likely__widget_linkedin:visited:hover,
+.likely-light .likely__widget_linkedin:active,
+.likely-dark-theme .likely__widget_linkedin:active,
+.likely-light .likely__widget_linkedin:visited:active,
+.likely-dark-theme .likely__widget_linkedin:visited:active,
+.likely-light .likely__widget_linkedin:focus,
+.likely-dark-theme .likely__widget_linkedin:focus,
+.likely-light .likely__widget_linkedin:visited:focus,
+.likely-dark-theme .likely__widget_linkedin:visited:focus {
+  text-shadow: #0a66c2 0 0 0.25em;
+  background: rgba(10,102,194,0.7);
+}
+@media (hover: none) {
+  .likely-light .likely__widget_linkedin:hover,
+  .likely-dark-theme .likely__widget_linkedin:hover,
+  .likely-light .likely__widget_linkedin:visited:hover,
+  .likely-dark-theme .likely__widget_linkedin:visited:hover,
+  .likely-light .likely__widget_linkedin:active,
+  .likely-dark-theme .likely__widget_linkedin:active,
+  .likely-light .likely__widget_linkedin:visited:active,
+  .likely-dark-theme .likely__widget_linkedin:visited:active,
+  .likely-light .likely__widget_linkedin:focus,
+  .likely-dark-theme .likely__widget_linkedin:focus,
+  .likely-light .likely__widget_linkedin:visited:focus,
+  .likely-dark-theme .likely__widget_linkedin:visited:focus {
+    text-shadow: rgba(0,0,0,0.2) 0 0 0.33em;
+    background: rgba(236,236,236,0.16);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .likely-color-theme-based .likely__widget_linkedin:hover,
+  .likely-color-theme-based .likely__widget_linkedin:visited:hover,
+  .likely-color-theme-based .likely__widget_linkedin:active,
+  .likely-color-theme-based .likely__widget_linkedin:visited:active,
+  .likely-color-theme-based .likely__widget_linkedin:focus,
+  .likely-color-theme-based .likely__widget_linkedin:visited:focus {
+    text-shadow: #0a66c2 0 0 0.25em;
+    background: rgba(10,102,194,0.7);
+  }
+}
+@media (prefers-color-scheme: dark) and (hover: none) {
+  .likely-color-theme-based .likely__widget_linkedin:hover,
+  .likely-color-theme-based .likely__widget_linkedin:visited:hover,
+  .likely-color-theme-based .likely__widget_linkedin:active,
+  .likely-color-theme-based .likely__widget_linkedin:visited:active,
+  .likely-color-theme-based .likely__widget_linkedin:focus,
+  .likely-color-theme-based .likely__widget_linkedin:visited:focus {
+    text-shadow: rgba(0,0,0,0.2) 0 0 0.33em;
+    background: rgba(236,236,236,0.16);
+  }
+}
+.likely__widget_odnoklassniki,
+.likely__widget_odnoklassniki:visited {
+  fill: #ee8208;
+}
+.likely__widget_odnoklassniki:hover,
+.likely__widget_odnoklassniki:visited:hover,
+.likely__widget_odnoklassniki:active,
+.likely__widget_odnoklassniki:visited:active,
+.likely__widget_odnoklassniki:focus,
+.likely__widget_odnoklassniki:visited:focus {
+  all: initial;
+/* Restore styles after reset */
+  fill: #ee8208;
+  transition: none;
+  cursor: pointer;
+/*** End of restore styles ***/
+  background: rgba(250,223,193,0.8);
+}
+@media (hover: none) {
+  .likely__widget_odnoklassniki:hover,
+  .likely__widget_odnoklassniki:visited:hover,
+  .likely__widget_odnoklassniki:active,
+  .likely__widget_odnoklassniki:visited:active,
+  .likely__widget_odnoklassniki:focus,
+  .likely__widget_odnoklassniki:visited:focus {
+    transition: widget-transition;
+    cursor: unset;
+    background: rgba(231,231,231,0.8);
+  }
+}
+.likely-light .likely__widget_odnoklassniki:hover,
+.likely-dark-theme .likely__widget_odnoklassniki:hover,
+.likely-light .likely__widget_odnoklassniki:visited:hover,
+.likely-dark-theme .likely__widget_odnoklassniki:visited:hover,
+.likely-light .likely__widget_odnoklassniki:active,
+.likely-dark-theme .likely__widget_odnoklassniki:active,
+.likely-light .likely__widget_odnoklassniki:visited:active,
+.likely-dark-theme .likely__widget_odnoklassniki:visited:active,
+.likely-light .likely__widget_odnoklassniki:focus,
+.likely-dark-theme .likely__widget_odnoklassniki:focus,
+.likely-light .likely__widget_odnoklassniki:visited:focus,
+.likely-dark-theme .likely__widget_odnoklassniki:visited:focus {
+  text-shadow: #ee8208 0 0 0.25em;
+  background: rgba(238,130,8,0.7);
+}
+@media (hover: none) {
+  .likely-light .likely__widget_odnoklassniki:hover,
+  .likely-dark-theme .likely__widget_odnoklassniki:hover,
+  .likely-light .likely__widget_odnoklassniki:visited:hover,
+  .likely-dark-theme .likely__widget_odnoklassniki:visited:hover,
+  .likely-light .likely__widget_odnoklassniki:active,
+  .likely-dark-theme .likely__widget_odnoklassniki:active,
+  .likely-light .likely__widget_odnoklassniki:visited:active,
+  .likely-dark-theme .likely__widget_odnoklassniki:visited:active,
+  .likely-light .likely__widget_odnoklassniki:focus,
+  .likely-dark-theme .likely__widget_odnoklassniki:focus,
+  .likely-light .likely__widget_odnoklassniki:visited:focus,
+  .likely-dark-theme .likely__widget_odnoklassniki:visited:focus {
+    text-shadow: rgba(0,0,0,0.2) 0 0 0.33em;
+    background: rgba(236,236,236,0.16);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .likely-color-theme-based .likely__widget_odnoklassniki:hover,
+  .likely-color-theme-based .likely__widget_odnoklassniki:visited:hover,
+  .likely-color-theme-based .likely__widget_odnoklassniki:active,
+  .likely-color-theme-based .likely__widget_odnoklassniki:visited:active,
+  .likely-color-theme-based .likely__widget_odnoklassniki:focus,
+  .likely-color-theme-based .likely__widget_odnoklassniki:visited:focus {
+    text-shadow: #ee8208 0 0 0.25em;
+    background: rgba(238,130,8,0.7);
+  }
+}
+@media (prefers-color-scheme: dark) and (hover: none) {
+  .likely-color-theme-based .likely__widget_odnoklassniki:hover,
+  .likely-color-theme-based .likely__widget_odnoklassniki:visited:hover,
+  .likely-color-theme-based .likely__widget_odnoklassniki:active,
+  .likely-color-theme-based .likely__widget_odnoklassniki:visited:active,
+  .likely-color-theme-based .likely__widget_odnoklassniki:focus,
+  .likely-color-theme-based .likely__widget_odnoklassniki:visited:focus {
+    text-shadow: rgba(0,0,0,0.2) 0 0 0.33em;
+    background: rgba(236,236,236,0.16);
+  }
+}
+.likely__widget_pinterest,
+.likely__widget_pinterest:visited {
+  fill: #e60019;
+}
+.likely__widget_pinterest:hover,
+.likely__widget_pinterest:visited:hover,
+.likely__widget_pinterest:active,
+.likely__widget_pinterest:visited:active,
+.likely__widget_pinterest:focus,
+.likely__widget_pinterest:visited:focus {
+  all: initial;
+/* Restore styles after reset */
+  fill: #e60019;
+  transition: none;
+  cursor: pointer;
+/*** End of restore styles ***/
+  background: rgba(248,191,197,0.8);
+}
+@media (hover: none) {
+  .likely__widget_pinterest:hover,
+  .likely__widget_pinterest:visited:hover,
+  .likely__widget_pinterest:active,
+  .likely__widget_pinterest:visited:active,
+  .likely__widget_pinterest:focus,
+  .likely__widget_pinterest:visited:focus {
+    transition: widget-transition;
+    cursor: unset;
+    background: rgba(231,231,231,0.8);
+  }
+}
+.likely-light .likely__widget_pinterest:hover,
+.likely-dark-theme .likely__widget_pinterest:hover,
+.likely-light .likely__widget_pinterest:visited:hover,
+.likely-dark-theme .likely__widget_pinterest:visited:hover,
+.likely-light .likely__widget_pinterest:active,
+.likely-dark-theme .likely__widget_pinterest:active,
+.likely-light .likely__widget_pinterest:visited:active,
+.likely-dark-theme .likely__widget_pinterest:visited:active,
+.likely-light .likely__widget_pinterest:focus,
+.likely-dark-theme .likely__widget_pinterest:focus,
+.likely-light .likely__widget_pinterest:visited:focus,
+.likely-dark-theme .likely__widget_pinterest:visited:focus {
+  text-shadow: #e60019 0 0 0.25em;
+  background: rgba(230,0,25,0.7);
+}
+@media (hover: none) {
+  .likely-light .likely__widget_pinterest:hover,
+  .likely-dark-theme .likely__widget_pinterest:hover,
+  .likely-light .likely__widget_pinterest:visited:hover,
+  .likely-dark-theme .likely__widget_pinterest:visited:hover,
+  .likely-light .likely__widget_pinterest:active,
+  .likely-dark-theme .likely__widget_pinterest:active,
+  .likely-light .likely__widget_pinterest:visited:active,
+  .likely-dark-theme .likely__widget_pinterest:visited:active,
+  .likely-light .likely__widget_pinterest:focus,
+  .likely-dark-theme .likely__widget_pinterest:focus,
+  .likely-light .likely__widget_pinterest:visited:focus,
+  .likely-dark-theme .likely__widget_pinterest:visited:focus {
+    text-shadow: rgba(0,0,0,0.2) 0 0 0.33em;
+    background: rgba(236,236,236,0.16);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .likely-color-theme-based .likely__widget_pinterest:hover,
+  .likely-color-theme-based .likely__widget_pinterest:visited:hover,
+  .likely-color-theme-based .likely__widget_pinterest:active,
+  .likely-color-theme-based .likely__widget_pinterest:visited:active,
+  .likely-color-theme-based .likely__widget_pinterest:focus,
+  .likely-color-theme-based .likely__widget_pinterest:visited:focus {
+    text-shadow: #e60019 0 0 0.25em;
+    background: rgba(230,0,25,0.7);
+  }
+}
+@media (prefers-color-scheme: dark) and (hover: none) {
+  .likely-color-theme-based .likely__widget_pinterest:hover,
+  .likely-color-theme-based .likely__widget_pinterest:visited:hover,
+  .likely-color-theme-based .likely__widget_pinterest:active,
+  .likely-color-theme-based .likely__widget_pinterest:visited:active,
+  .likely-color-theme-based .likely__widget_pinterest:focus,
+  .likely-color-theme-based .likely__widget_pinterest:visited:focus {
+    text-shadow: rgba(0,0,0,0.2) 0 0 0.33em;
+    background: rgba(236,236,236,0.16);
+  }
+}
+.likely__widget_reddit,
+.likely__widget_reddit:visited {
+  fill: #ff4501;
+}
+.likely__widget_reddit:hover,
+.likely__widget_reddit:visited:hover,
+.likely__widget_reddit:active,
+.likely__widget_reddit:visited:active,
+.likely__widget_reddit:focus,
+.likely__widget_reddit:visited:focus {
+  all: initial;
+/* Restore styles after reset */
+  fill: #ff4501;
+  transition: none;
+  cursor: pointer;
+/*** End of restore styles ***/
+  background: rgba(255,208,191,0.8);
+}
+@media (hover: none) {
+  .likely__widget_reddit:hover,
+  .likely__widget_reddit:visited:hover,
+  .likely__widget_reddit:active,
+  .likely__widget_reddit:visited:active,
+  .likely__widget_reddit:focus,
+  .likely__widget_reddit:visited:focus {
+    transition: widget-transition;
+    cursor: unset;
+    background: rgba(231,231,231,0.8);
+  }
+}
+.likely-light .likely__widget_reddit:hover,
+.likely-dark-theme .likely__widget_reddit:hover,
+.likely-light .likely__widget_reddit:visited:hover,
+.likely-dark-theme .likely__widget_reddit:visited:hover,
+.likely-light .likely__widget_reddit:active,
+.likely-dark-theme .likely__widget_reddit:active,
+.likely-light .likely__widget_reddit:visited:active,
+.likely-dark-theme .likely__widget_reddit:visited:active,
+.likely-light .likely__widget_reddit:focus,
+.likely-dark-theme .likely__widget_reddit:focus,
+.likely-light .likely__widget_reddit:visited:focus,
+.likely-dark-theme .likely__widget_reddit:visited:focus {
+  text-shadow: #ff4501 0 0 0.25em;
+  background: rgba(255,69,1,0.7);
+}
+@media (hover: none) {
+  .likely-light .likely__widget_reddit:hover,
+  .likely-dark-theme .likely__widget_reddit:hover,
+  .likely-light .likely__widget_reddit:visited:hover,
+  .likely-dark-theme .likely__widget_reddit:visited:hover,
+  .likely-light .likely__widget_reddit:active,
+  .likely-dark-theme .likely__widget_reddit:active,
+  .likely-light .likely__widget_reddit:visited:active,
+  .likely-dark-theme .likely__widget_reddit:visited:active,
+  .likely-light .likely__widget_reddit:focus,
+  .likely-dark-theme .likely__widget_reddit:focus,
+  .likely-light .likely__widget_reddit:visited:focus,
+  .likely-dark-theme .likely__widget_reddit:visited:focus {
+    text-shadow: rgba(0,0,0,0.2) 0 0 0.33em;
+    background: rgba(236,236,236,0.16);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .likely-color-theme-based .likely__widget_reddit:hover,
+  .likely-color-theme-based .likely__widget_reddit:visited:hover,
+  .likely-color-theme-based .likely__widget_reddit:active,
+  .likely-color-theme-based .likely__widget_reddit:visited:active,
+  .likely-color-theme-based .likely__widget_reddit:focus,
+  .likely-color-theme-based .likely__widget_reddit:visited:focus {
+    text-shadow: #ff4501 0 0 0.25em;
+    background: rgba(255,69,1,0.7);
+  }
+}
+@media (prefers-color-scheme: dark) and (hover: none) {
+  .likely-color-theme-based .likely__widget_reddit:hover,
+  .likely-color-theme-based .likely__widget_reddit:visited:hover,
+  .likely-color-theme-based .likely__widget_reddit:active,
+  .likely-color-theme-based .likely__widget_reddit:visited:active,
+  .likely-color-theme-based .likely__widget_reddit:focus,
+  .likely-color-theme-based .likely__widget_reddit:visited:focus {
+    text-shadow: rgba(0,0,0,0.2) 0 0 0.33em;
+    background: rgba(236,236,236,0.16);
+  }
+}
+.likely__widget_telegram,
+.likely__widget_telegram:visited {
+  fill: #35a3dc;
+}
+.likely__widget_telegram:hover,
+.likely__widget_telegram:visited:hover,
+.likely__widget_telegram:active,
+.likely__widget_telegram:visited:active,
+.likely__widget_telegram:focus,
+.likely__widget_telegram:visited:focus {
+  all: initial;
+/* Restore styles after reset */
+  fill: #35a3dc;
+  transition: none;
+  cursor: pointer;
+/*** End of restore styles ***/
+  background: rgba(204,232,246,0.8);
+}
+@media (hover: none) {
+  .likely__widget_telegram:hover,
+  .likely__widget_telegram:visited:hover,
+  .likely__widget_telegram:active,
+  .likely__widget_telegram:visited:active,
+  .likely__widget_telegram:focus,
+  .likely__widget_telegram:visited:focus {
+    transition: widget-transition;
+    cursor: unset;
+    background: rgba(231,231,231,0.8);
+  }
+}
+.likely-light .likely__widget_telegram:hover,
+.likely-dark-theme .likely__widget_telegram:hover,
+.likely-light .likely__widget_telegram:visited:hover,
+.likely-dark-theme .likely__widget_telegram:visited:hover,
+.likely-light .likely__widget_telegram:active,
+.likely-dark-theme .likely__widget_telegram:active,
+.likely-light .likely__widget_telegram:visited:active,
+.likely-dark-theme .likely__widget_telegram:visited:active,
+.likely-light .likely__widget_telegram:focus,
+.likely-dark-theme .likely__widget_telegram:focus,
+.likely-light .likely__widget_telegram:visited:focus,
+.likely-dark-theme .likely__widget_telegram:visited:focus {
+  text-shadow: #35a3dc 0 0 0.25em;
+  background: rgba(53,163,220,0.7);
+}
+@media (hover: none) {
+  .likely-light .likely__widget_telegram:hover,
+  .likely-dark-theme .likely__widget_telegram:hover,
+  .likely-light .likely__widget_telegram:visited:hover,
+  .likely-dark-theme .likely__widget_telegram:visited:hover,
+  .likely-light .likely__widget_telegram:active,
+  .likely-dark-theme .likely__widget_telegram:active,
+  .likely-light .likely__widget_telegram:visited:active,
+  .likely-dark-theme .likely__widget_telegram:visited:active,
+  .likely-light .likely__widget_telegram:focus,
+  .likely-dark-theme .likely__widget_telegram:focus,
+  .likely-light .likely__widget_telegram:visited:focus,
+  .likely-dark-theme .likely__widget_telegram:visited:focus {
+    text-shadow: rgba(0,0,0,0.2) 0 0 0.33em;
+    background: rgba(236,236,236,0.16);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .likely-color-theme-based .likely__widget_telegram:hover,
+  .likely-color-theme-based .likely__widget_telegram:visited:hover,
+  .likely-color-theme-based .likely__widget_telegram:active,
+  .likely-color-theme-based .likely__widget_telegram:visited:active,
+  .likely-color-theme-based .likely__widget_telegram:focus,
+  .likely-color-theme-based .likely__widget_telegram:visited:focus {
+    text-shadow: #35a3dc 0 0 0.25em;
+    background: rgba(53,163,220,0.7);
+  }
+}
+@media (prefers-color-scheme: dark) and (hover: none) {
+  .likely-color-theme-based .likely__widget_telegram:hover,
+  .likely-color-theme-based .likely__widget_telegram:visited:hover,
+  .likely-color-theme-based .likely__widget_telegram:active,
+  .likely-color-theme-based .likely__widget_telegram:visited:active,
+  .likely-color-theme-based .likely__widget_telegram:focus,
+  .likely-color-theme-based .likely__widget_telegram:visited:focus {
+    text-shadow: rgba(0,0,0,0.2) 0 0 0.33em;
+    background: rgba(236,236,236,0.16);
+  }
+}
+.likely__widget_twitter,
+.likely__widget_twitter:visited {
+  fill: #1da1f2;
+}
+.likely__widget_twitter:hover,
+.likely__widget_twitter:visited:hover,
+.likely__widget_twitter:active,
+.likely__widget_twitter:visited:active,
+.likely__widget_twitter:focus,
+.likely__widget_twitter:visited:focus {
+  all: initial;
+/* Restore styles after reset */
+  fill: #1da1f2;
+  transition: none;
+  cursor: pointer;
+/*** End of restore styles ***/
+  background: rgba(198,231,251,0.8);
+}
+@media (hover: none) {
+  .likely__widget_twitter:hover,
+  .likely__widget_twitter:visited:hover,
+  .likely__widget_twitter:active,
+  .likely__widget_twitter:visited:active,
+  .likely__widget_twitter:focus,
+  .likely__widget_twitter:visited:focus {
+    transition: widget-transition;
+    cursor: unset;
+    background: rgba(231,231,231,0.8);
+  }
+}
+.likely-light .likely__widget_twitter:hover,
+.likely-dark-theme .likely__widget_twitter:hover,
+.likely-light .likely__widget_twitter:visited:hover,
+.likely-dark-theme .likely__widget_twitter:visited:hover,
+.likely-light .likely__widget_twitter:active,
+.likely-dark-theme .likely__widget_twitter:active,
+.likely-light .likely__widget_twitter:visited:active,
+.likely-dark-theme .likely__widget_twitter:visited:active,
+.likely-light .likely__widget_twitter:focus,
+.likely-dark-theme .likely__widget_twitter:focus,
+.likely-light .likely__widget_twitter:visited:focus,
+.likely-dark-theme .likely__widget_twitter:visited:focus {
+  text-shadow: #1da1f2 0 0 0.25em;
+  background: rgba(29,161,242,0.7);
+}
+@media (hover: none) {
+  .likely-light .likely__widget_twitter:hover,
+  .likely-dark-theme .likely__widget_twitter:hover,
+  .likely-light .likely__widget_twitter:visited:hover,
+  .likely-dark-theme .likely__widget_twitter:visited:hover,
+  .likely-light .likely__widget_twitter:active,
+  .likely-dark-theme .likely__widget_twitter:active,
+  .likely-light .likely__widget_twitter:visited:active,
+  .likely-dark-theme .likely__widget_twitter:visited:active,
+  .likely-light .likely__widget_twitter:focus,
+  .likely-dark-theme .likely__widget_twitter:focus,
+  .likely-light .likely__widget_twitter:visited:focus,
+  .likely-dark-theme .likely__widget_twitter:visited:focus {
+    text-shadow: rgba(0,0,0,0.2) 0 0 0.33em;
+    background: rgba(236,236,236,0.16);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .likely-color-theme-based .likely__widget_twitter:hover,
+  .likely-color-theme-based .likely__widget_twitter:visited:hover,
+  .likely-color-theme-based .likely__widget_twitter:active,
+  .likely-color-theme-based .likely__widget_twitter:visited:active,
+  .likely-color-theme-based .likely__widget_twitter:focus,
+  .likely-color-theme-based .likely__widget_twitter:visited:focus {
+    text-shadow: #1da1f2 0 0 0.25em;
+    background: rgba(29,161,242,0.7);
+  }
+}
+@media (prefers-color-scheme: dark) and (hover: none) {
+  .likely-color-theme-based .likely__widget_twitter:hover,
+  .likely-color-theme-based .likely__widget_twitter:visited:hover,
+  .likely-color-theme-based .likely__widget_twitter:active,
+  .likely-color-theme-based .likely__widget_twitter:visited:active,
+  .likely-color-theme-based .likely__widget_twitter:focus,
+  .likely-color-theme-based .likely__widget_twitter:visited:focus {
+    text-shadow: rgba(0,0,0,0.2) 0 0 0.33em;
+    background: rgba(236,236,236,0.16);
+  }
+}
+.likely__widget_viber,
+.likely__widget_viber:visited {
+  fill: #7360f2;
+}
+.likely__widget_viber:hover,
+.likely__widget_viber:visited:hover,
+.likely__widget_viber:active,
+.likely__widget_viber:visited:active,
+.likely__widget_viber:focus,
+.likely__widget_viber:visited:focus {
+  all: initial;
+/* Restore styles after reset */
+  fill: #7360f2;
+  transition: none;
+  cursor: pointer;
+/*** End of restore styles ***/
+  background: rgba(220,215,251,0.8);
+}
+@media (hover: none) {
+  .likely__widget_viber:hover,
+  .likely__widget_viber:visited:hover,
+  .likely__widget_viber:active,
+  .likely__widget_viber:visited:active,
+  .likely__widget_viber:focus,
+  .likely__widget_viber:visited:focus {
+    transition: widget-transition;
+    cursor: unset;
+    background: rgba(231,231,231,0.8);
+  }
+}
+.likely-light .likely__widget_viber:hover,
+.likely-dark-theme .likely__widget_viber:hover,
+.likely-light .likely__widget_viber:visited:hover,
+.likely-dark-theme .likely__widget_viber:visited:hover,
+.likely-light .likely__widget_viber:active,
+.likely-dark-theme .likely__widget_viber:active,
+.likely-light .likely__widget_viber:visited:active,
+.likely-dark-theme .likely__widget_viber:visited:active,
+.likely-light .likely__widget_viber:focus,
+.likely-dark-theme .likely__widget_viber:focus,
+.likely-light .likely__widget_viber:visited:focus,
+.likely-dark-theme .likely__widget_viber:visited:focus {
+  text-shadow: #7360f2 0 0 0.25em;
+  background: rgba(115,96,242,0.7);
+}
+@media (hover: none) {
+  .likely-light .likely__widget_viber:hover,
+  .likely-dark-theme .likely__widget_viber:hover,
+  .likely-light .likely__widget_viber:visited:hover,
+  .likely-dark-theme .likely__widget_viber:visited:hover,
+  .likely-light .likely__widget_viber:active,
+  .likely-dark-theme .likely__widget_viber:active,
+  .likely-light .likely__widget_viber:visited:active,
+  .likely-dark-theme .likely__widget_viber:visited:active,
+  .likely-light .likely__widget_viber:focus,
+  .likely-dark-theme .likely__widget_viber:focus,
+  .likely-light .likely__widget_viber:visited:focus,
+  .likely-dark-theme .likely__widget_viber:visited:focus {
+    text-shadow: rgba(0,0,0,0.2) 0 0 0.33em;
+    background: rgba(236,236,236,0.16);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .likely-color-theme-based .likely__widget_viber:hover,
+  .likely-color-theme-based .likely__widget_viber:visited:hover,
+  .likely-color-theme-based .likely__widget_viber:active,
+  .likely-color-theme-based .likely__widget_viber:visited:active,
+  .likely-color-theme-based .likely__widget_viber:focus,
+  .likely-color-theme-based .likely__widget_viber:visited:focus {
+    text-shadow: #7360f2 0 0 0.25em;
+    background: rgba(115,96,242,0.7);
+  }
+}
+@media (prefers-color-scheme: dark) and (hover: none) {
+  .likely-color-theme-based .likely__widget_viber:hover,
+  .likely-color-theme-based .likely__widget_viber:visited:hover,
+  .likely-color-theme-based .likely__widget_viber:active,
+  .likely-color-theme-based .likely__widget_viber:visited:active,
+  .likely-color-theme-based .likely__widget_viber:focus,
+  .likely-color-theme-based .likely__widget_viber:visited:focus {
+    text-shadow: rgba(0,0,0,0.2) 0 0 0.33em;
+    background: rgba(236,236,236,0.16);
+  }
+}
+.likely__widget_vkontakte,
+.likely__widget_vkontakte:visited {
+  fill: #07f;
+}
+.likely__widget_vkontakte:hover,
+.likely__widget_vkontakte:visited:hover,
+.likely__widget_vkontakte:active,
+.likely__widget_vkontakte:visited:active,
+.likely__widget_vkontakte:focus,
+.likely__widget_vkontakte:visited:focus {
+  all: initial;
+/* Restore styles after reset */
+  fill: #07f;
+  transition: none;
+  cursor: pointer;
+/*** End of restore styles ***/
+  background: rgba(191,221,255,0.8);
+}
+@media (hover: none) {
+  .likely__widget_vkontakte:hover,
+  .likely__widget_vkontakte:visited:hover,
+  .likely__widget_vkontakte:active,
+  .likely__widget_vkontakte:visited:active,
+  .likely__widget_vkontakte:focus,
+  .likely__widget_vkontakte:visited:focus {
+    transition: widget-transition;
+    cursor: unset;
+    background: rgba(231,231,231,0.8);
+  }
+}
+.likely-light .likely__widget_vkontakte:hover,
+.likely-dark-theme .likely__widget_vkontakte:hover,
+.likely-light .likely__widget_vkontakte:visited:hover,
+.likely-dark-theme .likely__widget_vkontakte:visited:hover,
+.likely-light .likely__widget_vkontakte:active,
+.likely-dark-theme .likely__widget_vkontakte:active,
+.likely-light .likely__widget_vkontakte:visited:active,
+.likely-dark-theme .likely__widget_vkontakte:visited:active,
+.likely-light .likely__widget_vkontakte:focus,
+.likely-dark-theme .likely__widget_vkontakte:focus,
+.likely-light .likely__widget_vkontakte:visited:focus,
+.likely-dark-theme .likely__widget_vkontakte:visited:focus {
+  text-shadow: #07f 0 0 0.25em;
+  background: rgba(0,119,255,0.7);
+}
+@media (hover: none) {
+  .likely-light .likely__widget_vkontakte:hover,
+  .likely-dark-theme .likely__widget_vkontakte:hover,
+  .likely-light .likely__widget_vkontakte:visited:hover,
+  .likely-dark-theme .likely__widget_vkontakte:visited:hover,
+  .likely-light .likely__widget_vkontakte:active,
+  .likely-dark-theme .likely__widget_vkontakte:active,
+  .likely-light .likely__widget_vkontakte:visited:active,
+  .likely-dark-theme .likely__widget_vkontakte:visited:active,
+  .likely-light .likely__widget_vkontakte:focus,
+  .likely-dark-theme .likely__widget_vkontakte:focus,
+  .likely-light .likely__widget_vkontakte:visited:focus,
+  .likely-dark-theme .likely__widget_vkontakte:visited:focus {
+    text-shadow: rgba(0,0,0,0.2) 0 0 0.33em;
+    background: rgba(236,236,236,0.16);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .likely-color-theme-based .likely__widget_vkontakte:hover,
+  .likely-color-theme-based .likely__widget_vkontakte:visited:hover,
+  .likely-color-theme-based .likely__widget_vkontakte:active,
+  .likely-color-theme-based .likely__widget_vkontakte:visited:active,
+  .likely-color-theme-based .likely__widget_vkontakte:focus,
+  .likely-color-theme-based .likely__widget_vkontakte:visited:focus {
+    text-shadow: #07f 0 0 0.25em;
+    background: rgba(0,119,255,0.7);
+  }
+}
+@media (prefers-color-scheme: dark) and (hover: none) {
+  .likely-color-theme-based .likely__widget_vkontakte:hover,
+  .likely-color-theme-based .likely__widget_vkontakte:visited:hover,
+  .likely-color-theme-based .likely__widget_vkontakte:active,
+  .likely-color-theme-based .likely__widget_vkontakte:visited:active,
+  .likely-color-theme-based .likely__widget_vkontakte:focus,
+  .likely-color-theme-based .likely__widget_vkontakte:visited:focus {
+    text-shadow: rgba(0,0,0,0.2) 0 0 0.33em;
+    background: rgba(236,236,236,0.16);
+  }
+}
+.likely__widget_whatsapp,
+.likely__widget_whatsapp:visited {
+  fill: #25d366;
+}
+.likely__widget_whatsapp:hover,
+.likely__widget_whatsapp:visited:hover,
+.likely__widget_whatsapp:active,
+.likely__widget_whatsapp:visited:active,
+.likely__widget_whatsapp:focus,
+.likely__widget_whatsapp:visited:focus {
+  all: initial;
+/* Restore styles after reset */
+  fill: #25d366;
+  transition: none;
+  cursor: pointer;
+/*** End of restore styles ***/
+  background: rgba(200,244,216,0.8);
+}
+@media (hover: none) {
+  .likely__widget_whatsapp:hover,
+  .likely__widget_whatsapp:visited:hover,
+  .likely__widget_whatsapp:active,
+  .likely__widget_whatsapp:visited:active,
+  .likely__widget_whatsapp:focus,
+  .likely__widget_whatsapp:visited:focus {
+    transition: widget-transition;
+    cursor: unset;
+    background: rgba(231,231,231,0.8);
+  }
+}
+.likely-light .likely__widget_whatsapp:hover,
+.likely-dark-theme .likely__widget_whatsapp:hover,
+.likely-light .likely__widget_whatsapp:visited:hover,
+.likely-dark-theme .likely__widget_whatsapp:visited:hover,
+.likely-light .likely__widget_whatsapp:active,
+.likely-dark-theme .likely__widget_whatsapp:active,
+.likely-light .likely__widget_whatsapp:visited:active,
+.likely-dark-theme .likely__widget_whatsapp:visited:active,
+.likely-light .likely__widget_whatsapp:focus,
+.likely-dark-theme .likely__widget_whatsapp:focus,
+.likely-light .likely__widget_whatsapp:visited:focus,
+.likely-dark-theme .likely__widget_whatsapp:visited:focus {
+  text-shadow: #25d366 0 0 0.25em;
+  background: rgba(37,211,102,0.7);
+}
+@media (hover: none) {
+  .likely-light .likely__widget_whatsapp:hover,
+  .likely-dark-theme .likely__widget_whatsapp:hover,
+  .likely-light .likely__widget_whatsapp:visited:hover,
+  .likely-dark-theme .likely__widget_whatsapp:visited:hover,
+  .likely-light .likely__widget_whatsapp:active,
+  .likely-dark-theme .likely__widget_whatsapp:active,
+  .likely-light .likely__widget_whatsapp:visited:active,
+  .likely-dark-theme .likely__widget_whatsapp:visited:active,
+  .likely-light .likely__widget_whatsapp:focus,
+  .likely-dark-theme .likely__widget_whatsapp:focus,
+  .likely-light .likely__widget_whatsapp:visited:focus,
+  .likely-dark-theme .likely__widget_whatsapp:visited:focus {
+    text-shadow: rgba(0,0,0,0.2) 0 0 0.33em;
+    background: rgba(236,236,236,0.16);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .likely-color-theme-based .likely__widget_whatsapp:hover,
+  .likely-color-theme-based .likely__widget_whatsapp:visited:hover,
+  .likely-color-theme-based .likely__widget_whatsapp:active,
+  .likely-color-theme-based .likely__widget_whatsapp:visited:active,
+  .likely-color-theme-based .likely__widget_whatsapp:focus,
+  .likely-color-theme-based .likely__widget_whatsapp:visited:focus {
+    text-shadow: #25d366 0 0 0.25em;
+    background: rgba(37,211,102,0.7);
+  }
+}
+@media (prefers-color-scheme: dark) and (hover: none) {
+  .likely-color-theme-based .likely__widget_whatsapp:hover,
+  .likely-color-theme-based .likely__widget_whatsapp:visited:hover,
+  .likely-color-theme-based .likely__widget_whatsapp:active,
+  .likely-color-theme-based .likely__widget_whatsapp:visited:active,
+  .likely-color-theme-based .likely__widget_whatsapp:focus,
+  .likely-color-theme-based .likely__widget_whatsapp:visited:focus {
+    text-shadow: rgba(0,0,0,0.2) 0 0 0.33em;
+    background: rgba(236,236,236,0.16);
+  }
+}
+/* Size options */
+.likely {
+  gap: 10px;
+}
+.likely .likely__widget,
+.likely .likely__widget:visited {
+  line-height: 20px;
+  font-size: 14px;
+  border-radius: 3px;
+  height: 22px;
+}
+.likely .likely__icon {
+  width: 22px;
+  height: 22px;
+}
+.likely .likely__button {
+  padding: 1px 4px 1px 0;
+}
+.likely .likely__counter {
+  padding: 1px 4px;
+}
+.likely svg {
+  width: 16px;
+  height: 16px;
+}
+.likely-big {
+  gap: 12px;
+}
+.likely-big .likely__widget,
+.likely-big .likely__widget:visited {
+  line-height: 28px;
+  font-size: 18px;
+  border-radius: 4px;
+  height: 32px;
+}
+.likely-big .likely__icon {
+  width: 32px;
+  height: 32px;
+}
+.likely-big .likely__button {
+  padding: 2px 6px 2px 0;
+}
+.likely-big .likely__counter {
+  padding: 2px 6px;
+}
+.likely-big svg {
+  width: 24px;
+  height: 24px;
+}
+.likely-small {
+  gap: 8px;
+}
+.likely-small .likely__widget,
+.likely-small .likely__widget:visited {
+  line-height: 14px;
+  font-size: 12px;
+  border-radius: 2px;
+  height: 18px;
+}
+.likely-small .likely__icon {
+  width: 18px;
+  height: 18px;
+}
+.likely-small .likely__button {
+  padding: 2px 3px 2px 0;
+}
+.likely-small .likely__counter {
+  padding: 2px 3px;
+}
+.likely-small svg {
+  width: 12px;
+  height: 12px;
+}
+
+
+/*# sourceMappingURL=likely.css.map*/
