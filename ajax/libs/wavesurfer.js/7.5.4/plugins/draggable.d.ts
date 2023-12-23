@@ -1,0 +1,1 @@
+export declare function makeDraggable(element: HTMLElement | null, onDrag: (dx: number, dy: number, x: number, y: number) => void, onStart?: (x: number, y: number) => void, onEnd?: () => void, threshold?: number, mouseButton?: number): () => void;
