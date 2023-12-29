@@ -1,0 +1,36 @@
+.AspectRatio {
+  --vkui_internal--aspect_ratio: 1;
+
+  position: relative;
+  max-inline-size: 100%;
+}
+
+.AspectRatio::before {
+  content: '';
+  block-size: 0;
+  display: block;
+  -webkit-padding-after: calc((1 / var(--vkui_internal--aspect_ratio, 1)) * 100%);
+          padding-block-end: calc((1 / var(--vkui_internal--aspect_ratio, 1)) * 100%);
+}
+
+/* stylelint-disable-next-line selector-max-universal */
+
+.AspectRatio > * {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+}
+
+/* stylelint-disable-next-line selector-max-universal */
+
+.AspectRatio--mode-stretch > * {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+/* stylelint-disable-next-line selector-max-type */
+
+.AspectRatio--mode-stretch > img,
+.AspectRatio--mode-stretch > video {
+  object-fit: cover;
+}

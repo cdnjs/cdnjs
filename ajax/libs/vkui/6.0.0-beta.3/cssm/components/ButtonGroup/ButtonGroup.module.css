@@ -1,0 +1,97 @@
+.ButtonGroup {
+  display: inline-flex;
+  max-inline-size: 100%; /* [Примечание 2] Чтобы блок не выходил за границы контейнера (связано с [Примечание 4]) */
+}
+
+.ButtonGroup--stretched {
+  display: flex;
+  inline-size: 100%;
+}
+
+.ButtonGroup--mode-vertical {
+  flex-direction: column;
+}
+
+.ButtonGroup--mode-horizontal {
+  flex-direction: row;
+  /* чтобы блоки не растягивались на всю высоту контейнера */
+  align-items: flex-start;
+}
+
+/* stylelint-disable selector-max-universal */
+
+/**
+ * [Примечание 3] Чтобы не завязываться на класс компонента, используем каскад и универсальный селектор.
+ */
+
+/* "gap" для mode="vertical" */
+
+.ButtonGroup--mode-vertical.ButtonGroup--gap-space > *:not(:first-child) {
+  -webkit-margin-before: var(--vkui--size_button_group_gap_space--regular);
+          margin-block-start: var(--vkui--size_button_group_gap_space--regular);
+}
+
+.ButtonGroup--mode-vertical.ButtonGroup--gap-s > *:not(:first-child) {
+  -webkit-margin-before: var(--vkui--size_button_group_gap_small--regular);
+          margin-block-start: var(--vkui--size_button_group_gap_small--regular);
+}
+
+.ButtonGroup--mode-vertical.ButtonGroup--gap-m > *:not(:first-child) {
+  -webkit-margin-before: var(--vkui--size_button_group_gap_medium--regular);
+          margin-block-start: var(--vkui--size_button_group_gap_medium--regular);
+}
+
+/* "gap" для mode="horizontal" */
+
+.ButtonGroup--mode-horizontal > *:not(.ButtonGroup) {
+  /**
+   * [Примечание 4]
+   *
+   * `min-width` в контексте Flexbox по умолчанию имеет значение `auto`,
+   * из-за чего элементы при переполнении будут выходить за границы контейнера.
+   *
+   * Подробности по ссылке https://stackoverflow.com/a/66689926/2903061
+   */
+  min-inline-size: 0;
+}
+
+.ButtonGroup--mode-horizontal.ButtonGroup--gap-space > *:not(:last-child) {
+  -webkit-margin-end: var(--vkui--size_button_group_gap_space--regular);
+          margin-inline-end: var(--vkui--size_button_group_gap_space--regular);
+}
+
+.ButtonGroup--mode-horizontal.ButtonGroup--gap-s > *:not(:last-child) {
+  -webkit-margin-end: var(--vkui--size_button_group_gap_small--regular);
+          margin-inline-end: var(--vkui--size_button_group_gap_small--regular);
+}
+
+.ButtonGroup--mode-horizontal.ButtonGroup--gap-m > *:not(:last-child) {
+  -webkit-margin-end: var(--vkui--size_button_group_gap_medium--regular);
+          margin-inline-end: var(--vkui--size_button_group_gap_medium--regular);
+}
+
+/* stylelint-enable selector-max-universal */
+
+.ButtonGroup--mode-vertical.ButtonGroup--align-left {
+  align-items: flex-start;
+}
+
+.ButtonGroup--mode-vertical.ButtonGroup--align-center {
+  align-items: center;
+}
+
+.ButtonGroup--mode-vertical.ButtonGroup--align-right {
+  align-items: flex-end;
+}
+
+.ButtonGroup--mode-horizontal.ButtonGroup--align-left {
+  justify-content: flex-start;
+}
+
+.ButtonGroup--mode-horizontal.ButtonGroup--align-center {
+  justify-content: center;
+}
+
+.ButtonGroup--mode-horizontal.ButtonGroup--align-right {
+  justify-content: flex-end;
+}

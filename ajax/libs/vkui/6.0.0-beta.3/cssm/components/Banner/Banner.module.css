@@ -1,0 +1,162 @@
+.Banner {
+  isolation: isolate;
+  color: var(--vkui--color_text_primary);
+}
+
+.Banner__in {
+  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
+  padding: 12px;
+  background-color: var(--vkui--color_background_secondary);
+  border-radius: var(--vkui--size_border_radius--regular);
+  overflow: hidden;
+}
+
+.Banner__in::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: 0;
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  border: var(--vkui--size_border--regular) solid var(--vkui--color_image_border_alpha);
+  border-radius: inherit;
+  pointer-events: none;
+  box-sizing: border-box;
+  z-index: var(--vkui_internal--z_index_banner_content);
+}
+
+.Banner__before {
+  position: relative;
+  -webkit-margin-end: 12px;
+          margin-inline-end: 12px;
+  z-index: var(--vkui_internal--z_index_banner_content);
+}
+
+.Banner__content {
+  position: relative;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  min-inline-size: 0;
+  z-index: var(--vkui_internal--z_index_banner_content);
+}
+
+.Banner__subheader,
+.Banner__text {
+  color: var(--vkui--color_text_subhead);
+}
+
+.Banner__bg {
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: 0;
+  z-index: var(--vkui_internal--z_index_banner_background);
+}
+
+/* stylelint-disable-next-line selector-max-universal */
+
+.Banner__bg,
+.Banner__bg > * {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.Banner__aside {
+  display: flex;
+  flex-flow: row nowrap;
+  align-content: center;
+  align-items: center;
+  justify-content: flex-end;
+  inline-size: 28px;
+  color: var(--vkui--color_icon_secondary);
+}
+
+.Banner__dismiss {
+  position: absolute;
+  inset-block-start: 2px;
+  inset-inline-end: 2px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  color: var(--vkui--color_icon_secondary);
+  z-index: var(--vkui_internal--z_index_banner_hover);
+}
+
+.Banner__actions {
+  -webkit-margin-before: 12px;
+          margin-block-start: 12px;
+}
+
+.Banner__subheader:not(:first-child),
+.Banner__text:not(:first-child) {
+  -webkit-margin-before: 2px;
+          margin-block-start: 2px;
+}
+
+/**
+ * Mode "image"
+ */
+
+.Banner--mode-image .Banner__in {
+  background-color: var(--vkui--color_background_secondary);
+}
+
+.Banner--inverted .Banner__dismiss,
+.Banner--inverted .Banner__expand,
+.Banner--inverted {
+  color: var(--vkui--color_text_contrast);
+}
+
+.Banner--inverted .Banner__subheader {
+  color: var(--vkui--color_text_contrast);
+  opacity: 0.72;
+}
+
+/**
+ * Size "m"
+ */
+
+.Banner--size-m .Banner__in {
+  padding: 16px;
+}
+
+.Banner--size-m .Banner__subheader:not(:first-child),
+.Banner--size-m .Banner__text:not(:first-child) {
+  -webkit-margin-before: 4px;
+          margin-block-start: 4px;
+}
+
+.Banner--ios .Banner__dismiss,
+.Banner--ios.Banner--mode-image .Banner__dismiss {
+  color: var(--vkui--color_icon_secondary);
+}
+
+/**
+ * CMP:
+ * FormStatus
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormStatus) .Banner__in::before {
+  border: 0;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormStatus--mode-error) .Banner__in {
+  background-color: var(--vkui--color_background_negative_tint);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormStatus--mode-error) .Banner__subheader {
+  color: var(--vkui--color_background_negative);
+}

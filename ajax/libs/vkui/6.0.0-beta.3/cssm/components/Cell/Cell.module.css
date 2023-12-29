@@ -1,0 +1,93 @@
+.Cell {
+  position: relative;
+}
+
+.Cell--dragging {
+  background-color: var(--vkui--color_background_secondary);
+  box-shadow: var(--vkui--elevation3);
+}
+
+.Cell--selectable.Cell--disabled {
+  opacity: var(--vkui--opacity_disable_accessibility);
+}
+
+.Cell__checkbox,
+.Cell__dragger {
+  position: relative;
+  flex-shrink: 0;
+  -webkit-margin-end: 16px;
+          margin-inline-end: 16px;
+}
+
+.Cell__content {
+  max-inline-size: 100%;
+  min-inline-size: 0;
+}
+
+.Cell--removable .Cell__content {
+  flex-grow: 1;
+  /* размер removable icon */
+  -webkit-padding-end: 44px;
+          padding-inline-end: 44px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.Cell--removable :global(.vkuiInternalRemovable__content) {
+  -webkit-padding-start: 0;
+          padding-inline-start: 0;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list -- для того чтобы активная область Cell распространялась и на область removable */
+
+.Cell--removable :global(.vkuiInternalRemovable__action) {
+  position: absolute;
+  inset-inline-end: 0;
+  -webkit-padding-start: 0;
+          padding-inline-start: 0;
+}
+
+/**
+ * iOS
+ */
+
+.Cell--ios .Cell__dragger {
+  margin-inline: 12px 0;
+}
+
+.Cell--ios .Cell__checkbox {
+  -webkit-margin-end: 12px;
+          margin-inline-end: 12px;
+}
+
+.Cell--ios.Cell--removable .Cell__content {
+  /* размер removable icon + icon margins*/
+  padding-inline: 48px var(--vkui--size_base_padding_horizontal--regular);
+  /* правый паддинг от removable который мы обнулили ниже */
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.Cell--ios.Cell--removable :global(.vkuiInternalRemovable__action) {
+  inset-inline: 0 auto;
+  z-index: 1;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.Cell--ios.Cell--removable :global(.vkuiInternalRemovable__content) {
+  -webkit-padding-end: 0;
+          padding-inline-end: 0;
+}
+
+/**
+ * CMP:
+ * FormItem
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormItem) > .Cell {
+  margin-block: 0;
+  margin-inline: calc(-1 * var(--vkui--size_base_padding_horizontal--regular));
+}
