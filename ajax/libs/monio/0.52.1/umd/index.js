@@ -1,0 +1,5 @@
+/*! Monio: index.js
+    v0.52.1 (c) 2024 Kyle Simpson
+    MIT License: http://getify.mit-license.org
+*/
+!function UMD(e,i,t,n){"function"==typeof define&&define.amd?(t=Object.values(t),define(e,t,n)):"undefined"!=typeof module&&module.exports?(t=Object.keys(t).map((e=>require(e))),module.exports=n(...t)):(t=Object.values(t).map((e=>i[e])),i[e]=n(...t))}("Monio","undefined"!=typeof globalThis?globalThis:"undefined"!=typeof global?global:"undefined"!=typeof window?window:"undefined"!=typeof self?self:new Function("return this")(),{"./just.js":"Just","./nothing.js":"Nothing","./maybe.js":"Maybe","./either.js":"Either","./async-either.js":"AsyncEither","./state.js":"State","./io/io.js":"IO","./io/iox.js":"IOx","./io/any.js":"AnyIO","./io/all.js":"AllIO","./io/helpers.js":"IOHelpers","./io/x-helpers.js":"IOxHelpers","./lib/util.js":"MonioUtil"},(function DEF(e,i,t,n,o,s,l,u,r,d,f,a,j){"use strict";let p={};return p.Just=e,p.Nothing=i,p.Maybe=t,p.Either=n,p.AsyncEither=o,p.State=s,p.IO=l,p.RIO=l,p.IOx=u,p.AnyIO=r,p.AllIO=d,p.IOHelpers=f,p.IOxHelpers=a,p.MonioUtil=j,p}));
