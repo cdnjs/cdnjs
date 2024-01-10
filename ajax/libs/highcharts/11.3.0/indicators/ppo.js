@@ -1,0 +1,9 @@
+/**
+ * Highstock JS v11.3.0 (2024-01-10)
+ *
+ * Indicator series type for Highcharts Stock
+ *
+ * (c) 2010-2024 Wojciech Chmiel
+ *
+ * License: www.highcharts.com/license
+ */!function(e){"object"==typeof module&&module.exports?(e.default=e,module.exports=e):"function"==typeof define&&define.amd?define("highcharts/indicators/ppo",["highcharts","highcharts/modules/stock"],function(t){return e(t),e.Highcharts=t,e}):e("undefined"!=typeof Highcharts?Highcharts:void 0)}(function(e){"use strict";var t=e?e._modules:{};function s(e,t,s,o){e.hasOwnProperty(t)||(e[t]=o.apply(null,s),"function"==typeof CustomEvent&&window.dispatchEvent(new CustomEvent("HighchartsModuleLoaded",{detail:{path:t,module:e[t]}})))}s(t,"Stock/Indicators/PPO/PPOIndicator.js",[t["Core/Series/SeriesRegistry.js"],t["Core/Utilities.js"]],function(e,t){let{ema:s}=e.seriesTypes,{correctFloat:o,extend:i,merge:r,error:a}=t;class n extends s{getValues(e,t){let s,i;let r=t.periods,n=t.index,d=[],u=[],p=[];if(2!==r.length||r[1]<=r[0]){a('Error: "PPO requires two periods. Notice, first period should be lower than the second one."');return}let l=super.getValues.call(this,e,{index:n,period:r[0]}),c=super.getValues.call(this,e,{index:n,period:r[1]});if(!l||!c)return;let h=r[1]-r[0];for(i=0;i<c.yData.length;i++)s=o((l.yData[i+h]-c.yData[i])/c.yData[i]*100),d.push([c.xData[i],s]),u.push(c.xData[i]),p.push(s);return{values:d,xData:u,yData:p}}}return n.defaultOptions=r(s.defaultOptions,{params:{period:void 0,periods:[12,26]}}),i(n.prototype,{nameBase:"PPO",nameComponents:["periods"]}),e.registerSeriesType("ppo",n),n}),s(t,"masters/indicators/ppo.src.js",[],function(){})});

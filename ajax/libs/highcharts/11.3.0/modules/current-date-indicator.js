@@ -1,0 +1,9 @@
+/**
+ * Highcharts Gantt JS v11.3.0 (2024-01-10)
+ *
+ * CurrentDateIndicator
+ *
+ * (c) 2010-2024 Lars A. V. Cabrera
+ *
+ * License: www.highcharts.com/license
+ */!function(t){"object"==typeof module&&module.exports?(t.default=t,module.exports=t):"function"==typeof define&&define.amd?define("highcharts/modules/current-date-indicator",["highcharts"],function(e){return t(e),t.Highcharts=e,t}):t("undefined"!=typeof Highcharts?Highcharts:void 0)}(function(t){"use strict";var e=t?t._modules:{};function o(t,e,o,n){t.hasOwnProperty(e)||(t[e]=n.apply(null,o),"function"==typeof CustomEvent&&window.dispatchEvent(new CustomEvent("HighchartsModuleLoaded",{detail:{path:e,module:t[e]}})))}o(e,"Extensions/CurrentDateIndication.js",[e["Core/Globals.js"],e["Core/Utilities.js"]],function(t,e){let{composed:o}=t,{addEvent:n,merge:i,pushUnique:a,wrap:r}=e,s={color:"#ccd3ff",width:2,label:{format:"%a, %b %d %Y, %H:%M",formatter:function(t,e){return this.axis.chart.time.dateFormat(e||"",t)},rotation:0,style:{fontSize:"0.7em"}}};function l(){let t=this.options,e=t.currentDateIndicator;if(e){let o="object"==typeof e?i(s,e):i(s);o.value=Date.now(),o.className="highcharts-current-date-indicator",t.plotLines||(t.plotLines=[]),t.plotLines.push(o)}}function c(){this.label&&this.label.attr({text:this.getLabelText(this.options.label)})}function u(t,e){let o=this.options;return o&&o.className&&-1!==o.className.indexOf("highcharts-current-date-indicator")&&o.label&&"function"==typeof o.label.formatter?(o.value=Date.now(),o.label.formatter.call(this,o.value,o.label.format)):t.call(this,e)}return{compose:function t(e,i){a(o,t)&&(n(e,"afterSetOptions",l),n(i,"render",c),r(i.prototype,"getLabelText",u))}}}),o(e,"masters/modules/current-date-indicator.src.js",[e["Core/Globals.js"],e["Extensions/CurrentDateIndication.js"]],function(t,e){e.compose(t.Axis,t.PlotLineOrBand)})});

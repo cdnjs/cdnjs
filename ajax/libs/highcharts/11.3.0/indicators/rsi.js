@@ -1,0 +1,9 @@
+/**
+ * Highstock JS v11.3.0 (2024-01-10)
+ *
+ * Indicator series type for Highcharts Stock
+ *
+ * (c) 2010-2024 Paweł Fus
+ *
+ * License: www.highcharts.com/license
+ */!function(e){"object"==typeof module&&module.exports?(e.default=e,module.exports=e):"function"==typeof define&&define.amd?define("highcharts/indicators/rsi",["highcharts","highcharts/modules/stock"],function(t){return e(t),e.Highcharts=t,e}):e("undefined"!=typeof Highcharts?Highcharts:void 0)}(function(e){"use strict";var t=e?e._modules:{};function s(e,t,s,i){e.hasOwnProperty(t)||(e[t]=i.apply(null,s),"function"==typeof CustomEvent&&window.dispatchEvent(new CustomEvent("HighchartsModuleLoaded",{detail:{path:t,module:e[t]}})))}s(t,"Stock/Indicators/RSI/RSIIndicator.js",[t["Core/Series/SeriesRegistry.js"],t["Core/Utilities.js"]],function(e,t){let{sma:s}=e.seriesTypes,{isNumber:i,merge:a}=t;function n(e,t){return parseFloat(e.toFixed(t))}class o extends s{getValues(e,t){let s=t.period,a=e.xData,o=e.yData,r=o?o.length:0,d=t.decimals,u=[],c=[],h=[],l=0,f=0,p=t.index,m=1,g,y,x,v,S,j;if(!(a.length<s)){for(i(o[0])?j=o:(p=Math.min(p,o[0].length-1),j=o.map(e=>e[p]));m<s;)(y=n(j[m]-j[m-1],d))>0?l+=y:f+=Math.abs(y),m++;for(x=n(l/(s-1),d),v=n(f/(s-1),d),S=m;S<r;S++)(y=n(j[S]-j[S-1],d))>0?(l=y,f=0):(l=0,f=Math.abs(y)),x=n((x*(s-1)+l)/s,d),g=0===(v=n((v*(s-1)+f)/s,d))?100:0===x?0:n(100-100/(1+x/v),d),u.push([a[S],g]),c.push(a[S]),h.push(g);return{values:u,xData:c,yData:h}}}}return o.defaultOptions=a(s.defaultOptions,{params:{decimals:4,index:3}}),e.registerSeriesType("rsi",o),o}),s(t,"masters/indicators/rsi.src.js",[],function(){})});
