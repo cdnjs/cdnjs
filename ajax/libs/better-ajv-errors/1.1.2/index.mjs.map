@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/index.js"],
+  "sourcesContent": ["import { parse } from '@humanwhocodes/momoa';\nimport prettify from './helpers';\n\nexport default (schema, data, errors, options = {}) => {\n  const { format = 'cli', indent = null, json = null } = options;\n\n  const jsonRaw = json || JSON.stringify(data, null, indent);\n  const jsonAst = parse(jsonRaw);\n\n  const customErrorToText = error => error.print().join('\\n');\n  const customErrorToStructure = error => error.getError();\n  const customErrors = prettify(errors, {\n    data,\n    schema,\n    jsonAst,\n    jsonRaw,\n  });\n\n  if (format === 'cli') {\n    return customErrors.map(customErrorToText).join('\\n\\n');\n  } else {\n    return customErrors.map(customErrorToStructure);\n  }\n};\n"],
+  "mappings": ";AAAA;AACA;AAEA,IAAO,cAAQ,CAAC,QAAQ,MAAM,QAAQ,UAAU,OAAO;AACrD,QAAM,EAAE,SAAS,OAAO,SAAS,MAAM,OAAO,SAAS;AAEvD,QAAM,UAAU,QAAQ,KAAK,UAAU,MAAM,MAAM;AACnD,QAAM,UAAU,MAAM;AAEtB,QAAM,oBAAoB,WAAS,MAAM,QAAQ,KAAK;AACtD,QAAM,yBAAyB,WAAS,MAAM;AAC9C,QAAM,eAAe,SAAS,QAAQ;AAAA,IACpC;AAAA,IACA;AAAA,IACA;AAAA,IACA;AAAA;AAGF,MAAI,WAAW,OAAO;AACpB,WAAO,aAAa,IAAI,mBAAmB,KAAK;AAAA,SAC3C;AACL,WAAO,aAAa,IAAI;AAAA;AAAA;",
+  "names": []
+}
