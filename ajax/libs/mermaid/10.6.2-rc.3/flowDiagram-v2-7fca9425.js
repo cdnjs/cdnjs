@@ -1,0 +1,29 @@
+import { p as parser, f as flowDb } from "./flowDb-b68c5ed6.js";
+import { f as flowRendererV2, g as flowStyles } from "./styles-22495f47.js";
+import { t as setConfig } from "./mermaid-021f123a.js";
+import "./layout-0f7b0e6b.js";
+import "./index-f82e7698.js";
+import "./edges-1292032b.js";
+import "./createText-32daf8c0.js";
+import "./line-fe0a462c.js";
+import "./array-b7dcf730.js";
+import "./path-39bad7e2.js";
+const diagram = {
+  parser,
+  db: flowDb,
+  renderer: flowRendererV2,
+  styles: flowStyles,
+  init: (cnf) => {
+    if (!cnf.flowchart) {
+      cnf.flowchart = {};
+    }
+    cnf.flowchart.arrowMarkerAbsolute = cnf.arrowMarkerAbsolute;
+    setConfig({ flowchart: { arrowMarkerAbsolute: cnf.arrowMarkerAbsolute } });
+    flowRendererV2.setConf(cnf.flowchart);
+    flowDb.clear();
+    flowDb.setGen("gen-2");
+  }
+};
+export {
+  diagram
+};
