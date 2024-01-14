@@ -1,0 +1,237 @@
+/*!
+ * Author : Matteo Bruni
+ * MIT license: https://opensource.org/licenses/MIT
+ * Demo / Generator : https://particles.js.org/
+ * GitHub : https://www.github.com/matteobruni/tsparticles
+ * How to use? : Check the GitHub README
+ * v3.1.0
+ */
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory(require("@tsparticles/plugin-absorbers"), require("@tsparticles/updater-destroy"), require("@tsparticles/plugin-emitters"), require("@tsparticles/plugin-emitters-shape-circle"), require("@tsparticles/plugin-emitters-shape-square"), require("@tsparticles/interaction-external-trail"), require("@tsparticles/updater-roll"), require("@tsparticles/slim"), require("@tsparticles/shape-text"), require("@tsparticles/updater-tilt"), require("@tsparticles/updater-twinkle"), require("@tsparticles/updater-wobble"));
+	else if(typeof define === 'function' && define.amd)
+		define(["@tsparticles/plugin-absorbers", "@tsparticles/updater-destroy", "@tsparticles/plugin-emitters", "@tsparticles/plugin-emitters-shape-circle", "@tsparticles/plugin-emitters-shape-square", "@tsparticles/interaction-external-trail", "@tsparticles/updater-roll", "@tsparticles/slim", "@tsparticles/shape-text", "@tsparticles/updater-tilt", "@tsparticles/updater-twinkle", "@tsparticles/updater-wobble"], factory);
+	else {
+		var a = typeof exports === 'object' ? factory(require("@tsparticles/plugin-absorbers"), require("@tsparticles/updater-destroy"), require("@tsparticles/plugin-emitters"), require("@tsparticles/plugin-emitters-shape-circle"), require("@tsparticles/plugin-emitters-shape-square"), require("@tsparticles/interaction-external-trail"), require("@tsparticles/updater-roll"), require("@tsparticles/slim"), require("@tsparticles/shape-text"), require("@tsparticles/updater-tilt"), require("@tsparticles/updater-twinkle"), require("@tsparticles/updater-wobble")) : factory(root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"], root["window"]);
+		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
+	}
+})(this, (__WEBPACK_EXTERNAL_MODULE__94__, __WEBPACK_EXTERNAL_MODULE__344__, __WEBPACK_EXTERNAL_MODULE__68__, __WEBPACK_EXTERNAL_MODULE__953__, __WEBPACK_EXTERNAL_MODULE__787__, __WEBPACK_EXTERNAL_MODULE__889__, __WEBPACK_EXTERNAL_MODULE__734__, __WEBPACK_EXTERNAL_MODULE__830__, __WEBPACK_EXTERNAL_MODULE__727__, __WEBPACK_EXTERNAL_MODULE__448__, __WEBPACK_EXTERNAL_MODULE__4__, __WEBPACK_EXTERNAL_MODULE__83__) => {
+return /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ 889:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__889__;
+
+/***/ }),
+
+/***/ 94:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__94__;
+
+/***/ }),
+
+/***/ 68:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__68__;
+
+/***/ }),
+
+/***/ 953:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__953__;
+
+/***/ }),
+
+/***/ 787:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__787__;
+
+/***/ }),
+
+/***/ 727:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__727__;
+
+/***/ }),
+
+/***/ 830:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__830__;
+
+/***/ }),
+
+/***/ 344:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__344__;
+
+/***/ }),
+
+/***/ 734:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__734__;
+
+/***/ }),
+
+/***/ 448:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__448__;
+
+/***/ }),
+
+/***/ 4:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__4__;
+
+/***/ }),
+
+/***/ 83:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__83__;
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   loadFull: () => (/* binding */ loadFull)
+/* harmony export */ });
+/* harmony import */ var _tsparticles_plugin_absorbers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(94);
+/* harmony import */ var _tsparticles_plugin_absorbers__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_tsparticles_plugin_absorbers__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _tsparticles_updater_destroy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(344);
+/* harmony import */ var _tsparticles_updater_destroy__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_tsparticles_updater_destroy__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _tsparticles_plugin_emitters__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(68);
+/* harmony import */ var _tsparticles_plugin_emitters__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_tsparticles_plugin_emitters__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _tsparticles_plugin_emitters_shape_circle__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(953);
+/* harmony import */ var _tsparticles_plugin_emitters_shape_circle__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_tsparticles_plugin_emitters_shape_circle__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _tsparticles_plugin_emitters_shape_square__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(787);
+/* harmony import */ var _tsparticles_plugin_emitters_shape_square__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_tsparticles_plugin_emitters_shape_square__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _tsparticles_interaction_external_trail__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(889);
+/* harmony import */ var _tsparticles_interaction_external_trail__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_tsparticles_interaction_external_trail__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _tsparticles_updater_roll__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(734);
+/* harmony import */ var _tsparticles_updater_roll__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_tsparticles_updater_roll__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _tsparticles_slim__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(830);
+/* harmony import */ var _tsparticles_slim__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_tsparticles_slim__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _tsparticles_shape_text__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(727);
+/* harmony import */ var _tsparticles_shape_text__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_tsparticles_shape_text__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _tsparticles_updater_tilt__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(448);
+/* harmony import */ var _tsparticles_updater_tilt__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_tsparticles_updater_tilt__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _tsparticles_updater_twinkle__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(4);
+/* harmony import */ var _tsparticles_updater_twinkle__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_tsparticles_updater_twinkle__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _tsparticles_updater_wobble__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(83);
+/* harmony import */ var _tsparticles_updater_wobble__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_tsparticles_updater_wobble__WEBPACK_IMPORTED_MODULE_11__);
+
+
+
+
+
+
+
+
+
+
+
+
+async function loadFull(engine, refresh = true) {
+  await (0,_tsparticles_updater_destroy__WEBPACK_IMPORTED_MODULE_1__.loadDestroyUpdater)(engine, false);
+  await (0,_tsparticles_updater_roll__WEBPACK_IMPORTED_MODULE_6__.loadRollUpdater)(engine, false);
+  await (0,_tsparticles_updater_tilt__WEBPACK_IMPORTED_MODULE_9__.loadTiltUpdater)(engine, false);
+  await (0,_tsparticles_updater_twinkle__WEBPACK_IMPORTED_MODULE_10__.loadTwinkleUpdater)(engine, false);
+  await (0,_tsparticles_updater_wobble__WEBPACK_IMPORTED_MODULE_11__.loadWobbleUpdater)(engine, false);
+  await (0,_tsparticles_shape_text__WEBPACK_IMPORTED_MODULE_8__.loadTextShape)(engine, false);
+  await (0,_tsparticles_interaction_external_trail__WEBPACK_IMPORTED_MODULE_5__.loadExternalTrailInteraction)(engine, false);
+  await (0,_tsparticles_plugin_absorbers__WEBPACK_IMPORTED_MODULE_0__.loadAbsorbersPlugin)(engine, false);
+  await (0,_tsparticles_plugin_emitters__WEBPACK_IMPORTED_MODULE_2__.loadEmittersPlugin)(engine, false);
+  await (0,_tsparticles_plugin_emitters_shape_circle__WEBPACK_IMPORTED_MODULE_3__.loadEmittersShapeCircle)(engine, false);
+  await (0,_tsparticles_plugin_emitters_shape_square__WEBPACK_IMPORTED_MODULE_4__.loadEmittersShapeSquare)(engine, false);
+  await (0,_tsparticles_slim__WEBPACK_IMPORTED_MODULE_7__.loadSlim)(engine, refresh);
+}
+})();
+
+/******/ 	return __webpack_exports__;
+/******/ })()
+;
+});
