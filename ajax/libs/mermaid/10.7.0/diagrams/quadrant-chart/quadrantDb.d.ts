@@ -1,0 +1,38 @@
+type LexTextObj = {
+    text: string;
+    type: 'text' | 'markdown';
+};
+declare function setQuadrant1Text(textObj: LexTextObj): void;
+declare function setQuadrant2Text(textObj: LexTextObj): void;
+declare function setQuadrant3Text(textObj: LexTextObj): void;
+declare function setQuadrant4Text(textObj: LexTextObj): void;
+declare function setXAxisLeftText(textObj: LexTextObj): void;
+declare function setXAxisRightText(textObj: LexTextObj): void;
+declare function setYAxisTopText(textObj: LexTextObj): void;
+declare function setYAxisBottomText(textObj: LexTextObj): void;
+declare function addPoint(textObj: LexTextObj, x: number, y: number): void;
+declare function setWidth(width: number): void;
+declare function setHeight(height: number): void;
+declare function getQuadrantData(): import("./quadrantBuilder.js").QuadrantBuildType;
+declare const _default: {
+    setWidth: typeof setWidth;
+    setHeight: typeof setHeight;
+    setQuadrant1Text: typeof setQuadrant1Text;
+    setQuadrant2Text: typeof setQuadrant2Text;
+    setQuadrant3Text: typeof setQuadrant3Text;
+    setQuadrant4Text: typeof setQuadrant4Text;
+    setXAxisLeftText: typeof setXAxisLeftText;
+    setXAxisRightText: typeof setXAxisRightText;
+    setYAxisTopText: typeof setYAxisTopText;
+    setYAxisBottomText: typeof setYAxisBottomText;
+    addPoint: typeof addPoint;
+    getQuadrantData: typeof getQuadrantData;
+    clear: () => void;
+    setAccTitle: (txt: string) => void;
+    getAccTitle: () => string;
+    setDiagramTitle: (txt: string) => void;
+    getDiagramTitle: () => string;
+    getAccDescription: () => string;
+    setAccDescription: (txt: string) => void;
+};
+export default _default;
