@@ -1,0 +1,196 @@
+.Header {
+  display: flex;
+  align-items: flex-start;
+  padding: 0;
+  padding-inline: var(--vkui--size_base_padding_horizontal--regular);
+  -webkit-user-select: text;
+     -moz-user-select: text;
+      -ms-user-select: text;
+          user-select: text;
+  font-family: var(--vkui--font_family_base);
+}
+
+.Header__main {
+  flex: 1 0 0;
+  min-inline-size: 0;
+  color: var(--vkui--color_text_primary);
+}
+
+.Header__content {
+  display: flex;
+  align-items: center;
+}
+
+.Header__content-in,
+.Header__subtitle {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.Header__content--multiline {
+  white-space: initial;
+  word-break: break-word;
+}
+
+.Header__subtitle {
+  display: block;
+  color: var(--vkui--color_text_secondary);
+}
+
+.Header--mode-secondary:not(.Header--pi):not(.Header--with-subtitle) .Header__main,
+.Header--mode-tertiary .Header__main {
+  color: var(--vkui--color_text_secondary);
+}
+
+.Header__indicator {
+  color: var(--vkui--color_text_secondary);
+  -webkit-margin-start: 6px;
+          margin-inline-start: 6px;
+  flex-shrink: 0;
+}
+
+.Header--mode-primary .Header__indicator {
+  color: var(--vkui--color_text_subhead);
+}
+
+.Header:not(.Header--pi) .Header__indicator {
+  align-self: center;
+}
+
+.Header--mode-secondary .Header__indicator {
+  -webkit-margin-start: 8px;
+          margin-inline-start: 8px;
+}
+
+.Header__aside {
+  display: flex;
+  white-space: nowrap;
+}
+
+/* stylelint-disable selector-max-universal */
+
+.Header__aside.Header__aside > * {
+  margin-block: 13px 7px;
+  -webkit-margin-start: 12px;
+          margin-inline-start: 12px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.Header__aside > :global(.vkuiIcon) {
+  position: relative;
+  color: var(--vkui--color_icon_secondary);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.Header__aside > :global(.vkuiIcon--24) {
+  margin-block: 11px 5px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.Header__aside > :global(.vkuiIcon--16) {
+  margin-block: 15px 9px;
+}
+
+.Header--mode-primary {
+  padding-block: 3px 1px;
+}
+
+.Header__content {
+  -webkit-margin-before: 12px;
+          margin-block-start: 12px;
+}
+
+.Header__content:last-child {
+  -webkit-margin-after: 8px;
+          margin-block-end: 8px;
+}
+
+.Header--mode-tertiary .Header__content {
+  -webkit-margin-before: 15px;
+          margin-block-start: 15px;
+}
+
+.Header--mode-tertiary .Header__content:last-child {
+  -webkit-margin-after: 9px;
+          margin-block-end: 9px;
+}
+
+.Header__subtitle {
+  -webkit-margin-after: 7px;
+          margin-block-end: 7px;
+}
+
+/* Компенсируем 1 пиксель из-за паддинга в .Header--mode-primary */
+
+.Header--mode-primary .Header__subtitle {
+  -webkit-margin-after: 6px;
+          margin-block-end: 6px;
+}
+
+.Header--large .Header__content {
+  margin-block: 10px 6px;
+}
+
+/**
+ * CMP:
+ * Group
+ *
+ * TODO: Переделать отрицательные отступы https://github.com/VKCOM/VKUI/issues/3508
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalGroup--mode-plain):not(:first-of-type) > .Header:first-child,
+:global(.vkuiInternalGroup--mode-plain):not(:first-of-type)
+  > :global(.vkuiInternalTappable):first-child
+  > .Header {
+  -webkit-margin-before: -16px;
+          margin-block-start: -16px;
+}
+
+@media (max-width: 767.9px) {
+  /* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+  :global(.vkuiInternalGroup--sizeX-none.vkuiInternalGroup--mode-none):not(:first-of-type)
+    > .Header:first-child,
+  :global(.vkuiInternalGroup--sizeX-none.vkuiInternalGroup--mode-none):not(:first-of-type)
+    > :global(.vkuiInternalTappable):first-child
+    > .Header {
+    -webkit-margin-before: -16px;
+            margin-block-start: -16px;
+  }
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalGroup--mode-card) > .Header:not(.Header--mode-tertiary):first-child,
+:global(.vkuiInternalGroup--mode-card)
+  > :global(.vkuiInternalTappable):first-child
+  > .Header:not(.Header--mode-tertiary) {
+  -webkit-margin-before: -4px;
+          margin-block-start: -4px;
+}
+
+@media (min-width: 768px) {
+  /* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+  :global(.vkuiInternalGroup--sizeX-none.vkuiInternalGroup--mode-none)
+    > .Header:not(.Header--mode-tertiary):first-child,
+  :global(.vkuiInternalGroup--sizeX-none.vkuiInternalGroup--mode-none)
+    > :global(.vkuiInternalTappable):first-child
+    > .Header:not(.Header--mode-tertiary) {
+    -webkit-margin-before: -4px;
+            margin-block-start: -4px;
+  }
+}
+
+/**
+ * Impact:
+ * Link
+ */
+
+.Header__aside {
+  --vkui_internal--link-color: var(--vkui--color_text_accent);
+}

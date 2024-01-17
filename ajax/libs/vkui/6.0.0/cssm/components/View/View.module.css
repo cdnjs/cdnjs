@@ -1,0 +1,237 @@
+.View {
+  position: relative;
+  block-size: 100%;
+  inline-size: 100%;
+  word-wrap: break-word;
+}
+
+.View--animated,
+.View--swiping-back {
+  overflow: hidden;
+}
+
+.View--animated .View__panel,
+.View--animated .View__header,
+.View--swiping-back .View__panel,
+.View--swiping-back .View__header {
+  pointer-events: none;
+}
+
+.View__panels {
+  block-size: 100%;
+  inline-size: 100%;
+}
+
+.View__panel {
+  position: relative;
+  inline-size: 100%;
+  block-size: 100%;
+  box-sizing: border-box;
+  isolation: isolate;
+}
+
+.View__panel-in {
+  block-size: 100%;
+}
+
+.View--animated .View__panel,
+.View--swiping-back .View__panel {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  overflow: hidden;
+}
+
+.View__panel-overlay {
+  display: none;
+  position: absolute;
+  inline-size: 100%;
+  block-size: 100%;
+  inset-inline-start: 0;
+  inset-block-start: 0;
+  background-color: #000;
+  pointer-events: none;
+  z-index: var(--vkui_internal--z_index_panel_header_fade);
+}
+
+/**
+ * Panel swipe back
+ */
+
+.View--ios .View__panel--swipe-back-prev.View__panel--swipe-back-success {
+  transition: transform 0.3s var(--vkui--animation_easing_platform);
+  transform: translate3d(100%, 0, 0);
+}
+
+.View--ios .View__panel--swipe-back-next.View__panel--swipe-back-success {
+  transition: transform 0.3s var(--vkui--animation_easing_platform);
+  transform: translate3d(0, 0, 0);
+}
+
+.View--ios .View__panel--swipe-back-prev.View__panel--swipe-back-failed {
+  transition: transform 0.3s var(--vkui--animation_easing_platform);
+  transform: translate3d(0, 0, 0);
+}
+
+.View--ios .View__panel--swipe-back-next.View__panel--swipe-back-failed {
+  transition: transform 0.3s var(--vkui--animation_easing_platform);
+  transform: translate3d(-50%, 0, 0);
+}
+
+.View--ios .View__panel--swipe-back-next .View__panel-overlay {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.View--ios .View__panel--swipe-back-next.View__panel--swipe-back-success .View__panel-overlay,
+.View--ios .View__panel--swipe-back-next.View__panel--swipe-back-failed .View__panel-overlay {
+  transition: opacity 0.3s var(--vkui--animation_easing_platform);
+}
+
+/**
+ * Panel transition
+ */
+
+.View__panel--next ~ .View__panel--prev {
+  animation: animation-view-prev-back 0.3s var(--vkui--animation_easing_platform) forwards;
+}
+
+.View__panel--prev ~ .View__panel--next {
+  animation: animation-view-next-forward 0.3s var(--vkui--animation_easing_platform);
+}
+
+.View--no-motion .View__panel {
+  animation: none;
+}
+
+@keyframes animation-view-prev-back {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+}
+
+@keyframes animation-view-next-forward {
+  from {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.View--ios .View__panel--prev {
+  animation: animation-ios-prev-forward 0.6s var(--vkui--animation_easing_platform);
+}
+
+.View--ios .View__panel--next {
+  animation: animation-ios-next-back 0.6s var(--vkui--animation_easing_platform);
+}
+
+.View--ios .View__panel--prev ~ .View__panel--next {
+  animation: animation-ios-next-forward 0.6s var(--vkui--animation_easing_platform);
+}
+
+.View--ios .View__panel--next ~ .View__panel--prev {
+  animation: animation-ios-prev-back 0.6s var(--vkui--animation_easing_platform) forwards;
+}
+
+.View--ios .View__panel--prev .View__panel-overlay,
+.View--ios .View__panel--next .View__panel-overlay {
+  display: block;
+}
+
+.View--ios .View__panel--prev .View__panel-overlay {
+  animation: animation-ios-fade-in 0.6s var(--vkui--animation_easing_platform);
+}
+
+.View--ios .View__panel--next .View__panel-overlay {
+  animation: animation-ios-fade-out 0.6s var(--vkui--animation_easing_platform) forwards;
+}
+
+.View--ios .View__panel--prev ~ .View__panel--next .View__panel-overlay,
+.View--ios .View__panel--next ~ .View__panel--prev .View__panel-overlay {
+  display: none;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.View--ios.View--no-motion .View__panel,
+.View--ios.View--no-motion .View__panel :global(.vkuiInternalPanel__in) {
+  animation: none;
+}
+
+/**
+ * Active panel
+ */
+
+.View--ios .View__panel--active .View__panel-overlay {
+  display: none;
+}
+
+@keyframes animation-ios-next-forward {
+  from {
+    transform: translate3d(100%, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes animation-ios-next-back {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes animation-ios-prev-forward {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes animation-ios-prev-back {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+@keyframes animation-ios-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 0.3;
+  }
+}
+
+@keyframes animation-ios-fade-out {
+  from {
+    opacity: 0.3;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
