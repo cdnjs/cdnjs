@@ -1,0 +1,133 @@
+declare const _default: string;
+
+type KeyframeProperties = Record<string, string>;
+type KeyframeSteps = Record<string, KeyframeProperties>;
+interface Theme {
+    accentColor?: Record<string, string>;
+    animation?: Record<string, string>;
+    aspectRatio?: Record<string, string>;
+    backdropBlur?: Record<string, string>;
+    backdropBrightness?: Record<string, string>;
+    backdropContrast?: Record<string, string>;
+    backdropGrayscale?: Record<string, string>;
+    backdropHueRotate?: Record<string, string>;
+    backdropInvert?: Record<string, string>;
+    backdropOpacity?: Record<string, string>;
+    backdropSaturate?: Record<string, string>;
+    backdropSepia?: Record<string, string>;
+    backgroundColor?: Record<string, string>;
+    backgroundImage?: Record<string, string>;
+    blur?: Record<string, string>;
+    borderColor?: Record<string, string>;
+    borderRadius?: Record<string, string>;
+    borderSpacing?: Record<string, string>;
+    borderWidth?: Record<string, string>;
+    boxShadow?: Record<string, string>;
+    boxShadowColor?: Record<string, string>;
+    brightness?: Record<string, string>;
+    caretColor?: Record<string, string>;
+    colors?: Record<string, string>;
+    columns?: Record<string, string>;
+    contrast?: Record<string, string>;
+    cursor?: Record<string, string>;
+    divideColor?: Record<string, string>;
+    divideWidth?: Record<string, string>;
+    dropShadow?: Record<string, string | string[]>;
+    fill?: Record<string, string>;
+    flexBasis?: Record<string, string>;
+    fontFamily?: Record<string, string | [string, {
+        fontFeatureSettings?: string;
+        fontVariationSettings?: string;
+    }]>;
+    fontSize?: Record<string, string | readonly [
+        string,
+        string | {
+            lineHeight?: string;
+            letterSpacing?: string;
+            fontWeight?: string;
+        }
+    ]>;
+    fontWeight?: Record<string, string>;
+    gap?: Record<string, string>;
+    grayscale?: Record<string, string>;
+    gridAutoColumns?: Record<string, string>;
+    gridAutoRows?: Record<string, string>;
+    gridColumn?: Record<string, string>;
+    gridColumnEnd?: Record<string, string>;
+    gridColumnStart?: Record<string, string>;
+    gridRow?: Record<string, string>;
+    gridRowEnd?: Record<string, string>;
+    gridRowStart?: Record<string, string>;
+    gridTemplateColumns?: Record<string, string>;
+    gridTemplateRows?: Record<string, string>;
+    height?: Record<string, string>;
+    hueRotate?: Record<string, string>;
+    inset?: Record<string, string>;
+    invert?: Record<string, string>;
+    keyframes?: Record<string, KeyframeSteps>;
+    letterSpacing?: Record<string, string>;
+    lineClamp?: Record<string, string>;
+    lineHeight?: Record<string, string>;
+    listStyleImage?: Record<string, string>;
+    listStyleType?: Record<string, string>;
+    margin?: Record<string, string>;
+    maxHeight?: Record<string, string>;
+    maxWidth?: Record<string, string>;
+    minHeight?: Record<string, string>;
+    minWidth?: Record<string, string>;
+    objectPosition?: Record<string, string>;
+    outlineColor?: Record<string, string>;
+    outlineOffset?: Record<string, string>;
+    outlineWidth?: Record<string, string>;
+    opacity?: Record<string, string>;
+    order?: Record<string, string>;
+    padding?: Record<string, string>;
+    placeholderColor?: Record<string, string>;
+    ringColor?: Record<string, string>;
+    ringWidth?: Record<string, string>;
+    ringOffsetColor?: Record<string, string>;
+    ringOffsetWidth?: Record<string, string>;
+    rotate?: Record<string, string>;
+    saturate?: Record<string, string>;
+    scale?: Record<string, string>;
+    scrollMargin?: Record<string, string>;
+    scrollPadding?: Record<string, string>;
+    sepia?: Record<string, string>;
+    size?: Record<string, string>;
+    skew?: Record<string, string>;
+    space?: Record<string, string>;
+    spacing?: Record<string, string>;
+    stroke?: Record<string, string>;
+    strokeWidth?: Record<string, string>;
+    textColor?: Record<string, string>;
+    textDecorationColor?: Record<string, string>;
+    textDecorationThickness?: Record<string, string>;
+    textIndent?: Record<string, string>;
+    textUnderlineOffset?: Record<string, string>;
+    transformOrigin?: Record<string, string>;
+    transitionDelay?: Record<string, string>;
+    transitionDuration?: Record<string, string>;
+    transitionProperty?: Record<string, string>;
+    transitionTimingFunction?: Record<string, string>;
+    translate?: Record<string, string>;
+    width?: Record<string, string>;
+    zIndex?: Record<string, string>;
+}
+
+type Rule = {
+    kind: 'rule';
+    selector: string;
+    nodes: AstNode[];
+};
+type Declaration = {
+    kind: 'declaration';
+    property: string;
+    value: string;
+};
+type AstNode = Rule | Declaration;
+declare function rule(selector: string, nodes: AstNode[]): Rule;
+declare function decl(property: string, value: string): Declaration;
+declare function optimizeCss(input: string): string;
+declare function compile(rawCandidates: string[], theme?: Theme): string;
+
+export { type AstNode, type Declaration, type Rule, compile, decl, optimizeCss, _default as preflight, rule };
