@@ -1,0 +1,32 @@
+.Popover {
+  position: relative;
+  animation: popover-fade-in 0.2s ease;
+  background: var(--vkui--color_background_modal);
+  border-radius: var(--vkui--size_border_radius--regular);
+  box-shadow: var(--vkui--elevation3);
+}
+
+/* Создаём "Safe Zone" */
+
+.Popover::before {
+  content: '';
+  position: absolute;
+  top: calc(-1 * var(--vkui_internal--popover_safe_zone_padding));
+  right: calc(-1 * var(--vkui_internal--popover_safe_zone_padding));
+  bottom: calc(-1 * var(--vkui_internal--popover_safe_zone_padding));
+  left: calc(-1 * var(--vkui_internal--popover_safe_zone_padding));
+}
+
+.Popover__in {
+  position: relative;
+}
+
+@keyframes popover-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

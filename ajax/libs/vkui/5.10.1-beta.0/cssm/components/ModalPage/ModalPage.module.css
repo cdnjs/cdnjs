@@ -1,0 +1,156 @@
+.ModalPage {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.ModalPage:focus {
+  outline: none;
+}
+
+.ModalPage--desktop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ModalPage__in-wrap {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  align-items: flex-end;
+  pointer-events: initial;
+  transform: translateY(100%);
+  transition: transform 320ms var(--vkui--animation_easing_platform);
+}
+
+.ModalPage--ios .ModalPage__in-wrap {
+  transition: transform 400ms var(--vkui--animation_easing_platform);
+}
+
+.ModalPage--desktop .ModalPage__in-wrap {
+  position: relative;
+  align-items: initial;
+  margin: 32px 56px;
+  height: auto;
+  max-height: 640px;
+  opacity: 0;
+  transform: none;
+  transition: opacity 340ms var(--vkui--animation_easing_platform);
+}
+
+@media (max-height: 672px) {
+  .ModalPage--desktop .ModalPage__in-wrap {
+    max-height: calc(100% - 32px * 2);
+  }
+}
+
+.ModalPage--size-s .ModalPage__in-wrap {
+  max-width: var(--vkui--size_popup_small--regular);
+}
+
+.ModalPage--size-m .ModalPage__in-wrap {
+  max-width: var(--vkui--size_popup_medium--regular);
+}
+
+.ModalPage--size-l .ModalPage__in-wrap {
+  max-width: var(--vkui--size_popup_large--regular);
+}
+
+.ModalPage__in {
+  background-color: var(--vkui--color_background_modal);
+  overflow: visible;
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-top-right-radius: var(--vkui--size_border_radius_paper--regular);
+  border-top-left-radius: var(--vkui--size_border_radius_paper--regular);
+
+  --vkui_internal--background: var(--vkui--color_background_modal);
+}
+
+.ModalPage--desktop .ModalPage__in {
+  height: auto;
+  box-shadow: var(--vkui--elevation3);
+  border-bottom-right-radius: var(--vkui--size_border_radius_paper--regular);
+  border-bottom-left-radius: var(--vkui--size_border_radius_paper--regular);
+}
+
+.ModalPage__header {
+  width: 100%;
+}
+
+.ModalPage__content-wrap {
+  position: relative;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  overflow: hidden;
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+}
+
+.ModalPage__header:empty + .ModalPage__content-wrap {
+  border-radius: inherit;
+}
+
+.ModalPage__content {
+  height: 100%;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.ModalPage--desktop .ModalPage__content,
+:global(.vkuiInternalModalRoot__modal--expandable) .ModalPage__content {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ModalPage--desktop .ModalPage__content-in,
+:global(.vkuiInternalModalRoot__modal--expandable) .ModalPage__content-in {
+  height: 100%;
+}
+
+/* существует для того, чтобы использовать в расчёте translateY
+ * чтобы поднять ModalPage не только на высоту контента, но и на высоту bottom-inset
+ * особенно важно для ModalPage c динамической высотой
+ */
+
+.ModalPage__bottom-inset {
+  height: var(--vkui_internal--safe_area_inset_bottom);
+  flex-shrink: 0;
+}
+
+/**
+ * CMP:
+ * ModalRoot
+ *
+ * [дополнительно] также ищи в файле `ModalRoot__modal--expandable`
+ */
+
+:global(.vkuiInternalModalRoot--touched) .ModalPage__in-wrap {
+  transition: none;
+}
+
+:global(.vkuiInternalModalRoot--switching) .ModalPage__in-wrap {
+  pointer-events: none;
+}
+
+:global(.vkuiInternalModalRoot__modal--collapsed) .ModalPage__content,
+:global(.vkuiInternalModalRoot__modal--dragging) .ModalPage__content {
+  overflow: hidden;
+  touch-action: pan-y;
+}

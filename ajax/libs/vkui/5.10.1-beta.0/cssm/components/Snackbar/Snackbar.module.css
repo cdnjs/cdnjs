@@ -1,0 +1,101 @@
+.Snackbar {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  z-index: var(--vkui--z_index_popout);
+  position: fixed;
+  bottom: 0;
+  left: auto;
+  width: 100%;
+  padding-left: var(--vkui_internal--safe_area_inset_left);
+  padding-right: var(--vkui_internal--safe_area_inset_right);
+  padding-bottom: var(--vkui_internal--safe_area_inset_bottom);
+}
+
+/**
+ * CMP:
+ * Epic
+ */
+
+:global(.vkuiInternalEpic--hasTabbar) .Snackbar {
+  padding-bottom: calc(
+    var(--vkui_internal--tabbar_height) + var(--vkui_internal--safe_area_inset_bottom)
+  );
+}
+
+.Snackbar__in,
+.Snackbar__snackbar {
+  transition: transform 320ms var(--vkui--animation_easing_platform);
+}
+
+.Snackbar__in {
+  padding: 8px;
+  animation: animation-snackbar-intro-vertical 340ms var(--vkui--animation_easing_platform);
+}
+
+.Snackbar--closing .Snackbar__in {
+  transform: translate3d(0, 140%, 0);
+}
+
+.ModalRoot .Snackbar {
+  padding-bottom: var(--vkui_internal--safe_area_inset_bottom);
+}
+
+/* iOS */
+
+.Snackbar--ios .Snackbar__in,
+.Snackbar--ios .Snackbar__snackbar {
+  transition: transform 400ms var(--vkui--animation_easing_platform);
+}
+
+/**
+ * Desktop
+ */
+
+.Snackbar--desktop {
+  max-width: 351px;
+  left: 0;
+  bottom: 0;
+}
+
+.Snackbar--desktop .Snackbar__in {
+  padding: 12px;
+  animation-name: animation-snackbar-intro-horizontal;
+}
+
+.Snackbar--desktop.Snackbar--closing .Snackbar__in {
+  transform: translate3d(-140%, 0, 0);
+}
+
+/**
+ * Touch-interaction
+ */
+
+.Snackbar--touched .Snackbar__snackbar {
+  transition: none;
+}
+
+/**
+ * Animations
+ */
+
+@keyframes animation-snackbar-intro-vertical {
+  from {
+    transform: translate3d(0, 140%, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes animation-snackbar-intro-horizontal {
+  from {
+    transform: translate3d(-140%, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
