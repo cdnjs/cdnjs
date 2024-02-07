@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("uicolor","eu",{title:"EI kolore-hautatzailea",options:"Kolore aukerak",highlight:"Nabarmendu",selected:"Hautatutako kolorea",predefined:"Aurrez definitutako kolore multzoak",config:"Itsatsi kate hau zure config.js fitxategian"});

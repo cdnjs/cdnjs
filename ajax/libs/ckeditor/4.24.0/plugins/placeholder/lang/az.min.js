@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("placeholder","az",{title:"Yertutanın xüsusiyyətləri",toolbar:"Yertutan",name:"Yertutanın adı",invalidName:"Yertutan boş ola bilməz, həm də [, ], <, > işarələrdən ehtiva edə bilməz",pathName:"yertutan"});

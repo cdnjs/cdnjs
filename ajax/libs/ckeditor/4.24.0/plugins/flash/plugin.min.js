@@ -1,0 +1,1 @@
+CKEDITOR.plugins.add("flash",{init:function(){CKEDITOR.error("editor-plugin-deprecated",{plugin:"flash"})}}),CKEDITOR.tools.extend(CKEDITOR.config,{flashEmbedTagOnly:!1,flashAddEmbedTag:!0,flashConvertOnEdit:!1});
