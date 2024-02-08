@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Sopplayer - HTML5 Stylish Video Player</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="svg/play.svg" />
+  <link href="sopplayer.css" rel="stylesheet" />
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
+  <!-- <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script> -->
+</head>
+<body>
+  <div class="container">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLFcP4G5x1z-rhG307w1iAQBFSTHa5hbRz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <br>
+    <a href="https://github.com/SH20RAJ/Sopplayer/" class="btn btn-dark">VIEW IN GITHUB</a>
+    <br>
+    <a href="https://www.youtube.com/watch?v=Tmj2QOXE6EU&feature=emb_imp_woyt" class="btn btn-warning">VIDEO DOC</a>
+    <br>
+    <center>
+      <video id="my-video" class="sopplayer" controls preload="auto" data-setup="{}" width="500px">
+        <source src="sample.mp4" type="video/mp4" />
+        <p class="vjs-no-js">
+          To view this video please enable JavaScript, and consider upgrading to a
+          web browser that
+          <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+        </p>
+      </video>
+    </center>
+    <br><br>
+    <div id="list"></div>
+    <script src="sopplayer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
+    <script>
+      fetch('https://raw.githubusercontent.com/SH20RAJ/Sopplayer/main/players/README.md')
+        .then(response => response.text())
+        .then(data => {
+          console.log(data);
+          var converter = new showdown.Converter();
+          var md = data;
+          var html = converter.makeHtml(md);
+          document.querySelector('#list').innerHTML = html;
+        });
+    </script>
+    ---
+    <div id="mypost"></div>
+    <script>
+      fetch('https://sh20raj.github.io/Sopplayer/README.md')
+        .then(response => response.text())
+        .then(data => {
+          console.log(data);
+          var converter = new showdown.Converter();
+          var md = data;
+          var html = converter.makeHtml(md);
+          document.querySelector('#mypost').innerHTML = html;
+        });
+    </script>
+  </div>
+  <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-61e98fd84ed0c9e8"></script>
+</body>
+</html>
