@@ -1,0 +1,59 @@
+/**
+ * Утилитарные классы на замену отдельному компоненту для имитации
+ * :focus-visible состояния.
+ */
+.-focus-visible {
+  --vkui_internal--outline_width: 2px;
+}
+/* stylelint-disable-next-line selector-max-universal */
+.-focus-visible:focus,
+.-focus-visible:focus-visible,
+.-focus-visible *:focus,
+.-focus-visible *:focus-visible {
+  outline: none;
+}
+.-focus-visible.-focus-visible--mode-outside {
+  --vkui_internal--outline_offset: var(--vkui_internal--outline_width);
+}
+.-focus-visible.-focus-visible--mode-inside {
+  --vkui_internal--outline_offset: calc(-1 * var(--vkui_internal--outline_width));
+}
+.-focus-visible.-focus-visible--focused.-focus-visible--mode-inside,
+.-focus-visible.-focus-visible--focused.-focus-visible--mode-outside {
+  outline: var(--vkui_internal--outline);
+  outline-offset: var(--vkui_internal--outline_offset);
+}
+/**
+  * [a11y][progressive enhancement]
+  * @see https://github.com/VKCOM/VKUI/issues/2703
+  *
+  * TODO [a11y]: перенести комментарий в задачу по ссылке выше
+  *
+  * add animation for browsers that support prefers-reduced-motion
+  * without support there are no animations; this way, users with
+  * vestibular motion disorders are not affected
+  *
+  * добавляем анимации для браузеров с поддержкой prefers-reduced-motion
+  * без поддержки анимаций нет вообще; так юзеры с проблемами с
+  * вестибулярным аппаратом могут пользоваться приложениями на vkui с
+  * клавиатуры без спецэффектов
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .-focus-visible.-focus-visible--focused.-focus-visible--mode-inside,
+  .-focus-visible.-focus-visible--focused.-focus-visible--mode-outside {
+    outline-offset: 0;
+    animation: animation-outline-offset 0.1s ease-in-out 0.01s forwards;
+  }
+
+  .-focus-visible.-focus-visible--focused.-focus-visible--mode-inside {
+    outline-offset: calc(-2 * var(--vkui_internal--outline_width));
+  }
+}
+@keyframes animation-outline-offset {
+  0% {
+  }
+
+  100% {
+    outline-offset: var(--vkui_internal--outline_offset);
+  }
+}

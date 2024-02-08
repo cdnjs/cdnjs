@@ -1,0 +1,59 @@
+.CellButton {
+  box-sizing: border-box;
+  text-decoration: none;
+  margin: 0;
+  border: 0;
+  inline-size: 100%;
+  background: transparent;
+  text-align: start;
+  padding-block: 0;
+}
+
+/**
+ * CMP:
+ * FormItem
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormItem) .CellButton {
+  inline-size: 100%;
+  box-sizing: content-box;
+  margin-block: 0;
+  margin-inline: calc(-1 * var(--vkui--size_base_padding_horizontal--regular));
+}
+
+.CellButton[disabled] {
+  opacity: 0.4;
+}
+
+.CellButton--centered {
+  justify-content: center;
+  text-align: center;
+}
+
+/* stylelint-disable-next-line selector-max-universal -- отключаем растягивание элементов внутри */
+
+.CellButton--centered > * {
+  flex-grow: initial;
+  max-inline-size: initial;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.CellButton--centered :global(.vkuiIcon) {
+  -webkit-padding-end: 8px;
+          padding-inline-end: 8px;
+}
+
+.CellButton {
+  --vkui_internal--icon_color: var(--vkui--color_icon_accent);
+
+  color: var(--vkui--color_text_accent);
+}
+
+.CellButton--mode-danger {
+  --vkui_internal--icon_color: var(--vkui--color_text_negative);
+
+  color: var(--vkui--color_text_negative);
+}
