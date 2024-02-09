@@ -1,0 +1,49 @@
+$inter-font-display: swap !default;
+$inter-font-suffix: '' !default;
+$inter-font-path: 'variable' !default;
+$inter-font-path-suffix: '?v=4.0' !default;
+
+@mixin normal {
+  @font-face {
+    font-family: 'InterVariable';
+    font-weight: 100 900;
+    font-style: normal;
+    font-named-instance: 'Regular';
+    font-display: $inter-font-display;
+    src: url("#{$inter-font-path}/InterVariable#{$inter-font-suffix}.woff2#{$inter-font-path-suffix}") format("woff2 supports variations(gvar)"),
+    url("#{$inter-font-path}/InterVariable#{$inter-font-suffix}.woff2#{$inter-font-path-suffix}") format("woff2-variations"),
+    url("#{$inter-font-path}/InterVariable#{$inter-font-suffix}.woff2#{$inter-font-path-suffix}") format("woff2");
+  }
+}
+
+@mixin italic {
+  @font-face {
+    font-family: 'InterVariable';
+    font-weight: 100 900;
+    font-style: italic;
+    font-named-instance: 'Italic';
+    font-display: $inter-font-display;
+    src: url("#{$inter-font-path}/InterVariable-Italic#{$inter-font-suffix}.woff2#{$inter-font-path-suffix}") format("woff2 supports variations(gvar)"),
+    url("#{$inter-font-path}/InterVariable-Italic#{$inter-font-suffix}.woff2#{$inter-font-path-suffix}") format("woff2-variations"),
+    url("#{$inter-font-path}/InterVariable-Italic#{$inter-font-suffix}.woff2#{$inter-font-path-suffix}") format("woff2");
+  }
+}
+
+@mixin default {
+  /* -------------------------------------------------------
+  Variable font.
+  Usage:
+
+    html { font-family: 'Inter', sans-serif; }
+    @supports (font-variation-settings: normal) {
+      html { font-family: 'InterVariable', sans-serif; }
+    }
+  */
+
+  @include normal;
+  @include italic;
+}
+
+@mixin all {
+  @include default;
+}
