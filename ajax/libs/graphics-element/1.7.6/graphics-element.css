@@ -1,0 +1,749 @@
+/*
+  Let's look at how we can give the <graphics-element> a decent look,
+  but also how we can make sure that the <fallback> content only shows
+  when the <graphics-element> isn't actually defined, because scripts
+  are disabled (or blocked!).
+*/
+graphics-element {
+  display: block;
+  border: 1px solid grey;
+
+  /*
+    We can use the :defined pseudo-class to check whether a particular
+    element is considered a "real" element (either by being a built-in
+    standard HTML element, or a registered custom element) or whether it's
+    just "a tag name that isn't tied to anything".
+
+    If JS is disabled, as well as when the JS for registering our custom
+    element is still loading, our <graphics-element> will just be "a word"
+    and so we want to make sure to not show any content, except for the
+    <fallback-image>, if there is one.
+
+    So, first off: hide everything!
+  */
+
+  &:not(:defined) > * {
+    display: none;
+    /*
+      And then we declare a more specific rule that does NOT hide the
+      <fallback-image> element and its content.
+    */
+    & fallback-image {
+      display: block;
+      text-align: center;
+      padding: 0.5em;
+      margin: auto;
+
+      /*
+        Normally, images are inline elements, but in our case we want it to be
+        treated as a full block, so that the caption text shows up underneath
+        it, rather than next to it:
+      */
+      & > .view-source {
+        display: block;
+        position: relative;
+        top: -0.6em;
+        margin-bottom: -0.2em;
+        font-size: 60%;
+        color: #00000030;
+      }
+
+      & > label {
+        display: block;
+        font-style: italic;
+        font-size: 0.9em;
+        text-align: right;
+      }
+
+      & > img {
+        display: block;
+        border: 1px solid lightgrey;
+      }
+    }
+  }
+
+  /*
+    Then, we say what should happen once our <graphics-element> element
+    is considered a proper, registered HTML tag:
+  */
+  &:defined {
+    display: inline-block;
+    padding: 0.5em;
+    justify-self: center;
+    font-size: revert;
+    text-align: revert;
+
+    /*
+      And of course, once that's the case we actually want to make sure that
+      the <fallback-image> does NOT show anymore!
+    */
+    & fallback-image.loaded {
+      display: none;
+    }
+  }
+
+  & table.slider-wrapper {
+    border-spacing: 0;
+    width: 100%;
+    padding: 0 1em;
+    margin-top: 0.5em;
+    margin-bottom: -0.5em;
+
+    & td:nth-child(1) {
+      font-feature-settings: "hist";
+    }
+    & td:nth-child(2) {
+      font-size: 60%;
+      text-align: right;
+      vertical-align: middle;
+      width: 2em;
+    }
+    & td:nth-child(4) {
+      font-size: 60%;
+      text-align: left;
+      vertical-align: middle;
+      padding-left: 0.5em;
+      width: 2em;
+    }
+    & td:nth-child(5) {
+      width: 4em;
+      text-align: center;
+      cursor: pointer;
+      & * {
+        cursor: pointer;
+      }
+    }
+    & td input[type="range"] {
+      width: 100%;
+    }
+  }
+
+  & button.remove-color {
+    float: right;
+    margin-top: -1em;
+    opacity: 0.5;
+  }
+
+  & > p {
+    text-align: left;
+    padding: 0 1em;
+    font-family: sans-serif;
+    font-style: normal;
+    user-select: text;
+
+    & *.calm {
+      -webkit-text-stroke: 0px transparent;
+      cursor: auto !important;
+    }
+
+    /* color tags. They're not real tags, but the browser couldn't care less */
+    & aliceblue {
+      -webkit-text-stroke: 0.75px #f0f8ff;
+      cursor: pointer;
+    }
+    & antiquewhite {
+      -webkit-text-stroke: 0.75px #faebd7;
+      cursor: pointer;
+    }
+    & aqua {
+      -webkit-text-stroke: 0.75px #00ffff;
+      cursor: pointer;
+    }
+    & aquamarine {
+      -webkit-text-stroke: 0.75px #7fffd4;
+      cursor: pointer;
+    }
+    & azure {
+      -webkit-text-stroke: 0.75px #f0ffff;
+      cursor: pointer;
+    }
+    & beige {
+      -webkit-text-stroke: 0.75px #f5f5dc;
+      cursor: pointer;
+    }
+    & bisque {
+      -webkit-text-stroke: 0.75px #ffe4c4;
+      cursor: pointer;
+    }
+    & black {
+      -webkit-text-stroke: 0.75px #000000;
+      cursor: pointer;
+    }
+    & blanchedalmond {
+      -webkit-text-stroke: 0.75px #ffebcd;
+      cursor: pointer;
+    }
+    & blue {
+      -webkit-text-stroke: 0.75px #0000ff;
+      cursor: pointer;
+    }
+    & blueviolet {
+      -webkit-text-stroke: 0.75px #8a2be2;
+      cursor: pointer;
+    }
+    & brown {
+      -webkit-text-stroke: 0.75px #a52a2a;
+      cursor: pointer;
+    }
+    & burlywood {
+      -webkit-text-stroke: 0.75px #deb887;
+      cursor: pointer;
+    }
+    & cadetblue {
+      -webkit-text-stroke: 0.75px #5f9ea0;
+      cursor: pointer;
+    }
+    & chartreuse {
+      -webkit-text-stroke: 0.75px #7fff00;
+      cursor: pointer;
+    }
+    & chocolate {
+      -webkit-text-stroke: 0.75px #d2691e;
+      cursor: pointer;
+    }
+    & coral {
+      -webkit-text-stroke: 0.75px #ff7f50;
+      cursor: pointer;
+    }
+    & cornflowerblue {
+      -webkit-text-stroke: 0.75px #6495ed;
+      cursor: pointer;
+    }
+    & cornsilk {
+      -webkit-text-stroke: 0.75px #fff8dc;
+      cursor: pointer;
+    }
+    & crimson {
+      -webkit-text-stroke: 0.75px #dc143c;
+      cursor: pointer;
+    }
+    & cyan {
+      -webkit-text-stroke: 0.75px #00ffff;
+      cursor: pointer;
+    }
+    & darkblue {
+      -webkit-text-stroke: 0.75px #00008b;
+      cursor: pointer;
+    }
+    & darkcyan {
+      -webkit-text-stroke: 0.75px #008b8b;
+      cursor: pointer;
+    }
+    & darkgoldenrod {
+      -webkit-text-stroke: 0.75px #b8860b;
+      cursor: pointer;
+    }
+    & darkgray {
+      -webkit-text-stroke: 0.75px #a9a9a9;
+      cursor: pointer;
+    }
+    & darkgreen {
+      -webkit-text-stroke: 0.75px #006400;
+      cursor: pointer;
+    }
+    & darkgrey {
+      -webkit-text-stroke: 0.75px #a9a9a9;
+      cursor: pointer;
+    }
+    & darkkhaki {
+      -webkit-text-stroke: 0.75px #bdb76b;
+      cursor: pointer;
+    }
+    & darkmagenta {
+      -webkit-text-stroke: 0.75px #8b008b;
+      cursor: pointer;
+    }
+    & darkolivegreen {
+      -webkit-text-stroke: 0.75px #556b2f;
+      cursor: pointer;
+    }
+    & darkorange {
+      -webkit-text-stroke: 0.75px #ff8c00;
+      cursor: pointer;
+    }
+    & darkorchid {
+      -webkit-text-stroke: 0.75px #9932cc;
+      cursor: pointer;
+    }
+    & darkred {
+      -webkit-text-stroke: 0.75px #8b0000;
+      cursor: pointer;
+    }
+    & darksalmon {
+      -webkit-text-stroke: 0.75px #e9967a;
+      cursor: pointer;
+    }
+    & darkseagreen {
+      -webkit-text-stroke: 0.75px #8fbc8f;
+      cursor: pointer;
+    }
+    & darkslateblue {
+      -webkit-text-stroke: 0.75px #483d8b;
+      cursor: pointer;
+    }
+    & darkslategray {
+      -webkit-text-stroke: 0.75px #2f4f4f;
+      cursor: pointer;
+    }
+    & darkslategrey {
+      -webkit-text-stroke: 0.75px #2f4f4f;
+      cursor: pointer;
+    }
+    & darkturquoise {
+      -webkit-text-stroke: 0.75px #00ced1;
+      cursor: pointer;
+    }
+    & darkviolet {
+      -webkit-text-stroke: 0.75px #9400d3;
+      cursor: pointer;
+    }
+    & deeppink {
+      -webkit-text-stroke: 0.75px #ff1493;
+      cursor: pointer;
+    }
+    & deepskyblue {
+      -webkit-text-stroke: 0.75px #00bfff;
+      cursor: pointer;
+    }
+    & dimgray {
+      -webkit-text-stroke: 0.75px #696969;
+      cursor: pointer;
+    }
+    & dimgrey {
+      -webkit-text-stroke: 0.75px #696969;
+      cursor: pointer;
+    }
+    & dodgerblue {
+      -webkit-text-stroke: 0.75px #1e90ff;
+      cursor: pointer;
+    }
+    & firebrick {
+      -webkit-text-stroke: 0.75px #b22222;
+      cursor: pointer;
+    }
+    & floralwhite {
+      -webkit-text-stroke: 0.75px #fffaf0;
+      cursor: pointer;
+    }
+    & forestgreen {
+      -webkit-text-stroke: 0.75px #228b22;
+      cursor: pointer;
+    }
+    & fuchsia {
+      -webkit-text-stroke: 0.75px #ff00ff;
+      cursor: pointer;
+    }
+    & gainsboro {
+      -webkit-text-stroke: 0.75px #dcdcdc;
+      cursor: pointer;
+    }
+    & ghostwhite {
+      -webkit-text-stroke: 0.75px #f8f8ff;
+      cursor: pointer;
+    }
+    & gold {
+      -webkit-text-stroke: 0.75px #ffd700;
+      cursor: pointer;
+    }
+    & goldenrod {
+      -webkit-text-stroke: 0.75px #daa520;
+      cursor: pointer;
+    }
+    & gray {
+      -webkit-text-stroke: 0.75px #808080;
+      cursor: pointer;
+    }
+    & green {
+      -webkit-text-stroke: 0.75px #008000;
+      cursor: pointer;
+    }
+    & greenyellow {
+      -webkit-text-stroke: 0.75px #adff2f;
+      cursor: pointer;
+    }
+    & grey {
+      -webkit-text-stroke: 0.75px #808080;
+      cursor: pointer;
+    }
+    & honeydew {
+      -webkit-text-stroke: 0.75px #f0fff0;
+      cursor: pointer;
+    }
+    & hotpink {
+      -webkit-text-stroke: 0.75px #ff69b4;
+      cursor: pointer;
+    }
+    & indianred {
+      -webkit-text-stroke: 0.75px #cd5c5c;
+      cursor: pointer;
+    }
+    & indigo {
+      -webkit-text-stroke: 0.75px #4b0082;
+      cursor: pointer;
+    }
+    & ivory {
+      -webkit-text-stroke: 0.75px #fffff0;
+      cursor: pointer;
+    }
+    & khaki {
+      -webkit-text-stroke: 0.75px #f0e68c;
+      cursor: pointer;
+    }
+    & lavender {
+      -webkit-text-stroke: 0.75px #e6e6fa;
+      cursor: pointer;
+    }
+    & lavenderblush {
+      -webkit-text-stroke: 0.75px #fff0f5;
+      cursor: pointer;
+    }
+    & lawngreen {
+      -webkit-text-stroke: 0.75px #7cfc00;
+      cursor: pointer;
+    }
+    & lemonchiffon {
+      -webkit-text-stroke: 0.75px #fffacd;
+      cursor: pointer;
+    }
+    & lightblue {
+      -webkit-text-stroke: 0.75px #add8e6;
+      cursor: pointer;
+    }
+    & lightcoral {
+      -webkit-text-stroke: 0.75px #f08080;
+      cursor: pointer;
+    }
+    & lightcyan {
+      -webkit-text-stroke: 0.75px #e0ffff;
+      cursor: pointer;
+    }
+    & lightgoldenrodyellow {
+      -webkit-text-stroke: 0.75px #fafad2;
+      cursor: pointer;
+    }
+    & lightgray {
+      -webkit-text-stroke: 0.75px #d3d3d3;
+      cursor: pointer;
+    }
+    & lightgreen {
+      -webkit-text-stroke: 0.75px #90ee90;
+      cursor: pointer;
+    }
+    & lightgrey {
+      -webkit-text-stroke: 0.75px #d3d3d3;
+      cursor: pointer;
+    }
+    & lightpink {
+      -webkit-text-stroke: 0.75px #ffb6c1;
+      cursor: pointer;
+    }
+    & lightsalmon {
+      -webkit-text-stroke: 0.75px #ffa07a;
+      cursor: pointer;
+    }
+    & lightseagreen {
+      -webkit-text-stroke: 0.75px #20b2aa;
+      cursor: pointer;
+    }
+    & lightskyblue {
+      -webkit-text-stroke: 0.75px #87cefa;
+      cursor: pointer;
+    }
+    & lightslategray {
+      -webkit-text-stroke: 0.75px #778899;
+      cursor: pointer;
+    }
+    & lightslategrey {
+      -webkit-text-stroke: 0.75px #778899;
+      cursor: pointer;
+    }
+    & lightsteelblue {
+      -webkit-text-stroke: 0.75px #b0c4de;
+      cursor: pointer;
+    }
+    & lightyellow {
+      -webkit-text-stroke: 0.75px #ffffe0;
+      cursor: pointer;
+    }
+    & lime {
+      -webkit-text-stroke: 0.75px #00ff00;
+      cursor: pointer;
+    }
+    & limegreen {
+      -webkit-text-stroke: 0.75px #32cd32;
+      cursor: pointer;
+    }
+    & linen {
+      -webkit-text-stroke: 0.75px #faf0e6;
+      cursor: pointer;
+    }
+    & magenta {
+      -webkit-text-stroke: 0.75px #ff00ff;
+      cursor: pointer;
+    }
+    & maroon {
+      -webkit-text-stroke: 0.75px #800000;
+      cursor: pointer;
+    }
+    & mediumaquamarine {
+      -webkit-text-stroke: 0.75px #66cdaa;
+      cursor: pointer;
+    }
+    & mediumblue {
+      -webkit-text-stroke: 0.75px #0000cd;
+      cursor: pointer;
+    }
+    & mediumorchid {
+      -webkit-text-stroke: 0.75px #ba55d3;
+      cursor: pointer;
+    }
+    & mediumpurple {
+      -webkit-text-stroke: 0.75px #9370db;
+      cursor: pointer;
+    }
+    & mediumseagreen {
+      -webkit-text-stroke: 0.75px #3cb371;
+      cursor: pointer;
+    }
+    & mediumslateblue {
+      -webkit-text-stroke: 0.75px #7b68ee;
+      cursor: pointer;
+    }
+    & mediumspringgreen {
+      -webkit-text-stroke: 0.75px #00fa9a;
+      cursor: pointer;
+    }
+    & mediumturquoise {
+      -webkit-text-stroke: 0.75px #48d1cc;
+      cursor: pointer;
+    }
+    & mediumvioletred {
+      -webkit-text-stroke: 0.75px #c71585;
+      cursor: pointer;
+    }
+    & midnightblue {
+      -webkit-text-stroke: 0.75px #191970;
+      cursor: pointer;
+    }
+    & mintcream {
+      -webkit-text-stroke: 0.75px #f5fffa;
+      cursor: pointer;
+    }
+    & mistyrose {
+      -webkit-text-stroke: 0.75px #ffe4e1;
+      cursor: pointer;
+    }
+    & moccasin {
+      -webkit-text-stroke: 0.75px #ffe4b5;
+      cursor: pointer;
+    }
+    & navajowhite {
+      -webkit-text-stroke: 0.75px #ffdead;
+      cursor: pointer;
+    }
+    & navy {
+      -webkit-text-stroke: 0.75px #000080;
+      cursor: pointer;
+    }
+    & oldlace {
+      -webkit-text-stroke: 0.75px #fdf5e6;
+      cursor: pointer;
+    }
+    & olive {
+      -webkit-text-stroke: 0.75px #808000;
+      cursor: pointer;
+    }
+    & olivedrab {
+      -webkit-text-stroke: 0.75px #6b8e23;
+      cursor: pointer;
+    }
+    & orange {
+      -webkit-text-stroke: 0.75px #ffa500;
+      cursor: pointer;
+    }
+    & orangered {
+      -webkit-text-stroke: 0.75px #ff4500;
+      cursor: pointer;
+    }
+    & orchid {
+      -webkit-text-stroke: 0.75px #da70d6;
+      cursor: pointer;
+    }
+    & palegoldenrod {
+      -webkit-text-stroke: 0.75px #eee8aa;
+      cursor: pointer;
+    }
+    & palegreen {
+      -webkit-text-stroke: 0.75px #98fb98;
+      cursor: pointer;
+    }
+    & paleturquoise {
+      -webkit-text-stroke: 0.75px #afeeee;
+      cursor: pointer;
+    }
+    & palevioletred {
+      -webkit-text-stroke: 0.75px #db7093;
+      cursor: pointer;
+    }
+    & papayawhip {
+      -webkit-text-stroke: 0.75px #ffefd5;
+      cursor: pointer;
+    }
+    & peachpuff {
+      -webkit-text-stroke: 0.75px #ffdab9;
+      cursor: pointer;
+    }
+    & peru {
+      -webkit-text-stroke: 0.75px #cd853f;
+      cursor: pointer;
+    }
+    & pink {
+      -webkit-text-stroke: 0.75px #ffc0cb;
+      cursor: pointer;
+    }
+    & plum {
+      -webkit-text-stroke: 0.75px #dda0dd;
+      cursor: pointer;
+    }
+    & powderblue {
+      -webkit-text-stroke: 0.75px #b0e0e6;
+      cursor: pointer;
+    }
+    & purple {
+      -webkit-text-stroke: 0.75px #800080;
+      cursor: pointer;
+    }
+    & rebeccapurple {
+      -webkit-text-stroke: 0.75px #663399;
+      cursor: pointer;
+    }
+    & red {
+      -webkit-text-stroke: 0.75px #ff0000;
+      cursor: pointer;
+    }
+    & rosybrown {
+      -webkit-text-stroke: 0.75px #bc8f8f;
+      cursor: pointer;
+    }
+    & royalblue {
+      -webkit-text-stroke: 0.75px #4169e1;
+      cursor: pointer;
+    }
+    & saddlebrown {
+      -webkit-text-stroke: 0.75px #8b4513;
+      cursor: pointer;
+    }
+    & salmon {
+      -webkit-text-stroke: 0.75px #fa8072;
+      cursor: pointer;
+    }
+    & sandybrown {
+      -webkit-text-stroke: 0.75px #f4a460;
+      cursor: pointer;
+    }
+    & seagreen {
+      -webkit-text-stroke: 0.75px #2e8b57;
+      cursor: pointer;
+    }
+    & seashell {
+      -webkit-text-stroke: 0.75px #fff5ee;
+      cursor: pointer;
+    }
+    & sienna {
+      -webkit-text-stroke: 0.75px #a0522d;
+      cursor: pointer;
+    }
+    & silver {
+      -webkit-text-stroke: 0.75px #c0c0c0;
+      cursor: pointer;
+    }
+    & skyblue {
+      -webkit-text-stroke: 0.75px #87ceeb;
+      cursor: pointer;
+    }
+    & slateblue {
+      -webkit-text-stroke: 0.75px #6a5acd;
+      cursor: pointer;
+    }
+    & slategray {
+      -webkit-text-stroke: 0.75px #708090;
+      cursor: pointer;
+    }
+    & slategrey {
+      -webkit-text-stroke: 0.75px #708090;
+      cursor: pointer;
+    }
+    & snow {
+      -webkit-text-stroke: 0.75px #fffafa;
+      cursor: pointer;
+    }
+    & springgreen {
+      -webkit-text-stroke: 0.75px #00ff7f;
+      cursor: pointer;
+    }
+    & steelblue {
+      -webkit-text-stroke: 0.75px #4682b4;
+      cursor: pointer;
+    }
+    & tan {
+      -webkit-text-stroke: 0.75px #d2b48c;
+      cursor: pointer;
+    }
+    & teal {
+      -webkit-text-stroke: 0.75px #008080;
+      cursor: pointer;
+    }
+    & thistle {
+      -webkit-text-stroke: 0.75px #d8bfd8;
+      cursor: pointer;
+    }
+    & tomato {
+      -webkit-text-stroke: 0.75px #ff6347;
+      cursor: pointer;
+    }
+    & turquoise {
+      -webkit-text-stroke: 0.75px #40e0d0;
+      cursor: pointer;
+    }
+    & violet {
+      -webkit-text-stroke: 0.75px #ee82ee;
+      cursor: pointer;
+    }
+    & wheat {
+      -webkit-text-stroke: 0.75px #f5deb3;
+      cursor: pointer;
+    }
+    & white {
+      -webkit-text-stroke: 0.75px #ffffff;
+      cursor: pointer;
+    }
+    & whitesmoke {
+      -webkit-text-stroke: 0.75px #f5f5f5;
+      cursor: pointer;
+    }
+    & yellow {
+      -webkit-text-stroke: 0.75px #ffff00;
+      cursor: pointer;
+    }
+    & yellowgreen {
+      -webkit-text-stroke: 0.75px #9acd32;
+      cursor: pointer;
+    }
+  }
+}
+
+/* why does CSS nesting not work for this? */
+graphics-element[centered] {
+  display: block;
+  margin: 0 auto;
+}
+
+graphics-element[float="right"] {
+  float: right;
+  margin-left: 1em;
+}
+
+graphics-element[float="left"] {
+  float: left;
+  margin-right: 1em;
+}
