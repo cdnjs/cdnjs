@@ -1,0 +1,25 @@
+import { p as e, f as o } from "./flowDb-93ab6144.js";
+import { f as t, g as a } from "./styles-bbd72e25.js";
+import { u as i } from "./mermaid-48a62b8a.js";
+import "./graph-e0e26be4.js";
+import "./index-01e15329.js";
+import "./layout-80aad27a.js";
+import "./clone-3b1617af.js";
+import "./edges-1ba9bfc1.js";
+import "./createText-e3a641da.js";
+import "./line-45cd1716.js";
+import "./array-2ff2c7a6.js";
+import "./path-428ebac9.js";
+import "./channel-98732275.js";
+const M = {
+  parser: e,
+  db: o,
+  renderer: t,
+  styles: a,
+  init: (r) => {
+    r.flowchart || (r.flowchart = {}), r.flowchart.arrowMarkerAbsolute = r.arrowMarkerAbsolute, i({ flowchart: { arrowMarkerAbsolute: r.arrowMarkerAbsolute } }), t.setConf(r.flowchart), o.clear(), o.setGen("gen-2");
+  }
+};
+export {
+  M as diagram
+};
