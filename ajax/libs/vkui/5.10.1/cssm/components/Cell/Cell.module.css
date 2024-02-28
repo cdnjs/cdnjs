@@ -1,0 +1,81 @@
+.Cell {
+  position: relative;
+}
+
+.Cell--dragging {
+  background-color: var(--vkui--color_background_secondary);
+  box-shadow: var(--vkui--elevation3);
+}
+
+.Cell--selectable.Cell--disabled {
+  opacity: var(--vkui--opacity_disable_accessibility);
+}
+
+.Cell__checkbox,
+.Cell__dragger {
+  position: relative;
+  flex-shrink: 0;
+  margin-right: 16px;
+}
+
+.Cell__content {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.Cell--removable .Cell__content {
+  flex-grow: 1;
+  /* размер removable icon */
+  padding-right: 44px;
+}
+
+.Cell--removable :global(.vkuiInternalRemovable__content) {
+  padding-left: 0;
+}
+
+/* для того чтобы активная область Cell распространялась и на область removable */
+
+.Cell--removable :global(.vkuiInternalRemovable__action) {
+  position: absolute;
+  right: 0;
+  padding-left: 0;
+}
+
+/**
+ * iOS
+ */
+
+.Cell--ios .Cell__dragger {
+  margin-right: 0;
+  margin-left: 12px;
+}
+
+.Cell--ios .Cell__checkbox {
+  margin-right: 12px;
+}
+
+.Cell--ios.Cell--removable .Cell__content {
+  /* размер removable icon + icon margins*/
+  padding-left: 48px;
+  /* правый паддинг от removable который мы обнулили ниже */
+  padding-right: var(--vkui--size_base_padding_horizontal--regular);
+}
+
+.Cell--ios.Cell--removable :global(.vkuiInternalRemovable__action) {
+  right: auto;
+  left: 0;
+  z-index: 1;
+}
+
+.Cell--ios.Cell--removable :global(.vkuiInternalRemovable__content) {
+  padding-right: 0;
+}
+
+/**
+ * CMP:
+ * FormItem
+ */
+
+:global(.vkuiInternalFormItem) > .Cell {
+  margin: 0 calc(-1 * var(--vkui--size_base_padding_horizontal--regular));
+}

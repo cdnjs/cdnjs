@@ -1,0 +1,144 @@
+.Tappable {
+  isolation: isolate;
+  position: relative;
+  cursor: default;
+  border-radius: var(--vkui--size_border_radius--regular);
+  transition: background-color 0.15s ease-out, opacity 0.15s ease-out;
+  outline: var(--vkui_internal--outline-reset);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/*
+Просто поменять местами элементы внутри Tappable нельзя:
+
+- некоторые элементы завязаны на :last-child и :first-child
+- необходимо чтобы все элементы были позиционированные
+
+https://developer.mozilla.org/ru/docs/Web/CSS/CSS_Positioning/Understanding_z_index/Stacking_without_z-index
+https://github.com/VKCOM/VKUI/pull/3641
+*/
+
+/* stylelint-disable-next-line @project-tools/stylelint-atomic, selector-max-universal */
+
+.Tappable > * {
+  position: relative;
+  z-index: var(--vkui_internal--z_index_tappable_element);
+}
+
+.Tappable--hasHover,
+.Tappable--hasActive {
+  cursor: pointer;
+}
+
+.Tappable[disabled],
+.Tappable[aria-disabled='true'] {
+  cursor: default;
+  outline: none;
+}
+
+/**
+ * hover & active state
+ */
+
+.Tappable__stateLayer {
+  z-index: var(--vkui_internal--z_index_tappable_state);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: inherit;
+  transition: background-color 0.15s ease-out;
+}
+
+.Tappable--hover-background > .Tappable__stateLayer {
+  background-color: var(--vkui--color_transparent--hover);
+}
+
+.Tappable--hover-opacity {
+  opacity: 0.8;
+}
+
+.Tappable--active-background > .Tappable__stateLayer {
+  background-color: var(--vkui--color_transparent--active);
+}
+
+.Tappable--active-opacity {
+  opacity: 0.7;
+}
+
+/**
+ * iOS tappable
+ */
+
+.Tappable--ios.Tappable--active-background {
+  transition: none;
+}
+
+.Tappable .Tappable__waves {
+  z-index: var(--vkui_internal--z_index_tappable_state);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: inherit;
+  /* Fix for Safari: css animation + border-radius + overflow ignores parent border-radius */
+  will-change: transform;
+}
+
+.Tappable .Tappable__wave {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0 -12px;
+  opacity: 0;
+  content: '';
+  border-radius: 50%;
+  background: var(--vkui--color_transparent--active);
+  animation: animation-wave 0.3s var(--vkui--animation_easing_platform);
+}
+
+/**
+ * overrides
+ */
+
+.Tappable--sizeX-compact {
+  border-radius: 0;
+}
+
+@media (max-width: 767.9px) {
+  .Tappable--sizeX-none {
+    border-radius: 0;
+  }
+}
+
+.Tappable.Tappable--borderRadiusInherit {
+  border-radius: inherit;
+}
+
+/**
+ * Animations
+ */
+
+@keyframes animation-wave {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(8);
+    opacity: 0;
+  }
+}

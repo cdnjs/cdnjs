@@ -1,0 +1,69 @@
+.ImageBase {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  color: var(--vkui_internal--icon_color, var(--vkui--color_icon_secondary));
+  background-color: var(--vkui--color_background_secondary);
+  background-size: cover;
+  isolation: isolate;
+}
+
+.ImageBase--transparent-background {
+  background-color: transparent;
+}
+
+.ImageBase__border {
+  pointer-events: none;
+  position: absolute;
+  z-index: var(--vkui_internal--z_index_image_base_border);
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  transform-origin: left top;
+  border: var(--vkui--size_border--regular) solid var(--vkui--color_image_border_alpha);
+  border-radius: inherit;
+}
+
+.ImageBase__img {
+  position: absolute;
+  z-index: var(--vkui_internal--z_index_image_base_img);
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: inherit;
+  object-fit: cover;
+  visibility: hidden;
+}
+
+.ImageBase--loaded .ImageBase__img {
+  visibility: visible;
+}
+
+.ImageBase__fallback {
+  position: absolute;
+
+  /* Расcчитываем на центрирование через родительский `display: flex` */
+  top: auto;
+  left: auto;
+}
+
+/**
+ * CMP:
+ * PanelHeader
+ */
+
+:global(.vkuiInternalPanelHeader__before) .ImageBase {
+  margin-left: 8px;
+}
+
+:global(.vkuiInternalPanelHeader__after) .ImageBase {
+  margin-right: 8px;
+}
