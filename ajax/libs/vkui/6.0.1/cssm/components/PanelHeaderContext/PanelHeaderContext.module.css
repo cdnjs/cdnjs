@@ -1,0 +1,173 @@
+.PanelHeaderContext {
+  z-index: var(--vkui_internal--z_index_panel_header_context);
+}
+
+.PanelHeaderContext--opened,
+.PanelHeaderContext--closing {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.PanelHeaderContext--sizeX-regular.PanelHeaderContext--opened,
+.PanelHeaderContext--sizeX-regular.PanelHeaderContext--closing {
+  block-size: auto;
+}
+
+@media (min-width: 768px) {
+  .PanelHeaderContext--sizeX-none.PanelHeaderContext--opened,
+  .PanelHeaderContext--sizeX-none.PanelHeaderContext--closing {
+    block-size: auto;
+  }
+}
+
+.PanelHeaderContext__in {
+  position: absolute;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.PanelHeaderContext__fade {
+  display: none;
+  position: absolute;
+  inline-size: 100%;
+  block-size: 100%;
+  inset-inline-start: 0;
+  inset-block-start: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.PanelHeaderContext--sizeX-compact .PanelHeaderContext__fade {
+  display: block;
+}
+
+@media (max-width: 767.9px) {
+  .PanelHeaderContext--sizeX-none .PanelHeaderContext__fade {
+    display: block;
+  }
+}
+
+.PanelHeaderContext--opened .PanelHeaderContext__fade {
+  animation: animation-panelheadercontext-fade-in 0.2s ease;
+}
+
+.PanelHeaderContext--closing .PanelHeaderContext__fade {
+  animation: animation-panelheadercontext-fade-out 0.2s ease;
+}
+
+.PanelHeaderContext--opened .PanelHeaderContext__in {
+  pointer-events: auto;
+  animation: animation-panelheadercontext-translate-in 0.2s ease;
+}
+
+.PanelHeaderContext--closing .PanelHeaderContext__in {
+  animation: animation-panelheadercontext-translate-out 0.2s ease;
+}
+
+.PanelHeaderContext__content {
+  overflow: hidden;
+  background: var(--vkui--color_background_content);
+}
+
+.PanelHeaderContext--ios .PanelHeaderContext__in {
+  padding: 0;
+}
+
+/**
+ * Имеется ввиду
+ * platform !== 'ios' ||
+ * (platform === 'ios' && isDesktop)
+ */
+
+.PanelHeaderContext:not(.PanelHeaderContext--ios) .PanelHeaderContext__content,
+.PanelHeaderContext--sizeX-regular.PanelHeaderContext--ios .PanelHeaderContext__content {
+  border-radius: 12px;
+  padding-block: 8px;
+  padding-inline: 0;
+}
+
+@media (min-width: 768px) {
+  .PanelHeaderContext--sizeX-none.PanelHeaderContext--ios .PanelHeaderContext__content {
+    border-radius: 12px;
+    padding-block: 8px;
+    padding-inline: 0;
+  }
+}
+
+/*
+ Desktop
+ */
+
+.PanelHeaderContext--sizeX-regular .PanelHeaderContext__in {
+  padding-block: 12px;
+  padding-inline: 8px;
+}
+
+.PanelHeaderContext--sizeX-regular .PanelHeaderContext__content {
+  border-radius: 12px;
+}
+
+.PanelHeaderContext--sizeX-regular .PanelHeaderContext__content {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.08), 0 8px 8px rgba(0, 0, 0, 0.16);
+}
+
+@media (min-width: 768px) {
+  .PanelHeaderContext--sizeX-none .PanelHeaderContext__in {
+    padding-block: 12px;
+    padding-inline: 8px;
+  }
+
+  .PanelHeaderContext--sizeX-none .PanelHeaderContext__content {
+    border-radius: 12px;
+  }
+
+  .PanelHeaderContext--sizeX-none .PanelHeaderContext__content {
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.08), 0 8px 8px rgba(0, 0, 0, 0.16);
+  }
+}
+
+/*
+  Animations
+ */
+
+@keyframes animation-panelheadercontext-translate-in {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes animation-panelheadercontext-translate-out {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes animation-panelheadercontext-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes animation-panelheadercontext-fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}

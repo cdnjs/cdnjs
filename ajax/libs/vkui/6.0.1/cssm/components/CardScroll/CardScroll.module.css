@@ -1,0 +1,84 @@
+.CardScroll__in {
+  display: flex;
+  align-items: stretch;
+}
+
+.CardScroll__gap {
+  display: block;
+  flex-shrink: 0;
+}
+
+.CardScroll + .CardScroll {
+  -webkit-margin-before: 16px;
+          margin-block-start: 16px;
+}
+
+.CardScroll--withSpaces .CardScroll__gap {
+  inline-size: var(--vkui--size_base_padding_horizontal--regular);
+}
+
+/**
+ * CMP:
+ * SplitCol
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalSplitCol--viewWidth-tabletPlus):global(.vkuiInternalSplitCol--spaced-auto)
+  .CardScroll--withSpaces
+  .CardScroll__gap {
+  inline-size: 16px;
+}
+
+@media (min-width: 768px) {
+  /* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+  :global(.vkuiInternalSplitCol--viewWidth-none):global(.vkuiInternalSplitCol--spaced-auto)
+    .CardScroll--withSpaces
+    .CardScroll__gap {
+    inline-size: 16px;
+  }
+}
+
+/**
+ * CMP:
+ * Group
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalGroup--mode-card) .CardScroll--withSpaces {
+  margin-inline: -8px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalGroup--mode-card) .CardScroll--withSpaces:first-child {
+  -webkit-padding-before: var(--vkui--size_cardgrid_padding_vertical--regular);
+          padding-block-start: var(--vkui--size_cardgrid_padding_vertical--regular);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalGroup--mode-card) .CardScroll--withSpaces:last-child {
+  -webkit-padding-after: var(--vkui--size_cardgrid_padding_vertical--regular);
+          padding-block-end: var(--vkui--size_cardgrid_padding_vertical--regular);
+}
+
+@media (min-width: 768px) {
+  /* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+  :global(.vkuiInternalGroup--mode-none) .CardScroll--withSpaces {
+    margin-inline: -8px;
+  }
+
+  /* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+  :global(.vkuiInternalGroup--mode-none) .CardScroll--withSpaces:first-child {
+    -webkit-padding-before: var(--vkui--size_cardgrid_padding_vertical--regular);
+            padding-block-start: var(--vkui--size_cardgrid_padding_vertical--regular);
+  }
+
+  /* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+  :global(.vkuiInternalGroup--mode-none) .CardScroll--withSpaces:last-child {
+    -webkit-padding-after: var(--vkui--size_cardgrid_padding_vertical--regular);
+            padding-block-end: var(--vkui--size_cardgrid_padding_vertical--regular);
+  }
+}

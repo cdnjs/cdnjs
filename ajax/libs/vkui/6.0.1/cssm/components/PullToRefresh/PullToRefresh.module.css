@@ -1,0 +1,109 @@
+.PullToRefresh {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.PullToRefresh--refreshing {
+  touch-action: none;
+  pointer-events: none;
+}
+
+.PullToRefresh__controls {
+  inline-size: 100%;
+  pointer-events: none;
+}
+
+.PullToRefresh:not(.PullToRefresh--ios) .PullToRefresh__controls {
+  z-index: var(--vkui_internal--z_index_pull_to_refresh);
+}
+
+.PullToRefresh__spinner {
+  display: flex;
+  margin: auto;
+  inline-size: 40px;
+  block-size: 40px;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  transition: transform 300ms cubic-bezier(0.1, 0, 0.25, 1), opacity 220ms ease-out;
+  opacity: 0;
+  background: var(--vkui--color_background_modal);
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  color: var(--vkui--color_icon_accent);
+}
+
+.PullToRefresh--ios .PullToRefresh__spinner {
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+  color: var(--vkui--color_icon_medium);
+}
+
+.PullToRefresh--watching .PullToRefresh__spinner {
+  transition: opacity 220ms ease-out;
+}
+
+.PullToRefresh__spinner-self {
+  stroke: currentColor;
+}
+
+.PullToRefresh--ios.PullToRefresh--refreshing .PullToRefresh__spinner-self {
+  animation: pull-to-refresh-to-refreshing 380ms ease-out;
+}
+
+.PullToRefresh__spinner-path {
+  transform: rotate(-90deg);
+  transform-origin: center center;
+  transition: stroke-dashoffset 167ms ease-out;
+}
+
+.PullToRefresh--watching .PullToRefresh__spinner-path,
+.PullToRefresh--refreshing .PullToRefresh__spinner-path {
+  transition: none;
+}
+
+.PullToRefresh__spinner--on .PullToRefresh__spinner-path {
+  animation: ptr-rotator var(--vkui_internal--duration) linear infinite;
+}
+
+.PullToRefresh__content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: hidden;
+  transition: transform 400ms var(--vkui--animation_easing_platform);
+}
+
+.PullToRefresh--watching .PullToRefresh__content {
+  transition: none;
+}
+
+@keyframes pull-to-refresh-to-refreshing {
+  0% {
+    transform: scale(1);
+  }
+
+  30% {
+    transform: scale(0.6);
+  }
+
+  90% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes ptr-rotator {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

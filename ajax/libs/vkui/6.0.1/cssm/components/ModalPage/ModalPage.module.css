@@ -1,0 +1,165 @@
+.ModalPage {
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: hidden;
+  position: absolute;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.ModalPage:focus {
+  outline: none;
+}
+
+.ModalPage--desktop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ModalPage__in-wrap {
+  inline-size: 100%;
+  block-size: 100%;
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  margin-inline: auto;
+  display: flex;
+  align-items: flex-end;
+  pointer-events: initial;
+  transform: translateY(100%);
+  transition: transform 320ms var(--vkui--animation_easing_platform);
+}
+
+.ModalPage--ios .ModalPage__in-wrap {
+  transition: transform 400ms var(--vkui--animation_easing_platform);
+}
+
+.ModalPage--desktop .ModalPage__in-wrap {
+  position: relative;
+  align-items: initial;
+  margin-block: 32px;
+  margin-inline: 56px;
+  block-size: auto;
+  max-block-size: 640px;
+  opacity: 0;
+  transform: none;
+  transition: opacity 340ms var(--vkui--animation_easing_platform);
+}
+
+@media (max-height: 672px) {
+  .ModalPage--desktop .ModalPage__in-wrap {
+    max-block-size: calc(100% - 32px * 2);
+  }
+}
+
+.ModalPage--size-s .ModalPage__in-wrap {
+  max-inline-size: var(--vkui--size_popup_small--regular);
+}
+
+.ModalPage--size-m .ModalPage__in-wrap {
+  max-inline-size: var(--vkui--size_popup_medium--regular);
+}
+
+.ModalPage--size-l .ModalPage__in-wrap {
+  max-inline-size: var(--vkui--size_popup_large--regular);
+}
+
+.ModalPage__in {
+  background-color: var(--vkui--color_background_modal);
+  overflow: visible;
+  position: relative;
+  box-sizing: border-box;
+  inline-size: 100%;
+  block-size: 100%;
+  display: flex;
+  flex-direction: column;
+  border-start-end-radius: var(--vkui--size_border_radius_paper--regular);
+  border-start-start-radius: var(--vkui--size_border_radius_paper--regular);
+
+  --vkui_internal--background: var(--vkui--color_background_modal);
+}
+
+.ModalPage--desktop .ModalPage__in {
+  block-size: auto;
+  box-shadow: var(--vkui--elevation3);
+  border-end-end-radius: var(--vkui--size_border_radius_paper--regular);
+  border-end-start-radius: var(--vkui--size_border_radius_paper--regular);
+}
+
+.ModalPage__header {
+  inline-size: 100%;
+}
+
+.ModalPage__content-wrap {
+  position: relative;
+  display: flex;
+  block-size: 100%;
+  flex-direction: column;
+  overflow: hidden;
+  border-end-start-radius: inherit;
+  border-end-end-radius: inherit;
+}
+
+.ModalPage__header:empty + .ModalPage__content-wrap {
+  border-radius: inherit;
+}
+
+.ModalPage__content {
+  block-size: 100%;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.ModalPage--desktop .ModalPage__content,
+:global(.vkuiInternalModalRoot__modal--expandable) .ModalPage__content {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.ModalPage--desktop .ModalPage__content-in,
+:global(.vkuiInternalModalRoot__modal--expandable) .ModalPage__content-in {
+  block-size: 100%;
+}
+
+/* существует для того, чтобы использовать в расчёте translateY
+ * чтобы поднять ModalPage не только на высоту контента, но и на высоту bottom-inset
+ * особенно важно для ModalPage c динамической высотой
+ */
+
+.ModalPage__bottom-inset {
+  block-size: var(--vkui_internal--safe_area_inset_bottom);
+  flex-shrink: 0;
+}
+
+/**
+ * CMP:
+ * ModalRoot
+ *
+ * [дополнительно] также ищи в файле `ModalRoot__modal--expandable`
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalModalRoot--touched) .ModalPage__in-wrap {
+  transition: none;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalModalRoot--switching) .ModalPage__in-wrap {
+  pointer-events: none;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalModalRoot__modal--collapsed) .ModalPage__content,
+:global(.vkuiInternalModalRoot__modal--dragging) .ModalPage__content {
+  overflow: hidden;
+  touch-action: pan-y;
+}

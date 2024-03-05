@@ -1,0 +1,26 @@
+.ImageBaseBadge {
+  position: absolute;
+  z-index: var(--vkui_internal--z_index_image_base_badge);
+  inset-inline-end: 0;
+  inset-block-end: 0;
+  border-radius: 50%;
+
+  /* Смещаем на `padding-top` и `padding-left`, чтобы не учитывать `padding` при позиционировании. */
+  transform: translate(2px, 2px);
+  padding: 2px;
+}
+
+.ImageBaseBadge--background-stroke {
+  /* цвет фона для скрывания элементов */
+  background-color: var(--vkui_internal--background, var(--vkui--color_background_content));
+}
+
+.ImageBaseBadge--background-shadow::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  margin: auto;
+  border-radius: inherit;
+  box-shadow: var(--vkui--elevation1);
+  pointer-events: none;
+}
