@@ -1,0 +1,1 @@
+"use strict";const BellcurveSeriesDefaults={intervals:3,pointsInInterval:3,marker:{enabled:!1}};export default BellcurveSeriesDefaults;

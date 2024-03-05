@@ -1,0 +1,1 @@
+const BulletSeriesDefaults={targetOptions:{width:"140%",height:3,borderWidth:0,borderRadius:0},tooltip:{pointFormat:'<span style="color:{series.color}">●</span> {series.name}: <b>{point.y}</b>. Target: <b>{point.target}</b><br/>'}};export default BulletSeriesDefaults;

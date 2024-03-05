@@ -1,0 +1,1 @@
+"use strict";const SeriesLabelDefaults={enabled:!0,connectorAllowed:!1,connectorNeighbourDistance:24,format:void 0,formatter:void 0,minFontSize:null,maxFontSize:null,onArea:null,style:{fontSize:"0.8em",fontWeight:"bold"},useHTML:!1,boxesToAvoid:[]};export default SeriesLabelDefaults;

@@ -1,0 +1,1 @@
+"use strict";const chartDefaults={parallelCoordinates:!1,parallelAxes:{lineWidth:1,title:{text:"",reserveSpace:!1},labels:{x:0,y:4,align:"center",reserveSpace:!1},offset:0}},xAxisDefaults={lineWidth:0,tickLength:0,opposite:!0,type:"category"},ParallelCoordinatesDefaults={chart:chartDefaults,xAxis:xAxisDefaults};export default ParallelCoordinatesDefaults;
