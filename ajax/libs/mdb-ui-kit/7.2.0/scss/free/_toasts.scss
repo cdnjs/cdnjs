@@ -1,0 +1,54 @@
+//
+// Toast styles
+//
+
+.toast {
+  // scss-docs-start toast-css-vars
+  --#{$prefix}toast-border-bottom-width: #{$toast-border-bottom-width};
+  --#{$prefix}toast-btn-close-width: #{$toast-btn-close-width};
+  --#{$prefix}toast-btn-close-mr: #{$toast-btn-close-mr};
+  --#{$prefix}toast-btn-close-ml: #{$toast-btn-close-ml};
+  --#{$prefix}toast-bg: #{$toast-background-color};
+  --#{$prefix}toast-header-bg: #{$toast-header-background-color};
+  // scss-docs-end toast-css-vars
+
+  border: 0;
+
+  .btn-close {
+    width: var(--#{$prefix}toast-btn-close-width);
+  }
+}
+
+.toast-header {
+  border-bottom-width: var(--#{$prefix}toast-border-bottom-width);
+
+  .btn-close {
+    margin-right: var(--#{$prefix}toast-btn-close-mr);
+    margin-left: var(--#{$prefix}toast-btn-close-ml);
+  }
+}
+
+.parent-toast-relative {
+  position: relative;
+}
+
+.toast-absolute {
+  position: absolute;
+}
+
+.toast-fixed {
+  position: fixed;
+  z-index: var(--#{$prefix}toast-zindex);
+}
+
+@each $color, $value in $theme-colors {
+  .toast-#{$color} {
+    background-color: var(--#{$prefix}#{$color}-bg-subtle);
+    color: var(--#{$prefix}#{$color}-text-emphasis);
+    border-color: var(--#{$prefix}#{$color}-border-subtle);
+
+    i {
+      color: var(--#{$prefix}#{$color}-text-emphasis);
+    }
+  }
+}
