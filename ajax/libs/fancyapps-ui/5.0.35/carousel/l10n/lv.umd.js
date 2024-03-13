@@ -1,0 +1,1 @@
+!function(e,s){"object"==typeof exports&&"undefined"!=typeof module?s(exports):"function"==typeof define&&define.amd?define(["exports"],s):s(((e="undefined"!=typeof globalThis?globalThis:e||self).Carousel=e.Carousel||{},e.Carousel.l10n=e.Carousel.l10n||{}))}(this,(function(e){"use strict";e.lv={NEXT:"Nākošais slaids",PREV:"Iepriekšējais slaids",GOTO:"Doties uz #%d slaidu"}}));
