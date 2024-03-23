@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../src/diagrams/flowchart/flowDiagram-v2.ts"],
+  "sourcesContent": ["// @ts-ignore: JISON doesn't support types\nimport flowParser from './parser/flow.jison';\nimport flowDb from './flowDb.js';\nimport flowRendererV2 from './flowRenderer-v2.js';\nimport flowStyles from './styles.js';\nimport type { MermaidConfig } from '../../config.type.js';\nimport { setConfig } from '../../diagram-api/diagramAPI.js';\n\nexport const diagram = {\n  parser: flowParser,\n  db: flowDb,\n  renderer: flowRendererV2,\n  styles: flowStyles,\n  init: (cnf: MermaidConfig) => {\n    if (!cnf.flowchart) {\n      cnf.flowchart = {};\n    }\n    cnf.flowchart.arrowMarkerAbsolute = cnf.arrowMarkerAbsolute;\n    // flowchart-v2 uses dagre-wrapper, which doesn't have access to flowchart cnf\n    setConfig({ flowchart: { arrowMarkerAbsolute: cnf.arrowMarkerAbsolute } });\n    flowRendererV2.setConf(cnf.flowchart);\n    flowDb.clear();\n    flowDb.setGen('gen-2');\n  },\n};\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;AAQO,IAAM,UAAU;AAAA,EACrB,QAAQ;AAAA,EACR,IAAI;AAAA,EACJ,UAAU;AAAA,EACV,QAAQ;AAAA,EACR,MAAM,CAAC,QAAuB;AAC5B,QAAI,CAAC,IAAI,WAAW;AAClB,UAAI,YAAY,CAAC;AAAA,IACnB;AACA,QAAI,UAAU,sBAAsB,IAAI;AAExC,cAAU,EAAE,WAAW,EAAE,qBAAqB,IAAI,oBAAoB,EAAE,CAAC;AACzE,4BAAe,QAAQ,IAAI,SAAS;AACpC,mBAAO,MAAM;AACb,mBAAO,OAAO,OAAO;AAAA,EACvB;AACF;",
+  "names": []
+}
