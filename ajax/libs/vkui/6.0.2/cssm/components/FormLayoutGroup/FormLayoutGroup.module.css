@@ -1,0 +1,53 @@
+.FormLayoutGroup--mode-horizontal {
+  display: flex;
+  padding-block: var(--vkui--size_form_item_padding_vertical--regular);
+  padding-inline: var(--vkui--size_base_padding_horizontal--regular);
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.FormLayoutGroup__removable {
+  flex-grow: 1;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+
+.FormLayoutGroup__offset {
+  display: none;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.FormLayoutGroup--mode-horizontal
+  :global(.vkuiInternalFormItem--withTop)
+  ~ .FormLayoutGroup__offset {
+  order: -1;
+  display: block;
+  min-inline-size: 100%;
+  block-size: calc(2px + var(--vkui--font_subhead--line_height--regular) + 8px);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.FormLayoutGroup--sizeY-compact.FormLayoutGroup--mode-horizontal
+  :global(.vkuiInternalFormItem--withTop)
+  ~ .FormLayoutGroup__offset {
+  block-size: calc(2px + var(--vkui--font_subhead--line_height--compact) + 6px);
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  /* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+  .FormLayoutGroup--sizeY-none.FormLayoutGroup--mode-horizontal
+    :global(.vkuiInternalFormItem--withTop)
+    ~ .FormLayoutGroup__offset {
+    block-size: calc(2px + var(--vkui--font_subhead--line_height--compact) + 6px);
+  }
+}
+
+.FormLayoutGroup--removable {
+  padding-inline: 0;
+}
+
+.FormLayoutGroup--segmented {
+  position: relative;
+}

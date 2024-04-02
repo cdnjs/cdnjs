@@ -1,0 +1,239 @@
+.TabsItem {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: 4px;
+  padding-inline: 8px;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  min-block-size: 32px;
+  border-radius: var(--vkui--size_border_radius--regular);
+  transition: background-color 150ms ease-out;
+}
+
+.TabsItem--withGaps {
+  margin-block: 8px;
+}
+
+.TabsItem--withGaps:not(:first-of-type) {
+  -webkit-margin-start: 6px;
+          margin-inline-start: 6px;
+}
+
+.TabsItem--sizeY-compact {
+  padding-block: 2px;
+  min-block-size: 28px;
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .TabsItem--sizeY-none {
+    padding-block: 2px;
+    min-block-size: 28px;
+  }
+}
+
+.TabsItem[disabled] {
+  opacity: var(--vkui--opacity_disable_accessibility);
+}
+
+/* mode="default" */
+
+.TabsItem--mode-default {
+  position: relative;
+  flex-basis: 0;
+  flex-grow: 1;
+  flex-shrink: 0;
+  padding-block: 12px;
+  padding-inline: 16px;
+  min-block-size: 48px;
+}
+
+.TabsItem--sizeY-compact.TabsItem--mode-default {
+  padding-block: 10px;
+  min-block-size: 44px;
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .TabsItem--sizeY-none.TabsItem--mode-default {
+    padding-block: 10px;
+    min-block-size: 44px;
+  }
+}
+
+.TabsItem--hover.TabsItem--mode-default {
+  background-color: var(--vkui--color_transparent--hover);
+}
+
+/* mode="accent" */
+
+.TabsItem--mode-accent {
+  transition: background-color 150ms ease-out, box-shadow 150ms ease-out;
+}
+
+.TabsItem--selected.TabsItem--mode-accent {
+  background-color: var(--vkui--color_background_modal);
+  box-shadow: var(--vkui--elevation2);
+}
+
+.TabsItem--hover.TabsItem--mode-accent {
+  background-color: var(--vkui--color_background_secondary);
+}
+
+.TabsItem--mode-accent::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: var(--vkui--size_border--regular) solid transparent;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.TabsItem--selected.TabsItem--mode-accent::before {
+  border-color: var(--vkui--color_separator_primary);
+}
+
+/* mode="secondary" */
+
+.TabsItem--selected.TabsItem--mode-secondary {
+  background-color: var(--vkui--color_background_secondary_alpha);
+}
+
+.TabsItem--hover.TabsItem--mode-secondary {
+  background-color: var(--vkui--color_background_secondary_alpha--hover);
+}
+
+/* Элемент */
+
+.TabsItem__before {
+  -webkit-margin-end: 6px;
+          margin-inline-end: 6px;
+  color: var(--vkui--color_icon_medium);
+  transition: color 150ms ease-out;
+}
+
+.TabsItem--selected .TabsItem__before {
+  color: var(--vkui--color_icon_primary);
+}
+
+.TabsItem--selected.TabsItem--mode-accent .TabsItem__before {
+  color: var(--vkui--color_icon_accent_themed);
+}
+
+.TabsItem--selected.TabsItem--mode-secondary .TabsItem__before {
+  opacity: 0.72;
+}
+
+/* Элемент */
+
+.TabsItem__label {
+  max-inline-size: 100%;
+  overflow: hidden;
+  color: var(--vkui--color_text_secondary);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 150ms ease-out;
+  min-inline-size: 0;
+}
+
+.TabsItem--selected .TabsItem__label {
+  color: var(--vkui--color_text_primary);
+}
+
+.TabsItem--selected.TabsItem--mode-accent .TabsItem__label {
+  color: var(--vkui--color_text_accent_themed);
+}
+
+.TabsItem--selected.TabsItem--mode-secondary .TabsItem__label {
+  opacity: 0.72;
+}
+
+/* Элемент */
+
+.TabsItem__status {
+  -webkit-margin-start: 6px;
+          margin-inline-start: 6px;
+}
+
+.TabsItem__status--count {
+  color: var(--vkui--color_text_tertiary);
+}
+
+/* Элемент */
+
+.TabsItem__after {
+  -webkit-margin-start: 6px;
+          margin-inline-start: 6px;
+  color: var(--vkui--color_icon_accent_themed);
+}
+
+/* Элемент */
+
+.TabsItem__underline {
+  position: absolute;
+  inset-inline: 16px;
+  inset-block-end: 5px;
+  block-size: 2px;
+  border-radius: 2px;
+  background-color: var(--vkui--color_background_accent);
+  opacity: 0;
+  transition: opacity 150ms ease-out;
+  pointer-events: none;
+}
+
+.TabsItem--sizeY-compact .TabsItem__underline {
+  inset-block-end: 3px;
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .TabsItem--sizeY-none .TabsItem__underline {
+    inset-block-end: 3px;
+  }
+}
+
+.TabsItem__underline[data-selected='true'] {
+  opacity: 1;
+}
+
+/**
+ * CMP:
+ * Tabs
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalTabs--vkcom) .TabsItem {
+  flex-grow: 0;
+  min-inline-size: auto;
+  padding-inline: 10px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalTabs--vkcom) .TabsItem__underline {
+  inset-inline: 2px;
+  inset-block-end: 0;
+}
+
+/**
+ * CMP:
+ * HorizontalScroll
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalHorizontalScroll) .TabsItem {
+  min-inline-size: 64px;
+  flex-basis: auto;
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+
+.TabsItem.TabsItem--stretched {
+  flex-grow: 1;
+}
+
+.TabsItem.TabsItem--shrinked {
+  flex-grow: 0;
+  min-inline-size: auto;
+}

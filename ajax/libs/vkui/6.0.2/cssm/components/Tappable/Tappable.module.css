@@ -1,0 +1,125 @@
+.Tappable {
+  isolation: isolate;
+  position: relative;
+  border-radius: var(--vkui--size_border_radius--regular);
+}
+
+/*
+Просто поменять местами элементы внутри Tappable нельзя:
+
+- некоторые элементы завязаны на :last-child и :first-child
+- необходимо чтобы все элементы были позиционированные
+
+https://developer.mozilla.org/ru/docs/Web/CSS/CSS_Positioning/Understanding_z_index/Stacking_without_z-index
+https://github.com/VKCOM/VKUI/pull/3641
+*/
+
+/* stylelint-disable-next-line selector-max-universal */
+
+.Tappable > * {
+  position: relative;
+  z-index: var(--vkui_internal--z_index_tappable_element);
+}
+
+/**
+ * overrides
+ */
+
+.Tappable--sizeX-compact {
+  border-radius: 0;
+}
+
+@media (max-width: 767.9px) {
+  .Tappable--sizeX-none {
+    border-radius: 0;
+  }
+}
+
+.Tappable.Tappable--borderRadiusInherit {
+  border-radius: inherit;
+}
+
+/**
+ * hover & active state
+ */
+
+.Tappable__stateLayer {
+  z-index: var(--vkui_internal--z_index_tappable_state);
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  transition: background-color 0.15s ease-out;
+  /* Fix for Safari: css animation + border-radius + overflow ignores parent border-radius */
+  will-change: transform;
+}
+
+/**
+ * Задерживаем отрисовку background-color
+ */
+
+.Tappable--hasPointer-false .Tappable__ripple {
+  transition: background-color 0.15s 0.15s ease-out;
+}
+
+@media (pointer: coarse),(pointer: none) {
+  .Tappable--hasPointer-none .Tappable__ripple {
+    transition: background-color 0.15s 0.15s ease-out;
+  }
+}
+
+.Tappable--hovered-background > .Tappable__stateLayer {
+  background-color: var(--vkui--color_transparent--hover);
+}
+
+.Tappable--activated-background > .Tappable__stateLayer {
+  background-color: var(--vkui--color_transparent--active);
+}
+
+.Tappable--hovered-opacity,
+.Tappable--activated-opacity {
+  transition: opacity 0.15s ease-out;
+}
+
+.Tappable--hovered-opacity {
+  opacity: 0.8;
+}
+
+.Tappable--activated-opacity {
+  opacity: 0.7;
+}
+
+.Tappable__wave {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 24px;
+  block-size: 24px;
+  margin-block: -12px 0;
+  margin-inline: 0 -12px;
+  opacity: 0;
+  content: '';
+  border-radius: 50%;
+  background: var(--vkui--color_transparent--active);
+  animation: animation-wave 0.3s var(--vkui--animation_easing_platform);
+}
+
+/**
+ * Animations
+ */
+
+@keyframes animation-wave {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(8);
+    opacity: 0;
+  }
+}

@@ -1,0 +1,124 @@
+.CustomScrollView {
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.CustomScrollView__box {
+  max-block-size: inherit;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -webkit-padding-end: 100px;
+          padding-inline-end: 100px;
+  position: relative;
+}
+
+.CustomScrollView__barY:active + .CustomScrollView__box {
+  pointer-events: none;
+}
+
+.CustomScrollView__barY {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  block-size: 100%;
+  inline-size: 10px;
+}
+
+.CustomScrollView__trackerY {
+  inline-size: 10px;
+  box-sizing: border-box;
+  padding-block: 4px 4px;
+  padding-inline: 0 4px;
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.CustomScrollView__trackerY--hidden {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+.CustomScrollView__trackerY::before {
+  content: '';
+  opacity: 0.48;
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  background-color: var(--vkui--color_icon_medium);
+  border-radius: 12px;
+  transition: transform 200ms, opacity 200ms;
+}
+
+.CustomScrollView__trackerY:hover::before,
+.CustomScrollView__trackerY:active::before {
+  opacity: 0.8;
+  transform: scaleX(1.3333);
+}
+
+/**
+ * CMP:
+ * CustomSelectDropdown
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalCustomSelectDropdown) .CustomScrollView__box {
+  -webkit-padding-end: 8px;
+          padding-inline-end: 8px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalCustomSelectDropdown--wide) .CustomScrollView__box {
+  -webkit-padding-end: 0;
+          padding-inline-end: 0;
+}
+
+.CustomScrollView--hasPointer-true .CustomScrollView__box {
+  /**
+   * Для удаление скролла в Firefox.
+   * В версии ниже 64 будет виден скролл, но это не ломает функциональность.
+   */
+  scrollbar-width: none;
+}
+
+.CustomScrollView--hasPointer-true .CustomScrollView__box::-webkit-scrollbar {
+  display: none;
+}
+
+@media (pointer: fine) {
+  .CustomScrollView--hasPointer-none .CustomScrollView__box {
+    /**
+     * Для удаление скролла в Firefox.
+     * В версии ниже 64 будет виден скролл, но это не ломает функциональность.
+     */
+    scrollbar-width: none;
+  }
+
+  .CustomScrollView--hasPointer-none .CustomScrollView__box::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/**
+ * Не отрисовываем полосу прокрутки, если у устройства отсутствует мышь
+ */
+
+.CustomScrollView--hasPointer-false .CustomScrollView__barY {
+  display: none;
+}
+
+@media (pointer: coarse),(pointer: none) {
+  .CustomScrollView--hasPointer-none .CustomScrollView__barY {
+    display: none;
+  }
+}

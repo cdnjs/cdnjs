@@ -1,0 +1,108 @@
+.Snackbar {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  z-index: var(--vkui--z_index_popout);
+  position: fixed;
+  inset-block-end: 0;
+  inset-inline-start: auto;
+  inline-size: 100%;
+  padding-inline: var(--vkui_internal--safe_area_inset_left)
+    var(--vkui_internal--safe_area_inset_right);
+  -webkit-padding-after: var(--vkui_internal--safe_area_inset_bottom);
+          padding-block-end: var(--vkui_internal--safe_area_inset_bottom);
+}
+
+/**
+ * CMP:
+ * Epic
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalEpic--hasTabbar) .Snackbar {
+  -webkit-padding-after: calc(
+    var(--vkui_internal--tabbar_height) + var(--vkui_internal--safe_area_inset_bottom)
+  );
+          padding-block-end: calc(
+    var(--vkui_internal--tabbar_height) + var(--vkui_internal--safe_area_inset_bottom)
+  );
+}
+
+.Snackbar__in,
+.Snackbar__snackbar {
+  transition: transform 320ms var(--vkui--animation_easing_platform);
+}
+
+.Snackbar__in {
+  padding: 8px;
+  animation: animation-snackbar-intro-vertical 340ms var(--vkui--animation_easing_platform);
+}
+
+.Snackbar--closing .Snackbar__in {
+  transform: translate3d(0, 140%, 0);
+}
+
+.ModalRoot .Snackbar {
+  -webkit-padding-after: var(--vkui_internal--safe_area_inset_bottom);
+          padding-block-end: var(--vkui_internal--safe_area_inset_bottom);
+}
+
+/* iOS */
+
+.Snackbar--ios .Snackbar__in,
+.Snackbar--ios .Snackbar__snackbar {
+  transition: transform 400ms var(--vkui--animation_easing_platform);
+}
+
+/**
+ * Desktop
+ */
+
+.Snackbar--desktop {
+  max-inline-size: 351px;
+  inset-inline-start: 0;
+  inset-block-end: 0;
+}
+
+.Snackbar--desktop .Snackbar__in {
+  padding: 12px;
+  animation-name: animation-snackbar-intro-horizontal;
+}
+
+.Snackbar--desktop.Snackbar--closing .Snackbar__in {
+  transform: translate3d(-140%, 0, 0);
+}
+
+/**
+ * Touch-interaction
+ */
+
+.Snackbar--touched .Snackbar__snackbar {
+  transition: none;
+}
+
+/**
+ * Animations
+ */
+
+@keyframes animation-snackbar-intro-vertical {
+  from {
+    transform: translate3d(0, 140%, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes animation-snackbar-intro-horizontal {
+  from {
+    transform: translate3d(-140%, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}

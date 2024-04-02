@@ -1,0 +1,39 @@
+.GridAvatar {
+  border-radius: 50%;
+}
+
+.GridAvatar__in {
+  display: flex;
+  flex-flow: column wrap;
+  block-size: 100%;
+  inline-size: 100%;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.GridAvatar__item {
+  inline-size: calc(50% - var(--vkui_internal--grid_avatar_image_offset) / 2);
+  block-size: calc(50% - var(--vkui_internal--grid_avatar_image_offset) / 2);
+  -webkit-margin-end: var(--vkui_internal--grid_avatar_image_offset);
+          margin-inline-end: var(--vkui_internal--grid_avatar_image_offset);
+  background-size: cover;
+  background-position: center;
+}
+
+.GridAvatar__item:only-child {
+  inline-size: 100%;
+}
+
+.GridAvatar__item:first-child:not(:nth-last-child(4)),
+.GridAvatar__item:nth-child(2):last-child {
+  block-size: 100%;
+}
+
+/* если есть минимум три элемента — выбираем второй с конца */
+
+.GridAvatar__item:nth-last-child(n + 3) ~ .GridAvatar__item:nth-last-child(2),
+/* четвертый с конца */
+.GridAvatar__item:nth-last-child(4) {
+  -webkit-margin-after: var(--vkui_internal--grid_avatar_image_offset);
+          margin-block-end: var(--vkui_internal--grid_avatar_image_offset);
+}

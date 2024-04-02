@@ -1,0 +1,28 @@
+/* stylelint-disable declaration-no-important */
+.VisuallyHidden {
+  position: absolute !important;
+  block-size: 1px !important;
+  inline-size: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important; /* Fix for https://github.com/twbs/bootstrap/issues/25686 */
+  white-space: nowrap !important;
+  clip: rect(0, 0, 0, 0) !important;
+  -webkit-clip-path: inset(50%);
+          clip-path: inset(50%);
+  overflow: hidden !important;
+  border: 0 !important;
+  opacity: 0;
+}
+/* Чтобы фокус скринридера, попавший на скрытый инпут был виден.
+ * Особенно актуально для Android TalkBack */
+.VisuallyHidden--focusable-input {
+  inset-inline-start: 0;
+  inset-block-start: 0;
+  block-size: 100% !important;
+  inline-size: 100% !important;
+  clip: auto !important;
+  -webkit-clip-path: none !important;
+          clip-path: none !important;
+  pointer-events: none;
+}
+/* stylelint-enable declaration-no-important */

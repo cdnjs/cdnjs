@@ -1,0 +1,45 @@
+.AppRoot {
+  block-size: 100%;
+  inline-size: 100%;
+}
+
+.AppRoot--pointer-has-not {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+/** 
+ * Хак для webkit-based браузеров, потому что на версиях iOS <= 14.* исчезает возможность 
+ * редактировать contenteditable элементы, если выше по дереву задан user-select: none; 
+ */
+
+.AppRoot--pointer-has-not [contenteditable] {
+  -webkit-user-select: text;
+     -moz-user-select: text;
+      -ms-user-select: text;
+          user-select: text;
+}
+
+@media (pointer: coarse),(pointer: none) {
+  .AppRoot--pointer-none {
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+  }
+
+  .AppRoot--pointer-none [contenteditable] {
+    -webkit-user-select: text;
+       -moz-user-select: text;
+        -ms-user-select: text;
+            user-select: text;
+  }
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkui__root--embedded) .AppRoot {
+  overflow: auto;
+}

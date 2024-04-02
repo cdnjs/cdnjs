@@ -1,0 +1,149 @@
+.FormItem {
+  display: block;
+}
+
+.FormItem--withPadding {
+  padding-block: var(--vkui--size_form_item_padding_vertical--regular);
+  padding-inline: var(--vkui--size_base_padding_horizontal--regular);
+}
+
+.FormItem--removable {
+  padding-inline: 0;
+}
+
+.FormItem__removable {
+  max-inline-size: 100%;
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: 0;
+  padding: 0;
+  min-inline-size: 1px;
+  overflow: hidden;
+}
+
+.FormItem__top {
+  padding-block: 2px 8px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--vkui--color_text_subhead);
+}
+
+.FormItem__bottom {
+  color: var(--vkui--color_text_secondary);
+  -webkit-padding-before: 8px;
+          padding-block-start: 8px;
+}
+
+.FormItem--status-error .FormItem__bottom {
+  color: var(--vkui--color_text_negative);
+}
+
+.FormItem--status-valid .FormItem__bottom,
+.FormItem--verified .FormItem__bottom {
+  color: var(--vkui--color_text_positive);
+}
+
+/**
+ * sizeY COMPACT
+ */
+
+.FormItem--sizeY-compact .FormItem__top {
+  -webkit-padding-after: 6px;
+          padding-block-end: 6px;
+}
+
+.FormItem--sizeY-compact .FormItem__bottom {
+  -webkit-padding-before: 6px;
+          padding-block-start: 6px;
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .FormItem--sizeY-none .FormItem__top {
+    -webkit-padding-after: 6px;
+            padding-block-end: 6px;
+  }
+
+  .FormItem--sizeY-none .FormItem__bottom {
+    -webkit-padding-before: 6px;
+            padding-block-start: 6px;
+  }
+}
+
+/**
+ * CMP:
+ * FormLayoutGroup
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormLayoutGroup--mode-horizontal) .FormItem {
+  max-inline-size: 100%;
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: 0;
+  padding: 0;
+  min-inline-size: 1px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormLayoutGroup--mode-horizontal:not(.vkuiInternalFormLayoutGroup--segmented))
+  .FormItem
+  + .FormItem {
+  -webkit-margin-start: 16px;
+          margin-inline-start: 16px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormLayoutGroup--mode-horizontal.vkuiInternalFormLayoutGroup--segmented)
+  .FormItem
+  + .FormItem {
+  -webkit-margin-start: calc(-1 * var(--vkui--size_border--regular));
+          margin-inline-start: calc(-1 * var(--vkui--size_border--regular));
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormLayoutGroup--mode-vertical.vkuiInternalFormLayoutGroup--segmented)
+  .FormItem
+  + .FormItem {
+  -webkit-padding-before: 0;
+          padding-block-start: 0;
+  -webkit-margin-before: calc(-1 * var(--vkui--size_border--regular));
+          margin-block-start: calc(-1 * var(--vkui--size_border--regular));
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormLayoutGroup--mode-vertical.vkuiInternalFormLayoutGroup--segmented)
+  .FormItem:not(:last-of-type) {
+  -webkit-padding-after: 0;
+          padding-block-end: 0;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.FormItem--withTop .FormItem__removable,
+:global(.vkuiInternalFormLayoutGroup--mode-horizontal) .FormItem--withTop {
+  -webkit-margin-before: calc(-2px - var(--vkui--font_subhead--line_height--regular) - 8px);
+          margin-block-start: calc(-2px - var(--vkui--font_subhead--line_height--regular) - 8px);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.FormItem--sizeY-compact.FormItem--withTop .FormItem__removable,
+:global(.vkuiInternalFormLayoutGroup--mode-horizontal) .FormItem--sizeY-compact.FormItem--withTop {
+  -webkit-margin-before: calc(-2px - var(--vkui--font_subhead--line_height--compact) - 6px);
+          margin-block-start: calc(-2px - var(--vkui--font_subhead--line_height--compact) - 6px);
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  /* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+  .FormItem--sizeY-none.FormItem--withTop .FormItem__removable,
+  :global(.vkuiInternalFormLayoutGroup--mode-horizontal) .FormItem--sizeY-none.FormItem--withTop {
+    -webkit-margin-before: calc(-2px - var(--vkui--font_subhead--line_height--compact) - 6px);
+            margin-block-start: calc(-2px - var(--vkui--font_subhead--line_height--compact) - 6px);
+  }
+}

@@ -1,0 +1,230 @@
+.Group {
+  color: var(--vkui--color_text_primary);
+  padding-block: 8px;
+}
+
+.Group__header:empty {
+  display: none;
+}
+
+.Group--mode-plain:not(:first-of-type) > .Group__header {
+  -webkit-margin-before: -8px;
+          margin-block-start: -8px;
+}
+
+@media (max-width: 767.9px) {
+  .Group--sizeX-none.Group--mode-none:not(:first-of-type) > .Group__header {
+    -webkit-margin-before: -8px;
+            margin-block-start: -8px;
+  }
+}
+
+.Group--mode-card > .Group__header {
+  -webkit-margin-before: -4px;
+          margin-block-start: -4px;
+}
+
+@media (min-width: 768px) {
+  .Group--sizeX-none.Group--mode-none > .Group__header {
+    -webkit-margin-before: -4px;
+            margin-block-start: -4px;
+  }
+}
+
+.Group__separator--spacing,
+.Group__separator--separator {
+  display: none;
+}
+
+/* stylelint-disable-next-line selector-max-universal */
+
+.Group--mode-plain + * + .Group__separator--separator {
+  display: block;
+}
+
+@media (max-width: 767.9px) {
+  /* stylelint-disable-next-line selector-max-universal */
+  .Group--sizeX-none.Group--mode-none + * + .Group__separator--separator {
+    display: block;
+  }
+}
+
+.Group--mode-card + .Group__separator--spacing {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .Group--sizeX-none.Group--mode-none + .Group__separator--spacing {
+    display: block;
+  }
+}
+
+.Group:last-of-type ~ .Group__separator {
+  display: none;
+}
+
+.Group:last-of-type ~ .Group__separator--force,
+.Group--mode-card:last-of-type + .Group__separator--spacing {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .Group--sizeX-none.Group--mode-none:last-of-type + .Group__separator--spacing {
+    display: block;
+  }
+}
+
+.Group--mode-card.Group--padding-s {
+  padding: 4px;
+}
+
+.Group--mode-card.Group--padding-m {
+  padding: 8px;
+}
+
+@media (min-width: 768px) {
+  .Group--sizeX-none.Group--inside-modal.Group--padding-s,
+  .Group--sizeX-none.Group--mode-none.Group--padding-s {
+    padding: 4px;
+  }
+
+  .Group--sizeX-none.Group--inside-modal.Group--padding-m,
+  .Group--sizeX-none.Group--mode-none.Group--padding-m {
+    padding: 8px;
+  }
+}
+
+.Group--sizeX-compact,
+.Group--sizeX-compact.Group--mode-card {
+  padding-inline: 0;
+}
+
+@media (max-width: 767.9px) {
+  .Group--sizeX-none,
+  .Group--sizeX-none.Group--mode-card {
+    padding-inline: 0;
+  }
+}
+
+.Group--mode-card {
+  background: var(--vkui--color_background_content);
+  border-radius: var(--vkui--size_border_radius_paper--regular);
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .Group--sizeX-none.Group--mode-none {
+    background: var(--vkui--color_background_content);
+    border-radius: var(--vkui--size_border_radius_paper--regular);
+    position: relative;
+  }
+}
+
+.Group--sizeX-compact.Group--mode-card:first-of-type {
+  border-start-start-radius: 0;
+  border-start-end-radius: 0;
+  border-end-end-radius: var(--vkui--size_border_radius_paper--regular);
+  border-end-start-radius: var(--vkui--size_border_radius_paper--regular);
+}
+
+@media (max-width: 767.9px) {
+  .Group--sizeX-none.Group--mode-card:first-of-type {
+    border-start-start-radius: 0;
+    border-start-end-radius: 0;
+    border-end-end-radius: var(--vkui--size_border_radius_paper--regular);
+    border-end-start-radius: var(--vkui--size_border_radius_paper--regular);
+  }
+}
+
+/**
+ * Изменено с ::after на ::before
+ * потому что при ::after абсолютно позиционированный элемент накладывается
+ * поверх любого другого абсолютно позиционированного элемента внутри Group,
+ * например поверх Tooltip
+ * См. пример: Slider c пропом withTooltip
+ */
+
+.Group--mode-card::before {
+  content: '';
+  inset-inline-start: 0;
+  inset-block-start: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  position: absolute;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 var(--vkui--size_border--regular) var(--vkui--color_separator_primary);
+}
+
+@media (min-width: 768px) {
+  .Group--sizeX-none.Group--mode-none::before {
+    content: '';
+    inset-inline-start: 0;
+    inset-block-start: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    position: absolute;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow: inset 0 0 0 var(--vkui--size_border--regular) var(--vkui--color_field_border_alpha);
+  }
+}
+
+.Group--sizeX-compact.Group--mode-card::before {
+  box-shadow: none;
+}
+
+@media (max-width: 767.9px) {
+  .Group--sizeX-none.Group--mode-card::before {
+    box-shadow: none;
+  }
+}
+
+.Group--mode-plain + .Group__separator,
+.Group--mode-plain + .Group__separator + .Group__separator {
+  padding-block: 8px;
+}
+
+@media (max-width: 767.9px) {
+  .Group--sizeX-none.Group--mode-none + .Group__separator,
+  .Group--sizeX-none.Group--mode-none + .Group__separator + .Group__separator {
+    padding-block: 8px;
+  }
+}
+
+.Group__description {
+  display: block;
+  padding-block: 4px 16px;
+  padding-inline: var(--vkui--size_base_padding_horizontal--regular);
+  color: var(--vkui--color_text_secondary);
+}
+
+.Group .Group,
+.Group .Group + .Group__separator {
+  padding-inline: 0;
+}
+
+.Group .Group:first-of-type {
+  -webkit-padding-before: 0;
+          padding-block-start: 0;
+}
+
+.Group .Group:last-of-type {
+  -webkit-padding-after: 0;
+          padding-block-end: 0;
+}
+
+/*
+ * CMP:
+ * PanelHeader
+ */
+
+/* stylelint-disable-next-line selector-max-universal, selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalPanelHeader--vkcom) ~ .Group:first-of-type,
+:global(.vkuiInternalPanelHeader--vkcom) + * .Group:first-of-type {
+  position: relative;
+  inset-block-start: -1px;
+  border-start-end-radius: 0;
+  border-start-start-radius: 0;
+}

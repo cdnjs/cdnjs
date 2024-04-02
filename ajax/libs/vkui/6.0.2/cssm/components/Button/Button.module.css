@@ -1,0 +1,707 @@
+.Button {
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  text-decoration: none;
+  border: 0;
+  min-block-size: var(--vkui--size_button_small_height--compact);
+  margin: 0;
+  padding: 0;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  border-radius: var(--vkui--size_border_radius--regular);
+  max-inline-size: 100%;
+  min-inline-size: var(--vkui--size_button_minimum_width--regular);
+}
+
+.Button--rounded {
+  border-radius: var(--vkui--size_border_radius_rounded--regular);
+}
+
+.Button--loading {
+  cursor: progress;
+}
+
+.Button--singleIcon {
+  inline-size: var(--vkui--size_button_small_height--compact);
+  min-inline-size: initial;
+}
+
+.Button--sizeY-regular.Button--singleIcon {
+  inline-size: var(--vkui--size_button_small_height--regular);
+}
+
+@media (pointer: coarse) and (min-height: 415px),(pointer: none) and (min-height: 415px),(max-width: 767.9px) and (min-height: 415px) {
+  .Button--sizeY-none.Button--singleIcon {
+    inline-size: var(--vkui--size_button_small_height--regular);
+  }
+}
+
+.Button--stretched {
+  display: block;
+  inline-size: 100%;
+  flex-grow: 1;
+  flex-basis: 0;
+}
+
+.Button__in {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  min-block-size: inherit;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.Button--align-left .Button__in {
+  justify-content: flex-start;
+  text-align: start;
+}
+
+.Button--align-center {
+}
+
+.Button--align-right .Button__in {
+  justify-content: flex-end;
+  text-align: end;
+}
+
+.Button[disabled] {
+  opacity: var(--vkui--opacity_disable);
+}
+
+.Button--mode-primary[disabled]:not(.Button--appearance-overlay):not(
+    .Button--appearance-negative
+  ):not(.Button--appearance-positive),
+.Button--mode-secondary[disabled]:not(.Button--appearance-overlay),
+.Button--mode-tertiary[disabled]:not(.Button--appearance-overlay),
+.Button--mode-outline[disabled]:not(.Button--appearance-overlay) {
+  opacity: 0.64;
+}
+
+.Button--with-icon {
+}
+
+.Button__content {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-weight: var(--vkui--font_weight_accent2);
+}
+
+.Button--size-s .Button__content:first-child {
+  -webkit-padding-start: var(--vkui--size_button_base_small_padding_horizontal--regular);
+          padding-inline-start: var(--vkui--size_button_base_small_padding_horizontal--regular);
+}
+
+.Button--size-s .Button__content:last-child,
+.Button--size-s .Button__after {
+  -webkit-padding-end: var(--vkui--size_button_base_small_padding_horizontal--regular);
+          padding-inline-end: var(--vkui--size_button_base_small_padding_horizontal--regular);
+}
+
+.Button--size-m .Button__content:first-child {
+  -webkit-padding-start: var(--vkui--size_button_base_medium_padding_horizontal--regular);
+          padding-inline-start: var(--vkui--size_button_base_medium_padding_horizontal--regular);
+}
+
+.Button--size-m .Button__content:last-child,
+.Button--size-m .Button__after {
+  -webkit-padding-end: var(--vkui--size_button_base_medium_padding_horizontal--regular);
+          padding-inline-end: var(--vkui--size_button_base_medium_padding_horizontal--regular);
+}
+
+.Button--size-l .Button__content:first-child {
+  -webkit-padding-start: var(--vkui--size_button_base_large_padding_horizontal--regular);
+          padding-inline-start: var(--vkui--size_button_base_large_padding_horizontal--regular);
+}
+
+.Button--size-l .Button__content:last-child,
+.Button--size-l .Button__after {
+  -webkit-padding-end: var(--vkui--size_button_base_large_padding_horizontal--regular);
+          padding-inline-end: var(--vkui--size_button_base_large_padding_horizontal--regular);
+}
+
+.Button--size-s .Button__before {
+  -webkit-padding-start: var(--vkui--size_button_base_small_padding_horizontal_icon--regular);
+          padding-inline-start: var(--vkui--size_button_base_small_padding_horizontal_icon--regular);
+}
+
+.Button--size-m .Button__before {
+  -webkit-padding-start: var(--vkui--size_button_base_medium_padding_horizontal_icon--regular);
+          padding-inline-start: var(--vkui--size_button_base_medium_padding_horizontal_icon--regular);
+}
+
+.Button--size-l .Button__before {
+  -webkit-padding-start: var(--vkui--size_button_base_large_padding_horizontal_icon--regular);
+          padding-inline-start: var(--vkui--size_button_base_large_padding_horizontal_icon--regular);
+}
+
+.Button--mode-tertiary.Button--size-s .Button__content:first-child {
+  -webkit-padding-start: var(--vkui--size_button_tertiary_small_padding_horizontal--regular);
+          padding-inline-start: var(--vkui--size_button_tertiary_small_padding_horizontal--regular);
+}
+
+.Button--mode-tertiary.Button--size-s .Button__content:last-child,
+.Button--mode-tertiary.Button--size-s .Button__after {
+  -webkit-padding-end: var(--vkui--size_button_tertiary_small_padding_horizontal--regular);
+          padding-inline-end: var(--vkui--size_button_tertiary_small_padding_horizontal--regular);
+}
+
+.Button--mode-tertiary.Button--size-m .Button__content:first-child {
+  -webkit-padding-start: var(--vkui--size_button_tertiary_medium_padding_horizontal--regular);
+          padding-inline-start: var(--vkui--size_button_tertiary_medium_padding_horizontal--regular);
+}
+
+.Button--mode-tertiary.Button--size-m .Button__content:last-child,
+.Button--mode-tertiary.Button--size-m .Button__after {
+  -webkit-padding-end: var(--vkui--size_button_tertiary_medium_padding_horizontal--regular);
+          padding-inline-end: var(--vkui--size_button_tertiary_medium_padding_horizontal--regular);
+}
+
+.Button--mode-tertiary.Button--size-l .Button__content:first-child {
+  -webkit-padding-start: var(--vkui--size_button_tertiary_large_padding_horizontal--regular);
+          padding-inline-start: var(--vkui--size_button_tertiary_large_padding_horizontal--regular);
+}
+
+.Button--mode-tertiary.Button--size-l .Button__content:last-child,
+.Button--mode-tertiary.Button--size-l .Button__after {
+  -webkit-padding-end: var(--vkui--size_button_tertiary_large_padding_horizontal--regular);
+          padding-inline-end: var(--vkui--size_button_tertiary_large_padding_horizontal--regular);
+}
+
+.Button--mode-tertiary.Button--size-s .Button__before {
+  -webkit-padding-start: var(--vkui--size_button_tertiary_small_padding_horizontal_icon--regular);
+          padding-inline-start: var(--vkui--size_button_tertiary_small_padding_horizontal_icon--regular);
+}
+
+.Button--mode-tertiary.Button--size-m .Button__before {
+  -webkit-padding-start: var(--vkui--size_button_tertiary_medium_padding_horizontal_icon--regular);
+          padding-inline-start: var(--vkui--size_button_tertiary_medium_padding_horizontal_icon--regular);
+}
+
+.Button--mode-tertiary.Button--size-l .Button__before {
+  -webkit-padding-start: var(--vkui--size_button_tertiary_large_padding_horizontal_icon--regular);
+          padding-inline-start: var(--vkui--size_button_tertiary_large_padding_horizontal_icon--regular);
+}
+
+.Button--singleIcon .Button__after,
+.Button--singleIcon .Button__before,
+.Button--mode-tertiary.Button--singleIcon .Button__after,
+.Button--mode-tertiary.Button--singleIcon .Button__before {
+  margin-inline: auto;
+  padding-inline: 0;
+}
+
+.Button--mode-link {
+  background: none;
+  min-inline-size: initial;
+}
+
+.Button--mode-link .Button__after,
+.Button--mode-link .Button__before,
+.Button--mode-link .Button__content:first-child,
+.Button--mode-link .Button__content:last-child,
+.Button--stretched .Button__after:only-child,
+.Button--stretched .Button__before:only-child {
+  padding-inline: 0;
+}
+
+.Button__spinner {
+  color: currentColor;
+  position: absolute;
+  inset: 0;
+}
+
+.Button__spinner + .Button__in {
+  visibility: hidden;
+}
+
+/* Button's backgrounds */
+
+/* Mode  = Primary */
+
+.Button--mode-primary.Button--appearance-accent {
+  background-color: var(--vkui--color_background_accent_themed);
+}
+
+.Button--mode-primary.Button--appearance-accent.Button--hover {
+  background-color: var(--vkui--color_background_accent_themed--hover);
+}
+
+.Button--mode-primary.Button--appearance-accent.Button--active {
+  background-color: var(--vkui--color_background_accent_themed--active);
+}
+
+.Button--mode-primary.Button--appearance-positive {
+  background-color: var(--vkui--color_background_positive);
+}
+
+.Button--mode-primary.Button--appearance-positive.Button--hover {
+  background-color: var(--vkui--color_background_positive--hover);
+}
+
+.Button--mode-primary.Button--appearance-positive.Button--active {
+  background-color: var(--vkui--color_background_positive--active);
+}
+
+.Button--mode-primary.Button--appearance-negative {
+  background-color: var(--vkui--color_background_negative);
+}
+
+.Button--mode-primary.Button--appearance-negative.Button--hover {
+  background-color: var(--vkui--color_background_negative--hover);
+}
+
+.Button--mode-primary.Button--appearance-negative.Button--active {
+  background-color: var(--vkui--color_background_negative--active);
+}
+
+.Button--mode-primary.Button--appearance-neutral {
+  background-color: var(--vkui--color_background_secondary);
+}
+
+.Button--mode-primary.Button--appearance-neutral.Button--hover {
+  background-color: var(--vkui--color_background_secondary--hover);
+}
+
+.Button--mode-primary.Button--appearance-neutral.Button--active {
+  background-color: var(--vkui--color_background_secondary--active);
+}
+
+.Button--mode-primary.Button--appearance-accent-invariable {
+  background-color: var(--vkui--color_background_accent);
+}
+
+.Button--mode-primary.Button--appearance-accent-invariable.Button--hover {
+  background-color: var(--vkui--color_background_accent--hover);
+}
+
+.Button--mode-primary.Button--appearance-accent-invariable.Button--active {
+  background-color: var(--vkui--color_background_accent--active);
+}
+
+/* Mode = Secondary */
+
+.Button--mode-secondary {
+  background-color: var(--vkui--color_background_secondary_alpha);
+}
+
+.Button--mode-secondary.Button--hover {
+  background-color: var(--vkui--color_background_secondary_alpha--hover);
+}
+
+.Button--mode-secondary.Button--active {
+  background-color: var(--vkui--color_background_secondary_alpha--active);
+}
+
+/* Mode = Tertiary */
+
+.Button--mode-tertiary,
+.Button--mode-outline {
+  background-color: var(--vkui--color_transparent);
+}
+
+.Button--mode-tertiary.Button--hover,
+.Button--mode-outline.Button--hover {
+  background-color: var(--vkui--color_transparent--hover);
+}
+
+.Button--mode-tertiary.Button--active,
+.Button--mode-outline.Button--active {
+  background-color: var(--vkui--color_transparent--active);
+}
+
+/*
+  Buttons text colors
+*/
+
+.Button.Button--appearance-accent {
+  color: var(--vkui--color_text_accent_themed);
+}
+
+.Button.Button--appearance-positive {
+  color: var(--vkui--color_text_positive);
+}
+
+.Button.Button--appearance-negative {
+  color: var(--vkui--color_text_negative);
+}
+
+.Button.Button--appearance-neutral {
+  color: var(--vkui--color_text_primary);
+}
+
+.Button.Button--appearance-accent-invariable {
+  color: var(--vkui--color_text_accent);
+}
+
+.Button--mode-primary.Button--appearance-accent {
+  color: var(--vkui--color_text_contrast_themed);
+}
+
+.Button--mode-primary.Button--appearance-negative,
+.Button--mode-primary.Button--appearance-positive,
+.Button--mode-primary.Button--appearance-accent-invariable {
+  color: var(--vkui--color_text_contrast);
+}
+
+.Button--mode-link.Button--hover {
+  opacity: 0.8;
+}
+
+.Button--mode-link.Button--active {
+  opacity: 0.7;
+}
+
+/*
+  Outline buttons borders
+*/
+
+.Button--mode-outline.Button--appearance-accent,
+.Button--mode-outline.Button--appearance-accent.Button--hover,
+.Button--mode-outline.Button--appearance-accent.Button--active {
+  box-shadow: inset 0 0 0 1px var(--vkui--color_stroke_accent_themed);
+}
+
+.Button--mode-outline.Button--appearance-positive {
+  box-shadow: inset 0 0 0 1px var(--vkui--color_stroke_positive);
+}
+
+.Button--mode-outline.Button--appearance-positive.Button--hover {
+  box-shadow: inset 0 0 0 1px var(--vkui--color_stroke_positive--hover);
+}
+
+.Button--mode-outline.Button--appearance-positive.Button--active {
+  box-shadow: inset 0 0 0 1px var(--vkui--color_stroke_positive--active);
+}
+
+.Button--mode-outline.Button--appearance-negative {
+  box-shadow: inset 0 0 0 1px var(--vkui--color_stroke_negative);
+}
+
+.Button--mode-outline.Button--appearance-negative.Button--hover {
+  box-shadow: inset 0 0 0 1px var(--vkui--color_stroke_negative--hover);
+}
+
+.Button--mode-outline.Button--appearance-negative.Button--active {
+  box-shadow: inset 0 0 0 1px var(--vkui--color_stroke_negative--active);
+}
+
+.Button--mode-outline.Button--appearance-neutral {
+  box-shadow: inset 0 0 0 1px var(--vkui--color_field_border_alpha);
+}
+
+.Button--mode-outline.Button--appearance-neutral.Button--hover {
+  background-color: var(--vkui--color_background_secondary--hover);
+  box-shadow: unset;
+}
+
+.Button--mode-outline.Button--appearance-neutral.Button--active {
+  background-color: var(--vkui--color_background_secondary--active);
+  box-shadow: unset;
+}
+
+.Button--mode-outline.Button--appearance-accent-invariable {
+  box-shadow: inset 0 0 0 1px var(--vkui--color_stroke_accent);
+}
+
+/*
+  Overlay colors section, separately
+  Background colors
+*/
+
+.Button--mode-primary.Button--appearance-overlay {
+  background-color: var(--vkui--color_background_contrast);
+}
+
+.Button--mode-primary.Button--appearance-overlay.Button--hover {
+  background-color: var(--vkui--color_background_contrast--hover);
+}
+
+.Button--mode-primary.Button--appearance-overlay.Button--active {
+  background-color: var(--vkui--color_background_contrast--active);
+}
+
+.Button--mode-secondary.Button--appearance-overlay {
+  background-color: var(--vkui--color_background_contrast_secondary_alpha);
+}
+
+.Button--mode-secondary.Button--appearance-overlay.Button--hover,
+.Button--mode-tertiary.Button--appearance-overlay.Button--hover,
+.Button--mode-outline.Button--appearance-overlay.Button--hover {
+  background-color: var(--vkui--color_background_contrast_secondary_alpha--hover);
+}
+
+.Button--mode-secondary.Button--appearance-overlay.Button--active,
+.Button--mode-tertiary.Button--appearance-overlay.Button--active,
+.Button--mode-outline.Button--appearance-overlay.Button--active {
+  background-color: var(--vkui--color_background_contrast_secondary_alpha--active);
+}
+
+/* Text colors */
+
+.Button--mode-primary.Button--appearance-overlay {
+  color: var(--vkui--color_text_primary_invariably);
+}
+
+.Button--mode-primary.Button--appearance-overlay.Button--hover {
+  color: var(--vkui--color_text_primary_invariably--hover);
+}
+
+.Button--mode-primary.Button--appearance-overlay.Button--active {
+  color: var(--vkui--color_text_primary_invariably--active);
+}
+
+.Button--mode-secondary.Button--appearance-overlay,
+.Button--mode-tertiary.Button--appearance-overlay,
+.Button--mode-outline.Button--appearance-overlay,
+.Button--mode-link.Button--appearance-overlay {
+  color: var(--vkui--color_text_contrast);
+}
+
+/* Borders */
+
+.Button--mode-outline.Button--appearance-overlay {
+  box-shadow: inset 0 0 0 1px var(--vkui--color_stroke_contrast);
+}
+
+.Button--mode-outline.Button--appearance-overlay.Button--hover {
+  box-shadow: inset 0 0 0 1px var(--vkui--color_stroke_contrast--hover);
+}
+
+.Button--mode-outline.Button--appearance-overlay.Button--active {
+  box-shadow: inset 0 0 0 1px var(--vkui--color_stroke_contrast--active);
+}
+
+.Button__before:not(:last-child) + .Button__content {
+  -webkit-margin-start: 6px;
+          margin-inline-start: 6px;
+}
+
+.Button__after:not(:first-child) {
+  -webkit-margin-start: 6px;
+          margin-inline-start: 6px;
+}
+
+.Button--size-l .Button__before:not(:last-child) + .Button__content {
+  -webkit-margin-start: 8px;
+          margin-inline-start: 8px;
+}
+
+.Button--size-l .Button__after:not(:first-child) {
+  -webkit-margin-start: 8px;
+          margin-inline-start: 8px;
+}
+
+/* Fonts sizes  */
+
+.Button--size-s .Button__content {
+  font-family: var(--vkui--font_subhead--font_family--regular);
+  font-size: var(--vkui--font_subhead--font_size--compact);
+  line-height: var(--vkui--font_subhead--line_height--compact);
+}
+
+.Button--sizeY-regular.Button--size-s .Button__content {
+  font-family: var(--vkui--font_subhead--font_family--regular);
+  font-size: var(--vkui--font_subhead--font_size--regular);
+  line-height: var(--vkui--font_subhead--line_height--regular);
+}
+
+@media (pointer: coarse) and (min-height: 415px),(pointer: none) and (min-height: 415px),(max-width: 767.9px) and (min-height: 415px) {
+  .Button--sizeY-none.Button--size-s .Button__content {
+    font-family: var(--vkui--font_subhead--font_family--regular);
+    font-size: var(--vkui--font_subhead--font_size--regular);
+    line-height: var(--vkui--font_subhead--line_height--regular);
+  }
+}
+
+.Button--size-m .Button__content {
+  font-family: var(--vkui--font_headline2--font_family--regular);
+  font-size: var(--vkui--font_headline2--font_size--compact);
+  line-height: var(--vkui--font_headline2--line_height--compact);
+}
+
+.Button--sizeY-regular.Button--size-m .Button__content {
+  font-family: var(--vkui--font_headline2--font_family--regular);
+  font-size: var(--vkui--font_headline2--font_size--regular);
+  line-height: var(--vkui--font_headline2--line_height--regular);
+}
+
+@media (pointer: coarse) and (min-height: 415px),(pointer: none) and (min-height: 415px),(max-width: 767.9px) and (min-height: 415px) {
+  .Button--sizeY-none.Button--size-m .Button__content {
+    font-family: var(--vkui--font_headline2--font_family--regular);
+    font-size: var(--vkui--font_headline2--font_size--regular);
+    line-height: var(--vkui--font_headline2--line_height--regular);
+  }
+}
+
+.Button--size-l .Button__content {
+  font-family: var(--vkui--font_headline1--font_family--regular);
+  font-size: var(--vkui--font_headline1--font_size--compact);
+  line-height: var(--vkui--font_headline1--line_height--compact);
+}
+
+.Button--sizeY-regular.Button--size-l .Button__content {
+  font-family: var(--vkui--font_headline1--font_family--regular);
+  font-size: var(--vkui--font_headline1--font_size--regular);
+  line-height: var(--vkui--font_headline1--line_height--regular);
+}
+
+@media (pointer: coarse) and (min-height: 415px),(pointer: none) and (min-height: 415px),(max-width: 767.9px) and (min-height: 415px) {
+  .Button--sizeY-none.Button--size-l .Button__content {
+    font-family: var(--vkui--font_headline1--font_family--regular);
+    font-size: var(--vkui--font_headline1--font_size--regular);
+    line-height: var(--vkui--font_headline1--line_height--regular);
+  }
+}
+
+.Button--sizeY-regular.Button--size-l.Button--ios .Button__content {
+  font-family: var(--vkui--font_title3--font_family--regular);
+  font-size: var(--vkui--font_title3--font_size--regular);
+  line-height: var(--vkui--font_title3--line_height--regular);
+}
+
+@media (pointer: coarse) and (min-height: 415px),(pointer: none) and (min-height: 415px),(max-width: 767.9px) and (min-height: 415px) {
+  .Button--sizeY-none.Button--size-l.Button--ios .Button__content {
+    font-family: var(--vkui--font_title3--font_family--regular);
+    font-size: var(--vkui--font_title3--font_size--regular);
+    line-height: var(--vkui--font_title3--line_height--regular);
+  }
+}
+
+/* Sizes */
+
+.Button--size-m {
+  min-block-size: var(--vkui--size_button_medium_height--compact);
+}
+
+.Button--sizeY-regular.Button--size-m {
+  min-block-size: var(--vkui--size_button_medium_height--regular);
+}
+
+@media (pointer: coarse) and (min-height: 415px),(pointer: none) and (min-height: 415px),(max-width: 767.9px) and (min-height: 415px) {
+  .Button--sizeY-none.Button--size-m {
+    min-block-size: var(--vkui--size_button_medium_height--regular);
+  }
+}
+
+.Button--size-m.Button--singleIcon {
+  inline-size: var(--vkui--size_button_medium_height--compact);
+}
+
+.Button--sizeY-regular.Button--size-m.Button--singleIcon {
+  inline-size: var(--vkui--size_button_medium_height--regular);
+}
+
+@media (pointer: coarse) and (min-height: 415px),(pointer: none) and (min-height: 415px),(max-width: 767.9px) and (min-height: 415px) {
+  .Button--sizeY-none.Button--size-m.Button--singleIcon {
+    inline-size: var(--vkui--size_button_medium_height--regular);
+  }
+}
+
+.Button--size-l {
+  min-block-size: var(--vkui--size_button_large_height--compact);
+}
+
+.Button--sizeY-regular.Button--size-l {
+  min-block-size: var(--vkui--size_button_large_height--regular);
+}
+
+@media (pointer: coarse) and (min-height: 415px),(pointer: none) and (min-height: 415px),(max-width: 767.9px) and (min-height: 415px) {
+  .Button--sizeY-none.Button--size-l {
+    min-block-size: var(--vkui--size_button_large_height--regular);
+  }
+}
+
+.Button--size-l.Button--singleIcon {
+  inline-size: var(--vkui--size_button_large_height--compact);
+}
+
+.Button--sizeY-regular.Button--size-l.Button--singleIcon {
+  inline-size: var(--vkui--size_button_large_height--regular);
+}
+
+@media (pointer: coarse) and (min-height: 415px),(pointer: none) and (min-height: 415px),(max-width: 767.9px) and (min-height: 415px) {
+  .Button--sizeY-none.Button--size-l.Button--singleIcon {
+    inline-size: var(--vkui--size_button_large_height--regular);
+  }
+}
+
+.Button--sizeY-regular {
+  min-block-size: var(--vkui--size_button_small_height--regular);
+}
+
+@media (pointer: coarse) and (min-height: 415px),(pointer: none) and (min-height: 415px),(max-width: 767.9px) and (min-height: 415px) {
+  .Button--sizeY-none {
+    min-block-size: var(--vkui--size_button_small_height--regular);
+  }
+}
+
+/**
+ * Impact:
+ * Counter
+ */
+
+.Button--mode-primary.Button--appearance-accent {
+  --vkui_internal--counter_inherit_background: var(--vkui--color_background_content);
+  --vkui_internal--counter_inherit_color: var(--vkui--color_text_accent_themed);
+}
+
+.Button--mode-secondary.Button--appearance-accent,
+.Button--mode-tertiary.Button--appearance-accent,
+.Button--mode-outline.Button--appearance-accent {
+  --vkui_internal--counter_inherit_background: var(--vkui--color_background_accent_themed);
+  --vkui_internal--counter_inherit_color: var(--vkui--color_text_contrast_themed);
+}
+
+.Button--mode-primary.Button--appearance-positive {
+  --vkui_internal--counter_inherit_background: var(--vkui--color_background_contrast);
+  --vkui_internal--counter_inherit_color: var(--vkui--color_text_positive);
+}
+
+.Button--mode-secondary.Button--appearance-positive,
+.Button--mode-tertiary.Button--appearance-positive,
+.Button--mode-outline.Button--appearance-positive {
+  --vkui_internal--counter_inherit_background: var(--vkui--color_background_positive);
+  --vkui_internal--counter_inherit_color: var(--vkui--color_text_contrast);
+}
+
+.Button--mode-primary.Button--appearance-negative {
+  --vkui_internal--counter_inherit_background: var(--vkui--color_background_contrast);
+  --vkui_internal--counter_inherit_color: var(--vkui--color_text_negative);
+}
+
+.Button--mode-secondary.Button--appearance-negative,
+.Button--mode-tertiary.Button--appearance-negative,
+.Button--mode-outline.Button--appearance-negative {
+  --vkui_internal--counter_inherit_background: var(--vkui--color_background_negative);
+  --vkui_internal--counter_inherit_color: var(--vkui--color_text_contrast);
+}
+
+.Button--mode-primary.Button--appearance-neutral {
+  --vkui_internal--counter_inherit_background: var(--vkui--color_background_contrast);
+  --vkui_internal--counter_inherit_color: var(--vkui--color_text_primary_invariably);
+}
+
+.Button--mode-secondary.Button--appearance-neutral,
+.Button--mode-tertiary.Button--appearance-neutral,
+.Button--mode-outline.Button--appearance-neutral {
+  --vkui_internal--counter_inherit_background: var(--vkui--color_background_accent);
+  --vkui_internal--counter_inherit_color: var(--vkui--color_text_contrast);
+}
+
+.Button--mode-primary.Button--appearance-overlay {
+  --vkui_internal--counter_inherit_background: var(--vkui--color_icon_primary_invariably);
+  --vkui_internal--counter_inherit_color: var(--vkui--color_text_contrast);
+}
+
+.Button--mode-secondary.Button--appearance-overlay,
+.Button--mode-tertiary.Button--appearance-overlay,
+.Button--mode-outline.Button--appearance-overlay {
+  --vkui_internal--counter_inherit_background: var(--vkui--color_background_contrast);
+  --vkui_internal--counter_inherit_color: var(--vkui--color_text_primary_invariably);
+}

@@ -1,0 +1,75 @@
+.ImageBase {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  color: var(--vkui_internal--icon_color, var(--vkui--color_icon_secondary));
+  background-color: var(--vkui--color_background_secondary);
+  background-size: cover;
+  isolation: isolate;
+}
+
+.ImageBase--transparent-background {
+  background-color: transparent;
+}
+
+.ImageBase__border {
+  pointer-events: none;
+  position: absolute;
+  z-index: var(--vkui_internal--z_index_image_base_border);
+  inset-inline-start: 0;
+  inset-block-start: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  box-sizing: border-box;
+  transform-origin: left top;
+  border: var(--vkui--size_border--regular) solid var(--vkui--color_image_border_alpha);
+  border-radius: inherit;
+}
+
+.ImageBase__img {
+  position: absolute;
+  z-index: var(--vkui_internal--z_index_image_base_img);
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  border: 0;
+  border-radius: inherit;
+  object-fit: cover;
+  visibility: hidden;
+}
+
+.ImageBase--loaded .ImageBase__img {
+  visibility: visible;
+}
+
+.ImageBase__fallback {
+  position: absolute;
+
+  /* Расcчитываем на центрирование через родительский `display: flex` */
+  inset-block-start: auto;
+  inset-inline-start: auto;
+}
+
+/**
+ * CMP:
+ * PanelHeader
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalPanelHeader__before) .ImageBase {
+  -webkit-margin-start: 8px;
+          margin-inline-start: 8px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalPanelHeader__after) .ImageBase {
+  -webkit-margin-end: 8px;
+          margin-inline-end: 8px;
+}
