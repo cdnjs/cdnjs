@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/solid.ts"],
+  "sourcesContent": ["import { type Exome, subscribe } from \"exome\";\nimport { createSignal, onCleanup } from \"solid-js\";\n\nexport function useStore<T extends Exome, R = T>(\n\tstore: T,\n\tselector: (state: T) => R = (v) => v as any,\n) {\n\tconst [value, setValue] = createSignal(selector(store));\n\n\tfunction render() {\n\t\tsetValue(() => selector(store));\n\t}\n\n\tconst unsubscribe = subscribe(store, render);\n\tonCleanup(() => unsubscribe);\n\n\treturn value;\n}\n"],
+  "mappings": ";AAAA,SAAqB,aAAAA,SAAiB;AACtC,SAAS,gBAAAC,GAAc,aAAAC,SAAiB;AAEjC,SAASC,EACfC,GACAC,IAA4B,CAACC,MAAMA,GAClC;AACD,MAAM,CAACC,GAAOC,CAAQ,IAAIP,EAAaI,EAASD,CAAK,CAAC;AAEtD,WAASK,IAAS;AACjB,IAAAD,EAAS,MAAMH,EAASD,CAAK,CAAC;AAAA,EAC/B;AAEA,MAAMM,IAAcV,EAAUI,GAAOK,CAAM;AAC3C,SAAAP,EAAU,MAAMQ,CAAW,GAEpBH;AACR;",
+  "names": ["subscribe", "createSignal", "onCleanup", "useStore", "store", "selector", "v", "value", "setValue", "render", "unsubscribe"]
+}
