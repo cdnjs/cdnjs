@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/lit.ts"],
+  "sourcesContent": ["import { Exome, subscribe } from \"exome\";\nimport { ReactiveController, ReactiveControllerHost } from \"lit\";\n\nexport class StoreController<T extends Exome> implements ReactiveController {\n\tprivate unsubscribe: undefined | (() => void);\n\n\tconstructor(private host: ReactiveControllerHost, public store: T) {\n\t\thost.addController(this);\n\t}\n\n\thostConnected() {\n\t\tthis.unsubscribe = subscribe(this.store, () => {\n\t\t\tthis.host.requestUpdate();\n\t\t});\n\t}\n\n\thostDisconnected() {\n\t\tthis.unsubscribe?.();\n\t}\n}\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;AAAA,IAAAA,IAAA;AAAAC,EAAAD,GAAA;AAAA,yBAAAE;AAAA;AAAA,iBAAAC,EAAAH;AAAA,IAAAI,IAAiC,kBAGpBF,IAAN,MAAqE;AAAA,EAG3E,YAAoBG,GAAqCC,GAAU;AAA/C,gBAAAD;AAAqC,iBAAAC;AACxD,IAAAD,EAAK,cAAc,IAAI;AAAA,EACxB;AAAA,EAEA,gBAAgB;AACf,SAAK,kBAAc,aAAU,KAAK,OAAO,MAAM;AAC9C,WAAK,KAAK,cAAc;AAAA,IACzB,CAAC;AAAA,EACF;AAAA,EAEA,mBAAmB;AAhBpB,QAAAE;AAiBE,KAAAA,IAAA,KAAK,gBAAL,QAAAA,EAAA;AAAA,EACD;AACD;",
+  "names": ["lit_exports", "__export", "StoreController", "__toCommonJS", "import_exome", "host", "store", "_a"]
+}
