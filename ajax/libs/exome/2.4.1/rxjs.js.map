@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/rxjs.ts"],
+  "sourcesContent": ["import { type Exome, subscribe } from \"exome\";\nimport { Observable } from \"rxjs\";\n\nexport function observableFromExome<T extends Exome = Exome>(\n\tstore: T,\n): Observable<T> {\n\treturn new Observable<T>((subscriber) => {\n\t\tsubscribe(store, (value: any) => subscriber.next(value));\n\t\tsubscriber.next(store);\n\t});\n}\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;AAAA,IAAAA,IAAA;AAAAC,EAAAD,GAAA;AAAA,6BAAAE;AAAA;AAAA,iBAAAC,EAAAH;AAAA,IAAAI,IAAsC,kBACtCC,IAA2B;AAEpB,SAASH,EACfI,GACgB;AAChB,SAAO,IAAI,aAAc,CAACC,MAAe;AACxC,qBAAUD,GAAO,CAACE,MAAeD,EAAW,KAAKC,CAAK,CAAC,GACvDD,EAAW,KAAKD,CAAK;AAAA,EACtB,CAAC;AACF;",
+  "names": ["rxjs_exports", "__export", "observableFromExome", "__toCommonJS", "import_exome", "import_rxjs", "store", "subscriber", "value"]
+}
