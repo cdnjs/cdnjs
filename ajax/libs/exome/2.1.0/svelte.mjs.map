@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/svelte.ts"],
+  "sourcesContent": ["import { type Exome, subscribe } from \"exome\";\n\nexport function useStore<T extends Exome, R = T>(\n\tstore: T,\n\tselector: (state: T) => R = (v) => v as any,\n) {\n\treturn {\n\t\tsubscribe(cb: (value: R) => void) {\n\t\t\tcb(selector(store));\n\t\t\treturn subscribe(store, () => cb(selector(store)));\n\t\t},\n\t};\n}\n"],
+  "mappings": ";AAAA,SAAqB,aAAAA,SAAiB;AAE/B,SAASC,EACfC,GACAC,IAA4B,CAACC,MAAMA,GAClC;AACD,SAAO;AAAA,IACN,UAAUC,GAAwB;AACjC,aAAAA,EAAGF,EAASD,CAAK,CAAC,GACXF,EAAUE,GAAO,MAAMG,EAAGF,EAASD,CAAK,CAAC,CAAC;AAAA,IAClD;AAAA,EACD;AACD;",
+  "names": ["subscribe", "useStore", "store", "selector", "v", "cb"]
+}
