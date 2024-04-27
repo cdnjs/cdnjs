@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/angular.ts"],
+  "sourcesContent": ["import {\n\tDestroyRef,\n\tassertInInjectionContext,\n\tinject,\n\tsignal,\n} from \"@angular/core\";\nimport { Exome, subscribe } from \"exome\";\n\nexport function useStore<T extends Exome, R = T>(\n\tstore: T,\n\tselector: (state: T) => R = (v) => v as any,\n) {\n\tconst writableSignal = signal(selector(store));\n\n\tfunction render() {\n\t\twritableSignal.set(selector(store));\n\t}\n\n\tconst unsubscribe = subscribe(store, render);\n\n\tconst requiresCleanup: any = assertInInjectionContext(useStore);\n\tconst cleanupRef = requiresCleanup ? inject(DestroyRef) : null;\n\n\tcleanupRef?.onDestroy(unsubscribe);\n\n\treturn writableSignal.asReadonly();\n}\n"],
+  "mappings": ";AAAA;AAAA,EACC,cAAAA;AAAA,EACA,4BAAAC;AAAA,EACA,UAAAC;AAAA,EACA,UAAAC;AAAA,OACM;AACP,SAAgB,aAAAC,SAAiB;AAE1B,SAASC,EACfC,GACAC,IAA4B,CAACC,MAAMA,GAClC;AACD,MAAMC,IAAiBN,EAAOI,EAASD,CAAK,CAAC;AAE7C,WAASI,IAAS;AACjB,IAAAD,EAAe,IAAIF,EAASD,CAAK,CAAC;AAAA,EACnC;AAEA,MAAMK,IAAcP,EAAUE,GAAOI,CAAM,GAGrCE,IADuBX,EAAyBI,CAAQ,IACzBH,EAAOF,CAAU,IAAI;AAE1D,SAAAY,KAAA,QAAAA,EAAY,UAAUD,IAEfF,EAAe,WAAW;AAClC;",
+  "names": ["DestroyRef", "assertInInjectionContext", "inject", "signal", "subscribe", "useStore", "store", "selector", "v", "writableSignal", "render", "unsubscribe", "cleanupRef"]
+}
