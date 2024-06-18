@@ -1,0 +1,223 @@
+.FormField {
+  position: relative;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  min-block-size: var(--vkui--size_field_height--regular);
+  font-family: var(--vkui--font_family_base);
+  -webkit-tap-highlight-color: transparent;
+  isolation: isolate;
+  border-radius: var(--vkui--size_border_radius--regular);
+}
+
+.FormField--sizeY-compact {
+  min-block-size: var(--vkui--size_field_height--compact);
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .FormField--sizeY-none {
+    min-block-size: var(--vkui--size_field_height--compact);
+  }
+}
+
+/* stylelint-disable-next-line selector-max-universal */
+
+.FormField > * {
+  border-radius: inherit;
+  z-index: var(--vkui_internal--z_index_form_field_element);
+}
+
+.FormField__before,
+.FormField__after {
+  position: relative;
+  z-index: var(--vkui_internal--z_index_form_field_side);
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  flex-shrink: 0;
+  min-inline-size: var(--vkui--size_field_height--regular);
+  block-size: 100%;
+  color: var(--vkui--color_icon_secondary);
+}
+
+.FormField--sizeY-compact .FormField__before,
+.FormField--sizeY-compact .FormField__after {
+  min-inline-size: var(--vkui--size_field_height--compact);
+  block-size: var(--vkui--size_field_height--compact);
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .FormField--sizeY-none .FormField__before,
+  .FormField--sizeY-none .FormField__after {
+    min-inline-size: var(--vkui--size_field_height--compact);
+    block-size: var(--vkui--size_field_height--compact);
+  }
+}
+
+.FormField__before {
+  color: var(--vkui--color_icon_accent);
+}
+
+.FormField__after {
+  color: var(--vkui--color_icon_secondary);
+}
+
+.FormField__border {
+  pointer-events: none;
+  position: absolute;
+  z-index: var(--vkui_internal--z_index_form_field_border);
+  inset-inline-start: 0;
+  inset-block-start: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  box-sizing: border-box;
+  transform-origin: left top;
+  border: var(--vkui--size_border--regular) solid transparent;
+  border-radius: inherit;
+}
+
+.FormField--mode-default .FormField__border {
+  border-color: var(--vkui--color_field_border_alpha);
+}
+
+.FormField--mode-default {
+  background-color: var(--vkui--color_field_background);
+}
+
+/**
+ * CMP:
+ * FormItem
+ * [start]
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormItem--status-error) .FormField__border,
+.FormField--status-error .FormField__border {
+  border-color: var(--vkui--color_stroke_negative);
+  z-index: var(--vkui_internal--z_index_form_field_status);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormItem--status-error) .FormField,
+.FormField--status-error {
+  background-color: var(--vkui--color_background_negative_tint);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormItem--status-valid) .FormField__border,
+.FormField--status-valid .FormField__border {
+  border-color: var(--vkui--color_stroke_positive);
+  z-index: var(--vkui_internal--z_index_form_field_status);
+}
+
+/* [end] */
+
+.FormField--disabled {
+  opacity: var(--vkui--opacity_disable_accessibility);
+  cursor: default;
+  pointer-events: none;
+}
+
+.FormField--hover {
+  background-color: var(--vkui--color_field_background);
+}
+
+.FormField--mode-default.FormField--hover .FormField__border {
+  border-color: var(--vkui--color_field_border_alpha--hover);
+  z-index: var(--vkui_internal--z_index_form_field_border_hover);
+}
+
+/**
+ * CMP:
+ * NativeSelect
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalNativeSelect) .FormField__after {
+  pointer-events: none;
+}
+
+/**
+ * CMP:
+ * CalendarHeader
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalCalendarHeader__picker) .FormField__after {
+  min-inline-size: 12px;
+  -webkit-padding-end: 8px;
+          padding-inline-end: 8px;
+}
+
+/**
+ * CMP:
+ * FormLayoutGroup
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormLayoutGroup--segmented) .FormField {
+  z-index: auto;
+  isolation: auto;
+  border-radius: 0;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(
+    .vkuiInternalFormLayoutGroup--segmented.vkuiInternalFormLayoutGroup--mode-horizontal
+      .vkuiInternalFormItem
+  ):first-of-type
+  .FormField {
+  border-start-start-radius: var(--vkui--size_border_radius--regular);
+  border-end-start-radius: var(--vkui--size_border_radius--regular);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(
+    .vkuiInternalFormLayoutGroup--segmented.vkuiInternalFormLayoutGroup--mode-horizontal
+      .vkuiInternalFormItem
+  ):last-of-type
+  .FormField {
+  border-start-end-radius: var(--vkui--size_border_radius--regular);
+  border-end-end-radius: var(--vkui--size_border_radius--regular);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(
+    .vkuiInternalFormLayoutGroup--segmented.vkuiInternalFormLayoutGroup--mode-vertical
+      .vkuiInternalFormItem
+  ):first-of-type
+  .FormField {
+  border-start-start-radius: var(--vkui--size_border_radius--regular);
+  border-start-end-radius: var(--vkui--size_border_radius--regular);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(
+    .vkuiInternalFormLayoutGroup--segmented.vkuiInternalFormLayoutGroup--mode-vertical
+      .vkuiInternalFormItem
+  ):last-of-type
+  .FormField {
+  border-end-start-radius: var(--vkui--size_border_radius--regular);
+  border-end-end-radius: var(--vkui--size_border_radius--regular);
+}
+
+/**
+ * useFocusVisibleClassName()
+ */
+
+/* increase specificity for selects */
+
+.FormField--focus-visible.FormField--focus-visible .FormField__border {
+  border-color: var(--vkui--color_stroke_accent);
+}

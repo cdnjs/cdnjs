@@ -1,0 +1,155 @@
+.Radio {
+  display: block;
+  padding-block: 0;
+  padding-inline: var(--vkui--size_base_padding_horizontal--regular);
+  font-family: var(--vkui--font_family_base);
+}
+
+/**
+ * CMP:
+ * FormItem
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormItem) .Radio {
+  inline-size: 100%;
+  box-sizing: content-box;
+  margin-block: 0;
+  margin-inline: calc(-1 * var(--vkui--size_base_padding_horizontal--regular));
+}
+
+.Radio__container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.Radio__input:disabled ~ .Radio__container {
+  opacity: var(--vkui--opacity_disable_accessibility);
+}
+
+.Radio__icon {
+  flex-shrink: 0;
+  inline-size: 22px;
+  block-size: 22px;
+  -webkit-margin-end: 14px;
+          margin-inline-end: 14px;
+  color: var(--vkui--color_icon_tertiary);
+  transition: color 0.15s var(--vkui--animation_easing_platform);
+}
+
+.Radio__input:checked ~ .Radio__container .Radio__icon {
+  color: var(--vkui--color_icon_accent);
+}
+
+.Radio__icon .Radio__pin {
+  transform-origin: 12px 12px;
+  transform: scale(0);
+  transition: transform 0.15s var(--vkui--animation_easing_platform);
+}
+
+.Radio__input:checked ~ .Radio__container .Radio__icon .Radio__pin {
+  transform: none;
+}
+
+.Radio__content {
+  display: block;
+  flex-grow: 1;
+  max-inline-size: 100%;
+  color: var(--vkui--color_text_primary);
+}
+
+.Radio__description {
+  display: block;
+  color: var(--vkui--color_text_secondary);
+  margin-block: 2px 12px;
+}
+
+.Radio__title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  -webkit-margin-before: 12px;
+          margin-block-start: 12px;
+}
+
+.Radio__title:last-child {
+  -webkit-margin-after: 12px;
+          margin-block-end: 12px;
+}
+
+.Radio__titleAfter {
+  -webkit-margin-start: 4px;
+          margin-inline-start: 4px;
+  color: var(--vkui--color_icon_tertiary);
+}
+
+/**
+ * sizeY COMPACT
+ */
+
+.Radio--sizeY-compact .Radio__title {
+  -webkit-margin-before: 8px;
+          margin-block-start: 8px;
+}
+
+.Radio--sizeY-compact .Radio__title:last-child {
+  -webkit-margin-after: 8px;
+          margin-block-end: 8px;
+}
+
+.Radio--sizeY-compact .Radio__description {
+  -webkit-margin-after: 7px;
+          margin-block-end: 7px;
+}
+
+.Radio--sizeY-compact .Radio__icon {
+  inline-size: 18px;
+  block-size: 18px;
+}
+
+.Radio--sizeY-compact .Radio__icon::after {
+  inline-size: 12px;
+  block-size: 12px;
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .Radio--sizeY-none .Radio__title {
+    -webkit-margin-before: 8px;
+            margin-block-start: 8px;
+  }
+
+  .Radio--sizeY-none .Radio__title:last-child {
+    -webkit-margin-after: 8px;
+            margin-block-end: 8px;
+  }
+
+  .Radio--sizeY-none .Radio__description {
+    -webkit-margin-after: 7px;
+            margin-block-end: 7px;
+  }
+
+  .Radio--sizeY-none .Radio__icon {
+    inline-size: 18px;
+    block-size: 18px;
+  }
+
+  .Radio--sizeY-none .Radio__icon::after {
+    inline-size: 12px;
+    block-size: 12px;
+  }
+}
+
+/**
+ * CMP:
+ * RadioGroup
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalRadioGroup) .Radio {
+  flex: 1;
+  margin: 0;
+  box-sizing: border-box;
+}

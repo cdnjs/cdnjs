@@ -1,0 +1,91 @@
+.Input {
+  position: relative;
+  line-height: 20px;
+  font-size: 16px;
+}
+
+.Input--align-center .Input__el {
+  text-align: center;
+}
+
+.Input--align-right .Input__el {
+  text-align: end;
+}
+
+.Input__el {
+  block-size: var(--vkui--size_field_height--regular);
+  margin: 0;
+  inline-size: 100%;
+  box-sizing: border-box;
+  box-shadow: none;
+  border: 0;
+  border-radius: inherit;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  color: var(--vkui--color_text_primary);
+  padding-block: 0;
+  padding-inline: 12px;
+  position: relative;
+  z-index: var(--vkui_internal--z_index_form_field_element);
+  background: transparent;
+}
+
+/*
+ * Отключаем нативные элементы для <input type="number" />
+ *
+ * см. https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp
+ */
+
+.Input__el::-webkit-outer-spin-button,
+.Input__el::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.Input__el[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.Input--sizeY-compact .Input__el {
+  block-size: var(--vkui--size_field_height--compact);
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .Input--sizeY-none .Input__el {
+    block-size: var(--vkui--size_field_height--compact);
+  }
+}
+
+.Input--hasBefore .Input__el {
+  -webkit-padding-start: 0;
+          padding-inline-start: 0;
+}
+
+.Input--hasAfter .Input__el {
+  -webkit-padding-end: 0;
+          padding-inline-end: 0;
+}
+
+.Input__el:disabled {
+  opacity: var(--vkui--opacity_disable_accessibility);
+}
+
+.Input__el::-ms-input-placeholder {
+  color: var(--vkui--color_text_secondary);
+  /* Для Firefox */
+  opacity: 1;
+}
+
+.Input__el::placeholder {
+  color: var(--vkui--color_text_secondary);
+  /* Для Firefox */
+  opacity: 1;
+}
+
+.Input__el:disabled::-ms-input-placeholder {
+  color: var(--vkui--color_text_secondary);
+}
+
+.Input__el:disabled::placeholder {
+  color: var(--vkui--color_text_secondary);
+}

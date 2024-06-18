@@ -1,0 +1,199 @@
+.IconButton {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  display: block;
+  color: currentColor;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  block-size: 48px;
+  inline-size: -webkit-fit-content;
+  inline-size: -moz-fit-content;
+  inline-size: fit-content;
+
+  /**
+   * Чтобы закргуление было равно половине высоты.
+   * см. https://stackoverflow.com/questions/27233295/possible-to-make-border-radius-equal-to-half-the-total-height-without-javascript
+   */
+  border-radius: 9999px;
+}
+
+.IconButton--sizeY-compact {
+  block-size: 44px;
+}
+
+.IconButton[disabled] {
+  opacity: var(--vkui--opacity_disable_accessibility);
+}
+
+.IconButton--ios {
+  border-radius: var(--vkui--size_border_radius--regular);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.IconButton :global(.vkuiIcon--16) {
+  padding: 16px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.IconButton :global(.vkuiIcon--16.vkuiIcon--w-8) {
+  padding-block: 16px;
+  padding-inline: 14px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.IconButton--sizeY-compact :global(.vkuiIcon--16),
+.IconButton--sizeY-compact :global(.vkuiIcon--16.vkuiIcon--w-8) {
+  padding: 14px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.IconButton :global(.vkuiIcon--24) {
+  padding: 12px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.IconButton--sizeY-compact :global(.vkuiIcon--24) {
+  padding: 10px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.IconButton :global(.vkuiIcon--28) {
+  padding: 10px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.IconButton--sizeY-compact :global(.vkuiIcon--28) {
+  padding: 8px;
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .IconButton--sizeY-none {
+    block-size: 44px;
+  }
+
+  /* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+  .IconButton--sizeY-none :global(.vkuiIcon--16),
+  .IconButton--sizeY-none :global(.vkuiIcon--16.vkuiIcon--w-8) {
+    padding: 14px;
+  }
+
+  /* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+  .IconButton--sizeY-none :global(.vkuiIcon--24) {
+    padding: 10px;
+  }
+
+  /* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+  .IconButton--sizeY-none :global(.vkuiIcon--28) {
+    padding: 8px;
+  }
+}
+
+/**
+ * CMP:
+ * - FormItem
+ * - FormLayoutGroup
+ * - FormField
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormItem--removable) :global(.vkuiInternalRemovable__content) > .IconButton,
+:global(.vkuiInternalFormLayoutGroup--removable)
+  :global(.vkuiInternalRemovable__content)
+  > .IconButton,
+:global(.vkuiInternalFormField__after) .IconButton {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  inline-size: var(--vkui--size_field_height--regular);
+  block-size: var(--vkui--size_field_height--regular);
+  border-radius: var(--vkui--size_border_radius--regular);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormField__after)
+  .IconButton
+  :global(.vkuiIcon):global(.vkuiIcon):global(.vkuiIcon) {
+  padding: 0;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormField__after) .IconButton--sizeY-compact {
+  inline-size: var(--vkui--size_field_height--compact);
+  block-size: var(--vkui--size_field_height--compact);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormItem--removable)
+  :global(.vkuiInternalRemovable__content)
+  > .IconButton--sizeY-compact,
+:global(.vkuiInternalFormLayoutGroup--removable)
+  :global(.vkuiInternalRemovable__content)
+  > .IconButton--sizeY-compact {
+  block-size: var(--vkui--size_field_height--compact);
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  /* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+  :global(.vkuiInternalFormField__after) .IconButton--sizeY-none {
+    inline-size: var(--vkui--size_field_height--compact);
+    block-size: var(--vkui--size_field_height--compact);
+  }
+
+  /* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+  :global(.vkuiInternalFormItem--removable)
+    :global(.vkuiInternalRemovable__content)
+    > .IconButton--sizeY-none,
+  :global(.vkuiInternalFormLayoutGroup--removable)
+    :global(.vkuiInternalRemovable__content)
+    > .IconButton--sizeY-none {
+    block-size: var(--vkui--size_field_height--compact);
+  }
+}
+
+/**
+ * CMP:
+ * SimpleCell
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalSimpleCell__after) .IconButton:last-child {
+  -webkit-margin-end: -12px;
+          margin-inline-end: -12px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalSimpleCell__after) .IconButton--ios:last-child {
+  -webkit-margin-end: -9px;
+          margin-inline-end: -9px;
+}
+
+/**
+ * CMP:
+ * Alert
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalAlert__dismiss).IconButton {
+  block-size: 36px;
+  padding: 8px;
+}

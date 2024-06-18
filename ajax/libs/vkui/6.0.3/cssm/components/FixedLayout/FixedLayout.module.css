@@ -1,0 +1,66 @@
+.FixedLayout {
+  position: fixed;
+  box-sizing: border-box;
+  /**
+   * ⚠️ WARNING ⚠️
+   * `left: auto` решает следующие задачи:
+   * 1. При фиксированной ширине компонента позиционирует компонент по центру.
+   * 2. При использовании `SplitLayout` позиционирует компонент с права от `<SplitCol fixed />`.
+   *
+   * Подробности можно почитать здесь https://github.com/VKCOM/VKUI/pull/2472
+   *
+   * Единственное, есть проблема при срабатывании insets в landscape ориентации экрана (https://github.com/VKCOM/VKUI/issues/2422).
+   */
+  inset-inline-start: auto;
+  z-index: var(--vkui_internal--z_index_fixed_layout);
+  padding-inline: var(--vkui_internal--safe_area_inset_left)
+    var(--vkui_internal--safe_area_inset_right);
+}
+
+.FixedLayout--filled {
+  background: var(--vkui--color_background_content);
+}
+
+.FixedLayout--vertical-top {
+  inline-size: 100%;
+  inset-block-start: 0;
+}
+
+.FixedLayout--vertical-bottom {
+  inline-size: 100%;
+  inset-block-end: 0;
+  -webkit-padding-after: var(--vkui_internal--safe_area_inset_bottom);
+          padding-block-end: var(--vkui_internal--safe_area_inset_bottom);
+}
+
+/**
+ * CMP:
+ * Epic
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalEpic--hasTabbar) .FixedLayout--vertical-bottom {
+  -webkit-padding-after: calc(
+    var(--vkui_internal--tabbar_height) + var(--vkui_internal--safe_area_inset_bottom)
+  );
+          padding-block-end: calc(
+    var(--vkui_internal--tabbar_height) + var(--vkui_internal--safe_area_inset_bottom)
+  );
+}
+
+/**
+ * CMP:
+ * PanelHeader
+ */
+
+/* stylelint-disable-next-line selector-max-universal, selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalPanelHeader) ~ .FixedLayout--vertical-top,
+:global(.vkuiInternalPanelHeader)
+  ~ *
+  .FixedLayout--vertical-top:not(:global(.vkuiInternalPanelHeader__fixed)) {
+  inset-block-start: calc(
+    var(--vkui_internal--panel_header_height) + var(--vkui_internal--safe_area_inset_top)
+  );
+}

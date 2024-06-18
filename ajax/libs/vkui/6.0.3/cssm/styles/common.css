@@ -1,0 +1,51 @@
+/* stylelint-disable-next-line selector-max-type */
+.vkui,
+.vkui > body,
+.vkui__root {
+  margin: 0;
+  padding: 0;
+  block-size: 100%;
+}
+.vkui__root--embedded {
+  overflow-x: hidden;
+}
+.vkui,
+.vkui__root--embedded {
+  color-scheme: var(--vkui--colors_scheme);
+}
+/* stylelint-disable-next-line selector-max-type */
+.vkui > body,
+.vkui__root--embedded {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  font-family: var(--vkui--font_family_base);
+  color: var(--vkui--color_text_primary);
+}
+.vkui--sizeX-regular {
+  background: var(--vkui--color_background);
+}
+@media (min-width: 768px) {
+  .vkui--sizeX-none {
+    background: var(--vkui--color_background);
+  }
+}
+.vkui--sizeY-compact {
+  --vkui_internal--panel_header_height: var(--vkui--size_panel_header_height--compact);
+}
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .vkui--sizeY-none {
+    --vkui_internal--panel_header_height: var(--vkui--size_panel_header_height--compact);
+  }
+}
+.vkui--layout-card {
+  background: var(--vkui--color_background);
+}
+.vkui--layout-plain {
+  background: var(--vkui--color_background_content);
+}
+/* отключаем нативный pull-to-refresh при взаимодействии с компонентом
+ * PullToRefresh или при открывании модалки */
+.vkui--disable-overscroll-behavior {
+  /* Safari >= 16 */
+  overscroll-behavior-y: none;
+}

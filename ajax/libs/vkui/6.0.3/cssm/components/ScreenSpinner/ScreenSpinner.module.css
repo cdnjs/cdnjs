@@ -1,0 +1,70 @@
+.ScreenSpinner {
+  animation: screen-spinner-intro 0.3s ease;
+}
+
+.ScreenSpinner--clickable {
+  cursor: pointer;
+}
+
+.ScreenSpinner__spinner {
+  opacity: 1;
+  transition: opacity 0.1s ease;
+}
+
+.ScreenSpinner__spinner--hidden {
+  opacity: 0;
+}
+
+.ScreenSpinner__container {
+  position: relative;
+  inline-size: 88px;
+  block-size: 88px;
+  background: var(--vkui--color_background_modal);
+  box-shadow: var(--vkui--elevation4);
+  border-radius: var(--vkui--size_border_radius--regular);
+  color: var(--vkui--color_icon_medium);
+}
+
+.ScreenSpinner__icon {
+  position: absolute;
+  inset-block-start: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.ScreenSpinner__icon :global(.vkuiIcon) {
+  animation: screen-spinner-intro 0.2s ease;
+}
+
+/* stylelint-disable-next-line selector-max-type, selector-pseudo-class-disallowed-list */
+
+.ScreenSpinner__icon--state-done :global(.vkuiIcon) path {
+  stroke-dasharray: 50;
+  stroke-dashoffset: 50;
+  animation: screen-spinner-icon-done 0.6s 0.3s var(--vkui--animation_easing_platform) forwards;
+}
+
+@keyframes screen-spinner-icon-done {
+  from {
+    stroke-dashoffset: 50;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes screen-spinner-intro {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,91 @@
+.HorizontalCell {
+  display: flex;
+}
+
+.HorizontalCell__image {
+  display: flex;
+  justify-content: center;
+}
+
+.HorizontalCell__body {
+  text-decoration: none;
+  font-family: inherit;
+}
+
+/* Перебиваем селектор в Tappable--sizeX-(compact|none) */
+
+.HorizontalCell .HorizontalCell__body {
+  border-radius: var(--vkui--size_border_radius--regular);
+}
+
+.HorizontalCell__content {
+  color: var(--vkui--color_text_primary);
+  word-break: break-word;
+  text-overflow: ellipsis;
+}
+
+.HorizontalCell__subtitle {
+  color: var(--vkui--color_text_secondary);
+}
+
+.HorizontalCell__content .HorizontalCell__subtitle {
+  -webkit-margin-before: 2px;
+          margin-block-start: 2px;
+}
+
+.HorizontalCell--size-s {
+  --vkui_internal--side_cell_gap: calc(
+    var(--vkui--size_base_padding_horizontal--regular) - var(--vkui--spacing_size_m)
+  );
+  --vkui_internal--side_cell_width: calc(72px + var(--vkui_internal--side_cell_gap));
+
+  max-inline-size: 72px;
+}
+
+.HorizontalCell__image {
+  padding-block: 4px;
+  padding-inline: var(--vkui--spacing_size_s);
+}
+
+.HorizontalCell__content {
+  padding-block: 2px 8px;
+  padding-inline: 6px;
+  text-align: start;
+}
+
+.HorizontalCell--size-s .HorizontalCell__image {
+  padding-block: 4px;
+  padding-inline: var(--vkui--spacing_size_m);
+}
+
+.HorizontalCell--size-s .HorizontalCell__content {
+  padding-block: 2px 8px;
+  padding-inline: 4px;
+  text-align: center;
+}
+
+.HorizontalCell--size-m {
+  --vkui_internal--side_cell_width: calc(100px + var(--vkui_internal--side_cell_gap));
+
+  max-inline-size: 100px;
+}
+
+.HorizontalCell--size-l {
+  inline-size: auto;
+}
+
+.HorizontalCell:first-child::before,
+.HorizontalCell:last-child::after {
+  content: '';
+  min-inline-size: var(--vkui_internal--side_cell_gap);
+}
+
+.HorizontalCell--size-s:first-child,
+.HorizontalCell--size-s:last-child {
+  max-inline-size: var(--vkui_internal--side_cell_width);
+}
+
+.HorizontalCell--size-m:first-child,
+.HorizontalCell--size-m:last-child {
+  max-inline-size: var(--vkui_internal--side_cell_width);
+}

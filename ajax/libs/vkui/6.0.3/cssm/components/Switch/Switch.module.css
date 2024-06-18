@@ -1,0 +1,207 @@
+.Switch {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  position: relative;
+  display: block;
+  cursor: pointer;
+
+  /* Добавляем отступы, если пин больше трека */
+  padding: calc(
+    (var(--vkui--size_switch_pin--regular) - var(--vkui--size_switch_height--regular)) / 2
+  );
+}
+
+.Switch--sizeY-compact {
+  padding: calc(
+    (var(--vkui--size_switch_pin--compact) - var(--vkui--size_switch_height--compact)) / 2
+  );
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .Switch--sizeY-none {
+    padding: calc(
+      (var(--vkui--size_switch_pin--compact) - var(--vkui--size_switch_height--compact)) / 2
+    );
+  }
+}
+
+.Switch--disabled {
+  cursor: default;
+}
+
+.Switch__pseudo {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/**
+ * Пин
+ */
+
+.Switch__pseudo::before {
+  position: absolute;
+  content: '';
+  border-radius: 50%;
+  box-sizing: border-box;
+  background: var(--vkui--color_icon_contrast_secondary);
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.12), 0 2px 2px 0 rgba(0, 0, 0, 0.24);
+
+  /* Делаем пин по центру */
+  inset-block-start: calc(
+    (var(--vkui--size_switch_height--regular) - var(--vkui--size_switch_pin--regular)) / 2
+  );
+  inset-inline-start: calc(
+    (var(--vkui--size_switch_height--regular) - var(--vkui--size_switch_pin--regular)) / 2
+  );
+  inline-size: var(--vkui--size_switch_pin--regular);
+  block-size: var(--vkui--size_switch_pin--regular);
+}
+
+.Switch--sizeY-compact .Switch__pseudo::before {
+  inset-block-start: calc(
+    (var(--vkui--size_switch_height--compact) - var(--vkui--size_switch_pin--compact)) / 2
+  );
+  inset-inline-start: calc(
+    (var(--vkui--size_switch_height--compact) - var(--vkui--size_switch_pin--compact)) / 2
+  );
+  inline-size: var(--vkui--size_switch_pin--compact);
+  block-size: var(--vkui--size_switch_pin--compact);
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .Switch--sizeY-none .Switch__pseudo::before {
+    inset-block-start: calc(
+      (var(--vkui--size_switch_height--compact) - var(--vkui--size_switch_pin--compact)) / 2
+    );
+    inset-inline-start: calc(
+      (var(--vkui--size_switch_height--compact) - var(--vkui--size_switch_pin--compact)) / 2
+    );
+    inline-size: var(--vkui--size_switch_pin--compact);
+    block-size: var(--vkui--size_switch_pin--compact);
+  }
+}
+
+.Switch__self:checked + .Switch__pseudo::before {
+  background: var(--vkui--color_icon_accent);
+  transform: translateX(
+    calc(var(--vkui--size_switch_width--regular) - var(--vkui--size_switch_height--regular))
+  );
+}
+
+/**
+ * Трек
+ */
+
+.Switch__pseudo::after {
+  content: '';
+  display: block;
+  background: var(--vkui--color_icon_tertiary_alpha);
+  border-radius: calc(var(--vkui--size_switch_width--regular) / 2);
+  inline-size: var(--vkui--size_switch_width--regular);
+  block-size: var(--vkui--size_switch_height--regular);
+}
+
+.Switch--sizeY-compact .Switch__pseudo::after {
+  border-radius: calc(var(--vkui--size_switch_width--compact) / 2);
+  inline-size: var(--vkui--size_switch_width--compact);
+  block-size: var(--vkui--size_switch_height--compact);
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .Switch--sizeY-none .Switch__pseudo::after {
+    border-radius: calc(var(--vkui--size_switch_width--compact) / 2);
+    inline-size: var(--vkui--size_switch_width--compact);
+    block-size: var(--vkui--size_switch_height--compact);
+  }
+}
+
+.Switch__self:checked + .Switch__pseudo::after {
+  opacity: 0.48;
+  background: var(--vkui--color_icon_accent);
+}
+
+.Switch--sizeY-compact .Switch__self:checked + .Switch__pseudo::before {
+  transform: translateX(
+    calc(var(--vkui--size_switch_width--compact) - var(--vkui--size_switch_height--compact))
+  );
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .Switch--sizeY-none .Switch__self:checked + .Switch__pseudo::before {
+    transform: translateX(
+      calc(var(--vkui--size_switch_width--compact) - var(--vkui--size_switch_height--compact))
+    );
+  }
+}
+
+.Switch__self[disabled] + .Switch__pseudo {
+  opacity: var(--vkui--opacity_disable);
+}
+
+/**
+ * Пин
+ */
+
+.Switch--ios .Switch__pseudo::before {
+  background: var(--vkui_internal--white);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15), 0 3px 1px rgba(0, 0, 0, 0.06),
+    inset 0 0 0 0.5px rgba(0, 0, 0, 0.04);
+}
+
+.Switch--ios .Switch__self:checked + .Switch__pseudo::before {
+  background: var(--vkui_internal--white);
+}
+
+/**
+ * Трек
+ */
+
+.Switch--ios .Switch__pseudo::after {
+  background: var(--vkui--color_track_background);
+}
+
+.Switch--ios .Switch__self:checked + .Switch__pseudo::after {
+  opacity: 1;
+}
+
+/**
+ * [a11y]
+ * add animation for browsers that support prefers-reduced-motion
+ * so that users with vestibular motion disorders have no problem
+ * navigating accessible vkui apps via keyboard
+ */
+
+@media (prefers-reduced-motion: no-preference) {
+  .Switch__pseudo::after {
+    transition: background-color 0.1s ease;
+  }
+
+  .Switch__pseudo::before {
+    transition: transform 0.1s ease;
+  }
+
+  .Switch--ios .Switch__pseudo::after {
+    transition: background-color 0.2s ease;
+  }
+
+  .Switch--ios .Switch__pseudo::before {
+    transition: transform 0.2s cubic-bezier(0.36, -0.24, 0.26, 1.32);
+  }
+}
+
+/**
+ * CMP:
+ * SimpleCell
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalSimpleCell__after) > .Switch {
+  -webkit-margin-start: 12px;
+          margin-inline-start: 12px;
+}

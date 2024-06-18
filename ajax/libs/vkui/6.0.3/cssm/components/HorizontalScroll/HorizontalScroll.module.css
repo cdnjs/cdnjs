@@ -1,0 +1,83 @@
+.HorizontalScroll {
+  position: relative;
+
+  /**
+   * ⚠️ WARNING ⚠️
+   * `overflow-y` мы не трогаем, т.к. из-за `hidden` могут обрезаться тени у потомков.
+   */
+  overflow-x: hidden;
+  isolation: isolate;
+}
+
+.HorizontalScroll__in {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+
+  /**
+   * Для удаление скролла в Firefox.
+   * В версии ниже 64 будет виден скролл, но это не ломает функциональность.
+   */
+  scrollbar-width: none;
+}
+
+.HorizontalScroll__in::-webkit-scrollbar {
+  display: none;
+}
+
+.HorizontalScroll__in-wrapper {
+  transition: transform 0.2s;
+}
+
+.HorizontalScroll__arrow {
+  z-index: var(--vkui_internal--z_index_horizontal_scroll_arrow);
+  position: absolute;
+  inset-block-start: 0;
+  opacity: 0;
+}
+
+.HorizontalScroll:hover .HorizontalScroll__arrow {
+  opacity: var(--vkui--opacity_disable_accessibility);
+}
+
+.HorizontalScroll--withConstArrows .HorizontalScroll__arrow,
+.HorizontalScroll--withConstArrows:hover .HorizontalScroll__arrow,
+.HorizontalScroll .HorizontalScroll__arrow:hover {
+  opacity: 1;
+}
+
+.HorizontalScroll__arrowLeft:hover ~ .HorizontalScroll__in .HorizontalScroll__in-wrapper {
+  transform: translateX(8px);
+}
+
+.HorizontalScroll__arrowRight:hover ~ .HorizontalScroll__in .HorizontalScroll__in-wrapper {
+  transform: translateX(-8px);
+}
+
+/**
+ * CMP:
+ * Tabs
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalTabs) .HorizontalScroll {
+  min-inline-size: 100%;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalTabs) .HorizontalScroll__in-wrapper {
+  display: flex;
+  align-items: stretch;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalTabs--withGaps) .HorizontalScroll__in-wrapper::after,
+:global(.vkuiInternalTabs--withGaps) .HorizontalScroll__in-wrapper::before {
+  display: block;
+  inline-size: var(--vkui--size_base_padding_horizontal--regular);
+  flex-shrink: 0;
+  block-size: 1px;
+  content: '';
+}
