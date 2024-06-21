@@ -1,0 +1,1 @@
+"use strict";import Highcharts from"./highcharts.src.js";import"./modules/navigator.src.js";export default Highcharts;

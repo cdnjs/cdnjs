@@ -1,0 +1,1 @@
+"use strict";const Scatter3DSeriesDefaults={tooltip:{pointFormat:"x: <b>{point.x}</b><br/>y: <b>{point.y}</b><br/>z: <b>{point.z}</b><br/>"}};export default Scatter3DSeriesDefaults;

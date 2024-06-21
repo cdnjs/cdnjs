@@ -1,0 +1,1 @@
+"use strict";const WGLDrawMode={area:"LINES",arearange:"LINES",areaspline:"LINES",column:"LINES",columnrange:"LINES",bar:"LINES",line:"LINE_STRIP",scatter:"POINTS",heatmap:"TRIANGLES",treemap:"TRIANGLES",bubble:"POINTS"};export default WGLDrawMode;
