@@ -1,0 +1,1 @@
+import{f as a}from"./p-9555078d.js";import{f as t,l as o,m as e}from"./p-d85e5927.js";import{f as r}from"./p-39c8189c.js";import"./p-1e4f6cab.js";var s={code:"en-GB",formatDistance:a,formatLong:r,formatRelative:t,localize:o,match:e,options:{weekStartsOn:1,firstWeekContainsDate:4}};export default s;
