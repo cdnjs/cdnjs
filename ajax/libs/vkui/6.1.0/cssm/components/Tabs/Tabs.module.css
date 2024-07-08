@@ -1,0 +1,74 @@
+.Tabs__in {
+  display: flex;
+  align-items: stretch;
+}
+
+.Tabs--withGaps {
+  justify-content: flex-start;
+}
+
+/**
+ * CMP:
+ * PanelHeader
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalPanelHeader) .Tabs {
+  overflow: hidden;
+  font-family: var(--vkui--font_family_base);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalPanelHeader) .Tabs::after {
+  display: block;
+  inline-size: 1000px;
+  content: '';
+}
+
+/**
+ * CMP:
+ * Group
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalGroup--mode-plain) > .Tabs--mode-default:first-child {
+  -webkit-margin-before: -8px;
+          margin-block-start: -8px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalGroup--mode-card) > .Tabs--mode-default:first-child {
+  -webkit-margin-before: -4px;
+          margin-block-start: -4px;
+}
+
+/*
+ * CMP:
+ * FixedLayout
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list -- Нужно для закрашивания прозрачной области нижнего инсета на iphone x */
+
+:global(.vkuiInternalFixedLayout--ios):global(.vkuiInternalFixedLayout--vertical-bottom)
+  .Tabs::after {
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  content: '';
+  background: var(--vkui--color_background_content);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFixedLayout--ios):global(.vkuiInternalFixedLayout--vertical-bottom) .Tabs__in,
+:global(.vkuiInternalFixedLayout--ios):global(.vkuiInternalFixedLayout--vertical-bottom)
+  .Separator {
+  position: relative;
+  z-index: var(--vkui_internal--z_index_tabs);
+}

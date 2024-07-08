@@ -1,0 +1,35 @@
+.Tabbar {
+  position: fixed;
+  z-index: var(--vkui_internal--z_index_tabs);
+  inset-block-end: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: var(--vkui_internal--tabbar_height);
+  -webkit-padding-after: var(--vkui_internal--safe_area_inset_bottom);
+          padding-block-end: var(--vkui_internal--safe_area_inset_bottom);
+  box-sizing: content-box;
+  background: var(--vkui--color_background_tertiary);
+  display: flex;
+  overflow: hidden;
+}
+
+.Tabbar--shadow {
+  box-shadow: var(--vkui--elevation3);
+}
+
+/**
+ * iOS
+ */
+
+.Tabbar--ios.Tabbar--shadow {
+  box-shadow: none;
+}
+
+.Tabbar--ios.Tabbar--shadow::before {
+  position: absolute;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: var(--vkui--size_border--regular);
+  background: var(--vkui--color_separator_primary_alpha);
+  content: '';
+}

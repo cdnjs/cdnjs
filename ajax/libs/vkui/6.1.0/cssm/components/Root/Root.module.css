@@ -1,0 +1,135 @@
+.Root {
+  inline-size: 100%;
+  block-size: 100%;
+  position: relative;
+}
+
+.Root--transition {
+  pointer-events: none;
+}
+
+.Root__view {
+  inline-size: 100%;
+  block-size: 100%;
+  position: relative;
+}
+
+.Root--transition .Root__view {
+  position: fixed;
+  inset-inline-start: 0;
+  inset-block-start: 0;
+  overflow: hidden;
+}
+
+.Root__scrollCompensation {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.Root__view--show-forward {
+  animation: root-android-animation-show-forward 0.3s var(--vkui--animation_easing_platform);
+}
+
+.Root__view--hide-back {
+  animation: root-android-animation-hide-back 0.3s var(--vkui--animation_easing_platform) forwards;
+}
+
+/**
+ * iOS
+ */
+
+.Root--ios .Root__view--show-back::after,
+.Root--ios .Root__view--hide-forward::after {
+  position: absolute;
+  inline-size: 100%;
+  block-size: 100%;
+  inset-inline-start: 0;
+  inset-block-start: 0;
+  display: block;
+  content: '';
+  background-color: #000;
+}
+
+.Root--ios .Root__view--show-back::after {
+  animation: root-ios-animation-show-back 0.6s var(--vkui--animation_easing_platform) forwards;
+}
+
+.Root--ios .Root__view--hide-forward::after {
+  animation: root-ios-animation-hide-forward 0.6s var(--vkui--animation_easing_platform);
+}
+
+.Root--ios .Root__view--show-forward {
+  animation: root-ios-animation-show-forward 0.6s var(--vkui--animation_easing_platform);
+}
+
+.Root--ios .Root__view--hide-back {
+  animation: root-ios-animation-hide-back 0.6s var(--vkui--animation_easing_platform) forwards;
+}
+
+@keyframes root-ios-animation-show-back {
+  from {
+    opacity: 0.3;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes root-ios-animation-hide-forward {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 0.3;
+  }
+}
+
+@keyframes root-ios-animation-hide-back {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, 100%, 0);
+  }
+}
+
+@keyframes root-ios-animation-show-forward {
+  from {
+    transform: translate3d(0, 100%, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/**
+ * Android
+ */
+
+@keyframes root-android-animation-hide-back {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(1.05);
+    opacity: 0;
+  }
+}
+
+@keyframes root-android-animation-show-forward {
+  from {
+    transform: scale(1.05);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

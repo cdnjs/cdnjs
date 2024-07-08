@@ -1,0 +1,28 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import * as React from 'react';
+import { useAdaptivityHasPointer } from '../../hooks/useAdaptivityHasPointer';
+import { CustomSelect } from '../CustomSelect/CustomSelect';
+import { NativeSelect } from '../NativeSelect/NativeSelect';
+/**
+ * @see https://vkcom.github.io/VKUI/#/Select
+ */ export const Select = ({ children, ...props })=>{
+    const { options = [], searchable, emptyText, onInputChange, filterFn, popupDirection, renderOption, renderDropdown, fetching, onClose, onOpen, icon, ClearButton, allowClearButton, clearButtonTestId, dropdownOffsetDistance, dropdownAutoWidth, forceDropdownPortal, noMaxHeight, autoHideScrollbar, autoHideScrollbarDelay, labelTextTestId, nativeSelectTestId, after, mode, ...restProps } = props;
+    const hasPointer = useAdaptivityHasPointer();
+    const nativeProps = restProps;
+    return /*#__PURE__*/ _jsxs(React.Fragment, {
+        children: [
+            (hasPointer === undefined || hasPointer) && /*#__PURE__*/ _jsx(CustomSelect, {
+                ...props
+            }),
+            (hasPointer === undefined || !hasPointer) && /*#__PURE__*/ _jsx(NativeSelect, {
+                ...nativeProps,
+                children: options.map(({ label, value })=>/*#__PURE__*/ _jsx("option", {
+                        value: value,
+                        children: label
+                    }, `${value}`))
+            })
+        ]
+    });
+};
+
+//# sourceMappingURL=Select.js.map
