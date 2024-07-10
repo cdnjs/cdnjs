@@ -1,0 +1,1 @@
+import o from"x/initC.js";let r=SharedWorker,e="/K.js";export const[hook,send]=o(r?new r(e).port:new Worker(e));
