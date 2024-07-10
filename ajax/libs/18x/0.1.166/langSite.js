@@ -1,0 +1,1 @@
+import{onSet as t}from"x/lang.js";import e from"x/fBintxt.js";let l=new Set;t(async t=>{let a=t.length;for(;--a&&_LANG[a][1]!==t;);_L.splice(0,_L.length,...await e(_V+"@"+_lV(a)+"/"+t+".js")),l.forEach(e=>e(t))});export default(t=>(l.add(t),_L.length&&t(),()=>{l.delete(t)}));
