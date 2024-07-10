@@ -1,0 +1,1 @@
+addEventListener("push",i=>{i.waitUntil(self.registration.showNotification(...i.data.json()))}),addEventListener("notificationclick",i=>{i.notification.close(),i.waitUntil(clients.openWindow(i.notification.data.url))})
