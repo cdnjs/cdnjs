@@ -1,0 +1,1 @@
+export var URLLI=[];export var I18N_URL=[];export const i18nReset=r=>{I18N_URL.splice(0,I18N_URL.length),I18N_URL.push(...r)};export default((r,e)=>t=>{var o,L;for(L of[URLLI,I18N_URL])for(o of L)if(o(t,r))return;e(t)});export var Path=new Proxy({},{get:(r,e)=>r=>(t,o)=>{if(t===e)return o(r),1}});
