@@ -1,0 +1,58 @@
+.CardGrid {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.CardGrid--spaced {
+  padding-block: var(--vkui--size_base_padding_vertical--regular);
+  padding-inline: var(--vkui--size_base_padding_horizontal--regular);
+}
+
+.CardGrid--sizeX-compact {
+  padding-inline: var(--vkui--size_base_padding_horizontal--regular);
+}
+
+@media (max-width: 767.9px) {
+  .CardGrid--sizeX-none {
+    padding-inline: var(--vkui--size_base_padding_horizontal--regular);
+  }
+}
+
+.CardGrid + .CardGrid {
+  -webkit-margin-before: calc(var(--vkui--size_cardgrid_padding_vertical--regular) * 2);
+          margin-block-start: calc(var(--vkui--size_cardgrid_padding_vertical--regular) * 2);
+}
+
+/**
+ * CMP:
+ * Group
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalGroup--mode-card) .CardGrid {
+  padding-inline: var(--vkui--size_base_padding_horizontal--regular);
+}
+
+@media (min-width: 768px) {
+  /* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+  :global(.vkuiInternalGroup--mode-none) .CardGrid {
+    padding-inline: 8px;
+  }
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalGroup) .CardGrid:first-child {
+  -webkit-margin-before: var(--vkui--size_cardgrid_padding_vertical--regular);
+          margin-block-start: var(--vkui--size_cardgrid_padding_vertical--regular);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalGroup) .CardGrid:last-child {
+  -webkit-margin-after: var(--vkui--size_cardgrid_padding_vertical--regular);
+          margin-block-end: var(--vkui--size_cardgrid_padding_vertical--regular);
+}

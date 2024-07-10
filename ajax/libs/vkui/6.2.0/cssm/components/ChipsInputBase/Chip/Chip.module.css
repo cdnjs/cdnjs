@@ -1,0 +1,98 @@
+.Chip {
+  display: inline-flex;
+  align-items: center;
+  border: var(--vkui--size_border--regular) solid var(--vkui--color_image_border_alpha);
+  background: var(--vkui--color_background_content);
+  border-radius: 6px;
+  block-size: 32px;
+  box-sizing: border-box;
+}
+
+.Chip__in,
+.Chip__removable {
+  position: relative;
+  display: flex;
+  align-items: center;
+  block-size: 100%;
+  border-radius: inherit;
+}
+
+.Chip__in {
+  -webkit-padding-start: 8px;
+          padding-inline-start: 8px;
+  overflow: hidden;
+}
+
+.Chip__in:last-of-type {
+  -webkit-padding-end: 8px;
+          padding-inline-end: 8px;
+}
+
+.Chip__content {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--vkui--color_text_primary);
+  display: inline-block;
+
+  /* Typography/Paragraph */
+  font-size: var(--vkui--font_paragraph--font_size--regular);
+  line-height: var(--vkui--font_paragraph--line_height--regular);
+  font-weight: var(--vkui--font_paragraph--font_weight--regular);
+  font-family: var(--vkui--font_paragraph--font_family--regular);
+}
+
+.Chip--sizeY-compact .Chip__content {
+  /* Typography/Footnote */
+  font-size: var(--vkui--font_footnote--font_size--regular);
+  line-height: var(--vkui--font_footnote--line_height--regular);
+  font-weight: var(--vkui--font_footnote--font_weight--regular);
+  font-family: var(--vkui--font_footnote--font_family--regular);
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .Chip--sizeY-none .Chip__content {
+    /* Typography/Footnote */
+    font-size: var(--vkui--font_footnote--font_size--regular);
+    line-height: var(--vkui--font_footnote--line_height--regular);
+    font-weight: var(--vkui--font_footnote--font_weight--regular);
+    font-family: var(--vkui--font_footnote--font_family--regular);
+  }
+}
+
+.Chip__removable {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.Chip__remove {
+  flex: 0 0 100%;
+  padding: 5px;
+  transform: translateX(-1px);
+  color: var(--vkui--color_icon_secondary);
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.Chip__before {
+  -webkit-margin-end: 6px;
+          margin-inline-end: 6px;
+}
+
+.Chip__after {
+  -webkit-margin-start: 6px;
+          margin-inline-start: 6px;
+}
+
+.Chip--sizeY-compact {
+  block-size: 28px;
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .Chip--sizeY-none {
+    block-size: 28px;
+  }
+}

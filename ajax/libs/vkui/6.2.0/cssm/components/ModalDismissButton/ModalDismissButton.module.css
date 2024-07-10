@@ -1,0 +1,35 @@
+.ModalDismissButton {
+  position: absolute;
+  justify-content: center;
+  inset-block-start: 0;
+  inset-inline-end: -56px;
+  inline-size: 56px;
+  block-size: 56px;
+  padding: 18px;
+  box-sizing: border-box;
+  color: var(--vkui--color_icon_contrast);
+  transition: opacity 0.15s ease-out;
+}
+
+.ModalDismissButton::before {
+  display: block;
+  content: '';
+  inset: 14px;
+  background: var(--vkui--color_overlay_primary);
+  border-radius: 50%;
+  position: absolute;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list -- fixes icon misplacement on Safari in some cases */
+
+.ModalDismissButton :global(.vkuiIcon) {
+  transform: translateX(0);
+}
+
+.ModalDismissButton--hover.ModalDismissButton::before {
+  background: var(--vkui--color_overlay_primary--hover);
+}
+
+.ModalDismissButton--active.ModalDismissButton::before {
+  background: var(--vkui--color_overlay_primary--active);
+}
