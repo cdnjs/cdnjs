@@ -1,0 +1,1 @@
+export default(r=>{var e,t,o;for(e of(o=[],t=r[Symbol.iterator]()))o.push([e,t.next().value]);return o});
