@@ -1,0 +1,1 @@
+F.push=i=>{i.waitUntil(self.registration.showNotification(...i.data.json()))},F.notificationclick=i=>{i.notification.close(),i.waitUntil(clients.openWindow(i.notification.data.url))}

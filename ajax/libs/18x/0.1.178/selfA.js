@@ -1,0 +1,1 @@
+export default((e,t)=>{var a,r;if(e.host===location.host)return{hash:a}=e,r=e.pathname.slice(1)+e.search,a&&(r+=a),t.preventDefault(),r});
