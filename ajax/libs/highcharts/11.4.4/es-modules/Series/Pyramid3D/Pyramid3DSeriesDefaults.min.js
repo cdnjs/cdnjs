@@ -1,0 +1,1 @@
+"use strict";const Pyramid3DSeriesDefaults={reversed:!0,neckHeight:0,neckWidth:0,dataLabels:{verticalAlign:"top"}};export default Pyramid3DSeriesDefaults;

@@ -1,0 +1,9 @@
+!/**
+ * Highstock JS v11.4.4 (2024-07-02)
+ *
+ * Indicator series type for Highcharts Stock
+ *
+ * (c) 2010-2024 Sebastian Bochan
+ *
+ * License: www.highcharts.com/license
+ */function(t){"object"==typeof module&&module.exports?(t.default=t,module.exports=t):"function"==typeof define&&define.amd?define("highcharts/indicators/atr",["highcharts","modules/stock"],function(e){return t(e),t.Highcharts=e,t}):t("undefined"!=typeof Highcharts?Highcharts:void 0)}(function(t){"use strict";var e=t?t._modules:{};function s(e,s,i,n){e.hasOwnProperty(s)||(e[s]=n.apply(null,i),"function"==typeof CustomEvent&&t.win.dispatchEvent(new CustomEvent("HighchartsModuleLoaded",{detail:{path:s,module:e[s]}})))}s(e,"Stock/Indicators/ATR/ATRIndicator.js",[e["Core/Series/SeriesRegistry.js"],e["Core/Utilities.js"]],function(t,e){let{sma:s}=t.seriesTypes,{isArray:i,merge:n}=e;function a(t,e){return Math.max(t[1]-t[2],void 0===e?0:Math.abs(t[1]-e[3]),void 0===e?0:Math.abs(t[2]-e[3]))}class o extends s{getValues(t,e){let s=e.period,n=t.xData,o=t.yData,r=o?o.length:0,u=[[n[0],o[0]]],d=[],h=[],c=[],l,p,f=0,m=1,g=0;if(!(n.length<=s)&&i(o[0])&&4===o[0].length){for(p=1;p<=r;p++){var y,v;(function(t,e,s,i){let n=e[i],a=s[i];t.push([n,a])})(u,n,o,p),s<m?(f=(y=p,v=f,l=[n[y-1],(v*(s-1)+a(o[y-1],o[y-2]))/s])[1],d.push(l),h.push(l[0]),c.push(l[1])):(s===m?(f=g/(p-1),d.push([n[p-1],f]),h.push(n[p-1]),c.push(f)):g+=a(o[p-1],o[p-2]),m++)}return{values:d,xData:h,yData:c}}}}return o.defaultOptions=n(s.defaultOptions,{params:{index:void 0}}),t.registerSeriesType("atr",o),o}),s(e,"masters/indicators/atr.src.js",[e["Core/Globals.js"]],function(t){return t})});
