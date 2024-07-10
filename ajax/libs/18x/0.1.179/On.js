@@ -1,0 +1,1 @@
+export default((e,r)=>{var n,t;for(n in r)t=r[n],e.addEventListener(n,t);return()=>{for(n in r)t=r[n],e.removeEventListener(n,t)}});
