@@ -1,0 +1,1 @@
+"use strict";const MapPointSeriesDefaults={dataLabels:{crop:!1,defer:!1,enabled:!0,formatter:function(){return this.point.name},overflow:!1,style:{color:"#000000"}},legendSymbol:"lineMarker"};export default MapPointSeriesDefaults;

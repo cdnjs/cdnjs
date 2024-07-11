@@ -1,0 +1,1 @@
+"use strict";const VariwideSeriesDefaults={pointPadding:0,groupPadding:0};export default VariwideSeriesDefaults;

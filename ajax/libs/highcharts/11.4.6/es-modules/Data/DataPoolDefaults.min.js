@@ -1,0 +1,1 @@
+"use strict";const DataPoolDefaults={connectors:[]};export default DataPoolDefaults;

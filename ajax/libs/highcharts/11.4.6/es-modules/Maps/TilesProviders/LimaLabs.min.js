@@ -1,0 +1,1 @@
+"use strict";class LimaLabs{constructor(){this.defaultCredits='Map data &copy;2023 <a href="https://maps.lima-labs.com/">LimaLabs</a>',this.initialProjectionName="WebMercator",this.requiresApiKey=!0,this.themes={Standard:{url:"https://cdn.lima-labs.com/{zoom}/{x}/{y}.png?api={apikey}",minZoom:0,maxZoom:20}}}}export default LimaLabs;
