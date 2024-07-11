@@ -1,0 +1,1 @@
+export default((t,a)=>t?a===t||a.startsWith(t+"/"):1);
