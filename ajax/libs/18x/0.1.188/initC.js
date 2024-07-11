@@ -1,0 +1,1 @@
+export default(e=>{let t=new Map;return e.onmessage=({data:e})=>t.get(e[0])(...e[1]),[(e,s)=>(t.set(e,s),()=>{t.delete(e)}),(t,...s)=>e.postMessage([t,s])]});
