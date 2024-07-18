@@ -1,0 +1,130 @@
+.TabbarItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--vkui--color_tabbar_text_inactive);
+  text-decoration: none;
+  border: 0;
+  outline: var(--vkui_internal--outline-reset);
+  padding: 0;
+  background: transparent;
+  block-size: var(--vkui_internal--tabbar_height);
+  position: relative;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalTabbar) .TabbarItem {
+  flex-shrink: 0;
+  max-inline-size: 100%;
+  min-inline-size: 0;
+  flex-grow: 1;
+  flex-basis: 0;
+}
+
+.TabbarItem--selected {
+  color: var(--vkui--color_text_accent_themed);
+}
+
+.TabbarItem__tappable {
+  position: absolute;
+}
+
+.TabbarItem__in {
+  display: flex;
+  padding-block: 4px 2px;
+  padding-inline: 2px;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  block-size: 100%;
+  inline-size: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalTabbar--layout-vertical) .TabbarItem__in {
+  flex-direction: column;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalTabbar--layout-horizontal) .TabbarItem__in {
+  flex-direction: row;
+}
+
+.TabbarItem__icon {
+  color: var(--vkui--color_icon_secondary);
+  position: relative;
+}
+
+.TabbarItem--selected .TabbarItem__icon {
+  color: var(--vkui--color_icon_accent_themed);
+}
+
+.TabbarItem__text {
+  white-space: nowrap;
+  max-inline-size: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalTabbar--layout-vertical) .TabbarItem__text {
+  --vkui--font_footnote--font_size--regular: 10px;
+  --vkui--font_footnote--line_height--regular: 12px;
+
+  -webkit-margin-before: 2px;
+
+          margin-block-start: 2px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalTabbar--layout-horizontal) .TabbarItem__text {
+  -webkit-margin-start: 8px;
+          margin-inline-start: 8px;
+}
+
+/**
+ * Android
+ */
+
+.TabbarItem--android .TabbarItem__tappable {
+  inline-size: calc(100% + 16px);
+  -webkit-padding-after: calc(100% + 16px);
+          padding-block-end: calc(100% + 16px);
+  border-radius: 50%;
+}
+
+.TabbarItem--android:first-child {
+  border-start-start-radius: 0;
+  border-end-start-radius: 0;
+}
+
+.TabbarItem--android:last-child {
+  border-start-end-radius: 0;
+  border-end-end-radius: 0;
+}
+
+/**
+ * iOS
+ */
+
+.TabbarItem--ios .TabbarItem__tappable {
+  inline-size: 100%;
+  block-size: 100%;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+}
+
+.TabbarItem--ios .TabbarItem__in {
+  transition: transform 0.07s var(--vkui--animation_easing_platform);
+}
+
+.TabbarItem--ios .TabbarItem__tappable--active + .TabbarItem__in {
+  transform: scale(0.96);
+}
