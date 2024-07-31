@@ -1,0 +1,38 @@
+import { EventDispatcher } from "../core";
+import type { Texture } from "../core";
+import { Vector2 } from "../math";
+import { Color } from "../../colors";
+export declare class Material extends EventDispatcher {
+    id: number;
+    name: string;
+    overdraw: any;
+    color?: Color;
+    map?: Texture;
+    useScreenCoordinates?: boolean;
+    alignment?: Vector2;
+    screenOffset?: Vector2;
+    uvScale?: Vector2;
+    uvOffset?: Vector2;
+    scaleByViewport?: boolean;
+    fog?: unknown;
+    uniforms?: any;
+    side: number;
+    opacity: number;
+    transparent: boolean;
+    depthTest: boolean;
+    depthWrite: boolean;
+    polygonOffset: boolean;
+    polygonOffsetFactor: number;
+    polygonOffsetUnits: number;
+    alphaTest: number;
+    visible: boolean;
+    needsUpdate: boolean;
+    outline: boolean;
+    wireframe: boolean;
+    shaded: boolean;
+    setValues(values?: Partial<Record<keyof Material, any>>): void;
+    clone<T extends this>(material?: T): T;
+    makeShaded(sTex: number): void;
+    dispose(): void;
+}
+export declare let MaterialIdCount: number;
