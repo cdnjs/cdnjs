@@ -1,0 +1,25 @@
+import LSP1JSONSchema from '../../schemas/LSP1UniversalReceiverDelegate.json';
+import LSP3JSONSchema from '../../schemas/LSP3ProfileMetadata.json';
+import LSP4JSONSchema from '../../schemas/LSP4DigitalAsset.json';
+import LSP4LegacyJSONSchema from '../../schemas/LSP4DigitalAssetLegacy.json';
+import LSP5JSONSchema from '../../schemas/LSP5ReceivedAssets.json';
+import LSP6JSONSchema from '../../schemas/LSP6KeyManager.json';
+import LSP8JSONSchema from '../../schemas/LSP8IdentifiableDigitalAsset.json';
+import LSP9JSONSchema from '../../schemas/LSP9Vault.json';
+import LSP10JSONSchema from '../../schemas/LSP10ReceivedVaults.json';
+import LSP12JSONSchema from '../../schemas/LSP12IssuedAssets.json';
+import LSP17JSONSchema from '../../schemas/LSP17ContractExtension.json';
+export const LSP1Schema = LSP1JSONSchema;
+export const LSP3Schema = LSP3JSONSchema;
+export const LSP4Schema = LSP4JSONSchema;
+export const LSP4LegacySchema = LSP4LegacyJSONSchema;
+export const LSP5Schema = LSP5JSONSchema;
+export const LSP6Schema = LSP6JSONSchema;
+export const LSP8Schema = LSP8JSONSchema;
+export const LSP9Schema = LSP9JSONSchema;
+export const LSP10Schema = LSP10JSONSchema;
+export const LSP12Schema = LSP12JSONSchema;
+export const LSP17Schema = LSP17JSONSchema;
+const AllSchemas = LSP1Schema.concat(LSP3Schema, LSP4Schema, LSP4LegacySchema, LSP5Schema, LSP6Schema, LSP8Schema, LSP9Schema, LSP10Schema, LSP12Schema, LSP17Schema);
+export default AllSchemas;
+//# sourceMappingURL=index.js.map
