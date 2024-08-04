@@ -1,0 +1,48 @@
+export declare enum Method {
+    GET_DATA_LEGACY = "getDataLegacy",
+    GET_DATA = "getData",
+    GET_DATA_BATCH = "getDataBatch",
+    OWNER = "owner",
+    SUPPORTS_INTERFACE = "supportsInterface",
+    IS_VALID_SIGNATURE = "isValidSignature"
+}
+export declare enum Encoding {
+    BYTES = "bytes",
+    BYTES4 = "bytes4",
+    BOOL = "bool",
+    UINT256 = "uint256",
+    BYTES32_ARRAY = "bytes32[]",
+    BYTES_ARRAY = "bytes[]",
+    ADDRESS = "address"
+}
+export interface MethodData {
+    sig: string;
+    value: string;
+    returnEncoding: Encoding;
+}
+export interface Permissions {
+    CHANGEOWNER?: boolean;
+    ADDCONTROLLER?: boolean;
+    EDITPERMISSIONS?: boolean;
+    ADDEXTENSIONS?: boolean;
+    CHANGEEXTENSIONS?: boolean;
+    ADDUNIVERSALRECEIVERDELEGATE?: boolean;
+    CHANGEUNIVERSALRECEIVERDELEGATE?: boolean;
+    REENTRANCY?: boolean;
+    SUPER_TRANSFERVALUE?: boolean;
+    TRANSFERVALUE?: boolean;
+    SUPER_CALL?: boolean;
+    CALL?: boolean;
+    SUPER_STATICCALL?: boolean;
+    STATICCALL?: boolean;
+    SUPER_DELEGATECALL?: boolean;
+    DELEGATECALL?: boolean;
+    DEPLOY?: boolean;
+    SUPER_SETDATA?: boolean;
+    SETDATA?: boolean;
+    ENCRYPT?: boolean;
+    DECRYPT?: boolean;
+    SIGN?: boolean;
+    EXECUTE_RELAY_CALL?: boolean;
+    ERC4337_PERMISSION?: boolean;
+}
