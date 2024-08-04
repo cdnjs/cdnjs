@@ -1,0 +1,15 @@
+import { ERC725JSONSchema } from '../types/ERC725JSONSchema';
+type schemaType = ERC725JSONSchema[];
+export declare const LSP1Schema: schemaType;
+export declare const LSP3Schema: schemaType;
+export declare const LSP4Schema: schemaType;
+export declare const LSP4LegacySchema: schemaType;
+export declare const LSP5Schema: schemaType;
+export declare const LSP6Schema: schemaType;
+export declare const LSP8Schema: schemaType;
+export declare const LSP9Schema: schemaType;
+export declare const LSP10Schema: schemaType;
+export declare const LSP12Schema: schemaType;
+export declare const LSP17Schema: schemaType;
+declare const AllSchemas: ERC725JSONSchema[];
+export default AllSchemas;
