@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/preact.ts"],
+  "sourcesContent": ["import { type Exome, subscribe } from \"exome\";\nimport { useEffect, useLayoutEffect, useState } from \"preact/hooks\";\n\nconst useIsomorphicLayoutEffect =\n\ttypeof window !== \"undefined\" ? useLayoutEffect : useEffect;\n\nfunction increment(number: number): number {\n\treturn number + 1;\n}\n\n/**\n * Subscribes to store instance update events and trigger updates to component accordingly.\n *\n * @example:\n * ```ts\n * import { useStore } from \"exome/preact\"\n * import { counterStore } from \"./counter.store.ts\"\n *\n * function App() {\n *   const { count, increment } = useStore(counterStore)\n *\n *   return (\n *     <button onClick={increment}>{count}</button>\n *   );\n * }\n * ```\n */\nexport function useStore<T extends Exome>(store: T): Readonly<T> {\n\tconst [, render] = useState(0);\n\n\tuseIsomorphicLayoutEffect(\n\t\t() => subscribe(store, () => render(increment)),\n\t\t[store],\n\t);\n\n\treturn store;\n}\n"],
+  "mappings": ";AAAA,SAAqB,aAAAA,SAAiB;AACtC,SAAS,aAAAC,GAAW,mBAAAC,GAAiB,YAAAC,SAAgB;AAErD,IAAMC,IACL,OAAO,UAAW,cAAcF,IAAkBD;AAEnD,SAASI,EAAUC,GAAwB;AAC1C,SAAOA,IAAS;AACjB;AAmBO,SAASC,EAA0BC,GAAuB;AAChE,MAAM,CAAC,EAAEC,CAAM,IAAIN,EAAS,CAAC;AAE7B,SAAAC;AAAA,IACC,MAAMJ,EAAUQ,GAAO,MAAMC,EAAOJ,CAAS,CAAC;AAAA,IAC9C,CAACG,CAAK;AAAA,EACP,GAEOA;AACR;",
+  "names": ["subscribe", "useEffect", "useLayoutEffect", "useState", "useIsomorphicLayoutEffect", "increment", "number", "useStore", "store", "render"]
+}
