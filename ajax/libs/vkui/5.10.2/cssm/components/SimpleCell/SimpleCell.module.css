@@ -1,0 +1,168 @@
+.SimpleCell {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  white-space: nowrap;
+  text-decoration: none;
+  color: var(--vkui--color_text_primary);
+  padding-left: var(--vkui--size_base_padding_horizontal--regular);
+  padding-right: var(--vkui--size_base_padding_horizontal--regular);
+}
+
+.SimpleCell--mult {
+  white-space: normal;
+}
+
+.SimpleCell--mult .SimpleCell__children {
+  text-overflow: initial;
+}
+
+.SimpleCell__before {
+  display: flex;
+  align-items: center;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-right: 12px;
+  color: var(--vkui_internal--icon_color, var(--vkui--color_icon_accent));
+}
+
+/* stylelint-disable-next-line @project-tools/stylelint-atomic -- добиваем отступ до 16px */
+
+.SimpleCell__before > :global(.vkuiIcon) {
+  padding-right: 4px;
+}
+
+.SimpleCell__before:empty {
+  display: none;
+}
+
+.SimpleCell__middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  max-width: 100%;
+  flex-grow: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* stylelint-disable-next-line @project-tools/stylelint-atomic, selector-max-universal -- gap: 2px */
+
+.SimpleCell__middle > *:not(:first-child) {
+  margin-top: 2px;
+}
+
+.SimpleCell__subhead {
+  color: var(--vkui--color_text_subhead);
+}
+
+.SimpleCell__text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.SimpleCell__subtitle,
+.SimpleCell__extraSubtitle {
+  color: var(--vkui--color_text_secondary);
+}
+
+.SimpleCell .SimpleCell__content {
+  display: flex;
+  align-content: flex-start;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 100%;
+}
+
+.SimpleCell:not(.SimpleCell--mult) .SimpleCell__content {
+  justify-content: flex-start;
+}
+
+.SimpleCell__children {
+  color: inherit;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: block;
+}
+
+.SimpleCell--mult .SimpleCell__children,
+.SimpleCell--mult .SimpleCell__subtitle {
+  flex: 1 1 auto;
+}
+
+.SimpleCell__badge {
+  display: inline-block;
+  flex-grow: 0;
+  flex-shrink: 0;
+  color: var(--vkui--color_icon_accent);
+}
+
+/* stylelint-disable-next-line @project-tools/stylelint-atomic, selector-max-universal -- gap: 4px */
+
+.SimpleCell__content > *:not(:last-child) {
+  margin-right: 4px;
+}
+
+.SimpleCell__indicator {
+  color: var(--vkui--color_text_secondary);
+  min-width: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  padding-left: 12px;
+}
+
+.SimpleCell__after {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  color: var(--vkui_internal--icon_color, var(--vkui--color_icon_accent));
+}
+
+.SimpleCell__after > :global(.vkuiIcon) {
+  padding-left: 8px;
+}
+
+.SimpleCell__after > :global(.vkuiIcon):last-child {
+  padding-right: 2px;
+}
+
+.SimpleCell__chevronIcon {
+  color: var(--vkui--color_icon_tertiary);
+  padding-left: 12px;
+}
+
+/**
+ * sizeY === 'compact'
+ */
+
+.SimpleCell--sizeY-compact {
+  min-height: 44px;
+}
+
+.SimpleCell--sizeY-compact .SimpleCell__before {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .SimpleCell--sizeY-none {
+    min-height: 44px;
+  }
+
+  .SimpleCell--sizeY-none .SimpleCell__before {
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+}
+
+/**
+ * CMP:
+ * FormItem
+ */
+
+:global(.vkuiInternalFormItem) > .SimpleCell {
+  margin: 0 calc(-1 * var(--vkui--size_base_padding_horizontal--regular));
+}
