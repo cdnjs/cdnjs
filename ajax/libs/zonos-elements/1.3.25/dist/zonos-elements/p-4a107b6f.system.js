@@ -1,0 +1,1 @@
+System.register([],(function(e){"use strict";return{execute:function(){var n=e("i",(function(e){var n=e&&(/--zonos-elements-/gi.test(e)||/(\-*)\w+-\d+/gi.test(e));return!!n&&!e.includes("(")&&!e.includes("#")}))}}}));
