@@ -1,0 +1,1 @@
+const e=e=>!(!e||!/--zonos-elements-/gi.test(e)&&!/(\-*)\w+-\d+/gi.test(e)||e.includes("(")||e.includes("#"));export{e as i}
