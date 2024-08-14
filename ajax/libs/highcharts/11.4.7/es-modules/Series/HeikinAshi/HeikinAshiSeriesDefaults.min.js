@@ -1,0 +1,1 @@
+"use strict";const HeikinAshiDefaults={dataGrouping:{groupAll:!0}};export default HeikinAshiDefaults;

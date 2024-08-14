@@ -1,0 +1,1 @@
+"use strict";const MapLineSeriesDefaults={lineWidth:1,fillColor:"none",legendSymbol:"lineMarker"};export default MapLineSeriesDefaults;

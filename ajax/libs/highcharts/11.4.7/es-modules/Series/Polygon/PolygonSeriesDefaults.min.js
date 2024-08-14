@@ -1,0 +1,1 @@
+"use strict";const PolygonSeriesDefaults={marker:{enabled:!1,states:{hover:{enabled:!1}}},stickyTracking:!1,tooltip:{followPointer:!0,pointFormat:""},trackByArea:!0,legendSymbol:"rectangle"};export default PolygonSeriesDefaults;

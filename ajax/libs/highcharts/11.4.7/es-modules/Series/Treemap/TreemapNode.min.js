@@ -1,0 +1,1 @@
+"use strict";class TreemapNode{constructor(){this.childrenTotal=0,this.visible=!1}init(i,t,e,s,h,r,l){return this.id=i,this.i=t,this.children=e,this.height=s,this.level=h,this.series=r,this.parent=l,this}}export default TreemapNode;
