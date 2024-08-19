@@ -1,0 +1,1 @@
+export default{LAYERGROUP:"layergroup",SIZE:"size",TARGET:"target",VIEW:"view"};
