@@ -1,0 +1,1344 @@
+:root {
+  --iti-hover-color: rgba(0, 0, 0, 0.05);
+  --iti-border-color: #ccc;
+  --iti-dialcode-color: #999;
+  --iti-dropdown-bg: white;
+  --iti-spacer-horizontal: 8px;
+  --iti-flag-height: 15px;
+  --iti-flag-width: 20px;
+  --iti-border-width: 1px;
+  --iti-arrow-height: 4px;
+  --iti-arrow-width: 6px;
+  --iti-triangle-border: calc(var(--iti-arrow-width) / 2);
+  --iti-arrow-padding: 6px;
+  --iti-arrow-color: #555;
+  --iti-input-padding: 6px;
+  --iti-right-hand-selected-country-padding: calc(var(--iti-spacer-horizontal) + var(--iti-spacer-horizontal) + var(--iti-flag-width));
+  --iti-selected-country-arrow-padding: calc(var(--iti-arrow-padding) + var(--iti-arrow-padding) + var(--iti-flag-width) + var(--iti-spacer-horizontal) + var(--iti-arrow-width) + var(--iti-input-padding));
+  --iti-path-flags-1x: url("../img/flags.webp");
+  --iti-path-flags-2x: url("../img/flags@2x.webp");
+  --iti-path-globe-1x: url("../img/globe.webp");
+  --iti-path-globe-2x: url("../img/globe@2x.webp");
+  --iti-flag-sprite-width: 5938px;
+  --iti-flag-sprite-height: 15px;
+  --iti-mobile-popup-margin: 30px;
+}
+
+.iti {
+  position: relative;
+  display: inline-block;
+}
+.iti * {
+  box-sizing: border-box;
+}
+.iti__hide {
+  display: none;
+}
+.iti__v-hide {
+  visibility: hidden;
+}
+.iti__a11y-text {
+  width: 1px;
+  height: 1px;
+  clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+  position: absolute;
+}
+.iti input.iti__tel-input,
+.iti input.iti__tel-input[type=text],
+.iti input.iti__tel-input[type=tel] {
+  position: relative;
+  z-index: 0;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-right: var(--iti-right-hand-selected-country-padding);
+  margin-right: 0;
+}
+.iti__country-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  padding: var(--iti-border-width);
+}
+.iti__selected-country {
+  z-index: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  background: none;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  border-radius: 0;
+  font-weight: inherit;
+  line-height: inherit;
+  text-decoration: none;
+}
+.iti__selected-country-primary {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 var(--iti-arrow-padding) 0 var(--iti-spacer-horizontal);
+}
+.iti__arrow {
+  margin-left: var(--iti-arrow-padding);
+  width: 0;
+  height: 0;
+  border-left: var(--iti-triangle-border) solid transparent;
+  border-right: var(--iti-triangle-border) solid transparent;
+  border-top: var(--iti-arrow-height) solid var(--iti-arrow-color);
+}
+[dir=rtl] .iti__arrow {
+  margin-right: var(--iti-arrow-padding);
+  margin-left: 0;
+}
+.iti__arrow--up {
+  border-top: none;
+  border-bottom: var(--iti-arrow-height) solid var(--iti-arrow-color);
+}
+.iti__dropdown-content {
+  border-radius: 3px;
+  background-color: var(--iti-dropdown-bg);
+}
+.iti--inline-dropdown .iti__dropdown-content {
+  position: absolute;
+  z-index: 2;
+  margin-top: 3px;
+  margin-left: calc(var(--iti-border-width) * -1);
+  border: var(--iti-border-width) solid var(--iti-border-color);
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+}
+.iti__search-input {
+  width: 100%;
+  border-width: 0;
+  border-radius: 3px;
+  padding: 9px 12px;
+}
+.iti__search-input + .iti__country-list {
+  border-top: 1px solid var(--iti-border-color);
+}
+.iti__country-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+.iti--inline-dropdown .iti__country-list {
+  max-height: 185px;
+}
+.iti--flexible-dropdown-width .iti__country-list {
+  white-space: nowrap;
+}
+@media (max-width: 500px) {
+  .iti--flexible-dropdown-width .iti__country-list {
+    white-space: normal;
+  }
+}
+.iti__flag-box {
+  display: inline-block;
+  width: var(--iti-flag-width);
+}
+.iti__country {
+  display: flex;
+  align-items: center;
+  padding: 8px var(--iti-spacer-horizontal);
+  outline: none;
+}
+.iti__dial-code {
+  color: var(--iti-dialcode-color);
+}
+.iti__country.iti__highlight {
+  background-color: var(--iti-hover-color);
+}
+.iti__flag-box, .iti__country-name {
+  margin-right: var(--iti-spacer-horizontal);
+}
+[dir=rtl] .iti__flag-box, [dir=rtl] .iti__country-name {
+  margin-right: 0;
+  margin-left: var(--iti-spacer-horizontal);
+}
+.iti--allow-dropdown input.iti__tel-input,
+.iti--allow-dropdown input.iti__tel-input[type=text],
+.iti--allow-dropdown input.iti__tel-input[type=tel] {
+  padding-right: var(--iti-input-padding);
+  padding-left: var(--iti-selected-country-arrow-padding);
+  margin-left: 0;
+}
+[dir=rtl] .iti--allow-dropdown input.iti__tel-input,
+[dir=rtl] .iti--allow-dropdown input.iti__tel-input[type=text],
+[dir=rtl] .iti--allow-dropdown input.iti__tel-input[type=tel] {
+  padding-right: var(--iti-selected-country-arrow-padding);
+  padding-left: var(--iti-input-padding);
+  margin-right: 0;
+}
+.iti--allow-dropdown .iti__country-container {
+  right: auto;
+  left: 0;
+}
+[dir=rtl] .iti--allow-dropdown .iti__country-container {
+  right: 0;
+  left: auto;
+}
+.iti--allow-dropdown .iti__country-container:not(:has(+ input[disabled])):not(:has(+ input[readonly])):hover, .iti--allow-dropdown .iti__country-container:not(:has(+ input[disabled])):not(:has(+ input[readonly])):hover button {
+  cursor: pointer;
+}
+.iti--allow-dropdown .iti__country-container:not(:has(+ input[disabled])):not(:has(+ input[readonly])) .iti__selected-country-primary:hover,
+.iti--allow-dropdown .iti__country-container:not(:has(+ input[disabled])):not(:has(+ input[readonly])) .iti__selected-country:has(+ .iti__dropdown-content:hover) .iti__selected-country-primary {
+  background-color: var(--iti-hover-color);
+}
+.iti .iti__selected-dial-code {
+  margin-left: 4px;
+}
+[dir=rtl] .iti .iti__selected-dial-code {
+  margin-left: 0;
+  margin-right: 4px;
+}
+.iti--container {
+  position: fixed;
+  top: -1000px;
+  left: -1000px;
+  z-index: 1060;
+  padding: var(--iti-border-width);
+}
+.iti--container:hover {
+  cursor: pointer;
+}
+
+.iti--fullscreen-popup.iti--container {
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  padding: var(--iti-mobile-popup-margin);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.iti--fullscreen-popup .iti__dropdown-content {
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  position: relative;
+}
+.iti--fullscreen-popup .iti__country {
+  padding: 10px 10px;
+  line-height: 1.5em;
+}
+
+.iti__flag {
+  --iti-flag-offset: 100px;
+  --iti-flag-width: 20px;
+  --iti-flag-height: 15px;
+  height: var(--iti-flag-height);
+  width: var(--iti-flag-width);
+  box-shadow: 0px 0px 1px 0px #888;
+  background-image: var(--iti-path-flags-1x);
+  background-repeat: no-repeat;
+  background-position: var(--iti-flag-offset) 0;
+  background-size: var(--iti-flag-sprite-width) var(--iti-flag-sprite-height);
+}
+
+.iti__ad {
+  --iti-flag-offset: 0px;
+}
+
+.iti__ae {
+  --iti-flag-offset: -22px;
+}
+
+.iti__af {
+  --iti-flag-offset: -44px;
+}
+
+.iti__ag {
+  --iti-flag-offset: -66px;
+}
+
+.iti__ai {
+  --iti-flag-offset: -88px;
+}
+
+.iti__al {
+  --iti-flag-offset: -110px;
+}
+
+.iti__am {
+  --iti-flag-offset: -132px;
+}
+
+.iti__ao {
+  --iti-flag-offset: -154px;
+}
+
+.iti__aq {
+  --iti-flag-offset: -176px;
+}
+
+.iti__ar {
+  --iti-flag-offset: -198px;
+}
+
+.iti__arab {
+  --iti-flag-offset: -220px;
+}
+
+.iti__as {
+  --iti-flag-offset: -242px;
+}
+
+.iti__at {
+  --iti-flag-offset: -264px;
+}
+
+.iti__au {
+  --iti-flag-offset: -286px;
+}
+
+.iti__aw {
+  --iti-flag-offset: -308px;
+}
+
+.iti__ax {
+  --iti-flag-offset: -330px;
+}
+
+.iti__az {
+  --iti-flag-offset: -352px;
+}
+
+.iti__ba {
+  --iti-flag-offset: -374px;
+}
+
+.iti__bb {
+  --iti-flag-offset: -396px;
+}
+
+.iti__bd {
+  --iti-flag-offset: -418px;
+}
+
+.iti__be {
+  --iti-flag-offset: -440px;
+}
+
+.iti__bf {
+  --iti-flag-offset: -462px;
+}
+
+.iti__bg {
+  --iti-flag-offset: -484px;
+}
+
+.iti__bh {
+  --iti-flag-offset: -506px;
+}
+
+.iti__bi {
+  --iti-flag-offset: -528px;
+}
+
+.iti__bj {
+  --iti-flag-offset: -550px;
+}
+
+.iti__bl {
+  --iti-flag-offset: -572px;
+}
+
+.iti__bm {
+  --iti-flag-offset: -594px;
+}
+
+.iti__bn {
+  --iti-flag-offset: -616px;
+}
+
+.iti__bo {
+  --iti-flag-offset: -638px;
+}
+
+.iti__bq {
+  --iti-flag-offset: -660px;
+}
+
+.iti__br {
+  --iti-flag-offset: -682px;
+}
+
+.iti__bs {
+  --iti-flag-offset: -704px;
+}
+
+.iti__bt {
+  --iti-flag-offset: -726px;
+}
+
+.iti__bv {
+  --iti-flag-offset: -748px;
+}
+
+.iti__bw {
+  --iti-flag-offset: -770px;
+}
+
+.iti__by {
+  --iti-flag-offset: -792px;
+}
+
+.iti__bz {
+  --iti-flag-offset: -814px;
+}
+
+.iti__ca {
+  --iti-flag-offset: -836px;
+}
+
+.iti__cc {
+  --iti-flag-offset: -858px;
+}
+
+.iti__cd {
+  --iti-flag-offset: -880px;
+}
+
+.iti__cefta {
+  --iti-flag-offset: -902px;
+}
+
+.iti__cf {
+  --iti-flag-offset: -924px;
+}
+
+.iti__cg {
+  --iti-flag-offset: -946px;
+}
+
+.iti__ch {
+  --iti-flag-offset: -968px;
+}
+
+.iti__ci {
+  --iti-flag-offset: -990px;
+}
+
+.iti__ck {
+  --iti-flag-offset: -1012px;
+}
+
+.iti__cl {
+  --iti-flag-offset: -1034px;
+}
+
+.iti__cm {
+  --iti-flag-offset: -1056px;
+}
+
+.iti__cn {
+  --iti-flag-offset: -1078px;
+}
+
+.iti__co {
+  --iti-flag-offset: -1100px;
+}
+
+.iti__cp {
+  --iti-flag-offset: -1122px;
+}
+
+.iti__cr {
+  --iti-flag-offset: -1144px;
+}
+
+.iti__cu {
+  --iti-flag-offset: -1166px;
+}
+
+.iti__cv {
+  --iti-flag-offset: -1188px;
+}
+
+.iti__cw {
+  --iti-flag-offset: -1210px;
+}
+
+.iti__cx {
+  --iti-flag-offset: -1232px;
+}
+
+.iti__cy {
+  --iti-flag-offset: -1254px;
+}
+
+.iti__cz {
+  --iti-flag-offset: -1276px;
+}
+
+.iti__de {
+  --iti-flag-offset: -1298px;
+}
+
+.iti__dg {
+  --iti-flag-offset: -1320px;
+}
+
+.iti__dj {
+  --iti-flag-offset: -1342px;
+}
+
+.iti__dk {
+  --iti-flag-offset: -1364px;
+}
+
+.iti__dm {
+  --iti-flag-offset: -1386px;
+}
+
+.iti__do {
+  --iti-flag-offset: -1408px;
+}
+
+.iti__dz {
+  --iti-flag-offset: -1430px;
+}
+
+.iti__eac {
+  --iti-flag-offset: -1452px;
+}
+
+.iti__ec {
+  --iti-flag-offset: -1474px;
+}
+
+.iti__ee {
+  --iti-flag-offset: -1496px;
+}
+
+.iti__eg {
+  --iti-flag-offset: -1518px;
+}
+
+.iti__eh {
+  --iti-flag-offset: -1540px;
+}
+
+.iti__er {
+  --iti-flag-offset: -1562px;
+}
+
+.iti__es-ct {
+  --iti-flag-offset: -1584px;
+}
+
+.iti__es-ga {
+  --iti-flag-offset: -1606px;
+}
+
+.iti__es-pv {
+  --iti-flag-offset: -1628px;
+}
+
+.iti__es {
+  --iti-flag-offset: -1650px;
+}
+
+.iti__et {
+  --iti-flag-offset: -1672px;
+}
+
+.iti__eu {
+  --iti-flag-offset: -1694px;
+}
+
+.iti__fi {
+  --iti-flag-offset: -1716px;
+}
+
+.iti__fj {
+  --iti-flag-offset: -1738px;
+}
+
+.iti__fk {
+  --iti-flag-offset: -1760px;
+}
+
+.iti__fm {
+  --iti-flag-offset: -1782px;
+}
+
+.iti__fo {
+  --iti-flag-offset: -1804px;
+}
+
+.iti__fr {
+  --iti-flag-offset: -1826px;
+}
+
+.iti__ga {
+  --iti-flag-offset: -1848px;
+}
+
+.iti__gb-eng {
+  --iti-flag-offset: -1870px;
+}
+
+.iti__gb-nir {
+  --iti-flag-offset: -1892px;
+}
+
+.iti__gb-sct {
+  --iti-flag-offset: -1914px;
+}
+
+.iti__gb-wls {
+  --iti-flag-offset: -1936px;
+}
+
+.iti__gb {
+  --iti-flag-offset: -1958px;
+}
+
+.iti__gd {
+  --iti-flag-offset: -1980px;
+}
+
+.iti__ge {
+  --iti-flag-offset: -2002px;
+}
+
+.iti__gf {
+  --iti-flag-offset: -2024px;
+}
+
+.iti__gg {
+  --iti-flag-offset: -2046px;
+}
+
+.iti__gh {
+  --iti-flag-offset: -2068px;
+}
+
+.iti__gi {
+  --iti-flag-offset: -2090px;
+}
+
+.iti__gl {
+  --iti-flag-offset: -2112px;
+}
+
+.iti__gm {
+  --iti-flag-offset: -2134px;
+}
+
+.iti__gn {
+  --iti-flag-offset: -2156px;
+}
+
+.iti__gp {
+  --iti-flag-offset: -2178px;
+}
+
+.iti__gq {
+  --iti-flag-offset: -2200px;
+}
+
+.iti__gr {
+  --iti-flag-offset: -2222px;
+}
+
+.iti__gs {
+  --iti-flag-offset: -2244px;
+}
+
+.iti__gt {
+  --iti-flag-offset: -2266px;
+}
+
+.iti__gu {
+  --iti-flag-offset: -2288px;
+}
+
+.iti__gw {
+  --iti-flag-offset: -2310px;
+}
+
+.iti__gy {
+  --iti-flag-offset: -2332px;
+}
+
+.iti__hk {
+  --iti-flag-offset: -2354px;
+}
+
+.iti__hm {
+  --iti-flag-offset: -2376px;
+}
+
+.iti__hn {
+  --iti-flag-offset: -2398px;
+}
+
+.iti__hr {
+  --iti-flag-offset: -2420px;
+}
+
+.iti__ht {
+  --iti-flag-offset: -2442px;
+}
+
+.iti__hu {
+  --iti-flag-offset: -2464px;
+}
+
+.iti__ic {
+  --iti-flag-offset: -2486px;
+}
+
+.iti__id {
+  --iti-flag-offset: -2508px;
+}
+
+.iti__ie {
+  --iti-flag-offset: -2530px;
+}
+
+.iti__il {
+  --iti-flag-offset: -2552px;
+}
+
+.iti__im {
+  --iti-flag-offset: -2574px;
+}
+
+.iti__in {
+  --iti-flag-offset: -2596px;
+}
+
+.iti__io {
+  --iti-flag-offset: -2618px;
+}
+
+.iti__iq {
+  --iti-flag-offset: -2640px;
+}
+
+.iti__ir {
+  --iti-flag-offset: -2662px;
+}
+
+.iti__is {
+  --iti-flag-offset: -2684px;
+}
+
+.iti__it {
+  --iti-flag-offset: -2706px;
+}
+
+.iti__je {
+  --iti-flag-offset: -2728px;
+}
+
+.iti__jm {
+  --iti-flag-offset: -2750px;
+}
+
+.iti__jo {
+  --iti-flag-offset: -2772px;
+}
+
+.iti__jp {
+  --iti-flag-offset: -2794px;
+}
+
+.iti__ke {
+  --iti-flag-offset: -2816px;
+}
+
+.iti__kg {
+  --iti-flag-offset: -2838px;
+}
+
+.iti__kh {
+  --iti-flag-offset: -2860px;
+}
+
+.iti__ki {
+  --iti-flag-offset: -2882px;
+}
+
+.iti__km {
+  --iti-flag-offset: -2904px;
+}
+
+.iti__kn {
+  --iti-flag-offset: -2926px;
+}
+
+.iti__kp {
+  --iti-flag-offset: -2948px;
+}
+
+.iti__kr {
+  --iti-flag-offset: -2970px;
+}
+
+.iti__kw {
+  --iti-flag-offset: -2992px;
+}
+
+.iti__ky {
+  --iti-flag-offset: -3014px;
+}
+
+.iti__kz {
+  --iti-flag-offset: -3036px;
+}
+
+.iti__la {
+  --iti-flag-offset: -3058px;
+}
+
+.iti__lb {
+  --iti-flag-offset: -3080px;
+}
+
+.iti__lc {
+  --iti-flag-offset: -3102px;
+}
+
+.iti__li {
+  --iti-flag-offset: -3124px;
+}
+
+.iti__lk {
+  --iti-flag-offset: -3146px;
+}
+
+.iti__lr {
+  --iti-flag-offset: -3168px;
+}
+
+.iti__ls {
+  --iti-flag-offset: -3190px;
+}
+
+.iti__lt {
+  --iti-flag-offset: -3212px;
+}
+
+.iti__lu {
+  --iti-flag-offset: -3234px;
+}
+
+.iti__lv {
+  --iti-flag-offset: -3256px;
+}
+
+.iti__ly {
+  --iti-flag-offset: -3278px;
+}
+
+.iti__ma {
+  --iti-flag-offset: -3300px;
+}
+
+.iti__mc {
+  --iti-flag-offset: -3322px;
+}
+
+.iti__md {
+  --iti-flag-offset: -3344px;
+}
+
+.iti__me {
+  --iti-flag-offset: -3366px;
+}
+
+.iti__mf {
+  --iti-flag-offset: -3388px;
+}
+
+.iti__mg {
+  --iti-flag-offset: -3410px;
+}
+
+.iti__mh {
+  --iti-flag-offset: -3432px;
+}
+
+.iti__mk {
+  --iti-flag-offset: -3454px;
+}
+
+.iti__ml {
+  --iti-flag-offset: -3476px;
+}
+
+.iti__mm {
+  --iti-flag-offset: -3498px;
+}
+
+.iti__mn {
+  --iti-flag-offset: -3520px;
+}
+
+.iti__mo {
+  --iti-flag-offset: -3542px;
+}
+
+.iti__mp {
+  --iti-flag-offset: -3564px;
+}
+
+.iti__mq {
+  --iti-flag-offset: -3586px;
+}
+
+.iti__mr {
+  --iti-flag-offset: -3608px;
+}
+
+.iti__ms {
+  --iti-flag-offset: -3630px;
+}
+
+.iti__mt {
+  --iti-flag-offset: -3652px;
+}
+
+.iti__mu {
+  --iti-flag-offset: -3674px;
+}
+
+.iti__mv {
+  --iti-flag-offset: -3696px;
+}
+
+.iti__mw {
+  --iti-flag-offset: -3718px;
+}
+
+.iti__mx {
+  --iti-flag-offset: -3740px;
+}
+
+.iti__my {
+  --iti-flag-offset: -3762px;
+}
+
+.iti__mz {
+  --iti-flag-offset: -3784px;
+}
+
+.iti__na {
+  --iti-flag-offset: -3806px;
+}
+
+.iti__nc {
+  --iti-flag-offset: -3828px;
+}
+
+.iti__ne {
+  --iti-flag-offset: -3850px;
+}
+
+.iti__nf {
+  --iti-flag-offset: -3872px;
+}
+
+.iti__ng {
+  --iti-flag-offset: -3894px;
+}
+
+.iti__ni {
+  --iti-flag-offset: -3916px;
+}
+
+.iti__nl {
+  --iti-flag-offset: -3938px;
+}
+
+.iti__no {
+  --iti-flag-offset: -3960px;
+}
+
+.iti__np {
+  --iti-flag-offset: -3982px;
+}
+
+.iti__nr {
+  --iti-flag-offset: -4004px;
+}
+
+.iti__nu {
+  --iti-flag-offset: -4026px;
+}
+
+.iti__nz {
+  --iti-flag-offset: -4048px;
+}
+
+.iti__om {
+  --iti-flag-offset: -4070px;
+}
+
+.iti__pa {
+  --iti-flag-offset: -4092px;
+}
+
+.iti__pc {
+  --iti-flag-offset: -4114px;
+}
+
+.iti__pe {
+  --iti-flag-offset: -4136px;
+}
+
+.iti__pf {
+  --iti-flag-offset: -4158px;
+}
+
+.iti__pg {
+  --iti-flag-offset: -4180px;
+}
+
+.iti__ph {
+  --iti-flag-offset: -4202px;
+}
+
+.iti__pk {
+  --iti-flag-offset: -4224px;
+}
+
+.iti__pl {
+  --iti-flag-offset: -4246px;
+}
+
+.iti__pm {
+  --iti-flag-offset: -4268px;
+}
+
+.iti__pn {
+  --iti-flag-offset: -4290px;
+}
+
+.iti__pr {
+  --iti-flag-offset: -4312px;
+}
+
+.iti__ps {
+  --iti-flag-offset: -4334px;
+}
+
+.iti__pt {
+  --iti-flag-offset: -4356px;
+}
+
+.iti__pw {
+  --iti-flag-offset: -4378px;
+}
+
+.iti__py {
+  --iti-flag-offset: -4400px;
+}
+
+.iti__qa {
+  --iti-flag-offset: -4422px;
+}
+
+.iti__re {
+  --iti-flag-offset: -4444px;
+}
+
+.iti__ro {
+  --iti-flag-offset: -4466px;
+}
+
+.iti__rs {
+  --iti-flag-offset: -4488px;
+}
+
+.iti__ru {
+  --iti-flag-offset: -4510px;
+}
+
+.iti__rw {
+  --iti-flag-offset: -4532px;
+}
+
+.iti__sa {
+  --iti-flag-offset: -4554px;
+}
+
+.iti__sb {
+  --iti-flag-offset: -4576px;
+}
+
+.iti__sc {
+  --iti-flag-offset: -4598px;
+}
+
+.iti__sd {
+  --iti-flag-offset: -4620px;
+}
+
+.iti__se {
+  --iti-flag-offset: -4642px;
+}
+
+.iti__sg {
+  --iti-flag-offset: -4664px;
+}
+
+.iti__ac {
+  --iti-flag-offset: -4686px;
+}
+
+.iti__sh-hl {
+  --iti-flag-offset: -4708px;
+}
+
+.iti__sh-ta {
+  --iti-flag-offset: -4730px;
+}
+
+.iti__sh {
+  --iti-flag-offset: -4752px;
+}
+
+.iti__si {
+  --iti-flag-offset: -4774px;
+}
+
+.iti__sj {
+  --iti-flag-offset: -4796px;
+}
+
+.iti__sk {
+  --iti-flag-offset: -4818px;
+}
+
+.iti__sl {
+  --iti-flag-offset: -4840px;
+}
+
+.iti__sm {
+  --iti-flag-offset: -4862px;
+}
+
+.iti__sn {
+  --iti-flag-offset: -4884px;
+}
+
+.iti__so {
+  --iti-flag-offset: -4906px;
+}
+
+.iti__sr {
+  --iti-flag-offset: -4928px;
+}
+
+.iti__ss {
+  --iti-flag-offset: -4950px;
+}
+
+.iti__st {
+  --iti-flag-offset: -4972px;
+}
+
+.iti__sv {
+  --iti-flag-offset: -4994px;
+}
+
+.iti__sx {
+  --iti-flag-offset: -5016px;
+}
+
+.iti__sy {
+  --iti-flag-offset: -5038px;
+}
+
+.iti__sz {
+  --iti-flag-offset: -5060px;
+}
+
+.iti__tc {
+  --iti-flag-offset: -5082px;
+}
+
+.iti__td {
+  --iti-flag-offset: -5104px;
+}
+
+.iti__tf {
+  --iti-flag-offset: -5126px;
+}
+
+.iti__tg {
+  --iti-flag-offset: -5148px;
+}
+
+.iti__th {
+  --iti-flag-offset: -5170px;
+}
+
+.iti__tj {
+  --iti-flag-offset: -5192px;
+}
+
+.iti__tk {
+  --iti-flag-offset: -5214px;
+}
+
+.iti__tl {
+  --iti-flag-offset: -5236px;
+}
+
+.iti__tm {
+  --iti-flag-offset: -5258px;
+}
+
+.iti__tn {
+  --iti-flag-offset: -5280px;
+}
+
+.iti__to {
+  --iti-flag-offset: -5302px;
+}
+
+.iti__tr {
+  --iti-flag-offset: -5324px;
+}
+
+.iti__tt {
+  --iti-flag-offset: -5346px;
+}
+
+.iti__tv {
+  --iti-flag-offset: -5368px;
+}
+
+.iti__tw {
+  --iti-flag-offset: -5390px;
+}
+
+.iti__tz {
+  --iti-flag-offset: -5412px;
+}
+
+.iti__ua {
+  --iti-flag-offset: -5434px;
+}
+
+.iti__ug {
+  --iti-flag-offset: -5456px;
+}
+
+.iti__um {
+  --iti-flag-offset: -5478px;
+}
+
+.iti__un {
+  --iti-flag-offset: -5500px;
+}
+
+.iti__us {
+  --iti-flag-offset: -5522px;
+}
+
+.iti__uy {
+  --iti-flag-offset: -5544px;
+}
+
+.iti__uz {
+  --iti-flag-offset: -5566px;
+}
+
+.iti__va {
+  --iti-flag-offset: -5588px;
+}
+
+.iti__vc {
+  --iti-flag-offset: -5610px;
+}
+
+.iti__ve {
+  --iti-flag-offset: -5632px;
+}
+
+.iti__vg {
+  --iti-flag-offset: -5654px;
+}
+
+.iti__vi {
+  --iti-flag-offset: -5676px;
+}
+
+.iti__vn {
+  --iti-flag-offset: -5698px;
+}
+
+.iti__vu {
+  --iti-flag-offset: -5720px;
+}
+
+.iti__wf {
+  --iti-flag-offset: -5742px;
+}
+
+.iti__ws {
+  --iti-flag-offset: -5764px;
+}
+
+.iti__xk {
+  --iti-flag-offset: -5786px;
+}
+
+.iti__xx {
+  --iti-flag-offset: -5808px;
+}
+
+.iti__ye {
+  --iti-flag-offset: -5830px;
+}
+
+.iti__yt {
+  --iti-flag-offset: -5852px;
+}
+
+.iti__za {
+  --iti-flag-offset: -5874px;
+}
+
+.iti__zm {
+  --iti-flag-offset: -5896px;
+}
+
+.iti__zw {
+  --iti-flag-offset: -5918px;
+}
+
+.iti__globe {
+  background-image: var(--iti-path-globe-1x);
+  background-size: contain;
+  background-position: right;
+  box-shadow: none;
+  height: 19px;
+}
+
+@media (min-resolution: 2x) {
+  .iti__flag {
+    background-image: var(--iti-path-flags-2x);
+  }
+  .iti__globe {
+    background-image: var(--iti-path-globe-2x);
+  }
+}
