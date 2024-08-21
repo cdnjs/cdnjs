@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("devtools","sr-latn",{title:"Informacija o elementu",dialogName:"Naziv prozora sa dijalogom",tabName:"Naziv kartice",elementId:"ID elementa",elementType:"Tip elementa"});

@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("imagebase","pt-br",{captionPlaceholder:"Digite descrição da imagem"});
