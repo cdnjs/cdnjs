@@ -1,0 +1,1 @@
+const e=e=>e.replace(/\[([^\]]+)\]\((https?:\/\/[^\s\)]+)\)|(https?:\/\/[^\s]+)/g,((e,n,r,o)=>r?`<zonos-link href="${r}" target="_blank" rel="noopener noreferrer">${n}</zonos-link>`:`<zonos-link href="${o}" target="_blank" rel="noopener noreferrer">${o}</zonos-link>`));export{e as f}
