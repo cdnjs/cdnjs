@@ -1,0 +1,96 @@
+.ChipsInputBase {
+  --vkui_internal--chips_input_base_container_gap: 4px;
+
+  flex-grow: 1;
+  flex-shrink: 1;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  max-inline-size: 100%;
+  list-style: none;
+  margin: 0;
+  padding: var(--vkui_internal--chips_input_base_container_gap);
+  z-index: var(--vkui_internal--z_index_form_field_element);
+  overflow: hidden;
+}
+
+.ChipsInputBase__chip {
+  max-inline-size: calc(100% - var(--vkui_internal--chips_input_base_container_gap));
+  margin: 2px;
+}
+
+.ChipsInputBase__el {
+  flex: 1;
+  position: relative;
+  inline-size: 100%;
+  margin-block: 2px 4px;
+  margin-inline: 10px 2px;
+  padding: 0;
+  color: var(--vkui--color_text_primary);
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+
+.ChipsInputBase__el:not(:-moz-read-only):focus {
+  min-inline-size: 64px;
+}
+
+.ChipsInputBase__el:not(:read-only):focus {
+  min-inline-size: 64px;
+}
+
+.ChipsInputBase__el::-ms-clear {
+  display: none;
+}
+
+.ChipsInputBase__el:disabled {
+  opacity: var(--vkui--opacity_disable_accessibility);
+}
+
+.ChipsInputBase__el::-ms-input-placeholder {
+  color: var(--vkui--color_text_secondary);
+  /* Для Firefox */
+  opacity: 1;
+}
+
+.ChipsInputBase__el::placeholder {
+  color: var(--vkui--color_text_secondary);
+  /* Для Firefox */
+  opacity: 1;
+}
+
+.ChipsInputBase__el:disabled::-ms-input-placeholder {
+  color: var(--vkui--color_text_secondary);
+}
+
+.ChipsInputBase__el:disabled::placeholder {
+  color: var(--vkui--color_text_secondary);
+}
+
+.ChipsInputBase__el[readonly] {
+  cursor: default;
+}
+
+.ChipsInputBase--hasPlaceholder .ChipsInputBase__el {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-inline: calc(12px - var(--vkui_internal--chips_input_base_container_gap)) 0;
+}
+
+/**
+ * sizeY COMPACT
+ */
+
+.ChipsInputBase--sizeY-compact {
+  --vkui_internal--chips_input_base_container_gap: 2px;
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .ChipsInputBase--sizeY-none {
+    --vkui_internal--chips_input_base_container_gap: 2px;
+  }
+}
