@@ -1,0 +1,1 @@
+import{onSet as a}from"x/lang.js";export default(e=>{var r,l;return r=new Set,[a=>(r.add(a),l&&a.call(l),()=>{r.delete(a)}),a(async a=>{var t;for(t of(l=await e(a),r))t.call(l)})]});
