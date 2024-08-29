@@ -1,0 +1,1 @@
+export default(e=>("/"===e[0]&&(e=e.slice(1)),e));
