@@ -1,0 +1,1 @@
+import r from"x/initC.js";let o="/W.js";export const[hook,send]=r(globalThis.SharedWorker?new SharedWorker(o).port:new Worker(o));
