@@ -1,0 +1,1 @@
+const AxisResizerDefaults={minLength:"10%",maxLength:"100%",resize:{controlledAxis:{next:[],prev:[]},enabled:!1,cursor:"ns-resize",lineColor:"#cccccc",lineDashStyle:"Solid",lineWidth:4,x:0,y:0}};export default AxisResizerDefaults;

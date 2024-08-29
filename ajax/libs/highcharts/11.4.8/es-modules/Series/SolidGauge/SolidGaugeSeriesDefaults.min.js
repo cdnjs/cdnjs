@@ -1,0 +1,1 @@
+"use strict";const SolidGaugeSeriesDefaults={colorByPoint:!0,dataLabels:{y:0}};export default SolidGaugeSeriesDefaults;

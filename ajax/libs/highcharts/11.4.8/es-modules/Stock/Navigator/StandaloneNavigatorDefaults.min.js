@@ -1,0 +1,1 @@
+"use strict";const standaloneNavigatorDefaults={chart:{height:70,margin:[0,5,0,5]},exporting:{enabled:!1},legend:{enabled:!1},navigator:{enabled:!1},plotOptions:{series:{states:{hover:{enabled:!1}},marker:{enabled:!1}}},scrollbar:{enabled:!1},title:{text:""},tooltip:{enabled:!1},xAxis:{visible:!1},yAxis:{height:0,visible:!1}};export default standaloneNavigatorDefaults;

@@ -1,0 +1,9 @@
+!/**
+ * Highstock JS v11.4.8 (2024-08-29)
+ *
+ * Indicator series type for Highcharts Stock
+ *
+ * (c) 2010-2024 Paweł Dalek
+ *
+ * License: www.highcharts.com/license
+ */function(e){"object"==typeof module&&module.exports?(e.default=e,module.exports=e):"function"==typeof define&&define.amd?define("highcharts/indicators/vwap",["highcharts","highcharts/modules/stock"],function(t){return e(t),e.Highcharts=t,e}):e("undefined"!=typeof Highcharts?Highcharts:void 0)}(function(e){"use strict";var t=e?e._modules:{};function s(t,s,a,i){t.hasOwnProperty(s)||(t[s]=i.apply(null,a),"function"==typeof CustomEvent&&e.win.dispatchEvent(new CustomEvent("HighchartsModuleLoaded",{detail:{path:s,module:t[s]}})))}s(t,"Stock/Indicators/VWAP/VWAPIndicator.js",[t["Core/Series/SeriesRegistry.js"],t["Core/Utilities.js"]],function(e,t){let{sma:s}=e.seriesTypes,{error:a,isArray:i,merge:r}=t;class o extends s{getValues(e,t){let s=e.chart,r=e.xData,o=e.yData,n=t.period,u=!0,l;if(!(l=s.get(t.volumeSeriesID))){a("Series "+t.volumeSeriesID+" not found! Check `volumeSeriesID`.",!0,s);return}return i(o[0])||(u=!1),this.calculateVWAPValues(u,r,o,l,n)}calculateVWAPValues(e,t,s,a,i){let r,o,n,u,l,c;let d=a.yData,h=a.xData.length,p=t.length,f=[],m=[],v=[],g=[],y=[];for(l=0,r=p<=h?p:h,c=0;l<r;l++)o=(e?(s[l][1]+s[l][2]+s[l][3])/3:s[l])*d[l],n=c?f[l-1]+o:o,u=c?m[l-1]+d[l]:d[l],f.push(n),m.push(u),y.push([t[l],n/u]),v.push(y[l][0]),g.push(y[l][1]),++c===i&&(c=0);return{values:y,xData:v,yData:g}}}return o.defaultOptions=r(s.defaultOptions,{params:{index:void 0,period:30,volumeSeriesID:"volume"}}),e.registerSeriesType("vwap",o),o}),s(t,"masters/indicators/vwap.src.js",[t["Core/Globals.js"]],function(e){return e})});

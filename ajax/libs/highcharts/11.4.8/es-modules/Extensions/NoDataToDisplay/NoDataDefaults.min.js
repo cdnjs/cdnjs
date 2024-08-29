@@ -1,0 +1,1 @@
+"use strict";const lang={noData:"No data to display"},noData={attr:{zIndex:1},position:{x:0,y:0,align:"center",verticalAlign:"middle"},style:{fontWeight:"bold",fontSize:"0.8em",color:"#666666"}},NoDataDefaults={lang:lang,noData:noData};export default NoDataDefaults;
