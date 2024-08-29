@@ -1,0 +1,1 @@
+(async(e,a,i)=>{await a.register("/S.js"),await a.ready;let r=i.pathname;i.href=r.slice(1+r.slice(1).indexOf("/"),-4)})(document,navigator.serviceWorker,location);
