@@ -1,0 +1,1 @@
+import{setPre as t}from"x/route.js";import e from"x/removeSlash.js";export default(h=>{t(e(h)),"/"!==h.charAt(0)&&(h="/"+h),history.pushState(null,"",h),window.dispatchEvent(new HashChangeEvent("hashchange"))});
