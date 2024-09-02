@@ -1,0 +1,72 @@
+@keyframes skeleton {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(var(--vkui_internal--skeleton_width));
+  }
+}
+
+.Skeleton {
+  --vkui_internal--skeleton_width: 300px;
+  --vkui_internal--skeleton_color_from: var(--vkui--color_skeleton_from);
+  --vkui_internal--skeleton_color_to: var(--vkui--color_skeleton_to);
+  --vkui_internal--skeleton_animation_duration: 1.5s;
+
+  display: inline-flex;
+  position: relative;
+  inline-size: 100%;
+  max-inline-size: 100%;
+  line-height: 1;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.Skeleton::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  inset-inline-start: calc(-1 * var(--vkui_internal--skeleton_width));
+  animation-duration: var(--vkui_internal--skeleton_animation_duration);
+  animation-iteration-count: infinite;
+  animation-name: skeleton;
+  background-attachment: fixed;
+  animation-timing-function: var(--vkui--animation_easing_platform);
+  background-size: var(--vkui_internal--skeleton_width) 100%;
+  background-color: var(--vkui_internal--skeleton_color_from);
+  background-image: linear-gradient(
+    to right,
+    var(--vkui_internal--skeleton_color_from) 0,
+    var(--vkui_internal--skeleton_color_to) 50%,
+    var(--vkui_internal--skeleton_color_from) 75%
+  );
+}
+
+/* Если скелетон находится внутри другого скелетона он меняет цвет */
+
+.Skeleton .Skeleton {
+  --vkui_internal--skeleton_color_from: var(--vkui--color_background_content);
+  --vkui_internal--skeleton_color_to: var(--vkui--color_background_tertiary);
+}
+
+.Skeleton .Skeleton .Skeleton {
+  --vkui_internal--skeleton_color_from: var(--vkui--color_skeleton_from);
+  --vkui_internal--skeleton_color_to: var(--vkui--color_skeleton_to);
+}
+
+.Skeleton--disableAnimation {
+  /**
+   * Safari тратит время не пересчет анимации даже если элемент скрыт
+   * Для повышения производительности анимацию необходимо выключить
+   */
+  animation-name: none;
+  background-image: none;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .Skeleton {
+    animation-name: none;
+    background-image: none;
+  }
+}
