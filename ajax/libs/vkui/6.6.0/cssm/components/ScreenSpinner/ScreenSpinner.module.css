@@ -1,0 +1,76 @@
+.ScreenSpinner {
+  position: relative;
+  inline-size: 88px;
+  block-size: 88px;
+  border-radius: var(--vkui--size_border_radius--regular);
+  animation: screen-spinner-intro 0.3s ease;
+}
+
+.ScreenSpinner--mode-shadow {
+  background-color: var(--vkui--color_background_contrast_themed);
+  box-shadow: var(--vkui--elevation3);
+  color: var(--vkui--color_icon_medium);
+}
+
+.ScreenSpinner--mode-overlay {
+  background-color: var(--vkui--color_avatar_overlay);
+  color: var(--vkui--color_icon_contrast);
+}
+
+.ScreenSpinner__spinner {
+  opacity: 1;
+  transition: opacity 0.1s ease;
+}
+
+.ScreenSpinner--state-done .ScreenSpinner__spinner,
+.ScreenSpinner--state-error .ScreenSpinner__spinner {
+  opacity: 0;
+}
+
+.ScreenSpinner__icon {
+  position: absolute;
+  inset-block-start: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ScreenSpinner--state-cancelable .ScreenSpinner__icon {
+  cursor: pointer;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.ScreenSpinner__icon :global(.vkuiIcon) {
+  animation: screen-spinner-intro 0.2s ease;
+}
+
+/* stylelint-disable-next-line selector-max-type, selector-pseudo-class-disallowed-list */
+
+.ScreenSpinner--state-done :global(.vkuiIcon) path {
+  stroke-dasharray: 50;
+  stroke-dashoffset: 50;
+  animation: screen-spinner-icon-done 0.6s 0.3s var(--vkui--animation_easing_platform) forwards;
+}
+
+@keyframes screen-spinner-icon-done {
+  from {
+    stroke-dashoffset: 50;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes screen-spinner-intro {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

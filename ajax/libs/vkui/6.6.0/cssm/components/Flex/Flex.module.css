@@ -1,0 +1,107 @@
+.Flex {
+  --vkui_internal--flex_original_margin_inline: 0px;
+  --vkui_internal--flex_original_margin_block: 0px;
+
+  display: flex;
+}
+
+.Flex--margin-auto {
+  --vkui_internal--flex_original_margin_inline: var(--vkui--size_base_padding_horizontal--regular);
+  --vkui_internal--flex_original_margin_block: var(--vkui--size_base_padding_vertical--regular);
+
+  margin-block: var(--vkui--size_base_padding_horizontal--regular);
+  margin-inline: var(--vkui--size_base_padding_vertical--regular);
+}
+
+.Flex--withGaps {
+  -webkit-margin-before: calc(
+    -1 * var(--vkui_internal--row_gap) + var(--vkui_internal--flex_original_margin_block)
+  );
+          margin-block-start: calc(
+    -1 * var(--vkui_internal--row_gap) + var(--vkui_internal--flex_original_margin_block)
+  );
+  -webkit-margin-start: calc(
+    -1 * var(--vkui_internal--column_gap) + var(--vkui_internal--flex_original_margin_inline)
+  );
+          margin-inline-start: calc(
+    -1 * var(--vkui_internal--column_gap) + var(--vkui_internal--flex_original_margin_inline)
+  );
+}
+
+.Flex > .Flex--margin-auto {
+  margin-block: 0;
+  margin-inline: 0;
+}
+
+.Flex--direction-column {
+  flex-direction: column;
+}
+
+.Flex--reverse {
+  flex-direction: row-reverse;
+}
+
+.Flex--direction-column.Flex--reverse {
+  flex-direction: column-reverse;
+}
+
+.Flex--wrap {
+  flex-wrap: wrap;
+}
+
+/* justify-content */
+
+.Flex--justify-start {
+  justify-content: flex-start;
+}
+
+.Flex--justify-end {
+  justify-content: flex-end;
+}
+
+.Flex--justify-center {
+  justify-content: center;
+}
+
+.Flex--justify-space-around {
+  justify-content: space-around;
+}
+
+.Flex--justify-space-between {
+  justify-content: space-between;
+}
+
+.Flex--justify-space-evenly {
+  justify-content: space-evenly;
+}
+
+/* align-items */
+
+.Flex--align-start {
+  align-items: flex-start;
+}
+
+.Flex--align-end {
+  align-items: flex-end;
+}
+
+.Flex--align-center {
+  align-items: center;
+}
+
+.Flex--align-stretch {
+  align-items: stretch;
+}
+
+.Flex--align-baseline {
+  align-items: baseline;
+}
+
+/* stylelint-disable-next-line @project-tools/stylelint-atomic, selector-max-universal */
+
+.Flex--withGaps > * {
+  -webkit-margin-before: var(--vkui_internal--row_gap);
+          margin-block-start: var(--vkui_internal--row_gap);
+  -webkit-margin-start: var(--vkui_internal--column_gap);
+          margin-inline-start: var(--vkui_internal--column_gap);
+}
