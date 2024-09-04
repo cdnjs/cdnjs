@@ -1,0 +1,15 @@
+export * from "./basic";
+export * from "./instanced";
+export * from "./lambert";
+export * from "./lambertdouble";
+export * from "./outline";
+export * from "./screen";
+export * from "./screenaa";
+export * from "./sphereimposter";
+export * from "./sphereimposteroutline";
+export * from "./sprite";
+export * from "./stickimposter";
+export * from "./stickimposteroutline";
+export * from "./volumetric";
+import { Shader } from '../ShaderType';
+export declare const ShaderLib: Record<string, Shader>;

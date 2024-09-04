@@ -1,0 +1,9 @@
+export declare const ClampToEdgeWrapping = 1001;
+export declare const LinearFilter = 1006;
+export declare const NearestFilter = 1007;
+export declare const LinearMipMapLinearFilter = 1008;
+export declare const UnsignedByteType = 1009;
+export declare const FloatType = 1010;
+export declare const RGBAFormat = 1021;
+export declare const RFormat = 1022;
+export declare const R32Format = 1023;
