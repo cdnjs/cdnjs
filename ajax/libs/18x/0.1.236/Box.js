@@ -1,0 +1,1 @@
+import e from"x/On.js";export default(()=>{var t,o,r;return{body:t}=r=document,(o=r.createElement("dialog")).className="uBox",e(o,{close:()=>{t.removeChild(o)}}),t.prepend(o),o.addEventListener("cancel",e=>{e.preventDefault()}),setTimeout(()=>{o.showModal()}),o});
