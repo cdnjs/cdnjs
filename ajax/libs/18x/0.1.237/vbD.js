@@ -1,0 +1,1 @@
+var r;r=r=>{var e,n,t,u,a,g;for(g=BigInt(0),n=0n,a=t=0,u=r.length;t<u&&(g+=BigInt(127&(e=r[a]))<<n,n+=7n,!(e<128));a=++t);return[Number(g),r.slice(a+1)]};export default(e=>{var n,t,u;for(u=e,t=[];u.length;)[n,u]=r(u),t.push(n);return t});

@@ -1,0 +1,1 @@
+export default(e=>{for(;e;){if("DIALOG"===e.tagName)return e;e=e.parentNode}});
