@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no" />
+    <title>Unity WebGL Player | nodulus-master</title>
+    <style>
+      * {
+        border: 0;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico" />
+    <link rel="stylesheet" href="TemplateData/style.css" />
+  </head>
+  <body>
+    <div id="unity-container" class="unity-desktop">
+      <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
+      <div id="unity-loading-bar">
+        <div id="unity-logo"></div>
+        <div id="unity-progress-bar-empty">
+          <div id="unity-progress-bar-full"></div>
+        </div>
+      </div>
+      <div id="unity-warning"></div>
+      <div id="unity-footer">
+        <div id="unity-webgl-logo"></div>
+        <div id="unity-fullscreen-button"></div>
+        <div id="unity-build-title">nodulus-master</div>
+      </div>
+    </div>
+    <script>
+            var gameInstance;
+            var container = document.querySelector("#unity-container");
+            var canvas = document.querySelector("#unity-canvas");
+            var loadingBar = document.querySelector("#unity-loading-bar");
+            var progressBarFull = document.querySelector("#unity-progress-bar-full");
+            var fullscreenButton = document.querySelector("#unity-fullscreen-button");
+            var warningBanner = document.querySelector("#unity-warning");
+
+            // Shows a temporary message banner/ribbon for a few seconds, or
+            // a permanent error message on top of the canvas if type=='error'.
+            // If type=='warning', a yellow highlight color is used.
+            // Modify or remove this function to customize the visually presented
+            // way that non-critical warnings and error messages are presented to the
+            // user.
+            function unityShowBanner(msg, type) {
+              function updateBannerVisibility() {
+                warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
+              }
+              var div = document.createElement('div');
+              div.innerHTML = msg;
+              warningBanner.appendChild(div);
+              if (type == 'error') div.style = 'background: red; padding: 10px;';
+              else {
+                if (type == 'warning') div.style = 'background: yellow; padding: 10px;';
+                setTimeout(function() {
+                  warningBanner.removeChild(div);
+                  updateBannerVisibility();
+                }, 5000);
+              }
+              updateBannerVisibility();
+            }
+
+            var buildUrl = "Build";
+            var loaderUrl = buildUrl + "/webgl.loader.js";
+            var config = {
+              dataUrl: buildUrl + "/webgl.data",
+              frameworkUrl: buildUrl + "/webgl.framework.js",
+              codeUrl: buildUrl + "/webgl.wasm",
+              symbolsUrl: buildUrl + "/webgl.symbols.json",
+              streamingAssetsUrl: "StreamingAssets",
+              companyName: "DefaultCompany",
+              productName: "nodulus-master",
+              productVersion: "1.0",
+              showBanner: unityShowBanner,
+            };
+
+            // By default Unity keeps WebGL canvas render target size matched with
+            // the DOM size of the canvas element (scaled by window.devicePixelRatio)
+            // Set this to false if you want to decouple this synchronization from
+            // happening inside the engine, and you would instead like to size up
+            // the canvas DOM size and WebGL render target sizes yourself.
+            // config.matchWebGLToCanvasSize = false;
+
+            if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+              // Mobile device style: fill the whole browser client area with the game canvas:
+
+              var meta = document.createElement('meta');
+              meta.name = 'viewport';
+              meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+              document.getElementsByTagName('head')[0].appendChild(meta);
+              container.className = "unity-mobile";
+              canvas.className = "unity-mobile";
+
+              // To lower canvas resolution on mobile devices to gain some
+              // performance, uncomment the following line:
+              // config.devicePixelRatio = 1;
+
+
+            } else {
+              // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
+
+              canvas.style.width = "960px";
+              canvas.style.height = "600px";
+            }
+
+            loadingBar.style.display = "block";
+
+            var script = document.createElement("script");
+            script.src = loaderUrl;
+            script.onload = () => {
+              createUnityInstance(canvas, config, (progress) => {
+                progressBarFull.style.width = 100 * progress + "%";
+                    }).then((unityInstance) => {
+                      loadingBar.style.display = "none";
+                      fullscreenButton.onclick = () => {
+                        unityInstance.SetFullscreen(1);
+                      };
+                      gameInstance = unityInstance;
+                    }).catch((message) => {
+                      alert(message);
+                    });
+                  };
+
+            document.body.appendChild(script);
+    </script>
+    <script>
+      var storage = {};
+      function getStorageValue(key, defaultValue) {
+        var v = storage[key];
+        if (v === null) {
+          return defaultValue;
+        }
+        if (typeof v !== 'undefined') {
+          return v;
+        }
+        return defaultValue;
+      }
+      var WXWASMSDK = {
+        WXInitializeSDK() {
+          gameInstance.SendMessage('WXSDKManagerHandler', 'Inited', 200);
+        },
+        WXStorageSetIntSync(key, value) {
+          storage[key] = value;
+        },
+        WXStorageGetIntSync(key, defaultValue) {
+          return getStorageValue(key, defaultValue);
+        },
+        WXStorageSetFloatSync(key, value) {
+          storage[key] = value;
+        },
+        WXStorageGetFloatSync(key, defaultValue) {
+          return getStorageValue(key, defaultValue);
+        },
+        WXStorageSetStringSync(key, value) {
+          storage[key] = value;
+        },
+        WXStorageGetStringSync(key, defaultValue) {
+          return getStorageValue(key, defaultValue || '');
+        },
+        WXStorageDeleteAllSync() {
+          storage = {};
+        },
+        WXStorageDeleteKeySync(key) {
+          delete storage[key];
+        },
+        WXStorageHasKeySync(key) {
+          return typeof storage[key] === 'undefined';
+        },
+        WXCheckSession(s, f, c) {},
+        WXAuthorize(scope, s, f, c) {},
+        WXCreateUserInfoButton(x, y, width, height, lang, withCredentials) {
+          return "";
+        },
+        WXUserInfoButtonShow(id) {},
+        WXUserInfoButtonDestroy(id) {},
+        WXUserInfoButtonHide(id) {},
+        WXUserInfoButtonOffTap(id) {},
+        WXUserInfoButtonOnTap(id) {},
+        WXOnShareAppMessage(conf, isPromise) {},
+        WXOnShareAppMessageResolve(conf) {},
+        WXOffShareAppMessage() {},
+        WXCreateBannerAd(conf) {
+          return Math.random().toString(32);
+        },
+        WXCreateRewardedVideoAd(conf) {
+          return Math.random().toString(32);
+        },
+        WXCreateInterstitialAd(conf) {
+          return Math.random().toString(32);
+        },
+        WXCreateCustomAd(conf) {},
+        WXADStyleChange(id, key, value) {},
+        WXShowAd(id) {},
+        WXHideAd(id) {},
+        WXADGetStyleValue(id, key) {},
+        WXADDestroy(id) {},
+        WXADLoad(id, succ, fail) {},
+        WXToTempFilePathSync(conf) {},
+        WXGetUserDataPath() {},
+        WXWriteFileSync(filePath, data, encoding) {},
+        WXCreateFixedBottomMiddleBannerAd(adUnitId, adIntervals, height) {
+          return Math.random().toString(32);
+        },
+        WXReportGameStart() {},
+        WXReportGameSceneError(sceneId, errorType, errStr, extJsonStr) {},
+        WXWriteLog(str) {},
+        WXWriteWarn(str) {},
+        WXHideLoadingPage() {},
+        WXPreloadConcurrent() {},
+        WXCreateInnerAudioContext() {
+          return Math.random().toString(32);
+        },
+        WXInnerAudioContextSetBool() {},
+        WXInnerAudioContextSetString() {},
+        WXInnerAudioContextSetFloat() {},
+        WXInnerAudioContextGetFloat() {},
+        WXInnerAudioContextGetBool() {},
+        WXInnerAudioContextPlay() {},
+        WXInnerAudioContextPause() {},
+        WXInnerAudioContextStop() {},
+        WXInnerAudioContextDestroy() {},
+        WXInnerAudioContextSeek() {},
+        WXInnerAudioContextAddListener(id, key) {
+          if (key === 'onCanplay') {
+            setTimeout(function () {
+              gameInstance.SendMessage(
+                'WXSDKManagerHandler',
+                'OnAudioCallback',
+                JSON.stringify({
+                  callbackId: id,
+                  errMsg: key,
+                })
+              );
+            }, 100);
+          }
+        },
+        WXInnerAudioContextRemoveListener() {},
+        WXPreDownloadAudios(paths, id) {
+          gameInstance.SendMessage(
+            'WXSDKManagerHandler',
+            'WXPreDownloadAudiosCallback',
+            JSON.stringify({
+              callbackId: id.toString(),
+              errMsg: '0',
+            })
+          );
+        },
+        WXCreateVideo() {
+          return Math.random().toString(32);
+        },
+        WXVideoPlay() {},
+        WXVideoAddListener() {},
+        WXVideoDestroy() {},
+        WXVideoExitFullScreen() {},
+        WXVideoPause() {},
+        WXVideoRequestFullScreen() {},
+        WXVideoSeek() {},
+        WXVideoStop() {},
+        WXVideoRemoveListener() {},
+        WXVideoSetProperty() {},
+        WXShowOpenData() {},
+        WXDownloadTexture(id, type, callback) {
+          var Infos = {
+            Texture: GameGlobal.TextureConfig,
+            SpriteAtlas: GameGlobal.SpriteAtlasConfig,
+          }[type];
+          if (!Infos[id]) {
+            return console.error(type + '映射id 不存在', id);
+          }
+          var path = Infos[id].p;
+          var cid = type + '_' + id;
+          if (downloadedTextures[cid]) {
+            if (downloadedTextures[cid].data) {
+              callback();
+            } else {
+              console.error(type + '映射id data 不存在！', id);
+            }
+          } else if (downloadingTextures[cid]) {
+            downloadingTextures[cid].push(callback);
+          } else {
+            downloadingTextures[cid] = [callback];
+            textureHandler.downloadFile(
+              id,
+              type,
+              GameGlobal.AUDIO_PREFIX.replace(/\/$/, '') + '/' + path.replace(/\\/g, '/')
+            );
+          }
+        },
+        WXCreateGameClubButton() {
+          return Math.random().toString(32);
+        },
+        WXGameClubButtonDestroy() {},
+        WXGameClubButtonHide() {},
+        WXGameClubButtonShow() {},
+        WXGameClubButtonAddListener() {},
+        WXGameClubButtonRemoveListener() {},
+        WXGameClubButtonSetProperty() {},
+        WXGameClubStyleChangeInt() {},
+        WXGameClubStyleChangeStr() {},
+        WXIsCloudTest() {
+          return false;
+        },
+        WXUncaughtException() {},
+        WXSetDataCDN() {},
+        WXSetPreloadList() {},
+        WXGetCachePath() {},
+        WXGetPluginCachePath() {},
+        WXGetFontRawData() {},
+        WXShareFontBuffer() {},
+        WXReportShareBehavior() {},
+        WXShowAd2() {},
+        WXToTempFilePath() {},
+        WXDataContextPostMessage() {},
+        WXHideOpenData() {},
+        WXAccessFileSync() {},
+        WXAccessFile() {},
+        WXCopyFileSync() {},
+        WXCopyFile() {},
+        WXUnlinkSync() {},
+        WXUnlink() {},
+        WXReportUserBehaviorBranchAnalytics() {},
+        WXCallFunction() {},
+        WXCallFunctionInit() {},
+        WXCloudID() {},
+        WXWriteFile() {},
+        WXWriteStringFile() {},
+        WXAppendFile() {},
+        WXAppendStringFile() {},
+        WXWriteBinFileSync() {},
+        WXReadFile() {},
+        WXReadFileSync() {},
+        WXLogManagerDebug() {},
+        WXLogManagerInfo() {},
+        WXLogManagerLog() {},
+        WXLogManagerWarn() {},
+        WXCleanAllFileCache() {},
+        WXCleanFileCache() {},
+        WXRemoveFile() {},
+        WXOnLaunchProgress() {},
+        WXMkdir() {},
+        WXMkdirSync() {},
+        WXRmdir() {},
+        WXRmdirSync() {},
+        WXCameraCreateCamera() {},
+        WXCameraCloseFrameChange() {},
+        WXCameraDestroy() {},
+        WXCameraListenFrameChange() {},
+        WXCameraOnAuthCancel() {},
+        WXCameraOnCameraFrame() {},
+        WXCameraOnStop() {},
+        WX_GetRecorderManager() {},
+        WX_OnRecorderError() {},
+        WX_OnRecorderFrameRecorded() {},
+        WX_OnRecorderInterruptionBegin() {},
+        WX_OnRecorderInterruptionEnd() {},
+        WX_OnRecorderPause() {},
+        WX_OnRecorderResume() {},
+        WX_OnRecorderStart() {},
+        WX_OnRecorderStop() {},
+        WX_RecorderPause() {},
+        WX_RecorderResume() {},
+        WX_RecorderStart() {},
+        WX_RecorderStop() {},
+        WX_UploadFile() {},
+        WXUploadTaskAbort() {},
+        WXUploadTaskOffHeadersReceived() {},
+        WXUploadTaskOffProgressUpdate() {},
+        WXUploadTaskOnHeadersReceived() {},
+        WXUploadTaskOnProgressUpdate() {},
+        WXStat() {},
+        WX_GetGameRecorder() {},
+        WX_GameRecorderOff() {},
+        WX_GameRecorderOn() {},
+        WX_GameRecorderStart() {},
+        WX_GameRecorderAbort() {},
+        WX_GameRecorderPause() {},
+        WX_GameRecorderResume() {},
+        WX_GameRecorderStop() {},
+        WX_OperateGameRecorderVideo() {},
+        WXChatCreate() {},
+        WXChatHide() {},
+        WXChatShow() {},
+        WXChatClose() {},
+        WXChatOpen() {},
+        WXChatSetTabs() {},
+        WXChatOn() {},
+        WXChatOff() {},
+        WXChatSetSignature() {},
+        WXSetArrayBuffer() {},
+        WX_FileSystemManagerReaddirSync() {},
+        WX_FileSystemManagerReadCompressedFileSync() {},
+        WX_FileSystemManagerClose() {},
+        WX_FileSystemManagerFstat() {},
+        WX_FileSystemManagerFtruncate() {},
+        WX_FileSystemManagerGetFileInfo() {},
+        WX_FileSystemManagerGetSavedFileList() {},
+        WX_FileSystemManagerOpen() {},
+        WX_FileSystemManagerRead() {},
+        WX_FileSystemManagerReadCompressedFile() {},
+        WX_FileSystemManagerReadZipEntry() {},
+        WX_FileSystemManagerReaddir() {},
+        WX_FileSystemManagerRemoveSavedFile() {},
+        WX_FileSystemManagerRename() {},
+        WX_FileSystemManagerRenameSync() {},
+        WX_FileSystemManagerSaveFile() {},
+        WX_FileSystemManagerTruncate() {},
+        WX_FileSystemManagerUnzip() {},
+        WX_FileSystemManagerWrite() {},
+        WX_FileSystemManagerReadSync() {},
+        WX_FileSystemManagerFstatSync() {},
+        WX_FileSystemManagerStatSync() {},
+        WX_FileSystemManagerWriteSync() {},
+        WX_FileSystemManagerOpenSync() {},
+        WX_FileSystemManagerSaveFileSync() {},
+        WX_FileSystemManagerCloseSync() {},
+        WX_FileSystemManagerFtruncateSync() {},
+        WX_FileSystemManagerTruncateSync() {},
+        WX_FileSystemManagerAppendFileSync() {},
+        WX_FileSystemManagerAppendFileStringSync() {},
+        WX_FileSystemManagerWriteStringSync() {},
+        WX_FileSystemManagerReadZipEntryString() {},
+        WX_FileSystemManagerWriteString() {},
+        WX_OnNeedPrivacyAuthorization() {},
+        WX_PrivacyAuthorizeResolve() {},
+        WX_OnTouchCancel() {},
+        WX_OffTouchCancel() {},
+        WX_OnTouchEnd() {},
+        WX_OffTouchEnd() {},
+        WX_OnTouchMove() {},
+        WX_OffTouchMove() {},
+        WX_OnTouchStart() {},
+        WX_OffTouchStart() {},
+        WX_RegisterOnTouchCancelCallback() {},
+        WX_RegisterOnTouchEndCallback() {},
+        WX_RegisterOnTouchMoveCallback() {},
+        WX_RegisterOnTouchStartCallback() {},
+        WX_CreateTCPSocket() {},
+        WX_TCPSocketBindWifi() {},
+        WX_TCPSocketClose() {},
+        WX_TCPSocketConnect() {},
+        WX_TCPSocketWriteString() {},
+        WX_TCPSocketWriteBuffer() {},
+        WX_TCPSocketOffBindWifi() {},
+        WX_TCPSocketOffClose() {},
+        WX_TCPSocketOffConnect() {},
+        WX_TCPSocketOffError() {},
+        WX_TCPSocketOffMessage() {},
+        WX_TCPSocketOnBindWifi() {},
+        WX_TCPSocketOnClose() {},
+        WX_TCPSocketOnConnect() {},
+        WX_TCPSocketOnError() {},
+        WX_TCPSocketOnMessage() {},
+        WX_RegisterTCPSocketOnMessageCallback() {},
+        WX_CreateUDPSocket() {},
+        WX_UDPSocketClose() {},
+        WX_UDPSocketConnect() {},
+        WX_UDPSocketOffClose() {},
+        WX_UDPSocketOffError() {},
+        WX_UDPSocketOffListening() {},
+        WX_UDPSocketOffMessage() {},
+        WX_UDPSocketOnClose() {},
+        WX_UDPSocketOnError() {},
+        WX_UDPSocketOnListening() {},
+        WX_UDPSocketOnMessage() {},
+        WX_UDPSocketSendString() {},
+        WX_UDPSocketSendBuffer() {},
+        WX_UDPSocketSetTTL() {},
+        WX_UDPSocketWrite() {},
+        WX_UDPSocketBind() {},
+        WX_RegisterUDPSocketOnMessageCallback() {},
+        WX_OnBLECharacteristicValueChange() {},
+        WX_OffBLECharacteristicValueChange() {},
+        WX_RegisterOnBLECharacteristicValueChangeCallback() {},
+        WX_StartGyroscope() {},
+        WX_StopGyroscope() {},
+        WX_OnGyroscopeChange() {},
+        WX_OffGyroscopeChange() {},
+        WX_RegisterStartGyroscopeCallback() {},
+        WX_RegisterStopGyroscopeCallback() {},
+        WX_RegisterOnGyroscopeChangeCallback() {},
+
+        WX_AddCard(conf, callbackId){},
+        WX_AuthPrivateMessage(conf, callbackId){},
+        WX_Authorize(conf, callbackId){},
+        WX_CheckIsAddedToMyMiniProgram(conf, callbackId){},
+        WX_CheckSession(conf, callbackId){},
+        WX_ChooseImage(conf, callbackId){},
+        WX_ChooseMedia(conf, callbackId){},
+        WX_ChooseMessageFile(conf, callbackId){},
+        WX_CloseBLEConnection(conf, callbackId){},
+        WX_CloseBluetoothAdapter(conf, callbackId){},
+        WX_CompressImage(conf, callbackId){},
+        WX_CreateBLEConnection(conf, callbackId){},
+        WX_CreateBLEPeripheralServer(conf, callbackId){},
+        WX_ExitMiniProgram(conf, callbackId){},
+        WX_ExitVoIPChat(conf, callbackId){},
+        WX_FaceDetect(conf, callbackId){},
+        WX_GetAvailableAudioSources(conf, callbackId){},
+        WX_GetBLEDeviceCharacteristics(conf, callbackId){},
+        WX_GetBLEDeviceRSSI(conf, callbackId){},
+        WX_GetBLEDeviceServices(conf, callbackId){},
+        WX_GetBLEMTU(conf, callbackId){},
+        WX_GetBackgroundFetchData(conf, callbackId){},
+        WX_GetBackgroundFetchToken(conf, callbackId){},
+        WX_GetBatteryInfo(conf, callbackId){},
+        WX_GetBeacons(conf, callbackId){},
+        WX_GetBluetoothAdapterState(conf, callbackId){},
+        WX_GetBluetoothDevices(conf, callbackId){},
+        WX_GetChannelsLiveInfo(conf, callbackId){},
+        WX_GetChannelsLiveNoticeInfo(conf, callbackId){},
+        WX_GetClipboardData(conf, callbackId){},
+        WX_GetConnectedBluetoothDevices(conf, callbackId){},
+        WX_GetExtConfig(conf, callbackId){},
+        WX_GetFuzzyLocation(conf, callbackId){},
+        WX_GetGameClubData(conf, callbackId){},
+        WX_GetGroupEnterInfo(conf, callbackId){},
+        WX_GetInferenceEnvInfo(conf, callbackId){},
+        WX_GetLocalIPAddress(conf, callbackId){},
+        WX_GetNetworkType(conf, callbackId){},
+        WX_GetPrivacySetting(conf, callbackId){},
+        WX_GetScreenBrightness(conf, callbackId){},
+        WX_GetScreenRecordingState(conf, callbackId){},
+        WX_GetSetting(conf, callbackId){},
+        WX_GetShareInfo(conf, callbackId){},
+        WX_GetStorageInfo(conf, callbackId){},
+        WX_GetSystemInfo(conf, callbackId){},
+        WX_GetSystemInfoAsync(conf, callbackId){},
+        WX_GetUserInfo(conf, callbackId){},
+        WX_GetUserInteractiveStorage(conf, callbackId){},
+        WX_GetWeRunData(conf, callbackId){},
+        WX_HideKeyboard(conf, callbackId){},
+        WX_HideLoading(conf, callbackId){},
+        WX_HideShareMenu(conf, callbackId){},
+        WX_HideToast(conf, callbackId){},
+        WX_InitFaceDetect(conf, callbackId){},
+        WX_IsBluetoothDevicePaired(conf, callbackId){},
+        WX_JoinVoIPChat(conf, callbackId){},
+        WX_Login(conf, callbackId){},
+        WX_MakeBluetoothPair(conf, callbackId){},
+        WX_NavigateToMiniProgram(conf, callbackId){},
+        WX_NotifyBLECharacteristicValueChange(conf, callbackId){},
+        WX_OpenAppAuthorizeSetting(conf, callbackId){},
+        WX_OpenBluetoothAdapter(conf, callbackId){},
+        WX_OpenCard(conf, callbackId){},
+        WX_OpenChannelsActivity(conf, callbackId){},
+        WX_OpenChannelsEvent(conf, callbackId){},
+        WX_OpenChannelsLive(conf, callbackId){},
+        WX_OpenChannelsUserProfile(conf, callbackId){},
+        WX_OpenCustomerServiceChat(conf, callbackId){},
+        WX_OpenCustomerServiceConversation(conf, callbackId){},
+        WX_OpenPrivacyContract(conf, callbackId){},
+        WX_OpenSetting(conf, callbackId){},
+        WX_OpenSystemBluetoothSetting(conf, callbackId){},
+        WX_PreviewImage(conf, callbackId){},
+        WX_PreviewMedia(conf, callbackId){},
+        WX_ReadBLECharacteristicValue(conf, callbackId){},
+        WX_RemoveStorage(conf, callbackId){},
+        WX_RemoveUserCloudStorage(conf, callbackId){},
+        WX_ReportScene(conf, callbackId){},
+        WX_RequestMidasFriendPayment(conf, callbackId){},
+        WX_RequestMidasPayment(conf, callbackId){},
+        WX_RequestSubscribeMessage(conf, callbackId){},
+        WX_RequestSubscribeSystemMessage(conf, callbackId){},
+        WX_RequirePrivacyAuthorize(conf, callbackId){},
+        WX_RestartMiniProgram(conf, callbackId){},
+        WX_SaveFileToDisk(conf, callbackId){},
+        WX_SaveImageToPhotosAlbum(conf, callbackId){},
+        WX_ScanCode(conf, callbackId){},
+        WX_SetBLEMTU(conf, callbackId){},
+        WX_SetBackgroundFetchToken(conf, callbackId){},
+        WX_SetClipboardData(conf, callbackId){},
+        WX_SetDeviceOrientation(conf, callbackId){},
+        WX_SetEnableDebug(conf, callbackId){},
+        WX_SetInnerAudioOption(conf, callbackId){},
+        WX_SetKeepScreenOn(conf, callbackId){},
+        WX_SetMenuStyle(conf, callbackId){},
+        WX_SetScreenBrightness(conf, callbackId){},
+        WX_SetStatusBarStyle(conf, callbackId){},
+        WX_SetUserCloudStorage(conf, callbackId){},
+        WX_SetVisualEffectOnCapture(conf, callbackId){},
+        WX_ShowActionSheet(conf, callbackId){},
+        WX_ShowKeyboard(conf, callbackId){},
+        WX_ShowLoading(conf, callbackId){},
+        WX_ShowModal(conf, callbackId){},
+        WX_ShowShareImageMenu(conf, callbackId){},
+        WX_ShowShareMenu(conf, callbackId){},
+        WX_ShowToast(conf, callbackId){},
+        WX_StartAccelerometer(conf, callbackId){},
+        WX_StartBeaconDiscovery(conf, callbackId){},
+        WX_StartBluetoothDevicesDiscovery(conf, callbackId){},
+        WX_StartCompass(conf, callbackId){},
+        WX_StartDeviceMotionListening(conf, callbackId){},
+        WX_StopAccelerometer(conf, callbackId){},
+        WX_StopBeaconDiscovery(conf, callbackId){},
+        WX_StopBluetoothDevicesDiscovery(conf, callbackId){},
+        WX_StopCompass(conf, callbackId){},
+        WX_StopDeviceMotionListening(conf, callbackId){},
+        WX_StopFaceDetect(conf, callbackId){},
+        WX_UpdateKeyboard(conf, callbackId){},
+        WX_UpdateShareMenu(conf, callbackId){},
+        WX_UpdateVoIPChatMuteConfig(conf, callbackId){},
+        WX_UpdateWeChatApp(conf, callbackId){},
+        WX_VibrateLong(conf, callbackId){},
+        WX_VibrateShort(conf, callbackId){},
+        WX_WriteBLECharacteristicValue(conf, callbackId){},
+        WX_StartGameLive(conf, callbackId){},
+        WX_CheckGameLiveEnabled(conf, callbackId){},
+        WX_GetUserCurrentGameliveInfo(conf, callbackId){},
+        WX_GetUserRecentGameLiveInfo(conf, callbackId){},
+        WX_GetUserGameLiveDetails(conf, callbackId){},
+        WX_OpenChannelsLiveCollection(conf, callbackId){},
+        WX_OpenPage(conf, callbackId){},
+        WX_RequestMidasPaymentGameItem(conf, callbackId){},
+        WX_RequestSubscribeLiveActivity(conf, callbackId){},
+        WX_OpenBusinessView(conf, callbackId){},
+
+        WX_ExitPointerLock() {},
+        WX_OperateGameRecorderVideo() {},
+        WX_RemoveStorageSync() {},
+        WX_ReportEvent() {},
+        WX_ReportMonitor() {},
+        WX_ReportPerformance() {},
+        WX_ReportUserBehaviorBranchAnalytics() {},
+        WX_RequestPointerLock() {},
+        WX_ReserveChannelsLive() {},
+        WX_RevokeBufferURL() {},
+        WX_SetPreferredFramesPerSecond() {},
+        WX_SetStorageSync() {},
+        WX_ShareAppMessage() {},
+        WX_TriggerGC() {},
+
+        WX_OnAccelerometerChange() {},
+        WX_OffAccelerometerChange() {},
+        WX_OnAudioInterruptionBegin() {},
+        WX_OffAudioInterruptionBegin() {},
+        WX_OnAudioInterruptionEnd() {},
+        WX_OffAudioInterruptionEnd() {},
+        WX_OnBLEConnectionStateChange() {},
+        WX_OffBLEConnectionStateChange() {},
+        WX_OnBLEMTUChange() {},
+        WX_OffBLEMTUChange() {},
+        WX_OnBLEPeripheralConnectionStateChanged() {},
+        WX_OffBLEPeripheralConnectionStateChanged() {},
+        WX_OnBackgroundFetchData() {},
+        WX_OnBeaconServiceChange() {},
+        WX_OffBeaconServiceChange() {},
+        WX_OnBeaconUpdate() {},
+        WX_OffBeaconUpdate() {},
+        WX_OnBluetoothAdapterStateChange() {},
+        WX_OffBluetoothAdapterStateChange() {},
+        WX_OnBluetoothDeviceFound() {},
+        WX_OffBluetoothDeviceFound() {},
+        WX_OnCompassChange() {},
+        WX_OffCompassChange() {},
+        WX_OnDeviceMotionChange() {},
+        WX_OffDeviceMotionChange() {},
+        WX_OnDeviceOrientationChange() {},
+        WX_OffDeviceOrientationChange() {},
+        WX_OnError() {},
+        WX_OffError() {},
+        WX_OnHide() {},
+        WX_OffHide() {},
+        WX_OnInteractiveStorageModified() {},
+        WX_OffInteractiveStorageModified() {},
+        WX_OnKeyDown() {},
+        WX_OffKeyDown() {},
+        WX_OnKeyUp() {},
+        WX_OffKeyUp() {},
+        WX_OnKeyboardComplete() {},
+        WX_OffKeyboardComplete() {},
+        WX_OnKeyboardConfirm() {},
+        WX_OffKeyboardConfirm() {},
+        WX_OnKeyboardHeightChange() {},
+        WX_OffKeyboardHeightChange() {},
+        WX_OnKeyboardInput() {},
+        WX_OffKeyboardInput() {},
+        WX_OnMemoryWarning() {},
+        WX_OffMemoryWarning() {},
+        WX_OnMessage() {},
+        WX_OnMouseDown() {},
+        WX_OffMouseDown() {},
+        WX_OnMouseMove() {},
+        WX_OffMouseMove() {},
+        WX_OnMouseUp() {},
+        WX_OffMouseUp() {},
+        WX_OnNetworkStatusChange() {},
+        WX_OffNetworkStatusChange() {},
+        WX_OnNetworkWeakChange() {},
+        WX_OffNetworkWeakChange() {},
+        WX_OnScreenRecordingStateChanged() {},
+        WX_OffScreenRecordingStateChanged() {},
+        WX_OnShareMessageToFriend() {},
+        WX_OnShow() {},
+        WX_OffShow() {},
+        WX_OnUnhandledRejection() {},
+        WX_OffUnhandledRejection() {},
+        WX_OnUserCaptureScreen() {},
+        WX_OffUserCaptureScreen() {},
+        WX_OnVoIPChatInterrupted() {},
+        WX_OffVoIPChatInterrupted() {},
+        WX_OnVoIPChatMembersChanged() {},
+        WX_OffVoIPChatMembersChanged() {},
+        WX_OnVoIPChatSpeakersChanged() {},
+        WX_OffVoIPChatSpeakersChanged() {},
+        WX_OnVoIPChatStateChanged() {},
+        WX_OffVoIPChatStateChanged() {},
+        WX_OnWheel() {},
+        WX_OffWheel() {},
+        WX_OnWindowResize() {},
+        WX_OffWindowResize() {},
+
+        WX_OnAddToFavorites() {},
+        WX_OnAddToFavorites_Resolve(conf){},
+        WX_OffAddToFavorites() {},
+        WX_OnCopyUrl() {},
+        WX_OnCopyUrl_Resolve(conf){},
+        WX_OffCopyUrl() {},
+        WX_OnHandoff() {},
+        WX_OnHandoff_Resolve(conf){},
+        WX_OffHandoff() {},
+        WX_OnShareTimeline() {},
+        WX_OnShareTimeline_Resolve(conf){},
+        WX_OffShareTimeline() {},
+        WX_OnGameLiveStateChange() {},
+        WX_OnGameLiveStateChange_Resolve(conf){},
+        WX_OffGameLiveStateChange() {},
+
+        WX_SetHandoffQuery(query){
+            return "";
+        },
+        WX_GetAccountInfoSync(){
+            return JSON.stringify({});
+        },
+        WX_GetAppAuthorizeSetting(){
+            return JSON.stringify({});
+        },
+        WX_GetAppBaseInfo(){
+            return JSON.stringify({});
+        },
+        WX_GetBatteryInfoSync(){
+            return JSON.stringify({});
+        },
+        WX_GetDeviceInfo(){
+            return JSON.stringify({});
+        },
+        WX_GetEnterOptionsSync(){
+            return JSON.stringify({});
+        },
+        WX_GetExptInfoSync(keys){
+            return JSON.stringify({});
+        },
+        WX_GetExtConfigSync(){
+            return JSON.stringify({});
+        },
+        WX_GetLaunchOptionsSync(){
+            return JSON.stringify({});
+        },
+        WX_GetMenuButtonBoundingClientRect(){
+            return JSON.stringify({});
+        },
+        WX_GetStorageInfoSync(){
+            return JSON.stringify({});
+        },
+        WX_GetSystemInfoSync(){
+            return JSON.stringify({});
+        },
+        WX_GetSystemSetting(){
+            return JSON.stringify({});
+        },
+        WX_GetWindowInfo(){
+            return JSON.stringify({});
+        },
+        WX_CreateImageData(){
+            return JSON.stringify({});
+        },
+        WX_CreatePath2D(){
+            return JSON.stringify({});
+        },
+        WX_IsPointerLocked(){
+            return "";
+        },
+        WX_IsVKSupport(version){
+            return "";
+        },
+        WX_SetCursor(path, x, y){
+            return "";
+        },
+        WX_SetMessageToFriendQuery(option){
+            return "";
+        },
+        WX_GetTextLineHeight(option){
+            return "";
+        },
+        WX_LoadFont(path){
+            return "";
+        },
+        WX_GetGameLiveState(){
+            return JSON.stringify({});
+        },
+
+        WX_DownloadFile() {return ""},
+        WX_CreateFeedbackButton() {return ""},
+        WX_GetLogManager() {return ""},
+        WX_GetRealtimeLogManager() {return ""},
+        WX_GetUpdateManager() {return ""},
+        WX_CreateVideoDecoder() {return ""},
+
+        WX_DownloadTaskAbort() {},
+        WX_DownloadTaskOffHeadersReceived() {},
+        WX_DownloadTaskOffProgressUpdate() {},
+        WX_DownloadTaskOnHeadersReceived() {},
+        WX_DownloadTaskOnProgressUpdate() {},
+        WXFeedbackButtonSetProperty() {},
+        WX_FeedbackButtonDestroy() {},
+        WX_FeedbackButtonHide() {},
+        WX_FeedbackButtonOffTap() {},
+        WX_FeedbackButtonOnTap() {},
+        WX_FeedbackButtonShow() {},
+        WX_LogManagerDebug() {},
+        WX_LogManagerInfo() {},
+        WX_LogManagerLog() {},
+        WX_LogManagerWarn() {},
+        WX_RealtimeLogManagerAddFilterMsg() {},
+        WX_RealtimeLogManagerError() {},
+        WX_RealtimeLogManagerInfo() {},
+        WX_RealtimeLogManagerSetFilterMsg() {},
+        WX_RealtimeLogManagerWarn() {},
+        WX_UpdateManagerApplyUpdate() {},
+        WX_UpdateManagerOnCheckForUpdate() {},
+        WX_UpdateManagerOnUpdateFailed() {},
+        WX_UpdateManagerOnUpdateReady() {},
+        WX_VideoDecoderGetFrameData() {},
+        WX_VideoDecoderRemove() {},
+        WX_VideoDecoderSeek() {},
+        WX_VideoDecoderStart() {},
+        WX_VideoDecoderStop() {},
+        WX_VideoDecoderOff() {},
+        WX_VideoDecoderOn() {},
+      };
+      var downloadedTextures = {};
+      var downloadingTextures = {};
+      var textureHandler = {
+        downloadFile(textureId, type, prefix) {
+          var url = prefix + '.png';
+          var cid = type + '_' + textureId;
+          var image = new Image();
+          image.src = url;
+          image.onload = function () {
+            downloadedTextures[cid] = {
+              data: image,
+            };
+            if (downloadingTextures[cid] instanceof Array) {
+              downloadingTextures[cid].forEach(v => v());
+            } else {
+              downloadingTextures[cid]();
+            }
+            delete downloadingTextures[cid];
+          };
+          image.onerror = function () {
+            console.error(url + ' 下载失败！');
+          };
+        },
+      };
+
+      var GameGlobal = {
+        TextureConfig: {},
+        SpriteAtlasConfig: {},
+        DownloadedTextures: downloadedTextures,
+        AUDIO_PREFIX: './Assets/Textures/',
+      };
+      window._ScaleRate = 1;
+    </script>
+  </body>
+</html>
