@@ -1,0 +1,1 @@
+import o from"x/xBox.js";export default(r=>o(o=>{o.innerHTML=r}));

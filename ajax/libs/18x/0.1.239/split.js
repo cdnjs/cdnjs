@@ -1,0 +1,1 @@
+export default((e,r)=>{var i,l;return(i=e.indexOf(r))>=0?(l=e.slice(i+1),e=e.slice(0,i)):l="",[e,l]});
