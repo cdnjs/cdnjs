@@ -1,0 +1,646 @@
+#paragraph {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* More modern font */
+    font-size: 16px;
+    line-height: 1.7; /* Slightly increased line height */
+    color: #444;
+    padding: 20px; /* Increased padding */
+    margin: auto; /* Centered with auto margins */
+    background: linear-gradient(135deg, #f0f8ff, #e6f7ff); /* Subtle gradient */
+    border-radius: 8px;
+    max-width: 800px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+    border: 1px solid #e0e0e0; /* Subtle border */
+  }
+  
+  #paragraph:hover {
+    transform: translateY(-3px); /* Slight lift on hover */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, #e6f7ff, #d0efff);/* slightly lighter gradient on hover */
+  }
+  
+  /* Add a subtle drop cap effect */
+  #paragraph::first-letter {
+    font-size: 2em;
+    font-weight: bold;
+    float: left;
+    margin-right: 5px;
+    color: #007bff; /* Accent color */
+  }
+  
+  /* Improved readability for links within the paragraph */
+  #paragraph a {
+    color: #007bff;
+    text-decoration: none;
+    border-bottom: 1px solid #007bff;
+    transition: border-bottom 0.3s ease;
+  }
+  
+  #paragraph a:hover {
+    border-bottom: 2px solid #0056b3;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    #paragraph {
+      padding: 15px;
+      font-size: 15px;
+      max-width: 95%; /* Use more of the screen */
+
+    }
+  
+    #paragraph::first-letter {
+      font-size: 1.8em;
+    }
+  }
+  
+  @media (max-width: 480px) {
+      #paragraph{
+          padding:10px;
+          font-size: 14px;
+      }
+}
+#check-circle,
+#check-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px; /* Adjust size as needed */
+  height: 24px; /* Adjust size as needed */
+  border-radius: 50%; /* For circles */
+  border: 2px solid #ccc; /* Default border color */
+  cursor: pointer;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+#check-box {
+  border-radius: 4px; /* For boxes */
+}
+
+#check-circle.checked,
+#check-box.checked {
+  border-color: #007bff; /* Checked border color */
+  background-color: #007bff; /* Checked background color */
+}
+
+#check-circle.checked::after,
+#check-box.checked::after {
+  content: "";
+  display: block;
+  width: 12px; /* Adjust checkmark/cross size */
+  height: 12px; /* Adjust checkmark/cross size */
+  background-color: white; /* Checkmark/cross color */
+  -webkit-mask-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>'); /* Checkmark SVG */
+  mask-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>'); /* Checkmark SVG */
+}
+
+#check-box.checked::after{
+    width: 14px;
+    height: 14px;
+}
+
+/* Optional hover effect */
+#check-circle:hover,
+#check-box:hover {
+  border-color: #0056b3;
+}
+
+/* Optional focus effect */
+#check-circle:focus,
+#check-box:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
+}
+label {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  font-family: sans-serif; /* Add a default font */
+  font-size: 16px; /* Adjust font size as needed */
+  color: #333; /* Default text color */
+}
+
+label::after {
+  content: attr(data-label);
+  margin-left: 8px; /* Space between checkbox and text */
+}
+.nav {
+  display: flex;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #333;
+  padding: 8px 15px;
+  margin: 0 5px;
+  border-radius: 3px;
+  transition: background-color 0.3s;
+  font-size: 16px; /* Define font size */
+}
+
+.nav a:hover {
+  background-color: #ddd;
+}
+
+/* Left/Right/Up Navigation */
+.nav.nav-left,
+.nav.nav-right,
+.nav.nav-up {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.nav.nav-right {
+  align-items: flex-end;
+}
+
+.nav.nav-up {
+    align-items: center;
+}
+
+.nav.nav-left a,
+.nav.nav-right a,
+.nav.nav-up a {
+  margin: 5px 0;
+  padding: 10px 15px; /* Increase padding to adjust height */
+}
+
+/* Down Navigation */
+.nav.nav-down {
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav.nav-down a {
+  margin: 5px 0;
+  display: block; /* Fixes stacking issue */
+  width: 100%; /* Ensure links take full width */
+  text-align: center; /* Center text */
+}
+.prog {
+  width: 200px;
+  height: 20px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  position: relative;
+  margin: 10px 0;
+}
+
+.prog::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: green;
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+
+.prog.continuous::before {
+  width: 0;
+  animation: progress-continuous 2s linear infinite;
+}
+
+@keyframes progress-continuous {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+
+/* Hexadecimal Progress (Corrected) */
+.prog.hex-0::before {
+  width: 0%;
+}
+
+.prog.hex-1::before {
+  width: 6.25%;
+}
+
+.prog.hex-2::before {
+  width: 12.5%;
+}
+
+.prog.hex-3::before {
+  width: 18.75%;
+}
+
+.prog.hex-4::before {
+  width: 25%;
+}
+
+.prog.hex-5::before {
+  width: 31.25%;
+}
+
+.prog.hex-6::before {
+  width: 37.5%;
+}
+
+.prog.hex-7::before {
+  width: 43.75%;
+}
+
+.prog.hex-8::before {
+  width: 50%;
+}
+
+.prog.hex-9::before {
+  width: 56.25%;
+}
+
+.prog.hex-a::before {
+  width: 62.5%;
+}
+
+.prog.hex-b::before {
+  width: 68.75%;
+}
+
+.prog.hex-c::before {
+  width: 75%;
+}
+
+.prog.hex-d::before {
+  width: 81.25%;
+}
+
+.prog.hex-e::before {
+  width: 87.5%;
+}
+
+.prog.hex-f::before {
+  width: 93.75%;
+}
+
+.prog.hex-10::before {
+    width: 100%;
+}
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s linear infinite;
+  border-radius: 4px; /* Optional: Add rounded corners */
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Example usage (adjust dimensions and styles as needed) */
+.skeleton.text {
+  width: 80%;
+  height: 16px;
+  margin-bottom: 8px;
+}
+
+.skeleton.title {
+  width: 60%;
+  height: 24px;
+  margin-bottom: 12px;
+}
+
+.skeleton.image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%; /* Optional: For circular images */
+}
+
+.skeleton.button {
+  width: 120px;
+  height: 36px;
+  border-radius: 18px; /* Optional: For rounded buttons */
+}
+.floating-card {
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef); /* Subtle gradient */
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  position: relative;
+  margin: 30px;
+  max-width: 450px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #dee2e6; /* Subtle border */
+}
+
+.floating-card h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.8em;
+  font-weight: 600; /* Semi-bold font weight */
+  color: #212529;
+  letter-spacing: -0.5px; /* Adjust letter spacing */
+}
+
+.floating-card p {
+  line-height: 1.7;
+  color: #495057;
+  font-size: 1.1em;
+}
+
+.ratio-3-4 {
+  width: 330px;
+  height: 440px;
+}
+
+.ratio-3-6 {
+  width: 330px;
+  height: 660px;
+}
+
+.floating-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 600px) {
+  .floating-card {
+    width: 90%;
+    max-width: none;
+    margin: 20px auto;
+    padding: 25px;
+  }
+
+  .ratio-3-4, .ratio-3-6{
+    width: auto;
+    height: auto;
+    aspect-ratio: 3 / 4;
+  }
+
+  .ratio-3-6{
+    aspect-ratio: 3 / 6;
+  }
+}
+/* Base Heading Styles (Optional) */
+h1, h2, h3, h4, h5, h6 {
+  font-family: sans-serif; /* Default font */
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+/* Custom Font Classes */
+.h1-consolas, .h2-consolas, .h3-consolas, .h4-consolas, .h5-consolas, .h6-consolas {
+  font-family: 'Consolas', monospace;
+}
+
+.h1-ocr-a-bt, .h2-ocr-a-bt, .h3-ocr-a-bt, .h4-ocr-a-bt, .h5-ocr-a-bt, .h6-ocr-a-bt {
+  font-family: "OCR A BT", monospace;
+  font-weight: normal; /* or bold, italic, etc. */
+  font-style: normal; /* or italic, oblique, etc. */
+}
+
+/* Example Heading Size Adjustments (Optional) */
+h1, .h1-consolas, .h1-ocr-a-bt {
+  font-size: 2.5em;
+}
+
+h2, .h2-consolas, .h2-ocr-a-bt {
+  font-size: 2em;
+}
+
+h3, .h3-consolas, .h3-ocr-a-bt {
+  font-size: 1.7em;
+}
+
+h4, .h4-consolas, .h4-ocr-a-bt {
+  font-size: 1.4em;
+}
+
+h5, .h5-consolas, .h5-ocr-a-bt {
+  font-size: 1.2em;
+}
+
+h6, .h6-consolas, .h6-ocr-a-bt {
+  font-size: 1em;
+}
+.rating {
+  display: inline-block;
+  unicode-bidi: bidi_isolate;
+  direction: rtl; /* Right-to-left to support star selection */
+  text-align: left; /* Reset text alignment */
+}
+
+.rating > input {
+  display: none; /* Hide radio buttons */
+}
+
+.rating > label {
+  display: inline-block;
+  position: relative;
+  width: 25px; /* Adjust star size as needed */
+  height: 25px; /* Adjust star size as needed */
+  cursor: pointer;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 18.78 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>') center/contain no-repeat;
+}
+
+.rating > label:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="yellow" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 18.78 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>') center/contain no-repeat;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.rating > input:checked ~ label:before,
+.rating > input:hover ~ label:before {
+  opacity: 1;
+}
+
+/* Optional Hover Effect */
+.rating > label:hover,
+.rating > label:hover ~ label {
+  transform: scale(1.1);
+}
+/* Dot Loading Animation */
+.load-dot {
+  font-size: 2em;
+  position: relative;
+  width: 3em;
+  height: 1em;
+}
+
+.load-dot::before {
+  content: "";
+  animation: dot-sequence 3s infinite steps(1); /* Changed to steps */
+}
+
+@keyframes dot-sequence {
+  0% {
+    content: ".";
+  }
+  33.33% {
+    content: "..";
+  }
+  66.66% {
+    content: "...";
+  }
+  100% {
+    content: ".";
+  }
+}
+
+/* Bar Loading Animation */
+.load-bar {
+  width: 100px;
+  height: 10px;
+  background-color: #f0f0f0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.load-bar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30%;
+  height: 100%;
+  background: linear-gradient(90deg, #007bff, #66b3ff);
+  animation: bar-loading 1.5s linear infinite;
+}
+
+@keyframes bar-loading {
+  0% {
+    left: -30%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+.load-swing {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  border-radius: 50%;
+  border: 4px solid rgba(0, 123, 255, 0.3); /* Light border */
+}
+
+.load-swing::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background-color: #007bff; /* Blue dot */
+  border-radius: 50%;
+  transform: translateX(-50%);
+  animation: swing 1.5s linear infinite;
+}
+
+@keyframes swing {
+  0% {
+    transform: translateX(-50%) rotate(0deg) translateY(-20px);
+  }
+  50% {
+    transform: translateX(-50%) rotate(180deg) translateY(-20px);
+  }
+  100% {
+    transform: translateX(-50%) rotate(360deg) translateY(-20px);
+  }
+}
+/* HTML: <div class="loader"></div> */
+/*Used from https://css-loaders.com/3d/*/
+.td-loader {
+  --s: 20px;
+  
+  --_d: calc(0.353*var(--s));
+  width: calc(var(--s) + var(--_d));
+  aspect-ratio: 1;
+  display: grid;
+}
+.td-loader:before,
+.td-loader:after {
+  content: "";
+  grid-area: 1/1;
+  clip-path: polygon(var(--_d) 0,100% 0,100% calc(100% - var(--_d)),calc(100% - var(--_d)) 100%,0 100%,0 var(--_d));
+  background:
+    conic-gradient(from -90deg at calc(100% - var(--_d)) var(--_d),
+     #fff 135deg,#666 0 270deg,#aaa 0);
+  animation: l6 2s infinite;
+}
+.td-loader:after {
+  animation-delay:-1s;
+}
+@keyframes l6{
+  0%  {transform:translate(0,0)}
+  25% {transform:translate(30px,0)}
+  50% {transform:translate(30px,30px)}
+  75% {transform:translate(0,30px)}
+  100%{transform:translate(0,0)}
+}
+.cube-laper {
+  --s: 200px; /* control the size*/
+  --c1: #1d1d1d;
+  --c2: #4e4f51;
+  --c3: #3c3c3c;
+  
+  background:
+    repeating-conic-gradient(from 30deg,#0000 0 120deg,var(--c3) 0 50%) 
+     calc(var(--s)/2) calc(var(--s)*tan(30deg)/2),
+    repeating-conic-gradient(from 30deg,var(--c1) 0 60deg,var(--c2) 0 120deg,var(--c3) 0 50%);
+  background-size: var(--s) calc(var(--s)*tan(30deg));
+}
+.load-windows {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5em; /* Adjust as needed */
+  height: 1em;
+}
+
+.load-windows span {
+  display: inline-block;
+  width: 0.6em;
+  height: 0.6em;
+  border-radius: 50%;
+  margin: 0 0.125em;
+  background-color: #007bff; /* Windows blue */
+  opacity: 0;
+  animation: windows-loading 2s infinite; /* Adjusted duration */
+}
+
+.load-windows span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.load-windows span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.load-windows span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.load-windows span:nth-child(4) {
+  animation-delay: 0.6s;
+}
+
+.load-windows span:nth-child(5) {
+  animation-delay: 0.8s;
+}
+
+@keyframes windows-loading {
+  0%, 40%, 100% {
+    opacity: 0.3; /* Adjusted opacity */
+    transform: scale(0.4); /* Adjusted scale */
+  }
+  20% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
