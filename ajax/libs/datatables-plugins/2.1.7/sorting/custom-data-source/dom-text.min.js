@@ -1,0 +1,1 @@
+$.fn.dataTable.ext.order["dom-text"]=function(n,t){return this.api().column(t,{order:"index"}).nodes().map(function(n,t){return $("input",n).val()})};
