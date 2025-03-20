@@ -1,0 +1,183 @@
+.Checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-block: 0;
+  padding-inline: var(--vkui--size_base_padding_horizontal--regular);
+  min-inline-size: var(--vkui--size_field_height--regular);
+  min-block-size: var(--vkui--size_field_height--regular);
+  font-family: var(--vkui--font_family_base);
+}
+
+/**
+ * CMP:
+ * FormItem
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormItem) .Checkbox {
+  inline-size: 100%;
+  box-sizing: content-box;
+  margin-block: 0;
+  margin-inline: calc(-1 * var(--vkui--size_base_padding_horizontal--regular));
+}
+
+.Checkbox__icon {
+  flex-shrink: 0;
+  -webkit-margin-end: 12px;
+          margin-inline-end: 12px;
+}
+
+.Checkbox__icon--on {
+  color: var(--vkui--color_icon_accent);
+  display: none;
+}
+
+.Checkbox__icon--indeterminate {
+  color: var(--vkui--color_icon_accent);
+  display: none;
+}
+
+.Checkbox__icon--off {
+  color: var(--vkui--color_icon_tertiary);
+}
+
+.Checkbox__content {
+  flex-grow: 1;
+  color: var(--vkui--color_text_primary);
+  min-inline-size: 0; /* см. https://github.com/VKCOM/VKUI/issues/5687 */
+  word-break: break-word;
+}
+
+.Checkbox__description {
+  color: var(--vkui--color_text_secondary);
+  display: block;
+  margin-block: 2px 12px;
+}
+
+.Checkbox__title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  -webkit-margin-before: 12px;
+          margin-block-start: 12px;
+}
+
+.Checkbox__title:last-child {
+  -webkit-margin-after: 12px;
+          margin-block-end: 12px;
+}
+
+.Checkbox__titleBefore {
+  min-inline-size: 0; /* см. https://github.com/VKCOM/VKUI/issues/5687 */
+}
+
+.Checkbox__titleAfter {
+  -webkit-margin-start: 4px;
+          margin-inline-start: 4px;
+  flex-shrink: 0;
+  color: var(--vkui--color_icon_tertiary);
+}
+
+.Checkbox__input:checked ~ .Checkbox__icon--on {
+  display: flex;
+}
+
+.Checkbox__input:indeterminate ~ .Checkbox__icon--indeterminate,
+.Checkbox__input:checked ~ .Checkbox__icon--off {
+  display: none;
+}
+
+.Checkbox__input:indeterminate ~ .Checkbox__icon--indeterminate {
+  display: flex;
+}
+
+.Checkbox__input:indeterminate ~ .Checkbox__icon--on,
+.Checkbox__input:indeterminate ~ .Checkbox__icon--off {
+  display: none;
+}
+
+/* stylelint-disable-next-line selector-max-universal */
+
+.Checkbox__input[disabled] ~ * {
+  opacity: var(--vkui--opacity_disable_accessibility);
+}
+
+/**
+ * simple
+ */
+
+.Checkbox--simple {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  border-radius: 50%;
+  inline-size: var(--vkui--size_field_height--regular);
+  block-size: var(--vkui--size_field_height--regular);
+}
+
+.Checkbox--simple .Checkbox__content {
+  display: none;
+}
+
+.Checkbox--simple .Checkbox__icon {
+  margin: 0;
+}
+
+/**
+ * sizeY COMPACT
+ */
+
+.Checkbox--sizeY-compact {
+  min-inline-size: var(--vkui--size_field_height--compact);
+  min-block-size: var(--vkui--size_field_height--compact);
+}
+
+.Checkbox--sizeY-compact.Checkbox--simple {
+  inline-size: var(--vkui--size_field_height--compact);
+  block-size: var(--vkui--size_field_height--compact);
+}
+
+.Checkbox--sizeY-compact .Checkbox__title {
+  -webkit-margin-before: 8px;
+          margin-block-start: 8px;
+}
+
+.Checkbox--sizeY-compact .Checkbox__title:last-child {
+  -webkit-margin-after: 8px;
+          margin-block-end: 8px;
+}
+
+.Checkbox--sizeY-compact .Checkbox__description {
+  -webkit-margin-after: 8px;
+          margin-block-end: 8px;
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .Checkbox--sizeY-none {
+    min-inline-size: var(--vkui--size_field_height--compact);
+    min-block-size: var(--vkui--size_field_height--compact);
+  }
+
+  .Checkbox--sizeY-none.Checkbox--simple {
+    inline-size: var(--vkui--size_field_height--compact);
+    block-size: var(--vkui--size_field_height--compact);
+  }
+
+  .Checkbox--sizeY-none .Checkbox__title {
+    -webkit-margin-before: 8px;
+            margin-block-start: 8px;
+  }
+
+  .Checkbox--sizeY-none .Checkbox__title:last-child {
+    -webkit-margin-after: 8px;
+            margin-block-end: 8px;
+  }
+
+  .Checkbox--sizeY-none .Checkbox__description {
+    -webkit-margin-after: 8px;
+            margin-block-end: 8px;
+  }
+}

@@ -1,0 +1,62 @@
+.ModalRoot {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.ModalRoot__mask {
+  opacity: 1;
+  inline-size: 100%;
+  block-size: 100%;
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: 0;
+  background: rgba(0, 0, 0, 0.4);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  transition: opacity 167ms ease-out;
+  animation: animation-fade-in 0.32s ease;
+}
+
+.ModalRoot--touched .ModalRoot__mask {
+  transition: none;
+}
+
+.ModalRoot--switching .ModalRoot__mask {
+  /** Во время автоматической анимации смены модалок с фоном взаимодействовать нельзя */
+  pointer-events: none;
+}
+
+.ModalRoot__viewport {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+:not(.ModalRoot--desktop).ModalRoot .ModalRoot__viewport {
+  inset-block-start: var(--vkui_internal--safe_area_inset_top);
+}
+
+:not(.ModalRoot--desktop).ModalRoot--hasCustomPanelHeaderAfterSlot .ModalRoot__viewport {
+  inset-block-start: calc(
+    var(--vkui_internal--safe_area_inset_top) + var(--vkui_internal--panel_header_height)
+  );
+}
+
+.ModalRoot__modal {
+  position: absolute;
+  inline-size: 100%;
+  block-size: 100%;
+  box-sizing: border-box;
+}
+
+@keyframes animation-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

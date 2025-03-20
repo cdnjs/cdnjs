@@ -1,0 +1,87 @@
+.Select {
+  position: relative;
+  cursor: pointer;
+  box-sizing: border-box;
+  font-family: var(--vkui--font_family_base);
+}
+
+.Select__el {
+  display: block;
+  position: absolute;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: 0;
+  inset-inline-start: 0;
+  inset-block-start: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  opacity: 0;
+  z-index: var(--vkui_internal--z_index_form_field_side);
+  font-size: var(--vkui--font_paragraph--font_size--regular);
+  font-family: inherit;
+}
+
+.Select__container {
+  flex-grow: 1;
+  flex-shrink: 1;
+  padding-inline: 12px 0;
+  color: var(--vkui--color_text_primary);
+  box-sizing: border-box;
+  position: relative;
+  z-index: var(--vkui_internal--z_index_form_field_element);
+  overflow: hidden;
+}
+
+.Select--hasBefore .Select__container {
+  -webkit-padding-start: 0;
+          padding-inline-start: 0;
+}
+
+.Select--multiline .Select__container {
+  padding-block: 12px;
+}
+
+.Select--sizeY-compact.Select--multiline .Select__container {
+  padding-block: 8px;
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .Select--sizeY-none.Select--multiline .Select__container {
+    padding-block: 8px;
+  }
+}
+
+.Select__title {
+  display: block;
+}
+
+.Select:not(.Select--multiline) .Select__title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.Select--empty .Select__title {
+  color: var(--vkui--color_text_secondary);
+}
+
+.Select--align-right .Select__title {
+  text-align: end;
+}
+
+.Select--align-center .Select__title {
+  text-align: center;
+}
+
+/**
+ * CMP:
+ * CalendarHeader
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalCalendarHeader__picker) .Select__container {
+  -webkit-padding-end: 4px;
+          padding-inline-end: 4px;
+}
