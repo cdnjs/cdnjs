@@ -1,0 +1,178 @@
+.host {
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.box {
+  max-block-size: inherit;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -webkit-padding-end: 100px;
+          padding-inline-end: 100px;
+  position: relative;
+  outline: none;
+}
+
+.boxOverscrollBehaviorContain {
+  overscroll-behavior: contain;
+}
+
+.boxOverscrollBehaviorNone {
+  overscroll-behavior: none;
+}
+
+.boxHorizontalEnabled {
+  -webkit-padding-end: 0;
+          padding-inline-end: 0;
+  overflow-x: scroll;
+}
+
+.boxContent {
+  position: relative;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.barY:active + .box,
+.barX:active + .box {
+  pointer-events: none;
+}
+
+.barY,
+.barX {
+  position: absolute;
+}
+
+.barY {
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  block-size: 100%;
+  inline-size: 10px;
+}
+
+.barX {
+  inset-block-end: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: 10px;
+}
+
+.trackerY,
+.trackerX {
+  position: absolute;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  box-sizing: border-box;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+}
+
+.trackerY {
+  inline-size: 10px;
+  padding-block: 4px;
+  padding-inline: 0 4px;
+}
+
+.trackerX {
+  block-size: 10px;
+  padding-inline: 4px;
+  padding-block: 0 4px;
+}
+
+.trackerYHidden,
+.trackerXHidden {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+.trackerY::before,
+.trackerX::before {
+  content: '';
+  opacity: 0.48;
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  background-color: var(--vkui--color_icon_medium);
+  border-radius: 12px;
+  transition:
+    transform 200ms,
+    opacity 200ms;
+}
+
+.trackerY:hover::before,
+.trackerY:active::before {
+  opacity: 0.8;
+  transform: scaleX(1.3333);
+}
+
+.trackerX:hover::before,
+.trackerX:active::before {
+  opacity: 0.8;
+  transform: scaleY(1.3333);
+}
+
+/**
+ * CMP:
+ * CustomSelectDropdown
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalCustomSelectDropdown) .box {
+  -webkit-padding-end: 8px;
+          padding-inline-end: 8px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalCustomSelectDropdown--wide) .box {
+  -webkit-padding-end: 0;
+          padding-inline-end: 0;
+}
+
+.hasPointerTrue .box {
+  /**
+   * Для удаление скролла в Firefox.
+   * В версии ниже 64 будет виден скролл, но это не ломает функциональность.
+   */
+  scrollbar-width: none;
+}
+
+.hasPointerTrue .box::-webkit-scrollbar {
+  display: none;
+}
+
+@media (pointer: fine) {
+  .hasPointerNone .box {
+    /**
+     * Для удаление скролла в Firefox.
+     * В версии ниже 64 будет виден скролл, но это не ломает функциональность.
+     */
+    scrollbar-width: none;
+  }
+
+  .hasPointerNone .box::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/**
+ * Не отрисовываем полосу прокрутки, если у устройства отсутствует мышь
+ */
+
+.hasPointerFalse .barY,
+.hasPointerFalse .barX {
+  display: none;
+}
+
+@media (pointer: coarse),(pointer: none) {
+  .hasPointerNone .barY,
+  .hasPointerNone .barX {
+    display: none;
+  }
+}
