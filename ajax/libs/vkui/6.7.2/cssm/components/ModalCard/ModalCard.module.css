@@ -1,0 +1,67 @@
+.ModalCard {
+  box-sizing: border-box;
+  position: absolute;
+  inset-block-start: 0;
+  padding: 8px;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.ModalCard:focus {
+  outline: none;
+}
+
+.ModalCard__in {
+  inline-size: 100%;
+  margin-inline: auto;
+  transform: translateY(calc(100% + 16px));
+  transition: transform 340ms var(--vkui--animation_easing_platform);
+}
+
+/**
+ * iOS
+ */
+
+.ModalCard--ios .ModalCard__in {
+  max-inline-size: 414px;
+}
+
+/**
+ * Android + vkcom
+ */
+
+.ModalCard--android .ModalCard__in {
+  max-inline-size: 440px;
+}
+
+.ModalCard--vkcom .ModalCard__in {
+  max-inline-size: 400px;
+}
+
+/**
+ * Desktop
+ */
+
+.ModalCard--desktop {
+  align-items: center;
+}
+
+.ModalCard--desktop .ModalCard__in {
+  transform: unset;
+  opacity: 0;
+  transition: opacity 340ms var(--vkui--animation_easing_platform);
+}
+
+/**
+ * CMP:
+ * ModalRoot
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalModalRoot--touched) .ModalCard__in {
+  transition: none;
+}

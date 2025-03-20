@@ -1,0 +1,84 @@
+.WriteBarIcon {
+  background: none;
+  border: 0;
+  position: relative;
+  color: var(--vkui--color_icon_secondary);
+  block-size: 52px;
+  inline-size: 44px;
+  cursor: pointer;
+  border-radius: var(--vkui--size_border_radius--regular);
+  margin: 0;
+  padding: 0;
+}
+
+.WriteBarIcon__in {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.WriteBarIcon:disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.WriteBarIcon__active {
+  opacity: 0.6;
+}
+
+.WriteBarIcon__counter {
+  position: absolute;
+  inset-block-start: 6px;
+  inset-inline-end: 2px;
+  box-shadow: 0 0 0 2px var(--vkui--color_background_modal);
+}
+
+.WriteBarIcon--ios .WriteBarIcon__counter {
+  box-shadow: 0 0 0 2px var(--vkui--color_background_content);
+}
+
+.WriteBarIcon.WriteBarIcon--mode-send,
+.WriteBarIcon.WriteBarIcon--mode-done {
+  color: var(--vkui--color_icon_accent);
+}
+
+/**
+ * iOS
+ */
+
+.WriteBarIcon--ios {
+  color: var(--vkui--color_icon_accent_themed);
+}
+
+.WriteBarIcon--ios.WriteBarIcon--mode-send,
+.WriteBarIcon--ios.WriteBarIcon--mode-done {
+  color: var(--vkui--color_icon_accent_themed);
+  inline-size: 48px;
+  padding-inline: 0;
+}
+
+.WriteBarIcon--ios.WriteBarIcon--mode-send,
+.WriteBarIcon--ios.WriteBarIcon--mode-done {
+  /* компенсируем отступ WriteBar__after справа */
+  -webkit-margin-end: -4px;
+          margin-inline-end: -4px;
+}
+
+.WriteBarIcon--ios.WriteBarIcon--mode-send:only-child,
+.WriteBarIcon--ios.WriteBarIcon--mode-done:only-child {
+  /* для одной иконки нужно компенсировать отступ WriteBar__after слева */
+  -webkit-margin-start: -4px;
+          margin-inline-start: -4px;
+}
+
+/**
+ * Impact:
+ * Counter
+ */
+
+.WriteBarIcon {
+  --vkui_internal--counter_inherit_color: var(--vkui--color_text_contrast_themed);
+  --vkui_internal--counter_inherit_background: var(--vkui--color_background_positive);
+}

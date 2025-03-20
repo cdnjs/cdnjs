@@ -1,0 +1,169 @@
+.ContentBadge {
+  isolation: isolate;
+  position: relative;
+  display: inline-grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  block-size: auto;
+
+  /**
+   * `min-width` в контексте Flexbox по умолчанию имеет значение `auto`,
+   * из-за чего элементы при переполнении будут выходить за границы контейнера.
+   *
+   * Подробности по ссылке https://stackoverflow.com/a/66689926/2903061
+   */
+  min-inline-size: 0;
+}
+
+.ContentBadge--size-s {
+  min-block-size: 16px;
+  padding-block: 1px;
+  padding-inline: 4px;
+  border-radius: 4px;
+}
+
+.ContentBadge--size-m {
+  column-gap: 4px;
+  min-block-size: 20px;
+  padding-block: 3px;
+  padding-inline: 6px;
+  border-radius: 6px;
+}
+
+.ContentBadge__singleIcon-slot--size-m {
+  padding-block: 1px;
+  margin-inline: -2px;
+}
+
+.ContentBadge--size-l {
+  column-gap: 6px;
+  min-block-size: 28px;
+  padding-block: 6px;
+  padding-inline: 8px;
+  border-radius: 8px;
+}
+
+.ContentBadge__icon-slot--size-l {
+  -webkit-margin-start: -2px;
+          margin-inline-start: -2px;
+  -webkit-margin-end: -2px;
+          margin-inline-end: -2px;
+}
+
+.ContentBadge__singleIcon-slot--size-l {
+  margin-block: -2px;
+  margin-inline: -4px;
+}
+
+.ContentBadge--capsule {
+  border-radius: 48px;
+}
+
+/* mode="primary" */
+
+.ContentBadge--primary-accent {
+  color: var(--vkui--color_text_contrast);
+  background-color: var(--vkui--color_background_accent);
+}
+
+.ContentBadge--primary-neutral {
+  color: var(--vkui--color_text_primary);
+  background-color: var(--vkui--color_background_secondary);
+}
+
+.ContentBadge--primary-accent-green {
+  color: var(--vkui--color_text_contrast);
+  background-color: var(--vkui--color_accent_green);
+}
+
+.ContentBadge--primary-accent-red {
+  color: var(--vkui--color_text_contrast);
+  background-color: var(--vkui--color_accent_red);
+}
+
+.ContentBadge--primary-overlay {
+  color: var(--vkui--color_text_contrast);
+  background-color: var(--vkui--color_overlay_primary);
+}
+
+/* mode="secondary" */
+
+.ContentBadge--secondary-accent {
+  color: var(--vkui--color_text_accent);
+  background-color: var(--vkui--color_background_secondary_alpha);
+}
+
+.ContentBadge--secondary-neutral {
+  color: var(--vkui--color_text_subhead);
+  background-color: var(--vkui--color_background_secondary);
+}
+
+.ContentBadge--secondary-accent-green {
+  color: var(--vkui--color_accent_green);
+  background-color: var(--vkui--color_background_positive_tint);
+}
+
+.ContentBadge--secondary-accent-red {
+  color: var(--vkui--color_accent_red);
+  background-color: var(--vkui--color_background_negative_tint);
+}
+
+.ContentBadge--secondary-overlay {
+  color: var(--vkui--color_text_contrast);
+  background-color: var(--vkui--color_overlay_secondary);
+}
+
+/* mode="outline" */
+
+.ContentBadge--mode-outline::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: inherit;
+}
+
+.ContentBadge--outline-accent {
+  color: var(--vkui--color_text_accent);
+}
+
+.ContentBadge--outline-accent::before {
+  border-color: var(--vkui--color_stroke_accent);
+}
+
+.ContentBadge--outline-neutral {
+  color: var(--vkui--color_text_secondary);
+}
+
+.ContentBadge--outline-neutral::before {
+  border-color: var(--vkui--color_icon_secondary);
+}
+
+.ContentBadge--outline-accent-green {
+  color: var(--vkui--color_accent_green);
+}
+
+.ContentBadge--outline-accent-green::before {
+  border-color: currentColor;
+}
+
+.ContentBadge--outline-accent-red {
+  color: var(--vkui--color_accent_red);
+}
+
+.ContentBadge--outline-accent-red::before {
+  border-color: currentColor;
+}
+
+.ContentBadge--outline-overlay {
+  color: var(--vkui--color_text_contrast);
+}
+
+.ContentBadge--outline-overlay::before {
+  border-width: 0;
+  background-color: var(--vkui--color_overlay_primary);
+}
