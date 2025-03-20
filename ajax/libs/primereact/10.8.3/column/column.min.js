@@ -1,0 +1,1 @@
+this.primereact=this.primereact||{},this.primereact.column=function(e){"use strict";var t=function(){};return t.displayName="Column",e.Column=t,Object.defineProperty(e,"__esModule",{value:!0}),e}({});
