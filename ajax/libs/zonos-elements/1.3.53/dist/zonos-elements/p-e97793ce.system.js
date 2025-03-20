@@ -1,0 +1,1 @@
+System.register(["./p-8e8defdc.system.js"],(function(t){"use strict";var e;return{setters:[function(t){e=t.z}],execute:function(){var n=t("g",(function(t){var n=(t===null||t===void 0?void 0:t.customRoundRadius)||"10px";var r=t===null||t===void 0?void 0:t.overrideBorderStyle;if(r){return r==="SHARP"?"0px":n}return e.appearance.style==="SHARP"?"0px":n}))}}}));
