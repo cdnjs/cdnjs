@@ -1,0 +1,117 @@
+.ModalCardBase__container {
+  box-sizing: border-box;
+  position: relative;
+  background: var(--vkui--color_background_modal);
+  border-radius: 12px;
+  padding: 16px;
+  -webkit-margin-after: var(--vkui_internal--safe_area_inset_bottom);
+          margin-block-end: var(--vkui_internal--safe_area_inset_bottom);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  pointer-events: initial;
+  box-shadow: var(--vkui--elevation3);
+
+  --vkui_internal--background: var(--vkui--color_background_modal);
+  --vkui_internal--dismiss_icon_height: 20px;
+  --vkui_internal--dismiss_icon_padding: 12px;
+  --vkui_internal--dismiss_icon_safe_offset: 4px;
+  --vkui_internal--dismiss_icon_desktop_offset: 4px;
+}
+
+.ModalCardBase--withSafeZone .ModalCardBase__container {
+  -webkit-padding-before: calc(
+    var(--vkui_internal--dismiss_icon_height) + var(--vkui_internal--dismiss_icon_padding) +
+      var(--vkui_internal--dismiss_icon_safe_offset)
+  );
+          padding-block-start: calc(
+    var(--vkui_internal--dismiss_icon_height) + var(--vkui_internal--dismiss_icon_padding) +
+      var(--vkui_internal--dismiss_icon_safe_offset)
+  );
+}
+
+.ModalCardBase__container--softwareKeyboardOpened {
+  -webkit-margin-after: 0;
+          margin-block-end: 0;
+}
+
+.ModalCardBase__header,
+.ModalCardBase__subheader {
+  text-align: center;
+  margin: 0;
+  padding-block: 0;
+  padding-inline: 8px;
+  word-break: break-word;
+}
+
+.ModalCardBase__header {
+  color: var(--vkui--color_text_primary);
+}
+
+.ModalCardBase__subheader {
+  color: var(--vkui--color_text_subhead);
+}
+
+.ModalCardBase__icon {
+  margin-block: 8px 16px;
+  margin-inline: auto;
+  color: var(--vkui--color_icon_accent);
+}
+
+.ModalCardBase__actions {
+  -webkit-margin-before: 16px;
+          margin-block-start: 16px;
+}
+
+.ModalCardBase__dismiss {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  color: var(--vkui--color_icon_secondary);
+  padding: var(--vkui_internal--dismiss_icon_padding);
+}
+
+/**
+ * iOS
+ */
+
+.ModalCardBase--ios .ModalCardBase__container {
+  border-radius: 14px;
+
+  --vkui_internal--dismiss_icon_height: 24px;
+  --vkui_internal--dismiss_icon_padding: 12px;
+  --vkui_internal--dismiss_icon_safe_offset: 0px;
+}
+
+/**
+ * Desktop
+ */
+
+.ModalCardBase--desktop .ModalCardBase__dismiss {
+  inset-block-start: var(--vkui_internal--dismiss_icon_desktop_offset);
+  inset-inline-end: var(--vkui_internal--dismiss_icon_desktop_offset);
+}
+
+.ModalCardBase--desktop .ModalCardBase__container {
+  padding: 24px;
+
+  --vkui_internal--dismiss_icon_safe_offset: 0px;
+}
+
+.ModalCardBase--desktop.ModalCardBase--ios .ModalCardBase__container {
+  --vkui_internal--dismiss_icon_padding: 10px;
+  --vkui_internal--dismiss_icon_safe_offset: 6px;
+}
+
+.ModalCardBase--withSafeZone.ModalCardBase--desktop .ModalCardBase__container {
+  -webkit-padding-before: calc(
+    var(--vkui_internal--dismiss_icon_height) + var(--vkui_internal--dismiss_icon_padding) +
+      var(--vkui_internal--dismiss_icon_safe_offset) +
+      var(--vkui_internal--dismiss_icon_desktop_offset)
+  );
+          padding-block-start: calc(
+    var(--vkui_internal--dismiss_icon_height) + var(--vkui_internal--dismiss_icon_padding) +
+      var(--vkui_internal--dismiss_icon_safe_offset) +
+      var(--vkui_internal--dismiss_icon_desktop_offset)
+  );
+}

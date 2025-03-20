@@ -1,0 +1,33 @@
+.SubnavigationBar__in {
+  /* Отрицательный margin нужен, чтобы компенсировать увеличенный из-за тени padding (12px -> 20px) */
+  margin-block: -8px;
+  margin-inline: 0;
+}
+
+.SubnavigationBar__scrollIn {
+  margin: 0;
+  padding-block: calc(var(--vkui--size_subnavigation_bar_padding_vertical--regular) + 8px);
+  padding-inline: 0;
+  display: flex;
+}
+
+.SubnavigationBar__scrollIn::before,
+.SubnavigationBar__scrollIn::after {
+  content: '';
+  min-inline-size: var(--vkui--size_base_padding_horizontal--regular);
+}
+
+.SubnavigationBar__item {
+  list-style-type: none;
+  display: flex;
+}
+
+.SubnavigationBar__item + .SubnavigationBar__item {
+  -webkit-margin-start: var(--vkui--size_subnavigation_bar_gap--regular);
+          margin-inline-start: var(--vkui--size_subnavigation_bar_gap--regular);
+}
+
+.SubnavigationBar--mode-fixed .SubnavigationBar__item {
+  flex: 1;
+  min-inline-size: 0;
+}
