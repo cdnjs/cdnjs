@@ -1,0 +1,1 @@
+import e from"x/goto.js";import r from"x/selfA.js";document.body.addEventListener("click",t=>{var o,a,d;for(d=t.target;d;){if({nodeName:a}=d,"A"===a){({href:o}=d),o&&(void 0!==(o=r(d,t))?e(o):d.target||(d.target="_blank"));break}if("BODY"===a)break;d=d.parentNode}});
