@@ -1,0 +1,1 @@
+this.primereact=this.primereact||{},this.primereact.columngroup=function(e){"use strict";var r=function(){};return r.displayName="ColumnGroup",e.ColumnGroup=r,Object.defineProperty(e,"__esModule",{value:!0}),e}({});
