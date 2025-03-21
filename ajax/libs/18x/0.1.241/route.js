@@ -1,0 +1,1 @@
+var r,o;import e from"x/On.js";export const nowUrl=()=>location.pathname.slice(1);o=nowUrl(),r=[];export default(o=>{r.push(o)});export const setPre=r=>{o=r};export const preUrl=()=>o;export const refresh=e=>{var t;for(t of r)t(e,o);setPre(e)};e(window,{popstate:()=>{var r;(r=nowUrl())!==o&&refresh(r)}});

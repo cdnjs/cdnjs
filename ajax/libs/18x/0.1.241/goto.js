@@ -1,0 +1,1 @@
+import{refresh as r,preUrl as o}from"x/route.js";import m from"x/split.js";import t from"x/removeSlash.js";import s from"x/setUrl.js";export default(e=>{var p;(e=t(e))!==(p=o())&&(s(e),m(e,"#")[0]!==m(p,"#")[0]&&r(e))});

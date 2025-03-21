@@ -1,0 +1,1 @@
+import r from"x/setUrl.js";import{refresh as o}from"x/route.js";import m from"x/removeSlash.js";export default(t=>{r(t=m(t)),o(t)});
