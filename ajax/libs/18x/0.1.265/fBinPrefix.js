@@ -1,0 +1,1 @@
+import{fBin as f}from"x/f.js";export default(o=>(r,t)=>f(o+r,t));
