@@ -1,0 +1,1 @@
+import{setPre as t}from"x/route.js";export default(a=>{"/"!==a.charAt(0)&&(a="/"+a),location.pathname!==a&&(t(a.slice(1)),history.pushState(null,"",a),window.dispatchEvent(new HashChangeEvent("hashchange")))});
