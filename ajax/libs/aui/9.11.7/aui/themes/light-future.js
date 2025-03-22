@@ -1,0 +1,2 @@
+"use strict";(window.webpackChunk_auiPrototyping=window.webpackChunk_auiPrototyping||[]).push([[630],{732:(t,a,d)=>{d.r(a),d.d(a,{default:()=>o});const o='\nhtml[data-color-mode="light"][data-theme~="light:light"],\nhtml[data-color-mode="dark"][data-theme~="dark:light"] {\n  color-scheme: light;\n  --ds-background-disabled: #28311B;\n}\n'}}]);
+//# sourceMappingURL=light-future.js.map
