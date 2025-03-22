@@ -1,0 +1,239 @@
+:root {
+    --chocolat-icon-left: url("data:image/svg+xml,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 viewBox%3D%220 0 32 32%22 stroke-linecap%3D%22round%22 stroke-linejoin%3D%22round%22%3E    %3Ccircle cx%3D%2216%22 cy%3D%2216%22 r%3D%2216%22 fill-opacity%3D%22.2%22%2F%3E    %3Cpath d%3D%22M15.3 20.7 10.7 16l4.6-4.7m7.4 4.7h-12%22 fill%3D%22none%22 stroke%3D%22%23fff%22 stroke-width%3D%221.3%22%2F%3E%3C%2Fsvg%3E");
+    --chocolat-icon-right: url("data:image/svg+xml,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 viewBox%3D%220 0 32 32%22 stroke-linecap%3D%22round%22 stroke-linejoin%3D%22round%22%3E    %3Ccircle cx%3D%2216%22 cy%3D%2216%22 r%3D%2216%22 fill-opacity%3D%22.2%22%2F%3E    %3Cpath d%3D%22m16.7 11.3 4.6 4.7-4.6 4.7M9.3 16h12%22 fill%3D%22none%22 stroke%3D%22%23fff%22 stroke-width%3D%221.3%22%2F%3E%3C%2Fsvg%3E");
+    --chocolat-icon-close: url("data:image/svg+xml,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 viewBox%3D%220 0 32 32%22 stroke-linecap%3D%22round%22%3E    %3Ccircle cx%3D%2216%22 cy%3D%2216%22 r%3D%2216%22 fill-opacity%3D%22.2%22%2F%3E    %3Cpath d%3D%22m12 12 8 8m0-8-8 8%22 fill%3D%22none%22 stroke%3D%22%23fff%22 stroke-width%3D%221.3%22%2F%3E%3C%2Fsvg%3E");
+    --chocolat-icon-loader: url("data:image/svg+xml,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%2238%22 height%3D%2238%22%3E  %3Cg transform%3D%22translate(1 1)%22 stroke-width%3D%222%22 fill%3D%22none%22 fill-rule%3D%22evenodd%22%3E    %3Ccircle stroke-opacity%3D%22.2%22 stroke%3D%22%23000%22 cx%3D%2218%22 cy%3D%2218%22 r%3D%2218%22%2F%3E    %3Cpath d%3D%22M36 18C36 8 28 0 18 0%22 stroke%3D%22%23fff%22%3E      %3CanimateTransform attributeName%3D%22transform%22 type%3D%22rotate%22 from%3D%220 18 18%22 to%3D%22360 18 18%22 dur%3D%221s%22 repeatCount%3D%22indefinite%22%2F%3E    %3C%2Fpath%3E  %3C%2Fg%3E%3C%2Fsvg%3E");
+    --chocolat-icon-fullscreen: url("data:image/svg+xml,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 viewBox%3D%220 0 16 16%22%3E    %3Cg stroke%3D%22%23fff%22 fill%3D%22none%22%3E        %3Cpath d%3D%22M.5 2.5h15v11H.5z%22%2F%3E        %3Cpath d%3D%22M7.5 7.5h8v6h-8z%22%2F%3E    %3C%2Fg%3E%3C%2Fsvg%3E");
+    --chocolat-transition-time: 0.4s;
+}
+
+.chocolat-zoomable.chocolat-zoomed {
+    cursor: zoom-out;
+}
+.chocolat-open {
+    overflow: hidden;
+}
+.chocolat-overlay {
+    transition: opacity var(--chocolat-transition-time) ease, visibility 0s var(--chocolat-transition-time) ease;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    background-color: #fff;
+    visibility: hidden;
+    opacity: 0;
+}
+.chocolat-overlay.chocolat-visible {
+    transition: opacity var(--chocolat-transition-time), visibility 0s;
+    visibility: visible;
+    opacity: 0.8;
+}
+
+.chocolat-wrapper {
+    transition: opacity var(--chocolat-transition-time) ease, visibility 0s var(--chocolat-transition-time) ease;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    opacity: 0;
+    left: 0;
+    top: 0;
+    z-index: 16;
+    color: #fff;
+    visibility: hidden;
+}
+.chocolat-wrapper.chocolat-visible {
+    transition: opacity var(--chocolat-transition-time), visibility 0s;
+    opacity: 1;
+    visibility: visible;
+}
+
+.chocolat-zoomable .chocolat-img {
+    cursor: zoom-in;
+}
+.chocolat-loader {
+    transition: opacity 0.3s;
+    height: 38px;
+    width: 38px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -19px;
+    margin-top: -19px;
+    z-index: 11;
+    background: var(--chocolat-icon-loader);
+    opacity: 0;
+}
+.chocolat-loader.chocolat-visible {
+    opacity: 1;
+}
+
+.chocolat-image-wrapper {
+    position: fixed;
+    width: 0px;
+    height: 0px;
+    left: 50%;
+    top: 50%;
+    z-index: 14;
+    text-align: left;
+    transform: translate(-50%, -50%);
+}
+
+.chocolat-image-wrapper .chocolat-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.chocolat-wrapper .chocolat-left {
+    width: 50px;
+    height: 100px;
+    cursor: pointer;
+    background: var(--chocolat-icon-left) 50% 50% / 2rem auto no-repeat;
+    z-index: 17;
+    visibility: hidden;
+}
+
+.chocolat-layout {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.chocolat-image-canvas {
+    transition: opacity .2s;
+    opacity: 0;
+    flex-grow: 1;
+    align-self: stretch;
+}
+.chocolat-image-canvas.chocolat-visible {
+    opacity: 1;
+}
+.chocolat-center {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+}
+
+.chocolat-wrapper .chocolat-right {
+    width: 50px;
+    height: 100px;
+    cursor: pointer;
+    background: var(--chocolat-icon-right) 50% 50% / 2rem auto no-repeat;
+    z-index: 17;
+    visibility: hidden;
+}
+.chocolat-wrapper .chocolat-right.active {
+    visibility: visible;
+}
+.chocolat-wrapper .chocolat-left.active {
+    visibility: visible;
+}
+.chocolat-wrapper .chocolat-top {
+    height: 50px;
+    overflow: hidden;
+    z-index: 17;
+    flex-shrink: 0;
+}
+.chocolat-wrapper .chocolat-close {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--chocolat-icon-close) 50% 50% / 2rem auto no-repeat;
+}
+.chocolat-wrapper .chocolat-bottom {
+    height: 40px;
+    font-size: 12px;
+    z-index: 17;
+    padding-left: 15px;
+    padding-right: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+
+}
+.chocolat-wrapper .chocolat-set-title {
+    display: inline-block;
+    padding-right: 15px;
+    line-height: 1;
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+}
+.chocolat-wrapper .chocolat-pagination {
+    float: right;
+    display: inline-block;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-right: 15px;
+    /*border-right: 1px solid rgba(255, 255, 255, 0.2);*/
+}
+.chocolat-wrapper .chocolat-fullscreen {
+    width: 16px;
+    height: 40px;
+    background: var(--chocolat-icon-fullscreen) 50% 50% / 1rem auto no-repeat;
+    display: block;
+    cursor: pointer;
+    float: right;
+}
+.chocolat-wrapper .chocolat-description {
+    display: inline-block;
+    flex-grow: 1;
+    text-align: left;
+}
+
+/* no container mode*/
+body.chocolat-open > .chocolat-overlay {
+    z-index: 15;
+}
+body.chocolat-open > .chocolat-loader {
+    z-index: 15;
+}
+body.chocolat-open > .chocolat-image-wrapper {
+    z-index: 17;
+}
+
+/* container mode*/
+.chocolat-in-container .chocolat-wrapper,
+.chocolat-in-container .chocolat-image-wrapper,
+.chocolat-in-container .chocolat-overlay {
+    position: absolute;
+}
+.chocolat-in-container {
+    position: relative;
+}
+
+.chocolat-zoomable.chocolat-zooming-in .chocolat-image-wrapper,
+.chocolat-zoomable.chocolat-zooming-out .chocolat-image-wrapper {
+    transition: width .2s ease, height .2s ease;
+}
+.chocolat-zoomable.chocolat-zooming-in .chocolat-img,
+.chocolat-zoomable.chocolat-zooming-out .chocolat-img {
+    transition: margin .2s ease;
+}
+
+/* uncomment to hide controls when zoomed-in*/
+/*
+.chocolat-zoomable .chocolat-top,
+.chocolat-zoomable .chocolat-bottom,
+.chocolat-zoomable .chocolat-right,
+.chocolat-zoomable .chocolat-left {
+    transition: opacity .3s ease, visibility 0s .3s;
+   opacity: 1;
+}
+
+.chocolat-zoomable.chocolat-zoomed .chocolat-top,
+.chocolat-zoomable.chocolat-zoomed .chocolat-bottom,
+.chocolat-zoomable.chocolat-zoomed .chocolat-right,
+.chocolat-zoomable.chocolat-zoomed .chocolat-left {
+    visibility: hidden;
+    opacity: 0;
+}
+*/
