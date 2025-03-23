@@ -1,0 +1,359 @@
+.host {
+  position: relative;
+}
+
+.static.hasFixed::before {
+  display: block;
+  content: '';
+}
+
+.host:not(.static):not(.hasFixed) {
+  block-size: 0;
+  /* см. https://github.com/VKCOM/VKUI/issues/5571 */
+  z-index: var(--vkui_internal--z_index_panel_header);
+}
+
+.fixed {
+  z-index: var(--vkui_internal--z_index_panel_header);
+}
+
+.in {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  white-space: nowrap;
+  position: relative;
+  background: var(--vkui--color_background_content);
+}
+
+.trnsp .in {
+  background: transparent;
+}
+
+.sizeXRegular.shadow .in {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
+}
+
+@media (min-width: 768px) {
+  .sizeXNone.shadow .in {
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
+  }
+}
+
+.before {
+  box-sizing: border-box;
+  color: var(--vkui--color_icon_accent_themed);
+  display: flex;
+  flex-shrink: 0;
+}
+
+.content {
+  overflow: hidden;
+}
+
+/* stylelint-disable-next-line selector-max-universal */
+
+.content > * {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.contentIn {
+  color: var(--vkui--color_text_primary);
+  font-weight: 500;
+  font-family: var(--vkui--font_family_accent);
+}
+
+.host::before,
+.in {
+  block-size: var(--vkui_internal--panel_header_height);
+  -webkit-padding-before: var(--vkui_internal--safe_area_inset_top);
+          padding-block-start: var(--vkui_internal--safe_area_inset_top);
+}
+
+.after {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  box-sizing: border-box;
+  color: var(--vkui--color_icon_accent_themed);
+}
+
+/* stylelint-disable-next-line selector-max-universal */
+
+.after > *:not(:last-child) {
+  -webkit-margin-end: 4px;
+          margin-inline-end: 4px;
+}
+
+/**
+ * iOS
+ */
+
+.ios .before {
+  flex-basis: 0;
+  flex-shrink: 0;
+  flex-grow: 1;
+  opacity: 1;
+  transition: opacity 0.3s var(--vkui--animation_easing_platform);
+  padding-block: 4px;
+  padding-inline: 4px 0;
+}
+
+.ios .before .host + .primitive {
+  -webkit-margin-start: -6px;
+          margin-inline-start: -6px;
+  -webkit-padding-start: 0;
+          padding-inline-start: 0;
+}
+
+.ios .content {
+  text-align: center;
+  opacity: 1;
+  transition: opacity 0.3s var(--vkui--animation_easing_platform);
+}
+
+.ios .contentIn {
+  font-size: 21px;
+}
+
+/* stylelint-disable-next-line selector-max-universal */
+
+.ios .content > * {
+  padding-block: 0;
+  padding-inline: 4px;
+}
+
+.ios.noBefore .content {
+  -webkit-padding-start: 8px;
+          padding-inline-start: 8px;
+}
+
+/* stylelint-disable-next-line selector-max-universal */
+
+.ios.noAfter .content > * {
+  -webkit-padding-end: 0;
+          padding-inline-end: 0;
+}
+
+.ios.noAfter .content {
+  -webkit-padding-end: 8px;
+          padding-inline-end: 8px;
+}
+
+.ios .after {
+  flex-basis: 0;
+  flex-shrink: 0;
+  flex-grow: 1;
+  opacity: 1;
+  transition: opacity 0.3s var(--vkui--animation_easing_platform);
+  padding-block: 4px;
+  padding-inline: 0 4px;
+}
+
+/**
+ * Android
+ */
+
+.android .before:not(:empty) {
+  padding-block: 4px;
+  padding-inline: 4px 0;
+  -webkit-margin-end: -8px;
+          margin-inline-end: -8px;
+}
+
+.android .content {
+  align-items: center;
+  flex-grow: 1;
+  max-inline-size: 100%;
+}
+
+.android .contentIn {
+  font-size: 23px;
+}
+
+/* stylelint-disable-next-line selector-max-universal */
+
+.android .content > * {
+  padding-block: 0;
+  padding-inline: 12px;
+}
+
+/**
+ * Common
+ */
+
+.sizeYCompact:not(.vkcom) .contentIn {
+  font-size: 20px;
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .sizeYNone:not(.vkcom) .contentIn {
+    font-size: 20px;
+  }
+}
+
+/**
+ * CMP:
+ * SplitCol
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalSplitCol--viewWidth-tabletPlus):global(.vkuiInternalSplitCol--spaced-auto)
+  .android.noBefore:not(:global(.vkuiInternalModalPageHeader__in))
+  .content {
+  -webkit-padding-start: 0;
+          padding-inline-start: 0;
+}
+
+@media (min-width: 768px) {
+  /* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+  :global(.vkuiInternalSplitCol--viewWidth-none):global(.vkuiInternalSplitCol--spaced-auto)
+    .android.noBefore:not(:global(.vkuiInternalModalPageHeader__in))
+    .content {
+    -webkit-padding-start: 0;
+            padding-inline-start: 0;
+  }
+}
+
+/* stylelint-disable selector-max-universal */
+
+.android.noAfter .content > *,
+.vkcom.noAfter .content > * {
+  -webkit-padding-end: 0;
+          padding-inline-end: 0;
+}
+
+/* stylelint-enable selector-max-universal */
+
+.android.noAfter .content {
+  -webkit-padding-end: 16px;
+          padding-inline-end: 16px;
+}
+
+.android.noBefore .content {
+  -webkit-padding-start: 16px;
+          padding-inline-start: 16px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalSplitCol--viewWidth-tabletPlus):global(.vkuiInternalSplitCol--spaced-auto)
+  .android.noAfter:not(:global(.vkuiInternalModalPageHeader__in))
+  .content {
+  -webkit-padding-end: 0;
+          padding-inline-end: 0;
+}
+
+@media (min-width: 768px) {
+  /* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+  :global(.vkuiInternalSplitCol--viewWidth-none):global(.vkuiInternalSplitCol--spaced-auto)
+    .android.noAfter:not(:global(.vkuiInternalModalPageHeader__in))
+    .content {
+    -webkit-padding-end: 0;
+            padding-inline-end: 0;
+  }
+}
+
+.android .after:not(:empty),
+.vkcom .after:not(:empty) {
+  padding-block: 4px;
+  padding-inline: 0 4px;
+}
+
+/**
+ * VKCOM
+ */
+
+.vkcom {
+  position: relative;
+  z-index: var(--vkui_internal--z_index_panel_header);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.vkcom.sizeXRegular:not(:global(.vkuiInternalModalPageHeader__in)):not(.sep) .in::after {
+  position: absolute;
+  inset-inline: var(--vkui--size_border--regular);
+  inset-block-end: 0;
+  block-size: var(--vkui--size_border--regular);
+  background-color: var(--vkui--color_background_content);
+  content: '';
+}
+
+@media (min-width: 768px) {
+  /* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+  .vkcom.sizeXNone:not(:global(.vkuiInternalModalPageHeader__in)):not(.sep) .in::after {
+    position: absolute;
+    inset-inline: var(--vkui--size_border--regular);
+    inset-block-end: 0;
+    block-size: var(--vkui--size_border--regular);
+    background-color: var(--vkui--color_background_content);
+    content: '';
+  }
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.vkcom.sizeXRegular:not(:global(.vkuiInternalModalPageHeader__in)) .in {
+  border-start-start-radius: var(--vkui--size_border_radius_paper--regular);
+  border-start-end-radius: var(--vkui--size_border_radius_paper--regular);
+  box-shadow: 0 0 0 var(--vkui--size_border--regular) var(--vkui--color_field_border_alpha) inset;
+  -webkit-border-after: 0;
+          border-block-end: 0;
+}
+
+@media (min-width: 768px) {
+  /* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+  .vkcom.sizeXNone:not(:global(.vkuiInternalModalPageHeader__in)) .in {
+    border-start-start-radius: var(--vkui--size_border_radius_paper--regular);
+    border-start-end-radius: var(--vkui--size_border_radius_paper--regular);
+    box-shadow: 0 0 0 var(--vkui--size_border--regular) var(--vkui--color_field_border_alpha) inset;
+    -webkit-border-after: 0;
+            border-block-end: 0;
+  }
+}
+
+.vkcom .content {
+  text-align: center;
+}
+
+.vkcom .before:not(:empty) {
+  padding-block: 0;
+  padding-inline: 4px 0;
+}
+
+.vkcom .before,
+.vkcom .after {
+  flex-basis: 0;
+  flex-shrink: 0;
+  flex-grow: 1;
+}
+
+.separator {
+  -webkit-margin-before: calc(-1 * var(--vkui--size_border--regular));
+          margin-block-start: calc(-1 * var(--vkui--size_border--regular));
+}
+
+/* stylelint-disable-next-line selector-max-universal */
+
+.noBefore .content > * {
+  -webkit-padding-start: 0;
+          padding-inline-start: 0;
+}
+
+/**
+ * CMP:
+ * Panel
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalPanel--centered) .host {
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: 0;
+  inline-size: 100%;
+}

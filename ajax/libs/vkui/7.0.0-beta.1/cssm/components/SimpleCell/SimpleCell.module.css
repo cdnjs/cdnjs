@@ -1,0 +1,192 @@
+.host {
+  --vkui_internal--SimpleCell-before-inline-padding-end: var(--vkui--spacing_size_xl);
+
+  display: flex;
+  align-items: center;
+  min-block-size: 48px;
+  white-space: nowrap;
+  text-decoration: none;
+  color: var(--vkui--color_text_primary);
+  padding-inline: var(--vkui--size_base_padding_horizontal--regular);
+}
+
+.mult {
+  white-space: normal;
+}
+
+.mult .children {
+  text-overflow: initial;
+}
+
+.disabled {
+  opacity: var(--vkui--opacity_disable_accessibility);
+}
+
+.before {
+  display: flex;
+  align-items: center;
+  padding-block: var(--vkui--spacing_size_s);
+  -webkit-padding-end: var(--vkui_internal--SimpleCell-before-inline-padding-end);
+          padding-inline-end: var(--vkui_internal--SimpleCell-before-inline-padding-end);
+  color: var(--vkui_internal--icon_color, var(--vkui--color_icon_accent));
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.before > :global(.vkuiIcon) {
+  -webkit-padding-end: var(--vkui--spacing_size_xs);
+          padding-inline-end: var(--vkui--spacing_size_xs);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.beforeIos > :global(.vkuiIcon) {
+  -webkit-padding-end: 0;
+          padding-inline-end: 0;
+}
+
+.before:empty {
+  display: none;
+}
+
+.middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: var(--vkui--spacing_size_l);
+  max-inline-size: 100%;
+  flex-grow: 1;
+  min-inline-size: 0;
+  overflow: hidden;
+}
+
+/* stylelint-disable-next-line selector-max-universal -- gap: 2px */
+
+.middle > *:not(:first-child) {
+  -webkit-margin-before: var(--vkui--spacing_size_2xs);
+          margin-block-start: var(--vkui--spacing_size_2xs);
+}
+
+.subhead {
+  color: var(--vkui--color_text_subhead);
+}
+
+.text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.subtitle,
+.extraSubtitle {
+  color: var(--vkui--color_text_secondary);
+}
+
+.host .content {
+  display: flex;
+  align-content: flex-start;
+  align-items: center;
+  justify-content: space-between;
+  max-inline-size: 100%;
+}
+
+.host:not(.mult) .content {
+  justify-content: flex-start;
+}
+
+.children {
+  color: inherit;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: block;
+}
+
+.mult .children,
+.mult .subtitle {
+  flex: 1 1 auto;
+}
+
+.badge {
+  display: inline-block;
+  flex-grow: 0;
+  flex-shrink: 0;
+  color: var(--vkui--color_icon_accent);
+}
+
+/* stylelint-disable-next-line selector-max-universal -- gap: 4px */
+
+.content > *:not(:last-child) {
+  -webkit-margin-end: var(--vkui--spacing_size_xs);
+          margin-inline-end: var(--vkui--spacing_size_xs);
+}
+
+.indicator {
+  flex-shrink: 0;
+  color: var(--vkui--color_text_secondary);
+  min-inline-size: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-padding-start: var(--vkui--spacing_size_xl);
+          padding-inline-start: var(--vkui--spacing_size_xl);
+}
+
+.after {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  color: var(--vkui_internal--icon_color, var(--vkui--color_icon_accent));
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.after > :global(.vkuiIcon) {
+  -webkit-padding-start: var(--vkui--spacing_size_m);
+          padding-inline-start: var(--vkui--spacing_size_m);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.after > :global(.vkuiIcon):last-child {
+  -webkit-padding-end: var(--vkui--spacing_size_2xs);
+          padding-inline-end: var(--vkui--spacing_size_2xs);
+}
+
+.chevronIcon {
+  color: var(--vkui--color_icon_tertiary);
+  -webkit-padding-start: var(--vkui--spacing_size_xl);
+          padding-inline-start: var(--vkui--spacing_size_xl);
+}
+
+/**
+ * sizeY === 'compact'
+ */
+
+.sizeYCompact {
+  min-block-size: 44px;
+}
+
+.sizeYCompact .before {
+  padding-block: var(--vkui--spacing_size_xs);
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .sizeYNone {
+    min-block-size: 44px;
+  }
+
+  .sizeYNone .before {
+    padding-block: var(--vkui--spacing_size_xs);
+  }
+}
+
+/**
+ * CMP:
+ * FormItem
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormItem) > .host {
+  margin-block: 0;
+  margin-inline: calc(-1 * var(--vkui--size_base_padding_horizontal--regular));
+}
