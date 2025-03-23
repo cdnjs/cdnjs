@@ -1,0 +1,1 @@
+import o from"x/initC.js";export const[hook,send]=o(new BroadcastChannel(""));
