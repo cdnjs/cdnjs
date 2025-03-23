@@ -1,0 +1,1 @@
+import e from"x/langSite.js";customElements.define("i-h",class extends HTMLElement{connectedCallback(){let n=this,t=_H[n.innerHTML];t.length?this._=e(()=>n.innerHTML=t(_L)):n.innerHTML=t()}disconnectedCallback(){let{_:e}=this;e&&e()}});
