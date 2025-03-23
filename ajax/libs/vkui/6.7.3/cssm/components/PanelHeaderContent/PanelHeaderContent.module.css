@@ -1,0 +1,118 @@
+.PanelHeaderContent {
+  line-height: initial;
+  block-size: 100%;
+  max-inline-size: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: var(--vkui--font_family_base);
+}
+
+.PanelHeaderContent__before {
+  flex-shrink: 0;
+  -webkit-margin-end: 12px;
+          margin-inline-end: 12px;
+}
+
+.PanelHeaderContent__in {
+  flex-grow: 1;
+  min-inline-size: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  block-size: 100%;
+}
+
+.PanelHeaderContent__status,
+.PanelHeaderContent__children-in,
+.PanelHeaderContent__childrenText {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.PanelHeaderContent__status {
+  order: 1;
+  -webkit-margin-before: 1px;
+          margin-block-start: 1px;
+  max-inline-size: 100%;
+  color: var(--vkui--color_text_secondary);
+}
+
+.PanelHeaderContent__children {
+  max-inline-size: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.PanelHeaderContent__children-in {
+  flex-grow: 0;
+  min-inline-size: 0;
+}
+
+.PanelHeaderContent__aside {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  -webkit-margin-start: 2px;
+          margin-inline-start: 2px;
+  color: var(--vkui--color_icon_accent);
+}
+
+.PanelHeaderContent__width {
+  inline-size: 1000px;
+}
+
+.PanelHeaderContent__in--centered {
+  align-items: center;
+}
+
+/**
+ * iOS
+ */
+
+.PanelHeaderContent--ios .PanelHeaderContent__children-in {
+  font-size: 21px;
+  font-family: var(--vkui--font_family_accent);
+  font-weight: 500;
+  line-height: var(--vkui_internal--panel_header_height);
+}
+
+/**
+ * Android
+ */
+
+.PanelHeaderContent--android .PanelHeaderContent__children-in {
+  font-size: 23px;
+  font-family: var(--vkui--font_family_accent);
+  font-weight: 500;
+  line-height: var(--vkui_internal--panel_header_height);
+}
+
+/**
+ * VKCOM
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalPanelHeader--no-before) .PanelHeaderContent--vkcom {
+  -webkit-padding-start: 16px;
+          padding-inline-start: 16px;
+}
+
+/**
+ * Common
+ */
+
+.PanelHeaderContent--sizeY-compact:not(.PanelHeaderContent--vkcom)
+  .PanelHeaderContent__children-in {
+  font-size: 20px;
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .PanelHeaderContent--sizeY-none:not(.PanelHeaderContent--vkcom) .PanelHeaderContent__children-in {
+    font-size: 20px;
+  }
+}

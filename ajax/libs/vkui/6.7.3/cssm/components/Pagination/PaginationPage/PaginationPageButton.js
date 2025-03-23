@@ -1,0 +1,50 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import * as React from 'react';
+import { classNames } from '@vkontakte/vkjs';
+import { Tappable } from '../../Tappable/Tappable';
+import { Text } from '../../Typography/Text/Text';
+import { VisuallyHidden } from '../../VisuallyHidden/VisuallyHidden';
+import { getPageLabelDefault } from '../utils';
+import { getPaginationPageClassNames } from './usePaginationPageClasses';
+import styles from './PaginationPage.module.css';
+const getTappablePropsFromPaginationPage = (opts)=>{
+    const { isCurrent = false, getPageLabel = getPageLabelDefault, children, className, disabled, sizeY, ...restProps } = opts;
+    const pageClassNames = getPaginationPageClassNames({
+        isCurrent,
+        disabled,
+        sizeY
+    });
+    return {
+        'className': classNames(pageClassNames, className),
+        'activeMode': styles['PaginationPage--state-active'],
+        'hoverMode': styles['PaginationPage--state-hover'],
+        'focusVisibleMode': 'outside',
+        'aria-current': isCurrent ? true : undefined,
+        'disabled': disabled,
+        'children': /*#__PURE__*/ _jsxs(Text, {
+            normalize: false,
+            children: [
+                /*#__PURE__*/ _jsxs(VisuallyHidden, {
+                    children: [
+                        getPageLabel(isCurrent),
+                        " "
+                    ]
+                }),
+                children
+            ]
+        }),
+        'data-page': children,
+        ...restProps
+    };
+};
+export const PaginationPageButton = ({ renderPageButton, ...restProps })=>{
+    const tappableProps = getTappablePropsFromPaginationPage(restProps);
+    if (typeof renderPageButton === 'function') {
+        return renderPageButton(tappableProps);
+    }
+    return /*#__PURE__*/ _jsx(Tappable, {
+        ...tappableProps
+    });
+};
+
+//# sourceMappingURL=PaginationPageButton.js.map

@@ -1,0 +1,179 @@
+.CustomScrollView {
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.CustomScrollView__box {
+  max-block-size: inherit;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -webkit-padding-end: 100px;
+          padding-inline-end: 100px;
+  position: relative;
+  outline: none;
+}
+
+.CustomScrollView__box--overscrollBehavior-contain {
+  overscroll-behavior: contain;
+}
+
+.CustomScrollView__box--overscrollBehavior-none {
+  overscroll-behavior: none;
+}
+
+.CustomScrollView__box--horizontalEnabled {
+  -webkit-padding-end: 0;
+          padding-inline-end: 0;
+  overflow-x: scroll;
+}
+
+.CustomScrollView__box-content {
+  position: relative;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.CustomScrollView__barY:active + .CustomScrollView__box,
+.CustomScrollView__barX:active + .CustomScrollView__box {
+  pointer-events: none;
+}
+
+.CustomScrollView__barY,
+.CustomScrollView__barX {
+  position: absolute;
+}
+
+.CustomScrollView__barY {
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  block-size: 100%;
+  inline-size: 10px;
+}
+
+.CustomScrollView__barX {
+  inset-block-end: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: 10px;
+}
+
+.CustomScrollView__trackerY,
+.CustomScrollView__trackerX {
+  position: absolute;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  box-sizing: border-box;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+}
+
+.CustomScrollView__trackerY {
+  inline-size: 10px;
+  padding-block: 4px;
+  padding-inline: 0 4px;
+}
+
+.CustomScrollView__trackerX {
+  block-size: 10px;
+  padding-inline: 4px;
+  padding-block: 0 4px;
+}
+
+.CustomScrollView__trackerY--hidden,
+.CustomScrollView__trackerX--hidden {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+.CustomScrollView__trackerY::before,
+.CustomScrollView__trackerX::before {
+  content: '';
+  opacity: 0.48;
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  background-color: var(--vkui--color_icon_medium);
+  border-radius: 12px;
+  transition:
+    transform 200ms,
+    opacity 200ms;
+}
+
+.CustomScrollView__trackerY:hover::before,
+.CustomScrollView__trackerY:active::before {
+  opacity: 0.8;
+  transform: scaleX(1.3333);
+}
+
+.CustomScrollView__trackerX:hover::before,
+.CustomScrollView__trackerX:active::before {
+  opacity: 0.8;
+  transform: scaleY(1.3333);
+}
+
+/**
+ * CMP:
+ * CustomSelectDropdown
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalCustomSelectDropdown) .CustomScrollView__box {
+  -webkit-padding-end: 8px;
+          padding-inline-end: 8px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalCustomSelectDropdown--wide) .CustomScrollView__box {
+  -webkit-padding-end: 0;
+          padding-inline-end: 0;
+}
+
+.CustomScrollView--hasPointer-true .CustomScrollView__box {
+  /**
+   * Для удаление скролла в Firefox.
+   * В версии ниже 64 будет виден скролл, но это не ломает функциональность.
+   */
+  scrollbar-width: none;
+}
+
+.CustomScrollView--hasPointer-true .CustomScrollView__box::-webkit-scrollbar {
+  display: none;
+}
+
+@media (pointer: fine) {
+  .CustomScrollView--hasPointer-none .CustomScrollView__box {
+    /**
+     * Для удаление скролла в Firefox.
+     * В версии ниже 64 будет виден скролл, но это не ломает функциональность.
+     */
+    scrollbar-width: none;
+  }
+
+  .CustomScrollView--hasPointer-none .CustomScrollView__box::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/**
+ * Не отрисовываем полосу прокрутки, если у устройства отсутствует мышь
+ */
+
+.CustomScrollView--hasPointer-false .CustomScrollView__barY,
+.CustomScrollView--hasPointer-false .CustomScrollView__barX {
+  display: none;
+}
+
+@media (pointer: coarse),(pointer: none) {
+  .CustomScrollView--hasPointer-none .CustomScrollView__barY,
+  .CustomScrollView--hasPointer-none .CustomScrollView__barX {
+    display: none;
+  }
+}
