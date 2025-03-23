@@ -1,0 +1,1 @@
+import r from"x/utf8d.js";export default(t=>{var u,a,e,f;for(a=[],f=0,e=0,u=t.length;e<=u;)t[e]||(a.push(r(t.subarray(f,e))),f=e+1),++e;return a});
