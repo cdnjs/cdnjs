@@ -1,0 +1,1 @@
+import{fBin as t}from"x/f.js";import o from"x/bintxt.js";export default(async(r,a)=>o(await t(r,a)));
