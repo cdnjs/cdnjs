@@ -1,0 +1,16 @@
+export const transformOriginClassNames = {
+    'top': "styles__-anim-transform-origin-top--U-y0r",
+    'top-start': "styles__-anim-transform-origin-top-start--NborP",
+    'top-end': "styles__-anim-transform-origin-top-end--tQgLk",
+    'right': "styles__-anim-transform-origin-right--mj-en",
+    'right-start': "styles__-anim-transform-origin-right-start--fNSw5",
+    'right-end': "styles__-anim-transform-origin-right-end--63J-7",
+    'bottom': "styles__-anim-transform-origin-bottom--5a3cC",
+    'bottom-start': "styles__-anim-transform-origin-bottom-start--aC3jD",
+    'bottom-end': "styles__-anim-transform-origin-bottom-end--wOxCB",
+    'left': "styles__-anim-transform-origin-left--0O6zM",
+    'left-start': "styles__-anim-transform-origin-left-start--4Bb3E",
+    'left-end': "styles__-anim-transform-origin-left-end--Laj2R"
+};
+
+//# sourceMappingURL=transformOrigin.js.map

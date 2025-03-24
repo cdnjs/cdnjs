@@ -1,0 +1,13 @@
+export const spacingSizeClassNames = {
+    '2xs': "styles__-spacing--2xs--9hI8k",
+    'xs': "styles__-spacing--xs--73Akc",
+    's': "styles__-spacing--s--Nbnpf",
+    'm': "styles__-spacing--m--VgoWA",
+    'l': "styles__-spacing--l--Bo0u1",
+    'xl': "styles__-spacing--xl--BDqLM",
+    '2xl': "styles__-spacing--2xl---waKe",
+    '3xl': "styles__-spacing--3xl--oriiV",
+    '4xl': "styles__-spacing--4xl--ME7fs"
+};
+
+//# sourceMappingURL=sizes.js.map
