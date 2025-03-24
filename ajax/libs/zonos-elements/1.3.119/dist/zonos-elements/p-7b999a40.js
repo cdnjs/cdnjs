@@ -1,0 +1,1 @@
+const t=()=>{var t;return null===(t=window.Zonos.zonosApiKey)||void 0===t?void 0:t.includes("test")},e=(t,e)=>new CustomEvent(t,{detail:e});export{e as c,t as g}
