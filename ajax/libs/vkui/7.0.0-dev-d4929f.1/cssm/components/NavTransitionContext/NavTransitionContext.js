@@ -1,0 +1,20 @@
+'use client';
+import { jsx as _jsx } from "react/jsx-runtime";
+import * as React from "react";
+import { useObjectMemo } from "../../hooks/useObjectMemo.js";
+const TransitionContext = /*#__PURE__*/ React.createContext({
+    entering: false
+});
+export const useNavTransition = ()=>React.useContext(TransitionContext);
+export const NavTransitionProvider = ({ children, entering })=>{
+    const parentContext = useNavTransition();
+    const contextValue = useObjectMemo({
+        entering: parentContext.entering || entering
+    });
+    return /*#__PURE__*/ _jsx(TransitionContext.Provider, {
+        value: contextValue,
+        children: children
+    });
+};
+
+//# sourceMappingURL=NavTransitionContext.js.map

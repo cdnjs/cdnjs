@@ -1,0 +1,45 @@
+'use client';
+import { jsx as _jsx } from "react/jsx-runtime";
+import * as React from "react";
+import { useColorScheme } from "../../hooks/useColorScheme.js";
+import { useIsClient } from "../../hooks/useIsClient.js";
+import { createPortal } from "../../lib/createPortal.js";
+import { isRefObject } from "../../lib/isRefObject.js";
+import { ColorSchemeProvider } from "../ColorSchemeProvider/ColorSchemeProvider.js";
+import { AppRootContext } from "./AppRootContext.js";
+export const AppRootPortal = ({ children, usePortal })=>{
+    const { portalRoot, mode, disablePortal } = React.useContext(AppRootContext);
+    const colorScheme = useColorScheme();
+    const isClient = useIsClient();
+    if (!isClient) {
+        return null;
+    }
+    const portalContainer = resolvePortalContainer(usePortal, portalRoot.current);
+    if (!portalContainer || shouldDisablePortal(usePortal, mode, Boolean(disablePortal))) {
+        return /*#__PURE__*/ _jsx(React.Fragment, {
+            children: children
+        });
+    }
+    return createPortal(/*#__PURE__*/ _jsx(ColorSchemeProvider, {
+        value: colorScheme,
+        children: children
+    }), portalContainer);
+};
+function shouldDisablePortal(usePortal, mode, disablePortal) {
+    if (usePortal !== undefined) {
+        if (typeof usePortal !== 'boolean') {
+            return false;
+        }
+        return disablePortal || usePortal !== true;
+    }
+    // fallback
+    return disablePortal || mode === 'full';
+}
+function resolvePortalContainer(usePortal, portalRootFromContext) {
+    if (usePortal === true || !usePortal) {
+        return portalRootFromContext ? portalRootFromContext : null;
+    }
+    return isRefObject(usePortal) ? usePortal.current : usePortal;
+}
+
+//# sourceMappingURL=AppRootPortal.js.map
