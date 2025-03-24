@@ -1,0 +1,1 @@
+import{refresh as o,setUrl as r,removeSlash as t}from"x/route.js";export default(e=>{r(e=t(e)),o(e)});
