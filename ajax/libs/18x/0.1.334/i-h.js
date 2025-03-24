@@ -1,0 +1,1 @@
+import e from"x/langSite.js";customElements.define("i-h",class extends HTMLElement{connectedCallback(){let t=this,n=_H[t.dataset.h];n&&(t._=e(()=>t.innerHTML=n(_L)))}disconnectedCallback(){this._&&this._()}});
