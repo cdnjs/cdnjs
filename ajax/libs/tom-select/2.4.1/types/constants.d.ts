@@ -1,0 +1,12 @@
+export declare const KEY_A = 65;
+export declare const KEY_RETURN = 13;
+export declare const KEY_ESC = 27;
+export declare const KEY_LEFT = 37;
+export declare const KEY_UP = 38;
+export declare const KEY_RIGHT = 39;
+export declare const KEY_DOWN = 40;
+export declare const KEY_BACKSPACE = 8;
+export declare const KEY_DELETE = 46;
+export declare const KEY_TAB = 9;
+export declare const IS_MAC: boolean;
+export declare const KEY_SHORTCUT: string;
