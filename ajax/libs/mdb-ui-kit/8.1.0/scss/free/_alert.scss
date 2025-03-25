@@ -1,0 +1,39 @@
+// Alert
+
+.alert {
+  border: 0;
+}
+
+.alert-absolute {
+  position: absolute;
+}
+
+.alert-fixed {
+  --#{$prefix}alert-fixed-z-index: #{$alert-zindex};
+
+  position: fixed;
+  z-index: var(--#{$prefix}alert-fixed-z-index);
+}
+
+.parent-alert-relative {
+  position: relative;
+}
+
+@each $color, $value in $theme-colors {
+  .alert-#{$color} {
+    background-color: var(--#{$prefix}#{$color}-bg-subtle);
+    color: var(--#{$prefix}#{$color}-text-emphasis);
+
+    i {
+      color: var(--#{$prefix}#{$color}-text-emphasis);
+    }
+
+    .alert-link {
+      color: var(--#{$prefix}#{$color}-text-emphasis);
+
+      &:hover {
+        color: rgba(var(--#{$prefix}#{$color}-text-emphasis), var(--#{$prefix}text-hover-opacity));
+      }
+    }
+  }
+}
