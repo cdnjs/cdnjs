@@ -1,0 +1,103 @@
+.ImageBase {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  color: var(--vkui_internal--icon_color, var(--vkui--color_icon_secondary));
+  background-color: var(--vkui--color_background_secondary);
+  background-size: cover;
+  isolation: isolate;
+}
+
+.ImageBase--loaded,
+.ImageBase--transparent-background {
+  background-color: transparent;
+}
+
+.ImageBase__children,
+.ImageBase__border {
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: 0;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.ImageBase__children {
+  display: inherit;
+  align-items: inherit;
+  justify-content: inherit;
+  border-radius: inherit;
+}
+
+.ImageBase__border {
+  pointer-events: none;
+  z-index: var(--vkui_internal--z_index_image_base_border);
+  box-sizing: border-box;
+  transform-origin: left top;
+  border: var(--vkui--size_border--regular) solid var(--vkui--color_image_border_alpha);
+  border-radius: inherit;
+}
+
+.ImageBase__img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  border: 0;
+  border-radius: inherit;
+  visibility: hidden;
+}
+
+.ImageBase__img--keepRatio {
+  inline-size: auto;
+  block-size: auto;
+}
+
+.ImageBase__img--objectFit-contain {
+  object-fit: contain;
+}
+
+.ImageBase__img--objectFit-cover {
+  object-fit: cover;
+}
+
+.ImageBase__img--objectFit-none {
+  object-fit: none;
+}
+
+.ImageBase__img--objectFit-scaleDown {
+  object-fit: scale-down;
+}
+
+.ImageBase--loaded .ImageBase__img {
+  visibility: visible;
+}
+
+.ImageBase__fallback {
+  position: absolute;
+
+  /* Расcчитываем на центрирование через родительский `display: flex` */
+  inset-block-start: auto;
+  inset-inline-start: auto;
+}
+
+/**
+ * CMP:
+ * PanelHeader
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalPanelHeader__before) .ImageBase {
+  -webkit-margin-start: 8px;
+          margin-inline-start: 8px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalPanelHeader__after) .ImageBase {
+  -webkit-margin-end: 8px;
+          margin-inline-end: 8px;
+}

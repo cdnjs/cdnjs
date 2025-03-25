@@ -1,0 +1,70 @@
+.Skeleton {
+  --vkui_internal--skeleton_color_from: var(--vkui--color_skeleton_from);
+  --vkui_internal--skeleton_color_to: var(--vkui--color_skeleton_to);
+  --vkui_internal--skeleton_animation_duration: 1.5s;
+  --vkui_internal--skeleton_gradient_left: 0;
+
+  display: inline-flex;
+  position: relative;
+  inline-size: 100%;
+  max-inline-size: 100%;
+  line-height: 1;
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: var(--vkui_internal--skeleton_color_from);
+}
+
+/* Если скелетон находится внутри другого скелетона он меняет цвет */
+
+.Skeleton .Skeleton {
+  --vkui_internal--skeleton_color_from: var(--vkui--color_background_content);
+  --vkui_internal--skeleton_color_to: var(--vkui--color_background_tertiary);
+}
+
+.Skeleton .Skeleton .Skeleton {
+  --vkui_internal--skeleton_color_from: var(--vkui--color_skeleton_from);
+  --vkui_internal--skeleton_color_to: var(--vkui--color_skeleton_to);
+}
+
+.Skeleton::before {
+  position: absolute;
+  inset-inline-start: var(--vkui_internal--skeleton_gradient_left);
+  inset-block-start: 0;
+  content: ' ';
+  inline-size: 100vw;
+  block-size: 100%;
+  background-image: linear-gradient(
+    90deg,
+    var(--vkui_internal--skeleton_color_from),
+    var(--vkui_internal--skeleton_color_to),
+    var(--vkui_internal--skeleton_color_from)
+  );
+  transform: translateX(-100vw);
+  animation-name: animation-skeleton;
+  animation-direction: normal /*rtl:reverse*/;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes animation-skeleton {
+  100% {
+    transform: translateX(100vw);
+  }
+}
+
+.Skeleton--disableAnimation::before {
+  /**
+   * Safari тратит время не пересчет анимации даже если элемент скрыт
+   * Для повышения производительности анимацию необходимо выключить
+   */
+  animation-name: none;
+  background-image: none;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .Skeleton::before {
+    animation-name: none;
+    background-image: none;
+  }
+}

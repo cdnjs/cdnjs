@@ -1,0 +1,326 @@
+/* stylelint-disable selector-max-universal */
+
+/*
+ * Автоопределение mode:
+ *
+ * - sizeX="compact" (mobile)  -> mode="plain"
+ * - sizeX="regular" (desktop) -> mode="card"
+ */
+
+.Group {
+  --vkui_internal--Group_padding_inline: 0;
+  --vkui_internal--Group_padding_block: var(--vkui--spacing_size_m);
+  --vkui_internal--Group_card_mode_padding_size: 0;
+
+  color: var(--vkui--color_text_primary);
+  padding-block: var(--vkui_internal--Group_padding_block);
+  padding-inline: var(--vkui_internal--Group_padding_inline);
+}
+
+.Group--padding-s {
+  --vkui_internal--Group_card_mode_padding_size: var(--vkui--spacing_size_xs);
+}
+
+.Group--padding-m {
+  --vkui_internal--Group_card_mode_padding_size: var(--vkui--spacing_size_m);
+}
+
+/* разделитель при mode="card" */
+
+.Group--mode-card,
+.Group--sizeX-regular.Group--mode-none {
+  --vkui_internal--Group_padding_inline: var(--vkui_internal--Group_card_mode_padding_size);
+  --vkui_internal--Group_padding_block: var(--vkui_internal--Group_card_mode_padding_size);
+
+  position: relative;
+  background: var(--vkui--color_background_content);
+  border-radius: var(--vkui--size_border_radius_paper--regular);
+}
+
+@media (min-width: 768px) {
+  .Group--sizeX-none.Group--mode-none {
+    --vkui_internal--Group_padding_inline: var(--vkui_internal--Group_card_mode_padding_size);
+    --vkui_internal--Group_padding_block: var(--vkui_internal--Group_card_mode_padding_size);
+
+    position: relative;
+    background: var(--vkui--color_background_content);
+    border-radius: var(--vkui--size_border_radius_paper--regular);
+  }
+}
+
+.Group--sizeX-compact.Group--mode-card {
+  --vkui_internal--Group_padding_inline: 0;
+
+  border-radius: var(--vkui--size_border_radius_promo--regular);
+}
+
+@media (max-width: 767.9px) {
+  .Group--sizeX-none.Group--mode-card {
+    --vkui_internal--Group_padding_inline: 0;
+
+    border-radius: var(--vkui--size_border_radius_promo--regular);
+  }
+}
+
+.Group--sizeX-compact.Group--mode-card:first-of-type {
+  border-start-start-radius: 0;
+  border-start-end-radius: 0;
+  border-end-end-radius: var(--vkui--size_border_radius_promo--regular);
+  border-end-start-radius: var(--vkui--size_border_radius_promo--regular);
+}
+
+@media (max-width: 767.9px) {
+  .Group--sizeX-none.Group--mode-card:first-of-type {
+    border-start-start-radius: 0;
+    border-start-end-radius: 0;
+    border-end-end-radius: var(--vkui--size_border_radius_promo--regular);
+    border-end-start-radius: var(--vkui--size_border_radius_promo--regular);
+  }
+}
+
+/*
+ * Изменено с ::after на ::before
+ * потому что при ::after абсолютно позиционированный элемент накладывается
+ * поверх любого другого абсолютно позиционированного элемента внутри Group,
+ * например поверх Tooltip
+ * См. пример: Slider c пропом withTooltip
+ */
+
+.Group--mode-card::before,
+.Group--sizeX-regular.Group--mode-none::before {
+  content: '';
+  inset-inline-start: 0;
+  inset-block-start: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  position: absolute;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 var(--vkui--size_border--regular) var(--vkui--color_separator_primary);
+}
+
+@media (min-width: 768px) {
+  .Group--sizeX-none.Group--mode-none::before {
+    content: '';
+    inset-inline-start: 0;
+    inset-block-start: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    position: absolute;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow: inset 0 0 0 var(--vkui--size_border--regular) var(--vkui--color_field_border_alpha);
+  }
+}
+
+.Group--sizeX-compact.Group--mode-card::before {
+  box-shadow: none;
+}
+
+@media (max-width: 767.9px) {
+  .Group--sizeX-none.Group--mode-card::before {
+    box-shadow: none;
+  }
+}
+
+/*
+ * Header
+ */
+
+.Group__header:empty {
+  display: none;
+}
+
+.Group--mode-plain:not(:first-of-type) > .Group__header,
+.Group--sizeX-compact.Group--mode-none:not(:first-of-type) > .Group__header {
+  -webkit-margin-before: calc(-1 * var(--vkui--spacing_size_m));
+          margin-block-start: calc(-1 * var(--vkui--spacing_size_m));
+}
+
+@media (max-width: 767.9px) {
+  .Group--sizeX-none.Group--mode-none:not(:first-of-type) > .Group__header {
+    -webkit-margin-before: calc(-1 * var(--vkui--spacing_size_m));
+            margin-block-start: calc(-1 * var(--vkui--spacing_size_m));
+  }
+}
+
+.Group--mode-card > .Group__header,
+.Group--sizeX-regular.Group--mode-none > .Group__header {
+  -webkit-margin-before: calc(-1 * var(--vkui--spacing_size_xs));
+          margin-block-start: calc(-1 * var(--vkui--spacing_size_xs));
+}
+
+@media (min-width: 768px) {
+  .Group--sizeX-none.Group--mode-none > .Group__header {
+    -webkit-margin-before: calc(-1 * var(--vkui--spacing_size_xs));
+            margin-block-start: calc(-1 * var(--vkui--spacing_size_xs));
+  }
+}
+
+/*
+ * Description
+ */
+
+.Group__description {
+  display: block;
+  padding-block: var(--vkui--spacing_size_xs) var(--vkui--spacing_size_2xl);
+  padding-inline: var(--vkui--size_base_padding_horizontal--regular);
+  color: var(--vkui--color_text_secondary);
+}
+
+/*
+ * Separator (sibling)
+ *
+ * ⚠️ Находится за пределами Group
+ */
+
+.Group__separator-sibling {
+  --vkui_internal--Group__separator_hr: none;
+
+  position: relative;
+  box-sizing: border-box;
+}
+
+.Group__separator-sibling::before {
+  display: var(--vkui_internal--Group__separator_hr);
+  content: '';
+  block-size: var(--vkui--size_border--regular);
+  background: var(--vkui--color_separator_primary);
+}
+
+/* разделитель при mode="plain" */
+
+.Group--mode-plain + .Group__separator-sibling,
+.Group--sizeX-compact.Group--mode-none + .Group__separator-sibling {
+  --vkui_internal--Group__separator_hr: block;
+
+  padding-inline: var(--vkui--size_base_padding_horizontal--regular);
+  padding-block: var(--vkui--spacing_size_m);
+}
+
+@media (max-width: 767.9px) {
+  .Group--sizeX-none.Group--mode-none + .Group__separator-sibling {
+    --vkui_internal--Group__separator_hr: block;
+
+    padding-inline: var(--vkui--size_base_padding_horizontal--regular);
+    padding-block: var(--vkui--spacing_size_m);
+  }
+}
+
+.Group--mode-plain:last-of-type + .Group__separator-sibling:not(.Group__separator-sibling--forced) {
+  display: none;
+}
+
+@media (max-width: 767.9px) {
+  .Group--sizeX-none.Group--mode-none:last-of-type
+    + .Group__separator-sibling:not(.Group__separator-sibling--forced) {
+    display: none;
+  }
+}
+
+/* разделитель при mode="card" */
+
+.Group--mode-card + .Group__separator-sibling,
+.Group--sizeX-regular.Group--mode-none + .Group__separator-sibling {
+  block-size: var(--vkui--spacing_size_2xl);
+  padding-block: calc(var(--vkui--spacing_size_2xl) / 2);
+}
+
+@media (min-width: 768px) {
+  .Group--sizeX-none.Group--mode-none + .Group__separator-sibling {
+    block-size: var(--vkui--spacing_size_2xl);
+    padding-block: calc(var(--vkui--spacing_size_2xl) / 2);
+  }
+}
+
+.Group--sizeX-compact.Group--mode-card + .Group__separator-sibling {
+  block-size: var(--vkui--spacing_size_m);
+  padding-block: calc(var(--vkui--spacing_size_m) / 2);
+}
+
+@media (max-width: 767.9px) {
+  .Group--sizeX-none.Group--mode-card + .Group__separator-sibling {
+    block-size: var(--vkui--spacing_size_m);
+    padding-block: calc(var(--vkui--spacing_size_m) / 2);
+  }
+}
+
+/*
+ * Group вложенный в ModalPage
+ *
+ * note: ModalPage форсирует mode="plain" для Group
+ */
+
+@media (min-width: 768px) {
+  .Group--mode-plain-inside-modal {
+    --vkui_internal--Group_padding_inline: var(--vkui--spacing_size_m);
+    --vkui_internal--Group_padding_block: var(--vkui--spacing_size_m);
+  }
+
+  .Group--mode-plain-inside-modal + .Group__separator-sibling {
+    padding-inline: calc(
+      var(--vkui--size_base_padding_horizontal--regular) + var(--vkui--spacing_size_m)
+    );
+  }
+}
+
+/*
+ * Group вложенный в Group
+ */
+
+.Group .Group {
+  --vkui_internal--Group_padding_inline: 0;
+}
+
+.Group .Group + .Group__separator-sibling {
+  padding-inline: var(--vkui--size_base_padding_horizontal--regular);
+}
+
+.Group .Group:first-of-type {
+  -webkit-padding-before: 0;
+          padding-block-start: 0;
+}
+
+.Group .Group:last-of-type {
+  -webkit-padding-after: 0;
+          padding-block-end: 0;
+}
+
+/*
+ * Group.ExpandedContent
+ * компенсирующий отступы Group в зависимости
+ * от режима: inline / block
+ */
+
+.Group__expanded-content--inline {
+  margin-inline: calc(-1 * var(--vkui_internal--Group_padding_inline));
+}
+
+.Group__expanded-content--block {
+  margin-block: calc(-1 * var(--vkui_internal--Group_padding_block));
+}
+
+.Group .Group:first-of-type .Group__expanded-content--block {
+  -webkit-margin-start: 0;
+          margin-inline-start: 0;
+}
+
+.Group .Group:last-of-type .Group__expanded-content--block {
+  -webkit-margin-start: 0;
+          margin-inline-start: 0;
+}
+
+/*
+ * CMP:
+ * PanelHeader
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalPanelHeader--vkcom) ~ .Group:first-of-type,
+:global(.vkuiInternalPanelHeader--vkcom) + * .Group:first-of-type {
+  position: relative;
+  inset-block-start: -1px;
+  border-start-end-radius: 0;
+  border-start-start-radius: 0;
+}
