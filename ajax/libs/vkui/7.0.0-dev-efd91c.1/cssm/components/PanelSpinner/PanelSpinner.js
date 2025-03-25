@@ -1,0 +1,16 @@
+import { jsx as _jsx } from "react/jsx-runtime";
+import * as React from "react";
+import { Spinner } from "../Spinner/Spinner.js";
+/**
+ * @see https://vkcom.github.io/VKUI/#/PanelSpinner
+ */ export const PanelSpinner = /*#__PURE__*/ React.memo(({ height = 96, style, ...restProps })=>/*#__PURE__*/ _jsx(Spinner, {
+        size: "m",
+        ...restProps,
+        style: {
+            height,
+            ...style
+        }
+    }));
+PanelSpinner.displayName = 'PanelSpinner';
+
+//# sourceMappingURL=PanelSpinner.js.map
