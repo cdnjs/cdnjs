@@ -1,0 +1,167 @@
+.host {
+  --vkui_internal_ModalPage--userHeight: 100%;
+  --vkui_internal_ModalPage--desktopMaxWidth: 100%;
+
+  display: flex;
+  inline-size: 100%;
+  block-size: var(--vkui_internal_ModalPage--userHeight);
+  margin-inline: auto;
+  outline: none;
+  box-sizing: border-box;
+}
+
+/* Mobile */
+
+@media (max-width: 767.9px) {
+  .host {
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: 0;
+    max-inline-size: var(--vkui--size_popup_small--regular);
+    pointer-events: none;
+  }
+
+  .hostSafeAreaInsetTop {
+    max-block-size: calc(100% - var(--vkui_internal--safe_area_inset_top));
+  }
+
+  .hostSafeAreaInsetTopWithCustomOffset {
+    max-block-size: calc(
+      100% - (var(--vkui_internal--safe_area_inset_top) + var(--vkui_internal--panel_header_height))
+    );
+  }
+}
+
+/* Desktop */
+
+@media (min-width: 768px) {
+  .host {
+    position: relative;
+    margin-block: auto;
+    max-inline-size: var(--vkui_internal_ModalPage--desktopMaxWidth);
+    max-block-size: calc(100% - 64px); /* FIXME 64px??? */
+    block-size: auto;
+  }
+
+  .hostMaxWidthS {
+    --vkui_internal_ModalPage--desktopMaxWidth: var(--vkui--size_popup_small--regular);
+  }
+
+  .hostMaxWidthM {
+    --vkui_internal_ModalPage--desktopMaxWidth: var(--vkui--size_popup_medium--regular);
+  }
+
+  .hostMaxWidthL {
+    --vkui_internal_ModalPage--desktopMaxWidth: var(--vkui--size_popup_large--regular);
+  }
+}
+
+.document {
+  inline-size: 100%;
+  box-sizing: border-box;
+
+  /*
+   * Удерживает высоту в пределах 100% родителя при переполнении контента.
+   */
+  display: flex;
+  flex-shrink: 1;
+  flex-direction: column;
+}
+
+/* Mobile */
+
+@media (max-width: 767.9px) {
+  .document {
+    --vkui_internal_ModalPageDocument--snapPoint: auto;
+    --vkui_internal_ModalPageDocument--safeAreaInsetBottom: var(
+      --vkui_internal--safe_area_inset_bottom
+    );
+
+    position: absolute;
+    inset-inline-start: 0;
+    inset-block-end: 0;
+    block-size: var(--vkui_internal_ModalPageDocument--snapPoint);
+    max-block-size: 100%;
+    -webkit-padding-after: var(--vkui_internal_ModalPageDocument--safeAreaInsetBottom);
+            padding-block-end: var(--vkui_internal_ModalPageDocument--safeAreaInsetBottom);
+    pointer-events: auto;
+    touch-action: pan-y;
+    transform: translate3d(0, 0, 0);
+    transition: block-size 0.4s var(--vkui_internal--spring-easing);
+  }
+
+  .documentStateEnter {
+    transform: translate3d(0, 100%, 0);
+  }
+
+  .documentStateEntering {
+    transform: translate3d(0, 0, 0);
+    transition: transform 0.5s var(--vkui_internal--slide-easing) 0.1s;
+  }
+
+  .documentStateExiting {
+    transform: translate3d(0, 100%, 0);
+    transition: transform 0.2s ease;
+  }
+
+  .documentStateExited {
+    transform: translate3d(0, 100%, 0);
+  }
+}
+
+/* Desktop */
+
+@media (min-width: 768px) {
+  .document {
+    position: relative;
+    block-size: auto;
+  }
+
+  .documentStateEnter {
+    opacity: 0;
+  }
+
+  .documentStateEntering {
+    opacity: 1;
+    transition: opacity 0.2s ease-in 0.1s;
+  }
+
+  .documentStateExiting {
+    opacity: 0;
+    transition: opacity 0.1s ease-out;
+  }
+
+  .documentStateExited {
+    opacity: 0;
+  }
+}
+
+.children {
+  inline-size: 100%;
+  block-size: 100%;
+  border-start-start-radius: var(--vkui--size_border_radius_paper--regular);
+  border-start-end-radius: var(--vkui--size_border_radius_paper--regular);
+  background-color: var(--vkui--color_background_modal);
+  overflow: hidden;
+
+  /*
+   * Удерживает высоту в пределах 100% родителя при переполнении контента.
+   *
+   * - см. `ModalPageHeader`
+   * - см. `ModalPageContent`
+   * - см. `ModalPageFooter`
+   */
+  display: flex;
+  flex-shrink: 1;
+  flex-direction: column;
+}
+
+/* Desktop */
+
+@media (min-width: 768px) {
+  .children {
+    border-end-end-radius: var(--vkui--size_border_radius_paper--regular);
+    border-end-start-radius: var(--vkui--size_border_radius_paper--regular);
+    box-shadow: var(--vkui--elevation3);
+  }
+}
