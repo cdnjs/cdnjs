@@ -1,0 +1,1 @@
+"use strict";const ArcDiagramSeriesDefaults={centeredLinks:!1,equalNodes:!1,dataLabels:{linkTextPath:{attributes:{startOffset:"25%"}}},marker:{fillOpacity:1,lineWidth:0,states:{},symbol:"circle"},offset:"100%",reversed:!1};export default ArcDiagramSeriesDefaults;

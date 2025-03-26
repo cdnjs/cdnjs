@@ -1,0 +1,1 @@
+"use strict";const Boostables=["area","areaspline","arearange","column","columnrange","bar","line","scatter","heatmap","bubble","treemap"];export default Boostables;

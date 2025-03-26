@@ -1,0 +1,1 @@
+"use strict";const connectorsDefaults={connectors:{type:"straight",radius:0,lineWidth:1,marker:{enabled:!1,align:"center",verticalAlign:"middle",inside:!1,lineWidth:1},startMarker:{symbol:"diamond"},endMarker:{symbol:"arrow-filled"}}};export default connectorsDefaults;

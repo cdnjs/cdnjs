@@ -1,0 +1,1 @@
+"use strict";const TilemapSeriesDefaults={marker:null,states:{hover:{halo:{enabled:!0,size:2,opacity:.5,attributes:{zIndex:3}}}},pointPadding:2,tileShape:"hexagon"};export default TilemapSeriesDefaults;

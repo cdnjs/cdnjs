@@ -1,0 +1,1 @@
+"use strict";const VectorSeriesDefaults={lineWidth:2,marker:void 0,rotationOrigin:"center",states:{hover:{lineWidthPlus:1}},tooltip:{pointFormat:"<b>[{point.x}, {point.y}]</b><br/>Length: <b>{point.length}</b><br/>Direction: <b>{point.direction}°</b><br/>"},vectorLength:20};export default VectorSeriesDefaults;
