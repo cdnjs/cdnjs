@@ -1,0 +1,1 @@
+"use strict";function u(i,n){return{handler:i,config:n}}u.withOptions=function(i,n=()=>({})){function t(o){return{handler:i(o),config:n(o)}}return t.__isOptionsFunction=!0,t};var g=u;module.exports=g;
