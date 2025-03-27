@@ -1,0 +1,32 @@
+import Visuals from "../../../visuals";
+import RecordNote from "./recordNote";
+import { VideomailClientOptions } from "../../../../types/options";
+declare class RecordTimer {
+    private visuals;
+    private recordNote;
+    private options;
+    private recordTimerElement?;
+    private nearComputed;
+    private endNighComputed;
+    private started;
+    private countdown?;
+    constructor(visuals: Visuals, recordNote: RecordNote, options: VideomailClientOptions);
+    private thresholdReached;
+    private isNear;
+    private endIsNigh;
+    private setNear;
+    private setNigh;
+    check(elapsedTime: number): void;
+    private update;
+    private hide;
+    private show;
+    private getSecondsRecorded;
+    private getStartSeconds;
+    start(): void;
+    pause(): void;
+    resume(): void;
+    isStopped(): boolean;
+    stop(): void;
+    build(): void;
+}
+export default RecordTimer;
