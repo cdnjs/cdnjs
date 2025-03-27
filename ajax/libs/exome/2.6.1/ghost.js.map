@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/ghost.ts", "../src/create-id.ts"],
+  "sourcesContent": ["/**\n * @module exome/ghost\n */\nimport { exomeId } from \"exome\";\n\nimport { createID } from \"./create-id.ts\";\n\n/**\n * This is a class that pretends to be Exome store, but doesn't apply same change detection logic.\n * This is useful for testing and mocking data.\n */\nexport class GhostExome {\n\tprivate [exomeId] = this.constructor.name + \"-\" + createID();\n}\n", "export const createID = (): string =>\n\t(\n\t\tDate.now().toString(36) + ((Math.random() * 1e5) ^ 1).toString(36)\n\t).toUpperCase();\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;AAAA,IAAAA,IAAA;AAAAC,EAAAD,GAAA;AAAA,oBAAAE;AAAA;AAAA,iBAAAC,EAAAH;AAGA,IAAAI,IAAwB;;;ACHjB,IAAMC,IAAW,OAEtB,KAAK,IAAI,EAAE,SAAS,EAAE,KAAM,KAAK,OAAO,IAAI,MAAO,GAAG,SAAS,EAAE,GAChE,YAAY;;;ADHf,IAAAC;AAYUA,IAAA;AADH,IAAMC,IAAN,MAAiB;AAAA,EAAjB;AACN,SAASD,KAAW,KAAK,YAAY,OAAO,MAAME,EAAS;AAAA;AAC5D;",
+  "names": ["ghost_exports", "__export", "GhostExome", "__toCommonJS", "import_exome", "createID", "_a", "GhostExome", "createID"]
+}
