@@ -1,0 +1,1 @@
+"use strict";const StreamgraphSeriesDefaults={fillOpacity:1,lineWidth:0,marker:{enabled:!1},stacking:"stream"};export default StreamgraphSeriesDefaults;
