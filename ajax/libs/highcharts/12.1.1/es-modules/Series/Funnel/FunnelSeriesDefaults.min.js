@@ -1,0 +1,1 @@
+"use strict";const FunnelSeriesDefaults={animation:!1,borderRadius:0,center:["50%","50%"],width:"90%",neckWidth:"30%",height:"100%",neckHeight:"25%",reversed:!1,size:!0,dataLabels:{connectorWidth:1,verticalAlign:"middle"},states:{select:{color:"#cccccc",borderColor:"#000000"}}};export default FunnelSeriesDefaults;

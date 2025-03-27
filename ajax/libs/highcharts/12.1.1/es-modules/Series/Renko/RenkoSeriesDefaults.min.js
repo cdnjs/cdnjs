@@ -1,0 +1,1 @@
+"use strict";const RenkoDefaults={boxSize:4,groupPadding:0,pointPadding:0,downColor:"#ff0000",navigatorOptions:{type:"renko"},fillColor:"transparent",borderWidth:2,lineWidth:0,stickyTracking:!0,borderRadius:{where:"all"},tooltip:{pointFormat:'<span style="color:{point.color}">●</span> {series.name}: <b>{point.low:.2f} - {point.y:.2f}</b><br/>'}};export default RenkoDefaults;
