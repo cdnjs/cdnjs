@@ -1,0 +1,97 @@
+.host {
+  display: inline-flex;
+  max-inline-size: 100%; /* [Примечание 2] Чтобы блок не выходил за границы контейнера (связано с [Примечание 4]) */
+}
+
+.stretched {
+  display: flex;
+  inline-size: 100%;
+}
+
+.modeVertical {
+  flex-direction: column;
+}
+
+.modeHorizontal {
+  flex-direction: row;
+  /* чтобы блоки не растягивались на всю высоту контейнера */
+  align-items: flex-start;
+}
+
+/* stylelint-disable selector-max-universal */
+
+/**
+ * [Примечание 3] Чтобы не завязываться на класс компонента, используем каскад и универсальный селектор.
+ */
+
+/* "gap" для mode="vertical" */
+
+.modeVertical.gapSpace > *:not(:first-child) {
+  -webkit-margin-before: var(--vkui--size_button_group_gap_space--regular);
+          margin-block-start: var(--vkui--size_button_group_gap_space--regular);
+}
+
+.modeVertical.gapS > *:not(:first-child) {
+  -webkit-margin-before: var(--vkui--size_button_group_gap_small--regular);
+          margin-block-start: var(--vkui--size_button_group_gap_small--regular);
+}
+
+.modeVertical.gapM > *:not(:first-child) {
+  -webkit-margin-before: var(--vkui--size_button_group_gap_medium--regular);
+          margin-block-start: var(--vkui--size_button_group_gap_medium--regular);
+}
+
+/* "gap" для mode="horizontal" */
+
+.modeHorizontal > *:not(.host) {
+  /**
+   * [Примечание 4]
+   *
+   * `min-width` в контексте Flexbox по умолчанию имеет значение `auto`,
+   * из-за чего элементы при переполнении будут выходить за границы контейнера.
+   *
+   * Подробности по ссылке https://stackoverflow.com/a/66689926/2903061
+   */
+  min-inline-size: 0;
+}
+
+.modeHorizontal.gapSpace > *:not(:last-child) {
+  -webkit-margin-end: var(--vkui--size_button_group_gap_space--regular);
+          margin-inline-end: var(--vkui--size_button_group_gap_space--regular);
+}
+
+.modeHorizontal.gapS > *:not(:last-child) {
+  -webkit-margin-end: var(--vkui--size_button_group_gap_small--regular);
+          margin-inline-end: var(--vkui--size_button_group_gap_small--regular);
+}
+
+.modeHorizontal.gapM > *:not(:last-child) {
+  -webkit-margin-end: var(--vkui--size_button_group_gap_medium--regular);
+          margin-inline-end: var(--vkui--size_button_group_gap_medium--regular);
+}
+
+/* stylelint-enable selector-max-universal */
+
+.modeVertical.alignLeft {
+  align-items: flex-start;
+}
+
+.modeVertical.alignCenter {
+  align-items: center;
+}
+
+.modeVertical.alignRight {
+  align-items: flex-end;
+}
+
+.modeHorizontal.alignLeft {
+  justify-content: flex-start;
+}
+
+.modeHorizontal.alignCenter {
+  justify-content: center;
+}
+
+.modeHorizontal.alignRight {
+  justify-content: flex-end;
+}
