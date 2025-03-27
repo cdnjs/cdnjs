@@ -1,0 +1,11 @@
+!/**
+ * Highcharts Gantt JS v12.1.2 (2024-12-21)
+ * @module highcharts/modules/current-date-indicator
+ * @requires highcharts
+ *
+ * CurrentDateIndicator
+ *
+ * (c) 2010-2024 Lars A. V. Cabrera
+ *
+ * License: www.highcharts.com/license
+ */function(t,e){"object"==typeof exports&&"object"==typeof module?module.exports=e(t._Highcharts):"function"==typeof define&&define.amd?define("highcharts/modules/current-date-indicator",["highcharts/highcharts"],function(t){return e(t)}):"object"==typeof exports?exports["highcharts/modules/current-date-indicator"]=e(t._Highcharts):t.Highcharts=e(t.Highcharts)}("undefined"==typeof window?this:window,t=>(()=>{"use strict";var e={944:e=>{e.exports=t}},r={};function o(t){var a=r[t];if(void 0!==a)return a.exports;var i=r[t]={exports:{}};return e[t](i,i.exports,o),i.exports}o.n=t=>{var e=t&&t.__esModule?()=>t.default:()=>t;return o.d(e,{a:e}),e},o.d=(t,e)=>{for(var r in e)o.o(e,r)&&!o.o(t,r)&&Object.defineProperty(t,r,{enumerable:!0,get:e[r]})},o.o=(t,e)=>Object.prototype.hasOwnProperty.call(t,e);var a={};o.d(a,{default:()=>x});var i=o(944),n=o.n(i);let{composed:s}=n(),{addEvent:l,merge:c,pushUnique:h,wrap:d}=n(),f={color:"#ccd3ff",width:2,label:{format:"%[abdYHM]",formatter:function(t,e){return this.axis.chart.time.dateFormat(e||"",t,!0)},rotation:0,style:{fontSize:"0.7em"}}};function u(){let t=this.options,e=t.currentDateIndicator;if(e){let r="object"==typeof e?c(f,e):c(f);r.value=Date.now(),r.className="highcharts-current-date-indicator",t.plotLines||(t.plotLines=[]),t.plotLines.push(r)}}function p(){this.label&&this.label.attr({text:this.getLabelText(this.options.label)})}function m(t,e){let r=this.options;return r&&r.className&&-1!==r.className.indexOf("highcharts-current-date-indicator")&&r.label&&"function"==typeof r.label.formatter?(r.value=Date.now(),r.label.formatter.call(this,r.value,r.label.format)):t.call(this,e)}let b=n();({compose:function(t,e){h(s,"CurrentDateIndication")&&(l(t,"afterSetOptions",u),l(e,"render",p),d(e.prototype,"getLabelText",m))}}).compose(b.Axis,b.PlotLineOrBand);let x=n();return a.default})());

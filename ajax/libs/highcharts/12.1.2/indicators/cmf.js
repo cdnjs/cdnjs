@@ -1,0 +1,11 @@
+!/**
+ * Highstock JS v12.1.2 (2024-12-21)
+ * @module highcharts/indicators/cmf
+ * @requires highcharts
+ * @requires highcharts/modules/stock
+ *
+ * (c) 2010-2024 Highsoft AS
+ * Author: Sebastian Domas
+ *
+ * License: www.highcharts.com/license
+ */function(e,t){"object"==typeof exports&&"object"==typeof module?module.exports=t(e._Highcharts,e._Highcharts.SeriesRegistry):"function"==typeof define&&define.amd?define("highcharts/indicators/cmf",["highcharts/highcharts"],function(e){return t(e,e.SeriesRegistry)}):"object"==typeof exports?exports["highcharts/indicators/cmf"]=t(e._Highcharts,e._Highcharts.SeriesRegistry):e.Highcharts=t(e.Highcharts,e.Highcharts.SeriesRegistry)}("undefined"==typeof window?this:window,(e,t)=>(()=>{"use strict";var r={512:e=>{e.exports=t},944:t=>{t.exports=e}},s={};function i(e){var t=s[e];if(void 0!==t)return t.exports;var o=s[e]={exports:{}};return r[e](o,o.exports,i),o.exports}i.n=e=>{var t=e&&e.__esModule?()=>e.default:()=>e;return i.d(t,{a:t}),t},i.d=(e,t)=>{for(var r in t)i.o(t,r)&&!i.o(e,r)&&Object.defineProperty(e,r,{enumerable:!0,get:t[r]})},i.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t);var o={};i.d(o,{default:()=>d});var n=i(944),a=i.n(n),u=i(512),l=i.n(u);let{sma:h}=l().seriesTypes,{merge:p}=a();class c extends h{constructor(){super(...arguments),this.nameBase="Chaikin Money Flow"}isValid(){let e=this.chart,t=this.options,r=this.linkedParent,s=this.volumeSeries||(this.volumeSeries=e.get(t.params.volumeSeriesID)),i=r?.pointArrayMap?.length===4;function o(e){return e.dataTable.rowCount>=t.params.period}return!!(r&&s&&o(r)&&o(s)&&i)}getValues(e,t){if(this.isValid())return this.getMoneyFlow(e.xData,e.yData,this.volumeSeries.getColumn("y"),t.period)}getMoneyFlow(e,t,r,s){let i=t.length,o=[],n=[],a=[],u=[],l,h,p=-1,c=0,d=0;function f(e,t){let r=e[1],s=e[2],i=e[3];return null!==t&&null!==r&&null!==s&&null!==i&&r!==s?(i-s-(r-i))/(r-s)*t:(p=l,null)}if(s>0&&s<=i){for(l=0;l<s;l++)o[l]=f(t[l],r[l]),c+=r[l],d+=o[l];for(n.push(e[l-1]),a.push(l-p>=s&&0!==c?d/c:null),u.push([n[0],a[0]]);l<i;l++)o[l]=f(t[l],r[l]),c-=r[l-s],c+=r[l],d-=o[l-s],d+=o[l],h=[e[l],l-p>=s?d/c:null],n.push(h[0]),a.push(h[1]),u.push([h[0],h[1]])}return{values:u,xData:n,yData:a}}}c.defaultOptions=p(h.defaultOptions,{params:{index:void 0,volumeSeriesID:"volume"}}),l().registerSeriesType("cmf",c);let d=a();return o.default})());

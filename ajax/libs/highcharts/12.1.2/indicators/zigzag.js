@@ -1,0 +1,12 @@
+!/**
+ * Highstock JS v12.1.2 (2024-12-21)
+ * @module highcharts/indicators/zigzag
+ * @requires highcharts
+ * @requires highcharts/modules/stock
+ *
+ * Indicator series type for Highcharts Stock
+ *
+ * (c) 2010-2024 Kacper Madej
+ *
+ * License: www.highcharts.com/license
+ */function(e,t){"object"==typeof exports&&"object"==typeof module?module.exports=t(e._Highcharts,e._Highcharts.SeriesRegistry):"function"==typeof define&&define.amd?define("highcharts/indicators/zigzag",["highcharts/highcharts"],function(e){return t(e,e.SeriesRegistry)}):"object"==typeof exports?exports["highcharts/indicators/zigzag"]=t(e._Highcharts,e._Highcharts.SeriesRegistry):e.Highcharts=t(e.Highcharts,e.Highcharts.SeriesRegistry)}("undefined"==typeof window?this:window,(e,t)=>(()=>{"use strict";var r={512:e=>{e.exports=t},944:t=>{t.exports=e}},i={};function s(e){var t=i[e];if(void 0!==t)return t.exports;var o=i[e]={exports:{}};return r[e](o,o.exports,s),o.exports}s.n=e=>{var t=e&&e.__esModule?()=>e.default:()=>e;return s.d(t,{a:t}),t},s.d=(e,t)=>{for(var r in t)s.o(t,r)&&!s.o(e,r)&&Object.defineProperty(e,r,{enumerable:!0,get:t[r]})},s.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t);var o={};s.d(o,{default:()=>f});var a=s(944),h=s.n(a),n=s(512),p=s.n(n);let{sma:d}=p().seriesTypes,{merge:u,extend:g}=h();class l extends d{getValues(e,t){let r=t.lowIndex,i=t.highIndex,s=t.deviation/100,o={low:1+s,high:1-s},a=e.xData,h=e.yData,n=h?h.length:0,p=[],d=[],u=[],g,l,f,c,x=!1,y=!1;if(!a||a.length<=1||n&&(void 0===h[0][r]||void 0===h[0][i]))return;let v=h[0][r],m=h[0][i];for(g=1;g<n;g++)h[g][r]<=m*o.high?(p.push([a[0],m]),f=[a[g],h[g][r]],c=!0,x=!0):h[g][i]>=v*o.low&&(p.push([a[0],v]),f=[a[g],h[g][i]],c=!1,x=!0),x&&(d.push(p[0][0]),u.push(p[0][1]),l=g++,g=n);for(g=l;g<n;g++)c?(h[g][r]<=f[1]&&(f=[a[g],h[g][r]]),h[g][i]>=f[1]*o.low&&(y=i)):(h[g][i]>=f[1]&&(f=[a[g],h[g][i]]),h[g][r]<=f[1]*o.high&&(y=r)),!1!==y&&(p.push(f),d.push(f[0]),u.push(f[1]),f=[a[g],h[g][y]],c=!c,y=!1);let w=p.length;return 0!==w&&p[w-1][0]<a[n-1]&&(p.push(f),d.push(f[0]),u.push(f[1])),{values:p,xData:d,yData:u}}}l.defaultOptions=u(d.defaultOptions,{params:{index:void 0,period:void 0,lowIndex:2,highIndex:1,deviation:1}}),g(l.prototype,{nameComponents:["deviation"],nameSuffixes:["%"],nameBase:"Zig Zag"}),p().registerSeriesType("zigzag",l);let f=h();return o.default})());
