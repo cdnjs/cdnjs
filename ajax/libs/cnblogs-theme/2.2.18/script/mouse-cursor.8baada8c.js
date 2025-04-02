@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcnblogs_theme=self.webpackChunkcnblogs_theme||[]).push([[91],{971:function(e,n,t){function u(e){document.body.style.cursor=`url(${e.url||"https://files.cnblogs.com/files/wangyang0210/normal.gif?t=1681261712"}), default`}t.r(n),t.d(n,{default:function(){return u}})}}]);
