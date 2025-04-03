@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/svelte.ts"],
+  "sourcesContent": ["/**\n * @module exome/svelte\n */\nimport { type Exome, subscribe } from \"exome\";\n\n/**\n * Subscribes to store instance update events and trigger updates to component accordingly.\n *\n * @example:\n * ```html\n * <script lang=\"ts\">\n *   import { useStore } from \"exome/svelte\"\n *   import { counterStore } from \"./counter.store.ts\"\n *\n *   const { increment } = counterStore\n *   const count = useStore(counterStore, s => s.count)\n * </script>\n *\n * <main>\n *   <button on:click={increment}>{$count}</button>\n * </main>\n * ```\n */\nexport function useStore<T extends Exome, R = T>(\n\tstore: T,\n\tselector: (state: T) => R = (v) => v as any,\n): {\n\tsubscribe(cb: (value: R) => void): () => void;\n} {\n\treturn {\n\t\tsubscribe(cb: (value: R) => void) {\n\t\t\tcb(selector(store));\n\t\t\treturn subscribe(store, () => cb(selector(store)));\n\t\t},\n\t};\n}\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;AAAA,IAAAA,IAAA;AAAAC,EAAAD,GAAA;AAAA,kBAAAE;AAAA;AAAA,iBAAAC,EAAAH;AAGA,IAAAI,IAAsC;AAoB/B,SAASF,EACfG,GACAC,IAA4B,CAACC,MAAMA,GAGlC;AACD,SAAO;AAAA,IACN,UAAUC,GAAwB;AACjC,aAAAA,EAAGF,EAASD,CAAK,CAAC,OACX,aAAUA,GAAO,MAAMG,EAAGF,EAASD,CAAK,CAAC,CAAC;AAAA,IAClD;AAAA,EACD;AACD;",
+  "names": ["svelte_exports", "__export", "useStore", "__toCommonJS", "import_exome", "store", "selector", "v", "cb"]
+}
