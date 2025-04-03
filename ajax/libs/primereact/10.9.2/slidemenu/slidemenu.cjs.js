@@ -1,0 +1,627 @@
+'use client';
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+var React = require('react');
+var PrimeReact = require('primereact/api');
+var componentbase = require('primereact/componentbase');
+var csstransition = require('primereact/csstransition');
+var hooks = require('primereact/hooks');
+var chevronleft = require('primereact/icons/chevronleft');
+var overlayservice = require('primereact/overlayservice');
+var portal = require('primereact/portal');
+var utils = require('primereact/utils');
+var angleright = require('primereact/icons/angleright');
+
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+function _interopNamespace(e) {
+  if (e && e.__esModule) return e;
+  var n = Object.create(null);
+  if (e) {
+    Object.keys(e).forEach(function (k) {
+      if (k !== 'default') {
+        var d = Object.getOwnPropertyDescriptor(e, k);
+        Object.defineProperty(n, k, d.get ? d : {
+          enumerable: true,
+          get: function () { return e[k]; }
+        });
+      }
+    });
+  }
+  n["default"] = e;
+  return Object.freeze(n);
+}
+
+var React__namespace = /*#__PURE__*/_interopNamespace(React);
+var PrimeReact__default = /*#__PURE__*/_interopDefaultLegacy(PrimeReact);
+
+function _extends() {
+  _extends = Object.assign ? Object.assign.bind() : function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  return _extends.apply(this, arguments);
+}
+
+function _typeof(o) {
+  "@babel/helpers - typeof";
+
+  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+    return typeof o;
+  } : function (o) {
+    return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+  }, _typeof(o);
+}
+
+function _toPrimitive(input, hint) {
+  if (_typeof(input) !== "object" || input === null) return input;
+  var prim = input[Symbol.toPrimitive];
+  if (prim !== undefined) {
+    var res = prim.call(input, hint || "default");
+    if (_typeof(res) !== "object") return res;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return (hint === "string" ? String : Number)(input);
+}
+
+function _toPropertyKey(arg) {
+  var key = _toPrimitive(arg, "string");
+  return _typeof(key) === "symbol" ? key : String(key);
+}
+
+function _defineProperty(obj, key, value) {
+  key = _toPropertyKey(key);
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+function _iterableToArrayLimit(r, l) {
+  var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+  if (null != t) {
+    var e,
+      n,
+      i,
+      u,
+      a = [],
+      f = !0,
+      o = !1;
+    try {
+      if (i = (t = t.call(r)).next, 0 === l) {
+        if (Object(t) !== t) return;
+        f = !1;
+      } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
+    } catch (r) {
+      o = !0, n = r;
+    } finally {
+      try {
+        if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return;
+      } finally {
+        if (o) throw n;
+      }
+    }
+    return a;
+  }
+}
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+  return arr2;
+}
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
+
+var classes = {
+  previousIcon: 'p-slidemenu-backward-icon',
+  previous: function previous(_ref) {
+    var levelState = _ref.levelState;
+    return utils.classNames('p-slidemenu-backward', {
+      'p-hidden-space': levelState === 0,
+      'p-slidemenu-separator': levelState > 0
+    });
+  },
+  root: function root(_ref2) {
+    var props = _ref2.props;
+    return utils.classNames('p-slidemenu p-component', {
+      'p-slidemenu-overlay': props.popup
+    });
+  },
+  wrapper: 'p-slidemenu-wrapper',
+  content: 'p-slidemenu-content',
+  separator: 'p-slidemenu-separator',
+  icon: 'p-menuitem-icon',
+  submenuIcon: 'p-submenu-icon',
+  label: 'p-menuitem-text',
+  action: 'p-menuitem-link',
+  menu: function menu(_ref3) {
+    var props = _ref3.subProps;
+    return utils.classNames({
+      'p-slidemenu-rootlist': props.root,
+      'p-submenu-list': !props.root,
+      'p-active-submenu': props.parentActive
+    });
+  },
+  menuitem: function menuitem(_ref4) {
+    var item = _ref4.item,
+      active = _ref4.active;
+    return utils.classNames('p-menuitem', {
+      'p-menuitem-active': active,
+      'p-disabled': item.disabled
+    }, item.className);
+  },
+  transition: 'p-connected-overlay'
+};
+var styles = "\n@layer primereact {\n    .p-slidemenu {\n        width: 12.5em;\n    }\n    \n    .p-slidemenu.p-slidemenu-overlay {\n        position: absolute;\n    }\n    \n    .p-slidemenu .p-menu-separator {\n        border-width: 1px 0 0 0;\n    }\n    \n    .p-slidemenu ul {\n        list-style: none;\n        margin: 0;\n        padding: 0;\n    }\n    \n    .p-slidemenu .p-slidemenu-rootlist {\n        position: absolute;\n        top: 0;\n    }\n    \n    .p-slidemenu .p-submenu-list {\n        display: none;\n        position: absolute;\n        top: 0;\n        width: 12.5em;\n    }\n    \n    .p-slidemenu .p-menuitem-link {\n        cursor: pointer;\n        display: flex;\n        align-items: center;\n        text-decoration: none;\n        overflow: hidden;\n    }\n    \n    .p-slidemenu .p-menuitem-icon {\n        vertical-align: middle;\n    }\n    \n    .p-slidemenu .p-menuitem-text {\n        vertical-align: middle;\n    }\n    \n    .p-slidemenu .p-menuitem {\n        position: relative;\n    }\n    \n    .p-slidemenu .p-menuitem-link .p-submenu-icon {\n        margin-left: auto;\n    }\n    \n    .p-slidemenu .p-slidemenu-wrapper {\n        position: relative;\n    }\n    \n    .p-slidemenu .p-slidemenu-content {\n        overflow-x: hidden;\n        overflow-y: auto;\n        position: relative;\n        height: 100%;\n    }\n    \n    .p-slidemenu-backward {\n        bottom: 0;\n        width: 100%;\n        padding: 0.25em;\n        cursor: pointer;\n    }\n    \n    .p-slidemenu-backward .p-slidemenu-backward-icon {\n        vertical-align: middle;\n    }\n    \n    .p-slidemenu-backward span {\n        vertical-align: middle;\n    }\n    \n    .p-slidemenu .p-menuitem-active {\n        position: static;\n    }\n    \n    .p-slidemenu .p-menuitem-active > .p-submenu-list {\n        display: block;\n    }\n}\n";
+var inlineStyles = {
+  menu: function menu(_ref5) {
+    var props = _ref5.subProps;
+    return {
+      width: props.menuWidth + 'px',
+      left: props.root ? -1 * props.level * props.menuWidth + 'px' : props.menuWidth + 'px',
+      transitionProperty: props.root ? 'left' : 'none',
+      transitionDuration: props.effectDuration + 'ms',
+      transitionTimingFunction: props.easing
+    };
+  }
+};
+var SlideMenuBase = componentbase.ComponentBase.extend({
+  defaultProps: {
+    __TYPE: 'SlideMenu',
+    appendTo: null,
+    autoZIndex: true,
+    backIcon: null,
+    backLabel: 'Back',
+    baseZIndex: 0,
+    className: null,
+    easing: 'ease-out',
+    effectDuration: 250,
+    id: null,
+    menuWidth: 190,
+    model: null,
+    onHide: null,
+    onShow: null,
+    onNavigate: null,
+    popup: false,
+    style: null,
+    submenuIcon: null,
+    transitionOptions: null,
+    viewportHeight: 175,
+    children: undefined,
+    closeOnEscape: true
+  },
+  css: {
+    classes: classes,
+    styles: styles,
+    inlineStyles: inlineStyles
+  }
+});
+
+function ownKeys$1(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$1(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$1(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$1(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+var SlideMenuSub = /*#__PURE__*/React__namespace.memo(function (props) {
+  var _React$useState = React__namespace.useState(null),
+    _React$useState2 = _slicedToArray(_React$useState, 2),
+    activeItemState = _React$useState2[0],
+    setActiveItemState = _React$useState2[1];
+  var _React$useState3 = React__namespace.useState({}),
+    _React$useState4 = _slicedToArray(_React$useState3, 2),
+    renderSubMenu = _React$useState4[0],
+    setRenderSubMenu = _React$useState4[1];
+  var mergeProps = hooks.useMergeProps();
+  var ptm = props.ptm,
+    cx = props.cx,
+    sx = props.sx;
+  var getPTOptions = function getPTOptions(item, key) {
+    return ptm(key, {
+      hostName: props.hostName,
+      context: {
+        active: activeItemState === item
+      }
+    });
+  };
+  var onItemClick = function onItemClick(event, item, index) {
+    if (item.disabled) {
+      event.preventDefault();
+      return;
+    }
+    if (item.command) {
+      item.command({
+        originalEvent: event,
+        item: item
+      });
+    }
+    if (item.items) {
+      var key = createKey(item, index);
+      setRenderSubMenu(_objectSpread$1(_objectSpread$1({}, renderSubMenu), {}, _defineProperty({}, key, true)));
+      setActiveItemState(item);
+      props.onForward();
+    }
+    if (!item.url) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  };
+  var createSeparator = function createSeparator(index) {
+    var key = props.id + '_sep_' + index;
+    var separatorProps = mergeProps({
+      id: key,
+      key: key,
+      className: cx('separator'),
+      role: 'separator'
+    }, ptm('separator', {
+      hostName: props.hostName
+    }));
+    return /*#__PURE__*/React__namespace.createElement("li", separatorProps);
+  };
+  var createSubmenu = function createSubmenu(item, index) {
+    var shouldRender = renderSubMenu[createKey(item, index)];
+    if (item.items && shouldRender) {
+      return /*#__PURE__*/React__namespace.createElement(SlideMenuSub, {
+        id: props.id + '_' + index,
+        menuProps: props.menuProps,
+        model: item.items,
+        index: props.index + 1,
+        menuWidth: props.menuWidth,
+        effectDuration: props.effectDuration,
+        onForward: props.onForward,
+        parentActive: item === activeItemState,
+        submenuIcon: props.submenuIcon,
+        ptm: ptm,
+        cx: cx,
+        sx: sx
+      });
+    }
+    return null;
+  };
+  var createKey = function createKey(item, index) {
+    return item.id || props.id + '_' + index;
+  };
+  var createMenuitem = function createMenuitem(item, index) {
+    if (item.visible === false) {
+      return null;
+    }
+    var key = createKey(item, index);
+    var active = activeItemState === item;
+    var iconClassName = utils.classNames('p-menuitem-icon', item.icon);
+    var iconProps = mergeProps({
+      className: cx('icon')
+    }, getPTOptions(item, 'icon'));
+    var icon = utils.IconUtils.getJSXIcon(item.icon, _objectSpread$1({}, iconProps), {
+      props: props.menuProps
+    });
+    var submenuIconProps = mergeProps({
+      className: cx('submenuIcon')
+    }, getPTOptions(item, 'submenuIcon'));
+    var labelProps = mergeProps({
+      className: cx('label')
+    }, getPTOptions(item, 'label'));
+    var submenuIcon = item.items && utils.IconUtils.getJSXIcon(props.submenuIcon || /*#__PURE__*/React__namespace.createElement(angleright.AngleRightIcon, submenuIconProps), _objectSpread$1({}, submenuIconProps), {
+      props: props
+    });
+    var label = item.label && /*#__PURE__*/React__namespace.createElement("span", labelProps, item.label);
+    var submenu = createSubmenu(item, index);
+    var actionProps = mergeProps({
+      href: item.url || '#',
+      className: cx('action'),
+      target: item.target,
+      onClick: function onClick(event) {
+        return onItemClick(event, item, index);
+      },
+      'aria-disabled': item.disabled
+    }, getPTOptions(item, 'action'));
+    var content = /*#__PURE__*/React__namespace.createElement("a", actionProps, icon, label, submenuIcon);
+    if (item.template) {
+      var defaultContentOptions = {
+        onClick: function onClick(event) {
+          return onItemClick(event, item, index);
+        },
+        className: 'p-menuitem-link',
+        labelClassName: 'p-menuitem-text',
+        iconClassName: iconClassName,
+        submenuIconClassName: 'p-submenu-icon',
+        element: content,
+        props: props,
+        active: active
+      };
+      content = utils.ObjectUtils.getJSXElement(item.template, item, defaultContentOptions);
+    }
+    var menuitemProps = mergeProps({
+      id: key,
+      key: key,
+      className: cx('menuitem', {
+        active: active,
+        item: item
+      }),
+      style: item.style
+    }, getPTOptions(item, 'menuitem'));
+    return /*#__PURE__*/React__namespace.createElement("li", menuitemProps, content, submenu);
+  };
+  var createItem = function createItem(item, index) {
+    if (item.visible === false) {
+      return null;
+    }
+    return item.separator ? createSeparator(index) : createMenuitem(item, index);
+  };
+  var createItems = function createItems() {
+    return props.model ? props.model.map(createItem) : null;
+  };
+  var items = createItems();
+  var menuProps = mergeProps({
+    className: cx('menu', {
+      subProps: props
+    }),
+    style: sx('menu', {
+      subProps: props
+    })
+  }, ptm('menu', {
+    hostName: props.hostName
+  }));
+  return /*#__PURE__*/React__namespace.createElement("ul", menuProps, items);
+});
+SlideMenuSub.displayName = 'SlideMenuSub';
+
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+var SlideMenu = /*#__PURE__*/React__namespace.memo(/*#__PURE__*/React__namespace.forwardRef(function (inProps, ref) {
+  var mergeProps = hooks.useMergeProps();
+  var context = React__namespace.useContext(PrimeReact.PrimeReactContext);
+  var props = SlideMenuBase.getProps(inProps, context);
+  var _React$useState = React__namespace.useState(props.id),
+    _React$useState2 = _slicedToArray(_React$useState, 2),
+    idState = _React$useState2[0],
+    setIdState = _React$useState2[1];
+  var _React$useState3 = React__namespace.useState(0),
+    _React$useState4 = _slicedToArray(_React$useState3, 2),
+    levelState = _React$useState4[0],
+    setLevelState = _React$useState4[1];
+  var _React$useState5 = React__namespace.useState(false),
+    _React$useState6 = _slicedToArray(_React$useState5, 2),
+    visibleState = _React$useState6[0],
+    setVisibleState = _React$useState6[1];
+  var _SlideMenuBase$setMet = SlideMenuBase.setMetaData({
+      props: props,
+      state: {
+        id: idState,
+        visible: visibleState,
+        level: levelState
+      }
+    }),
+    ptm = _SlideMenuBase$setMet.ptm,
+    cx = _SlideMenuBase$setMet.cx,
+    sx = _SlideMenuBase$setMet.sx,
+    isUnstyled = _SlideMenuBase$setMet.isUnstyled;
+  componentbase.useHandleStyle(SlideMenuBase.css.styles, isUnstyled, {
+    name: 'slidemenu'
+  });
+  var menuRef = React__namespace.useRef(null);
+  var targetRef = React__namespace.useRef(null);
+  var backward = React__namespace.useRef(null);
+  var slideMenuContent = React__namespace.useRef(null);
+  var isCloseOnEscape = visibleState && props.popup && props.closeOnEscape;
+  var slideMenuDisplayOrder = hooks.useDisplayOrder('slide-menu', isCloseOnEscape);
+  hooks.useGlobalOnEscapeKey({
+    callback: function callback(event) {
+      hide(event);
+    },
+    when: isCloseOnEscape && slideMenuDisplayOrder,
+    priority: [hooks.ESC_KEY_HANDLING_PRIORITIES.SLIDE_MENU, slideMenuDisplayOrder]
+  });
+  var _useOverlayListener = hooks.useOverlayListener({
+      target: targetRef,
+      overlay: menuRef,
+      listener: function listener(event, _ref) {
+        var valid = _ref.valid;
+        valid && hide(event);
+      },
+      when: visibleState
+    }),
+    _useOverlayListener2 = _slicedToArray(_useOverlayListener, 2),
+    bindOverlayListener = _useOverlayListener2[0],
+    unbindOverlayListener = _useOverlayListener2[1];
+  var onPanelClick = function onPanelClick(event) {
+    if (props.popup) {
+      overlayservice.OverlayService.emit('overlay-click', {
+        originalEvent: event,
+        target: targetRef.current
+      });
+    }
+  };
+  var navigateForward = function navigateForward() {
+    setLevelState(function (prevLevel) {
+      return prevLevel + 1;
+    });
+  };
+  var navigateBack = function navigateBack() {
+    setLevelState(function (prevLevel) {
+      return prevLevel - 1;
+    });
+  };
+  var toggle = function toggle(event) {
+    if (props.popup) {
+      visibleState ? hide(event) : show(event);
+    }
+  };
+  var show = function show(event) {
+    targetRef.current = event.currentTarget;
+    setVisibleState(true);
+    props.onShow && props.onShow(event);
+  };
+  var hide = function hide(event) {
+    targetRef.current = event.currentTarget;
+    setVisibleState(false);
+    props.onHide && props.onHide(event);
+  };
+  var onEnter = function onEnter() {
+    if (props.autoZIndex) {
+      utils.ZIndexUtils.set('menu', menuRef.current, context && context.autoZIndex || PrimeReact__default["default"].autoZIndex, props.baseZIndex || context && context.zIndex.menu || PrimeReact__default["default"].zIndex.menu);
+    }
+    utils.DomHandler.addStyles(menuRef.current, {
+      position: 'absolute',
+      top: '0',
+      left: '0'
+    });
+    utils.DomHandler.absolutePosition(menuRef.current, targetRef.current);
+  };
+  var onEntered = function onEntered() {
+    bindOverlayListener();
+  };
+  var onExit = function onExit() {
+    targetRef.current = null;
+    unbindOverlayListener();
+  };
+  var onExited = function onExited() {
+    utils.ZIndexUtils.clear(menuRef.current);
+    setLevelState(0);
+  };
+  hooks.useMountEffect(function () {
+    if (!idState) {
+      setIdState(utils.UniqueComponentId());
+    }
+  });
+  hooks.useUpdateEffect(function () {
+    setLevelState(0);
+  }, [props.model]);
+  hooks.useUpdateEffect(function () {
+    props.onNavigate && props.onNavigate({
+      level: levelState
+    });
+  }, [levelState]);
+  hooks.useUnmountEffect(function () {
+    utils.ZIndexUtils.clear(menuRef.current);
+  });
+  React__namespace.useImperativeHandle(ref, function () {
+    return {
+      props: props,
+      toggle: toggle,
+      show: show,
+      hide: hide,
+      navigateForward: navigateForward,
+      navigateBack: navigateBack,
+      setLevelState: setLevelState,
+      getElement: function getElement() {
+        return menuRef.current;
+      }
+    };
+  });
+  var createBackward = function createBackward() {
+    var previousIconProps = mergeProps({
+      className: cx('previousIcon')
+    }, ptm('previousIcon'));
+    var icon = props.backIcon || /*#__PURE__*/React__namespace.createElement(chevronleft.ChevronLeftIcon, previousIconProps);
+    var backIcon = utils.IconUtils.getJSXIcon(icon, _objectSpread({}, previousIconProps), {
+      props: props
+    });
+    var previousLabelProps = mergeProps(ptm('previousLabel'));
+    var previousProps = mergeProps({
+      ref: backward,
+      className: cx('previous', {
+        levelState: levelState
+      }),
+      onClick: function onClick(e) {
+        return navigateBack();
+      }
+    }, ptm('previous'));
+    return /*#__PURE__*/React__namespace.createElement("div", previousProps, backIcon, /*#__PURE__*/React__namespace.createElement("span", previousLabelProps, props.backLabel));
+  };
+  var createElement = function createElement() {
+    var wrapperStyle = {
+      height: props.viewportHeight + 'px'
+    };
+    var backward = createBackward();
+    var rootProps = mergeProps({
+      ref: menuRef,
+      id: props.id,
+      className: utils.classNames(props.className, cx('root')),
+      style: props.style,
+      onClick: function onClick(e) {
+        return onPanelClick(e);
+      }
+    }, SlideMenuBase.getOtherProps(props), ptm('root'));
+    var wrapperProps = mergeProps({
+      className: cx('wrapper'),
+      style: wrapperStyle
+    }, ptm('wrapper'));
+    var contentProps = mergeProps({
+      ref: slideMenuContent,
+      className: cx('content')
+    }, ptm('content'));
+    var transitionProps = mergeProps({
+      classNames: cx('transition'),
+      "in": !props.popup || visibleState,
+      timeout: {
+        enter: 120,
+        exit: 100
+      },
+      options: props.transitionOptions,
+      unmountOnExit: true,
+      onEnter: onEnter,
+      onEntered: onEntered,
+      onExit: onExit,
+      onExited: onExited
+    }, ptm('transition'));
+    return /*#__PURE__*/React__namespace.createElement(csstransition.CSSTransition, _extends({
+      nodeRef: menuRef
+    }, transitionProps), /*#__PURE__*/React__namespace.createElement("div", rootProps, /*#__PURE__*/React__namespace.createElement("div", wrapperProps, /*#__PURE__*/React__namespace.createElement("div", contentProps, /*#__PURE__*/React__namespace.createElement(SlideMenuSub, {
+      id: idState,
+      hostName: "SlideMenu",
+      menuProps: props,
+      model: props.model,
+      root: true,
+      index: 0,
+      menuWidth: props.menuWidth,
+      effectDuration: props.effectDuration,
+      level: levelState,
+      parentActive: levelState === 0,
+      onForward: navigateForward,
+      submenuIcon: props.submenuIcon,
+      ptm: ptm,
+      cx: cx,
+      sx: sx
+    }))), backward));
+  };
+  var element = createElement();
+  return props.popup ? /*#__PURE__*/React__namespace.createElement(portal.Portal, {
+    element: element,
+    appendTo: props.appendTo
+  }) : element;
+}));
+SlideMenu.displayName = 'SlideMenu';
+
+exports.SlideMenu = SlideMenu;
