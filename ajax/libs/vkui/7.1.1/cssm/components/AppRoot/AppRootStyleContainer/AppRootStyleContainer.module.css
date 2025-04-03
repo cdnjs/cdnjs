@@ -1,0 +1,63 @@
+/*
+ * Стили, которые переиспользуются в AppRoot и при использовании порталов.
+ *
+ * Желательно не помещать сюда стили отвечающие за геометрию и фон,
+ * чтобы не влиять на поведение модалок и других плавающих элементов.
+ * Такие стили лучше помещать сразу в AppRoot.
+ */
+.host {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+          text-size-adjust: 100%;
+  font-family: var(--vkui--font_family_base);
+  color: var(--vkui--color_text_primary);
+  color-scheme: var(--vkui--colors_scheme);
+}
+.sizeYCompact {
+  --vkui_internal--panel_header_height: var(--vkui--size_panel_header_height--compact);
+}
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .sizeYNone {
+    --vkui_internal--panel_header_height: var(--vkui--size_panel_header_height--compact);
+  }
+}
+.userSelectNone {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+/**
+ * Хак для webkit-based браузеров, потому что на версиях iOS <= 14.* исчезает возможность
+ * редактировать contenteditable элементы, если выше по дереву задан user-select: none;
+ */
+.userSelectNone [contenteditable] {
+  -webkit-user-select: text;
+     -moz-user-select: text;
+          user-select: text;
+}
+@media (pointer: coarse),(pointer: none) {
+  .pointerNone {
+    -webkit-user-select: none;
+       -moz-user-select: none;
+            user-select: none;
+  }
+
+  .pointerNone [contenteditable] {
+    -webkit-user-select: text;
+       -moz-user-select: text;
+            user-select: text;
+  }
+}
+.embedded {
+  /* Раньше в этом режиме на родителе (app__root--embeded)
+   * лежал стиль overflow-x: hidden
+   * см: https://github.com/VKCOM/VKUI/commit/67366838397305b79d4c1de6e0b5ca03e7fd7450
+   * см: https://github.com/VKCOM/VKUI/pull/1248/files
+   * Но сейчас, так как главные стили, в том числе и
+   * transform: translate3d(0, 0, 0) лежат на AppRoot,
+   * то в этом смысла не видно.
+   * По крайней мере примеров,
+   * где бы overflow ломался в embedded режиме,
+   * пока не было найдено */
+  overflow: auto;
+}
