@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("language","cy",{button:"Gosod iaith",remove:"Tynnu iaith"});
