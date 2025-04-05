@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/solid.ts"],
+  "sourcesContent": ["/**\n * @module exome/solid\n */\nimport { type Exome, subscribe } from \"exome\";\nimport { type Accessor, createSignal, onCleanup } from \"solid-js\";\n\n/**\n * Subscribes to store instance update events and trigger updates to component accordingly.\n *\n * @example:\n * ```ts\n * import { useStore } from \"exome/solid\"\n * import { counterStore } from \"./counter.store.ts\"\n *\n * function App() {\n *   const { count, increment } = useStore(counterStore, s => s.count)\n *\n *   return (\n *     <button onClick={increment}>{count}</button>\n *   );\n * }\n * ```\n */\nexport function useStore<T extends Exome, R = T>(\n\tstore: T,\n\tselector: (state: T) => R = (v) => v as any,\n): Accessor<R> {\n\tconst [value, setValue] = createSignal(selector(store));\n\n\tfunction render() {\n\t\tsetValue(() => selector(store));\n\t}\n\n\tconst unsubscribe = subscribe(store, render);\n\tonCleanup(() => unsubscribe);\n\n\treturn value;\n}\n"],
+  "mappings": ";AAGA,SAAqB,aAAAA,SAAiB;AACtC,SAAwB,gBAAAC,GAAc,aAAAC,SAAiB;AAmBhD,SAASC,EACfC,GACAC,IAA4B,CAACC,MAAMA,GACrB;AACd,MAAM,CAACC,GAAOC,CAAQ,IAAIP,EAAaI,EAASD,CAAK,CAAC;AAEtD,WAASK,IAAS;AACjB,IAAAD,EAAS,MAAMH,EAASD,CAAK,CAAC;AAAA,EAC/B;AAEA,MAAMM,IAAcV,EAAUI,GAAOK,CAAM;AAC3C,SAAAP,EAAU,MAAMQ,CAAW,GAEpBH;AACR;",
+  "names": ["subscribe", "createSignal", "onCleanup", "useStore", "store", "selector", "v", "value", "setValue", "render", "unsubscribe"]
+}

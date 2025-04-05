@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/rxjs.ts"],
+  "sourcesContent": ["/**\n * @module exome/rxjs\n */\nimport { type Exome, subscribe } from \"exome\";\nimport { Observable } from \"rxjs\";\n\n/**\n * Subscribes to store instance update events and trigger Observable updates accordingly.\n *\n * @example:\n * ```ts\n * import { observableFromExome } from \"exome/rxjs\"\n * import { counterStore } from \"./counter.store.ts\"\n *\n * observableFromExome(counterStore)\n *   .pipe(\n *     map(({ count }) => count),\n *     distinctUntilChanged()\n *   )\n *   .subscribe((value) => {\n *     console.log(\"Count changed to\", value)\n *   });\n *\n * setInterval(counterStore.increment, 1000)\n * ```\n */\nexport function observableFromExome<T extends Exome = Exome>(\n\tstore: T,\n): Observable<T> {\n\treturn new Observable<T>((subscriber) => {\n\t\tsubscribe(store, (value: any) => subscriber.next(value));\n\t\tsubscriber.next(store);\n\t});\n}\n"],
+  "mappings": ";AAGA,SAAqB,aAAAA,SAAiB;AACtC,SAAS,cAAAC,SAAkB;AAsBpB,SAASC,EACfC,GACgB;AAChB,SAAO,IAAIF,EAAc,CAACG,MAAe;AACxC,IAAAJ,EAAUG,GAAO,CAACE,MAAeD,EAAW,KAAKC,CAAK,CAAC,GACvDD,EAAW,KAAKD,CAAK;AAAA,EACtB,CAAC;AACF;",
+  "names": ["subscribe", "Observable", "observableFromExome", "store", "subscriber", "value"]
+}
