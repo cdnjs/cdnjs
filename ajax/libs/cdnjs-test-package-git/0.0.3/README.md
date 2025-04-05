@@ -1,0 +1,3 @@
+# cdnjs-test-package
+
+halloooo
