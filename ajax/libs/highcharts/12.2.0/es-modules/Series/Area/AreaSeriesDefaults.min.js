@@ -1,0 +1,1 @@
+"use strict";const AreaSeriesDefaults={threshold:0,legendSymbol:"areaMarker"};export default AreaSeriesDefaults;

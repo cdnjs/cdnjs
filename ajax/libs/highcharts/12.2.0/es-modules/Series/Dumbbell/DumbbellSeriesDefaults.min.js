@@ -1,0 +1,1 @@
+"use strict";const DumbbellSeriesDefaults={trackByArea:!1,fillColor:"none",lineWidth:0,pointRange:1,connectorWidth:1,stickyTracking:!1,groupPadding:.2,crisp:!1,pointPadding:.1,legendSymbol:"rectangle",lowColor:"#333333",states:{hover:{lineWidthPlus:0,connectorWidthPlus:1,halo:!1}}};export default DumbbellSeriesDefaults;

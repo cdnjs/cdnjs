@@ -1,0 +1,1 @@
+"use strict";const CandlestickSeriesDefaults={states:{hover:{lineWidth:2}},threshold:null,lineColor:"#000000",lineWidth:1,upColor:"#ffffff",stickyTracking:!0};export default CandlestickSeriesDefaults;

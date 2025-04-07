@@ -1,0 +1,1 @@
+"use strict";import Boostables from"./Boostables.js";const BoostableMap={};Boostables.forEach(o=>{BoostableMap[o]=!0});export default BoostableMap;

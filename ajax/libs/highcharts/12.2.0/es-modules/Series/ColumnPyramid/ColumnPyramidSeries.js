@@ -1,0 +1,179 @@
+/* *
+ *
+ *  (c) 2010-2025 Sebastian Bochan
+ *
+ *  License: www.highcharts.com/license
+ *
+ *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
+ *
+ * */
+'use strict';
+import ColumnPyramidSeriesDefaults from './ColumnPyramidSeriesDefaults.js';
+import SeriesRegistry from '../../Core/Series/SeriesRegistry.js';
+const { column: ColumnSeries } = SeriesRegistry.seriesTypes;
+import U from '../../Core/Utilities.js';
+const { clamp, merge, pick } = U;
+/* *
+ *
+ *  Class
+ *
+ * */
+/**
+ * The ColumnPyramidSeries class
+ *
+ * @private
+ * @class
+ * @name Highcharts.seriesTypes.columnpyramid
+ *
+ * @augments Highcharts.Series
+ */
+class ColumnPyramidSeries extends ColumnSeries {
+    /* *
+     *
+     *  Functions
+     *
+     * */
+    /**
+     * Overrides the column translate method
+     * @private
+     */
+    translate() {
+        const series = this, chart = series.chart, options = series.options, dense = series.dense =
+            series.closestPointRange * series.xAxis.transA < 2, borderWidth = series.borderWidth = pick(options.borderWidth, dense ? 0 : 1 // #3635
+        ), yAxis = series.yAxis, threshold = options.threshold, minPointLength = pick(options.minPointLength, 5), metrics = series.getColumnMetrics(), pointWidth = metrics.width, pointXOffset = series.pointXOffset = metrics.offset;
+        let translatedThreshold = series.translatedThreshold =
+            yAxis.getThreshold(threshold), 
+        // Postprocessed for border width
+        seriesBarW = series.barW =
+            Math.max(pointWidth, 1 + 2 * borderWidth);
+        if (chart.inverted) {
+            translatedThreshold -= 0.5; // #3355
+        }
+        // When the pointPadding is 0,
+        // we want the pyramids to be packed tightly,
+        // so we allow individual pyramids to have individual sizes.
+        // When pointPadding is greater,
+        // we strive for equal-width columns (#2694).
+        if (options.pointPadding) {
+            seriesBarW = Math.ceil(seriesBarW);
+        }
+        super.translate();
+        // Record the new values
+        for (const point of series.points) {
+            const yBottom = pick(point.yBottom, translatedThreshold), safeDistance = 999 + Math.abs(yBottom), plotY = clamp(point.plotY, -safeDistance, yAxis.len + safeDistance), 
+            // Don't draw too far outside plot area
+            // (#1303, #2241, #4264)
+            barW = seriesBarW / 2, barY = Math.min(plotY, yBottom), barH = Math.max(plotY, yBottom) - barY;
+            let barX = point.plotX + pointXOffset, stackTotal, stackHeight, topXwidth, bottomXwidth, invBarPos, x1, x2, x3, x4, y1, y2;
+            // Adjust for null or missing points
+            if (options.centerInCategory) {
+                barX = series.adjustForMissingColumns(barX, pointWidth, point, metrics);
+            }
+            point.barX = barX;
+            point.pointWidth = pointWidth;
+            // Fix the tooltip on center of grouped pyramids
+            // (#1216, #424, #3648)
+            point.tooltipPos = chart.inverted ?
+                [
+                    yAxis.len + yAxis.pos - chart.plotLeft - plotY,
+                    series.xAxis.len - barX - barW,
+                    barH
+                ] :
+                [
+                    barX + barW,
+                    plotY + yAxis.pos - chart.plotTop,
+                    barH
+                ];
+            stackTotal =
+                threshold + (point.total || point.y);
+            // Overwrite stacktotal (always 100 / -100)
+            if (options.stacking === 'percent') {
+                stackTotal =
+                    threshold + (point.y < 0) ?
+                        -100 :
+                        100;
+            }
+            // Get the highest point (if stack, extract from total)
+            const topPointY = yAxis.toPixels((stackTotal), true);
+            // Calculate height of stack (in pixels)
+            stackHeight =
+                chart.plotHeight - topPointY -
+                    (chart.plotHeight - translatedThreshold);
+            // `topXwidth` and `bottomXwidth` = width of lines from the center
+            // calculated from tanges proportion. Cannot be a NaN #12514.
+            topXwidth = stackHeight ?
+                (barW * (barY - topPointY)) / stackHeight : 0;
+            // Like topXwidth, but with height of point
+            bottomXwidth = stackHeight ?
+                (barW * (barY + barH - topPointY)) / stackHeight :
+                0;
+            /*
+                    /\
+                   /  \
+            x1,y1,------ x2,y1
+                /       \
+               -----------
+            x4,y2        x3,y2
+            */
+            x1 = barX - topXwidth + barW;
+            x2 = barX + topXwidth + barW;
+            x3 = barX + bottomXwidth + barW;
+            x4 = barX - bottomXwidth + barW;
+            y1 = barY - minPointLength;
+            y2 = barY + barH;
+            if (point.y < 0) {
+                y1 = barY;
+                y2 = barY + barH + minPointLength;
+            }
+            // Inverted chart
+            if (chart.inverted) {
+                invBarPos = yAxis.width - barY;
+                stackHeight =
+                    topPointY - (yAxis.width - translatedThreshold);
+                // Proportion tanges
+                topXwidth = (barW *
+                    (topPointY - invBarPos)) / stackHeight;
+                bottomXwidth = (barW *
+                    (topPointY - (invBarPos - barH))) / stackHeight;
+                x1 = barX + barW + topXwidth; // Top bottom
+                x2 = x1 - 2 * topXwidth; // Top top
+                x3 = barX - bottomXwidth + barW; // Bottom top
+                x4 = barX + bottomXwidth + barW; // Bottom bottom
+                y1 = barY;
+                y2 = barY + barH - minPointLength;
+                if (point.y < 0) {
+                    y2 = barY + barH + minPointLength;
+                }
+            }
+            // Register shape type and arguments to be used in drawPoints
+            point.shapeType = 'path';
+            point.shapeArgs = {
+                x: x1,
+                y: y1,
+                width: x2 - x1,
+                height: barH,
+                // Path of pyramid
+                d: [
+                    ['M', x1, y1],
+                    ['L', x2, y1],
+                    ['L', x3, y2],
+                    ['L', x4, y2],
+                    ['Z']
+                ]
+            };
+        }
+    }
+}
+/* *
+ *
+ *  Static properties
+ *
+ * */
+ColumnPyramidSeries.defaultOptions = merge(ColumnSeries.defaultOptions, ColumnPyramidSeriesDefaults);
+SeriesRegistry.registerSeriesType('columnpyramid', ColumnPyramidSeries);
+/* *
+ *
+ *  Default Export
+ *
+ * */
+export default ColumnPyramidSeries;
