@@ -1,0 +1,37 @@
+import { CustomMedia, Level, PlayerOptions, Source } from './interfaces';
+declare class Media {
+    #private;
+    constructor(element: HTMLMediaElement, options: PlayerOptions, autoplay: boolean, customMedia: CustomMedia);
+    canPlayType(mimeType: string): boolean;
+    load(): Promise<void>;
+    play(): Promise<void>;
+    pause(): Promise<void>;
+    destroy(): void;
+    set src(media: Source[]);
+    get src(): Source[];
+    get current(): Source;
+    set mediaFiles(sources: Source[]);
+    get mediaFiles(): Source[];
+    set volume(value: number);
+    get volume(): number;
+    set muted(value: boolean);
+    get muted(): boolean;
+    set playbackRate(value: number);
+    get playbackRate(): number;
+    set defaultPlaybackRate(value: number);
+    get defaultPlaybackRate(): number;
+    set currentTime(value: number);
+    get currentTime(): number;
+    get duration(): number;
+    get paused(): boolean;
+    get ended(): boolean;
+    set loaded(loaded: boolean);
+    get loaded(): boolean;
+    set level(value: number | string | Level);
+    get level(): number | string | Level;
+    get levels(): Level[];
+    get instance(): Media | null;
+    private _getMediaFiles;
+    private _invoke;
+}
+export default Media;
