@@ -1,0 +1,33 @@
+.in {
+  /* Отрицательный margin нужен, чтобы компенсировать увеличенный из-за тени padding (12px -> 20px) */
+  margin-block: -8px;
+  margin-inline: 0;
+}
+
+.scrollIn {
+  margin: 0;
+  padding-block: calc(var(--vkui--size_subnavigation_bar_padding_vertical--regular) + 8px);
+  padding-inline: 0;
+  display: flex;
+}
+
+.scrollIn::before,
+.scrollIn::after {
+  content: '';
+  min-inline-size: var(--vkui--size_base_padding_horizontal--regular);
+}
+
+.item {
+  list-style-type: none;
+  display: flex;
+}
+
+.item + .item {
+  -webkit-margin-start: var(--vkui--size_subnavigation_bar_gap--regular);
+          margin-inline-start: var(--vkui--size_subnavigation_bar_gap--regular);
+}
+
+.modeFixed .item {
+  flex: 1;
+  min-inline-size: 0;
+}
