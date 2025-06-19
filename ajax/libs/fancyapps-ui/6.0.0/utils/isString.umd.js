@@ -1,0 +1,1 @@
+!/*! License details at fancyapps.com/license */function(e,i){"object"==typeof exports&&"undefined"!=typeof module?i(exports):"function"==typeof define&&define.amd?define(["exports"],i):i((e="undefined"!=typeof globalThis?globalThis:e||self).window=e.window||{})}(this,function(e){"use strict";e.isString=e=>"string"==typeof e});
