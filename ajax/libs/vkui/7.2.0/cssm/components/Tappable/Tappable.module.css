@@ -1,0 +1,123 @@
+.host {
+  position: relative;
+  border-radius: var(--vkui--size_border_radius--regular);
+  isolation: isolate;
+}
+
+/*
+Просто поменять местами элементы внутри Tappable нельзя:
+
+- некоторые элементы завязаны на :last-child и :first-child
+- необходимо чтобы все элементы были позиционированные
+
+https://developer.mozilla.org/ru/docs/Web/CSS/CSS_Positioning/Understanding_z_index/Stacking_without_z-index
+https://github.com/VKCOM/VKUI/pull/3641
+*/
+
+/* stylelint-disable-next-line selector-max-universal */
+
+.host > * {
+  position: relative;
+  z-index: var(--vkui_internal--z_index_tappable_element);
+}
+
+/**
+ * overrides
+ */
+
+.sizeXCompact {
+  border-radius: 0;
+}
+
+@media (max-width: 767.9px) {
+  .sizeXNone {
+    border-radius: 0;
+  }
+}
+
+.host.borderRadiusInherit {
+  border-radius: inherit;
+}
+
+/**
+ * hover & active state
+ */
+
+.stateLayer {
+  position: absolute;
+  inset: 0;
+  z-index: var(--vkui_internal--z_index_tappable_state);
+  overflow: hidden;
+  border-radius: inherit;
+  transition: background-color 0.15s ease-out;
+}
+
+/**
+ * Задерживаем отрисовку background-color
+ */
+
+.hasPointerFalse .ripple {
+  transition: background-color 0.15s 0.15s ease-out;
+}
+
+@media (pointer: coarse),(pointer: none) {
+  .hasPointerNone .ripple {
+    transition: background-color 0.15s 0.15s ease-out;
+  }
+}
+
+.hoveredBackground > .stateLayer {
+  background-color: var(--vkui--color_transparent--hover);
+}
+
+.activatedBackground > .stateLayer {
+  background-color: var(--vkui--color_transparent--active);
+}
+
+.hoveredOpacity,
+.activatedOpacity {
+  transition: opacity 0.15s ease-out;
+}
+
+.hoveredOpacity {
+  opacity: 0.8;
+}
+
+.activatedOpacity {
+  opacity: 0.7;
+}
+
+.wave {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 24px;
+  block-size: 24px;
+  margin-block: -12px 0;
+  margin-inline: 0 -12px;
+  content: '';
+  background: var(--vkui--color_transparent--active);
+  border-radius: 50%;
+  opacity: 0;
+  animation: animation-wave 0.3s var(--vkui--animation_easing_platform);
+}
+
+/**
+ * Animations
+ */
+
+@keyframes animation-wave {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(8);
+  }
+}
