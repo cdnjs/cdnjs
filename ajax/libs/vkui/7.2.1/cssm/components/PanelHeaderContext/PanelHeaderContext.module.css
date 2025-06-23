@@ -1,0 +1,177 @@
+.host {
+  --vkui_internal--PanelHeaderContext__fade_display: none;
+
+  z-index: var(--vkui_internal--z_index_panel_header_context);
+  inline-size: 100%;
+  block-size: auto;
+}
+
+.sizeXCompact {
+  --vkui_internal--PanelHeaderContext__fade_display: block;
+
+  block-size: 100%;
+}
+
+@media (max-width: 767.9px) {
+  .sizeXNone {
+    --vkui_internal--PanelHeaderContext__fade_display: block;
+
+    block-size: 100%;
+  }
+}
+
+.in {
+  position: absolute;
+  inset-inline-start: 0;
+  z-index: 1;
+  box-sizing: border-box;
+  inline-size: 100%;
+  padding: 8px;
+}
+
+.fade {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  z-index: 0;
+  display: var(--vkui_internal--PanelHeaderContext__fade_display);
+  inline-size: 100%;
+  block-size: 100%;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.opened .fade {
+  animation: animation-panelheadercontext-fade-in var(--vkui--animation_duration_m) ease both;
+}
+
+.closing .fade {
+  animation: animation-panelheadercontext-fade-out var(--vkui--animation_duration_m) ease both;
+}
+
+.opened .in {
+  animation: animation-panelheadercontext-translate-in var(--vkui--animation_duration_m) ease both;
+}
+
+.closing .in {
+  animation: animation-panelheadercontext-translate-out var(--vkui--animation_duration_m) ease both;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .opened .in {
+    animation-name: animation-panelheadercontext-fade-in;
+  }
+
+  .closing .in {
+    animation-name: animation-panelheadercontext-fade-out;
+  }
+}
+
+.content {
+  overflow: hidden;
+  background: var(--vkui--color_background_content);
+}
+
+.ios .in {
+  padding: 0;
+}
+
+/**
+ * Имеется ввиду
+ * platform !== 'ios' ||
+ * (platform === 'ios' && isDesktop)
+ */
+
+.host:not(.ios) .content,
+.sizeXRegular.ios .content {
+  padding-block: 8px;
+  padding-inline: 0;
+  border-radius: 12px;
+}
+
+@media (min-width: 768px) {
+  .sizeXNone.ios .content {
+    padding-block: 8px;
+    padding-inline: 0;
+    border-radius: 12px;
+  }
+}
+
+/*
+ Desktop
+ */
+
+.sizeXRegular .in {
+  padding-block: 12px;
+  padding-inline: 8px;
+}
+
+.sizeXRegular .content {
+  border-radius: 12px;
+}
+
+.sizeXRegular .content {
+  box-shadow:
+    0 0 4px rgba(0, 0, 0, 0.08),
+    0 8px 8px rgba(0, 0, 0, 0.16);
+}
+
+@media (min-width: 768px) {
+  .sizeXNone .in {
+    padding-block: 12px;
+    padding-inline: 8px;
+  }
+
+  .sizeXNone .content {
+    border-radius: 12px;
+  }
+
+  .sizeXNone .content {
+    box-shadow:
+      0 0 4px rgba(0, 0, 0, 0.08),
+      0 8px 8px rgba(0, 0, 0, 0.16);
+  }
+}
+
+/*
+  Animations
+ */
+
+@keyframes animation-panelheadercontext-translate-in {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes animation-panelheadercontext-translate-out {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes animation-panelheadercontext-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes animation-panelheadercontext-fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}

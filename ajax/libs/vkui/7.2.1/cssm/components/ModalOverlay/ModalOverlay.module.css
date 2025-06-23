@@ -1,0 +1,72 @@
+.host {
+  inset: 0;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: opacity 0.3s linear;
+  will-change: opacity;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.nonInteractive {
+  pointer-events: none;
+  touch-action: none;
+}
+
+.hostPositionAbsolute {
+  position: absolute;
+}
+
+.hostPositionFixed {
+  position: fixed;
+  z-index: var(--vkui--z_index_modal);
+}
+
+.hostStateEnter {
+  opacity: 0;
+  transition-property: none;
+}
+
+.hostStateEntering {
+  opacity: var(--vkui_internal--modal-overlay--opacity);
+}
+
+.hostStateEntered {
+  opacity: var(--vkui_internal--modal-overlay--opacity);
+}
+
+.hostStateExit {
+  opacity: var(--vkui_internal--modal-overlay--opacity);
+  transition-property: none;
+}
+
+.hostStateExiting {
+  opacity: 0;
+}
+
+.hostStateExited {
+  opacity: 0;
+  transition-property: none;
+}
+
+/* Mobile */
+
+@media (max-width: 767.9px) {
+  .hostStateEntering,
+  .hostStateExiting {
+    transition-duration: var(--vkui--animation_duration_l);
+  }
+}
+
+/* Desktop */
+
+@media (min-width: 768px) {
+  .hostStateEntering {
+    transition-duration: 0.2s;
+  }
+
+  .hostStateExiting {
+    transition-duration: 0.1s;
+  }
+}

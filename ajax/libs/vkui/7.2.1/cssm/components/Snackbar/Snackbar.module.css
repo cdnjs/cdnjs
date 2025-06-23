@@ -1,0 +1,234 @@
+.host {
+  --vkui_internal--snackbar_safe_area_inset_bottom: var(--vkui_internal--safe_area_inset_bottom);
+  --vkui_internal--snackbar_in_padding: 8px;
+  --vkui_internal--snackbar_shift_x: 0;
+  --vkui_internal--snackbar_shift_y: 0;
+  --vkui_internal--snackbar_direction: 0;
+  --vkui_internal--snackbar_animation_from: translate3d(0, 0, 0);
+  --vkui_internal--snackbar_animation_to: translate3d(0, 0, 0);
+  --vkui_internal--snackbar_animation_duration: 340ms;
+  --vkui_internal--snackbar_animation_text_direction: 1;
+
+  position: fixed;
+  inset-inline: var(--vkui_internal--safe_area_inset_left)
+    var(--vkui_internal--safe_area_inset_right);
+  z-index: var(--vkui--z_index_popout);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+.ios {
+  --vkui_internal--snackbar_animation_duration: 400ms;
+}
+
+.rtl {
+  --vkui_internal--snackbar_animation_text_direction: -1;
+}
+
+.placementTopStart,
+.placementTop,
+.placementTopEnd {
+  --vkui_internal--snackbar_animation_from: translate3d(0, -100%, 0);
+  --vkui_internal--snackbar_animation_to: translate3d(0, var(--vkui_internal--snackbar_shift_y), 0);
+
+  inset-block-start: var(--vkui_internal--safe_area_inset_top);
+}
+
+.placementBottomStart {
+  --vkui_internal--snackbar_direction: calc(
+    -1 * var(--vkui_internal--snackbar_animation_text_direction)
+  );
+}
+
+.placementBottomEnd {
+  --vkui_internal--snackbar_direction: calc(
+    1 * var(--vkui_internal--snackbar_animation_text_direction)
+  );
+}
+
+.placementBottomStart,
+.placementBottom,
+.placementBottomEnd {
+  --vkui_internal--snackbar_animation_from: translate3d(
+    calc(var(--vkui_internal--snackbar_direction) * 100%),
+    0,
+    0
+  );
+  --vkui_internal--snackbar_animation_to: translate3d(var(--vkui_internal--snackbar_shift_x), 0, 0);
+
+  inset-block-end: var(--vkui_internal--snackbar_safe_area_inset_bottom);
+}
+
+@media (min-width: 768px) and (pointer: fine),(min-width: 768px) and (min-height: 720px) {
+  .host {
+    inline-size: 100%;
+    max-inline-size: 351px;
+  }
+
+  .placementTop,
+  .placementBottom {
+    margin-inline: auto;
+  }
+
+  .placementBottom {
+    --vkui_internal--snackbar_animation_from: translate3d(0, 100%, 0);
+    --vkui_internal--snackbar_animation_to: translate3d(
+      0,
+      var(--vkui_internal--snackbar_shift_y),
+      0
+    );
+  }
+
+  .placementTopStart,
+  .placementBottomStart {
+    --vkui_internal--snackbar_animation_from: translate3d(
+      calc(-100% * var(--vkui_internal--snackbar_animation_text_direction)),
+      0,
+      0
+    );
+    --vkui_internal--snackbar_animation_to: translate3d(
+      var(--vkui_internal--snackbar_shift_x),
+      0,
+      0
+    );
+
+    inset-inline-start: var(--vkui_internal--safe_area_inset_left);
+    inset-inline-end: auto;
+  }
+
+  .placementTopEnd,
+  .placementBottomEnd {
+    --vkui_internal--snackbar_animation_from: translate3d(
+      calc(100% * var(--vkui_internal--snackbar_animation_text_direction)),
+      0,
+      0
+    );
+    --vkui_internal--snackbar_animation_to: translate3d(
+      var(--vkui_internal--snackbar_shift_x),
+      0,
+      0
+    );
+
+    inset-inline-start: auto;
+    inset-inline-end: var(--vkui_internal--safe_area_inset_right);
+  }
+}
+
+.in {
+  padding: var(--vkui_internal--snackbar_in_padding);
+  animation-duration: var(--vkui_internal--snackbar_animation_duration);
+  animation-timing-function: var(--vkui--animation_easing_platform);
+  animation-fill-mode: both;
+}
+
+.placementTopStart .in,
+.placementTop .in,
+.placementTopEnd .in {
+  transform: translate3d(0, var(--vkui_internal--snackbar_shift_y), 0);
+}
+
+.placementBottomStart .in,
+.placementBottom .in,
+.placementBottomEnd .in {
+  transform: translate3d(var(--vkui_internal--snackbar_shift_x), 0, 0);
+}
+
+@media (min-width: 768px) and (pointer: fine),(min-width: 768px) and (min-height: 720px) {
+  .in {
+    --vkui_internal--snackbar_in_padding: 12px;
+  }
+
+  .placementTopStart .in,
+  .placementBottomStart .in,
+  .placementTopEnd .in,
+  .placementBottomEnd .in {
+    transform: translate3d(var(--vkui_internal--snackbar_shift_x), 0, 0);
+  }
+
+  .placementBottom .in {
+    transform: translate3d(0, var(--vkui_internal--snackbar_shift_y), 0);
+  }
+}
+
+.stateEnter .in,
+.stateEntering .in {
+  animation-name: animation-snackbar-slide-in;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .stateEnter .in,
+  .stateEntering .in {
+    animation-name: animation-snackbar-fade-in;
+  }
+}
+
+.stateEntered .in {
+  transition-timing-function: var(--vkui--animation_easing_platform);
+  transition-duration: var(--vkui_internal--snackbar_animation_duration);
+  transition-property: transform;
+}
+
+.touched .in {
+  transition-property: none;
+}
+
+.stateExit .in,
+.stateExiting .in {
+  animation-name: animation-snackbar-slide-out;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .stateExit .in,
+  .stateExiting .in {
+    animation-name: animation-snackbar-fade-out;
+  }
+}
+
+/* stylelint-disable-next-line at-rule-empty-line-before */
+
+@keyframes animation-snackbar-slide-in {
+  from {
+    opacity: 0;
+    transform: var(--vkui_internal--snackbar_animation_from);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes animation-snackbar-slide-out {
+  from {
+    opacity: 1;
+    transform: var(--vkui_internal--snackbar_animation_to);
+  }
+
+  to {
+    opacity: 0;
+    transform: var(--vkui_internal--snackbar_animation_from);
+  }
+}
+
+/* Анимации при (prefers-reduced-motion: reduce) */
+
+@keyframes animation-snackbar-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes animation-snackbar-fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}

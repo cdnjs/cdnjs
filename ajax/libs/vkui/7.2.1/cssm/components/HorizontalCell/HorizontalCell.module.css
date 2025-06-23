@@ -1,0 +1,122 @@
+.host {
+  display: flex;
+}
+
+.image {
+  display: flex;
+  justify-content: center;
+}
+
+.body {
+  max-inline-size: inherit;
+  font-family: inherit;
+  text-decoration: none;
+}
+
+/* Перебиваем селектор в Tappable--sizeX-(compact|none) */
+
+.host .body {
+  border-radius: var(--vkui--size_border_radius--regular);
+}
+
+.content {
+  max-inline-size: inherit;
+  text-overflow: ellipsis;
+  color: var(--vkui--color_text_primary);
+  word-break: break-word;
+}
+
+.subtitle {
+  color: var(--vkui--color_text_secondary);
+}
+
+.content .subtitle {
+  -webkit-margin-before: 2px;
+          margin-block-start: 2px;
+}
+
+.sized {
+  max-inline-size: var(--vkui_internal--cell_width);
+}
+
+.customSize .body {
+  inline-size: var(--vkui_internal--cell_width);
+}
+
+.sizeS {
+  --vkui_internal--side_cell_gap: calc(
+    var(--vkui--size_base_padding_horizontal--regular) - var(--vkui--spacing_size_m)
+  );
+  --vkui_internal--cell_width: 72px;
+}
+
+.noPadding {
+  --vkui_internal--side_cell_gap: 0px;
+}
+
+.image {
+  padding-block: 4px;
+  padding-inline: var(--vkui--spacing_size_s);
+}
+
+.content {
+  padding-block: 2px 8px;
+  padding-inline: 6px;
+  text-align: start;
+}
+
+.textAlignCenter {
+  text-align: center;
+}
+
+.textAlignEnd {
+  text-align: end;
+}
+
+.sizeS .image {
+  padding-block: 4px;
+  padding-inline: var(--vkui--spacing_size_m);
+}
+
+.sizeS .content {
+  padding-block: 2px 8px;
+  padding-inline: 4px;
+}
+
+.sizeM {
+  --vkui_internal--cell_width: 100px;
+}
+
+.sizeL {
+  --vkui_internal--cell_width: 140px;
+}
+
+.sizeXL {
+  --vkui_internal--cell_width: 232px;
+}
+
+.sizeAuto {
+  inline-size: auto;
+}
+
+.host:first-child::before,
+.host:last-child::after {
+  min-inline-size: var(--vkui_internal--side_cell_gap);
+  content: '';
+}
+
+.sized:first-child,
+.sized:last-child {
+  max-inline-size: calc(var(--vkui_internal--cell_width) + var(--vkui_internal--side_cell_gap));
+}
+
+.sized:first-child:last-child {
+  max-inline-size: calc(
+    var(--vkui_internal--cell_width) + (2 * (var(--vkui_internal--side_cell_gap)))
+  );
+}
+
+.sized:first-child .body,
+.sized:last-child .body {
+  max-inline-size: var(--vkui_internal--cell_width);
+}
