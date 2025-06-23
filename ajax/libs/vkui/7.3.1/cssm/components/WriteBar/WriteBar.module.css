@@ -1,0 +1,116 @@
+.host {
+  background: var(--vkui--color_background_contrast_themed);
+}
+
+.shadow {
+  box-shadow: var(--vkui--elevation3);
+}
+
+.before,
+.form,
+.after {
+  display: flex;
+  align-items: flex-end;
+}
+
+.form {
+  min-block-size: 52px;
+}
+
+.formIn {
+  position: relative;
+  display: flex;
+  flex: 1;
+  min-inline-size: 0;
+}
+
+.textarea {
+  box-sizing: border-box;
+  flex: 1;
+  inline-size: 100%;
+  min-inline-size: 0;
+  max-block-size: 120px;
+  margin: 0;
+  color: var(--vkui--color_text_primary);
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  resize: none;
+  background: transparent;
+  border: 0;
+}
+
+.textarea::placeholder {
+  color: var(--vkui--color_text_subhead);
+  /* Для Firefox */
+  opacity: 1;
+}
+
+.textarea:focus {
+  outline: var(--vkui_internal--outline-reset);
+}
+
+.inlineAfter {
+  display: flex;
+  align-items: flex-end;
+}
+
+.before {
+  -webkit-padding-start: 4px;
+          padding-inline-start: 4px;
+}
+
+.after {
+  -webkit-padding-end: 4px;
+          padding-inline-end: 4px;
+}
+
+.textarea {
+  block-size: 52px;
+  padding-block: 16px;
+  padding-inline: 12px;
+}
+
+/**
+ * iOS
+ */
+
+.ios {
+  background: var(--vkui--color_background_content);
+}
+
+.ios .before,
+.ios .after {
+  padding-block: 0;
+  padding-inline: 4px;
+}
+
+.ios .formIn {
+  box-sizing: border-box;
+  margin-block: 8px;
+  margin-inline: 0;
+  background-color: var(--vkui--color_write_bar_input_background);
+  border: var(--vkui--size_border--regular) solid var(--vkui--color_write_bar_input_border);
+  border-radius: 18px;
+}
+
+.ios .formIn:first-child {
+  -webkit-margin-start: 12px;
+          margin-inline-start: 12px;
+}
+
+.ios .inlineAfter {
+  /* чтобы правильно выровнять иконку, нужно учитывать border */
+  --vkui_internal--writebar-right-gap: calc(-1 * var(--vkui--size_border--regular));
+  --vkui_internal--writebar-vertical-gap: calc(var(--vkui_internal--writebar-right-gap) - 8px);
+
+  margin-block: var(--vkui_internal--writebar-vertical-gap);
+  -webkit-margin-end: var(--vkui_internal--writebar-right-gap);
+          margin-inline-end: var(--vkui_internal--writebar-right-gap);
+}
+
+.ios .textarea {
+  block-size: 36px;
+  padding-block: 6px;
+  padding-inline: 12px 0;
+}

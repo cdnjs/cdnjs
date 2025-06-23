@@ -1,0 +1,117 @@
+.host {
+  position: relative;
+}
+
+.dragging {
+  background-color: var(--vkui--color_background_secondary);
+  box-shadow: var(--vkui--elevation3);
+}
+
+.checkbox,
+.dragger {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.checkbox {
+  -webkit-margin-end: var(--vkui--spacing_size_2xl);
+          margin-inline-end: var(--vkui--spacing_size_2xl);
+}
+
+.dragger {
+  display: flex;
+  align-items: center;
+  block-size: 100%;
+  -webkit-padding-end: var(--vkui--spacing_size_2xl);
+          padding-inline-end: var(--vkui--spacing_size_2xl);
+}
+
+.dragger.controlNoBefore {
+  -webkit-padding-end: 0;
+          padding-inline-end: 0;
+}
+
+.controlNoBefore {
+  /* Когда в before нет ничего, кроме dragger или checkbox, нужно добавлять компенсированный отступ */
+  -webkit-margin-end: calc(var(--vkui--spacing_size_2xl) - var(--vkui--spacing_size_xl));
+          margin-inline-end: calc(var(--vkui--spacing_size_2xl) - var(--vkui--spacing_size_xl));
+}
+
+.content {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+
+.removable .content {
+  flex-grow: 1;
+  /* размер removable icon */
+  -webkit-padding-end: 44px;
+          padding-inline-end: 44px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.removable :global(.vkuiInternalRemovable__content) {
+  -webkit-padding-start: 0;
+          padding-inline-start: 0;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list -- для того чтобы активная область Cell распространялась и на область removable */
+
+.removable :global(.vkuiInternalRemovable__action) {
+  position: absolute;
+  inset-inline-end: 0;
+  -webkit-padding-start: 0;
+          padding-inline-start: 0;
+}
+
+/**
+ * iOS
+ */
+
+.ios .dragger {
+  padding-inline: var(--vkui--spacing_size_xl) 0;
+}
+
+.ios .checkbox {
+  -webkit-margin-end: var(--vkui--spacing_size_xl);
+          margin-inline-end: var(--vkui--spacing_size_xl);
+}
+
+.ios .controlNoBefore {
+  /* Когда в before нет ничего, кроме dragger или checkbox, оставляем только отступ у before в SimpleCell */
+  -webkit-margin-end: 0;
+          margin-inline-end: 0;
+}
+
+.ios.removable .content {
+  /* размер removable icon + icon margins*/
+  padding-inline: 48px var(--vkui--size_base_padding_horizontal--regular);
+  /* правый паддинг от removable который мы обнулили ниже */
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.ios.removable :global(.vkuiInternalRemovable__action) {
+  inset-inline: 0 auto;
+  z-index: 1;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.ios.removable :global(.vkuiInternalRemovable__content) {
+  -webkit-padding-end: 0;
+          padding-inline-end: 0;
+}
+
+/**
+ * CMP:
+ * FormItem
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormItem) > .host {
+  margin-block: 0;
+  margin-inline: calc(-1 * var(--vkui--size_base_padding_horizontal--regular));
+}
