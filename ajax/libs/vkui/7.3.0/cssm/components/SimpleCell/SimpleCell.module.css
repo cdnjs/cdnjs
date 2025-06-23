@@ -1,0 +1,192 @@
+.host {
+  --vkui_internal--SimpleCell-before-inline-padding-end: var(--vkui--spacing_size_xl);
+
+  display: flex;
+  align-items: center;
+  min-block-size: 48px;
+  padding-inline: var(--vkui--size_base_padding_horizontal--regular);
+  color: var(--vkui--color_text_primary);
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.mult {
+  white-space: normal;
+}
+
+.mult .children {
+  text-overflow: initial;
+}
+
+.disabled {
+  opacity: var(--vkui--opacity_disable_accessibility);
+}
+
+.before {
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  padding-block: var(--vkui--spacing_size_s);
+  -webkit-padding-end: var(--vkui_internal--SimpleCell-before-inline-padding-end);
+          padding-inline-end: var(--vkui_internal--SimpleCell-before-inline-padding-end);
+  color: var(--vkui_internal--icon_color, var(--vkui--color_icon_accent));
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.before > :global(.vkuiIcon) {
+  box-sizing: content-box;
+  -webkit-padding-end: var(--vkui--spacing_size_xs);
+          padding-inline-end: var(--vkui--spacing_size_xs);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.beforeIos > :global(.vkuiIcon) {
+  -webkit-padding-end: 0;
+          padding-inline-end: 0;
+}
+
+.before:empty {
+  display: none;
+}
+
+.middle {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: center;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  padding-block: var(--vkui--spacing_size_l);
+  overflow: hidden;
+}
+
+/* stylelint-disable-next-line selector-max-universal -- gap: 2px */
+
+.middle > *:not(:first-child) {
+  -webkit-margin-before: var(--vkui--spacing_size_2xs);
+          margin-block-start: var(--vkui--spacing_size_2xs);
+}
+
+.overTitle {
+  color: var(--vkui--color_text_subhead);
+}
+
+.text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.subtitle,
+.extraSubtitle {
+  color: var(--vkui--color_text_secondary);
+}
+
+.host .content {
+  display: flex;
+  align-content: flex-start;
+  align-items: center;
+  justify-content: flex-start;
+  max-inline-size: 100%;
+}
+
+.children {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: inherit;
+}
+
+.mult .children,
+.mult .subtitle {
+  flex: 0 1 auto;
+}
+
+.badge {
+  display: inline-block;
+  flex-grow: 0;
+  flex-shrink: 0;
+  color: var(--vkui--color_icon_accent);
+}
+
+/* stylelint-disable-next-line selector-max-universal -- gap: 4px */
+
+.content > *:not(:last-child) {
+  -webkit-margin-end: var(--vkui--spacing_size_xs);
+          margin-inline-end: var(--vkui--spacing_size_xs);
+}
+
+.indicator {
+  flex-shrink: 0;
+  min-inline-size: 0;
+  -webkit-padding-start: var(--vkui--spacing_size_xl);
+          padding-inline-start: var(--vkui--spacing_size_xl);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--vkui--color_text_secondary);
+  white-space: nowrap;
+}
+
+.after {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  align-self: stretch;
+  color: var(--vkui_internal--icon_color, var(--vkui--color_icon_accent));
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.after > :global(.vkuiIcon) {
+  box-sizing: content-box;
+  -webkit-padding-start: var(--vkui--spacing_size_m);
+          padding-inline-start: var(--vkui--spacing_size_m);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.after > :global(.vkuiIcon):last-child {
+  -webkit-padding-end: var(--vkui--spacing_size_2xs);
+          padding-inline-end: var(--vkui--spacing_size_2xs);
+}
+
+.chevronIcon {
+  -webkit-padding-start: var(--vkui--spacing_size_xl);
+          padding-inline-start: var(--vkui--spacing_size_xl);
+  color: var(--vkui--color_icon_tertiary);
+}
+
+/**
+ * sizeY === 'compact'
+ */
+
+.sizeYCompact {
+  min-block-size: 44px;
+}
+
+.sizeYCompact .before {
+  padding-block: var(--vkui--spacing_size_xs);
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .sizeYNone {
+    min-block-size: 44px;
+  }
+
+  .sizeYNone .before {
+    padding-block: var(--vkui--spacing_size_xs);
+  }
+}
+
+/**
+ * CMP:
+ * FormItem
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormItem) > .host {
+  margin-block: 0;
+  margin-inline: calc(-1 * var(--vkui--size_base_padding_horizontal--regular));
+}

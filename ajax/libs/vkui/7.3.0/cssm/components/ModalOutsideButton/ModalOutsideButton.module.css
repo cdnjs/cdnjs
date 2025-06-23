@@ -1,0 +1,31 @@
+.host {
+  box-sizing: border-box;
+  inline-size: 56px;
+  block-size: 56px;
+  padding: 18px;
+  color: var(--vkui--color_icon_contrast);
+}
+
+.host::before {
+  position: absolute;
+  inset: 14px;
+  display: block;
+  content: '';
+  background: var(--vkui--color_overlay_secondary);
+  border-radius: 50%;
+  transition: background-color 0.15s ease-out;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list -- fixes icon misplacement on Safari in some cases */
+
+.host :global(.vkuiIcon) {
+  transform: translateX(0);
+}
+
+.hover::before {
+  background: var(--vkui--color_overlay_secondary--hover);
+}
+
+.active::before {
+  background: var(--vkui--color_overlay_secondary--active);
+}
