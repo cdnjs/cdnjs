@@ -1,0 +1,213 @@
+.host {
+  position: relative;
+  display: block;
+  list-style-type: none;
+  background: var(--vkui--color_background_secondary);
+  border-radius: var(--vkui--size_card_border_radius--regular);
+}
+
+.modeShadow {
+  box-shadow: var(
+    --vkui--elevation3,
+    0 2px 24px 0 rgb(0, 0, 0, 0.08),
+    0 0 2px 0 rgb(0, 0, 0, 0.08)
+  );
+}
+
+.modeShadow,
+.modeOutline,
+.modePlain {
+  background: var(--vkui--color_background_contrast_themed);
+}
+
+.withBorder::after {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  box-sizing: border-box;
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  pointer-events: none;
+  content: '';
+  border: var(--vkui--size_border--regular) solid var(--vkui--color_image_border_alpha);
+  border-radius: inherit;
+}
+
+/**
+ * CMP:
+ * CardScroll
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalCardScroll) .host {
+  flex-shrink: 0;
+  -webkit-margin-end: var(--vkui--size_cardgrid_padding--regular);
+          margin-inline-end: var(--vkui--size_cardgrid_padding--regular);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalCardScroll) .host:last-of-type {
+  -webkit-margin-end: 0;
+          margin-inline-end: 0;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalCardScroll--size-s) .host {
+  inline-size: 40%;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalCardScroll--size-m) .host {
+  inline-size: 62%;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalCardScroll--size-l) .host {
+  inline-size: calc(100% - var(--vkui--size_base_padding_horizontal--regular) * 2);
+  -webkit-margin-end: var(--vkui--size_base_padding_horizontal--regular);
+          margin-inline-end: var(--vkui--size_base_padding_horizontal--regular);
+}
+
+/**
+ * CMP:
+ * Group
+ * SplitCol
+ */
+
+/* stylelint-disable selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalGroup--mode-card) :global(.vkuiInternalCardScroll--size-l) .host,
+:global(.vkuiInternalSplitCol--viewWidth-tabletPlus):global(.vkuiInternalSplitCol--spaced-auto)
+  :global(.vkuiInternalCardScroll--size-l)
+  .host {
+  inline-size: calc(100% - 32px);
+  -webkit-margin-end: 16px;
+          margin-inline-end: 16px;
+}
+
+/* stylelint-enable selector-pseudo-class-disallowed-list */
+
+@media (min-width: 768px) {
+  /* stylelint-disable selector-pseudo-class-disallowed-list */
+  :global(.vkuiInternalSplitCol--viewWidth-none):global(.vkuiInternalSplitCol--spaced-auto)
+    :global(.vkuiInternalCardScroll--size-l)
+    .host {
+    inline-size: calc(100% - 32px);
+    -webkit-margin-end: 16px;
+            margin-inline-end: 16px;
+  }
+  /* stylelint-enable selector-pseudo-class-disallowed-list */
+}
+
+/* stylelint-disable selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalGroup--mode-card) :global(.vkuiInternalCardScroll--size-l) .host:last-of-type,
+:global(.vkuiInternalSplitCol--viewWidth-tabletPlus):global(.vkuiInternalSplitCol--spaced-auto)
+  :global(.vkuiInternalCardScroll--size-l)
+  .host:last-of-type {
+  -webkit-margin-end: 0;
+          margin-inline-end: 0;
+}
+
+/* stylelint-enable selector-pseudo-class-disallowed-list */
+
+/* stylelint-disable selector-pseudo-class-disallowed-list */
+
+@media (min-width: 768px) {
+  :global(.vkuiInternalSplitCol--viewWidth-none):global(.vkuiInternalSplitCol--spaced-auto)
+    :global(.vkuiInternalCardScroll--size-l)
+    .host:last-of-type {
+    -webkit-margin-end: 0;
+            margin-inline-end: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  :global(.vkuiInternalGroup--mode-none)
+    :global(.vkuiInternalCardScroll--size-l)
+    .host:last-of-type {
+    -webkit-margin-end: 0;
+            margin-inline-end: 0;
+  }
+
+  :global(.vkuiInternalGroup--mode-none) :global(.vkuiInternalCardScroll--size-l) .host {
+    inline-size: calc(100% - 32px);
+    -webkit-margin-end: 16px;
+            margin-inline-end: 16px;
+  }
+}
+
+/* stylelint-enable selector-pseudo-class-disallowed-list */
+
+/**
+ * CMP:
+ * CardGrid
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalCardGrid) .host {
+  -webkit-margin-end: var(--vkui--size_cardgrid_padding--regular);
+          margin-inline-end: var(--vkui--size_cardgrid_padding--regular);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalCardGrid--size-l) .host {
+  inline-size: 100%;
+  -webkit-margin-end: 0;
+          margin-inline-end: 0;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalCardGrid--size-l) .host:not(:first-child) {
+  -webkit-margin-before: var(--vkui--size_cardgrid_padding--regular);
+          margin-block-start: var(--vkui--size_cardgrid_padding--regular);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalCardGrid--size-m) .host {
+  inline-size: calc(50% - (var(--vkui--size_cardgrid_padding--regular) / 2));
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalCardGrid--size-m) .host:nth-child(n + 3) {
+  -webkit-margin-before: var(--vkui--size_cardgrid_padding--regular);
+          margin-block-start: var(--vkui--size_cardgrid_padding--regular);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalCardGrid--size-m) .host:nth-child(2n) {
+  -webkit-margin-end: 0;
+          margin-inline-end: 0;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalCardGrid--size-s) .host {
+  inline-size: calc((100% - 2 * var(--vkui--size_cardgrid_padding--regular)) / 3);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalCardGrid--size-s) .host:nth-child(n + 4) {
+  -webkit-margin-before: var(--vkui--size_cardgrid_padding--regular);
+          margin-block-start: var(--vkui--size_cardgrid_padding--regular);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalCardGrid--size-s) .host:nth-child(3n) {
+  -webkit-margin-end: 0;
+          margin-inline-end: 0;
+}

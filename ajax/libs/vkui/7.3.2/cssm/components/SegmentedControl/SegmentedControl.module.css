@@ -1,0 +1,66 @@
+.host {
+  box-sizing: border-box;
+  block-size: 30px;
+  padding: 2px;
+  font-family: var(--vkui--font_family_base);
+  background-color: var(--vkui--color_background_secondary);
+  border-radius: var(--vkui--size_border_radius--regular);
+}
+
+.sizeL {
+  block-size: 36px;
+}
+
+.in {
+  position: relative;
+  display: flex;
+  inline-size: 100%;
+  block-size: 100%;
+  border-radius: inherit;
+  transition: all 100ms ease-out;
+}
+
+.slider {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: calc(100% / var(--vkui_internal--SegmentedControl_options));
+  background-color: var(--vkui--color_segmented_control);
+  border-radius: inherit;
+  box-shadow:
+    inset 0 0 0 0.5px var(--vkui--color_image_border_alpha),
+    0 3px 8px rgb(0, 0, 0, 0.12),
+    0 3px 1px rgb(0, 0, 0, 0.04);
+  transform: translateX(calc(var(--vkui_internal--SegmentedControl_actual_index) * 100%));
+  transform-origin: 0 0;
+  transition: transform 150ms;
+
+  --vkui_internal--SegmentedControl_actual_index: 0;
+  --vkui_internal--SegmentedControl_options: 0;
+}
+
+.rtl .slider {
+  transform: translateX(calc(-1 * var(--vkui_internal--SegmentedControl_actual_index) * 100%));
+}
+
+/**
+ * sizeY REGULAR
+ */
+
+.sizeYRegular {
+  block-size: 36px;
+}
+
+.sizeYRegular.sizeL {
+  block-size: 44px;
+}
+
+@media (pointer: coarse) and (min-height: 415px),(pointer: none) and (min-height: 415px),(max-width: 767.9px) and (min-height: 415px) {
+  .sizeYNone {
+    block-size: 36px;
+  }
+
+  .sizeYNone.sizeL {
+    block-size: 44px;
+  }
+}

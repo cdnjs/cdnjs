@@ -1,0 +1,29 @@
+.host {
+  display: inline-flex;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+
+/* Хак для того, чтобы убрать системный тултип в Safari */
+
+.host.disableNativeTitle::after,
+.host.disableNativeTitle .content::after {
+  display: block;
+  content: '';
+}
+
+.content {
+  flex: 0 0 auto;
+  min-inline-size: 1em;
+  max-inline-size: inherit;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.contentMultiline {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -ms-box-orient: vertical;
+  white-space: normal;
+}

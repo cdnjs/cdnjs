@@ -1,0 +1,118 @@
+.host {
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  box-sizing: border-box;
+  inline-size: 100%;
+  block-size: 100%;
+  pointer-events: none;
+}
+
+.opened {
+  pointer-events: initial;
+}
+
+.closing {
+  pointer-events: none;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.overlay {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  opacity: 1;
+}
+
+.opened .overlay {
+  animation: animation-full-fade-in var(--vkui--animation_duration_m) ease both;
+}
+
+.closing .overlay {
+  opacity: 0;
+  /* prettier-ignore */
+  animation: animation-full-fade-out var(--vkui--animation_duration_m) var(--vkui--animation_easing_default) both;
+}
+
+.masked .overlay {
+  background: var(--vkui--color_overlay_primary);
+}
+
+.fixed .overlay,
+.absolute .overlay {
+  position: absolute;
+}
+
+.container {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.content {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  inline-size: 100%;
+  pointer-events: none;
+}
+
+/* stylelint-disable-next-line selector-max-universal */
+
+.content > * {
+  pointer-events: auto;
+}
+
+.alignYCenter .container {
+  align-items: center;
+}
+
+.alignYBottom .container {
+  align-items: flex-end;
+}
+
+.alignYTop .container {
+  align-items: flex-start;
+}
+
+.alignXCenter .container {
+  justify-content: center;
+}
+
+.alignXLeft .container {
+  justify-content: flex-start;
+}
+
+.alignXRight .container {
+  justify-content: flex-end;
+}
+
+@keyframes animation-full-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes animation-full-fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
