@@ -1,0 +1,117 @@
+.host {
+  position: relative;
+  box-sizing: border-box;
+  inline-size: 88px;
+  block-size: 88px;
+  padding-block: var(--vkui--spacing_size_2xl);
+  padding-inline: var(--vkui--spacing_size_2xl);
+  border-radius: var(--vkui--size_border_radius--regular);
+  animation: screen-spinner-intro 0.3s ease;
+}
+
+.hasLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  inline-size: -webkit-fit-content;
+  inline-size: -moz-fit-content;
+  inline-size: fit-content;
+  max-inline-size: 150px;
+  block-size: -webkit-fit-content;
+  block-size: -moz-fit-content;
+  block-size: fit-content;
+}
+
+.modeShadow {
+  color: var(--vkui--color_icon_medium);
+  background-color: var(--vkui--color_background_contrast_themed);
+  box-shadow: var(--vkui--elevation3);
+}
+
+.modeOverlay {
+  color: var(--vkui--color_icon_contrast);
+  background-color: var(--vkui--color_avatar_overlay);
+}
+
+.label {
+  -webkit-margin-before: var(--vkui--spacing_size_xs);
+          margin-block-start: var(--vkui--spacing_size_xs);
+  color: var(--vkui--color_text_secondary);
+  text-align: center;
+}
+
+.modeOverlay .label {
+  color: var(--vkui--color_text_contrast);
+}
+
+.spinner {
+  opacity: 1;
+}
+
+.spinnerTransition {
+  transition: opacity 0.1s ease;
+}
+
+.stateDone .spinner,
+.stateError .spinner,
+.stateCustom .spinner {
+  opacity: 0;
+}
+
+.iconSlot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 56px;
+  block-size: 56px;
+}
+
+.icon {
+  position: absolute;
+  inset-block-start: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.stateCancelable .icon {
+  cursor: pointer;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.icon :global(.vkuiIcon) {
+  animation: screen-spinner-intro 0.2s ease;
+}
+
+/* stylelint-disable-next-line selector-max-type, selector-pseudo-class-disallowed-list */
+
+.stateDone :global(.vkuiIcon) path {
+  stroke-dasharray: 50;
+  stroke-dashoffset: 50;
+  animation: screen-spinner-icon-done 0.6s 0.3s var(--vkui--animation_easing_platform) forwards;
+}
+
+@keyframes screen-spinner-icon-done {
+  from {
+    stroke-dashoffset: 50;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes screen-spinner-intro {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
