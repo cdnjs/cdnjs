@@ -1,0 +1,130 @@
+@import "../props.media.css";
+@import "../props.gray-hsl.css";
+
+:where(.btn,button,input:is([type="button"],[type="submit"],[type="reset"])),
+:where(input[type="file"])::-webkit-file-upload-button,
+:where(input[type="file"])::file-selector-button {
+  --_accent: initial /* your color */;
+  --_text: initial /* your text color */;
+  --_size: initial /* your size */;
+  
+  --_bg: var(--surface-3);
+  --_border: var(--surface-3);
+  --_highlight-size: 0;
+  --_highlight: hsl(var(--gray-12-hsl) / 25%);
+  --_ink-shadow: 0 1px 0 var(--surface-1);
+  
+  --_icon-size: var(--size-relative-7);
+  --_icon-color: var(--_accent, var(--link));
+  
+  font-size: var(--_size);
+  background: var(--_bg);
+  color: var(--_text);
+  border: var(--border-size-2) solid var(--_border);
+  box-shadow: 
+    var(--shadow-2),
+    0 1px var(--surface-3),
+    0 0 0 var(--_highlight-size) var(--_highlight)
+  ;
+  text-shadow: var(--_ink-shadow);
+  
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: var(--size-2);
+  
+  font-weight: var(--font-weight-7);
+  border-radius: var(--radius-2);
+  padding-block: .75ch;
+  padding-inline: var(--size-relative-6);
+
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  
+  transition: border-color .5s var(--ease-3) 3s;
+
+  @media (--motionOK) {
+    transition:
+      border-color .5s var(--ease-3) 3s,
+      box-shadow 145ms var(--ease-4),
+      outline-offset 145ms var(--ease-4);
+  }
+}
+
+:where(.btn,button,input:is([type="button"],[type="submit"],[type="reset"])) {
+  /* disabled */
+  &[disabled] {
+    --_bg: none;
+    --_text: var(--gray-5);
+    cursor: not-allowed;
+    box-shadow: var(--shadow-1);
+  }
+
+  /* pressing */
+  &:where(:not(:active):hover) {
+    --_highlight-size: var(--size-2);
+    transition-delay: 0s;
+    transition-duration: .25s;
+  }
+
+  /* icons */
+  & > :where(svg) {
+    flex-shrink: 0;
+    filter: drop-shadow(var(--_ink-shadow));
+    block-size: var(--_icon-size);
+    inline-size: var(--_icon-size);
+  }
+
+  & > :where(svg > *) {
+    stroke: var(--_icon-color);
+    stroke-width: var(--border-size-2);
+  }
+}
+
+/* adaptive indigo text */
+:where([type="submit"], form button:not([type],[disabled])) {
+  --_text: var(--_accent, var(--link));
+} 
+
+/* red reset */
+:where([type="reset"]) {
+  --_text: var(--red-2);
+  --_border: var(--surface-3);
+
+  &:focus-visible {
+    outline-color: var(--red-6);
+  }
+}
+
+/* submit, form > button, reset matching hover border color */
+:where([type="submit"], [type="reset"], form button:not([type])):is(:hover, :focus-visible):not([disabled]) {
+  --_border: currentColor;
+}
+
+/* file input */
+:where(input[type="file"]) {
+  max-inline-size: 100%;
+  padding: 0;
+  cursor: initial;
+  align-self: flex-start;
+  border-radius: var(--radius-2);
+  border: var(--border-size-1) solid var(--surface-2); 
+  box-shadow: var(--inner-shadow-4);
+  color: var(--text-2);
+}
+
+:where(input[type="file"])::-webkit-file-upload-button,
+:where(input[type="file"])::file-selector-button {
+  margin-inline-end: var(--size-relative-6);
+  cursor: pointer;
+}
+
+/* special dark theme styles */
+:where([type="submit"]),
+:where(form button:not([type="button"])),
+:where([type="reset"]), 
+:where([disabled]) {
+  --_bg: var(--surface-1);
+}

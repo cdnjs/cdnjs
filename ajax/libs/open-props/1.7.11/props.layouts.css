@@ -1,0 +1,33 @@
+:where(html) {
+  --grid-cell: [stack] 1fr / [stack] 1fr;
+  --grid-cell-name: stack;
+  
+  --grid-ram: repeat(auto-fit, minmax(min(0, 100%), 1fr));
+  --grid-holy-grail: auto 1fr auto / auto 1fr auto;
+}
+
+* {
+  --grid_adapt_mixin-viewport_context: 100vw;
+  --grid_adapt_mixin-container_context: 100%;
+  --grid_adapt_mixin-context: var(--grid_adapt_mixin-viewport_context);
+
+  --grid_adapt_mixin-break_1: 1024px;
+  --above-break_1-columns: 5;
+  --grid_adapt_mixin-break_2: 480px;
+  --above-break_2-columns: 2;
+
+  --grid_adapt_mixin: repeat(auto-fill,
+      minmax(
+        clamp(
+          clamp(
+            calc(100% / calc(var(--above-break_1-columns) + 1) + 0.1%), 
+            calc(calc(var(--grid_adapt_mixin-break_1) - var(--grid_adapt_mixin-context)) * 1e5),
+            calc(100% / calc(var(--above-break_2-columns) + 1) + 0.1%)
+          ), 
+          calc(calc(var(--grid_adapt_mixin-break_2) - var(--grid_adapt_mixin-context)) * 1e5),
+          100%
+        ), 
+      1fr)
+  );
+}
+
