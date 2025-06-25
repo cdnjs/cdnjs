@@ -1,0 +1,105 @@
+:where(html) {
+
+    /* Animation duration based on https://design.brainly.com/8adfd5f36/p/091f75-ux-motion */
+    --duration-instant:    0ms;    /* e.g. text change */
+    --duration-quick-1:    80ms;   /* e.g. checkbox, radio, hover */
+    --duration-quick-2:    120ms;  /* e.g. toggle, tab, chip, color, fade */
+    --duration-moderate-1: 180ms;  /* e.g. dropdown, tooltip */
+    --duration-moderate-2: 260ms;  /* e.g. modal, toast, dialog, notification */
+    --duration-gentle-1:   320ms;  /* e.g. bottom sheet, card expand */
+    --duration-gentle-2:   420ms;  /* e.g. advanced animations */
+
+    /* 
+     * Calculated animation duration based on https://design.brainly.com/8adfd5f36/p/091f75-ux-motion/t/page-091f75-75547432-5018fa-12
+     * Demo: https://codepen.io/T3sT3ro/pen/RNwRLWx
+     * unitless 
+     */
+    --animated-element-distance: 0;
+    --animated-element-width:    0;
+    --animated-element-height:   0;
+    
+    /* Calculated animation duration in milliseconds */
+    --duration-calculated: calc(((0.5  * var(--animated-element-distance, 0)) +
+                                 (0.35 * var(--animated-element-width, 0)) +
+                                 (0.3  * var(--animated-element-height, 0))) * 1ms);
+
+    /* Common time units */
+    --minute:     60s;
+    --hour:       calc( 60 * var(--minute));
+    --day:        calc( 24 * var(--hour));
+    --week:       calc(  7 * var(--day));
+    --fortnight:  calc( 14 * var(--day));
+    --month:      calc( 30 * var(--day));
+    --quarter:    calc( 13 * var(--week));
+    --year:       calc(365 * var(--day));
+    --leap-year:  calc(366 * var(--day));
+    --olympiad:   calc(  4 * var(--year));
+    --decade:     calc( 10 * var(--year));
+    --generation: calc(  3 * var(--decade));
+    --lifetime:   calc(  8 * var(--decade));
+
+    --work-day:  calc( 8 * var(--hour));
+    --work-week: calc( 5 * var(--day));
+
+    --blink:           .1s;
+    --flinch:          .3s
+    --sneeze:          .5s;
+    --brief-moment:    15s;
+    --pause:           10s;
+    --unhealthy-pause: 30s;
+
+    /*
+     * https://en.wikipedia.org/wiki/List_of_unusual_units_of_measurement
+     */
+    --moment:          90s;
+    --kermit:          calc(14.4 * var(--minute));
+    --microfortnight:  1.2096s;
+
+    /* Approximate astronomical durations */
+    --sidereal-day: calc((23 * var(--hour)) + (56 * var(--minute)) + 4.091s);
+    --iss-orbit:    calc(91.5 * var(--minute));
+    --lunar-month:  calc(29.5 * var(--day));
+    --venus-year:   calc(225  * var(--day));
+    --sol:          88775s;
+    --mars-year:    calc(668.5907 * var(--sol));
+
+    /*
+     * 10 Little-Known Units of Time
+     * https://www.mentalfloss.com/article/60080/10-little-known-units-time
+     */
+    --atom: .15957s;
+    --ghurry: calc(24 * var(--minute));
+    --lustre: calc(5 * var(--year));
+    --mileway: calc(20 * var(--minute));
+    --nundine: calc(9 * var(--day));
+    --nychthemeron: var(--day);
+    --punct: calc(15 * var(--minute));
+    --quadrant: calc(6 * var(--hour));
+    --quinzieme: calc(15 * var(--day));
+    --scruple: calc(24 * var(--minute));
+
+    /*
+     * The Potrzebie System of Weights and Measures
+     * https://madcoversite.com/mad033-36.html
+     * https://webmadness.net/resources/The-Potrzebie-system-of-weights-and-measures.pdf
+     *
+     * There is an inconsistency in the definitions where 1 wolverton = 0.00001 clarke.
+     * Calculating fractions of clarkes suggests that a 1 wolverton = 0.00000001 clarke. 
+     */
+    --clarke: var(--sidereal-day);
+    --wood: calc(0.1 * var(--clarke));
+    --martin: calc(0.01 * var(--wood));
+    --kovac: calc(0.01 * var(--martin));
+    --wolverton: calc(0.001 * var(--kovac));
+    --mingo: calc(10 * var(--clarke));
+    --cowznofski: calc(10 * var(--mingo));
+
+    /*
+     * https://en.wikipedia.org/wiki/List_of_humorous_units_of_measurement
+     */
+    --friedman: calc(6 * var(--month));
+    --jiffy: 0.01s;
+    --microcentury: calc((52 * var(--minute)) + 35.7s);
+    --nanocentury: 3.156s;
+    --scaramucci: calc(11 * var(--day));
+}
