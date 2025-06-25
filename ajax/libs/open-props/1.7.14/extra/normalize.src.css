@@ -1,0 +1,364 @@
+@import "../props.media.css";
+
+*, ::before, ::after { box-sizing: border-box; }
+
+:where(:not(dialog)) {
+  margin: 0;
+}
+
+:where(:not(fieldset, progress, meter)) {
+  border-width: 0;
+  border-style: solid;
+  background-origin: border-box;
+  background-repeat: no-repeat;
+}
+
+:where(html) {
+  block-size: 100%;
+  font-family: var(--font-system-ui);
+  line-height: var(--font-lineheight-3);
+  -webkit-text-size-adjust: none; /* https://kilianvalkhof.com/2022/css-html/your-css-reset-needs-text-size-adjust-probably/ */
+
+  @media (--motionOK) {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (--motionOK) {
+  :where(:focus-visible) {
+    transition: outline-offset 145ms var(--ease-2);
+  }
+  :where(:not(:active):focus-visible) {
+    transition-duration: .25s;
+  }
+}
+
+:where(:not(:active):focus-visible) {
+  outline-offset: 5px;
+}
+
+:where(body) {
+  min-block-size: 100%;
+}
+
+:where(h1, h2, h3, h4, h5, h6) {
+  line-height: var(--font-lineheight-1);
+  font-weight: var(--font-weight-9);
+  text-wrap: balance;
+}
+
+:where(h1) {
+  font-size: var(--font-size-8);
+  max-inline-size: var(--size-header-1);
+}
+
+:where(h2) {
+  font-size: var(--font-size-6);
+  max-inline-size: var(--size-header-2);
+}
+
+:where(h3) { font-size: var(--font-size-5) }
+:where(h4) { font-size: var(--font-size-4) }
+:where(h5) { font-size: var(--font-size-3) }
+
+:where(h3, h4, h5, h6, dt) {
+  max-inline-size: var(--size-header-3);
+}
+
+:where(p, ul, ol, dl, h6) {
+  font-size: var(--font-size-2);
+}
+
+:where(a, u, ins, abbr) {
+  text-underline-offset: 1px;
+
+  @supports (-moz-appearance: none) {
+    text-underline-offset: 2px;
+  }
+}
+
+:where(a[href], area, button, input:not([type="text"], [type="email"], [type="number"], [type="password"], [type=""], [type="tel"], [type="url"]), label[for], select, summary, [tabindex]:not([tabindex*="-"],pre)) {
+  cursor: pointer;
+}
+
+:where(a[href], area, button, input, label[for], select, summary, textarea, [tabindex]:not([tabindex*="-"])) {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:where(a) {
+  &:where([href]) {
+    text-decoration-color: var(--indigo-2);
+
+    &:where(:visited) {
+      text-decoration-color: var(--purple-2);
+    }
+  }
+
+  &:where(:not(:hover)) {
+    text-decoration: inherit;
+  }
+}
+
+:where(img, svg, video, canvas, audio, iframe, embed, object) {
+  display: block;
+}
+
+:where(img, svg, video) {
+  max-inline-size: 100%;
+  block-size: auto;
+}
+
+:where(input, button, textarea, select),
+:where(input[type="file"])::-webkit-file-upload-button {
+  font: inherit;
+  font-size: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+}
+
+::placeholder {
+  color: var(--gray-7);
+  opacity: .75;
+}
+
+:where(input:not([type="range"]), textarea) {
+  padding-inline: var(--size-2);
+  padding-block: var(--size-1);
+}
+
+:where(select) {
+  padding-inline: var(--size-relative-4) 0;
+  padding-block: .75ch;
+  field-sizing: content;
+}
+
+:where(textarea, select, input:not([type="button"],[type="submit"],[type="reset"])) {
+  background-color: var(--surface-2);
+  border-radius: var(--radius-2);
+}
+
+:where(textarea) {
+  resize: block;
+  field-sizing: content;
+  min-inline-size: var(--size-content-1);
+  min-block-size: 2lh;
+}
+
+:where(input[type="checkbox"], input[type="radio"]) {
+  block-size: var(--size-3);
+  inline-size: var(--size-3);
+}
+
+:where(svg:not([width])) {
+  inline-size: var(--size-10);
+}
+
+:where(code, kbd, samp, pre) { font-family: var(--font-monospace-code), monospace; }
+:where(:not(pre) > code, kbd) { white-space: nowrap }
+
+:where(pre) {
+  white-space: pre;
+  min-inline-size: 0;
+  max-inline-size: max-content;
+  writing-mode: lr;
+  direction: ltr;
+}
+
+:where(:not(pre) > code) {
+  padding: var(--size-1) var(--size-2);
+  background: var(--surface-2);
+  border-radius: var(--radius-2);
+  writing-mode: lr;
+}
+
+:where(kbd, var) {
+  padding: var(--size-1) var(--size-2);
+  border-width: var(--border-size-1);
+  border-color: var(--surface-4);
+  border-radius: var(--radius-2);
+}
+
+:where(mark) {
+  border-radius: var(--radius-2);
+  padding-inline: var(--size-1);
+}
+
+:where(ol, ul) { padding-inline-start: var(--size-8) }
+:where(li) { padding-inline-start: var(--size-2) }
+:where(li, dd, figcaption) { max-inline-size: var(--size-content-2) }
+:where(p) { max-inline-size: var(--size-content-3); text-wrap: pretty; }
+:where(dt, summary) { font-weight: var(--font-weight-7) }
+
+:where(dt:not(:first-of-type)) {
+  margin-block-start: var(--size-5);
+}
+
+:where(small) {
+  font-size: max(.5em, var(--font-size-0));
+  max-inline-size: var(--size-content-1);
+}
+
+:where(hr) {
+  margin-block: var(--size-fluid-5);
+  height: var(--border-size-2);
+  background-color: var(--surface-3);
+}
+
+:where(figure) {
+  display: grid;
+  gap: var(--size-2);
+  place-items: center;
+
+  & > :where(figcaption) {
+    font-size: var(--font-size-1);
+    text-wrap: balance;
+  }
+}
+
+:where(blockquote, :not(blockquote) > cite) {
+  border-inline-start-width: var(--border-size-3);
+}
+
+:where(blockquote) {
+  display: grid;
+  gap: var(--size-3);
+  padding-block: var(--size-3);
+  padding-inline: var(--size-4);
+  max-inline-size: var(--size-content-2);
+}
+
+:where(:not(blockquote) > cite) {
+  padding-inline-start: var(--size-2);
+}
+
+:where(summary) {
+  background: var(--surface-3);
+  padding: var(--size-2) var(--size-3);
+  margin: calc(var(--size-2) * -1) calc(var(--size-3) * -1);
+  border-radius: var(--radius-2);
+}
+
+:where(details) {
+  padding-inline: var(--size-3);
+  padding-block: var(--size-2);
+  background: var(--surface-2);
+  border-radius: var(--radius-2);
+}
+
+:where(details[open] > summary) {
+  margin-bottom: var(--size-2);
+  border-end-start-radius: 0;
+  border-end-end-radius: 0;
+}
+
+:where(fieldset) {
+  border-radius: var(--radius-2);
+  border: var(--border-size-1) solid var(--surface-4);
+}
+
+:where(del) {
+  background: var(--red-9);
+  color: var(--red-2);
+}
+
+:where(ins) {
+  background: var(--green-9);
+  color: var(--green-1);
+}
+
+:where(abbr) {
+  text-decoration-color: var(--blue-5);
+}
+
+:where(dialog) {
+  background-color: var(--surface-1);
+  color: inherit;
+  border-radius: var(--radius-3);
+  box-shadow: var(--shadow-6);
+}
+
+:where(menu) {
+  padding-inline-start: 0;
+  display: flex;
+  gap: var(--size-3);
+}
+
+:where(sup) {
+  font-size: .5em;
+}
+
+:where(table) {
+  width: fit-content;
+  border: 1px solid var(--surface-2);
+  background: var(--surface-2);
+  border-radius: var(--radius-3);
+
+  --nice-inner-radius: calc(var(--radius-3) - 2px);
+}
+
+:where(table:not(:has(tfoot)) tr:last-child td:first-child) {
+  border-end-start-radius: var(--nice-inner-radius);
+}
+
+:where(table:not(:has(tfoot)) tr:last-child td:last-child) {
+  border-end-end-radius: var(--nice-inner-radius);
+}
+
+:where(table thead tr:first-child th:first-child) {
+  border-start-start-radius: var(--nice-inner-radius);
+}
+
+:where(table thead tr:first-child th:last-child) {
+  border-start-end-radius: var(--nice-inner-radius);
+}
+
+:where(tfoot tr:last-child :is(th,td):first-of-type) {
+  border-end-start-radius: var(--nice-inner-radius);
+}
+
+:where(tfoot tr:last-child :is(th,td):last-of-type) {
+  border-end-end-radius: var(--nice-inner-radius);
+}
+
+:where(th) {
+  color: var(--text-1);
+  background-color: var(--surface-2);
+}
+
+:where(table :is(a, button, [contenteditable]):is(:focus-visible)) {
+  outline-offset: -2px;
+}
+
+:where(td) {
+  background: var(--surface-1);
+  max-inline-size: var(--size-content-2);
+  text-wrap: pretty;
+}
+
+:where(td,th) {
+  text-align: left;
+  padding: var(--size-2);
+}
+
+:where(:is(td,th):not([align])) {
+	text-align: center;
+}
+
+:where(thead) {
+  border-collapse: collapse;
+}
+
+:where(table tr:hover td),
+:where(tbody tr:nth-child(even):hover td) {
+  background-color: var(--surface-3);
+}
+
+:where(table > caption) {
+  margin: var(--size-3);
+}
+
+:where(tfoot button) {
+  padding-block: var(--size-1);
+  padding-inline: var(--size-3);
+}
