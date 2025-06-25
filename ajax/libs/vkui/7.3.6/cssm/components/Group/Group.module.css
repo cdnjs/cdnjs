@@ -1,0 +1,328 @@
+/* stylelint-disable selector-max-universal */
+
+/*
+ * Автоопределение mode:
+ *
+ * - sizeX="compact" (mobile)  -> mode="plain"
+ * - sizeX="regular" (desktop) -> mode="card"
+ */
+
+.host {
+  --vkui_internal--Group_padding_inline: 0;
+  --vkui_internal--Group_padding_block: var(--vkui--spacing_size_m);
+  --vkui_internal--Group_card_mode_padding_size: 0;
+
+  padding-block: var(--vkui_internal--Group_padding_block);
+  padding-inline: var(--vkui_internal--Group_padding_inline);
+  color: var(--vkui--color_text_primary);
+}
+
+.paddingS {
+  --vkui_internal--Group_card_mode_padding_size: var(--vkui--spacing_size_xs);
+}
+
+.paddingM {
+  --vkui_internal--Group_card_mode_padding_size: var(--vkui--spacing_size_m);
+}
+
+/* разделитель при mode="card" */
+
+.modeCard,
+.sizeXRegular.modeNone {
+  --vkui_internal--Group_padding_inline: var(--vkui_internal--Group_card_mode_padding_size);
+  --vkui_internal--Group_padding_block: var(--vkui_internal--Group_card_mode_padding_size);
+
+  position: relative;
+  background: var(--vkui--color_background_content);
+  border-radius: var(--vkui--size_border_radius_paper--regular);
+}
+
+@media (min-width: 768px) {
+  .sizeXNone.modeNone {
+    --vkui_internal--Group_padding_inline: var(--vkui_internal--Group_card_mode_padding_size);
+    --vkui_internal--Group_padding_block: var(--vkui_internal--Group_card_mode_padding_size);
+
+    position: relative;
+    background: var(--vkui--color_background_content);
+    border-radius: var(--vkui--size_border_radius_paper--regular);
+  }
+}
+
+.sizeXCompact.modeCard {
+  --vkui_internal--Group_padding_inline: 0;
+
+  border-radius: var(--vkui--size_border_radius_promo--regular);
+}
+
+@media (max-width: 767.9px) {
+  .sizeXNone.modeCard {
+    --vkui_internal--Group_padding_inline: 0;
+
+    border-radius: var(--vkui--size_border_radius_promo--regular);
+  }
+}
+
+.sizeXCompact.modeCard:first-of-type {
+  border-start-start-radius: 0;
+  border-start-end-radius: 0;
+  border-end-start-radius: var(--vkui--size_border_radius_promo--regular);
+  border-end-end-radius: var(--vkui--size_border_radius_promo--regular);
+}
+
+@media (max-width: 767.9px) {
+  .sizeXNone.modeCard:first-of-type {
+    border-start-start-radius: 0;
+    border-start-end-radius: 0;
+    border-end-start-radius: var(--vkui--size_border_radius_promo--regular);
+    border-end-end-radius: var(--vkui--size_border_radius_promo--regular);
+  }
+}
+
+/*
+ * Изменено с ::after на ::before
+ * потому что при ::after абсолютно позиционированный элемент накладывается
+ * поверх любого другого абсолютно позиционированного элемента внутри Group,
+ * например поверх Tooltip
+ * См. пример: Slider c пропом withTooltip
+ */
+
+.modeCard::before,
+.sizeXRegular.modeNone::before {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  pointer-events: none;
+  content: '';
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 var(--vkui--size_border--regular) var(--vkui--color_separator_primary);
+}
+
+@media (min-width: 768px) {
+  .sizeXNone.modeNone::before {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    pointer-events: none;
+    content: '';
+    border-radius: inherit;
+    box-shadow: inset 0 0 0 var(--vkui--size_border--regular) var(--vkui--color_field_border_alpha);
+  }
+}
+
+.sizeXCompact.modeCard::before {
+  box-shadow: none;
+}
+
+@media (max-width: 767.9px) {
+  .sizeXNone.modeCard::before {
+    box-shadow: none;
+  }
+}
+
+/*
+ * Header
+ */
+
+.header:empty {
+  display: none;
+}
+
+.modePlain:not(:first-of-type) > .header,
+.sizeXCompact.modeNone:not(:first-of-type) > .header {
+  -webkit-margin-before: calc(-1 * var(--vkui--spacing_size_m));
+          margin-block-start: calc(-1 * var(--vkui--spacing_size_m));
+}
+
+@media (max-width: 767.9px) {
+  .sizeXNone.modeNone:not(:first-of-type) > .header {
+    -webkit-margin-before: calc(-1 * var(--vkui--spacing_size_m));
+            margin-block-start: calc(-1 * var(--vkui--spacing_size_m));
+  }
+}
+
+.modeCard > .header,
+.sizeXRegular.modeNone > .header {
+  -webkit-margin-before: calc(-1 * var(--vkui--spacing_size_xs));
+          margin-block-start: calc(-1 * var(--vkui--spacing_size_xs));
+}
+
+@media (min-width: 768px) {
+  .sizeXNone.modeNone > .header {
+    -webkit-margin-before: calc(-1 * var(--vkui--spacing_size_xs));
+            margin-block-start: calc(-1 * var(--vkui--spacing_size_xs));
+  }
+}
+
+/*
+ * Description
+ */
+
+.description {
+  display: block;
+  padding-block: var(--vkui--spacing_size_xs) var(--vkui--spacing_size_2xl);
+  padding-inline: var(--vkui--size_base_padding_horizontal--regular);
+  color: var(--vkui--color_text_secondary);
+}
+
+/*
+ * Separator (sibling)
+ *
+ * ⚠️ Находится за пределами Group
+ */
+
+.separatorSibling {
+  --vkui_internal--Group__separator_hr: none;
+
+  position: relative;
+  box-sizing: border-box;
+}
+
+.separatorSibling::before {
+  display: var(--vkui_internal--Group__separator_hr);
+  block-size: var(--vkui--size_border--regular);
+  -webkit-margin-after: calc(-1 * var(--vkui--size_border--regular));
+          margin-block-end: calc(-1 * var(--vkui--size_border--regular));
+  content: '';
+  background: var(--vkui--color_separator_primary);
+}
+
+/* разделитель при mode="plain" */
+
+.modePlain + .separatorSibling,
+.sizeXCompact.modeNone + .separatorSibling {
+  --vkui_internal--Group__separator_hr: block;
+
+  padding-block: var(--vkui--spacing_size_m);
+  padding-inline: var(--vkui--size_base_padding_horizontal--regular);
+}
+
+@media (max-width: 767.9px) {
+  .sizeXNone.modeNone + .separatorSibling {
+    --vkui_internal--Group__separator_hr: block;
+
+    padding-block: var(--vkui--spacing_size_m);
+    padding-inline: var(--vkui--size_base_padding_horizontal--regular);
+  }
+}
+
+.modePlain:last-of-type + .separatorSibling:not(.separatorSiblingForced) {
+  display: none;
+}
+
+@media (max-width: 767.9px) {
+  .sizeXNone.modeNone:last-of-type + .separatorSibling:not(.separatorSiblingForced) {
+    display: none;
+  }
+}
+
+/* разделитель при mode="card" */
+
+.modeCard + .separatorSibling,
+.sizeXRegular.modeNone + .separatorSibling {
+  block-size: var(--vkui--spacing_size_2xl);
+  padding-block: calc(var(--vkui--spacing_size_2xl) / 2);
+}
+
+@media (min-width: 768px) {
+  .sizeXNone.modeNone + .separatorSibling {
+    block-size: var(--vkui--spacing_size_2xl);
+    padding-block: calc(var(--vkui--spacing_size_2xl) / 2);
+  }
+}
+
+.sizeXCompact.modeCard + .separatorSibling {
+  block-size: var(--vkui--spacing_size_m);
+  padding-block: calc(var(--vkui--spacing_size_m) / 2);
+}
+
+@media (max-width: 767.9px) {
+  .sizeXNone.modeCard + .separatorSibling {
+    block-size: var(--vkui--spacing_size_m);
+    padding-block: calc(var(--vkui--spacing_size_m) / 2);
+  }
+}
+
+/*
+ * Group вложенный в ModalPage
+ *
+ * note: ModalPage форсирует mode="plain" для Group
+ */
+
+@media (min-width: 768px) {
+  .modePlainInsideModal {
+    --vkui_internal--Group_padding_inline: var(--vkui--spacing_size_m);
+    --vkui_internal--Group_padding_block: var(--vkui--spacing_size_m);
+  }
+
+  .modePlainInsideModal + .separatorSibling {
+    padding-inline: calc(
+      var(--vkui--size_base_padding_horizontal--regular) + var(--vkui--spacing_size_m)
+    );
+  }
+}
+
+/*
+ * Group вложенный в Group
+ */
+
+.host .host {
+  --vkui_internal--Group_padding_inline: 0;
+}
+
+.host .host + .separatorSibling {
+  padding-inline: var(--vkui--size_base_padding_horizontal--regular);
+}
+
+.host .host:first-of-type {
+  -webkit-padding-before: 0;
+          padding-block-start: 0;
+}
+
+.host .host:last-of-type {
+  -webkit-padding-after: 0;
+          padding-block-end: 0;
+}
+
+/*
+ * Group.host
+ * компенсирующий отступы Group в зависимости
+ * от режима: inline / block
+ */
+
+.expandedContentInline {
+  margin-inline: calc(-1 * var(--vkui_internal--Group_padding_inline));
+}
+
+.expandedContentBlock {
+  margin-block: calc(-1 * var(--vkui_internal--Group_padding_block));
+}
+
+.host .host:first-of-type .expandedContentBlock {
+  -webkit-margin-start: 0;
+          margin-inline-start: 0;
+}
+
+.host .host:last-of-type .expandedContentBlock {
+  -webkit-margin-start: 0;
+          margin-inline-start: 0;
+}
+
+/*
+ * CMP:
+ * PanelHeader
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalPanelHeader--vkcom) ~ .host:first-of-type,
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+:global(.vkuiInternalPanelHeader--vkcom) + * .host:first-of-type {
+  position: relative;
+  inset-block-start: -1px;
+  border-start-start-radius: 0;
+  border-start-end-radius: 0;
+}
