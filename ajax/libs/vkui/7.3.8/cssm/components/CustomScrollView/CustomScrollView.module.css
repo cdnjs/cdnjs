@@ -1,0 +1,68 @@
+.host {
+  inline-size: 100%;
+  block-size: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+@supports (scrollbar-color: auto) {
+  .host {
+    scrollbar-color: var(--vkui--color_icon_tertiary_alpha) transparent;
+    scrollbar-width: thin;
+  }
+
+  .scrollbarHidden {
+    /**
+     * Для удаление скролла в Firefox.
+     * В версии ниже 64 будет виден скролл, но это не ломает функциональность.
+     */
+    scrollbar-width: none;
+  }
+}
+
+@supports not (scrollbar-color: auto) {
+  .scrollbarHidden::-webkit-scrollbar {
+    display: none;
+  }
+
+  .host::-webkit-scrollbar {
+    inline-size: 12px;
+    block-size: 12px;
+    background: 0 0;
+  }
+
+  .host::-webkit-scrollbar-track,
+  .host::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  .host::-webkit-scrollbar-thumb,
+  .host::-webkit-scrollbar-thumb {
+    background-color: var(--vkui--color_icon_tertiary_alpha);
+    background-clip: padding-box, content-box;
+    border: 3px solid transparent;
+    border-radius: 6px;
+  }
+
+  .host::-webkit-scrollbar-thumb:hover,
+  .host::-webkit-scrollbar-thumb:active {
+    background-color: var(--vkui--color_icon_tertiary_alpha--hover);
+    border: 2px solid transparent;
+  }
+}
+
+.overscrollBehaviorContain {
+  overscroll-behavior: contain;
+}
+
+.overscrollBehaviorNone {
+  overscroll-behavior: none;
+}
+
+.scrollBehaviorSmooth {
+  scroll-behavior: smooth;
+}
+
+.horizontalScrollEnabled {
+  overflow-x: auto;
+}

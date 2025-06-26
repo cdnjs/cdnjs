@@ -1,0 +1,173 @@
+.content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  transform: translateX(
+    calc(
+      -1px * var(--vkui_internal_Removable_remove_offset) *
+        var(--vkui_internal_Removable_remove_offset_direction)
+    )
+  );
+
+  --vkui_internal_Removable_remove_offset: 0;
+  --vkui_internal_Removable_remove_offset_direction: 1;
+}
+
+.withPadding {
+  -webkit-padding-start: var(--vkui--size_base_padding_horizontal--regular);
+          padding-inline-start: var(--vkui--size_base_padding_horizontal--regular);
+}
+
+.rtl {
+  --vkui_internal_Removable_remove_offset_direction: -1;
+}
+
+.action {
+  position: relative;
+  flex-grow: 0;
+  flex-shrink: 0;
+  color: var(--vkui--color_icon_secondary);
+  border: 0;
+}
+
+.alignStart .action {
+  align-self: flex-start;
+}
+
+.disabled {
+  opacity: var(--vkui--opacity_disable_accessibility);
+}
+
+/**
+ * iOS
+ */
+
+.ios {
+  overflow: hidden;
+}
+
+.remove {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 100%;
+  block-size: 100%;
+  padding-block: 0;
+  padding-inline: 10px;
+  font-size: 15px;
+  line-height: 45px;
+  color: var(--vkui_internal--white);
+  background-color: var(--vkui--color_background_negative);
+  border: 0;
+  border-radius: 0;
+}
+
+.removeIn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.toggle {
+  display: block;
+  inline-size: 44px;
+  block-size: 44px;
+  margin-block: 0;
+  margin-inline: 2px;
+  background: none;
+}
+
+.toggleIn {
+  position: relative;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  block-size: 100%;
+  border: 0;
+}
+
+.toggleIn::after {
+  inline-size: 22px;
+  block-size: 22px;
+  content: '';
+  background-color: var(--vkui--color_background_negative);
+  border-radius: 50%;
+}
+
+.toggleIn::before {
+  position: absolute;
+  display: block;
+  inline-size: 12px;
+  block-size: 2px;
+  content: '';
+  background-color: var(--vkui_internal--white);
+}
+
+.ios .content {
+  padding-inline: 0 var(--vkui--size_base_padding_horizontal--regular);
+  transition: transform 0.6s var(--vkui--animation_easing_platform);
+}
+
+.indent .action {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/**
+ * CMP:
+ * FormLayoutGroup
+ * FormItem
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormItem--removable) .content,
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+:global(.vkuiInternalFormLayoutGroup--removable) .content {
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.offset {
+  display: none;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormItem--withTop) :global(.vkuiInternalFormItem__removable) ~ .offset,
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+:global(.vkuiInternalFormLayoutGroup--removable) :global(.vkuiInternalFormItem--withTop) ~ .offset {
+  display: block;
+  order: -1;
+  inline-size: 100%;
+  block-size: calc(2px + var(--vkui--font_subhead--line_height--regular) + 8px);
+}
+
+/* stylelint-disable selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormItem--sizeY-compact):global(.vkuiInternalFormItem--withTop)
+  :global(.vkuiInternalFormItem__removable)
+  ~ .offset,
+:global(.vkuiInternalFormLayoutGroup--sizeY-compact):global(.vkuiInternalFormLayoutGroup--removable)
+  :global(.vkuiInternalFormItem--withTop)
+  ~ .offset {
+  block-size: calc(2px + var(--vkui--font_subhead--line_height--compact) + 6px);
+}
+
+/* stylelint-enable selector-pseudo-class-disallowed-list */
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  /* stylelint-disable selector-pseudo-class-disallowed-list */
+  :global(.vkuiInternalFormItem--sizeY-none):global(.vkuiInternalFormItem--withTop)
+    :global(.vkuiInternalFormItem__removable)
+    ~ .offset,
+  :global(.vkuiInternalFormLayoutGroup--sizeY-none):global(.vkuiInternalFormLayoutGroup--removable)
+    :global(.vkuiInternalFormItem--withTop)
+    ~ .offset {
+    block-size: calc(2px + var(--vkui--font_subhead--line_height--compact) + 6px);
+  }
+  /* stylelint-enable selector-pseudo-class-disallowed-list */
+}

@@ -1,0 +1,59 @@
+/*
+ * .vkui класс в режиме full необходим на элементе html,
+ * чтобы правильно устанавливалось значение color-scheme,
+ * окрашивающее фон html и скроллбар в цвета текущей цветовой
+ * схемы.
+ * Так как color-scheme зависит от vkui токена, то в
+ * full режиме класс токенов vkui также должен
+ * быть установлен на html.
+ *
+ * В SSR есть проблема - чтобы на сервере правильно установить
+ * нужный класс, для токенов надо знать предпочитаемую цветовую
+ * схему пользователя и передать её через свойство appearance.
+ * Если ошибиться со схемой на сервере, то пользователь
+ * может получить не ту схему, либо может увидеть как интерфейс моргает
+ * из-за переключения со светлой темы на тёмную.
+ * Чтобы окончательно избавиться от этой проблемы нужно
+ * в vkui-tokens создавать темы, в которые сразу же зашиты обе цветовые схемы.
+ * А переключение между темами задавалось бы через медиа выражения
+ * с помощью prefers-color-scheme.
+ * */
+/* stylelint-disable-next-line selector-max-type */
+.vkui > body,
+.vkui,
+.vkui__root {
+  block-size: 100%;
+  padding: 0;
+  margin: 0;
+  color-scheme: var(--vkui--colors_scheme);
+}
+.vkui {
+  /*
+   * TODO [>=8]: Убрать background с html элемента, но для этого надо
+   * чтобы height у всех родителей Panel вплоть до html имели
+   * min-height: 100% вместо height: 100% иначе фон html выглядывает в
+   * многоколоночном режиме если чуть ниже проскролить контент.
+   */
+  background: var(--vkui--color_background);
+}
+.vkui__root {
+  /* чтобы можно было ограничить размеры приложения
+   * извне с помощью max-height, max-width */
+  max-inline-size: inherit;
+  max-block-size: inherit;
+}
+.vkui__root--embedded {
+  background: var(--vkui--color_background);
+}
+.vkui--layout-card {
+  background: var(--vkui--color_background);
+}
+.vkui--layout-plain {
+  background: var(--vkui--color_background_content);
+}
+/* отключаем нативный pull-to-refresh при взаимодействии с компонентом
+ * PullToRefresh или при открывании модалки */
+.vkui--disable-overscroll-behavior {
+  /* Safari >= 16 */
+  overscroll-behavior-y: none;
+}
