@@ -1,0 +1,1 @@
+const p=p=>/[^\p{Script=Latin}\p{P}\p{S}\p{N}\p{Z}\p{C}\p{M}]{1}/u.test(p)&&!/[ʼˮ՚ߴߵ']{1}/u.test(p),t=t=>Object.entries(t).reduce(((t,[c,e])=>p(e)?Object.assign(Object.assign({},t),{[c]:!0}):t),{});export{t as c,p as i}
