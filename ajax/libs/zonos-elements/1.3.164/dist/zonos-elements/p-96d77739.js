@@ -1,0 +1,1 @@
+const s=s=>Object.entries(s).reduce(((s,[t,c])=>(c&&(s[t]=c),s)),{});export{s}
