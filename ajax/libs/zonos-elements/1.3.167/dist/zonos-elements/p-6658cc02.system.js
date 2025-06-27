@@ -1,0 +1,1 @@
+System.register(["./p-a9a95fae.system.js"],(function(t){"use strict";var n;return{setters:[function(t){n=t.z}],execute:function(){var e=t("g",(function(t){var e=(t===null||t===void 0?void 0:t.customRoundRadius)||"10px";var r=t===null||t===void 0?void 0:t.overrideBorderStyle;if(r){return r==="SHARP"?"0px":e}return n.appearance.style==="SHARP"?"0px":e}))}}}));
