@@ -1,0 +1,1 @@
+const o=o=>!(!o||!(/--zonos-elements-/gi.test(o)||/--zonos--/gi.test(o)||/(\-*)\w+-\d+/gi.test(o))||o.includes("(")||o.includes("#"));export{o as i}
