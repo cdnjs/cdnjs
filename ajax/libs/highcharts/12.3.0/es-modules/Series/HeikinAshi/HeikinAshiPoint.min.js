@@ -1,0 +1,1 @@
+"use strict";import SeriesRegistry from"../../Core/Series/SeriesRegistry.js";const{candlestick:{prototype:{pointClass:CandlestickPoint}},hlc:{prototype:{pointClass:HLCPoint}}}=SeriesRegistry.seriesTypes;class HeikinAshiPoint extends CandlestickPoint{}export default HeikinAshiPoint;

@@ -1,0 +1,11 @@
+/**
+ * Highcharts JS v12.3.0 (2025-06-21)
+ * @module highcharts/modules/mouse-wheel-zoom
+ * @requires highcharts
+ *
+ * Mousewheel zoom module
+ *
+ * (c) 2023 Askel Eirik Johansson
+ *
+ * License: www.highcharts.com/license
+ */let e;import*as t from"../highcharts.js";var i={};i.n=e=>{var t=e&&e.__esModule?()=>e.default:()=>e;return i.d(t,{a:t}),t},i.d=(e,t)=>{for(var o in t)i.o(t,o)&&!i.o(e,o)&&Object.defineProperty(e,o,{enumerable:!0,get:t[o]})},i.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t);let o=t.default;var r=i.n(o);let{defined:s,isNumber:n,pick:l}=r(),a={backgroundColor:"string",borderColor:"string",borderRadius:"string",color:"string",fill:"string",fontSize:"string",labels:"string",name:"string",stroke:"string",title:"string"},{addEvent:h,isObject:u,pick:g,defined:d,merge:m}=r(),{getAssignedAxis:c}={annotationsFieldsTypes:a,getAssignedAxis:function(e){return e.filter(e=>{let t=e.axis.getExtremes(),i=t.min,o=t.max,r=l(e.axis.minPointOffset,0);return n(i)&&n(o)&&e.value>=i-r&&e.value<=o+r&&!e.axis.options.isInternal})[0]},getFieldType:function(e,t){let i=a[e],o=typeof t;return s(i)&&(o=i),({string:"text",number:"number",boolean:"checkbox"})[o]}},f=[],x={enabled:!0,sensitivity:1.1},p=e=>(u(e)||(e={enabled:e??!0}),m(x,e)),y=function(t,i,o,r,s,n,l){let a=g(l.type,t.zooming.type,""),h=[];"x"===a?h=o:"y"===a?h=r:"xy"===a&&(h=t.axes);let u=t.transform({axes:h,to:{x:s-5,y:n-5,width:10,height:10},from:{x:s-5*i,y:n-5*i,width:10*i,height:10*i},trigger:"mousewheel"});return u&&(d(e)&&clearTimeout(e),e=setTimeout(()=>{t.pointer?.drop()},400)),u};function b(){let e=p(this.zooming.mouseWheel);e.enabled&&h(this.container,"wheel",t=>{t=this.pointer?.normalize(t)||t;let{pointer:i}=this,o=i&&!i.inClass(t.target,"highcharts-no-mousewheel");if(this.isInsidePlot(t.chartX-this.plotLeft,t.chartY-this.plotTop)&&o){let o=e.sensitivity||1.1,r=t.detail||(t.deltaY||0)/120,s=c(i.getCoordinates(t).xAxis),n=c(i.getCoordinates(t).yAxis);y(this,Math.pow(o,r),s?[s.axis]:this.xAxis,n?[n.axis]:this.yAxis,t.chartX,t.chartY,e)&&t.preventDefault?.()}})}let v=r();v.MouseWheelZoom=v.MouseWheelZoom||{compose:function(e){-1===f.indexOf(e)&&(f.push(e),h(e,"afterGetContainer",b))}},v.MouseWheelZoom.compose(v.Chart);let w=r();export{w as default};

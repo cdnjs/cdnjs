@@ -1,0 +1,1 @@
+"use strict";const ErrorBarSeriesDefaults={color:"#000000",grouping:!1,linkedTo:":previous",tooltip:{pointFormat:'<span style="color:{point.color}">●</span> {series.name}: <b>{point.low}</b> - <b>{point.high}</b><br/>'},whiskerWidth:null};export default ErrorBarSeriesDefaults;

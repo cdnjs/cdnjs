@@ -1,0 +1,12 @@
+!/**
+ * Highstock JS v12.3.0 (2025-06-21)
+ * @module highcharts/indicators/mfi
+ * @requires highcharts
+ * @requires highcharts/modules/stock
+ *
+ * Money Flow Index indicator for Highcharts Stock
+ *
+ * (c) 2010-2025 Grzegorz Blachliński
+ *
+ * License: www.highcharts.com/license
+ */function(e,t){"object"==typeof exports&&"object"==typeof module?module.exports=t(e._Highcharts,e._Highcharts.SeriesRegistry):"function"==typeof define&&define.amd?define("highcharts/indicators/mfi",["highcharts/highcharts"],function(e){return t(e,e.SeriesRegistry)}):"object"==typeof exports?exports["highcharts/indicators/mfi"]=t(e._Highcharts,e._Highcharts.SeriesRegistry):e.Highcharts=t(e.Highcharts,e.Highcharts.SeriesRegistry)}("undefined"==typeof window?this:window,(e,t)=>(()=>{"use strict";var r={512:e=>{e.exports=t},944:t=>{t.exports=e}},s={};function i(e){var t=s[e];if(void 0!==t)return t.exports;var o=s[e]={exports:{}};return r[e](o,o.exports,i),o.exports}i.n=e=>{var t=e&&e.__esModule?()=>e.default:()=>e;return i.d(t,{a:t}),t},i.d=(e,t)=>{for(var r in t)i.o(t,r)&&!i.o(e,r)&&Object.defineProperty(e,r,{enumerable:!0,get:t[r]})},i.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t);var o={};i.d(o,{default:()=>v});var a=i(944),n=i.n(a),u=i(512),h=i.n(u);let{sma:p}=h().seriesTypes,{extend:c,merge:d,error:f,isArray:l}=n();function g(e){return e.reduce(function(e,t){return e+t})}function y(e){return(e[1]+e[2]+e[3])/3}class m extends p{getValues(e,t){let r=t.period,s=e.xData,i=e.yData,o=i?i.length:0,a=t.decimals,n=e.chart.get(t.volumeSeriesID),u=n?.getColumn("y")||[],h=[],p=[],c=[],d=[],m=[],v,x,S,D,H,b,w=!1,_=1;if(!n)return void f("Series "+t.volumeSeriesID+" not found! Check `volumeSeriesID`.",!0,e.chart);if(!(s.length<=r)&&l(i[0])&&4===i[0].length&&u){for(v=y(i[_]);_<r+1;)x=v,w=(v=y(i[_]))>=x,S=v*u[_],d.push(w?S:0),m.push(w?0:S),_++;for(b=_-1;b<o;b++){var j;b>_-1&&(d.shift(),m.shift(),x=v,w=(v=y(i[b]))>x,S=v*u[b],d.push(w?S:0),m.push(w?0:S)),D=g(m),j=100-100/(1+g(d)/D),H=parseFloat(j.toFixed(a)),h.push([s[b],H]),p.push(s[b]),c.push(H)}return{values:h,xData:p,yData:c}}}}m.defaultOptions=d(p.defaultOptions,{params:{index:void 0,volumeSeriesID:"volume",decimals:4}}),c(m.prototype,{nameBase:"Money Flow Index"}),h().registerSeriesType("mfi",m);let v=n();return o.default})());

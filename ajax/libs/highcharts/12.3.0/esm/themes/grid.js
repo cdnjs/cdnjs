@@ -1,0 +1,9 @@
+/**
+ * Highcharts JS v12.3.0 (2025-06-21)
+ * @module highcharts/themes/grid
+ * @requires highcharts
+ *
+ * (c) 2009-2025 Torstein Honsi
+ *
+ * License: www.highcharts.com/license
+ */import*as e from"../highcharts.js";var t,o,r={};r.n=e=>{var t=e&&e.__esModule?()=>e.default:()=>e;return r.d(t,{a:t}),t},r.d=(e,t)=>{for(var o in t)r.o(t,o)&&!r.o(e,o)&&Object.defineProperty(e,o,{enumerable:!0,get:t[o]})},r.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t);let l=e.default;var a=r.n(l);let{setOptions:n}=a();(t=o||(o={})).options={colors:["#058DC7","#50B432","#ED561B","#DDDF00","#24CBE5","#64E572","#FF9655","#FFF263","#6AF9C4"],chart:{backgroundColor:{linearGradient:{x1:0,y1:0,x2:1,y2:1},stops:[[0,"rgb(255, 255, 255)"],[1,"rgb(240, 240, 255)"]]},borderWidth:2,plotBackgroundColor:"rgba(255, 255, 255, .9)",plotShadow:!0,plotBorderWidth:1},title:{style:{color:"#000",font:'bold 16px "Trebuchet MS", Verdana, sans-serif'}},subtitle:{style:{color:"#666666",font:'bold 12px "Trebuchet MS", Verdana, sans-serif'}},xAxis:{gridLineWidth:1,lineColor:"#000",tickColor:"#000",labels:{style:{color:"#000",font:"11px Trebuchet MS, Verdana, sans-serif"}},title:{style:{color:"#333",fontWeight:"bold",fontSize:"12px",fontFamily:"Trebuchet MS, Verdana, sans-serif"}}},yAxis:{minorTickInterval:"auto",lineColor:"#000",lineWidth:1,tickWidth:1,tickColor:"#000",labels:{style:{color:"#000",font:"11px Trebuchet MS, Verdana, sans-serif"}},title:{style:{color:"#333",fontWeight:"bold",fontSize:"12px",fontFamily:"Trebuchet MS, Verdana, sans-serif"}}},legend:{itemStyle:{font:"9pt Trebuchet MS, Verdana, sans-serif",color:"black"},itemHoverStyle:{color:"#039"},itemHiddenStyle:{color:"gray"}},navigation:{buttonOptions:{theme:{stroke:"#CCCCCC"}}}},t.apply=function(){n(t.options)};let i=o;a().theme=i.options,i.apply();let s=a();export{s as default};

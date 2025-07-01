@@ -1,0 +1,11 @@
+/**
+ * Highcharts JS v12.3.0 (2025-06-21)
+ * @module highcharts/modules/pareto
+ * @requires highcharts
+ *
+ * Pareto series type for Highcharts
+ *
+ * (c) 2010-2025 Sebastian Bochan
+ *
+ * License: www.highcharts.com/license
+ */import*as e from"../highcharts.js";var t,s={};s.n=e=>{var t=e&&e.__esModule?()=>e.default:()=>e;return s.d(t,{a:t}),t},s.d=(e,t)=>{for(var i in t)s.o(t,i)&&!s.o(e,i)&&Object.defineProperty(e,i,{enumerable:!0,get:t[i]})},s.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t);let i=e.default;var r=s.n(i);let a=e.default.Series;var n=s.n(a);let{noop:o}=r(),{addEvent:d,defined:h}=r();!function(e){function t(){n().prototype.init.apply(this,arguments),this.initialised=!1,this.baseSeries=null,this.eventRemovers=[],this.addEvents()}function s(){let e=this.chart,t=this.options.baseSeries,s=h(t)&&(e.series[t]||e.get(t));this.baseSeries=s||null}function i(){this.eventRemovers.push(d(this.chart,"afterLinkSeries",()=>{this.setBaseSeries(),this.baseSeries&&!this.initialised&&(this.setDerivedData(),this.addBaseSeriesEvents(),this.initialised=!0)}))}function r(){this.eventRemovers.push(d(this.baseSeries,"updatedData",()=>{this.setDerivedData()}),d(this.baseSeries,"destroy",()=>{this.baseSeries=null,this.initialised=!1}))}function a(){this.eventRemovers.forEach(e=>{e()}),n().prototype.destroy.apply(this,arguments)}e.hasDerivedData=!0,e.setDerivedData=o,e.compose=function(e){let n=e.prototype;return n.addBaseSeriesEvents=r,n.addEvents=i,n.destroy=a,n.init=t,n.setBaseSeries=s,e},e.init=t,e.setBaseSeries=s,e.addEvents=i,e.addBaseSeriesEvents=r,e.destroy=a}(t||(t={}));let l=t,u=e.default.SeriesRegistry;var p=s.n(u);let{line:v}=p().seriesTypes,{correctFloat:c,merge:f,extend:S}=r();class y extends v{sumPointsPercents(e,t,s,i){let r=[],a=0,n=0,o=0,d;for(let h of e)null!==h&&(i?n+=h:(d=h/s*100,r.push([t[a],c(o+d)]),o+=d)),++a;return i?n:r}setDerivedData(){let e=this.baseSeries?.getColumn("x")||[],t=this.baseSeries?.getColumn("y")||[],s=this.sumPointsPercents(t,e,null,!0);this.setData(this.sumPointsPercents(t,e,s,!1),!1)}}y.defaultOptions=f(v.defaultOptions,{zIndex:3}),S(y.prototype,{hasDerivedData:l.hasDerivedData}),l.compose(y),p().registerSeriesType("pareto",y);let D=r();export{D as default};

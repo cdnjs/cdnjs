@@ -1,0 +1,9 @@
+/**
+ * Highcharts JS v12.3.0 (2025-06-21)
+ * @module highcharts/modules/lollipop
+ * @requires highcharts
+ *
+ * (c) 2009-2025 Sebastian Bochan, Rafal Sebestjanski
+ *
+ * License: www.highcharts.com/license
+ */import*as t from"../highcharts.js";var e={};e.n=t=>{var o=t&&t.__esModule?()=>t.default:()=>t;return e.d(o,{a:o}),o},e.d=(t,o)=>{for(var r in o)e.o(o,r)&&!e.o(t,r)&&Object.defineProperty(t,r,{enumerable:!0,get:o[r]})},e.o=(t,e)=>Object.prototype.hasOwnProperty.call(t,e);let o=t.default;var r=e.n(o);let s=t.default.SeriesRegistry;var a=e.n(s);let{series:{prototype:{pointClass:l}},seriesTypes:{scatter:{prototype:{pointClass:i}},dumbbell:{prototype:{pointClass:n}}}}=a(),{extend:p}=r();class d extends l{}p(d.prototype,{destroy:n.prototype.destroy,pointSetState:i.prototype.setState,setState:n.prototype.setState});let c=t.default.Series;var y=e.n(c);let{seriesTypes:{column:{prototype:h},dumbbell:{prototype:u},scatter:g}}=a(),{extend:b,merge:f}=r();class C extends y(){drawPoints(){let t=this.points.length,e=0,o;for(super.drawPoints.apply(this,arguments);e<t;)o=this.points[e],this.drawConnector(o),e++}translate(){for(let t of(h.translate.apply(this,arguments),this.points)){let{pointWidth:e,shapeArgs:o}=t;o?.x&&(o.x+=e/2,t.plotX=o.x||0)}}}C.defaultOptions=f(y().defaultOptions,{threshold:0,connectorWidth:1,groupPadding:.2,pointPadding:.1,states:{hover:{lineWidthPlus:0,connectorWidthPlus:1,halo:!1}},lineWidth:0,dataLabels:{align:void 0,verticalAlign:void 0},pointRange:1}),b(C.prototype,{alignDataLabel:h.alignDataLabel,crispCol:h.crispCol,drawConnector:u.drawConnector,drawDataLabels:h.drawDataLabels,getColumnMetrics:h.getColumnMetrics,getConnectorAttribs:u.getConnectorAttribs,pointClass:d}),a().registerSeriesType("lollipop",C);let v=r();export{v as default};
