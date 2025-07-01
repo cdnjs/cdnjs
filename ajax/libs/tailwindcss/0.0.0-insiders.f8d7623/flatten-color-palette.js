@@ -1,0 +1,1 @@
+"use strict";function s(r){let n={};for(let[e,t]of Object.entries(r??{}))if(e!=="__CSS_VALUES__")if(typeof t=="object"&&t!==null)for(let[l,i]of Object.entries(s(t)))n[`${e}${l==="DEFAULT"?"":`-${l}`}`]=i;else n[e]=t;if("__CSS_VALUES__"in r)for(let[e,t]of Object.entries(r.__CSS_VALUES__))Number(t)&4||(n[e]=r[e]);return n}module.exports=s;
