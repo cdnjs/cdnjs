@@ -1,0 +1,17 @@
+import { B as BSelect } from './Select-bl4qUzij.js';
+import { a as registerComponent } from './plugins-B172kuKE.js';
+import 'vue';
+import './Icon-DPyGDeRK.js';
+import './config-CKuo-p6e.js';
+import './helpers.js';
+import './_plugin-vue_export-helper-OJRSZE6i.js';
+import './CompatFallthroughMixin-C8LPuwDr.js';
+import './FormElementMixin-Dd_wkBN5.js';
+
+const Plugin = {
+  install(Vue) {
+    registerComponent(Vue, BSelect);
+  }
+};
+
+export { BSelect, Plugin as default };
