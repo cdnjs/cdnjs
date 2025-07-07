@@ -1,0 +1,2 @@
+/*! License details at fancyapps.com/license */
+const e=function(e){if(!(e&&e instanceof Element&&e.offsetParent))return!1;const n=e.scrollHeight>e.clientHeight,t=window.getComputedStyle(e).overflowY,o=-1!==t.indexOf("hidden"),i=-1!==t.indexOf("visible");return n&&!o&&!i},n=function(t,o=void 0){return!t||t===document.body||o&&t===o?null:e(t)?t:n(t.parentElement,o)};export{n as getScrollableParent,e as isScrollable};
