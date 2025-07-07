@@ -1,0 +1,1 @@
+import{a as o}from"./chunks/mermaid-layout-elk.esm.min/chunk-SP2CHFBE.mjs";var a=o(async()=>await import("./chunks/mermaid-layout-elk.esm.min/render-3NUKSE6Y.mjs"),"loader"),t=["elk.stress","elk.force","elk.mrtree","elk.sporeOverlap"],r=[{name:"elk",loader:a,algorithm:"elk.layered"},...t.map(e=>({name:e,loader:a,algorithm:e}))],l=r;export{l as default};
