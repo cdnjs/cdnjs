@@ -1,0 +1,84 @@
+.host {
+  position: relative;
+
+  /**
+   * ⚠️ WARNING ⚠️
+   * `overflow-y` мы не трогаем, т.к. из-за `hidden` могут обрезаться тени у потомков.
+   */
+  overflow-x: hidden;
+  isolation: isolate;
+
+  --vkui_internal--HorizontalScroll_shift_direction: 1;
+}
+
+.rtl {
+  --vkui_internal--HorizontalScroll_shift_direction: -1;
+}
+
+.in {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+
+  /**
+   * Для удаление скролла в Firefox.
+   * В версии ниже 64 будет виден скролл, но это не ломает функциональность.
+   */
+  scrollbar-width: none;
+}
+
+.in::-webkit-scrollbar {
+  display: none;
+}
+
+.inWrapper {
+  display: flex;
+  align-items: stretch;
+  transition: transform 0.2s;
+}
+
+.arrow {
+  position: absolute;
+  inset-block-start: 0;
+  z-index: var(--vkui_internal--z_index_horizontal_scroll_arrow);
+  opacity: 0;
+}
+
+.host:hover .arrow,
+.withConstArrows .arrow {
+  opacity: var(--vkui--opacity_disable_accessibility);
+}
+
+.host .arrow:hover {
+  opacity: 1;
+}
+
+.arrowLeft:hover ~ .in .inWrapper {
+  transform: translateX(calc(8px * var(--vkui_internal--HorizontalScroll_shift_direction)));
+}
+
+.arrowRight:hover ~ .in .inWrapper {
+  transform: translateX(calc(-8px * var(--vkui_internal--HorizontalScroll_shift_direction)));
+}
+
+/**
+ * CMP:
+ * Tabs
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalTabs) .host {
+  min-inline-size: 100%;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalTabs--withGaps) .inWrapper::after,
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+:global(.vkuiInternalTabs--withGaps) .inWrapper::before {
+  display: block;
+  flex-shrink: 0;
+  inline-size: var(--vkui--size_base_padding_horizontal--regular);
+  block-size: 1px;
+  content: '';
+}
