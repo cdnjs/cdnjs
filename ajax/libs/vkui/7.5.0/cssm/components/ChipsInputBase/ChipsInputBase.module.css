@@ -1,0 +1,96 @@
+.host {
+  --vkui_internal--chips_input_base_container_gap: 4px;
+
+  position: relative;
+  z-index: var(--vkui_internal--z_index_form_field_element);
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-wrap: wrap;
+  max-inline-size: 100%;
+  padding: var(--vkui_internal--chips_input_base_container_gap);
+  margin: 0;
+  overflow: hidden;
+}
+
+.listBox {
+  position: relative;
+  display: inline-flex;
+  flex-wrap: wrap;
+  max-inline-size: 100%;
+  overflow: hidden;
+  list-style: none;
+}
+
+.chip {
+  max-inline-size: calc(100% - var(--vkui_internal--chips_input_base_container_gap));
+  margin: 2px;
+}
+
+.el {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-flex;
+  flex: 1;
+  inline-size: 100%;
+  padding: 0;
+  color: var(--vkui--color_text_primary);
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.el:not(:-moz-read-only):focus {
+  min-inline-size: 64px;
+  padding-block: 2px 4px;
+  padding-inline: 10px 2px;
+}
+
+.hasPlaceholder .el,
+.hasInputValue .el,
+.el:not(:read-only):focus {
+  min-inline-size: 64px;
+  padding-block: 2px 4px;
+  padding-inline: 10px 2px;
+}
+
+.el::-ms-clear {
+  display: none;
+}
+
+.el::placeholder {
+  color: var(--vkui--color_text_secondary);
+  /* Для Firefox */
+  opacity: 1;
+}
+
+.el:disabled::placeholder {
+  color: var(--vkui--color_text_secondary);
+}
+
+.el[readonly] {
+  cursor: default;
+}
+
+.hasPlaceholder .el {
+  block-size: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/**
+ * sizeY COMPACT
+ */
+
+.sizeYCompact {
+  --vkui_internal--chips_input_base_container_gap: 2px;
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .sizeYNone {
+    --vkui_internal--chips_input_base_container_gap: 2px;
+  }
+}
