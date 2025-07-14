@@ -1,0 +1,2 @@
+/*! License details at fancyapps.com/license */
+import{it_IT as a}from"../../panzoom/l10n/it_IT.js";const i=Object.assign(Object.assign({},a),{ERROR:"Qualcosa è andato storto, riprova più tardi",NEXT:"Diapositiva successiva",PREV:"Diapositiva precedente",GOTO:"Vai alla diapositiva #%d",DOWNLOAD:"Scarica",TOGGLE_FULLSCREEN:"Attiva/disattiva modalità a schermo intero",TOGGLE_EXPAND:"Attiva/disattiva modalità a schermo intero",TOGGLE_THUMBS:"Attiva/disattiva miniature",TOGGLE_AUTOPLAY:"Attiva/disattiva presentazione"});export{i as it_IT};
