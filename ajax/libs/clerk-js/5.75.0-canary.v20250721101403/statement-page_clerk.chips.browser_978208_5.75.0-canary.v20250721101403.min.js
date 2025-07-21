@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunk_clerk_clerk_js=globalThis.webpackChunk_clerk_clerk_js||[]).push([["177"],{9181:function(e,t,r){r.r(t),r.d(t,{OrganizationStatementPage:()=>n});var a=r(9109),l=r(1576),c=r(5515);let n=()=>(0,a.tZ)(l.SubscriberTypeContext.Provider,{value:"org",children:(0,a.tZ)(c.StatementPage,{})})}}]);
