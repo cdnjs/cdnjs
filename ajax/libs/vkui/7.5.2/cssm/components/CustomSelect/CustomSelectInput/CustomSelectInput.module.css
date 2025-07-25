@@ -1,0 +1,136 @@
+.host {
+  position: relative;
+}
+
+.el {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  z-index: var(--vkui_internal--z_index_form_field_element);
+  box-sizing: border-box;
+  inline-size: 100%;
+  block-size: var(--vkui--size_field_height--regular);
+  padding-block: 0;
+  padding-inline: 12px;
+  margin: 0;
+  line-height: var(--vkui--size_field_height--regular);
+  color: var(--vkui--color_text_primary);
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background: transparent;
+  border: 0;
+  border-radius: inherit;
+  box-shadow: none;
+}
+
+.elCursorPointer {
+  cursor: pointer;
+}
+
+.sizeYCompact .el {
+  block-size: var(--vkui--size_field_height--compact);
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .sizeYNone .el {
+    block-size: var(--vkui--size_field_height--compact);
+  }
+}
+
+.hasBefore .el {
+  -webkit-padding-start: 0;
+          padding-inline-start: 0;
+}
+
+.hasAfter .el {
+  -webkit-padding-end: 0;
+          padding-inline-end: 0;
+}
+
+.container {
+  z-index: var(--vkui_internal--z_index_form_field_element);
+  box-sizing: border-box;
+  inline-size: 100%;
+  max-block-size: 100%;
+  padding-inline: 12px 0;
+  overflow: hidden;
+  color: var(--vkui--color_text_primary);
+  pointer-events: none;
+}
+
+.hasBefore .container {
+  -webkit-padding-start: 0;
+          padding-inline-start: 0;
+}
+
+.multiline .container {
+  padding-block: 12px;
+}
+
+.sizeYCompact.multiline .container {
+  padding-block: 8px;
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .sizeYNone.multiline .container {
+    padding-block: 8px;
+  }
+}
+
+.inputGroup {
+  position: relative;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  align-self: stretch;
+  overflow: hidden;
+}
+
+.hasBefore .inputGroup {
+  border-radius: 0;
+}
+
+.title {
+  display: block;
+}
+
+.host:not(.multiline) .title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.empty .title {
+  color: var(--vkui--color_text_secondary);
+}
+
+/* Для доступности placeholder в инпуте задан, но визуально не виден, потому что
+ * для комфортного управления видом плейсходера мы рендерим его отдельно, так же как и лэйбл
+ */
+
+.el::placeholder {
+  opacity: 0;
+}
+
+.alignRight .title,
+.alignRight .el {
+  text-align: end;
+}
+
+.alignCenter .title,
+.alignCenter .el {
+  text-align: center;
+}
+
+/**
+ * CMP:
+ * CalendarHeader
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalCalendarHeader__picker) .container {
+  -webkit-padding-end: 4px;
+          padding-inline-end: 4px;
+}

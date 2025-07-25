@@ -1,0 +1,46 @@
+'use client';
+import { jsx as _jsx } from "react/jsx-runtime";
+import * as React from "react";
+import { classNames } from "@vkontakte/vkjs";
+import { useAdaptivity } from "../../hooks/useAdaptivity.js";
+import { useAutoFocus } from "../../hooks/useAutoFocus.js";
+import { useExternRef } from "../../hooks/useExternRef.js";
+import { getFormFieldModeFromSelectType } from "../../lib/select.js";
+import { DropdownIcon } from "../DropdownIcon/DropdownIcon.js";
+import { FormField } from "../FormField/FormField.js";
+import { SelectTypography } from "../SelectTypography/SelectTypography.js";
+import styles from "../Select/Select.module.css";
+const sizeYClassNames = {
+    none: styles.sizeYNone,
+    compact: styles.sizeYCompact
+};
+/**
+ * @see https://vkui.io/components/select-mimicry
+ */ export const SelectMimicry = ({ tabIndex = 0, placeholder, children, align, getRootRef, multiline, disabled, onClick, before, after = /*#__PURE__*/ _jsx(DropdownIcon, {}), selectType = 'default', status, className, autoFocus, ...restProps })=>{
+    const rootRef = useExternRef(getRootRef);
+    const { sizeY = 'none' } = useAdaptivity();
+    const title = children || placeholder;
+    useAutoFocus(rootRef, autoFocus);
+    return /*#__PURE__*/ _jsx(FormField, {
+        ...restProps,
+        tabIndex: disabled ? undefined : tabIndex,
+        className: classNames(styles.host, sizeY !== 'regular' && sizeYClassNames[sizeY], !children && styles.empty, multiline && styles.multiline, align === 'center' && styles.alignCenter, align === 'right' && styles.alignRight, before && styles.hasBefore, className),
+        getRootRef: rootRef,
+        onClick: disabled ? undefined : onClick,
+        disabled: disabled,
+        before: before,
+        after: after,
+        mode: getFormFieldModeFromSelectType(selectType),
+        status: status,
+        children: /*#__PURE__*/ _jsx("div", {
+            className: styles.container,
+            children: /*#__PURE__*/ _jsx(SelectTypography, {
+                selectType: selectType,
+                className: styles.title,
+                children: title
+            })
+        })
+    });
+};
+
+//# sourceMappingURL=SelectMimicry.js.map

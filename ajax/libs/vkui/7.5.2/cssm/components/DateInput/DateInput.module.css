@@ -1,0 +1,64 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-grow: 1;
+  min-inline-size: inherit;
+  min-block-size: inherit;
+
+  --vkui_internal--DateInput_input_margin_inline_start: 10px;
+  --vkui_internal--DateInput_input_margin_inline_end: 14px;
+}
+
+.input {
+  z-index: var(--vkui_internal--z_index_form_field_element);
+  display: block;
+  flex-grow: 1;
+  align-self: center;
+  margin-inline: var(--vkui_internal--DateInput_input_margin_inline_start)
+    var(--vkui_internal--DateInput_input_margin_inline_end);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  cursor: text;
+  -webkit-user-select: text;
+     -moz-user-select: text;
+          user-select: text;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.customValue {
+  position: absolute;
+  box-sizing: border-box;
+  align-self: center;
+  inline-size: calc(
+    100% - var(--vkui_internal--DateInput_input_margin_inline_start) -
+      var(--vkui_internal--DateInput_input_margin_inline_end)
+  );
+  margin-inline: var(--vkui_internal--DateInput_input_margin_inline_start)
+    var(--vkui_internal--DateInput_input_margin_inline_end);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  pointer-events: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+.inputTimeDivider {
+  /* stylelint-disable-next-line declaration-no-important */
+  letter-spacing: 6px !important;
+}
+
+.sizeYCompact .input {
+  -webkit-margin-end: 22px;
+          margin-inline-end: 22px;
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .sizeYNone .input {
+    --vkui_internal--DateInput_input_margin_inline_end: 22px;
+  }
+}
