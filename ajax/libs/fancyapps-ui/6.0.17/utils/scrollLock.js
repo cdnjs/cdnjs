@@ -1,0 +1,2 @@
+/*! License details at fancyapps.com/license */
+const t=(t=!0,e="--f-scrollbar-compensate",s="--f-body-margin",o="hide-scrollbar")=>{const n=document,r=n.body,l=n.documentElement;if(t){if(r.classList.contains(o))return;let t=window.innerWidth-l.getBoundingClientRect().width;t<0&&(t=0),l.style.setProperty(e,`${t}px`);const n=parseFloat(window.getComputedStyle(r).marginRight);n&&r.style.setProperty(s,`${n}px`),r.classList.add(o)}else r.classList.remove(o),r.style.setProperty(s,""),n.documentElement.style.setProperty(e,"")};export{t as scrollLock};
