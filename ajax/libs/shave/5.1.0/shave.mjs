@@ -1,0 +1,9 @@
+/**
+  shave - Shave is a javascript plugin that truncates multi-line text within a html element based on set max height
+  @version v5.1.0
+  @link https://github.com/yowainwright/shave#readme
+  @author Jeff Wainwright <yowainwright@gmail.com> (jeffry.in)
+  @license MIT
+**/
+function M(t){return typeof t=="string"?[...document.querySelectorAll(t)]:"length"in t?[...t]:[t]}function W(t,c,s={}){if(typeof c>"u"||isNaN(c))throw Error("maxHeight is required");let i=M(t);if(!i.length)return;let{character:T="\u2026",classname:b="js-shave",spaces:E=!0,charclassname:C="js-shave-char",link:r={},delimiter:o}=s,g=typeof E=="boolean"?E:!0,m=r&&JSON.stringify(r)!=="{}"&&r.href,q=m?"a":"span";for(let A=0;A<i.length;A+=1){let e=i[A],n=e.style,O=e.querySelector("."+b),f=e.textContent===void 0?"innerText":"textContent";O&&(e.removeChild(e.querySelector("."+C)),e[f]=e[f]);let j=e[f],l;if(o?l=j.split(o):l=g?j.split(" "):j,l.length<2)continue;let S=n.height;n.height="auto";let k=n.maxHeight;if(n.maxHeight="none",e.offsetHeight<=c){n.height=S,n.maxHeight=k;continue}let P=m&&r.textContent?r.textContent:T,h=document.createElement(q),L={className:C,textContent:P};for(let a in L)h[a]=L[a],h.textContent=T;if(m)for(let a in r)h[a]=r[a];let d=l.length-1,v=0,y;for(;v<d;){y=v+d+1>>1;let a=l.slice(0,y);e[f]=H(o,g,a),e.insertAdjacentElement("beforeend",h),e.offsetHeight>c?d=y-1:v=y}let w=l.slice(0,d);e[f]=H(o,g,w),e.insertAdjacentElement("beforeend",h);let u=l.slice(d),N=Array.isArray(u),p="";o&&N?p=o+u.join(o):g&&N?p=" "+u.join(" "):N?p=u.join(""):p=u;let J=document.createTextNode(p),x=document.createElement("span");x.classList.add(b),x.style.display="none",x.appendChild(J),e.insertAdjacentElement("beforeend",x),n.height=S,n.maxHeight=k}}function H(t,c,s){let i=Array.isArray(s);return t&&i?s.join(t):c&&i?s.join(" "):i?s.join(""):s}export{W as default,H as updateTextProp};
+//# sourceMappingURL=shave.mjs.map
