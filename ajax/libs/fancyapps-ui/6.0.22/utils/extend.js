@@ -1,0 +1,2 @@
+/*! License details at fancyapps.com/license */
+import{isPlainObject as s}from"./isPlainObject.js";const r=(t,...e)=>{const n=e.length;for(let c=0;c<n;c++){const n=e[c]||{};Object.entries(n).forEach((([e,n])=>{const c=Array.isArray(n)?[]:{};t[e]||Object.assign(t,{[e]:c}),s(n)?Object.assign(t[e],r(t[e],n)):Array.isArray(n)?Object.assign(t,{[e]:[...n]}):Object.assign(t,{[e]:n})}))}return t};export{r as extend};
