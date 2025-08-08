@@ -1,0 +1,16 @@
+import { B as BPagination, P as PaginationButton } from './Pagination-B-LAJQay.js';
+import { a as registerComponent } from './plugins-B172kuKE.js';
+import 'vue';
+import './config-CKuo-p6e.js';
+import './_plugin-vue_export-helper-OJRSZE6i.js';
+import './Icon-DPyGDeRK.js';
+import './helpers.js';
+
+const Plugin = {
+  install(Vue) {
+    registerComponent(Vue, BPagination);
+    registerComponent(Vue, PaginationButton);
+  }
+};
+
+export { BPagination, PaginationButton as BPaginationButton, Plugin as default };
