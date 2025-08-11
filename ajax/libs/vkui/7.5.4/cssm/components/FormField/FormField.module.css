@@ -1,0 +1,266 @@
+.host {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  inline-size: 100%;
+  min-block-size: var(--vkui--size_field_height--regular);
+  font-family: var(--vkui--font_family_base);
+  border-radius: var(--vkui--size_border_radius--regular);
+  isolation: isolate;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.scrollContainer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  inline-size: 100%;
+  min-block-size: inherit;
+  overflow-y: auto;
+}
+
+.content {
+  display: flex;
+  flex-grow: 1;
+  min-inline-size: 0;
+  min-block-size: inherit;
+}
+
+.sizeYCompact {
+  min-block-size: var(--vkui--size_field_height--compact);
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .sizeYNone {
+    min-block-size: var(--vkui--size_field_height--compact);
+  }
+}
+
+/* stylelint-disable-next-line selector-max-universal */
+
+.host > * {
+  z-index: var(--vkui_internal--z_index_form_field_element);
+  border-radius: inherit;
+}
+
+.iconWrapper {
+  position: -webkit-sticky;
+  position: sticky;
+  inset-block-start: 0;
+  display: flex;
+  flex-shrink: 0;
+  block-size: 100%;
+}
+
+.before,
+.after {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+  min-inline-size: var(--vkui--size_field_height--regular);
+  color: var(--vkui--color_icon_secondary);
+}
+
+.sizeYCompact .before,
+.sizeYCompact .after {
+  min-inline-size: var(--vkui--size_field_height--compact);
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .sizeYNone .before,
+  .sizeYNone .after {
+    min-inline-size: var(--vkui--size_field_height--compact);
+  }
+}
+
+.iconAlignStart {
+  align-self: flex-start;
+}
+
+.iconAlignEnd {
+  align-self: flex-end;
+}
+
+.before {
+  color: var(--vkui--color_icon_accent);
+}
+
+.after {
+  color: var(--vkui--color_icon_secondary);
+}
+
+.border {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  z-index: var(--vkui_internal--z_index_form_field_border);
+  box-sizing: border-box;
+  inline-size: 100%;
+  block-size: 100%;
+  pointer-events: none;
+  border: var(--vkui--size_border--regular) solid transparent;
+  border-radius: inherit;
+  transform-origin: left top;
+}
+
+.modeDefault > .border {
+  border-color: var(--vkui--color_field_border_alpha);
+}
+
+.modeDefault {
+  background-color: var(--vkui--color_field_background);
+}
+
+.hover {
+  background-color: var(--vkui--color_field_background);
+}
+
+.modeDefault.hover > .border {
+  z-index: var(--vkui_internal--z_index_form_field_border_hover);
+  border-color: var(--vkui--color_field_border_alpha--hover);
+}
+
+/**
+ * useFocusVisibleClassName()
+ */
+
+/* increase specificity for selects */
+
+.focusVisible.focusVisible > .border {
+  border-color: var(--vkui--color_stroke_accent);
+}
+
+/**
+ * CMP:
+ * FormItem
+ * [start]
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormItem--status-error) .modeDefault > .border,
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+:global(.vkuiInternalFormItem--status-error) .focusVisible > .border,
+.statusError.modeDefault > .border,
+.statusError.focusVisible > .border {
+  z-index: var(--vkui_internal--z_index_form_field_status);
+  border-color: var(--vkui--color_stroke_negative);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormItem--status-error) .host,
+.statusError {
+  background-color: var(--vkui--color_background_negative_tint);
+}
+
+/* increase specificity to cover --mode-default case */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormItem--status-valid) .modeDefault > .border,
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+:global(.vkuiInternalFormItem--status-valid) .focusVisible > .border,
+.statusValid.modeDefault > .border,
+.statusValid.focusVisible > .border {
+  z-index: var(--vkui_internal--z_index_form_field_status);
+  border-color: var(--vkui--color_stroke_positive);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormItem--status-valid) .host:not(.modeDefault),
+.statusValid:not(.modeDefault) {
+  background-color: var(--vkui--color_background_positive_tint);
+}
+
+/* [end] */
+
+.disabled {
+  pointer-events: none;
+  cursor: default;
+  opacity: var(--vkui--opacity_disable_accessibility);
+}
+
+/**
+ * CMP:
+ * NativeSelect
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalNativeSelect) .after {
+  pointer-events: none;
+}
+
+/**
+ * CMP:
+ * CalendarHeader
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalCalendarHeader__picker) .after {
+  min-inline-size: 12px;
+  -webkit-padding-end: 8px;
+          padding-inline-end: 8px;
+}
+
+/**
+ * CMP:
+ * FormLayoutGroup
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormLayoutGroup--segmented) .host {
+  z-index: auto;
+  border-radius: 0;
+  isolation: auto;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(
+    .vkuiInternalFormLayoutGroup--segmented.vkuiInternalFormLayoutGroup--mode-horizontal
+      .vkuiInternalFormItem
+  ):first-of-type
+  .host {
+  border-start-start-radius: var(--vkui--size_border_radius--regular);
+  border-end-start-radius: var(--vkui--size_border_radius--regular);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(
+    .vkuiInternalFormLayoutGroup--segmented.vkuiInternalFormLayoutGroup--mode-horizontal
+      .vkuiInternalFormItem
+  ):last-of-type
+  .host {
+  border-start-end-radius: var(--vkui--size_border_radius--regular);
+  border-end-end-radius: var(--vkui--size_border_radius--regular);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(
+    .vkuiInternalFormLayoutGroup--segmented.vkuiInternalFormLayoutGroup--mode-vertical
+      .vkuiInternalFormItem
+  ):first-of-type
+  .host {
+  border-start-start-radius: var(--vkui--size_border_radius--regular);
+  border-start-end-radius: var(--vkui--size_border_radius--regular);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(
+    .vkuiInternalFormLayoutGroup--segmented.vkuiInternalFormLayoutGroup--mode-vertical
+      .vkuiInternalFormItem
+  ):last-of-type
+  .host {
+  border-end-start-radius: var(--vkui--size_border_radius--regular);
+  border-end-end-radius: var(--vkui--size_border_radius--regular);
+}
