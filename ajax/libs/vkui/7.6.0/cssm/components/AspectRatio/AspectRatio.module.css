@@ -1,0 +1,38 @@
+.host {
+  --vkui_internal--aspect_ratio: 1;
+
+  position: relative;
+  max-inline-size: 100%;
+}
+
+.host::before {
+  display: block;
+  block-size: 0;
+  -webkit-padding-after: calc((1 / var(--vkui_internal--aspect_ratio, 1)) * 100%);
+          padding-block-end: calc((1 / var(--vkui_internal--aspect_ratio, 1)) * 100%);
+  content: '';
+}
+
+/* stylelint-disable-next-line selector-max-universal */
+
+.host > * {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+}
+
+/* stylelint-disable-next-line selector-max-universal */
+
+.modeStretch > * {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+/* stylelint-disable selector-max-type */
+
+.modeStretch > img,
+.modeStretch > video {
+  object-fit: cover;
+}
+
+/* stylelint-enable selector-max-type */
