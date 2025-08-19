@@ -1,0 +1,1 @@
+!/*! License details at fancyapps.com/license */function(e,n){"object"==typeof exports&&"undefined"!=typeof module?n(exports):"function"==typeof define&&define.amd?define(["exports"],n):n((e="undefined"!=typeof globalThis?globalThis:e||self).window=e.window||{})}(this,function(e){"use strict";e.clamp=function(e=0,n=0,t=0){return Math.max(Math.min(n,t),e)}});

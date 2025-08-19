@@ -1,0 +1,2 @@
+/*! License details at fancyapps.com/license */
+import{de_DE as e}from"../../panzoom/l10n/de_DE.js";const s=Object.assign(Object.assign({},e),{ERROR:"Etwas ist schief gelaufen, bitte versuchen Sie es später noch einmal",NEXT:"Nächste Folie",PREV:"Vorherige Folie",GOTO:"Zur #%d Folie gehen",DOWNLOAD:"Herunterladen",TOGGLE_EXPAND:"Vollbild umschalten",TOGGLE_FULLSCREEN:"Vollbild umschalten",TOGGLE_THUMBS:"Miniaturansichten umschalten",TOGGLE_AUTOPLAY:"Diashow wechseln"});export{s as de_DE};
