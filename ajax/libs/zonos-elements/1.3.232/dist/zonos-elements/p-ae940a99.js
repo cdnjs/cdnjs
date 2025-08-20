@@ -1,0 +1,1 @@
+import{l as o}from"./p-2557b96b.js";const r="gkjqw123",v="Kq93wqw3",i=()=>{var i;return null===(i=o.inclusivePricingConfigurations)||void 0===i?void 0:i.some((o=>{var i,l;return"ENABLED"===(null===(i=o.configurations[r])||void 0===i?void 0:i.status)||"ENABLED"===(null===(l=o.configurations[v])||void 0===l?void 0:l.status)}))};export{r as D,v as T,i as h}
