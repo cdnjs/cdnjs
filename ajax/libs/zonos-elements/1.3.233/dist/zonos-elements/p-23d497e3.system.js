@@ -1,0 +1,1 @@
+System.register(["./p-d45285aa.system.js"],(function(t){"use strict";var n;return{setters:[function(t){n=t.z}],execute:function(){var r=t("g",(function(t){var r=(t===null||t===void 0?void 0:t.customRoundRadius)||"10px";var e=t===null||t===void 0?void 0:t.overrideBorderStyle;if(e){return e==="SHARP"?"0px":r}return n.appearance.style==="SHARP"?"0px":r}))}}}));
