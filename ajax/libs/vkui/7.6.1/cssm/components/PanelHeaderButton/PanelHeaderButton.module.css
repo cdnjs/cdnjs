@@ -1,0 +1,195 @@
+.host {
+  position: relative;
+  display: block;
+  padding: 0;
+  margin: 0;
+  color: currentColor;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background: none;
+  border: 0;
+  box-shadow: none;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.host :global(.vkuiIcon) {
+  box-sizing: content-box;
+}
+
+.host[disabled] {
+  opacity: 0.6;
+}
+
+.primitive {
+  block-size: 48px;
+  padding-block: 0;
+  padding-inline: 10px;
+  line-height: 48px;
+}
+
+/* stylelint-disable selector-max-type */
+
+.rtl svg {
+  transform: scaleX(-1);
+}
+
+/* stylelint-enable selector-max-type */
+
+/*
+ * iOS
+ */
+
+.ios {
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-size: 17px;
+}
+
+.ios.primitive {
+  block-size: 44px;
+  line-height: 44px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.ios :global(.vkuiIcon--24) {
+  padding: 10px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.ios :global(.vkuiIcon--28) {
+  padding: 8px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.backIos :global(.vkuiIcon--w-20) {
+  -webkit-padding-start: 4px;
+          padding-inline-start: 4px;
+}
+
+/*
+ * Android
+ */
+
+.android.notPrimitive {
+  border-radius: 50%;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.android :global(.vkuiIcon--24),
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+.android :global(.vkuiIcon--28) {
+  padding: 10px;
+}
+
+/**
+* VKCOM
+*/
+
+.vkcom {
+  color: var(--vkui--color_text_secondary);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.backVkcom :global(.vkuiIcon) {
+  color: var(--vkui--color_icon_secondary);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.vkcom > :not(:global(.vkuiInternalBadge)):not(:global(.vkuiInternalCounter)) {
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.vkcom.hover > :not(:global(.vkuiInternalCounter)):not(:global(.vkuiInternalBadge)),
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+.vkcom.active > :not(:global(.vkuiInternalCounter)):not(:global(.vkuiInternalBadge)) {
+  opacity: 1;
+}
+
+.vkcom {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.vkcom.notPrimitive {
+  border-radius: 50%;
+}
+
+.backVkcom.backHasLabel {
+  -webkit-padding-end: 11px;
+          padding-inline-end: 11px;
+}
+
+@media (min-width: 768px) {
+  .backIos.backHasLabel:not(.backSizeXCompact) {
+    -webkit-padding-end: 8px;
+            padding-inline-end: 8px;
+  }
+}
+
+.backSizeXCompact.backIos .label {
+  display: none;
+}
+
+@media (max-width: 767.9px) {
+  .backSizeXNone.backIos .label {
+    display: none;
+  }
+}
+
+/*
+ * CMP:
+ * Counter
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.host :global(.vkuiInternalCounter) {
+  position: absolute;
+  inset-block-start: 4px;
+  inset-inline-end: 4px;
+  padding: 0;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.host :global(.vkuiIcon--24) ~ :global(.vkuiInternalCounter),
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+.ios :global(.vkuiInternalCounter) {
+  inset-block-start: 2px;
+  inset-inline-end: 2px;
+}
+
+/*
+ * CMP:
+ * Badge
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.host :global(.vkuiInternalBadge) {
+  position: absolute;
+  inset-block-start: 8px;
+  inset-inline-end: 8px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.host :global(.vkuiIcon--24) ~ :global(.vkuiInternalBadge),
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+.ios :global(.vkuiInternalBadge) {
+  inset-block-start: 6px;
+  inset-inline-end: 6px;
+}

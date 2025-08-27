@@ -1,0 +1,84 @@
+.host {
+  position: relative;
+  inline-size: 44px;
+  block-size: 52px;
+  padding: 0;
+  margin: 0;
+  color: var(--vkui--color_icon_secondary);
+  cursor: pointer;
+  background: none;
+  border: 0;
+  border-radius: var(--vkui--size_border_radius--regular);
+}
+
+.in {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.host:disabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.active {
+  opacity: 0.6;
+}
+
+.counter {
+  position: absolute;
+  inset-block-start: 6px;
+  inset-inline-end: 2px;
+  box-shadow: 0 0 0 2px var(--vkui--color_background_contrast_themed);
+}
+
+.ios .counter {
+  box-shadow: 0 0 0 2px var(--vkui--color_background_content);
+}
+
+.host.modeSend,
+.host.modeDone {
+  color: var(--vkui--color_icon_accent);
+}
+
+/**
+ * iOS
+ */
+
+.ios {
+  color: var(--vkui--color_icon_accent_themed);
+}
+
+.ios.modeSend,
+.ios.modeDone {
+  inline-size: 48px;
+  padding-inline: 0;
+  color: var(--vkui--color_icon_accent_themed);
+}
+
+.ios.modeSend,
+.ios.modeDone {
+  /* компенсируем отступ WriteBar__after справа */
+  -webkit-margin-end: -4px;
+          margin-inline-end: -4px;
+}
+
+.ios.modeSend:only-child,
+.ios.modeDone:only-child {
+  /* для одной иконки нужно компенсировать отступ WriteBar__after слева */
+  -webkit-margin-start: -4px;
+          margin-inline-start: -4px;
+}
+
+/**
+ * Impact:
+ * Counter
+ */
+
+.host {
+  --vkui_internal--counter_inherit_color: var(--vkui--color_text_contrast_themed);
+  --vkui_internal--counter_inherit_background: var(--vkui--color_background_positive);
+}

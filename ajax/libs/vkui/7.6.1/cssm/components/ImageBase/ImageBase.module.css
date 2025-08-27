@@ -1,0 +1,127 @@
+.host {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  color: var(--vkui_internal--icon_color, var(--vkui--color_icon_secondary));
+  background-color: var(--vkui--color_background_secondary);
+  background-size: cover;
+  isolation: isolate;
+}
+
+.loaded,
+.transparentBackground {
+  background-color: transparent;
+}
+
+.children,
+.border {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.children {
+  display: inherit;
+  align-items: inherit;
+  justify-content: inherit;
+  border-radius: inherit;
+}
+
+.border {
+  z-index: var(--vkui_internal--z_index_image_base_border);
+  box-sizing: border-box;
+  pointer-events: none;
+  border: var(--vkui--size_border--regular) solid var(--vkui--color_image_border_alpha);
+  border-radius: inherit;
+  transform-origin: left top;
+}
+
+.img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  /* Скрывает текст из атрибута alt. */
+  color: transparent;
+  /*
+  Скрывает альтернативную иконку, которая появляется когда нет атрибута alt.
+  Работает только в Chromium. В остальных ситуациях сработает `.imgHiddenAlt`, который добавляется на `onError`.
+  */
+  text-indent: 10000px;
+  border: 0;
+  border-radius: inherit;
+}
+
+.imgKeepRatio {
+  inline-size: auto;
+  block-size: auto;
+}
+
+.imgObjectFitContain {
+  object-fit: contain;
+}
+
+.imgObjectFitCover {
+  object-fit: cover;
+}
+
+.imgObjectFitNone {
+  object-fit: none;
+}
+
+.imgObjectFitScaleDown {
+  object-fit: scale-down;
+}
+
+.withObjectPosition {
+  --vkui_internal--ImageBase_object_position_default: 50% 50%;
+
+  object-position: var(
+    --vkui_internal--ImageBase_object_position,
+    var(--vkui_internal--ImageBase_object_position_default)
+  );
+}
+
+.withFilter {
+  --vkui_internal--ImageBase_object_filter_default: none;
+
+  filter: var(
+    --vkui_internal--ImageBase_object_filter,
+    var(--vkui_internal--ImageBase_object_filter_default)
+  );
+}
+
+.imgHiddenAlt {
+  opacity: 0;
+}
+
+.fallback {
+  position: absolute;
+
+  /* Расcчитываем на центрирование через родительский `display: flex` */
+  inset-block-start: auto;
+  inset-inline-start: auto;
+}
+
+/**
+ * CMP:
+ * PanelHeader
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalPanelHeader__before) > .host {
+  -webkit-margin-start: 8px;
+          margin-inline-start: 8px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalPanelHeader__after) > .host {
+  -webkit-margin-end: 8px;
+          margin-inline-end: 8px;
+}

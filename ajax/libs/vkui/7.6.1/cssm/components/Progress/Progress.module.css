@@ -1,0 +1,34 @@
+.host {
+  block-size: 2px;
+  background: var(--vkui--color_track_background);
+  border-radius: 1px;
+
+  --vkui_internal_Progress_background_color: var(--vkui--color_stroke_accent);
+  --vkui_internal_Progress_progress: 0;
+}
+
+.trackDisable {
+  background: transparent;
+}
+
+.host::after {
+  display: block;
+  inline-size: calc(var(--vkui_internal_Progress_progress) * 1%);
+  block-size: 100%;
+  content: '';
+  background: var(--vkui_internal_Progress_background_color);
+  border-radius: inherit;
+  transition: width 0.2s ease;
+}
+
+.appearanceAccent {
+  --vkui_internal_Progress_background_color: var(--vkui--color_stroke_accent);
+}
+
+.appearancePositive {
+  --vkui_internal_Progress_background_color: var(--vkui--color_stroke_positive);
+}
+
+.appearanceNegative {
+  --vkui_internal_Progress_background_color: var(--vkui--color_stroke_negative);
+}

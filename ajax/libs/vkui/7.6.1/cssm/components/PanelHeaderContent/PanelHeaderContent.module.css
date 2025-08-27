@@ -1,0 +1,117 @@
+.host {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  max-inline-size: 100%;
+  block-size: 100%;
+  font-family: var(--vkui--font_family_base);
+  line-height: initial;
+}
+
+.before {
+  flex-shrink: 0;
+  -webkit-margin-end: 12px;
+          margin-inline-end: 12px;
+}
+
+.in {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-inline-size: 0;
+  block-size: 100%;
+}
+
+.subtitle,
+.childrenIn,
+.childrenText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.subtitle {
+  order: 1;
+  max-inline-size: 100%;
+  -webkit-margin-before: 1px;
+          margin-block-start: 1px;
+  color: var(--vkui--color_text_secondary);
+}
+
+.children {
+  display: flex;
+  align-items: center;
+  max-inline-size: 100%;
+}
+
+.childrenIn {
+  flex-grow: 0;
+  min-inline-size: 0;
+}
+
+.aside {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  -webkit-margin-start: 2px;
+          margin-inline-start: 2px;
+  color: var(--vkui--color_icon_accent);
+}
+
+.width {
+  inline-size: 1000px;
+}
+
+.inCentered {
+  align-items: center;
+}
+
+/**
+ * iOS
+ */
+
+.ios .childrenIn {
+  font-family: var(--vkui--font_family_accent);
+  font-size: 21px;
+  font-weight: 500;
+  line-height: var(--vkui_internal--panel_header_height);
+}
+
+/**
+ * Android
+ */
+
+.android .childrenIn {
+  font-family: var(--vkui--font_family_accent);
+  font-size: 23px;
+  font-weight: 500;
+  line-height: var(--vkui_internal--panel_header_height);
+}
+
+/**
+ * VKCOM
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalPanelHeader--no-before) .vkcom {
+  -webkit-padding-start: 16px;
+          padding-inline-start: 16px;
+}
+
+/**
+ * Common
+ */
+
+.sizeYCompact:not(.vkcom) .childrenIn {
+  font-size: 20px;
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .sizeYNone:not(.vkcom) .childrenIn {
+    font-size: 20px;
+  }
+}

@@ -1,0 +1,124 @@
+.host {
+  --vkui_internal--flex_original_margin_inline: 0px;
+  --vkui_internal--flex_original_margin_block: 0px;
+
+  display: flex;
+}
+
+.marginAuto {
+  --vkui_internal--flex_original_margin_inline: var(--vkui--size_base_padding_horizontal--regular);
+  --vkui_internal--flex_original_margin_block: var(--vkui--size_base_padding_vertical--regular);
+
+  margin-block: var(--vkui--size_base_padding_vertical--regular);
+  margin-inline: var(--vkui--size_base_padding_horizontal--regular);
+}
+
+/*TODO [>=8]: Проверить браузерную поддержку gap*/
+
+/*Данная проверка позволяет максимально близко определить поддерживается ли gap + flex*/
+
+/*см. https://github.com/w3c/csswg-drafts/issues/3559#issuecomment-1758459996*/
+
+/*Поддержка inset https://developer.mozilla.org/en-US/docs/Web/CSS/inset#browser_compatibility*/
+
+/*Поддержка gap https://developer.mozilla.org/en-US/docs/Web/CSS/gap#browser_compatibility*/
+
+@supports (inset: 0) {
+  .host {
+    gap: var(--vkui_internal--row_gap) var(--vkui_internal--column_gap);
+  }
+}
+
+@supports not (inset: 0) {
+  .host {
+    -webkit-margin-before: calc(
+      -1 * var(--vkui_internal--row_gap) + var(--vkui_internal--flex_original_margin_block)
+    );
+            margin-block-start: calc(
+      -1 * var(--vkui_internal--row_gap) + var(--vkui_internal--flex_original_margin_block)
+    );
+    -webkit-margin-start: calc(
+      -1 * var(--vkui_internal--column_gap) + var(--vkui_internal--flex_original_margin_inline)
+    );
+            margin-inline-start: calc(
+      -1 * var(--vkui_internal--column_gap) + var(--vkui_internal--flex_original_margin_inline)
+    );
+  }
+
+  /* stylelint-disable-next-line @project-tools/stylelint-atomic, selector-max-universal */
+  .host.host > * {
+    -webkit-margin-before: var(--vkui_internal--row_gap);
+            margin-block-start: var(--vkui_internal--row_gap);
+    -webkit-margin-start: var(--vkui_internal--column_gap);
+            margin-inline-start: var(--vkui_internal--column_gap);
+  }
+}
+
+.host > .marginAuto {
+  margin-block: 0;
+  margin-inline: 0;
+}
+
+.directionColumn {
+  flex-direction: column;
+}
+
+.reverse {
+  flex-direction: row-reverse;
+}
+
+.directionColumn.reverse {
+  flex-direction: column-reverse;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+/* justify-content */
+
+.justifyStart {
+  justify-content: flex-start;
+}
+
+.justifyEnd {
+  justify-content: flex-end;
+}
+
+.justifyCenter {
+  justify-content: center;
+}
+
+.justifySpaceAround {
+  justify-content: space-around;
+}
+
+.justifySpaceBetween {
+  justify-content: space-between;
+}
+
+.justifySpaceEvenly {
+  justify-content: space-evenly;
+}
+
+/* align-items */
+
+.alignStart {
+  align-items: flex-start;
+}
+
+.alignEnd {
+  align-items: flex-end;
+}
+
+.alignCenter {
+  align-items: center;
+}
+
+.alignStretch {
+  align-items: stretch;
+}
+
+.alignBaseline {
+  align-items: baseline;
+}

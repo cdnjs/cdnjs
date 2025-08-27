@@ -1,0 +1,49 @@
+.host {
+  display: flex;
+}
+
+.centered {
+  margin-block: auto;
+}
+
+.host:last-child::after {
+  min-inline-size: var(--vkui_internal--side_cell_gap);
+  content: '';
+}
+
+.body {
+  box-sizing: content-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-block: 4px;
+  padding-inline: var(--vkui--spacing_size_s);
+}
+
+.sizeS .body {
+  min-inline-size: 64px;
+  padding: var(--vkui--spacing_size_xs);
+}
+
+.sizeM .body {
+  inline-size: 128px;
+  -webkit-margin-after: auto;
+          margin-block-end: auto;
+}
+
+/* Перебиваем селектор в Tappable--sizeX-(compact|none) */
+
+.host .body {
+  border-radius: var(--vkui--size_border_radius--regular);
+}
+
+.icon {
+  color: var(--vkui--color_icon_secondary);
+}
+
+.text {
+  -webkit-padding-before: 8px;
+          padding-block-start: 8px;
+  color: var(--vkui--color_text_secondary);
+}

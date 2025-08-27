@@ -1,0 +1,243 @@
+.host {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  min-block-size: 32px;
+  padding-block: 4px;
+  padding-inline: 8px;
+  text-decoration: none;
+  border-radius: var(--vkui--size_border_radius--regular);
+  transition: background-color 150ms ease-out;
+}
+
+.withGaps {
+  margin-block: 8px;
+}
+
+.withGaps:not(:first-child) {
+  -webkit-margin-start: 6px;
+          margin-inline-start: 6px;
+}
+
+.sizeYCompact {
+  min-block-size: 28px;
+  padding-block: 2px;
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .sizeYNone {
+    min-block-size: 28px;
+    padding-block: 2px;
+  }
+}
+
+.host[disabled],
+.host[aria-disabled='true'] {
+  opacity: var(--vkui--opacity_disable_accessibility);
+}
+
+/* mode="default" */
+
+.modeDefault {
+  position: relative;
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: 0;
+  min-block-size: 48px;
+  padding-block: 12px;
+  padding-inline: 16px;
+}
+
+.sizeYCompact.modeDefault {
+  min-block-size: 44px;
+  padding-block: 10px;
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .sizeYNone.modeDefault {
+    min-block-size: 44px;
+    padding-block: 10px;
+  }
+}
+
+.hover.modeDefault {
+  background-color: var(--vkui--color_transparent--hover);
+}
+
+/* mode="accent" */
+
+.modeAccent {
+  transition:
+    background-color 150ms ease-out,
+    box-shadow 150ms ease-out;
+}
+
+.selected.modeAccent {
+  background-color: var(--vkui--color_background_contrast_themed);
+  box-shadow: var(--vkui--elevation2);
+}
+
+.hover.modeAccent {
+  background-color: var(--vkui--color_background_contrast_themed--hover);
+}
+
+.modeAccent::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: '';
+  border: var(--vkui--size_border--regular) solid transparent;
+  border-radius: inherit;
+}
+
+.selected.modeAccent::before {
+  border-color: var(--vkui--color_separator_primary);
+}
+
+/* mode="secondary" */
+
+.selected.modeSecondary {
+  background-color: var(--vkui--color_background_secondary_alpha);
+}
+
+.hover.modeSecondary {
+  background-color: var(--vkui--color_background_secondary_alpha--hover);
+}
+
+/* Элемент */
+
+.before {
+  -webkit-margin-end: 6px;
+          margin-inline-end: 6px;
+  color: var(--vkui--color_icon_medium);
+  transition: color 150ms ease-out;
+}
+
+.selected .before {
+  color: var(--vkui--color_icon_primary);
+}
+
+.selected.modeAccent .before {
+  color: var(--vkui--color_icon_accent_themed);
+}
+
+/* Элемент */
+
+.label {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--vkui--color_text_secondary);
+  white-space: nowrap;
+  transition: color 150ms ease-out;
+}
+
+.selected .label {
+  color: var(--vkui--color_text_primary);
+}
+
+.selected.modeAccent .label {
+  color: var(--vkui--color_text_accent_themed);
+}
+
+/* Элемент */
+
+.status {
+  -webkit-margin-start: 6px;
+          margin-inline-start: 6px;
+}
+
+.statusCount {
+  color: var(--vkui--color_text_tertiary);
+}
+
+/* Элемент */
+
+.after {
+  -webkit-margin-start: 6px;
+          margin-inline-start: 6px;
+  color: var(--vkui--color_icon_medium);
+}
+
+.selected .after {
+  color: var(--vkui--color_icon_primary);
+}
+
+.modeAccent.selected .after {
+  color: var(--vkui--color_icon_accent_themed);
+}
+
+/* Элемент */
+
+.underline {
+  position: absolute;
+  inset-block-end: 5px;
+  inset-inline: 16px;
+  block-size: 2px;
+  pointer-events: none;
+  background-color: var(--vkui--color_background_accent);
+  border-radius: 2px;
+  opacity: 0;
+  transition: opacity 150ms ease-out;
+}
+
+.sizeYCompact .underline {
+  inset-block-end: 3px;
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .sizeYNone .underline {
+    inset-block-end: 3px;
+  }
+}
+
+.underline[data-selected='true'] {
+  opacity: 1;
+}
+
+/**
+ * CMP:
+ * Tabs
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalTabs--vkcom) .host {
+  flex-grow: 0;
+  min-inline-size: auto;
+  padding-inline: 10px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalTabs--vkcom) .underline {
+  inset-block-end: 0;
+  inset-inline: 2px;
+}
+
+/**
+ * CMP:
+ * HorizontalScroll
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalHorizontalScroll) .host {
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: auto;
+  min-inline-size: 64px;
+}
+
+.host.stretched {
+  flex-grow: 1;
+}
+
+.host.shrinked {
+  flex-grow: 0;
+  min-inline-size: auto;
+}

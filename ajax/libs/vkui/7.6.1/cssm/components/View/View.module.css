@@ -1,0 +1,259 @@
+.host {
+  --vkui_internal--view_animation_translateY_initial: 80px;
+
+  position: relative;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow-wrap: break-word;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .host {
+    --vkui_internal--view_animation_translateY_initial: 0;
+  }
+}
+
+.animated,
+.swipingBack {
+  overflow: hidden;
+}
+
+.panelOverlay {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  z-index: var(--vkui_internal--z_index_panel_header_fade);
+  display: none;
+  inline-size: 100%;
+  block-size: 100%;
+  pointer-events: none;
+  background-color: #000;
+}
+
+.panelPrev .panelOverlay {
+  display: block;
+  animation: animation-ios-overlay-fade-in 0.6s var(--vkui--animation_easing_platform);
+}
+
+.panelNext .panelOverlay {
+  display: block;
+  animation: animation-ios-overlay-fade-out 0.6s var(--vkui--animation_easing_platform) forwards;
+}
+
+.panelActive .panelOverlay,
+.panelPrev ~ .panelNext .panelOverlay,
+.panelNext ~ .panelPrev .panelOverlay {
+  display: none;
+}
+
+.panelSwipeBackNext .panelOverlay {
+  background-color: rgb(0, 0, 0, 0.1);
+}
+
+.panelSwipeBackNext.panelSwipeBackSuccess .panelOverlay,
+.panelSwipeBackNext.panelSwipeBackFailed .panelOverlay {
+  transition: opacity 0.3s var(--vkui--animation_easing_platform);
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .panelPrev .panelOverlay,
+  .panelNext .panelOverlay {
+    display: none;
+    animation: none;
+  }
+}
+
+.panels {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.panelIn {
+  block-size: 100%;
+}
+
+.panel {
+  position: relative;
+  box-sizing: border-box;
+  inline-size: 100%;
+  block-size: 100%;
+  isolation: isolate;
+}
+
+.animated .panel,
+.animated .header,
+.swipingBack .panel,
+.swipingBack .header {
+  pointer-events: none;
+}
+
+.animated .panel,
+.swipingBack .panel {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  overflow: hidden;
+}
+
+/**
+ * Panel swipe back
+ */
+
+.ios .panelSwipeBackPrev.panelSwipeBackSuccess,
+.ios .panelSwipeBackPrev.panelSwipeBackFailed,
+.ios .panelSwipeBackNext.panelSwipeBackSuccess,
+.ios .panelSwipeBackNext.panelSwipeBackFailed {
+  transition: transform 0.3s var(--vkui--animation_easing_platform);
+}
+
+.ios .panelSwipeBackPrev.panelSwipeBackFailed,
+.ios .panelSwipeBackNext.panelSwipeBackSuccess {
+  transform: translate3d(0, 0, 0);
+}
+
+.ios .panelSwipeBackPrev.panelSwipeBackSuccess {
+  transform: translate3d(100%, 0, 0);
+}
+
+.ios .panelSwipeBackNext.panelSwipeBackFailed {
+  transform: translate3d(-50%, 0, 0);
+}
+
+/**
+ * Panel transition
+ */
+
+.panelNext ~ .panelPrev {
+  animation: animation-view-prev-back 0.3s var(--vkui--animation_easing_platform) forwards;
+}
+
+.panelPrev ~ .panelNext {
+  animation: animation-view-next-forward 0.3s var(--vkui--animation_easing_platform);
+}
+
+.ios .panelPrev {
+  animation: animation-ios-prev-forward 0.6s var(--vkui--animation_easing_platform);
+}
+
+.ios .panelNext {
+  animation: animation-ios-next-back 0.6s var(--vkui--animation_easing_platform);
+}
+
+.ios .panelPrev ~ .panelNext {
+  animation: animation-ios-next-forward 0.6s var(--vkui--animation_easing_platform);
+}
+
+.ios .panelNext ~ .panelPrev {
+  animation: animation-ios-prev-back 0.6s var(--vkui--animation_easing_platform) forwards;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .ios .panelPrev,
+  .ios .panelNext {
+    animation: none;
+  }
+
+  .ios .panelNext ~ .panelPrev {
+    animation-name: animation-view-prev-back;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+  }
+
+  .ios .panelPrev ~ .panelNext {
+    animation-name: animation-view-next-forward;
+    animation-duration: 0.3s;
+    animation-fill-mode: none;
+  }
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.ios.noMotion .panel :global(.vkuiInternalPanel__in),
+.noMotion .panel,
+.ios.noMotion .panel {
+  animation: none;
+}
+
+@keyframes animation-view-prev-back {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(var(--vkui_internal--view_animation_translateY_initial));
+  }
+}
+
+@keyframes animation-view-next-forward {
+  from {
+    opacity: 0;
+    transform: translateY(var(--vkui_internal--view_animation_translateY_initial));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes animation-ios-next-forward {
+  from {
+    transform: translate3d(100%, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes animation-ios-next-back {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes animation-ios-prev-forward {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes animation-ios-prev-back {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+@keyframes animation-ios-overlay-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 0.3;
+  }
+}
+
+@keyframes animation-ios-overlay-fade-out {
+  from {
+    opacity: 0.3;
+  }
+
+  to {
+    opacity: 0;
+  }
+}

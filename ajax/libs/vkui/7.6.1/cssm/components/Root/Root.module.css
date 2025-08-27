@@ -1,0 +1,128 @@
+.host {
+  --vkui_internal--root_animation_opacity_initial: 0;
+  --vkui_internal--root_animation_transform_initial: scale(1.05);
+  --vkui_internal--root_animation_duration: 0.3s;
+
+  position: relative;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.ios {
+  --vkui_internal--root_animation_opacity_initial: 1;
+  --vkui_internal--root_animation_transform_initial: translate3d(0, 100%, 0);
+  --vkui_internal--root_animation_duration: 0.6s;
+}
+
+.transition {
+  pointer-events: none;
+}
+
+.view {
+  position: relative;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.viewShowForward {
+  /* prettier-ignore */
+  animation: root-animation-show-forward var(--vkui_internal--root_animation_duration) var(--vkui--animation_easing_platform);
+}
+
+.viewHideBack {
+  /* prettier-ignore */
+  animation: root-animation-hide-back var(--vkui_internal--root_animation_duration) var(--vkui--animation_easing_platform) forwards;
+}
+
+.transition .view {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  overflow: hidden;
+}
+
+.scrollCompensation {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+/**
+ * iOS
+ */
+
+.ios .viewShowBack::after,
+.ios .viewHideForward::after {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  content: '';
+  background-color: #000;
+}
+
+.ios .viewShowBack::after {
+  /* prettier-ignore */
+  animation: root-ios-overlay-animation-show-back var(--vkui_internal--root_animation_duration) var(--vkui--animation_easing_platform) forwards;
+}
+
+.ios .viewHideForward::after {
+  /* prettier-ignore */
+  animation: root-ios-overlay-animation-hide-forward var(--vkui_internal--root_animation_duration) var(--vkui--animation_easing_platform);
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .host {
+    --vkui_internal--root_animation_transform_initial: 1;
+  }
+
+  .ios {
+    --vkui_internal--root_animation_opacity_initial: 0;
+    --vkui_internal--root_animation_transform_initial: 1;
+  }
+}
+
+@keyframes root-animation-hide-back {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+
+  to {
+    opacity: var(--vkui_internal--root_animation_opacity_initial);
+    transform: var(--vkui_internal--root_animation_transform_initial);
+  }
+}
+
+@keyframes root-animation-show-forward {
+  from {
+    opacity: var(--vkui_internal--root_animation_opacity_initial);
+    transform: var(--vkui_internal--root_animation_transform_initial);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes root-ios-overlay-animation-show-back {
+  from {
+    opacity: 0.3;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes root-ios-overlay-animation-hide-forward {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 0.3;
+  }
+}
