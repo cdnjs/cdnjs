@@ -1,0 +1,2 @@
+import * as React from 'react';
+export declare const DialogTrigger: (<I extends import("@primereact/types/core").ComponentInstance, T extends React.ElementType>(inProps?: (import("@primereact/types/core").GlobalComponentProps<I, unknown, T, unknown, unknown> & {} & {} & Omit<import("@primereact/types/shared").ExtractProps<T>, keyof import("@primereact/types/core").GlobalComponentProps<I_1, P, T_1, unknown, unknown>> & import("@primereact/types/shared/dialog").DialogTriggerProps) | undefined) => React.JSX.Element | null) & Record<string, unknown> & React.FC<{}>;
