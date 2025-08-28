@@ -1,0 +1,1 @@
+import{z as o}from"./p-b2a0ab4a.js";const p=p=>{const a=(null==p?void 0:p.customRoundRadius)||"10px",n=null==p?void 0:p.overrideBorderStyle;return n?"SHARP"===n?"0px":a:"SHARP"===o.appearance.style?"0px":a};export{p as g}

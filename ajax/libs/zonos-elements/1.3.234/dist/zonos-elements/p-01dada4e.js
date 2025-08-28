@@ -1,0 +1,1 @@
+import{d as a}from"./p-5762e217.js";import{d as i}from"./p-b2a0ab4a.js";var r=a,n=i,t=function(a,i,t){var o=!0,e=!0;if("function"!=typeof a)throw new TypeError("Expected a function");return n(t)&&(o="leading"in t?!!t.leading:o,e="trailing"in t?!!t.trailing:e),r(a,i,{leading:o,maxWait:i,trailing:e})};export{t}

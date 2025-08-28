@@ -1,0 +1,1 @@
+System.register([],(function(n){"use strict";return{execute:function(){var r=n("g",(function(n){var r=n.getBoundingClientRect();var t=r.left;var e=window.innerWidth-r.right;return t<=e}))}}}));

@@ -1,0 +1,1 @@
+const w=w=>w||window.innerWidth<1024&&window.innerWidth>=768,o=w=>w||window.innerWidth<768;export{w as a,o as i}

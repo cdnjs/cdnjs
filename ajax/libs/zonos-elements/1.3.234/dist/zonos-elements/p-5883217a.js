@@ -1,0 +1,1 @@
+const n=n=>{const o=n.getBoundingClientRect();return o.left<=window.innerWidth-o.right};export{n as g}

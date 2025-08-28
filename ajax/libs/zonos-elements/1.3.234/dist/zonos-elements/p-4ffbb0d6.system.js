@@ -1,0 +1,1 @@
+System.register(["./p-989d3af9.system.js"],(function(t){"use strict";var e;return{setters:[function(t){e=t.h}],execute:function(){var n=t("r",(function(t){var n=t.content,r=t.isLoading,s=t.skeletonHeight,o=t.skeletonWidth;if(r){return e("zonos-skeleton",{skeletonHeight:s,skeletonWidth:o})}return n}))}}}));

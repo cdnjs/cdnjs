@@ -1,0 +1,1 @@
+const o=o=>o.filter(Boolean).join(" ");export{o as c}

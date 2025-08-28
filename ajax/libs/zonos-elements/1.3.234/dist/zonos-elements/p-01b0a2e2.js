@@ -1,0 +1,1 @@
+import{e as o,c as r}from"./p-6b361d2b.js";const s=({companyName:s,countryCode:t})=>{if(o.includes(t))return s.trim().length>0;const e=(o=>r.includes(o))(t);return!!e};export{s}
