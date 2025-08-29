@@ -1,0 +1,25 @@
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+var colorpicker = require('./index-DiQy3SCb.js');
+require('./plugins-DbyYGVpp.js');
+require('vue');
+require('./FormElementMixin-DavX4iOv.js');
+require('./config-DR826Ki2.js');
+require('./helpers.js');
+require('./Button-Cq7yqI8p.js');
+require('./Icon-lsDKE2wQ.js');
+require('./_plugin-vue_export-helper-Die8u8yB.js');
+require('./Dropdown-DtpKU9qf.js');
+require('./trapFocus-BlX6xykt.js');
+require('./DropdownItem-IMOKyRGV.js');
+require('./Input-BcloGeZ3.js');
+require('./CompatFallthroughMixin-hhK0Gkhr.js');
+require('./Field-19ZCJFF8.js');
+require('./Tooltip-Cgighv0j.js');
+
+
+
+exports.BColorpicker = colorpicker.Colorpicker;
+exports.default = colorpicker.Plugin;
