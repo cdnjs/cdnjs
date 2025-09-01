@@ -1,0 +1,1 @@
+define(["exports"],function(s){"use strict";function t(o,u,n,i){var a,l;const e=(l=(a=i["vs/nls"])==null?void 0:a.availableLanguages)==null?void 0:l["*"];!e||e==="en"?n({}):u([`vs/nls.messages.${e}`],()=>{n({})})}s.load=t,Object.defineProperties(s,{__esModule:{value:!0},[Symbol.toStringTag]:{value:"Module"}})});
