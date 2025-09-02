@@ -1,0 +1,327 @@
+.host {
+  --vkui_internal--alert_animation_scale_initial: 0.95;
+
+  position: relative;
+  min-inline-size: 280px;
+  max-inline-size: 416px;
+  margin-block: auto;
+  margin-inline: 24px;
+  color: var(--vkui--color_text_primary);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  border-radius: var(--vkui--size_border_radius_paper--regular);
+  box-shadow: var(--vkui--elevation4);
+}
+
+.desktop {
+  inline-size: 100%;
+}
+
+.opening {
+  /* prettier-ignore */
+  animation: animation-alert-scale-up var(--vkui--animation_duration_m) var(--vkui--animation_easing_platform);
+}
+
+.closing {
+  opacity: 0;
+  /* prettier-ignore */
+  animation: animation-alert-scale-down var(--vkui--animation_duration_m) var(--vkui--animation_easing_platform);
+}
+
+.host::before {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  content: '';
+  background-color: var(--vkui--color_background_modal);
+  border-radius: inherit;
+}
+
+.content {
+  position: relative;
+  padding-block: 24px 16px;
+  padding-inline: 24px;
+}
+
+.contentWithButton {
+  -webkit-padding-end: 52px;
+          padding-inline-end: 52px;
+}
+
+.action {
+  white-space: nowrap;
+  background: transparent;
+}
+
+.actions {
+  position: relative;
+  display: flex;
+  max-inline-size: 100%;
+  padding-block: 0 12px;
+  padding-inline: 12px;
+}
+
+.title {
+  -webkit-margin-after: 8px;
+          margin-block-end: 8px;
+}
+
+.description {
+  color: var(--vkui--color_text_secondary);
+}
+
+.title,
+.description {
+  word-break: break-word;
+}
+
+.actionsDirectionHorizontal {
+  justify-content: flex-end;
+}
+
+.actionsDirectionVertical {
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+/* stylelint-disable-next-line selector-max-universal */
+
+.actions > * {
+  margin: 4px;
+}
+
+.actionsAlignLeft {
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.actionsAlignCenter {
+  align-items: center;
+  justify-content: center;
+}
+
+.actionsAlignRight {
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+/**
+ * iOS version
+ */
+
+.ios {
+  --vkui_internal--alert_animation_scale_initial: 1.05;
+
+  inline-size: 270px;
+  min-inline-size: 270px;
+  overflow: hidden;
+  box-shadow: none;
+}
+
+.ios.closing {
+  --vkui_internal--alert_animation_scale_initial: 1;
+}
+
+.ios .content {
+  padding-block: 20px;
+  padding-inline: 16px;
+  text-align: center;
+}
+
+.ios .title:not(:last-child) {
+  -webkit-margin-after: 7px;
+          margin-block-end: 7px;
+}
+
+.ios .description {
+  color: inherit;
+}
+
+.ios .content::after {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline: 0;
+  block-size: 1px;
+  content: '';
+  background: var(--vkui--color_separator_primary_alpha);
+  transform-origin: center bottom;
+}
+
+.ios .actions {
+  padding: initial;
+}
+
+.ios .actionsDirectionVertical {
+  flex-direction: column;
+  align-items: initial;
+}
+
+.ios .action {
+  position: relative;
+  display: block;
+  block-size: 44px;
+  padding-block: 0;
+  padding-inline: 6px;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: var(--vkui--font_family_base);
+  font-size: 17px;
+  line-height: 44px;
+  color: var(--vkui--color_text_accent);
+  text-align: center;
+  text-decoration: none;
+  border: 0;
+  border-radius: 0;
+}
+
+.ios .action::after {
+  position: absolute;
+  content: '';
+  background: var(--vkui--color_separator_primary_alpha);
+}
+
+.ios .actionsDirectionHorizontal .action::after {
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  inline-size: 1px;
+  block-size: 100%;
+  transform-origin: right center;
+}
+
+.ios .actionsDirectionHorizontal .action:last-child::after {
+  content: none;
+}
+
+.ios .actionsDirectionHorizontal .action {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+}
+
+.ios .actionsDirectionHorizontal .action:first-child {
+  border-end-start-radius: var(--vkui--size_border_radius_paper--regular);
+}
+
+.ios .actionsDirectionHorizontal .action:last-child {
+  border-end-end-radius: var(--vkui--size_border_radius_paper--regular);
+}
+
+.ios .actionsDirectionVertical .action::after {
+  inset-block-end: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: 1px;
+  transform-origin: center bottom;
+}
+
+.ios .actionsDirectionVertical .action:last-child::after {
+  content: none;
+}
+
+.ios .actionsDirectionVertical .action:last-child {
+  border-start-start-radius: 0;
+  border-start-end-radius: 0;
+  border-end-start-radius: 12px;
+  border-end-end-radius: 12px;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+  .ios .content::after,
+  .ios .actionsDirectionVertical .action::after {
+    transform: scaleY(0.5);
+  }
+
+  .ios .actionsDirectionHorizontal .action::after {
+    transform: scaleX(0.5);
+  }
+}
+
+@media (-webkit-min-device-pixel-ratio: 3), (min-resolution: 3dppx) {
+  .ios .content::after,
+  .ios .actionsDirectionVertical .action::after {
+    transform: scaleY(0.33);
+  }
+
+  .ios .actionsDirectionHorizontal .action::after {
+    transform: scaleX(0.33);
+  }
+}
+
+.ios .actionModeCancel {
+  font-weight: 600;
+}
+
+.ios .actionModeDestructive {
+  color: var(--vkui--color_text_negative);
+}
+
+/**
+ * VKCOM
+ */
+
+.vkcom {
+  inline-size: 400px;
+  box-shadow:
+    0 0 2px rgb(0, 0, 0, 0.12),
+    0 0 96px rgb(0, 0, 0, 0.16);
+}
+
+.vkcom .content {
+  -webkit-padding-after: 20px;
+          padding-block-end: 20px;
+}
+
+.vkcom .actions {
+  padding-block: 0 12px;
+  padding-inline: 20px;
+}
+
+.vkcom .button {
+  order: 2;
+}
+
+.vkcom .buttonModeCancel {
+  order: 1;
+}
+
+.dismiss {
+  position: absolute;
+  inset-block-start: 8px;
+  inset-inline-end: 8px;
+  color: var(--vkui--color_icon_secondary);
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .host,
+  .ios {
+    --vkui_internal--alert_animation_scale_initial: 1;
+  }
+}
+
+@keyframes animation-alert-scale-up {
+  from {
+    opacity: 0;
+    transform: scale(var(--vkui_internal--alert_animation_scale_initial));
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes animation-alert-scale-down {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(var(--vkui_internal--alert_animation_scale_initial));
+  }
+}

@@ -1,0 +1,106 @@
+.content {
+  block-size: 100%;
+  font-family: var(--vkui--font_family_base);
+  font-size: 14px;
+  color: var(--vkui--color_text_primary);
+  border-radius: 0;
+}
+
+.host,
+.hidden {
+  flex-grow: 0;
+  flex-basis: calc(100% / 7);
+  border-radius: 0;
+}
+
+.hidden,
+.content {
+  block-size: 36px;
+}
+
+.sizeS {
+  block-size: 34px;
+}
+
+.disabled,
+.notSameMonth {
+  color: var(--vkui--color_text_tertiary);
+}
+
+.selected {
+  background-color: var(--vkui--color_background_secondary_alpha);
+}
+
+.selectionStart.selected,
+.hintedSelectionStart {
+  border-start-start-radius: 8px;
+  border-end-start-radius: 8px;
+}
+
+.selectionEnd.selected,
+.hintedSelectionEnd {
+  border-start-end-radius: 8px;
+  border-end-end-radius: 8px;
+}
+
+.dayNumber {
+  text-align: center;
+}
+
+.today {
+  font-weight: 600;
+}
+
+.today .dayNumber::after {
+  position: relative;
+  inset-inline-start: 50%;
+  display: block;
+  inline-size: 16px;
+  content: '';
+  -webkit-border-after: 2px solid var(--vkui--color_stroke_accent);
+          border-block-end: 2px solid var(--vkui--color_stroke_accent);
+  transform: translateX(-50%);
+}
+
+.rtl .today .dayNumber::after {
+  transform: translateX(50%);
+}
+
+.today .innerActive .dayNumber::after {
+  border-block-end-color: var(--vkui--color_stroke_contrast);
+}
+
+.inner,
+.hinted {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.inner {
+  border-radius: 8px;
+}
+
+.hintedActive,
+.hostHovered :not(.hintedActive) .inner {
+  background-color: var(--vkui--color_background_secondary_alpha--hover);
+}
+
+.hostActivated :not(.hintedActive) .inner {
+  background-color: var(--vkui--color_background_secondary_alpha--active);
+}
+
+.innerActive {
+  color: var(--vkui--color_text_contrast);
+  background-color: var(--vkui--color_background_accent);
+}
+
+.hostHovered .inner.innerActive {
+  background-color: var(--vkui--color_background_accent--hover);
+}
+
+.hostActivated .inner.innerActive {
+  background-color: var(--vkui--color_background_accent--active);
+}

@@ -1,0 +1,208 @@
+.host {
+  position: relative;
+  display: block;
+  inline-size: -webkit-fit-content;
+  inline-size: -moz-fit-content;
+  inline-size: fit-content;
+  block-size: 48px;
+  padding: 0;
+  margin: 0;
+  color: currentColor;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background: none;
+  border: 0;
+
+  /**
+   * Чтобы закргуление было равно половине высоты.
+   * см. https://stackoverflow.com/questions/27233295/possible-to-make-border-radius-equal-to-half-the-total-height-without-javascript
+   */
+  border-radius: 9999px;
+  box-shadow: none;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.host :global(.vkuiIcon) {
+  box-sizing: content-box;
+}
+
+.sizeYCompact {
+  block-size: 44px;
+}
+
+.host[disabled] {
+  opacity: var(--vkui--opacity_disable_accessibility);
+}
+
+.ios {
+  border-radius: var(--vkui--size_border_radius--regular);
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.host :global(.vkuiIcon--16) {
+  padding: 16px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.host :global(.vkuiIcon--16.vkuiIcon--w-8) {
+  padding-block: 16px;
+  padding-inline: 14px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.sizeYCompact :global(.vkuiIcon--16),
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+.sizeYCompact :global(.vkuiIcon--16.vkuiIcon--w-8) {
+  padding: 14px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.host :global(.vkuiIcon--24) {
+  padding: 12px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.sizeYCompact :global(.vkuiIcon--24) {
+  padding: 10px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.host :global(.vkuiIcon--28) {
+  padding: 10px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.sizeYCompact :global(.vkuiIcon--28) {
+  padding: 8px;
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .sizeYNone {
+    block-size: 44px;
+  }
+
+  /* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+  .sizeYNone :global(.vkuiIcon--16),
+  /* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+  .sizeYNone :global(.vkuiIcon--16.vkuiIcon--w-8) {
+    padding: 14px;
+  }
+
+  /* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+  .sizeYNone :global(.vkuiIcon--24) {
+    padding: 10px;
+  }
+
+  /* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+  .sizeYNone :global(.vkuiIcon--28) {
+    padding: 8px;
+  }
+}
+
+/**
+ * CMP:
+ * - FormItem
+ * - FormLayoutGroup
+ * - FormField
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormItem--removable) :global(.vkuiInternalRemovable__content) > .host,
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+:global(.vkuiInternalFormLayoutGroup--removable) :global(.vkuiInternalRemovable__content) > .host,
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+:global(.vkuiInternalFormField__after) .host {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--vkui--size_field_height--regular);
+  block-size: var(--vkui--size_field_height--regular);
+  border-radius: var(--vkui--size_border_radius--regular);
+}
+
+/* stylelint-disable selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormField__after)
+  .host
+  :global(.vkuiIcon):global(.vkuiIcon):global(.vkuiIcon) {
+  padding: 0;
+}
+
+/* stylelint-enable selector-pseudo-class-disallowed-list */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormField__after) .sizeYCompact {
+  inline-size: var(--vkui--size_field_height--compact);
+  block-size: var(--vkui--size_field_height--compact);
+}
+
+/* stylelint-disable selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormItem--removable) :global(.vkuiInternalRemovable__content) > .sizeYCompact,
+:global(.vkuiInternalFormLayoutGroup--removable)
+  :global(.vkuiInternalRemovable__content)
+  > .sizeYCompact {
+  block-size: var(--vkui--size_field_height--compact);
+}
+
+/* stylelint-enable selector-pseudo-class-disallowed-list */
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  /* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+  :global(.vkuiInternalFormField__after) .sizeYNone {
+    inline-size: var(--vkui--size_field_height--compact);
+    block-size: var(--vkui--size_field_height--compact);
+  }
+
+  /* stylelint-disable selector-pseudo-class-disallowed-list */
+  :global(.vkuiInternalFormItem--removable) :global(.vkuiInternalRemovable__content) > .sizeYNone,
+  :global(.vkuiInternalFormLayoutGroup--removable)
+    :global(.vkuiInternalRemovable__content)
+    > .sizeYNone {
+    block-size: var(--vkui--size_field_height--compact);
+  }
+  /* stylelint-enable selector-pseudo-class-disallowed-list */
+}
+
+/**
+ * CMP:
+ * SimpleCell
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalSimpleCell__after) .host:last-child {
+  -webkit-margin-end: -12px;
+          margin-inline-end: -12px;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalSimpleCell__after) .ios:last-child {
+  -webkit-margin-end: -9px;
+          margin-inline-end: -9px;
+}
+
+/**
+ * CMP:
+ * Alert
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalAlert__dismiss).host {
+  block-size: 36px;
+  padding: 8px;
+}

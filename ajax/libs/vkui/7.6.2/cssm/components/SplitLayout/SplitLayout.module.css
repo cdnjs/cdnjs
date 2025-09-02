@@ -1,0 +1,39 @@
+.host {
+  position: relative;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.inner {
+  display: flex;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+/* Hack with using PanelHeaderSimple */
+
+/* Better to implement simple header-like here */
+
+.innerHeader {
+  position: relative;
+  z-index: var(--vkui_internal--z_index_split_layout_panel_header);
+  -webkit-margin-before: calc(
+    -1 * (var(--vkui_internal--panel_header_height) + var(--vkui_internal--safe_area_inset_top))
+  );
+          margin-block-start: calc(
+    -1 * (var(--vkui_internal--panel_header_height) + var(--vkui_internal--safe_area_inset_top))
+  );
+}
+
+.ios .innerHeader {
+  -webkit-margin-before: calc(
+    -1 * (var(--vkui_internal--panel_header_height) + var(--vkui_internal--safe_area_inset_top))
+  );
+          margin-block-start: calc(
+    -1 * (var(--vkui_internal--panel_header_height) + var(--vkui_internal--safe_area_inset_top))
+  );
+}
+
+.innerCenter {
+  justify-content: center;
+}
