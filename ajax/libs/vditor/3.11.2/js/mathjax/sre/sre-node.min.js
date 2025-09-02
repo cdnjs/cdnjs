@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var SRE=require("speech-rule-engine");global.SRE=SRE,global.sre=Object.create(SRE),global.sre.Engine={isReady:function(){return SRE.engineReady()}};
