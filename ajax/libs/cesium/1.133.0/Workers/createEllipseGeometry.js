@@ -1,0 +1,26 @@
+/**
+ * @license
+ * Cesium - https://github.com/CesiumGS/cesium
+ * Version 1.133
+ *
+ * Copyright 2011-2022 Cesium Contributors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * Columbus View (Pat. Pend.)
+ *
+ * Portions licensed separately.
+ * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
+ */
+
+import{a as o}from"./chunk-4ACTK46C.js";import"./chunk-YEW7R7AH.js";import"./chunk-ZGBT2T5X.js";import"./chunk-XT6UTGKT.js";import"./chunk-Z2RDB3TM.js";import"./chunk-6ILMHJNC.js";import"./chunk-BVCRXM5D.js";import"./chunk-HAOANVWC.js";import"./chunk-4TSPR557.js";import"./chunk-A3SS73U6.js";import"./chunk-DCUNHES3.js";import"./chunk-FR7FP24V.js";import"./chunk-373G7NSX.js";import"./chunk-BKGSCG7A.js";import"./chunk-WPFG33PL.js";import"./chunk-REGTT5HQ.js";import{a as t,d as c}from"./chunk-7KM3L2YX.js";import"./chunk-OJSJBWPR.js";import"./chunk-KTQSNOO6.js";import"./chunk-IJ2TDK6X.js";import"./chunk-GMRH73SU.js";import{e as n}from"./chunk-DD5VUJDC.js";function a(r,i){return n(i)&&(r=o.unpack(r,i)),r._center=t.clone(r._center),r._ellipsoid=c.clone(r._ellipsoid),o.createGeometry(r)}var u=a;export{u as default};
