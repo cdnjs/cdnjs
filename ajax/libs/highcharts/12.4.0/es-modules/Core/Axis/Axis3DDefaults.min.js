@@ -1,0 +1,1 @@
+"use strict";const Axis3DDefaults={labels:{position3d:"offset",skew3d:!1},title:{position3d:null,skew3d:null}};export default Axis3DDefaults;

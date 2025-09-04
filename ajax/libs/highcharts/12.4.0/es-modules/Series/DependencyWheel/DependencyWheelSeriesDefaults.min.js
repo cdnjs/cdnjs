@@ -1,0 +1,1 @@
+"use strict";const DependencyWheelSeriesDefaults={center:[null,null],curveFactor:.6,startAngle:0,dataLabels:{textPath:{enabled:!1,attributes:{dy:5}}}};export default DependencyWheelSeriesDefaults;

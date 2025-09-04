@@ -1,0 +1,1 @@
+"use strict";const VariablePieSeriesDefaults={minPointSize:"10%",maxPointSize:"100%",zMin:void 0,zMax:void 0,sizeBy:"area",tooltip:{pointFormat:'<span style="color:{point.color}">●</span> {series.name}<br/>Value: {point.y}<br/>Size: {point.z}<br/>'}};export default VariablePieSeriesDefaults;

@@ -1,0 +1,1 @@
+"use strict";const MapViewDefaults={center:[0,0],fitToGeometry:void 0,maxZoom:void 0,padding:0,projection:{name:void 0,parallels:void 0,rotation:void 0},zoom:void 0,insetOptions:{borderColor:"#cccccc",borderWidth:1,padding:"10%",relativeTo:"mapBoundingBox",units:"percent"}};export default MapViewDefaults;

@@ -1,0 +1,1 @@
+"use strict";const DragDropDefaults={dragSensitivity:2,dragHandle:{className:"highcharts-drag-handle",color:"#fff",lineColor:"rgba(0, 0, 0, 0.6)",lineWidth:1,zIndex:901},guideBox:{default:{className:"highcharts-drag-box-default",lineWidth:1,lineColor:"#888",color:"rgba(0, 0, 0, 0.1)",cursor:"move",zIndex:900}}};export default DragDropDefaults;

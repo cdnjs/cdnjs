@@ -1,0 +1,1 @@
+"use strict";const WaterfallSeriesDefaults={dataLabels:{inside:!0},lineWidth:1,lineColor:"#333333",dashStyle:"Dot",borderColor:"#333333",states:{hover:{lineWidthPlus:0}}};export default WaterfallSeriesDefaults;

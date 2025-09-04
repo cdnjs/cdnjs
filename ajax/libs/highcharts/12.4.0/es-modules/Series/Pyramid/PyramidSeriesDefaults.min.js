@@ -1,0 +1,1 @@
+"use strict";const PyramidSeriesDefaults={neckHeight:"0%",neckWidth:"0%",reversed:!0};export default PyramidSeriesDefaults;

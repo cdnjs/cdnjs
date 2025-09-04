@@ -1,0 +1,1 @@
+"use strict";const ApproximationRegistry={};export default ApproximationRegistry;

@@ -1,0 +1,1 @@
+"use strict";const DotPlotSeriesDefaults={itemPadding:.1,marker:{symbol:"circle",states:{hover:{},select:{}}},slotsPerBar:void 0};export default DotPlotSeriesDefaults;
