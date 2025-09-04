@@ -1,0 +1,59 @@
+.host {
+  --css-transition-duration: 1s;
+
+  inline-size: 50vh;
+  block-size: 50vh;
+  background-color: var(--vkui--color_background_accent);
+  border-radius: 8px;
+}
+
+.appear {
+  opacity: 0;
+}
+
+.appearing {
+  opacity: 1;
+  transition: opacity var(--css-transition-duration) ease-in-out;
+}
+
+.appeared {
+  opacity: 1;
+}
+
+.enter {
+  opacity: 0;
+  transform: translateY(-25%) rotate(25deg);
+  transform-origin: center center;
+}
+
+.entering {
+  opacity: 1;
+  transform: translateY(0) rotate(0deg);
+  transform-origin: center center;
+  transition:
+    transform var(--css-transition-duration) ease-in-out,
+    opacity var(--css-transition-duration) ease-in-out;
+}
+
+.entered {
+  opacity: 1;
+}
+
+.exit {
+  opacity: 1;
+  transform: translateY(0) rotate(0deg);
+}
+
+.exiting {
+  opacity: 0;
+  transform: translateY(-25%) rotate(25deg);
+  transform-origin: center center;
+  transition:
+    transform var(--css-transition-duration) ease-in-out,
+    opacity var(--css-transition-duration) ease-in-out;
+}
+
+.exited {
+  opacity: 0;
+  transform: translateY(-25%) rotate(25deg);
+}
