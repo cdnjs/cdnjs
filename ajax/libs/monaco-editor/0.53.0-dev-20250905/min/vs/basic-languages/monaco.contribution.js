@@ -1,0 +1,1 @@
+define(["../yaml.contribution.2f71e830","../editor.api.4ff40efd"],function(i,t){"use strict"});
