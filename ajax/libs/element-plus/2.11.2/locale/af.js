@@ -1,0 +1,191 @@
+/*! Element Plus v2.11.2 */
+
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.ElementPlusLocaleAf = factory());
+})(this, (function () { 'use strict';
+
+  var af = {
+    name: "af",
+    el: {
+      breadcrumb: {
+        label: "Breadcrumb"
+      },
+      colorpicker: {
+        confirm: "Bevestig",
+        clear: "Maak skoon",
+        defaultLabel: "color picker",
+        description: "current color is {color}. press enter to select a new color.",
+        alphaLabel: "pick alpha value"
+      },
+      datepicker: {
+        now: "Nou",
+        today: "Vandag",
+        cancel: "Kanselleer",
+        clear: "Maak skoon",
+        confirm: "Bevestig",
+        dateTablePrompt: "Use the arrow keys and enter to select the day of the month",
+        monthTablePrompt: "Use the arrow keys and enter to select the month",
+        yearTablePrompt: "Use the arrow keys and enter to select the year",
+        selectedDate: "Selected date",
+        selectDate: "Kies datum",
+        selectTime: "Kies tyd",
+        startDate: "Begindatum",
+        startTime: "Begintyd",
+        endDate: "Einddatum",
+        endTime: "Eindtyd",
+        prevYear: "Previous Year",
+        nextYear: "Next Year",
+        prevMonth: "Previous Month",
+        nextMonth: "Next Month",
+        year: "Jaar",
+        month1: "Jan",
+        month2: "Feb",
+        month3: "Mrt",
+        month4: "Apr",
+        month5: "Mei",
+        month6: "Jun",
+        month7: "Jul",
+        month8: "Aug",
+        month9: "Sep",
+        month10: "Okt",
+        month11: "Nov",
+        month12: "Des",
+        weeks: {
+          sun: "So",
+          mon: "Ma",
+          tue: "Di",
+          wed: "Wo",
+          thu: "Do",
+          fri: "Vr",
+          sat: "Sa"
+        },
+        weeksFull: {
+          sun: "Sunday",
+          mon: "Monday",
+          tue: "Tuesday",
+          wed: "Wednesday",
+          thu: "Thursday",
+          fri: "Friday",
+          sat: "Saturday"
+        },
+        months: {
+          jan: "Jan",
+          feb: "Feb",
+          mar: "Mrt",
+          apr: "Apr",
+          may: "Mei",
+          jun: "Jun",
+          jul: "Jul",
+          aug: "Aug",
+          sep: "Sep",
+          oct: "Okt",
+          nov: "Nov",
+          dec: "Des"
+        }
+      },
+      inputNumber: {
+        decrease: "decrease number",
+        increase: "increase number"
+      },
+      select: {
+        loading: "Laai",
+        noMatch: "Geen toepaslike data",
+        noData: "Geen data",
+        placeholder: "Kies"
+      },
+      mention: {
+        loading: "Laai"
+      },
+      dropdown: {
+        toggleDropdown: "Toggle Dropdown"
+      },
+      cascader: {
+        noMatch: "Geen toepaslike data",
+        loading: "Laai",
+        placeholder: "Kies",
+        noData: "Geen data"
+      },
+      pagination: {
+        goto: "Gaan na",
+        pagesize: "/page",
+        total: "Totaal {total}",
+        pageClassifier: "",
+        page: "Page",
+        prev: "Go to previous page",
+        next: "Go to next page",
+        currentPage: "page {pager}",
+        prevPages: "Previous {pager} pages",
+        nextPages: "Next {pager} pages",
+        deprecationWarning: "Deprecated usages detected, please refer to the el-pagination documentation for more details"
+      },
+      dialog: {
+        close: "Close this dialog"
+      },
+      drawer: {
+        close: "Close this dialog"
+      },
+      messagebox: {
+        title: "Boodskap",
+        confirm: "Bevestig",
+        cancel: "Kanselleer",
+        error: "Ongeldige invoer",
+        close: "Close this dialog"
+      },
+      upload: {
+        deleteTip: "press delete to remove",
+        delete: "Verwyder",
+        preview: "Voorskou",
+        continue: "Gaan voort"
+      },
+      slider: {
+        defaultLabel: "slider between {min} and {max}",
+        defaultRangeStartLabel: "pick start value",
+        defaultRangeEndLabel: "pick end value"
+      },
+      table: {
+        emptyText: "Geen Data",
+        confirmFilter: "Bevestig",
+        resetFilter: "Herstel",
+        clearFilter: "Alles",
+        sumText: "Som"
+      },
+      tour: {
+        next: "Next",
+        previous: "Previous",
+        finish: "Finish",
+        close: "Close this dialog"
+      },
+      tree: {
+        emptyText: "Geen Data"
+      },
+      transfer: {
+        noMatch: "Geen toepaslike data",
+        noData: "Geen data",
+        titles: ["Lys 1", "Lys 2"],
+        filterPlaceholder: "Voer sleutelwoord in",
+        noCheckedFormat: "{total} items",
+        hasCheckedFormat: "{checked}/{total} gekies"
+      },
+      image: {
+        error: "FAILED"
+      },
+      pageHeader: {
+        title: "Back"
+      },
+      popconfirm: {
+        confirmButtonText: "Yes",
+        cancelButtonText: "No"
+      },
+      carousel: {
+        leftArrow: "Carousel arrow left",
+        rightArrow: "Carousel arrow right",
+        indicator: "Carousel switch to index {index}"
+      }
+    }
+  };
+
+  return af;
+
+}));

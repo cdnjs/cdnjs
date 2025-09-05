@@ -1,0 +1,191 @@
+/*! Element Plus v2.11.2 */
+
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.ElementPlusLocaleEu = factory());
+})(this, (function () { 'use strict';
+
+  var eu = {
+    name: "eu",
+    el: {
+      breadcrumb: {
+        label: "Breadcrumb"
+      },
+      colorpicker: {
+        confirm: "Ados",
+        clear: "Garbitu",
+        defaultLabel: "color picker",
+        description: "current color is {color}. press enter to select a new color.",
+        alphaLabel: "pick alpha value"
+      },
+      datepicker: {
+        now: "Orain",
+        today: "Gaur",
+        cancel: "Utzi",
+        clear: "Garbitu",
+        confirm: "Ados",
+        dateTablePrompt: "Use the arrow keys and enter to select the day of the month",
+        monthTablePrompt: "Use the arrow keys and enter to select the month",
+        yearTablePrompt: "Use the arrow keys and enter to select the year",
+        selectedDate: "Selected date",
+        selectDate: "Hautatu data",
+        selectTime: "Hautatu ordua",
+        startDate: "Hasierako data",
+        startTime: "Hasierako ordua",
+        endDate: "Amaierako data",
+        endTime: "Amaierako ordua",
+        prevYear: "Aurreko urtea",
+        nextYear: "Hurrengo urtea",
+        prevMonth: "Aurreko hilabetea",
+        nextMonth: "Hurrengo hilabetea",
+        year: "",
+        month1: "Urtarrila",
+        month2: "Otsaila",
+        month3: "Martxoa",
+        month4: "Apirila",
+        month5: "Maiatza",
+        month6: "Ekaina",
+        month7: "Uztaila",
+        month8: "Abuztua",
+        month9: "Iraila",
+        month10: "Urria",
+        month11: "Azaroa",
+        month12: "Abendua",
+        weeks: {
+          sun: "ig.",
+          mon: "al.",
+          tue: "ar.",
+          wed: "az.",
+          thu: "og.",
+          fri: "ol.",
+          sat: "lr."
+        },
+        weeksFull: {
+          sun: "Sunday",
+          mon: "Monday",
+          tue: "Tuesday",
+          wed: "Wednesday",
+          thu: "Thursday",
+          fri: "Friday",
+          sat: "Saturday"
+        },
+        months: {
+          jan: "urt",
+          feb: "ots",
+          mar: "mar",
+          apr: "api",
+          may: "mai",
+          jun: "eka",
+          jul: "uzt",
+          aug: "abu",
+          sep: "ira",
+          oct: "urr",
+          nov: "aza",
+          dec: "abe"
+        }
+      },
+      inputNumber: {
+        decrease: "decrease number",
+        increase: "increase number"
+      },
+      select: {
+        loading: "Kargatzen",
+        noMatch: "Bat datorren daturik ez",
+        noData: "Daturik ez",
+        placeholder: "Hautatu"
+      },
+      mention: {
+        loading: "Kargatzen"
+      },
+      dropdown: {
+        toggleDropdown: "Toggle Dropdown"
+      },
+      cascader: {
+        noMatch: "Bat datorren daturik ez",
+        loading: "Kargatzen",
+        placeholder: "Hautatu",
+        noData: "Daturik ez"
+      },
+      pagination: {
+        goto: "Joan",
+        pagesize: "/orria",
+        total: "Guztira {total}",
+        pageClassifier: "",
+        page: "Page",
+        prev: "Go to previous page",
+        next: "Go to next page",
+        currentPage: "page {pager}",
+        prevPages: "Previous {pager} pages",
+        nextPages: "Next {pager} pages",
+        deprecationWarning: "Deprecated usages detected, please refer to the el-pagination documentation for more details"
+      },
+      dialog: {
+        close: "Close this dialog"
+      },
+      drawer: {
+        close: "Close this dialog"
+      },
+      messagebox: {
+        title: "Mezua",
+        confirm: "Ados",
+        cancel: "Utzi",
+        error: "Sarrera baliogabea",
+        close: "Close this dialog"
+      },
+      upload: {
+        deleteTip: "sakatu Ezabatu kentzeko",
+        delete: "Ezabatu",
+        preview: "Aurrebista",
+        continue: "Jarraitu"
+      },
+      slider: {
+        defaultLabel: "slider between {min} and {max}",
+        defaultRangeStartLabel: "pick start value",
+        defaultRangeEndLabel: "pick end value"
+      },
+      table: {
+        emptyText: "Daturik ez",
+        confirmFilter: "Baieztatu",
+        resetFilter: "Berrezarri",
+        clearFilter: "Guztia",
+        sumText: "Batura"
+      },
+      tour: {
+        next: "Hurrengoa",
+        previous: "Aurrekoa",
+        finish: "Bukatu",
+        close: "Close this dialog"
+      },
+      tree: {
+        emptyText: "Daturik ez"
+      },
+      transfer: {
+        noMatch: "Bat datorren daturik ez",
+        noData: "Daturik ez",
+        titles: ["Zerrenda 1", "Zerrenda 2"],
+        filterPlaceholder: "Sartu gako-hitza",
+        noCheckedFormat: "{total} elementu",
+        hasCheckedFormat: "{checked}/{total} hautatuta"
+      },
+      image: {
+        error: "FAILED"
+      },
+      pageHeader: {
+        title: "Back"
+      },
+      popconfirm: {
+        confirmButtonText: "Yes",
+        cancelButtonText: "No"
+      },
+      carousel: {
+        leftArrow: "Carousel arrow left",
+        rightArrow: "Carousel arrow right",
+        indicator: "Carousel switch to index {index}"
+      }
+    }
+  };
+
+  return eu;
+
+}));

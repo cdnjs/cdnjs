@@ -1,0 +1,191 @@
+/*! Element Plus v2.11.2 */
+
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.ElementPlusLocaleFi = factory());
+})(this, (function () { 'use strict';
+
+  var fi = {
+    name: "fi",
+    el: {
+      breadcrumb: {
+        label: "Breadcrumb"
+      },
+      colorpicker: {
+        confirm: "OK",
+        clear: "Tyhjenn\xE4",
+        defaultLabel: "color picker",
+        description: "current color is {color}. press enter to select a new color.",
+        alphaLabel: "pick alpha value"
+      },
+      datepicker: {
+        now: "Nyt",
+        today: "T\xE4n\xE4\xE4n",
+        cancel: "Peruuta",
+        clear: "Tyhjenn\xE4",
+        confirm: "OK",
+        dateTablePrompt: "Use the arrow keys and enter to select the day of the month",
+        monthTablePrompt: "Use the arrow keys and enter to select the month",
+        yearTablePrompt: "Use the arrow keys and enter to select the year",
+        selectedDate: "Selected date",
+        selectDate: "Valitse p\xE4iv\xE4",
+        selectTime: "Valitse aika",
+        startDate: "Aloitusp\xE4iv\xE4",
+        startTime: "Aloitusaika",
+        endDate: "Lopetusp\xE4iv\xE4",
+        endTime: "Lopetusaika",
+        prevYear: "Edellinen vuosi",
+        nextYear: "Seuraava vuosi",
+        prevMonth: "Edellinen kuukausi",
+        nextMonth: "Seuraava kuukausi",
+        year: "",
+        month1: "tammikuu",
+        month2: "helmikuu",
+        month3: "maaliskuu",
+        month4: "huhtikuu",
+        month5: "toukokuu",
+        month6: "kes\xE4kuu",
+        month7: "hein\xE4kuu",
+        month8: "elokuu",
+        month9: "syyskuu",
+        month10: "lokakuu",
+        month11: "marraskuu",
+        month12: "joulukuu",
+        weeks: {
+          sun: "su",
+          mon: "ma",
+          tue: "ti",
+          wed: "ke",
+          thu: "to",
+          fri: "pe",
+          sat: "la"
+        },
+        weeksFull: {
+          sun: "Sunday",
+          mon: "Monday",
+          tue: "Tuesday",
+          wed: "Wednesday",
+          thu: "Thursday",
+          fri: "Friday",
+          sat: "Saturday"
+        },
+        months: {
+          jan: "tammi",
+          feb: "helmi",
+          mar: "maalis",
+          apr: "huhti",
+          may: "touko",
+          jun: "kes\xE4",
+          jul: "hein\xE4",
+          aug: "elo",
+          sep: "syys",
+          oct: "loka",
+          nov: "marras",
+          dec: "joulu"
+        }
+      },
+      inputNumber: {
+        decrease: "decrease number",
+        increase: "increase number"
+      },
+      select: {
+        loading: "Lataa",
+        noMatch: "Ei vastaavia tietoja",
+        noData: "Ei tietoja",
+        placeholder: "Valitse"
+      },
+      mention: {
+        loading: "Lataa"
+      },
+      dropdown: {
+        toggleDropdown: "Toggle Dropdown"
+      },
+      cascader: {
+        noMatch: "Ei vastaavia tietoja",
+        loading: "Lataa",
+        placeholder: "Valitse",
+        noData: "Ei tietoja"
+      },
+      pagination: {
+        goto: "Mene",
+        pagesize: "/sivu",
+        total: "Yhteens\xE4 {total}",
+        pageClassifier: "",
+        page: "Page",
+        prev: "Go to previous page",
+        next: "Go to next page",
+        currentPage: "page {pager}",
+        prevPages: "Previous {pager} pages",
+        nextPages: "Next {pager} pages",
+        deprecationWarning: "Deprecated usages detected, please refer to the el-pagination documentation for more details"
+      },
+      dialog: {
+        close: "Close this dialog"
+      },
+      drawer: {
+        close: "Close this dialog"
+      },
+      messagebox: {
+        title: "Viesti",
+        confirm: "OK",
+        cancel: "Peruuta",
+        error: "Virheellinen sy\xF6te",
+        close: "Close this dialog"
+      },
+      upload: {
+        deleteTip: "Poista Delete-n\xE4pp\xE4imell\xE4",
+        delete: "Poista",
+        preview: "Esikatsele",
+        continue: "Jatka"
+      },
+      slider: {
+        defaultLabel: "slider between {min} and {max}",
+        defaultRangeStartLabel: "pick start value",
+        defaultRangeEndLabel: "pick end value"
+      },
+      table: {
+        emptyText: "Ei tietoja",
+        confirmFilter: "Vahvista",
+        resetFilter: "Tyhjenn\xE4",
+        clearFilter: "Kaikki",
+        sumText: "Summa"
+      },
+      tour: {
+        next: "Next",
+        previous: "Previous",
+        finish: "Finish",
+        close: "Close this dialog"
+      },
+      tree: {
+        emptyText: "Ei tietoja"
+      },
+      transfer: {
+        noMatch: "Ei vastaavia tietoja",
+        noData: "Ei tietoja",
+        titles: ["Luettelo 1", "Luettelo 2"],
+        filterPlaceholder: "Sy\xF6t\xE4 hakusana",
+        noCheckedFormat: "{total} kohdetta",
+        hasCheckedFormat: "{checked}/{total} valittu"
+      },
+      image: {
+        error: "FAILED"
+      },
+      pageHeader: {
+        title: "Back"
+      },
+      popconfirm: {
+        confirmButtonText: "Yes",
+        cancelButtonText: "No"
+      },
+      carousel: {
+        leftArrow: "Carousel arrow left",
+        rightArrow: "Carousel arrow right",
+        indicator: "Carousel switch to index {index}"
+      }
+    }
+  };
+
+  return fi;
+
+}));
