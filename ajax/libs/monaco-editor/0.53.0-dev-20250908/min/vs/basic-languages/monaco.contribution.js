@@ -1,0 +1,1 @@
+define("vs/basic-languages/monaco.contribution",["../yaml.contribution.f38b5d74","../editor.api.8bbc48b2"],function(i,n){"use strict"});
