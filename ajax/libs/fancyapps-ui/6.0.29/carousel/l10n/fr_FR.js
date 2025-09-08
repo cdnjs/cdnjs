@@ -1,0 +1,2 @@
+/*! License details at fancyapps.com/license */
+import{fr_FR as e}from"../../panzoom/l10n/fr_FR.js";const s=Object.assign(Object.assign({},e),{ERROR:"Quelque chose s'est mal passé, veuillez réessayer plus tard",NEXT:"Diapositive suivante",PREV:"Diapositive précédente",GOTO:"Aller à la diapositive #%d",DOWNLOAD:"Télécharger",TOGGLE_FULLSCREEN:"Basculer en mode plein écran",TOGGLE_EXPAND:"Basculer en mode plein écran",TOGGLE_THUMBS:"Basculer les vignettes",TOGGLE_AUTOPLAY:"Basculer le diaporama"});export{s as fr_FR};

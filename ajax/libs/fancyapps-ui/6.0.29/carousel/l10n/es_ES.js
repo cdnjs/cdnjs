@@ -1,0 +1,2 @@
+/*! License details at fancyapps.com/license */
+import{es_ES as a}from"../../panzoom/l10n/es_ES.js";const i=Object.assign(Object.assign({},a),{ERROR:"Algo salió mal, inténtalo de nuevo más tarde",NEXT:"Siguiente diapositiva",PREV:"Diapositiva anterior",GOTO:"Ir a la diapositiva #%d",DOWNLOAD:"Descargar",TOGGLE_FULLSCREEN:"Cambiar a modo pantalla completa",TOGGLE_EXPAND:"Cambiar a modo pantalla completa",TOGGLE_THUMBS:"Cambiar a miniaturas",TOGGLE_AUTOPLAY:"Cambiar a modo presentación"});export{i as es_ES};
