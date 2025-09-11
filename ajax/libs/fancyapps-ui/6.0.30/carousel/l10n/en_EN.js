@@ -1,0 +1,2 @@
+/*! License details at fancyapps.com/license */
+import{en_EN as e}from"../../panzoom/l10n/en_EN.js";const o=Object.assign(Object.assign({},e),{ERROR:"Something went wrong. <br /> Please try again later.",NEXT:"Next page",PREV:"Previous page",GOTO:"Go to page #%d",DOWNLOAD:"Download",TOGGLE_FULLSCREEN:"Toggle full-screen mode",TOGGLE_EXPAND:"Toggle full-size mode",TOGGLE_THUMBS:"Toggle thumbnails",TOGGLE_AUTOPLAY:"Toggle slideshow"});export{o as en_EN};
