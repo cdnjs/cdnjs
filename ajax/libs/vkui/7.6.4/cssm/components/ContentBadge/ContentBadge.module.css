@@ -1,0 +1,169 @@
+.host {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: center;
+
+  /**
+   * `min-width` в контексте Flexbox по умолчанию имеет значение `auto`,
+   * из-за чего элементы при переполнении будут выходить за границы контейнера.
+   *
+   * Подробности по ссылке https://stackoverflow.com/a/66689926/2903061
+   */
+  min-inline-size: 0;
+  block-size: auto;
+  isolation: isolate;
+}
+
+.sizeS {
+  min-block-size: 16px;
+  padding-block: 1px;
+  padding-inline: 4px;
+  border-radius: 4px;
+}
+
+.sizeM {
+  column-gap: 4px;
+  min-block-size: 20px;
+  padding-block: 3px;
+  padding-inline: 6px;
+  border-radius: 6px;
+}
+
+.singleIconSlotSizeM {
+  padding-block: 1px;
+  margin-inline: -2px;
+}
+
+.sizeL {
+  column-gap: 6px;
+  min-block-size: 28px;
+  padding-block: 6px;
+  padding-inline: 8px;
+  border-radius: 8px;
+}
+
+.iconSlotSizeL {
+  -webkit-margin-start: -2px;
+          margin-inline-start: -2px;
+  -webkit-margin-end: -2px;
+          margin-inline-end: -2px;
+}
+
+.singleIconSlotSizeL {
+  margin-block: -2px;
+  margin-inline: -4px;
+}
+
+.capsule {
+  border-radius: 48px;
+}
+
+/* mode="primary" */
+
+.primaryAccent {
+  color: var(--vkui--color_text_contrast);
+  background-color: var(--vkui--color_background_accent);
+}
+
+.primaryNeutral {
+  color: var(--vkui--color_text_primary);
+  background-color: var(--vkui--color_background_secondary);
+}
+
+.primaryAccentGreen {
+  color: var(--vkui--color_text_contrast);
+  background-color: var(--vkui--color_accent_green);
+}
+
+.primaryAccentRed {
+  color: var(--vkui--color_text_contrast);
+  background-color: var(--vkui--color_accent_red);
+}
+
+.primaryOverlay {
+  color: var(--vkui--color_text_contrast);
+  background-color: var(--vkui--color_overlay_primary);
+}
+
+/* mode="secondary" */
+
+.secondaryAccent {
+  color: var(--vkui--color_text_accent);
+  background-color: var(--vkui--color_background_secondary_alpha);
+}
+
+.secondaryNeutral {
+  color: var(--vkui--color_text_subhead);
+  background-color: var(--vkui--color_background_secondary);
+}
+
+.secondaryAccentGreen {
+  color: var(--vkui--color_accent_green);
+  background-color: var(--vkui--color_background_positive_tint);
+}
+
+.secondaryAccentRed {
+  color: var(--vkui--color_accent_red);
+  background-color: var(--vkui--color_background_negative_tint);
+}
+
+.secondaryOverlay {
+  color: var(--vkui--color_text_contrast);
+  background-color: var(--vkui--color_overlay_secondary);
+}
+
+/* mode="outline" */
+
+.modeOutline::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  content: '';
+  border-style: solid;
+  border-width: 1px;
+  border-radius: inherit;
+}
+
+.outlineAccent {
+  color: var(--vkui--color_text_accent);
+}
+
+.outlineAccent::before {
+  border-color: var(--vkui--color_stroke_accent);
+}
+
+.outlineNeutral {
+  color: var(--vkui--color_text_secondary);
+}
+
+.outlineNeutral::before {
+  border-color: var(--vkui--color_icon_secondary);
+}
+
+.outlineAccentGreen {
+  color: var(--vkui--color_accent_green);
+}
+
+.outlineAccentGreen::before {
+  border-color: currentColor;
+}
+
+.outlineAccentRed {
+  color: var(--vkui--color_accent_red);
+}
+
+.outlineAccentRed::before {
+  border-color: currentColor;
+}
+
+.outlineOverlay {
+  color: var(--vkui--color_text_contrast);
+}
+
+.outlineOverlay::before {
+  background-color: var(--vkui--color_overlay_primary);
+  border-width: 0;
+}

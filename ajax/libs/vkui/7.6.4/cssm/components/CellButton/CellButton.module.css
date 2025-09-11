@@ -1,0 +1,80 @@
+.host {
+  box-sizing: border-box;
+  inline-size: 100%;
+  padding-block: 0;
+  margin: 0;
+  text-align: start;
+  text-decoration: none;
+  background: transparent;
+  border: 0;
+}
+
+/**
+ * CMP:
+ * FormItem
+ */
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormItem) .host {
+  box-sizing: content-box;
+  inline-size: 100%;
+  margin-block: 0;
+  margin-inline: calc(-1 * var(--vkui--size_base_padding_horizontal--regular));
+}
+
+.host[disabled] {
+  opacity: 0.4;
+}
+
+.centered {
+  justify-content: center;
+  text-align: center;
+}
+
+/* stylelint-disable-next-line selector-max-universal -- отключаем растягивание элементов внутри */
+
+.centered > * {
+  flex-grow: initial;
+  max-inline-size: initial;
+}
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+.centered :global(.vkuiIcon) {
+  -webkit-padding-end: var(--vkui--spacing_size_m);
+          padding-inline-end: var(--vkui--spacing_size_m);
+  /* компенсируем отступ заданные в SimpleCell__before */
+  -webkit-margin-end: calc(
+    -1 * var(--vkui_internal--SimpleCell-before-inline-padding-end, var(--vkui--spacing_size_xl))
+  );
+          margin-inline-end: calc(
+    -1 * var(--vkui_internal--SimpleCell-before-inline-padding-end, var(--vkui--spacing_size_xl))
+  );
+}
+
+.appearanceAccent {
+  --vkui_internal--icon_color: var(--vkui--color_icon_accent);
+
+  color: var(--vkui--color_text_accent);
+}
+
+/* Переопределяем токен для `appearance="accent"` */
+
+.centered {
+  --vkui_internal--icon_color: var(--vkui--color_icon_accent_themed);
+
+  color: var(--vkui--color_text_accent_themed);
+}
+
+.appearanceNeutral {
+  --vkui_internal--icon_color: var(--vkui--color_icon_primary);
+
+  color: var(--vkui--color_text_primary);
+}
+
+.appearanceNegative {
+  --vkui_internal--icon_color: var(--vkui--color_text_negative);
+
+  color: var(--vkui--color_text_negative);
+}
