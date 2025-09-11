@@ -1,0 +1,118 @@
+.host {
+  position: relative;
+  overflow: hidden;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+.viewport {
+  position: relative;
+  block-size: 100%;
+  margin: 0;
+}
+
+.layer {
+  display: flex;
+  align-items: stretch;
+  inline-size: 100%;
+  block-size: 100%;
+  min-block-size: 100px;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.draggable .layer {
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.layer:empty {
+  min-block-size: 0;
+}
+
+.slide {
+  flex: 0 0 auto;
+  inline-size: 100%;
+  max-inline-size: 100%;
+  overflow: hidden;
+}
+
+.customWidth .slide {
+  inline-size: auto;
+}
+
+/* stylelint-disable-next-line selector-max-universal */
+
+.slide > * {
+  inline-size: 100%;
+  min-block-size: 100%;
+}
+
+.bullets {
+  position: absolute;
+  inset-block-end: 10px;
+  inset-inline-start: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  block-size: 6px;
+}
+
+.bulletsDark .bullet {
+  background-color: var(--vkui--color_icon_primary_invariably);
+}
+
+.bulletsLight .bullet {
+  background-color: var(--vkui--color_icon_contrast);
+}
+
+.bullet {
+  inline-size: 6px;
+  block-size: 6px;
+  margin-block: 0;
+  margin-inline: 3px;
+  border-radius: 50%;
+  opacity: var(--vkui--opacity_disable_accessibility);
+}
+
+.bulletActive {
+  opacity: 1;
+}
+
+.arrow {
+  position: absolute;
+  z-index: var(--vkui_internal--z_index_gallery_scroll_arrow);
+  opacity: 0;
+}
+
+.arrow.arrowAreaStretch {
+  inset-block-start: 0;
+}
+
+.arrow.arrowAreaFit {
+  inset-block-start: 50%;
+  block-size: auto;
+  padding-block: calc(var(--vkui--size_base_padding_vertical--regular) * 2);
+  transform: translateY(-50%);
+}
+
+.arrowStart {
+  -webkit-padding-end: var(--vkui--size_base_padding_horizontal--regular);
+          padding-inline-end: var(--vkui--size_base_padding_horizontal--regular);
+}
+
+.arrowEnd {
+  -webkit-padding-start: var(--vkui--size_base_padding_horizontal--regular);
+          padding-inline-start: var(--vkui--size_base_padding_horizontal--regular);
+}
+
+.host:hover .arrow {
+  opacity: var(--vkui--opacity_disable_accessibility);
+}
+
+.arrowFocusVisible,
+.host .arrow:hover {
+  opacity: 1;
+}

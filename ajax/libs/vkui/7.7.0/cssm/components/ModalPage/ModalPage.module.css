@@ -1,0 +1,164 @@
+.host {
+  display: flex;
+  inline-size: 100%;
+  block-size: var(--vkui_internal_ModalPage--userHeight);
+  margin-inline: auto;
+  pointer-events: initial;
+  outline: none;
+}
+
+/* Mobile */
+
+.hostMobile {
+  --vkui_internal_ModalPage--userHeight: 100%;
+
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline: 0;
+  box-sizing: border-box;
+  max-inline-size: var(--vkui--size_popup_small--regular);
+  pointer-events: none;
+}
+
+.hostMobileSafeAreaInsetTop {
+  max-block-size: calc(100% - var(--vkui_internal--safe_area_inset_top));
+}
+
+.hostMobileSafeAreaInsetTopWithCustomOffset {
+  max-block-size: calc(
+    100% - (var(--vkui_internal--safe_area_inset_top) + var(--vkui_internal--panel_header_height))
+  );
+}
+
+/* Desktop */
+
+.hostDesktop {
+  --vkui_internal_ModalPage--desktopMaxWidth: 100%;
+  --vkui_internal_ModalPage--desktopMaxHeight: 640px;
+  --vkui_internal_ModalPage--userHeight: auto;
+
+  position: relative;
+  box-sizing: content-box;
+  max-inline-size: var(--vkui_internal_ModalPage--desktopMaxWidth);
+  max-block-size: min(var(--vkui_internal_ModalPage--desktopMaxHeight), 100%);
+  margin-block: auto;
+}
+
+.hostDesktopMaxWidthS {
+  --vkui_internal_ModalPage--desktopMaxWidth: var(--vkui--size_popup_small--regular);
+}
+
+.hostDesktopMaxWidthM {
+  --vkui_internal_ModalPage--desktopMaxWidth: var(--vkui--size_popup_medium--regular);
+}
+
+.hostDesktopMaxWidthL {
+  --vkui_internal_ModalPage--desktopMaxWidth: var(--vkui--size_popup_large--regular);
+}
+
+.document {
+  box-sizing: border-box;
+
+  /*
+   * Удерживает высоту в пределах 100% родителя при переполнении контента.
+   */
+  display: flex;
+  flex-shrink: 1;
+  flex-direction: column;
+  inline-size: 100%;
+}
+
+/* Mobile */
+
+.documentMobile {
+  --vkui_internal_ModalPageDocument--snapPoint: auto;
+  --vkui_internal_ModalPageDocument--safeAreaInsetBottom: var(
+    --vkui_internal--safe_area_inset_bottom
+  );
+
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline-start: 0;
+  block-size: var(--vkui_internal_ModalPageDocument--snapPoint);
+  max-block-size: 100%;
+  pointer-events: auto;
+  touch-action: pan-y;
+  transform: translate3d(0, 0, 0);
+  transition: block-size 0.4s var(--vkui_internal--spring-easing);
+}
+
+.documentMobile.documentStateEnter {
+  transform: translate3d(0, 100%, 0);
+}
+
+.documentMobile.documentStateEntering {
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.5s var(--vkui_internal--slide-easing) 0.1s;
+}
+
+.documentMobile.documentStateExiting {
+  transform: translate3d(0, 100%, 0);
+  transition: transform 0.2s ease;
+}
+
+.documentMobile.documentStateExited {
+  transform: translate3d(0, 100%, 0);
+}
+
+/* Desktop */
+
+.documentDesktop {
+  position: relative;
+  block-size: auto;
+}
+
+.documentDesktop.documentStateEnter {
+  opacity: 0;
+}
+
+.documentDesktop.documentStateEntering {
+  opacity: 1;
+  transition: opacity 0.2s ease-in 0.1s;
+}
+
+.documentDesktop.documentStateExiting {
+  opacity: 0;
+  transition: opacity 0.1s ease-out;
+}
+
+.documentDesktop.documentStateExited {
+  opacity: 0;
+}
+
+.children {
+  box-sizing: border-box;
+  /*
+   * Удерживает высоту в пределах 100% родителя при переполнении контента.
+   *
+   * - см. `ModalPageHeader`
+   * - см. `ModalPageContent`
+   * - см. `ModalPageFooter`
+   */
+  display: flex;
+  flex-shrink: 1;
+  flex-direction: column;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: hidden;
+  background-color: var(--vkui--color_background_modal);
+  border-start-start-radius: var(--vkui--size_border_radius_paper--regular);
+  border-start-end-radius: var(--vkui--size_border_radius_paper--regular);
+}
+
+.childrenMobile {
+  -webkit-padding-after: var(--vkui_internal_ModalPageDocument--safeAreaInsetBottom);
+          padding-block-end: var(--vkui_internal_ModalPageDocument--safeAreaInsetBottom);
+}
+
+/* Desktop */
+
+.childrenDesktop {
+  border-end-start-radius: var(--vkui--size_border_radius_paper--regular);
+  border-end-end-radius: var(--vkui--size_border_radius_paper--regular);
+  box-shadow: var(--vkui--elevation3);
+}

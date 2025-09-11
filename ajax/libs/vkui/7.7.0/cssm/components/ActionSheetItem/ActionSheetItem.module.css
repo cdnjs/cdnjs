@@ -1,0 +1,234 @@
+.host {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  min-block-size: 48px;
+  padding-block: 0;
+  padding-inline: 16px;
+  overflow: hidden;
+  color: var(--vkui--color_text_primary);
+  text-decoration: none;
+}
+
+.container,
+.before,
+.after {
+  position: relative;
+}
+
+.before,
+.after {
+  flex-shrink: 0;
+}
+
+.container {
+  flex-grow: 1;
+  max-inline-size: 100%;
+  padding-block: 10px;
+  padding-inline: 0;
+}
+
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.content {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.ellipsis .content {
+  justify-content: flex-start;
+}
+
+.children {
+  min-inline-size: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.subtitle {
+  -webkit-margin-before: 2px;
+          margin-block-start: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--vkui--color_text_secondary);
+}
+
+.meta {
+  flex-shrink: 0;
+  -webkit-margin-start: 6px;
+          margin-inline-start: 6px;
+  color: var(--vkui--color_text_secondary);
+}
+
+.before {
+  -webkit-margin-end: 16px;
+          margin-inline-end: 16px;
+  color: var(--vkui--color_icon_accent);
+}
+
+.menu .before {
+  -webkit-margin-end: 12px;
+          margin-inline-end: 12px;
+}
+
+.ios .before {
+  -webkit-margin-end: 18px;
+          margin-inline-end: 18px;
+  color: var(--vkui--color_icon_accent_themed);
+}
+
+.modeDestructive .container:first-child {
+  color: var(--vkui--color_text_negative);
+}
+
+.modeDestructive .before {
+  color: var(--vkui--color_icon_negative);
+}
+
+.after {
+  display: flex;
+  flex-direction: row;
+  -webkit-margin-start: 16px;
+          margin-inline-start: 16px;
+  color: var(--vkui--color_icon_accent);
+}
+
+/* stylelint-disable-next-line selector-max-universal -- gap 12px */
+
+.after > *:not(:last-child) {
+  -webkit-margin-end: 12px;
+          margin-inline-end: 12px;
+}
+
+/**
+ * iOS
+ */
+
+.ios {
+  min-block-size: 56px;
+  padding-block: 14px;
+  padding-inline: 18px;
+  color: var(--vkui--color_text_accent_themed);
+  background: var(--vkui--color_background_modal);
+}
+
+.rich {
+  color: var(--vkui--color_text_primary);
+}
+
+.ios.modeDestructive {
+  color: var(--vkui--color_text_negative);
+}
+
+.ios::before {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  content: '';
+  background-color: var(--vkui--color_background_modal);
+  transition:
+    opacity 0.15s ease-out,
+    background-color 0.15s ease-out;
+}
+
+.ios::after {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 0;
+  block-size: 1px;
+  content: '';
+  background: var(--vkui--color_separator_primary_alpha);
+  transform-origin: center bottom;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+  .ios::after {
+    transform: scaleY(0.5);
+  }
+}
+
+@media (-webkit-min-device-pixel-ratio: 3), (min-resolution: 3dppx) {
+  .ios::after {
+    transform: scaleY(0.33);
+  }
+}
+
+.ios:first-child::after,
+.modeCancel::after {
+  content: none;
+}
+
+.ios.active::before {
+  background-color: var(--vkui--color_transparent--active);
+  opacity: 1;
+  transition: none;
+}
+
+.ios .container {
+  padding: 0;
+}
+
+.ios .centered {
+  justify-content: center;
+}
+
+.modeCancel {
+  min-block-size: 52px;
+}
+
+/**
+ * Desktop
+ */
+
+.menu {
+  inline-size: auto;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+/**
+ * Disabled
+ */
+
+.disabled .children,
+.disabled .meta,
+.disabled .subtitle {
+  color: var(--vkui--color_text_secondary);
+}
+
+.disabled .marker,
+.disabled .before {
+  color: var(--vkui--color_icon_secondary);
+}
+
+/**
+ * SizeY = compact
+ */
+
+.sizeYCompact {
+  min-block-size: 32px;
+}
+
+.sizeYCompact.ios {
+  min-block-size: 36px;
+  padding-block: 4px;
+  padding-inline: 18px 20px;
+}
+
+.sizeYCompact:not(.ios) + .sizeYCompact:not(.ios) {
+  -webkit-margin-before: 2px;
+          margin-block-start: 2px;
+}
+
+.sizeYCompact .container {
+  padding-block: 5px;
+  padding-inline: 0;
+}
