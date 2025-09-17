@@ -1,0 +1,1 @@
+const e=1e3,s=1e3;export{s as K,e as M}
