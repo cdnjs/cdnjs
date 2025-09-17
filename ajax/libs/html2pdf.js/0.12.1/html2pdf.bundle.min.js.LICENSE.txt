@@ -1,0 +1,2103 @@
+/*!
+ * html2canvas 1.4.1 <https://html2canvas.hertzen.com>
+ * Copyright (c) 2022 Niklas von Hertzen <https://hertzen.com>
+ * Released under MIT License
+ */
+
+/*!
+ * html2pdf.js v0.12.1
+ * Copyright (c) 2025 Erik Koopmans
+ * Released under the MIT License.
+ */
+
+/*! *****************************************************************************
+    Copyright (c) Microsoft Corporation.
+
+    Permission to use, copy, modify, and/or distribute this software for any
+    purpose with or without fee is hereby granted.
+
+    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+    REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+    AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+    INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+    LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+    OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+    PERFORMANCE OF THIS SOFTWARE.
+    ***************************************************************************** */
+
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+
+/*! ../internals/a-callable */
+
+/*! ../internals/a-constructor */
+
+/*! ../internals/a-possible-prototype */
+
+/*! ../internals/a-set */
+
+/*! ../internals/add-to-unscopables */
+
+/*! ../internals/advance-string-index */
+
+/*! ../internals/an-instance */
+
+/*! ../internals/an-object */
+
+/*! ../internals/array-buffer-non-extensible */
+
+/*! ../internals/array-for-each */
+
+/*! ../internals/array-from */
+
+/*! ../internals/array-includes */
+
+/*! ../internals/array-iteration */
+
+/*! ../internals/array-method-has-species-support */
+
+/*! ../internals/array-method-is-strict */
+
+/*! ../internals/array-reduce */
+
+/*! ../internals/array-slice */
+
+/*! ../internals/array-species-constructor */
+
+/*! ../internals/array-species-create */
+
+/*! ../internals/call-with-safe-iteration-closing */
+
+/*! ../internals/check-correctness-of-iteration */
+
+/*! ../internals/classof */
+
+/*! ../internals/classof-raw */
+
+/*! ../internals/collection */
+
+/*! ../internals/collection-strong */
+
+/*! ../internals/copy-constructor-properties */
+
+/*! ../internals/correct-is-regexp-logic */
+
+/*! ../internals/correct-prototype-getter */
+
+/*! ../internals/create-html */
+
+/*! ../internals/create-iter-result-object */
+
+/*! ../internals/create-non-enumerable-property */
+
+/*! ../internals/create-property */
+
+/*! ../internals/create-property-descriptor */
+
+/*! ../internals/define-built-in */
+
+/*! ../internals/define-built-in-accessor */
+
+/*! ../internals/define-built-ins */
+
+/*! ../internals/define-global-property */
+
+/*! ../internals/descriptors */
+
+/*! ../internals/document-create-element */
+
+/*! ../internals/does-not-exceed-safe-integer */
+
+/*! ../internals/dom-iterables */
+
+/*! ../internals/dom-token-list-prototype */
+
+/*! ../internals/enum-bug-keys */
+
+/*! ../internals/environment */
+
+/*! ../internals/environment-is-ios */
+
+/*! ../internals/environment-is-ios-pebble */
+
+/*! ../internals/environment-is-node */
+
+/*! ../internals/environment-is-webos-webkit */
+
+/*! ../internals/environment-user-agent */
+
+/*! ../internals/environment-v8-version */
+
+/*! ../internals/export */
+
+/*! ../internals/fails */
+
+/*! ../internals/fix-regexp-well-known-symbol-logic */
+
+/*! ../internals/freezing */
+
+/*! ../internals/function-apply */
+
+/*! ../internals/function-bind-context */
+
+/*! ../internals/function-bind-native */
+
+/*! ../internals/function-call */
+
+/*! ../internals/function-name */
+
+/*! ../internals/function-uncurry-this */
+
+/*! ../internals/function-uncurry-this-accessor */
+
+/*! ../internals/function-uncurry-this-clause */
+
+/*! ../internals/get-built-in */
+
+/*! ../internals/get-iterator */
+
+/*! ../internals/get-iterator-direct */
+
+/*! ../internals/get-iterator-method */
+
+/*! ../internals/get-json-replacer-function */
+
+/*! ../internals/get-method */
+
+/*! ../internals/get-set-record */
+
+/*! ../internals/get-substitution */
+
+/*! ../internals/global-this */
+
+/*! ../internals/has-own-property */
+
+/*! ../internals/hidden-keys */
+
+/*! ../internals/host-report-errors */
+
+/*! ../internals/html */
+
+/*! ../internals/ie8-dom-define */
+
+/*! ../internals/indexed-object */
+
+/*! ../internals/inherit-if-required */
+
+/*! ../internals/inspect-source */
+
+/*! ../internals/internal-metadata */
+
+/*! ../internals/internal-state */
+
+/*! ../internals/is-array */
+
+/*! ../internals/is-array-iterator-method */
+
+/*! ../internals/is-callable */
+
+/*! ../internals/is-constructor */
+
+/*! ../internals/is-forced */
+
+/*! ../internals/is-iterable */
+
+/*! ../internals/is-null-or-undefined */
+
+/*! ../internals/is-object */
+
+/*! ../internals/is-possible-prototype */
+
+/*! ../internals/is-pure */
+
+/*! ../internals/is-regexp */
+
+/*! ../internals/is-symbol */
+
+/*! ../internals/iterate */
+
+/*! ../internals/iterate-simple */
+
+/*! ../internals/iterator-close */
+
+/*! ../internals/iterator-close-all */
+
+/*! ../internals/iterator-create-constructor */
+
+/*! ../internals/iterator-create-proxy */
+
+/*! ../internals/iterator-define */
+
+/*! ../internals/iterator-helper-throws-on-invalid-iterator */
+
+/*! ../internals/iterator-helper-without-closing-on-early-error */
+
+/*! ../internals/iterators */
+
+/*! ../internals/iterators-core */
+
+/*! ../internals/length-of-array-like */
+
+/*! ../internals/make-built-in */
+
+/*! ../internals/math-trunc */
+
+/*! ../internals/microtask */
+
+/*! ../internals/new-promise-capability */
+
+/*! ../internals/not-a-regexp */
+
+/*! ../internals/object-assign */
+
+/*! ../internals/object-create */
+
+/*! ../internals/object-define-properties */
+
+/*! ../internals/object-define-property */
+
+/*! ../internals/object-get-own-property-descriptor */
+
+/*! ../internals/object-get-own-property-names */
+
+/*! ../internals/object-get-own-property-names-external */
+
+/*! ../internals/object-get-own-property-symbols */
+
+/*! ../internals/object-get-prototype-of */
+
+/*! ../internals/object-is-extensible */
+
+/*! ../internals/object-is-prototype-of */
+
+/*! ../internals/object-keys */
+
+/*! ../internals/object-keys-internal */
+
+/*! ../internals/object-property-is-enumerable */
+
+/*! ../internals/object-set-prototype-of */
+
+/*! ../internals/object-to-string */
+
+/*! ../internals/ordinary-to-primitive */
+
+/*! ../internals/own-keys */
+
+/*! ../internals/path */
+
+/*! ../internals/perform */
+
+/*! ../internals/promise-constructor-detection */
+
+/*! ../internals/promise-native-constructor */
+
+/*! ../internals/promise-resolve */
+
+/*! ../internals/promise-statics-incorrect-iteration */
+
+/*! ../internals/queue */
+
+/*! ../internals/regexp-exec */
+
+/*! ../internals/regexp-exec-abstract */
+
+/*! ../internals/regexp-flags */
+
+/*! ../internals/regexp-flags-detection */
+
+/*! ../internals/regexp-get-flags */
+
+/*! ../internals/regexp-sticky-helpers */
+
+/*! ../internals/regexp-unsupported-dot-all */
+
+/*! ../internals/regexp-unsupported-ncg */
+
+/*! ../internals/require-object-coercible */
+
+/*! ../internals/safe-get-built-in */
+
+/*! ../internals/schedulers-fix */
+
+/*! ../internals/set-clone */
+
+/*! ../internals/set-difference */
+
+/*! ../internals/set-helpers */
+
+/*! ../internals/set-intersection */
+
+/*! ../internals/set-is-disjoint-from */
+
+/*! ../internals/set-is-subset-of */
+
+/*! ../internals/set-is-superset-of */
+
+/*! ../internals/set-iterate */
+
+/*! ../internals/set-size */
+
+/*! ../internals/set-species */
+
+/*! ../internals/set-symmetric-difference */
+
+/*! ../internals/set-to-string-tag */
+
+/*! ../internals/set-union */
+
+/*! ../internals/shared */
+
+/*! ../internals/shared-key */
+
+/*! ../internals/shared-store */
+
+/*! ../internals/species-constructor */
+
+/*! ../internals/string-html-forced */
+
+/*! ../internals/string-multibyte */
+
+/*! ../internals/string-trim */
+
+/*! ../internals/string-trim-forced */
+
+/*! ../internals/symbol-constructor-detection */
+
+/*! ../internals/symbol-define-to-primitive */
+
+/*! ../internals/symbol-registry-detection */
+
+/*! ../internals/task */
+
+/*! ../internals/this-number-value */
+
+/*! ../internals/to-absolute-index */
+
+/*! ../internals/to-indexed-object */
+
+/*! ../internals/to-integer-or-infinity */
+
+/*! ../internals/to-length */
+
+/*! ../internals/to-object */
+
+/*! ../internals/to-primitive */
+
+/*! ../internals/to-property-key */
+
+/*! ../internals/to-set-like */
+
+/*! ../internals/to-string */
+
+/*! ../internals/to-string-tag-support */
+
+/*! ../internals/try-to-string */
+
+/*! ../internals/uid */
+
+/*! ../internals/use-symbol-as-uid */
+
+/*! ../internals/v8-prototype-define-bug */
+
+/*! ../internals/validate-arguments-length */
+
+/*! ../internals/weak-map-basic-detection */
+
+/*! ../internals/well-known-symbol */
+
+/*! ../internals/well-known-symbol-define */
+
+/*! ../internals/well-known-symbol-wrapped */
+
+/*! ../internals/whitespaces */
+
+/*! ../modules/es.array.iterator */
+
+/*! ../modules/es.iterator.constructor */
+
+/*! ../modules/es.iterator.for-each */
+
+/*! ../modules/es.iterator.map */
+
+/*! ../modules/es.json.stringify */
+
+/*! ../modules/es.object.get-own-property-symbols */
+
+/*! ../modules/es.promise.all */
+
+/*! ../modules/es.promise.catch */
+
+/*! ../modules/es.promise.constructor */
+
+/*! ../modules/es.promise.race */
+
+/*! ../modules/es.promise.reject */
+
+/*! ../modules/es.promise.resolve */
+
+/*! ../modules/es.regexp.exec */
+
+/*! ../modules/es.set.constructor */
+
+/*! ../modules/es.symbol.constructor */
+
+/*! ../modules/es.symbol.for */
+
+/*! ../modules/es.symbol.key-for */
+
+/*! ../modules/web.set-interval */
+
+/*! ../modules/web.set-timeout */
+
+/*! ../utils.js */
+
+/*! ../worker.js */
+
+/*! ./PngDecoder */
+
+/*! ./PngEncoder */
+
+/*! ./applyUnfilter */
+
+/*! ./arrayLikeToArray.js */
+
+/*! ./arrayWithHoles.js */
+
+/*! ./convertIndexedToRgb */
+
+/*! ./crc */
+
+/*! ./helpers/crc */
+
+/*! ./helpers/decodeInterlaceAdam7 */
+
+/*! ./helpers/decodeInterlaceNull */
+
+/*! ./helpers/signature */
+
+/*! ./helpers/text */
+
+/*! ./internalTypes */
+
+/*! ./iterableToArrayLimit.js */
+
+/*! ./nonIterableRest.js */
+
+/*! ./plugin/hyperlinks.js */
+
+/*! ./plugin/jspdf-plugin.js */
+
+/*! ./plugin/pagebreaks.js */
+
+/*! ./snapdom/clone.js */
+
+/*! ./text */
+
+/*! ./toPrimitive.js */
+
+/*! ./toPropertyKey.js */
+
+/*! ./typeof.js */
+
+/*! ./types */
+
+/*! ./unfilter */
+
+/*! ./unsupportedIterableToArray.js */
+
+/*! ./utils.js */
+
+/*! ./worker.js */
+
+/*! @babel/runtime/helpers/asyncToGenerator */
+
+/*! @babel/runtime/helpers/defineProperty */
+
+/*! @babel/runtime/helpers/slicedToArray */
+
+/*! @babel/runtime/helpers/typeof */
+
+/*! @license DOMPurify 3.2.6 | (c) Cure53 and other contributors | Released under the Apache license 2.0 and Mozilla Public License 2.0 | github.com/cure53/DOMPurify/blob/3.2.6/LICENSE */
+
+/*! canvg */
+
+/*! core-js/modules/es.array.concat.js */
+
+/*! core-js/modules/es.array.from.js */
+
+/*! core-js/modules/es.array.index-of.js */
+
+/*! core-js/modules/es.array.iterator.js */
+
+/*! core-js/modules/es.array.join.js */
+
+/*! core-js/modules/es.array.map.js */
+
+/*! core-js/modules/es.array.reduce.js */
+
+/*! core-js/modules/es.array.reverse.js */
+
+/*! core-js/modules/es.array.slice.js */
+
+/*! core-js/modules/es.function.name.js */
+
+/*! core-js/modules/es.json.stringify.js */
+
+/*! core-js/modules/es.number.constructor.js */
+
+/*! core-js/modules/es.object.assign.js */
+
+/*! core-js/modules/es.object.keys.js */
+
+/*! core-js/modules/es.object.to-string.js */
+
+/*! core-js/modules/es.promise.js */
+
+/*! core-js/modules/es.regexp.exec.js */
+
+/*! core-js/modules/es.regexp.test.js */
+
+/*! core-js/modules/es.regexp.to-string.js */
+
+/*! core-js/modules/es.set.js */
+
+/*! core-js/modules/es.string.ends-with.js */
+
+/*! core-js/modules/es.string.includes.js */
+
+/*! core-js/modules/es.string.iterator.js */
+
+/*! core-js/modules/es.string.link.js */
+
+/*! core-js/modules/es.string.match.js */
+
+/*! core-js/modules/es.string.replace.js */
+
+/*! core-js/modules/es.string.split.js */
+
+/*! core-js/modules/es.string.starts-with.js */
+
+/*! core-js/modules/es.string.trim.js */
+
+/*! core-js/modules/es.symbol.description.js */
+
+/*! core-js/modules/es.symbol.iterator.js */
+
+/*! core-js/modules/es.symbol.js */
+
+/*! core-js/modules/esnext.iterator.constructor.js */
+
+/*! core-js/modules/esnext.iterator.for-each.js */
+
+/*! core-js/modules/esnext.iterator.map.js */
+
+/*! core-js/modules/esnext.set.add-all.js */
+
+/*! core-js/modules/esnext.set.delete-all.js */
+
+/*! core-js/modules/esnext.set.difference.js */
+
+/*! core-js/modules/esnext.set.every.js */
+
+/*! core-js/modules/esnext.set.filter.js */
+
+/*! core-js/modules/esnext.set.find.js */
+
+/*! core-js/modules/esnext.set.intersection.js */
+
+/*! core-js/modules/esnext.set.is-disjoint-from.js */
+
+/*! core-js/modules/esnext.set.is-subset-of.js */
+
+/*! core-js/modules/esnext.set.is-superset-of.js */
+
+/*! core-js/modules/esnext.set.join.js */
+
+/*! core-js/modules/esnext.set.map.js */
+
+/*! core-js/modules/esnext.set.reduce.js */
+
+/*! core-js/modules/esnext.set.some.js */
+
+/*! core-js/modules/esnext.set.symmetric-difference.js */
+
+/*! core-js/modules/esnext.set.union.js */
+
+/*! core-js/modules/web.dom-collections.for-each.js */
+
+/*! core-js/modules/web.dom-collections.iterator.js */
+
+/*! core-js/modules/web.timers.js */
+
+/*! dompurify */
+
+/*! fast-png */
+
+/*! fflate */
+
+/*! html2canvas */
+
+/*! iobuffer */
+
+/*! jspdf */
+
+/*! pako */
+
+/*! performance-now */
+
+/*! raf */
+
+/*! rgbcolor */
+
+/*! stackblur-canvas */
+
+/*! svg-pathdata */
+
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+
+/*!**********************!*\
+  !*** ./src/utils.js ***!
+  \**********************/
+
+/*!***********************!*\
+  !*** ./src/worker.js ***!
+  \***********************/
+
+/*!******************************!*\
+  !*** ./src/snapdom/clone.js ***!
+  \******************************/
+
+/*!**********************************!*\
+  !*** ./src/plugin/hyperlinks.js ***!
+  \**********************************/
+
+/*!**********************************!*\
+  !*** ./src/plugin/pagebreaks.js ***!
+  \**********************************/
+
+/*!***********************************!*\
+  !*** ./node_modules/raf/index.js ***!
+  \***********************************/
+
+/*!************************************!*\
+  !*** ./src/plugin/jspdf-plugin.js ***!
+  \************************************/
+
+/*!****************************************!*\
+  !*** ./node_modules/rgbcolor/index.js ***!
+  \****************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/canvg/lib/index.es.js ***!
+  \********************************************/
+
+/*!********************************************!*\
+  !*** ./node_modules/fflate/esm/browser.js ***!
+  \********************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/pako/dist/pako.esm.mjs ***!
+  \*********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/core-js/internals/uid.js ***!
+  \***********************************************/
+
+/*!***********************************************!*\
+  !*** ./node_modules/iobuffer/lib-esm/text.js ***!
+  \***********************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/core-js/internals/html.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/core-js/internals/path.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/core-js/internals/task.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/core-js/modules/es.set.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/fast-png/lib-esm/index.js ***!
+  \************************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/fast-png/lib-esm/types.js ***!
+  \************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/core-js/internals/a-set.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/core-js/internals/fails.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/core-js/internals/queue.js ***!
+  \*************************************************/
+
+/*!*************************************************!*\
+  !*** ./node_modules/jspdf/dist/jspdf.es.min.js ***!
+  \*************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/core-js/internals/export.js ***!
+  \**************************************************/
+
+/*!**************************************************!*\
+  !*** ./node_modules/core-js/internals/shared.js ***!
+  \**************************************************/
+
+/*!***************************************************!*\
+  !*** ./node_modules/core-js/internals/classof.js ***!
+  \***************************************************/
+
+/*!***************************************************!*\
+  !*** ./node_modules/core-js/internals/is-pure.js ***!
+  \***************************************************/
+
+/*!***************************************************!*\
+  !*** ./node_modules/core-js/internals/iterate.js ***!
+  \***************************************************/
+
+/*!***************************************************!*\
+  !*** ./node_modules/core-js/internals/perform.js ***!
+  \***************************************************/
+
+/*!***************************************************!*\
+  !*** ./node_modules/core-js/modules/es.symbol.js ***!
+  \***************************************************/
+
+/*!***************************************************!*\
+  !*** ./node_modules/dompurify/dist/purify.es.mjs ***!
+  \***************************************************/
+
+/*!***************************************************!*\
+  !*** ./node_modules/iobuffer/lib-esm/IOBuffer.js ***!
+  \***************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/core-js/internals/freezing.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/core-js/internals/is-array.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/core-js/internals/own-keys.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/core-js/internals/set-size.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/core-js/modules/es.promise.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/core-js/modules/web.timers.js ***!
+  \****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/core-js/internals/an-object.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/core-js/internals/is-forced.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/core-js/internals/is-object.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/core-js/internals/is-regexp.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/core-js/internals/is-symbol.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/core-js/internals/iterators.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/core-js/internals/microtask.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/core-js/internals/set-clone.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/core-js/internals/set-union.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/core-js/internals/to-length.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/core-js/internals/to-object.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/core-js/internals/to-string.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/fast-png/lib-esm/PngDecoder.js ***!
+  \*****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./node_modules/fast-png/lib-esm/PngEncoder.js ***!
+  \*****************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/core-js/internals/a-callable.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/core-js/internals/array-from.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/core-js/internals/collection.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/core-js/internals/get-method.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/core-js/internals/math-trunc.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/core-js/internals/shared-key.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/core-js/modules/es.array.map.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/fast-png/lib-esm/helpers/crc.js ***!
+  \******************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/html2canvas/dist/html2canvas.js ***!
+  \******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/internals/an-instance.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/internals/array-slice.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/internals/classof-raw.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/internals/create-html.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/internals/descriptors.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/internals/environment.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/internals/global-this.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/internals/hidden-keys.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/internals/is-callable.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/internals/is-iterable.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/internals/object-keys.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/internals/regexp-exec.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/internals/set-helpers.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/internals/set-iterate.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/internals/set-species.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/internals/string-trim.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/internals/to-set-like.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/internals/whitespaces.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/modules/es.array.from.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/modules/es.array.join.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/modules/es.symbol.for.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
+  !*** ./node_modules/fast-png/lib-esm/helpers/text.js ***!
+  \*******************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/core-js/internals/array-reduce.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/core-js/internals/get-built-in.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/core-js/internals/get-iterator.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/core-js/internals/not-a-regexp.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/core-js/internals/regexp-flags.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/core-js/internals/shared-store.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/core-js/internals/to-primitive.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.array.slice.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.object.keys.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.promise.all.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.regexp.exec.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.regexp.test.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.string.link.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.string.trim.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/core-js/modules/esnext.set.map.js ***!
+  \********************************************************/
+
+/*!********************************************************!*\
+  !*** ./node_modules/fast-png/lib-esm/internalTypes.js ***!
+  \********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/core-js/internals/a-constructor.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/core-js/internals/dom-iterables.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/core-js/internals/enum-bug-keys.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/core-js/internals/function-call.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/core-js/internals/function-name.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/core-js/internals/make-built-in.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/core-js/internals/object-assign.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/core-js/internals/object-create.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/core-js/internals/try-to-string.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.array.concat.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.array.reduce.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.iterator.map.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.promise.race.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.string.match.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.string.split.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/core-js/modules/esnext.set.find.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/core-js/modules/esnext.set.join.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/core-js/modules/esnext.set.some.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/core-js/modules/web.set-timeout.js ***!
+  \*********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/internals/array-for-each.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/internals/array-includes.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/internals/function-apply.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/internals/get-set-record.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/internals/ie8-dom-define.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/internals/indexed-object.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/internals/inspect-source.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/internals/internal-state.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/internals/is-constructor.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/internals/iterate-simple.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/internals/iterator-close.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/internals/iterators-core.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/internals/schedulers-fix.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/internals/set-difference.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.array.reverse.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.function.name.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.object.assign.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.promise.catch.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/modules/esnext.set.every.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/modules/esnext.set.union.js ***!
+  \**********************************************************/
+
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/modules/web.set-interval.js ***!
+  \**********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/typeof.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/core-js/internals/array-iteration.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/core-js/internals/create-property.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/core-js/internals/define-built-in.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/core-js/internals/iterator-define.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/core-js/internals/promise-resolve.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/core-js/internals/to-property-key.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.array.index-of.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.array.iterator.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.json.stringify.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.promise.reject.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.string.replace.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.symbol.key-for.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/core-js/modules/esnext.set.filter.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/core-js/modules/esnext.set.reduce.js ***!
+  \***********************************************************/
+
+/*!***********************************************************!*\
+  !*** ./node_modules/fast-png/lib-esm/helpers/unfilter.js ***!
+  \***********************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/core-js/internals/define-built-ins.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/core-js/internals/get-substitution.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/core-js/internals/has-own-property.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/core-js/internals/object-to-string.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/core-js/internals/regexp-get-flags.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/core-js/internals/set-intersection.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/core-js/internals/set-is-subset-of.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/core-js/internals/string-multibyte.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.promise.resolve.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.set.constructor.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.string.includes.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.string.iterator.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.symbol.iterator.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/core-js/modules/esnext.set.add-all.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/fast-png/lib-esm/helpers/signature.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
+  !*** ./node_modules/stackblur-canvas/dist/stackblur-es.js ***!
+  \************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/core-js/internals/collection-strong.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/core-js/internals/internal-metadata.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/core-js/internals/safe-get-built-in.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/core-js/internals/set-to-string-tag.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/core-js/internals/this-number-value.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/core-js/internals/to-absolute-index.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/core-js/internals/to-indexed-object.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/core-js/internals/use-symbol-as-uid.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/core-js/internals/well-known-symbol.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.object.to-string.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.regexp.to-string.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.string.ends-with.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/core-js/modules/esnext.iterator.map.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/performance-now/lib/performance-now.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/svg-pathdata/lib/SVGPathData.module.js ***!
+  \*************************************************************/
+
+/*!**************************************************************!*\
+  !*** ./node_modules/core-js/internals/add-to-unscopables.js ***!
+  \**************************************************************/
+
+/*!**************************************************************!*\
+  !*** ./node_modules/core-js/internals/environment-is-ios.js ***!
+  \**************************************************************/
+
+/*!**************************************************************!*\
+  !*** ./node_modules/core-js/internals/host-report-errors.js ***!
+  \**************************************************************/
+
+/*!**************************************************************!*\
+  !*** ./node_modules/core-js/internals/iterator-close-all.js ***!
+  \**************************************************************/
+
+/*!**************************************************************!*\
+  !*** ./node_modules/core-js/internals/set-is-superset-of.js ***!
+  \**************************************************************/
+
+/*!**************************************************************!*\
+  !*** ./node_modules/core-js/internals/string-html-forced.js ***!
+  \**************************************************************/
+
+/*!**************************************************************!*\
+  !*** ./node_modules/core-js/internals/string-trim-forced.js ***!
+  \**************************************************************/
+
+/*!**************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.iterator.for-each.js ***!
+  \**************************************************************/
+
+/*!**************************************************************!*\
+  !*** ./node_modules/fast-png/lib-esm/convertIndexedToRgb.js ***!
+  \**************************************************************/
+
+/*!***************************************************************!*\
+  !*** ./node_modules/core-js/internals/environment-is-node.js ***!
+  \***************************************************************/
+
+/*!***************************************************************!*\
+  !*** ./node_modules/core-js/internals/get-iterator-direct.js ***!
+  \***************************************************************/
+
+/*!***************************************************************!*\
+  !*** ./node_modules/core-js/internals/get-iterator-method.js ***!
+  \***************************************************************/
+
+/*!***************************************************************!*\
+  !*** ./node_modules/core-js/internals/inherit-if-required.js ***!
+  \***************************************************************/
+
+/*!***************************************************************!*\
+  !*** ./node_modules/core-js/internals/species-constructor.js ***!
+  \***************************************************************/
+
+/*!***************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.number.constructor.js ***!
+  \***************************************************************/
+
+/*!***************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.string.starts-with.js ***!
+  \***************************************************************/
+
+/*!***************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.symbol.constructor.js ***!
+  \***************************************************************/
+
+/*!***************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.symbol.description.js ***!
+  \***************************************************************/
+
+/*!***************************************************************!*\
+  !*** ./node_modules/core-js/modules/esnext.set.delete-all.js ***!
+  \***************************************************************/
+
+/*!***************************************************************!*\
+  !*** ./node_modules/core-js/modules/esnext.set.difference.js ***!
+  \***************************************************************/
+
+/*!****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/toPrimitive.js ***!
+  \****************************************************************/
+
+/*!****************************************************************!*\
+  !*** ./node_modules/core-js/internals/a-possible-prototype.js ***!
+  \****************************************************************/
+
+/*!****************************************************************!*\
+  !*** ./node_modules/core-js/internals/advance-string-index.js ***!
+  \****************************************************************/
+
+/*!****************************************************************!*\
+  !*** ./node_modules/core-js/internals/array-species-create.js ***!
+  \****************************************************************/
+
+/*!****************************************************************!*\
+  !*** ./node_modules/core-js/internals/function-bind-native.js ***!
+  \****************************************************************/
+
+/*!****************************************************************!*\
+  !*** ./node_modules/core-js/internals/is-null-or-undefined.js ***!
+  \****************************************************************/
+
+/*!****************************************************************!*\
+  !*** ./node_modules/core-js/internals/length-of-array-like.js ***!
+  \****************************************************************/
+
+/*!****************************************************************!*\
+  !*** ./node_modules/core-js/internals/object-is-extensible.js ***!
+  \****************************************************************/
+
+/*!****************************************************************!*\
+  !*** ./node_modules/core-js/internals/object-keys-internal.js ***!
+  \****************************************************************/
+
+/*!****************************************************************!*\
+  !*** ./node_modules/core-js/internals/regexp-exec-abstract.js ***!
+  \****************************************************************/
+
+/*!****************************************************************!*\
+  !*** ./node_modules/core-js/internals/set-is-disjoint-from.js ***!
+  \****************************************************************/
+
+/*!****************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.promise.constructor.js ***!
+  \****************************************************************/
+
+/*!****************************************************************!*\
+  !*** ./node_modules/fast-png/lib-esm/helpers/applyUnfilter.js ***!
+  \****************************************************************/
+
+/*!*****************************************************************!*\
+  !*** ./node_modules/core-js/internals/function-bind-context.js ***!
+  \*****************************************************************/
+
+/*!*****************************************************************!*\
+  !*** ./node_modules/core-js/internals/function-uncurry-this.js ***!
+  \*****************************************************************/
+
+/*!*****************************************************************!*\
+  !*** ./node_modules/core-js/internals/is-possible-prototype.js ***!
+  \*****************************************************************/
+
+/*!*****************************************************************!*\
+  !*** ./node_modules/core-js/internals/iterator-create-proxy.js ***!
+  \*****************************************************************/
+
+/*!*****************************************************************!*\
+  !*** ./node_modules/core-js/internals/ordinary-to-primitive.js ***!
+  \*****************************************************************/
+
+/*!*****************************************************************!*\
+  !*** ./node_modules/core-js/internals/regexp-sticky-helpers.js ***!
+  \*****************************************************************/
+
+/*!*****************************************************************!*\
+  !*** ./node_modules/core-js/internals/to-string-tag-support.js ***!
+  \*****************************************************************/
+
+/*!*****************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.iterator.constructor.js ***!
+  \*****************************************************************/
+
+/*!*****************************************************************!*\
+  !*** ./node_modules/core-js/modules/esnext.set.intersection.js ***!
+  \*****************************************************************/
+
+/*!*****************************************************************!*\
+  !*** ./node_modules/core-js/modules/esnext.set.is-subset-of.js ***!
+  \*****************************************************************/
+
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js ***!
+  \******************************************************************/
+
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/toPropertyKey.js ***!
+  \******************************************************************/
+
+/*!******************************************************************!*\
+  !*** ./node_modules/core-js/internals/array-method-is-strict.js ***!
+  \******************************************************************/
+
+/*!******************************************************************!*\
+  !*** ./node_modules/core-js/internals/define-global-property.js ***!
+  \******************************************************************/
+
+/*!******************************************************************!*\
+  !*** ./node_modules/core-js/internals/environment-user-agent.js ***!
+  \******************************************************************/
+
+/*!******************************************************************!*\
+  !*** ./node_modules/core-js/internals/environment-v8-version.js ***!
+  \******************************************************************/
+
+/*!******************************************************************!*\
+  !*** ./node_modules/core-js/internals/new-promise-capability.js ***!
+  \******************************************************************/
+
+/*!******************************************************************!*\
+  !*** ./node_modules/core-js/internals/object-define-property.js ***!
+  \******************************************************************/
+
+/*!******************************************************************!*\
+  !*** ./node_modules/core-js/internals/object-is-prototype-of.js ***!
+  \******************************************************************/
+
+/*!******************************************************************!*\
+  !*** ./node_modules/core-js/internals/regexp-flags-detection.js ***!
+  \******************************************************************/
+
+/*!******************************************************************!*\
+  !*** ./node_modules/core-js/internals/regexp-unsupported-ncg.js ***!
+  \******************************************************************/
+
+/*!******************************************************************!*\
+  !*** ./node_modules/core-js/internals/to-integer-or-infinity.js ***!
+  \******************************************************************/
+
+/*!******************************************************************!*\
+  !*** ./node_modules/core-js/modules/esnext.iterator.for-each.js ***!
+  \******************************************************************/
+
+/*!*******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js ***!
+  \*******************************************************************/
+
+/*!*******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/defineProperty.js ***!
+  \*******************************************************************/
+
+/*!*******************************************************************!*\
+  !*** ./node_modules/core-js/internals/correct-is-regexp-logic.js ***!
+  \*******************************************************************/
+
+/*!*******************************************************************!*\
+  !*** ./node_modules/core-js/internals/document-create-element.js ***!
+  \*******************************************************************/
+
+/*!*******************************************************************!*\
+  !*** ./node_modules/core-js/internals/object-get-prototype-of.js ***!
+  \*******************************************************************/
+
+/*!*******************************************************************!*\
+  !*** ./node_modules/core-js/internals/object-set-prototype-of.js ***!
+  \*******************************************************************/
+
+/*!*******************************************************************!*\
+  !*** ./node_modules/core-js/internals/v8-prototype-define-bug.js ***!
+  \*******************************************************************/
+
+/*!*******************************************************************!*\
+  !*** ./node_modules/core-js/modules/esnext.set.is-superset-of.js ***!
+  \*******************************************************************/
+
+/*!********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/nonIterableRest.js ***!
+  \********************************************************************/
+
+/*!********************************************************************!*\
+  !*** ./node_modules/core-js/internals/correct-prototype-getter.js ***!
+  \********************************************************************/
+
+/*!********************************************************************!*\
+  !*** ./node_modules/core-js/internals/define-built-in-accessor.js ***!
+  \********************************************************************/
+
+/*!********************************************************************!*\
+  !*** ./node_modules/core-js/internals/dom-token-list-prototype.js ***!
+  \********************************************************************/
+
+/*!********************************************************************!*\
+  !*** ./node_modules/core-js/internals/is-array-iterator-method.js ***!
+  \********************************************************************/
+
+/*!********************************************************************!*\
+  !*** ./node_modules/core-js/internals/object-define-properties.js ***!
+  \********************************************************************/
+
+/*!********************************************************************!*\
+  !*** ./node_modules/core-js/internals/require-object-coercible.js ***!
+  \********************************************************************/
+
+/*!********************************************************************!*\
+  !*** ./node_modules/core-js/internals/set-symmetric-difference.js ***!
+  \********************************************************************/
+
+/*!********************************************************************!*\
+  !*** ./node_modules/core-js/internals/weak-map-basic-detection.js ***!
+  \********************************************************************/
+
+/*!********************************************************************!*\
+  !*** ./node_modules/core-js/internals/well-known-symbol-define.js ***!
+  \********************************************************************/
+
+/*!*********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js ***!
+  \*********************************************************************/
+
+/*!*********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js ***!
+  \*********************************************************************/
+
+/*!*********************************************************************!*\
+  !*** ./node_modules/core-js/internals/array-species-constructor.js ***!
+  \*********************************************************************/
+
+/*!*********************************************************************!*\
+  !*** ./node_modules/core-js/internals/create-iter-result-object.js ***!
+  \*********************************************************************/
+
+/*!*********************************************************************!*\
+  !*** ./node_modules/core-js/internals/environment-is-ios-pebble.js ***!
+  \*********************************************************************/
+
+/*!*********************************************************************!*\
+  !*** ./node_modules/core-js/internals/symbol-registry-detection.js ***!
+  \*********************************************************************/
+
+/*!*********************************************************************!*\
+  !*** ./node_modules/core-js/internals/validate-arguments-length.js ***!
+  \*********************************************************************/
+
+/*!*********************************************************************!*\
+  !*** ./node_modules/core-js/internals/well-known-symbol-wrapped.js ***!
+  \*********************************************************************/
+
+/*!*********************************************************************!*\
+  !*** ./node_modules/core-js/modules/esnext.iterator.constructor.js ***!
+  \*********************************************************************/
+
+/*!*********************************************************************!*\
+  !*** ./node_modules/core-js/modules/esnext.set.is-disjoint-from.js ***!
+  \*********************************************************************/
+
+/*!**********************************************************************!*\
+  !*** ./node_modules/core-js/internals/create-property-descriptor.js ***!
+  \**********************************************************************/
+
+/*!**********************************************************************!*\
+  !*** ./node_modules/core-js/internals/get-json-replacer-function.js ***!
+  \**********************************************************************/
+
+/*!**********************************************************************!*\
+  !*** ./node_modules/core-js/internals/promise-native-constructor.js ***!
+  \**********************************************************************/
+
+/*!**********************************************************************!*\
+  !*** ./node_modules/core-js/internals/regexp-unsupported-dot-all.js ***!
+  \**********************************************************************/
+
+/*!**********************************************************************!*\
+  !*** ./node_modules/core-js/internals/symbol-define-to-primitive.js ***!
+  \**********************************************************************/
+
+/*!**********************************************************************!*\
+  !*** ./node_modules/core-js/modules/web.dom-collections.for-each.js ***!
+  \**********************************************************************/
+
+/*!**********************************************************************!*\
+  !*** ./node_modules/core-js/modules/web.dom-collections.iterator.js ***!
+  \**********************************************************************/
+
+/*!**********************************************************************!*\
+  !*** ./node_modules/fast-png/lib-esm/helpers/decodeInterlaceNull.js ***!
+  \**********************************************************************/
+
+/*!***********************************************************************!*\
+  !*** ./node_modules/core-js/internals/array-buffer-non-extensible.js ***!
+  \***********************************************************************/
+
+/*!***********************************************************************!*\
+  !*** ./node_modules/core-js/internals/copy-constructor-properties.js ***!
+  \***********************************************************************/
+
+/*!***********************************************************************!*\
+  !*** ./node_modules/core-js/internals/environment-is-webos-webkit.js ***!
+  \***********************************************************************/
+
+/*!***********************************************************************!*\
+  !*** ./node_modules/core-js/internals/iterator-create-constructor.js ***!
+  \***********************************************************************/
+
+/*!***********************************************************************!*\
+  !*** ./node_modules/fast-png/lib-esm/helpers/decodeInterlaceAdam7.js ***!
+  \***********************************************************************/
+
+/*!************************************************************************!*\
+  !*** ./node_modules/core-js/internals/does-not-exceed-safe-integer.js ***!
+  \************************************************************************/
+
+/*!************************************************************************!*\
+  !*** ./node_modules/core-js/internals/function-uncurry-this-clause.js ***!
+  \************************************************************************/
+
+/*!************************************************************************!*\
+  !*** ./node_modules/core-js/internals/symbol-constructor-detection.js ***!
+  \************************************************************************/
+
+/*!*************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/iterableToArrayLimit.js ***!
+  \*************************************************************************/
+
+/*!*************************************************************************!*\
+  !*** ./node_modules/core-js/internals/object-get-own-property-names.js ***!
+  \*************************************************************************/
+
+/*!*************************************************************************!*\
+  !*** ./node_modules/core-js/internals/object-property-is-enumerable.js ***!
+  \*************************************************************************/
+
+/*!*************************************************************************!*\
+  !*** ./node_modules/core-js/internals/promise-constructor-detection.js ***!
+  \*************************************************************************/
+
+/*!*************************************************************************!*\
+  !*** ./node_modules/core-js/modules/esnext.set.symmetric-difference.js ***!
+  \*************************************************************************/
+
+/*!**************************************************************************!*\
+  !*** ./node_modules/core-js/internals/check-correctness-of-iteration.js ***!
+  \**************************************************************************/
+
+/*!**************************************************************************!*\
+  !*** ./node_modules/core-js/internals/create-non-enumerable-property.js ***!
+  \**************************************************************************/
+
+/*!**************************************************************************!*\
+  !*** ./node_modules/core-js/internals/function-uncurry-this-accessor.js ***!
+  \**************************************************************************/
+
+/*!***************************************************************************!*\
+  !*** ./node_modules/core-js/internals/object-get-own-property-symbols.js ***!
+  \***************************************************************************/
+
+/*!****************************************************************************!*\
+  !*** ./node_modules/core-js/internals/array-method-has-species-support.js ***!
+  \****************************************************************************/
+
+/*!****************************************************************************!*\
+  !*** ./node_modules/core-js/internals/call-with-safe-iteration-closing.js ***!
+  \****************************************************************************/
+
+/*!****************************************************************************!*\
+  !*** ./node_modules/core-js/modules/es.object.get-own-property-symbols.js ***!
+  \****************************************************************************/
+
+/*!******************************************************************************!*\
+  !*** ./node_modules/core-js/internals/fix-regexp-well-known-symbol-logic.js ***!
+  \******************************************************************************/
+
+/*!******************************************************************************!*\
+  !*** ./node_modules/core-js/internals/object-get-own-property-descriptor.js ***!
+  \******************************************************************************/
+
+/*!*******************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js ***!
+  \*******************************************************************************/
+
+/*!*******************************************************************************!*\
+  !*** ./node_modules/core-js/internals/promise-statics-incorrect-iteration.js ***!
+  \*******************************************************************************/
+
+/*!**********************************************************************************!*\
+  !*** ./node_modules/core-js/internals/object-get-own-property-names-external.js ***!
+  \**********************************************************************************/
+
+/*!**************************************************************************************!*\
+  !*** ./node_modules/core-js/internals/iterator-helper-throws-on-invalid-iterator.js ***!
+  \**************************************************************************************/
+
+/*!******************************************************************************************!*\
+  !*** ./node_modules/core-js/internals/iterator-helper-without-closing-on-early-error.js ***!
+  \******************************************************************************************/
+
+/**
+ * @license
+  Copyright (c) 2008, Adobe Systems Incorporated
+  All rights reserved.
+
+  Redistribution and use in source and binary forms, with or without 
+  modification, are permitted provided that the following conditions are
+  met:
+
+  * Redistributions of source code must retain the above copyright notice, 
+    this list of conditions and the following disclaimer.
+  
+  * Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the 
+    documentation and/or other materials provided with the distribution.
+  
+  * Neither the name of Adobe Systems Incorporated nor the names of its 
+    contributors may be used to endorse or promote products derived from 
+    this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+  IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+  THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
+  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+  PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+
+/**
+ * @license
+ *
+ * Licensed under the MIT License.
+ * http://opensource.org/licenses/mit-license
+ */
+
+/**
+ * @license
+ * (c) Dean McNamee <dean@gmail.com>, 2013.
+ *
+ * https://github.com/deanm/omggif
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to
+ * deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+ * sell copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+ * IN THE SOFTWARE.
+ *
+ * omggif is a JavaScript implementation of a GIF 89a encoder and decoder,
+ * including animation and compression.  It does not rely on any specific
+ * underlying system, so should run in the browser, Node, or Plask.
+ */
+
+/**
+ * @license
+ * Copyright (c) 2014 Steven Spungin (TwelveTone LLC)  steven@twelvetone.tv
+ *
+ * Licensed under the MIT License.
+ * http://opensource.org/licenses/mit-license
+ */
+
+/**
+ * @license
+ * Copyright (c) 2017 Aras Abbasi
+ *
+ * Licensed under the MIT License.
+ * http://opensource.org/licenses/mit-license
+ */
+
+/**
+ * @license
+ * Copyright (c) 2018 Aras Abbasi
+ *
+ * Licensed under the MIT License.
+ * http://opensource.org/licenses/mit-license
+ */
+
+/**
+ * @license
+ * Copyright (c) 2019 Aras Abbasi
+ *
+ * Licensed under the MIT License.
+ * http://opensource.org/licenses/mit-license
+ */
+
+/**
+ * @license
+ * FPDF is released under a permissive license: there is no usage restriction.
+ * You may embed it freely in your application (commercial or not), with or
+ * without modifications.
+ *
+ * Reference: http://www.fpdf.org/en/script/script37.php
+ */
+
+/**
+ * @license
+ * Joseph Myers does not specify a particular license for his work.
+ *
+ * Author: Joseph Myers
+ * Accessed from: http://www.myersdaily.org/joseph/javascript/md5.js
+ *
+ * Modified by: Owen Leong
+ */
+
+/**
+ * @license
+ * Licensed under the MIT License.
+ * http://opensource.org/licenses/mit-license
+ * Author: Owen Leong (@owenl131)
+ * Date: 15 Oct 2020
+ * References:
+ * https://www.cs.cmu.edu/~dst/Adobe/Gallery/anon21jul01-pdf-encryption.txt
+ * https://github.com/foliojs/pdfkit/blob/master/lib/security.js
+ * http://www.fpdf.org/en/script/script37.php
+ */
+
+/**
+ * @license
+ * Licensed under the MIT License.
+ * http://opensource.org/licenses/mit-license
+ */
+
+/**
+ * @license
+ * Unicode Bidi Engine based on the work of Alex Shensis (@asthensis)
+ * MIT License
+ */
+
+/**
+ * @license
+ * jsPDF fileloading PlugIn
+ * Copyright (c) 2018 Aras Abbasi (aras.abbasi@gmail.com)
+ *
+ * Licensed under the MIT License.
+ * http://opensource.org/licenses/mit-license
+ */
+
+/**
+ * @license
+ * jsPDF filters PlugIn
+ * Copyright (c) 2014 Aras Abbasi
+ *
+ * Licensed under the MIT License.
+ * http://opensource.org/licenses/mit-license
+ */
+
+/**
+ * @license
+ * jsPDF virtual FileSystem functionality
+ *
+ * Licensed under the MIT License.
+ * http://opensource.org/licenses/mit-license
+ */
+
+/**
+ * A class to parse color values
+ * @author Stoyan Stefanov <sstoo@gmail.com>
+ * {@link   http://www.phpied.com/rgb-color-parser-in-javascript/}
+ * @license Use it if you like it
+ */
+
+/** ====================================================================
+ * @license
+ * jsPDF XMP metadata plugin
+ * Copyright (c) 2016 Jussi Utunen, u-jussi@suomi24.fi
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+ * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * ====================================================================
+ */
+
+/** @license
+   * Copyright (c) 2017 Dominik Homberger
+  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+  https://webpjs.appspot.com
+  WebPRiffParser dominikhlbg@gmail.com
+  */
