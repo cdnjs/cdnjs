@@ -1,0 +1,191 @@
+.host {
+  box-sizing: border-box;
+  display: flex;
+  min-block-size: 64px;
+  padding-block: var(--vkui--spacing_size_m);
+  padding-inline: var(--vkui--size_base_padding_horizontal--regular);
+  font-family: var(--vkui--font_family_base);
+  color: var(--vkui--color_text_primary);
+  text-decoration: none; /* в случае если Component="a" */
+}
+
+.sizeYCompact {
+  min-block-size: 60px;
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .sizeYNone {
+    min-block-size: 60px;
+  }
+}
+
+.before {
+  -webkit-margin-end: var(--vkui--spacing_size_xl);
+          margin-inline-end: var(--vkui--spacing_size_xl);
+}
+
+.in {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: center;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+
+.host.withAfter:not(.alignAfterStart).contentAlignStart .in,
+.host:not(.withAfter).contentAlignStart .in {
+  justify-content: flex-start;
+}
+
+.host.withAfter:not(.alignAfterStart).contentAlignEnd .in,
+.host:not(.withAfter).contentAlignEnd .in {
+  justify-content: flex-end;
+}
+
+.content {
+  display: flex;
+  word-break: break-word;
+}
+
+.contentBefore {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  min-inline-size: 0;
+}
+
+.alignAfterStart.contentAlignStart .contentBefore {
+  justify-content: flex-start;
+}
+
+.alignAfterStart.contentAlignCenter .contentBefore {
+  justify-content: center;
+}
+
+.alignAfterStart.contentAlignEnd .contentBefore {
+  justify-content: flex-end;
+}
+
+.contentAfter {
+  box-sizing: border-box;
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: flex-end;
+  -webkit-padding-start: var(--vkui--spacing_size_xl);
+          padding-inline-start: var(--vkui--spacing_size_xl);
+}
+
+.alignBeforeStart .before,
+.alignAfterStart .contentAfter {
+  align-self: flex-start;
+}
+
+.alignBeforeCenter .before,
+.alignAfterCenter .contentAfter {
+  align-self: center;
+}
+
+.alignBeforeEnd .before,
+.alignAfterEnd .contentAfter {
+  align-self: flex-end;
+}
+
+.afterChildren {
+  font-weight: var(--vkui--font_weight_accent2);
+}
+
+.afterCaption {
+  -webkit-margin-before: var(--vkui--spacing_size_2xs);
+          margin-block-start: var(--vkui--spacing_size_2xs);
+  font-size: var(--vkui--font_footnote--font_size--regular);
+  line-height: var(--vkui--font_footnote--line_height--regular);
+  color: var(--vkui--color_text_secondary);
+}
+
+.sizeYCompact .afterCaption {
+  font-size: var(--vkui--font_caption1--font_size--regular);
+  line-height: var(--vkui--font_caption1--line_height--regular);
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .sizeYNone .afterCaption {
+    font-size: var(--vkui--font_caption1--font_size--regular);
+    line-height: var(--vkui--font_caption1--line_height--regular);
+  }
+}
+
+.overTitle {
+  color: var(--vkui--color_text_secondary);
+}
+
+.extraSubtitle {
+  -webkit-margin-before: 1px;
+          margin-block-start: 1px;
+  color: var(--vkui--color_text_secondary);
+}
+
+.children {
+  font-weight: var(--vkui--font_weight_accent2);
+}
+
+.textEllipsis .overTitle,
+.textEllipsis .children,
+.textEllipsis .subtitle,
+.textEllipsis .extraSubtitle {
+  max-inline-size: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bottom {
+  -webkit-margin-before: var(--vkui--spacing_size_s);
+          margin-block-start: var(--vkui--spacing_size_s);
+}
+
+.actions {
+  -webkit-margin-before: var(--vkui--spacing_size_m);
+          margin-block-start: var(--vkui--spacing_size_m);
+}
+
+.children,
+.subtitle,
+.afterChildren {
+  font-size: var(--vkui--font_paragraph--font_size--regular);
+  line-height: var(--vkui--font_paragraph--line_height--regular);
+}
+
+.sizeYCompact .children,
+.sizeYCompact .subtitle,
+.sizeYCompact .afterChildren {
+  font-size: var(--vkui--font_subhead--font_size--regular);
+  line-height: var(--vkui--font_subhead--line_height--regular);
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .sizeYNone .children,
+  .sizeYNone .subtitle,
+  .sizeYNone .afterChildren {
+    font-size: var(--vkui--font_subhead--font_size--regular);
+    line-height: var(--vkui--font_subhead--line_height--regular);
+  }
+}
+
+/**
+ * CMP:
+ * FormItem
+ **/
+
+/* stylelint-disable-next-line selector-pseudo-class-disallowed-list */
+
+:global(.vkuiInternalFormItem) .host {
+  margin-inline: calc(-1 * var(--vkui--size_base_padding_horizontal--regular));
+}
+
+@media (pointer: fine) and (min-width: 768px),(max-height: 414.9px) {
+  .sizeYNone {
+    min-block-size: 60px;
+  }
+}

@@ -1,0 +1,29 @@
+/* stylelint-disable selector-pseudo-class-disallowed-list */
+
+/*
+В Windows можно менять общий масштаб интерфейса от 100 до 500%. Готовые пресеты 125%, 150% и 175%.
+В случаях, когда `--vkui--size_border--regular` используется не для свойства `border`, а для `height`,
+одна из линий становится размером больше чем остальные.
+
+Поэтому используем пограничные значения DPI, чтобы смена на субпиксельные значения срабатывала раньше:
+- 1.01dppx вместо 2dppx для 101% и до 200%;
+- 2.01dppx вместо 3dppx для 201% и больше;
+
+@see https://github.com/VKCOM/VKUI/issues/8864
+*/
+
+:root {
+  --vkui--size_border--regular: var(--vkui--size_border1x--regular);
+}
+
+@media (-webkit-min-device-pixel-ratio: 1.01), (min-resolution: 1.01dppx) {
+  :root {
+    --vkui--size_border--regular: var(--vkui--size_border2x--regular);
+  }
+}
+
+@media (-webkit-min-device-pixel-ratio: 2.01), (min-resolution: 2.01dppx) {
+  :root {
+    --vkui--size_border--regular: var(--vkui--size_border3x--regular);
+  }
+}
