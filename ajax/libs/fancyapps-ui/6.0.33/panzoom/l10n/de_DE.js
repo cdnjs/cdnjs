@@ -1,0 +1,2 @@
+/*! License details at fancyapps.com/license */
+const e={IMAGE_ERROR:"Bild nicht gefunden",MOVE_UP:"Aufwärts bewegen",MOVE_DOWN:"Nach unten bewegen",MOVE_LEFT:"Nach links bewegen",MOVE_RIGHT:"Nach rechts bewegen",ZOOM_IN:"Vergrößern",ZOOM_OUT:"Verkleinern",TOGGLE_FULL:"Zoomstufe umschalten",TOGGLE_1TO1:"Zoomstufe umschalten",ITERATE_ZOOM:"Zoomstufe umschalten",ROTATE_CCW:"Gegen den Uhrzeigersinn drehen",ROTATE_CW:"Im Uhrzeigersinn drehen",FLIP_X:"Horizontal spiegeln",FLIP_Y:"Vertikal spiegeln",RESET:"Zurücksetzen",TOGGLE_FS:"Vollbild umschalten"};export{e as de_DE};

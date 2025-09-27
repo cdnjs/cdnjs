@@ -1,0 +1,2 @@
+/*! License details at fancyapps.com/license */
+import{lv_LV as l}from"../../panzoom/l10n/lv_LV.js";const s=Object.assign(Object.assign({},l),{ERROR:"Kaut kas nogāja greizi. Lūdzu, vēlāk mēģiniet vēlreiz",NEXT:"Nākošā lapa",PREV:"Iepriekšējā lapa",GOTO:"Doties uz #%d lapu",DOWNLOAD:"Lejupielādēt",TOGGLE_FULLSCREEN:"Pārslēgt pilnekrāna režīmu",TOGGLE_EXPAND:"Pārslēgt pilnekrāna režīmu",TOGGLE_THUMBS:"Pārslēgt sīktēlus",TOGGLE_AUTOPLAY:"Pārslēgt slaidrādi"});export{s as lv_LV};
