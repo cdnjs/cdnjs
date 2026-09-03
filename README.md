@@ -42,6 +42,11 @@
 
 ## Introduction
 
+> [!WARNING]
+> This repository is no longer updated as it became too large. As part of cdnjs' [migration to Cloudflare's Developer Platform](https://blog.cloudflare.com/cdnjs-dev-platform-migration/), cdnjs is now powered by a Cloudflare R2 bucket.
+>
+> If you operate a mirror of cdnjs and were reliant on this repository for syncing, please [open an issue](https://github.com/cdnjs/cdnjs/issues/new?assignees=&labels=%F0%9F%93%A0+Mirror+Request&template=mirror-request.yml&title=Request%3A+read-only+S3+%28R2%29+credentials+for+%3Cname%3E+mirror) to request read-only S3 credentials for the cdnjs R2 bucket.
+
 This is the robot-only repository for cdnjs, where all the library assets that are hosted on cdnjs are stored. For the JSON files that control the libraries we host, please see the "human" [`cdnjs/packages`](https://github.com/cdnjs/packages) repository.
 
 ### Other Repositories
