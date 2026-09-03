@@ -1,0 +1,69 @@
+---
+name: cdnjs Mirror Credentials Request
+description: Request access to the R2 bucket that powers cdnjs for faster syncing
+title: "Request: read-only S3 (R2) credentials for <name> mirror"
+labels: ["📠 Mirror Request"]
+body:
+
+- type: markdown
+  attributes:
+    value: |
+      Please fill out the information in this issue template so that we can efficiently process your request for credentials.
+
+      cdnjs is backed by a Cloudflare R2 bucket that stores all the files available on the CDN.
+      We can provide read-only S3 credentials to enable mirror operators to sync directly without pull-through caching.
+
+- type: input
+  id: url
+  attributes:
+    label: Mirror URL
+    description: |
+      Please provide the URL where your cdnjs mirror is accessible on the public internet.
+    placeholder: |
+      xyz.com
+  validations:
+    required: true
+
+- type: textarea
+  id: purpose
+  attributes:
+    label: Mirror purpose
+    description: |
+      Please provide some context on why your mirror exists and who uses it.
+    placeholder: |
+      xyz.com is operated to provide a faster alternative for users on Mars.
+  validations:
+    required: true
+
+- type: input
+  id: ownership
+  attributes:
+    label: Mirror ownership
+    description: |
+      Please explain who owns/operations the mirror and your affiliation.
+    placeholder: |
+      xyz.com is operated by xyz inc., and I am an engineer on the CDN team.
+  validations:
+    required: true
+
+- type: input
+  id: contact
+  attributes:
+    label: Mirror contact
+    description: |
+      Please provide an email address where we can contact you as the mirror operator.
+      We will use this to share the credentials initially, if they are rotated, or for any other issues.
+    placeholder: "cdn-eng@xyz.com"
+  validations:
+    required: true
+
+- type: checkboxes
+  id: unmodified
+  attributes:
+    label: Mirror unmodified
+    description: |
+      Please confirm you will mirror files as cdnjs provides them with no modifications.
+      Use the SRI hashes provided by the cdnjs API to confirm that your served files have the expected contents.
+    options:
+      - label: Confirm
+        required: true
